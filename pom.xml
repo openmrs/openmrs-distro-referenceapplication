@@ -70,6 +70,12 @@
             <artifactId>emrapi-omod</artifactId>
             <version>${emrapiModuleVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>org.openmrs.web</groupId>
+            <artifactId>openmrs-webapp</artifactId>
+            <version>${openMRSVersion}</version>
+            <type>war</type>
+        </dependency>
     </dependencies>
 
 	<build>
@@ -139,6 +145,24 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
+
+                    <execution>
+                        <id>move-war-to-dist</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <move todir="${project.build.directory}/distro">
+                                    <fileset dir="${project.build.directory}/dependencies">
+                                        <include name="*.war"/>
+                                    </fileset>
+                                </move>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+
                     <!-- For some reason the serialization.xstream-omod artifact is .omod, not .jar -->
                     <execution>
                         <id>rename-omods-to-omod</id>
