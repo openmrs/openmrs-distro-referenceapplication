@@ -1,0 +1,12 @@
+#!/bin/bash
+
+BundledModulesDir=/var/lib/tomcat6/webapps/openmrs/WEB-INF/bundledModules/
+OmodTmpDir=/tmp/openmrs-omods
+
+until [ -d ${BundledModulesDir} ]
+    do
+        echo "Waiting for webapp to deploy"
+        sleep 1
+    done
+cp ${OmodTmpDir}/** ${BundledModulesDir}
+chown -R tomcat6:tomcat6 ${BundledModulesDir}
