@@ -3,7 +3,7 @@
 MavenRootDir=$(dirname `pwd`)
 DistroDir=${MavenRootDir}/target/distro
 DebCtrlDir=target/openmrs-reference/DEBIAN
-DebWarDir=target/openmrs-reference/var/lib/tomcat6/webapps/
+DebWarDir=target/openmrs-reference/var/lib/tomcat7/webapps/
 OmodTemp=target/openmrs-reference/tmp/openmrs-omods
 
 prepareDir() {
