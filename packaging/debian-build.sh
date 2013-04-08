@@ -4,16 +4,16 @@ MavenRootDir=$(dirname `pwd`)
 DistroDir=${MavenRootDir}/target/distro
 DebCtrlDir=target/openmrs-reference/DEBIAN
 DebWarDir=target/openmrs-reference/var/lib/tomcat7/webapps/
-OmodTemp=target/openmrs-reference/tmp/openmrs-omods
+OmodDir=target/openmrs-reference/usr/share/tomcat7/.OpenMRS/modules/
 
 prepareDir() {
     if [ -d ${DistroDir} ];
         then
             #mkdir -p ${DebCtrlDir}
             mkdir -p ${DebWarDir}
-            mkdir -p ${OmodTemp}
+            mkdir -p ${OmodDir}
             cp ${DistroDir}/*.war ${DebWarDir}/openmrs.war
-            cp ${DistroDir}/*.omod ${OmodTemp}
+            cp ${DistroDir}/*.omod ${OmodDir}
             cp -r DEBIAN ${DebCtrlDir}
             applyVersion
         else
