@@ -1,10 +1,10 @@
 #!/bin/bash
 
-ConfigDir=/usr/share/tomcat7/.OpenMRS/
+ModulesDir=/usr/share/tomcat7/.OpenMRS/modules
 #OmodTmpDir=/tmp/openmrs-omods
 #
 #mkdir -p ${BundledModulesDir}
 #cp ${OmodTmpDir}/** ${BundledModulesDir}
-chown -R tomcat7:tomcat7 ${ConfigDir}
+chown -R tomcat7:tomcat7 ${ModulesDir}
 ##restart tomcat
 /etc/init.d/tomcat7 restart
