@@ -46,6 +46,7 @@
         <reportingModuleVersion>0.7.6-SNAPSHOT</reportingModuleVersion>
         <metadatasharingModuleVersion>1.1.8-SNAPSHOT</metadatasharingModuleVersion>
         <metadatamappingModuleVersion>1.0.1</metadatamappingModuleVersion>
+        <uicommonsModuleVersion>1.0-SNAPSHOT</uicommonsModuleVersion>
     </properties>
 
     <dependencies>
@@ -80,11 +81,6 @@
             <artifactId>emrapi-omod</artifactId>
             <version>${emrapiModuleVersion}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.openmrs.module</groupId>-->
-            <!--<artifactId>referenceapplication-omod</artifactId>-->
-            <!--<version>${referenceapplicationModuleVersion}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>paperrecord-omod</artifactId>
@@ -99,6 +95,16 @@
             <groupId>org.openmrs.module</groupId>
             <artifactId>uilibrary-omod</artifactId>
             <version>${uilibraryModuleVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>uicommons-omod</artifactId>
+            <version>${uicommonsModuleVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>referenceapplication-omod</artifactId>
+            <version>${referenceapplicationModuleVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.openmrs.module</groupId>
@@ -120,7 +126,6 @@
             <artifactId>metadatamapping-omod</artifactId>
             <version>${metadatamappingModuleVersion}</version>
         </dependency>
-
         <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>serialization.xstream-omod</artifactId>
@@ -132,14 +137,12 @@
             <artifactId>htmlwidgets-omod</artifactId>
             <version>${htmlwidgetsModuleVersion}</version>
         </dependency>
-
         <dependency>
             <groupId>org.openmrs.web</groupId>
             <artifactId>openmrs-webapp</artifactId>
             <version>${openMRSVersion}</version>
             <type>war</type>
         </dependency>
-
     </dependencies>
 
 	<build>
