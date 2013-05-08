@@ -32,6 +32,7 @@
 	<properties>
 		<openMRSVersion>1.9.4-SNAPSHOT</openMRSVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <logicModuleVersion>0.5.2</logicModuleVersion>
         <appframeworkModuleVersion>2.0-SNAPSHOT</appframeworkModuleVersion>
         <uiframeworkModuleVersion>2.5.2-SNAPSHOT</uiframeworkModuleVersion>
         <registrationcoreModuleVersion>1.0-SNAPSHOT</registrationcoreModuleVersion>
@@ -64,6 +65,14 @@
             <artifactId>uiframework-omod</artifactId>
             <version>${uiframeworkModuleVersion}</version>
         </dependency>
+        <dependency>
+            <!-- note the non-standard type  -->
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>logic-omod</artifactId>
+            <version>${logicModuleVersion}</version>
+            <type>omod</type>
+        </dependency>
+
         <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>registrationcore-omod</artifactId>
