@@ -71,6 +71,10 @@ Vagrant.configure("2") do |config|
     puppet.manifest_file  = "site.pp"
     puppet.module_path    = "puppet/modules"
   end
+  config.vm.provision :shell do |shell|
+      shell.inline = "if [ -e /vagrant/packaging/target/openmrs-.deb ]; then sudo dpkg -i /vagrant/packaging/target/openmrs-.deb; fi"
+  end
+
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
