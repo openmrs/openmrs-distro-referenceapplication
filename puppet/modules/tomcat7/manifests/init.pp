@@ -1,9 +1,7 @@
 class tomcat7 {
+include aptitude
   package { "tomcat7" :
-    ensure  =>  "present",
-    require => Exec["updateApt"],
-  }
-  exec { "updateApt":
-    command => "/usr/bin/apt-get update",
+    ensure  => "present",
+    require => Class[ "aptitude" ],
   }
 }
