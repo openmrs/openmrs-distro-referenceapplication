@@ -1,4 +1,5 @@
 class mysql {
+include aptitude
 ##This password is only used for boxes created by Vagrant for developer testing.
 $mysqlPassword = Admin123
 
