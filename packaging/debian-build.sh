@@ -14,7 +14,7 @@ prepareDir() {
             mkdir -p ${OmodDir}
             cp ${DistroDir}/*.war ${DebWarDir}/openmrs.war
             cp ${DistroDir}/*.omod ${OmodDir}
-            cp -r DEBIAN ${DebCtrlDir}
+            cp -r DEBIAN/* ${DebCtrlDir}
             applyVersion
         else
             echo "Can't find the distribution dir.  Do you need to run mvn package?"
