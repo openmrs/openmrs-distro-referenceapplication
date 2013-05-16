@@ -9,7 +9,7 @@ OmodDir=target/openmrs-reference/usr/share/tomcat7/.OpenMRS/modules/
 prepareDir() {
     if [ -d ${DistroDir} ];
         then
-            #mkdir -p ${DebCtrlDir}
+            mkdir -p ${DebCtrlDir}
             mkdir -p ${DebWarDir}
             mkdir -p ${OmodDir}
             cp ${DistroDir}/*.war ${DebWarDir}/openmrs.war
