@@ -2,10 +2,20 @@
 
 TomcatAppDir=/usr/share/tomcat7/.OpenMRS/
 ModulesDir=${TomcatAppDir}/modules
-#OmodTmpDir=/tmp/openmrs-omods
-#
-#mkdir -p ${BundledModulesDir}
-#cp ${OmodTmpDir}/** ${BundledModulesDir}
+WarFile=/var/lib/tomcat7/webapps/openmrs.war
+ExplodedWar=/var/lib/tomcat7/webapps/openmrs
+##Set ownership of war file t tomcat user
 chown -R tomcat7:tomcat7 ${TomcatAppDir}
+chown -R tomcat7:tomcat7 ${WarFile}
+
+##Wait for WAR File to expand before restart
+OldTimeStamp="$(date -r ${ExplodedWar})"
+NewTimeStamp=${OldTimeStamp}
+echo -n "Waiting for new WAR file to expand."
+while [ "${NewTimeStamp}" = "${OldTimeStamp}" ];
+  do
+    NewTimeStamp="$(date -r ${ExplodedWar})"
+    sleep 1
+  done
 ##restart tomcat
 /etc/init.d/tomcat7 restart
