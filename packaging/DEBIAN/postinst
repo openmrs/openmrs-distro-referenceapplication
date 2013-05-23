@@ -30,8 +30,8 @@ fi
 wait() {
 OldTimeStamp="$(date -r ${ExplodedWar})"
 NewTimeStamp=${OldTimeStamp}
-echo -n "Waiting for new WAR file to expand."
 
+echo -n "Waiting for new WAR file to expand."
 while [ "${NewTimeStamp}" = "${OldTimeStamp}" ];
   do
     NewTimeStamp="$(date -r ${ExplodedWar})"
@@ -40,7 +40,6 @@ while [ "${NewTimeStamp}" = "${OldTimeStamp}" ];
     if [ ${count} == 120 ];
       then break
     fi
-    echo ${count}
   done
 
 }
