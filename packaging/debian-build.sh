@@ -5,6 +5,8 @@ DistroDir=${MavenRootDir}/target/distro
 DebCtrlDir=target/openmrs-reference/DEBIAN
 DebWarDir=target/openmrs-reference/var/lib/tomcat7/webapps/
 OmodDir=target/openmrs-reference/usr/share/tomcat7/.OpenMRS/modules/
+PuppetDir=${MavenRootDir}/puppet
+DebPuppetDir=target/openmrs-reference/tmp
 
 prepareDir() {
     if [ -d ${DistroDir} ];
@@ -12,9 +14,11 @@ prepareDir() {
             mkdir -p ${DebCtrlDir}
             mkdir -p ${DebWarDir}
             mkdir -p ${OmodDir}
+            mkdir -p ${DebPuppetDir}
             cp ${DistroDir}/*.war ${DebWarDir}/openmrs.war
             cp ${DistroDir}/*.omod ${OmodDir}
             cp -r DEBIAN/* ${DebCtrlDir}
+            cp -r ${PuppetDir}/ ${DebPuppetDir}
             applyVersion
         else
             echo "Can't find the distribution dir.  Do you need to run mvn package?"
