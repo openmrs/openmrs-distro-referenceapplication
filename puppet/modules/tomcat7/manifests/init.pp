@@ -18,10 +18,9 @@ include aptitude
     require => Package[ "tomcat7"],
   }
   file { "/var/lib/tomcat7" :
-      ensure  => present,
-      owner   => "tomcat7",
-      group   => "tomcat7",
-      require => Package[ "tomcat7"],
-
+    ensure  => present,
+    owner   => "tomcat7",
+    group   => "tomcat7",
+    require => Package[ "tomcat7"],
   }
 }
