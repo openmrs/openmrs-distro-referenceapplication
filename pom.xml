@@ -56,6 +56,11 @@
         <htmlformentryModuleVersion>2.2-SNAPSHOT</htmlformentryModuleVersion>
         <htmlformentry19extModuleVersion>1.3-SNAPSHOT</htmlformentry19extModuleVersion>
         <coreappsModuleVersion>1.0-SNAPSHOT</coreappsModuleVersion>
+
+        <db.url><![CDATA[jdbc:mysql://localhost:3306/openmrs?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8]]></db.url>
+        <db.user>root</db.user>
+        <db.password>Admin123</db.password>
+
     </properties>
 
     <dependencies>
@@ -235,6 +240,7 @@
                             <includeGroupIds>org.openmrs.module,org.openmrs</includeGroupIds>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
 
@@ -320,7 +326,146 @@
                 </executions>
             </plugin>
         </plugins>
-	</build>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>setupdatabase</id>
+            <activation>
+                <property>
+                    <name>setupDatabase</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+            <plugins>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+            </executions>
+            </plugin>
+            <plugin>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>2.0.1</version>
+            <configuration>
+            <!--<changeLogFile>src/main/resources/db-changelog.xml</changeLogFile>-->
+            <driver>com.mysql.jdbc.Driver</driver>
+            <url>${db.url}</url>
+            <username>${db.user}</username>
+            <password>${db.password}</password>
+            </configuration>
+            <dependencies>
+            <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.8</version>
+            </dependency>
+            <dependency>
+            <groupId>org.openmrs.liquibase.ext</groupId>
+            <artifactId>modify-column</artifactId>
+            <version>2.0.2</version>
+            </dependency>
+            <dependency>
+            <groupId>org.openmrs.liquibase.ext</groupId>
+            <artifactId>identity-insert</artifactId>
+            <version>1.2.1</version>
+            </dependency>
+            <dependency>
+            <groupId>org.openmrs.api</groupId>
+            <artifactId>openmrs-api</artifactId>
+            <version>${openMRSVersion}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            </dependency>
+
+            </dependencies>
+            <executions>
+                <execution>
+                <id>empty-db-create-schema</id>
+                <phase>generate-resources</phase>
+                <configuration>
+                <driver>com.mysql.jdbc.Driver</driver>
+                <changeLogFile>liquibase-schema-only.xml</changeLogFile>
+                <verbose>true</verbose>
+                <dropFirst>false</dropFirst>
+                <systemProperties>
+                <property>
+                <name>liquibase.databaseChangeLogTableName</name>
+                <value>liquibasechangelog</value>
+                </property>
+                <property>
+                <name>liquibase.databaseChangeLogLockTableName</name>
+                <value>liquibasechangeloglock</value>
+                </property>
+                </systemProperties>
+                </configuration>
+                <goals>
+                <goal>update</goal>
+                </goals>
+                </execution>
+                <execution>
+                <id>empty-db-add-core-data</id>
+                <phase>generate-resources</phase>
+                <configuration>
+                <driver>com.mysql.jdbc.Driver</driver>
+                <changeLogFile>liquibase-core-data.xml</changeLogFile>
+                <url>${db.url}</url>
+                <username>${db.user}</username>
+                <password>${db.password}</password>
+                <verbose>true</verbose>
+                <dropFirst>false</dropFirst>
+                <systemProperties>
+                <property>
+                <name>liquibase.databaseChangeLogTableName</name>
+                <value>liquibasechangelog</value>
+                </property>
+                <property>
+                <name>liquibase.databaseChangeLogLockTableName</name>
+                <value>liquibasechangeloglock</value>
+                </property>
+                </systemProperties>
+                </configuration>
+                <goals>
+                <goal>update</goal>
+                </goals>
+                </execution>
+                <execution>
+                <id>empty-db-update-to-latest</id>
+                <phase>generate-resources</phase>
+                <configuration>
+                <driver>com.mysql.jdbc.Driver</driver>
+                <changeLogFile>liquibase-update-to-latest.xml</changeLogFile>
+                <url>${db.url}</url>
+                <username>${db.user}</username>
+                <password>${db.password}</password>
+                <verbose>true</verbose>
+                <dropFirst>false</dropFirst>
+                <systemProperties>
+                <property>
+                <name>liquibase.databaseChangeLogTableName</name>
+                <value>liquibasechangelog</value>
+                </property>
+                <property>
+                <name>liquibase.databaseChangeLogLockTableName</name>
+                <value>liquibasechangeloglock</value>
+                </property>
+                </systemProperties>
+                </configuration>
+                <goals>
+                <goal>update</goal>
+                </goals>
+                </execution>
+
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+    </profile>
+    </profiles>
 
 	<repositories>
 		<repository>

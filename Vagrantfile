@@ -78,6 +78,17 @@ config.vm.synced_folder ".", "/vagrant", :extra => "dmode=755,fmode=755"
   config.vm.provision :shell do |shell|
     shell.inline = 'if [ -e /vagrant/packaging/target/openmrs-.deb ]; then sudo dpkg -i /vagrant/packaging/target/openmrs-.deb; fi'
   end
+config.vm.provision :shell do |shell|
+shell.inline = 'cd /vagrant/ && ./create-db.sh'
+end
+config.vm.provision :shell do |shell|
+shell.inline = 'cd /vagrant/ && mvn generate-resources -P setupdatabase'
+end
+config.vm.provision :shell do |shell|
+shell.inline = 'sudo /etc/init.d/tomcat7 restart'
+end
+
+
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
