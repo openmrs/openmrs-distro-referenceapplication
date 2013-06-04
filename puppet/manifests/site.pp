@@ -1,1 +1,1 @@
-include tomcat7, mysql
+include tomcat7, mysql, maven2
