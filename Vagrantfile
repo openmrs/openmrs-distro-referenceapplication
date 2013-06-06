@@ -91,6 +91,9 @@ puppet.manifest_file  = "site.pp"
 puppet.module_path    = "puppet/modules"
 puppet.options        = "-e 'include refapp'"
 end
+config.vm.provision :shell do |shell|
+shell.inline = 'cd /vagrant/ && ./appStartupCheck.sh'
+end
 
 
 
