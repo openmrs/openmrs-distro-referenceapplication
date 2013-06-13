@@ -21,19 +21,6 @@ public class TestProperties {
     }
 
     public String getWebAppUrl() {
-        return properties.getProperty("webapp.url", "http://localhost:8080/openmrs");
+        return properties.getProperty("webapp.url");
     }
-
-    public String getDatabaseUrl() {
-        return properties.getProperty("database.url", "jdbc:mysql://localhost:3306/openmrs");
-    }
-
-    public String getDatabaseUsername() {
-        return properties.getProperty("database.username", "");
-    }
-
-    public String getDatabasePassword() {
-        return properties.getProperty("database.password", "");
-    }
-
 }
