@@ -9,6 +9,6 @@ public class LoginPage extends AbstractBasePage {
     }
 
     public void loginAsAdmin() {
-        login("admin", "Admin123");
+        login("admin", properties.getUserPass());
     }
 }
