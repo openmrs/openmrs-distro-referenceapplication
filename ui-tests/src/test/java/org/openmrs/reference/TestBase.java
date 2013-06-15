@@ -1,13 +1,17 @@
 package org.openmrs.reference;
 
-import org.apache.commons.lang3.SystemUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.openmrs.reference.page.TestProperties;
-import org.openqa.selenium.chrome.ChromeDriver;
+import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.lang3.SystemUtils;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.openmrs.reference.page.AbstractBasePage;
+import org.openmrs.reference.page.GenericPage;
+import org.openmrs.reference.page.TestProperties;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestBase {
     protected static ChromeDriver driver;
@@ -37,4 +41,24 @@ public class TestBase {
         }
         System.setProperty("webdriver.chrome.driver", resource.getPath());
     }
+
+    /**
+     * Return a Page that represents the current page, so that all the convenient
+     * methods in AbstractBasePage can be used.
+     * 
+     * @return a Page
+     */
+    public GenericPage currentPage() {
+    	return new GenericPage(driver);
+    }
+
+    /**
+     * Assert we're on the expected page. For now, it just checks the <title> tag.
+     * 
+     * @param expected page
+     */
+	public void assertPage(AbstractBasePage expected) {
+	    assertEquals(expected.expectedTitle(), currentPage().title());
+    }
+
 }
