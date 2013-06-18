@@ -6,7 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-public class AbstractBasePage {
+/**
+ * A superclass for "real" pages. Has lots of handy methods for accessing
+ * elements, clicking, filling fields. etc.
+ */
+public abstract class AbstractBasePage {
     protected TestProperties properties = new TestProperties();
     protected WebDriver driver;
     private String serverURL;
@@ -16,22 +20,26 @@ public class AbstractBasePage {
         serverURL = properties.getWebAppUrl();
     }
 
-    public void login(String user, String password) {
-        driver.findElement(By.id("username")).sendKeys(user);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("login-button")).click();
-    }
-
     public void gotoPage(String address) {
         driver.get(serverURL + address);
     }
+    
+    // Convenience method. TODO Should this be named findElement instead?
+    public WebElement getElement(By by) {
+    	return driver.findElement(by);
+    }
 
-    public String getText(By elementId){
-        return driver.findElement(elementId).getText();
+    // Convenience method. TODO Should this be named findElementById instead?
+    public WebElement getElementById(String id) {
+    	return getElement(By.id(id));
+    }
+    
+    public String getText(By by){
+        return getElement(by).getText();
     }
 
     public void setTextToField(String textFieldId, String text) {
-        setText(driver.findElement(By.id(textFieldId)), text);
+        setText(getElement(By.id(textFieldId)), text);
     }
 
     public void setTextToFieldInsideSpan(String spanId, String text) {
@@ -45,7 +53,7 @@ public class AbstractBasePage {
     }
 
     public void clickOn(By elementId) {
-        driver.findElement(elementId).click();
+        getElement(elementId).click();
     }
 
     public void hoverOn(By elementId) {
@@ -55,6 +63,17 @@ public class AbstractBasePage {
     }
 
     private WebElement findTextFieldInsideSpan(String spanId) {
-        return driver.findElement(By.id(spanId)).findElement(By.tagName("input"));
+        return getElementById(spanId).findElement(By.tagName("input"));
     }
+
+	public String title() {
+	    return getText(By.tagName("title"));
+    }
+	
+	/**
+	 * Real pages supply their title.
+	 * 
+	 * @return The title of the page.
+	 */
+	public abstract String expectedTitle();
 }
