@@ -3,7 +3,7 @@ package org.openmrs.reference;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.openmrs.reference.page.TestProperties;
+import org.openmrs.reference.page.AbstractBasePage;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.net.URL;
@@ -11,20 +11,25 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase {
     protected static ChromeDriver driver;
+    private static AbstractBasePage abstractBasePage;
 
     @BeforeClass
     public static void startWebDriver() {
-        setupChromeDriver();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
-        driver.get(new TestProperties().getWebAppUrl());
+        driver = setupChromeDriver();
+//        driver = new ChromeDriver();
+        abstractBasePage = new AbstractBasePage(driver);
+//        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+        abstractBasePage.gotoPage("/login.htm");
     }
 
     @AfterClass
     public static void stopWebDriver() {
         driver.quit();
     }
-    private static void setupChromeDriver() {
+
+
+
+    private static ChromeDriver setupChromeDriver() {
         URL resource = null;
         ClassLoader classLoader = TestBase.class.getClassLoader();
 
@@ -36,5 +41,8 @@ public class TestBase {
             resource = classLoader.getResource("chromedriver/windows/chromedriver.exe");
         }
         System.setProperty("webdriver.chrome.driver", resource.getPath());
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+        return driver;
     }
 }

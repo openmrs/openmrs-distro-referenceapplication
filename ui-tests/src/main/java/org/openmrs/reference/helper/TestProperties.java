@@ -1,4 +1,4 @@
-package org.openmrs.reference.page;
+package org.openmrs.reference.helper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +24,12 @@ public class TestProperties {
     public String getWebAppUrl() {
         return properties.getProperty("webapp.url");
     }
-    public String getUserPass() {
-        return properties.getProperty("test.password");
+
+    public String getUserName(){
+        return properties.getProperty("login.username");
+    }
+
+    public String getPassword(){
+        return properties.getProperty("login.password");
     }
 }
