@@ -30,4 +30,9 @@ public class LoginPage extends AbstractBasePage {
     public void loginAsAdmin(){
         login(UserName,Password);
     }
+
+	@Override
+    public String expectedUrlPath() {
+    	return "/openmrs/login.htm";
+    }
 }

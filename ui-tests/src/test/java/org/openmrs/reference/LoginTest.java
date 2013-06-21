@@ -1,13 +1,13 @@
 package org.openmrs.reference;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.LoginPage;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public class LoginTest extends TestBase {
     private HeaderPage headerPage;
@@ -24,7 +24,9 @@ public class LoginTest extends TestBase {
 
     @Test
     public void verifyAppsOnMainPage() throws Exception {
+    	assertPage(loginPage);
         loginPage.loginAsAdmin();
+        assertPage(homePage);
         assertThat(homePage.isRegisterPatientCustomizedForRefAppPresented(), is(true));
         assertThat(homePage.isPatientRegistrationAppPresented(), is(true));
 
@@ -37,6 +39,7 @@ public class LoginTest extends TestBase {
         assertThat(homePage.isLegacyFindPatientAppPresented(), is(true));
 
         headerPage.logOut();
+        assertPage(loginPage);
     }
 
 }

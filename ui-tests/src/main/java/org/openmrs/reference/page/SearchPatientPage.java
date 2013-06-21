@@ -21,4 +21,9 @@ public class SearchPatientPage extends AbstractBasePage {
         enterPatientIDOrName(nameOrID);
         submitSearch();
     }
+
+	@Override
+    public String expectedUrlPath() {
+	    return "openmrs/coreapps/findpatient/findPatient.page?app=coreapps.findPatient";
+    }
 }

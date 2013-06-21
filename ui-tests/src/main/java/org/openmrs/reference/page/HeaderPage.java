@@ -21,4 +21,9 @@ public class HeaderPage extends AbstractBasePage {
         clickOn(By.className(LOGOUT_LINK));
     }
 
+	@Override
+    public String expectedUrlPath() {
+	    return null;
+    }
+
 }
