@@ -58,5 +58,10 @@ public class HomePage extends AbstractBasePage{
     public Boolean isLegacyFindPatientAppPresented() {
         return isAppButtonPresent(LEGACY_FIND_PATIENT);
     }
+
+	@Override
+    public String expectedUrlPath() {
+    	return "/openmrs/referenceapplication/home.page";
+    }
 }
 

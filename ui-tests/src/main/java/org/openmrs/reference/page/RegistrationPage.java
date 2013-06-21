@@ -90,5 +90,10 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(By.cssSelector(ADDRESS_LINK));
     }
 
+	@Override
+    public String expectedUrlPath() {
+	    return "/openmrs/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
+    }
+
 
 }
