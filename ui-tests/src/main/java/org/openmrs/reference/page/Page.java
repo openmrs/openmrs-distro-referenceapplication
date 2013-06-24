@@ -18,13 +18,15 @@ public interface Page {
 	
 	String getText(By by);
 	
-	void setTextToField(String textFieldId, String text);
+	void setTextToField(By by, String text);
 	
 	void setTextToFieldInsideSpan(String spanId, String text);
 	
 	void clickOn(By by);
 	
 	void hoverOn(By by);
+
+    void selectFromCombo(By by, String value);
 
 	/**
 	 * Return the actual title of the page.

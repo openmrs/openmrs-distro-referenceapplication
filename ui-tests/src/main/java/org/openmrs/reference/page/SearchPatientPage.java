@@ -10,7 +10,7 @@ public class SearchPatientPage extends AbstractBasePage {
     }
 
     private void enterPatientIDOrName(String nameOrID) {
-        setTextToField("patient-search",nameOrID);
+        setTextToField(By.id("patient-search"),nameOrID);
     }
 
     private void submitSearch(){

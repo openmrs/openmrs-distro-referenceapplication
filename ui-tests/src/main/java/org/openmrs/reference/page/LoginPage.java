@@ -22,8 +22,8 @@ public class LoginPage extends AbstractBasePage {
     private String LOGIN_BTN = "login-button";
 
     public void login(String user, String password) {
-        setTextToField(USERNAME_TEXTBOX,user);
-        setTextToField(PASSWORD_TEXTBOX, password);
+        setTextToField(By.id(USERNAME_TEXTBOX),user);
+        setTextToField(By.id(PASSWORD_TEXTBOX), password);
         clickOn(By.id(LOGIN_BTN));
     }
 

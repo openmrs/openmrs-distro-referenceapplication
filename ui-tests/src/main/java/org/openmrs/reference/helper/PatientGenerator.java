@@ -19,7 +19,7 @@ public class PatientGenerator {
 			"April", "May", "June", "July", "August", "September", "October", "November",
 			"December"};
 
-    private static final String[] PATIENT_GENDER = {"","Male","Female"};
+    private static final String[] PATIENT_GENDER = {"M","F"};
 
 	public static String getPatientGivenName() {
 		return PATIENT_GIVEN_NAMES[(int) (Math.random() * PATIENT_GIVEN_NAMES.length)];

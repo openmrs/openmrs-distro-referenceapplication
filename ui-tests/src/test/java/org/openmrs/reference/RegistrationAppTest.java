@@ -22,6 +22,13 @@ public class RegistrationAppTest extends TestBase{
         registrationPage = new RegistrationPage(driver);
     }
 
+    @Test
+    public void verifyAppsOnMainPage()  {
+        loginPage.loginAsAdmin();
+        homePage.OpenRegisterAPatientApp();
+        registrationPage.registerPatient();
 
+        //todo - Verification of the Patient Registration once  RA-72 is completed
+    }
 
 }

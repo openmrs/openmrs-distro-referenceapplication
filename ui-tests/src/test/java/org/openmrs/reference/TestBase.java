@@ -18,8 +18,6 @@ public class TestBase {
     @BeforeClass
     public static void startWebDriver() {
         driver = setupChromeDriver();
-//        driver = new ChromeDriver();
-//        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
         currentPage().gotoPage("/login.htm");
     }
 

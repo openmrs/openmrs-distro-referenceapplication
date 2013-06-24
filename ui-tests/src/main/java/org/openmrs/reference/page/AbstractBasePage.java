@@ -47,8 +47,8 @@ public abstract class AbstractBasePage implements Page {
     }
 
     @Override
-    public void setTextToField(String textFieldId, String text) {
-        setText(getElement(By.id(textFieldId)), text);
+    public void setTextToField(By textFieldId, String text) {
+        setText(getElement(textFieldId), text);
     }
 
     @Override
@@ -67,7 +67,8 @@ public abstract class AbstractBasePage implements Page {
         getElement(by).click();
     }
 
-    public void selectCombo(By by, String value){
+    @Override
+    public void selectFromCombo(By by, String value){
         Select droplist = new Select(getElement(by));
         droplist.selectByVisibleText(value);
     }
