@@ -26,8 +26,8 @@ public class RegistrationAppTest extends TestBase{
     public void verifyAppsOnMainPage()  {
         loginPage.loginAsAdmin();
         homePage.OpenRegisterAPatientApp();
-        registrationPage.registerPatient();
-
+//        registrationPage.registerPatient();
+// breeze - commented this test out as it is a WIP
         //todo - Verification of the Patient Registration once  RA-72 is completed
     }
 
