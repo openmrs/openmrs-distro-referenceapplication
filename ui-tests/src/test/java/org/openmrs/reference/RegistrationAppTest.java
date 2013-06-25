@@ -23,7 +23,7 @@ public class RegistrationAppTest extends TestBase{
     }
 
     @Test
-    public void verifyAppsOnMainPage()  {
+    public void verifyRegistrationSuccessful()  {
         loginPage.loginAsAdmin();
         homePage.OpenRegisterAPatientApp();
         registrationPage.registerPatient();

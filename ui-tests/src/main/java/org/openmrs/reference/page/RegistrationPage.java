@@ -17,7 +17,8 @@ public class RegistrationPage extends AbstractBasePage {
     private String CONFIRM_SPAN = "//ul[@id='formBreadcrumb']/li[3]/span";
     private String NAME_LINK = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(1)";
     private String GENDER_LINK = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(2)";
-    private String DATE_PICKER = "span.date input";
+    private String DATE_PICKER = "span.date i.icon-calendar";
+    private String DATE_WIDGET_ELEMENT = "div.datetimepicker-days tbody tr:nth-child(1) td";
     private String BIRTHDATE_LINK = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(3)";
     private String ADDRESS_LINK = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(4)";
 
@@ -50,7 +51,8 @@ public class RegistrationPage extends AbstractBasePage {
 //        setTextToField(BirthDate_Day_TxtBox, "5");
 //        selectFromCombo(By.id(BirthDate_Month_SelectBox), PatientGenerator.getPatientBirthMonth());
 //        setTextToField(BirthDate_Year_TxtBox, "1985");
-         setTextToField(By.cssSelector(DATE_PICKER),"12-04-1990");
+         clickOn(By.cssSelector(DATE_PICKER));
+         clickOn(By.cssSelector(DATE_WIDGET_ELEMENT));
 
         clickOnAddressLink();
         setTextToField(By.id(Address1_TxtBox), PatientGenerator.getPatientAddress1());
