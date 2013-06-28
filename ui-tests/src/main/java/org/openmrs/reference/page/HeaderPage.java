@@ -1,6 +1,5 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.reference.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -11,10 +10,15 @@ public class HeaderPage extends AbstractBasePage {
     }
 
     private String LOGOUT_LINK = "logout";
-    private String HOME_Link = "icon-home small";
+    private String HOME_Icon = "icon-home small";
+    private String HOME_Link = "Home";
 
     public void clickOnHomeIcon(){
-        clickOn(By.id(HOME_Link));
+        clickOn(By.id(HOME_Icon));
+    }
+
+    public void clickOnHomeLink(){
+        clickOn(By.linkText(HOME_Link));
     }
 
     public void logOut() {

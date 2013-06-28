@@ -28,6 +28,7 @@ public interface Page {
 
     void selectFromCombo(By by, String value);
 
+
 	/**
 	 * Return the actual title of the page.
 	 * 

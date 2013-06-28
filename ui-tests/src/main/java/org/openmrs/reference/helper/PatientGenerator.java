@@ -38,27 +38,27 @@ public class PatientGenerator {
     }
 
     public static String getPatientAddress1(){
-        return "Address1"+ String.valueOf(Calendar.getInstance().getTimeInMillis());
+        return "Address1"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
     }
 
     public static String getPatientAddress2(){
-        return "Address2"+ String.valueOf(Calendar.getInstance().getTimeInMillis());
+        return "Address2"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
     }
 
     public static String getPatientCity(){
-        return "City"+ String.valueOf(Calendar.getInstance().getTimeInMillis());
+        return "City"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
     }
 
     public static String getPatientState(){
-        return "State"+ String.valueOf(Calendar.getInstance().getTimeInMillis());
+        return "State"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
     }
 
     public static String getPatientCountry(){
-        return "Country"+ String.valueOf(Calendar.getInstance().getTimeInMillis());
+        return "Country"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
     }
 
     public static String getPhoneNumber(){
-        return String.valueOf(Calendar.getInstance().getTimeInMillis());
+        return String.valueOf(Calendar.getInstance().getTime());
     }
 
 }

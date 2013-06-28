@@ -39,8 +39,12 @@ public class HomePage extends AbstractBasePage{
         return isAppButtonPresent(REGISTER_PATIENT_REF_APP);
     }
 
-    public void OpenRegisterAPatientApp(){
+    public void openRegisterAPatientApp(){
         openApp(REGISTER_PATIENT_REF_APP);
+    }
+
+    public void openLegacyAdministrationApp(){
+        openApp(SYSTEM_ADMIN_APP);
     }
 
     public Boolean isPatientRegistrationAppPresented() {

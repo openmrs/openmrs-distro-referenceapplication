@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openmrs.reference.page.AdminPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.LoginPage;
 import org.openmrs.reference.page.ModulesPage;
@@ -15,12 +16,14 @@ public class CheckModules extends TestBase {
     private LoginPage loginPage;
     private HomePage homePage;
     private ModulesPage modulesPage;
+    private AdminPage adminPage;
 
     @Before
     public void setUp() {
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         modulesPage = new ModulesPage(driver);
+        adminPage = new AdminPage(driver);
     }
 
     @Test
@@ -28,7 +31,9 @@ public class CheckModules extends TestBase {
     	assertPage(loginPage);
         loginPage.loginAsAdmin();
         assertPage(homePage);
-        homePage.gotoPage("/admin/modules/module.list");
+        homePage.openLegacyAdministrationApp();
+        adminPage.clickOnManageModules();
+//        homePage.gotoPage("/admin/modules/module.list");
         assertPage(modulesPage);
         // Get the modulesListing <div>, which contains the table of modules.
         WebElement moduleListing = modulesPage.getElementById("moduleListing");
