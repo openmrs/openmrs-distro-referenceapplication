@@ -8,12 +8,13 @@ startedSignal="INFO: Server startup"
 timeout () {
   sleep 1
   count=$((count+1))
-  if [ ${count} == 120 ];
+  if [ ${count} == 180 ];
     then
-    echo "Waited for 2 minutes and Tomcat has not started."
+    echo "Waited for 3 minutes and Tomcat has not started."
     echo "Check /var/log/tomcat7/catalina.out to see what is happening."
-    exit
-          fi
+    exit 1
+  fi
+
 }
 
 checkForStartup() {
@@ -24,7 +25,6 @@ checkForStartup() {
       if [ "${Host}" == "devtest01.openmrs.org" ]
         then
           result=`ssh -o StrictHostKeyChecking=no devtest01.openmrs.org "sudo tail /var/log/tomcat7/catalina.out | grep \"${startedSignal}\""`
-#This if can do to the function
         timeout
         else
           result=`tail /var/log/tomcat7/catalina.out | grep "${startedSignal}"`
