@@ -30,8 +30,8 @@ checkForStartup() {
           result=`tail /var/log/tomcat7/catalina.out | grep "${startedSignal}"`
         timeout
       fi
-done
-  echo "Tomcat started."
+  done
+  echo "Tomcat started in ${count} seconds."
   echo "OpenMRS Reference Application is ready for use."
 }
 
