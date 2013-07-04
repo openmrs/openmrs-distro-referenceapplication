@@ -1,7 +1,7 @@
 package org.openmrs.reference.page;
 
 
-import org.openmrs.reference.helper.PatientGenerator;
+import org.openmrs.reference.PatientGenerator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
