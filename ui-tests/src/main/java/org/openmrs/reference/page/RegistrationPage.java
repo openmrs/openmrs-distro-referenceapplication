@@ -1,6 +1,6 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.reference.helper.PatientGenerator;
+import org.openmrs.reference.helper.TestPatient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -44,38 +44,19 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(By.xpath(DEMOGRAPHICS_SPAN));
     }
 
-    public void registerPatient(){
-        enterPatientGivenName();
-        enterPatientFamilyName();
-        clickOnGenderLink();
-        selectPatientGender();
+    public void enterPatientAddress(TestPatient patient) {
+        setTextToField(By.id(Address1_TxtBox), patient.address1);
+        setTextToField(By.id(Address2_TxtBox), patient.address2);
+        setTextToField(By.id(CityVillage_TxtBox), patient.city);
+        setTextToField(By.id(State_TxtBox), patient.state);
+        setTextToField(By.id(Country_TxtBox), patient.country);
+        setTextToField(By.id(PostalCode_TxtBox), patient.postalCode);
 
-        clickOnBirthDateLink();
-        selectPatientBirthDate();
+        setTextToField(By.id(Latitude_TxtBox), patient.latitude);
+        setTextToField(By.id(Longitude_TxtBox), patient.longitude);
 
-        clickOnContactInfo();
-        clickOnAddressLink();
-        enterPatientAddress();
-
-        clickOnPhoneNumber();
-        setTextToField(By.name(PhoneNumber_TxtBox), PatientGenerator.getPhoneNumber());
-//
-//        clickOnConfirm();
-    }
-
-    public void enterPatientAddress() {
-        setTextToField(By.id(Address1_TxtBox), PatientGenerator.getPatientAddress1());
-        setTextToField(By.id(Address2_TxtBox), PatientGenerator.getPatientAddress2());
-        setTextToField(By.id(CityVillage_TxtBox), PatientGenerator.getPatientCity());
-        setTextToField(By.id(State_TxtBox), PatientGenerator.getPatientState());
-        setTextToField(By.id(Country_TxtBox),PatientGenerator.getPatientCountry());
-        setTextToField(By.id(PostalCode_TxtBox),"345234");
-
-        setTextToField(By.id(Latitude_TxtBox),"12");
-        setTextToField(By.id(Longitude_TxtBox),"47");
-
-        setTextToField(By.id(StartDate_TxtBox),"01-01-2000");
-        setTextToField(By.id(EndDate_TxtBox),"01-01-2010");
+        setTextToField(By.id(StartDate_TxtBox), patient.startDate);
+        setTextToField(By.id(EndDate_TxtBox), patient.endDate);
     }
 
     public void selectPatientBirthDate() {
@@ -83,16 +64,16 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(By.cssSelector(DATE_WIDGET_ELEMENT));
     }
 
-    public void selectPatientGender() {
-        clickOn(By.cssSelector(Gender.replace("XX", PatientGenerator.getPatientGender())));
+    public void selectPatientGender(String gender) {
+        clickOn(By.cssSelector(Gender.replace("XX", gender)));
     }
 
-    public void enterPatientFamilyName() {
-        setTextToField(By.name(FamilyName_TxtBox), PatientGenerator.getPatientFamilyName());
+    public void enterPatientFamilyName(String familyName) {
+        setTextToField(By.name(FamilyName_TxtBox), familyName);
     }
 
-    public void enterPatientGivenName() {
-        setTextToField(By.name(GivenName_TxtBox), PatientGenerator.getPatientGivenName());
+    public void enterPatientGivenName(String givenName) {
+        setTextToField(By.name(GivenName_TxtBox), givenName);
     }
 
     public void enterPatientGivenNameForAutoSuggestFn(String name){
@@ -102,6 +83,10 @@ public class RegistrationPage extends AbstractBasePage {
         setTextToField(By.name(FamilyName_TxtBox),name);
     }
 
+    public void enterPhoneNumber(String phone) {
+    	setTextToField(By.name(PhoneNumber_TxtBox), phone);
+    }
+    
     public void clickOnContactInfo(){
         clickOn(By.xpath(CONTACT_INFO_SPAN));
     }

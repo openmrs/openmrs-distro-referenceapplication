@@ -11,13 +11,15 @@ import org.junit.BeforeClass;
 import org.openmrs.reference.page.GenericPage;
 import org.openmrs.reference.page.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TestBase {
-    protected static ChromeDriver driver;
+    protected static RemoteWebDriver driver;
 
     @BeforeClass
     public static void startWebDriver() {
-        driver = setupChromeDriver();
+        driver = setupChromeDriver();  // or: setupFirefoxDriver();
         currentPage().gotoPage("/login.htm");
     }
 
@@ -26,7 +28,7 @@ public class TestBase {
         driver.quit();
     }
 
-    private static ChromeDriver setupChromeDriver() {
+    static RemoteWebDriver setupChromeDriver() {
         URL resource = null;
         ClassLoader classLoader = TestBase.class.getClassLoader();
 
@@ -39,6 +41,12 @@ public class TestBase {
         }
         System.setProperty("webdriver.chrome.driver", resource.getPath());
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+        return driver;
+    }
+    
+    static RemoteWebDriver setupFirefoxDriver() {
+    	driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
         return driver;
     }

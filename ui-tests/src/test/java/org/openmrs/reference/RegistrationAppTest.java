@@ -1,13 +1,18 @@
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-
-import org.openmrs.reference.helper.PatientGenerator;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.helper.TestPatient;
+import org.openmrs.reference.page.AdminPage;
+import org.openmrs.reference.page.AdvancedSettingsPage;
+import org.openmrs.reference.page.HeaderPage;
+import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.LoginPage;
+import org.openmrs.reference.page.RegistrationPage;
 
 
 public class RegistrationAppTest extends TestBase{
@@ -40,20 +45,34 @@ public class RegistrationAppTest extends TestBase{
 
     // Test for Story RA-71
     @Test
-    public void verifyAddressValuesDisplayedInConfirmationPage(){
+    public void verifyAddressValuesDisplayedInConfirmationPage() {
         homePage.openRegisterAPatientApp();
-        registrationPage.enterPatientGivenName();
-        registrationPage.enterPatientFamilyName();
+        TestPatient patient = PatientGenerator.generateTestPatient();
+        registrationPage.enterPatientGivenName(patient.givenName);
+        registrationPage.enterPatientFamilyName(patient.familyName);
         registrationPage.clickOnGenderLink();
-        registrationPage.selectPatientGender();
+        registrationPage.selectPatientGender(patient.gender);
         registrationPage.clickOnContactInfo();
         registrationPage.clickOnAddressLink();
-        registrationPage.enterPatientAddress();
+        registrationPage.enterPatientAddress(patient);
+        // TODO clickOnPhoneNumber is not working. Something wrong with RegistrationPage.PHONE_NUMBER_LINK 
+//        registrationPage.clickOnPhoneNumber();
+//        registrationPage.enterPhoneNumber(patient.phone);
         registrationPage.clickOnConfirm();
 
-        String address=PatientGenerator.getPatientAddress1()+" "+PatientGenerator.getPatientAddress2()+" "+PatientGenerator.getPatientCity()+" "+PatientGenerator.getPatientState()+" "+PatientGenerator.getPatientCountry()+" 345234 12 47 01-01-2000 01-01-2010";
+        String address = patient.address1 + " " + 
+        		patient.address2 + " " + 
+        		patient.city + " " + 
+        		patient.state + " " + 
+        		patient.country + " " + 
+        		patient.postalCode + " " + 
+        		patient.latitude + " " + 
+        		patient.longitude + " " + 
+        		patient.startDate + " " + 
+        		patient.endDate;
+        System.out.println(address);
 
-        assertTrue(registrationPage.getAddressValueInConfirmationPage().equals(address));
+        assertEquals(address, registrationPage.getAddressValueInConfirmationPage());
 
     }
 
