@@ -13,6 +13,7 @@ public class HomePage extends AbstractBasePage{
     private String STYLE_GUIDE = "referenceapplication-styleGuide-referenceapplication-styleGuide-extension";
     private String SYSTEM_ADMIN_APP = "legacy-admin-legacy-admin-extension";
     private String LEGACY_FIND_PATIENT = "legacy-findPatient-legacy-findPatient-extension";
+    private String DISPENSING_MEDICATION_APP = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -65,6 +66,10 @@ public class HomePage extends AbstractBasePage{
 
     public Boolean isLegacyFindPatientAppPresented() {
         return isAppButtonPresent(LEGACY_FIND_PATIENT);
+    }
+
+    public Boolean isDispensingMedicationAppPresented(){
+        return isAppButtonPresent(DISPENSING_MEDICATION_APP);
     }
 
 	@Override
