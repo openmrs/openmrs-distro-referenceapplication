@@ -32,11 +32,11 @@ public class HomePage extends AbstractBasePage{
         clickOn(By.id(appIdentifier));
     }
 
-    public boolean isFindAPatientAppPresented() {
+    public boolean isFindAPatientAppPresent() {
         return isAppButtonPresent(FIND_PATIENT);
     }
 
-    public Boolean isRegisterPatientCustomizedForRefAppPresented() {
+    public Boolean isRegisterPatientCustomizedForRefAppPresent() {
         return isAppButtonPresent(REGISTER_PATIENT_REF_APP);
     }
 
@@ -48,27 +48,27 @@ public class HomePage extends AbstractBasePage{
         openApp(SYSTEM_ADMIN_APP);
     }
 
-    public Boolean isPatientRegistrationAppPresented() {
+    public Boolean isPatientRegistrationAppPresent() {
         return isAppButtonPresent(REGISTER_PATIENT);
     }
 
-    public Boolean isActiveVisitsAppPresented() {
+    public Boolean isActiveVisitsAppPresent() {
         return isAppButtonPresent(ACTIVE_VISITS);
     }
 
-    public Boolean isStyleGuideAppPresented() {
+    public Boolean isStyleGuideAppPresent() {
         return isAppButtonPresent(STYLE_GUIDE);
     }
 
-    public Boolean isSystemAdministrationAppPresented() {
+    public Boolean isSystemAdministrationAppPresent() {
         return isAppButtonPresent(SYSTEM_ADMIN_APP);
     }
 
-    public Boolean isLegacyFindPatientAppPresented() {
+    public Boolean isLegacyFindPatientAppPresent() {
         return isAppButtonPresent(LEGACY_FIND_PATIENT);
     }
 
-    public Boolean isDispensingMedicationAppPresented(){
+    public Boolean isDispensingMedicationAppPresent(){
         return isAppButtonPresent(DISPENSING_MEDICATION_APP);
     }
 

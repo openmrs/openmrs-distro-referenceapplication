@@ -24,21 +24,20 @@ public class LoginTest extends TestBase {
     }
 
     @Test
-    public void verifyAppsOnMainPage() throws Exception {
+    public void verifyModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
         loginPage.loginAsAdmin();
         assertPage(homePage);
-        assertThat(homePage.isDispensingMedicationAppPresented(),is(true));
-        assertThat(homePage.isRegisterPatientCustomizedForRefAppPresented(), is(true));
-        assertThat(homePage.isPatientRegistrationAppPresented(), is(true));
+        assertThat(homePage.isDispensingMedicationAppPresent(),is(true));
+        assertThat(homePage.isRegisterPatientCustomizedForRefAppPresent(), is(true));
 
-        assertThat(homePage.isFindAPatientAppPresented(), is(true));
+        assertThat(homePage.isFindAPatientAppPresent(), is(true));
 
-        assertThat(homePage.isActiveVisitsAppPresented(), is(true));
-        assertThat(homePage.isStyleGuideAppPresented(), is(true));
+        assertThat(homePage.isActiveVisitsAppPresent(), is(true));
+        assertThat(homePage.isStyleGuideAppPresent(), is(true));
 
-        assertThat(homePage.isSystemAdministrationAppPresented(), is(true));
-        assertThat(homePage.isLegacyFindPatientAppPresented(), is(true));
+        assertThat(homePage.isSystemAdministrationAppPresent(), is(true));
+        assertThat(homePage.isLegacyFindPatientAppPresent(), is(true));
 
         headerPage.logOut();
         assertPage(loginPage);
