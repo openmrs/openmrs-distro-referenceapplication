@@ -48,15 +48,11 @@ public class HomePage extends AbstractBasePage{
         openApp(SYSTEM_ADMIN_APP);
     }
 
-<<<<<<< HEAD
     public Boolean isPatientRegistrationAppPresent() {
         return isAppButtonPresent(REGISTER_PATIENT);
     }
 
     public Boolean isActiveVisitsAppPresent() {
-=======
-    public Boolean isActiveVisitsAppPresented() {
->>>>>>> 8e69b4f84eadd3a73702e0e56ae0f168c1afb1bb
         return isAppButtonPresent(ACTIVE_VISITS);
     }
 
