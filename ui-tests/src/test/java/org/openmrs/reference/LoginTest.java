@@ -30,7 +30,6 @@ public class LoginTest extends TestBase {
         assertPage(homePage);
         assertThat(homePage.isDispensingMedicationAppPresented(),is(true));
         assertThat(homePage.isRegisterPatientCustomizedForRefAppPresented(), is(true));
-        assertThat(homePage.isPatientRegistrationAppPresented(), is(true));
 
         assertThat(homePage.isFindAPatientAppPresented(), is(true));
 
