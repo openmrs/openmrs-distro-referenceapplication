@@ -2,6 +2,7 @@ package org.openmrs.reference.page;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import org.openmrs.reference.helper.TestProperties;
 import org.openqa.selenium.By;
@@ -68,7 +69,7 @@ public abstract class AbstractBasePage implements Page {
     }
 
     @Override
-    public void selectFromCombo(By by, String value){
+    public void selectFrom(By by, String value){
         Select droplist = new Select(getElement(by));
         droplist.selectByVisibleText(value);
     }
@@ -97,6 +98,11 @@ public abstract class AbstractBasePage implements Page {
         catch (MalformedURLException e) {
 	        return null;
         }
+    }
+
+    @Override
+    public List<WebElement> getElements(By by) {
+        return driver.findElements(by);
     }
 	
 	/**

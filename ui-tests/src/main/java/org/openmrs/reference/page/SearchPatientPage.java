@@ -9,12 +9,16 @@ public class SearchPatientPage extends AbstractBasePage {
         super(driver);
     }
 
+    private String searchTxtBox = "patient-search";
+    private String searchBtn = "form#patient-search-form input:contains('patient-search-form')";      //css-selector will be replaced with id once it is implemented in the app
+
+
     private void enterPatientIDOrName(String nameOrID) {
-        setTextToField(By.id("patient-search"),nameOrID);
+        setTextToField(By.id(searchTxtBox),nameOrID);
     }
 
     private void submitSearch(){
-        clickOn(By.cssSelector("form#patient-search-form input:contains('patient-search-form')"));
+        clickOn(By.cssSelector(searchBtn));
     }
 
     public void searchPatient(String nameOrID){

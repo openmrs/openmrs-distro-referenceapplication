@@ -3,6 +3,8 @@ package org.openmrs.reference.page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 /**
  * A web page.
  */
@@ -26,8 +28,9 @@ public interface Page {
 	
 	void hoverOn(By by);
 
-    void selectFromCombo(By by, String value);
+    void selectFrom(By by, String value);
 
+    List<WebElement> getElements(By by);
 
 	/**
 	 * Return the actual title of the page.

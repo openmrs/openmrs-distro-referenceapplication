@@ -46,30 +46,18 @@ public class RegistrationAppTest extends TestBase{
         registrationPage.enterPatientFamilyName();
         registrationPage.clickOnGenderLink();
         registrationPage.selectPatientGender();
+        registrationPage.clickOnBirthDateLink();
+        registrationPage.enterPatientBirthDate();
+
         registrationPage.clickOnContactInfo();
         registrationPage.clickOnAddressLink();
         registrationPage.enterPatientAddress();
         registrationPage.clickOnConfirm();
 
-        String address=PatientGenerator.getPatientAddress1()+" "+PatientGenerator.getPatientAddress2()+" "+PatientGenerator.getPatientCity()+" "+PatientGenerator.getPatientState()+" "+PatientGenerator.getPatientCountry()+" 345234 12 47 01-01-2000 01-01-2010";
+        String address=PatientGenerator.getPatientAddress1()+" "+PatientGenerator.getPatientAddress2()+" "+PatientGenerator.getPatientCity()+" "+PatientGenerator.getPatientState()+" "+PatientGenerator.getPatientCountry()+" 345234 12 47";
 
         assertTrue(registrationPage.getAddressValueInConfirmationPage().equals(address));
 
-    }
-
-
-    // Test for Story RA-77
-    @Ignore
-    public void verifyAutoSuggestionWorksForNameFields(){
-       homePage.openLegacyAdministrationApp();
-       adminPage.clickOnAdvancedSettings();
-            // WIP
-//       advancedSettingsPage.setGivenNameAutoSuggestList();
-//       advancedSettingsPage.setFamilyNameAutoSuggestList();
-//       advancedSettingsPage.saveChanges();
-//       headerPage.clickOnHomeLink();
-//       homePage.openRegisterAPatientApp();
-//       registrationPage.enterPatientGivenNameForAutoSuggestFn("a");
     }
 
     @After

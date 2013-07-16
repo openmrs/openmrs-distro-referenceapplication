@@ -6,14 +6,13 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage extends AbstractBasePage{
 
-    private String FIND_PATIENT = "coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension";
-    private String REGISTER_PATIENT = "registrationapp-basicRegisterPatient-homepageLink-registrationapp-basicRegisterPatient-homepageLink-extension";
-    private String REGISTER_PATIENT_REF_APP = "referenceapplication-registrationapp-registerPatient-homepageLink-referenceapplication-registrationapp-registerPatient-homepageLink-extension";
-    private String ACTIVE_VISITS = "org-openmrs-module-coreapps-activeVisitsHomepageLink-org-openmrs-module-coreapps-activeVisitsHomepageLink-extension";
-    private String STYLE_GUIDE = "referenceapplication-styleGuide-referenceapplication-styleGuide-extension";
-    private String SYSTEM_ADMIN_APP = "legacy-admin-legacy-admin-extension";
-    private String LEGACY_FIND_PATIENT = "legacy-findPatient-legacy-findPatient-extension";
-    private String DISPENSING_MEDICATION_APP = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
+    private String findPatientApp = "coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension";
+    private String registerPatientApp = "referenceapplication-registrationapp-registerPatient-homepageLink-referenceapplication-registrationapp-registerPatient-homepageLink-extension";
+    private String activeVisitsApp = "org-openmrs-module-coreapps-activeVisitsHomepageLink-org-openmrs-module-coreapps-activeVisitsHomepageLink-extension";
+    private String styleGuideApp = "referenceapplication-styleGuide-referenceapplication-styleGuide-extension";
+    private String systemAdminApp = "legacy-admin-legacy-admin-extension";
+    private String legacyFindPatientApp = "legacy-findPatient-legacy-findPatient-extension";
+    private String dispensingMedicationApp = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -33,43 +32,39 @@ public class HomePage extends AbstractBasePage{
     }
 
     public boolean isFindAPatientAppPresent() {
-        return isAppButtonPresent(FIND_PATIENT);
+        return isAppButtonPresent(findPatientApp);
     }
 
     public Boolean isRegisterPatientCustomizedForRefAppPresent() {
-        return isAppButtonPresent(REGISTER_PATIENT_REF_APP);
+        return isAppButtonPresent(registerPatientApp);
     }
 
     public void openRegisterAPatientApp(){
-        openApp(REGISTER_PATIENT_REF_APP);
+        openApp(registerPatientApp);
     }
 
     public void openLegacyAdministrationApp(){
-        openApp(SYSTEM_ADMIN_APP);
-    }
-
-    public Boolean isPatientRegistrationAppPresent() {
-        return isAppButtonPresent(REGISTER_PATIENT);
+        openApp(systemAdminApp);
     }
 
     public Boolean isActiveVisitsAppPresent() {
-        return isAppButtonPresent(ACTIVE_VISITS);
+        return isAppButtonPresent(activeVisitsApp);
     }
 
     public Boolean isStyleGuideAppPresent() {
-        return isAppButtonPresent(STYLE_GUIDE);
+        return isAppButtonPresent(styleGuideApp);
     }
 
     public Boolean isSystemAdministrationAppPresent() {
-        return isAppButtonPresent(SYSTEM_ADMIN_APP);
+        return isAppButtonPresent(systemAdminApp);
     }
 
     public Boolean isLegacyFindPatientAppPresent() {
-        return isAppButtonPresent(LEGACY_FIND_PATIENT);
+        return isAppButtonPresent(legacyFindPatientApp);
     }
 
     public Boolean isDispensingMedicationAppPresent(){
-        return isAppButtonPresent(DISPENSING_MEDICATION_APP);
+        return isAppButtonPresent(dispensingMedicationApp);
     }
 
 	@Override

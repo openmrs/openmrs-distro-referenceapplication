@@ -19,42 +19,65 @@ public class PatientGenerator {
 			"April", "May", "June", "July", "August", "September", "October", "November",
 			"December"};
 
+    private static final String[] PATIENT_BIRTH_DAY = {"1","2","3","4","5","6","7","8",
+            "9","10","11","12","13","14","15","16","17","18","19","20","21","22","23",
+            "24","25","26","27","28"};
+
+    private static final String[] PATIENT_BIRTH_YEAR = {"1980","1981","1982","1983",
+            "1990","1991","1995"};
+
     private static final String[] PATIENT_GENDER = {"M","F"};
 
+    private static String randomGenerator(String[] fieldName){
+        return fieldName[(int)(Math.random()*fieldName.length)];
+    }
+
 	public static String getPatientGivenName() {
-		return PATIENT_GIVEN_NAMES[(int) (Math.random() * PATIENT_GIVEN_NAMES.length)];
+        return randomGenerator(PATIENT_GIVEN_NAMES);
 	}
 
 	public static String getPatientFamilyName() {
-		return PATIENT_FAMILY_NAMES[(int) (Math.random() * PATIENT_FAMILY_NAMES.length)];
+        return randomGenerator(PATIENT_FAMILY_NAMES);
 	}
 
     public static String getPatientGender(){
-        return PATIENT_GENDER[(int) (Math.random() * PATIENT_GENDER.length)];
+        return randomGenerator(PATIENT_GENDER);
+    }
+
+    public static String getPatientBirthDay(){
+        return randomGenerator(PATIENT_BIRTH_DAY);
     }
 
     public static String getPatientBirthMonth(){
-        return PATIENT_BIRTH_MONTH[(int) (Math.random() * PATIENT_BIRTH_MONTH.length)];
+        return randomGenerator(PATIENT_BIRTH_MONTH);
+    }
+
+    public static String getPatientBirthYear(){
+         return randomGenerator(PATIENT_BIRTH_YEAR);
+    }
+
+    private static String timeGenerator(){
+        return String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
     }
 
     public static String getPatientAddress1(){
-        return "Address1"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
+        return "Address1"+ timeGenerator();
     }
 
     public static String getPatientAddress2(){
-        return "Address2"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
+        return "Address2"+ timeGenerator();
     }
 
     public static String getPatientCity(){
-        return "City"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
+        return "City"+ timeGenerator();
     }
 
     public static String getPatientState(){
-        return "State"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
+        return "State"+ timeGenerator();
     }
 
     public static String getPatientCountry(){
-        return "Country"+ String.valueOf(Calendar.getInstance().getTimeInMillis()).substring(0,5);
+        return "Country"+ timeGenerator();
     }
 
     public static String getPhoneNumber(){

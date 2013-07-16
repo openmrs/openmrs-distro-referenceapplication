@@ -11,9 +11,9 @@ public class AdvancedSettingsPage extends AbstractBasePage {
         super(driver);
     }
 
-    private String GivenNameAutoSuggestList = "//tbody[@id='globalPropsList']/tr[418]/td[2]/textarea";
-    private String FamilyNameAutoSuggestList = "//tbody[@id='globalPropsList']/tr[417]/td[2]/textarea";
-    private String Save_BTN = "//div[@id='buttonsAtBottom']//input[@value='Save']";
+    private String GivenNameAutoSuggestList = "//tbody[@id='globalPropsList']/tr[418]/td[2]/textarea";        //Once we get an id, this x-path should be replaced
+    private String FamilyNameAutoSuggestList = "//tbody[@id='globalPropsList']/tr[417]/td[2]/textarea";       //Once we get an id, this x-path should be replaced
+    private String Save_BTN = "//div[@id='buttonsAtBottom']//input[@value='Save']";                           //Once we get an id, this x-path should be replaced
 
 
     public void setGivenNameAutoSuggestList(){

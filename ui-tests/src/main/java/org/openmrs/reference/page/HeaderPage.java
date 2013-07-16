@@ -9,20 +9,20 @@ public class HeaderPage extends AbstractBasePage {
         super(driver);
     }
 
-    private String LOGOUT_LINK = "logout";
-    private String HOME_Icon = "icon-home small";
-    private String HOME_Link = "Home";
+    private String logoutLink = "logout";
+    private String homeIcon = "icon-home small";
+    private String homeLink = "Home";
 
     public void clickOnHomeIcon(){
-        clickOn(By.id(HOME_Icon));
+        clickOn(By.id(homeIcon));
     }
 
     public void clickOnHomeLink(){
-        clickOn(By.linkText(HOME_Link));
+        clickOn(By.linkText(homeLink));
     }
 
     public void logOut() {
-        clickOn(By.className(LOGOUT_LINK));
+        clickOn(By.className(logoutLink));
     }
 
 	@Override

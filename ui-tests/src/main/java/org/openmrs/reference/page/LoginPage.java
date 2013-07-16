@@ -17,14 +17,14 @@ public class LoginPage extends AbstractBasePage {
         Password = properties.getPassword();
     }
 
-    private String USERNAME_TEXTBOX = "username";
-    private String PASSWORD_TEXTBOX = "password";
-    private String LOGIN_BTN = "login-button";
+    private String userNameTxtBox = "username";
+    private String passwordTxtBox = "password";
+    private String loginBtn = "login-button";
 
     public void login(String user, String password) {
-        setTextToField(By.id(USERNAME_TEXTBOX),user);
-        setTextToField(By.id(PASSWORD_TEXTBOX), password);
-        clickOn(By.id(LOGIN_BTN));
+        setTextToField(By.id(userNameTxtBox),user);
+        setTextToField(By.id(passwordTxtBox), password);
+        clickOn(By.id(loginBtn));
     }
 
     public void loginAsAdmin(){

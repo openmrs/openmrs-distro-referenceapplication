@@ -33,7 +33,6 @@ public class CheckModules extends TestBase {
         assertPage(homePage);
         homePage.openLegacyAdministrationApp();
         adminPage.clickOnManageModules();
-//        homePage.gotoPage("/admin/modules/module.list");
         assertPage(modulesPage);
         // Get the modulesListing <div>, which contains the table of modules.
         WebElement moduleListing = modulesPage.getElementById("moduleListing");
