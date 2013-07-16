@@ -57,6 +57,7 @@
         <htmlformentry19extModuleVersion>1.3-SNAPSHOT</htmlformentry19extModuleVersion>
         <coreappsModuleVersion>1.0-SNAPSHOT</coreappsModuleVersion>
 		<dispensingModuleVersion>1.0-SNAPSHOT</dispensingModuleVersion>
+        <webservices.restModuleVersion>2.1.1-SNAPSHOT</webservices.restModuleVersion>
 
         <db.url><![CDATA[jdbc:mysql://localhost:3306/openmrs?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8]]></db.url>
         <db.user>root</db.user>
@@ -195,6 +196,11 @@
             <groupId>org.openmrs.module</groupId>
             <artifactId>dispensing-omod</artifactId>
             <version>${dispensingModuleVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>webservices.rest-omod</artifactId>
+            <version>${webservices.restModuleVersion}</version>
         </dependency>
 
         <dependency>
