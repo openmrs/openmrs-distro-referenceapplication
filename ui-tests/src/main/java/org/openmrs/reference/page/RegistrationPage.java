@@ -16,15 +16,15 @@ public class RegistrationPage extends AbstractBasePage {
     private String contactInfoSectionLink = "//ul[@id='formBreadcrumb']/li[2]/span";       //Once we get an id, this xpath should be replaced
     private String confirmSectionLink = "//ul[@id='formBreadcrumb']/li[3]/span";            //Once we get an id, this xpath should be replaced
 
-    private String nameLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(1)";        //Once we get an id, this xpath should be replaced
-    private String genderLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(2)";       //Once we get an id, this xpath should be replaced
-    private String birthDateLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(3)";    //Once we get an id, this xpath should be replaced
-    private String addressLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";      //Once we get an id, this xpath should be replaced
-    private String phoneNumberLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(1)";  //Once we get an id, this xpath should be replaced
+    private String nameLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(1)";        //Once we get an id, this css-selector should be replaced
+    private String genderLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(2)";       //Once we get an id, this css-selector should be replaced
+    private String birthDateLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(3)";    //Once we get an id, this css-selector should be replaced
+    private String addressLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";      //Once we get an id, this css-selector should be replaced
+    private String phoneNumberLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(1)";  //Once we get an id, this css-selector should be replaced
 
     private String givenNameTxtBox = "givenName";
     private String familyNameTxtBox = "familyName";
-    private String genderRadioBtn = "input[value='XX']";                  //Once we get an id, this css-path should be replaced
+    private String genderRadioBtn = "input[value='XX']";                  //Once we get an id, this css-selector should be replaced
     private String birthDayTxtBox = "birthdateDay-field";
     private String birthMonthDropDown = "birthdateMonth-field";
     private String birthYearTxtBox = "birthdateYear-field";
@@ -39,7 +39,7 @@ public class RegistrationPage extends AbstractBasePage {
     private String startDateTxtBox = "startDate";          //Will be removed once the field is taken out from Registration Page
     private String endDateTxtBox = "endDate";              //Will be removed once the field is taken out from Registration Page
     private String phoneNumberTxtBox = "phoneNumber";
-    private String addressInConfirmationPage = "//div[@id='dataCanvas']//li[5]/strong";             //Once we get an id, this xpath should be replaced
+    private String addressInConfirmationPage = "//div[@id='dataCanvas']//li[4]/strong";             //Once we get an id, this xpath should be replaced
 
 
     public void clickOnDemographics() {
