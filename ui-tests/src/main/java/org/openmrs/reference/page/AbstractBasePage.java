@@ -30,26 +30,24 @@ public abstract class AbstractBasePage implements Page {
         driver.get(serverURL + address);
     }
     
-    // Convenience method. TODO Should this be named findElement instead?
     @Override
-    public WebElement getElement(By by) {
+    public WebElement findElement(By by) {
     	return driver.findElement(by);
     }
 
-    // Convenience method. TODO Should this be named findElementById instead?
     @Override
-    public WebElement getElementById(String id) {
-    	return getElement(By.id(id));
+    public WebElement findElementById(String id) {
+    	return findElement(By.id(id));
     }
     
     @Override
     public String getText(By by) {
-        return getElement(by).getText();
+        return findElement(by).getText();
     }
 
     @Override
     public void setTextToField(By textFieldId, String text) {
-        setText(getElement(textFieldId), text);
+        setText(findElement(textFieldId), text);
     }
 
     @Override
@@ -65,24 +63,24 @@ public abstract class AbstractBasePage implements Page {
 
     @Override
     public void clickOn(By by) {
-        getElement(by).click();
+        findElement(by).click();
     }
 
     @Override
     public void selectFrom(By by, String value){
-        Select droplist = new Select(getElement(by));
+        Select droplist = new Select(findElement(by));
         droplist.selectByVisibleText(value);
     }
 
     @Override
     public void hoverOn(By by) {
         Actions builder = new Actions(driver);
-        Actions hover = builder.moveToElement(getElement(by));
+        Actions hover = builder.moveToElement(findElement(by));
         hover.perform();
     }
 
     private WebElement findTextFieldInsideSpan(String spanId) {
-        return getElementById(spanId).findElement(By.tagName("input"));
+        return findElementById(spanId).findElement(By.tagName("input"));
     }
 
 	@Override
@@ -101,7 +99,7 @@ public abstract class AbstractBasePage implements Page {
     }
 
     @Override
-    public List<WebElement> getElements(By by) {
+    public List<WebElement> findElements(By by) {
         return driver.findElements(by);
     }
 	
