@@ -2,7 +2,6 @@ package org.openmrs.reference;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +21,15 @@ public class LoginTest extends TestBase {
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
     }
+    
+    @Test
+    public void testLoginLogout() {
+    	assertPage(loginPage);
+        loginPage.loginAsAdmin();
+        assertPage(homePage);
+        headerPage.logOut();
+        assertPage(loginPage);
+    }
 
     @Test
     public void verifyModulesAvailableOnHomePage() throws Exception {
@@ -30,15 +38,11 @@ public class LoginTest extends TestBase {
         assertPage(homePage);
         assertThat(homePage.isDispensingMedicationAppPresent(),is(true));
         assertThat(homePage.isRegisterPatientCustomizedForRefAppPresent(), is(true));
-
         assertThat(homePage.isFindAPatientAppPresent(), is(true));
-
         assertThat(homePage.isActiveVisitsAppPresent(), is(true));
         assertThat(homePage.isStyleGuideAppPresent(), is(true));
-
         assertThat(homePage.isSystemAdministrationAppPresent(), is(true));
         assertThat(homePage.isLegacyFindPatientAppPresent(), is(true));
-
         headerPage.logOut();
         assertPage(loginPage);
     }
