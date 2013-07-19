@@ -26,16 +26,20 @@ public class CheckModules extends TestBase {
         adminPage = new AdminPage(driver);
     }
 
+    /**
+     * Check the list of modules to be sure they are all started.
+     */
     @Test
     public void checkModules() throws Exception {
     	assertPage(loginPage);
         loginPage.loginAsAdmin();
         assertPage(homePage);
         homePage.openLegacyAdministrationApp();
+        assertPage(adminPage);
         adminPage.clickOnManageModules();
         assertPage(modulesPage);
         // Get the modulesListing <div>, which contains the table of modules.
-        WebElement moduleListing = modulesPage.getElementById("moduleListing");
+        WebElement moduleListing = modulesPage.findElementById("moduleListing");
         // Grab all the <input> elements from the first column of the table.
         List<WebElement> firstColumn = moduleListing.findElements(By.xpath("table/tbody/tr/td[1]/input"));
         for (WebElement eachModule : firstColumn) {

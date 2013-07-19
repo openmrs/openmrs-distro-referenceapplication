@@ -1,16 +1,17 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.reference.helper.PatientGenerator;
+import org.openmrs.reference.helper.TestPatient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+/**
+ * The register-a-new-patient page.
+ */
 public class RegistrationPage extends AbstractBasePage {
-
 
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
-
 
     private String demographicsSectionLink = "//ul[@id='formBreadcrumb']/li[1]/span";        //Once we get an id, this xpath should be replaced
     private String contactInfoSectionLink = "//ul[@id='formBreadcrumb']/li[2]/span";       //Once we get an id, this xpath should be replaced
@@ -20,7 +21,7 @@ public class RegistrationPage extends AbstractBasePage {
     private String genderLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(2)";       //Once we get an id, this css-selector should be replaced
     private String birthDateLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(3)";    //Once we get an id, this css-selector should be replaced
     private String addressLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";      //Once we get an id, this css-selector should be replaced
-    private String phoneNumberLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(1)";  //Once we get an id, this css-selector should be replaced
+    private String phoneNumberLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";  //Once we get an id, this css-selector should be replaced
 
     private String givenNameTxtBox = "givenName";
     private String familyNameTxtBox = "familyName";
@@ -36,8 +37,6 @@ public class RegistrationPage extends AbstractBasePage {
     private String postalCodeTxtBox = "postalCode";
     private String latitudeTxtBox = "latitude";
     private String longitudeTxtBox = "longitude";
-    private String startDateTxtBox = "startDate";          //Will be removed once the field is taken out from Registration Page
-    private String endDateTxtBox = "endDate";              //Will be removed once the field is taken out from Registration Page
     private String phoneNumberTxtBox = "phoneNumber";
     private String addressInConfirmationPage = "//div[@id='dataCanvas']//li[4]/strong";             //Once we get an id, this xpath should be replaced
 
@@ -46,61 +45,40 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(By.xpath(demographicsSectionLink));
     }
 
-    public void registerPatient(){
-        enterPatientGivenName();
-        enterPatientFamilyName();
-        clickOnGenderLink();
-        selectPatientGender();
-
-        clickOnBirthDateLink();
-        enterPatientBirthDate();
-
-        clickOnContactInfo();
-        clickOnAddressLink();
-        enterPatientAddress();
-
-        clickOnPhoneNumber();
-        setTextToField(By.name(phoneNumberTxtBox), PatientGenerator.getPhoneNumber());
-//            Waiting for Confirm page to be fixed
-//        clickOnConfirm();
+    public void enterPatientAddress(TestPatient patient) {
+        setTextToField(By.id(address1TxtBox), patient.address1);
+        setTextToField(By.id(address2TxtBox), patient.address2);
+        setTextToField(By.id(cityVillageTxtBox), patient.city);
+        setTextToField(By.id(stateProvinceTxtBox), patient.state);
+        setTextToField(By.id(countryTxtBox), patient.country);
+        setTextToField(By.id(postalCodeTxtBox), patient.postalCode);
+        setTextToField(By.id(latitudeTxtBox), patient.latitude);
+        setTextToField(By.id(longitudeTxtBox), patient.longitude);
     }
 
-    public void enterPatientAddress() {
-        setTextToField(By.id(address1TxtBox), PatientGenerator.getPatientAddress1());
-        setTextToField(By.id(address2TxtBox), PatientGenerator.getPatientAddress2());
-        setTextToField(By.id(cityVillageTxtBox), PatientGenerator.getPatientCity());
-        setTextToField(By.id(stateProvinceTxtBox), PatientGenerator.getPatientState());
-        setTextToField(By.id(countryTxtBox),PatientGenerator.getPatientCountry());
-        setTextToField(By.id(postalCodeTxtBox),"345234");
-
-        setTextToField(By.id(latitudeTxtBox),"12");
-        setTextToField(By.id(longitudeTxtBox),"47");
+    public void enterPatientBirthDate(TestPatient patient) {
+        setTextToField(By.id(birthDayTxtBox), patient.birthDay);
+        selectFrom(By.id(birthMonthDropDown), patient.birthMonth);
+        setTextToField(By.id(birthYearTxtBox), patient.birthYear);
     }
 
-    public void enterPatientBirthDate() {
-        setTextToField(By.id(birthDayTxtBox),PatientGenerator.getPatientBirthDay());
-        selectFrom(By.id(birthMonthDropDown), PatientGenerator.getPatientBirthMonth());
-        setTextToField(By.id(birthYearTxtBox),PatientGenerator.getPatientBirthYear());
-
+    public void selectPatientGender(String gender) {
+        clickOn(By.cssSelector(genderRadioBtn.replace("XX", gender)));
     }
 
-    public void selectPatientGender() {
-        clickOn(By.cssSelector(genderRadioBtn.replace("XX", PatientGenerator.getPatientGender())));
+    public void enterPatientFamilyName(String familyName) {
+        setTextToField(By.name(familyNameTxtBox), familyName);
     }
 
-    public void enterPatientFamilyName() {
-        setTextToField(By.name(familyNameTxtBox), PatientGenerator.getPatientFamilyName());
-    }
-
-    public void enterPatientGivenName() {
-        setTextToField(By.name(givenNameTxtBox), PatientGenerator.getPatientGivenName());
+    public void enterPatientGivenName(String givenName) {
+        setTextToField(By.name(givenNameTxtBox), givenName);
     }
 
     public void enterPatientGivenNameForAutoSuggestFn(String name){
-        setTextToField(By.name(givenNameTxtBox),name);
+        setTextToField(By.name(givenNameTxtBox), name);
     }
     public void enterPatientFamilyNameForAutoSuggestFn(String name){
-        setTextToField(By.name(familyNameTxtBox),name);
+        setTextToField(By.name(familyNameTxtBox), name);
     }
 
     public void clickOnContactInfo(){
@@ -108,7 +86,11 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clickOnPhoneNumber() {
-        clickOn(By.xpath(phoneNumberLink));
+        clickOn(By.cssSelector(phoneNumberLink));
+    }
+
+	public void enterPhoneNumber(String phone) {
+        setTextToField(By.name(phoneNumberTxtBox), phone);
     }
 
     public void clickOnConfirm() {

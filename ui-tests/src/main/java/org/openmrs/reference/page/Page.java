@@ -1,9 +1,9 @@
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * A web page.
@@ -12,11 +12,9 @@ public interface Page {
 
 	void gotoPage(String address);
 
-    // TODO Should this be named findElement instead?
-	WebElement getElement(By by);
+	WebElement findElement(By by);
 	
-	// TODO Should this be named findElementById instead?
-	WebElement getElementById(String id);
+	WebElement findElementById(String id);
 	
 	String getText(By by);
 	
@@ -30,7 +28,7 @@ public interface Page {
 
     void selectFrom(By by, String value);
 
-    List<WebElement> getElements(By by);
+    List<WebElement> findElements(By by);
 
 	/**
 	 * Return the actual title of the page.
