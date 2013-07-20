@@ -40,7 +40,7 @@ public class RegistrationAppTest extends TestBase{
 
     // Test for Story RA-71
     @Test
-    public void verifyAddressValuesDisplayedInConfirmationPage() {
+    public void registerAPatientAndVerifyConfirmationPage() {
         homePage.openRegisterAPatientApp();
         TestPatient patient = PatientGenerator.generateTestPatient();
         registrationPage.enterPatientGivenName(patient.givenName);
@@ -64,8 +64,11 @@ public class RegistrationAppTest extends TestBase{
         		patient.latitude + " " + 
         		patient.longitude;
 
-        assertEquals(address, registrationPage.getAddressValueInConfirmationPage());
-
+        assertEquals(patient.givenName + " " + patient.familyName, registrationPage.getNameInConfirmationPage());
+        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
+        assertEquals(patient.birthDay + " " + patient.birthMonth + " " + patient.birthYear, registrationPage.getBirthdateInConfirmationPage());
+        assertEquals(address, registrationPage.getAddressInConfirmationPage());
+        assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
     }
 
     @After
