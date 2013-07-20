@@ -50,7 +50,6 @@ public class RegistrationAppTest extends TestBase{
         registrationPage.clickOnBirthDateLink();
         registrationPage.enterPatientBirthDate(patient);
         registrationPage.clickOnContactInfo();
-        registrationPage.clickOnAddressLink();
         registrationPage.enterPatientAddress(patient);
         registrationPage.clickOnPhoneNumber();
         registrationPage.enterPhoneNumber(patient.phone);
