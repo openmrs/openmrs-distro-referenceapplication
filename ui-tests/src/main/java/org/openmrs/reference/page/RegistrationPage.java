@@ -38,7 +38,13 @@ public class RegistrationPage extends AbstractBasePage {
     private String latitudeTxtBox = "latitude";
     private String longitudeTxtBox = "longitude";
     private String phoneNumberTxtBox = "phoneNumber";
-    private String addressInConfirmationPage = "//div[@id='dataCanvas']//li[4]/strong";             //Once we get an id, this xpath should be replaced
+    
+    static final String CONFIRMATION_DIV = "//div[@id='confirmation']";
+	static final String NAME_CONFIRM = CONFIRMATION_DIV + "//li[1]/strong";             //Once we get an id, this xpath should be replaced
+	static final String GENDER_CONFIRM = CONFIRMATION_DIV + "//li[2]/strong";             //Once we get an id, this xpath should be replaced
+	static final String BIRTHDATE_CONFIRM = CONFIRMATION_DIV + "//li[3]/strong";             //Once we get an id, this xpath should be replaced
+	static final String ADDRESS_CONFIRM = CONFIRMATION_DIV + "//li[4]/strong";             //Once we get an id, this xpath should be replaced
+	static final String PHONE_CONFIRM = CONFIRMATION_DIV + "//li[5]/strong";             //Once we get an id, this xpath should be replaced
 
 
     public void clickOnDemographics() {
@@ -113,10 +119,26 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(By.cssSelector(addressLink));
     }
 
-    public String getAddressValueInConfirmationPage() {
-        return  getText(By.xpath(addressInConfirmationPage)) ;
+    public String getNameInConfirmationPage() {
+        return getText(By.xpath(NAME_CONFIRM)) ;
     }
 
+    public String getGenderInConfirmationPage() {
+    	return getText(By.xpath(GENDER_CONFIRM)) ;
+    }
+    
+    public String getBirthdateInConfirmationPage() {
+    	return getText(By.xpath(BIRTHDATE_CONFIRM)) ;
+    }
+    
+    public String getAddressInConfirmationPage() {
+    	return getText(By.xpath(ADDRESS_CONFIRM)) ;
+    }
+    
+    public String getPhoneInConfirmationPage() {
+    	return getText(By.xpath(PHONE_CONFIRM)) ;
+    }
+    
 
 	@Override
     public String expectedUrlPath() {
