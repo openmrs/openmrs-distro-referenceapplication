@@ -9,7 +9,7 @@ public class HeaderPage extends AbstractBasePage {
         super(driver);
     }
 
-    private String logoutLink = "logout";
+    private String logoutLink = "//a[@href='/openmrs/logout']";
     private String homeIcon = "icon-home small";
     private String homeLink = "Home";
 
@@ -22,7 +22,7 @@ public class HeaderPage extends AbstractBasePage {
     }
 
     public void logOut() {
-        clickOn(By.className(logoutLink));
+        clickOn(By.xpath(logoutLink));
     }
 
 	@Override
