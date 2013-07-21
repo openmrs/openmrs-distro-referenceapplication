@@ -10,14 +10,16 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openmrs.reference.page.GenericPage;
 import org.openmrs.reference.page.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TestBase {
-    protected static ChromeDriver driver;
+    protected static WebDriver driver;
 
     @BeforeClass
     public static void startWebDriver() {
-        driver = setupChromeDriver();
+        driver = setupFirefoxDriver(); //setupChromeDriver(); // setupFirefoxDriver();
         currentPage().gotoPage("/login.htm");
     }
 
@@ -25,8 +27,13 @@ public class TestBase {
     public static void stopWebDriver() {
         driver.quit();
     }
+    
+    static WebDriver setupFirefoxDriver() {
+    	driver = new FirefoxDriver();
+    	return driver;
+    }
 
-    private static ChromeDriver setupChromeDriver() {
+    static WebDriver setupChromeDriver() {
         URL resource = null;
         ClassLoader classLoader = TestBase.class.getClassLoader();
 
