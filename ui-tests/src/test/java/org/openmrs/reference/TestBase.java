@@ -19,7 +19,7 @@ public class TestBase {
 
     @BeforeClass
     public static void startWebDriver() {
-        driver = setupFirefoxDriver(); //setupChromeDriver(); // setupFirefoxDriver();
+        driver = setupChromeDriver(); //setupChromeDriver(); // setupFirefoxDriver();
         currentPage().gotoPage("/login.htm");
     }
 
