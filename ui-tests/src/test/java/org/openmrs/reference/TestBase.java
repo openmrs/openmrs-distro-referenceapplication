@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.openmrs.reference.helper.TestProperties;
 import org.openmrs.reference.page.GenericPage;
 import org.openmrs.reference.page.Page;
 import org.openqa.selenium.WebDriver;
@@ -15,11 +16,28 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TestBase {
+	
+	public enum WebDriverType {chrome, firefox};	// only these two for now
+	
     protected static WebDriver driver;
 
     @BeforeClass
     public static void startWebDriver() {
-        driver = setupChromeDriver(); //setupChromeDriver(); // setupFirefoxDriver();
+        final TestProperties properties = TestProperties.instance();
+        final String webDriverName = properties.getWebDriver();
+        final WebDriverType webDriverType = WebDriverType.valueOf(webDriverName);
+        switch (webDriverType) {
+			case chrome:
+				driver = setupChromeDriver();
+				break;
+			case firefox:
+				driver = setupFirefoxDriver();
+				break;
+			default:
+				// shrug, choose chrome as default
+				driver = setupChromeDriver();
+				break;
+		}
         currentPage().gotoPage("/login.htm");
     }
 
