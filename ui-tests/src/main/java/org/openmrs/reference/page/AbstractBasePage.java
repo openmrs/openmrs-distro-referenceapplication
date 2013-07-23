@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.Select;
  * elements, clicking, filling fields. etc.
  */
 public abstract class AbstractBasePage implements Page {
-    protected TestProperties properties = new TestProperties();
+    protected TestProperties properties = TestProperties.instance();
     protected WebDriver driver;
     private String serverURL;
 
