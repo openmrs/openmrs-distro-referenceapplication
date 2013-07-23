@@ -5,8 +5,8 @@ class browsers {
   package { "firefox":
     ensure => latest,
   }
-package { "xvfbfofofofof":
-  ensure => present,
-}
+  package { "xvfb":
+    ensure => present,
+  }
 
 }
