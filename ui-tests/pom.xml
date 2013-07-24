@@ -16,10 +16,11 @@
         <webapp.url>http://localhost:8080/openmrs</webapp.url>
         <login.username>admin</login.username>
         <login.password>test</login.password>
+        <webdriver>chrome</webdriver>
     </properties>
     <profiles>
         <profile>
-            <id>ci</id>
+            <id>ci-headless</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
                 <!--<property>-->
@@ -75,6 +76,17 @@
 
                     </plugins>
                 </build>
+        </profile>
+        <profile>
+            <id>ci</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <webapp.url>http://devtest01.openmrs.org:8080/openmrs</webapp.url>
+                <login.username>admin</login.username>
+                <login.password>Admin123</login.password>
+            </properties>
         </profile>
     </profiles>
 
