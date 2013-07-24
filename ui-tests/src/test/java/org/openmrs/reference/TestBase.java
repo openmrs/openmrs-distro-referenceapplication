@@ -2,14 +2,23 @@ package org.openmrs.reference;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.rules.TestRule;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.openmrs.reference.page.GenericPage;
 import org.openmrs.reference.page.Page;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -27,6 +36,20 @@ public class TestBase {
     public static void stopWebDriver() {
         driver.quit();
     }
+    
+    // This takes a screen (well, browser) snapshot whenever there's a failure
+    // and stores it in a "screenshots" directory.
+    @Rule
+    public TestRule testWatcher = new TestWatcher() {
+        @Override
+        public void failed(Throwable t, Description test) {
+            File tempFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(tempFile, new File("screenshots/" + test.getDisplayName() + ".png"));
+            } catch (IOException e) {
+            }
+        }
+    };
     
     static WebDriver setupFirefoxDriver() {
     	driver = new FirefoxDriver();
