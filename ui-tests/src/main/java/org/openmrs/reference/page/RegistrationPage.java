@@ -18,7 +18,7 @@ public class RegistrationPage extends AbstractBasePage {
     private String confirmSectionLink = "//ul[@id='formBreadcrumb']/li[3]/span";            //Once we get an id, this xpath should be replaced
 
     private String nameLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(1)";        //Once we get an id, this css-selector should be replaced
-    private String genderLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(2)";       //Once we get an id, this css-selector should be replaced
+    private String genderId = "genderLabel";
     private String birthDateLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(3)";    //Once we get an id, this css-selector should be replaced
     private String addressLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";      //Once we get an id, this css-selector should be replaced
     private String phoneNumberLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";  //Once we get an id, this css-selector should be replaced
@@ -108,7 +108,7 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clickOnGenderLink(){
-        clickOn(By.cssSelector(genderLink));
+        clickOn(By.id(genderId));
     }
 
     public void clickOnBirthDateLink(){
