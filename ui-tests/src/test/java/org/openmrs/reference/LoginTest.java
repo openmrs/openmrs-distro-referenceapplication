@@ -1,7 +1,6 @@
 package org.openmrs.reference;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,12 +26,12 @@ public class LoginTest extends TestBase {
     	assertPage(loginPage);
         loginPage.loginAsAdmin();
         assertPage(homePage);
-        assertThat(homePage.isDispensingMedicationAppPresent(),is(true));
-        assertThat(homePage.isRegisterPatientCustomizedForRefAppPresent(), is(true));
-        assertThat(homePage.isFindAPatientAppPresent(), is(true));
-        assertThat(homePage.isActiveVisitsAppPresent(), is(true));
-        assertThat(homePage.isStyleGuideAppPresent(), is(true));
-        assertThat(homePage.isSystemAdministrationAppPresent(), is(true));
+        assertTrue(homePage.isDispensingMedicationAppPresent());
+        assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
+        assertTrue(homePage.isFindAPatientAppPresent());
+        assertTrue(homePage.isActiveVisitsAppPresent());
+        assertTrue(homePage.isStyleGuideAppPresent());
+        assertTrue(homePage.isSystemAdministrationAppPresent());
         headerPage.logOut();
         assertPage(loginPage);
     }

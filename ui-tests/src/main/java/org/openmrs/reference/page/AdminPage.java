@@ -10,12 +10,7 @@ public class AdminPage extends AbstractBasePage{
         super(driver);
     }
 
-    private String manageModuleLink = "Manage Modules";
-    private String advancedSettingsLink = "Advanced Settings";
-
-    public void clickOnManageModules(){
-        clickOn(By.linkText(manageModuleLink));
-    }
+    static final String advancedSettingsLink = "Advanced Settings";
 
     public void clickOnAdvancedSettings(){
         clickOn(By.linkText(advancedSettingsLink));
@@ -23,6 +18,6 @@ public class AdminPage extends AbstractBasePage{
 
     @Override
     public String expectedUrlPath() {
-        return "/openmrs/admin/index.htm";
+        return OPENMRS_PATH + "/admin/index.htm";
     }
 }

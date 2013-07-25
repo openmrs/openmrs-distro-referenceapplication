@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.reference.helper.TestProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,6 +32,10 @@ public abstract class AbstractBasePage implements Page {
     @Override
     public void gotoPage(String address) {
         driver.get(serverURL + address);
+    }
+    
+    public void go() {
+    	driver.get(StringUtils.removeEnd(serverURL, OPENMRS_PATH) + expectedUrlPath());
     }
     
     @Override
@@ -61,7 +66,6 @@ public abstract class AbstractBasePage implements Page {
     private void setText(WebElement element, String text) {
         element.clear();
         element.sendKeys(text);
-//        element.sendKeys(Keys.RETURN);   It clears out the entered text in the text box
     }
 
     @Override
@@ -113,4 +117,10 @@ public abstract class AbstractBasePage implements Page {
 	 */
 	@Override
     public abstract String expectedUrlPath();
+
+	public void clickOnLinkFromHref(String href) {
+		// We allow use of xpath here because href's tend to be quite stable.
+        clickOn(By.xpath("//a[@href='" + href + "']"));
+        
+    }
 }

@@ -13,31 +13,31 @@ public class RegistrationPage extends AbstractBasePage {
         super(driver);
     }
 
-    private String demographicsSectionLink = "//ul[@id='formBreadcrumb']/li[1]/span";        //Once we get an id, this xpath should be replaced
-    private String contactInfoSectionLink = "//ul[@id='formBreadcrumb']/li[2]/span";       //Once we get an id, this xpath should be replaced
-    private String confirmSectionLink = "//ul[@id='formBreadcrumb']/li[3]/span";            //Once we get an id, this xpath should be replaced
+    static final String DEMOGRAPHICS_SECTION = "//ul[@id='formBreadcrumb']/li[1]/span";        //Once we get an id, this xpath should be replaced
+    static final String CONTACT_INFO_SECTION = "//ul[@id='formBreadcrumb']/li[2]/span";       //Once we get an id, this xpath should be replaced
+    static final String CONFIRM_SECTION = "//ul[@id='formBreadcrumb']/li[3]/span";            //Once we get an id, this xpath should be replaced
 
-    private String nameLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(1)";        //Once we get an id, this css-selector should be replaced
-    private String genderId = "genderLabel";
-    private String birthDateLink = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(3)";    //Once we get an id, this css-selector should be replaced
-    private String addressLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";      //Once we get an id, this css-selector should be replaced
-    private String phoneNumberLink = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";  //Once we get an id, this css-selector should be replaced
+    static final String NAME_ID = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(1)";        //Once we get an id, this css-selector should be replaced
+    static final String GENDER_ID = "genderLabel";
+    static final String BIRTHDATE_ID = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(3)";    //Once we get an id, this css-selector should be replaced
+    static final String ADDRESS_ID = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";      //Once we get an id, this css-selector should be replaced
+    static final String PHONE_NUMBER_ID = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";  //Once we get an id, this css-selector should be replaced
 
-    private String givenNameTxtBox = "givenName";
-    private String familyNameTxtBox = "familyName";
-    private String genderRadioBtn = "input[value='XX']";                  //Once we get an id, this css-selector should be replaced
-    private String birthDayTxtBox = "birthdateDay-field";
-    private String birthMonthDropDown = "birthdateMonth-field";
-    private String birthYearTxtBox = "birthdateYear-field";
-    private String address1TxtBox = "address1";
-    private String address2TxtBox = "address2";
-    private String cityVillageTxtBox = "cityVillage";
-    private String stateProvinceTxtBox = "stateProvince";
-    private String countryTxtBox = "country";
-    private String postalCodeTxtBox = "postalCode";
-    private String latitudeTxtBox = "latitude";
-    private String longitudeTxtBox = "longitude";
-    private String phoneNumberTxtBox = "phoneNumber";
+    static final String GIVEN_NAME_TEXTBOX_ID = "givenName";
+    static final String FAMILY_NAME_TEXTBOX_ID = "familyName";
+    static final String GENDER_RADIO_BUTTON_ID = "input[value='XX']";                  //Once we get an id, this css-selector should be replaced
+    static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
+    static final String BIRTHDAY_MONTH_DROPDOWN_ID = "birthdateMonth-field";
+    static final String BIRTHDAY_YEAR_TEXTBOX_ID = "birthdateYear-field";
+    static final String ADDRESS1_TEXTBOX_ID = "address1";
+    static final String ADDRESS2_TEXTBOX_ID = "address2";
+    static final String CITY_VILLAGE_TEXTBOX_ID = "cityVillage";
+    static final String STATE_PROVINCE_TEXTBOX_ID = "stateProvince";
+    static final String COUNTRY_TEXTBOX_ID = "country";
+    static final String POSTAL_CODE_TEXTBOX_ID = "postalCode";
+    static final String LATITUDE_TEXTBOX_ID = "latitude";
+    static final String LONGITUDE_TEXTBOX_ID = "longitude";
+    static final String PHONE_NUMBER_TEXTBOX_ID = "phoneNumber";
     
     static final String CONFIRMATION_DIV = "//div[@id='confirmation']";
 	static final String NAME_CONFIRM = CONFIRMATION_DIV + "//li[1]/strong";             //Once we get an id, this xpath should be replaced
@@ -48,75 +48,75 @@ public class RegistrationPage extends AbstractBasePage {
 
 
     public void clickOnDemographics() {
-        clickOn(By.xpath(demographicsSectionLink));
+        clickOn(By.xpath(DEMOGRAPHICS_SECTION));
     }
 
     public void enterPatientAddress(TestPatient patient) {
-        setTextToField(By.id(address1TxtBox), patient.address1);
-        setTextToField(By.id(address2TxtBox), patient.address2);
-        setTextToField(By.id(cityVillageTxtBox), patient.city);
-        setTextToField(By.id(stateProvinceTxtBox), patient.state);
-        setTextToField(By.id(countryTxtBox), patient.country);
-        setTextToField(By.id(postalCodeTxtBox), patient.postalCode);
-        setTextToField(By.id(latitudeTxtBox), patient.latitude);
-        setTextToField(By.id(longitudeTxtBox), patient.longitude);
+        setTextToField(By.id(ADDRESS1_TEXTBOX_ID), patient.address1);
+        setTextToField(By.id(ADDRESS2_TEXTBOX_ID), patient.address2);
+        setTextToField(By.id(CITY_VILLAGE_TEXTBOX_ID), patient.city);
+        setTextToField(By.id(STATE_PROVINCE_TEXTBOX_ID), patient.state);
+        setTextToField(By.id(COUNTRY_TEXTBOX_ID), patient.country);
+        setTextToField(By.id(POSTAL_CODE_TEXTBOX_ID), patient.postalCode);
+        setTextToField(By.id(LATITUDE_TEXTBOX_ID), patient.latitude);
+        setTextToField(By.id(LONGITUDE_TEXTBOX_ID), patient.longitude);
     }
 
     public void enterPatientBirthDate(TestPatient patient) {
-        setTextToField(By.id(birthDayTxtBox), patient.birthDay);
-        selectFrom(By.id(birthMonthDropDown), patient.birthMonth);
-        setTextToField(By.id(birthYearTxtBox), patient.birthYear);
+        setTextToField(By.id(BIRTHDAY_DAY_TEXTBOX_ID), patient.birthDay);
+        selectFrom(By.id(BIRTHDAY_MONTH_DROPDOWN_ID), patient.birthMonth);
+        setTextToField(By.id(BIRTHDAY_YEAR_TEXTBOX_ID), patient.birthYear);
     }
 
     public void selectPatientGender(String gender) {
-        clickOn(By.cssSelector(genderRadioBtn.replace("XX", gender)));
+        clickOn(By.cssSelector(GENDER_RADIO_BUTTON_ID.replace("XX", gender)));
     }
 
     public void enterPatientFamilyName(String familyName) {
-        setTextToField(By.name(familyNameTxtBox), familyName);
+        setTextToField(By.name(FAMILY_NAME_TEXTBOX_ID), familyName);
     }
 
     public void enterPatientGivenName(String givenName) {
-        setTextToField(By.name(givenNameTxtBox), givenName);
+        setTextToField(By.name(GIVEN_NAME_TEXTBOX_ID), givenName);
     }
 
     public void enterPatientGivenNameForAutoSuggestFn(String name){
-        setTextToField(By.name(givenNameTxtBox), name);
+        setTextToField(By.name(GIVEN_NAME_TEXTBOX_ID), name);
     }
     public void enterPatientFamilyNameForAutoSuggestFn(String name){
-        setTextToField(By.name(familyNameTxtBox), name);
+        setTextToField(By.name(FAMILY_NAME_TEXTBOX_ID), name);
     }
 
     public void clickOnContactInfo(){
-        clickOn(By.xpath(contactInfoSectionLink));
+        clickOn(By.xpath(CONTACT_INFO_SECTION));
     }
 
     public void clickOnPhoneNumber() {
-        clickOn(By.cssSelector(phoneNumberLink));
+        clickOn(By.cssSelector(PHONE_NUMBER_ID));
     }
 
 	public void enterPhoneNumber(String phone) {
-        setTextToField(By.name(phoneNumberTxtBox), phone);
+        setTextToField(By.name(PHONE_NUMBER_TEXTBOX_ID), phone);
     }
 
     public void clickOnConfirm() {
-        clickOn(By.xpath(confirmSectionLink));
+        clickOn(By.xpath(CONFIRM_SECTION));
     }
 
     public void clickOnNameLink(){
-        clickOn(By.cssSelector(nameLink));
+        clickOn(By.cssSelector(NAME_ID));
     }
 
     public void clickOnGenderLink(){
-        clickOn(By.id(genderId));
+        clickOn(By.id(GENDER_ID));
     }
 
     public void clickOnBirthDateLink(){
-        clickOn(By.cssSelector(birthDateLink));
+        clickOn(By.cssSelector(BIRTHDATE_ID));
     }
 
     public void clickOnAddressLink(){
-        clickOn(By.cssSelector(addressLink));
+        clickOn(By.cssSelector(ADDRESS_ID));
     }
 
     public String getNameInConfirmationPage() {
@@ -139,11 +139,9 @@ public class RegistrationPage extends AbstractBasePage {
     	return getText(By.xpath(PHONE_CONFIRM)) ;
     }
     
-
 	@Override
     public String expectedUrlPath() {
-	    return "/openmrs/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
+	    return OPENMRS_PATH + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
-
 
 }

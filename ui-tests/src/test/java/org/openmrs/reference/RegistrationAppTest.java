@@ -76,5 +76,4 @@ public class RegistrationAppTest extends TestBase{
         headerPage.logOut();
     }
 
-
 }
