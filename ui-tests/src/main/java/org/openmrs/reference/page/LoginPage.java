@@ -8,6 +8,7 @@ public class LoginPage extends AbstractBasePage {
 	static final String userNameTxtBox = "username";
 	static final String passwordTxtBox = "password";
 	static final String loginBtn = "login-button";
+	public static final String LOGIN_PATH = "/login.htm";
 	
     private String UserName;
     private String Password;
@@ -30,6 +31,6 @@ public class LoginPage extends AbstractBasePage {
 
 	@Override
     public String expectedUrlPath() {
-    	return "/openmrs/login.htm";
+    	return OPENMRS_PATH + LOGIN_PATH;
     }
 }

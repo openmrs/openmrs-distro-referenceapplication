@@ -23,15 +23,6 @@ public class LoginTest extends TestBase {
     }
     
     @Test
-    public void testLoginLogout() {
-    	assertPage(loginPage);
-        loginPage.loginAsAdmin();
-        assertPage(homePage);
-        headerPage.logOut();
-        assertPage(loginPage);
-    }
-
-    @Test
     public void verifyModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
         loginPage.loginAsAdmin();
@@ -42,7 +33,6 @@ public class LoginTest extends TestBase {
         assertThat(homePage.isActiveVisitsAppPresent(), is(true));
         assertThat(homePage.isStyleGuideAppPresent(), is(true));
         assertThat(homePage.isSystemAdministrationAppPresent(), is(true));
-        assertThat(homePage.isLegacyFindPatientAppPresent(), is(true));
         headerPage.logOut();
         assertPage(loginPage);
     }

@@ -16,6 +16,9 @@ import org.openqa.selenium.support.ui.Select;
  * elements, clicking, filling fields. etc.
  */
 public abstract class AbstractBasePage implements Page {
+	
+	public static final String OPENMRS_PATH = "/openmrs";
+	
     protected TestProperties properties = TestProperties.instance();
     protected WebDriver driver;
     private String serverURL;

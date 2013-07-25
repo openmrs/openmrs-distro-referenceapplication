@@ -11,7 +11,6 @@ public class HomePage extends AbstractBasePage{
     private String activeVisitsApp = "org-openmrs-module-coreapps-activeVisitsHomepageLink-org-openmrs-module-coreapps-activeVisitsHomepageLink-extension";
     private String styleGuideApp = "referenceapplication-styleGuide-referenceapplication-styleGuide-extension";
     private String systemAdminApp = "legacy-admin-legacy-admin-extension";
-    private String legacyFindPatientApp = "legacy-findPatient-legacy-findPatient-extension";
     private String dispensingMedicationApp = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
 
     public HomePage(WebDriver driver) {
@@ -57,10 +56,6 @@ public class HomePage extends AbstractBasePage{
 
     public Boolean isSystemAdministrationAppPresent() {
         return isAppButtonPresent(systemAdminApp);
-    }
-
-    public Boolean isLegacyFindPatientAppPresent() {
-        return isAppButtonPresent(legacyFindPatientApp);
     }
 
     public Boolean isDispensingMedicationAppPresent(){

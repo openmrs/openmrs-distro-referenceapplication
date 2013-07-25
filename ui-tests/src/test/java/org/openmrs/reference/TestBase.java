@@ -17,6 +17,7 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openmrs.reference.helper.TestProperties;
 import org.openmrs.reference.page.GenericPage;
+import org.openmrs.reference.page.LoginPage;
 import org.openmrs.reference.page.Page;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -47,12 +48,16 @@ public class TestBase {
 				driver = setupChromeDriver();
 				break;
 		}
-        currentPage().gotoPage("/login.htm");
+        goToLoginPage();
     }
 
     @AfterClass
     public static void stopWebDriver() {
         driver.quit();
+    }
+    
+    public static void goToLoginPage() {
+    	currentPage().gotoPage(LoginPage.LOGIN_PATH);
     }
     
     // This takes a screen (well, browser) snapshot whenever there's a failure
@@ -63,7 +68,7 @@ public class TestBase {
         public void failed(Throwable t, Description test) {
             File tempFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             try {
-                FileUtils.copyFile(tempFile, new File("screenshots/" + test.getDisplayName() + ".png"));
+                FileUtils.copyFile(tempFile, new File("target/screenshots/" + test.getDisplayName() + ".png"));
             } catch (IOException e) {
             }
         }
@@ -109,6 +114,5 @@ public class TestBase {
 	public void assertPage(Page expected) {
 	    assertEquals(expected.expectedUrlPath(), currentPage().urlPath());
     }
-
 
 }
