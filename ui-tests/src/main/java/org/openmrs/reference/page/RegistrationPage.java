@@ -13,19 +13,16 @@ public class RegistrationPage extends AbstractBasePage {
         super(driver);
     }
 
-    static final String DEMOGRAPHICS_SECTION = "//ul[@id='formBreadcrumb']/li[1]/span";        //Once we get an id, this xpath should be replaced
-    static final String CONTACT_INFO_SECTION = "//ul[@id='formBreadcrumb']/li[2]/span";       //Once we get an id, this xpath should be replaced
-    static final String CONFIRM_SECTION = "//ul[@id='formBreadcrumb']/li[3]/span";            //Once we get an id, this xpath should be replaced
+    static final String CONTACT_INFO_SECTION_ID = "contactInfo_id";
+    static final String CONFIRM_SECTION_ID = "confirmation_id";
 
-    static final String NAME_ID = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(1)";        //Once we get an id, this css-selector should be replaced
     static final String GENDER_ID = "genderLabel";
-    static final String BIRTHDATE_ID = "ul#formBreadcrumb li:nth-of-type(1) li:nth-of-type(3)";    //Once we get an id, this css-selector should be replaced
-    static final String ADDRESS_ID = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";      //Once we get an id, this css-selector should be replaced
-    static final String PHONE_NUMBER_ID = "ul#formBreadcrumb li:nth-of-type(2) li:nth-of-type(2)";  //Once we get an id, this css-selector should be replaced
+    static final String BIRTHDATE_ID = "birthdateLabel";
+    static final String PHONE_NUMBER_ID = "phoneNumberLabel";
 
     static final String GIVEN_NAME_TEXTBOX_ID = "givenName";
     static final String FAMILY_NAME_TEXTBOX_ID = "familyName";
-    static final String GENDER_RADIO_BUTTON_ID = "input[value='XX']";                  //Once we get an id, this css-selector should be replaced
+    static final String GENDER_RADIO_BUTTON_ID = "input[value='XX']";
     static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
     static final String BIRTHDAY_MONTH_DROPDOWN_ID = "birthdateMonth-field";
     static final String BIRTHDAY_YEAR_TEXTBOX_ID = "birthdateYear-field";
@@ -46,10 +43,6 @@ public class RegistrationPage extends AbstractBasePage {
 	static final String ADDRESS_CONFIRM = CONFIRMATION_DIV + "//li[4]/strong";             //Once we get an id, this xpath should be replaced
 	static final String PHONE_CONFIRM = CONFIRMATION_DIV + "//li[5]/strong";             //Once we get an id, this xpath should be replaced
 
-
-    public void clickOnDemographics() {
-        clickOn(By.xpath(DEMOGRAPHICS_SECTION));
-    }
 
     public void enterPatientAddress(TestPatient patient) {
         setTextToField(By.id(ADDRESS1_TEXTBOX_ID), patient.address1);
@@ -88,11 +81,11 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clickOnContactInfo(){
-        clickOn(By.xpath(CONTACT_INFO_SECTION));
+        clickOn(By.id(CONTACT_INFO_SECTION_ID));
     }
 
     public void clickOnPhoneNumber() {
-        clickOn(By.cssSelector(PHONE_NUMBER_ID));
+        clickOn(By.id(PHONE_NUMBER_ID));
     }
 
 	public void enterPhoneNumber(String phone) {
@@ -100,11 +93,7 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clickOnConfirm() {
-        clickOn(By.xpath(CONFIRM_SECTION));
-    }
-
-    public void clickOnNameLink(){
-        clickOn(By.cssSelector(NAME_ID));
+        clickOn(By.id(CONFIRM_SECTION_ID));
     }
 
     public void clickOnGenderLink(){
@@ -112,11 +101,7 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clickOnBirthDateLink(){
-        clickOn(By.cssSelector(BIRTHDATE_ID));
-    }
-
-    public void clickOnAddressLink(){
-        clickOn(By.cssSelector(ADDRESS_ID));
+        clickOn(By.id(BIRTHDATE_ID));
     }
 
     public String getNameInConfirmationPage() {
