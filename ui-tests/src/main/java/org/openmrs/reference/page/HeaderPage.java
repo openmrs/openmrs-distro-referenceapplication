@@ -1,5 +1,6 @@
 package org.openmrs.reference.page;
 
+import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -9,7 +10,7 @@ public class HeaderPage extends AbstractBasePage {
 		super(driver);
 	}
 	
-	static final String LOGOUT_HREF = OPENMRS_PATH + "/logout";
+	final String LOGOUT_HREF = URL_ROOT + "/logout";
 	static final String HOME_ICON = "icon-home small";
 	static final String HOME_LINK_TEXT = "Home";
 	

@@ -1,6 +1,7 @@
 package org.openmrs.reference.page;
 
 import org.openmrs.reference.helper.TestPatient;
+import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -126,7 +127,7 @@ public class RegistrationPage extends AbstractBasePage {
     
 	@Override
     public String expectedUrlPath() {
-	    return OPENMRS_PATH + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
+	    return URL_ROOT + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
 
 }

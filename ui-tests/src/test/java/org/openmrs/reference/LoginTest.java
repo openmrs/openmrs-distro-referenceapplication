@@ -6,7 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.LoginPage;
+import org.openmrs.uitestframework.page.LoginPage;
+import org.openmrs.uitestframework.test.TestBase;
 
 public class LoginTest extends TestBase {
     private HeaderPage headerPage;

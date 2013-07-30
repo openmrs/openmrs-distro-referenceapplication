@@ -1,5 +1,6 @@
 package org.openmrs.reference.page;
 
+import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.WebDriver;
 
 /**
