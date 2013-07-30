@@ -13,8 +13,8 @@ public class RegistrationPage extends AbstractBasePage {
         super(driver);
     }
 
-    static final String CONTACT_INFO_SECTION_ID = "contactInfo_id";
-    static final String CONFIRM_SECTION_ID = "confirmation_id";
+    static final String CONTACT_INFO_SECTION_ID = "contactInfo_label";
+    static final String CONFIRM_SECTION_ID = "confirmation_label";
 
     static final String GENDER_ID = "genderLabel";
     static final String BIRTHDATE_ID = "birthdateLabel";

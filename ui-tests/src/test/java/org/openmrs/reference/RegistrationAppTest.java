@@ -12,6 +12,7 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.LoginPage;
 import org.openmrs.reference.page.RegistrationPage;
+import org.openqa.selenium.UnhandledAlertException;
 
 
 public class RegistrationAppTest extends TestBase{
@@ -43,32 +44,38 @@ public class RegistrationAppTest extends TestBase{
     public void registerAPatientAndVerifyConfirmationPage() {
         homePage.openRegisterAPatientApp();
         TestPatient patient = PatientGenerator.generateTestPatient();
-        registrationPage.enterPatientGivenName(patient.givenName);
-        registrationPage.enterPatientFamilyName(patient.familyName);
-        registrationPage.clickOnGenderLink();
-        registrationPage.selectPatientGender(patient.gender);
-        registrationPage.clickOnBirthDateLink();
-        registrationPage.enterPatientBirthDate(patient);
-        registrationPage.clickOnContactInfo();
-        registrationPage.enterPatientAddress(patient);
-        registrationPage.clickOnPhoneNumber();
-        registrationPage.enterPhoneNumber(patient.phone);
-        registrationPage.clickOnConfirm();
+        try {
+	        registrationPage.enterPatientGivenName(patient.givenName);
+	        registrationPage.enterPatientFamilyName(patient.familyName);
+	        registrationPage.clickOnGenderLink();
+	        registrationPage.selectPatientGender(patient.gender);
+	        registrationPage.clickOnBirthDateLink();
+	        registrationPage.enterPatientBirthDate(patient);
+	        registrationPage.clickOnContactInfo();
+	        registrationPage.enterPatientAddress(patient);
+	        registrationPage.clickOnPhoneNumber();
+	        registrationPage.enterPhoneNumber(patient.phone);
+	        registrationPage.clickOnConfirm();
 
-        String address = patient.address1 + " " + 
-        		patient.address2 + " " + 
-        		patient.city + " " + 
-        		patient.state + " " + 
-        		patient.country + " " + 
-        		patient.postalCode + " " + 
-        		patient.latitude + " " + 
-        		patient.longitude;
+	        String address = patient.address1 + " " + 
+	        		patient.address2 + " " + 
+	        		patient.city + " " + 
+	        		patient.state + " " + 
+	        		patient.country + " " + 
+	        		patient.postalCode + " " + 
+	        		patient.latitude + " " + 
+	        		patient.longitude;
 
-        assertEquals(patient.givenName + " " + patient.familyName, registrationPage.getNameInConfirmationPage());
-        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
-        assertEquals(patient.birthDay + " " + patient.birthMonth + " " + patient.birthYear, registrationPage.getBirthdateInConfirmationPage());
-        assertEquals(address, registrationPage.getAddressInConfirmationPage());
-        assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
+	        assertEquals(patient.givenName + " " + patient.familyName, registrationPage.getNameInConfirmationPage());
+	        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
+	        assertEquals(patient.birthDay + " " + patient.birthMonth + " " + patient.birthYear, registrationPage.getBirthdateInConfirmationPage());
+	        assertEquals(address, registrationPage.getAddressInConfirmationPage());
+	        assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
+        }
+        catch (UnhandledAlertException e) {
+	        System.out.println(e);
+	        System.out.println(e.getAlertText());
+        }
     }
 
     @After

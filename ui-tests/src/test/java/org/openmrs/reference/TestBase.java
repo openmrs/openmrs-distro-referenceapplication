@@ -92,7 +92,7 @@ public class TestBase {
         }
         System.setProperty("webdriver.chrome.driver", resource.getPath());
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
         return driver;
     }
 
