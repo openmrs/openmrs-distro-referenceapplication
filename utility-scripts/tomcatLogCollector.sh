@@ -16,6 +16,8 @@ cleanTomcatLog(){
     then
       rm ${workingDir}/catalina.out
   fi
+  ## And finally zero out the source log file
+  ${remoteExec} "sudo bash -c 'cat /dev/null > ${tomcatLogLocation}'"
 }
 
 getTomcatLog() {
