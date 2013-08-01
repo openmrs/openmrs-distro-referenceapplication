@@ -11,10 +11,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.rules.TestRule;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
 import org.openmrs.reference.helper.TestProperties;
 import org.openmrs.reference.page.GenericPage;
 import org.openmrs.reference.page.LoginPage;
@@ -23,6 +25,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TestBase {
@@ -90,7 +93,15 @@ public class TestBase {
         } else if(SystemUtils.IS_OS_WINDOWS) {
             resource = classLoader.getResource("chromedriver/windows/chromedriver.exe");
         }
-        System.setProperty("webdriver.chrome.driver", resource.getPath());
+        System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, resource.getPath());
+        String chromedriverFilesDir = "target/chromedriverlogs";
+        try {
+	        FileUtils.forceMkdir(new File(chromedriverFilesDir));
+        }
+        catch (IOException e) {
+        	e.printStackTrace();
+        }
+        System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_PROPERTY, chromedriverFilesDir + "/chromedriver-" + TestClassName.name + ".log");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
         return driver;
@@ -114,5 +125,17 @@ public class TestBase {
 	public void assertPage(Page expected) {
 	    assertEquals(expected.expectedUrlPath(), currentPage().urlPath());
     }
+
+	// This junit cleverness picks up the name of the test class, to be used in the chromedriver log file name.
+	@ClassRule 
+	public static TestClassName TestClassName = new TestClassName();
+	static class TestClassName implements TestRule {
+		public String name;
+		@Override
+	    public Statement apply(Statement statement, Description description) {
+			name = description.getTestClass().getSimpleName();
+		    return statement;
+	    }
+	}
 
 }
