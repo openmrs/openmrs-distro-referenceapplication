@@ -92,7 +92,7 @@ puppet.module_path    = "puppet/modules"
 puppet.options        = "-e 'include refapp'"
 end
 config.vm.provision :shell do |shell|
-shell.inline = 'cd /vagrant/ && ./appStartupCheck.sh'
+shell.inline = 'cd /vagrant/ && utility-scripts/appStartupCheck.sh'
 end
 
 
