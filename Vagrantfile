@@ -73,7 +73,7 @@ config.vm.synced_folder ".", "/vagrant", :extra => "dmode=755,fmode=755"
     puppet.module_path    = "puppet/modules"
   end
 config.vm.provision :shell do |shell|
-shell.inline = 'cd /vagrant/ && ./create-db.sh'
+shell.inline = 'cd /vagrant/ && utility-scripts/create-db.sh'
 end
 config.vm.provision :shell do |shell|
 shell.inline = 'cd /vagrant/ && mvn generate-resources -P setupdatabase'
