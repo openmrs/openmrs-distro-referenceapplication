@@ -58,6 +58,7 @@
         <coreappsModuleVersion>1.0-SNAPSHOT</coreappsModuleVersion>
 		<dispensingModuleVersion>1.0-SNAPSHOT</dispensingModuleVersion>
         <webservices.restModuleVersion>2.1.1-SNAPSHOT</webservices.restModuleVersion>
+        <referencedemodataModuleVersion>1.0-SNAPSHOT</referencedemodataModuleVersion>
 
         <db.url><![CDATA[jdbc:mysql://localhost:3306/openmrs?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8]]></db.url>
         <db.user>root</db.user>
@@ -201,6 +202,11 @@
             <groupId>org.openmrs.module</groupId>
             <artifactId>webservices.rest-omod</artifactId>
             <version>${webservices.restModuleVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>referencedemodata-omod</artifactId>
+            <version>${referencedemodataModuleVersion}</version>
         </dependency>
 
         <dependency>

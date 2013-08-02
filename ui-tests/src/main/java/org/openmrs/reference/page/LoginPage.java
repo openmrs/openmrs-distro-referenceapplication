@@ -9,7 +9,7 @@ public class LoginPage extends AbstractBasePage {
 	static final String PASSWORD_TEXTBOX_ID = "password";
 	static final String LOGIN_BUTTON_ID = "login-button";
 	public static final String LOGIN_PATH = "/login.htm";
-    public static final String UNKOWN_LOCATION_ELEMENT_ID = "1-Unknown Location";
+    public static final String UNKOWN_LOCATION_ELEMENT_ID = "2-Wishard Hospital";
 	
 	private String UserName;
 	
