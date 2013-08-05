@@ -60,6 +60,7 @@
 		<dispensingModuleVersion>1.0-SNAPSHOT</dispensingModuleVersion>
         <webservices.restModuleVersion>2.1.1-SNAPSHOT</webservices.restModuleVersion>
         <referencedemodataModuleVersion>1.0-SNAPSHOT</referencedemodataModuleVersion>
+        <namephoneticsModuleVersion>1.3.7-SNAPSHOT</namephoneticsModuleVersion>
 
         <db.url><![CDATA[jdbc:mysql://localhost:3306/openmrs?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8]]></db.url>
         <db.user>root</db.user>
@@ -213,6 +214,11 @@
             <groupId>org.openmrs.module</groupId>
             <artifactId>referencedemodata-omod</artifactId>
             <version>${referencedemodataModuleVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>namephonetics-omod</artifactId>
+            <version>${namephoneticsModuleVersion}</version>
         </dependency>
 
         <dependency>
