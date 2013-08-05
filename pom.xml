@@ -35,7 +35,7 @@
         <referencemetadataModuleVersion>1.0-SNAPSHOT</referencemetadataModuleVersion>
         <logicModuleVersion>0.5.2</logicModuleVersion>
         <appframeworkModuleVersion>2.0-SNAPSHOT</appframeworkModuleVersion>
-        <uiframeworkModuleVersion>2.5.2</uiframeworkModuleVersion>
+        <uiframeworkModuleVersion>3.0-SNAPSHOT</uiframeworkModuleVersion>
         <registrationcoreModuleVersion>1.0-SNAPSHOT</registrationcoreModuleVersion>
         <registrationappModuleVersion>1.0-SNAPSHOT</registrationappModuleVersion>
         <eventModuleVersion>2.2-SNAPSHOT</eventModuleVersion>
@@ -43,20 +43,23 @@
         <emrapiModuleVersion>1.0-SNAPSHOT</emrapiModuleVersion>
         <referenceapplicationModuleVersion>1.0-SNAPSHOT</referenceapplicationModuleVersion>
         <paperrecordModuleVersion>1.0-SNAPSHOT</paperrecordModuleVersion>
-        <providermanagementModuleVersion>1.1.4-SNAPSHOT</providermanagementModuleVersion>
+        <providermanagementModuleVersion>2.1-SNAPSHOT</providermanagementModuleVersion>
         <uilibraryModuleVersion>2.0.4-SNAPSHOT</uilibraryModuleVersion>
         <calculationModuleVersion>1.1-SNAPSHOT</calculationModuleVersion>
         <serialization.xstreamModuleVersion>0.2.8-SNAPSHOT</serialization.xstreamModuleVersion>
         <htmlwidgetsModuleVersion>1.6.6-SNAPSHOT</htmlwidgetsModuleVersion>
-        <reportingModuleVersion>0.7.7-SNAPSHOT</reportingModuleVersion>
+        <reportingModuleVersion>0.8-SNAPSHOT</reportingModuleVersion>
         <metadatasharingModuleVersion>1.1.8</metadatasharingModuleVersion>
         <metadatamappingModuleVersion>1.0.2-SNAPSHOT</metadatamappingModuleVersion>
         <uicommonsModuleVersion>1.0-SNAPSHOT</uicommonsModuleVersion>
         <appuiModuleVersion>1.0-SNAPSHOT</appuiModuleVersion>
-        <htmlformentryModuleVersion>2.2-SNAPSHOT</htmlformentryModuleVersion>
-        <htmlformentry19extModuleVersion>1.3-SNAPSHOT</htmlformentry19extModuleVersion>
+        <htmlformentryModuleVersion>2.1.4-SNAPSHOT</htmlformentryModuleVersion>
+        <htmlformentry19extModuleVersion>1.4-SNAPSHOT</htmlformentry19extModuleVersion>
+        <htmlformentryuiModuleVersion>1.0-SNAPSHOT</htmlformentryuiModuleVersion>
         <coreappsModuleVersion>1.0-SNAPSHOT</coreappsModuleVersion>
-        <namephoneticsModuleVersion>1.3.7-SNAPSHOT</namephoneticsModuleVersion>
+		<dispensingModuleVersion>1.0-SNAPSHOT</dispensingModuleVersion>
+        <webservices.restModuleVersion>2.1.1-SNAPSHOT</webservices.restModuleVersion>
+        <referencedemodataModuleVersion>1.0-SNAPSHOT</referencedemodataModuleVersion>
 
         <db.url><![CDATA[jdbc:mysql://localhost:3306/openmrs?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8]]></db.url>
         <db.user>root</db.user>
@@ -178,6 +181,11 @@
         </dependency>
         <dependency>
             <groupId>org.openmrs.module</groupId>
+            <artifactId>htmlformentryui-omod</artifactId>
+            <version>${htmlformentryuiModuleVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
             <artifactId>appui-omod</artifactId>
             <version>${appuiModuleVersion}</version>
         </dependency>
@@ -191,10 +199,20 @@
             <artifactId>coreapps-omod</artifactId>
             <version>${coreappsModuleVersion}</version>
         </dependency>
+		<dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>dispensing-omod</artifactId>
+            <version>${dispensingModuleVersion}</version>
+        </dependency>
         <dependency>
             <groupId>org.openmrs.module</groupId>
-            <artifactId>namephonetics-omod</artifactId>
-            <version>${namephoneticsModuleVersion}</version>
+            <artifactId>webservices.rest-omod</artifactId>
+            <version>${webservices.restModuleVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>referencedemodata-omod</artifactId>
+            <version>${referencedemodataModuleVersion}</version>
         </dependency>
 
         <dependency>
@@ -244,6 +262,7 @@
                             <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
                             <!-- the event module has the non-standard groupId org.openmrs -->
                             <includeGroupIds>org.openmrs.module,org.openmrs</includeGroupIds>
+                            <excludeTransitive>true</excludeTransitive>
                         </configuration>
                     </execution>
 
