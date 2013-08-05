@@ -63,7 +63,7 @@ public abstract class AbstractBasePage implements Page {
         setText(findTextFieldInsideSpan(spanId), text);
     }
 
-    private void setText(WebElement element, String text) {
+    public void setText(WebElement element, String text) {
         element.clear();
         element.sendKeys(text);
     }

@@ -51,6 +51,7 @@ public class TestBase {
 				driver = setupChromeDriver();
 				break;
 		}
+        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
         goToLoginPage();
     }
 
@@ -103,7 +104,6 @@ public class TestBase {
         }
         System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_PROPERTY, chromedriverFilesDir + "/chromedriver-" + TestClassName.name + ".log");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
         return driver;
     }
 
