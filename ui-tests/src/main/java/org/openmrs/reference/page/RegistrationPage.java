@@ -3,9 +3,6 @@ package org.openmrs.reference.page;
 import org.openmrs.reference.helper.TestPatient;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * The register-a-new-patient page.
@@ -73,12 +70,18 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void enterPatientGivenName(String givenName) {
+    	// TODO Temporary experiment - just wait 1 second for page to finish js scripts
+    	try {
+	        Thread.sleep(1000);
+        }
+        catch (InterruptedException e) {
+        }
     	By by = By.name(GIVEN_NAME_TEXTBOX_ID);
     	// TODO Temporary experiment to see if it helps with intermittent failures.
-    	WebDriverWait wait = new WebDriverWait(driver, 10);
-    	WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
-		setText(element, givenName);
-//		setTextToField(by, givenName);
+//    	WebDriverWait wait = new WebDriverWait(driver, 10);
+//    	WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+//		setText(element, givenName);
+		setTextToField(by, givenName);
     }
 
     public void enterPatientGivenNameForAutoSuggestFn(String name){
