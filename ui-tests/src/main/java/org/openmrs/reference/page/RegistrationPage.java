@@ -70,28 +70,18 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void enterPatientGivenName(String givenName) {
-    	// TODO Temporary experiment - just wait 1 second for page to finish js scripts
-    	try {
-	        Thread.sleep(1000);
-        }
-        catch (InterruptedException e) {
-        }
     	By by = By.name(GIVEN_NAME_TEXTBOX_ID);
-    	// TODO Temporary experiment to see if it helps with intermittent failures.
-//    	WebDriverWait wait = new WebDriverWait(driver, 10);
-//    	WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
-//		setText(element, givenName);
 		setTextToField(by, givenName);
     }
 
-    public void enterPatientGivenNameForAutoSuggestFn(String name){
+    public void enterPatientGivenNameForAutoSuggestFn(String name) {
         setTextToField(By.name(GIVEN_NAME_TEXTBOX_ID), name);
     }
-    public void enterPatientFamilyNameForAutoSuggestFn(String name){
+    public void enterPatientFamilyNameForAutoSuggestFn(String name) {
         setTextToField(By.name(FAMILY_NAME_TEXTBOX_ID), name);
     }
 
-    public void clickOnContactInfo(){
+    public void clickOnContactInfo() {
         clickOn(By.id(CONTACT_INFO_SECTION_ID));
     }
 
@@ -107,15 +97,16 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(By.id(CONFIRM_SECTION_ID));
     }
 
-    public void clickOnGenderLink(){
-        clickOn(By.id(GENDER_ID));
+    public void clickOnGenderLink() {
+    	waitForFocusByCss("input", "value", "M");
     }
 
-    public void clickOnBirthDateLink(){
+    public void clickOnBirthDateLink() {
         clickOn(By.id(BIRTHDATE_ID));
+        waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
 
-    public String getNameInConfirmationPage() {
+	public String getNameInConfirmationPage() {
         return getText(By.xpath(NAME_CONFIRM)) ;
     }
 

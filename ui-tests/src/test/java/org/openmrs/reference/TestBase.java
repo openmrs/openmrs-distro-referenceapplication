@@ -70,11 +70,7 @@ public class TestBase {
     public TestRule testWatcher = new TestWatcher() {
         @Override
         public void failed(Throwable t, Description test) {
-            File tempFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            try {
-                FileUtils.copyFile(tempFile, new File("target/screenshots/" + test.getDisplayName() + ".png"));
-            } catch (IOException e) {
-            }
+            takeScreenshot(test.getDisplayName());
         }
     };
     
@@ -124,6 +120,14 @@ public class TestBase {
      */
 	public void assertPage(Page expected) {
 	    assertEquals(expected.expectedUrlPath(), currentPage().urlPath());
+    }
+
+	public void takeScreenshot(String filename) {
+	    File tempFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+	    try {
+	        FileUtils.copyFile(tempFile, new File("target/screenshots/" + filename + ".png"));
+	    } catch (IOException e) {
+	    }
     }
 
 	// This junit cleverness picks up the name of the test class, to be used in the chromedriver log file name.

@@ -15,7 +15,7 @@ import org.openmrs.reference.page.RegistrationPage;
 import org.openqa.selenium.UnhandledAlertException;
 
 
-public class RegistrationAppTest extends TestBase{
+public class RegistrationAppTest extends TestBase {
     private HeaderPage headerPage;
     private LoginPage loginPage;
     private RegistrationPage registrationPage;
@@ -37,7 +37,6 @@ public class RegistrationAppTest extends TestBase{
 // breeze - commented this test out as it is a WIP
         //todo - Verification of the Patient Registration once  RA-72 is completed
     }
-
 
     // Test for Story RA-71
     @Test
@@ -75,12 +74,21 @@ public class RegistrationAppTest extends TestBase{
         catch (UnhandledAlertException e) {
 	        System.out.println(e);
 	        System.out.println(e.getAlertText());
+	        e.printStackTrace();
+	        takeScreenshot("registerAPatientAndVerifyConfirmationPage");
         }
     }
 
     @After
     public void tearDown(){
-        headerPage.logOut();
+        try {
+	        headerPage.logOut();
+        }
+        catch (UnhandledAlertException e) {
+	        System.out.println(e);
+	        System.out.println(e.getAlertText());
+	        e.printStackTrace();
+        }
     }
 
 }

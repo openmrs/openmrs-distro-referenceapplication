@@ -7,10 +7,15 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.openmrs.reference.helper.TestProperties;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * A superclass for "real" pages. Has lots of handy methods for accessing
@@ -19,6 +24,8 @@ import org.openqa.selenium.support.ui.Select;
 public abstract class AbstractBasePage implements Page {
 	
 	public static final String OPENMRS_PATH = "/openmrs";
+
+	public static final int MAX_WAIT_SECONDS = 10;
 	
     protected TestProperties properties = TestProperties.instance();
     protected WebDriver driver;
@@ -40,6 +47,8 @@ public abstract class AbstractBasePage implements Page {
     
     @Override
     public WebElement findElement(By by) {
+    	WebDriverWait wait = new WebDriverWait(driver, MAX_WAIT_SECONDS);
+    	wait.until(ExpectedConditions.presenceOfElementLocated(by));
     	return driver.findElement(by);
     }
 
@@ -66,6 +75,7 @@ public abstract class AbstractBasePage implements Page {
     public void setText(WebElement element, String text) {
         element.clear();
         element.sendKeys(text);
+        element.sendKeys(Keys.RETURN);
     }
 
     @Override
@@ -123,4 +133,44 @@ public abstract class AbstractBasePage implements Page {
         clickOn(By.xpath("//a[@href='" + href + "']"));
         
     }
+
+	public void waitForFocusById(final String id) {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+    	wait.until(new ExpectedCondition<Boolean>() {
+    	      @Override
+    	      public Boolean apply(WebDriver driver) {
+    	        return hasFocus(id);
+    	      }
+    	});
+    }
+
+    public void waitForFocusByCss(final String tag, final String attr, final String value) {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+    	wait.until(new ExpectedCondition<Boolean>() {
+    		@Override
+    		public Boolean apply(WebDriver driver) {
+    			return hasFocus(tag, attr, value);
+    		}
+    	});
+    }
+
+    void waitForJsVariable(final String varName) {
+    	WebDriverWait wait = new WebDriverWait(driver, MAX_WAIT_SECONDS);
+    	wait.until(new ExpectedCondition<Boolean>() {
+    	      @Override
+    	      public Boolean apply(WebDriver driver) {
+    	        return (Boolean) ((JavascriptExecutor)driver).executeScript("return " + varName, new Object[] {});
+    	      }
+    	});
+    }
+
+    boolean hasFocus(String id) {
+        return (Boolean) ((JavascriptExecutor)driver).executeScript("return jQuery('#" + id +  "').is(':focus')", new Object[] {});
+    }
+    
+    boolean hasFocus(String tag, String attr, String value) {
+    	return (Boolean) ((JavascriptExecutor)driver).executeScript("return jQuery('" + tag + "[" + attr + "=" + value + "]').is(':focus')", new Object[] {});
+    }
+    
+
 }
