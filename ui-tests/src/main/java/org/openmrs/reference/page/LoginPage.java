@@ -26,6 +26,7 @@ public class LoginPage extends AbstractBasePage {
 		setTextToField(By.id(PASSWORD_TEXTBOX_ID), password);
         clickOn(By.id(UNKOWN_LOCATION_ELEMENT_ID));
 		clickOn(By.id(LOGIN_BUTTON_ID));
+		findElement(byFromHref(HeaderPage.LOGOUT_HREF));	// this waits until the Logoff link is present
 	}
 	
 	public void loginAsAdmin() {

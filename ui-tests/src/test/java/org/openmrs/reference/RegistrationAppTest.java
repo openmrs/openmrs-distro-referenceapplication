@@ -27,7 +27,9 @@ public class RegistrationAppTest extends TestBase {
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
+    	assertPage(loginPage);
         loginPage.loginAsAdmin();
+        assertPage(homePage);
     }
 
     @Ignore

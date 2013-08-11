@@ -130,9 +130,12 @@ public abstract class AbstractBasePage implements Page {
 
 	public void clickOnLinkFromHref(String href) {
 		// We allow use of xpath here because href's tend to be quite stable.
-        clickOn(By.xpath("//a[@href='" + href + "']"));
-        
+        clickOn(byFromHref(href));
     }
+	
+	public By byFromHref(String href) {
+		return By.xpath("//a[@href='" + href + "']");
+	}
 
 	public void waitForFocusById(final String id) {
     	WebDriverWait wait = new WebDriverWait(driver, 10);
