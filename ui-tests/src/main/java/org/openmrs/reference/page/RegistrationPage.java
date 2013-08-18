@@ -43,6 +43,19 @@ public class RegistrationPage extends AbstractBasePage {
 	static final String ADDRESS_CONFIRM = CONFIRMATION_DIV + "//li[4]/strong";             //Once we get an id, this xpath should be replaced
 	static final String PHONE_CONFIRM = CONFIRMATION_DIV + "//li[5]/strong";             //Once we get an id, this xpath should be replaced
 
+	public void enterPatient(TestPatient patient) {
+        enterPatientGivenName(patient.givenName);
+        enterPatientFamilyName(patient.familyName);
+        clickOnGenderLink();
+        selectPatientGender(patient.gender);
+        clickOnBirthDateLink();
+        enterPatientBirthDate(patient);
+        clickOnContactInfo();
+        enterPatientAddress(patient);
+        clickOnPhoneNumber();
+        enterPhoneNumber(patient.phone);
+        clickOnConfirm();
+    }
 
     public void enterPatientAddress(TestPatient patient) {
         setTextToField(By.id(ADDRESS1_TEXTBOX_ID), patient.address1);

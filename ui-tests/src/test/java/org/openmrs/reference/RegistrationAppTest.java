@@ -14,7 +14,6 @@ import org.openmrs.reference.page.LoginPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openqa.selenium.UnhandledAlertException;
 
-
 public class RegistrationAppTest extends TestBase {
     private HeaderPage headerPage;
     private LoginPage loginPage;
@@ -46,17 +45,7 @@ public class RegistrationAppTest extends TestBase {
         homePage.openRegisterAPatientApp();
         TestPatient patient = PatientGenerator.generateTestPatient();
         try {
-	        registrationPage.enterPatientGivenName(patient.givenName);
-	        registrationPage.enterPatientFamilyName(patient.familyName);
-	        registrationPage.clickOnGenderLink();
-	        registrationPage.selectPatientGender(patient.gender);
-	        registrationPage.clickOnBirthDateLink();
-	        registrationPage.enterPatientBirthDate(patient);
-	        registrationPage.clickOnContactInfo();
-	        registrationPage.enterPatientAddress(patient);
-	        registrationPage.clickOnPhoneNumber();
-	        registrationPage.enterPhoneNumber(patient.phone);
-	        registrationPage.clickOnConfirm();
+	        registrationPage.enterPatient(patient);
 
 	        String address = patient.address1 + " " + 
 	        		patient.address2 + " " + 
@@ -74,6 +63,8 @@ public class RegistrationAppTest extends TestBase {
 	        assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
         }
         catch (UnhandledAlertException e) {
+        	// This try/catch is just an attempt to capture some intermittent test failures.
+        	// Once we have reliable tests, this should be removed.
 	        System.out.println(e);
 	        System.out.println(e.getAlertText());
 	        e.printStackTrace();
@@ -83,6 +74,8 @@ public class RegistrationAppTest extends TestBase {
 
     @After
     public void tearDown(){
+    	// This try/catch is just an attempt to capture some intermittent test failures.
+    	// Once we have reliable tests, the try/catch should be removed.
         try {
 	        headerPage.logOut();
         }
