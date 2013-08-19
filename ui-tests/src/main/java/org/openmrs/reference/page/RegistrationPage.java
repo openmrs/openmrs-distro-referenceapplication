@@ -45,7 +45,21 @@ public class RegistrationPage extends AbstractBasePage {
 	static final String PHONE_CONFIRM = CONFIRMATION_DIV + "//li[5]/strong";             //Once we get an id, this xpath should be replaced
 
 
-    public void enterPatientAddress(TestPatient patient) {
+	public void enterPatient(TestPatient patient) {
+        enterPatientGivenName(patient.givenName);
+        enterPatientFamilyName(patient.familyName);
+        clickOnGenderLink();
+        selectPatientGender(patient.gender);
+        clickOnBirthDateLink();
+        enterPatientBirthDate(patient);
+        clickOnContactInfo();
+        enterPatientAddress(patient);
+        clickOnPhoneNumber();
+        enterPhoneNumber(patient.phone);
+        clickOnConfirm();
+    }
+
+	public void enterPatientAddress(TestPatient patient) {
         setTextToField(By.id(ADDRESS1_TEXTBOX_ID), patient.address1);
         setTextToField(By.id(ADDRESS2_TEXTBOX_ID), patient.address2);
         setTextToField(By.id(CITY_VILLAGE_TEXTBOX_ID), patient.city);
@@ -74,14 +88,14 @@ public class RegistrationPage extends AbstractBasePage {
         setTextToField(By.name(GIVEN_NAME_TEXTBOX_ID), givenName);
     }
 
-    public void enterPatientGivenNameForAutoSuggestFn(String name){
+    public void enterPatientGivenNameForAutoSuggestFn(String name) {
         setTextToField(By.name(GIVEN_NAME_TEXTBOX_ID), name);
     }
-    public void enterPatientFamilyNameForAutoSuggestFn(String name){
+    public void enterPatientFamilyNameForAutoSuggestFn(String name) {
         setTextToField(By.name(FAMILY_NAME_TEXTBOX_ID), name);
     }
 
-    public void clickOnContactInfo(){
+    public void clickOnContactInfo() {
         clickOn(By.id(CONTACT_INFO_SECTION_ID));
     }
 
@@ -97,12 +111,13 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(By.id(CONFIRM_SECTION_ID));
     }
 
-    public void clickOnGenderLink(){
-        clickOn(By.id(GENDER_ID));
+    public void clickOnGenderLink() {
+    	waitForFocusByCss("input", "value", "M");
     }
 
-    public void clickOnBirthDateLink(){
+    public void clickOnBirthDateLink() {
         clickOn(By.id(BIRTHDATE_ID));
+        waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
 
     public String getNameInConfirmationPage() {

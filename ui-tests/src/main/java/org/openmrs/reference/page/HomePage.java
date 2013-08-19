@@ -29,6 +29,7 @@ public class HomePage extends AbstractBasePage {
 	private void openApp(String appIdentifier) {
 		driver.get(properties.getWebAppUrl());
 		clickOn(By.id(appIdentifier));
+        waitForJsVariable("Navigator.isReady");
 	}
 	
 	public boolean isFindAPatientAppPresent() {
