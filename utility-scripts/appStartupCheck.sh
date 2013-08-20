@@ -8,9 +8,9 @@ startedSignal="INFO: Server startup"
 timeout () {
   sleep 1
   count=$((count+1))
-  if [ ${count} == 180 ];
+  if [ ${count} == 300 ];
     then
-    echo "Waited for 3 minutes and Tomcat has not started."
+    echo "Waited for 5 minutes and Tomcat has not started."
     echo "Check /var/log/tomcat7/catalina.out to see what is happening."
     exit 1
   fi
