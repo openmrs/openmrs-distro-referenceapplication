@@ -13,7 +13,6 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.page.LoginPage;
 import org.openmrs.uitestframework.test.TestBase;
-import org.openqa.selenium.UnhandledAlertException;
 
 public class RegistrationAppTest extends TestBase {
     private HeaderPage headerPage;
@@ -45,46 +44,27 @@ public class RegistrationAppTest extends TestBase {
     public void registerAPatientAndVerifyConfirmationPage() {
         homePage.openRegisterAPatientApp();
         TestPatient patient = PatientGenerator.generateTestPatient();
-        try {
-	        registrationPage.enterPatient(patient);
+        registrationPage.enterPatient(patient);
 
-	        String address = patient.address1 + " " + 
-	        		patient.address2 + " " + 
-	        		patient.city + " " + 
-	        		patient.state + " " + 
-	        		patient.country + " " + 
-	        		patient.postalCode + " " + 
-	        		patient.latitude + " " + 
-	        		patient.longitude;
+        String address = patient.address1 + " " + 
+        		patient.address2 + " " + 
+        		patient.city + " " + 
+        		patient.state + " " + 
+        		patient.country + " " + 
+        		patient.postalCode + " " + 
+        		patient.latitude + " " + 
+        		patient.longitude;
 
-	        assertEquals(patient.givenName + " " + patient.familyName, registrationPage.getNameInConfirmationPage());
-	        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
-	        assertEquals(patient.birthDay + " " + patient.birthMonth + " " + patient.birthYear, registrationPage.getBirthdateInConfirmationPage());
-	        assertEquals(address, registrationPage.getAddressInConfirmationPage());
-	        assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
-        }
-        catch (UnhandledAlertException e) {
-        	// This try/catch is just an attempt to capture some intermittent test failures.
-        	// Once we have reliable tests, this should be removed.
-	        System.out.println(e);
-	        System.out.println(e.getAlertText());
-	        e.printStackTrace();
-	        takeScreenshot("registerAPatientAndVerifyConfirmationPage");
-        }
+        assertEquals(patient.givenName + " " + patient.familyName, registrationPage.getNameInConfirmationPage());
+        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
+        assertEquals(patient.birthDay + " " + patient.birthMonth + " " + patient.birthYear, registrationPage.getBirthdateInConfirmationPage());
+        assertEquals(address, registrationPage.getAddressInConfirmationPage());
+        assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
     }
 
     @After
     public void tearDown() {
-    	// This try/catch is just an attempt to capture some intermittent test failures.
-    	// Once we have reliable tests, the try/catch should be removed.
-        try {
-	        headerPage.logOut();
-        }
-        catch (UnhandledAlertException e) {
-	        System.out.println(e);
-	        System.out.println(e.getAlertText());
-	        e.printStackTrace();
-        }
+        headerPage.logOut();
     }
 
 }
