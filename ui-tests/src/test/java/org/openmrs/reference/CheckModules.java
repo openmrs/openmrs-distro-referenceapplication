@@ -6,8 +6,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.LoginPage;
 import org.openmrs.reference.page.ModulesPage;
+import org.openmrs.uitestframework.page.LoginPage;
+import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

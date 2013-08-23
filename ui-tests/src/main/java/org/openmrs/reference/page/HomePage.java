@@ -1,5 +1,6 @@
 package org.openmrs.reference.page;
 
+import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -65,6 +66,6 @@ public class HomePage extends AbstractBasePage {
 	
 	@Override
 	public String expectedUrlPath() {
-		return OPENMRS_PATH + "/referenceapplication/home.page";
+		return URL_ROOT + "/referenceapplication/home.page";
 	}
 }

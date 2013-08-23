@@ -10,8 +10,9 @@ import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.LoginPage;
 import org.openmrs.reference.page.RegistrationPage;
+import org.openmrs.uitestframework.page.LoginPage;
+import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.UnhandledAlertException;
 
 public class RegistrationAppTest extends TestBase {
@@ -73,7 +74,7 @@ public class RegistrationAppTest extends TestBase {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
     	// This try/catch is just an attempt to capture some intermittent test failures.
     	// Once we have reliable tests, the try/catch should be removed.
         try {

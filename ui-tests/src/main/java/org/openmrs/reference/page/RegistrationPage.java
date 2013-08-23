@@ -1,6 +1,7 @@
 package org.openmrs.reference.page;
 
 import org.openmrs.reference.helper.TestPatient;
+import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -57,7 +58,7 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnConfirm();
     }
 
-    public void enterPatientAddress(TestPatient patient) {
+	public void enterPatientAddress(TestPatient patient) {
         setTextToField(By.id(ADDRESS1_TEXTBOX_ID), patient.address1);
         setTextToField(By.id(ADDRESS2_TEXTBOX_ID), patient.address2);
         setTextToField(By.id(CITY_VILLAGE_TEXTBOX_ID), patient.city);
@@ -141,7 +142,7 @@ public class RegistrationPage extends AbstractBasePage {
     
 	@Override
     public String expectedUrlPath() {
-	    return OPENMRS_PATH + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
+	    return URL_ROOT + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
 
 }
