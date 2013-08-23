@@ -33,8 +33,6 @@ public class RegistrationPage extends AbstractBasePage {
     static final String STATE_PROVINCE_TEXTBOX_ID = "stateProvince";
     static final String COUNTRY_TEXTBOX_ID = "country";
     static final String POSTAL_CODE_TEXTBOX_ID = "postalCode";
-    static final String LATITUDE_TEXTBOX_ID = "latitude";
-    static final String LONGITUDE_TEXTBOX_ID = "longitude";
     static final String PHONE_NUMBER_TEXTBOX_ID = "phoneNumber";
     
     static final String CONFIRMATION_DIV = "//div[@id='confirmation']";
@@ -65,8 +63,6 @@ public class RegistrationPage extends AbstractBasePage {
         setTextToField(By.id(STATE_PROVINCE_TEXTBOX_ID), patient.state);
         setTextToField(By.id(COUNTRY_TEXTBOX_ID), patient.country);
         setTextToField(By.id(POSTAL_CODE_TEXTBOX_ID), patient.postalCode);
-        setTextToField(By.id(LATITUDE_TEXTBOX_ID), patient.latitude);
-        setTextToField(By.id(LONGITUDE_TEXTBOX_ID), patient.longitude);
     }
 
     public void enterPatientBirthDate(TestPatient patient) {

@@ -27,7 +27,7 @@ public class RegistrationAppTest extends TestBase {
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
     	assertPage(loginPage);
-        loginPage.loginAsAdmin();
+        loginPage.login("clerk", "Clerk123"); // TODO: loginPage.loginAsClerk();
         assertPage(homePage);
     }
 
@@ -51,9 +51,7 @@ public class RegistrationAppTest extends TestBase {
         		patient.city + " " + 
         		patient.state + " " + 
         		patient.country + " " + 
-        		patient.postalCode + " " + 
-        		patient.latitude + " " + 
-        		patient.longitude;
+        		patient.postalCode;
 
         assertEquals(patient.givenName + " " + patient.familyName, registrationPage.getNameInConfirmationPage());
         assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
