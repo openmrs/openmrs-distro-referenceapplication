@@ -1,13 +1,14 @@
 package org.openmrs.reference;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.page.LoginPage;
 import org.openmrs.uitestframework.test.TestBase;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class LoginTest extends TestBase {
     private HeaderPage headerPage;
@@ -27,7 +28,7 @@ public class LoginTest extends TestBase {
     	assertPage(loginPage);
         loginPage.loginAsAdmin();
         assertPage(homePage);
-        assertTrue(homePage.isDispensingMedicationAppPresent());
+        assertFalse(homePage.isDispensingMedicationAppPresent());
         assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
