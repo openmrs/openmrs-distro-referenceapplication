@@ -1,15 +1,19 @@
 package org.openmrs.reference;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.sql.SQLException;
+
+import org.dbunit.dataset.DataSetException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.page.LoginPage;
 import org.openmrs.uitestframework.test.TestBase;
@@ -19,29 +23,24 @@ public class RegistrationAppTest extends TestBase {
     private LoginPage loginPage;
     private RegistrationPage registrationPage;
     private HomePage homePage;
+	private PatientDashboardPage patientDashboardPage;
+	private String registeredPatientId;
 
     @Before
-    public void setUp() {
+    public void setUp() throws DataSetException, SQLException, Exception {
         loginPage = new LoginPage(driver);
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
+        patientDashboardPage = new PatientDashboardPage(driver);
     	assertPage(loginPage);
-        loginPage.login("clerk", "Clerk123"); // TODO: loginPage.loginAsClerk();
+        loginPage.loginAsClerk();
         assertPage(homePage);
-    }
-
-    @Ignore
-    public void verifyRegistrationSuccessful()  {
-        homePage.openRegisterAPatientApp();
-//        registrationPage.registerPatient();
-// breeze - commented this test out as it is a WIP
-        //todo - Verification of the Patient Registration once  RA-72 is completed
     }
 
     // Test for Story RA-71
     @Test
-    public void registerAPatientAndVerifyConfirmationPage() {
+    public void registerAPatient() {
         homePage.openRegisterAPatientApp();
         TestPatient patient = PatientGenerator.generateTestPatient();
         registrationPage.enterPatient(patient);
@@ -58,10 +57,17 @@ public class RegistrationAppTest extends TestBase {
         assertEquals(patient.birthDay + " " + patient.birthMonth + " " + patient.birthYear, registrationPage.getBirthdateInConfirmationPage());
         assertEquals(address, registrationPage.getAddressInConfirmationPage());
         assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
+        
+        registrationPage.confirmPatient();
+        assertPage(patientDashboardPage);
+		registeredPatientId = patientIdFromUrl();	// remember just-registered patient id, so it can be removed.
+		assertTrue(driver.getPageSource().contains(patient.familyName + ", " + patient.givenName));
     }
-
-    @After
-    public void tearDown() {
+    
+	@After
+    public void tearDown() throws Exception {
+		deletePatient(registeredPatientId);
+		dbUnitTearDown();
         headerPage.logOut();
     }
 

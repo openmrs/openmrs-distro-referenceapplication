@@ -141,4 +141,8 @@ public class RegistrationPage extends AbstractBasePage {
 	    return URL_ROOT + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
 
+	public void confirmPatient() {
+		clickOn(By.cssSelector("input[value='Confirm']"));
+    }
+
 }
