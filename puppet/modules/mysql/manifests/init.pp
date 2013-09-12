@@ -21,5 +21,14 @@ $mysqlPassword = Admin123
     command => "/usr/bin/mysqladmin -u root PASSWORD ${mysqlPassword}; /bin/true",
     require => [Package["mysql-server"], Package["mysql-client"] , Service["mysql"]]
   }
+  file {"/etc/mysql/my.cnf" :
+    ensure => present,
+    owner  => "root",
+    group  => "root",
+    mode   => 644,
+    source => "puppet:///modules/mysql/etc/mysql/my.cnf",
+    notify => Service[ "mysql" ],
+    require => Package["mysql-server"]
 
+  }
 }
