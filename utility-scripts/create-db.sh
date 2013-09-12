@@ -14,6 +14,3 @@ SQL="${Q1}${Q2}${Q3}${Q4}${Q5}"
 
 #Create the OpenMRS Schema
 $MYSQL -uroot -p${mysqlPw} -e "${SQL}"
-
-#Set the privs for it
-#$MYSQL -uroot -p${mysqlPw} -e "GRANT ALL PRIVILEGES ON openmrs.* TO root@'%' IDENTIFIED BY '${mysqlPw}';"
