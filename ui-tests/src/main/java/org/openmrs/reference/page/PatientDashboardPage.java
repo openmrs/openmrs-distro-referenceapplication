@@ -12,7 +12,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 
 	@Override
     public String expectedUrlPath() {
-	    return URL_ROOT + "/coreapps/patientdashboard/patientDashboard.page";
+	    return URL_ROOT + "/coreapps/clinicianfacing/patient.page";
     }
 	
 }
