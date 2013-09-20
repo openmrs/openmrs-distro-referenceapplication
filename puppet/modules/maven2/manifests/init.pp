@@ -9,5 +9,12 @@ include aptitude
     ensure  =>  "present",
     require => Class[ "aptitude" ],
   }
+  file { "/home/bamboo/.m2/settings.xml":
+    ensure => present,
+    source => "puppet:///modules/maven2//home/bamboo/.m2/settings.xml",
+    owner  => "bamboo",
+    group  => "bamboo",
+    mode   => 644
+  }
 
 }
