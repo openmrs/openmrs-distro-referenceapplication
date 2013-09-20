@@ -10,7 +10,7 @@ public class HomePage extends AbstractBasePage {
 	static final String REGISTER_PATIENT_APP_ID = "referenceapplication-registrationapp-registerPatient-homepageLink-referenceapplication-registrationapp-registerPatient-homepageLink-extension";
 	static final String ACTIVE_VISITS_APP_ID = "org-openmrs-module-coreapps-activeVisitsHomepageLink-org-openmrs-module-coreapps-activeVisitsHomepageLink-extension";
 	static final String STYLE_GUIDE_APP_ID = "referenceapplication-styleGuide-referenceapplication-styleGuide-extension";
-	static final String SYSTEM_ADMIN_APP_ID = "legacy-admin-legacy-admin-extension";
+	static final String SYSTEM_ADMIN_APP_ID = "referenceapplication-legacyAdmin-referenceapplication-legacyAdmin-extension";
 	static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
 	
 	public HomePage(WebDriver driver) {
