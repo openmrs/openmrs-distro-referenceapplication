@@ -5,7 +5,7 @@ node default {
 
 #This is the CI Bamboo server for the Reference Application
 node 'gw78.iu.xsede.org' {
-  include browsers, maven2
+  include browsers, sonar-server
 }
 
 
