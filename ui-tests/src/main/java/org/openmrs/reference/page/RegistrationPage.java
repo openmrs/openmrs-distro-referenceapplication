@@ -143,6 +143,7 @@ public class RegistrationPage extends AbstractBasePage {
 
 	public void confirmPatient() {
 		clickOn(By.cssSelector("input[value='Confirm']"));
+		waitForElement(By.className("patient-header"));
     }
 
 }
