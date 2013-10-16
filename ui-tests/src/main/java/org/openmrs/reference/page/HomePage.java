@@ -12,6 +12,7 @@ public class HomePage extends AbstractBasePage {
 	static final String STYLE_GUIDE_APP_ID = "referenceapplication-styleGuide-referenceapplication-styleGuide-extension";
 	static final String SYSTEM_ADMIN_APP_ID = "referenceapplication-legacyAdmin-referenceapplication-legacyAdmin-extension";
 	static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
+	static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
 	
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -64,8 +65,13 @@ public class HomePage extends AbstractBasePage {
 		return isAppButtonPresent(DISPENSING_MEDICATION_APP_ID);
 	}
 	
+	public boolean isCaptureVitalsAppPresent() {
+		return isAppButtonPresent(CAPTURE_VITALS_APP_ID);
+    }
+
 	@Override
 	public String expectedUrlPath() {
 		return URL_ROOT + "/referenceapplication/home.page";
 	}
+
 }
