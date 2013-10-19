@@ -39,7 +39,7 @@ public class VisitTest extends TestBase {
 	 */
 	@Test
 	public void testStartVisit() {
-		System.out.println("test patient uuid: " + patientUuid);
+//		System.out.println("test patient uuid: " + patientUuid);
 		currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patientUuid);
 		assertPage(patientDashboardPage);
 		patientDashboardPage.startVisit();

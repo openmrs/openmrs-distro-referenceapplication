@@ -29,7 +29,7 @@ public class PatientDashboardPage extends AbstractBasePage {
     }
 
 	public boolean hasActiveVisit() {
-	    return findElement(By.cssSelector(".status-container .status")) != null;
+	    return findElement(By.className("active-visit-started-at-message")) != null;
     }
 
 	public WebElement endVisitLink() {
