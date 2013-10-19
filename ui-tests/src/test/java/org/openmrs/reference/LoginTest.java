@@ -74,7 +74,7 @@ public class LoginTest extends TestBase {
     @Test
     public void verifyNurseModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
-    	loginPage.login("nurse", "Nurse123");
+    	loginPage.loginAsNurse();
     	assertPage(homePage);
     	assertTrue(homePage.isFindAPatientAppPresent());
     	assertTrue(homePage.isActiveVisitsAppPresent());
