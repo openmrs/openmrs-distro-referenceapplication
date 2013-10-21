@@ -24,7 +24,7 @@ public class VisitTest extends TestBase {
         homePage = new HomePage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
     	assertPage(loginPage);
-        loginPage.loginAsNurse();
+        loginPage.loginAsDoctor();
         assertPage(homePage);
 	}
 	
@@ -40,10 +40,21 @@ public class VisitTest extends TestBase {
 	@Test
 	public void testStartVisit() {
 //		System.out.println("test patient uuid: " + patientUuid);
+		// go to patient dashboard for the just-created test patient
 		currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patientUuid);
 		assertPage(patientDashboardPage);
+		// start visit
 		patientDashboardPage.startVisit();
+		// verify visit was started
 		Assert.assertTrue(patientDashboardPage.hasActiveVisit());
 		Assert.assertNotNull(patientDashboardPage.endVisitLink());
+		
+		// visit note
+		patientDashboardPage.visitNote();
+		patientDashboardPage.enterDiagnosis("Pneumonia");
+		Assert.assertEquals("Pneumonia", patientDashboardPage.primaryDiagnosis());
+		patientDashboardPage.enterNote("this is a note");
+		patientDashboardPage.save();
+		Assert.assertEquals("Today", patientDashboardPage.visitLink().getText().trim());
 	}
 }
