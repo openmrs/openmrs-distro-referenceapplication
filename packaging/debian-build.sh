@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MavenRootDir=$(dirname `pwd`)
-DistroDir=${MavenRootDir}/target/distro
+DistroDir=${MavenRootDir}/package/target/distro
 DebCtrlDir=target/openmrs-reference/DEBIAN
 DebWarDir=target/openmrs-reference/var/lib/tomcat7/webapps/
 OmodDir=target/openmrs-reference/usr/share/tomcat7/.OpenMRS/modules/
