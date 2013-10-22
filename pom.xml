@@ -11,12 +11,6 @@
 	<description>Reference Application Distribution</description>
 	<url>https://wiki.openmrs.org/x/yQRDAg</url>
 
-	<parent>
-		<groupId>org.openmrs</groupId>
-		<artifactId>openmrs</artifactId>
-		<version>1.9.6</version>
-	</parent>
-
 	<modules>
 		<module>package</module>
 		<module>ui-tests</module>
@@ -69,7 +63,6 @@
 	<dependencyManagement>
 		<dependencies>
 			<!-- Core dependencies -->
-			<!-- We can remove them after we fix dependencies in the parent -->
 			<dependency>
 				<groupId>org.openmrs</groupId>
 				<artifactId>openmrs</artifactId>
@@ -655,77 +648,6 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.openmrs.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-openmrs-plugin
-										</artifactId>
-										<versionRange>
-											[1.0.1,)
-										</versionRange>
-										<goals>
-											<goal>
-												initialize-module
-											</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-dependency-plugin
-										</artifactId>
-										<versionRange>
-											[2.8,)
-										</versionRange>
-										<goals>
-											<goal>unpack-dependencies</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											de.saumya.mojo
-										</groupId>
-										<artifactId>
-											gem-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.0.0-beta,)
-										</versionRange>
-										<goals>
-											<goal>exec</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
 			</plugins>
 		</pluginManagement>
 		
@@ -745,6 +667,11 @@
 					<include>**/*.xml</include>
 					<include>**/*.properties</include>
 				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/webapp</directory>
+				<filtering>false</filtering>
+				<targetPath>web/module</targetPath>
 			</resource>
 		</resources>
 		
@@ -833,15 +760,15 @@
 	</pluginRepositories>
 
 	<distributionManagement>
-		<repository>
-			<id>openmrs-repo-modules</id>
-			<name>Modules</name>
-			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/modules/</url>
-		</repository>
-		<snapshotRepository>
-			<id>openmrs-repo-snapshots</id>
-			<name>OpenMRS Snapshots</name>
-			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
+        <repository>
+            <id>openmrs-repo-modules</id>
+            <name>Modules</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/modules</url>
+        </repository>
+        <snapshotRepository>
+            <id>openmrs-repo-snapshots</id>
+            <name>OpenMRS Snapshots</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
