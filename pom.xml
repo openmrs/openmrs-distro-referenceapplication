@@ -697,6 +697,41 @@
 	
 	<profiles>
 		<profile>
+			<id>update-to-latest</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>versions-maven-plugin</artifactId>
+						<version>2.1</version>
+						<configuration>
+							<allowSnapshots>true</allowSnapshots>
+							<excludeProperties>
+								uiframeworkModuleVersion,openMRSVersion,logicModuleVersion,appframeworkModuleVersion,
+								htmlformentryModuleVersion,htmlformentry19extModuleVersion,reportingModuleVersion,
+								metadatasharingModuleVersion,metadatamappingModuleVersion
+							</excludeProperties>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>update-to-released</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>versions-maven-plugin</artifactId>
+						<version>2.1</version>
+						<configuration>
+							<allowSnapshots>false</allowSnapshots>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>release</id>
 			<build>
 				<plugins>
