@@ -15,12 +15,10 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
-import org.openmrs.uitestframework.page.LoginPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 public class RegistrationAppTest extends TestBase {
     private HeaderPage headerPage;
-    private LoginPage loginPage;
     private RegistrationPage registrationPage;
     private HomePage homePage;
 	private PatientDashboardPage patientDashboardPage;
@@ -28,7 +26,6 @@ public class RegistrationAppTest extends TestBase {
 
     @Before
     public void setUp() throws DataSetException, SQLException, Exception {
-        loginPage = new LoginPage(driver);
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);

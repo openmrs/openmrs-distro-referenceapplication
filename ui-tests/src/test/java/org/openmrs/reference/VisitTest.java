@@ -6,13 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
-import org.openmrs.uitestframework.page.LoginPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 
 public class VisitTest extends TestBase {
 
-    private LoginPage loginPage;
     private HomePage homePage;
 	private PatientDashboardPage patientDashboardPage;
 	private String patientUuid;
@@ -20,7 +18,6 @@ public class VisitTest extends TestBase {
 	@Before
 	public void before() {
 		patientUuid = createTestPatient().uuid;
-        loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
     	assertPage(loginPage);

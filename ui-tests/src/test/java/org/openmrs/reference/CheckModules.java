@@ -7,19 +7,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ModulesPage;
-import org.openmrs.uitestframework.page.LoginPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class CheckModules extends TestBase {
-    private LoginPage loginPage;
     private HomePage homePage;
     private ModulesPage modulesPage;
 
     @Before
     public void setUp() {
-        loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         modulesPage = new ModulesPage(driver);
     }
@@ -29,8 +26,7 @@ public class CheckModules extends TestBase {
      */
     @Test
     public void checkModules() throws Exception {
-    	assertPage(loginPage);
-        loginPage.loginAsAdmin();
+    	login();
         assertPage(homePage);
         modulesPage.go();
         assertPage(modulesPage);
