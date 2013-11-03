@@ -19,7 +19,7 @@ public class VisitTest extends TestBase {
 	
 	@Before
 	public void before() {
-		patientUuid = createTestPatient();
+		patientUuid = createTestPatient().uuid;
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
