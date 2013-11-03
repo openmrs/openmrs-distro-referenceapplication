@@ -10,37 +10,40 @@ import org.openqa.selenium.WebDriver;
  */
 public class RegistrationPage extends AbstractBasePage {
 
-    public RegistrationPage(WebDriver driver) {
+
+	public RegistrationPage(WebDriver driver) {
         super(driver);
     }
 
-    static final String CONTACT_INFO_SECTION_ID = "contactInfo_label";
-    static final String CONFIRM_SECTION_ID = "confirmation_label";
-
-    static final String GENDER_ID = "genderLabel";
-    static final String BIRTHDATE_ID = "birthdateLabel";
-    static final String PHONE_NUMBER_ID = "phoneNumberLabel";
-
-    static final String GIVEN_NAME_TEXTBOX_ID = "givenName";
-    static final String FAMILY_NAME_TEXTBOX_ID = "familyName";
+	static final By CONTACT_INFO_SECTION = By.id("contactInfo_label");
+	static final By CONFIRM_SECTION = By.id("confirmation_label");
+	static final By BIRTHDATE_LABEL = By.id("birthdateLabel");
+    static final By PHONE_NUMBER_LABEL = By.id("phoneNumberLabel");
+	static final By GIVEN_NAME = By.name("givenName");
+	static final By FAMILY_NAME = By.name("familyName");
     static final String GENDER_RADIO_BUTTON_ID = "input[value='XX']";
     static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
-    static final String BIRTHDAY_MONTH_DROPDOWN_ID = "birthdateMonth-field";
-    static final String BIRTHDAY_YEAR_TEXTBOX_ID = "birthdateYear-field";
-    static final String ADDRESS1_TEXTBOX_ID = "address1";
-    static final String ADDRESS2_TEXTBOX_ID = "address2";
-    static final String CITY_VILLAGE_TEXTBOX_ID = "cityVillage";
-    static final String STATE_PROVINCE_TEXTBOX_ID = "stateProvince";
-    static final String COUNTRY_TEXTBOX_ID = "country";
-    static final String POSTAL_CODE_TEXTBOX_ID = "postalCode";
-    static final String PHONE_NUMBER_TEXTBOX_ID = "phoneNumber";
+    static final By BIRTHDAY_DAY = By.id(BIRTHDAY_DAY_TEXTBOX_ID);
+    static final By BIRTHDAY_MONTH = By.id("birthdateMonth-field");
+    static final By BIRTHDAY_YEAR = By.id("birthdateYear-field");
+	static final By ADDRESS1 = By.id("address1");
+	static final By ADDRESS2 = By.id("address2");
+	static final By CITY_VILLAGE = By.id("cityVillage");
+    static final By STATE_PROVINCE = By.id("stateProvince");
+    static final By COUNTRY = By.id("country");
+    static final By POSTAL_CODE = By.id("postalCode");
+    static final By PHONE_NUMBER = By.name("phoneNumber");
     
+    // These xpath expressions should be replaced by id's or cssSelectors if possible.
     static final String CONFIRMATION_DIV = "//div[@id='confirmation']";
-	static final String NAME_CONFIRM = CONFIRMATION_DIV + "//li[1]/strong";             //Once we get an id, this xpath should be replaced
-	static final String GENDER_CONFIRM = CONFIRMATION_DIV + "//li[2]/strong";             //Once we get an id, this xpath should be replaced
-	static final String BIRTHDATE_CONFIRM = CONFIRMATION_DIV + "//li[3]/strong";             //Once we get an id, this xpath should be replaced
-	static final String ADDRESS_CONFIRM = CONFIRMATION_DIV + "//li[4]/strong";             //Once we get an id, this xpath should be replaced
-	static final String PHONE_CONFIRM = CONFIRMATION_DIV + "//li[5]/strong";             //Once we get an id, this xpath should be replaced
+	static final By NAME_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[1]/strong");
+	static final By GENDER_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[2]/strong");
+	static final By BIRTHDATE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[3]/strong");
+	static final By ADDRESS_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[4]/strong");
+	static final By PHONE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[5]/strong");
+
+	static final By PATIENT_HEADER = By.className("patient-header");
+	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
 
 	public void enterPatient(TestPatient patient) {
         enterPatientGivenName(patient.givenName);
@@ -53,22 +56,22 @@ public class RegistrationPage extends AbstractBasePage {
         enterPatientAddress(patient);
         clickOnPhoneNumber();
         enterPhoneNumber(patient.phone);
-        clickOnConfirm();
+        clickOnConfirmSection();
     }
 
 	public void enterPatientAddress(TestPatient patient) {
-        setTextToField(By.id(ADDRESS1_TEXTBOX_ID), patient.address1);
-        setTextToField(By.id(ADDRESS2_TEXTBOX_ID), patient.address2);
-        setTextToField(By.id(CITY_VILLAGE_TEXTBOX_ID), patient.city);
-        setTextToField(By.id(STATE_PROVINCE_TEXTBOX_ID), patient.state);
-        setTextToField(By.id(COUNTRY_TEXTBOX_ID), patient.country);
-        setTextToField(By.id(POSTAL_CODE_TEXTBOX_ID), patient.postalCode);
+        setTextToField(ADDRESS1, patient.address1);
+        setTextToField(ADDRESS2, patient.address2);
+        setTextToField(CITY_VILLAGE, patient.city);
+        setTextToField(STATE_PROVINCE, patient.state);
+        setTextToField(COUNTRY, patient.country);
+        setTextToField(POSTAL_CODE, patient.postalCode);
     }
 
     public void enterPatientBirthDate(TestPatient patient) {
-        setTextToField(By.id(BIRTHDAY_DAY_TEXTBOX_ID), patient.birthDay);
-        selectFrom(By.id(BIRTHDAY_MONTH_DROPDOWN_ID), patient.birthMonth);
-        setTextToField(By.id(BIRTHDAY_YEAR_TEXTBOX_ID), patient.birthYear);
+        setTextToField(BIRTHDAY_DAY, patient.birthDay);
+        selectFrom(BIRTHDAY_MONTH, patient.birthMonth);
+        setTextToField(BIRTHDAY_YEAR, patient.birthYear);
     }
 
     public void selectPatientGender(String gender) {
@@ -76,35 +79,27 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void enterPatientFamilyName(String familyName) {
-        setTextToField(By.name(FAMILY_NAME_TEXTBOX_ID), familyName);
+        setTextToField(FAMILY_NAME, familyName);
     }
 
     public void enterPatientGivenName(String givenName) {
-    	By by = By.name(GIVEN_NAME_TEXTBOX_ID);
-		setTextToField(by, givenName);
-    }
-
-    public void enterPatientGivenNameForAutoSuggestFn(String name) {
-        setTextToField(By.name(GIVEN_NAME_TEXTBOX_ID), name);
-    }
-    public void enterPatientFamilyNameForAutoSuggestFn(String name) {
-        setTextToField(By.name(FAMILY_NAME_TEXTBOX_ID), name);
+		setTextToField(GIVEN_NAME, givenName);
     }
 
     public void clickOnContactInfo() {
-        clickOn(By.id(CONTACT_INFO_SECTION_ID));
+        clickOn(CONTACT_INFO_SECTION);
     }
 
     public void clickOnPhoneNumber() {
-        clickOn(By.id(PHONE_NUMBER_ID));
+        clickOn(PHONE_NUMBER_LABEL);
     }
 
 	public void enterPhoneNumber(String phone) {
-        setTextToField(By.name(PHONE_NUMBER_TEXTBOX_ID), phone);
+        setTextToField(PHONE_NUMBER, phone);
     }
 
-    public void clickOnConfirm() {
-        clickOn(By.id(CONFIRM_SECTION_ID));
+    public void clickOnConfirmSection() {
+        clickOn(CONFIRM_SECTION);
     }
 
     public void clickOnGenderLink() {
@@ -112,28 +107,28 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clickOnBirthDateLink() {
-        clickOn(By.id(BIRTHDATE_ID));
+        clickOn(BIRTHDATE_LABEL);
         waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
 
 	public String getNameInConfirmationPage() {
-        return getText(By.xpath(NAME_CONFIRM)) ;
+        return getText(NAME_CONFIRM) ;
     }
 
     public String getGenderInConfirmationPage() {
-    	return getText(By.xpath(GENDER_CONFIRM)) ;
+    	return getText(GENDER_CONFIRM) ;
     }
     
     public String getBirthdateInConfirmationPage() {
-    	return getText(By.xpath(BIRTHDATE_CONFIRM)) ;
+    	return getText(BIRTHDATE_CONFIRM) ;
     }
     
     public String getAddressInConfirmationPage() {
-    	return getText(By.xpath(ADDRESS_CONFIRM)) ;
+    	return getText(ADDRESS_CONFIRM) ;
     }
     
     public String getPhoneInConfirmationPage() {
-    	return getText(By.xpath(PHONE_CONFIRM)) ;
+    	return getText(PHONE_CONFIRM) ;
     }
     
 	@Override
@@ -142,8 +137,8 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
 	public void confirmPatient() {
-		clickOn(By.cssSelector("input[value='Confirm']"));
-		waitForElement(By.className("patient-header"));
+		clickOn(CONFIRM);
+		waitForElement(PATIENT_HEADER);
     }
 
 }

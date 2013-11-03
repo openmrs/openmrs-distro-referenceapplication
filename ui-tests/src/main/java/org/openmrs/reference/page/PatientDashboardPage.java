@@ -9,22 +9,22 @@ import org.openqa.selenium.WebElement;
 public class PatientDashboardPage extends AbstractBasePage {
 
 	public static final String URL_PATH = "/coreapps/clinicianfacing/patient.page";
-	private static final String START_VISIT_ID = "org.openmrs.module.coreapps.createVisit";
-	private static final String END_VISIT_ID = "referenceapplication.realTime.endVisit";
-	private static final String VISIT_NOTE_ID = "referenceapplication.realTime.simpleVisitNote";
-	private static final String CONFIRM_DIALOG_ID = "quick-visit-creation-dialog";
-	private static final String CONFIRM_BUTTON_CLASS = "confirm";
-	private static final String DIAGNOSIS_SEARCH_CONTAINER_ID = "diagnosis-search-container";
-	private static final String DIAGNOSIS_SEARCH_ID = "diagnosis-search";
+	private static final By START_VISIT = By.id("org.openmrs.module.coreapps.createVisit");
+	private static final By END_VISIT = By.id("referenceapplication.realTime.endVisit");
+	private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
+	private static final By STARTED_AT = By.className("active-visit-started-at-message");
+	private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
+	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
+	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
 
 	public PatientDashboardPage(WebDriver driver) {
 	    super(driver);
     }
 
 	public void startVisit() {
-		clickOn(By.id(START_VISIT_ID));
-		waitForElement(By.id(CONFIRM_DIALOG_ID));
-		clickOn(By.cssSelector("#" + CONFIRM_DIALOG_ID + " ." + CONFIRM_BUTTON_CLASS));
+		clickOn(START_VISIT);
+		waitForElement(CONFIRM);
+		clickOn(CONFIRM);
 	}
 	
 	@Override
@@ -33,20 +33,20 @@ public class PatientDashboardPage extends AbstractBasePage {
     }
 
 	public boolean hasActiveVisit() {
-	    return findElement(By.className("active-visit-started-at-message")) != null;
+	    return findElement(STARTED_AT) != null;
     }
 
 	public WebElement endVisitLink() {
-	    return findElement(By.id(END_VISIT_ID));
+	    return findElement(END_VISIT);
     }
 
 	public void visitNote() {
-	    clickOn(By.id(VISIT_NOTE_ID));
-	    waitForElement(By.id(DIAGNOSIS_SEARCH_CONTAINER_ID));
+	    clickOn(VISIT_NOTE);
+	    waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
     }
 
 	public void enterDiagnosis(String diag) {
-		setTextToFieldNoEnter(By.id(DIAGNOSIS_SEARCH_ID), diag);
+		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
 		clickOn(By.className("code"));
     }
 
