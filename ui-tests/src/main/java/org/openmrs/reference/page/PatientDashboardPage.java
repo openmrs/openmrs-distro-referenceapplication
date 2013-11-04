@@ -55,7 +55,7 @@ public class PatientDashboardPage extends AbstractBasePage {
     }
 
 	public void enterNote(String note) {
-	    setTextToField(By.id("w10"), note);
+	    setText(By.id("w10"), note);
     }
 
 	public void save() {

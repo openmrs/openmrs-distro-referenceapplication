@@ -60,18 +60,18 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
 	public void enterPatientAddress(TestPatient patient) {
-        setTextToField(ADDRESS1, patient.address1);
-        setTextToField(ADDRESS2, patient.address2);
-        setTextToField(CITY_VILLAGE, patient.city);
-        setTextToField(STATE_PROVINCE, patient.state);
-        setTextToField(COUNTRY, patient.country);
-        setTextToField(POSTAL_CODE, patient.postalCode);
+        setText(ADDRESS1, patient.address1);
+        setText(ADDRESS2, patient.address2);
+        setText(CITY_VILLAGE, patient.city);
+        setText(STATE_PROVINCE, patient.state);
+        setText(COUNTRY, patient.country);
+        setText(POSTAL_CODE, patient.postalCode);
     }
 
     public void enterPatientBirthDate(TestPatient patient) {
-        setTextToField(BIRTHDAY_DAY, patient.birthDay);
+        setText(BIRTHDAY_DAY, patient.birthDay);
         selectFrom(BIRTHDAY_MONTH, patient.birthMonth);
-        setTextToField(BIRTHDAY_YEAR, patient.birthYear);
+        setText(BIRTHDAY_YEAR, patient.birthYear);
     }
 
     public void selectPatientGender(String gender) {
@@ -79,11 +79,11 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void enterPatientFamilyName(String familyName) {
-        setTextToField(FAMILY_NAME, familyName);
+        setText(FAMILY_NAME, familyName);
     }
 
     public void enterPatientGivenName(String givenName) {
-		setTextToField(GIVEN_NAME, givenName);
+		setText(GIVEN_NAME, givenName);
     }
 
     public void clickOnContactInfo() {
@@ -95,7 +95,7 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
 	public void enterPhoneNumber(String phone) {
-        setTextToField(PHONE_NUMBER, phone);
+        setText(PHONE_NUMBER, phone);
     }
 
     public void clickOnConfirmSection() {
