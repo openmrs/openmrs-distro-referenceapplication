@@ -10,7 +10,7 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
 
-@Ignore
+//@Ignore("temporarily disable trying to figure out why bamboo is hanging")
 public class LoginTest extends TestBase {
     private HeaderPage headerPage;
     private HomePage homePage;

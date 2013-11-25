@@ -3,12 +3,14 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 
+//@Ignore("temporarily disable trying to figure out why bamboo is hanging")
 public class VisitTest extends TestBase {
 
     private HomePage homePage;
