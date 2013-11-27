@@ -4,13 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
 
-//@Ignore("temporarily disable trying to figure out why bamboo is hanging")
 public class LoginTest extends TestBase {
     private HeaderPage headerPage;
     private HomePage homePage;

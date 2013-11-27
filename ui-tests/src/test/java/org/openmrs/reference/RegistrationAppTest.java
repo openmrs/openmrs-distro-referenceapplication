@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import org.dbunit.dataset.DataSetException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
@@ -18,7 +17,6 @@ import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 
-//@Ignore("temporarily disable trying to figure out why bamboo is hanging")
 public class RegistrationAppTest extends TestBase {
     private HeaderPage headerPage;
     private RegistrationPage registrationPage;
@@ -67,6 +65,7 @@ public class RegistrationAppTest extends TestBase {
     public void tearDown() throws Exception {
 		deletePatient(registeredPatientId);
 		dbUnitTearDown();
+		Thread.sleep(5000);	// a bit of a hack, wait for "created patient" popup to disappear 
         headerPage.logOut();
     }
 
