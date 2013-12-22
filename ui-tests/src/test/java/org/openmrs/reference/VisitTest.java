@@ -7,17 +7,18 @@ import org.junit.Test;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
+import org.openmrs.uitestframework.test.TestData.PatientInfo;
 
 
 public class VisitTest extends TestBase {
 
     private HomePage homePage;
 	private PatientDashboardPage patientDashboardPage;
-	private String patientUuid;
+	private PatientInfo patient;
 	
 	@Before
 	public void before() {
-		patientUuid = createTestPatient().uuid;
+		patient = createTestPatient();
         homePage = new HomePage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
     	assertPage(loginPage);
@@ -27,8 +28,7 @@ public class VisitTest extends TestBase {
 	
 	@After
     public void tearDown() throws Exception {
-		deletePatientUuid(patientUuid);
-		dbUnitTearDown();
+		deletePatient(patient);
     }
 
 	/**
@@ -38,7 +38,7 @@ public class VisitTest extends TestBase {
 	public void testStartVisit() {
 //		System.out.println("test patient uuid: " + patientUuid);
 		// go to patient dashboard for the just-created test patient
-		currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patientUuid);
+		currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
 		assertPage(patientDashboardPage);
 		// start visit
 		patientDashboardPage.startVisit();
