@@ -59,6 +59,7 @@
 		<referencedemodataModuleVersion>1.1</referencedemodataModuleVersion>
 		<namephoneticsModuleVersion>1.4</namephoneticsModuleVersion>
 		<dataexchangeModuleVersion>1.1</dataexchangeModuleVersion>
+		<orderentryuiModuleVersion>1.0-SNAPSHOT</orderentryuiModuleVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -253,6 +254,11 @@
 				<artifactId>namephonetics-api</artifactId>
 				<version>${namephoneticsModuleVersion}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>orderentryui-api</artifactId>
+				<version>${orderentryuiModuleVersion}</version>
+			</dependency>
 			
 			<!-- API test dependencies -->
 			<dependency>
@@ -417,6 +423,12 @@
 				<version>${namephoneticsModuleVersion}</version>
 				<classifier>tests</classifier>
 			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>orderentryui-api</artifactId>
+				<version>${orderentryuiModuleVersion}</version>
+				<classifier>tests</classifier>
+			</dependency>
 			
 			<!-- OMOD dependencies -->
 			<dependency>
@@ -555,6 +567,11 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>namephonetics-omod</artifactId>
 				<version>${namephoneticsModuleVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>orderentryui-omod</artifactId>
+				<version>${orderentryuiModuleVersion}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
