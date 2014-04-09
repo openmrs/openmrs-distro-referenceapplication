@@ -46,7 +46,8 @@
 		<calculationModuleVersion>1.1</calculationModuleVersion>
 		<serialization.xstreamModuleVersion>0.2.7</serialization.xstreamModuleVersion>
 		<htmlwidgetsModuleVersion>1.6.5</htmlwidgetsModuleVersion>
-		<reportingModuleVersion>0.8.1</reportingModuleVersion>
+		<reportingModuleVersion>0.8.2-SNAPSHOT</reportingModuleVersion>
+		<reportinguiModuleVersion>1.0-SNAPSHOT</reportinguiModuleVersion>
 		<metadatasharingModuleVersion>1.1.8</metadatasharingModuleVersion>
 		<metadatamappingModuleVersion>1.0.1</metadatamappingModuleVersion>
 		<uicommonsModuleVersion>1.2.1</uicommonsModuleVersion>
@@ -189,6 +190,11 @@
 				<artifactId>reporting-api</artifactId>
 				<version>${reportingModuleVersion}</version>
 			</dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>reportingui-api</artifactId>
+                <version>${reportinguiModuleVersion}</version>
+            </dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>metadatasharing-api</artifactId>
@@ -502,6 +508,11 @@
 				<artifactId>reporting-omod</artifactId>
 				<version>${reportingModuleVersion}</version>
 			</dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>reportingui-omod</artifactId>
+                <version>${reportinguiModuleVersion}</version>
+            </dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>metadatasharing-omod</artifactId>
