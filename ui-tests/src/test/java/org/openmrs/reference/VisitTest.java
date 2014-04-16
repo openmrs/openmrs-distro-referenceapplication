@@ -3,6 +3,7 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
@@ -35,6 +36,7 @@ public class VisitTest extends TestBase {
 	 * Beginnings of visit test. For starters, we just start a visit and verify it started.
 	 */
 	@Test
+    @Ignore
 	public void testStartVisit() {
 //		System.out.println("test patient uuid: " + patientUuid);
 		// go to patient dashboard for the just-created test patient
