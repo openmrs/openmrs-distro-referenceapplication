@@ -39,7 +39,7 @@
 		<registrationappModuleVersion>1.0</registrationappModuleVersion>
 		<eventModuleVersion>2.1</eventModuleVersion>
 		<idgenModuleVersion>2.7</idgenModuleVersion>
-		<emrapiModuleVersion>1.1</emrapiModuleVersion>
+		<emrapiModuleVersion>1.2-SNAPSHOT</emrapiModuleVersion>
 		<referenceapplicationModuleVersion>1.0.1</referenceapplicationModuleVersion>
 		<providermanagementModuleVersion>2.1</providermanagementModuleVersion>
 		<uilibraryModuleVersion>2.0.4</uilibraryModuleVersion>
@@ -47,6 +47,7 @@
 		<serialization.xstreamModuleVersion>0.2.7</serialization.xstreamModuleVersion>
 		<htmlwidgetsModuleVersion>1.6.5</htmlwidgetsModuleVersion>
 		<reportingModuleVersion>0.8.3-SNAPSHOT</reportingModuleVersion>
+        <reportingRestModuleVersion>1.3-SNAPSHOT</reportingRestModuleVersion>
 		<reportinguiModuleVersion>1.0-SNAPSHOT</reportinguiModuleVersion>
 		<metadatasharingModuleVersion>1.1.8</metadatasharingModuleVersion>
 		<metadatamappingModuleVersion>1.0.1</metadatamappingModuleVersion>
@@ -265,6 +266,11 @@
 				<artifactId>orderentryui-api</artifactId>
 				<version>${orderentryuiModuleVersion}</version>
 			</dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>reportingrest-api</artifactId>
+                <version>${reportingrestModuleVersion}</version>
+            </dependency>
 			
 			<!-- API test dependencies -->
 			<dependency>
