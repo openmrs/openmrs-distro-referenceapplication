@@ -62,6 +62,7 @@
 		<namephoneticsModuleVersion>1.4</namephoneticsModuleVersion>
 		<dataexchangeModuleVersion>1.1</dataexchangeModuleVersion>
 		<orderentryuiModuleVersion>1.0-SNAPSHOT</orderentryuiModuleVersion>
+		<allergyapiModuleVersion>1.0-SNAPSHOT</allergyapiModuleVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -621,6 +622,22 @@
 				<artifactId>dataexchange-omod</artifactId>
 				<version>${dataexchangeModuleVersion}</version>
 				<scope>tests</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>allergyapi-api</artifactId>
+				<version>${allergyapiModuleVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>allergyapi-api</artifactId>
+				<version>${allergyapiModuleVersion}</version>
+				<classifier>tests</classifier>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>allergyapi-omod</artifactId>
+				<version>${allergyapiModuleVersion}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
