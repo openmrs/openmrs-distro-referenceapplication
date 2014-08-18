@@ -63,6 +63,7 @@
 		<dataexchangeModuleVersion>1.1</dataexchangeModuleVersion>
 		<orderentryuiModuleVersion>1.0-SNAPSHOT</orderentryuiModuleVersion>
 		<allergyapiModuleVersion>1.0-SNAPSHOT</allergyapiModuleVersion>
+		<allergyuiModuleVersion>1.0-SNAPSHOT</allergyuiModuleVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -638,6 +639,24 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>allergyapi-omod</artifactId>
 				<version>${allergyapiModuleVersion}</version>
+			</dependency>
+			
+			
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>allergyui-api</artifactId>
+				<version>${allergyuiModuleVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>allergyui-api</artifactId>
+				<version>${allergyuiModuleVersion}</version>
+				<classifier>tests</classifier>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>allergyui-omod</artifactId>
+				<version>${allergyuiModuleVersion}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
