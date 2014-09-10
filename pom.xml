@@ -64,6 +64,7 @@
 		<orderentryuiVersion>1.0-SNAPSHOT</orderentryuiVersion>
 		<allergyapiVersion>1.0-SNAPSHOT</allergyapiVersion>
 		<allergyuiVersion>1.0-SNAPSHOT</allergyuiVersion>
+		<formentryappVersion>1.0-SNAPSHOT</formentryappVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -657,6 +658,23 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>allergyui-omod</artifactId>
 				<version>${allergyuiVersion}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>formentryapp-api</artifactId>
+				<version>${formentryappVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>formentryapp-api</artifactId>
+				<version>${formentryappVersion}</version>
+				<classifier>tests</classifier>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>formentryapp-omod</artifactId>
+				<version>${formentryappVersion}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
