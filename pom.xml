@@ -63,6 +63,7 @@
 		<allergyapiVersion>1.0-SNAPSHOT</allergyapiVersion>
 		<allergyuiVersion>1.0-SNAPSHOT</allergyuiVersion>
 		<formentryappVersion>1.0-SNAPSHOT</formentryappVersion>
+		<atlasVersion>2.1-SNAPSHOT</atlasVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -267,6 +268,11 @@
                 <artifactId>reportingrest-api</artifactId>
                 <version>${reportingRestVersion}</version>
             </dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>atlas-api</artifactId>
+				<version>${atlasVersion}</version>
+			</dependency>
 			
 			<!-- API test dependencies -->
 			<dependency>
@@ -431,6 +437,13 @@
 				<version>${namephoneticsVersion}</version>
 				<classifier>tests</classifier>
 			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>atlas-api</artifactId>
+				<version>${atlasVersion}</version>
+				<classifier>tests</classifier>
+			</dependency>
+
 
 			<!-- OMOD dependencies -->
 			<dependency>
@@ -647,6 +660,12 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>formentryapp-omod</artifactId>
 				<version>${formentryappVersion}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>atlas-omod</artifactId>
+				<version>${atlasVersion}</version>
 			</dependency>
 
 			<!-- Other dependencies -->		
