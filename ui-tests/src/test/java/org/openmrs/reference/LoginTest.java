@@ -1,13 +1,14 @@
 package org.openmrs.reference;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class LoginTest extends TestBase {
     private HeaderPage headerPage;
@@ -23,13 +24,13 @@ public class LoginTest extends TestBase {
     public void verifyModulesAvailableOnHomePage() throws Exception {
     	login();
         assertPage(homePage);
-        assertFalse(homePage.isDispensingMedicationAppPresent());
-        assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
-        assertTrue(homePage.isStyleGuideAppPresent());
+        assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
+        assertTrue(homePage.isCaptureVitalsAppPresent());
+        assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
-    	assertTrue(homePage.isCaptureVitalsAppPresent());
+        assertThat(homePage.numberOfAppsPresent(), is(6));
         headerPage.logOut();
         assertPage(loginPage);
     }
@@ -41,11 +42,7 @@ public class LoginTest extends TestBase {
     	assertPage(homePage);
     	assertTrue(homePage.isActiveVisitsAppPresent());
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
-    	assertFalse(homePage.isDispensingMedicationAppPresent());
-    	assertFalse(homePage.isFindAPatientAppPresent());
-    	assertFalse(homePage.isStyleGuideAppPresent());
-    	assertFalse(homePage.isSystemAdministrationAppPresent());
-    	assertFalse(homePage.isCaptureVitalsAppPresent());
+        assertThat(homePage.numberOfAppsPresent(), is(2));
     	headerPage.logOut();
     	assertPage(loginPage);
     }
@@ -55,13 +52,9 @@ public class LoginTest extends TestBase {
     	assertPage(loginPage);
     	loginPage.login("doctor", "Doctor123");
     	assertPage(homePage);
-    	assertTrue(homePage.isActiveVisitsAppPresent());
-    	assertTrue(homePage.isFindAPatientAppPresent());
-    	assertFalse(homePage.isRegisterPatientCustomizedForRefAppPresent());
-    	assertFalse(homePage.isDispensingMedicationAppPresent());
-    	assertFalse(homePage.isStyleGuideAppPresent());
-    	assertFalse(homePage.isSystemAdministrationAppPresent());
-    	assertFalse(homePage.isCaptureVitalsAppPresent());
+        assertTrue(homePage.isFindAPatientAppPresent());
+        assertTrue(homePage.isActiveVisitsAppPresent());
+        assertThat(homePage.numberOfAppsPresent(), is(2));
     	headerPage.logOut();
     	assertPage(loginPage);
     }
@@ -74,12 +67,21 @@ public class LoginTest extends TestBase {
     	assertTrue(homePage.isFindAPatientAppPresent());
     	assertTrue(homePage.isActiveVisitsAppPresent());
     	assertTrue(homePage.isCaptureVitalsAppPresent());
-    	assertFalse(homePage.isRegisterPatientCustomizedForRefAppPresent());
-    	assertFalse(homePage.isDispensingMedicationAppPresent());
-    	assertFalse(homePage.isStyleGuideAppPresent());
-    	assertFalse(homePage.isSystemAdministrationAppPresent());
+        assertThat(homePage.numberOfAppsPresent(), is(3));
     	headerPage.logOut();
     	assertPage(loginPage);
     }
-    
+
+    @Test
+    public void verifySysadminModulesAvailableOnHomePage() throws Exception {
+        assertPage(loginPage);
+        loginPage.loginAsSysadmin();
+        assertPage(homePage);
+        assertTrue(homePage.isConfigureMetadataAppPresent());
+        assertTrue(homePage.isSystemAdministrationAppPresent());
+        assertThat(homePage.numberOfAppsPresent(), is(2));
+        headerPage.logOut();
+        assertPage(loginPage);
+    }
+
 }
