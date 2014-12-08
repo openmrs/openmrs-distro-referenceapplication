@@ -24,7 +24,7 @@ checkForStartup() {
     do
       if [ "${Host}" == "devtest01.openmrs.org" ]
         then
-          result=`ssh -o StrictHostKeyChecking=no devtest01.openmrs.org "sudo tail /var/log/tomcat7/catalina.out | grep \"${startedSignal}\""`
+          result=`ssh -o StrictHostKeyChecking=no bamboo@devtest01.openmrs.org "sudo tail /var/log/tomcat7/catalina.out | grep \"${startedSignal}\""`
         timeout
         else
           result=`tail /var/log/tomcat7/catalina.out | grep "${startedSignal}"`

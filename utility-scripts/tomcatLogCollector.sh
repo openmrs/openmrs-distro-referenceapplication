@@ -1,7 +1,7 @@
 #!/bin/bash
 
 workingDir=`pwd`
-remoteExec='ssh -o StrictHostKeyChecking=no devtest01.openmrs.org'
+remoteExec='ssh -o StrictHostKeyChecking=no bamboo@devtest01.openmrs.org'
 tomcatLogLocation="/var/log/tomcat7/catalina.out"
 
 cleanTomcatLog(){
@@ -22,7 +22,7 @@ cleanTomcatLog(){
 
 getTomcatLog() {
   ${remoteExec} "sudo cp ${tomcatLogLocation} ~/"
-  scp -o StrictHostKeyChecking=no devtest01.openmrs.org:~/catalina.out ${workingDir}
+  scp -o StrictHostKeyChecking=no bamboo@devtest01.openmrs.org:~/catalina.out ${workingDir}
 }
 
 $1
