@@ -41,7 +41,7 @@ public class AddAllergyPage extends AbstractBasePage {
 	public int getAllergensCount(int typeIndex) {
 		WebElement table = driver.findElement(ALLERGENS);
 		List<WebElement> allergenTypeCollection = table.findElements(By.xpath("id('allergens')/ul[" + (typeIndex + 1) + "]/li"));
-		return allergenTypeCollection.size() - 1;	// Should not be counted Input Form under "Other"
+		return allergenTypeCollection.size();
 	}
 	
 	public String getAllergenName(int typeIndex, int allergenIndex) {
@@ -52,14 +52,14 @@ public class AddAllergyPage extends AbstractBasePage {
 	
 	public void chooseAllergen(int typeIndex, int allergenIndex) {
 		WebElement table = driver.findElement(ALLERGENS);
-		List<WebElement> allergenTypeCollection = table.findElements(By.xpath("id('allergens')/ul[" + (typeIndex + 1) + "]/li/input"));
+		List<WebElement> allergenTypeCollection = table.findElements(By.xpath("id('allergens')/ul[" + (typeIndex + 1) + "]/li/input[1]"));
 		allergenTypeCollection.get(allergenIndex).click();
 	}
 	
 	public int getReactionsCount() {
 		WebElement table = driver.findElement(REACTIONS);
 		List<WebElement> reactionsCollection = table.findElements(By.xpath("id('reactions')/ul/li"));
-		return reactionsCollection.size() - 1;	// Should not be counted Input Form under "Other"
+		return reactionsCollection.size();
 	}
 	
 	public String getReactionName(int index) {
@@ -70,7 +70,7 @@ public class AddAllergyPage extends AbstractBasePage {
 	
 	public void chooseReaction(int index) {
 		WebElement table = driver.findElement(REACTIONS);
-		List<WebElement> reactionsCollection = table.findElements(By.xpath("id('reactions')/ul/li/input"));
+		List<WebElement> reactionsCollection = table.findElements(By.xpath("id('reactions')/ul/li/input[1]"));
 		reactionsCollection.get(index).click();
 	}
 	

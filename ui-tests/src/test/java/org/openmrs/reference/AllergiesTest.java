@@ -17,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -279,12 +280,18 @@ public class AllergiesTest extends TestBase {
     	}
     	
     	List<String> reactionsNames = new ArrayList<String>();
+    	List<Integer> commands = new ArrayList<Integer>();
     	for(int i = 0; i < multiple; i++) {
-    		int reaction = 0;
-    		String reactionName = addAllergyPage.getReactionName(reactionsList.get(reaction));
-        	addAllergyPage.chooseReaction(reactionsList.get(reaction));
-        	
+    		int reaction = rand.nextInt(reactionsList.size());
+    		commands.add(reaction);
         	reactionsList.remove(reaction);
+    	}
+    	
+    	// Should sort all the commands in order, because the random order does not match
+    	Collections.sort(commands);
+    	for(int i = 0; i < commands.size(); i++) {
+    		String reactionName = addAllergyPage.getReactionName(commands.get(i));
+        	addAllergyPage.chooseReaction(commands.get(i));
         	reactionsNames.add(reactionName);
     	}
     	
