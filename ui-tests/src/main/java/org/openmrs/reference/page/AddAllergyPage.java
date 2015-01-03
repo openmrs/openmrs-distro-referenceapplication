@@ -41,7 +41,7 @@ public class AddAllergyPage extends AbstractBasePage {
 	public int getAllergensCount(int typeIndex) {
 		WebElement table = driver.findElement(ALLERGENS);
 		List<WebElement> allergenTypeCollection = table.findElements(By.xpath("id('allergens')/ul[" + (typeIndex + 1) + "]/li"));
-		return allergenTypeCollection.size();
+		return allergenTypeCollection.size() - 1; // should not take "Other"
 	}
 	
 	public String getAllergenName(int typeIndex, int allergenIndex) {
@@ -59,7 +59,7 @@ public class AddAllergyPage extends AbstractBasePage {
 	public int getReactionsCount() {
 		WebElement table = driver.findElement(REACTIONS);
 		List<WebElement> reactionsCollection = table.findElements(By.xpath("id('reactions')/ul/li"));
-		return reactionsCollection.size();
+		return reactionsCollection.size() - 1; // should not take "Other"
 	}
 	
 	public String getReactionName(int index) {
