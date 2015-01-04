@@ -1,8 +1,22 @@
+/**
+ * The contents of this file are subject to the OpenMRS Public License
+ * Version 1.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://license.openmrs.org
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+ */
 package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class HomePage extends AbstractBasePage {
 	
@@ -14,6 +28,8 @@ public class HomePage extends AbstractBasePage {
     static final String CONFIGURE_METADATA_APP_ID = "coreapps-configuremetadata-homepageLink-coreapps-configuremetadata-homepageLink-extension";
 	static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
 	static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
+	static final String HOME_CONTAINER = "home-container";
+	static final String CANT_LOGIN = "cant-login";
 	
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -77,6 +93,17 @@ public class HomePage extends AbstractBasePage {
 	public boolean isCaptureVitalsAppPresent() {
 		return isAppButtonPresent(CAPTURE_VITALS_APP_ID);
     }
+	
+	public String getLoggedAsString() {
+		WebElement container = driver.findElement(By.id(HOME_CONTAINER));
+		WebElement text = container.findElement(By.xpath("id('home-container')/h4"));
+		return text.getText();
+	}
+	
+	public void pressCantLogin() {
+		WebElement button = driver.findElement(By.id(CANT_LOGIN));
+		button.click();
+	}
 
 	@Override
 	public String expectedUrlPath() {
