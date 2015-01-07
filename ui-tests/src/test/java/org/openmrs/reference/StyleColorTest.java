@@ -16,6 +16,8 @@ package org.openmrs.reference;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +42,8 @@ public class StyleColorTest extends TestBase {
 	
 	private List<String> colors;
 	private List<WebElement> allFormChildElements;
+	
+	private static final Log log = LogFactory.getLog(StyleColorTest.class);
 	
 	// The colors that are considered normal
 	// Anyone can change the list by adding or removing color
@@ -246,8 +250,8 @@ public class StyleColorTest extends TestBase {
 	}
 	
 	private void checkWebPageAllElementsColor() {
-		// print page url
-		System.out.println("\n\n" + driver.getCurrentUrl() + "\n");
+		// log page url
+		log.info(driver.getCurrentUrl());
 		
 		// get all elements
 		allFormChildElements = driver.findElements(By.cssSelector("*"));
@@ -261,12 +265,12 @@ public class StyleColorTest extends TestBase {
 			
 			// check "color" css value
 			if(color != "" && !colors.contains(color)) {
-				System.out.println("Weird color: " + color + ", Item path: " + getElementXPath(driver, item));
+				log.warn("Weird color: " + color + ", Item path: " + getElementXPath(driver, item));
 			}
 			
 			// check "background-color" css value
 			if(backgroundColor != "" && !colors.contains(backgroundColor)) {
-				System.out.println("Weird background color: " + backgroundColor + ", Item path: " + getElementXPath(driver, item));
+				log.warn("Weird background color: " + backgroundColor + ", Item path: " + getElementXPath(driver, item));
 			}
 		}
 	}
