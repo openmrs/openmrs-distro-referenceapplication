@@ -21,7 +21,8 @@ public class RegistrationPage extends AbstractBasePage {
     static final By PHONE_NUMBER_LABEL = By.id("phoneNumberLabel");
 	static final By GIVEN_NAME = By.name("givenName");
 	static final By FAMILY_NAME = By.name("familyName");
-    static final String GENDER_RADIO_BUTTON_ID = "input[value='XX']";
+    static final String GENDER_FIELD_ID = "gender-field";
+    static final By GENDER = By.id(GENDER_FIELD_ID);
     static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
     static final By BIRTHDAY_DAY = By.id(BIRTHDAY_DAY_TEXTBOX_ID);
     static final By BIRTHDAY_MONTH = By.id("birthdateMonth-field");
@@ -75,7 +76,7 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void selectPatientGender(String gender) {
-        clickOn(By.cssSelector(GENDER_RADIO_BUTTON_ID.replace("XX", gender)));
+        selectFrom(GENDER, gender);
     }
 
     public void enterPatientFamilyName(String familyName) {
@@ -103,7 +104,7 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clickOnGenderLink() {
-    	waitForFocusByCss("input", "value", "M");
+    	waitForFocusById(GENDER_FIELD_ID);
     }
 
     public void clickOnBirthDateLink() {

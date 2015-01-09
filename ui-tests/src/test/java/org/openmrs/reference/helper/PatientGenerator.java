@@ -41,7 +41,7 @@ public class PatientGenerator {
 	
 	private static final String[] PATIENT_BIRTH_YEAR = { "1980", "1981", "1982", "1983", "1990", "1991", "1995" };
 	
-	private static final String[] PATIENT_GENDER = { "M", "F" };
+	private static final String[] PATIENT_GENDER = { "Male", "Female" };
 	
 	static String randomArrayEntry(String[] array) {
 		return array[(int) (Math.random() * array.length)];
