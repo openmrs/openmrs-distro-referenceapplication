@@ -1,9 +1,23 @@
+/**
+ * The contents of this file are subject to the OpenMRS Public License
+ * Version 1.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://license.openmrs.org
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+ */
 package org.openmrs.reference.page;
 
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * The register-a-new-patient page.
@@ -21,6 +35,7 @@ public class RegistrationPage extends AbstractBasePage {
     static final By PHONE_NUMBER_LABEL = By.id("phoneNumberLabel");
 	static final By GIVEN_NAME = By.name("givenName");
 	static final By FAMILY_NAME = By.name("familyName");
+	static final By GENDER_SELECT = By.id("gender-field");
     static final String GENDER_RADIO_BUTTON_ID = "input[value='XX']";
     static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
     static final By BIRTHDAY_DAY = By.id(BIRTHDAY_DAY_TEXTBOX_ID);
@@ -85,6 +100,11 @@ public class RegistrationPage extends AbstractBasePage {
     public void enterPatientGivenName(String givenName) {
 		setText(GIVEN_NAME, givenName);
     }
+    
+    public void enterPatientGender(int gender) {
+    	Select select = new Select(driver.findElement(GENDER_SELECT));
+    	select.selectByIndex(gender);
+    }
 
     public void clickOnContactInfo() {
         clickOn(CONTACT_INFO_SECTION);
@@ -103,7 +123,7 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clickOnGenderLink() {
-    	waitForFocusByCss("input", "value", "M");
+    	waitForFocusByCss("select", "id", "gender-field");
     }
 
     public void clickOnBirthDateLink() {
