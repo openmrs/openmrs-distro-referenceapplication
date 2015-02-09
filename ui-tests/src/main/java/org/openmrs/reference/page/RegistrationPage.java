@@ -34,6 +34,7 @@ public class RegistrationPage extends AbstractBasePage {
     static final By COUNTRY = By.id("country");
     static final By POSTAL_CODE = By.id("postalCode");
     static final By PHONE_NUMBER = By.name("phoneNumber");
+    static final By UNKNOWN_PATIENT = By.id("checkbox-unknown-patient");
     
     // These xpath expressions should be replaced by id's or cssSelectors if possible.
     static final String CONFIRMATION_DIV = "//div[@id='confirmation']";
@@ -60,6 +61,13 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnConfirmSection();
     }
 
+    public void enterUnidentifiedPatient(TestPatient patient) {
+        selectUnidentifiedPatient();
+        clickOnGenderLink();
+        selectPatientGender(patient.gender);
+        clickOnConfirmSection();
+    }
+
 	public void enterPatientAddress(TestPatient patient) {
         setText(ADDRESS1, patient.address1);
         setText(ADDRESS2, patient.address2);
@@ -73,6 +81,10 @@ public class RegistrationPage extends AbstractBasePage {
         setText(BIRTHDAY_DAY, patient.birthDay);
         selectFrom(BIRTHDAY_MONTH, patient.birthMonth);
         setText(BIRTHDAY_YEAR, patient.birthYear);
+    }
+
+    public void selectUnidentifiedPatient() {
+        clickOn(UNKNOWN_PATIENT);
     }
 
     public void selectPatientGender(String gender) {
