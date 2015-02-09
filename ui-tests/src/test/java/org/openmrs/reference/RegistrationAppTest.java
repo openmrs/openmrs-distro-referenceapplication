@@ -30,6 +30,7 @@ public class RegistrationAppTest extends TestBase {
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
+        headerPage.clickOnHomeIcon();
     	assertPage(loginPage);
         loginPage.loginAsClerk();
         assertPage(homePage);

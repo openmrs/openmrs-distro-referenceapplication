@@ -11,12 +11,11 @@ public class HeaderPage extends AbstractBasePage {
 	}
 	
 	final String LOGOUT_HREF = URL_ROOT + "/logout";
-	static final String HOME_ICON = "icon-home small";
+	static final String HOME_ICON = "logo";
 	static final String HOME_LINK_TEXT = "Home";
-	
-	// TODO This is unused, do we really need it?
+
 	public void clickOnHomeIcon() {
-		clickOn(By.id(HOME_ICON));
+		clickOn(By.className(HOME_ICON));
 	}
 	
 	// TODO This is unused, do we really need it?
