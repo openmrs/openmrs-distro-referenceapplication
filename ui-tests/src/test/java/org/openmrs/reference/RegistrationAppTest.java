@@ -68,4 +68,19 @@ public class RegistrationAppTest extends TestBase {
         headerPage.logOut();
     }
 
+    // Test for RA-472
+    @Test
+    public void registerUnidentifiedPatient() {
+        homePage.openRegisterAPatientApp();
+        TestPatient patient = PatientGenerator.generateTestPatient();
+        registrationPage.enterUnidentifiedPatient(patient);
+
+        assertEquals("--", registrationPage.getNameInConfirmationPage());
+        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
+
+        registrationPage.confirmPatient();
+        assertPage(patientDashboardPage);
+        registeredPatientId = patientIdFromUrl();	// remember just-registered patient id, so it can be removed.
+        assertTrue(driver.getPageSource().contains("UNKNOWN, UNKNOWN"));
+    }
 }
