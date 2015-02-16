@@ -1,5 +1,6 @@
 package org.openmrs.reference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
@@ -20,6 +21,12 @@ public class LoginTest extends TestBase {
         homePage = new HomePage(driver);
     }
     
+    @After
+    public void logout() {
+    	headerPage.logOut();
+    	assertPage(loginPage);
+    }
+    
     @Test
     public void verifyModulesAvailableOnHomePage() throws Exception {
     	login();
@@ -31,8 +38,6 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(7));
-        headerPage.logOut();
-        assertPage(loginPage);
     }
 
     @Test
@@ -43,8 +48,6 @@ public class LoginTest extends TestBase {
     	assertTrue(homePage.isActiveVisitsAppPresent());
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(2));
-    	headerPage.logOut();
-    	assertPage(loginPage);
     }
     
     @Test
@@ -55,8 +58,6 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(2));
-    	headerPage.logOut();
-    	assertPage(loginPage);
     }
     
     @Test
@@ -68,8 +69,6 @@ public class LoginTest extends TestBase {
     	assertTrue(homePage.isActiveVisitsAppPresent());
     	assertTrue(homePage.isCaptureVitalsAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(3));
-    	headerPage.logOut();
-    	assertPage(loginPage);
     }
 
     @Test
@@ -80,8 +79,6 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(2));
-        headerPage.logOut();
-        assertPage(loginPage);
     }
 
 }
