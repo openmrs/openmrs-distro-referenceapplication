@@ -30,7 +30,7 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isCaptureVitalsAppPresent());
         assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
-        assertThat(homePage.numberOfAppsPresent(), is(6));
+        assertThat(homePage.numberOfAppsPresent(), is(7));
         headerPage.logOut();
         assertPage(loginPage);
     }
