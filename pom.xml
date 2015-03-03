@@ -65,7 +65,7 @@
 		<allergyuiVersion>1.1-SNAPSHOT</allergyuiVersion>
 		<formentryappVersion>1.1-SNAPSHOT</formentryappVersion>
 		<atlasVersion>2.1</atlasVersion>
-		<chartsearchModuleVersion>1.2-SNAPSHOT</chartsearchModuleVersion>
+		<chartsearchVersion>1.2-SNAPSHOT</chartsearchVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -335,7 +335,8 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>chartsearch-api</artifactId>
-				<version>${chartsearchModuleVersion}</version>
+				<version>${chartsearchVersion}</version>
+				<scope>provided</scope>
 			</dependency>
 			
 			<!-- API test dependencies -->
@@ -545,8 +546,9 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>chartsearch-api</artifactId>
-				<version>${chartsearchModuleVersion}</version>
+				<version>${chartsearchVersion}</version>
 				<classifier>tests</classifier>
+				<scope>provided</scope>
 			</dependency>
 
 
@@ -835,7 +837,8 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>chartsearch-omod</artifactId>
-				<version>${chartsearchModuleVersion}</version>
+				<version>${chartsearchVersion}</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<!-- Other dependencies -->		
@@ -849,7 +852,8 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>chartsearch-server</artifactId>
-				<version>${chartsearchModuleVersion}</version>
+				<version>${chartsearchVersion}</version>
+				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
