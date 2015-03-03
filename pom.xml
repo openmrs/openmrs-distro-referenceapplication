@@ -59,6 +59,7 @@
 		<referencedemodataModuleVersion>1.1</referencedemodataModuleVersion>
 		<namephoneticsModuleVersion>1.4</namephoneticsModuleVersion>
 		<dataexchangeModuleVersion>1.1</dataexchangeModuleVersion>
+		<chartsearchModuleVersion>1.2-SNAPSHOT</chartsearchModuleVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -577,6 +578,27 @@
 				<artifactId>dataexchange-omod</artifactId>
 				<version>${dataexchangeModuleVersion}</version>
 				<scope>tests</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>chartsearch-api</artifactId>
+				<version>${chartsearchModuleVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>chartsearch-api</artifactId>
+				<version>${chartsearchModuleVersion}</version>
+				<classifier>tests</classifier>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>chartsearch-omod</artifactId>
+				<version>${chartsearchModuleVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>chartsearch-server</artifactId>
+				<version>${chartsearchModuleVersion}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
