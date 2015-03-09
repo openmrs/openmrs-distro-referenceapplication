@@ -21,6 +21,7 @@ public class RegistrationPage extends AbstractBasePage {
     static final By PHONE_NUMBER_LABEL = By.id("phoneNumberLabel");
 	static final By GIVEN_NAME = By.name("givenName");
 	static final By FAMILY_NAME = By.name("familyName");
+    static final By MIDDLE_NAME = By.name("middleName");
     static final String GENDER_FIELD_ID = "gender-field";
     static final By GENDER = By.id(GENDER_FIELD_ID);
     static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
@@ -49,6 +50,7 @@ public class RegistrationPage extends AbstractBasePage {
 
 	public void enterPatient(TestPatient patient) {
         enterPatientGivenName(patient.givenName);
+        enterPatientMiddleName("");  // no middle name
         enterPatientFamilyName(patient.familyName);
         clickOnGenderLink();
         selectPatientGender(patient.gender);
@@ -97,6 +99,10 @@ public class RegistrationPage extends AbstractBasePage {
 
     public void enterPatientGivenName(String givenName) {
 		setText(GIVEN_NAME, givenName);
+    }
+
+    public void enterPatientMiddleName(String middleName) {
+        setText(MIDDLE_NAME, middleName);
     }
 
     public void clickOnContactInfo() {
