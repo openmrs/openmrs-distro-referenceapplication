@@ -44,7 +44,7 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By ADDRESS_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[4]/strong");
 	static final By PHONE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[5]/strong");
 
-	static final By PATIENT_HEADER = By.className("patient-header ");
+	static final By PATIENT_HEADER = By.className("patient-header");
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
 
 	public void enterPatient(TestPatient patient) {
