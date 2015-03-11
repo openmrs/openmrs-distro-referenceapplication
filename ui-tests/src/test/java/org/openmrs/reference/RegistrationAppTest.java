@@ -1,10 +1,5 @@
 package org.openmrs.reference;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.sql.SQLException;
-
 import org.dbunit.dataset.DataSetException;
 import org.junit.After;
 import org.junit.Before;
@@ -16,6 +11,11 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
+
+import java.sql.SQLException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RegistrationAppTest extends TestBase {
     private HeaderPage headerPage;
@@ -59,7 +59,7 @@ public class RegistrationAppTest extends TestBase {
         registrationPage.confirmPatient();
         assertPage(patientDashboardPage);
 		registeredPatientId = patientIdFromUrl();	// remember just-registered patient id, so it can be removed.
-		assertTrue(driver.getPageSource().contains(patient.familyName + ", " + patient.givenName));
+		assertTrue(driver.getPageSource().contains(patient.givenName + " " + patient.familyName));
     }
     
 	@After
@@ -82,6 +82,6 @@ public class RegistrationAppTest extends TestBase {
         registrationPage.confirmPatient();
         assertPage(patientDashboardPage);
         registeredPatientId = patientIdFromUrl();	// remember just-registered patient id, so it can be removed.
-        assertTrue(driver.getPageSource().contains("UNKNOWN, UNKNOWN"));
+        assertTrue(driver.getPageSource().contains("UNKNOWN UNKNOWN"));
     }
 }
