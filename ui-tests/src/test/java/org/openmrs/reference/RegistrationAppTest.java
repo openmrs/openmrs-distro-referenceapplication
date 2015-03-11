@@ -59,7 +59,7 @@ public class RegistrationAppTest extends TestBase {
         registrationPage.confirmPatient();
         assertPage(patientDashboardPage);
 		registeredPatientId = patientIdFromUrl();	// remember just-registered patient id, so it can be removed.
-		assertTrue(driver.getPageSource().contains(patient.familyName + " " + patient.givenName));
+		assertTrue(driver.getPageSource().contains(patient.givenName + " " + patient.familyName));
     }
     
 	@After
