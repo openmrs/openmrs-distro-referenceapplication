@@ -30,7 +30,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<openMRSVersion>1.11.1</openMRSVersion>
+		<openMRSVersion>1.11.2-SNAPSHOT</openMRSVersion>
 		<referencemetadataVersion>2.3-SNAPSHOT</referencemetadataVersion>
 		<logicVersion>0.5.2</logicVersion>
 		<appframeworkVersion>2.3</appframeworkVersion>
@@ -59,7 +59,6 @@
 		<coreappsVersion>1.5</coreappsVersion>
 		<webservices.restVersion>2.11</webservices.restVersion>
 		<referencedemodataVersion>1.4.1-SNAPSHOT</referencedemodataVersion>
-		<namephoneticsVersion>1.4</namephoneticsVersion>
 		<dataexchangeVersion>1.3.1</dataexchangeVersion>
 		<allergyapiVersion>1.3</allergyapiVersion>
 		<allergyuiVersion>1.1.2</allergyuiVersion>
@@ -317,12 +316,6 @@
 				<version>${referencedemodataVersion}</version>
 				<scope>provided</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>namephonetics-api</artifactId>
-				<version>${namephoneticsVersion}</version>
-				<scope>provided</scope>
-			</dependency>
             <dependency>
                 <groupId>org.openmrs.module</groupId>
                 <artifactId>reportingrest-api</artifactId>
@@ -539,13 +532,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>namephonetics-api</artifactId>
-				<version>${namephoneticsVersion}</version>
-				<classifier>tests</classifier>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
 				<artifactId>atlas-api</artifactId>
 				<version>${atlasVersion}</version>
 				<classifier>tests</classifier>
@@ -742,12 +728,6 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>referencedemodata-omod</artifactId>
 				<version>${referencedemodataVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>namephonetics-omod</artifactId>
-				<version>${namephoneticsVersion}</version>
 				<scope>provided</scope>
 			</dependency>
             <dependency>
