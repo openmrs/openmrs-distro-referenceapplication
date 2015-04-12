@@ -1,3 +1,16 @@
+/**
+ * The contents of this file are subject to the OpenMRS Public License
+ * Version 1.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://license.openmrs.org
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+ */
 package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.AbstractBasePage;
@@ -15,6 +28,16 @@ public class HomePage extends AbstractBasePage {
 	static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
 	static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
 	
+	private static final By INPATIENT = By.xpath("/html/body/header/div[@id='session-location']/ul[@class='select']/li[1]");
+	private static final By ISOLATION = By.xpath("/html/body/header/div[@id='session-location']/ul[@class='select']/li[2]");
+	private static final By LAB = By.xpath("/html/body/header/div[@id='session-location']/ul[@class='select']/li[3]");
+	private static final By OUTPATIENT = By.xpath("/html/body/header/div[@id='session-location']/ul[@class='select']/li[4]");
+	private static final By PHARMACY = By.xpath("/html/body/header/div[@id='session-location']/ul[@class='select']/li[5]");
+	private static final By REGISTRATION = By.xpath("/html/body/header/div[@id='session-location']/ul[@class='select']/li[6]");
+	private static final By UNKNOWN = By.xpath("/html/body/header/div[@id='session-location']/ul[@class='select']/li[7]");
+	public static final By LOCATIONTEXT = By.xpath("/html/body/div[@id='body-wrapper']/div[@id='content']/div[@id='home-container']/h4");
+	public static final By LOCATIONLINK = By.xpath("/html/body/header/ul[@class='user-options']/li[@class='change-location']/a/span");
+
 	public HomePage(WebDriver driver) {
 		super(driver);
 	}
@@ -81,6 +104,45 @@ public class HomePage extends AbstractBasePage {
 	@Override
 	public String expectedUrlPath() {
 		return URL_ROOT + "/referenceapplication/home.page";
+	}
+	
+	public String getLocationText() {
+		return driver.findElement(LOCATIONTEXT).getText();
+	}
+	
+	public void switchToInpatient() {
+		clickOn(LOCATIONLINK);
+		clickOn(INPATIENT);
+	}
+	
+	public void switchToIsolation() {
+		clickOn(LOCATIONLINK);
+		clickOn(ISOLATION);
+	}
+	
+	public void switchToLab() {
+		clickOn(LOCATIONLINK);
+		clickOn(LAB);
+	}
+	
+	public void switchToOutpatient() {
+		clickOn(LOCATIONLINK);
+		clickOn(OUTPATIENT);
+	}
+	
+	public void switchToPharmacy() {
+		clickOn(LOCATIONLINK);
+		clickOn(PHARMACY);
+	}
+	
+	public void switchToRegistration() {
+		clickOn(LOCATIONLINK);
+		clickOn(REGISTRATION);
+	}
+	
+	public void switchToUnknown() {
+		clickOn(LOCATIONLINK);
+		clickOn(UNKNOWN);
 	}
 
 }
