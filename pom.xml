@@ -65,9 +65,9 @@
 		<formentryappVersion>1.1</formentryappVersion>
 		<atlasVersion>2.1</atlasVersion>
 		<chartsearchVersion>1.2</chartsearchVersion>
-       <appointmentschedulingVersion>1.3</appointmentschedulingVersion>
-        <appointmentschedulinguiVersion>1.0.2-SNAPSHOT</appointmentschedulinguiVersion>
-	<chartsearchVersion>1.2</chartsearchVersion>
+		<appointmentschedulingVersion>1.3</appointmentschedulingVersion>
+		<appointmentschedulinguiVersion>1.0.2-SNAPSHOT</appointmentschedulinguiVersion>
+		<namephoneticsVersion>1.4</namephoneticsVersion> <!-- The omod for namephonetics is not included in the distro, but we keep the version around since it's a semi-supported add-on -->
 	</properties>
 
 	<dependencyManagement>
@@ -316,12 +316,18 @@
 				<version>${referencedemodataVersion}</version>
 				<scope>provided</scope>
 			</dependency>
-            <dependency>
-                <groupId>org.openmrs.module</groupId>
-                <artifactId>reportingrest-api</artifactId>
-                <version>${reportingRestVersion}</version>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>namephonetics-api</artifactId>
+				<version>${namephoneticsVersion}</version>
 				<scope>provided</scope>
-            </dependency>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>reportingrest-api</artifactId>
+				<version>${reportingRestVersion}</version>
+				<scope>provided</scope>
+			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>atlas-api</artifactId>
