@@ -65,7 +65,7 @@ public class RegistrationAppTest extends TestBase {
 	@After
     public void tearDown() throws Exception {
 		deletePatient(registeredPatientId);
-		Thread.sleep(5000);	// a bit of a hack, wait for "created patient" popup to disappear 
+        registrationPage.waitForDeletePatient();
         headerPage.logOut();
     }
 
