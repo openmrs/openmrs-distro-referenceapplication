@@ -33,7 +33,11 @@ public class PatientDashboardPage extends AbstractBasePage {
     }
 
 	public boolean hasActiveVisit() {
-	    return findElement(STARTED_AT) != null;
+        try {
+            return findElement(STARTED_AT) != null;
+        } catch(Exception e) {
+            return false;
+        }
     }
 
 	public WebElement endVisitLink() {
