@@ -47,7 +47,7 @@ public class RegistrationPage extends AbstractBasePage {
 
 	static final By PATIENT_HEADER = By.className("patient-header");
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
-
+    static final By REVIEW = By.id("reviewSimilarPatientsButton");
 	public void enterPatient(TestPatient patient) {
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName("");  // no middle name
@@ -59,7 +59,9 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnContactInfo();
         enterPatientAddress(patient);
         clickOnPhoneNumber();
-        enterPhoneNumber(patient.phone);
+        if(patient.phone != null && !patient.phone.isEmpty()) {
+            enterPhoneNumber(patient.phone);
+        }
         clickOnConfirmSection();
     }
 
@@ -73,10 +75,18 @@ public class RegistrationPage extends AbstractBasePage {
 	public void enterPatientAddress(TestPatient patient) {
         setText(ADDRESS1, patient.address1);
         setText(ADDRESS2, patient.address2);
-        setText(CITY_VILLAGE, patient.city);
-        setText(STATE_PROVINCE, patient.state);
-        setText(COUNTRY, patient.country);
-        setText(POSTAL_CODE, patient.postalCode);
+        if(patient.city != null && !patient.city.isEmpty()) {
+            setText(CITY_VILLAGE, patient.city);
+        }
+        if(patient.state != null && !patient.state.isEmpty()) {
+            setText(STATE_PROVINCE, patient.state);
+        }
+        if(patient.country != null && !patient.country.isEmpty()) {
+            setText(COUNTRY, patient.country);
+        }
+        if(patient.postalCode != null && !patient.postalCode.isEmpty()) {
+            setText(POSTAL_CODE, patient.postalCode);
+        }
     }
 
     public void enterPatientBirthDate(TestPatient patient) {
@@ -129,6 +139,14 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(BIRTHDATE_LABEL);
         waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
+    public boolean clickOnReviewButton() {
+        try {
+            clickOn(REVIEW);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
+    }
 
 	public String getNameInConfirmationPage() {
         return getText(NAME_CONFIRM) ;
@@ -149,7 +167,7 @@ public class RegistrationPage extends AbstractBasePage {
     public String getPhoneInConfirmationPage() {
     	return getText(PHONE_CONFIRM) ;
     }
-    
+
 	@Override
     public String expectedUrlPath() {
 	    return URL_ROOT + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
@@ -160,4 +178,7 @@ public class RegistrationPage extends AbstractBasePage {
 		waitForElement(PATIENT_HEADER);
     }
 
+    public void waitForDeletePatient() {
+        waitForElementToBeHidden(PATIENT_HEADER);
+    }
 }
