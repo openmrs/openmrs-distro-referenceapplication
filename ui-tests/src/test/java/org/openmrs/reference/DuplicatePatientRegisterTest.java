@@ -45,6 +45,8 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     }
     @After
     public void tearDown() throws Exception {
+        registrationPage.exitReview();
+        headerPage.clickOnHomeIcon();
         if(registeredPatientId != null) {
             deletePatient(registeredPatientId);
         }
