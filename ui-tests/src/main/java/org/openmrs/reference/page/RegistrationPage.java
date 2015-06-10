@@ -48,6 +48,7 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By PATIENT_HEADER = By.className("patient-header");
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
+    static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
 	public void enterPatient(TestPatient patient) {
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName("");  // no middle name
@@ -180,5 +181,9 @@ public class RegistrationPage extends AbstractBasePage {
 
     public void waitForDeletePatient() {
         waitForElementToBeHidden(PATIENT_HEADER);
+    }
+
+    public void exitReview() {
+        clickOn(CANCEL);
     }
 }
