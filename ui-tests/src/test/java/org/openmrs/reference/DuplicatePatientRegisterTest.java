@@ -9,6 +9,8 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 
+import java.util.concurrent.TimeoutException;
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -43,14 +45,27 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         patient.address2 = "address";
         registrationPage.enterPatient(patient);
     }
+
+    private void waitForPatientDeletion(String id) throws Exception {
+        registrationPage.waitForDeletePatient();
+        Long startTime = System.currentTimeMillis();
+        while(!checkIfPatientExists(id)) {
+            Thread.sleep(200);
+            if(System.currentTimeMillis() - startTime > 30000) {
+                throw new TimeoutException("Patient not deleted in expected time");
+            }
+        }
+    }
+
     @After
     public void tearDown() throws Exception {
         registrationPage.exitReview();
         headerPage.clickOnHomeIcon();
-        if(registeredPatientId != null) {
+        if (registeredPatientId != null) {
             deletePatient(registeredPatientId);
         }
-        registrationPage.waitForDeletePatient();
+        waitForPatientDeletion(registeredPatientId);
+
         headerPage.logOut();
     }
 
