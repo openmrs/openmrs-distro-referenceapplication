@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
@@ -13,12 +14,14 @@ import org.openmrs.uitestframework.test.TestData.PatientInfo;
 public class VisitTest extends TestBase {
 
     private HomePage homePage;
+    private HeaderPage headerPage;
 	private PatientDashboardPage patientDashboardPage;
 	private PatientInfo patient;
 	
 	@Before
 	public void before() {
-		patient = createTestPatient();
+        headerPage = new HeaderPage(driver);
+        patient = createTestPatient();
         homePage = new HomePage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
     	assertPage(loginPage);
@@ -28,7 +31,9 @@ public class VisitTest extends TestBase {
 	
 	@After
     public void tearDown() throws Exception {
+        headerPage.clickOnHomeIcon();
 		deletePatient(patient);
+        headerPage.logOut();
     }
 
 	/**

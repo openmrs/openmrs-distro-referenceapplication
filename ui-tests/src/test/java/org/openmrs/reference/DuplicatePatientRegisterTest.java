@@ -1,6 +1,5 @@
 package org.openmrs.reference;
 
-import org.openmrs.reference.helper.TestPatient;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +7,7 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
+import org.openmrs.uitestframework.test.TestData.PatientInfo;
 import static org.openmrs.uitestframework.test.TestData.checkIfPatientExists;
 
 import java.util.concurrent.TimeoutException;
@@ -19,8 +19,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     private HeaderPage headerPage;
     private RegistrationPage registrationPage;
     private HomePage homePage;
-    private String registeredPatientId;
-    private TestPatient patient;
+    private PatientInfo patient;
 
     @Before
     public void setUp() {
@@ -28,14 +27,16 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
         headerPage.clickOnHomeIcon();
+        patient = createTestPatient();
+
         assertPage(loginPage);
         loginPage.loginAsAdmin();
         assertPage(homePage);
     }
 
     private void registerAPatient() {
+
         homePage.openRegisterAPatientApp();
-        patient = new TestPatient();
         patient.familyName = "Smith";
         patient.givenName = "Bob";
         patient.gender = "Male";
@@ -47,10 +48,10 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         registrationPage.enterPatient(patient);
     }
 
-    private void waitForPatientDeletion(String id) throws Exception {
+    private void waitForPatientDeletion(String uuid) throws Exception {
         registrationPage.waitForDeletePatient();
         Long startTime = System.currentTimeMillis();
-        while(!checkIfPatientExists(id)) {
+        while(checkIfPatientExists(uuid)) {
             Thread.sleep(200);
             if(System.currentTimeMillis() - startTime > 30000) {
                 throw new TimeoutException("Patient not deleted in expected time");
@@ -62,10 +63,8 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     public void tearDown() throws Exception {
         registrationPage.exitReview();
         headerPage.clickOnHomeIcon();
-        if (registeredPatientId != null) {
-            deletePatient(registeredPatientId);
-        }
-        waitForPatientDeletion(registeredPatientId);
+        deletePatient(patient);
+        waitForPatientDeletion(patient.uuid);
 
         headerPage.logOut();
     }
@@ -76,7 +75,6 @@ public class DuplicatePatientRegisterTest  extends TestBase {
 
         registerAPatient();
         registrationPage.confirmPatient();
-        registeredPatientId = patientIdFromUrl();
         headerPage.clickOnHomeIcon();
         assertPage(homePage);
         registerAPatient();
