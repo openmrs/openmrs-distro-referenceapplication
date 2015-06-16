@@ -47,7 +47,7 @@ public class LoginTest extends TestBase {
     	assertPage(homePage);
     	assertTrue(homePage.isActiveVisitsAppPresent());
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
-        assertThat(homePage.numberOfAppsPresent(), is(3));
+        assertThat(homePage.numberOfAppsPresent(), is(4));
     }
     
     @Test
