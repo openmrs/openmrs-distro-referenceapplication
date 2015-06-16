@@ -3,7 +3,6 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.CaptureVitalsPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -13,6 +12,12 @@ import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import org.openmrs.uitestframework.test.TestData.PatientInfo;
+import org.openqa.selenium.By;
+
+import java.util.concurrent.TimeoutException;
+
+import static org.openmrs.uitestframework.test.TestData.checkIfPatientExists;
 
 /**
  * Created by tomasz on 25.05.15.
@@ -25,9 +30,8 @@ public class CaptureVitalsTest  extends TestBase {
     private HomePage homePage;
     private CaptureVitalsPage captureVitalsPage;
     private PatientDashboardPage patientDashboardPage;
-    private String registeredPatientId;
     private PatientCaptureVitalsPage patientCaptureVitalsPage;
-    private TestPatient patient;
+    private PatientInfo patient;
     @Before
     public void setUp() {
         headerPage = new HeaderPage(driver);
@@ -48,48 +52,46 @@ public class CaptureVitalsTest  extends TestBase {
         assertPage(homePage);
         homePage.captureVitals();
         //assertPage(captureVitalsPage);
-        captureVitalsPage.search(registeredPatientId);
-
+        currentPage().gotoPage(patientCaptureVitalsPage.URL_PATH + "?patientId="+patient.uuid);
 
     }
 
     private void registerAPatient() {
         homePage.openRegisterAPatientApp();
         //assertPage(registrationPage);
-        patient = new TestPatient();
-        patient.familyName = "Smith";
-        patient.givenName = "Bob";
-        patient.gender = "Male";
-        patient.birthYear = "1990";
-        patient.birthMonth = "January";
-        patient.birthDay = "1";
-        patient.address1 = "Ouagadougou";
-        patient.address2 = "Burkina Faso";
-        patient.city = "Ouagadougou";
-        patient.country = "Burkina Faso";
-        patient.postalCode = "90-911";
-        patient.state = "Unknown";
-        patient.phone = "888587794";
+        patient = createTestPatient();
+//        patient.familyName = "Smith";
+//        patient.givenName = "Bob";
+//        patient.gender = "Male";
+//        patient.birthYear = "1990";
+//        patient.birthMonth = "January";
+//        patient.birthDay = "1";
+//        patient.address1 = "Ouagadougou";
+//        patient.address2 = "Burkina Faso";
+//        patient.city = "Ouagadougou";
+//        patient.country = "Burkina Faso";
+//        patient.postalCode = "90-911";
+//        patient.state = "Unknown";
+//        patient.phone = "888587794";
         //assertPage(registrationPage);
-        registrationPage.enterPatient(patient);
-        registrationPage.confirmPatient();
-        registeredPatientId = patientIdFromUrl();
+//        registrationPage.enterPatient(patient);
+//        registrationPage.confirmPatient();
+        currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
     }
     @After
     public void tearDown() throws Exception {
-        if(registeredPatientId != null) {
-            deletePatient(registeredPatientId);
-        }
-        Thread.sleep(5000);	// a bit of a hack, wait for "created patient" popup to disappear
+        headerPage.clickOnHomeIcon();
+        deletePatient(patient);
+        waitForPatientDeletion(patient.uuid);
+
         headerPage.logOut();
     }
 
     @Test
     public void captureVital() {
         patientCaptureVitalsPage.checkIfRightPatient();
-        assertPage(patientCaptureVitalsPage);
         patientCaptureVitalsPage.setHeightField("0");
-        assertTrue(driver.getPageSource().contains("Minimum:10"));
+        assertTrue(driver.findElement(By.id("w9")).getText().contains("Minimum:10"));
         patientCaptureVitalsPage.setHeightField("400");
         assertTrue(driver.getPageSource().contains("Maximum:272"));
         patientCaptureVitalsPage.setHeightField("185");
@@ -131,58 +133,16 @@ public class CaptureVitalsTest  extends TestBase {
         assertTrue(driver.getPageSource().contains("Confirm submission?"));
     }
 
-    /*@Test
-    public void captureNoNumberVital() {
-        patientCaptureVitalsPage.checkIfRightPatient();
-        patientCaptureVitalsPage.setHeightField("abc");
-        patientCaptureVitalsPage.setWeightField("abc");
-        patientCaptureVitalsPage.setTemperatureField("abc");
-        patientCaptureVitalsPage.setPulseField("abc");
-        patientCaptureVitalsPage.setRespiratoryField("abc");
-        patientCaptureVitalsPage.setBloodPressureFields("abc", "abc");
-        patientCaptureVitalsPage.setBloodOxygenSaturationField("abc");
-        patientCaptureVitalsPage.confirm();
-        assertFalse(driver.getPageSource().contains("Confirm submission?"));
-        assertTrue(driver.getPageSource().contains("Must be a number"));
+    private void waitForPatientDeletion(String uuid) throws Exception {
+        registrationPage.waitForDeletePatient();
+        Long startTime = System.currentTimeMillis();
+        while(checkIfPatientExists(uuid)) {
+            Thread.sleep(200);
+            if(System.currentTimeMillis() - startTime > 30000) {
+                throw new TimeoutException("Patient not deleted in expected time");
+            }
+        }
     }
 
-    @Test
-    public void captureNoNumberVital() {
-        patientCaptureVitalsPage.checkIfRightPatient();
-        patientCaptureVitalsPage.setHeightField("185");
-        patientCaptureVitalsPage.setWeightField("-1");
-        assertFalse(driver.getPageSource().contains("Confirm submission?"));
-        assertTrue(driver.getPageSource().contains("Must be a number"));
-    }
 
-    @Test
-    public void capture0HeightVital() {
-        patientCaptureVitalsPage.checkIfRightPatient();
-        patientCaptureVitalsPage.setHeightField("0");
-        assertFalse(driver.getPageSource().contains("Confirm submission?"));
-        assertTrue(driver.getPageSource().contains("Minimum:10"));
-    }
-
-    @Test
-    public void capture400HeightVital() {
-        patientCaptureVitalsPage.checkIfRightPatient();
-        patientCaptureVitalsPage.setHeightField("400");
-        assertFalse(driver.getPageSource().contains("Confirm submission?"));
-        assertTrue(driver.getPageSource().contains("Maximum:272"));
-    }
-
-    @Test
-    public void captureOverMaxRepositoryVital() {
-        patientCaptureVitalsPage.checkIfRightPatient();
-        patientCaptureVitalsPage.setHeightField("185");
-        patientCaptureVitalsPage.setWeightField("78");
-        patientCaptureVitalsPage.setTemperatureField("36.6");
-        patientCaptureVitalsPage.setPulseField("120");
-        patientCaptureVitalsPage.setRespiratoryField("999999999");
-        patientCaptureVitalsPage.setBloodPressureFields("120", "70");
-        patientCaptureVitalsPage.setBloodOxygenSaturationField("50");
-        patientCaptureVitalsPage.confirm();
-        assertFalse(driver.getPageSource().contains("Confirm submission?"));
-
-    }*/
 }

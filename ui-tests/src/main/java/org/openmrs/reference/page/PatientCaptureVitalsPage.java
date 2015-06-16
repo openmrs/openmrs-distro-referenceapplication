@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class PatientCaptureVitalsPage extends AbstractBasePage {
 
+    public static final String URL_PATH = "/coreapps/vitals/patient.page";
     private static final By HEIGHT_FIELD = By.id("height");
     private static final By WEIGHT_FIELD = By.id("weight");
     private static final By TEMPERATURE_FIELD = By.id("temperature");
@@ -29,7 +30,7 @@ public class PatientCaptureVitalsPage extends AbstractBasePage {
 
     @Override
     public String expectedUrlPath() {
-        return URL_ROOT + "htmlformentryui/htmlform/enterHtmlFormWithSimpleUi.page?patientId=631&visitId=598&definitionUiResource=referenceapplication%3Ahtmlforms%2Fvitals.xml&returnUrl=%2Fopenmrs%2Fcoreapps%2Ffindpatient%2FfindPatient.page%3Fapp%3Dreferenceapplication.vitals&breadcrumbOverride=[{\"label\"%3A\"Capture Vitals\"%2C\"link\"%3A\"%2Fopenmrs%2Fcoreapps%2Ffindpatient%2FfindPatient.page%3Fapp%3Dreferenceapplication.vitals\"}%2C{\"label\"%3A\"Smith%2C Bob\"%2C\"link\"%3A\"%2Fopenmrs%2Fcoreapps%2Fvitals%2Fpatient.page%3FpatientId%3Dcee4c4ec-678d-4871-a3a6-fa5f18e7a6c9%26\"}]&";
+        return URL_ROOT + URL_PATH;
     }
 
     public void setHeightField(String value) {

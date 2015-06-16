@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
  */
 public class CaptureVitalsPage extends AbstractBasePage {
 
-    private static final By PATIENT_SEARCH_FORM = By.id("patient-search-form");
-    private static final By FIRST_FOUND_PATIENT = By.className("odd");
+    private static final By PATIENT_SEARCH = By.id("patient-search");
+    private static final By FIRST_FOUND_PATIENT = By.cssSelector("i.icon-vitals");
     public CaptureVitalsPage(WebDriver driver) {
         super(driver);
     }
@@ -21,16 +21,14 @@ public class CaptureVitalsPage extends AbstractBasePage {
         return URL_ROOT + "/coreapps/findpatient/findPatient.page?app=referenceapplication.vitals";
     }
 
-    public void search(String text) {
-        WebElement searchField = findElement(PATIENT_SEARCH_FORM);
-        try {
-            searchField.sendKeys(text);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        clickOn(FIRST_FOUND_PATIENT);
-    }
-
+//    public void search(String text) {
+//        WebElement searchField = findElement(PATIENT_SEARCH);
+//        try {
+//            searchField.sendKeys(text);
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//        clickOn(FIRST_FOUND_PATIENT);
+//    }
 
 }
