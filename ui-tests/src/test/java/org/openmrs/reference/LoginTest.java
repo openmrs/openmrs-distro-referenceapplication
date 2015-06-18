@@ -37,7 +37,7 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isCaptureVitalsAppPresent());
         assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
-        assertThat(homePage.numberOfAppsPresent(), is(8));
+        assertThat(homePage.numberOfAppsPresent(), is(9));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class LoginTest extends TestBase {
     	assertPage(homePage);
     	assertTrue(homePage.isActiveVisitsAppPresent());
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
-        assertThat(homePage.numberOfAppsPresent(), is(3));
+        assertThat(homePage.numberOfAppsPresent(), is(4));
     }
     
     @Test

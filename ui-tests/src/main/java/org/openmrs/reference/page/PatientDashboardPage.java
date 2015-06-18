@@ -16,8 +16,10 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
 	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
 	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
+    private static final By VISIT_LINK = By.className("visit-link");
 
-	public PatientDashboardPage(WebDriver driver) {
+
+    public PatientDashboardPage(WebDriver driver) {
 	    super(driver);
     }
 
@@ -25,7 +27,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 		clickOn(START_VISIT);
 		waitForElement(CONFIRM);
 		clickOn(CONFIRM);
-	}
+    }
 	
 	@Override
     public String expectedUrlPath() {
@@ -33,7 +35,11 @@ public class PatientDashboardPage extends AbstractBasePage {
     }
 
 	public boolean hasActiveVisit() {
-	    return findElement(STARTED_AT) != null;
+        try {
+            return findElement(STARTED_AT) != null;
+        } catch(Exception e) {
+            return false;
+        }
     }
 
 	public WebElement endVisitLink() {
@@ -63,7 +69,9 @@ public class PatientDashboardPage extends AbstractBasePage {
     }
 
 	public WebElement visitLink() {
-	    return findElement(By.className("visit-link"));
+	    return findElement(VISIT_LINK);
     }
-
+    public void waitForVisitLink() {
+        waitForElement(VISIT_LINK);
+    }
 }

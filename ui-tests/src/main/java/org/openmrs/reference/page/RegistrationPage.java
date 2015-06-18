@@ -1,7 +1,7 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.test.TestData.PatientInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -47,8 +47,9 @@ public class RegistrationPage extends AbstractBasePage {
 
 	static final By PATIENT_HEADER = By.className("patient-header");
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
-
-	public void enterPatient(TestPatient patient) {
+    static final By REVIEW = By.id("reviewSimilarPatientsButton");
+    static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
+	public void enterPatient(PatientInfo patient) {
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName("");  // no middle name
         enterPatientFamilyName(patient.familyName);
@@ -59,27 +60,37 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnContactInfo();
         enterPatientAddress(patient);
         clickOnPhoneNumber();
-        enterPhoneNumber(patient.phone);
+        if(patient.phone != null && !patient.phone.isEmpty()) {
+            enterPhoneNumber(patient.phone);
+        }
         clickOnConfirmSection();
     }
 
-    public void enterUnidentifiedPatient(TestPatient patient) {
+    public void enterUnidentifiedPatient(PatientInfo patient) {
         selectUnidentifiedPatient();
         clickOnGenderLink();
         selectPatientGender(patient.gender);
         clickOnConfirmSection();
     }
 
-	public void enterPatientAddress(TestPatient patient) {
+	public void enterPatientAddress(PatientInfo patient) {
         setText(ADDRESS1, patient.address1);
         setText(ADDRESS2, patient.address2);
-        setText(CITY_VILLAGE, patient.city);
-        setText(STATE_PROVINCE, patient.state);
-        setText(COUNTRY, patient.country);
-        setText(POSTAL_CODE, patient.postalCode);
+        if(patient.city != null && !patient.city.isEmpty()) {
+            setText(CITY_VILLAGE, patient.city);
+        }
+        if(patient.state != null && !patient.state.isEmpty()) {
+            setText(STATE_PROVINCE, patient.state);
+        }
+        if(patient.country != null && !patient.country.isEmpty()) {
+            setText(COUNTRY, patient.country);
+        }
+        if(patient.postalCode != null && !patient.postalCode.isEmpty()) {
+            setText(POSTAL_CODE, patient.postalCode);
+        }
     }
 
-    public void enterPatientBirthDate(TestPatient patient) {
+    public void enterPatientBirthDate(PatientInfo patient) {
         setText(BIRTHDAY_DAY, patient.birthDay);
         selectFrom(BIRTHDAY_MONTH, patient.birthMonth);
         setText(BIRTHDAY_YEAR, patient.birthYear);
@@ -129,6 +140,14 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(BIRTHDATE_LABEL);
         waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
+    public boolean clickOnReviewButton() {
+        try {
+            clickOn(REVIEW);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
+    }
 
 	public String getNameInConfirmationPage() {
         return getText(NAME_CONFIRM) ;
@@ -149,7 +168,7 @@ public class RegistrationPage extends AbstractBasePage {
     public String getPhoneInConfirmationPage() {
     	return getText(PHONE_CONFIRM) ;
     }
-    
+
 	@Override
     public String expectedUrlPath() {
 	    return URL_ROOT + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
@@ -160,4 +179,15 @@ public class RegistrationPage extends AbstractBasePage {
 		waitForElement(PATIENT_HEADER);
     }
 
+    public void waitForDeletePatient() {
+        waitForElementToBeHidden(PATIENT_HEADER);
+    }
+
+    public void exitReview() {
+        try {
+            clickOn(CANCEL);
+        } catch(Exception e) {
+
+        }
+    }
 }
