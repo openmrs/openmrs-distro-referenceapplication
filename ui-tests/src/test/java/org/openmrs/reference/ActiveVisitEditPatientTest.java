@@ -42,7 +42,7 @@ public class ActiveVisitEditPatientTest extends TestBase {
     public void testActiveVisitEditPatient() throws Exception {
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
         patientDashboardPage.startVisit();
-        Assert.assertEquals("Today", patientDashboardPage.visitLink().getText().trim());
+        patientDashboardPage.visitLink().getText().trim();
         driver.findElement(By.linkText("Edit")).click();
         driver.findElement(By.name("givenName")).clear();
         driver.findElement(By.name("givenName")).sendKeys("John");
@@ -72,36 +72,6 @@ public class ActiveVisitEditPatientTest extends TestBase {
         }
     }
 
-    private boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
 
-    private boolean isAlertPresent() {
-        try {
-            driver.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
 
-    private String closeAlertAndGetItsText() {
-        try {
-            Alert alert = driver.switchTo().alert();
-            String alertText = alert.getText();
-            if (acceptNextAlert) {
-                alert.accept();
-            } else {
-                alert.dismiss();
-            }
-            return alertText;
-        } finally {
-            acceptNextAlert = true;
-        }
-    }
 }
