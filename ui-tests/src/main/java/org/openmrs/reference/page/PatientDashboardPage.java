@@ -17,6 +17,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
 	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
     private static final By VISIT_LINK = By.className("visit-link");
+	private static final By YES = By.cssSelector("button.confirm.right");
 
 
     public PatientDashboardPage(WebDriver driver) {
@@ -74,4 +75,11 @@ public class PatientDashboardPage extends AbstractBasePage {
     public void waitForVisitLink() {
         waitForElement(VISIT_LINK);
     }
+	public void endVisit(){
+		clickOn(END_VISIT);
+		waitForElement(YES);
+		clickOn(YES);
+	}
+
+
 }
