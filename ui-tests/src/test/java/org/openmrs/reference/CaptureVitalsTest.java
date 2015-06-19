@@ -27,33 +27,21 @@ public class CaptureVitalsTest  extends TestBase {
 
 
     private HeaderPage headerPage;
-    private RegistrationPage registrationPage;
     private HomePage homePage;
-    private CaptureVitalsPage captureVitalsPage;
     private PatientDashboardPage patientDashboardPage;
     private PatientCaptureVitalsPage patientCaptureVitalsPage;
     private PatientInfo patient;
+
     @Before
     public void setUp() {
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
-        registrationPage = new RegistrationPage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
-        captureVitalsPage = new CaptureVitalsPage(driver);
         patientCaptureVitalsPage = new PatientCaptureVitalsPage(driver);
         headerPage.clickOnHomeIcon();
         assertPage(loginPage);
         loginPage.loginAsAdmin();
         assertPage(homePage);
-        registerAPatient();
-        if(!patientDashboardPage.hasActiveVisit()) {
-            patientDashboardPage.startVisit();
-            assertNotNull(patientDashboardPage.visitLink());
-        }
-        headerPage.clickOnHomeIcon();
-        assertPage(homePage);
-        homePage.captureVitals();
-        currentPage().gotoPage(patientCaptureVitalsPage.URL_PATH + "?patientId="+patient.uuid);
 
     }
 
@@ -62,6 +50,7 @@ public class CaptureVitalsTest  extends TestBase {
         patient = createTestPatient();
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
     }
+
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
@@ -73,6 +62,15 @@ public class CaptureVitalsTest  extends TestBase {
 
     @Test
     public void captureVital() {
+        registerAPatient();
+        if(!patientDashboardPage.hasActiveVisit()) {
+            patientDashboardPage.startVisit();
+            assertNotNull(patientDashboardPage.visitLink());
+        }
+        headerPage.clickOnHomeIcon();
+        assertPage(homePage);
+        homePage.captureVitals();
+        currentPage().gotoPage(patientCaptureVitalsPage.URL_PATH + "?patientId="+patient.uuid);
         patientCaptureVitalsPage.checkIfRightPatient();
 //        patientCaptureVitalsPage.setHeightField("0");
 //        assertTrue(driver.findElement(By.id("w7")).getText().contains("Minimum: 10"));
@@ -116,17 +114,6 @@ public class CaptureVitalsTest  extends TestBase {
         patientCaptureVitalsPage.confirm();
         assertTrue(driver.getPageSource().contains("Confirm submission?"));
         assertTrue(patientCaptureVitalsPage.save());
-    }
-
-    private void waitForPatientDeletion(String uuid) throws Exception {
-        registrationPage.waitForDeletePatient();
-        Long startTime = System.currentTimeMillis();
-        while(checkIfPatientExists(uuid)) {
-            Thread.sleep(200);
-            if(System.currentTimeMillis() - startTime > 30000) {
-                throw new TimeoutException("Patient not deleted in expected time");
-            }
-        }
     }
 
 

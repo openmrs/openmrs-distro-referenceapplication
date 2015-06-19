@@ -3,6 +3,7 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
@@ -19,7 +20,8 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     private HeaderPage headerPage;
     private RegistrationPage registrationPage;
     private HomePage homePage;
-    private PatientInfo patient;
+    private TestPatient patient1;
+    private TestPatient patient2;
 
     @Before
     public void setUp() {
@@ -27,14 +29,15 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
         headerPage.clickOnHomeIcon();
-        patient = createTestPatient();
+        patient1 = new TestPatient();
+        patient2 = new TestPatient();
 
         assertPage(loginPage);
         loginPage.loginAsAdmin();
         assertPage(homePage);
     }
 
-    private void registerAPatient() {
+    private void registerAPatient(TestPatient patient) {
 
         homePage.openRegisterAPatientApp();
         patient.familyName = "Smith";
@@ -48,24 +51,13 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         registrationPage.enterPatient(patient);
     }
 
-    private void waitForPatientDeletion(String uuid) throws Exception {
-        registrationPage.waitForDeletePatient();
-        Long startTime = System.currentTimeMillis();
-        while(checkIfPatientExists(uuid)) {
-            Thread.sleep(200);
-            if(System.currentTimeMillis() - startTime > 30000) {
-                throw new TimeoutException("Patient not deleted in expected time");
-            }
-        }
-    }
 
     @After
     public void tearDown() throws Exception {
         registrationPage.exitReview();
         headerPage.clickOnHomeIcon();
-        deletePatient(patient);
-        waitForPatientDeletion(patient.uuid);
-
+        deletePatientUuid(patient1.Uuid);
+        waitForPatientDeletion(patient1.Uuid);
         headerPage.logOut();
     }
 
@@ -73,11 +65,12 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     @Test
     public void DuplicateRegisterTest() {
 
-        registerAPatient();
+        registerAPatient(patient1);
         registrationPage.confirmPatient();
+        patient1.Uuid = patientIdFromUrl();
         headerPage.clickOnHomeIcon();
         assertPage(homePage);
-        registerAPatient();
+        registerAPatient(patient2);
         assertTrue(driver.getPageSource().contains("There seems to be a patient in the database that exactly matches this one. Please review before confirming:"));
         assertTrue(registrationPage.clickOnReviewButton());
     }

@@ -17,6 +17,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
 	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
     private static final By VISIT_LINK = By.className("toast-item-wrapper");
+    private static final By VISIT_LINK_2 = By.className("visit-link");
 	private static final By YES = By.cssSelector("#end-visit-dialog .confirm");
 
 
@@ -79,6 +80,11 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public WebElement visitLink() {
 	    return findElement(VISIT_LINK);
     }
+
+    public WebElement findLinkToVisit() {
+        return findElement(VISIT_LINK_2);
+    }
+
     public void waitForVisitLink() {
         waitForElement(VISIT_LINK);
     }

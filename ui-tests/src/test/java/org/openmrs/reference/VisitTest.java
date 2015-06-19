@@ -57,6 +57,6 @@ public class VisitTest extends TestBase {
 		Assert.assertEquals("Pneumonia", patientDashboardPage.primaryDiagnosis());
 		patientDashboardPage.enterNote("this is a note");
 		patientDashboardPage.save();
-		Assert.assertEquals("Today", patientDashboardPage.visitLink().getText().trim());
+		Assert.assertEquals("Today", patientDashboardPage.findLinkToVisit().getText().trim());
 	}
 }

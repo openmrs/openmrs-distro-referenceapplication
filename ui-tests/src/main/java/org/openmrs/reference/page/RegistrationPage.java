@@ -1,5 +1,6 @@
 package org.openmrs.reference.page;
 
+import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
 import org.openqa.selenium.By;
@@ -49,7 +50,7 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
-	public void enterPatient(PatientInfo patient) {
+	public void enterPatient(TestPatient patient) {
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName("");  // no middle name
         enterPatientFamilyName(patient.familyName);
@@ -66,14 +67,14 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnConfirmSection();
     }
 
-    public void enterUnidentifiedPatient(PatientInfo patient) {
+    public void enterUnidentifiedPatient(TestPatient patient) {
         selectUnidentifiedPatient();
         clickOnGenderLink();
         selectPatientGender(patient.gender);
         clickOnConfirmSection();
     }
 
-	public void enterPatientAddress(PatientInfo patient) {
+	public void enterPatientAddress(TestPatient patient) {
         setText(ADDRESS1, patient.address1);
         setText(ADDRESS2, patient.address2);
         if(patient.city != null && !patient.city.isEmpty()) {
@@ -90,7 +91,7 @@ public class RegistrationPage extends AbstractBasePage {
         }
     }
 
-    public void enterPatientBirthDate(PatientInfo patient) {
+    public void enterPatientBirthDate(TestPatient patient) {
         setText(BIRTHDAY_DAY, patient.birthDay);
         selectFrom(BIRTHDAY_MONTH, patient.birthMonth);
         setText(BIRTHDAY_YEAR, patient.birthYear);

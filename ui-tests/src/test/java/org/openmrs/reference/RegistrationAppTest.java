@@ -4,6 +4,8 @@ import org.dbunit.dataset.DataSetException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openmrs.reference.helper.PatientGenerator;
+import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
@@ -21,7 +23,7 @@ public class RegistrationAppTest extends TestBase {
     private RegistrationPage registrationPage;
     private HomePage homePage;
 	private PatientDashboardPage patientDashboardPage;
-	private PatientInfo patient;
+	private TestPatient patient;
 
     @Before
     public void setUp() throws DataSetException, SQLException, Exception {
@@ -29,7 +31,6 @@ public class RegistrationAppTest extends TestBase {
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
-        headerPage.clickOnHomeIcon();
     	assertPage(loginPage);
         loginPage.loginAsClerk();
         assertPage(homePage);
@@ -39,12 +40,7 @@ public class RegistrationAppTest extends TestBase {
     @Test
     public void registerAPatient() {
         homePage.openRegisterAPatientApp();
-        patient = createTestPatient();
-        if(patient.gender == "M") {
-            patient.gender = "Male";
-        } else {
-            patient.gender = "Female";
-        }
+        patient = PatientGenerator.generateTestPatient();
         registrationPage.enterPatient(patient);
 
         String address = patient.address1 + " " + 
@@ -68,7 +64,7 @@ public class RegistrationAppTest extends TestBase {
 	@After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-        deletePatient(patient);
+        deletePatientUuid(patient.Uuid);
         registrationPage.waitForDeletePatient();
         headerPage.logOut();
     }
@@ -77,12 +73,7 @@ public class RegistrationAppTest extends TestBase {
     @Test
     public void registerUnidentifiedPatient() {
         homePage.openRegisterAPatientApp();
-        patient = createTestPatient();
-        if(patient.gender == "M") {
-            patient.gender = "Male";
-        } else {
-            patient.gender = "Female";
-        }
+        patient = PatientGenerator.generateTestPatient();
         registrationPage.enterUnidentifiedPatient(patient);
 
         assertEquals("--", registrationPage.getNameInConfirmationPage());
