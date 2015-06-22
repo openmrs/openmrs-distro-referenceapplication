@@ -16,8 +16,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
 	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
 	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
-    private static final By VISIT_LINK = By.className("visit-link");
-	private static final By YES = By.cssSelector("button.confirm.right");
+    private static final By VISIT_LINK = By.className("toast-item-wrapper");
+	private static final By YES = By.cssSelector("#end-visit-dialog .confirm");
 
 
     public PatientDashboardPage(WebDriver driver) {
@@ -29,7 +29,14 @@ public class PatientDashboardPage extends AbstractBasePage {
 		waitForElement(CONFIRM);
 		clickOn(CONFIRM);
     }
-	
+
+	public void endVisit(){
+		clickOn(END_VISIT);
+		waitForElement(YES);
+		clickOn(YES);
+	}
+
+
 	@Override
     public String expectedUrlPath() {
 	    return URL_ROOT + URL_PATH;
@@ -75,11 +82,8 @@ public class PatientDashboardPage extends AbstractBasePage {
     public void waitForVisitLink() {
         waitForElement(VISIT_LINK);
     }
-	public void endVisit(){
-		clickOn(END_VISIT);
-		waitForElement(YES);
-		clickOn(YES);
+
+	public void waitForVisitLinkHidden() {
+		waitForElementToBeHidden(VISIT_LINK);
 	}
-
-
 }
