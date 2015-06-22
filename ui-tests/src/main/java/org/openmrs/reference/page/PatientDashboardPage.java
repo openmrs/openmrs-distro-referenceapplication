@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
+
 public class PatientDashboardPage extends AbstractBasePage {
 
 	public static final String URL_PATH = "/coreapps/clinicianfacing/patient.page";
@@ -70,7 +71,6 @@ public class PatientDashboardPage extends AbstractBasePage {
 		waitForElement(By.id("ui-id-1"));
 		clickOn(By.className("ui-menu-item"));
 	}
-
 
 	public String primaryDiagnosis() {
 	    return findElement(By.cssSelector(".diagnosis.primary .matched-name")).getText().trim();
