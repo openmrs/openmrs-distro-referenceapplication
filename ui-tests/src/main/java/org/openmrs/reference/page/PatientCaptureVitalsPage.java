@@ -21,8 +21,9 @@ public class PatientCaptureVitalsPage extends AbstractBasePage {
     private static final By BLOOD_PRESSURE_FIELD_1 = By.id("w18");
     private static final By BLOOD_PRESSURE_FIELD_2 = By.id("w20");
     private static final By BLOOD_OXYGEN_SATURATION_FIELD = By.id("w22");
-    private static final By CONFIRM_BUTTON = By.className("submitButton");
+    private static final By CONFIRM_BUTTON = By.xpath("//ul[@id='formBreadcrumb']/li[2]/span");
     private static final By CONFIRM_BUTTON_2 = By.id("coreapps-vitals-confirm");
+    private static final By SAVE_BUTTON = By.xpath("//button[@type='submit']");
 
     public PatientCaptureVitalsPage(WebDriver driver) {
         super(driver);
@@ -123,6 +124,16 @@ public class PatientCaptureVitalsPage extends AbstractBasePage {
             confirmButton.click();
         } catch(Exception e) {
 
+        }
+    }
+
+    public boolean save() {
+        try {
+            WebElement saveButton = findElement(SAVE_BUTTON);
+            saveButton.click();
+            return true;
+        } catch(Exception e) {
+            return false;
         }
     }
 
