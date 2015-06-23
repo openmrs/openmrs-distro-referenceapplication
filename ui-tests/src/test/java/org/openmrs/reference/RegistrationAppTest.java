@@ -57,6 +57,7 @@ public class RegistrationAppTest extends TestBase {
         assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
         
         registrationPage.confirmPatient();
+        patient.Uuid = patientIdFromUrl();
         assertPage(patientDashboardPage);
 		assertTrue(driver.getPageSource().contains(patient.givenName + " " + patient.familyName));
     }
