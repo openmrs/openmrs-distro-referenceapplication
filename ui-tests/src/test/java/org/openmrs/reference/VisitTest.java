@@ -33,6 +33,7 @@ public class VisitTest extends TestBase {
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
 		deletePatient(patient);
+        waitForPatientDeletion(patient.uuid);
         headerPage.logOut();
     }
 

@@ -56,7 +56,6 @@ public class CaptureVitalsTest  extends TestBase {
         headerPage.clickOnHomeIcon();
         deletePatient(patient);
         waitForPatientDeletion(patient.uuid);
-
         headerPage.logOut();
     }
 

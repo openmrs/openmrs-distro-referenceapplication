@@ -66,7 +66,7 @@ public class RegistrationAppTest extends TestBase {
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
         deletePatientUuid(patient.Uuid);
-        registrationPage.waitForDeletePatient();
+        waitForPatientDeletion(patient.Uuid);
         headerPage.logOut();
     }
 
