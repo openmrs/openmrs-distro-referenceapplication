@@ -81,6 +81,7 @@ public class RegistrationAppTest extends TestBase {
         assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
 
         registrationPage.confirmPatient();
+        patient.Uuid = patientIdFromUrl();
         assertPage(patientDashboardPage);	// remember just-registered patient id, so it can be removed.
         assertTrue(driver.getPageSource().contains("UNKNOWN UNKNOWN"));
     }
