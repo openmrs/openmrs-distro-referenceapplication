@@ -39,7 +39,7 @@ public class EndVisitTest extends TestBase {
     @Test
     public void EndVisitTest() throws Exception {
 
-        homePage.GoToActiveVisitPatient();
+        homePage.goToActiveVisitPatient();
         patientDashboardPage.endVisit();
         assertNotNull(By.id("referenceapplication.realTime.endVisit"));
         patientDashboardPage.waitForVisitLinkHidden();
