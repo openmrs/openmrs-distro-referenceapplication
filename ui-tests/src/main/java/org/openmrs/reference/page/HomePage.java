@@ -85,7 +85,7 @@ public class HomePage extends AbstractBasePage {
         return isAppButtonPresent(CAPTURE_VITALS_APP_ID);
     }
 
-    public void activeVisitPatient(){
+    public void GoToActiveVisitPatient(){
         clickOn(By.id(ACTIVE_VISITS_APP_ID));
         clickOn(ACTIVE_PATIENT);
 
