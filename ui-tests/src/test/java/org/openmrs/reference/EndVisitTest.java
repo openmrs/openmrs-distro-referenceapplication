@@ -6,6 +6,7 @@ package org.openmrs.reference;
 import org.junit.*;
 import static org.junit.Assert.*;
 
+import org.omg.PortableInterceptor.ACTIVE;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
@@ -29,7 +30,6 @@ public class EndVisitTest extends TestBase {
         homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
         assertPage(homePage);
-        patient = createTestPatient();
         patientDashboardPage = new PatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
 
@@ -38,9 +38,8 @@ public class EndVisitTest extends TestBase {
 
     @Test
     public void EndVisitTest() throws Exception {
-        currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
-        patientDashboardPage.startVisit();
-        patientDashboardPage.visitLink().getText().trim();
+
+        homePage.activeVisitPatient();
         patientDashboardPage.endVisit();
         assertNotNull(By.id("referenceapplication.realTime.endVisit"));
         patientDashboardPage.waitForVisitLinkHidden();

@@ -14,6 +14,9 @@ public class HomePage extends AbstractBasePage {
     static final String CONFIGURE_METADATA_APP_ID = "coreapps-configuremetadata-homepageLink-coreapps-configuremetadata-homepageLink-extension";
     static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
     static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
+    static final By ACTIVE_PATIENT = By.xpath("//td[2]/a");
+
+
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -80,6 +83,12 @@ public class HomePage extends AbstractBasePage {
 
     public boolean isCaptureVitalsAppPresent() {
         return isAppButtonPresent(CAPTURE_VITALS_APP_ID);
+    }
+
+    public void activeVisitPatient(){
+        clickOn(By.id(ACTIVE_VISITS_APP_ID));
+        clickOn(ACTIVE_PATIENT);
+
     }
 
     @Override
