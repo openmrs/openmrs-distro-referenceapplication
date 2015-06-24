@@ -6,20 +6,14 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
+import org.junit.*;
+import java.util.NoSuchElementException;
+import static org.junit.Assert.*;
 
 
 /**
  * Created by nata on 16.06.15.
  */
-
-
-        import org.junit.*;
-
-import java.util.NoSuchElementException;
-
-import static org.junit.Assert.*;
-
-
 
     public class RecentlyPatientTest extends TestBase {
     private HomePage homePage;
