@@ -14,9 +14,10 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
 	private static final By STARTED_AT = By.className("active-visit-started-at-message");
 	private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
-	public static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
-	public static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
-    public static final By VISIT_LINK = By.className("toast-item-wrapper");
+	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
+	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
+    private static final By VISIT_LINK = By.className("toast-item-wrapper");
+    private static final By VISIT_LINK_2 = By.className("visit-link");
 	private static final By YES = By.cssSelector("#end-visit-dialog .confirm");
 
 
@@ -62,7 +63,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public void enterDiagnosis(String diag) {
 		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
 		clickOn(By.className("code"));
-	}
+    }
 
 	public void enterSecondaryDiagnosis(String diag) {
 		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
@@ -90,6 +91,11 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public WebElement visitLink() {
 	    return findElement(VISIT_LINK);
     }
+
+    public WebElement findLinkToVisit() {
+        return findElement(VISIT_LINK_2);
+    }
+
     public void waitForVisitLink() {
         waitForElement(VISIT_LINK);
     }
