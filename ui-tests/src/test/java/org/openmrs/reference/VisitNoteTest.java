@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -58,7 +58,7 @@ public class VisitNoteTest extends TestBase {
         new Select(driver.findElement(By.id("w1"))).selectByVisibleText("Super User");
         new Select(driver.findElement(By.id("w3"))).selectByVisibleText("Isolation Ward");
         driver.findElement(By.id("w5-display")).click();
-        driver.findElement(By.linkText("" +LocalDate.now().getDayOfMonth())).click();
+        driver.findElement(By.linkText("" +Calendar.getInstance().get(Calendar.DAY_OF_MONTH))).click();
         WebElement diagnosisElement = driver.findElement(By.id("diagnosis-search"));
         diagnosisElement.click();
         patientDashboardPage.enterDiagnosis("MALARIA");

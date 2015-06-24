@@ -11,7 +11,6 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
-import org.openmrs.uitestframework.test.TestData.PatientInfo;
 
 import java.sql.SQLException;
 

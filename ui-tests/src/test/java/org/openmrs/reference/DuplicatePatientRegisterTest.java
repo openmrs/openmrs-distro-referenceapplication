@@ -8,8 +8,6 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
-import org.openmrs.uitestframework.test.TestData.PatientInfo;
-import static org.openmrs.uitestframework.test.TestData.checkIfPatientExists;
 
 import java.util.concurrent.TimeoutException;
 

@@ -6,7 +6,6 @@ package org.openmrs.reference;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import org.omg.PortableInterceptor.ACTIVE;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
@@ -19,7 +18,6 @@ import org.openqa.selenium.*;
 public class EndVisitTest extends TestBase {
     private HomePage homePage;
     private PatientDashboardPage patientDashboardPage;
-    private TestData.PatientInfo patient;
     private HeaderPage headerPage;
 
 

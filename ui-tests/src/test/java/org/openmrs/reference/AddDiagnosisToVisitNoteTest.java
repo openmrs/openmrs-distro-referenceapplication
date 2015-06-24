@@ -9,8 +9,6 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
-import org.openmrs.uitestframework.test.TestData;
-import org.openqa.selenium.*;
 
 
 public class AddDiagnosisToVisitNoteTest extends TestBase {

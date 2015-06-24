@@ -3,22 +3,16 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openmrs.reference.page.CaptureVitalsPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientCaptureVitalsPage;
 import org.openmrs.reference.page.PatientDashboardPage;
-import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
-import org.openqa.selenium.By;
 
-import java.util.concurrent.TimeoutException;
-
-import static org.openmrs.uitestframework.test.TestData.checkIfPatientExists;
 
 /**
  * Created by tomasz on 25.05.15.
