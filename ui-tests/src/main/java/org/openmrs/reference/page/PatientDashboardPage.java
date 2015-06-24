@@ -65,9 +65,20 @@ public class PatientDashboardPage extends AbstractBasePage {
 		clickOn(By.className("code"));
     }
 
+	public void enterSecondaryDiagnosis(String diag) {
+		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
+		waitForElement(By.id("ui-id-1"));
+		clickOn(By.className("ui-menu-item"));
+	}
+
+
 	public String primaryDiagnosis() {
 	    return findElement(By.cssSelector(".diagnosis.primary .matched-name")).getText().trim();
     }
+
+	public String secondaryDiagnosis() {
+		return findElement(By.xpath("//ul[2]/li/span/div/strong")).getText();
+	}
 
 	public void enterNote(String note) {
 	    setText(By.id("w10"), note);
