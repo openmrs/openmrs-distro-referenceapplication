@@ -53,7 +53,7 @@ public class VisitNoteTest extends TestBase {
         if(!patientDashboardPage.hasActiveVisit()) {
             patientDashboardPage.startVisit();
         }
-        driver.findElement(By.id("referenceapplication.realTime.simpleVisitNote")).click();
+        patientDashboardPage.visitNote();
         assertNotNull(driver.findElement(By.id("who-when-where")));
         new Select(driver.findElement(By.id("w1"))).selectByVisibleText("Super User");
         new Select(driver.findElement(By.id("w3"))).selectByVisibleText("Isolation Ward");

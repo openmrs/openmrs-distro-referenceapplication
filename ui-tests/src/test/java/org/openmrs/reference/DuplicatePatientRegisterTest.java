@@ -26,7 +26,6 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
-        headerPage.clickOnHomeIcon();
         patient1 = new TestPatient();
         patient2 = new TestPatient();
 
