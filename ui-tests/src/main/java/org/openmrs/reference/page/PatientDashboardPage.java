@@ -14,10 +14,9 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
 	private static final By STARTED_AT = By.className("active-visit-started-at-message");
 	private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
-	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
-	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
-    private static final By VISIT_LINK = By.className("toast-item-wrapper");
-    private static final By VISIT_LINK_2 = By.className("visit-link");
+	public static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
+	public static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
+    public static final By VISIT_LINK = By.className("toast-item-wrapper");
 	private static final By YES = By.cssSelector("#end-visit-dialog .confirm");
 
 
@@ -63,11 +62,22 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public void enterDiagnosis(String diag) {
 		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
 		clickOn(By.className("code"));
-    }
+	}
+
+	public void enterSecondaryDiagnosis(String diag) {
+		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
+		waitForElement(By.id("ui-id-1"));
+		clickOn(By.className("ui-menu-item"));
+	}
+
 
 	public String primaryDiagnosis() {
 	    return findElement(By.cssSelector(".diagnosis.primary .matched-name")).getText().trim();
     }
+
+	public String secondaryDiagnosis() {
+		return findElement(By.xpath("//ul[2]/li/span/div/strong")).getText();
+	}
 
 	public void enterNote(String note) {
 	    setText(By.id("w10"), note);
@@ -80,11 +90,6 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public WebElement visitLink() {
 	    return findElement(VISIT_LINK);
     }
-
-    public WebElement findLinkToVisit() {
-        return findElement(VISIT_LINK_2);
-    }
-
     public void waitForVisitLink() {
         waitForElement(VISIT_LINK);
     }
