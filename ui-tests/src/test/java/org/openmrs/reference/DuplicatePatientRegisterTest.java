@@ -3,13 +3,12 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
-
-import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertTrue;
 
@@ -19,15 +18,13 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     private RegistrationPage registrationPage;
     private HomePage homePage;
     private TestPatient patient1;
-    private TestPatient patient2;
 
     @Before
     public void setUp() {
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
-        patient1 = new TestPatient();
-        patient2 = new TestPatient();
+        patient1 = PatientGenerator.generateTestPatient();
 
         assertPage(loginPage);
         loginPage.loginAsAdmin();
@@ -67,7 +64,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         patient1.Uuid = patientIdFromUrl();
         headerPage.clickOnHomeIcon();
         assertPage(homePage);
-        registerAPatient(patient2);
+        registerAPatient(patient1);
         assertTrue(driver.getPageSource().contains("There seems to be a patient in the database that exactly matches this one. Please review before confirming:"));
         assertTrue(registrationPage.clickOnReviewButton());
     }
