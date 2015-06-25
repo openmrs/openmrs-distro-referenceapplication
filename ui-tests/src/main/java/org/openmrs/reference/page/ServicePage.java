@@ -36,16 +36,28 @@ public class ServicePage extends AbstractBasePage {
         save();
     }
 
+
     private void putName(String name) {
         findElement(NAME_FIELD).clear();
         findElement(NAME_FIELD).sendKeys(name);
 
     }
 
+    public void editServiceName(String name) {
+        putName(name);
+        save();
+    }
+
+
     private void putDuration(String duration) {
         findElement(DURATION_FIELD).clear();
         findElement(DURATION_FIELD).sendKeys(duration);
 
+    }
+
+    public void editServiceDuration(String duration) {
+        putDuration(duration);
+        save();
     }
 
     private void putDescription(String description) {
@@ -101,5 +113,17 @@ public class ServicePage extends AbstractBasePage {
     public void deleteService(String service) {
         findElement(By.id(CURRENT_SERVICE_TYPE + service)).click();
         findElement(CONFIRM).click();
+    }
+
+    public String getNameValue() {
+        return getText(NAME_FIELD);
+    }
+
+    public String getDurationValue() {
+        return getText(DURATION_FIELD);
+    }
+
+    public String getDescriptionValue() {
+        return getText(DESCRIPTION_FIELD);
     }
 }

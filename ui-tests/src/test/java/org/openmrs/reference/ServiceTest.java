@@ -19,7 +19,7 @@ public class ServiceTest extends TestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private ServicePage servicePage;
-
+    private String[] editedValues = null;
     @Before
     public void before() {
         homePage = new HomePage(driver);
@@ -27,6 +27,7 @@ public class ServiceTest extends TestBase {
         servicePage = new ServicePage(driver);
         loginPage.loginAsAdmin();
         assertPage(homePage);
+        servicePage.openManageServiceTypes();
     }
 
     @After
@@ -34,13 +35,17 @@ public class ServiceTest extends TestBase {
         if(servicePage.serviceExists("Test2")) {
             servicePage.deleteService("Test2");
         }
+        if(editedValues != null) {
+            servicePage.addNewService();
+            servicePage.putServiceData(editedValues[0],editedValues[1],editedValues[2]);
+            editedValues = null;
+        }
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
     }
 
     @Test
     public void AddServiceTest() {
-        servicePage.openManageServiceTypes();
         servicePage.addNewService();
         assertPage(servicePage);
         servicePage.putServiceData("Test2", "10", "This is a Service Type added only for test purpose");
@@ -48,5 +53,17 @@ public class ServiceTest extends TestBase {
         servicePage.putServiceData("Test2", "10", "This is a Service Type added only for test purpose");
         assertTrue(driver.getPageSource().contains("Name is duplicated"));
         servicePage.cancel();
+    }
+
+    @Test
+    public void EditServiceTest() {
+        driver.findElement(By.className("editAppointmentType")).click();
+        editedValues = new String[]{servicePage.getNameValue(),servicePage.getDurationValue(),servicePage.getDescriptionValue()};
+        servicePage.editServiceName("");
+        assertTrue(driver.getPageSource().contains("Invalid name"));
+        servicePage.editServiceDuration("abc");
+        assertTrue(driver.getPageSource().contains("Duration must be a positive number"));
+        servicePage.putServiceData("Test2", "10", "This is a Service Type added only for test purpose");
+        assertTrue(servicePage.serviceExists("Test2"));
     }
 }
