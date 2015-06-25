@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 /**
  * Created by tomasz on 24.06.15.
  */
@@ -19,6 +21,8 @@ public class ServicePage extends AbstractBasePage {
     public static final By APPOINTMENT_SCHEDULING = By.cssSelector("#appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension > i.icon-calendar");
     public static final By MANAGE_SERVICE_TYPES = By.id("appointmentschedulingui-manageAppointmentTypes-app");
     public static final By CONFIRM = By.cssSelector("div.simplemodal-wrap > #delete-appointment-type-dialog > div.dialog-content > button.confirm.right");
+    public static final By EDIT_ICON = By.className("editAppointmentType");
+    public static final By DELETE_ICON = By.className("deleteAppointmentType");
     public static final String CURRENT_SERVICE_TYPE = "appointmentschedulingui-delete-";
     public ServicePage(WebDriver driver) {
         super(driver);
@@ -40,7 +44,6 @@ public class ServicePage extends AbstractBasePage {
     private void putName(String name) {
         findElement(NAME_FIELD).clear();
         findElement(NAME_FIELD).sendKeys(name);
-
     }
 
     public void editServiceName(String name) {
@@ -52,7 +55,6 @@ public class ServicePage extends AbstractBasePage {
     private void putDuration(String duration) {
         findElement(DURATION_FIELD).clear();
         findElement(DURATION_FIELD).sendKeys(duration);
-
     }
 
     public void editServiceDuration(String duration) {
@@ -63,7 +65,6 @@ public class ServicePage extends AbstractBasePage {
     private void putDescription(String description) {
         findElement(DESCRIPTION_FIELD).clear();
         findElement(DESCRIPTION_FIELD).sendKeys(description);
-
     }
 
     private void save() {
@@ -108,11 +109,13 @@ public class ServicePage extends AbstractBasePage {
         }
     }
 
-
+    public List<WebElement> getElementsFromDeleted() {
+        return findElement(By.xpath("//table[@id='appointmentTypesTable']/tbody/tr[1]")).findElements(By.tagName("td"));
+    }
 
     public void deleteService(String service) {
         findElement(By.id(CURRENT_SERVICE_TYPE + service)).click();
-        findElement(CONFIRM).click();
+        confirmDelete();
     }
 
     public String getNameValue() {
@@ -125,5 +128,17 @@ public class ServicePage extends AbstractBasePage {
 
     public String getDescriptionValue() {
         return getText(DESCRIPTION_FIELD);
+    }
+
+    public void clickOnEdit() {
+        findElement(EDIT_ICON).click();
+    }
+
+    public void clickOnDelete() {
+        findElement(DELETE_ICON).click();
+    }
+
+    public void confirmDelete() {
+        findElement(CONFIRM).click();
     }
 }

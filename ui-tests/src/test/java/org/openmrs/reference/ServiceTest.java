@@ -8,6 +8,7 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ServicePage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertTrue;
 
@@ -57,7 +58,7 @@ public class ServiceTest extends TestBase {
 
     @Test
     public void EditServiceTest() {
-        driver.findElement(By.className("editAppointmentType")).click();
+        servicePage.clickOnEdit();
         editedValues = new String[]{servicePage.getNameValue(),servicePage.getDurationValue(),servicePage.getDescriptionValue()};
         servicePage.editServiceName("");
         assertTrue(driver.getPageSource().contains("Invalid name"));
@@ -65,5 +66,21 @@ public class ServiceTest extends TestBase {
         assertTrue(driver.getPageSource().contains("Duration must be a positive number"));
         servicePage.putServiceData("Test2", "10", "This is a Service Type added only for test purpose");
         assertTrue(servicePage.serviceExists("Test2"));
+    }
+
+    @Test
+    public void DeleteServiceTest() {
+        editedValues = new String[3];
+        int i=0;
+        for(WebElement el : servicePage.getElementsFromDeleted()) {
+            if( i < 3) {
+                editedValues[i] = el.getText();
+            } else {
+                break;
+            }
+            i++;
+        }
+        servicePage.clickOnDelete();
+        servicePage.confirmDelete();
     }
 }
