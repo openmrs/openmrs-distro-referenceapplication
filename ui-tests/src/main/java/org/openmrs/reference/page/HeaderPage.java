@@ -14,9 +14,22 @@ public class HeaderPage extends AbstractBasePage {
 	static final String HOME_ICON = "logo";
 	static final String HOME_LINK_TEXT = "Home";
 
-	public void clickOnHomeIcon() {
-		clickOn(By.className(HOME_ICON));
+	public void clickOnHomeIcon() throws InterruptedException {
+        clickWhenVisible(By.className(HOME_ICON));
 	}
+
+    public void clickWhenVisible(By by) throws InterruptedException {
+        Long startTime = System.currentTimeMillis();
+        while((System.currentTimeMillis() - startTime) < 5000) {
+            try {
+                clickOn(by);
+                break;
+            } catch (Exception e) {
+                Thread.sleep(100);
+            }
+        }
+
+    }
 	
 	// TODO This is unused, do we really need it?
 	public void clickOnHomeLink() {

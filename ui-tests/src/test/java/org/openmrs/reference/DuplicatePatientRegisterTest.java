@@ -31,7 +31,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         assertPage(homePage);
     }
 
-    private void registerAPatient(TestPatient patient) {
+    private void registerAPatient(TestPatient patient) throws InterruptedException {
 
         homePage.openRegisterAPatientApp();
         patient.familyName = "Smith";
@@ -51,13 +51,13 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         registrationPage.exitReview();
         headerPage.clickOnHomeIcon();
         deletePatientUuid(patient1.Uuid);
-        waitForPatientDeletion(patient1.Uuid);
+//        waitForPatientDeletion(patient1.Uuid);
         headerPage.logOut();
     }
 
     // Test for RA-714
     @Test
-    public void DuplicateRegisterTest() {
+    public void DuplicateRegisterTest() throws InterruptedException {
 
         registerAPatient(patient1);
         registrationPage.confirmPatient();

@@ -37,7 +37,7 @@ public class RegistrationAppTest extends TestBase {
 
     // Test for Story RA-71
     @Test
-    public void registerAPatient() {
+    public void registerAPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();
         registrationPage.enterPatient(patient);
@@ -63,15 +63,15 @@ public class RegistrationAppTest extends TestBase {
     
 	@After
     public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
         deletePatientUuid(patient.Uuid);
-        waitForPatientDeletion(patient.Uuid);
+//        waitForPatientDeletion(patient.Uuid);
+        headerPage.clickOnHomeIcon();
         headerPage.logOut();
     }
 
     // Test for RA-472
     @Test
-    public void registerUnidentifiedPatient() {
+    public void registerUnidentifiedPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();
         registrationPage.enterUnidentifiedPatient(patient);

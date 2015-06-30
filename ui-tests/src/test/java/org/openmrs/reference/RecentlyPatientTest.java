@@ -46,7 +46,7 @@ import static org.junit.Assert.*;
         headerPage.logOut();
     }
 
-        private boolean isElementPresent(By by) {
+    private boolean isElementPresent(By by) {
             try {
                 driver.findElement(by);
                 return true;

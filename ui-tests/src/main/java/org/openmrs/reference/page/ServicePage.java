@@ -81,22 +81,28 @@ public class ServicePage extends AbstractBasePage {
         findElement(MANAGE_SERVICE_TYPES).click();
     }
 
-    public void addNewService() {
-        findElement(NEW_SERVICE_TYPE).click();
+    public void addNewService() throws InterruptedException{
+        waitForServiceMenu();
+        clickWhenVisible(NEW_SERVICE_TYPE);
     }
 
-    public boolean serviceExists(String service) {
-        int i =1;
-        try {
-            while (!serviceExistsOnPage(service)) {
-                i++;
-                findElement(By.linkText(i + "")).click();
-            }
-        } catch(Exception e) {
-            return false;
-        }
-        return true;
+    public void waitForServiceMenu() {
+        waitForElement(NEW_SERVICE_TYPE);
     }
+
+//    public boolean serviceExists(String service) {
+//        int i =1;
+//        try {
+//            while (!serviceExistsOnPage(service)) {
+//                i++;
+//                findElement(By.linkText(i + "")).click();
+//                Thread.sleep(100);
+//            }
+//        } catch(Exception e) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     public boolean serviceExistsOnPage(String service) {
         try {
@@ -118,16 +124,33 @@ public class ServicePage extends AbstractBasePage {
         confirmDelete();
     }
 
+
+    public String getValue(By field) {
+        String text = getText(field);
+        if(!text.isEmpty()) {
+            return text;
+        }
+        return findElement(field).getAttribute("value");
+    }
+
+    public String getValue(WebElement element) {
+        String text = element.getText();
+        if(!text.isEmpty()) {
+            return text;
+        }
+        return element.getAttribute("value");
+    }
+
     public String getNameValue() {
-        return getText(NAME_FIELD);
+        return getValue(NAME_FIELD);
     }
 
     public String getDurationValue() {
-        return getText(DURATION_FIELD);
+        return getValue(DURATION_FIELD);
     }
 
     public String getDescriptionValue() {
-        return getText(DESCRIPTION_FIELD);
+        return getValue(DESCRIPTION_FIELD);
     }
 
     public void clickOnEdit() {
@@ -140,5 +163,18 @@ public class ServicePage extends AbstractBasePage {
 
     public void confirmDelete() {
         findElement(CONFIRM).click();
+    }
+
+    public void clickWhenVisible(By by) throws InterruptedException {
+        Long startTime = System.currentTimeMillis();
+        while((System.currentTimeMillis() - startTime) < 5000) {
+            try {
+                clickOn(by);
+                break;
+            } catch (Exception e) {
+                Thread.sleep(100);
+            }
+        }
+
     }
 }

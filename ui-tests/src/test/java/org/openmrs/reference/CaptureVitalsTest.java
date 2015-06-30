@@ -27,7 +27,7 @@ public class CaptureVitalsTest  extends TestBase {
     private PatientInfo patient;
 
     @Before
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
@@ -54,7 +54,7 @@ public class CaptureVitalsTest  extends TestBase {
     }
 
     @Test
-    public void captureVital() {
+    public void captureVital() throws InterruptedException {
         registerAPatient();
         if(!patientDashboardPage.hasActiveVisit()) {
             patientDashboardPage.startVisit();

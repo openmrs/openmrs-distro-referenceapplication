@@ -19,6 +19,7 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By CONTACT_INFO_SECTION = By.id("contactInfo_label");
 	static final By CONFIRM_SECTION = By.id("confirmation_label");
 	static final By BIRTHDATE_LABEL = By.id("birthdateLabel");
+    static final By GENDER_LABEL = By.id("genderLabel");
     static final By PHONE_NUMBER_LABEL = By.id("phoneNumberLabel");
 	static final By GIVEN_NAME = By.name("givenName");
 	static final By FAMILY_NAME = By.name("familyName");
@@ -26,9 +27,9 @@ public class RegistrationPage extends AbstractBasePage {
     static final String GENDER_FIELD_ID = "gender-field";
     static final By GENDER = By.id(GENDER_FIELD_ID);
     static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
-    static final By BIRTHDAY_DAY = By.id(BIRTHDAY_DAY_TEXTBOX_ID);
-    static final By BIRTHDAY_MONTH = By.id("birthdateMonth-field");
-    static final By BIRTHDAY_YEAR = By.id("birthdateYear-field");
+    public static final By BIRTHDAY_DAY = By.id(BIRTHDAY_DAY_TEXTBOX_ID);
+    public static final By BIRTHDAY_MONTH = By.id("birthdateMonth-field");
+    public static final By BIRTHDAY_YEAR = By.id("birthdateYear-field");
 	static final By ADDRESS1 = By.id("address1");
 	static final By ADDRESS2 = By.id("address2");
 	static final By CITY_VILLAGE = By.id("cityVillage");
@@ -50,7 +51,8 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
-	public void enterPatient(TestPatient patient) {
+
+	public void enterPatient(TestPatient patient) throws InterruptedException {
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName("");  // no middle name
         enterPatientFamilyName(patient.familyName);
@@ -67,7 +69,7 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnConfirmSection();
     }
 
-    public void enterUnidentifiedPatient(TestPatient patient) {
+    public void enterUnidentifiedPatient(TestPatient patient) throws InterruptedException {
         selectUnidentifiedPatient();
         clickOnGenderLink();
         selectPatientGender(patient.gender);
@@ -117,30 +119,32 @@ public class RegistrationPage extends AbstractBasePage {
         setText(MIDDLE_NAME, middleName);
     }
 
-    public void clickOnContactInfo() {
-        clickOn(CONTACT_INFO_SECTION);
+    public void clickOnContactInfo() throws InterruptedException {
+        clickWhenVisible(CONTACT_INFO_SECTION);
     }
 
-    public void clickOnPhoneNumber() {
-        clickOn(PHONE_NUMBER_LABEL);
+    public void clickOnPhoneNumber() throws InterruptedException {
+        clickWhenVisible(PHONE_NUMBER_LABEL);
     }
 
 	public void enterPhoneNumber(String phone) {
         setText(PHONE_NUMBER, phone);
     }
 
-    public void clickOnConfirmSection() {
-        clickOn(CONFIRM_SECTION);
+    public void clickOnConfirmSection() throws InterruptedException {
+        clickWhenVisible(CONFIRM_SECTION);
     }
 
-    public void clickOnGenderLink() {
-    	waitForFocusById(GENDER_FIELD_ID);
+    public void clickOnGenderLink() throws InterruptedException {
+        clickWhenVisible(GENDER_LABEL);
+    	//waitForFocusById(GENDER_FIELD_ID);
     }
 
-    public void clickOnBirthDateLink() {
-        clickOn(BIRTHDATE_LABEL);
-        waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
+    public void clickOnBirthDateLink() throws InterruptedException {
+        clickWhenVisible(BIRTHDATE_LABEL);
+        //waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
+
     public boolean clickOnReviewButton() {
         try {
             clickOn(REVIEW);
@@ -150,6 +154,18 @@ public class RegistrationPage extends AbstractBasePage {
         }
     }
 
+    public void clickWhenVisible(By by) throws InterruptedException {
+        Long startTime = System.currentTimeMillis();
+        while((System.currentTimeMillis() - startTime) < 5000) {
+            try {
+                clickOn(by);
+                break;
+            } catch (Exception e) {
+                Thread.sleep(100);
+            }
+        }
+
+    }
 	public String getNameInConfirmationPage() {
         return getText(NAME_CONFIRM) ;
     }
@@ -176,7 +192,19 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
 	public void confirmPatient() {
-		clickOn(CONFIRM);
+        try {
+            waitForElement(REVIEW);
+        }
+        catch(Exception e)
+        {
+
+        }
+        try {
+            clickWhenVisible(CONFIRM);
+        }
+        catch(Exception e) {
+
+        }
 		waitForElement(PATIENT_HEADER);
     }
 

@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.Calendar;
+import java.util.List;
 
 
 public class PatientDashboardPage extends AbstractBasePage {
@@ -20,7 +22,6 @@ public class PatientDashboardPage extends AbstractBasePage {
     private static final By VISIT_LINK = By.className("toast-item-wrapper");
     private static final By VISIT_LINK_2 = By.className("visit-link");
 	private static final By YES = By.cssSelector("#end-visit-dialog .confirm");
-
 
     public PatientDashboardPage(WebDriver driver) {
 	    super(driver);
@@ -103,4 +104,5 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public void waitForVisitLinkHidden() {
 		waitForElementToBeHidden(VISIT_LINK);
 	}
+
 }
