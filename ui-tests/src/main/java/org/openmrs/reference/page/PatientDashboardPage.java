@@ -11,7 +11,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 
 	public static final String URL_PATH = "/coreapps/clinicianfacing/patient.page";
 	private static final By START_VISIT = By.id("org.openmrs.module.coreapps.createVisit");
-	private static final By END_VISIT = By.id("referenceapplication.realTime.endVisit");
+	public static final By END_VISIT = By.id("referenceapplication.realTime.endVisit");
 	private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
 	private static final By STARTED_AT = By.className("active-visit-started-at-message");
 	private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
