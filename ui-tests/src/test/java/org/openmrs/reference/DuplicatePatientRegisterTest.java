@@ -50,8 +50,8 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     public void tearDown() throws Exception {
         registrationPage.exitReview();
         headerPage.clickOnHomeIcon();
-        deletePatientUuid(patient1.Uuid);
-//        waitForPatientDeletion(patient1.Uuid);
+        deletePatient(patient1.Uuid);
+        waitForPatientDeletion(patient1.Uuid);
         headerPage.logOut();
     }
 

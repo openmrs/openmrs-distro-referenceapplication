@@ -48,7 +48,7 @@ public class CaptureVitalsTest  extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-        deletePatient(patient);
+        deletePatient(patient.uuid);
         //waitForPatientDeletion(patient.uuid);
         headerPage.logOut();
     }
