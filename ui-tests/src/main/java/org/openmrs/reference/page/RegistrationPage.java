@@ -19,13 +19,13 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By CONTACT_INFO_SECTION = By.id("contactInfo_label");
 	static final By CONFIRM_SECTION = By.id("confirmation_label");
 	static final By BIRTHDATE_LABEL = By.id("birthdateLabel");
-    static final By GENDER_LABEL = By.id("genderLabel");
     static final By PHONE_NUMBER_LABEL = By.id("phoneNumberLabel");
 	static final By GIVEN_NAME = By.name("givenName");
 	static final By FAMILY_NAME = By.name("familyName");
     static final By MIDDLE_NAME = By.name("middleName");
-    static final String GENDER_FIELD_ID = "gender-field";
+    static final String GENDER_FIELD_ID = "genderLabel";
     static final By GENDER = By.id(GENDER_FIELD_ID);
+    static final By GENDER_SELECT = By.name("gender");
     static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
     public static final By BIRTHDAY_DAY = By.id(BIRTHDAY_DAY_TEXTBOX_ID);
     public static final By BIRTHDAY_MONTH = By.id("birthdateMonth-field");
@@ -40,10 +40,11 @@ public class RegistrationPage extends AbstractBasePage {
     static final By UNKNOWN_PATIENT = By.id("checkbox-unknown-patient");
     
     // These xpath expressions should be replaced by id's or cssSelectors if possible.
+    static final By CONFIRM_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li[2]/span");
     static final String CONFIRMATION_DIV = "//div[@id='confirmation']";
-	static final By NAME_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[1]/strong");
-	static final By GENDER_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[2]/strong");
-	static final By BIRTHDATE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[3]/strong");
+	public static final By NAME_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[1]/strong");
+	public static final By GENDER_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[2]/strong");
+	public static final By BIRTHDATE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[3]/strong");
 	static final By ADDRESS_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[4]/strong");
 	static final By PHONE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[5]/strong");
 
@@ -51,10 +52,9 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
-
-	public void enterPatient(TestPatient patient) throws InterruptedException {
+	public void enterPatient(TestPatient patient) {
         enterPatientGivenName(patient.givenName);
-        enterPatientMiddleName("");  // no middle name
+        enterPatientMiddleName(patient.middleName);  // no middle name
         enterPatientFamilyName(patient.familyName);
         clickOnGenderLink();
         selectPatientGender(patient.gender);
@@ -103,8 +103,10 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(UNKNOWN_PATIENT);
     }
 
-    public void selectPatientGender(String gender) {
-        selectFrom(GENDER, gender);
+    public void selectPatientGender(String gender) { selectFrom(GENDER_SELECT, gender);}
+
+    public void selectBirthMonth(String bitrthmonth) {
+        selectFrom(BIRTHDAY_MONTH, bitrthmonth);
     }
 
     public void enterPatientFamilyName(String familyName) {
@@ -119,30 +121,33 @@ public class RegistrationPage extends AbstractBasePage {
         setText(MIDDLE_NAME, middleName);
     }
 
-    public void clickOnContactInfo() throws InterruptedException {
-        clickWhenVisible(CONTACT_INFO_SECTION);
+    public void enterBirthDay(String birthday) {
+        setText(BIRTHDAY_DAY, birthday);
     }
 
-    public void clickOnPhoneNumber() throws InterruptedException {
-        clickWhenVisible(PHONE_NUMBER_LABEL);
+    public void enterBirthYear(String bitrthyear){ setText(BIRTHDAY_YEAR, bitrthyear);}
+
+    public void clickOnContactInfo() {
+        clickOn(CONTACT_INFO_SECTION);
+    }
+
+    public void clickOnPhoneNumber() {
+        clickOn(PHONE_NUMBER_LABEL);
     }
 
 	public void enterPhoneNumber(String phone) {
         setText(PHONE_NUMBER, phone);
     }
 
-    public void clickOnConfirmSection() throws InterruptedException {
-        clickWhenVisible(CONFIRM_SECTION);
+    public void clickOnConfirmSection() {
+        clickOn(CONFIRM_SECTION);
     }
 
-    public void clickOnGenderLink() throws InterruptedException {
-        clickWhenVisible(GENDER_LABEL);
-    	//waitForFocusById(GENDER_FIELD_ID);
-    }
+    public void clickOnGenderLink() {clickOn(GENDER);}
 
-    public void clickOnBirthDateLink() throws InterruptedException {
-        clickWhenVisible(BIRTHDATE_LABEL);
-        //waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
+    public void clickOnBirthDateLink() {
+        clickOn(BIRTHDATE_LABEL);
+        waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
 
     public boolean clickOnReviewButton() {
@@ -186,25 +191,42 @@ public class RegistrationPage extends AbstractBasePage {
     	return getText(PHONE_CONFIRM) ;
     }
 
+    public void clearName(){
+        driver.findElement(GIVEN_NAME).clear();
+    }
+
+    public void clearMiddleName(){
+        driver.findElement(MIDDLE_NAME).clear();
+    }
+
+    public void clearFamilyName(){
+        driver.findElement(FAMILY_NAME);
+    }
+
+    public void clearBirthDay(){
+        driver.findElement(BIRTHDAY_DAY);
+    }
+
+    public void clearBirthdateYear(){
+        driver.findElement(BIRTHDAY_YEAR);
+    }
+
+    public void clickOnBirthdateLabel(){
+        clickOn(BIRTHDATE_LABEL);
+    }
+
+    public void clickOnConfirmEdit(){
+        clickOn(CONFIRM_EDIT);
+    }
+
+
 	@Override
     public String expectedUrlPath() {
 	    return URL_ROOT + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
 
 	public void confirmPatient() {
-        try {
-            waitForElement(REVIEW);
-        }
-        catch(Exception e)
-        {
-
-        }
-        try {
-            clickWhenVisible(CONFIRM);
-        }
-        catch(Exception e) {
-
-        }
+		clickOn(CONFIRM);
 		waitForElement(PATIENT_HEADER);
     }
 
