@@ -10,17 +10,11 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
-import org.openmrs.uitestframework.test.TestData;
-import org.openqa.selenium.*;
-
-
 
 public class EndVisitTest extends TestBase {
     private HomePage homePage;
     private PatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
-
-
 
     @Before
     public void setUp() throws Exception {
@@ -30,8 +24,6 @@ public class EndVisitTest extends TestBase {
         assertPage(homePage);
         patientDashboardPage = new PatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
-
-
     }
 
     @Test
@@ -39,10 +31,8 @@ public class EndVisitTest extends TestBase {
 
         homePage.goToActiveVisitPatient();
         patientDashboardPage.endVisit();
-        assertNotNull(By.id("referenceapplication.realTime.endVisit"));
+        assertNotNull(patientDashboardPage.END_VISIT);
         patientDashboardPage.waitForVisitLinkHidden();
-
-
     }
 
     @After
