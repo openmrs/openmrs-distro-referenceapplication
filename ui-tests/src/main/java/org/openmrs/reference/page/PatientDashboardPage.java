@@ -17,12 +17,14 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
 	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
 	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
-	private static final By VISIT_LINK = By.className("toast-item-wrapper");
+	public static final By VISIT_LINK = By.className("toast-item-wrapper");
 	private static final By VISIT_LINK_2 = By.className("visit-link");
 	private static final By YES = By.cssSelector("#end-visit-dialog .confirm");
-	private static final By ADMIT_TO_IMPATIENT = By.linkText("Admit to Inpatient");
+	private static final By ADMIT_TO_INPATIENT = By.linkText("Admit to Inpatient");
 	private static final By SAVE = By.xpath("//input[@value='Save']");
-	private static final By EXIT_FROM_IMPATIENT = (By.linkText("Exit from Inpatient"));
+	private static final By EXIT_FROM_INPATIENT = (By.linkText("Exit from Inpatient"));
+	public static final By SELECT_LOCATION = By.id("w5");
+	private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
 
     public PatientDashboardPage(WebDriver driver) {
 	    super(driver);
@@ -45,21 +47,21 @@ public class PatientDashboardPage extends AbstractBasePage {
 	}
 
 
-	public void clickOnAdmitToImpatient(){
-		clickOn(ADMIT_TO_IMPATIENT);
+	public void clickOnAdmitToInpatient(){
+		clickOn(ADMIT_TO_INPATIENT);
 	}
 
-	public boolean impatientPresent(){
+	public boolean inpatientPresent(){
 		try {
-			return driver.findElement(ADMIT_TO_IMPATIENT) != null;
+			return driver.findElement(ADMIT_TO_INPATIENT) != null;
 		}
 		catch (Exception ex) {
 			return false;
 		}
 	}
 
-	public void exitFromImpatient(){
-		clickOn(EXIT_FROM_IMPATIENT);
+	public void exitFromInpatient(){
+		clickOn(EXIT_FROM_INPATIENT);
 		new Select(driver.findElement(By.id("w5"))).selectByVisibleText("Unknown Location");
 		clickOn(SAVE);
 
@@ -106,6 +108,10 @@ public class PatientDashboardPage extends AbstractBasePage {
 		return findElement(By.xpath("//ul[2]/li/span/div/strong")).getText();
 	}
 
+	public WebElement location() {
+		return findElement(SELECT_LOCATION);
+	}
+
 	public void enterNote(String note) {
 		setText(By.id("w10"), note);
 	}
@@ -130,4 +136,11 @@ public class PatientDashboardPage extends AbstractBasePage {
 		waitForElementToBeHidden(VISIT_LINK);
 	}
 
+	public void selectLocation(String loctation){
+		selectFrom(SELECT_LOCATION, loctation);
+	}
+
+	public void clickOnTranfer(){
+		clickOn(TRANSFER_TO_WARD_SERVICE);
+	}
 }
