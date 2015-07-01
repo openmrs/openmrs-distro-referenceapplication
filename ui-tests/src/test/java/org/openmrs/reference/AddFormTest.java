@@ -6,20 +6,19 @@ import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ManageFormsPage;
+import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
-import org.openqa.selenium.By;
 import static org.junit.Assert.assertNotNull;
 
 
 /**
  * Created by nata on 24.06.15.
  */
-public class FormTest extends TestBase {
+public class AddFormTest extends TestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
-    private String id;
-
+    private PatientDashboardPage patientDashboardPage;
 
     @Before
     public void setUp() throws Exception {
@@ -28,11 +27,11 @@ public class FormTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         manageForm = new ManageFormsPage(driver);
+        patientDashboardPage = new PatientDashboardPage(driver);
     }
 
     @Test
-    public void formTest() throws Exception {
-//        Add Form
+    public void addFormTest() throws Exception {
         homePage.goToManageForm();
         if(!manageForm.addPresent()) {
             manageForm.delete();
@@ -40,25 +39,14 @@ public class FormTest extends TestBase {
         manageForm.add();
         manageForm.addLabel("Eye Report");
         manageForm.addIcon("icon-align-justify");
-        id = manageForm.formIdFromUrl();
+        manageForm.formIdFromUrl();
         manageForm.save();
         headerPage.clickOnHomeIcon();
         homePage.goToActiveVisitPatient();
-        assertNotNull("Eye Report", driver.findElement(By.className("action-section")).getText());
-//        Edit Form
+        assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
         headerPage.clickOnHomeIcon();
         homePage.goToManageForm();
-        driver.findElement(By.xpath("//i[@onclick=\"location.href='forms/extension.page?formId=" + id +"&extensionId=patientDashboard.overallActions.form." + id + "'\"]")).click();
-        manageForm.addLabel("Eye Test");
-        manageForm.save();
-        headerPage.clickOnHomeIcon();
-        homePage.goToActiveVisitPatient();
-        assertNotNull("Eye Test", driver.findElement(By.className("action-section")).getText());
-//        Delete Form
-        headerPage.clickOnHomeIcon();
-        homePage.goToManageForm();
-        driver.findElement(By.xpath("//i[@onclick=\"location.href='forms/deleteExtension.page?formId="+id+"&extensionId=patientDashboard.overallActions.form."+id+"'\"]")).click();
-        assertNotNull("Add", driver.findElement(By.linkText("Add")).getText());
+        manageForm.deletePath();
 
     }
     @After
