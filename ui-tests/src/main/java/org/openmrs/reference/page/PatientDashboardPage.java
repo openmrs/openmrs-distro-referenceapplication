@@ -25,6 +25,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By EXIT_FROM_INPATIENT = (By.linkText("Exit from Inpatient"));
 	public static final By SELECT_LOCATION = By.id("w5");
 	private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
+	public static final By FORM_EXIST = By.className("action-section");
+
 
     public PatientDashboardPage(WebDriver driver) {
 	    super(driver);

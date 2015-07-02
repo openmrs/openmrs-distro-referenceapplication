@@ -15,6 +15,7 @@ public class HomePage extends AbstractBasePage {
     static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
     static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
     static final By ACTIVE_PATIENT = By.xpath("//td[2]/a");
+    static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
 
 
 
@@ -88,6 +89,12 @@ public class HomePage extends AbstractBasePage {
     public void goToActiveVisitPatient(){
         clickOn(By.id(ACTIVE_VISITS_APP_ID));
         clickOn(ACTIVE_PATIENT);
+
+    }
+
+    public void goToManageForm(){
+        clickOn(By.id(CONFIGURE_METADATA_APP_ID));
+        clickOn(MANAGE_FORM);
 
     }
 
