@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ModulesPage;
 import org.openmrs.uitestframework.test.TestBase;
@@ -25,6 +26,7 @@ public class CheckModules extends TestBase {
      * Check the list of modules to be sure they are all started.
      */
     @Test
+    @Category(org.openmrs.reference.groups.BuildTests.class)
     public void checkModules() throws Exception {
     	login();
         assertPage(homePage);

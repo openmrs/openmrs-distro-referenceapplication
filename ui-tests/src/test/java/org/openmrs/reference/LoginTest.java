@@ -3,6 +3,7 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
@@ -28,6 +29,7 @@ public class LoginTest extends TestBase {
     }
     
     @Test
+    @Category(org.openmrs.reference.groups.BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
     	login();
         assertPage(homePage);
