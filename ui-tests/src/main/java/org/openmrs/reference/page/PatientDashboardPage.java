@@ -26,6 +26,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public static final By SELECT_LOCATION = By.id("w5");
 	private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
 	public static final By FORM_EXIST = By.className("action-section");
+	private static final By EDIT_PATIENT = By.linkText("Edit");
 
 
     public PatientDashboardPage(WebDriver driver) {
@@ -36,6 +37,10 @@ public class PatientDashboardPage extends AbstractBasePage {
 		clickOn(START_VISIT);
 		waitForElement(CONFIRM);
 		clickOn(CONFIRM);
+	}
+
+	public void clickOnEditPatient(){
+		clickOn(EDIT_PATIENT);
 	}
 
 	public void endVisit(){

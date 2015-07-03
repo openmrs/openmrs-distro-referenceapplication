@@ -44,7 +44,7 @@ public class EditDemographicTest extends TestBase {
     @Test
     public void EditDemographicTest() throws Exception {
         homePage.goToActiveVisitPatient();
-        patientDashboardPage.clickOnEditPatien();
+        patientDashboardPage.clickOnEditPatient();
         registrationPage.clearName();
         registrationPage.enterPatientGivenName("John");
         registrationPage.clearMiddleName();
