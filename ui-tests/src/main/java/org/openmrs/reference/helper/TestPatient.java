@@ -3,6 +3,7 @@ package org.openmrs.reference.helper;
 public class TestPatient {
 	public String givenName;
 	public String familyName;
+	public String middleName;
 	public String birthDay;
 	public String birthMonth;
 	public String birthYear;
