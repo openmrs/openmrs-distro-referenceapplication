@@ -23,7 +23,8 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By GIVEN_NAME = By.name("givenName");
 	static final By FAMILY_NAME = By.name("familyName");
     static final By MIDDLE_NAME = By.name("middleName");
-    static final String GENDER_FIELD_ID = "genderLabel";
+    static final By GENDER_LABEL = By.id("genderLabel");
+    static final String GENDER_FIELD_ID = ("gender-field");
     static final By GENDER = By.id(GENDER_FIELD_ID);
     static final By GENDER_SELECT = By.name("gender");
     static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
@@ -143,7 +144,7 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(CONFIRM_SECTION);
     }
 
-    public void clickOnGenderLink() {clickOn(GENDER);}
+    public void clickOnGenderLink() {clickOn(GENDER_LABEL);}
 
     public void clickOnBirthDateLink() {
         clickOn(BIRTHDATE_LABEL);
