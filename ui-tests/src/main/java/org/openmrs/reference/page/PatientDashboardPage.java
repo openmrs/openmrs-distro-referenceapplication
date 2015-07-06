@@ -71,6 +71,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By EYE_REPORT = By.linkText("Eye Report");
 
 
+
 	public void startVisit() {
 		clickOn(START_VISIT);
 		waitForElement(CONFIRM);
