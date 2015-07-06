@@ -27,6 +27,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
 	public static final By FORM_EXIST = By.className("action-section");
 	private static final By EDIT_PATIENT = By.linkText("Edit");
+	private static final By ADD_ALEGRY=null;
 
 
     public PatientDashboardPage(WebDriver driver) {
