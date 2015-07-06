@@ -65,10 +65,11 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By DAY = By.xpath("//table[@class=' table-condensed']/tbody/tr[1]/td[0]");
 	private static final By MERGE_VISIT_BUTTON = By.xpath("//a[@id='org.openmrs.module.coreapps.mergeVisits']/li");
 	private static final By MERGE = By.id("mergeVisitsBtn");
-
+	private static final By ADD_ALLERGY = By.cssSelector("i.icon-pencil.edit-action.right");
 	public PatientDashboardPage(WebDriver driver) {
-		super(driver);
-    }
+		super(driver);}
+
+
 
 	public void startVisit() {
 		clickOn(START_VISIT);
@@ -85,6 +86,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 		waitForElement(YES);
 		clickOn(YES);
 	}
+
+	public void clickOnYes (){clickOn(YES);}
 
 	public void clickOnSave(){
 		clickOn(SAVE);
@@ -315,4 +318,6 @@ public class PatientDashboardPage extends AbstractBasePage {
 		waitForElement(SERVICE_DROPDOWN);
 		clickOn(SERVICE_DROPDOWN);
 	}
+
+	public void clickOnAddAllergy(){ clickOn(ADD_ALLERGY);}
 }
