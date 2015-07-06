@@ -17,7 +17,7 @@ public class AllergyPage extends AbstractBasePage{
     private static By REACTION;
     private static final By DELETE_ALLERGY = By.cssSelector("i.icon-remove.delete-action");
     public static final By REMOVE_ALLERGY_MESSAGE = By.id("removeAllergyMessage");
-    private static final By CONFIRM_DELETE_ALLERGY = By.cssSelector("button-confirm-right");
+    private static final By CONFIRM_DELETE_ALLERGY = By.cssSelector("#allergyui-remove-allergy-dialog .confirm");
     private static By DRUG_ID;
     private static String REACTION_XPATH = "//div[@id='reactions']/ul/li/label[text()=\"";
     private static By REACTION_ID;

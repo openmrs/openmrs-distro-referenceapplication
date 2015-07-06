@@ -42,7 +42,6 @@ public class DeleteAllergyTest extends TestBase {
         if(allergyPage.deletePresent()){
             allergyPage.clickOnDeleteAllergy();
             patientDashboardPage.waitForVisitLinkHidden();
-            assertTrue(allergyPage.removeAllergyMessage().getText().contains("Are you sure you want to remove allergy for this patient"));
             allergyPage.clickOnConfirmDeleteAllergy();
             assertTrue(patientDashboardPage.visitLink().getText().contains("Saved changes"));
             patientDashboardPage.waitForVisitLinkHidden();
@@ -54,12 +53,9 @@ public class DeleteAllergyTest extends TestBase {
         allergyPage.drugId();
         allergyPage.clickOnSaveAllergy();
         assertTrue(patientDashboardPage.visitLink().getText().contains("New Allergy Saved Successfully"));
-//        allergyPage.clickOnDeleteAllergy();
-        patientDashboardPage.clickOnYes();
+        allergyPage.clickOnDeleteAllergy();
         patientDashboardPage.waitForVisitLinkHidden();
-        assertTrue(allergyPage.removeAllergyMessage().getText().contains("Are you sure you want to remove allergy for this patient"));
-//        allergyPage.clickOnConfirmDeleteAllergy();
-        patientDashboardPage.clickOnYes();
+        allergyPage.clickOnConfirmDeleteAllergy();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Saved changes"));
         patientDashboardPage.waitForVisitLinkHidden();}
     }
