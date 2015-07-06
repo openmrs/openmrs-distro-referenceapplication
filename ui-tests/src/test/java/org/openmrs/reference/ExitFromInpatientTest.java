@@ -48,6 +48,7 @@ public class ExitFromInpatientTest extends TestBase {
 
     @After
     public void tearDown() throws Exception {
+        patientDashboardPage.waitForVisitLinkHidden();
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
     }

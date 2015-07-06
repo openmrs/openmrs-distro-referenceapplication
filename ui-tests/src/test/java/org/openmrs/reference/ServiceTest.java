@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -54,6 +55,7 @@ public class ServiceTest extends TestBase {
         headerPage.logOut();
     }
 
+    @Ignore
     @Test
     public void AddServiceTest() throws InterruptedException{
         servicePage.addNewService();
@@ -65,6 +67,7 @@ public class ServiceTest extends TestBase {
         servicePage.cancel();
     }
 
+    @Ignore
     @Test
     public void EditServiceTest() {
         servicePage.clickOnEdit();
@@ -77,6 +80,7 @@ public class ServiceTest extends TestBase {
         assertTrue(servicePage.serviceExistsOnPage("ATest2"));
     }
 
+    @Ignore
     @Test
     public void DeleteServiceTest() {
         editedValues = new String[3];

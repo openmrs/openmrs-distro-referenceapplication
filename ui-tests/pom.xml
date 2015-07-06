@@ -17,7 +17,23 @@
         <webdriver>firefox</webdriver>
         <uitestframeworkVersion>1.6-SNAPSHOT</uitestframeworkVersion>
     </properties>
+
+
     <profiles>
+        <profile>
+            <id>run-build-tests</id>
+            <build>
+            <plugins>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <groups>org.openmrs.reference.groups.BuildTests</groups>
+                </configuration>
+            </plugin>
+            </plugins>
+            </build>
+        </profile>
         <profile>
             <id>ci-headless</id>
             <activation>
@@ -54,7 +70,7 @@
                         </plugin>
                         <plugin>
                             <artifactId>maven-failsafe-plugin</artifactId>
-                            <version>2.12</version>
+                            <version>2.18.1</version>
                             <executions>
                                 <execution>
                                     <goals>
@@ -91,6 +107,10 @@
 
     <build>
         <plugins>
+                <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.18.1</version>
+                </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -110,7 +130,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.12</version>
+                <version>2.18.1</version>
                 <executions>
                     <execution>
                         <goals>
