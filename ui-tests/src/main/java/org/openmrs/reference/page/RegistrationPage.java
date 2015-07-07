@@ -230,4 +230,27 @@ public class RegistrationPage extends AbstractBasePage {
 
         }
     }
+//  Edit  Contact Info
+    public void clearVillage(){driver.findElement(CITY_VILLAGE).clear();}
+    public void clearState(){driver.findElement(STATE_PROVINCE).clear();}
+    public void clearCountry(){driver.findElement(COUNTRY).clear();}
+    public void clearPostalCode(){driver.findElement(POSTAL_CODE).clear();}
+    public void clearPhoneNumber(){driver.findElement(PHONE_NUMBER).clear();}
+    private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
+
+    public void clickOnPhoneNumberEdit(){clickOn(PHONE_NUMBER_EDIT);}
+    public void enterVillage(String familyName) {
+        setText(CITY_VILLAGE, familyName);
+    }
+    public void enterState(String familyName) {
+        setText(STATE_PROVINCE, familyName);
+    }
+    public void enterPostalCode(String familyName) {
+        setText(POSTAL_CODE, familyName);
+    }
+    public void enterCountry(String familyName) {
+        setText(COUNTRY, familyName);
+    }
+
 }
+
