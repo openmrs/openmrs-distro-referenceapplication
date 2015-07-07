@@ -53,7 +53,7 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
-	public void enterPatient(TestPatient patient) {
+	public void enterPatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName(patient.middleName);  // no middle name
         enterPatientFamilyName(patient.familyName);
@@ -132,22 +132,22 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(CONTACT_INFO_SECTION);
     }
 
-    public void clickOnPhoneNumber() {
-        clickOn(PHONE_NUMBER_LABEL);
+    public void clickOnPhoneNumber() throws InterruptedException {
+        clickWhenVisible(PHONE_NUMBER_LABEL);
     }
 
 	public void enterPhoneNumber(String phone) {
         setText(PHONE_NUMBER, phone);
     }
 
-    public void clickOnConfirmSection() {
-        clickOn(CONFIRM_SECTION);
+    public void clickOnConfirmSection() throws InterruptedException{
+        clickWhenVisible(CONFIRM_SECTION);
     }
 
     public void clickOnGenderLink() {clickOn(GENDER_LABEL);}
 
-    public void clickOnBirthDateLink() {
-        clickOn(BIRTHDATE_LABEL);
+    public void clickOnBirthDateLink() throws InterruptedException{
+        clickWhenVisible(BIRTHDATE_LABEL);
         waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
 
@@ -160,19 +160,7 @@ public class RegistrationPage extends AbstractBasePage {
         }
     }
 
-    public void clickWhenVisible(By by) throws InterruptedException {
-        Long startTime = System.currentTimeMillis();
-        while((System.currentTimeMillis() - startTime) < 5000) {
-            try {
-                clickOn(by);
-                break;
-            } catch (Exception e) {
-                Thread.sleep(100);
-            }
-        }
-
-    }
-	public String getNameInConfirmationPage() {
+    public String getNameInConfirmationPage() {
         return getText(NAME_CONFIRM) ;
     }
 

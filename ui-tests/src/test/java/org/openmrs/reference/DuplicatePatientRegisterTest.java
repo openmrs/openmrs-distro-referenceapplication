@@ -35,6 +35,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
 
         homePage.openRegisterAPatientApp();
         patient.familyName = "Smith";
+        patient.middleName = "";
         patient.givenName = "Bob";
         patient.gender = "Male";
         patient.birthYear = "1999";

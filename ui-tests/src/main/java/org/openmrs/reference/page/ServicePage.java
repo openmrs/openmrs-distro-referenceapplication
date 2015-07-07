@@ -165,16 +165,4 @@ public class ServicePage extends AbstractBasePage {
         findElement(CONFIRM).click();
     }
 
-    public void clickWhenVisible(By by) throws InterruptedException {
-        Long startTime = System.currentTimeMillis();
-        while((System.currentTimeMillis() - startTime) < 5000) {
-            try {
-                clickOn(by);
-                break;
-            } catch (Exception e) {
-                Thread.sleep(100);
-            }
-        }
-
-    }
 }

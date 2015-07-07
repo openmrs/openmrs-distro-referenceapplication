@@ -132,6 +132,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	}
 
 	public WebElement findLinkToVisit() {
+		waitForElement(VISIT_LINK_2);
 		return findElement(VISIT_LINK_2);
 	}
 

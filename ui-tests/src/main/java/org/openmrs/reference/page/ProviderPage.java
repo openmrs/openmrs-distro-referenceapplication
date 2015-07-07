@@ -23,19 +23,6 @@ public class ProviderPage extends AbstractBasePage {
 	}
 	
 
-    public void clickWhenVisible(By by) throws InterruptedException {
-        Long startTime = System.currentTimeMillis();
-        while((System.currentTimeMillis() - startTime) < 5000) {
-            try {
-                clickOn(by);
-                break;
-            } catch (Exception e) {
-                Thread.sleep(500);
-            }
-        }
-
-    }
-
 	public void manageProviders() {
 		clickOn(MANAGE_PROVIDERS);
 

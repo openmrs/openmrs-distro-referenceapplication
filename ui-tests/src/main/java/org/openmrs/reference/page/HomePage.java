@@ -32,9 +32,9 @@ public class HomePage extends AbstractBasePage {
         }
     }
 
-    private void openApp(String appIdentifier) {
+    private void openApp(String appIdentifier) throws InterruptedException {
         driver.get(properties.getWebAppUrl());
-        clickOn(By.id(appIdentifier));
+        clickWhenVisible(By.id(appIdentifier));
         waitForJsVariable("Navigator.isReady");
     }
 
@@ -54,11 +54,11 @@ public class HomePage extends AbstractBasePage {
         return isAppButtonPresent(REGISTER_PATIENT_APP_ID);
     }
 
-    public void openRegisterAPatientApp() {
+    public void openRegisterAPatientApp() throws InterruptedException {
         openApp(REGISTER_PATIENT_APP_ID);
     }
 
-    public void openLegacyAdministrationApp() {
+    public void openLegacyAdministrationApp()  throws InterruptedException{
         openApp(SYSTEM_ADMIN_APP_ID);
     }
 

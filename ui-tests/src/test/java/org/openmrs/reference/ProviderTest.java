@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -34,6 +35,7 @@ public class ProviderTest extends TestBase {
     }
 
     //combined test for RA-747 and RA-748
+    @Ignore
     @Test
     public void addRetireProviderTest() {
         homePage.goToAdministration();
