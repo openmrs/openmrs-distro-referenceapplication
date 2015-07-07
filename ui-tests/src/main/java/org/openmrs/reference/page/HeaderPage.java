@@ -24,7 +24,7 @@ public class HeaderPage extends AbstractBasePage {
 		clickOn(By.linkText(HOME_LINK_TEXT));
 	}
 	
-	public void logOut() {
+	public void logOut() throws InterruptedException{
 		clickOnLinkFromHref(LOGOUT_HREF);
 	}
 	

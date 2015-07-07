@@ -43,8 +43,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 		clickOn(EDIT_PATIENT);
 	}
 
-	public void endVisit(){
-		clickOn(END_VISIT);
+	public void endVisit() throws InterruptedException{
+		clickWhenVisible(END_VISIT);
 		waitForElement(YES);
 		clickOn(YES);
 	}

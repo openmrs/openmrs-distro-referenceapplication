@@ -29,7 +29,7 @@ public class ProviderTest extends TestBase {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws InterruptedException{
         providerPage.clickOnHomeLink();
         headerPage.logOut();
     }

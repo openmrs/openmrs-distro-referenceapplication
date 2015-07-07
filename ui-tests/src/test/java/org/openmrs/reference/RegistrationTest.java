@@ -97,7 +97,7 @@ public class RegistrationTest extends TestBase {
 
     // Test for RA-711
     @Test
-    public void RegisterTest() throws InterruptedException {
+    public void registerTest() throws InterruptedException {
 
         registerAPatient(patient1);
         registrationPage.confirmPatient();

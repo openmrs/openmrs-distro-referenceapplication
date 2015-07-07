@@ -214,8 +214,8 @@ public class RegistrationPage extends AbstractBasePage {
 	    return URL_ROOT + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
 
-	public void confirmPatient() {
-		clickOn(CONFIRM);
+	public void confirmPatient() throws InterruptedException{
+		clickWhenVisible(CONFIRM);
 		waitForElement(PATIENT_HEADER);
     }
 
