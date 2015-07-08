@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class PatientDashboardPage extends AbstractBasePage {
@@ -48,8 +49,17 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By LOCATION = By.id("w3");
 	private static final By WHO_WHEN_WHERE = By.id("who-when-where");
 
+	private static final By ERROR = By.cssSelector("li.error > span");
+	private static final By ADD_PAST_VISIT = By.linkText("Add Past Visit");
+
+	private static final By TODAY = By.cssSelector("td.day.active");
+	private static final By CONFIRM_PAST_VISIT = By.cssSelector("div.dialog-content.form > button.confirm.right");
+	private static final By CHANGE_DATE = By.cssSelector("button.confirm.no-color");
+	public static final By SUCCESS_MESSAGE = By.cssSelector("div.toast-item.toast-type-success > p");
+	private static final By DAY = By.xpath("//table[@class=' table-condensed']/tbody/tr[1]/td[0]");
+
 	public PatientDashboardPage(WebDriver driver) {
-	    super(driver);
+		super(driver);
     }
 
 	public void startVisit() {
@@ -231,4 +241,49 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public WebElement findPageElement() {
 		return findElement(WHO_WHEN_WHERE);
 	}
+
+	public boolean errorPresent(){
+		try {
+			return driver.findElement(ERROR) != null;
+		}
+		catch (Exception ex) {
+			return false;
+		}
+	}
+
+
+	public void addPastVisit(){
+		clickOn(ADD_PAST_VISIT);
+		clickOn(TODAY);
+		clickOn(CONFIRM_PAST_VISIT);
+	}
+
+	public void clickChangeDate (){
+		waitForElement(CHANGE_DATE);
+		clickOn(CHANGE_DATE);
+	}
+
+	public void enterDate(){
+		Calendar currentDay = Calendar.getInstance();
+	 	Integer dayOfMoth = currentDay.get(Calendar.DAY_OF_MONTH);
+	 	A: for(int j = 6; j > 0; j--) {
+			for (int i = 7; i > 0; i--) {
+				WebElement day = findElement(By.xpath(String.format("//table[@class=' table-condensed']/tbody/tr[%s]/td[%s]",j, i)));
+				if(!day.getAttribute("class").contains("disabled")) {
+					if (day.getText().equals("" + dayOfMoth)) {
+						day.click();
+						dayOfMoth--;
+						clickOn(CONFIRM_PAST_VISIT);
+						try {
+							clickChangeDate();
+						} catch(Exception e) {
+							break A;
+						}
+
+					}
+				}
+			}
+		}
+	}
+
 }
