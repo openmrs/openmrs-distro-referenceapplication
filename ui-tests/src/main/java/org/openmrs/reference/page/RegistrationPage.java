@@ -53,6 +53,7 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
+    public static final By FIELD_ERROR = By.id("field-error");
 	public void enterPatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName(patient.middleName);  // no middle name
@@ -181,23 +182,23 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clearName(){
-        driver.findElement(GIVEN_NAME).clear();
+        findElement(GIVEN_NAME).clear();
     }
 
     public void clearMiddleName(){
-        driver.findElement(MIDDLE_NAME).clear();
+        findElement(MIDDLE_NAME).clear();
     }
 
     public void clearFamilyName(){
-        driver.findElement(FAMILY_NAME);
+        findElement(FAMILY_NAME);
     }
 
     public void clearBirthDay(){
-        driver.findElement(BIRTHDAY_DAY);
+        findElement(BIRTHDAY_DAY);
     }
 
     public void clearBirthdateYear(){
-        driver.findElement(BIRTHDAY_YEAR);
+        findElement(BIRTHDAY_YEAR);
     }
 
     public void clickOnBirthdateLabel(){
@@ -231,11 +232,11 @@ public class RegistrationPage extends AbstractBasePage {
         }
     }
 //  Edit  Contact Info
-    public void clearVillage(){driver.findElement(CITY_VILLAGE).clear();}
-    public void clearState(){driver.findElement(STATE_PROVINCE).clear();}
-    public void clearCountry(){driver.findElement(COUNTRY).clear();}
-    public void clearPostalCode(){driver.findElement(POSTAL_CODE).clear();}
-    public void clearPhoneNumber(){driver.findElement(PHONE_NUMBER).clear();}
+    public void clearVillage(){findElement(CITY_VILLAGE).clear();}
+    public void clearState(){findElement(STATE_PROVINCE).clear();}
+    public void clearCountry(){findElement(COUNTRY).clear();}
+    public void clearPostalCode(){findElement(POSTAL_CODE).clear();}
+    public void clearPhoneNumber(){findElement(PHONE_NUMBER).clear();}
     private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
 
     public void clickOnPhoneNumberEdit(){clickOn(PHONE_NUMBER_EDIT);}

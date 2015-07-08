@@ -44,6 +44,10 @@ public class ContactInfoTest extends TestBase {
         registrationPage.enterPostalCode("3822");
         registrationPage.clickOnPhoneNumberEdit();
         registrationPage.clearPhoneNumber();
+        registrationPage.enterPhoneNumber("aaaaaaaaa");
+        registrationPage.clickOnConfirmEdit();
+        assertTrue(driver.getPageSource().contains("Must be a valid phone number (with +, -, numbers or parentheses)"));
+        registrationPage.clearPhoneNumber();
         registrationPage.enterPhoneNumber("111111111");
         registrationPage.clickOnConfirmEdit();
         registrationPage.confirmPatient();
