@@ -27,7 +27,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
 	public static final By FORM_EXIST = By.className("action-section");
 	private static final By EDIT_PATIENT = By.linkText("Edit");
-
+	private static final By SHOW_CONTACT_INFO = By.cssSelector("span.show");
+	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
 
     public PatientDashboardPage(WebDriver driver) {
 	    super(driver);
@@ -151,4 +152,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public void clickOnTranfer(){
 		clickOn(TRANSFER_TO_WARD_SERVICE);
 	}
+//Contact Info
+	public void clickOnShowContact(){ clickOn(SHOW_CONTACT_INFO);}
+	public void clickOnEditContact(){ clickOn(EDIT_CONTACT_INFO);}
 }
