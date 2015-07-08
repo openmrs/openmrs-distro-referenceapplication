@@ -18,6 +18,7 @@ public class HomePage extends AbstractBasePage {
     static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
     static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
     static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
+    static final By FIND_PATIENT_RECORD = By.cssSelector("i.icon-search");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -101,6 +102,8 @@ public class HomePage extends AbstractBasePage {
         clickOn(SYSTEM_ADMINISTRATION);
         clickOn(ADVANCED_ADMINISTRATION);
     }
+
+    public void clickOnFindPatientRecord(){ clickOn(FIND_PATIENT_RECORD);}
 
     @Override
     public String expectedUrlPath() {
