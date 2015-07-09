@@ -26,7 +26,7 @@ public class DeleteAppointmentBlockTest extends TestBase {
     }
 
     @Test
-    public void createAppointmentBlockTest() throws Exception {
+    public void deleteAppointmentBlockTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();
         appointmentBlocksPage.selectLocation("Outpatient Clinic");
         if (appointmentBlocksPage.blockPresent()){

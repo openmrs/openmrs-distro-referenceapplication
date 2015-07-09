@@ -65,7 +65,7 @@ public class AppointmentBlocksPage extends AbstractBasePage {
 
     public boolean blockPresent(){
         try {
-            return driver.findElement(BLOCK) != null;
+            return findElement(BLOCK) != null;
         }
         catch (Exception ex) {
             return false;

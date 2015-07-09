@@ -29,6 +29,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By EDIT_PATIENT = By.linkText("Edit");
 	private static final By SHOW_CONTACT_INFO = By.cssSelector("span.show");
 	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
+	
     public PatientDashboardPage(WebDriver driver) {
 	    super(driver);
     }
