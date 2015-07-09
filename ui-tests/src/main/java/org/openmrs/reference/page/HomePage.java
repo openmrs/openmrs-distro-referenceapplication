@@ -93,6 +93,10 @@ public class HomePage extends AbstractBasePage {
 
     }
 
+    public void goToActiveVisitsSearch() {
+        clickOn(By.id(ACTIVE_VISITS_APP_ID));
+    }
+
     public void goToManageForm() {
         clickOn(By.id(CONFIGURE_METADATA_APP_ID));
         clickOn(MANAGE_FORM);
