@@ -1,3 +1,5 @@
+
+
 package org.openmrs.reference;
 
 import org.junit.After;
@@ -30,26 +32,21 @@ public class EditAppointmentBlockTest extends TestBase {
     public void editAppointmentBlockTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();
         appointmentBlocksPage.selectLocation("Outpatient Clinic");
-        if (appointmentBlocksPage.blockPresent()){
-            appointmentBlocksPage.clickOnBlock();
-            appointmentBlocksPage.clickOnConfirmDelete();
-        }
-        else {
-            appointmentBlocksPage.clickOnCurrentDay();
-            appointmentBlocksPage.selectLocationBlock("Outpatient Clinic");
-            appointmentBlocksPage.enterService("derm");
-            appointmentBlocksPage.clickOnSave();
-            assertNotNull("Dermatology", appointmentBlocksPage.CURRENT_DAY);
-            appointmentBlocksPage.clickOnBlock();
-            appointmentBlocksPage.clickOnEdit();
-            appointmentBlocksPage.enterProvider("Jake Smith");
-            appointmentBlocksPage.clickOnServiceDelete();
-            appointmentBlocksPage.enterService("onco");
-            appointmentBlocksPage.clickOnSave();
-            assertNotNull("Oncology", appointmentBlocksPage.CURRENT_DAY);
-            appointmentBlocksPage.clickOnBlock();
-            appointmentBlocksPage.clickOnDelete();
-            appointmentBlocksPage.clickOnConfirmDelete();}
+        appointmentBlocksPage.clickOnCurrentDay();
+        appointmentBlocksPage.selectLocationBlock("Outpatient Clinic");
+        appointmentBlocksPage.enterService("derm");
+        appointmentBlocksPage.clickOnSave();
+        assertNotNull("Dermatology", appointmentBlocksPage.CURRENT_DAY);
+        appointmentBlocksPage.findBlock();
+        appointmentBlocksPage.clickOnEdit();
+        appointmentBlocksPage.enterProvider("Jake Smith");
+        appointmentBlocksPage.clickOnServiceDelete();
+        appointmentBlocksPage.enterService("onco");
+        appointmentBlocksPage.clickOnSave();
+        assertNotNull("Oncology", appointmentBlocksPage.CURRENT_DAY);
+        appointmentBlocksPage.findBlock();
+        appointmentBlocksPage.clickOnDelete();
+        appointmentBlocksPage.clickOnConfirmDelete();
     }
     @After
     public void tearDown() throws Exception {
@@ -57,3 +54,4 @@ public class EditAppointmentBlockTest extends TestBase {
         headerPage.logOut();
     }
 }
+

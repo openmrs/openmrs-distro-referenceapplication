@@ -1,3 +1,5 @@
+
+
 package org.openmrs.reference;
 
 import org.junit.After;
@@ -30,11 +32,6 @@ public class CreateAppointmentBlockTest extends TestBase {
     public void createAppointmentBlockTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();
         appointmentBlocksPage.selectLocation("Outpatient Clinic");
-        if (appointmentBlocksPage.blockPresent()){
-            appointmentBlocksPage.clickOnBlock();
-            appointmentBlocksPage.clickOnConfirmDelete();
-        }
-        else {
         appointmentBlocksPage.clickOnCurrentDay();
         appointmentBlocksPage.selectLocationBlock("Outpatient Clinic");
         appointmentBlocksPage.enterStartTime("11");
@@ -45,13 +42,13 @@ public class CreateAppointmentBlockTest extends TestBase {
         appointmentBlocksPage.enterProvider("Super User");
         appointmentBlocksPage.clickOnSave();
         assertNotNull("Dermatology", appointmentBlocksPage.CURRENT_DAY);
-        appointmentBlocksPage.clickOnBlock();
+        appointmentBlocksPage.findBlock();
         appointmentBlocksPage.clickOnDelete();
         appointmentBlocksPage.clickOnConfirmDelete();}
-    }
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
     }
 }
+

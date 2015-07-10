@@ -1,3 +1,4 @@
+
 package org.openmrs.reference.page;
 
 /**
@@ -5,10 +6,10 @@ package org.openmrs.reference.page;
  */
 
 
-import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class AppointmentBlocksPage extends AbstractBasePage {
 
@@ -17,13 +18,13 @@ public class AppointmentBlocksPage extends AbstractBasePage {
     private static final By LOCATION = By.className("ng-pristine");
     private static final By START_TIME = By.xpath("(//input[@type='text'])[5]");
     private static final By SERVICE = By.id("createAppointmentBlock");
+    private static final By BLOCK = By.className("fc-event-title");
     private static final By SERVICE_DROPDOWN = By.cssSelector("a.ng-scope.ng-binding");
     private static final By EDIT_BLOCK= By.linkText("Edit");
     private static final By SAVE = By.cssSelector("button.confirm");
     private static final By PROVIDER = By.xpath("(//input[@type='text'])[3]");
     public static final By CURRENT_DAY = By.className("fc-state-highlight");
     private static final By LOCATION_IN_BLOCK = By.xpath("//div[@id='select-location']/select");
-    private static final By BLOCK = By.cssSelector("div.fc-event-inner");
     private static final By DELETE = By.linkText("Delete");
     private static final By DELETE_CONFIRM = By.cssSelector("#delete-appointment-block-modal-buttons .confirm");
     private static final By SERVICE_DELETE = By.xpath("//div[@id='appointment-block-form']/selectmultipleappointmenttypes/div/div/div/div/i");
@@ -51,34 +52,39 @@ public class AppointmentBlocksPage extends AbstractBasePage {
 
     public void enterProvider(String provider){setTextToFieldNoEnter(PROVIDER, provider);}
 
-    public void clickOnCurrentDay(){clickOn(CURRENT_DAY);}
+    public void clickOnCurrentDay() throws InterruptedException{clickWhenVisible(CURRENT_DAY);}
     public void enterStartTime(String start){setTextToFieldNoEnter(START_TIME, start);}
-    public void clickOnSave(){clickOn(SAVE);}
-    public void clickOnBlock(){clickOn(BLOCK);}
-    public void clickOnDelete(){
+
+    public void clickOnSave(){
+        clickOn(SAVE);
+        try {
+            waitForElementToBeHidden(SAVE);
+        } catch(Exception e)
+        {
+
+        }
+    }
+
+    public void clickOnDelete() throws InterruptedException{
         waitForElement(DELETE);
         clickOn(DELETE);
     }
     public void clickOnConfirmDelete(){clickOn(DELETE_CONFIRM);}
     public void clickOnEdit(){clickOn(EDIT_BLOCK);}
     public void clickOnServiceDelete(){clickOn(SERVICE_DELETE);}
-
-    public boolean blockPresent(){
-        try {
-            return findElement(BLOCK) != null;
-        }
-        catch (Exception ex) {
-            return false;
-        }
-    }
-
     public AppointmentBlocksPage(WebDriver driver) {super(driver);}
 
 
+    public void findBlock() {
+        int iCount = 0;
 
+        try {
+            iCount = driver.findElements(By.xpath("//div[@id='calendar']/div/div/div/div")).size();
+            findElement(By.xpath("//div[@id='calendar']/div/div/div/div[" + iCount + "]/div/span[2]")).click();
+        } catch (Exception e) {
 
-
-
+        }
+    }
 
 
 
@@ -87,3 +93,4 @@ public class AppointmentBlocksPage extends AbstractBasePage {
         return URL_ROOT + "/appointmentschedulingui/scheduleProviders.page";
     }
 }
+

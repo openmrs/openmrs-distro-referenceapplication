@@ -1,3 +1,5 @@
+
+
 package org.openmrs.reference;
 
 import org.junit.After;
@@ -29,20 +31,15 @@ public class DeleteAppointmentBlockTest extends TestBase {
     public void deleteAppointmentBlockTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();
         appointmentBlocksPage.selectLocation("Outpatient Clinic");
-        if (appointmentBlocksPage.blockPresent()){
-            appointmentBlocksPage.clickOnBlock();
-            appointmentBlocksPage.clickOnConfirmDelete();
-        }
-        else {
-            appointmentBlocksPage.clickOnCurrentDay();
-            appointmentBlocksPage.selectLocationBlock("Outpatient Clinic");
-            appointmentBlocksPage.enterService("derm");
-            appointmentBlocksPage.enterProvider("Super User");
-            appointmentBlocksPage.clickOnSave();
-            assertNotNull("Dermatology", appointmentBlocksPage.CURRENT_DAY);
-            appointmentBlocksPage.clickOnBlock();
-            appointmentBlocksPage.clickOnDelete();
-            appointmentBlocksPage.clickOnConfirmDelete();}
+        appointmentBlocksPage.clickOnCurrentDay();
+        appointmentBlocksPage.selectLocationBlock("Outpatient Clinic");
+        appointmentBlocksPage.enterService("derm");
+        appointmentBlocksPage.enterProvider("Super User");
+        appointmentBlocksPage.clickOnSave();
+        assertNotNull("Dermatology", appointmentBlocksPage.CURRENT_DAY);
+        appointmentBlocksPage.findBlock();
+        appointmentBlocksPage.clickOnDelete();
+        appointmentBlocksPage.clickOnConfirmDelete();
     }
     @After
     public void tearDown() throws Exception {
@@ -50,3 +47,4 @@ public class DeleteAppointmentBlockTest extends TestBase {
         headerPage.logOut();
     }
 }
+
