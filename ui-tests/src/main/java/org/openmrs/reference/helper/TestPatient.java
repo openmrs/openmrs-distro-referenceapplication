@@ -7,6 +7,7 @@ public class TestPatient {
 	public String birthDay;
 	public String birthMonth;
 	public String birthYear;
+	public String estimatedYears;
 	public String gender;
 	public String address1;
 	public String address2;

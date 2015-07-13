@@ -5,6 +5,7 @@ package org.openmrs.reference.page;
  */
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,7 @@ public class FindPatientPage extends AbstractBasePage {
     public static final By PATIENT_NAME_SEARCH_RESULT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");
 
 
+
     public void enterPatient(String patient) {
         setTextToFieldNoEnter(PATIENT_SEARCH, patient);
 
@@ -28,7 +30,7 @@ public class FindPatientPage extends AbstractBasePage {
     public WebElement nameSearchResult() {
         return findElement(PATIENT_NAME_SEARCH_RESULT);
     }
-
+    
 
     @Override
     public String expectedUrlPath() {
