@@ -53,7 +53,8 @@ public class RegistrationPage extends AbstractBasePage {
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
-	public void enterPatient(TestPatient patient) {
+    public static final By FIELD_ERROR = By.id("field-error");
+	public void enterPatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName(patient.middleName);  // no middle name
         enterPatientFamilyName(patient.familyName);
@@ -132,22 +133,22 @@ public class RegistrationPage extends AbstractBasePage {
         clickOn(CONTACT_INFO_SECTION);
     }
 
-    public void clickOnPhoneNumber() {
-        clickOn(PHONE_NUMBER_LABEL);
+    public void clickOnPhoneNumber() throws InterruptedException {
+        clickWhenVisible(PHONE_NUMBER_LABEL);
     }
 
 	public void enterPhoneNumber(String phone) {
         setText(PHONE_NUMBER, phone);
     }
 
-    public void clickOnConfirmSection() {
-        clickOn(CONFIRM_SECTION);
+    public void clickOnConfirmSection() throws InterruptedException{
+        clickWhenVisible(CONFIRM_SECTION);
     }
 
     public void clickOnGenderLink() {clickOn(GENDER_LABEL);}
 
-    public void clickOnBirthDateLink() {
-        clickOn(BIRTHDATE_LABEL);
+    public void clickOnBirthDateLink() throws InterruptedException{
+        clickWhenVisible(BIRTHDATE_LABEL);
         waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
 
@@ -160,19 +161,7 @@ public class RegistrationPage extends AbstractBasePage {
         }
     }
 
-    public void clickWhenVisible(By by) throws InterruptedException {
-        Long startTime = System.currentTimeMillis();
-        while((System.currentTimeMillis() - startTime) < 5000) {
-            try {
-                clickOn(by);
-                break;
-            } catch (Exception e) {
-                Thread.sleep(100);
-            }
-        }
-
-    }
-	public String getNameInConfirmationPage() {
+    public String getNameInConfirmationPage() {
         return getText(NAME_CONFIRM) ;
     }
 
@@ -193,23 +182,23 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clearName(){
-        driver.findElement(GIVEN_NAME).clear();
+        findElement(GIVEN_NAME).clear();
     }
 
     public void clearMiddleName(){
-        driver.findElement(MIDDLE_NAME).clear();
+        findElement(MIDDLE_NAME).clear();
     }
 
     public void clearFamilyName(){
-        driver.findElement(FAMILY_NAME);
+        findElement(FAMILY_NAME);
     }
 
     public void clearBirthDay(){
-        driver.findElement(BIRTHDAY_DAY);
+        findElement(BIRTHDAY_DAY);
     }
 
     public void clearBirthdateYear(){
-        driver.findElement(BIRTHDAY_YEAR);
+        findElement(BIRTHDAY_YEAR);
     }
 
     public void clickOnBirthdateLabel(){
@@ -226,8 +215,8 @@ public class RegistrationPage extends AbstractBasePage {
 	    return URL_ROOT + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
 
-	public void confirmPatient() {
-		clickOn(CONFIRM);
+	public void confirmPatient() throws InterruptedException{
+		clickWhenVisible(CONFIRM);
 		waitForElement(PATIENT_HEADER);
     }
 
@@ -242,4 +231,27 @@ public class RegistrationPage extends AbstractBasePage {
 
         }
     }
+//  Edit  Contact Info
+    public void clearVillage(){findElement(CITY_VILLAGE).clear();}
+    public void clearState(){findElement(STATE_PROVINCE).clear();}
+    public void clearCountry(){findElement(COUNTRY).clear();}
+    public void clearPostalCode(){findElement(POSTAL_CODE).clear();}
+    public void clearPhoneNumber(){findElement(PHONE_NUMBER).clear();}
+    private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
+
+    public void clickOnPhoneNumberEdit(){clickOn(PHONE_NUMBER_EDIT);}
+    public void enterVillage(String familyName) {
+        setText(CITY_VILLAGE, familyName);
+    }
+    public void enterState(String familyName) {
+        setText(STATE_PROVINCE, familyName);
+    }
+    public void enterPostalCode(String familyName) {
+        setText(POSTAL_CODE, familyName);
+    }
+    public void enterCountry(String familyName) {
+        setText(COUNTRY, familyName);
+    }
+
 }
+

@@ -18,25 +18,13 @@ public class HeaderPage extends AbstractBasePage {
         clickWhenVisible(By.className(HOME_ICON));
 	}
 
-    public void clickWhenVisible(By by) throws InterruptedException {
-        Long startTime = System.currentTimeMillis();
-        while((System.currentTimeMillis() - startTime) < 5000) {
-            try {
-                clickOn(by);
-                break;
-            } catch (Exception e) {
-                Thread.sleep(100);
-            }
-        }
 
-    }
-	
 	// TODO This is unused, do we really need it?
 	public void clickOnHomeLink() {
 		clickOn(By.linkText(HOME_LINK_TEXT));
 	}
 	
-	public void logOut() {
+	public void logOut() throws InterruptedException{
 		clickOnLinkFromHref(LOGOUT_HREF);
 	}
 	

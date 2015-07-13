@@ -18,6 +18,7 @@ public class HomePage extends AbstractBasePage {
     static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
     static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
     static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
+    static final By FIND_PATIENT_RECORD = By.cssSelector("i.icon-search");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -32,9 +33,9 @@ public class HomePage extends AbstractBasePage {
         }
     }
 
-    private void openApp(String appIdentifier) {
+    private void openApp(String appIdentifier) throws InterruptedException {
         driver.get(properties.getWebAppUrl());
-        clickOn(By.id(appIdentifier));
+        clickWhenVisible(By.id(appIdentifier));
         waitForJsVariable("Navigator.isReady");
     }
 
@@ -54,11 +55,11 @@ public class HomePage extends AbstractBasePage {
         return isAppButtonPresent(REGISTER_PATIENT_APP_ID);
     }
 
-    public void openRegisterAPatientApp() {
+    public void openRegisterAPatientApp() throws InterruptedException {
         openApp(REGISTER_PATIENT_APP_ID);
     }
 
-    public void openLegacyAdministrationApp() {
+    public void openLegacyAdministrationApp()  throws InterruptedException{
         openApp(SYSTEM_ADMIN_APP_ID);
     }
 
@@ -92,6 +93,10 @@ public class HomePage extends AbstractBasePage {
 
     }
 
+    public void goToActiveVisitsSearch() {
+        clickOn(By.id(ACTIVE_VISITS_APP_ID));
+    }
+
     public void goToManageForm() {
         clickOn(By.id(CONFIGURE_METADATA_APP_ID));
         clickOn(MANAGE_FORM);
@@ -101,6 +106,8 @@ public class HomePage extends AbstractBasePage {
         clickOn(SYSTEM_ADMINISTRATION);
         clickOn(ADVANCED_ADMINISTRATION);
     }
+
+    public void clickOnFindPatientRecord(){ clickOn(FIND_PATIENT_RECORD);}
 
     @Override
     public String expectedUrlPath() {

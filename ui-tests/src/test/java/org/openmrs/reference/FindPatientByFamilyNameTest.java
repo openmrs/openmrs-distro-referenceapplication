@@ -8,13 +8,14 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.junit.*;
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 
 /**
- * Created by nata on 16.06.15.
+ * Created by nata on 09.07.15.
  */
 
-    public class RecentlyPatientTest extends TestBase {
+public class FindPatientByFamilyNameTest extends TestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private FindPatientPage findPatientPage;
@@ -33,10 +34,8 @@ import static org.junit.Assert.*;
     @Test
     public void testRecentlyPatientTest() throws Exception {
         homePage.clickOnFindPatientRecord();
-        findPatientPage.enterPatient("Bob Smith");
-        headerPage.clickOnHomeIcon();
-        homePage.clickOnFindPatientRecord();
-        assertNotNull(findPatientPage.PATIENT_SEARCH_RESULT);
+        findPatientPage.enterPatient("Smith");
+        assertTrue(findPatientPage.nameSearchResult().getText().contains("Smith"));
     }
 
 

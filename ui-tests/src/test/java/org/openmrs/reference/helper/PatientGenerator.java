@@ -5,6 +5,7 @@ public class PatientGenerator {
 	public static TestPatient generateTestPatient() {
 		TestPatient p = new TestPatient();
 		p.givenName = randomArrayEntry(PATIENT_GIVEN_NAMES);
+		p.middleName = "";
 		p.familyName = randomArrayEntry(PATIENT_FAMILY_NAMES);
 		p.gender = randomArrayEntry(PATIENT_GENDER);
 		p.birthDay = randomArrayEntry(PATIENT_BIRTH_DAY);

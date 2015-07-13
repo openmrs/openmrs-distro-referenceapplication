@@ -12,6 +12,7 @@ import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -38,62 +39,36 @@ public class ServiceTest extends TestBase {
 
     @After
     public void tearDown() throws Exception {
-        if(servicePage.serviceExistsOnPage("ATest2")) {
-            servicePage.deleteService("ATest2");
-            patientDashboardPage.waitForVisitLinkHidden();
-
-        }
-        if(editedValues != null) {
-            servicePage.addNewService();
-            servicePage.putServiceData(""+editedValues[0],""+editedValues[1],""+editedValues[2]);
-            editedValues = null;
-            patientDashboardPage.waitForVisitLinkHidden();
-
-        }
-        servicePage.waitForServiceMenu();
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
     }
 
-    @Ignore
     @Test
-    public void AddServiceTest() throws InterruptedException{
+    public void addEditDeleteServiceTest() throws InterruptedException{
         servicePage.addNewService();
         assertPage(servicePage);
         servicePage.putServiceData("ATest2", "10", "This is a Service Type added only for test purpose");
+        servicePage.waitForServiceMenu();
+        assertTrue(servicePage.serviceExistsOnPage("ATest2"));
         servicePage.addNewService();
         servicePage.putServiceData("ATest2", "10", "This is a Service Type added only for test purpose");
         assertTrue(driver.getPageSource().contains("Name is duplicated"));
         servicePage.cancel();
-    }
-
-    @Ignore
-    @Test
-    public void EditServiceTest() {
-        servicePage.clickOnEdit();
-        editedValues = new String[]{servicePage.getNameValue(),servicePage.getDurationValue(),servicePage.getDescriptionValue()};
+        servicePage.waitForServiceMenu();
+        servicePage.startEditService("ATest2");
         servicePage.editServiceName("");
         assertTrue(driver.getPageSource().contains("Invalid name"));
         servicePage.editServiceDuration("abc");
         assertTrue(driver.getPageSource().contains("Duration must be a positive number"));
-        servicePage.putServiceData("ATest2", "10", "This is a Service Type added only for test purpose");
-        assertTrue(servicePage.serviceExistsOnPage("ATest2"));
+        servicePage.putServiceData("ATest3", "20", "This is a Service Type edited only for test purpose");
+        servicePage.waitForServiceMenu();
+        assertFalse(servicePage.serviceExistsOnPage("ATest2"));
+        assertTrue(servicePage.serviceExistsOnPage("ATest3"));
+        servicePage.deleteService("ATest3");
+        servicePage.waitForServiceMenu();
+        patientDashboardPage.waitForVisitLinkHidden();
+        assertFalse(servicePage.serviceExistsOnPage("ATest3"));
     }
 
-    @Ignore
-    @Test
-    public void DeleteServiceTest() {
-        editedValues = new String[3];
-        int i=0;
-        for(WebElement el : servicePage.getElementsFromDeleted()) {
-            if( i < 3) {
-                editedValues[i] = servicePage.getValue(el);
-            } else {
-                break;
-            }
-            i++;
-        }
-        servicePage.clickOnDelete();
-        servicePage.confirmDelete();
-    }
+
 }

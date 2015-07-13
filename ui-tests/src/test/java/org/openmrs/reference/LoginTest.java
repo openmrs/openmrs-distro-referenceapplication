@@ -23,7 +23,7 @@ public class LoginTest extends TestBase {
     }
     
     @After
-    public void logout() {
+    public void logout() throws InterruptedException{
     	headerPage.logOut();
     	assertPage(loginPage);
     }

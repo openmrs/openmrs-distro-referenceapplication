@@ -35,6 +35,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
 
         homePage.openRegisterAPatientApp();
         patient.familyName = "Smith";
+        patient.middleName = "";
         patient.givenName = "Bob";
         patient.gender = "Male";
         patient.birthYear = "1999";
@@ -57,7 +58,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
 
     // Test for RA-714
     @Test
-    public void DuplicateRegisterTest() throws InterruptedException {
+    public void duplicateRegisterTest() throws InterruptedException {
 
         registerAPatient(patient1);
         registrationPage.confirmPatient();

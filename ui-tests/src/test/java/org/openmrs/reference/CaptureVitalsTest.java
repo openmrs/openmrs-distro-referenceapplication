@@ -40,7 +40,7 @@ public class CaptureVitalsTest  extends TestBase {
 
     }
 
-    private void registerAPatient() {
+    private void registerAPatient() throws InterruptedException{
         homePage.openRegisterAPatientApp();
         patient = createTestPatient();
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);

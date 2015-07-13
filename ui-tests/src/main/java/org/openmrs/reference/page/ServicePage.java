@@ -23,7 +23,8 @@ public class ServicePage extends AbstractBasePage {
     public static final By CONFIRM = By.cssSelector("div.simplemodal-wrap > #delete-appointment-type-dialog > div.dialog-content > button.confirm.right");
     public static final By EDIT_ICON = By.className("editAppointmentType");
     public static final By DELETE_ICON = By.className("deleteAppointmentType");
-    public static final String CURRENT_SERVICE_TYPE = "appointmentschedulingui-delete-";
+    public static final String CURRENT_SERVICE_TYPE_DELETE = "appointmentschedulingui-delete-";
+    public static final String CURRENT_SERVICE_TYPE_EDIT = "appointmentschedulingui-edit-";
     public ServicePage(WebDriver driver) {
         super(driver);
     }
@@ -106,7 +107,7 @@ public class ServicePage extends AbstractBasePage {
 
     public boolean serviceExistsOnPage(String service) {
         try {
-            if (findElement(By.id(CURRENT_SERVICE_TYPE + service)) != null) {
+            if (findElement(By.id(CURRENT_SERVICE_TYPE_DELETE + service)) != null) {
                 return true;
             }
             return false;
@@ -120,10 +121,13 @@ public class ServicePage extends AbstractBasePage {
     }
 
     public void deleteService(String service) {
-        findElement(By.id(CURRENT_SERVICE_TYPE + service)).click();
+        findElement(By.id(CURRENT_SERVICE_TYPE_DELETE + service)).click();
         confirmDelete();
     }
 
+    public void startEditService(String service) {
+        findElement(By.id(CURRENT_SERVICE_TYPE_EDIT + service)).click();
+    }
 
     public String getValue(By field) {
         String text = getText(field);
@@ -165,16 +169,4 @@ public class ServicePage extends AbstractBasePage {
         findElement(CONFIRM).click();
     }
 
-    public void clickWhenVisible(By by) throws InterruptedException {
-        Long startTime = System.currentTimeMillis();
-        while((System.currentTimeMillis() - startTime) < 5000) {
-            try {
-                clickOn(by);
-                break;
-            } catch (Exception e) {
-                Thread.sleep(100);
-            }
-        }
-
-    }
 }

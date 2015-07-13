@@ -27,6 +27,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
 	public static final By FORM_EXIST = By.className("action-section");
 	private static final By EDIT_PATIENT = By.linkText("Edit");
+	private static final By SHOW_CONTACT_INFO = By.cssSelector("span.show");
+	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
 
 
     public PatientDashboardPage(WebDriver driver) {
@@ -43,8 +45,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 		clickOn(EDIT_PATIENT);
 	}
 
-	public void endVisit(){
-		clickOn(END_VISIT);
+	public void endVisit() throws InterruptedException{
+		clickWhenVisible(END_VISIT);
 		waitForElement(YES);
 		clickOn(YES);
 	}
@@ -132,6 +134,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	}
 
 	public WebElement findLinkToVisit() {
+		waitForElement(VISIT_LINK_2);
 		return findElement(VISIT_LINK_2);
 	}
 
@@ -150,4 +153,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public void clickOnTranfer(){
 		clickOn(TRANSFER_TO_WARD_SERVICE);
 	}
+//Contact Info
+	public void clickOnShowContact(){ clickOn(SHOW_CONTACT_INFO);}
+	public void clickOnEditContact(){ clickOn(EDIT_CONTACT_INFO);}
 }

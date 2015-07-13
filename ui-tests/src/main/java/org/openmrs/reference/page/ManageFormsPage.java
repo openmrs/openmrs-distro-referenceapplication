@@ -36,8 +36,8 @@ public class ManageFormsPage extends AbstractBasePage{
         driver.findElement(EXTENSION_FORM_LABEL).sendKeys(lab);
     }
 
-    public void save(){
-        clickOn(SAVE);
+    public void save() throws InterruptedException {
+        clickWhenVisible(SAVE);
     }
 
     public void addIcon(String icon){

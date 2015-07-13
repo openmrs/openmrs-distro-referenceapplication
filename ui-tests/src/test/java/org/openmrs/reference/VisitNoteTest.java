@@ -52,6 +52,7 @@ public class VisitNoteTest extends TestBase {
         assertPage(patientDashboardPage);
         if(!patientDashboardPage.hasActiveVisit()) {
             patientDashboardPage.startVisit();
+            patientDashboardPage.waitForVisitLinkHidden();
         }
         patientDashboardPage.visitNote();
         assertNotNull(driver.findElement(By.id("who-when-where")));
