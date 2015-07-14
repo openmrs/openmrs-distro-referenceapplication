@@ -29,6 +29,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By EDIT_PATIENT = By.linkText("Edit");
 	private static final By SHOW_CONTACT_INFO = By.cssSelector("span.show");
 	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
+	private static final By PATIENT_ID = By.cssSelector("div.identifiers > span");
 
 
     public PatientDashboardPage(WebDriver driver) {
@@ -156,4 +157,12 @@ public class PatientDashboardPage extends AbstractBasePage {
 //Contact Info
 	public void clickOnShowContact(){ clickOn(SHOW_CONTACT_INFO);}
 	public void clickOnEditContact(){ clickOn(EDIT_CONTACT_INFO);}
+//Find Patient Id
+	public String findPatientId(){
+		return findElement(PATIENT_ID).getText();
+	}
+
+
+
+
 }

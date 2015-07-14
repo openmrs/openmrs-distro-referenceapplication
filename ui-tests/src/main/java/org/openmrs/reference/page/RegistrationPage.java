@@ -39,6 +39,7 @@ public class RegistrationPage extends AbstractBasePage {
     static final By POSTAL_CODE = By.id("postalCode");
     static final By PHONE_NUMBER = By.name("phoneNumber");
     static final By UNKNOWN_PATIENT = By.id("checkbox-unknown-patient");
+    public static final By ESTIMATED_YEARS = By.id("birthdateYears-field");
     
     // These xpath expressions should be replaced by id's or cssSelectors if possible.
     static final By CONFIRM_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li[2]/span");
@@ -101,6 +102,15 @@ public class RegistrationPage extends AbstractBasePage {
         setText(BIRTHDAY_YEAR, patient.birthYear);
     }
 
+    public void enterEstimatedYears(String estimatedYears) {
+        setText(ESTIMATED_YEARS, estimatedYears);
+    }
+
+    public void enterAddress1(String address1) {
+        setText(ADDRESS1, address1);
+    }
+
+
     public void selectUnidentifiedPatient() {
         clickOn(UNKNOWN_PATIENT);
     }
@@ -160,6 +170,7 @@ public class RegistrationPage extends AbstractBasePage {
             return false;
         }
     }
+
 
     public String getNameInConfirmationPage() {
         return getText(NAME_CONFIRM) ;
