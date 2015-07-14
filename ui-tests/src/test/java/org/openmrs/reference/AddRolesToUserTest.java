@@ -2,12 +2,19 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.openmrs.reference.page.AdministrationPage;
-import org.openmrs.reference.page.AppointmentBlocksPage;
-import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
+import org.openmrs.uitestframework.test.TestData;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by tomasz on 10.07.15.
@@ -30,169 +37,74 @@ public class AddRolesToUserTest extends TestBase {
         manageUserPage = new ManageUserPage(driver);
     }
 
+
+    private void reLoginAsUser() throws InterruptedException {
+        manageUserPage.clickOnHomeLink();
+        headerPage.logOut();
+        loginPage.login("super_nurse","Nurse321");
+    }
+
+    private void reLoginAsAdmin() throws InterruptedException {
+        headerPage.logOut();
+        loginPage.loginAsAdmin();
+    }
     @Test
     public void addRolesToUserTest() throws InterruptedException {
-//        driver.findElement(By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension")).click();
-//        driver.findElement(By.id("referenceapplication-legacyAdmin-app")).click();
-        homePage.openLegacyAdministrationApp();
+        homePage.goToAdministration();
         administrationPage.clickOnManageUsers();
-        driver.findElement(By.linkText("Add User")).click();
-        driver.findElement(By.id("createNewPersonButton")).click();
-        driver.findElement(By.name("person.names[0].givenName")).clear();
-        driver.findElement(By.name("person.names[0].givenName")).sendKeys("Super");
-        driver.findElement(By.name("person.names[0].familyName")).clear();
-        driver.findElement(By.name("person.names[0].familyName")).sendKeys("Nurse");
-        driver.findElement(By.name("userFormPassword")).clear();
-        driver.findElement(By.name("userFormPassword")).sendKeys("Nurse321");
-        driver.findElement(By.name("confirm")).clear();
-        driver.findElement(By.name("confirm")).sendKeys("Nurse321");
-        driver.findElement(By.id("saveButton")).click();
-        driver.findElement(By.id("F")).click();
-        driver.findElement(By.name("userFormPassword")).clear();
-        driver.findElement(By.name("userFormPassword")).sendKeys("Nurse321");
-        driver.findElement(By.name("confirm")).clear();
-        driver.findElement(By.name("confirm")).sendKeys("Nurse321");
-        driver.findElement(By.id("saveButton")).click();
-        driver.findElement(By.name("name")).clear();
-        driver.findElement(By.name("name")).sendKeys("super_nurse");
-        driver.findElement(By.name("action")).click();
-        driver.findElement(By.linkText("34-9")).click();
-        driver.findElement(By.id("saveButton")).click();
-        driver.findElement(By.name("name")).clear();
-        driver.findElement(By.name("name")).sendKeys("super_nurse");
-        driver.findElement(By.name("action")).click();
-        driver.findElement(By.linkText("34-9")).click();
-        driver.findElement(By.id("saveButton")).click();
-        driver.findElement(By.linkText("Log out")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("super_nurse");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Nurse321");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("super_nurse");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Nurse321");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("admin");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Admin123");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.name("name")).clear();
-        driver.findElement(By.name("name")).sendKeys("super_nurse");
-        driver.findElement(By.name("action")).click();
-        driver.findElement(By.linkText("34-9")).click();
-        driver.findElement(By.name("userFormPassword")).clear();
-        driver.findElement(By.name("userFormPassword")).sendKeys("Nurse321");
-        driver.findElement(By.name("confirm")).clear();
-        driver.findElement(By.name("confirm")).sendKeys("Nurse321");
-        driver.findElement(By.id("saveButton")).click();
-        driver.findElement(By.linkText("Log out")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("super_nurse");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Nurse321");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.linkText("Logout")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("admin");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Admin123");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.cssSelector("i.icon-cogs")).click();
-        driver.findElement(By.id("referenceapplication-legacyAdmin-app")).click();
-        driver.findElement(By.linkText("Manage Users")).click();
-        driver.findElement(By.name("name")).clear();
-        driver.findElement(By.name("name")).sendKeys("super_nurse");
-        driver.findElement(By.name("action")).click();
-        driver.findElement(By.linkText("34-9")).click();
-        driver.findElement(By.id("roleStrings.Anonymous")).click();
-        driver.findElement(By.id("roleStrings.Application:ConfiguresAppointmentScheduling")).click();
-        driver.findElement(By.id("saveButton")).click();
-        driver.findElement(By.linkText("Log out")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("super_nurse");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Nurse321");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.linkText("Home")).click();
-        driver.findElement(By.linkText("Logout")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("admin");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Admin123");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension")).click();
-        driver.findElement(By.id("referenceapplication-legacyAdmin-app")).click();
-        driver.findElement(By.linkText("Manage Users")).click();
-        driver.findElement(By.name("name")).clear();
-        driver.findElement(By.name("name")).sendKeys("super_nurse");
-        driver.findElement(By.name("action")).click();
-        driver.findElement(By.linkText("34-9")).click();
-        driver.findElement(By.id("roleStrings.Application:ConfiguresAppointmentScheduling")).click();
-        driver.findElement(By.id("roleStrings.Application:EntersADTEvents")).click();
-        driver.findElement(By.id("saveButton")).click();
-        driver.findElement(By.linkText("Home")).click();
-        driver.findElement(By.linkText("Logout")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("super_nurse");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Nurse321");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.linkText("Logout")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("admin");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Admin123");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension")).click();
-        driver.findElement(By.id("referenceapplication-legacyAdmin-app")).click();
-        driver.findElement(By.linkText("Manage Users")).click();
-        driver.findElement(By.name("name")).clear();
-        driver.findElement(By.name("name")).sendKeys("super_nurse");
-        driver.findElement(By.name("action")).click();
-        driver.findElement(By.linkText("34-9")).click();
-        driver.findElement(By.id("roleStrings.Application:EntersADTEvents")).click();
-        driver.findElement(By.id("roleStrings.Application:HasSuperUserPrivileges")).click();
-        driver.findElement(By.id("saveButton")).click();
-        driver.findElement(By.linkText("Home")).click();
-        driver.findElement(By.linkText("Logout")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("super_nurse");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Nurse321");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.linkText("Logout")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("admin");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Admin123");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension")).click();
-        driver.findElement(By.id("referenceapplication-legacyAdmin-app")).click();
-        driver.findElement(By.linkText("Manage Users")).click();
-        driver.findElement(By.name("name")).clear();
-        driver.findElement(By.name("name")).sendKeys("super_nurse");
-        driver.findElement(By.name("action")).click();
-        driver.findElement(By.linkText("34-9")).click();
-        driver.findElement(By.id("roleStrings.Application:HasSuperUserPrivileges")).click();
-        driver.findElement(By.id("roleStrings.Application:RegistersPatients")).click();
-        driver.findElement(By.id("saveButton")).click();
-        driver.findElement(By.linkText("Home")).click();
-        driver.findElement(By.linkText("Logout")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("super_nurse");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Nurse321");
-        driver.findElement(By.id("login-button")).click();
-        driver.findElement(By.linkText("Logout")).click();
+
+        Map<String,Integer> roleModules = new HashMap();
+
+        fillInRoleModules(roleModules);
+        if(!manageUserPage.userSuperNurseExists()) {
+            manageUserPage.clickOnAddUser();
+            manageUserPage.createNewPerson();
+            manageUserPage.fillInPersonName("Super", "Nurse", "nurse321");
+        }
+        String oldRole = null;
+        for(Entry<String, Integer> role : roleModules.entrySet()) {
+            manageUserPage.assignRolesToUserSuperNurse(oldRole,role.getKey());
+            reLoginAsUser();
+            assertThat(homePage.numberOfAppsPresent(), is(role.getValue()));
+            reLoginAsAdmin();
+            oldRole = role.getKey();
+            homePage.goToAdministration();
+            administrationPage.clickOnManageUsers();
+
+        }
 
     }
 
+    private void fillInRoleModules(Map<String, Integer> roleModules) {
+        roleModules.put("roleStrings.Anonymous",0);
+        roleModules.put("roleStrings.Application:ConfiguresAppointmentScheduling",1);
+        roleModules.put("roleStrings.Application:EntersADTEvents",2);
+        roleModules.put("roleStrings.Application:HasSuperUserPrivileges",9);
+        roleModules.put("roleStrings.Application:RegistersPatients",3);
+        roleModules.put("roleStrings.Application:SchedulesAndOverbooksAppointments",1);
+        roleModules.put("roleStrings.Application:SeesAppointmentSchedule",1);
+        roleModules.put("roleStrings.Application:UsesPatientSummary",1);
+        roleModules.put("roleStrings.Authenticated",0);
+        roleModules.put("roleStrings.Organizational:SystemAdministrator",3);
+        roleModules.put("roleStrings.SystemDeveloper",9);
+        roleModules.put("roleStrings.Application:AdministersSystem",1);
+        roleModules.put("roleStrings.Application:ConfiguresForms",1);
+        roleModules.put("roleStrings.Application:EntersVitals",2);
+        roleModules.put("roleStrings.Application:ManagesAtlas",1);
+        roleModules.put("roleStrings.Application:ConfiguresMetadata",1);
+        roleModules.put("roleStrings.Application:ManagesProviderSchedules",1);
+        roleModules.put("roleStrings.Application:RequestsAppointments",0);
+        roleModules.put("roleStrings.Application:SchedulesAppointments",1);
+        roleModules.put("roleStrings.Application:UsesCaptureVitalsApp",1);
+        roleModules.put("roleStrings.Application:WritesClinicalNotes", 2);
+        roleModules.put("roleStrings.Organizational:Doctor", 3);
+        roleModules.put("roleStrings.Organizational:Nurse", 4);
+        roleModules.put("roleStrings.Organizational:RegistrationClerk", 4);
+    }
     @After
     public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
+        manageUserPage.assignRolesToUserSuperNurse(null,"roleStrings.Organizational:RegistrationClerk");
+        manageUserPage.clickOnHomeLink();
         headerPage.logOut();
     }
 }
