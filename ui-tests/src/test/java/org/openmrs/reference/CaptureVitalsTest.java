@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HeaderPage;
@@ -54,8 +55,9 @@ public class CaptureVitalsTest  extends TestBase {
         headerPage.logOut();
     }
 
+    @Ignore
     @Test
-    //@Category(org.openmrs.reference.groups.BuildTests.class)
+    @Category(org.openmrs.reference.groups.BuildTests.class)
     public void captureVital() throws InterruptedException {
         registerAPatient();
         if(!patientDashboardPage.hasActiveVisit()) {

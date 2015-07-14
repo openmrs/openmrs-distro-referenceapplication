@@ -3,6 +3,7 @@ package org.openmrs.reference;
 import org.dbunit.dataset.DataSetException;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.helper.PatientGenerator;
@@ -37,8 +38,9 @@ public class RegistrationAppTest extends TestBase {
     }
 
     // Test for Story RA-71
+    @Ignore
     @Test
-    //@Category(org.openmrs.reference.groups.BuildTests.class)
+    @Category(org.openmrs.reference.groups.BuildTests.class)
     public void registerAPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();
@@ -72,6 +74,7 @@ public class RegistrationAppTest extends TestBase {
     }
 
     // Test for RA-472
+    @Ignore
     @Test
     public void registerUnidentifiedPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();

@@ -25,6 +25,7 @@ public class AddDiagnosisToVisitNoteTest extends TestBase {
            patientDashboardPage = new PatientDashboardPage(driver);
            headerPage = new HeaderPage(driver);
     }
+       @Ignore
        @Test
        public void AddDiagnosisToVisitNoteTest() throws Exception {
            homePage.goToActiveVisitPatient();

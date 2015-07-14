@@ -29,6 +29,7 @@ public class StartVisitTest extends TestBase {
         headerPage = new HeaderPage(driver);
     }
 
+    @Ignore
     @Test
     public void startVisitTest() throws Exception {
 

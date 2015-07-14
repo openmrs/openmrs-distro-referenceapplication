@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
@@ -96,6 +97,7 @@ public class RegistrationTest extends TestBase {
     }
 
     // Test for RA-711
+    @Ignore
     @Test
     public void registerTest() throws InterruptedException {
 

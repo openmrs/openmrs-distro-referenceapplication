@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -45,6 +46,7 @@ public class VisitNoteTest extends TestBase {
     }
 
     //Test for RA-720
+    @Ignore
     @Test
     public void testAddVisitNote() {
         driver.findElement(By.cssSelector("i.icon-calendar")).click();

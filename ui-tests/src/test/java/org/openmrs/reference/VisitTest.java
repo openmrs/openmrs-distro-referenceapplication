@@ -1,9 +1,6 @@
 package org.openmrs.reference;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -41,6 +38,7 @@ public class VisitTest extends TestBase {
 	/**
 	 * Beginnings of visit test. For starters, we just start a visit and verify it started.
 	 */
+	@Ignore
 	@Test
 	@Category(org.openmrs.reference.groups.BuildTests.class)
 	public void testStartVisit() {

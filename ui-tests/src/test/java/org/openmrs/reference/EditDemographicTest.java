@@ -6,6 +6,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
@@ -41,6 +42,7 @@ public class EditDemographicTest extends TestBase {
 
     }
 
+    @Ignore
     @Test
     public void EditDemographicTest() throws Exception {
         homePage.goToActiveVisitPatient();
