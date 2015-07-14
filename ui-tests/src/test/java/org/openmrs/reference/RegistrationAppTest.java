@@ -38,7 +38,7 @@ public class RegistrationAppTest extends TestBase {
 
     // Test for Story RA-71
     @Test
-    @Category(org.openmrs.reference.groups.BuildTests.class)
+    //@Category(org.openmrs.reference.groups.BuildTests.class)
     public void registerAPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();
