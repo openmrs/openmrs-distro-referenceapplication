@@ -5,7 +5,6 @@ package org.openmrs.reference.page;
  */
 
 
-import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
