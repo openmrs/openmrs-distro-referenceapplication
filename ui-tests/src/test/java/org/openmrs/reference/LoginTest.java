@@ -37,9 +37,9 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
         assertTrue(homePage.isCaptureVitalsAppPresent());
-        assertTrue(homePage.isConfigureMetadataAppPresent());
+//        assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
-        assertThat(homePage.numberOfAppsPresent(), is(9));
+        assertThat(homePage.numberOfAppsPresent(), is(8));
     }
 
     @Test
@@ -78,9 +78,9 @@ public class LoginTest extends TestBase {
         assertPage(loginPage);
         loginPage.loginAsSysadmin();
         assertPage(homePage);
-        assertTrue(homePage.isConfigureMetadataAppPresent());
+//        assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
-        assertThat(homePage.numberOfAppsPresent(), is(3));
+        assertThat(homePage.numberOfAppsPresent(), is(2));
     }
 
 }

@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -31,6 +32,7 @@ public class EditFormTest extends TestBase {
         patientDashboardPage = new PatientDashboardPage(driver);
     }
 
+    @Ignore
     @Test
     public void EditFormTest() throws Exception {
         homePage.goToManageForm();
