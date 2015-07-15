@@ -36,7 +36,7 @@ public class AddLocationTest extends TestBase {
     @Test
     public void addLocationTest() throws Exception {
         locationPage.clickOnManageLocation();
-        if(!locationPage.locationPresent()) {
+        if(locationPage.locationPresent()) {
             locationPage.clickOnCheckLocation();
             locationPage.clickOnDelete();
         }
