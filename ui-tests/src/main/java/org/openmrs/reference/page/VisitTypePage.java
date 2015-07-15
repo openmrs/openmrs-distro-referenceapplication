@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 /**
  * Created by tomasz on 15.07.15.
  */
@@ -41,19 +43,23 @@ public class VisitTypePage extends AbstractBasePage {
     }
 
     public void findVisitType(String visitType){
-        clickOn(By.linkText(visitType));
+//        clickOn(By.xpath("//table/tr/td/a[text()=normalize-space('\"+visitType+\"')]"));
+        List<WebElement> elements = findElements(By.linkText(visitType));
+        for(WebElement element : elements) {
+            if (element.findElements(By.tagName("del")).isEmpty())
+            {
+                element.click();
+                break;
+            }
+        }
     }
 
-    public void retireVisitType(String visitType, String retireReason) throws InterruptedException {
-        findVisitType(visitType);
-        fillInField(findElement(RETIRE_REASON),retireReason);
-        clickWhenVisible(RETIRE_VISIT_TYPE);
+    
+    public void retireVisitType() {
+        clickOn(RETIRE_VISIT_TYPE);
     }
-//    public void retireProvider() {
-//        clickOn(RETIRE_PROVIDER);
-//    }
 
-    public void fillInField(WebElement field, String text) {
+    private void fillInField(WebElement field, String text) {
         field.clear();
         field.sendKeys(text);
     }
@@ -62,9 +68,9 @@ public class VisitTypePage extends AbstractBasePage {
         clickOn(HOME);
     }
 
-//    public void fillInIdentifier(String text) {
-//        fillInField(findElement(IDENTIFIER), text);
-//    }
+    public void fillInRetireReason(String retireReason) {
+        fillInField(findElement(RETIRE_REASON),retireReason);
+    }
 
     public void fillInVisitType(String name,String description) {
         fillInField(findElement(NAME),name);

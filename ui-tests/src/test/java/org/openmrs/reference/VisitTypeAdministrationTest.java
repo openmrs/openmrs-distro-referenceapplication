@@ -34,7 +34,7 @@ public class VisitTypeAdministrationTest extends TestBase {
     }
 
     @Test
-    public void addVisitTypeTest() throws InterruptedException {
+    public void addRetireVisitTypeTest() throws InterruptedException {
         homePage.goToAdministration();
         visitTypePage.manageVisitTypes();
         assertPage(visitTypePage);
@@ -44,6 +44,12 @@ public class VisitTypeAdministrationTest extends TestBase {
         assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
         visitTypePage.fillInVisitType("Private Visit", "When someone haven't insurance they must pay for visit");
         assertTrue(driver.getPageSource().contains("Visit Type saved"));
-        visitTypePage.retireVisitType("Private Visit","Test Ended");
+        visitTypePage.findVisitType("Private Visit");
+        visitTypePage.retireVisitType();
+        assertTrue(driver.getPageSource().contains("Retire reason cannot be empty."));
+        assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
+        visitTypePage.fillInRetireReason("Test Ended");
+        visitTypePage.retireVisitType();
+        assertTrue(driver.getPageSource().contains("Visit Type retired successfully"));
     }
 }
