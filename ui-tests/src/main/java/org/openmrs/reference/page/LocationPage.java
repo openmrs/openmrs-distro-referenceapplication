@@ -26,7 +26,6 @@ public class LocationPage extends AbstractBasePage {
 
 
 
-
     public void clickOnManageLocation(){ clickOn(MANAGE_LOCATION);}
     public void clickOnAddLocation(){ clickOn(ADD_LOCATION);}
     public void clickOnSaveLocation(){ clickOn(SAVE_LOCATION);}
@@ -34,6 +33,7 @@ public class LocationPage extends AbstractBasePage {
         findElement (NAME).sendKeys(name);
         NAME_LOCATION = name;
     }
+    
     public String findLocation(){
         ADDED_LOCATION = By.linkText(NAME_LOCATION);
         return findElement(ADDED_LOCATION).getAttribute("href").split("=")[1];
@@ -43,6 +43,7 @@ public class LocationPage extends AbstractBasePage {
         CHECK_LOCATION = By.xpath(LOCATION_PATH + findLocation() +REST_PATH);
         clickOn(CHECK_LOCATION);
     }
+
 
     public void clearName(){ findElement(NAME).clear();}
     public void chooseTags (String tags) {findElement(TAGS).getText().contains(tags);}
