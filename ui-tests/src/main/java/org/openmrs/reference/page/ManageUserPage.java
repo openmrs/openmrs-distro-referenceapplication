@@ -66,11 +66,13 @@ public class ManageUserPage extends AbstractBasePage {
         }
     }
 
-    public void assignRolesToUserSuperNurse(String roleToUnassign, String roleToAssign) {
+    public void assignRolesToUserSuperNurse(String roleToUnassign, String roleToAssign) throws InterruptedException {
         clickOn(ACTION);
         clickOn(USER_LINK);
         if(roleToUnassign != null) {
+            waitForElement(By.id(roleToUnassign));
             clickOn(By.id(roleToUnassign));
+            Thread.sleep(200);
         }
         clickOn(By.id(roleToAssign));
         clickOn(SAVE_BUTTON);

@@ -61,6 +61,7 @@ public class VisitTypeAdministrationTest extends TestBase {
         visitTypePage.findRetiredVisitType("Payment Visit");
         visitTypePage.deleteVisitType();
         assertTrue(closeAlertAndGetItsText().contains("Are you sure you want to delete this visit type"));
+        Thread.sleep(200);
         assertTrue(driver.getPageSource().contains("Visit Type deleted forever successfully"));
     }
 
