@@ -18,20 +18,34 @@ public class LocationPage extends AbstractBasePage {
     private static final By TAGS = By.name("tags");
     public static String NAME_LOCATION;
     private static By DELETE_LOCATION = By.name("action");
-    private static By CHECK_LOCATION = By.xpath("//table[@id='locationTable']/tbody/tr[8]/td/input");
-    private static By ADDED_LOCATION ;
+    private static By ADDED_LOCATION;
+    private static String LOCATION_PATH = "//table[@id='locationTable']/tbody/tr/td/input[@value=\"";
+    private static String REST_PATH = "\"]";
+    private static By CHECK_LOCATION;
+    private static final By REASON_RETIRE = By.name("retireReason");
+
 
 
     public void clickOnManageLocation(){ clickOn(MANAGE_LOCATION);}
     public void clickOnAddLocation(){ clickOn(ADD_LOCATION);}
     public void clickOnSaveLocation(){ clickOn(SAVE_LOCATION);}
-    public void enterName(String name){ findElement (NAME).sendKeys(name);
-    NAME_LOCATION = name;
+    public void enterName(String name){
+        findElement (NAME).sendKeys(name);
+        NAME_LOCATION = name;
     }
-    public void chooseTags (String tags) {findElement(TAGS).getText().contains(tags);}
+    public String findLocation(){
+        ADDED_LOCATION = By.linkText(NAME_LOCATION);
+        return findElement(ADDED_LOCATION).getAttribute("href").split("=")[1];
+    }
 
+    public void checkLocation (){
+        CHECK_LOCATION = By.xpath(LOCATION_PATH + findLocation() +REST_PATH);
+        clickOn(CHECK_LOCATION);
+    }
+
+    public void clearName(){ findElement(NAME).clear();}
+    public void chooseTags (String tags) {findElement(TAGS).getText().contains(tags);}
     public void clickOnTags(){ clickOn(TAGS);}
-    public void clickOnCheckLocation(){ clickOn(CHECK_LOCATION);}
     public void clickOnDelete(){ clickOn(DELETE_LOCATION);}
     public void addedLocation(){
         clickOn(ADDED_LOCATION = By.linkText(NAME_LOCATION));
@@ -43,6 +57,9 @@ public class LocationPage extends AbstractBasePage {
         catch (Exception ex) {
             return false;
         }
+    }
+    public void enterRetireReason(String retire){
+        setText(REASON_RETIRE, retire);
     }
 
     public LocationPage(WebDriver driver) {

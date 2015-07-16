@@ -32,6 +32,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By PATIENT_ID = By.cssSelector("div.identifiers > span");
 
 
+
     public PatientDashboardPage(WebDriver driver) {
 	    super(driver);
     }
