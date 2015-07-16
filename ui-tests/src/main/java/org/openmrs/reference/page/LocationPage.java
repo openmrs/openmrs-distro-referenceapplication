@@ -30,8 +30,9 @@ public class LocationPage extends AbstractBasePage {
     public void clickOnManageLocation(){ clickOn(MANAGE_LOCATION);}
     public void clickOnAddLocation(){ clickOn(ADD_LOCATION);}
     public void clickOnSaveLocation(){ clickOn(SAVE_LOCATION);}
-    public void enterName(String name){ findElement (NAME).sendKeys(name);
-    NAME_LOCATION = name;
+    public void enterName(String name){
+        findElement (NAME).sendKeys(name);
+        NAME_LOCATION = name;
     }
     public String findLocation(){
         ADDED_LOCATION = By.linkText(NAME_LOCATION);
