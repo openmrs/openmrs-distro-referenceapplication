@@ -54,9 +54,7 @@ public class LocationPage extends AbstractBasePage {
     }
     public boolean locationPresent(){
         try {
-
             return findElement(ADDED_LOCATION = By.linkText(NAME_LOCATION)) != null;
-
         }
         catch (Exception ex) {
             return false;
