@@ -25,6 +25,8 @@ public class LocationPage extends AbstractBasePage {
     private static final By REASON_RETIRE = By.name("retireReason");
 
 
+
+
     public void clickOnManageLocation(){ clickOn(MANAGE_LOCATION);}
     public void clickOnAddLocation(){ clickOn(ADD_LOCATION);}
     public void clickOnSaveLocation(){ clickOn(SAVE_LOCATION);}
@@ -43,7 +45,6 @@ public class LocationPage extends AbstractBasePage {
 
     public void clearName(){ findElement(NAME).clear();}
     public void chooseTags (String tags) {findElement(TAGS).getText().contains(tags);}
-
     public void clickOnTags(){ clickOn(TAGS);}
     public void clickOnDelete(){ clickOn(DELETE_LOCATION);}
     public void addedLocation(){
@@ -51,7 +52,9 @@ public class LocationPage extends AbstractBasePage {
     }
     public boolean locationPresent(){
         try {
+
             return findElement(ADDED_LOCATION = By.linkText(NAME_LOCATION)) != null;
+
         }
         catch (Exception ex) {
             return false;
