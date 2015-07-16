@@ -13,7 +13,7 @@ import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 
-public class AddLocationTest extends TestBase {
+public class EditLocationTest extends TestBase {
     private HomePage homePage;
     private PatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
@@ -34,19 +34,25 @@ public class AddLocationTest extends TestBase {
     }
 
     @Test
-    public void addLocationTest() throws Exception {
+    public void EditLocationTest() throws Exception {
         locationPage.clickOnManageLocation();
         if(locationPage.locationPresent()) {
             locationPage.checkLocation();
             locationPage.clickOnDelete();
         }
         locationPage.clickOnAddLocation();
-        locationPage.clickOnSaveLocation();
-        assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
         locationPage.enterName("psychiatric hospital");
         locationPage.chooseTags("Admission Location");
         locationPage.clickOnTags();
         locationPage.clickOnSaveLocation();
+        locationPage.addedLocation();
+        locationPage.clearName();
+        locationPage.enterName("super psychiatric hospital");
+        locationPage.chooseTags("Transfer Location");
+        locationPage.chooseTags("Login Location");
+        locationPage.chooseTags("Visit Location");
+        locationPage.clickOnSaveLocation();
+        locationPage.findLocation();
         locationPage.checkLocation();
         locationPage.clickOnDelete();
 

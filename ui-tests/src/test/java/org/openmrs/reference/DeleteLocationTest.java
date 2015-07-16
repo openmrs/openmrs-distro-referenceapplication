@@ -39,7 +39,7 @@ public class DeleteLocationTest extends TestBase {
     public void deleteLocationTest() throws Exception {
         locationPage.clickOnManageLocation();
         if(locationPage.locationPresent()) {
-            locationPage.clickOnCheckLocation();
+            locationPage.checkLocation();
             locationPage.clickOnDelete();
         }
         else {
@@ -48,7 +48,7 @@ public class DeleteLocationTest extends TestBase {
         locationPage.chooseTags("Admission Location");
         locationPage.clickOnTags();
         locationPage.clickOnSaveLocation();
-        locationPage.clickOnCheckLocation();
+        locationPage.checkLocation();
         locationPage.clickOnDelete();
         assertTrue(driver.getPageSource().contains("delete"));}
 

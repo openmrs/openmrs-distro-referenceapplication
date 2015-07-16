@@ -1,7 +1,7 @@
 package org.openmrs.reference;
 
 /**
- * Created by nata on 15.07.15.
+ * Created by nata on 16.07.15.
  */
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -13,7 +13,7 @@ import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 
-public class AddLocationTest extends TestBase {
+public class RetireLocationTest extends TestBase {
     private HomePage homePage;
     private PatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
@@ -34,7 +34,7 @@ public class AddLocationTest extends TestBase {
     }
 
     @Test
-    public void addLocationTest() throws Exception {
+    public void retireLocationTest() throws Exception {
         locationPage.clickOnManageLocation();
         if(locationPage.locationPresent()) {
             locationPage.checkLocation();
@@ -47,8 +47,9 @@ public class AddLocationTest extends TestBase {
         locationPage.chooseTags("Admission Location");
         locationPage.clickOnTags();
         locationPage.clickOnSaveLocation();
-        locationPage.checkLocation();
-        locationPage.clickOnDelete();
+        locationPage.addedLocation();
+        locationPage.enterRetireReason("atomic bomb");
+        assertTrue(driver.getPageSource().contains("Location retired successfully"));
 
     }
 
