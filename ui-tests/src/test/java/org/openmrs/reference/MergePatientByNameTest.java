@@ -1,0 +1,113 @@
+package org.openmrs.reference;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.openmrs.reference.helper.TestPatient;
+import org.openmrs.reference.page.*;
+import org.openmrs.uitestframework.test.TestBase;
+import org.junit.*;
+import static org.junit.Assert.assertTrue;
+
+
+/**
+ * Created by nata on 09.07.15.
+ */
+
+public class MergePatientByNameTest extends TestBase {
+    private HomePage homePage;
+    private HeaderPage headerPage;
+    private FindPatientPage findPatientPage;
+    private TestPatient patient;
+    private TestPatient patient1;
+    private RegistrationPage registrationPage;
+    private PatientDashboardPage patientDashboardPage;
+    private DataManagementPage dataManagementPage;
+    private String id;
+    private String id2;
+
+
+    @Before
+    public void setUp() throws Exception {
+        homePage = new HomePage(driver);
+        loginPage.loginAsAdmin();
+        assertPage(homePage);
+        headerPage = new HeaderPage(driver);
+        findPatientPage = new FindPatientPage(driver);
+        registrationPage = new RegistrationPage(driver);
+        patientDashboardPage = new PatientDashboardPage(driver);
+        dataManagementPage = new DataManagementPage(driver);
+        patient = new TestPatient();
+        patient1 = new TestPatient();
+
+
+    }
+
+    @Test
+    public void mergePatientByNameTest() throws Exception {
+        homePage.openRegisterAPatientApp();
+//       Register first patient
+        patient.familyName = "Mike";
+        patient.givenName = "Smith";
+        patient.gender = "Male";
+        patient.estimatedYears = "25";
+        registrationPage.enterPatientGivenName(patient.givenName);
+        registrationPage.enterPatientFamilyName(patient.familyName);
+        registrationPage.clickOnGenderLink();
+        registrationPage.selectPatientGender(patient.gender);
+        registrationPage.clickOnBirthDateLink();
+        registrationPage.enterEstimatedYears(patient.estimatedYears);
+        registrationPage.clickOnContactInfo();
+        patient.address1 = "address";
+        registrationPage.enterAddress1(patient.address1);
+        registrationPage.clickOnConfirmSection();
+        registrationPage.confirmPatient();
+        id = patientDashboardPage.findPatientId();
+        patient.Uuid =  patientIdFromUrl();
+        headerPage.clickOnHomeIcon();
+//     Register second patient
+        homePage.openRegisterAPatientApp();
+        patient1.familyName = "Mike";
+        patient1.givenName = "Kowalski";
+        patient.gender = "Male";
+        patient.estimatedYears = "25";
+        registrationPage.enterPatientGivenName(patient1.givenName);
+        registrationPage.enterPatientFamilyName(patient1.familyName);
+        registrationPage.clickOnGenderLink();
+        registrationPage.selectPatientGender(patient.gender);
+        registrationPage.clickOnBirthDateLink();
+        registrationPage.enterEstimatedYears(patient.estimatedYears);
+        registrationPage.clickOnContactInfo();
+        patient.address1 = "address";
+        registrationPage.enterAddress1(patient.address1);
+        registrationPage.clickOnConfirmSection();
+        registrationPage.confirmPatient();
+        id2 = patientDashboardPage.findPatientId();
+        patient.Uuid =  patientIdFromUrl();
+        headerPage.clickOnHomeIcon();
+        homePage.goToDataMagament();
+        dataManagementPage.goToMegrePatient();
+        dataManagementPage.enterPatient1(id);
+        dataManagementPage.enterPatient2(id2);
+        dataManagementPage.clickOnContinue();
+        dataManagementPage.clickOnMergePatient();
+        dataManagementPage.clickOnContinue();
+        headerPage.clickOnHomeLink();
+        assertTrue(patientDashboardPage.visitLink().getText().contains("Records merged! Viewing preferred patient."));
+        homePage.clickOnFindPatientRecord();
+        findPatientPage.enterPatient(patient.givenName);
+        assertTrue(driver.getPageSource().contains(patient1.givenName));
+        findPatientPage.enterPatient(patient1.givenName);
+        assertTrue(driver.getPageSource().contains(patient.givenName));
+    }
+
+
+
+    @After
+    public void tearDown() throws Exception {
+        headerPage.clickOnHomeIcon();
+        deletePatient(patient.Uuid);
+        waitForPatientDeletion(patient.Uuid);
+        headerPage.logOut();
+    }
+
+}
