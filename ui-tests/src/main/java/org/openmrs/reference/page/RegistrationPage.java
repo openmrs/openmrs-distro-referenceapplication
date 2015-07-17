@@ -55,6 +55,8 @@ public class RegistrationPage extends AbstractBasePage {
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
     public static final By FIELD_ERROR = By.id("field-error");
+    static By AUTO_LIST;
+
 	public void enterPatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName(patient.middleName);  // no middle name
@@ -263,6 +265,15 @@ public class RegistrationPage extends AbstractBasePage {
     public void enterCountry(String familyName) {
         setText(COUNTRY, familyName);
     }
-
+//  AutocompleteTest
+    public void enterAndWaitFamilyName(String family){
+        setTextToFieldNoEnter(FAMILY_NAME, family);
+        AUTO_LIST = By.xpath("//ul[4]/li/a");
+        waitForElement(AUTO_LIST);
+    }
+    public void enterAndWaitGivenName(String given) {
+        setTextToFieldNoEnter(GIVEN_NAME, given);
+        waitForElement(By.className("ui-autocomplete"));
+    }
 }
 
