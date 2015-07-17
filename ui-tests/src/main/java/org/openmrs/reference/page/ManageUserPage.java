@@ -21,7 +21,7 @@ public class ManageUserPage extends AbstractBasePage {
     private static final By SAVE_BUTTON = By.id("saveButton");
     private static final By HOME = By.id("homeNavLink");
     private static final By ACTION = By.name("action") ;
-    private static final By USER_LINK = By.linkText("34-9");
+    private static final By USER_LINK = By.linkText("44-8");
     private static final By GENDER_FEMALE = By.id("F");
     private static final By SUPER_NURSE_USER_RECORD = By.xpath("//table[@class='openmrsSearchTable']/tbody/tr/td[text()='super_nurse']");
     public ManageUserPage(WebDriver driver) {

@@ -39,27 +39,27 @@ public class VisitTypeAdministrationTest extends TestBase {
     @Test
     public void addEditRetireDeleteVisitTypeTest() throws InterruptedException {
         homePage.goToAdministration();
-        visitTypePage.manageVisitTypes();
+        visitTypePage.manage();
         assertPage(visitTypePage);
-        visitTypePage.addVisitType();
-        visitTypePage.saveVisitType();
+        visitTypePage.add();
+        visitTypePage.save();
         assertTrue(driver.getPageSource().contains("Invalid name"));
         assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
         visitTypePage.createVisitType("Private Visit", "When someone haven't insurance they must pay for visit");
         assertTrue(driver.getPageSource().contains("Visit Type saved"));
-        visitTypePage.findVisitType("Private Visit");
-        visitTypePage.fillInVisitTypeName("Payment Visit");
-        visitTypePage.saveVisitType();
+        visitTypePage.find("Private Visit");
+        visitTypePage.fillInName("Payment Visit");
+        visitTypePage.save();
         assertTrue(driver.getPageSource().contains("Visit Type saved"));
-        visitTypePage.findVisitType("Payment Visit");
-        visitTypePage.retireVisitType();
+        visitTypePage.find("Payment Visit");
+        visitTypePage.retire();
         assertTrue(driver.getPageSource().contains("Retire reason cannot be empty."));
         assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
         visitTypePage.fillInRetireReason("Test Ended");
-        visitTypePage.retireVisitType();
+        visitTypePage.retire();
         assertTrue(driver.getPageSource().contains("Visit Type retired successfully"));
-        visitTypePage.findRetiredVisitType("Payment Visit");
-        visitTypePage.deleteVisitType();
+        visitTypePage.findRetired("Payment Visit");
+        visitTypePage.delete();
         assertTrue(closeAlertAndGetItsText().contains("Are you sure you want to delete this visit type"));
         Thread.sleep(200);
         assertTrue(driver.getPageSource().contains("Visit Type deleted forever successfully"));

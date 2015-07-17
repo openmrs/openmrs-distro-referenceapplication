@@ -36,32 +36,32 @@ public class RelationTypeTest extends TestBase {
         headerPage.logOut();
     }
 
-    // Test for RA-766, RA-767, RA-768, RA-769
+    // Test for RA-762, RA-763, RA-764, RA-765
     @Test
     public void addEditRetireDeleteRelationTypeTest() throws InterruptedException {
         homePage.goToAdministration();
-        relationTypePage.manageRelationTypes();
+        relationTypePage.manage();
         assertPage(relationTypePage);
-        relationTypePage.addRelationType();
-        relationTypePage.saveRelationType();
+        relationTypePage.add();
+        relationTypePage.save();
         assertTrue(driver.getPageSource().contains("A is to B name is required"));
         assertTrue(driver.getPageSource().contains("B is to A name is required"));
         assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
         relationTypePage.createRelationType("Wife", "Husband", "Marriage");
         assertTrue(driver.getPageSource().contains("Relationship type saved"));
-        relationTypePage.findRelationType("Wife/Husband");
-        relationTypePage.fillInRelationTypeDescription("This is Super Marriage");
-        relationTypePage.saveRelationType();
+        relationTypePage.find("Wife/Husband");
+        relationTypePage.fillInDescription("This is Super Marriage");
+        relationTypePage.save();
         assertTrue(driver.getPageSource().contains("Relationship type saved"));
-        relationTypePage.findRelationType("Wife/Husband");
-        relationTypePage.retireRelationType();
+        relationTypePage.find("Wife/Husband");
+        relationTypePage.retire();
         assertTrue(driver.getPageSource().contains("Retire reason cannot be empty."));
         assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
         relationTypePage.fillInRetireReason("divorce");
-        relationTypePage.retireRelationType();
+        relationTypePage.retire();
         assertTrue(driver.getPageSource().contains("Relationship Type retired successfully"));
-        relationTypePage.findRetiredRelationType("Wife/Husband");
-        relationTypePage.deleteRelationType();
+        relationTypePage.findRetired("Wife/Husband");
+        relationTypePage.delete();
         assertTrue(closeAlertAndGetItsText().contains("Are you sure you want to purge this object"));
         assertTrue(driver.getPageSource().contains("Relationship Type deleted forever successfully"));
     }

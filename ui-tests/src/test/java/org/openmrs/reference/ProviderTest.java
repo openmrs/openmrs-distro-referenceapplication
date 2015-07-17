@@ -38,20 +38,20 @@ public class ProviderTest extends TestBase {
     @Test
     public void addRetireProviderTest() {
         homePage.goToAdministration();
-        providerPage.manageProviders();
+        providerPage.manage();
         assertPage(providerPage);
-        providerPage.addProvider();
-        providerPage.saveProvider();
+        providerPage.add();
+        providerPage.save();
         assertTrue(driver.getPageSource().contains("Provider Name or Person required"));
         providerPage.fillInIdentifier("super_nurse");
         providerPage.fillInPerson("Super Nurse");
-        providerPage.saveProvider();
+        providerPage.save();
         assertPage(providerPage);
-        providerPage.findProvider();
-        providerPage.retireProvider();
+        providerPage.findBySearch("Super Nurse");
+        providerPage.retire();
         assertTrue(driver.getPageSource().contains("Retired Reason Required"));
         providerPage.fillInRetireReason("disease");
-        providerPage.retireProvider();
+        providerPage.retire();
         assertPage(providerPage);
     }
 

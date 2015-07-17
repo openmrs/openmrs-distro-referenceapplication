@@ -7,53 +7,21 @@ import org.openqa.selenium.WebElement;
 
 import static org.openmrs.uitestframework.test.TestBase.currentPage;
 
-public class ProviderPage extends AbstractBasePage {
+public class ProviderPage extends AdminManagementPage {
 
-	static final By MANAGE_PROVIDERS = By.linkText("Manage Providers");
-	static final By ADD_PROVIDER = By.linkText("Add Provider");
-	static final By RETIRE_PROVIDER = By.name("retireProviderButton");
-	static final By SAVE_PROVIDER = By.name("saveProviderButton");
-	static final By RETIRE_REASON = By.id("retire");
 	static final By IDENTIFIER = By.name("identifier");
 	static final By PERSON = By.id("providerName");
-	static final By HOME = By.id("homeNavLink");
-	static final By PROVIDER_ELEMENT = By.className("odd");
 	static final By SEARCH_ELEMENT = By.id("inputNode");
 	public ProviderPage(WebDriver driver) {
 		super(driver);
+		MANAGE = By.linkText("Manage Providers");
+		ADD = By.linkText("Add Provider");
+		RETIRE = By.name("retireProviderButton");
+		SAVE = By.name("saveProviderButton");
 	}
 	
 
-	public void manageProviders() {
-		clickOn(MANAGE_PROVIDERS);
 
-	}
-
-	public void addProvider() {
-		clickOn(ADD_PROVIDER);
-	}
-
-	public void saveProvider() {
-		clickOn(SAVE_PROVIDER);
-	}
-
-	public void findProvider(){
-		findElement(SEARCH_ELEMENT).sendKeys("Super Nurse");
-		waitForElement(PROVIDER_ELEMENT);
-		clickOn(PROVIDER_ELEMENT);
-	}
-	public void retireProvider() {
-		clickOn(RETIRE_PROVIDER);
-	}
-
-	public void fillInField(WebElement field, String text) {
-		field.clear();
-		field.sendKeys(text);
-	}
-
-	public void clickOnHomeLink() {
-		clickOn(HOME);
-	}
 
 	public void fillInIdentifier(String text) {
 		fillInField(findElement(IDENTIFIER), text);
@@ -61,12 +29,8 @@ public class ProviderPage extends AbstractBasePage {
 
 	public void fillInPerson(String text) {
 		fillInField(findElement(PERSON),text);
-		//clickOn(By.className("hit"));
 	}
 
-	public void fillInRetireReason(String text) {
-		fillInField(findElement(RETIRE_REASON), text);
-	}
 	@Override
 	public String expectedUrlPath() {
 		return URL_ROOT + "/admin/provider/index.htm";
