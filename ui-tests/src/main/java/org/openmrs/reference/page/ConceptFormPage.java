@@ -23,7 +23,9 @@ public class ConceptFormPage extends AbstractBasePage{
     private static final By EDIT = By.linkText("Edit");
     private static final By DELETE_CONCEPT = By.xpath("(//input[@name='action'])[4]");
     private static By ADDED_DRUG;
-     private static final By SAVE_EDIT = By.xpath("//input[@name='action']");
+    private static final By SAVE_EDIT = By.xpath("//input[@name='action']");
+    private static final By RETIRE = By.xpath("(//input[@name='action'])[5]");
+    private static final By UNRETIRE = By.xpath("//div[@id='content']/div[3]/div[3]/form/input");
 
 
 
@@ -66,6 +68,10 @@ public class ConceptFormPage extends AbstractBasePage{
         } finally {
             acceptNextAlert = true;
         }
+    }
+    public void retire(){
+        clickOn(RETIRE);
+        clickOn(UNRETIRE);
     }
 
 
