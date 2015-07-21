@@ -19,6 +19,7 @@ public class HomePage extends AbstractBasePage {
     static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
     static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
     static final By FIND_PATIENT_RECORD = By.cssSelector("i.icon-search");
+    static final By DATA_MANAGAMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -108,6 +109,8 @@ public class HomePage extends AbstractBasePage {
     }
 
     public void clickOnFindPatientRecord(){ clickOn(FIND_PATIENT_RECORD);}
+    public void goToDataMagament(){ clickOn(DATA_MANAGAMENT);}
+
 
     @Override
     public String expectedUrlPath() {
