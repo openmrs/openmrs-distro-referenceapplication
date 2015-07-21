@@ -23,7 +23,13 @@ public class ManageUserPage extends AbstractBasePage {
     private static final By ACTION = By.name("action") ;
     private static final By USER_LINK = By.linkText("44-8");
     private static final By GENDER_FEMALE = By.id("F");
+    private static final By GENDER_MALE = By.id("M");
     private static final By SUPER_NURSE_USER_RECORD = By.xpath("//table[@class='openmrsSearchTable']/tbody/tr/td[text()='super_nurse']");
+    private static final By USERNAME = By.name("username");
+    private static final By ORGANIZATIONAL_DOCTOR = By.id("roleStrings.Organizational:Doctor");
+    public String NAME;
+    private static final By FIND_USER = By.name("name");
+    private static final By DELETE_USER = By.xpath("(//input[@name='action'])[3]");
     public ManageUserPage(WebDriver driver) {
         super(driver);
     }
@@ -56,6 +62,21 @@ public class ManageUserPage extends AbstractBasePage {
         clickOn(SAVE_BUTTON);
 
     }
+    public void enterUserMale(String givenName, String familyName,String username, String password) {
+
+        findElement(PERSON_GIVEN_NAME).clear();
+        findElement(PERSON_GIVEN_NAME).sendKeys(givenName);
+        NAME = givenName;
+        findElement(PERSON_FAMILY_NAME).clear();
+        findElement(PERSON_FAMILY_NAME).sendKeys(familyName);
+        clickOn(GENDER_MALE);
+        findElement(USERNAME).clear();
+        findElement(USERNAME).sendKeys(username);
+        findElement(PASSWORD).clear();
+        findElement(PASSWORD).sendKeys(password);
+        findElement(CONFIRM).clear();
+        findElement(CONFIRM).sendKeys(password);
+            }
 
     public boolean userSuperNurseExists() {
         clickOn(ACTION);
@@ -77,7 +98,15 @@ public class ManageUserPage extends AbstractBasePage {
         clickOn(By.id(roleToAssign));
         clickOn(SAVE_BUTTON);
     }
-
+    public void chooseRole(){ clickOn(ORGANIZATIONAL_DOCTOR);}
+    public void saveUser(){ clickOn(SAVE_BUTTON);}
+    public void findUser(String user){
+        setText(FIND_USER, user);
+        NAME = user;
+        clickOn(ACTION);
+        findElement(By.linkText("45-5")).click();
+    }
+    public void deleteUser(){ clickOn(DELETE_USER);}
 
     public void clickOnHomeLink() {
         clickOn(HOME);
