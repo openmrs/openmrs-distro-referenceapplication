@@ -22,6 +22,13 @@
     <profiles>
         <profile>
             <id>run-build-tests</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <!--<property>-->
+                <!--<name>env.bambooBuildNumber</name>-->
+                <!--</
+                property>-->
+            </activation>
             <build>
                 <plugins>
                     <plugin>
