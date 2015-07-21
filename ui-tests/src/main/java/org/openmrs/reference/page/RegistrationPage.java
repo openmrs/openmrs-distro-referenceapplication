@@ -275,5 +275,20 @@ public class RegistrationPage extends AbstractBasePage {
         setTextToFieldNoEnter(GIVEN_NAME, given);
         waitForElement(By.className("ui-autocomplete"));
     }
+//    Merge Patients
+    public void enterMegrePatient(TestPatient patient) throws InterruptedException{
+        enterPatientGivenName(patient.givenName);
+        enterPatientFamilyName(patient.familyName);
+        clickOnGenderLink();
+        selectPatientGender(patient.gender);
+        clickOnBirthDateLink();
+        enterEstimatedYears(patient.estimatedYears);
+        clickOnContactInfo();
+        enterAddress1(patient.address1);
+        clickOnConfirmSection();
+        confirmPatient();
+    }
+
+
 }
 
