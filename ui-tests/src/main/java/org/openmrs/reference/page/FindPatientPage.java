@@ -18,17 +18,18 @@ public class FindPatientPage extends AbstractBasePage {
     private static final By PATIENT_SEARCH = By.id("patient-search");
     public static final By PATIENT_SEARCH_RESULT = By.id("patient-search-results-table");
     public static final By PATIENT_NAME_SEARCH_RESULT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");
-
+    private static final By PATIENT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");
 
 
     public void enterPatient(String patient) {
         setTextToFieldNoEnter(PATIENT_SEARCH, patient);
 
     }
-
+    public void clickOnFirstPatient(){ clickOn(PATIENT);}
     public WebElement nameSearchResult() {
         return findElement(PATIENT_NAME_SEARCH_RESULT);
     }
+
     
 
     @Override
