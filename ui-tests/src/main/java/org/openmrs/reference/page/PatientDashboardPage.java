@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Calendar;
+
 
 public class PatientDashboardPage extends AbstractBasePage {
 
@@ -30,10 +32,23 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By SHOW_CONTACT_INFO = By.cssSelector("span.show");
 	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
 	private static final By PATIENT_ID = By.cssSelector("div.identifiers > span");
+	private static final By CODE = By.className("code");
+	private static final By UI_ID_1 = By.id("ui-id-1");
+	private static final By UI_MENU_ITEM = By.className("ui-menu-item");
+	private static final By PRIMARY_DIAGNOSIS_ELEMENT = By.cssSelector(".diagnosis.primary .matched-name");
+	private static final By SECONDARY_DIAGNOSIS_ELEMENT = By.xpath("//ul[2]/li/span/div/strong");
+	private static final By CURRENT_DATE = By.linkText("Today");
+	private static final By VISIT_NOTE_ENCOUNTER = By.xpath("//div[@id='visit-details']/ul/li/ul/li/div/strong/span[text()='Visit Note']");
+	private static final By NOTE = By.id("w10");
+	private static final By SAVE_VISIT_NOTE = By.cssSelector(".submitButton.confirm");
+	private static final By CONFIRM_DEL_BUTTON = By.cssSelector("#delete-encounter-dialog > div.dialog-content > button.confirm.right");
+	private static final By DEL_DIAGNOSIS = By.xpath("//div[@id='display-encounter-diagnoses-container']/ul/li/span/i");
+	private static final By DATE_FIELD = By.id("w5-display");
+	private static final By PROVIDER = By.id("w1");
+	private static final By LOCATION = By.id("w3");
+	private static final By WHO_WHEN_WHERE = By.id("who-when-where");
 
-
-
-    public PatientDashboardPage(WebDriver driver) {
+	public PatientDashboardPage(WebDriver driver) {
 	    super(driver);
     }
 
@@ -102,21 +117,39 @@ public class PatientDashboardPage extends AbstractBasePage {
 
 	public void enterDiagnosis(String diag) {
 		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
-		clickOn(By.className("code"));
+		clickOn(CODE);
+	}
+
+	public void addDiagnosis(String diag) {
+		WebElement diagnosisElement = findElement(DIAGNOSIS_SEARCH);
+		diagnosisElement.click();
+		enterDiagnosis(diag);
+		diagnosisElement.clear();
+		diagnosisElement.click();
+
+	}
+
+	public void addSecondaryDiagnosis(String diag) {
+		WebElement diagnosisElement = findElement(DIAGNOSIS_SEARCH);
+		diagnosisElement.click();
+		enterSecondaryDiagnosis(diag);
+		diagnosisElement.clear();
+		diagnosisElement.click();
+
 	}
 
 	public void enterSecondaryDiagnosis(String diag) {
 		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
-		waitForElement(By.id("ui-id-1"));
-		clickOn(By.className("ui-menu-item"));
+		waitForElement(UI_ID_1);
+		clickOn(UI_MENU_ITEM);
 	}
 
 	public String primaryDiagnosis() {
-		return findElement(By.cssSelector(".diagnosis.primary .matched-name")).getText().trim();
+		return findElement(PRIMARY_DIAGNOSIS_ELEMENT).getText().trim();
 	}
 
 	public String secondaryDiagnosis() {
-		return findElement(By.xpath("//ul[2]/li/span/div/strong")).getText();
+		return findElement(SECONDARY_DIAGNOSIS_ELEMENT).getText();
 	}
 
 	public WebElement location() {
@@ -124,11 +157,15 @@ public class PatientDashboardPage extends AbstractBasePage {
 	}
 
 	public void enterNote(String note) {
-		setText(By.id("w10"), note);
+		setText(NOTE, note);
 	}
 
+	public void addNote(String note) {
+		findElement(NOTE).clear();
+		enterNote(note);
+	}
 	public void save() {
-		clickOn(By.cssSelector(".submitButton.confirm"));
+		clickOn(SAVE_VISIT_NOTE);
 	}
 
 	public WebElement visitLink() {
@@ -163,7 +200,35 @@ public class PatientDashboardPage extends AbstractBasePage {
 		return findElement(PATIENT_ID).getText();
 	}
 
+	public void goToEditVisitNote() {
+		clickOn(CURRENT_DATE);
+		String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
+		clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='"+visitNoteId+"']"));
+	}
 
+	public void deleteVisitNote() {
+		String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
+		clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='" + visitNoteId + "'][2]"));
+	}
 
+	public void confirmDeletion() {
+		clickOn(CONFIRM_DEL_BUTTON);
+	}
+	public void deleteDiagnosis() {
+		clickOn(DEL_DIAGNOSIS);
+	}
 
+	public void getCurrentDate() {
+		findElement(DATE_FIELD).click();
+		findElement(By.linkText("" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH))).click();
+	}
+
+	public void selectProviderAndLocation() {
+		new Select(findElement(PROVIDER)).selectByVisibleText("Super User");
+		new Select(findElement(LOCATION)).selectByVisibleText("Isolation Ward");
+	}
+
+	public WebElement findPageElement() {
+		return findElement(WHO_WHEN_WHERE);
+	}
 }

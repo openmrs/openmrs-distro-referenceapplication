@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.Calendar;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -41,15 +42,14 @@ public class VisitNoteTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-        deletePatient(patient.uuid);
+//        deletePatient(patient.uuid);
         headerPage.logOut();
     }
 
-    //Test for RA-720
+    //Test for RA-720, RA-682, RA-694
     @Ignore
     @Test
-    public void testAddVisitNote() {
-        driver.findElement(By.cssSelector("i.icon-calendar")).click();
+    public void testAddEditVisitNote() {
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
         assertPage(patientDashboardPage);
         if(!patientDashboardPage.hasActiveVisit()) {
@@ -57,20 +57,24 @@ public class VisitNoteTest extends TestBase {
             patientDashboardPage.waitForVisitLinkHidden();
         }
         patientDashboardPage.visitNote();
-        assertNotNull(driver.findElement(By.id("who-when-where")));
-        new Select(driver.findElement(By.id("w1"))).selectByVisibleText("Super User");
-        new Select(driver.findElement(By.id("w3"))).selectByVisibleText("Isolation Ward");
-        driver.findElement(By.id("w5-display")).click();
-        driver.findElement(By.linkText("" +Calendar.getInstance().get(Calendar.DAY_OF_MONTH))).click();
-        WebElement diagnosisElement = driver.findElement(By.id("diagnosis-search"));
-        diagnosisElement.click();
-        patientDashboardPage.enterDiagnosis("MALARIA");
-        diagnosisElement.clear();
-        diagnosisElement.click();
+        assertNotNull(patientDashboardPage.findPageElement());
+        patientDashboardPage.selectProviderAndLocation();
+        patientDashboardPage.addDiagnosis("MALARIA");
         patientDashboardPage.enterSecondaryDiagnosis("CANCER");
-        driver.findElement(By.id("w10")).clear();
-        driver.findElement(By.id("w10")).sendKeys("This is a note");
-        driver.findElement(By.xpath("//input[@value='Save']")).click();
+        patientDashboardPage.addNote("This is a note");
+        patientDashboardPage.save();
         assertTrue(driver.getPageSource().contains("MALARIA") && driver.getPageSource().contains("CANCER"));
+        patientDashboardPage.goToEditVisitNote();
+        patientDashboardPage.deleteDiagnosis();
+        patientDashboardPage.addSecondaryDiagnosis("flue");
+        assertEquals("flue", patientDashboardPage.secondaryDiagnosis());
+        patientDashboardPage.save();
+        assertNotNull(patientDashboardPage.visitLink());
+
+        patientDashboardPage.deleteVisitNote();
+        assertTrue(driver.getPageSource().contains("Are you sure you want to delete this encounter from the visit?"));
+        patientDashboardPage.confirmDeletion();
+        assertNotNull(patientDashboardPage.visitLink());
+
     }
 }
