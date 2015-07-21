@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by nata on 20.07.15.
  */
-public class EditPhoneNumberTest extends TestBase {
+public class XSSOnPhoneNumberFieldTest extends TestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
