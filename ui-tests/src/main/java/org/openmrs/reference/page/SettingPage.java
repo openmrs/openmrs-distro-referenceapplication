@@ -1,7 +1,6 @@
 package org.openmrs.reference.page;
 
 
-import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +20,11 @@ public class SettingPage extends AbstractBasePage{
     public String GIVEN;
     public String FAMILY;
     public static By LIST = By.className("ui-corner-all");
+    private static final By SECURITY = By.linkText("Security");
+    private static final By FALSE = By.id("settings[1].globalProperty.propertyValue_f");
+    private static final By SAVE_PROPERTIES = By.id("saveButton");
+    private static final By TRUE = By.id("settings[1].globalProperty.propertyValue_t");
+
 
 
     public void clickOnSetting(){ clickOn(SETTING);}
@@ -40,7 +44,13 @@ public class SettingPage extends AbstractBasePage{
     public void clearFamilyList(){ findElement(FAMILY_NAME_LIST).clear();}
     public void clearGivenList(){ findElement(GIVEN_NAME_LIST).clear();}
     public void waitForList(){ waitForElement(LIST);}
-
+    public void clickOnSecurity(){ clickOn(SECURITY);}
+    public void chooseFalse(){ clickOn(FALSE);}
+    public void saveProperties(){ clickOn(SAVE_PROPERTIES);}
+    public void chooseTrue(){
+        clickOn(TRUE);
+        clickOn(SAVE_PROPERTIES);
+    }
 
 
 
