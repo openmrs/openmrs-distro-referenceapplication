@@ -32,7 +32,7 @@ public class XSSOnPhoneNumberFieldTest extends TestBase {
     }
 
     @Test
-    public void editPhoneContactTest() throws Exception {
+    public void  XSSOnPhoneNumberFieldTest() throws Exception {
         patientDashboardPage.clickOnShowContact();
         patientDashboardPage.clickOnEditContact();
         registrationPage.clickOnPhoneNumberEdit();
