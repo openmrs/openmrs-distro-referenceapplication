@@ -1,5 +1,6 @@
 package org.openmrs.reference.page;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -106,9 +107,8 @@ public class ManageUserPage extends AbstractBasePage {
         setText(FIND_USER, user);
         NAME = user;
         clickOn(ACTION);
-        findElement(By.linkText("45-5")).click();
+        findElement(By.xpath("//div[@id='content']/div[2]/table/tbody/tr/td/a")).click();
     }
-
     public void removeUser(String user) {
         setText(FIND_USER, user);
         clickOn(ACTION);
@@ -116,6 +116,12 @@ public class ManageUserPage extends AbstractBasePage {
         deleteUser();
     }
     public void deleteUser(){ clickOn(DELETE_USER);}
+    public void changePassword(String password){
+        findElement(PASSWORD).clear();
+        findElement(PASSWORD).sendKeys(password);
+        findElement(CONFIRM).clear();
+        findElement(CONFIRM).sendKeys(password);
+    }
 
     public void clickOnHomeLink() {
         clickOn(HOME);
