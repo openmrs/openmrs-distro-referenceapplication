@@ -48,6 +48,12 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By PROVIDER = By.id("w1");
 	private static final By LOCATION = By.id("w3");
 	private static final By WHO_WHEN_WHERE = By.id("who-when-where");
+	private static final By REQUEST_APPOINTMENT = By.linkText("Request Appointment");
+	private static final By FRAME_VALUE = By.id("min-time-frame-value");
+	private static final By FRAME_UNITS = By.id("min-time-frame-units");
+	private static final By SAVE_REQUEST = By.id("save-button");
+	private static final By APPOINTMENT_TYPE = By.id("appointment-type");
+	private static final By SERVICE_DROPDOWN = By.cssSelector("a.ng-scope.ng-binding");
 
 	private static final By ERROR = By.cssSelector("li.error > span");
 	private static final By ADD_PAST_VISIT = By.linkText("Add Past Visit");
@@ -299,5 +305,14 @@ public class PatientDashboardPage extends AbstractBasePage {
 		waitForVisitLinkHidden();
 		return text;
 	}
-
+	
+	public void clickOnRequest(){ clickOn(REQUEST_APPOINTMENT);}
+	public void enterValue(String value){ setText(FRAME_VALUE, value);}
+	public void selectUnits(String units){ selectFrom(FRAME_UNITS, units);}
+	public void saveRequest(){ clickOn(SAVE_REQUEST);}
+	public void enterAppointmentType(String type){
+		setTextToFieldNoEnter(APPOINTMENT_TYPE, type);
+		waitForElement(SERVICE_DROPDOWN);
+		clickOn(SERVICE_DROPDOWN);
+	}
 }
