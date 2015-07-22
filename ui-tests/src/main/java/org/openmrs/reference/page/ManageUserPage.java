@@ -21,10 +21,10 @@ public class ManageUserPage extends AbstractBasePage {
     private static final By SAVE_BUTTON = By.id("saveButton");
     private static final By HOME = By.id("homeNavLink");
     private static final By ACTION = By.name("action") ;
-    private static final By USER_LINK = By.linkText("44-8");
+    private static final By USER_LINK = By.xpath("//table[@class='openmrsSearchTable']/tbody/tr/td/a");
     private static final By GENDER_FEMALE = By.id("F");
     private static final By GENDER_MALE = By.id("M");
-    private static final By SUPER_NURSE_USER_RECORD = By.xpath("//table[@class='openmrsSearchTable']/tbody/tr/td[text()='super_nurse']");
+    private static final String USER_RECORD = "//table[@class='openmrsSearchTable']/tbody/tr/td[text()='";
     private static final By USERNAME = By.name("username");
     private static final By ORGANIZATIONAL_DOCTOR = By.id("roleStrings.Organizational:Doctor");
     public String NAME;
@@ -48,9 +48,10 @@ public class ManageUserPage extends AbstractBasePage {
         findElement(CREATE_NEW_PERSON).click();
     }
 
-    public void fillInPersonName(String givenName, String familyName, String password) {
+    public void fillInPersonName(String givenName, String familyName, String username, String password) {
 
-        findElement(PERSON_GIVEN_NAME).clear();
+        findElement(USERNAME).clear();
+        findElement(USERNAME).sendKeys(username);findElement(PERSON_GIVEN_NAME).clear();
         findElement(PERSON_GIVEN_NAME).sendKeys(givenName);
         findElement(PERSON_FAMILY_NAME).clear();
         findElement(PERSON_FAMILY_NAME).sendKeys(familyName);
@@ -78,16 +79,17 @@ public class ManageUserPage extends AbstractBasePage {
         findElement(CONFIRM).sendKeys(password);
             }
 
-    public boolean userSuperNurseExists() {
+    public boolean userExists(String username) {
         clickOn(ACTION);
         try {
-            return findElement(SUPER_NURSE_USER_RECORD) != null;
+            return findElement(By.xpath(USER_RECORD+username+"']")) != null;
         } catch(Exception e) {
             return false;
         }
     }
 
-    public void assignRolesToUserSuperNurse(String roleToUnassign, String roleToAssign) throws InterruptedException {
+    public void assignRolesToUser(String roleToUnassign, String roleToAssign, String user) throws InterruptedException {
+        setText(FIND_USER, user);
         clickOn(ACTION);
         clickOn(USER_LINK);
         if(roleToUnassign != null) {
@@ -105,6 +107,13 @@ public class ManageUserPage extends AbstractBasePage {
         NAME = user;
         clickOn(ACTION);
         findElement(By.linkText("45-5")).click();
+    }
+
+    public void removeUser(String user) {
+        setText(FIND_USER, user);
+        clickOn(ACTION);
+        clickOn(USER_LINK);
+        deleteUser();
     }
     public void deleteUser(){ clickOn(DELETE_USER);}
 

@@ -56,14 +56,14 @@ public class AddRolesToUserTest extends TestBase {
         Map<String,Integer> roleModules = new HashMap();
 
         fillInRoleModules(roleModules);
-        if(!manageUserPage.userSuperNurseExists()) {
+        if(!manageUserPage.userExists("super_nurse")) {
             manageUserPage.clickOnAddUser();
             manageUserPage.createNewPerson();
-            manageUserPage.fillInPersonName("Super", "Nurse", "nurse321");
+            manageUserPage.fillInPersonName("Super", "Nurse", "super_nurse", "Nurse321");
         }
         String oldRole = null;
         for(Entry<String, Integer> role : roleModules.entrySet()) {
-            manageUserPage.assignRolesToUserSuperNurse(oldRole,role.getKey());
+            manageUserPage.assignRolesToUser(oldRole,role.getKey(),"super_nurse");
             reLoginAsUser();
             assertThat(homePage.numberOfAppsPresent(), is(role.getValue()));
             reLoginAsAdmin();
@@ -103,7 +103,7 @@ public class AddRolesToUserTest extends TestBase {
     }
     @After
     public void tearDown() throws Exception {
-        manageUserPage.assignRolesToUserSuperNurse(null,"roleStrings.Organizational:RegistrationClerk");
+        manageUserPage.removeUser("super_nurse");
         manageUserPage.clickOnHomeLink();
         headerPage.logOut();
     }
