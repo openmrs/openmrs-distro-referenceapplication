@@ -6,14 +6,18 @@ import org.openmrs.uitestframework.test.TestData.PatientInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+
 /**
  * The register-a-new-patient page.
  */
 public class RegistrationPage extends AbstractBasePage {
 
 
-	public RegistrationPage(WebDriver driver) {
+	public RegistrationPage(WebDriver driver) throws AWTException {
         super(driver);
+        robot = new Robot();
     }
 
 	static final By CONTACT_INFO_SECTION = By.id("contactInfo_label");
@@ -56,6 +60,7 @@ public class RegistrationPage extends AbstractBasePage {
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
     public static final By FIELD_ERROR = By.id("field-error");
     static By AUTO_LIST;
+    private Robot robot;
 
 	public void enterPatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
@@ -79,6 +84,11 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnGenderLink();
         selectPatientGender(patient.gender);
         clickOnConfirmSection();
+    }
+
+    public void enterUnidentifiedPatientByKeyboard(TestPatient patient) throws InterruptedException {
+        selectUnidentifiedPatientByKeyboard();
+        selectPatientGenderByKeyboard(patient.gender);
     }
 
 	public void enterPatientAddress(TestPatient patient) {
@@ -288,7 +298,29 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnConfirmSection();
         confirmPatient();
     }
+    private void keyPress(int key) {
+        robot.keyPress(key);
+        robot.keyRelease(key);
+    }
+
+    public void selectUnidentifiedPatientByKeyboard(){
+        clickOn(UNKNOWN_PATIENT);
+        keyPress(KeyEvent.VK_TAB);
+        keyPress(KeyEvent.VK_SPACE);
+    }
 
 
+    public void selectPatientGenderByKeyboard(String gender) {
+        keyPress(KeyEvent.VK_UP);
+        if(!gender.equals("Male")) {
+            keyPress(KeyEvent.VK_DOWN);
+        }
+
+        keyPress(KeyEvent.VK_TAB);
+    }
+
+    public void confirmPatientByKeyboard() throws InterruptedException{
+        keyPress(KeyEvent.VK_ENTER);
+    }
 }
 

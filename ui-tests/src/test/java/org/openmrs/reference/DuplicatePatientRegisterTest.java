@@ -11,6 +11,8 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 
+import java.awt.*;
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -21,7 +23,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     private TestPatient patient1;
 
     @Before
-    public void setUp() {
+    public void setUp() throws AWTException {
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);

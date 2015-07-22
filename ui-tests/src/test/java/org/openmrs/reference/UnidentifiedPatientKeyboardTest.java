@@ -5,7 +5,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
@@ -19,12 +18,15 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class RegistrationAppTest extends TestBase {
+/**
+ * Created by tomasz on 22.07.15.
+ */
+public class UnidentifiedPatientKeyboardTest extends TestBase {
     private HeaderPage headerPage;
     private RegistrationPage registrationPage;
     private HomePage homePage;
-	private PatientDashboardPage patientDashboardPage;
-	private TestPatient patient;
+    private PatientDashboardPage patientDashboardPage;
+    private TestPatient patient;
 
     @Before
     public void setUp() throws Exception {
@@ -32,40 +34,12 @@ public class RegistrationAppTest extends TestBase {
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
-    	assertPage(loginPage);
+        assertPage(loginPage);
         loginPage.loginAsClerk();
         assertPage(homePage);
     }
 
-    // Test for Story RA-71
-    @Ignore
-    @Test
-    @Category(org.openmrs.reference.groups.BuildTests.class)
-    public void registerAPatient() throws InterruptedException {
-        homePage.openRegisterAPatientApp();
-        patient = PatientGenerator.generateTestPatient();
-        registrationPage.enterPatient(patient);
-
-        String address = patient.address1 + " " + 
-        		patient.address2 + " " + 
-        		patient.city + " " + 
-        		patient.state + " " + 
-        		patient.country + " " + 
-        		patient.postalCode;
-
-        assertEquals(patient.givenName + " " + patient.familyName, registrationPage.getNameInConfirmationPage());
-        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
-        assertEquals(patient.birthDay + " " + patient.birthMonth + " " + patient.birthYear, registrationPage.getBirthdateInConfirmationPage());
-        assertEquals(address, registrationPage.getAddressInConfirmationPage());
-        assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
-        
-        registrationPage.confirmPatient();
-        patient.Uuid = patientIdFromUrl();
-        assertPage(patientDashboardPage);
-		assertTrue(driver.getPageSource().contains(patient.givenName + " " + patient.familyName));
-    }
-    
-	@After
+    @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
         deletePatient(patient.Uuid);
@@ -79,12 +53,12 @@ public class RegistrationAppTest extends TestBase {
     public void registerUnidentifiedPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();
-        registrationPage.enterUnidentifiedPatient(patient);
+        registrationPage.enterUnidentifiedPatientByKeyboard(patient);
 
         assertEquals("--", registrationPage.getNameInConfirmationPage());
         assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
 
-        registrationPage.confirmPatient();
+        registrationPage.confirmPatientByKeyboard();
         patient.Uuid = patientIdFromUrl();
         assertPage(patientDashboardPage);	// remember just-registered patient id, so it can be removed.
         assertTrue(driver.getPageSource().contains("UNKNOWN UNKNOWN"));
