@@ -32,7 +32,7 @@ public class AddPastVisitTest extends TestBase {
         headerPage = new HeaderPage(driver);
     }
     @Test
-    public void AddPastVisitTest() throws Exception {
+    public void addPastVisitTest() throws Exception {
         homePage.goToActiveVisitPatient();
         patientDashboardPage.addPastVisit();
         if(patientDashboardPage.errorPresent()) {
