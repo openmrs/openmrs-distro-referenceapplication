@@ -8,6 +8,10 @@ import org.junit.Test;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
+
+import javax.ws.rs.DELETE;
+
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
@@ -57,15 +61,20 @@ public class DeleteRequestAppointmentTest extends TestBase {
         findPatientPage.enterPatient(id);
         findPatientPage.clickOnFirstPatient();
         manageAppointmentPage.deleteRequest();
-        headerPage.clickOnHomeIcon();
-        appointmentBlocksPage.goToAppointmentBlock();
-        appointmentBlocksPage.selectLocation("Registration Desk");
-        appointmentBlocksPage.findBlock();
-        appointmentBlocksPage.clickOnDelete();
-        appointmentBlocksPage.clickOnConfirmDelete();
+        if (!manageAppointmentPage.deleteRequestPresent()) {
+            manageAppointmentPage.deleteRequest();
+        } else {
+            assertNotNull(manageAppointmentPage.DELETE_REQUEST);
+            headerPage.clickOnHomeIcon();
+            appointmentBlocksPage.goToAppointmentBlock();
+            appointmentBlocksPage.selectLocation("Registration Desk");
+            appointmentBlocksPage.findBlock();
+            appointmentBlocksPage.clickOnDelete();
+            appointmentBlocksPage.clickOnConfirmDelete();
+            assertNotNull(appointmentBlocksPage.DELETE);
+        }
+
     }
-
-
 
     @After
     public void tearDown() throws Exception {

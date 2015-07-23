@@ -25,7 +25,7 @@ public class AppointmentBlocksPage extends AbstractBasePage {
     private static final By PROVIDER = By.xpath("(//input[@type='text'])[3]");
     public static final By CURRENT_DAY = By.className("fc-state-highlight");
     private static final By LOCATION_IN_BLOCK = By.xpath("//div[@id='select-location']/select");
-    private static final By DELETE = By.linkText("Delete");
+    public static final By DELETE = By.linkText("Delete");
     private static final By DELETE_CONFIRM = By.cssSelector("#delete-appointment-block-modal-buttons .confirm");
     private static final By SERVICE_DELETE = By.xpath("//div[@id='appointment-block-form']/selectmultipleappointmenttypes/div/div/div/div/i");
     public void goToAppointmentBlock(){
