@@ -34,37 +34,43 @@ public class AddUserTest extends TestBase {
     @Test
     public void addUserTest() throws Exception {
         administrationPage.clickOnManageUsers();
-        manageUserPage.clickOnAddUser();
-        manageUserPage.createNewPerson();
-        manageUserPage.saveUser();
-        assertTrue(manageUserPage.errorDemographic().contains("You must define at least one name"));
-        assertTrue(manageUserPage.errorGender().contains("Cannot be empty or null"));
-        assertTrue(manageUserPage.errorUser().contains("User can log in with either Username or System Id"));
-        manageUserPage.enterGivenFamily("Super", "Nurse");
-        manageUserPage.saveUser();
-        assertTrue(manageUserPage.errorUser().contains("User can log in with either Username or System Id"));
-        assertTrue(driver.getPageSource().contains("Cannot be empty or null"));
-        manageUserPage.clickOnFemale();
-        manageUserPage.saveUser();
-        assertTrue(driver.getPageSource().contains("User can log in with either Username or System Id"));
-        manageUserPage.enterUsernamePassword("super_nurse", "supernurse", "supernurse123");
-        manageUserPage.saveUser();
-        assertTrue(manageUserPage.errorPassword().contains("Password should be 8 characters long and should have both upper and lower case characters , at least one digit , at least one non digit"));
-        manageUserPage.enterUsernamePassword("super_nurse", "Nurse123", "Nurse123");
-        manageUserPage.saveUser();
-        settingPage.waitForMessage();
-        assertTrue(driver.getPageSource().contains("User Saved"));
-        headerPage.logOut();
-        loginPage.login("super_nurse","Nurse123");
-        assertTrue(driver.getPageSource().contains("super_nurse"));
-        headerPage.logOut();
-        loginPage.loginAsAdmin();
-        homePage.goToAdministration();
-        administrationPage.clickOnManageUsers();
-        manageUserPage.findUser("super_nurse");
-        manageUserPage.deleteUser();
-        settingPage.waitForMessage();
-        assertTrue(driver.getPageSource().contains("Successfully deleted user."));
+        if (manageUserPage.userExists("super_nurse")) {
+            manageUserPage.findUser("super_nurse");
+            manageUserPage.deleteUser();
+        }
+        else {
+            manageUserPage.clickOnAddUser();
+            manageUserPage.createNewPerson();
+            manageUserPage.saveUser();
+            assertTrue(manageUserPage.errorDemographic().contains("You must define at least one name"));
+            assertTrue(manageUserPage.errorGender().contains("Cannot be empty or null"));
+            assertTrue(manageUserPage.errorUser().contains("User can log in with either Username or System Id"));
+            manageUserPage.enterGivenFamily("Super", "Nurse");
+            manageUserPage.saveUser();
+            assertTrue(manageUserPage.errorUser().contains("User can log in with either Username or System Id"));
+            assertTrue(driver.getPageSource().contains("Cannot be empty or null"));
+            manageUserPage.clickOnFemale();
+            manageUserPage.saveUser();
+            assertTrue(driver.getPageSource().contains("User can log in with either Username or System Id"));
+            manageUserPage.enterUsernamePassword("super_nurse", "supernurse", "supernurse123");
+            manageUserPage.saveUser();
+            assertTrue(manageUserPage.errorPassword().contains("Password should be 8 characters long and should have both upper and lower case characters , at least one digit , at least one non digit"));
+            manageUserPage.enterUsernamePassword("super_nurse", "Nurse123", "Nurse123");
+            manageUserPage.saveUser();
+            settingPage.waitForMessage();
+            assertTrue(driver.getPageSource().contains("User Saved"));
+            headerPage.logOut();
+            loginPage.login("super_nurse", "Nurse123");
+            assertTrue(driver.getPageSource().contains("super_nurse"));
+            headerPage.logOut();
+            loginPage.loginAsAdmin();
+            homePage.goToAdministration();
+            administrationPage.clickOnManageUsers();
+            manageUserPage.findUser("super_nurse");
+            manageUserPage.deleteUser();
+            settingPage.waitForMessage();
+            assertTrue(driver.getPageSource().contains("Successfully deleted user."));
+        }
     }
 
     @After
