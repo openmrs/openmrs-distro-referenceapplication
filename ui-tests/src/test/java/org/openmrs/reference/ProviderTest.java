@@ -34,9 +34,9 @@ public class ProviderTest extends TestBase {
         headerPage.logOut();
     }
 
-    //combined test for RA-747 and RA-748
+    //combined test for RA-747, RA-701 and RA-748
     @Test
-    public void addRetireProviderTest() {
+    public void addEditRetireProviderTest() {
         homePage.goToAdministration();
         providerPage.manage();
         assertPage(providerPage);
@@ -47,6 +47,9 @@ public class ProviderTest extends TestBase {
         providerPage.fillInPerson("Super Nurse");
         providerPage.save();
         assertPage(providerPage);
+        providerPage.findBySearch("Super Nurse");
+        providerPage.fillInIdentifier("super_nurse2");
+        providerPage.save();
         providerPage.findBySearch("Super Nurse");
         providerPage.retire();
         assertTrue(driver.getPageSource().contains("Retired Reason Required"));
