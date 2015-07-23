@@ -54,6 +54,13 @@ public class AddUserTest extends TestBase {
         manageUserPage.saveUser();
         settingPage.waitForMessage();
         assertTrue(driver.getPageSource().contains("User Saved"));
+        headerPage.logOut();
+        loginPage.login("super_nurse","Nurse123");
+        assertTrue(driver.getPageSource().contains("super_nurse"));
+        headerPage.logOut();
+        loginPage.loginAsAdmin();
+        homePage.goToAdministration();
+        administrationPage.clickOnManageUsers();
         manageUserPage.findUser("super_nurse");
         manageUserPage.deleteUser();
         settingPage.waitForMessage();
