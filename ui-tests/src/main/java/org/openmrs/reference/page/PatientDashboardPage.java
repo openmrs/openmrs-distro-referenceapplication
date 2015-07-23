@@ -57,6 +57,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By CHANGE_DATE = By.cssSelector("button.confirm.no-color");
 	public static final By SUCCESS_MESSAGE = By.cssSelector("div.toast-item.toast-type-success > p");
 	private static final By DAY = By.xpath("//table[@class=' table-condensed']/tbody/tr[1]/td[0]");
+	private static final By MERGE_VISIT_BUTTON = By.xpath("//a[@id='org.openmrs.module.coreapps.mergeVisits']/li");
+	private static final By MERGE = By.id("mergeVisitsBtn");
 
 	public PatientDashboardPage(WebDriver driver) {
 		super(driver);
@@ -284,6 +286,18 @@ public class PatientDashboardPage extends AbstractBasePage {
 				}
 			}
 		}
+	}
+
+	public String mergeVisits() {
+
+		clickOn(MERGE_VISIT_BUTTON);
+		driver.findElement(By.xpath("//table[@id='active-visits']/tbody/tr/td/input[@name='mergeVisits']")).click();
+		driver.findElement(By.xpath("//table[@id='active-visits']/tbody/tr[2]/td/input[@name='mergeVisits']")).click();
+		clickOn(MERGE);
+		waitForVisitLink();
+		String text = findElement(VISIT_LINK).getText();
+		waitForVisitLinkHidden();
+		return text;
 	}
 
 }
