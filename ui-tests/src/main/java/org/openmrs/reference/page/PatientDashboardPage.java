@@ -305,7 +305,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 		waitForVisitLinkHidden();
 		return text;
 	}
-	
+
 	public void clickOnRequest(){ clickOn(REQUEST_APPOINTMENT);}
 	public void enterValue(String value){ setText(FRAME_VALUE, value);}
 	public void selectUnits(String units){ selectFrom(FRAME_UNITS, units);}
