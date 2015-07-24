@@ -54,7 +54,6 @@ public class AppointmentBlocksPage extends AbstractBasePage {
 
     public void clickOnCurrentDay() throws InterruptedException{clickWhenVisible(CURRENT_DAY);}
     public void enterStartTime(String start){setTextToFieldNoEnter(START_TIME, start);}
-
     public void clickOnSave(){
         clickOn(SAVE);
         try {
@@ -73,8 +72,6 @@ public class AppointmentBlocksPage extends AbstractBasePage {
     public void clickOnEdit(){clickOn(EDIT_BLOCK);}
     public void clickOnServiceDelete(){clickOn(SERVICE_DELETE);}
     public AppointmentBlocksPage(WebDriver driver) {super(driver);}
-
-
     public void findBlock() {
         int iCount = 0;
 
