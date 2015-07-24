@@ -13,15 +13,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FindPatientPage extends AbstractBasePage {
-    public FindPatientPage(WebDriver driver) {
-        super(driver);
-    }
 
-    private static final By PATIENT_SEARCH = By.id("patient-search");
+    public static final String DATA_TABLES_EMPTY = ".dataTables_empty";
     public static final By PATIENT_SEARCH_RESULT = By.id("patient-search-results-table");
     public static final By PATIENT_NAME_SEARCH_RESULT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");
     public static final By PATIENT_ID_SEARCH_RESULT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[1]");
+    private static final By PATIENT_SEARCH = By.id("patient-search");
     private static final By PATIENT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");
+
+    public FindPatientPage(WebDriver driver) {
+        super(driver);
+    }
 
 
     public void enterPatient(String patient) {
@@ -55,8 +57,8 @@ public class FindPatientPage extends AbstractBasePage {
     public void waitForResultTable() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         //wait for table to be cleared from previous results
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(".dataTables_empty"))));
+        wait.until(ExpectedConditions.visibilityOf(findElement(By.cssSelector(DATA_TABLES_EMPTY))));
         //wait for the first row of the table
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(PATIENT_NAME_SEARCH_RESULT)));
+        wait.until(ExpectedConditions.visibilityOf(findElement(PATIENT_NAME_SEARCH_RESULT)));
     }
 }
