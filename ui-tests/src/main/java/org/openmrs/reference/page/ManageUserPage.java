@@ -31,6 +31,10 @@ public class ManageUserPage extends AbstractBasePage {
     public String NAME;
     private static final By FIND_USER = By.name("name");
     private static final By DELETE_USER = By.xpath("(//input[@name='action'])[3]");
+    private static final By ERROR_DEMOGRAPHIC = By.xpath("//form[@id='thisUserForm']/fieldset/span");
+    private static final By ERROR_GENDER = By.xpath("//form[@id='thisUserForm']/fieldset/table/tbody/tr[5]/td[2]/span");
+    private static final By ERROR_USER = By.xpath("//form[@id='thisUserForm']/fieldset[2]/table/tbody/tr[2]/td[2]/i");
+    private static final By ERROR_PASSWORD = By.xpath("//form[@id='thisUserForm']/fieldset[2]/table/tbody/tr[3]/td[2]/i");
     public ManageUserPage(WebDriver driver) {
         super(driver);
     }
@@ -125,5 +129,32 @@ public class ManageUserPage extends AbstractBasePage {
 
     public void clickOnHomeLink() {
         clickOn(HOME);
+    }
+    public String errorDemographic(){
+        return findElement(ERROR_DEMOGRAPHIC).getText();
+    }
+    public void enterGivenFamily(String givenName, String familyName){
+        findElement(PERSON_GIVEN_NAME).clear();
+        findElement(PERSON_GIVEN_NAME).sendKeys(givenName);
+        findElement(PERSON_FAMILY_NAME).clear();
+        findElement(PERSON_FAMILY_NAME).sendKeys(familyName);
+    }
+    public String errorGender(){
+        return findElement(ERROR_GENDER).getText();
+    }
+    public String errorUser(){
+        return findElement(ERROR_USER).getText();
+    }
+    public void clickOnFemale(){clickOn(GENDER_FEMALE);}
+    public void enterUsernamePassword(String username, String password, String confirm){
+        findElement(USERNAME).clear();
+        findElement(USERNAME).sendKeys(username);
+        findElement(PASSWORD).clear();
+        findElement(PASSWORD).sendKeys(password);
+        findElement(CONFIRM).clear();
+        findElement(CONFIRM).sendKeys(confirm);
+    }
+    public String errorPassword(){
+        return findElement(ERROR_PASSWORD).getText();
     }
 }
