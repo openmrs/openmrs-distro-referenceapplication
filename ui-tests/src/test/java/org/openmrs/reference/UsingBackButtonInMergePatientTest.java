@@ -63,7 +63,7 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
         patient1.address1 = "address";
         registrationPage.enterMegrePatient(patient1);
         id2 = patientDashboardPage.findPatientId();
-        patient.Uuid =  patientIdFromUrl();
+        patient1.Uuid =  patientIdFromUrl();
         headerPage.clickOnHomeIcon();
         homePage.goToDataMagament();
         dataManagementPage.goToMegrePatient();
