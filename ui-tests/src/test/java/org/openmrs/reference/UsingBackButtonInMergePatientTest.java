@@ -6,14 +6,16 @@ import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
 import org.junit.*;
+
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
 /**
- * Created by nata on 09.07.15.
+ * Created by nata on 24.07.15.
  */
 
-public class MergePatientByNameTest extends TestBase {
+public class UsingBackButtonInMergePatientTest extends TestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private FindPatientPage findPatientPage;
@@ -24,7 +26,6 @@ public class MergePatientByNameTest extends TestBase {
     private DataManagementPage dataManagementPage;
     private String id;
     private String id2;
-
 
     @Before
     public void setUp() throws Exception {
@@ -43,23 +44,21 @@ public class MergePatientByNameTest extends TestBase {
     }
 
     @Test
-    public void mergePatientByNameTest() throws Exception {
+    public void usingBackButtonInMergePatientTest() throws Exception {
         homePage.openRegisterAPatientApp();
-//       Register first patient
-        patient.familyName = "Mike";
-        patient.givenName = "Smith";
+        patient.familyName = "Potter";
+        patient.givenName = "John";
         patient.gender = "Male";
-        patient.estimatedYears = "25";
+        patient.estimatedYears = "45";
         patient.address1 = "address";
         registrationPage.enterMegrePatient(patient);
         id = patientDashboardPage.findPatientId();
         patient.Uuid =  patientIdFromUrl();
         headerPage.clickOnHomeIcon();
-//     Register second patient
         homePage.openRegisterAPatientApp();
-        patient1.familyName = "Mike";
-        patient1.givenName = "Kowalski";
-        patient1.gender = "Male";
+        patient1.familyName = "Smith";
+        patient1.givenName = "Jane";
+        patient1.gender = "Female";
         patient1.estimatedYears = "25";
         patient1.address1 = "address";
         registrationPage.enterMegrePatient(patient1);
@@ -70,17 +69,17 @@ public class MergePatientByNameTest extends TestBase {
         dataManagementPage.goToMegrePatient();
         dataManagementPage.enterPatient1(id);
         dataManagementPage.enterPatient2(id2);
+        dataManagementPage.searchId(id);
+        dataManagementPage.clickOnContinue();
+        dataManagementPage.clickOnNo();
+        dataManagementPage.enterPatient1(id);
+        dataManagementPage.enterPatient2(id2);
         dataManagementPage.clickOnContinue();
         dataManagementPage.clickOnMergePatient();
         dataManagementPage.clickOnContinue();
         headerPage.clickOnHomeLink();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Records merged! Viewing preferred patient."));
-        homePage.clickOnFindPatientRecord();
-        findPatientPage.enterPatient(patient.givenName);
-        assertTrue(driver.getPageSource().contains(patient1.givenName));
-        findPatientPage.enterPatient(patient1.givenName);
-        assertTrue(driver.getPageSource().contains(patient.givenName));
-    }
+           }
 
 
 
