@@ -5,7 +5,6 @@ package org.openmrs.reference;
  */
 import org.junit.*;
 import static org.junit.Assert.*;
-
 import org.openmrs.reference.page.AllergyPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -40,12 +39,22 @@ public class AddNewAllergyTest extends TestBase {
     public void addNewAllergyTest() throws Exception {
 
         patientDashboardPage.clickOnAddAllergy();
-        allergyPage.clickOnAddNewAllergy();
-        allergyPage.enterDrug("Aspirin");
-        allergyPage.drugId();
-        allergyPage.clickOnSaveAllergy();
-        assertTrue(patientDashboardPage.visitLink().getText().contains("New Allergy Saved Successfully"));
+        if (allergyPage.editPresent()){
+            allergyPage.deletePresent();
+            allergyPage.clickOnDeleteAllergy();
+            allergyPage.clickOnConfirmDeleteAllergy();
+
+        }
+        else {
+            allergyPage.clickOnAddNewAllergy();
+            allergyPage.enterDrug("Aspirin");
+            allergyPage.drugId();
+            allergyPage.clickOnSaveAllergy();
+            assertTrue(patientDashboardPage.visitLink().getText().contains("New Allergy Saved Successfully"));
+
+        }
     }
+
 
     @After
     public void tearDown() throws Exception {

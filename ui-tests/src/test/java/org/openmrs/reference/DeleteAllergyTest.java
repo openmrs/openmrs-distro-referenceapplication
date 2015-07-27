@@ -47,7 +47,6 @@ public class DeleteAllergyTest extends TestBase {
             patientDashboardPage.waitForVisitLinkHidden();
 
         }
-        else{
         allergyPage.clickOnAddNewAllergy();
         allergyPage.enterDrug("Aspirin");
         allergyPage.drugId();
@@ -57,7 +56,7 @@ public class DeleteAllergyTest extends TestBase {
         patientDashboardPage.waitForVisitLinkHidden();
         allergyPage.clickOnConfirmDeleteAllergy();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Saved changes"));
-        patientDashboardPage.waitForVisitLinkHidden();}
+        patientDashboardPage.waitForVisitLinkHidden();
     }
 
     @After

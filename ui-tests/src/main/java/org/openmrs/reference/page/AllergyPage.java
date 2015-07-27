@@ -52,7 +52,7 @@ public class AllergyPage extends AbstractBasePage{
 
     public boolean editPresent(){
         try {
-            return driver.findElement(EDIT_ALLERGY) != null;
+            return findElement(EDIT_ALLERGY) != null;
         }
         catch (Exception ex) {
             return false;
@@ -64,7 +64,7 @@ public class AllergyPage extends AbstractBasePage{
 
     public boolean deletePresent(){
         try {
-            return driver.findElement(DELETE_ALLERGY) != null;
+            return findElement(DELETE_ALLERGY) != null;
         }
         catch (Exception ex) {
             return false;
@@ -75,11 +75,13 @@ public class AllergyPage extends AbstractBasePage{
         return findElement(field).getAttribute("id");
     }
 
+    public String getFor(By field){ return findElement(field).getAttribute("for");}
+
     public String getDrugValue() {
        return getValue(DRUG);
     }
 
-    public String getReactionId(){ return getValue(REACTION);}
+    public String getReactionId(){ return getFor(REACTION);}
 
     public void drugId(){
         DRUG_ID = By.id(getDrugValue());

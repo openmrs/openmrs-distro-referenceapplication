@@ -40,26 +40,22 @@ public class EditAllergyTest extends TestBase {
 
         patientDashboardPage.clickOnAddAllergy();
         if(allergyPage.editPresent()){
-            allergyPage.clickOnEditAllergy();
-            allergyPage.enterReaction("Cough");
-            allergyPage.reactionId();
-            allergyPage.clickOnSaveAllergy();
-            assertTrue(patientDashboardPage.visitLink().getText().contains("Saved changes"));
+            allergyPage.deletePresent();
+            allergyPage.clickOnDeleteAllergy();
+            allergyPage.clickOnConfirmDeleteAllergy();
 
         }
-        else {
-            allergyPage.clickOnAddNewAllergy();
-            allergyPage.enterDrug("Aspirin");
-            allergyPage.drugId();
-            allergyPage.clickOnSaveAllergy();
-            assertTrue(patientDashboardPage.visitLink().getText().contains("New Allergy Saved Successfully"));
-            allergyPage.clickOnEditAllergy();
-            allergyPage.enterReaction("Cough");
-            allergyPage.reactionId();
-            allergyPage.clickOnSaveAllergy();
-            assertTrue(patientDashboardPage.visitLink().getText().contains("Saved changes"));
+        allergyPage.clickOnAddNewAllergy();
+        allergyPage.enterDrug("Aspirin");
+        allergyPage.drugId();
+        allergyPage.clickOnSaveAllergy();
+        assertTrue(patientDashboardPage.visitLink().getText().contains("New Allergy Saved Successfully"));
+        allergyPage.clickOnEditAllergy();
+        allergyPage.enterReaction("Cough");
+        allergyPage.reactionId();
+        allergyPage.clickOnSaveAllergy();
+        assertTrue(patientDashboardPage.visitLink().getText().contains("Saved changes"));
         }
-    }
 
     @After
     public void tearDown() throws Exception {
