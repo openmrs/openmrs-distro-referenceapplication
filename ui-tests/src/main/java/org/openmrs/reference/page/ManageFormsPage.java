@@ -22,6 +22,15 @@ public class ManageFormsPage extends AbstractBasePage{
     private static By EDIT_FORM_PATH;
     private static By DELETE_FORM_PATH;
     private static String REST_PATH_2 = "'\"]";
+    private static By CALENDAR_EYE_FORM = By.id("w1-display");
+    private static By DATAPICKER_YEAR = By.className("ui-datepicker-year");
+    private static By DATAPICKER_MONTH = By.className("ui-datepicker-moth");
+    private static By DATAPICKER_DAY = By.className("ui-state-default");
+    private static By WHERE_EYE_REPORT = By.id("w5");
+    private static By WHO_EYE_REPORT = By.name("w3");
+    private static By ENTER_FORM = By.cssSelector("input.submitButton");
+    private static By CURRENT_DAY = By.className("ui-state-highlight");
+    private static By PATIENT = By.className("name");
 
     public ManageFormsPage(WebDriver driver) {
         super(driver);
@@ -73,7 +82,15 @@ public class ManageFormsPage extends AbstractBasePage{
         DELETE_FORM_PATH = By.xpath(DELETE_FORM + id + REST_PATH + id + REST_PATH_2);
         clickOn(DELETE_FORM_PATH);
     }
-
+//    Eye Form
+    public void clickOnCalendarEyeReport(){ clickOn(CALENDAR_EYE_FORM);}
+    public void selectYear (String year){ selectFrom(DATAPICKER_YEAR, year);}
+    public void selectMoth (String month){ selectFrom(DATAPICKER_MONTH, month);}
+    public void selectDay (String day){ selectFrom(DATAPICKER_DAY, day);}
+    public void selectWhere (String where){ selectFrom(WHERE_EYE_REPORT, where);}
+    public void selectWho (String who){ selectFrom(WHO_EYE_REPORT, who);}
+    public void enterForm (){ clickOn(ENTER_FORM);}
+    public void clickOnCurrentDate (){ clickOn(CURRENT_DAY);}
 
 
     @Override

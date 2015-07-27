@@ -68,7 +68,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By ADD_ALLERGY = By.cssSelector("i.icon-pencil.edit-action.right");
 	public PatientDashboardPage(WebDriver driver) {
 		super(driver);}
-
+	private static final By EYE_REPORT = By.linkText("Eye Report");
 
 
 	public void startVisit() {
@@ -216,10 +216,13 @@ public class PatientDashboardPage extends AbstractBasePage {
 //Contact Info
 	public void clickOnShowContact(){ clickOn(SHOW_CONTACT_INFO);}
 	public void clickOnEditContact(){ clickOn(EDIT_CONTACT_INFO);}
-//Find Patient Id
+
+	//Find Patient Id
 	public String findPatientId(){
 		return findElement(PATIENT_ID).getText();
 	}
+	public void clickOnAddAllergy(){ clickOn(ADD_ALLERGY);}
+	public void clickOnEyeForm(){ clickOn(EYE_REPORT);}
 
 	public void goToEditVisitNote() {
 		clickOn(CURRENT_DATE);
@@ -318,6 +321,5 @@ public class PatientDashboardPage extends AbstractBasePage {
 		waitForElement(SERVICE_DROPDOWN);
 		clickOn(SERVICE_DROPDOWN);
 	}
-
-	public void clickOnAddAllergy(){ clickOn(ADD_ALLERGY);}
+	
 }
