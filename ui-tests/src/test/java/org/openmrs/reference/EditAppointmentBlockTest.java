@@ -4,6 +4,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
@@ -28,6 +29,7 @@ public class EditAppointmentBlockTest extends TestBase {
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
     }
 
+    @Ignore
     @Test
     public void editAppointmentBlockTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();

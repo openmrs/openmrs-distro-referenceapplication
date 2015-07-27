@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.reference.page.HeaderPage;
@@ -24,6 +25,8 @@ public class ComeBackToApplicationAfterLogoutTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
     }
+
+    @Ignore
     @Test
     public void comeBackToApplicationAfterLogoutTest() throws Exception {
         homePage.goToActiveVisitsSearch();

@@ -31,6 +31,7 @@ public class PasswordMinimumLengthTest extends TestBase {
         homePage.goToAdministration();
     }
 
+    @Ignore
     @Test
     public void passwordMinimumLengthTest() throws Exception {
         settingPage.clickOnSetting();

@@ -31,6 +31,7 @@ public class PasswordRequiresNonDigitTest extends TestBase {
         homePage.goToAdministration();
     }
 
+    @Ignore
     @Test
     public void passwordRequiresNonDigitTest() throws Exception {
         settingPage.clickOnSetting();

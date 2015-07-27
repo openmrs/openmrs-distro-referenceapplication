@@ -28,6 +28,7 @@ public class EditConceptTest extends TestBase {
         homePage.goToAdministration();
     }
 
+    @Ignore
     @Test
     public void editConceptTest() throws Exception {
         conceptFormPage.clickOnViewConceptDictionary();

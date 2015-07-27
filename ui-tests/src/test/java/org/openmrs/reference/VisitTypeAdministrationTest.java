@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -36,6 +37,7 @@ public class VisitTypeAdministrationTest extends TestBase {
     }
 
     // Test for RA-766, RA-767, RA-768, RA-769
+    @Ignore
     @Test
     public void addEditRetireDeleteVisitTypeTest() throws InterruptedException {
         homePage.goToAdministration();

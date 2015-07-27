@@ -28,6 +28,7 @@ public class AddConceptDrugTest extends TestBase {
         homePage.goToAdministration();
     }
 
+    @Ignore
     @Test
     public void addConceptDrugTest() throws Exception {
         conceptFormPage.clickOnViewConceptDictionary();

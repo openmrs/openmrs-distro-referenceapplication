@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -37,6 +38,7 @@ public class RelationTypeTest extends TestBase {
     }
 
     // Test for RA-762, RA-763, RA-764, RA-765
+    @Ignore
     @Test
     public void addEditRetireDeleteRelationTypeTest() throws InterruptedException {
         homePage.goToAdministration();

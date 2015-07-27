@@ -31,6 +31,7 @@ public class AddUserTest extends TestBase {
         homePage.goToAdministration();
     }
 
+    @Ignore
     @Test
     public void addUserTest() throws Exception {
         administrationPage.clickOnManageUsers();

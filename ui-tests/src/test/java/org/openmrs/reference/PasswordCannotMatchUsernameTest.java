@@ -31,6 +31,7 @@ public class PasswordCannotMatchUsernameTest extends TestBase {
         homePage.goToAdministration();
     }
 
+    @Ignore
     @Test
     public void passwordCannotMatchUsernameTest() throws Exception {
         settingPage.clickOnSetting();

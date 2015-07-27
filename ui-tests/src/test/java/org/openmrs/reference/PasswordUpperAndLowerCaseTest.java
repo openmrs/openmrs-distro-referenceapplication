@@ -31,6 +31,7 @@ public class PasswordUpperAndLowerCaseTest extends TestBase {
         homePage.goToAdministration();
     }
 
+    @Ignore
     @Test
     public void passwordUpperAndLowerCaseTest() throws Exception {
         settingPage.clickOnSetting();
