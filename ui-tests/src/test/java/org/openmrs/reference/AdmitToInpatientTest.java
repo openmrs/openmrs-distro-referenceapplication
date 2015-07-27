@@ -32,7 +32,6 @@ public class AdmitToInpatientTest extends TestBase {
 
     }
 
-    @Ignore
     @Test
     public void admitToInpatientTest() throws Exception {
 

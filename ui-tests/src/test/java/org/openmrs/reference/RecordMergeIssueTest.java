@@ -1,3 +1,4 @@
+package org.openmrs.reference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +8,6 @@ import org.openmrs.uitestframework.test.TestBase;
 import org.junit.*;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -81,10 +81,10 @@ public class RecordMergeIssueTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-//        deletePatient(patient.Uuid);
-//        waitForPatientDeletion(patient.Uuid);
-//        deletePatient(patient1.Uuid);
-//        waitForPatientDeletion(patient1.Uuid);
+        deletePatient(patient.Uuid);
+        waitForPatientDeletion(patient.Uuid);
+        deletePatient(patient1.Uuid);
+        waitForPatientDeletion(patient1.Uuid);
         headerPage.logOut();
     }
 }

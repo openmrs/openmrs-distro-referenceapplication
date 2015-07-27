@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.FindPatientPage;
@@ -41,6 +42,8 @@ public class FindPatientRecordTest extends TestBase {
         deletePatient(patient.uuid);
         headerPage.logOut();
     }
+
+    @Ignore
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void testFindPatientRecord() {

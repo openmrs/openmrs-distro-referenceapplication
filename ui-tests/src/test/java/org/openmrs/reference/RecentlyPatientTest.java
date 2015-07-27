@@ -30,7 +30,6 @@ import static org.junit.Assert.*;
 
     }
 
-    @Ignore
     @Test
     public void testRecentlyPatientTest() throws Exception {
 //        homePage.clickOnFindPatientRecord();

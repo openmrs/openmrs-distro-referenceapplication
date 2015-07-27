@@ -13,7 +13,6 @@ import org.openmrs.uitestframework.test.TestBase;
 
 import java.awt.*;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -44,13 +43,11 @@ public class RegistrationFormQuestionTest extends TestBase {
 
     @After
     public void tearDown() throws Exception {
-        registrationPage.exitReview();
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
     }
 
     //Test for RA-698
-    @Ignore
     @Test
     public void registrationFormQuestionTest() throws InterruptedException {
 

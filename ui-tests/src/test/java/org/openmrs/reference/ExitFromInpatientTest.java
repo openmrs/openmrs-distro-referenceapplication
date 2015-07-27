@@ -31,7 +31,6 @@ public class ExitFromInpatientTest extends TestBase {
 
     }
 
-    @Ignore
     @Test
     public void exitFromInpatientTest() throws Exception {
 

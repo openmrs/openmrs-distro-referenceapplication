@@ -1,6 +1,5 @@
 package org.openmrs.reference;
 
-import org.dbunit.dataset.DataSetException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -14,7 +13,6 @@ import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 
-import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
