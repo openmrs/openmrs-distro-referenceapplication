@@ -68,6 +68,7 @@
 		<appointmentschedulingVersion>1.3</appointmentschedulingVersion>
 		<appointmentschedulinguiVersion>1.0.3-SNAPSHOT</appointmentschedulinguiVersion>
 		<namephoneticsVersion>1.4</namephoneticsVersion> <!-- The omod for namephonetics is not included in the distro, but we keep the version around since it's a semi-supported add-on -->
+		<adminuiVersion>1.0-SNAPSHOT</adminuiVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -879,6 +880,12 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>chartsearch-server</artifactId>
 				<version>${chartsearchVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>adminui-omod</artifactId>
+				<version>${adminuiVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>
