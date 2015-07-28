@@ -34,6 +34,7 @@ public class EyeReportTest extends TestBase {
 
     }
 
+    @Ignore
     @Test
     public void eyeReportTest() throws Exception {
         patientDashboardPage.clickOnEyeForm();

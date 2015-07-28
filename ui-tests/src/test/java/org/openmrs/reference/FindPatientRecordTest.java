@@ -43,7 +43,6 @@ public class FindPatientRecordTest extends TestBase {
         headerPage.logOut();
     }
 
-    @Ignore
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void testFindPatientRecord() {

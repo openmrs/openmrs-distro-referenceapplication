@@ -8,7 +8,6 @@ import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData;
 
 import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by tomasz on 23.07.15.
@@ -37,7 +36,6 @@ public class MergeVisitsTest extends TestBase {
         headerPage.logOut();
     }
 
-    @Ignore
     @Test
     public void mergeVisitsTest() {
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
