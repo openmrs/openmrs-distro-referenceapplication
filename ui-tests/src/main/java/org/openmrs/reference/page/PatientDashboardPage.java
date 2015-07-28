@@ -101,7 +101,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 
 	public boolean inpatientPresent(){
 		try {
-			return driver.findElement(ADMIT_TO_INPATIENT) != null;
+			return findElement(EXIT_FROM_INPATIENT) != null;
 		}
 		catch (Exception ex) {
 			return false;

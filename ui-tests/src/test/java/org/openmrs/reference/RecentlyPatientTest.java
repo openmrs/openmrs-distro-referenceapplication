@@ -27,16 +27,14 @@ import static org.junit.Assert.*;
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         findPatientPage = new FindPatientPage(driver);
+        homePage.clickOnFindPatientRecord();
 
     }
 
-    @Ignore
     @Test
     public void testRecentlyPatientTest() throws Exception {
-//        homePage.clickOnFindPatientRecord();
         findPatientPage.enterPatient("Bob Smith");
         headerPage.clickOnHomeIcon();
-//        homePage.clickOnFindPatientRecord();
         assertNotNull(findPatientPage.PATIENT_SEARCH_RESULT);
     }
 

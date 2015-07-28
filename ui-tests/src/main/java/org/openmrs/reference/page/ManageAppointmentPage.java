@@ -34,7 +34,7 @@ public class ManageAppointmentPage extends AbstractBasePage {
     }
     public boolean deletePresent(){
         try {
-            return driver.findElement(DELETE_APPOINTMENT) != null;
+            return findElement(DELETE_APPOINTMENT) != null;
         }
         catch (Exception ex) {
             return false;

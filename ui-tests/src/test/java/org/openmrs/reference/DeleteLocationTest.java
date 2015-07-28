@@ -6,10 +6,7 @@ package org.openmrs.reference;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.LocationPage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
 
 
@@ -18,6 +15,7 @@ public class DeleteLocationTest extends TestBase {
     private PatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
     private LocationPage locationPage;
+    private SettingPage settingPage;
 
 
 
@@ -30,6 +28,7 @@ public class DeleteLocationTest extends TestBase {
         patientDashboardPage = new PatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
         locationPage = new LocationPage(driver);
+        settingPage = new SettingPage(driver);
         homePage.goToAdministration();
 
 
@@ -51,7 +50,8 @@ public class DeleteLocationTest extends TestBase {
         locationPage.clickOnSaveLocation();
         locationPage.checkLocation();
         locationPage.clickOnDelete();
-        assertTrue(driver.getPageSource().contains("delete"));}
+        settingPage.waitForMessage();
+        assertTrue(driver.getPageSource().contains("deleted"));}
 
     }
 

@@ -31,7 +31,6 @@ public class PasswordRequiresDigitTest extends TestBase {
         homePage.goToAdministration();
     }
 
-    @Ignore
     @Test
     public void passwordRequiresDigitTest() throws Exception {
         settingPage.clickOnSetting();
@@ -41,21 +40,26 @@ public class PasswordRequiresDigitTest extends TestBase {
         headerPage.clickOnHomeLink();
         homePage.goToAdministration();
         administrationPage.clickOnManageUsers();
-        manageUserPage.clickOnAddUser();
-        manageUserPage.createNewPerson();
-        manageUserPage.enterUserMale("doctor", "House", "dr_house", "Doktorhouse");
-        manageUserPage.chooseRole();
-        manageUserPage.saveUser();
-        manageUserPage.findUser("dr_house");
-        manageUserPage.deleteUser();
-        headerPage.clickOnHomeLink();
-        homePage.goToAdministration();
-        settingPage.clickOnSetting();
-        settingPage.clickOnSecurity();
-        settingPage.chooseTrueDigit();
-        settingPage.waitForMessage();
-        assertTrue(driver.getPageSource().contains("Global properties saved"));
-    }
+        manageUserPage.checkUser("dr_house");
+        if (manageUserPage.userExist("dr_house")) {
+            manageUserPage.clickOnUser();
+            manageUserPage.deleteUser();
+        }
+            manageUserPage.clickOnAddUser();
+            manageUserPage.createNewPerson();
+            manageUserPage.enterUserMale("doctor", "House", "dr_house", "Doktorhouse");
+            manageUserPage.chooseRole();
+            manageUserPage.saveUser();
+            manageUserPage.findUser("dr_house");
+            manageUserPage.deleteUser();
+            headerPage.clickOnHomeLink();
+            homePage.goToAdministration();
+            settingPage.clickOnSetting();
+            settingPage.clickOnSecurity();
+            settingPage.chooseTrueDigit();
+            settingPage.waitForMessage();
+            assertTrue(driver.getPageSource().contains("Global properties saved"));
+        }
 
     @After
     public void tearDown() throws Exception {

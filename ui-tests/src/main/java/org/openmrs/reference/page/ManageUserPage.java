@@ -35,6 +35,7 @@ public class ManageUserPage extends AbstractBasePage {
     private static final By ERROR_GENDER = By.xpath("//form[@id='thisUserForm']/fieldset/table/tbody/tr[5]/td[2]/span");
     private static final By ERROR_USER = By.xpath("//form[@id='thisUserForm']/fieldset[2]/table/tbody/tr[2]/td[2]/i");
     private static final By ERROR_PASSWORD = By.xpath("//form[@id='thisUserForm']/fieldset[2]/table/tbody/tr[3]/td[2]/i");
+    private static final By USER = By.xpath("//div[@id='content']/div[2]/table/tbody/tr/td/a");
     public ManageUserPage(WebDriver driver) {
         super(driver);
     }
@@ -111,7 +112,7 @@ public class ManageUserPage extends AbstractBasePage {
         setText(FIND_USER, user);
         NAME = user;
         clickOn(ACTION);
-        findElement(By.xpath("//div[@id='content']/div[2]/table/tbody/tr/td/a")).click();
+        findElement(USER).click();
     }
     public void removeUser(String user) {
         setText(FIND_USER, user);
@@ -119,6 +120,20 @@ public class ManageUserPage extends AbstractBasePage {
         clickOn(USER_LINK);
         deleteUser();
     }
+    public boolean userExist(String find){
+        try {
+            return findElement(By.xpath("//div[@id='content']/div[2]/table/tbody/tr/td[2]")).getText().contains(find);
+        }
+        catch (Exception ex) {
+            return false;
+        }
+    }
+    public void checkUser(String user){
+        setText(FIND_USER, user);
+        NAME = user;
+        clickOn(ACTION);}
+
+
     public void deleteUser(){ clickOn(DELETE_USER);}
     public void changePassword(String password){
         findElement(PASSWORD).clear();
@@ -157,4 +172,5 @@ public class ManageUserPage extends AbstractBasePage {
     public String errorPassword(){
         return findElement(ERROR_PASSWORD).getText();
     }
+    public void clickOnUser(){ clickOn(USER);}
 }

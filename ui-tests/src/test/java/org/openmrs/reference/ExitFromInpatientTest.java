@@ -34,7 +34,7 @@ public class ExitFromInpatientTest extends TestBase {
     @Test
     public void exitFromInpatientTest() throws Exception {
 
-        if(!patientDashboardPage.inpatientPresent()) {
+        if(patientDashboardPage.inpatientPresent()) {
             patientDashboardPage.exitFromInpatient();
 
         }

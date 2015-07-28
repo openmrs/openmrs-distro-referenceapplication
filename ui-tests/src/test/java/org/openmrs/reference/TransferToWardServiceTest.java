@@ -32,11 +32,10 @@ public class TransferToWardServiceTest extends TestBase {
 
     }
 
-    @Ignore
     @Test
     public void transferToWardServiceTest() throws Exception {
 
-        if(!patientDashboardPage.inpatientPresent()) {
+        if(patientDashboardPage.inpatientPresent()) {
             patientDashboardPage.exitFromInpatient();
 
         }

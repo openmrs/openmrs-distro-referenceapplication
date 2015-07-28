@@ -80,8 +80,8 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-//        deletePatient(patient.Uuid);
-//        waitForPatientDeletion(patient.Uuid);
+        deletePatient(patient.Uuid);
+        waitForPatientDeletion(patient.Uuid);
         headerPage.logOut();
     }
 
