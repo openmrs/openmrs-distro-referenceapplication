@@ -48,6 +48,8 @@ public class AddRolesToUserTest extends TestBase {
         headerPage.logOut();
         loginPage.loginAsAdmin();
     }
+
+    @Ignore
     @Test
     public void addRolesToUserTest() throws InterruptedException {
         homePage.goToAdministration();

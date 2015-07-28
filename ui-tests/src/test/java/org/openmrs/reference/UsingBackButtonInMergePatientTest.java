@@ -42,6 +42,7 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
 
     }
 
+    @Ignore
     @Test
     public void usingBackButtonInMergePatientTest() throws Exception {
         homePage.openRegisterAPatientApp();

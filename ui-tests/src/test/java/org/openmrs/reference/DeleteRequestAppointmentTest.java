@@ -4,6 +4,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.*;
@@ -39,6 +40,7 @@ public class DeleteRequestAppointmentTest extends TestBase {
         findPatientPage = new FindPatientPage(driver);
     }
 
+    @Ignore
     @Test
     public void deleteRequestAppointmentTest() throws Exception {
         homePage.goToActiveVisitPatient();

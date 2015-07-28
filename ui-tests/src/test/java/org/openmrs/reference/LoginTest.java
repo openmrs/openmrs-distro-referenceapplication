@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HeaderPage;
@@ -28,6 +29,7 @@ public class LoginTest extends TestBase {
     	assertPage(loginPage);
     }
     
+    @Ignore
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
@@ -42,6 +44,7 @@ public class LoginTest extends TestBase {
         assertThat(homePage.numberOfAppsPresent(), is(8));
     }
 
+    @Ignore
     @Test
     public void verifyClerkModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
@@ -51,7 +54,8 @@ public class LoginTest extends TestBase {
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(4));
     }
-    
+
+    @Ignore
     @Test
     public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
@@ -61,7 +65,8 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(3));
     }
-    
+
+    @Ignore
     @Test
     public void verifyNurseModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
@@ -73,6 +78,7 @@ public class LoginTest extends TestBase {
         assertThat(homePage.numberOfAppsPresent(), is(4));
     }
 
+    @Ignore
     @Test
     public void verifySysadminModulesAvailableOnHomePage() throws Exception {
         assertPage(loginPage);

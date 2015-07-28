@@ -26,6 +26,7 @@ public class EndVisitTest extends TestBase {
         headerPage = new HeaderPage(driver);
     }
 
+    @Ignore
     @Test
     public void EndVisitTest() throws Exception {
 
