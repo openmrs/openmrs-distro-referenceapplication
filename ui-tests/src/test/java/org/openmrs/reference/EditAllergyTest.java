@@ -35,7 +35,6 @@ public class EditAllergyTest extends TestBase {
 
     }
 
-    @Ignore
     @Test
     public void editAllergyTest() throws Exception {
 
