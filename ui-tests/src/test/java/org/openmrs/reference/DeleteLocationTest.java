@@ -33,8 +33,7 @@ public class DeleteLocationTest extends TestBase {
 
 
     }
-    
-    @Ignore
+
     @Test
     public void deleteLocationTest() throws Exception {
         locationPage.clickOnManageLocation();
