@@ -42,7 +42,6 @@ public class MergePatientByNameTest extends TestBase {
 
     }
 
-    @Ignore
     @Test
     public void mergePatientByNameTest() throws Exception {
         homePage.openRegisterAPatientApp();
@@ -71,6 +70,7 @@ public class MergePatientByNameTest extends TestBase {
         dataManagementPage.goToMegrePatient();
         dataManagementPage.enterPatient1(id);
         dataManagementPage.enterPatient2(id2);
+        dataManagementPage.searchId(id);
         dataManagementPage.clickOnContinue();
         dataManagementPage.clickOnMergePatient();
         dataManagementPage.clickOnContinue();
@@ -88,8 +88,8 @@ public class MergePatientByNameTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-//        deletePatient(patient.Uuid);
-//        waitForPatientDeletion(patient.Uuid);
+        deletePatient(patient.Uuid);
+        waitForPatientDeletion(patient.Uuid);
         headerPage.logOut();
     }
 

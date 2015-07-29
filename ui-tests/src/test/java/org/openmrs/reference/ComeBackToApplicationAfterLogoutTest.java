@@ -25,7 +25,6 @@ public class ComeBackToApplicationAfterLogoutTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
     }
-
     @Ignore
     @Test
     public void comeBackToApplicationAfterLogoutTest() throws Exception {

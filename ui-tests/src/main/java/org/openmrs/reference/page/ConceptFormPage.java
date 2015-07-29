@@ -26,6 +26,7 @@ public class ConceptFormPage extends AbstractBasePage{
     private static final By SAVE_EDIT = By.xpath("//input[@name='action']");
     private static final By RETIRE = By.xpath("(//input[@name='action'])[5]");
     private static final By UNRETIRE = By.xpath("//div[@id='content']/div[3]/div[3]/form/input");
+    private static final By FINDED_CONCEPT = By.cssSelector("tr.odd > td > span");
 
 
 
@@ -43,6 +44,17 @@ public class ConceptFormPage extends AbstractBasePage{
         setText(FIND_CONCEPT, find);
         CONCEPT = find;
     }
+    public boolean conceptExist(String find){
+        try {
+            return findElement(FINDED_CONCEPT).getText().contains(find);
+        }
+        catch (Exception ex) {
+            return false;
+        }
+    }
+
+
+
     public void clickOnAddedConcept(){
         ADDED_DRUG = By.xpath("//table[@id='openmrsSearchTable']/tbody/tr/td");
         waitForElement(ADDED_DRUG);

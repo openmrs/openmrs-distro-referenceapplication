@@ -31,7 +31,6 @@ public class PasswordUpperAndLowerCaseTest extends TestBase {
         homePage.goToAdministration();
     }
 
-    @Ignore
     @Test
     public void passwordUpperAndLowerCaseTest() throws Exception {
         settingPage.clickOnSetting();
@@ -41,21 +40,26 @@ public class PasswordUpperAndLowerCaseTest extends TestBase {
         headerPage.clickOnHomeLink();
         homePage.goToAdministration();
         administrationPage.clickOnManageUsers();
-        manageUserPage.clickOnAddUser();
-        manageUserPage.createNewPerson();
-        manageUserPage.enterUserMale("doctor", "House", "dr_house", "drhouse1");
-        manageUserPage.chooseRole();
-        manageUserPage.saveUser();
-        manageUserPage.findUser("dr_house");
-        manageUserPage.deleteUser();
-        headerPage.clickOnHomeLink();
-        homePage.goToAdministration();
-        settingPage.clickOnSetting();
-        settingPage.clickOnSecurity();
-        settingPage.chooseTrueCase1();
-        settingPage.waitForMessage();
-        assertTrue(driver.getPageSource().contains("Global properties saved"));
-    }
+        manageUserPage.checkUser("dr_house");
+        if (manageUserPage.userExist("dr_house")) {
+            manageUserPage.clickOnUser();
+            manageUserPage.deleteUser();
+        }
+            manageUserPage.clickOnAddUser();
+            manageUserPage.createNewPerson();
+            manageUserPage.enterUserMale("doctor", "House", "dr_house", "drhouse1");
+            manageUserPage.chooseRole();
+            manageUserPage.saveUser();
+            manageUserPage.findUser("dr_house");
+            manageUserPage.deleteUser();
+            headerPage.clickOnHomeLink();
+            homePage.goToAdministration();
+            settingPage.clickOnSetting();
+            settingPage.clickOnSecurity();
+            settingPage.chooseTrueCase1();
+            settingPage.waitForMessage();
+            assertTrue(driver.getPageSource().contains("Global properties saved"));
+        }
 
     @After
     public void tearDown() throws Exception {

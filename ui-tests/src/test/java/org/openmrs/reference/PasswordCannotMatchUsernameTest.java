@@ -31,7 +31,6 @@ public class PasswordCannotMatchUsernameTest extends TestBase {
         homePage.goToAdministration();
     }
 
-    @Ignore
     @Test
     public void passwordCannotMatchUsernameTest() throws Exception {
         settingPage.clickOnSetting();
@@ -41,22 +40,31 @@ public class PasswordCannotMatchUsernameTest extends TestBase {
         headerPage.clickOnHomeLink();
         homePage.goToAdministration();
         administrationPage.clickOnManageUsers();
-        manageUserPage.clickOnAddUser();
-        manageUserPage.createNewPerson();
-        manageUserPage.enterUserMale("dr_house", "House", "dr_house", "Dr_house123");
-        manageUserPage.chooseRole();
-        manageUserPage.saveUser();
-        assertTrue(driver.getPageSource().contains("User Saved"));
-        manageUserPage.findUser("dr_house");
-        manageUserPage.deleteUser();
-        assertTrue(driver.getPageSource().contains("Successfully deleted user."));
-        headerPage.clickOnHomeLink();
-        homePage.goToAdministration();
-        settingPage.clickOnSetting();
-        settingPage.clickOnSecurity();
-        settingPage.chooseTrue();
-        assertTrue(driver.getPageSource().contains("Global properties saved"));
-    }
+        manageUserPage.checkUser("dr_house");
+        if (manageUserPage.userExist("dr_house")) {
+            manageUserPage.clickOnUser();
+            manageUserPage.deleteUser();
+        }
+            manageUserPage.clickOnAddUser();
+            manageUserPage.createNewPerson();
+            manageUserPage.enterUserMale("dr_house", "House", "dr_house", "Dr_house123");
+            manageUserPage.chooseRole();
+            manageUserPage.saveUser();
+            settingPage.waitForMessage();
+            assertTrue(driver.getPageSource().contains("User Saved"));
+            manageUserPage.findUser("dr_house");
+            manageUserPage.deleteUser();
+            settingPage.waitForMessage();
+            assertTrue(driver.getPageSource().contains("Successfully deleted user."));
+            headerPage.clickOnHomeLink();
+            homePage.goToAdministration();
+            settingPage.clickOnSetting();
+            settingPage.clickOnSecurity();
+            settingPage.chooseTrue();
+            settingPage.waitForMessage();
+            assertTrue(driver.getPageSource().contains("Global properties saved"));
+        }
+
 
     @After
     public void tearDown() throws Exception {

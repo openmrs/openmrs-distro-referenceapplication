@@ -37,7 +37,6 @@ public class BookRequestAppointmentTest extends TestBase {
         patientDashboardPage = new PatientDashboardPage(driver);
         findPatientPage = new FindPatientPage(driver);
     }
-
     @Ignore
     @Test
     public void bookRequestAppointmentTest() throws Exception {

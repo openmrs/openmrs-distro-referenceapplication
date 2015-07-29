@@ -71,6 +71,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By EYE_REPORT = By.linkText("Eye Report");
 
 
+
 	public void startVisit() {
 		clickOn(START_VISIT);
 		waitForElement(CONFIRM);
@@ -100,7 +101,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 
 	public boolean inpatientPresent(){
 		try {
-			return driver.findElement(ADMIT_TO_INPATIENT) != null;
+			return findElement(EXIT_FROM_INPATIENT) != null;
 		}
 		catch (Exception ex) {
 			return false;
