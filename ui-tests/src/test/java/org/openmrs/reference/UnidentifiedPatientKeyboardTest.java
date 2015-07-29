@@ -47,7 +47,7 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
         headerPage.logOut();
     }
 
-    // Test for RA-472
+    // Test for RA-472, ignored due to issue
     @Ignore
     @Test
     public void registerUnidentifiedPatient() throws InterruptedException {

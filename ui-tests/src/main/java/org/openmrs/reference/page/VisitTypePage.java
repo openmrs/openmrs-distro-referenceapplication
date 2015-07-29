@@ -18,12 +18,13 @@ public class VisitTypePage extends AdminManagementPage {
         MANAGE = By.linkText("Manage Visit Types");
         ADD = By.linkText("Add Visit Type");
         SAVE = By.name("save");
+        NAME = By.name("name");
     }
 
 
 
 
-    public void createVisitType(String name,String description) {
+    public void createVisitType(String name,String description) throws InterruptedException {
         fillInName(name);
         fillInDescription(description);
         save();

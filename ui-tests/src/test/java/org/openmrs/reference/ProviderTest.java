@@ -35,9 +35,8 @@ public class ProviderTest extends TestBase {
     }
 
     //combined test for RA-747, RA-701 and RA-748
-    @Ignore
     @Test
-    public void addEditRetireProviderTest() {
+    public void addEditRetireProviderTest() throws InterruptedException {
         homePage.goToAdministration();
         providerPage.manage();
         assertPage(providerPage);

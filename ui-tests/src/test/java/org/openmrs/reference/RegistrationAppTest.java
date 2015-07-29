@@ -36,7 +36,6 @@ public class RegistrationAppTest extends TestBase {
     }
 
     // Test for Story RA-71
-    @Ignore
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void registerAPatient() throws InterruptedException {

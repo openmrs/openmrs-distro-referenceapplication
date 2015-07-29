@@ -38,7 +38,6 @@ public class VisitTest extends TestBase {
 	/**
 	 * Beginnings of visit test. For starters, we just start a visit and verify it started.
 	 */
-	@Ignore
 	@Test
 	@Category(org.openmrs.reference.groups.BuildTests.class)
 	public void testStartVisit() {

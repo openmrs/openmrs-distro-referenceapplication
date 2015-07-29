@@ -44,6 +44,9 @@ public class RelationTypeTest extends TestBase {
         homePage.goToAdministration();
         relationTypePage.manage();
         assertPage(relationTypePage);
+        if(relationTypePage.ifExists("Wife/Husband")) {
+            relationTypePage.delete();
+        }
         relationTypePage.add();
         relationTypePage.save();
         assertTrue(driver.getPageSource().contains("A is to B name is required"));

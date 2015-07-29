@@ -47,7 +47,6 @@ public class VisitNoteTest extends TestBase {
     }
 
     //Test for RA-720, RA-682, RA-694
-    @Ignore
     @Test
     public void testAddEditVisitNote() {
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);

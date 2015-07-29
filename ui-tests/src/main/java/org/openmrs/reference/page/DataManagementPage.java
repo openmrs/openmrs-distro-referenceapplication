@@ -31,7 +31,7 @@ public class DataManagementPage extends AbstractBasePage {
         setText(ID_PATIENT_2, patient2);
     }
     public void clickOnContinue(){
-        findElement(CONTINUE);
+        waitForElementToBeEnabled(CONTINUE);
         clickOn(CONTINUE);}
     public void clickOnMergePatient(){ clickOn(MERGE_PATIENT);}
     public void clickOnNo(){ clickOn(NO);}

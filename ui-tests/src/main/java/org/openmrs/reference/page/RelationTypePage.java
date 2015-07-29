@@ -35,7 +35,7 @@ public class RelationTypePage extends AdminManagementPage {
         fillInField(findElement(B_IS_TO_A),name);
     }
 
-    public void createRelationType(String aistob,String bistoa, String description) {
+    public void createRelationType(String aistob,String bistoa, String description) throws InterruptedException {
         fillInRelationTypeAIsToB(aistob);
         fillInRelationTypeBIsToA(bistoa);
         fillInDescription(description);

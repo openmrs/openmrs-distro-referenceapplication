@@ -30,8 +30,8 @@ public abstract class AdminManagementPage extends AbstractBasePage {
 
     static final By SEARCH_ELEMENT = By.id("inputNode");
 
-    public void clickOnHomeLink() {
-        clickOn(HOME);
+    public void clickOnHomeLink() throws InterruptedException {
+        clickWhenVisible(HOME);
     }
 
     public void add() {
@@ -43,14 +43,19 @@ public abstract class AdminManagementPage extends AbstractBasePage {
         clickOn(MANAGE);
     }
 
-    public void save() {
-        clickOn(SAVE);
+    public void save() throws InterruptedException {
+        clickWhenVisible(SAVE);
+    }
+
+
+    public void clickOnFound() {
+        clickOn(FOUND_ELEMENT);
     }
 
     public void findBySearch(String element){
         findElement(SEARCH_ELEMENT).sendKeys(element);
         waitForElement(FOUND_ELEMENT);
-        clickOn(FOUND_ELEMENT);
+        clickOnFound();
     }
 
     public void find(String item){
@@ -64,6 +69,17 @@ public abstract class AdminManagementPage extends AbstractBasePage {
         }
     }
 
+    public boolean ifExists(String item) {
+        List<WebElement> elements = findElements(By.linkText(item));
+        for(WebElement element : elements) {
+            if (element.findElements(By.tagName("del")).isEmpty())
+            {
+                element.click();
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void findRetired(String item){
         List<WebElement> elements = findElements(By.linkText(item));
@@ -77,12 +93,12 @@ public abstract class AdminManagementPage extends AbstractBasePage {
     }
 
 
-    public void retire() {
-        clickOn(RETIRE);
+    public void retire() throws InterruptedException  {
+        clickWhenVisible(RETIRE);
     }
 
-    public void delete() {
-        clickOn(DELETE);
+    public void delete() throws InterruptedException  {
+        clickWhenVisible(DELETE);
     }
 
     protected void fillInField(WebElement field, String text) {
