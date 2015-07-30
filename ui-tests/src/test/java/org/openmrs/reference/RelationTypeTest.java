@@ -60,6 +60,7 @@ public class RelationTypeTest extends TestBase {
         assertTrue(driver.getPageSource().contains("Relationship type saved"));
         relationTypePage.find("Wife/Husband");
         relationTypePage.retire();
+        Thread.sleep(200);
         assertTrue(driver.getPageSource().contains("Retire reason cannot be empty."));
         assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
         relationTypePage.fillInRetireReason("divorce");

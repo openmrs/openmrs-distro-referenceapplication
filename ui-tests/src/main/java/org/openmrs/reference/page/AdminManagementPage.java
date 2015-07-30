@@ -70,15 +70,18 @@ public abstract class AdminManagementPage extends AbstractBasePage {
     }
 
     public boolean ifExists(String item) {
-        List<WebElement> elements = findElements(By.linkText(item));
-        for(WebElement element : elements) {
-            if (element.findElements(By.tagName("del")).isEmpty())
-            {
-                element.click();
-                return true;
+        try {
+            List<WebElement> elements = findElements(By.linkText(item));
+            for (WebElement element : elements) {
+                if (element.findElements(By.tagName("del")).isEmpty()) {
+                    element.click();
+                    return true;
+                }
             }
+            return false;
+        } catch(Exception e) {
+            return false;
         }
-        return false;
     }
 
     public void findRetired(String item){

@@ -37,7 +37,6 @@ public class VisitTypeAdministrationTest extends TestBase {
     }
 
     // Test for RA-766, RA-767, RA-768, RA-769
-    @Ignore
     @Test
     public void addEditRetireDeleteVisitTypeTest() throws InterruptedException {
         homePage.goToAdministration();
@@ -55,6 +54,7 @@ public class VisitTypeAdministrationTest extends TestBase {
         assertTrue(driver.getPageSource().contains("Visit Type saved"));
         visitTypePage.find("Payment Visit");
         visitTypePage.retire();
+        Thread.sleep(200);
         assertTrue(driver.getPageSource().contains("Retire reason cannot be empty."));
         assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
         visitTypePage.fillInRetireReason("Test Ended");
