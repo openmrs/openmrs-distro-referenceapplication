@@ -31,6 +31,7 @@ public class NamePatientAccentedLetterTest extends TestBase {
         patient = new TestPatient();
     }
 
+    @Ignore
     @Test
     public void namePatientAccentedLetterTest() throws Exception {
         homePage.openRegisterAPatientApp();

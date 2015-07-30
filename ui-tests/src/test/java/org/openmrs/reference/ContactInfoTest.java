@@ -31,6 +31,7 @@ public class ContactInfoTest extends TestBase {
         homePage.goToActiveVisitPatient();
     }
 
+    @Ignore
     @Test
     public void contactInfoTest() throws Exception {
         patientDashboardPage.clickOnShowContact();

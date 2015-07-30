@@ -31,6 +31,7 @@ public class XSSOnPhoneNumberFieldTest extends TestBase {
         homePage.goToActiveVisitPatient();
     }
 
+    @Ignore
     @Test
     public void  XSSOnPhoneNumberFieldTest() throws Exception {
         patientDashboardPage.clickOnShowContact();

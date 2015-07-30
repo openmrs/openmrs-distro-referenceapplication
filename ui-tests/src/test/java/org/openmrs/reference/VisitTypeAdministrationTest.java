@@ -42,6 +42,14 @@ public class VisitTypeAdministrationTest extends TestBase {
         homePage.goToAdministration();
         visitTypePage.manage();
         assertPage(visitTypePage);
+        if(visitTypePage.ifExists("Private Visit")) {
+            visitTypePage.delete();
+            closeAlertAndGetItsText();
+        }
+        if(visitTypePage.ifExists("Payment Visit")) {
+            visitTypePage.delete();
+            closeAlertAndGetItsText();
+        }
         visitTypePage.add();
         visitTypePage.save();
         assertTrue(driver.getPageSource().contains("Invalid name"));
