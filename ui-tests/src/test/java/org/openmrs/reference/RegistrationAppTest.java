@@ -67,6 +67,7 @@ public class RegistrationAppTest extends TestBase {
         headerPage.clickOnHomeIcon();
         deletePatient(patient.Uuid);
         waitForPatientDeletion(patient.Uuid);
+        Thread.sleep(200);
         headerPage.logOut();
     }
 

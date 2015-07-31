@@ -3,11 +3,13 @@ package org.openmrs.reference.page;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+
 
 /**
  * The register-a-new-patient page.
@@ -20,6 +22,7 @@ public class RegistrationPage extends AbstractBasePage {
         robot = new Robot();
     }
 
+    private boolean acceptNextAlert = true;
 	static final By CONTACT_INFO_SECTION = By.id("null");
 	static final By CONFIRM_SECTION = By.id("confirmation_label");
 	static final By BIRTHDATE_LABEL = By.id("birthdateLabel");
@@ -167,7 +170,7 @@ public class RegistrationPage extends AbstractBasePage {
         clickWhenVisible(CONFIRM_SECTION);
     }
 
-    public void clickOnGenderLink() {clickOn(GENDER_LABEL);}
+    public void clickOnGenderLink() throws InterruptedException {clickWhenVisible(GENDER_LABEL);}
 
     public void clickOnBirthDateLink() throws InterruptedException{
         clickWhenVisible(BIRTHDATE_LABEL);
@@ -240,6 +243,12 @@ public class RegistrationPage extends AbstractBasePage {
 
 	public void confirmPatient() throws InterruptedException{
 		clickWhenVisible(CONFIRM);
+        try {
+            closeAlert();
+        } catch(Exception e)
+        {
+
+        }
 		waitForElement(PATIENT_HEADER);
     }
 
@@ -321,6 +330,26 @@ public class RegistrationPage extends AbstractBasePage {
 
     public void confirmPatientByKeyboard() throws InterruptedException{
         keyPress(KeyEvent.VK_ENTER);
+    }
+
+
+    private void closeAlert() throws InterruptedException {
+        try {
+            Thread.sleep(500);
+            Alert alert = driver.switchTo().alert();
+            Thread.sleep(500);
+            if (acceptNextAlert) {
+                alert.accept();
+                Thread.sleep(500);
+                alert = driver.switchTo().alert();
+                Thread.sleep(500);
+                alert.accept();
+            } else {
+                alert.dismiss();
+            }
+        } finally {
+            acceptNextAlert = true;
+        }
     }
 }
 
