@@ -22,6 +22,7 @@ public class RelationTypePage extends AdminManagementPage {
         MANAGE = By.linkText("Manage Relationship Types");
         ADD = By.linkText("Add Relationship Type");
         SAVE = By.name("save");
+        RETIRE = By.name("retire");
     }
 
 

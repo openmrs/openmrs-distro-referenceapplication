@@ -19,6 +19,7 @@ public class VisitTypePage extends AdminManagementPage {
         ADD = By.linkText("Add Visit Type");
         SAVE = By.name("save");
         NAME = By.name("name");
+        RETIRE = By.name("retire");
     }
 
 
