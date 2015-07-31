@@ -34,7 +34,6 @@ public class AutocompleteForNameTest extends TestBase {
         homePage.goToAdministration();
     }
 
-    @Ignore
     @Test
     public void autocompleteForNameTest() throws Exception {
         settingPage.clickOnSetting();

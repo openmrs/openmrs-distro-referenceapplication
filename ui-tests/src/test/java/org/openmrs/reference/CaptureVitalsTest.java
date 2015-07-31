@@ -55,7 +55,6 @@ public class CaptureVitalsTest  extends TestBase {
         headerPage.logOut();
     }
 
-    @Ignore
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void captureVital() throws InterruptedException {

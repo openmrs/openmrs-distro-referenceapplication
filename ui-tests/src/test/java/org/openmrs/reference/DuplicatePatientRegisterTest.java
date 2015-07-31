@@ -60,7 +60,6 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     }
 
     // Test for RA-714
-    @Ignore
     @Test
     public void duplicateRegisterTest() throws InterruptedException {
 

@@ -42,7 +42,6 @@ public class EditDemographicTest extends TestBase {
 
     }
 
-    @Ignore
     @Test
     public void EditDemographicTest() throws Exception {
         homePage.goToActiveVisitPatient();

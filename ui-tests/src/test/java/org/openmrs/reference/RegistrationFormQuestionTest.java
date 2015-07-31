@@ -48,7 +48,6 @@ public class RegistrationFormQuestionTest extends TestBase {
     }
 
     //Test for RA-698
-    @Ignore
     @Test
     public void registrationFormQuestionTest() throws InterruptedException {
 
