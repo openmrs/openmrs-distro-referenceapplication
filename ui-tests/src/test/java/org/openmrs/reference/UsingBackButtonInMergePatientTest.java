@@ -42,7 +42,6 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
 
     }
 
-    @Ignore
     @Test
     public void usingBackButtonInMergePatientTest() throws Exception {
         homePage.openRegisterAPatientApp();
@@ -63,7 +62,6 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
         patient1.address1 = "address";
         registrationPage.enterMegrePatient(patient1);
         id2 = patientDashboardPage.findPatientId();
-        patient1.Uuid =  patientIdFromUrl();
         headerPage.clickOnHomeIcon();
         homePage.goToDataMagament();
         dataManagementPage.goToMegrePatient();

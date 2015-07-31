@@ -42,6 +42,7 @@ public class AutocompleteForNameTest extends TestBase {
         settingPage.enterFamilyList("kowalski");
         settingPage.enterGivenList("samantha");
         settingPage.saveList();
+        headerPage.clickOnHomeLink();
         homePage.openRegisterAPatientApp();
         patient.givenName = "sa";
         registrationPage.enterAndWaitGivenName(patient.givenName);

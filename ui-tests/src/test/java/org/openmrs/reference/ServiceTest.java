@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -58,12 +59,12 @@ public class ServiceTest extends TestBase {
         assertTrue(servicePage.serviceExistsOnPage("ATest2"));
         servicePage.addNewService();
         servicePage.putServiceData("ATest2", "10", "This is a Service Type added only for test purpose");
-        assertTrue(driver.getPageSource().contains("Name is duplicated"));
+        assertNotNull("Name is duplicated", servicePage.ERROR_MESSAGE);
         servicePage.cancel();
         servicePage.waitForServiceMenu();
         servicePage.startEditService("ATest2");
         servicePage.editServiceName("");
-        assertTrue(driver.getPageSource().contains("Invalid name"));
+        assertNotNull("Invalid name", servicePage.ERROR_MESSAGE);
         servicePage.editServiceDuration("abc");
         assertTrue(driver.getPageSource().contains("Duration must be a positive number"));
         servicePage.putServiceData("ATest3", "20", "This is a Service Type edited only for test purpose");

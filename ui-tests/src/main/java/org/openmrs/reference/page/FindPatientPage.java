@@ -41,7 +41,7 @@ public class FindPatientPage extends AbstractBasePage {
     }
 
     public WebElement nameSearchResult() {
-        return findElement(PATIENT_NAME_SEARCH_RESULT);
+        return findElement(PATIENT_SEARCH_RESULT);
     }
 
     
