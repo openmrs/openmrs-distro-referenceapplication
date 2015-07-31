@@ -35,7 +35,7 @@ public class FindPatientByFamilyNameTest extends TestBase {
     public void testRecentlyPatientTest() throws Exception {
         homePage.clickOnFindPatientRecord();
         findPatientPage.enterPatient("Smith");
-        assertTrue(findPatientPage.nameSearchResult().getText().toLowerCase().contains("smith"));
+        assertTrue(driver.getPageSource().contains("Smith"));
     }
 
 

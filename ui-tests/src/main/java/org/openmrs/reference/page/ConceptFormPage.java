@@ -61,6 +61,7 @@ public class ConceptFormPage extends AbstractBasePage{
         clickOn(ADDED_DRUG);
     }
     public void editConcept(){
+        waitForElement(EDIT);
         clickOn(EDIT);
     }
     public void deleteConcept(){

@@ -66,7 +66,6 @@ public class RecordMergeIssueTest extends TestBase {
         patient1.address1 = "address";
         registrationPage.enterMegrePatient(patient1);
         id2 = patientDashboardPage.findPatientId();
-        patient1.Uuid = patientIdFromUrl();
         headerPage.clickOnHomeIcon();
         homePage.goToDataMagament();
         dataManagementPage.goToMegrePatient();
@@ -83,8 +82,6 @@ public class RecordMergeIssueTest extends TestBase {
         headerPage.clickOnHomeIcon();
         deletePatient(patient.Uuid);
         waitForPatientDeletion(patient.Uuid);
-        deletePatient(patient1.Uuid);
-        waitForPatientDeletion(patient1.Uuid);
         headerPage.logOut();
     }
 }

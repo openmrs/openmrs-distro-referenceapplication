@@ -65,7 +65,7 @@ public class CaptureVitalsTest  extends TestBase {
             assertNotNull(patientDashboardPage.visitLink());
         }
         headerPage.clickOnHomeIcon();
-        assertPage(homePage);
+//        assertPage(homePage);
         homePage.captureVitals();
         currentPage().gotoPage(patientCaptureVitalsPage.URL_PATH + "?patientId="+patient.uuid);
         patientCaptureVitalsPage.checkIfRightPatient();

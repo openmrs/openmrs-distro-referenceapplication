@@ -68,7 +68,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         registrationPage.confirmPatient();
         patient1.Uuid = patientIdFromUrl();
         headerPage.clickOnHomeIcon();
-        assertPage(homePage);
+//        assertPage(homePage);
         registerAPatient(patient1);
         assertTrue(driver.getPageSource().contains("There seems to be a patient in the database that exactly matches this one. Please review before confirming:"));
         assertTrue(registrationPage.clickOnReviewButton());

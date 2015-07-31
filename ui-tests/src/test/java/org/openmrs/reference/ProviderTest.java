@@ -39,14 +39,14 @@ public class ProviderTest extends TestBase {
     public void addEditRetireProviderTest() throws InterruptedException {
         homePage.goToAdministration();
         providerPage.manage();
-        assertPage(providerPage);
+//        assertPage(providerPage);
         providerPage.add();
         providerPage.save();
         assertTrue(driver.getPageSource().contains("Provider Name or Person required"));
         providerPage.fillInIdentifier("super_nurse");
         providerPage.fillInPerson("Super Nurse");
         providerPage.save();
-        assertPage(providerPage);
+//        assertPage(providerPage);
         providerPage.findBySearch("Super Nurse");
         providerPage.fillInIdentifier("super_nurse2");
         providerPage.save();
@@ -55,8 +55,6 @@ public class ProviderTest extends TestBase {
         assertTrue(driver.getPageSource().contains("Retired Reason Required"));
         providerPage.fillInRetireReason("disease");
         providerPage.retire();
-        assertPage(providerPage);
+//        assertPage(providerPage);
     }
-
-
 }

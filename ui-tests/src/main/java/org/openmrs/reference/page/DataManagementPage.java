@@ -33,7 +33,9 @@ public class DataManagementPage extends AbstractBasePage {
     public void clickOnContinue(){
         waitForElementToBeEnabled(CONTINUE);
         clickOn(CONTINUE);}
-    public void clickOnMergePatient(){ clickOn(MERGE_PATIENT);}
+    public void clickOnMergePatient(){
+        waitForElement(MERGE_PATIENT);
+        clickOn(MERGE_PATIENT);}
     public void clickOnNo(){ clickOn(NO);}
     public void waitCont() throws InterruptedException {
         clickWhenVisible(CONTINUE);

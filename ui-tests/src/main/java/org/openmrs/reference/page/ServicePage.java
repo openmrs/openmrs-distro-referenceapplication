@@ -25,6 +25,7 @@ public class ServicePage extends AbstractBasePage {
     public static final By DELETE_ICON = By.className("deleteAppointmentType");
     public static final String CURRENT_SERVICE_TYPE_DELETE = "appointmentschedulingui-delete-";
     public static final String CURRENT_SERVICE_TYPE_EDIT = "appointmentschedulingui-edit-";
+    public static final By ERROR_MESSAGE = By.xpath("//table[@id='appointmentTypesTable']/tbody/tr/td");
     public ServicePage(WebDriver driver) {
         super(driver);
     }
