@@ -45,6 +45,7 @@ public class RelationTypeTest extends TestBase {
         assertPage(relationTypePage);
         if(relationTypePage.ifExists("Wife/Husband")) {
             relationTypePage.delete();
+            closeAlertAndGetItsText();
         }
         relationTypePage.add();
         relationTypePage.save();
