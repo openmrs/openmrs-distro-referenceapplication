@@ -44,11 +44,19 @@ public class VisitTypeAdministrationTest extends TestBase {
         assertPage(visitTypePage);
         if(visitTypePage.ifExists("Private Visit")) {
             visitTypePage.delete();
-            closeAlertAndGetItsText();
+            try {
+                closeAlertAndGetItsText();
+            } catch(Exception e) {
+
+            }
         }
         if(visitTypePage.ifExists("Payment Visit")) {
             visitTypePage.delete();
-            closeAlertAndGetItsText();
+            try {
+                closeAlertAndGetItsText();
+            } catch(Exception e) {
+
+            }
         }
         visitTypePage.add();
         visitTypePage.save();
