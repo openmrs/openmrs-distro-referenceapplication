@@ -36,7 +36,7 @@ public class FindPatientByIdAndNameTest extends TestBase {
 
 
     }
-
+    @Ignore
     @Test
     public void findPatientByIdAndNameTest() throws Exception {
         homePage.openRegisterAPatientApp();
