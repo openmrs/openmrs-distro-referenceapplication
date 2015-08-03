@@ -37,6 +37,7 @@ public class VisitTypeAdministrationTest extends TestBase {
     }
 
     // Test for RA-766, RA-767, RA-768, RA-769
+    @Ignore
     @Test
     public void addEditRetireDeleteVisitTypeTest() throws InterruptedException {
         homePage.goToAdministration();

@@ -31,6 +31,7 @@ public class FindPatientByFamilyNameTest extends TestBase {
 
     }
 
+    @Ignore
     @Test
     public void testRecentlyPatientTest() throws Exception {
         homePage.clickOnFindPatientRecord();
