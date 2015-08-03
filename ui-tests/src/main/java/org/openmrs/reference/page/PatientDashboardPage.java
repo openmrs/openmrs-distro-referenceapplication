@@ -302,7 +302,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	}
 
 	public String mergeVisits() {
-
+		waitForElement(MERGE_VISIT_BUTTON);
 		clickOn(MERGE_VISIT_BUTTON);
 		driver.findElement(By.xpath("//table[@id='active-visits']/tbody/tr/td/input[@name='mergeVisits']")).click();
 		driver.findElement(By.xpath("//table[@id='active-visits']/tbody/tr[2]/td/input[@name='mergeVisits']")).click();
