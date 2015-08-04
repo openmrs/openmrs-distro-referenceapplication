@@ -58,6 +58,18 @@ public abstract class AdminManagementPage extends AbstractBasePage {
         clickOnFound();
     }
 
+    public boolean exists(String element){
+        findElement(SEARCH_ELEMENT).sendKeys(element);
+        if(driver.getPageSource().contains("No matches found for")) {
+            return false;
+        }
+        else {
+            waitForElement(FOUND_ELEMENT);
+            clickOnFound();
+            return true;
+        }
+    }
+
     public void find(String item){
         List<WebElement> elements = findElements(By.linkText(item));
         for(WebElement element : elements) {

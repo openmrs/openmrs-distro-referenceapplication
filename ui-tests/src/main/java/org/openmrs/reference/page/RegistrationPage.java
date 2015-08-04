@@ -5,6 +5,7 @@ import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 import java.awt.*;
@@ -154,8 +155,14 @@ public class RegistrationPage extends AbstractBasePage {
 
     public void enterBirthYear(String bitrthyear){ setText(BIRTHDAY_YEAR, bitrthyear);}
 
-    public void clickOnContactInfo() {
-        clickOn(CONTACT_INFO_SECTION);
+    public void clickOnContactInfo() throws InterruptedException {
+        try {
+            closeAlert();
+        } catch(Exception e)
+        {
+
+        }
+        clickWhenVisible(CONTACT_INFO_SECTION);
     }
 
     public void clickOnPhoneNumber() throws InterruptedException {
@@ -243,11 +250,15 @@ public class RegistrationPage extends AbstractBasePage {
 
 	public void confirmPatient() throws InterruptedException{
 		clickWhenVisible(CONFIRM);
+        boolean timeoutFlag = false;
         try {
-            closeAlert();
+            timeoutFlag = closeAlert();
         } catch(Exception e)
         {
 
+        }
+        if(timeoutFlag) {
+            throw new TimeoutException("Alert handling took too long");
         }
 		waitForElement(PATIENT_HEADER);
     }
@@ -333,23 +344,31 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
 
-    private void closeAlert() throws InterruptedException {
+    private boolean closeAlert() throws InterruptedException {
+        boolean timeoutFlag = false;
+        Long startTime = System.currentTimeMillis();
         try {
             Thread.sleep(500);
-            Alert alert = driver.switchTo().alert();
-            Thread.sleep(500);
-            if (acceptNextAlert) {
-                alert.accept();
-                Thread.sleep(500);
+            Alert alert;
+            while(true) {
+                if((System.currentTimeMillis() - startTime) > 30000) {
+                    timeoutFlag = true;
+                    break;
+                }
                 alert = driver.switchTo().alert();
                 Thread.sleep(500);
-                alert.accept();
-            } else {
-                alert.dismiss();
+                if (acceptNextAlert) {
+                    alert.accept();
+                }
+                else {
+                    alert.dismiss();
+                }
             }
+
         } finally {
             acceptNextAlert = true;
         }
+        return timeoutFlag;
     }
 }
 

@@ -20,6 +20,7 @@ public class HomePage extends AbstractBasePage {
     static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
     static final By FIND_PATIENT_RECORD = By.cssSelector("i.icon-search");
     static final By DATA_MANAGAMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
+    static final By PATIENT_HEADER = By.className("patient-header");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -91,7 +92,7 @@ public class HomePage extends AbstractBasePage {
     public void goToActiveVisitPatient(){
         clickOn(By.id(ACTIVE_VISITS_APP_ID));
         clickOn(ACTIVE_PATIENT);
-
+        waitForElement(PATIENT_HEADER);
     }
 
     public void goToActiveVisitsSearch() {

@@ -39,6 +39,10 @@ public class ProviderTest extends TestBase {
     public void addEditRetireProviderTest() throws InterruptedException {
         homePage.goToAdministration();
         providerPage.manage();
+        if(providerPage.exists("Super Nurse")) {
+            providerPage.fillInRetireReason("too much providers of this kind");
+            providerPage.retire();
+        }
 //        assertPage(providerPage);
         providerPage.add();
         providerPage.save();
