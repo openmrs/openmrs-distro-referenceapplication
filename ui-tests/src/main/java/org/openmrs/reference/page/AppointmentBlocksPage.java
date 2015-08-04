@@ -45,9 +45,19 @@ public class AppointmentBlocksPage extends AbstractBasePage {
     }
 
     public void enterService(String service){
-        setTextToFieldNoEnter(SERVICE, service);
-        waitForElement(SERVICE_DROPDOWN);
-        clickOn(SERVICE_DROPDOWN);
+        boolean flag = false;
+        while(!flag) {
+            try {
+                findElement(SERVICE).clear();
+                setTextToFieldNoEnter(SERVICE, service);
+                waitForElement(SERVICE_DROPDOWN);
+                clickOn(SERVICE_DROPDOWN);
+                flag = true;
+            } catch(Exception e) {
+                flag = false;
+            }
+        }
+
     }
 
     public void enterProvider(String provider){setTextToFieldNoEnter(PROVIDER, provider);}

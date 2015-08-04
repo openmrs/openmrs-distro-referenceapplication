@@ -37,7 +37,8 @@ public class BookRequestAppointmentTest extends TestBase {
         patientDashboardPage = new PatientDashboardPage(driver);
         findPatientPage = new FindPatientPage(driver);
     }
-    @Ignore
+
+    @Ignore //ignored due to timezone error
     @Test
     public void bookRequestAppointmentTest() throws Exception {
         homePage.goToActiveVisitPatient();

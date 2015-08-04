@@ -33,6 +33,7 @@ public class AddPatientAppointmentTest extends TestBase {
         findPatientPage = new FindPatientPage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
     }
+
     @Ignore
     @Test
     public void addPatientAppointmentTest() throws Exception {
