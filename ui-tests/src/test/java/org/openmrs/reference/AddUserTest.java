@@ -54,7 +54,7 @@ public class AddUserTest extends TestBase {
             assertTrue(driver.getPageSource().contains("User can log in with either Username or System Id"));
             manageUserPage.enterUsernamePassword("super_nurse", "supernurse", "supernurse123");
             manageUserPage.saveUser();
-            assertTrue(manageUserPage.errorPassword().contains("Password should be 8 characters long and should have both upper and lower case characters , at least one digit , at least one non digit"));
+            assertFalse(manageUserPage.errorPassword().isEmpty());
             manageUserPage.enterUsernamePassword("super_nurse", "Nurse123", "Nurse123");
             manageUserPage.saveUser();
             settingPage.waitForMessage();

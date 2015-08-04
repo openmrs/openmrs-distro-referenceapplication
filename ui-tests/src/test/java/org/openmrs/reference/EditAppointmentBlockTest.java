@@ -29,7 +29,6 @@ public class EditAppointmentBlockTest extends TestBase {
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
     }
 
-    @Ignore
     @Test
     public void editAppointmentBlockTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();
