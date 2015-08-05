@@ -21,7 +21,7 @@ public class VisitTypePage extends AdminManagementPage {
         NAME = By.name("name");
         RETIRE = By.name("retire");
     }
-
+    private static final By ERROR = By.cssSelector("span.error");
 
 
 
@@ -29,6 +29,9 @@ public class VisitTypePage extends AdminManagementPage {
         fillInName(name);
         fillInDescription(description);
         save();
+    }
+    public void waitForError(){
+        waitForElement(ERROR);
     }
 
     @Override

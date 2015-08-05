@@ -32,7 +32,7 @@ public class AddLocationTest extends TestBase {
         locationPage = new LocationPage(driver);
         homePage.goToAdministration();
     }
-
+    
     @Test
     public void addLocationTest() throws Exception {
         locationPage.clickOnManageLocation();
