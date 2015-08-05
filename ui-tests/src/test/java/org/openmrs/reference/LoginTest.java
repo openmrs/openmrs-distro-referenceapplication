@@ -28,7 +28,7 @@ public class LoginTest extends TestBase {
     	headerPage.logOut();
     	assertPage(loginPage);
     }
-    
+    @Ignore
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
@@ -42,7 +42,7 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isSystemAdministrationAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(9));
     }
-
+    @Ignore
     @Test
     public void verifyClerkModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
@@ -52,7 +52,7 @@ public class LoginTest extends TestBase {
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(4));
     }
-
+    @Ignore
     @Test
     public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
@@ -62,7 +62,7 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(3));
     }
-
+    @Ignore
     @Test
     public void verifyNurseModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
@@ -73,7 +73,7 @@ public class LoginTest extends TestBase {
     	assertTrue(homePage.isCaptureVitalsAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(4));
     }
-
+    @Ignore
     @Test
     public void verifySysadminModulesAvailableOnHomePage() throws Exception {
         assertPage(loginPage);

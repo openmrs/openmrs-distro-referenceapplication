@@ -45,6 +45,7 @@ public class CreateAppointmentBlockTest extends TestBase {
         assertNotNull("Dermatology", appointmentBlocksPage.CURRENT_DAY);
         appointmentBlocksPage.findBlock();
         appointmentBlocksPage.clickOnDelete();
+        appointmentBlocksPage.clickOnClose();
         appointmentBlocksPage.clickOnConfirmDelete();}
     @After
     public void tearDown() throws Exception {

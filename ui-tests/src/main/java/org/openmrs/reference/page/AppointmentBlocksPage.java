@@ -28,6 +28,7 @@ public class AppointmentBlocksPage extends AbstractBasePage {
     public static final By DELETE = By.linkText("Delete");
     private static final By DELETE_CONFIRM = By.cssSelector("#delete-appointment-block-modal-buttons .confirm");
     private static final By SERVICE_DELETE = By.xpath("//div[@id='appointment-block-form']/selectmultipleappointmenttypes/div/div/div/div/i");
+    private static final By CLOSE_WINDOW = By.cssSelector("#delete-appointment-block-modal > div.dialog-header > h3");
     public void goToAppointmentBlock(){
         clickOn(APPOINTMENT_SCHEDULING);
         clickOn(MANAGE_PROVIDER_SCHEDULES);
@@ -94,6 +95,10 @@ public class AppointmentBlocksPage extends AbstractBasePage {
         } catch (Exception e) {
 
         }
+    }
+    public void clickOnClose(){
+        findElement(CLOSE_WINDOW);
+        clickOn(CLOSE_WINDOW);
     }
 
 

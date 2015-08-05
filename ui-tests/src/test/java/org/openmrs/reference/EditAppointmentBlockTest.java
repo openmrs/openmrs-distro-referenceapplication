@@ -47,6 +47,7 @@ public class EditAppointmentBlockTest extends TestBase {
         assertNotNull("Oncology", appointmentBlocksPage.CURRENT_DAY);
         appointmentBlocksPage.findBlock();
         appointmentBlocksPage.clickOnDelete();
+        appointmentBlocksPage.clickOnClose();
         appointmentBlocksPage.clickOnConfirmDelete();
     }
     @After
