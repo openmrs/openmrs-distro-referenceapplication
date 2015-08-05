@@ -17,30 +17,32 @@ public class AddDiagnosisToVisitNoteTest extends TestBase {
     private HeaderPage headerPage;
 
 
-       @Before
-       public void setUp() throws Exception {
-           homePage = new HomePage(driver);
-           loginPage.loginAsAdmin();
-           assertPage(homePage);
-           patientDashboardPage = new PatientDashboardPage(driver);
-           headerPage = new HeaderPage(driver);
+    @Before
+    public void setUp() throws Exception {
+        homePage = new HomePage(driver);
+        loginPage.loginAsAdmin();
+        assertPage(homePage);
+        patientDashboardPage = new PatientDashboardPage(driver);
+        headerPage = new HeaderPage(driver);
     }
-       @Test
-       public void AddDiagnosisToVisitNoteTest() throws Exception {
-           homePage.goToActiveVisitPatient();
-           patientDashboardPage.visitNote();
-           patientDashboardPage.enterDiagnosis("Pne");
-           patientDashboardPage.enterSecondaryDiagnosis("Bleed");
-           assertEquals("Pneumonia", patientDashboardPage.primaryDiagnosis());
-           assertEquals("Bleeding", patientDashboardPage.secondaryDiagnosis());
-           patientDashboardPage.save();
-           assertNotNull(patientDashboardPage.visitLink());
+
+    @Ignore
+    @Test
+    public void AddDiagnosisToVisitNoteTest() throws Exception {
+        homePage.goToActiveVisitPatient();
+        patientDashboardPage.visitNote();
+        patientDashboardPage.enterDiagnosis("Pne");
+        patientDashboardPage.enterSecondaryDiagnosis("Bleed");
+        assertEquals("Pneumonia", patientDashboardPage.primaryDiagnosis());
+        assertEquals("Bleeding", patientDashboardPage.secondaryDiagnosis());
+        patientDashboardPage.save();
+        assertNotNull(patientDashboardPage.visitLink());
 
     }
 
-       @After
-       public void tearDown ()throws Exception {
-           headerPage.clickOnHomeIcon();
-           headerPage.logOut();
+    @After
+    public void tearDown ()throws Exception {
+        headerPage.clickOnHomeIcon();
+        headerPage.logOut();
     }
 }

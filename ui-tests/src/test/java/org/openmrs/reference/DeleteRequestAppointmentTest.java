@@ -40,6 +40,7 @@ public class DeleteRequestAppointmentTest extends TestBase {
         findPatientPage = new FindPatientPage(driver);
     }
 
+    @Ignore
     @Test
     public void deleteRequestAppointmentTest() throws Exception {
         homePage.goToActiveVisitPatient();
