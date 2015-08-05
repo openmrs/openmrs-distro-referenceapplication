@@ -2,23 +2,19 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.openmrs.reference.page.CaptureVitalsPage;
+import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientCaptureVitalsPage;
 import org.openmrs.reference.page.PatientDashboardPage;
-import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
-import org.openqa.selenium.By;
 
-import java.util.concurrent.TimeoutException;
-
-import static org.openmrs.uitestframework.test.TestData.checkIfPatientExists;
 
 /**
  * Created by tomasz on 25.05.15.
@@ -27,52 +23,50 @@ public class CaptureVitalsTest  extends TestBase {
 
 
     private HeaderPage headerPage;
-    private RegistrationPage registrationPage;
     private HomePage homePage;
-    private CaptureVitalsPage captureVitalsPage;
     private PatientDashboardPage patientDashboardPage;
     private PatientCaptureVitalsPage patientCaptureVitalsPage;
     private PatientInfo patient;
+
     @Before
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         headerPage = new HeaderPage(driver);
         homePage = new HomePage(driver);
-        registrationPage = new RegistrationPage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
-        captureVitalsPage = new CaptureVitalsPage(driver);
         patientCaptureVitalsPage = new PatientCaptureVitalsPage(driver);
         headerPage.clickOnHomeIcon();
         assertPage(loginPage);
         loginPage.loginAsAdmin();
         assertPage(homePage);
+
+    }
+
+    private void registerAPatient() throws InterruptedException{
+        homePage.openRegisterAPatientApp();
+        patient = createTestPatient();
+        currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        headerPage.clickOnHomeIcon();
+        deletePatient(patient.uuid);
+        //waitForPatientDeletion(patient.uuid);
+        headerPage.logOut();
+    }
+
+    @Test
+    @Category(org.openmrs.reference.groups.BuildTests.class)
+    public void captureVital() throws InterruptedException {
         registerAPatient();
         if(!patientDashboardPage.hasActiveVisit()) {
             patientDashboardPage.startVisit();
             assertNotNull(patientDashboardPage.visitLink());
         }
         headerPage.clickOnHomeIcon();
-        assertPage(homePage);
+//        assertPage(homePage);
         homePage.captureVitals();
         currentPage().gotoPage(patientCaptureVitalsPage.URL_PATH + "?patientId="+patient.uuid);
-
-    }
-
-    private void registerAPatient() {
-        homePage.openRegisterAPatientApp();
-        patient = createTestPatient();
-        currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
-    }
-    @After
-    public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
-        deletePatient(patient);
-        waitForPatientDeletion(patient.uuid);
-
-        headerPage.logOut();
-    }
-
-    @Test
-    public void captureVital() {
         patientCaptureVitalsPage.checkIfRightPatient();
 //        patientCaptureVitalsPage.setHeightField("0");
 //        assertTrue(driver.findElement(By.id("w7")).getText().contains("Minimum: 10"));
@@ -116,17 +110,6 @@ public class CaptureVitalsTest  extends TestBase {
         patientCaptureVitalsPage.confirm();
         assertTrue(driver.getPageSource().contains("Confirm submission?"));
         assertTrue(patientCaptureVitalsPage.save());
-    }
-
-    private void waitForPatientDeletion(String uuid) throws Exception {
-        registrationPage.waitForDeletePatient();
-        Long startTime = System.currentTimeMillis();
-        while(checkIfPatientExists(uuid)) {
-            Thread.sleep(200);
-            if(System.currentTimeMillis() - startTime > 30000) {
-                throw new TimeoutException("Patient not deleted in expected time");
-            }
-        }
     }
 
 

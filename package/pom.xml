@@ -233,10 +233,15 @@
                                     <artifactId>appointmentschedulingui-omod</artifactId>
                                     <destFileName>appointmentschedulingui-${appointmentschedulinguiVersion}.omod</destFileName>
                                 </artifactItem>
-<artifactItem>																																																																																																																																																													<groupId>org.openmrs.module</groupId>
-					<artifactId>chartsearch-omod</artifactId>
-					<destFileName>chartsearch-${chartsearchVersion}.omod</destFileName>
-				</artifactItem>
+								<artifactItem>																																																																																																																																																													<groupId>org.openmrs.module</groupId>
+									<artifactId>chartsearch-omod</artifactId>
+									<destFileName>chartsearch-${chartsearchVersion}.omod</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.openmrs.module</groupId>
+									<artifactId>adminui-omod</artifactId>
+									<destFileName>adminui-${adminuiVersion}.omod</destFileName>
+								</artifactItem>
 							</artifactItems>
 							<outputDirectory>${project.build.directory}/distro</outputDirectory>
 						</configuration>
@@ -264,20 +269,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

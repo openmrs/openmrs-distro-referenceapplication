@@ -31,25 +31,25 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<openMRSVersion>1.11.3</openMRSVersion>
-		<referencemetadataVersion>2.3</referencemetadataVersion>
+		<referencemetadataVersion>2.4-SNAPSHOT</referencemetadataVersion>
 		<logicVersion>0.5.2</logicVersion>
 		<appframeworkVersion>2.3</appframeworkVersion>
-		<uiframeworkVersion>3.3.1</uiframeworkVersion>
+		<uiframeworkVersion>3.4-SNAPSHOT</uiframeworkVersion>
 		<registrationcoreVersion>1.1.2</registrationcoreVersion>
 		<registrationappVersion>1.3-SNAPSHOT</registrationappVersion>
 		<eventVersion>2.2.1</eventVersion>
 		<idgenVersion>3.2</idgenVersion>
-		<emrapiVersion>1.6</emrapiVersion>
+		<emrapiVersion>1.7</emrapiVersion>
 		<referenceapplicationVersion>2.2</referenceapplicationVersion>
 		<providermanagementVersion>2.2</providermanagementVersion>
 		<uilibraryVersion>2.0.4</uilibraryVersion>
 		<calculationVersion>1.1</calculationVersion>
 		<serialization.xstreamVersion>0.2.7</serialization.xstreamVersion>
 		<htmlwidgetsVersion>1.6.8</htmlwidgetsVersion>
-		<reportingVersion>0.9.6</reportingVersion>
+		<reportingVersion>0.9.6-SNAPSHOT</reportingVersion>
 		<reportingRestVersion>1.4</reportingRestVersion>
 		<metadatadeployVersion>1.4</metadatadeployVersion>
-		<metadatasharingVersion>1.1.9</metadatasharingVersion>
+		<metadatasharingVersion>1.2-SNAPSHOT</metadatasharingVersion>
 		<metadatamappingVersion>1.0.2</metadatamappingVersion>
 		<uicommonsVersion>1.7-SNAPSHOT</uicommonsVersion>
 		<appuiVersion>1.4-SNAPSHOT</appuiVersion>
@@ -57,7 +57,7 @@
 		<htmlformentry19extVersion>1.5</htmlformentry19extVersion>
 		<htmlformentryuiVersion>1.2</htmlformentryuiVersion>
 		<coreappsVersion>1.7-SNAPSHOT</coreappsVersion>
-		<webservices.restVersion>2.11</webservices.restVersion>
+		<webservices.restVersion>2.12-SNAPSHOT</webservices.restVersion>
 		<referencedemodataVersion>1.4.1</referencedemodataVersion>
 		<dataexchangeVersion>1.3.1</dataexchangeVersion>
 		<allergyapiVersion>1.3</allergyapiVersion>
@@ -66,8 +66,9 @@
 		<atlasVersion>2.1</atlasVersion>
 		<chartsearchVersion>1.2</chartsearchVersion>
 		<appointmentschedulingVersion>1.3</appointmentschedulingVersion>
-		<appointmentschedulinguiVersion>1.0.2</appointmentschedulinguiVersion>
+		<appointmentschedulinguiVersion>1.0.3-SNAPSHOT</appointmentschedulinguiVersion>
 		<namephoneticsVersion>1.4</namephoneticsVersion> <!-- The omod for namephonetics is not included in the distro, but we keep the version around since it's a semi-supported add-on -->
+		<adminuiVersion>1.0-SNAPSHOT</adminuiVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -879,6 +880,12 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>chartsearch-server</artifactId>
 				<version>${chartsearchVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>adminui-omod</artifactId>
+				<version>${adminuiVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>

@@ -1,9 +1,7 @@
 package org.openmrs.reference;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
@@ -32,7 +30,8 @@ public class VisitTest extends TestBase {
 	@After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-		deletePatient(patient);
+		deletePatient(patient.uuid);
+        //waitForPatientDeletion(patient.uuid);
         headerPage.logOut();
     }
 
@@ -40,6 +39,7 @@ public class VisitTest extends TestBase {
 	 * Beginnings of visit test. For starters, we just start a visit and verify it started.
 	 */
 	@Test
+	@Category(org.openmrs.reference.groups.BuildTests.class)
 	public void testStartVisit() {
 //		System.out.println("test patient uuid: " + patientUuid);
 		// go to patient dashboard for the just-created test patient
@@ -57,6 +57,6 @@ public class VisitTest extends TestBase {
 		Assert.assertEquals("Pneumonia", patientDashboardPage.primaryDiagnosis());
 		patientDashboardPage.enterNote("this is a note");
 		patientDashboardPage.save();
-		Assert.assertEquals("Today", patientDashboardPage.visitLink().getText().trim());
+		Assert.assertEquals("Today", patientDashboardPage.findLinkToVisit().getText().trim());
 	}
 }

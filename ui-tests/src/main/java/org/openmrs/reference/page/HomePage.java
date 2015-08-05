@@ -14,6 +14,13 @@ public class HomePage extends AbstractBasePage {
     static final String CONFIGURE_METADATA_APP_ID = "coreapps-configuremetadata-homepageLink-coreapps-configuremetadata-homepageLink-extension";
     static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
     static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
+    static final By ACTIVE_PATIENT = By.xpath("//td[2]/a");
+    static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
+    static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
+    static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
+    static final By FIND_PATIENT_RECORD = By.cssSelector("i.icon-search");
+    static final By DATA_MANAGAMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
+    static final By PATIENT_HEADER = By.className("patient-header");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -28,9 +35,9 @@ public class HomePage extends AbstractBasePage {
         }
     }
 
-    private void openApp(String appIdentifier) {
+    private void openApp(String appIdentifier) throws InterruptedException {
         driver.get(properties.getWebAppUrl());
-        clickOn(By.id(appIdentifier));
+        clickWhenVisible(By.id(appIdentifier));
         waitForJsVariable("Navigator.isReady");
     }
 
@@ -50,11 +57,11 @@ public class HomePage extends AbstractBasePage {
         return isAppButtonPresent(REGISTER_PATIENT_APP_ID);
     }
 
-    public void openRegisterAPatientApp() {
+    public void openRegisterAPatientApp() throws InterruptedException {
         openApp(REGISTER_PATIENT_APP_ID);
     }
 
-    public void openLegacyAdministrationApp() {
+    public void openLegacyAdministrationApp()  throws InterruptedException{
         openApp(SYSTEM_ADMIN_APP_ID);
     }
 
@@ -81,6 +88,30 @@ public class HomePage extends AbstractBasePage {
     public boolean isCaptureVitalsAppPresent() {
         return isAppButtonPresent(CAPTURE_VITALS_APP_ID);
     }
+
+    public void goToActiveVisitPatient(){
+        clickOn(By.id(ACTIVE_VISITS_APP_ID));
+        clickOn(ACTIVE_PATIENT);
+//        waitForElement(PATIENT_HEADER);
+    }
+
+    public void goToActiveVisitsSearch() {
+        clickOn(By.id(ACTIVE_VISITS_APP_ID));
+    }
+
+    public void goToManageForm() {
+        clickOn(By.id(CONFIGURE_METADATA_APP_ID));
+        clickOn(MANAGE_FORM);
+    }
+
+    public void goToAdministration() {
+        clickOn(SYSTEM_ADMINISTRATION);
+        clickOn(ADVANCED_ADMINISTRATION);
+    }
+
+    public void clickOnFindPatientRecord(){ clickOn(FIND_PATIENT_RECORD);}
+    public void goToDataMagament(){ clickOn(DATA_MANAGAMENT);}
+
 
     @Override
     public String expectedUrlPath() {

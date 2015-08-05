@@ -14,16 +14,17 @@ public class HeaderPage extends AbstractBasePage {
 	static final String HOME_ICON = "logo";
 	static final String HOME_LINK_TEXT = "Home";
 
-	public void clickOnHomeIcon() {
-		clickOn(By.className(HOME_ICON));
+	public void clickOnHomeIcon() throws InterruptedException {
+        clickWhenVisible(By.className(HOME_ICON));
 	}
-	
+
+
 	// TODO This is unused, do we really need it?
 	public void clickOnHomeLink() {
 		clickOn(By.linkText(HOME_LINK_TEXT));
 	}
 	
-	public void logOut() {
+	public void logOut() throws InterruptedException{
 		clickOnLinkFromHref(LOGOUT_HREF);
 	}
 	
