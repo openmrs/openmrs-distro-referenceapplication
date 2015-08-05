@@ -28,6 +28,7 @@ public class DeleteAppointmentBlockTest extends TestBase {
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
     }
 
+    @Ignore
     @Test
     public void deleteAppointmentBlockTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();
