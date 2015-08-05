@@ -35,6 +35,7 @@ public class DeleteAllergyTest extends TestBase {
 
     }
 
+    @Ignore//ignored due to possible application logout
     @Test
     public void deleteAllergyTest() throws Exception {
 

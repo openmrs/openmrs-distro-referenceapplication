@@ -34,6 +34,7 @@ public class AutocompleteForNameTest extends TestBase {
         homePage.goToAdministration();
     }
 
+    @Ignore//ignored due to possible application logout
     @Test
     public void autocompleteForNameTest() throws Exception {
         settingPage.clickOnSetting();

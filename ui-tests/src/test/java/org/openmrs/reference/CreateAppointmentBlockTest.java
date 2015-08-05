@@ -29,7 +29,7 @@ public class CreateAppointmentBlockTest extends TestBase {
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
     }
 
-    @Ignore
+    @Ignore//ignored due to possible application logout
     @Test
     public void createAppointmentBlockTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();
