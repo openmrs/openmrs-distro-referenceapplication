@@ -56,6 +56,7 @@ public class ProviderTest extends TestBase {
         providerPage.save();
         providerPage.findBySearch("Super Nurse");
         providerPage.retire();
+        providerPage.waitForError();
         assertTrue(driver.getPageSource().contains("Retired Reason Required"));
         providerPage.fillInRetireReason("disease");
         providerPage.retire();

@@ -42,9 +42,11 @@ public class AdmitToInpatientTest extends TestBase {
         patientDashboardPage.clickOnAdmitToInpatient();
         patientDashboardPage.selectLocation("Unknown Location");
         assertTrue(patientDashboardPage.location().getText().contains("Unknown Location"));
+
         patientDashboardPage.clickOnSave();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Entered Admission"));
         patientDashboardPage.exitFromInpatient();
+        patientDashboardPage.waitForVisitLink();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Entered Discharge"));
 
     }

@@ -44,11 +44,11 @@ public class ExitFromInpatientTest extends TestBase {
         patientDashboardPage.clickOnSave();
         patientDashboardPage.exitFromInpatient();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Entered Discharge"));
+        patientDashboardPage.waitForVisitLinkHidden();
     }
 
     @After
     public void tearDown() throws Exception {
-        patientDashboardPage.waitForVisitLinkHidden();
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
     }
