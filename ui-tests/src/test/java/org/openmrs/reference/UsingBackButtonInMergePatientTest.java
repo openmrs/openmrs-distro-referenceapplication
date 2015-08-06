@@ -41,6 +41,8 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
 
 
     }
+
+    @Ignore //Ignored due to blocking validation
     @Test
     public void usingBackButtonInMergePatientTest() throws Exception {
         homePage.openRegisterAPatientApp();
