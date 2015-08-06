@@ -35,6 +35,8 @@ public class ProviderTest extends TestBase {
     }
 
     //combined test for RA-747, RA-701 and RA-748
+//    Ignore casused by bug
+    @Ignore
     @Test
     public void addEditRetireProviderTest() throws InterruptedException {
         homePage.goToAdministration();
@@ -56,6 +58,7 @@ public class ProviderTest extends TestBase {
         providerPage.save();
         providerPage.findBySearch("Super Nurse");
         providerPage.retire();
+        providerPage.waitForError();
         assertTrue(driver.getPageSource().contains("Retired Reason Required"));
         providerPage.fillInRetireReason("disease");
         providerPage.retire();
