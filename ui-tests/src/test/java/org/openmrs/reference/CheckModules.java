@@ -18,6 +18,7 @@ public class CheckModules extends TestBase {
 
     @Before
     public void setUp() {
+        login();
         homePage = new HomePage(driver);
         modulesPage = new ModulesPage(driver);
     }
@@ -28,8 +29,7 @@ public class CheckModules extends TestBase {
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void checkModules() throws Exception {
-    	login();
-        assertPage(homePage);
+    	assertPage(homePage);
         modulesPage.go();
         assertPage(modulesPage);
         // Get the modulesListing <div>, which contains the table of modules.

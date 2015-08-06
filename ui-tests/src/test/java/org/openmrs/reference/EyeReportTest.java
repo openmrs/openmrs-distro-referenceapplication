@@ -23,8 +23,8 @@ public class EyeReportTest extends TestBase {
     @Before
     public void setUp() throws Exception {
 
-        homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         patientDashboardPage = new PatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
@@ -34,7 +34,7 @@ public class EyeReportTest extends TestBase {
 
     }
 
-    @Ignore
+    @Ignore// ignored due to eye form changes
     @Test
     public void eyeReportTest() throws Exception {
         patientDashboardPage.clickOnEyeForm();

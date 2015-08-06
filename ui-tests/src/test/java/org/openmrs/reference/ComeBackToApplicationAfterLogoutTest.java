@@ -20,13 +20,13 @@ public class ComeBackToApplicationAfterLogoutTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
     }
 
-    @Ignore
+    @Ignore//ignored due to relogin error
     @Test
     public void comeBackToApplicationAfterLogoutTest() throws Exception {
         homePage.goToActiveVisitsSearch();

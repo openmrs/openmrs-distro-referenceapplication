@@ -46,7 +46,7 @@ public class ConceptFormPage extends AbstractBasePage{
     }
     public boolean conceptExist(String find){
         try {
-            return findElement(FINDED_CONCEPT).getText().contains(find);
+            return findElement(FINDED_CONCEPT).getText().equals(find);
         }
         catch (Exception ex) {
             return false;

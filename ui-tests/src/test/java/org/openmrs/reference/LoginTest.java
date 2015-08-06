@@ -20,7 +20,6 @@ public class LoginTest extends TestBase {
     @Before
     public void setUp() {
         headerPage = new HeaderPage(driver);
-        homePage = new HomePage(driver);
     }
     
     @After
@@ -28,11 +27,11 @@ public class LoginTest extends TestBase {
     	headerPage.logOut();
     	assertPage(loginPage);
     }
-    @Ignore
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
     	login();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
@@ -42,42 +41,42 @@ public class LoginTest extends TestBase {
         assertTrue(homePage.isSystemAdministrationAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(9));
     }
-    @Ignore
     @Test
     public void verifyClerkModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
     	loginPage.loginAsClerk();
+        homePage = new HomePage(driver);
     	assertPage(homePage);
     	assertTrue(homePage.isActiveVisitsAppPresent());
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(4));
     }
-    @Ignore
     @Test
     public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
     	loginPage.login("doctor", "Doctor123");
+        homePage = new HomePage(driver);
     	assertPage(homePage);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(3));
     }
-    @Ignore
     @Test
     public void verifyNurseModulesAvailableOnHomePage() throws Exception {
     	assertPage(loginPage);
     	loginPage.loginAsNurse();
+        homePage = new HomePage(driver);
     	assertPage(homePage);
     	assertTrue(homePage.isFindAPatientAppPresent());
     	assertTrue(homePage.isActiveVisitsAppPresent());
     	assertTrue(homePage.isCaptureVitalsAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(4));
     }
-    @Ignore
     @Test
     public void verifySysadminModulesAvailableOnHomePage() throws Exception {
         assertPage(loginPage);
         loginPage.loginAsSysadmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
 //        assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());

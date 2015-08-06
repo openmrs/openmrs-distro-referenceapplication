@@ -25,8 +25,8 @@ public class AddPastVisitTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         patientDashboardPage = new PatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);

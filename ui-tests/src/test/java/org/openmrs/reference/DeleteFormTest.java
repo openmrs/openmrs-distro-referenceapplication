@@ -23,14 +23,14 @@ public class DeleteFormTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         manageForm = new ManageFormsPage(driver);
     }
 
-    @Ignore
+    @Ignore//ignore due to moving forms functionality
     @Test
     public void deleteFormTest() throws Exception {
         homePage.goToManageForm();

@@ -21,8 +21,8 @@ public class PasswordMinimumLengthTest extends TestBase {
     @Before
     public void setUp() throws Exception {
 
-        homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         settingPage = new SettingPage(driver);

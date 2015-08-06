@@ -25,12 +25,12 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     @Before
     public void setUp() throws AWTException {
         headerPage = new HeaderPage(driver);
-        homePage = new HomePage(driver);
-        registrationPage = new RegistrationPage(driver);
         patient1 = PatientGenerator.generateTestPatient();
 
         assertPage(loginPage);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
+        registrationPage = new RegistrationPage(driver);
         assertPage(homePage);
     }
 
@@ -60,7 +60,6 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     }
 
     // Test for RA-714
-    @Ignore
     @Test
     public void duplicateRegisterTest() throws InterruptedException {
 

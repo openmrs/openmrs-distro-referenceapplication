@@ -23,9 +23,9 @@ public class ProviderTest extends TestBase {
     @Before
     public void setUp() {
         headerPage = new HeaderPage(driver);
+        login();
         homePage = new HomePage(driver);
         providerPage = new ProviderPage(driver);
-        login();
     }
 
     @After
@@ -34,9 +34,7 @@ public class ProviderTest extends TestBase {
         headerPage.logOut();
     }
 
-    //combined test for RA-747, RA-701 and RA-748
-//    Ignore casused by bug
-    @Ignore
+    @Ignore //ignored due to internal error
     @Test
     public void addEditRetireProviderTest() throws InterruptedException {
         homePage.goToAdministration();

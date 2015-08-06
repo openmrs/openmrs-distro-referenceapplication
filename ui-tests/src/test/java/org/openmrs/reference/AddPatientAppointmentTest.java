@@ -24,8 +24,8 @@ public class AddPatientAppointmentTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
@@ -34,7 +34,7 @@ public class AddPatientAppointmentTest extends TestBase {
         patientDashboardPage = new PatientDashboardPage(driver);
     }
 
-    @Ignore
+    @Ignore //ignored due to timezone error
     @Test
     public void addPatientAppointmentTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();

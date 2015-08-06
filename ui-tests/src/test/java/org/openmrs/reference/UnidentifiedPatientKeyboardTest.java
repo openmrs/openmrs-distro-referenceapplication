@@ -31,11 +31,11 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         headerPage = new HeaderPage(driver);
+        assertPage(loginPage);
+        loginPage.loginAsClerk();
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
-        assertPage(loginPage);
-        loginPage.loginAsClerk();
         assertPage(homePage);
     }
 

@@ -31,11 +31,11 @@ public class VisitNoteTest extends TestBase {
 
     @Before
     public void before() {
-        homePage = new HomePage(driver);
         headerPage = new HeaderPage(driver);
         patient = createTestPatient();
-        patientDashboardPage = new PatientDashboardPage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
+        patientDashboardPage = new PatientDashboardPage(driver);
         assertPage(homePage);
     }
 

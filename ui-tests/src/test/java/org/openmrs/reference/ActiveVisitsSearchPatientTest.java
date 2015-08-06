@@ -26,8 +26,8 @@ public class ActiveVisitsSearchPatientTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         activeVisitsPage = new ActiveVisitsPage(driver);
         headerPage = new HeaderPage(driver);

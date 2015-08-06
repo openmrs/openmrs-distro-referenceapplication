@@ -20,11 +20,11 @@ public class VisitTest extends TestBase {
 	public void before() {
         headerPage = new HeaderPage(driver);
         patient = createTestPatient();
-        homePage = new HomePage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
-    	assertPage(loginPage);
+        assertPage(loginPage);
         loginPage.loginAsDoctor();
-        assertPage(homePage);
+		homePage = new HomePage(driver);
+		patientDashboardPage = new PatientDashboardPage(driver);
+		assertPage(homePage);
 	}
 	
 	@After

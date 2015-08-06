@@ -29,9 +29,9 @@ public class AddRolesToUserTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        homePage = new HomePage(driver);
 
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         administrationPage = new AdministrationPage(driver);
@@ -50,7 +50,6 @@ public class AddRolesToUserTest extends TestBase {
         loginPage.loginAsAdmin();
     }
 
-    @Ignore
     @Test
     public void addRolesToUserTest() throws InterruptedException {
         homePage.goToAdministration();
@@ -79,30 +78,30 @@ public class AddRolesToUserTest extends TestBase {
     }
 
     private void fillInRoleModules(Map<String, Integer> roleModules) {
-        roleModules.put("roleStrings.Anonymous",1);
-        roleModules.put("roleStrings.Application:ConfiguresAppointmentScheduling",2);
-        roleModules.put("roleStrings.Application:EntersADTEvents",3);
-        roleModules.put("roleStrings.Application:HasSuperUserPrivileges",10);
-        roleModules.put("roleStrings.Application:RegistersPatients",4);
-        roleModules.put("roleStrings.Application:SchedulesAndOverbooksAppointments",2);
-        roleModules.put("roleStrings.Application:SeesAppointmentSchedule",2);
-        roleModules.put("roleStrings.Application:UsesPatientSummary",2);
-        roleModules.put("roleStrings.Authenticated",1);
-        roleModules.put("roleStrings.Organizational:SystemAdministrator",3);
-        roleModules.put("roleStrings.SystemDeveloper",10);
-        roleModules.put("roleStrings.Application:AdministersSystem",2);
-        roleModules.put("roleStrings.Application:ConfiguresForms",1);
-        roleModules.put("roleStrings.Application:EntersVitals",3);
-        roleModules.put("roleStrings.Application:ManagesAtlas",2);
-        roleModules.put("roleStrings.Application:ConfiguresMetadata",1);
-        roleModules.put("roleStrings.Application:ManagesProviderSchedules",2);
-        roleModules.put("roleStrings.Application:RequestsAppointments",1);
-        roleModules.put("roleStrings.Application:SchedulesAppointments",2);
-        roleModules.put("roleStrings.Application:UsesCaptureVitalsApp",2);
-        roleModules.put("roleStrings.Application:WritesClinicalNotes", 3);
-        roleModules.put("roleStrings.Organizational:Doctor", 4);
-        roleModules.put("roleStrings.Organizational:Nurse", 5);
-        roleModules.put("roleStrings.Organizational:RegistrationClerk", 5);
+        roleModules.put("roleStrings.Anonymous",0);
+        roleModules.put("roleStrings.Application:ConfiguresAppointmentScheduling",1);
+        roleModules.put("roleStrings.Application:EntersADTEvents",2);
+        roleModules.put("roleStrings.Application:HasSuperUserPrivileges",9);
+        roleModules.put("roleStrings.Application:RegistersPatients",3);
+        roleModules.put("roleStrings.Application:SchedulesAndOverbooksAppointments",1);
+        roleModules.put("roleStrings.Application:SeesAppointmentSchedule",1);
+        roleModules.put("roleStrings.Application:UsesPatientSummary",1);
+        roleModules.put("roleStrings.Authenticated",0);
+        roleModules.put("roleStrings.Organizational:SystemAdministrator",2);
+        roleModules.put("roleStrings.SystemDeveloper",9);
+        roleModules.put("roleStrings.Application:AdministersSystem",1);
+        roleModules.put("roleStrings.Application:ConfiguresForms",0);
+        roleModules.put("roleStrings.Application:EntersVitals",2);
+        roleModules.put("roleStrings.Application:ManagesAtlas",1);
+        roleModules.put("roleStrings.Application:ConfiguresMetadata",0);
+        roleModules.put("roleStrings.Application:ManagesProviderSchedules",1);
+        roleModules.put("roleStrings.Application:RequestsAppointments",0);
+        roleModules.put("roleStrings.Application:SchedulesAppointments",1);
+        roleModules.put("roleStrings.Application:UsesCaptureVitalsApp",1);
+        roleModules.put("roleStrings.Application:WritesClinicalNotes", 2);
+        roleModules.put("roleStrings.Organizational:Doctor", 3);
+        roleModules.put("roleStrings.Organizational:Nurse", 4);
+        roleModules.put("roleStrings.Organizational:RegistrationClerk", 4);
     }
     @After
     public void tearDown() throws Exception {

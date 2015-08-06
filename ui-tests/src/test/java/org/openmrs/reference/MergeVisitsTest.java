@@ -21,9 +21,9 @@ public class MergeVisitsTest extends TestBase {
 
     @Before
     public void setUp() {
-        homePage = new HomePage(driver);
         patient = createTestPatient();
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         patientDashboardPage = new PatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);

@@ -26,9 +26,9 @@ public class RelationTypeTest extends TestBase {
     @Before
     public void setUp() {
         headerPage = new HeaderPage(driver);
+        login();
         homePage = new HomePage(driver);
         relationTypePage = new RelationTypePage(driver);
-        login();
     }
 
     @After

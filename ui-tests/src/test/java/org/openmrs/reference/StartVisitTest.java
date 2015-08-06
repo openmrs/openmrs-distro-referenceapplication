@@ -21,9 +21,9 @@ public class StartVisitTest extends TestBase {
     @Before
     public void setUp() throws Exception {
 
-        homePage = new HomePage(driver);
         patient = createTestPatient();
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         patientDashboardPage = new PatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);

@@ -31,13 +31,13 @@ public class RegistrationTest extends TestBase {
     @Before
     public void setUp() throws AWTException {
         headerPage = new HeaderPage(driver);
-        homePage = new HomePage(driver);
-        registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
         patient1 = new TestPatient();
 
         assertPage(loginPage);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
+        registrationPage = new RegistrationPage(driver);
+        patientDashboardPage = new PatientDashboardPage(driver);
         assertPage(homePage);
     }
 

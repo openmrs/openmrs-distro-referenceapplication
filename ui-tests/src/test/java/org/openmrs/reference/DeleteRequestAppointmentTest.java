@@ -30,8 +30,8 @@ public class DeleteRequestAppointmentTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
@@ -40,7 +40,6 @@ public class DeleteRequestAppointmentTest extends TestBase {
         findPatientPage = new FindPatientPage(driver);
     }
 
-    @Ignore
     @Test
     public void deleteRequestAppointmentTest() throws Exception {
         homePage.goToActiveVisitPatient();

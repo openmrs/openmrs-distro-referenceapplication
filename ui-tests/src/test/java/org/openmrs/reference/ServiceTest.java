@@ -29,11 +29,11 @@ public class ServiceTest extends TestBase {
 
     @Before
     public void before() {
-        homePage = new HomePage(driver);
         headerPage = new HeaderPage(driver);
+        loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         servicePage = new ServicePage(driver);
         patientDashboardPage= new PatientDashboardPage(driver);
-        loginPage.loginAsAdmin();
         assertPage(homePage);
         servicePage.openManageServiceTypes();
     }

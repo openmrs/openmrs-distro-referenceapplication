@@ -24,15 +24,15 @@ public class EditFormTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        homePage = new HomePage(driver);
         loginPage.loginAsAdmin();
+        homePage = new HomePage(driver);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         manageForm = new ManageFormsPage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
     }
 
-    @Ignore
+    @Ignore//ignore due to moving forms functionality
     @Test
     public void EditFormTest() throws Exception {
         homePage.goToManageForm();

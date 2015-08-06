@@ -25,10 +25,10 @@ public class VisitTypeAdministrationTest extends TestBase {
     @Before
     public void setUp() {
         headerPage = new HeaderPage(driver);
+        loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         visitTypePage = new VisitTypePage(driver);
         settingPage = new SettingPage(driver);
-        loginPage.loginAsAdmin();
     }
 
     @After

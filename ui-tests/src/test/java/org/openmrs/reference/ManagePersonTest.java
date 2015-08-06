@@ -23,10 +23,10 @@ public class ManagePersonTest extends TestBase {
     @Before
     public void setUp() {
         headerPage = new HeaderPage(driver);
+        login();
         homePage = new HomePage(driver);
         managePersonPage = new ManagePersonPage(driver);
         settingPage = new SettingPage(driver);
-        login();
     }
 
     @After
