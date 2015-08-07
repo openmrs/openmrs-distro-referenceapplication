@@ -42,12 +42,11 @@ public class ExitFromInpatientTest extends TestBase {
         assertTrue(patientDashboardPage.location().getText().contains("Unknown Location"));
         patientDashboardPage.clickOnSave();
         patientDashboardPage.exitFromInpatient();
-
+        assertTrue(patientDashboardPage.visitLink().getText().contains("Entered Discharge"));
     }
 
     @After
     public void tearDown() throws Exception {
-        assertTrue(patientDashboardPage.visitLink().getText().contains("Entered Discharge"));
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
     }
