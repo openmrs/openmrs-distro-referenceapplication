@@ -36,7 +36,6 @@ public class MergeVisitsTest extends TestBase {
         headerPage.logOut();
     }
 
-    @Ignore
     @Test
     public void mergeVisitsTest() {
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
