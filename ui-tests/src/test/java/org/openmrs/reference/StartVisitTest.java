@@ -4,8 +4,6 @@ package org.openmrs.reference;
  * Created by nata on 17.06.15.
  */
 import org.junit.*;
-import static org.junit.Assert.*;
-
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
@@ -29,7 +27,6 @@ public class StartVisitTest extends TestBase {
         headerPage = new HeaderPage(driver);
     }
 
-    @Ignore
     @Test
     public void startVisitTest() throws Exception {
 

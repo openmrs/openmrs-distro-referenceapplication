@@ -65,6 +65,7 @@ public class RegistrationPage extends AbstractBasePage {
     public static final By FIELD_ERROR = By.id("field-error");
     static By AUTO_LIST;
     private Robot robot;
+    private static final By CONFIRM_DATA = By.id("submit");
 
 	public void enterPatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
@@ -306,6 +307,7 @@ public class RegistrationPage extends AbstractBasePage {
         waitForElement(By.className("ui-autocomplete"));
     }
 //    Merge Patients
+    public void clickOnConfirmPatient(){ clickOn(CONFIRM_DATA);}
     public void enterMegrePatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
         enterPatientFamilyName(patient.familyName);
@@ -316,7 +318,7 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnContactInfo();
         enterAddress1(patient.address1);
         clickOnConfirmSection();
-        confirmPatient();
+        clickOnConfirmPatient();
     }
     private void keyPress(int key) {
         robot.keyPress(key);
