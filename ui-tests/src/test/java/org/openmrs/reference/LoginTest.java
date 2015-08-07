@@ -25,13 +25,12 @@ public class LoginTest extends TestBase {
     @After
     public void logout() throws InterruptedException{
     	headerPage.logOut();
-    	assertPage(loginPage);
     }
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
-    	login();
         homePage = new HomePage(driver);
+        loginPage.loginAsAdmin();
         assertPage(homePage);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
@@ -43,7 +42,6 @@ public class LoginTest extends TestBase {
     }
     @Test
     public void verifyClerkModulesAvailableOnHomePage() throws Exception {
-    	assertPage(loginPage);
     	loginPage.loginAsClerk();
         homePage = new HomePage(driver);
     	assertPage(homePage);
@@ -53,7 +51,6 @@ public class LoginTest extends TestBase {
     }
     @Test
     public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
-    	assertPage(loginPage);
     	loginPage.login("doctor", "Doctor123");
         homePage = new HomePage(driver);
     	assertPage(homePage);
@@ -63,7 +60,6 @@ public class LoginTest extends TestBase {
     }
     @Test
     public void verifyNurseModulesAvailableOnHomePage() throws Exception {
-    	assertPage(loginPage);
     	loginPage.loginAsNurse();
         homePage = new HomePage(driver);
     	assertPage(homePage);
@@ -74,7 +70,6 @@ public class LoginTest extends TestBase {
     }
     @Test
     public void verifySysadminModulesAvailableOnHomePage() throws Exception {
-        assertPage(loginPage);
         loginPage.loginAsSysadmin();
         homePage = new HomePage(driver);
         assertPage(homePage);
