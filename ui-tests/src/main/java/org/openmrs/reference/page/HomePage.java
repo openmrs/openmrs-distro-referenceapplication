@@ -91,6 +91,7 @@ public class HomePage extends AbstractBasePage {
 
     public void goToActiveVisitPatient(){
         clickOn(By.id(ACTIVE_VISITS_APP_ID));
+        waitForElement(ACTIVE_PATIENT);
         clickOn(ACTIVE_PATIENT);
 //        waitForElement(PATIENT_HEADER);
     }

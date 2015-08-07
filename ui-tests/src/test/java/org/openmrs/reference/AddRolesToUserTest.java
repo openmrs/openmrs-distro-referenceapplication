@@ -42,7 +42,7 @@ public class AddRolesToUserTest extends TestBase {
     private void reLoginAsUser() throws InterruptedException {
         manageUserPage.clickOnHomeLink();
         headerPage.logOut();
-        loginPage.login("super_nurse","Nurse321");
+        loginPage.login("super_nurse", "Nurse321");
     }
 
     private void reLoginAsAdmin() throws InterruptedException {
@@ -67,7 +67,10 @@ public class AddRolesToUserTest extends TestBase {
         for(Entry<String, Integer> role : roleModules.entrySet()) {
             manageUserPage.assignRolesToUser(oldRole,role.getKey(),"super_nurse");
             reLoginAsUser();
-            assertThat(homePage.numberOfAppsPresent(), is(role.getValue()));
+            if(homePage.numberOfAppsPresent() != role.getValue()) {
+                throw new AssertionError("role "+role+" doesn't have matching number of accessible applications: should be:"+role.getValue()+"is:"+homePage.numberOfAppsPresent());
+            }
+//            assertThat(homePage.numberOfAppsPresent(), is(role.getValue()));
             reLoginAsAdmin();
             oldRole = role.getKey();
             homePage.goToAdministration();

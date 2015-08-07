@@ -95,8 +95,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 	}
 
 
-	public void clickOnAdmitToInpatient(){
-		clickOn(ADMIT_TO_INPATIENT);
+	public void clickOnAdmitToInpatient() throws InterruptedException {
+		clickWhenVisible(ADMIT_TO_INPATIENT);
 	}
 
 	public boolean inpatientPresent(){

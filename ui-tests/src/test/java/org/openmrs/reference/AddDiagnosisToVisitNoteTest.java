@@ -26,6 +26,7 @@ public class AddDiagnosisToVisitNoteTest extends TestBase {
         headerPage = new HeaderPage(driver);
     }
 
+    @Ignore//ignored due to possible application logout
     @Test
     public void AddDiagnosisToVisitNoteTest() throws Exception {
         homePage.goToActiveVisitPatient();

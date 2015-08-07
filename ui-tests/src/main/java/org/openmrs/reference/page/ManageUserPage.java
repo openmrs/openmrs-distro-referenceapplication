@@ -3,7 +3,9 @@ package org.openmrs.reference.page;
 import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Created by tomasz on 10.07.15.
@@ -94,14 +96,48 @@ public class ManageUserPage extends AbstractBasePage {
         }
     }
 
+    public void unassignRole(String roleToUnassign) {
+        waitForElement(By.id(roleToUnassign));
+        WebElement roleElement = null;
+        Long startTime = System.currentTimeMillis();
+        while(true) {
+            if((System.currentTimeMillis() - startTime) > 30000) {
+                throw new TimeoutException("Couldn't uncheck a role in 30 seconds");
+            }
+            roleElement = findElement(By.id(roleToUnassign));
+            if(roleElement.getAttribute("checked") != null && roleElement.getAttribute("checked").equals("true")) {
+                roleElement.click();
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+    public void assignRole(String roleToAssign) {
+        waitForElement(By.id(roleToAssign));
+        WebElement roleElement = null;
+        Long startTime = System.currentTimeMillis();
+        while(true) {
+            if((System.currentTimeMillis() - startTime) > 30000) {
+                throw new TimeoutException("Couldn't uncheck a role in 30 seconds");
+            }
+            roleElement = findElement(By.id(roleToAssign));
+            if(roleElement.getAttribute("checked") != null && roleElement.getAttribute("checked").equals("true")) {
+                roleElement.click();
+            }
+            else {
+                break;
+            }
+        }
+    }
+
     public void assignRolesToUser(String roleToUnassign, String roleToAssign, String user) throws InterruptedException {
         setText(FIND_USER, user);
         clickOn(ACTION);
         clickOn(USER_LINK);
         if(roleToUnassign != null) {
-            waitForElement(By.id(roleToUnassign));
-            clickOn(By.id(roleToUnassign));
-            Thread.sleep(200);
+            unassignRole(roleToUnassign);
         }
         clickOn(By.id(roleToAssign));
         clickOn(SAVE_BUTTON);

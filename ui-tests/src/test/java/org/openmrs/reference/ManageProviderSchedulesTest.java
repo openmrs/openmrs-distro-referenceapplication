@@ -28,7 +28,7 @@ public class ManageProviderSchedulesTest extends TestBase {
         headerPage = new HeaderPage(driver);
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
     }
-    @Ignore
+
     @Test
     public void manageProviderSchedulesTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();

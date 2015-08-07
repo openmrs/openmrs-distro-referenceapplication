@@ -42,6 +42,7 @@ public class TransferToWardServiceTest extends TestBase {
         patientDashboardPage.selectLocation("Unknown Location");
         patientDashboardPage.clickOnSave();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Entered Admission"));
+        patientDashboardPage.waitForVisitLinkHidden();
         patientDashboardPage.clickOnTranfer();
         patientDashboardPage.selectLocation("Isolation Ward");
         assertTrue(patientDashboardPage.location().getText().contains("Isolation Ward"));
