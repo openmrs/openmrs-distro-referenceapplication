@@ -36,7 +36,6 @@ public class ExitFromInpatientTest extends TestBase {
 
         if(patientDashboardPage.inpatientPresent()) {
             patientDashboardPage.exitFromInpatient();
-
         }
         patientDashboardPage.clickOnAdmitToInpatient();
         patientDashboardPage.selectLocation("Unknown Location");
@@ -44,7 +43,6 @@ public class ExitFromInpatientTest extends TestBase {
         patientDashboardPage.clickOnSave();
         patientDashboardPage.exitFromInpatient();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Entered Discharge"));
-        patientDashboardPage.waitForVisitLinkHidden();
     }
 
     @After

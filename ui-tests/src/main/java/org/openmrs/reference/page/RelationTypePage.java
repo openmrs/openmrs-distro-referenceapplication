@@ -17,6 +17,7 @@ public class RelationTypePage extends AdminManagementPage {
     static final By A_IS_TO_B = By.name("aIsToB");
     static final By B_IS_TO_A = By.name("bIsToA");
     static final By DESCRIPTION = By.name("description");
+    static final By ERROR = By.cssSelector("span.error");
     public RelationTypePage(WebDriver driver) {
         super(driver);
         MANAGE = By.linkText("Manage Relationship Types");
@@ -41,6 +42,10 @@ public class RelationTypePage extends AdminManagementPage {
         fillInRelationTypeBIsToA(bistoa);
         fillInDescription(description);
         save();
+    }
+
+    public void waitForError(){
+        waitForElement(ERROR);
     }
 
     @Override
