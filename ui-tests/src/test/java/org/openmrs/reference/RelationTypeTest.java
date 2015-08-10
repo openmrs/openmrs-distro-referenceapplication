@@ -36,8 +36,8 @@ public class RelationTypeTest extends TestBase {
         headerPage.logOut();
     }
 
-    // Test for RA-762, RA-763, RA-764, RA-765
 
+    // Test for RA-762, RA-763, RA-764, RA-765
     @Test
     public void addEditRetireDeleteRelationTypeTest() throws InterruptedException {
         homePage.goToAdministration();

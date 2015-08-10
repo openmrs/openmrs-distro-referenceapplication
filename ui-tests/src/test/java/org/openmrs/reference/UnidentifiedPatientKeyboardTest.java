@@ -43,8 +43,8 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
         headerPage.logOut();
     }
 
-    // Test for RA-472, ignored due to issue
-    @Ignore
+    // Test for RA-472,
+    @Ignore//ignored due to inability to check unindentified patient by keyboard
     @Test
     public void registerUnidentifiedPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();

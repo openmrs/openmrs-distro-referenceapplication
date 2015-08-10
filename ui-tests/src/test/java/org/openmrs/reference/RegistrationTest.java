@@ -99,7 +99,6 @@ public class RegistrationTest extends TestBase {
     }
 
     // Test for RA-711
-    @Ignore
     @Test
     public void registerTest() throws InterruptedException {
 

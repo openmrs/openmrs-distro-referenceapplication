@@ -43,7 +43,7 @@ public class FindPatientRecordTest extends TestBase {
         headerPage.logOut();
     }
 
-    @Ignore
+    @Ignore//ignored due to hanging build
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void testFindPatientRecord() {
