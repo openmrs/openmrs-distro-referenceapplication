@@ -57,6 +57,7 @@ public class CaptureVitalsTest  extends TestBase {
 
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
+    @Ignore
     public void captureVital() throws InterruptedException {
         registerAPatient();
         if(!patientDashboardPage.hasActiveVisit()) {

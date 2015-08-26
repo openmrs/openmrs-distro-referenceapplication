@@ -32,6 +32,7 @@ public class ContactInfoTest extends TestBase {
     }
 
     @Test
+    @Ignore
     public void contactInfoTest() throws Exception {
         patientDashboardPage.clickOnShowContact();
         patientDashboardPage.clickOnEditContact();

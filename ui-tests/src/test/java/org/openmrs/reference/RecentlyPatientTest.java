@@ -32,6 +32,7 @@ import static org.junit.Assert.*;
     }
 
     @Test
+    @Ignore
     public void testRecentlyPatientTest() throws Exception {
         findPatientPage.enterPatient("Bob Smith");
         headerPage.clickOnHomeIcon();

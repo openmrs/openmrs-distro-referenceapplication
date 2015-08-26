@@ -51,6 +51,7 @@ public class AddRolesToUserTest extends TestBase {
     }
 
     @Test
+    @Ignore
     public void addRolesToUserTest() throws InterruptedException {
         homePage.goToAdministration();
         administrationPage.clickOnManageUsers();
