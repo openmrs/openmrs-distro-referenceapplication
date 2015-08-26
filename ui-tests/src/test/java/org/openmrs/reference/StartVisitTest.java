@@ -28,6 +28,7 @@ public class StartVisitTest extends TestBase {
     }
 
     @Test
+    @Ignore
     public void startVisitTest() throws Exception {
 
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);

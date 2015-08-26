@@ -43,6 +43,7 @@ public class MergePatientByNameTest extends TestBase {
     }
 
     @Test
+    @Ignore
     public void mergePatientByNameTest() throws Exception {
         homePage.openRegisterAPatientApp();
 //       Register first patient

@@ -61,6 +61,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
 
     // Test for RA-714
     @Test
+    @Ignore
     public void duplicateRegisterTest() throws InterruptedException {
 
         registerAPatient(patient1);

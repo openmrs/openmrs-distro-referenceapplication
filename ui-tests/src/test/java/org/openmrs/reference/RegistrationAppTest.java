@@ -36,6 +36,7 @@ public class RegistrationAppTest extends TestBase {
     // Test for Story RA-71
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
+    @Ignore
     public void registerAPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();
@@ -71,6 +72,7 @@ public class RegistrationAppTest extends TestBase {
 
     // Test for RA-472
     @Test
+    @Ignore
     public void registerUnidentifiedPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();

@@ -40,6 +40,7 @@ public class VisitTest extends TestBase {
 	 */
 	@Test
 	@Category(org.openmrs.reference.groups.BuildTests.class)
+	@Ignore
 	public void testStartVisit() {
 //		System.out.println("test patient uuid: " + patientUuid);
 		// go to patient dashboard for the just-created test patient
