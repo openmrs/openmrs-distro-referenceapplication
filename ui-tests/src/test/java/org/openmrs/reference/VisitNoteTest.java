@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by tomasz on 19.06.15.
  */
+@Ignore
 public class VisitNoteTest extends TestBase {
 
     private HomePage homePage;

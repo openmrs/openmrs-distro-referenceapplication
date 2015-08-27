@@ -12,7 +12,7 @@ import org.openmrs.reference.page.LocationPage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 
-
+@Ignore
 public class AddLocationTest extends TestBase {
     private HomePage homePage;
     private PatientDashboardPage patientDashboardPage;
@@ -34,6 +34,7 @@ public class AddLocationTest extends TestBase {
     }
     
     @Test
+    @Ignore
     public void addLocationTest() throws Exception {
         locationPage.clickOnManageLocation();
         if(locationPage.locationPresent()) {
