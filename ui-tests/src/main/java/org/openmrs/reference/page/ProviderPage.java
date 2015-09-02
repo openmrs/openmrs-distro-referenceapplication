@@ -1,11 +1,8 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import static org.openmrs.uitestframework.test.TestBase.currentPage;
 
 public class ProviderPage extends AdminManagementPage {
 
