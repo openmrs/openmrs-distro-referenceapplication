@@ -32,7 +32,7 @@ public class ContactInfoTest extends TestBase {
     }
 
     @Test
-    @Ignore
+    @Ignore //ignored due to RA-901 Error
     public void contactInfoTest() throws Exception {
         patientDashboardPage.clickOnShowContact();
         patientDashboardPage.clickOnEditContact();

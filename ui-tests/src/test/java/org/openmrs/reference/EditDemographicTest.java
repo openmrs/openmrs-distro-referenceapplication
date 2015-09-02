@@ -43,7 +43,7 @@ public class EditDemographicTest extends TestBase {
     }
 
     @Test
-    @Ignore
+    @Ignore //ignored due to RA-901
     public void EditDemographicTest() throws Exception {
         homePage.goToActiveVisitPatient();
         patientDashboardPage.clickOnEditPatient();
