@@ -43,8 +43,7 @@ public class EditDemographicTest extends TestBase {
     }
 
     @Test
-    @Ignore //ignored due to RA-901
-    public void EditDemographicTest() throws Exception {
+    public void editDemographicTest() throws Exception {
         homePage.goToActiveVisitPatient();
         patientDashboardPage.clickOnEditPatient();
         registrationPage.clearName();
