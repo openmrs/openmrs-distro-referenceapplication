@@ -34,7 +34,7 @@ public class AddLocationTest extends TestBase {
     }
     
     @Test
-    @Ignore
+    @Ignore //ignored due to unreachable browser exception
     public void addLocationTest() throws Exception {
         locationPage.clickOnManageLocation();
         if(locationPage.locationPresent()) {
