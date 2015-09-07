@@ -36,6 +36,7 @@ public class MergeVisitsTest extends TestBase {
         headerPage.logOut();
     }
 
+    @Ignore //ignored due to problems in enter date algorithm
     @Test
     public void mergeVisitsTest() {
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
