@@ -2,6 +2,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
@@ -35,6 +36,7 @@ public class ManagePersonTest extends TestBase {
         headerPage.logOut();
     }
 
+    @Ignore //ignored due to unreachable browser exception
     @Test
     public void createEditDeletePersonTest() throws InterruptedException {
         homePage.goToAdministration();

@@ -32,7 +32,7 @@ import static org.junit.Assert.*;
     }
 
     @Test
-    @Ignore
+    @Ignore //ignored due to unreachable browser exception
     public void testRecentlyPatientTest() throws Exception {
         findPatientPage.enterPatient("Bob Smith");
         headerPage.clickOnHomeIcon();

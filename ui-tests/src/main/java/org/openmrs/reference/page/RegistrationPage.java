@@ -52,11 +52,11 @@ public class RegistrationPage extends AbstractBasePage {
     // These xpath expressions should be replaced by id's or cssSelectors if possible.
     static final By CONFIRM_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li[2]/span");
     static final String CONFIRMATION_DIV = "//div[@id='confirmation']";
-	public static final By NAME_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[1]/strong");
-	public static final By GENDER_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[2]/strong");
-	public static final By BIRTHDATE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[3]/strong");
-	static final By ADDRESS_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[4]/strong");
-	static final By PHONE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//li[5]/strong");
+	public static final By NAME_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[1]");
+	public static final By GENDER_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[2]");
+	public static final By BIRTHDATE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[3]");
+	static final By ADDRESS_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[4]");
+	static final By PHONE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[5]");
 
 	static final By PATIENT_HEADER = By.className("patient-header");
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");

@@ -36,24 +36,23 @@ public class RegistrationAppTest extends TestBase {
     // Test for Story RA-71
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
-    @Ignore
     public void registerAPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();
         registrationPage.enterPatient(patient);
 
-        String address = patient.address1 + " " + 
-        		patient.address2 + " " + 
-        		patient.city + " " + 
-        		patient.state + " " + 
-        		patient.country + " " + 
+        String address = patient.address1 + ", " +
+        		patient.address2 + ", " +
+        		patient.city + ", " +
+        		patient.state + ", " +
+        		patient.country + ", " +
         		patient.postalCode;
 
-        assertEquals(patient.givenName + " " + patient.familyName, registrationPage.getNameInConfirmationPage());
-        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
-        assertEquals(patient.birthDay + " " + patient.birthMonth + " " + patient.birthYear, registrationPage.getBirthdateInConfirmationPage());
-        assertEquals(address, registrationPage.getAddressInConfirmationPage());
-        assertEquals(patient.phone, registrationPage.getPhoneInConfirmationPage());
+        assertTrue(registrationPage.getNameInConfirmationPage().contains(patient.givenName + ", , " + patient.familyName));
+        assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
+        assertTrue(registrationPage.getBirthdateInConfirmationPage().contains(patient.birthDay + ", " + patient.birthMonth + ", " + patient.birthYear));
+        assertTrue(registrationPage.getAddressInConfirmationPage().contains(address));
+        assertTrue(registrationPage.getPhoneInConfirmationPage().contains(patient.phone));
         
         registrationPage.confirmPatient();
         patient.Uuid = patientIdFromUrl();
@@ -72,14 +71,12 @@ public class RegistrationAppTest extends TestBase {
 
     // Test for RA-472
     @Test
-    @Ignore
     public void registerUnidentifiedPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();
         registrationPage.enterUnidentifiedPatient(patient);
 
-        assertEquals("--", registrationPage.getNameInConfirmationPage());
-        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
+        assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
         registrationPage.confirmPatient();
         patient.Uuid = patientIdFromUrl();

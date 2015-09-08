@@ -44,7 +44,6 @@ public class RecordMergeIssueTest extends TestBase {
     }
 
     @Test
-    @Ignore
     public void recordMergeIssueTest() throws Exception {
         homePage.openRegisterAPatientApp();
 //       Register first patient
