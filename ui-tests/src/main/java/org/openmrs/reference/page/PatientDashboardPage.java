@@ -229,8 +229,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public void clickOnAddAllergy(){ clickOn(ADD_ALLERGY);}
 	public void clickOnEyeForm(){ clickOn(EYE_REPORT);}
 
-	public void goToEditVisitNote() {
-		clickOn(CURRENT_DATE);
+	public void goToEditVisitNote() throws InterruptedException {
+		clickWhenVisible(CURRENT_DATE);
 		String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
 		clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='"+visitNoteId+"']"));
 	}

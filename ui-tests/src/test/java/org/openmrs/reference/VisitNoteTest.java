@@ -49,8 +49,7 @@ public class VisitNoteTest extends TestBase {
 
     //Test for RA-720, RA-682, RA-694
     @Test
-    @Ignore
-    public void testAddEditVisitNote() {
+    public void testAddEditVisitNote() throws InterruptedException {
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
         assertPage(patientDashboardPage);
         if(!patientDashboardPage.hasActiveVisit()) {
@@ -65,6 +64,7 @@ public class VisitNoteTest extends TestBase {
         patientDashboardPage.addNote("This is a note");
         patientDashboardPage.save();
         assertTrue(driver.getPageSource().contains("MALARIA") && driver.getPageSource().contains("CANCER"));
+        patientDashboardPage.back();
         patientDashboardPage.goToEditVisitNote();
         patientDashboardPage.deleteDiagnosis();
         patientDashboardPage.addSecondaryDiagnosis("flue");
