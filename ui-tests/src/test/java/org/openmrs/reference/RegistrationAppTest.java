@@ -48,7 +48,7 @@ public class RegistrationAppTest extends TestBase {
         		patient.country + ", " +
         		patient.postalCode;
 
-        assertTrue(registrationPage.getNameInConfirmationPage().contains(patient.givenName + ", , " + patient.familyName));
+        assertTrue(registrationPage.getNameInConfirmationPage().contains(patient.givenName + ", " + patient.familyName));
         assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
         assertTrue(registrationPage.getBirthdateInConfirmationPage().contains(patient.birthDay + ", " + patient.birthMonth + ", " + patient.birthYear));
         assertTrue(registrationPage.getAddressInConfirmationPage().contains(address));

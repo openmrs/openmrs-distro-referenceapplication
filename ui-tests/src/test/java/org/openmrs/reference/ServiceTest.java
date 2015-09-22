@@ -46,13 +46,13 @@ public class ServiceTest extends TestBase {
 
     @Test
     public void addEditDeleteServiceTest() throws InterruptedException{
-        servicePage.addNewService();
         if(servicePage.serviceExistsOnPage("ATest2")) {
             servicePage.deleteService("ATest2");
         }
         if(servicePage.serviceExistsOnPage("ATest3")) {
             servicePage.deleteService("ATest3");
         }
+        servicePage.addNewService();
         assertPage(servicePage);
         servicePage.putServiceData("ATest2", "10", "This is a Service Type added only for test purpose");
         servicePage.waitForServiceMenu();
