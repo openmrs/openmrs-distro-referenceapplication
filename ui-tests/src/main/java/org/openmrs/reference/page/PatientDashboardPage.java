@@ -66,6 +66,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	private static final By MERGE_VISIT_BUTTON = By.xpath("//a[@id='org.openmrs.module.coreapps.mergeVisits']/li");
 	private static final By MERGE = By.id("mergeVisitsBtn");
 	private static final By ADD_ALLERGY = By.cssSelector("i.icon-pencil.edit-action.right");
+	private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
 	public PatientDashboardPage(WebDriver driver) {
 		super(driver);}
 	private static final By EYE_REPORT = By.linkText("Eye Report");
@@ -78,6 +79,9 @@ public class PatientDashboardPage extends AbstractBasePage {
 		clickOn(CONFIRM);
 	}
 
+	public void back() {
+		clickOn(PATIENT);
+	}
 	public void clickOnEditPatient(){
 		clickOn(EDIT_PATIENT);
 	}
@@ -225,8 +229,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public void clickOnAddAllergy(){ clickOn(ADD_ALLERGY);}
 	public void clickOnEyeForm(){ clickOn(EYE_REPORT);}
 
-	public void goToEditVisitNote() {
-		clickOn(CURRENT_DATE);
+	public void goToEditVisitNote() throws InterruptedException {
+		clickWhenVisible(CURRENT_DATE);
 		String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
 		clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='"+visitNoteId+"']"));
 	}

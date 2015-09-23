@@ -36,18 +36,20 @@ public class MergeVisitsTest extends TestBase {
         headerPage.logOut();
     }
 
+    @Ignore //ignored due to problems in enter date algorithm
     @Test
-    @Ignore
     public void mergeVisitsTest() {
         currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
         assertPage(patientDashboardPage);
         patientDashboardPage.startVisit();
         Assert.assertTrue(patientDashboardPage.hasActiveVisit());
+        patientDashboardPage.back();
         patientDashboardPage.addPastVisit();
         if(patientDashboardPage.errorPresent()) {
             patientDashboardPage.clickChangeDate();
             patientDashboardPage.enterDate();
         }
+        patientDashboardPage.back();
         assertTrue(patientDashboardPage.mergeVisits().contains("Visits merged successfully"));
 
     }

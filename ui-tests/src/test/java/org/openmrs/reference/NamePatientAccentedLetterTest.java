@@ -32,7 +32,6 @@ public class NamePatientAccentedLetterTest extends TestBase {
     }
 
     @Test
-    @Ignore
     public void namePatientAccentedLetterTest() throws Exception {
         homePage.openRegisterAPatientApp();
         patient.familyName = "Kłoczkowski";

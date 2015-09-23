@@ -14,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by tomasz on 02.07.15.
  */
+@Ignore
 public class ProviderTest extends TestBase {
 
     private HeaderPage headerPage;

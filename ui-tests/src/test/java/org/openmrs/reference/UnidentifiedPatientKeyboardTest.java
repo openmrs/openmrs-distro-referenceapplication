@@ -51,8 +51,8 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
         patient = PatientGenerator.generateTestPatient();
         registrationPage.enterUnidentifiedPatientByKeyboard(patient);
 
-        assertEquals("--", registrationPage.getNameInConfirmationPage());
-        assertEquals(patient.gender, registrationPage.getGenderInConfirmationPage());
+        assertTrue(registrationPage.getNameInConfirmationPage().contains("--"));
+        assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
         registrationPage.confirmPatientByKeyboard();
         patient.Uuid = patientIdFromUrl();

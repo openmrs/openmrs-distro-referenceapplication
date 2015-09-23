@@ -29,6 +29,7 @@ public class ManageProviderSchedulesTest extends TestBase {
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
     }
 
+    @Ignore //ignored due to RA-904
     @Test
     public void manageProviderSchedulesTest() throws Exception {
         appointmentBlocksPage.goToAppointmentBlock();
