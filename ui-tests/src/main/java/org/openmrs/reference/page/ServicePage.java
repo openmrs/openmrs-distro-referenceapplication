@@ -94,7 +94,7 @@ public class ServicePage extends AbstractBasePage {
     }
 
     public void waitForServicePage() {
-        waitForElement(CANCEL_BUTTON);
+        waitForElement(DESCRIPTION_FIELD);
     }
 
 //    public boolean serviceExists(String service) {
