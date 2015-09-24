@@ -32,7 +32,6 @@ public class XSSOnPhoneNumberFieldTest extends TestBase {
     }
 
     @Test
-    @Ignore
     public void  XSSOnPhoneNumberFieldTest() throws Exception {
         patientDashboardPage.clickOnShowContact();
         patientDashboardPage.clickOnEditContact();

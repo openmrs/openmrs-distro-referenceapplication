@@ -27,6 +27,7 @@ public class StartVisitTest extends TestBase {
         headerPage = new HeaderPage(driver);
     }
 
+    @Ignore //ignored due to logout error (RA-894)
     @Test
     public void startVisitTest() throws Exception {
 
