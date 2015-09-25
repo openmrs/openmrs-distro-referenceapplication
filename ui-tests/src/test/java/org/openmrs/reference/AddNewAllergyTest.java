@@ -11,7 +11,7 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 
-
+@Ignore //ignored due to unreachable browser exception
 public class AddNewAllergyTest extends TestBase {
     private HomePage homePage;
     private PatientDashboardPage patientDashboardPage;
