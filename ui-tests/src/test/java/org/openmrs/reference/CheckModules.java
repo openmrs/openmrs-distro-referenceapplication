@@ -31,6 +31,7 @@ public class CheckModules extends TestBase {
     public void checkModules() throws Exception {
     	assertPage(homePage);
         modulesPage.go();
+        Thread.sleep(500);
         assertPage(modulesPage);
         // Get the modulesListing <div>, which contains the table of modules.
         WebElement moduleListing = modulesPage.findElementById("moduleListing");
