@@ -1,5 +1,7 @@
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -11,8 +13,6 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by tomasz on 22.07.15.
@@ -49,12 +49,10 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
     public void registerUnidentifiedPatient() throws InterruptedException {
         homePage.openRegisterAPatientApp();
         patient = PatientGenerator.generateTestPatient();
-        registrationPage.enterUnidentifiedPatientByKeyboard(patient);
 
         assertTrue(registrationPage.getNameInConfirmationPage().contains("--"));
         assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
-        registrationPage.confirmPatientByKeyboard();
         patient.Uuid = patientIdFromUrl();
         assertPage(patientDashboardPage);	// remember just-registered patient id, so it can be removed.
         assertTrue(driver.getPageSource().contains("UNKNOWN UNKNOWN"));
