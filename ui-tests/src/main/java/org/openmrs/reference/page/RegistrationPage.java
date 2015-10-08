@@ -2,14 +2,10 @@ package org.openmrs.reference.page;
 
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.AbstractBasePage;
-import org.openmrs.uitestframework.test.TestData.PatientInfo;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
 
 
 /**
@@ -18,9 +14,8 @@ import java.awt.event.KeyEvent;
 public class RegistrationPage extends AbstractBasePage {
 
 
-	public RegistrationPage(WebDriver driver) throws AWTException {
+	public RegistrationPage(WebDriver driver) {
         super(driver);
-        robot = new Robot();
     }
 
     private boolean acceptNextAlert = true;
@@ -64,7 +59,6 @@ public class RegistrationPage extends AbstractBasePage {
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
     public static final By FIELD_ERROR = By.id("field-error");
     static By AUTO_LIST;
-    private Robot robot;
     private static final By CONFIRM_DATA = By.id("submit");
 
 	public void enterPatient(TestPatient patient) throws InterruptedException{
@@ -89,11 +83,6 @@ public class RegistrationPage extends AbstractBasePage {
         clickOnGenderLink();
         selectPatientGender(patient.gender);
         clickOnConfirmSection();
-    }
-
-    public void enterUnidentifiedPatientByKeyboard(TestPatient patient) throws InterruptedException {
-        selectUnidentifiedPatientByKeyboard();
-        selectPatientGenderByKeyboard(patient.gender);
     }
 
 	public void enterPatientAddress(TestPatient patient) {
@@ -319,30 +308,6 @@ public class RegistrationPage extends AbstractBasePage {
         enterAddress1(patient.address1);
         clickOnConfirmSection();
         clickOnConfirmPatient();
-    }
-    private void keyPress(int key) {
-        robot.keyPress(key);
-        robot.keyRelease(key);
-    }
-
-    public void selectUnidentifiedPatientByKeyboard(){
-        clickOn(UNKNOWN_PATIENT);
-        keyPress(KeyEvent.VK_TAB);
-        keyPress(KeyEvent.VK_SPACE);
-    }
-
-
-    public void selectPatientGenderByKeyboard(String gender) {
-        keyPress(KeyEvent.VK_UP);
-        if(!gender.equals("Male")) {
-            keyPress(KeyEvent.VK_DOWN);
-        }
-
-        keyPress(KeyEvent.VK_TAB);
-    }
-
-    public void confirmPatientByKeyboard() throws InterruptedException{
-        keyPress(KeyEvent.VK_ENTER);
     }
 
 
