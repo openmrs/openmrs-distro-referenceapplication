@@ -70,6 +70,8 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public PatientDashboardPage(WebDriver driver) {
 		super(driver);}
 	private static final By EYE_REPORT = By.linkText("Eye Report");
+	
+	public static final By CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
 
 
 
@@ -326,5 +328,9 @@ public class PatientDashboardPage extends AbstractBasePage {
 		waitForElement(SERVICE_DROPDOWN);
 		clickOn(SERVICE_DROPDOWN);
 	}
+
+	public void goToCaptureVitals() {
+	    findElement(CAPTURE_VITALS).click();
+    }
 	
 }
