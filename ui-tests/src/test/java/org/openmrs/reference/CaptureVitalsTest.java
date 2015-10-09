@@ -65,8 +65,7 @@ public class CaptureVitalsTest  extends TestBase {
         patientCaptureVitalsPage.setBloodPressureFields("120", "70");
         patientCaptureVitalsPage.setBloodOxygenSaturationField("50");
         patientCaptureVitalsPage.confirm();
-        assertTrue(driver.getPageSource().contains("Confirm submission?"));
-        assertTrue(patientCaptureVitalsPage.save());
+        patientCaptureVitalsPage.save();
     }
 
 
