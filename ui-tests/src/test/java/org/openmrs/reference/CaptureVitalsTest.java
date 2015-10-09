@@ -2,7 +2,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HeaderPage;
@@ -10,9 +9,6 @@ import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientCaptureVitalsPage;
 import org.openmrs.reference.page.PatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
 
 
@@ -22,7 +18,6 @@ import org.openmrs.uitestframework.test.TestData.PatientInfo;
 public class CaptureVitalsTest  extends TestBase {
 
 
-    private HeaderPage headerPage;
     private HomePage homePage;
     private PatientDashboardPage patientDashboardPage;
     private PatientCaptureVitalsPage patientCaptureVitalsPage;
@@ -45,8 +40,7 @@ public class CaptureVitalsTest  extends TestBase {
     @After
     public void tearDown() throws Exception {
         deletePatient(patient.uuid);
-        //waitForPatientDeletion(patient.uuid);
-        headerPage.logOut();
+        new HeaderPage(driver).logOut();
     }
 
     @Test
