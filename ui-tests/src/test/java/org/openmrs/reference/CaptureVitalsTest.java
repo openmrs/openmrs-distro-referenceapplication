@@ -44,7 +44,7 @@ public class CaptureVitalsTest  extends TestBase {
     private void registerAPatient() throws InterruptedException{
         homePage.openRegisterAPatientApp();
         patient = createTestPatient();
-        currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+        currentPage().goToPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
     }
 
     @After
@@ -66,7 +66,7 @@ public class CaptureVitalsTest  extends TestBase {
         headerPage.clickOnHomeIcon();
 //        assertPage(homePage);
         homePage.captureVitals();
-        currentPage().gotoPage(patientCaptureVitalsPage.URL_PATH + "?patientId="+patient.uuid);
+        currentPage().goToPage(patientCaptureVitalsPage.URL_PATH + "?patientId="+patient.uuid);
         patientCaptureVitalsPage.checkIfRightPatient();
 //        patientCaptureVitalsPage.setHeightField("0");
 //        assertTrue(driver.findElement(By.id("w7")).getText().contains("Minimum: 10"));

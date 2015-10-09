@@ -50,7 +50,7 @@ public class VisitNoteTest extends TestBase {
     //Test for RA-720, RA-682, RA-694
     @Test
     public void testAddEditVisitNote() throws InterruptedException {
-        currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+        currentPage().goToPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
         assertPage(patientDashboardPage);
         if(!patientDashboardPage.hasActiveVisit()) {
             patientDashboardPage.startVisit();

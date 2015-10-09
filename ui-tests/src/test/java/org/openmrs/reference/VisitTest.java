@@ -44,7 +44,7 @@ public class VisitTest extends TestBase {
 	public void testStartVisit() {
 //		System.out.println("test patient uuid: " + patientUuid);
 		// go to patient dashboard for the just-created test patient
-		currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+		currentPage().goToPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
 		assertPage(patientDashboardPage);
 		// start visit
 		patientDashboardPage.startVisit();

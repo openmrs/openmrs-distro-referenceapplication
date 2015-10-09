@@ -31,7 +31,7 @@ public class StartVisitTest extends TestBase {
     @Test
     public void startVisitTest() throws Exception {
 
-        currentPage().gotoPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+        currentPage().goToPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
         assertPage(patientDashboardPage);
         patientDashboardPage.startVisit();
         Assert.assertTrue(patientDashboardPage.hasActiveVisit());
