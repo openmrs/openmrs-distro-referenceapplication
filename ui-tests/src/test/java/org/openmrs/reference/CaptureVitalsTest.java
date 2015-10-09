@@ -30,15 +30,11 @@ public class CaptureVitalsTest  extends TestBase {
 
     @Before
     public void setUp() throws InterruptedException {
-        headerPage = new HeaderPage(driver);
-        headerPage.clickOnHomeIcon();
-        assertPage(loginPage);
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         patientDashboardPage = new PatientDashboardPage(driver);
         patientCaptureVitalsPage = new PatientCaptureVitalsPage(driver);
         assertPage(homePage);
-
     }
 
     private void registerAPatient() throws InterruptedException{
