@@ -2,7 +2,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.FindPatientPage;
@@ -43,10 +42,9 @@ public class FindPatientRecordTest extends TestBase {
         headerPage.logOut();
     }
 
-    @Ignore//ignored due to hanging build
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
-    public void testFindPatientRecord() {
+    public void testFindPatientRecord() throws InterruptedException {
         //navigate "find patient record" page
         homePage.clickOnFindPatientRecord();
         findPatientPage.enterPatient(idToSearch);
