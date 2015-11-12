@@ -79,26 +79,10 @@ public class AddRolesToUserTest extends TestBase {
 
     private void fillInRoleModules(Map<String, Integer> roleModules) {
         roleModules.put("roleStrings.Anonymous",0);
-        roleModules.put("roleStrings.Application:ConfiguresAppointmentScheduling",1);
-        roleModules.put("roleStrings.Application:EntersADTEvents",2);
-        roleModules.put("roleStrings.Application:HasSuperUserPrivileges",10);
-        roleModules.put("roleStrings.Application:RegistersPatients",3);
-        roleModules.put("roleStrings.Application:SchedulesAndOverbooksAppointments",1);
-        roleModules.put("roleStrings.Application:SeesAppointmentSchedule",1);
-        roleModules.put("roleStrings.Application:UsesPatientSummary",1);
         roleModules.put("roleStrings.Authenticated",0);
         roleModules.put("roleStrings.Organizational:SystemAdministrator",2);
         roleModules.put("roleStrings.SystemDeveloper",10);
         roleModules.put("roleStrings.Application:AdministersSystem",1);
-        roleModules.put("roleStrings.Application:ConfiguresForms",0);
-        roleModules.put("roleStrings.Application:EntersVitals",2);
-        roleModules.put("roleStrings.Application:ManagesAtlas",1);
-        roleModules.put("roleStrings.Application:ConfiguresMetadata",0);
-        roleModules.put("roleStrings.Application:ManagesProviderSchedules",1);
-        roleModules.put("roleStrings.Application:RequestsAppointments",0);
-        roleModules.put("roleStrings.Application:SchedulesAppointments",1);
-        roleModules.put("roleStrings.Application:UsesCaptureVitalsApp",1);
-        roleModules.put("roleStrings.Application:WritesClinicalNotes", 2);
         roleModules.put("roleStrings.Organizational:Doctor", 3);
         roleModules.put("roleStrings.Organizational:Nurse", 4);
         roleModules.put("roleStrings.Organizational:RegistrationClerk", 4);
