@@ -29,8 +29,8 @@ public class LoginTest extends TestBase {
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
-        homePage = new HomePage(driver);
-        loginPage.loginAsAdmin();
+    	loginPage.loginAsAdmin();
+    	homePage = new HomePage(driver);
         assertPage(homePage);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
