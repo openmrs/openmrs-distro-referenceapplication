@@ -8,7 +8,7 @@
     <name>Reference Application Distribution UI Tests</name>
     <packaging>jar</packaging>
     <url>http://maven.apache.org</url>
-    
+
     <parent>
 		<groupId>org.openmrs.distro</groupId>
 		<artifactId>referenceapplication</artifactId>
@@ -22,7 +22,7 @@
         <login.password>Admin123</login.password>
         <webdriver>chrome</webdriver>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.openmrs.contrib</groupId>
@@ -63,7 +63,6 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
-                            <groups>org.openmrs.reference.groups.BuildTests</groups>
                             <runOrder>alphabetical</runOrder>
                           	<parallel>classes</parallel>
                         	<threadCount>5</threadCount>
