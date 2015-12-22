@@ -43,7 +43,7 @@ public class RegistrationPage extends AbstractBasePage {
     static final By PHONE_NUMBER = By.name("phoneNumber");
     static final By UNKNOWN_PATIENT = By.id("checkbox-unknown-patient");
     public static final By ESTIMATED_YEARS = By.id("birthdateYears-field");
-    
+
     // These xpath expressions should be replaced by id's or cssSelectors if possible.
     static final By CONFIRM_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li[2]/span");
     static final String CONFIRMATION_DIV = "//div[@id='confirmation']";
@@ -152,11 +152,11 @@ public class RegistrationPage extends AbstractBasePage {
         {
 
         }
-        clickWhenVisible(CONTACT_INFO_SECTION);
+        clickOn(CONTACT_INFO_SECTION);
     }
 
     public void clickOnPhoneNumber() throws InterruptedException {
-        clickWhenVisible(PHONE_NUMBER_LABEL);
+    	clickOn(PHONE_NUMBER_LABEL);
     }
 
 	public void enterPhoneNumber(String phone) {
@@ -164,13 +164,13 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
     public void clickOnConfirmSection() throws InterruptedException{
-        clickWhenVisible(CONFIRM_SECTION);
+    	clickOn(CONFIRM_SECTION);
     }
 
-    public void clickOnGenderLink() throws InterruptedException {clickWhenVisible(GENDER_LABEL);}
+    public void clickOnGenderLink() throws InterruptedException {clickOn(GENDER_LABEL);}
 
     public void clickOnBirthDateLink() throws InterruptedException{
-        clickWhenVisible(BIRTHDATE_LABEL);
+    	clickOn(BIRTHDATE_LABEL);
         waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
 
@@ -191,15 +191,15 @@ public class RegistrationPage extends AbstractBasePage {
     public String getGenderInConfirmationPage() {
     	return getText(GENDER_CONFIRM) ;
     }
-    
+
     public String getBirthdateInConfirmationPage() {
     	return getText(BIRTHDATE_CONFIRM) ;
     }
-    
+
     public String getAddressInConfirmationPage() {
     	return getText(ADDRESS_CONFIRM) ;
     }
-    
+
     public String getPhoneInConfirmationPage() {
     	return getText(PHONE_CONFIRM) ;
     }
@@ -239,7 +239,7 @@ public class RegistrationPage extends AbstractBasePage {
     }
 
 	public void confirmPatient() throws InterruptedException{
-		clickWhenVisible(CONFIRM);
+		clickOn(CONFIRM);
         boolean timeoutFlag = false;
         try {
             timeoutFlag = closeAlert();

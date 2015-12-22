@@ -37,7 +37,7 @@ public class HomePage extends AbstractBasePage {
 
     private void openApp(String appIdentifier) throws InterruptedException {
         driver.get(properties.getWebAppUrl());
-        clickWhenVisible(By.id(appIdentifier));
+        clickOn(By.id(appIdentifier));
         waitForJsVariable("Navigator.isReady");
     }
 

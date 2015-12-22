@@ -38,7 +38,7 @@ public class DataManagementPage extends AbstractBasePage {
         clickOn(MERGE_PATIENT);}
     public void clickOnNo(){ clickOn(NO);}
     public void waitCont() throws InterruptedException {
-        clickWhenVisible(CONTINUE);
+    	clickOn(CONTINUE);
     }
     public void searchId(String id){
         setTextToFieldNoEnter(SEARCH, id);

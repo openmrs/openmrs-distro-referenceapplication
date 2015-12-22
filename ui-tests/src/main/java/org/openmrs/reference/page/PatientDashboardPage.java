@@ -70,7 +70,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public PatientDashboardPage(WebDriver driver) {
 		super(driver);}
 	private static final By EYE_REPORT = By.linkText("Eye Report");
-	
+
 	public static final By CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
 
 
@@ -89,7 +89,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	}
 
 	public void endVisit() throws InterruptedException{
-		clickWhenVisible(END_VISIT);
+		clickOn(END_VISIT);
 		waitForElement(YES);
 		clickOn(YES);
 	}
@@ -102,7 +102,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 
 
 	public void clickOnAdmitToInpatient() throws InterruptedException {
-		clickWhenVisible(ADMIT_TO_INPATIENT);
+		clickOn(ADMIT_TO_INPATIENT);
 	}
 
 	public boolean inpatientPresent(){
@@ -232,7 +232,7 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public void clickOnEyeForm(){ clickOn(EYE_REPORT);}
 
 	public void goToEditVisitNote() throws InterruptedException {
-		clickWhenVisible(CURRENT_DATE);
+		clickOn(CURRENT_DATE);
 		String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
 		clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='"+visitNoteId+"']"));
 	}
@@ -332,5 +332,5 @@ public class PatientDashboardPage extends AbstractBasePage {
 	public void goToCaptureVitals() {
 	    findElement(CAPTURE_VITALS).click();
     }
-	
+
 }

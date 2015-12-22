@@ -63,7 +63,7 @@ public class AppointmentBlocksPage extends AbstractBasePage {
 
     public void enterProvider(String provider){setTextToFieldNoEnter(PROVIDER, provider);}
 
-    public void clickOnCurrentDay() throws InterruptedException{clickWhenVisible(CURRENT_DAY);}
+    public void clickOnCurrentDay() throws InterruptedException{clickOn(CURRENT_DAY);}
     public void enterStartTime(String start){setTextToFieldNoEnter(START_TIME, start);}
 
     public void clickOnSave(){

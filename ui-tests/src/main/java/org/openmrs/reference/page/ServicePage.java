@@ -85,7 +85,7 @@ public class ServicePage extends AbstractBasePage {
 
     public void addNewService() throws InterruptedException{
         waitForServiceMenu();
-        clickWhenVisible(NEW_SERVICE_TYPE);
+        clickOn(NEW_SERVICE_TYPE);
         waitForServicePage();
     }
 

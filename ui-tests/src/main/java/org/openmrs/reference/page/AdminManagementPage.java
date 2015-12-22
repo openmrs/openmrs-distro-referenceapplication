@@ -31,7 +31,7 @@ public abstract class AdminManagementPage extends AbstractBasePage {
     static final By SEARCH_ELEMENT = By.id("inputNode");
 
     public void clickOnHomeLink() throws InterruptedException {
-        clickWhenVisible(HOME);
+        clickOn(HOME);
     }
 
     public void add() {
@@ -44,7 +44,7 @@ public abstract class AdminManagementPage extends AbstractBasePage {
     }
 
     public void save() throws InterruptedException {
-        clickWhenVisible(SAVE);
+        clickOn(SAVE);
     }
 
 
@@ -114,11 +114,11 @@ public abstract class AdminManagementPage extends AbstractBasePage {
 
 
     public void retire() throws InterruptedException  {
-        clickWhenVisible(RETIRE);
+        clickOn(RETIRE);
     }
 
     public void delete() throws InterruptedException  {
-        clickWhenVisible(DELETE);
+    	clickOn(DELETE);
     }
 
     protected void fillInField(WebElement field, String text) {

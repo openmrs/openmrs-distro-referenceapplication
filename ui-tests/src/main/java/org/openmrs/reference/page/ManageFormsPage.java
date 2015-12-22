@@ -46,7 +46,7 @@ public class ManageFormsPage extends AbstractBasePage{
     }
 
     public void save() throws InterruptedException {
-        clickWhenVisible(SAVE);
+    	clickOn(SAVE);
     }
 
     public void addIcon(String icon){
