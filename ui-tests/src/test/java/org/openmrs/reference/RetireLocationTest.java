@@ -32,6 +32,7 @@ public class RetireLocationTest extends TestBase {
     }
 
     @Test
+    @Ignore
     public void retireLocationTest() throws Exception {
         locationPage.clickOnManageLocation();
         if(locationPage.locationPresent()) {
