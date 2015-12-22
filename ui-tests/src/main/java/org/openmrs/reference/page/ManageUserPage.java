@@ -1,7 +1,7 @@
 package org.openmrs.reference.page;
 
 import org.apache.commons.lang3.StringUtils;
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Created by tomasz on 10.07.15.
  */
-public class ManageUserPage extends AbstractBasePage {
+public class ManageUserPage extends Page {
 
 
     public static String URL_PATH = "/admin/users/users.list";

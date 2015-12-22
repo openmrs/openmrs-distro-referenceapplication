@@ -6,12 +6,12 @@ package org.openmrs.reference.page;
  */
 
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class AppointmentBlocksPage extends AbstractBasePage {
+public class AppointmentBlocksPage extends Page {
 
     private static final By APPOINTMENT_SCHEDULING = By.id("appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension");
     private static final By MANAGE_PROVIDER_SCHEDULES = By.id("appointmentschedulingui-scheduleProviders-app");

@@ -1,12 +1,12 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class AllergyPage extends AbstractBasePage{
+public class AllergyPage extends Page{
 
     private static final By ADD_NEW_ALLERGY = By.cssSelector("#content > button.confirm");
     private static By DRUG;

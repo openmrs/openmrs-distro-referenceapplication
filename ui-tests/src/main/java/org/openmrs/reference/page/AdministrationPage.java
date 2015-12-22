@@ -1,13 +1,13 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
  * Created by tomasz on 10.07.15.
  */
-public class AdministrationPage extends AbstractBasePage {
+public class AdministrationPage extends Page {
 
 
     public static String URL_PATH = "/admin/index.htm";

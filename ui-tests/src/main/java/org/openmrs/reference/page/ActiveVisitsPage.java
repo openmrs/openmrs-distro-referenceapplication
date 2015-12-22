@@ -1,6 +1,6 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Created by tomasz on 09.07.15.
  */
-public class ActiveVisitsPage extends AbstractBasePage {
+public class ActiveVisitsPage extends Page {
 
     private static final By PATIENT_SEARCH = By.id("patient-search");
     private static final By FIRST_FOUND_PATIENT = By.cssSelector("i.icon-vitals");

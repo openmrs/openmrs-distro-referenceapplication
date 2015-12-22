@@ -1,6 +1,6 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by nata on 14.07.15.
  */
-public class LocationPage extends AbstractBasePage {
+public class LocationPage extends Page {
 
     private static final By MANAGE_LOCATION = By.linkText("Manage Locations");
     private static final By ADD_LOCATION = By.linkText("Add Location");

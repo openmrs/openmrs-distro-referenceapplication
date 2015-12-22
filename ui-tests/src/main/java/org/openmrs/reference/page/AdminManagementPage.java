@@ -1,6 +1,6 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by tomasz on 17.07.15.
  */
-public abstract class AdminManagementPage extends AbstractBasePage {
+public abstract class AdminManagementPage extends Page {
 
     public AdminManagementPage(WebDriver driver) {
         super(driver);

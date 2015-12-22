@@ -2,13 +2,13 @@ package org.openmrs.reference.page;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
 
-public class ManageFormsPage extends AbstractBasePage{
+public class ManageFormsPage extends Page{
 
     public static final By ADD = By.linkText("Add");
     private static final By SAVE = By.cssSelector("input[type=\"submit\"]");

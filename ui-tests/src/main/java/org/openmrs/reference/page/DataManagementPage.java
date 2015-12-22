@@ -5,12 +5,12 @@ package org.openmrs.reference.page;
  */
 
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class DataManagementPage extends AbstractBasePage {
+public class DataManagementPage extends Page {
     public DataManagementPage(WebDriver driver) {
         super(driver);
     }

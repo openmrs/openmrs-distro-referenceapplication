@@ -1,13 +1,13 @@
 package org.openmrs.reference.page;
 
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class SettingPage extends AbstractBasePage{
+public class SettingPage extends Page{
     public SettingPage(WebDriver driver) {
         super(driver);
     }

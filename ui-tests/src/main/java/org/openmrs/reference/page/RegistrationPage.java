@@ -1,7 +1,7 @@
 package org.openmrs.reference.page;
 
 import org.openmrs.reference.helper.TestPatient;
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * The register-a-new-patient page.
  */
-public class RegistrationPage extends AbstractBasePage {
+public class RegistrationPage extends Page {
 
 
 	public RegistrationPage(WebDriver driver) {

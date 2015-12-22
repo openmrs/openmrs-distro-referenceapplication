@@ -5,11 +5,11 @@ package org.openmrs.reference.page;
  */
 
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class FindPatientPage extends AbstractBasePage {
+public class FindPatientPage extends Page {
 
     public static final By PATIENT_SEARCH_RESULT = By.id("patient-search-results-table");
     public static final By PATIENT_NAME_SEARCH_RESULT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");

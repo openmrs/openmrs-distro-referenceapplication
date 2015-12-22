@@ -1,6 +1,6 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by tomasz on 24.06.15.
  */
-public class ServicePage extends AbstractBasePage {
+public class ServicePage extends Page {
     public static final String URL_PATH = "/appointmentschedulingui/appointmentType.page";
     public static final By NAME_FIELD = By.id("name-field");
     public static final By DURATION_FIELD = By.id("duration-field");

@@ -1,6 +1,6 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class PatientDashboardPage extends AbstractBasePage {
+public class PatientDashboardPage extends Page {
 
 	public static final String URL_PATH = "/coreapps/clinicianfacing/patient.page";
 	private static final By START_VISIT = By.id("org.openmrs.module.coreapps.createVisit");

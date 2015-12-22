@@ -1,6 +1,6 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by tomasz on 26.05.15.
  */
-public class PatientCaptureVitalsPage extends AbstractBasePage {
+public class PatientCaptureVitalsPage extends Page {
 
     public static final String URL_PATH = "/coreapps/vitals/patient.page";
     private static final By HEIGHT_FIELD = By.id("w8");

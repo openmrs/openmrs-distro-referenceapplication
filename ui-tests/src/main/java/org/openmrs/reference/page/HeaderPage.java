@@ -1,10 +1,10 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.AbstractBasePage;
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HeaderPage extends AbstractBasePage {
+public class HeaderPage extends Page {
 
 	public HeaderPage(WebDriver driver) {
 		super(driver);
