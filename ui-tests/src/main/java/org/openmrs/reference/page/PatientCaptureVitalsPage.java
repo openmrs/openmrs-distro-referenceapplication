@@ -131,6 +131,8 @@ public class PatientCaptureVitalsPage extends AbstractBasePage {
         try {
             WebElement saveButton = findElement(SAVE_BUTTON);
             saveButton.click();
+
+            findElementById("info-message").getText().contains("Entered Vitals");
             return true;
         } catch(Exception e) {
             return false;

@@ -40,14 +40,13 @@ public class CaptureVitalsTest  extends TestBase {
     @After
     public void tearDown() throws Exception {
         deletePatient(patient.uuid);
-        new HeaderPage(driver).logOut();
     }
 
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void captureVital() throws InterruptedException {
         registerAPatient();
-        patientDashboardPage.startVisit();        
+        patientDashboardPage.startVisit();
         patientDashboardPage.goToCaptureVitals();
         patientCaptureVitalsPage.waitForJsVariable("Navigator.isReady");
         patientCaptureVitalsPage.setHeightField("185");
