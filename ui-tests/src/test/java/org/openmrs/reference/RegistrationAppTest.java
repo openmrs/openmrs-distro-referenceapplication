@@ -1,21 +1,18 @@
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
-
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class RegistrationAppTest extends TestBase {
     private HeaderPage headerPage;
@@ -53,20 +50,17 @@ public class RegistrationAppTest extends TestBase {
         assertTrue(registrationPage.getBirthdateInConfirmationPage().contains(patient.birthDay + ", " + patient.birthMonth + ", " + patient.birthYear));
         assertTrue(registrationPage.getAddressInConfirmationPage().contains(address));
         assertTrue(registrationPage.getPhoneInConfirmationPage().contains(patient.phone));
-        
+
         registrationPage.confirmPatient();
         patient.Uuid = patientIdFromUrl();
         assertPage(patientDashboardPage);
 		assertTrue(driver.getPageSource().contains(patient.givenName + " " + patient.familyName));
     }
-    
+
 	@After
     public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
         deletePatient(patient.Uuid);
         waitForPatientDeletion(patient.Uuid);
-        Thread.sleep(200);
-        headerPage.logOut();
     }
 
     // Test for RA-472
