@@ -9,15 +9,19 @@
  */
 package org.openmrs.reference;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
 
-public class ActiveVisitsSearchPatientTest extends TestBase {
+public class SearchActiveVisitsTest extends TestBase {
 
     private HomePage homePage;
 
@@ -27,16 +31,24 @@ public class ActiveVisitsSearchPatientTest extends TestBase {
     }
 
     @Test
-    public void searchPatientTest() throws Exception {
+    @Category(BuildTests.class)
+    public void searchActiveVisitsByPatientNameOrIdOrLastSeenTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
-        String patientName = activeVisitsPage.getPatientName();
+
+        String patientName = activeVisitsPage.getPatientNameOfLastActiveVisit();
         activeVisitsPage.search(patientName);
-        assertTrue(activeVisitsPage.getPatientName().contains(patientName));
-        String patientId = activeVisitsPage.getPatientId();
+        assertThat(activeVisitsPage.getPatientNameOfLastActiveVisit(), is(equalTo(patientName)));
+
+        activeVisitsPage.search("");
+
+        String patientId = activeVisitsPage.getPatientIdOfLastActiveVisit();
         activeVisitsPage.search(patientId);
-        assertTrue(activeVisitsPage.getPatientId().contains(patientId));
-        String lastSeen = activeVisitsPage.getPatientLastSeen();
+        assertThat(activeVisitsPage.getPatientIdOfLastActiveVisit(), is(equalTo(patientId)));
+
+        activeVisitsPage.search("");
+
+        String lastSeen = activeVisitsPage.getPatientLastSeenValueOfLastActiveVisit();
         activeVisitsPage.search(lastSeen);
-        assertTrue(activeVisitsPage.getPatientLastSeen().contains(lastSeen));
+        assertThat(activeVisitsPage.getPatientLastSeenValueOfLastActiveVisit(), is(equalTo(lastSeen)));
     }
 }

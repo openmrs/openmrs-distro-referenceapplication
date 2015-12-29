@@ -1,48 +1,46 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
 package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-/**
- * Created by tomasz on 09.07.15.
- */
 public class ActiveVisitsPage extends Page {
 
-    private static final By PATIENT_SEARCH = By.id("patient-search");
-    private static final By FIRST_FOUND_PATIENT = By.cssSelector("i.icon-vitals");
-    public static String URL_PATH = "/coreapps/activeVisits.page";
-    private By SEARCH = By.tagName("input");
-    private By FIRST_ACTIVE_VISIT = By.className("odd");
+	private By SEARCH_INPUT = By.tagName("input");
 
-    public ActiveVisitsPage(HomePage homePage) {
-        super(homePage);
-    }
+	private By FIRST_ACTIVE_VISIT = By.className("odd");
 
-    @Override
-    public String getPageUrl() {
-        return URL_PATH;
-    }
+	public ActiveVisitsPage(HomePage homePage) {
+		super(homePage);
+	}
 
-    public String getPatientName() {
-        return findElement(FIRST_ACTIVE_VISIT).findElements(By.xpath("//td/a")).get(0).getText().trim();
-    }
+	@Override
+	public String getPageUrl() {
+		return "/coreapps/activeVisits.page";
+	}
 
-    public String getPatientId() {
-        return findElement(FIRST_ACTIVE_VISIT).findElements(By.xpath("//td")).get(0).getText().trim();
-    }
+	public String getPatientNameOfLastActiveVisit() {
+		return findElement(FIRST_ACTIVE_VISIT).findElements(By.xpath("//td/a")).get(0).getText().trim();
+	}
 
-    public String getPatientLastSeen() {
-        return findElement(FIRST_ACTIVE_VISIT).findElements(By.xpath("//td[3]")).get(0).getText().trim();
-    }
+	public String getPatientIdOfLastActiveVisit() {
+		return findElement(FIRST_ACTIVE_VISIT).findElements(By.xpath("//td")).get(0).getText().trim();
+	}
 
-    public void search(String text) {
-        WebElement searchField = findElement(SEARCH);
-        try {
-            searchField.clear();
-            searchField.sendKeys(text);
-        } catch(Exception e) {
-        }
-    }
+	public String getPatientLastSeenValueOfLastActiveVisit() {
+		return findElement(FIRST_ACTIVE_VISIT).findElements(By.xpath("//td[3]")).get(0).getText().trim();
+	}
+
+	public void search(String text) {
+		setText(SEARCH_INPUT, text);
+	}
 
 }
