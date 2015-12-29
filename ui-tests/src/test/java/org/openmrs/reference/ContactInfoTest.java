@@ -16,7 +16,7 @@ public class ContactInfoTest extends TestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private RegistrationPage registrationPage;
 
     @Before
@@ -26,7 +26,7 @@ public class ContactInfoTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         manageForm = new ManageFormsPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         registrationPage = new RegistrationPage(driver);
         homePage.goToActiveVisitPatient();
     }

@@ -13,7 +13,7 @@ import org.openmrs.uitestframework.test.TestBase;
 
 public class AutocompleteForNameTest extends TestBase {
     private HomePage homePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
     private SettingPage settingPage;
     private TestPatient patient;
@@ -26,7 +26,7 @@ public class AutocompleteForNameTest extends TestBase {
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         assertPage(homePage);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
         settingPage = new SettingPage(driver);
         patient = new TestPatient();

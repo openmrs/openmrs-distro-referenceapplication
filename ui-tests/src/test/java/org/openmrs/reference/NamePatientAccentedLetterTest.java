@@ -18,7 +18,7 @@ public class NamePatientAccentedLetterTest extends TestBase {
     private HeaderPage headerPage;
     private TestPatient patient;
     private RegistrationPage registrationPage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
 
     @Before
     public void setUp() throws Exception {
@@ -27,7 +27,7 @@ public class NamePatientAccentedLetterTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         patient = new TestPatient();
     }
 

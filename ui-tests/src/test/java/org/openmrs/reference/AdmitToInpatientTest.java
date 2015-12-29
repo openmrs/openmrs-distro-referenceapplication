@@ -8,13 +8,13 @@ import static org.junit.Assert.*;
 
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 
 public class AdmitToInpatientTest extends TestBase {
     private HomePage homePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
 
 
@@ -25,7 +25,7 @@ public class AdmitToInpatientTest extends TestBase {
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         assertPage(homePage);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
         homePage.goToActiveVisitPatient();
 

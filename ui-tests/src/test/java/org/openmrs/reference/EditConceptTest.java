@@ -11,7 +11,7 @@ import org.openmrs.uitestframework.test.TestBase;
 
 public class EditConceptTest extends TestBase {
     private HomePage homePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
     private ConceptFormPage conceptFormPage;
     private SettingPage settingPage;
@@ -22,7 +22,7 @@ public class EditConceptTest extends TestBase {
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         assertPage(homePage);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
         conceptFormPage = new ConceptFormPage(driver);
         settingPage = new SettingPage(driver);

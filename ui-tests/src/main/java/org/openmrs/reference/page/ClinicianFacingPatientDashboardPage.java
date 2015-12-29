@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 
-public class PatientDashboardPage extends Page {
+public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public static final String URL_PATH = "/coreapps/clinicianfacing/patient.page";
 	private static final By START_VISIT = By.id("org.openmrs.module.coreapps.createVisit");
@@ -66,13 +66,9 @@ public class PatientDashboardPage extends Page {
 	private static final By MERGE = By.id("mergeVisitsBtn");
 	private static final By ADD_ALLERGY = By.cssSelector("i.icon-pencil.edit-action.right");
 	private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
-	public PatientDashboardPage(WebDriver driver) {
+	public ClinicianFacingPatientDashboardPage(WebDriver driver) {
 		super(driver);}
 	private static final By EYE_REPORT = By.linkText("Eye Report");
-
-	public static final By CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
-
-
 
 	public void startVisit() {
 		clickOn(START_VISIT);
@@ -328,8 +324,6 @@ public class PatientDashboardPage extends Page {
 		clickOn(SERVICE_DROPDOWN);
 	}
 
-	public void goToCaptureVitals() {
-	    findElement(CAPTURE_VITALS).click();
-    }
+
 
 }

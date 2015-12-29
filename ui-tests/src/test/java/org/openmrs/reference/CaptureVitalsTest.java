@@ -4,10 +4,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.openmrs.reference.page.HeaderPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.PatientCaptureVitalsPage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.PatientVisitsDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
 
@@ -19,22 +19,25 @@ public class CaptureVitalsTest  extends TestBase {
 
 
     private HomePage homePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage;
     private PatientCaptureVitalsPage patientCaptureVitalsPage;
     private PatientInfo patient;
+    PatientVisitsDashboardPage patientVisitsDashboardPage;
 
     @Before
     public void setUp() throws InterruptedException {
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        clinicianFacingPatientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientVisitsDashboardPage = new PatientVisitsDashboardPage(driver);
+
         patientCaptureVitalsPage = new PatientCaptureVitalsPage(driver);
         assertPage(homePage);
     }
 
     private void registerAPatient() throws InterruptedException{
         patient = createTestPatient();
-        currentPage().goToPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+        currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
     }
 
     @After
@@ -46,8 +49,8 @@ public class CaptureVitalsTest  extends TestBase {
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void captureVital() throws InterruptedException {
         registerAPatient();
-        patientDashboardPage.startVisit();
-        patientDashboardPage.goToCaptureVitals();
+        clinicianFacingPatientDashboardPage.startVisit();
+        patientVisitsDashboardPage.goToCaptureVitals();
         patientCaptureVitalsPage.waitForJsVariable("Navigator.isReady");
         patientCaptureVitalsPage.setHeightField("185");
         patientCaptureVitalsPage.setWeightField("78");

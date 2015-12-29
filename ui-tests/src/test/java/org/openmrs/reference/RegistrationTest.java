@@ -1,44 +1,38 @@
 package org.openmrs.reference;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.openmrs.reference.helper.PatientGenerator;
-import org.openmrs.reference.helper.TestPatient;
-import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
-import org.openmrs.reference.page.RegistrationPage;
-import org.openmrs.uitestframework.test.TestBase;
-
-import java.awt.*;
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import java.awt.AWTException;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openmrs.reference.helper.TestPatient;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
+import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.RegistrationPage;
+import org.openmrs.uitestframework.test.TestBase;
 
 /**
  * Created by tomasz on 25.06.15.
  */
 public class RegistrationTest extends TestBase {
 
-    private HeaderPage headerPage;
     private RegistrationPage registrationPage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private HomePage homePage;
     private TestPatient patient1;
 
     @Before
     public void setUp() throws AWTException {
-        headerPage = new HeaderPage(driver);
         patient1 = new TestPatient();
 
         assertPage(loginPage);
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
-        assertPage(homePage);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
     }
 
     private void registerAPatient(TestPatient patient) throws InterruptedException{
@@ -92,10 +86,8 @@ public class RegistrationTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         registrationPage.exitReview();
-        headerPage.clickOnHomeIcon();
         deletePatient(patient1.Uuid);
 //        waitForPatientDeletion(patient1.Uuid);
-        headerPage.logOut();
     }
 
     // Test for RA-711

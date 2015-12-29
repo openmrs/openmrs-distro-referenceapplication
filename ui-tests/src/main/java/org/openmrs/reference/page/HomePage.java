@@ -38,7 +38,6 @@ public class HomePage extends Page {
     private void openApp(String appIdentifier) throws InterruptedException {
         driver.get(properties.getWebAppUrl());
         clickOn(By.id(appIdentifier));
-        waitForJsVariable("Navigator.isReady");
     }
 
     public void captureVitals() {
@@ -117,6 +116,11 @@ public class HomePage extends Page {
     @Override
     public String getPageUrl() {
         return "/referenceapplication/home.page";
+    }
+
+    @Override
+    public String getPageAliasUrl() {
+    	return "/index.htm";
     }
 
 }

@@ -8,13 +8,13 @@ import static org.junit.Assert.*;
 import org.openmrs.reference.page.AllergyPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 @Ignore //ignored due to unreachable browser exception
 public class AddNewAllergyTest extends TestBase {
     private HomePage homePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
     private AllergyPage allergyPage;
 
@@ -27,7 +27,7 @@ public class AddNewAllergyTest extends TestBase {
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         assertPage(homePage);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
         allergyPage = new AllergyPage(driver);
         homePage.goToActiveVisitPatient();

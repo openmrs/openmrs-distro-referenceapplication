@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ManageFormsPage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import static org.junit.Assert.assertNotNull;
 
@@ -19,7 +19,7 @@ public class AddFormTest extends TestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
 
     @Before
     public void setUp() throws Exception {
@@ -28,7 +28,7 @@ public class AddFormTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         manageForm = new ManageFormsPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
     }
 
     @Ignore //ignore due to moving forms functionality

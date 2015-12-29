@@ -78,6 +78,16 @@ public class RegistrationPage extends Page {
         clickOnConfirmSection();
     }
 
+	@Override
+	public boolean hasPageReadyIndicator() {
+		return true;
+	}
+
+	@Override
+	public String getPageReadyIndicatorName() {
+		return "Navigator.isReady";
+	}
+
     public void enterUnidentifiedPatient(TestPatient patient) throws InterruptedException {
         selectUnidentifiedPatient();
         clickOnGenderLink();
@@ -250,7 +260,6 @@ public class RegistrationPage extends Page {
         if(timeoutFlag) {
             throw new TimeoutException("Alert handling took too long");
         }
-		waitForElement(PATIENT_HEADER);
     }
 
     public void waitForDeletePatient() {

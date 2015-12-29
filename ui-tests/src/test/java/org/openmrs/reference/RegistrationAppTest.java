@@ -9,7 +9,7 @@ import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 
@@ -21,7 +21,7 @@ public class RegistrationAppTest extends TestBase {
     private HeaderPage headerPage;
     private RegistrationPage registrationPage;
     private HomePage homePage;
-	private PatientDashboardPage patientDashboardPage;
+	private ClinicianFacingPatientDashboardPage patientDashboardPage;
 	private TestPatient patient;
 
     @Before
@@ -30,7 +30,7 @@ public class RegistrationAppTest extends TestBase {
         loginPage.loginAsClerk();
         homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
     }
 
     // Test for Story RA-71

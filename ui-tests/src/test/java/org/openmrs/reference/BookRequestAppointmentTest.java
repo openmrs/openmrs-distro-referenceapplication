@@ -22,7 +22,7 @@ public class BookRequestAppointmentTest extends TestBase {
     private AppointmentBlocksPage appointmentBlocksPage;
     private ManageAppointmentPage manageAppointmentPage;
     private HomePage homePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private FindPatientPage findPatientPage;
     private String id;
 
@@ -34,7 +34,7 @@ public class BookRequestAppointmentTest extends TestBase {
         headerPage = new HeaderPage(driver);
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
         manageAppointmentPage = new ManageAppointmentPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         findPatientPage = new FindPatientPage(driver);
     }
 

@@ -3,7 +3,7 @@ package org.openmrs.reference;
 import org.junit.*;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData;
 
@@ -16,7 +16,7 @@ public class MergeVisitsTest extends TestBase {
 
     private HomePage homePage;
     private HeaderPage headerPage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private TestData.PatientInfo patient;
 
     @Before
@@ -25,7 +25,7 @@ public class MergeVisitsTest extends TestBase {
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         assertPage(homePage);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
     }
 
@@ -39,7 +39,7 @@ public class MergeVisitsTest extends TestBase {
     @Ignore //ignored due to problems in enter date algorithm
     @Test
     public void mergeVisitsTest() {
-        currentPage().goToPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+        currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
         assertPage(patientDashboardPage);
         patientDashboardPage.startVisit();
         Assert.assertTrue(patientDashboardPage.hasActiveVisit());

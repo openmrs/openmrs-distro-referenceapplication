@@ -19,7 +19,7 @@ public class FindPatientByIdAndNameTest extends TestBase {
     private FindPatientPage findPatientPage;
     private TestPatient patient;
     private RegistrationPage registrationPage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private String id;
 
 
@@ -31,7 +31,7 @@ public class FindPatientByIdAndNameTest extends TestBase {
         headerPage = new HeaderPage(driver);
         findPatientPage = new FindPatientPage(driver);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         patient = new TestPatient();
 
 

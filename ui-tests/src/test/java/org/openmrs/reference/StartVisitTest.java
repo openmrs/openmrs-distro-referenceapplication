@@ -6,13 +6,13 @@ package org.openmrs.reference;
 import org.junit.*;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData;
 
 public class StartVisitTest extends TestBase {
     private HomePage homePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
     private TestData.PatientInfo patient;
 
@@ -23,7 +23,7 @@ public class StartVisitTest extends TestBase {
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         assertPage(homePage);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
     }
 
@@ -31,7 +31,7 @@ public class StartVisitTest extends TestBase {
     @Test
     public void startVisitTest() throws Exception {
 
-        currentPage().goToPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+        currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
         assertPage(patientDashboardPage);
         patientDashboardPage.startVisit();
         Assert.assertTrue(patientDashboardPage.hasActiveVisit());

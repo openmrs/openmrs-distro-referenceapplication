@@ -6,7 +6,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
 import org.openqa.selenium.By;
@@ -27,7 +27,7 @@ public class VisitNoteTest extends TestBase {
 
     private HomePage homePage;
     private HeaderPage headerPage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private PatientInfo patient;
 
     @Before
@@ -36,7 +36,7 @@ public class VisitNoteTest extends TestBase {
         patient = createTestPatient();
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         assertPage(homePage);
     }
 
@@ -50,7 +50,7 @@ public class VisitNoteTest extends TestBase {
     //Test for RA-720, RA-682, RA-694
     @Test
     public void testAddEditVisitNote() throws InterruptedException {
-        currentPage().goToPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+        currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
         assertPage(patientDashboardPage);
         if(!patientDashboardPage.hasActiveVisit()) {
             patientDashboardPage.startVisit();

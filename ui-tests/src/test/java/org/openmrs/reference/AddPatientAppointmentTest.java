@@ -20,7 +20,7 @@ public class AddPatientAppointmentTest extends TestBase {
     private ManageAppointmentPage manageAppointmentPage;
     private FindPatientPage findPatientPage;
     private HomePage homePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
 
     @Before
     public void setUp() throws Exception {
@@ -31,7 +31,7 @@ public class AddPatientAppointmentTest extends TestBase {
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
         manageAppointmentPage = new ManageAppointmentPage(driver);
         findPatientPage = new FindPatientPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
     }
 
     @Ignore //ignored due to timezone error

@@ -12,7 +12,7 @@ import org.openmrs.uitestframework.test.TestBase;
 
 public class RetireLocationTest extends TestBase {
     private HomePage homePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private HeaderPage headerPage;
     private LocationPage locationPage;
     private SettingPage settingPage;
@@ -24,7 +24,7 @@ public class RetireLocationTest extends TestBase {
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         assertPage(homePage);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         headerPage = new HeaderPage(driver);
         locationPage = new LocationPage(driver);
         settingPage = new SettingPage(driver);

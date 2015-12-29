@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
@@ -27,7 +27,7 @@ public class EditDemographicTest extends TestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private RegistrationPage registrationPage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
 
 
     @Before
@@ -38,7 +38,7 @@ public class EditDemographicTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
 
     }
 

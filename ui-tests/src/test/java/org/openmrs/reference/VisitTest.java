@@ -4,7 +4,7 @@ import org.junit.*;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
 
@@ -13,7 +13,7 @@ public class VisitTest extends TestBase {
 
     private HomePage homePage;
     private HeaderPage headerPage;
-	private PatientDashboardPage patientDashboardPage;
+	private ClinicianFacingPatientDashboardPage patientDashboardPage;
 	private PatientInfo patient;
 	
 	@Before
@@ -23,7 +23,7 @@ public class VisitTest extends TestBase {
         assertPage(loginPage);
         loginPage.loginAsDoctor();
 		homePage = new HomePage(driver);
-		patientDashboardPage = new PatientDashboardPage(driver);
+		patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
 		assertPage(homePage);
 	}
 	
@@ -44,7 +44,7 @@ public class VisitTest extends TestBase {
 	public void testStartVisit() {
 //		System.out.println("test patient uuid: " + patientUuid);
 		// go to patient dashboard for the just-created test patient
-		currentPage().goToPage(PatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+		currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
 		assertPage(patientDashboardPage);
 		// start visit
 		patientDashboardPage.startVisit();

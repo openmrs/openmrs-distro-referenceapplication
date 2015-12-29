@@ -6,7 +6,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.PatientDashboardPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.ServicePage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
@@ -24,7 +24,7 @@ public class ServiceTest extends TestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private ServicePage servicePage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private String[] editedValues = null;
 
     @Before
@@ -33,7 +33,7 @@ public class ServiceTest extends TestBase {
         loginPage.loginAsAdmin();
         homePage = new HomePage(driver);
         servicePage = new ServicePage(driver);
-        patientDashboardPage= new PatientDashboardPage(driver);
+        patientDashboardPage= new ClinicianFacingPatientDashboardPage(driver);
         assertPage(homePage);
         servicePage.openManageServiceTypes();
     }

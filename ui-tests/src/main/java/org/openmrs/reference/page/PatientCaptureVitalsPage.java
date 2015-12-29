@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
  */
 public class PatientCaptureVitalsPage extends Page {
 
-    public static final String URL_PATH = "/coreapps/vitals/patient.page";
+    public static final String URL_PATH = "/htmlformentryui/htmlform/enterHtmlFormWithSimpleUi.page";
     private static final By HEIGHT_FIELD = By.id("w8");
     private static final By WEIGHT_FIELD = By.id("w10");
     private static final By TEMPERATURE_FIELD = By.id("w12");

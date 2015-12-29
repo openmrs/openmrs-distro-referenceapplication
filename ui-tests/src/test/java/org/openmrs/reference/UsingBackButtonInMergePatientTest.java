@@ -22,7 +22,7 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
     private TestPatient patient;
     private TestPatient patient1;
     private RegistrationPage registrationPage;
-    private PatientDashboardPage patientDashboardPage;
+    private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private DataManagementPage dataManagementPage;
     private String id;
     private String id2;
@@ -34,7 +34,7 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new PatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
         dataManagementPage = new DataManagementPage(driver);
         patient = new TestPatient();
         patient1 = new TestPatient();
