@@ -31,11 +31,11 @@ public class RegistrationFormQuestionTest extends TestBase {
         headerPage = new HeaderPage(driver);
         patient = new TestPatient();
 
-        assertPage(loginPage);
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        assertPage(page);
+        
+        homePage = new HomePage(page);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         assertPage(homePage);
     }
 

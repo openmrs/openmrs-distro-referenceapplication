@@ -25,7 +25,7 @@ public class ProviderTest extends TestBase {
     public void setUp() {
         headerPage = new HeaderPage(driver);
         login();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         providerPage = new ProviderPage(driver);
     }
 

@@ -23,8 +23,8 @@ public class FindPatientByFamilyNameTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        
+        homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         findPatientPage = new FindPatientPage(driver);

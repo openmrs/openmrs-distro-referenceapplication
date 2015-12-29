@@ -21,12 +21,12 @@ public class ContactInfoTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        
+        homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         manageForm = new ManageFormsPage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         registrationPage = new RegistrationPage(driver);
         homePage.goToActiveVisitPatient();
     }

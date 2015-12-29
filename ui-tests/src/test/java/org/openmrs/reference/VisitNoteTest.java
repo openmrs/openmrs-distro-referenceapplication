@@ -1,23 +1,18 @@
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
-import java.util.Calendar;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by tomasz on 19.06.15.
@@ -34,9 +29,9 @@ public class VisitNoteTest extends TestBase {
     public void before() {
         headerPage = new HeaderPage(driver);
         patient = createTestPatient();
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+
+        homePage = new HomePage(page);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         assertPage(homePage);
     }
 
@@ -50,7 +45,7 @@ public class VisitNoteTest extends TestBase {
     //Test for RA-720, RA-682, RA-694
     @Test
     public void testAddEditVisitNote() throws InterruptedException {
-        currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+    	patientDashboardPage.go(patient.uuid);
         assertPage(patientDashboardPage);
         if(!patientDashboardPage.hasActiveVisit()) {
             patientDashboardPage.startVisit();

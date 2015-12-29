@@ -30,13 +30,13 @@ public class DeleteRequestAppointmentTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        
+        homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
         manageAppointmentPage = new ManageAppointmentPage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         findPatientPage = new FindPatientPage(driver);
     }
 

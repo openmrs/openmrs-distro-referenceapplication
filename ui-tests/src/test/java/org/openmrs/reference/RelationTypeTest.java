@@ -25,7 +25,7 @@ public class RelationTypeTest extends TestBase {
     public void setUp() {
         headerPage = new HeaderPage(driver);
         login();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         relationTypePage = new RelationTypePage(driver);
         settingPage = new SettingPage(driver);
     }

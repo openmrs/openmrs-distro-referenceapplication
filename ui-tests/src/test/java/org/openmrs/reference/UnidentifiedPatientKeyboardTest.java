@@ -8,9 +8,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 
@@ -26,21 +26,16 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        headerPage = new HeaderPage(driver);
-        assertPage(loginPage);
-        loginPage.loginAsClerk();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         assertPage(homePage);
     }
 
     @After
     public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
         deletePatient(patient.Uuid);
         waitForPatientDeletion(patient.Uuid);
-        headerPage.logOut();
     }
 
     // Test for RA-472,

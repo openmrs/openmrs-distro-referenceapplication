@@ -1,13 +1,18 @@
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Created by nata on 22.06.15.
  */
-import org.junit.*;
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 
@@ -19,10 +24,9 @@ public class AddDiagnosisToVisitNoteTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         assertPage(homePage);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         headerPage = new HeaderPage(driver);
     }
 

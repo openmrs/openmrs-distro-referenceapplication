@@ -9,13 +9,11 @@ import org.junit.experimental.categories.Category;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
-import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 public class RegistrationAppTest extends TestBase {
-    private HeaderPage headerPage;
     private RegistrationPage registrationPage;
     private HomePage homePage;
 	private ClinicianFacingPatientDashboardPage patientDashboardPage;
@@ -23,11 +21,9 @@ public class RegistrationAppTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        headerPage = new HeaderPage(driver);
-        loginPage.loginAsClerk();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
     // Test for Story RA-71

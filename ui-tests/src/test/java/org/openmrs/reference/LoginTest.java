@@ -24,8 +24,7 @@ public class LoginTest extends TestBase {
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
-    	loginPage.loginAsAdmin();
-    	homePage = new HomePage(driver);
+    	homePage = new HomePage(page);
         assertPage(homePage);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
@@ -37,8 +36,8 @@ public class LoginTest extends TestBase {
     }
     @Test
     public void verifyClerkModulesAvailableOnHomePage() throws Exception {
-    	loginPage.loginAsClerk();
-        homePage = new HomePage(driver);
+    	goToLoginPage().loginAsClerk();
+        homePage = new HomePage(page);
     	assertPage(homePage);
     	assertTrue(homePage.isActiveVisitsAppPresent());
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
@@ -46,8 +45,8 @@ public class LoginTest extends TestBase {
     }
     @Test
     public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
-    	loginPage.login("doctor", "Doctor123");
-        homePage = new HomePage(driver);
+    	goToLoginPage().login("doctor", "Doctor123");
+        homePage = new HomePage(page);
     	assertPage(homePage);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
@@ -55,8 +54,8 @@ public class LoginTest extends TestBase {
     }
     @Test
     public void verifyNurseModulesAvailableOnHomePage() throws Exception {
-    	loginPage.loginAsNurse();
-        homePage = new HomePage(driver);
+    	goToLoginPage().loginAsNurse();
+        homePage = new HomePage(page);
     	assertPage(homePage);
     	assertTrue(homePage.isFindAPatientAppPresent());
     	assertTrue(homePage.isActiveVisitsAppPresent());
@@ -65,8 +64,8 @@ public class LoginTest extends TestBase {
     }
     @Test
     public void verifySysadminModulesAvailableOnHomePage() throws Exception {
-        loginPage.loginAsSysadmin();
-        homePage = new HomePage(driver);
+        goToLoginPage().loginAsSysadmin();
+        homePage = new HomePage(page);
         assertPage(homePage);
 //        assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());

@@ -2,7 +2,6 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -16,10 +15,9 @@ public class ActiveVisitsPage extends Page {
     private By SEARCH = By.tagName("input");
     private By FIRST_ACTIVE_VISIT = By.className("odd");
 
-    public ActiveVisitsPage(WebDriver driver) {
-        super(driver);
+    public ActiveVisitsPage(HomePage homePage) {
+        super(homePage);
     }
-
 
     @Override
     public String getPageUrl() {

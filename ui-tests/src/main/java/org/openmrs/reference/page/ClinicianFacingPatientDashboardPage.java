@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -66,9 +65,12 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By MERGE = By.id("mergeVisitsBtn");
 	private static final By ADD_ALLERGY = By.cssSelector("i.icon-pencil.edit-action.right");
 	private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
-	public ClinicianFacingPatientDashboardPage(WebDriver driver) {
-		super(driver);}
+
 	private static final By EYE_REPORT = By.linkText("Eye Report");
+
+	public ClinicianFacingPatientDashboardPage(Page page) {
+		super(page);
+	}
 
 	public void startVisit() {
 		clickOn(START_VISIT);
@@ -119,6 +121,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	@Override
 	public String getPageUrl() {
 		return URL_PATH;
+	}
+
+	public void go(String patientUuid) {
+		goToPage(getPageUrl() + "?patientId=" + patientUuid);
 	}
 
 	public boolean hasActiveVisit() {

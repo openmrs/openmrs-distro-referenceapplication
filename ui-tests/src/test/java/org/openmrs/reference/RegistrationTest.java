@@ -28,11 +28,11 @@ public class RegistrationTest extends TestBase {
     public void setUp() throws AWTException {
         patient1 = new TestPatient();
 
-        assertPage(loginPage);
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        assertPage(page);
+        
+        homePage = new HomePage(page);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
     private void registerAPatient(TestPatient patient) throws InterruptedException{

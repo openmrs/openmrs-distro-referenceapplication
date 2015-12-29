@@ -2,13 +2,19 @@
 
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.page.AppointmentBlocksPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.HeaderPage;
+import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.ManageAppointmentPage;
 import org.openmrs.uitestframework.test.TestBase;
-import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -24,14 +30,13 @@ public class AddPatientAppointmentTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
         manageAppointmentPage = new ManageAppointmentPage(driver);
         findPatientPage = new FindPatientPage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
     @Ignore //ignored due to timezone error

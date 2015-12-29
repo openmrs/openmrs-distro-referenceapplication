@@ -24,11 +24,11 @@ public class FindPatientRecordTest extends TestBase {
 
     @Before
     public void before() {
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         findPatientPage = new FindPatientPage(driver);
         patient = createTestPatient();
         idToSearch = patient.identifier;
-        loginPage.loginAsAdmin();
+        
         assertPage(homePage);
     }
 

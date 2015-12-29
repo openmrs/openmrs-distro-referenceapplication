@@ -29,12 +29,12 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        
+        homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         registrationPage = new RegistrationPage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         dataManagementPage = new DataManagementPage(driver);
         patient = new TestPatient();
         patient1 = new TestPatient();

@@ -26,9 +26,8 @@ public class CaptureVitalsTest  extends TestBase {
 
     @Before
     public void setUp() throws InterruptedException {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
-        clinicianFacingPatientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        homePage = new HomePage(page);
+        clinicianFacingPatientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         patientVisitsDashboardPage = new PatientVisitsDashboardPage(driver);
 
         patientCaptureVitalsPage = new PatientCaptureVitalsPage(driver);
@@ -37,7 +36,7 @@ public class CaptureVitalsTest  extends TestBase {
 
     private void registerAPatient() throws InterruptedException{
         patient = createTestPatient();
-        currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+        clinicianFacingPatientDashboardPage.go(patient.uuid);
     }
 
     @After

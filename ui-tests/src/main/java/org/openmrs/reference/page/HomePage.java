@@ -2,7 +2,6 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class HomePage extends Page {
 
@@ -22,8 +21,8 @@ public class HomePage extends Page {
     static final By DATA_MANAGAMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
     static final By PATIENT_HEADER = By.className("patient-header");
 
-    public HomePage(WebDriver driver) {
-        super(driver);
+    public HomePage(Page page) {
+        super(page);
     }
 
     private boolean isAppButtonPresent(String appId) {
@@ -95,8 +94,9 @@ public class HomePage extends Page {
 //        waitForElement(PATIENT_HEADER);
     }
 
-    public void goToActiveVisitsSearch() {
+    public ActiveVisitsPage goToActiveVisitsSearch() {
         clickOn(By.id(ACTIVE_VISITS_APP_ID));
+        return new ActiveVisitsPage(this);
     }
 
     public void goToManageForm() {

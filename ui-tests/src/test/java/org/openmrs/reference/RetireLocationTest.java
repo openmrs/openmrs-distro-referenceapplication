@@ -21,10 +21,10 @@ public class RetireLocationTest extends TestBase {
     @Before
     public void setUp() throws Exception {
 
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        
+        homePage = new HomePage(page);
         assertPage(homePage);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         headerPage = new HeaderPage(driver);
         locationPage = new LocationPage(driver);
         settingPage = new SettingPage(driver);

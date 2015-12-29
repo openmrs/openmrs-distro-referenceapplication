@@ -1,13 +1,17 @@
 package org.openmrs.reference;
 
-import org.junit.*;
+import static junit.framework.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData;
-
-import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by tomasz on 23.07.15.
@@ -22,10 +26,10 @@ public class MergeVisitsTest extends TestBase {
     @Before
     public void setUp() {
         patient = createTestPatient();
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+
+        homePage = new HomePage(page);
         assertPage(homePage);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         headerPage = new HeaderPage(driver);
     }
 
@@ -39,7 +43,7 @@ public class MergeVisitsTest extends TestBase {
     @Ignore //ignored due to problems in enter date algorithm
     @Test
     public void mergeVisitsTest() {
-        currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+    	patientDashboardPage.go(patient.uuid);
         assertPage(patientDashboardPage);
         patientDashboardPage.startVisit();
         Assert.assertTrue(patientDashboardPage.hasActiveVisit());

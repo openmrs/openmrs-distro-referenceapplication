@@ -25,7 +25,7 @@ public class ManagePersonTest extends TestBase {
     public void setUp() {
         headerPage = new HeaderPage(driver);
         login();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         managePersonPage = new ManagePersonPage(driver);
         settingPage = new SettingPage(driver);
     }

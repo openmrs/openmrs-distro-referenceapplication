@@ -1,11 +1,19 @@
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by nata on 21.07.15.
  */
-import org.junit.*;
-import static org.junit.Assert.*;
-import org.openmrs.reference.page.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openmrs.reference.page.AdministrationPage;
+import org.openmrs.reference.page.HeaderPage;
+import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.ManageUserPage;
+import org.openmrs.reference.page.SettingPage;
 import org.openmrs.uitestframework.test.TestBase;
 
 
@@ -20,9 +28,7 @@ public class AddUserTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         settingPage = new SettingPage(driver);
@@ -60,10 +66,10 @@ public class AddUserTest extends TestBase {
             settingPage.waitForMessage();
             assertTrue(driver.getPageSource().contains("User Saved"));
             headerPage.logOut();
-            loginPage.login("super_nurse", "Nurse123");
+            goToLoginPage().login("super_nurse", "Nurse123");
             assertTrue(driver.getPageSource().contains("super_nurse"));
             headerPage.logOut();
-            loginPage.loginAsAdmin();
+            goToLoginPage().loginAsAdmin();
             homePage.goToAdministration();
             administrationPage.clickOnManageUsers();
             manageUserPage.findUser("super_nurse");

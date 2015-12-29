@@ -1,10 +1,14 @@
 package org.openmrs.reference;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
 
@@ -15,24 +19,18 @@ public class VisitTest extends TestBase {
     private HeaderPage headerPage;
 	private ClinicianFacingPatientDashboardPage patientDashboardPage;
 	private PatientInfo patient;
-	
+
 	@Before
 	public void before() {
-        headerPage = new HeaderPage(driver);
         patient = createTestPatient();
-        assertPage(loginPage);
-        loginPage.loginAsDoctor();
-		homePage = new HomePage(driver);
-		patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
-		assertPage(homePage);
+		homePage = new HomePage(page);
+		patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
 	}
-	
+
 	@After
     public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
 		deletePatient(patient.uuid);
-        //waitForPatientDeletion(patient.uuid);
-        headerPage.logOut();
+        waitForPatientDeletion(patient.uuid);
     }
 
 	/**
@@ -44,14 +42,14 @@ public class VisitTest extends TestBase {
 	public void testStartVisit() {
 //		System.out.println("test patient uuid: " + patientUuid);
 		// go to patient dashboard for the just-created test patient
-		currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+		patientDashboardPage.go(patient.uuid);
 		assertPage(patientDashboardPage);
 		// start visit
 		patientDashboardPage.startVisit();
 		// verify visit was started
 		Assert.assertTrue(patientDashboardPage.hasActiveVisit());
 		Assert.assertNotNull(patientDashboardPage.endVisitLink());
-		
+
 		// visit note
 		patientDashboardPage.visitNote();
 		patientDashboardPage.enterDiagnosis("Pneumonia");

@@ -27,9 +27,9 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         headerPage = new HeaderPage(driver);
         patient1 = PatientGenerator.generateTestPatient();
 
-        assertPage(loginPage);
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        assertPage(page);
+        
+        homePage = new HomePage(page);
         registrationPage = new RegistrationPage(driver);
         assertPage(homePage);
     }

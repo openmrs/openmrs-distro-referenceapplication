@@ -28,8 +28,7 @@ public class AddRolesToUserTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         administrationPage = new AdministrationPage(driver);
@@ -38,14 +37,11 @@ public class AddRolesToUserTest extends TestBase {
 
 
     private void reLoginAsUser() throws InterruptedException {
-        manageUserPage.clickOnHomeLink();
-        headerPage.logOut();
-        loginPage.login(NURSE_USERNAME, NURSE_PASSWORD);
+        goToLoginPage().login(NURSE_USERNAME, NURSE_PASSWORD);
     }
 
     private void reLoginAsAdmin() throws InterruptedException {
-        headerPage.logOut();
-        loginPage.loginAsAdmin();
+        goToLoginPage().loginAsAdmin();
     }
 
     @Test
@@ -61,7 +57,7 @@ public class AddRolesToUserTest extends TestBase {
             manageUserPage.createNewPerson();
             manageUserPage.fillInPersonName("Super", "Nurse", NURSE_USERNAME, NURSE_PASSWORD);
         }
-        
+
         String oldRole = null;
         for(Entry<String, Integer> role : roleModules.entrySet()) {
             manageUserPage.assignRolesToUser(oldRole,role.getKey(),NURSE_USERNAME);
@@ -87,7 +83,7 @@ public class AddRolesToUserTest extends TestBase {
         roleModules.put("roleStrings.Organizational:Nurse", 4);
         roleModules.put("roleStrings.Organizational:RegistrationClerk", 4);
     }
-    
+
     @After
     public void tearDown() throws Exception {
         manageUserPage.removeUser(NURSE_USERNAME);

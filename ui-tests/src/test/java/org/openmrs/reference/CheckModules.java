@@ -19,7 +19,7 @@ public class CheckModules extends TestBase {
     @Before
     public void setUp() {
         login();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(page);
         modulesPage = new ModulesPage(driver);
     }
 

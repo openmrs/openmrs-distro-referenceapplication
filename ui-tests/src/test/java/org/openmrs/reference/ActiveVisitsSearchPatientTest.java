@@ -20,19 +20,15 @@ import org.openmrs.uitestframework.test.TestBase;
 public class ActiveVisitsSearchPatientTest extends TestBase {
 
     private HomePage homePage;
-    private ActiveVisitsPage activeVisitsPage;
 
     @Before
     public void setUp() throws Exception {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
-        assertPage(homePage);
-        activeVisitsPage = new ActiveVisitsPage(driver);
+        homePage = new HomePage(page);
     }
 
     @Test
     public void searchPatientTest() throws Exception {
-        homePage.goToActiveVisitsSearch();
+        ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         String patientName = activeVisitsPage.getPatientName();
         activeVisitsPage.search(patientName);
         assertTrue(activeVisitsPage.getPatientName().contains(patientName));

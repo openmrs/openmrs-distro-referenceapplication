@@ -20,8 +20,8 @@ public class ComeBackToApplicationAfterLogoutTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+        
+        homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
     }
@@ -31,7 +31,7 @@ public class ComeBackToApplicationAfterLogoutTest extends TestBase {
     public void comeBackToApplicationAfterLogoutTest() throws Exception {
         homePage.goToActiveVisitsSearch();
         headerPage.logOut();
-        loginPage.loginAsAdmin();
+        
         assertPage(homePage);
     }
 

@@ -3,10 +3,14 @@ package org.openmrs.reference;
 /**
  * Created by nata on 17.06.15.
  */
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData;
 
@@ -20,10 +24,10 @@ public class StartVisitTest extends TestBase {
     public void setUp() throws Exception {
 
         patient = createTestPatient();
-        loginPage.loginAsAdmin();
-        homePage = new HomePage(driver);
+
+        homePage = new HomePage(page);
         assertPage(homePage);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(driver);
+        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         headerPage = new HeaderPage(driver);
     }
 
@@ -31,7 +35,7 @@ public class StartVisitTest extends TestBase {
     @Test
     public void startVisitTest() throws Exception {
 
-        currentPage().goToPage(ClinicianFacingPatientDashboardPage.URL_PATH + "?patientId=" + patient.uuid);
+    	patientDashboardPage.go(patient.uuid);
         assertPage(patientDashboardPage);
         patientDashboardPage.startVisit();
         Assert.assertTrue(patientDashboardPage.hasActiveVisit());
