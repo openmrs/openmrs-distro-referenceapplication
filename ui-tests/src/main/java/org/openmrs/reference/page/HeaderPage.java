@@ -10,7 +10,6 @@ public class HeaderPage extends Page {
 		super(driver);
 	}
 
-	final String LOGOUT_HREF = getServerUrl() + "/logout";
 	static final String HOME_ICON = "logo";
 	static final String HOME_LINK_TEXT = "Home";
 
@@ -25,7 +24,7 @@ public class HeaderPage extends Page {
 	}
 
 	public void logOut() throws InterruptedException{
-		clickOnLinkFromHref(LOGOUT_HREF);
+		clickOnLinkFromHref(newContextPageUrl("/logout"));
 	}
 
 	@Override

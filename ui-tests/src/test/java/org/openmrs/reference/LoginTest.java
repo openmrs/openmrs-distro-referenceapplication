@@ -13,27 +13,14 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
 
 public class LoginTest extends TestBase {
-    private HeaderPage headerPage;
     private HomePage homePage;
 
-    @Before
-    public void setUp() {
-        headerPage = new HeaderPage(driver);
-    }
-
-    @After
-    public void logout() throws InterruptedException{
-    	headerPage.logOut();
-    }
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
