@@ -4,8 +4,6 @@ import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by tomasz on 26.05.15.
@@ -30,8 +28,8 @@ public class PatientCaptureVitalsPage extends Page {
     }
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + URL_PATH;
+    public String getPageUrl() {
+        return URL_PATH;
     }
 
     public void setHeightField(String value) {

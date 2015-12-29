@@ -9,7 +9,6 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class ManageAppointmentPage extends Page {
 
@@ -82,8 +81,8 @@ public class ManageAppointmentPage extends Page {
 
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + "/appointmentschedulingui/scheduleProviders.page";
+    public String getPageUrl() {
+        return "/appointmentschedulingui/scheduleProviders.page";
     }
 }
 

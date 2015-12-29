@@ -38,11 +38,11 @@ public class FindPatientPage extends Page {
     }
 
 
-    
+
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + "/findpatient/findPatient.page";
+    public String getPageUrl() {
+        return "/findpatient/findPatient.page";
     }
 
     /**

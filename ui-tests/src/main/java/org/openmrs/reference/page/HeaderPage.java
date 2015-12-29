@@ -10,7 +10,7 @@ public class HeaderPage extends Page {
 		super(driver);
 	}
 
-	final String LOGOUT_HREF = URL_ROOT + "/logout";
+	final String LOGOUT_HREF = getServerUrl() + "/logout";
 	static final String HOME_ICON = "logo";
 	static final String HOME_LINK_TEXT = "Home";
 
@@ -29,7 +29,7 @@ public class HeaderPage extends Page {
 	}
 
 	@Override
-	public String expectedUrlPath() {
+	public String getPageUrl() {
 		return null;
 	}
 

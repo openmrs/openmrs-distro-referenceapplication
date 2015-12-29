@@ -17,7 +17,7 @@ public class ProviderPage extends AdminManagementPage {
 		RETIRE = By.name("retireProviderButton");
 		SAVE = By.name("saveProviderButton");
 	}
-	
+
 
 
 
@@ -34,8 +34,8 @@ public class ProviderPage extends AdminManagementPage {
 	}
 
 	@Override
-	public String expectedUrlPath() {
-		return URL_ROOT + "/admin/provider/index.htm";
+	public String getPageUrl() {
+		return "/admin/provider/index.htm";
 	}
-	
+
 }

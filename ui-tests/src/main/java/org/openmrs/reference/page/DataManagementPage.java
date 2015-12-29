@@ -8,7 +8,6 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class DataManagementPage extends Page {
     public DataManagementPage(WebDriver driver) {
@@ -46,7 +45,7 @@ public class DataManagementPage extends Page {
     public String search(){
         return findElement(SEARCH).getText();}
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + "/datamanagement/dataManagement.page";
+    public String getPageUrl() {
+        return "/datamanagement/dataManagement.page";
     }
 }

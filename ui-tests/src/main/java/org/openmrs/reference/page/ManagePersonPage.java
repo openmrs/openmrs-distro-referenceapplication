@@ -2,9 +2,6 @@ package org.openmrs.reference.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * Created by tomasz on 15.07.15.
@@ -49,8 +46,8 @@ public class ManagePersonPage extends AdminManagementPage {
         clickOn(CREATE_PERSON);
     }
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + "/admin/person/index.htm";
+    public String getPageUrl() {
+        return "/admin/person/index.htm";
     }
 
 }

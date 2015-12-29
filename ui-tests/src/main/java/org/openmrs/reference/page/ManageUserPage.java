@@ -1,6 +1,5 @@
 package org.openmrs.reference.page;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -44,8 +43,8 @@ public class ManageUserPage extends Page {
 
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + URL_PATH;
+    public String getPageUrl() {
+        return URL_PATH;
     }
 
     public void clickOnAddUser() {

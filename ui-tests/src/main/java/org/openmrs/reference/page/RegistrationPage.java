@@ -234,8 +234,8 @@ public class RegistrationPage extends Page {
 
 
 	@Override
-    public String expectedUrlPath() {
-	    return URL_ROOT + "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
+    public String getPageUrl() {
+	    return "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
 
 	public void confirmPatient() throws InterruptedException{

@@ -115,8 +115,8 @@ public class HomePage extends Page {
 
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + "/referenceapplication/home.page";
+    public String getPageUrl() {
+        return "/referenceapplication/home.page";
     }
 
 }

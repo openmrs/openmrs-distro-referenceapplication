@@ -68,5 +68,5 @@ public class LocationPage extends Page {
 
 
     @Override
-    public String expectedUrlPath() {return URL_ROOT + "/locations/location.list";}
+    public String getPageUrl() {return "/locations/location.list";}
 }

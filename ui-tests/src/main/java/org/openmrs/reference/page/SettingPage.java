@@ -86,8 +86,8 @@ public class SettingPage extends Page{
     }
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + "admin/maintenance/settings.list";
+    public String getPageUrl() {
+        return "admin/maintenance/settings.list";
     }
 
 

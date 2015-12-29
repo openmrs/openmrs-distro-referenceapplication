@@ -94,8 +94,8 @@ public class ManageFormsPage extends Page{
 
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + "/formentryapp/forms/extension.page";
+    public String getPageUrl() {
+        return "/formentryapp/forms/extension.page";
     }
 
 

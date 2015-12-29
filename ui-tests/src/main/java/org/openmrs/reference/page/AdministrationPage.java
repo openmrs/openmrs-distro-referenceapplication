@@ -19,8 +19,8 @@ public class AdministrationPage extends Page {
 
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + URL_PATH;
+    public String getPageUrl() {
+        return URL_PATH;
     }
 
     public void clickOnManageUsers() {

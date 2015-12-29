@@ -1,13 +1,12 @@
 package org.openmrs.reference.page;
 
+import java.util.Calendar;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
-import java.util.Calendar;
-import java.util.List;
 
 
 public class PatientDashboardPage extends Page {
@@ -122,8 +121,8 @@ public class PatientDashboardPage extends Page {
 	}
 
 	@Override
-	public String expectedUrlPath() {
-		return URL_ROOT + URL_PATH;
+	public String getPageUrl() {
+		return URL_PATH;
 	}
 
 	public boolean hasActiveVisit() {

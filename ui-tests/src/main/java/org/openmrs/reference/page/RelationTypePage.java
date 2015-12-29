@@ -1,11 +1,7 @@
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * Created by tomasz on 15.07.15.
@@ -49,8 +45,8 @@ public class RelationTypePage extends AdminManagementPage {
     }
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + "/admin/person/relationshipType.list";
+    public String getPageUrl() {
+        return "/admin/person/relationshipType.list";
     }
 
 }

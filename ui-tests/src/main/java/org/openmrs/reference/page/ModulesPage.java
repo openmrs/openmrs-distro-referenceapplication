@@ -11,10 +11,10 @@ public class ModulesPage extends Page {
 	public ModulesPage(WebDriver driver) {
         super(driver);
     }
-	
+
 	@Override
-    public String expectedUrlPath() {
-    	return URL_ROOT + ADMIN_MODULE_LIST_PATH;
+    public String getPageUrl() {
+    	return ADMIN_MODULE_LIST_PATH;
     }
 }
 

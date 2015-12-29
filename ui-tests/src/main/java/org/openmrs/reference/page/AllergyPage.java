@@ -94,7 +94,7 @@ public class AllergyPage extends Page{
     }
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + "/allergyui/allergy.page";
+    public String getPageUrl() {
+        return "/allergyui/allergy.page";
     }
 }

@@ -1,11 +1,11 @@
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * Created by tomasz on 24.06.15.
@@ -31,8 +31,8 @@ public class ServicePage extends Page {
     }
 
     @Override
-    public String expectedUrlPath() {
-        return URL_ROOT + URL_PATH;
+    public String getPageUrl() {
+        return URL_PATH;
     }
 
     public void putServiceData(String name, String duration, String description) {
