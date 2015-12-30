@@ -13,22 +13,12 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ActiveVisitsPage;
-import org.openmrs.reference.page.HomePage;
-import org.openmrs.uitestframework.test.TestBase;
 
-public class SearchActiveVisitsTest extends TestBase {
-
-    private HomePage homePage;
-
-    @Before
-    public void setUp() throws Exception {
-        homePage = new HomePage(page);
-    }
+public class SearchActiveVisitsTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
