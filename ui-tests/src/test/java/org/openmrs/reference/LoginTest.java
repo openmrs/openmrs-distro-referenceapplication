@@ -28,11 +28,16 @@ public class LoginTest extends TestBase {
         assertPage(homePage);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
-        assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertTrue(homePage.isCaptureVitalsAppPresent());
-//        assertTrue(homePage.isConfigureMetadataAppPresent());
+        assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
+        assertTrue(homePage.isDataManagementAppPresent());
+        assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
-        assertThat(homePage.numberOfAppsPresent(), is(10));
+        // there is also a Form Entry app added by the XForms module; This shouldn't really be there, as XForms is not
+        // distributed with the Reference Application but for now we'll have the test count on it. Feel free to remove
+        // this comment and lower the expected count of apps present by 1 when we clean up this test server.
+        assertThat(homePage.numberOfAppsPresent(), is(9));
     }
     @Test
     public void verifyClerkModulesAvailableOnHomePage() throws Exception {
@@ -40,8 +45,9 @@ public class LoginTest extends TestBase {
         homePage = new HomePage(page);
     	assertPage(homePage);
     	assertTrue(homePage.isActiveVisitsAppPresent());
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
-        assertThat(homePage.numberOfAppsPresent(), is(4));
+        assertThat(homePage.numberOfAppsPresent(), is(3));
     }
     @Test
     public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
@@ -50,6 +56,7 @@ public class LoginTest extends TestBase {
     	assertPage(homePage);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(3));
     }
     @Test
@@ -59,6 +66,7 @@ public class LoginTest extends TestBase {
     	assertPage(homePage);
     	assertTrue(homePage.isFindAPatientAppPresent());
     	assertTrue(homePage.isActiveVisitsAppPresent());
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
     	assertTrue(homePage.isCaptureVitalsAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(4));
     }
@@ -67,7 +75,7 @@ public class LoginTest extends TestBase {
         goToLoginPage().loginAsSysadmin();
         homePage = new HomePage(page);
         assertPage(homePage);
-//        assertTrue(homePage.isConfigureMetadataAppPresent());
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(2));
     }

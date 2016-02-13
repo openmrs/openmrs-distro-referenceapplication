@@ -8,11 +8,13 @@ public class HomePage extends Page {
     static final String FIND_PATIENT_APP_ID = "coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension";
     static final String REGISTER_PATIENT_APP_ID = "referenceapplication-registrationapp-registerPatient-homepageLink-referenceapplication-registrationapp-registerPatient-homepageLink-extension";
     static final String ACTIVE_VISITS_APP_ID = "org-openmrs-module-coreapps-activeVisitsHomepageLink-org-openmrs-module-coreapps-activeVisitsHomepageLink-extension";
+    static final String APPOINTMENT_SCHEDULING_APP_ID = "appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension";
     static final String STYLE_GUIDE_APP_ID = "referenceapplication-styleGuide-referenceapplication-styleGuide-extension";
     static final String SYSTEM_ADMIN_APP_ID = "coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension";
-    static final String CONFIGURE_METADATA_APP_ID = "coreapps-configuremetadata-homepageLink-coreapps-configuremetadata-homepageLink-extension";
+    static final String CONFIGURE_METADATA_APP_ID = "org-openmrs-module-adminui-configuremetadata-homepageLink-org-openmrs-module-adminui-configuremetadata-homepageLink-extension";
     static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
     static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
+    static final String DATA_MANAGAMENT_APP_ID = "coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension";
     static final By ACTIVE_PATIENT = By.xpath("//td[2]/a");
     static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
     static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
@@ -67,6 +69,10 @@ public class HomePage extends Page {
         return isAppButtonPresent(ACTIVE_VISITS_APP_ID);
     }
 
+    public Boolean isAppointmentSchedulingAppPresent() {
+        return isAppButtonPresent(APPOINTMENT_SCHEDULING_APP_ID);
+    }
+
     public Boolean isStyleGuideAppPresent() {
         return isAppButtonPresent(STYLE_GUIDE_APP_ID);
     }
@@ -85,6 +91,10 @@ public class HomePage extends Page {
 
     public boolean isCaptureVitalsAppPresent() {
         return isAppButtonPresent(CAPTURE_VITALS_APP_ID);
+    }
+
+    public boolean isDataManagementAppPresent() {
+        return isAppButtonPresent(DATA_MANAGAMENT_APP_ID);
     }
 
     public void goToActiveVisitPatient(){
