@@ -57,10 +57,11 @@ public class HomePage extends Page {
         return isAppButtonPresent(REGISTER_PATIENT_APP_ID);
     }
 
-    public void openRegisterAPatientApp() throws InterruptedException {
+    public RegistrationPage openRegisterAPatientApp() throws InterruptedException {
         openApp(REGISTER_PATIENT_APP_ID);
+        return new RegistrationPage(this);
     }
-
+    
     public void openLegacyAdministrationApp()  throws InterruptedException{
         openApp(SYSTEM_ADMIN_APP_ID);
     }
@@ -132,5 +133,4 @@ public class HomePage extends Page {
     public String getPageAliasUrl() {
     	return "/index.htm";
     }
-
 }
