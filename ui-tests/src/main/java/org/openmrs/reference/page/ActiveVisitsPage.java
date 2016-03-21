@@ -17,6 +17,7 @@ public class ActiveVisitsPage extends Page {
 	private By SEARCH_INPUT = By.tagName("input");
 
 	private By FIRST_ACTIVE_VISIT = By.className("odd");
+	private static final By ACTIVE_PATIENT = By.xpath("//td[2]/a");
 
 	public ActiveVisitsPage(HomePage homePage) {
 		super(homePage);
@@ -41,6 +42,11 @@ public class ActiveVisitsPage extends Page {
 
 	public void search(String text) {
 		setText(SEARCH_INPUT, text);
+	}
+
+	public ClinicianFacingPatientDashboardPage goToPatientDashboardOfLastActiveVisit() {
+		clickOn(ACTIVE_PATIENT);
+		return new ClinicianFacingPatientDashboardPage(this);
 	}
 
 }
