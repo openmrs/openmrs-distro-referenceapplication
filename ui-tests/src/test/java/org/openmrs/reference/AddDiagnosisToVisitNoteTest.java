@@ -24,6 +24,7 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
     private VisitNotePage visitNotePage;
     
     @Test
+    @Ignore("unstable")
     @Category(BuildTests.class)
     public void AddDiagnosisToVisitNoteTest() throws Exception {
     	
