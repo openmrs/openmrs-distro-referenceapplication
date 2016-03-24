@@ -97,11 +97,8 @@ public class HomePage extends Page {
         return isAppButtonPresent(DATA_MANAGAMENT_APP_ID);
     }
 
-    public void goToActiveVisitPatient(){
-        clickOn(By.id(ACTIVE_VISITS_APP_ID));
-        waitForElement(ACTIVE_PATIENT);
-        clickOn(ACTIVE_PATIENT);
-//        waitForElement(PATIENT_HEADER);
+    public ClinicianFacingPatientDashboardPage goToActiveVisitPatient(){
+        return goToActiveVisitsSearch().goToPatientDashboardOfLastActiveVisit();
     }
 
     public ActiveVisitsPage goToActiveVisitsSearch() {

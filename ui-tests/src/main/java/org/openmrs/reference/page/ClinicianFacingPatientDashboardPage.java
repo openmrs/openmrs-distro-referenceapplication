@@ -143,6 +143,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(VISIT_NOTE);
 		waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
 	}
+	
+	public VisitNotePage goToVisitNote(){
+		clickOn(VISIT_NOTE);
+		return new VisitNotePage(this);
+	}
 
 	public void enterDiagnosis(String diag) {
 		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
