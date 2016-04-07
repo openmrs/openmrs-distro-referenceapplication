@@ -22,9 +22,9 @@ checkForStartup() {
   echo "Waiting for OpenMRS to start.  This could take a few minutes."
   while [ -z "${result}"  ];
     do
-      if [ "${Host}" == "devtest01.openmrs.org" ]
+      if [ "${Host}" == "int-refapp.openmrs.org" ]
         then
-          result=`ssh -o StrictHostKeyChecking=no bamboo@devtest01.openmrs.org "sudo tail /var/log/tomcat7/catalina.out | grep \"${startedSignal}\""`
+          result=`ssh -o StrictHostKeyChecking=no bamboo@int-refapp.openmrs.org "sudo tail /var/log/tomcat7/catalina.out | grep \"${startedSignal}\""`
         timeout
         else
           result=`tail /var/log/tomcat7/catalina.out | grep "${startedSignal}"`
