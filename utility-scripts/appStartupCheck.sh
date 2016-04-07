@@ -27,7 +27,7 @@ checkForStartup() {
           result=`ssh -o StrictHostKeyChecking=no bamboo@int-refapp.openmrs.org "sudo tail /var/log/tomcat7/catalina.out | grep \"${startedSignal}\""`
         timeout
         else
-          result=`tail /var/log/tomcat7/catalina.out | grep "${startedSignal}"`
+          result=`sudo tail /var/log/tomcat7/catalina.out | grep "${startedSignal}"`
         timeout
       fi
   done
