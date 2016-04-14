@@ -1,26 +1,11 @@
-/**
- * The contents of this file are subject to the OpenMRS Public License
- * Version 1.0 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License at
- * http://license.openmrs.org
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
- * License for the specific language governing rights and limitations
- * under the License.
- *
- * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
- */
 package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
-
 import static org.junit.Assert.assertTrue;
 
 
@@ -47,7 +32,6 @@ public class XSSOnPhoneNumberFieldTest extends TestBase {
     }
 
     @Test
-    @Category(org.openmrs.reference.groups.BuildTests.class)
     public void  XSSOnPhoneNumberFieldTest() throws Exception {
         patientDashboardPage.clickOnShowContact();
         patientDashboardPage.clickOnEditContact();
