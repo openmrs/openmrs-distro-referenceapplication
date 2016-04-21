@@ -37,7 +37,7 @@ public class LoginTest extends TestBase {
         // there is also a Form Entry app added by the XForms module; This shouldn't really be there, as XForms is not
         // distributed with the Reference Application but for now we'll have the test count on it. Feel free to remove
         // this comment and lower the expected count of apps present by 1 when we clean up this test server.
-        assertThat(homePage.numberOfAppsPresent(), is(9));
+        assertThat(homePage.numberOfAppsPresent(), is(10));
     }
     @Test
     public void verifyClerkModulesAvailableOnHomePage() throws Exception {
