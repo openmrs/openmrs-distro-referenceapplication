@@ -1,9 +1,17 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
 package org.openmrs.reference.page;
 
 /**
  * Created by nata on 30.06.15.
- */
-
+ */ 
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
@@ -17,17 +25,24 @@ public class FindPatientPage extends Page {
     private static final By PATIENT_SEARCH = By.id("patient-search");
     private static final By PATIENT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");
     public static final int SLEEP_TIME = 1000; //1 second
-
+    
+    public FindPatientPage(HomePage homePage) {
+    	super(homePage);
+    }
+    
+    // This constructor should not be used anymore. Too many tests rely on it right now to delete it.
     public FindPatientPage(WebDriver driver) {
         super(driver);
     }
-
 
     public void enterPatient(String patient) {
         setTextToFieldNoEnter(PATIENT_SEARCH, patient);
     }
 
-    public void clickOnFirstPatient(){ clickOn(PATIENT);}
+    public ClinicianFacingPatientDashboardPage clickOnFirstPatient(){
+    	clickOn(PATIENT);
+    	return new ClinicianFacingPatientDashboardPage(this);
+    }
 
     /**
      * Finds first record from the result table
@@ -36,9 +51,6 @@ public class FindPatientPage extends Page {
     public String findFirstPatientId() {
         return findElement(PATIENT_ID_SEARCH_RESULT).getText();
     }
-
-
-
 
     @Override
     public String getPageUrl() {
