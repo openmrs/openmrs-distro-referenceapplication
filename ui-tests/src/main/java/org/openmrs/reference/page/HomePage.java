@@ -1,3 +1,12 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
 package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
@@ -57,10 +66,11 @@ public class HomePage extends Page {
         return isAppButtonPresent(REGISTER_PATIENT_APP_ID);
     }
 
-    public void openRegisterAPatientApp() throws InterruptedException {
+    public RegistrationPage openRegisterAPatientApp() throws InterruptedException {
         openApp(REGISTER_PATIENT_APP_ID);
+        return new RegistrationPage(this);
     }
-
+    
     public void openLegacyAdministrationApp()  throws InterruptedException{
         openApp(SYSTEM_ADMIN_APP_ID);
     }
@@ -98,7 +108,10 @@ public class HomePage extends Page {
     }
 
     public ClinicianFacingPatientDashboardPage goToActiveVisitPatient(){
-        return goToActiveVisitsSearch().goToPatientDashboardOfLastActiveVisit();
+        clickOn(By.id(ACTIVE_VISITS_APP_ID));
+        waitForElement(ACTIVE_PATIENT);
+        clickOn(ACTIVE_PATIENT);
+        return new ClinicianFacingPatientDashboardPage(this);
     }
 
     public ActiveVisitsPage goToActiveVisitsSearch() {
@@ -116,9 +129,14 @@ public class HomePage extends Page {
         clickOn(ADVANCED_ADMINISTRATION);
     }
 
-    public void clickOnFindPatientRecord(){ clickOn(FIND_PATIENT_RECORD);}
-    public void goToDataMagament(){ clickOn(DATA_MANAGAMENT);}
-
+    public FindPatientPage clickOnFindPatientRecord(){ 
+    	clickOn(By.id(FIND_PATIENT_APP_ID));
+    	return new FindPatientPage(this);
+    }
+    
+    public void goToDataMagament(){ 
+    	clickOn(DATA_MANAGAMENT);
+    }
 
     @Override
     public String getPageUrl() {
@@ -129,5 +147,5 @@ public class HomePage extends Page {
     public String getPageAliasUrl() {
     	return "/index.htm";
     }
-
 }
+
