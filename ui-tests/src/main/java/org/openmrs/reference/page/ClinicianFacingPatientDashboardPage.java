@@ -1,12 +1,3 @@
-/**
- * This Source Code Form is subject to the terms of the Mozilla Public License,
- * v. 2.0. If a copy of the MPL was not distributed with this file, You can
- * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
- * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
- * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
- * graphic logo is a trademark of OpenMRS Inc.
- */
 package org.openmrs.reference.page;
 
 import java.util.Calendar;
@@ -25,6 +16,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
 	private static final By STARTED_AT = By.className("active-visit-started-at-message");
 	private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
+	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
 	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
 	public static final By VISIT_LINK = By.className("toast-item-wrapper");
 	private static final By VISIT_LINK_2 = By.className("visit-link");
@@ -60,7 +52,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By SAVE_REQUEST = By.id("save-button");
 	private static final By APPOINTMENT_TYPE = By.id("appointment-type");
 	private static final By SERVICE_DROPDOWN = By.cssSelector("a.ng-scope.ng-binding");
-	private static final By HOME_LOGO = By.className("logo");
 
 	private static final By ERROR = By.cssSelector("li.error > span");
 	private static final By ADD_PAST_VISIT = By.linkText("Add Past Visit");
@@ -81,17 +72,15 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		super(page);
 	}
 
-	public PatientVisitsDashboardPage startVisit() {
+	public void startVisit() {
 		clickOn(START_VISIT);
 		waitForElement(CONFIRM);
 		clickOn(CONFIRM);
-		return new PatientVisitsDashboardPage(this);
 	}
 
 	public void back() {
 		clickOn(PATIENT);
 	}
-	
 	public void clickOnEditPatient(){
 		clickOn(EDIT_PATIENT);
 	}
@@ -102,13 +91,12 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(YES);
 	}
 
-	public void clickOnYes (){
-		clickOn(YES);
-	}
+	public void clickOnYes (){clickOn(YES);}
 
 	public void clickOnSave(){
 		clickOn(SAVE);
 	}
+
 
 	public void clickOnAdmitToInpatient() throws InterruptedException {
 		clickOn(ADMIT_TO_INPATIENT);
@@ -127,10 +115,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(EXIT_FROM_INPATIENT);
 		new Select(driver.findElement(By.id("w5"))).selectByVisibleText("Unknown Location");
 		clickOn(SAVE);
-	}
-	
-	public void goToHome() {
-		clickOn(HOME_LOGO);
+
 	}
 
 	@Override
@@ -154,10 +139,9 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		return findElement(END_VISIT);
 	}
 
-	public VisitNotePage visitNote() {
+	public void visitNote() {
 		clickOn(VISIT_NOTE);
-		waitForElement(DIAGNOSIS_SEARCH);
-		return new VisitNotePage(this);
+		waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
 	}
 	
 	public VisitNotePage goToVisitNote(){
@@ -242,15 +226,9 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public void clickOnTranfer(){
 		clickOn(TRANSFER_TO_WARD_SERVICE);
 	}
-	
-	//Contact Info
-	public void clickOnShowContact(){ 
-		clickOn(SHOW_CONTACT_INFO);
-	}
-	
-	public void clickOnEditContact(){ 
-		clickOn(EDIT_CONTACT_INFO);
-	}
+//Contact Info
+	public void clickOnShowContact(){ clickOn(SHOW_CONTACT_INFO);}
+	public void clickOnEditContact(){ clickOn(EDIT_CONTACT_INFO);}
 
 	//Find Patient Id
 	public String findPatientId(){
@@ -312,11 +290,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(CHANGE_DATE);
 	}
 
-	public void enterDate() {
+	public void enterDate(){
 		Calendar currentDay = Calendar.getInstance();
 	 	Integer dayOfMoth = currentDay.get(Calendar.DAY_OF_MONTH);
 	 	A: for(int j = 6; j > 0; j--) {
-	 		for (int i = 7; i > 0; i--) {
+			for (int i = 7; i > 0; i--) {
 				WebElement day = findElement(By.xpath(String.format("//table[@class=' table-condensed']/tbody/tr[%s]/td[%s]",j, i)));
 				if(!day.getAttribute("class").contains("disabled")) {
 					if (day.getText().equals("" + dayOfMoth)) {
@@ -328,11 +306,12 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 						} catch(Exception e) {
 							break A;
 						}
+
 					}
 				}
-			 }
-	 		}
-	} // end enterDate method
+			}
+		}
+	}
 
 	public String mergeVisits() {
 		waitForElement(MERGE_VISIT_BUTTON);
@@ -346,25 +325,16 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		return text;
 	}
 
-	public void clickOnRequest(){ 
-		clickOn(REQUEST_APPOINTMENT);
-	}
-	
-	public void enterValue(String value){ 
-		setText(FRAME_VALUE, value);
-	}
-	
-	public void selectUnits(String units){ 
-		selectFrom(FRAME_UNITS, units);
-	}
-	
-	public void saveRequest(){ 
-		clickOn(SAVE_REQUEST);
-	}
-	
+	public void clickOnRequest(){ clickOn(REQUEST_APPOINTMENT);}
+	public void enterValue(String value){ setText(FRAME_VALUE, value);}
+	public void selectUnits(String units){ selectFrom(FRAME_UNITS, units);}
+	public void saveRequest(){ clickOn(SAVE_REQUEST);}
 	public void enterAppointmentType(String type){
 		setTextToFieldNoEnter(APPOINTMENT_TYPE, type);
 		waitForElement(SERVICE_DROPDOWN);
 		clickOn(SERVICE_DROPDOWN);
 	}
+
+
+
 }
