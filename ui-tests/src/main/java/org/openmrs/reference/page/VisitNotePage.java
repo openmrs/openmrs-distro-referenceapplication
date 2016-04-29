@@ -11,10 +11,12 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class VisitNotePage extends Page {
 	
 	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
+	private static final By CODE = By.className("code");
 	private static final By UI_ID_1 = By.id("ui-id-1");
 	private static final By UI_MENU_ITEM = By.className("ui-menu-item");
 	private static final By PRIMARY_DIAGNOSIS_ELEMENT = By.cssSelector(".diagnosis.primary .matched-name");
@@ -31,9 +33,26 @@ public class VisitNotePage extends Page {
 	}
 	
 	public void enterDiagnosis(String diag) {
-		setText(DIAGNOSIS_SEARCH, diag);
-		waitForElement(UI_ID_1);
-		clickOn(UI_MENU_ITEM);
+		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
+		clickOn(CODE);
+	}
+
+	public void addDiagnosis(String diag) {
+		WebElement diagnosisElement = findElement(DIAGNOSIS_SEARCH);
+		diagnosisElement.click();
+		enterDiagnosis(diag);
+		diagnosisElement.clear();
+		diagnosisElement.click();
+
+	}
+
+	public void addSecondaryDiagnosis(String diag) {
+		WebElement diagnosisElement = findElement(DIAGNOSIS_SEARCH);
+		diagnosisElement.click();
+		enterSecondaryDiagnosis(diag);
+		diagnosisElement.clear();
+		diagnosisElement.click();
+
 	}
 
 	public void enterSecondaryDiagnosis(String diag) {

@@ -12,49 +12,24 @@ package org.openmrs.reference;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
-import org.openmrs.reference.helper.TestPatient;
-import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
-import org.openmrs.reference.page.FindPatientPage;
-import org.openmrs.reference.page.PatientVisitsDashboardPage;
-import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.reference.page.VisitNotePage;
 
 
 public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
     private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private VisitNotePage visitNotePage;
-    private ActiveVisitsPage activeVisits;
-    private FindPatientPage findPatientPage;
-    private RegistrationPage registrationPage;
-    private TestPatient patient;
-    private PatientVisitsDashboardPage patientVisitsDashboard;
     
-    /* To make this test more stable, a new patient is registered, then given an active visit
-     * The test is then performed on this new patient
-     */ 
-    @Before
-    public void setUp() throws InterruptedException {
-    	registrationPage = homePage.openRegisterAPatientApp();
-    	patient = new TestPatient();
-    	registrationPage.enterGenericPatient(patient);
-    	patientDashboardPage = registrationPage.confirmPatient();
-    	patientDashboardPage.goToHome();
-    	findPatientPage = homePage.clickOnFindPatientRecord();
-    	patientDashboardPage = findPatientPage.clickOnFirstPatient();
-    	patientVisitsDashboard = patientDashboardPage.startVisit();
-    	patientVisitsDashboard.goToHome();
-    }
-    
-    @Test // RA-1117
+    @Test
+    @Ignore //unstable
     @Category(BuildTests.class)
-    public void AddDiagnosisVisitNoteTest() throws InterruptedException {
-        activeVisits = homePage.goToActiveVisitsSearch();
-        patientDashboardPage = activeVisits.goToPatientDashboardOfLastActiveVisit();
+    public void AddDiagnosisToVisitNoteTest() throws Exception {
+    	
+        patientDashboardPage = homePage.goToActiveVisitPatient();
         visitNotePage = patientDashboardPage.goToVisitNote();
         visitNotePage.enterDiagnosis("Pne");
         visitNotePage.enterSecondaryDiagnosis("Bleed");
@@ -63,5 +38,6 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
         visitNotePage.save();
         assertNotNull(patientDashboardPage.visitLink());
         patientDashboardPage.endVisit();
+
     }
 }
