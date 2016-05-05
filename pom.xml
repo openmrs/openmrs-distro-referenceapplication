@@ -70,7 +70,6 @@
 		<namephoneticsVersion>1.5</namephoneticsVersion> <!-- The omod for namephonetics is not included in the distro, but we keep the version around since it's a semi-supported add-on -->
 		<adminuiVersion>1.1-SNAPSHOT</adminuiVersion>
 		<uitestframeworkVersion>1.8-SNAPSHOT</uitestframeworkVersion>
-		<addresshierarchyVersion>2.8</addresshierarchyVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -920,12 +919,6 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>adminui-omod</artifactId>
 				<version>${adminuiVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>addresshierarchy-omod</artifactId>
-				<version>${addresshierarchyVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>
