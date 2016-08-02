@@ -1,12 +1,3 @@
-/**
- * This Source Code Form is subject to the terms of the Mozilla Public License,
- * v. 2.0. If a copy of the MPL was not distributed with this file, You can
- * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
- * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
- * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
- * graphic logo is a trademark of OpenMRS Inc.
- */
 package org.openmrs.reference.page;
 
 import java.util.Calendar;
@@ -77,10 +68,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	private static final By EYE_REPORT = By.linkText("Eye Report");
 
-	private static final By NAME = By.xpath("//ul[@id='breadcrumbs']/li[2]");
-	private static final By GENDER = By.xpath("//span[@class='gender-age']/span[1]");
-	private static final By AGE_BIRTHDATE = By.xpath("//span[@class='gender-age']/span[2]");
-
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
 	}
@@ -94,9 +81,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public void back() {
 		clickOn(PATIENT);
 	}
-	public EditDemographicsPage clickOnEditPatient(){
+	public void clickOnEditPatient(){
 		clickOn(EDIT_PATIENT);
-		return new EditDemographicsPage(this);
 	}
 
 	public void endVisit() throws InterruptedException{
@@ -349,16 +335,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(SERVICE_DROPDOWN);
 	}
 
-	public String name() {
-		return findElement(NAME).getText().trim();
-	}
 
-	public String gender() {
-		return findElement(GENDER).getText().trim();
-	}
 
-	public String birthdate() {
-		String birthdate = findElement(AGE_BIRTHDATE).getText();
-		return birthdate.substring(birthdate.lastIndexOf(' ') + 1).replaceAll("[()]", "");
-	}
 }
