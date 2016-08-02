@@ -116,7 +116,10 @@ public class HomePage extends Page {
         clickOn(ADVANCED_ADMINISTRATION);
     }
 
-    public void clickOnFindPatientRecord(){ clickOn(FIND_PATIENT_RECORD);}
+    public FindPatientPage clickOnFindPatientRecord(){
+    	clickOn(FIND_PATIENT_RECORD);
+    	return new FindPatientPage(driver);
+    }
     public void goToDataMagament(){ clickOn(DATA_MANAGAMENT);}
 
 
