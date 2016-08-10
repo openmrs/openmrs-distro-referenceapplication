@@ -70,6 +70,7 @@
 		<adminuiVersion>1.1</adminuiVersion>
 		<uitestframeworkVersion>1.8</uitestframeworkVersion>
 		<legacyuiVersion>1.0</legacyuiVersion>
+		<reportingcompatibilityVersion>2.0.0</reportingcompatibilityVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -917,6 +918,25 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>legacyui-omod</artifactId>
 				<version>${legacyuiVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>reportingcompatibility-api</artifactId>
+				<version>${reportingcompatibilityVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>reportingcompatibility-api</artifactId>
+				<version>${reportingcompatibilityVersion}</version>
+				<classifier>tests</classifier>
+				<scope>tests</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>reportingcompatibility-omod</artifactId>
+				<version>${reportingcompatibilityVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>
