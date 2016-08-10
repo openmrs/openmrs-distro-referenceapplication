@@ -69,6 +69,7 @@
 		<namephoneticsVersion>1.5</namephoneticsVersion> <!-- The omod for namephonetics is not included in the distro, but we keep the version around since it's a semi-supported add-on -->
 		<adminuiVersion>1.1</adminuiVersion>
 		<uitestframeworkVersion>1.8</uitestframeworkVersion>
+		<legacyuiVersion>1.0</legacyuiVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -897,6 +898,25 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>adminui-omod</artifactId>
 				<version>${adminuiVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>legacyui-api</artifactId>
+				<version>${legacyuiVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>legacyui-api</artifactId>
+				<version>${legacyuiVersion}</version>
+				<classifier>tests</classifier>
+				<scope>tests</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>legacyui-omod</artifactId>
+				<version>${legacyuiVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>
