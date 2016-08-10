@@ -273,6 +273,12 @@
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
+				<artifactId>serialization.xstream-api-2.0</artifactId>
+				<version>${serialization.xstreamVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
 				<artifactId>htmlwidgets-api</artifactId>
 				<version>${htmlwidgetsVersion}</version>
 				<scope>provided</scope>
@@ -490,6 +496,13 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>serialization.xstream-api</artifactId>
+				<version>${serialization.xstreamVersion}</version>
+				<classifier>tests</classifier>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>serialization.xstream-api-2.0</artifactId>
 				<version>${serialization.xstreamVersion}</version>
 				<classifier>tests</classifier>
 				<scope>test</scope>
