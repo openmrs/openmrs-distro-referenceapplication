@@ -71,6 +71,8 @@
 		<uitestframeworkVersion>1.9-SNAPSHOT</uitestframeworkVersion>
 		<legacyuiVersion>1.1-SNAPSHOT</legacyuiVersion>
 		<reportingcompatibilityVersion>2.0.0</reportingcompatibilityVersion>
+		<fhirVersion>1.5-SNAPSHOT</fhirVersion>
+		<owaVersion>1.5-SNAPSHOT</owaVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -956,6 +958,18 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>reportingcompatibility-omod</artifactId>
 				<version>${reportingcompatibilityVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>fhir-omod</artifactId>
+				<version>${fhirVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>owa-omod</artifactId>
+				<version>${owaVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>
