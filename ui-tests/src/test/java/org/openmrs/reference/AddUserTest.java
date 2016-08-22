@@ -41,8 +41,7 @@ public class AddUserTest extends TestBase {
     public void addUserTest() throws Exception {
         administrationPage.clickOnManageUsers();
         if (manageUserPage.userExists("super_nurse")) {
-            manageUserPage.findUser("super_nurse");
-            manageUserPage.deleteUser();
+            manageUserPage.removeUser("super_nurse");
         }
         else {
             manageUserPage.clickOnAddUser();
@@ -72,8 +71,7 @@ public class AddUserTest extends TestBase {
             goToLoginPage().loginAsAdmin();
             homePage.goToAdministration();
             administrationPage.clickOnManageUsers();
-            manageUserPage.findUser("super_nurse");
-            manageUserPage.deleteUser();
+            manageUserPage.removeUser("super_nurse");
             settingPage.waitForMessage();
             assertTrue(driver.getPageSource().contains("Successfully deleted user."));
         }

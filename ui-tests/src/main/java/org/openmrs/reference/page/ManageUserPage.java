@@ -2,9 +2,7 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * Created by tomasz on 10.07.15.
@@ -31,7 +29,6 @@ public class ManageUserPage extends Page {
     private static final By ORGANIZATIONAL_DOCTOR = By.id("roleStrings.Organizational:Doctor");
     public String NAME;
     private static final By FIND_USER = By.name("name");
-    private static final By DELETE_USER = By.xpath("(//input[@name='action'])[3]");
     private static final By ERROR_DEMOGRAPHIC = By.xpath("//form[@id='thisUserForm']/fieldset/span");
     private static final By ERROR_GENDER = By.xpath("//form[@id='thisUserForm']/fieldset/table/tbody/tr[5]/td[2]/span");
     private static final By ERROR_USER = By.xpath("//form[@id='thisUserForm']/fieldset[2]/table/tbody/tr[2]/td[2]/i");
@@ -47,29 +44,15 @@ public class ManageUserPage extends Page {
         return URL_PATH;
     }
 
-    public void clickOnAddUser() {
+    public AddEditUserPage clickOnAddUser() {
         findElement(ADD_USER).click();
+        return new AddEditUserPage(this);
     }
 
     public void createNewPerson() {
         findElement(CREATE_NEW_PERSON).click();
     }
 
-    public void fillInPersonName(String givenName, String familyName, String username, String password) {
-
-        findElement(USERNAME).clear();
-        findElement(USERNAME).sendKeys(username);findElement(PERSON_GIVEN_NAME).clear();
-        findElement(PERSON_GIVEN_NAME).sendKeys(givenName);
-        findElement(PERSON_FAMILY_NAME).clear();
-        findElement(PERSON_FAMILY_NAME).sendKeys(familyName);
-        clickOn(GENDER_FEMALE);
-        findElement(PASSWORD).clear();
-        findElement(PASSWORD).sendKeys(password);
-        findElement(CONFIRM).clear();
-        findElement(CONFIRM).sendKeys(password);
-        clickOn(SAVE_BUTTON);
-
-    }
     public void enterUserMale(String givenName, String familyName,String username, String password) {
 
         findElement(PERSON_GIVEN_NAME).clear();
@@ -95,51 +78,18 @@ public class ManageUserPage extends Page {
         }
     }
 
-    public void unassignRole(String roleToUnassign) {
-        waitForElement(By.id(roleToUnassign));
-        WebElement roleElement = null;
-        Long startTime = System.currentTimeMillis();
-        while(true) {
-            if((System.currentTimeMillis() - startTime) > 30000) {
-                throw new TimeoutException("Couldn't uncheck a role in 30 seconds");
-            }
-            roleElement = findElement(By.id(roleToUnassign));
-            if(roleElement.getAttribute("checked") != null && roleElement.getAttribute("checked").equals("true")) {
-                roleElement.click();
-            }
-            else {
-                break;
-            }
-        }
-    }
 
-    public void assignRole(String roleToAssign) {
-        waitForElement(By.id(roleToAssign));
-        WebElement roleElement = null;
-        Long startTime = System.currentTimeMillis();
-        while(true) {
-            if((System.currentTimeMillis() - startTime) > 30000) {
-                throw new TimeoutException("Couldn't uncheck a role in 30 seconds");
-            }
-            roleElement = findElement(By.id(roleToAssign));
-            if(roleElement.getAttribute("checked") != null && roleElement.getAttribute("checked").equals("true")) {
-                roleElement.click();
-            }
-            else {
-                break;
-            }
-        }
-    }
 
     public void assignRolesToUser(String roleToUnassign, String roleToAssign, String user) throws InterruptedException {
         setText(FIND_USER, user);
         clickOn(ACTION);
         clickOn(USER_LINK);
+        AddEditUserPage editPage = new AddEditUserPage(this);
         if(roleToUnassign != null) {
-            unassignRole(roleToUnassign);
+            editPage.unassignRole(roleToUnassign);
         }
-        clickOn(By.id(roleToAssign));
-        clickOn(SAVE_BUTTON);
+        editPage.clickOn(By.id(roleToAssign));
+        editPage.clickOn(SAVE_BUTTON);
     }
     public void chooseRole(){ clickOn(ORGANIZATIONAL_DOCTOR);}
     public void saveUser(){ clickOn(SAVE_BUTTON);}
@@ -153,7 +103,7 @@ public class ManageUserPage extends Page {
         setText(FIND_USER, user);
         clickOn(ACTION);
         clickOn(USER_LINK);
-        deleteUser();
+        new AddEditUserPage(this).deleteUser();
     }
     public boolean userExist(String find){
         try {
@@ -169,7 +119,6 @@ public class ManageUserPage extends Page {
         clickOn(ACTION);}
 
 
-    public void deleteUser(){ clickOn(DELETE_USER);}
     public void changePassword(String password){
         findElement(PASSWORD).clear();
         findElement(PASSWORD).sendKeys(password);
