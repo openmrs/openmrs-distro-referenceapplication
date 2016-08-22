@@ -23,7 +23,8 @@ public class AdministrationPage extends Page {
         return URL_PATH;
     }
 
-    public void clickOnManageUsers() {
+    public ManageUserPage clickOnManageUsers() {
         findElement(MANAGE_USERS).click();
+        return new ManageUserPage(driver);
     }
 }

@@ -1,6 +1,7 @@
 package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
+import org.openmrs.uitestframework.test.TestData;
 import org.openqa.selenium.By;
 
 public class HomePage extends Page {
@@ -111,9 +112,9 @@ public class HomePage extends Page {
         clickOn(MANAGE_FORM);
     }
 
-    public void goToAdministration() {
+    public AdministrationPage goToAdministration() {
         clickOn(SYSTEM_ADMINISTRATION);
-        clickOn(ADVANCED_ADMINISTRATION);
+        return new SystemAdministrationPage(this).goToAdvancedAdministration();
     }
 
     public FindPatientPage clickOnFindPatientRecord(){
