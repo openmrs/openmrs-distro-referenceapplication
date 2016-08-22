@@ -1,6 +1,8 @@
 openmrs-distro-referenceapplication
 ===================================
 
+[![Sauce Test Status](https://saucelabs.com/buildstatus/rkorytkowski)](https://saucelabs.com/u/rkorytkowski)
+
 ## Running locally with Vagrant 
 https://wiki.openmrs.org/x/CIC3Ag
 
