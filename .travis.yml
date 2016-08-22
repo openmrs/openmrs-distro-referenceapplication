@@ -1,3 +1,4 @@
 language: java
 script:
-  - mvn clean integration-test -Pci -DSAUCELABS_USERNAME=$SAUCELABS_USERNAME -DSAUCELABS_ACCESSKEY=$SAUCELABS_ACCESSKEY -DbuildNumber=$TRAVIS_BUILD_NUMBER
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn clean integration-test -Pci -DSAUCELABS_USERNAME=$SAUCELABS_USERNAME -DSAUCELABS_ACCESSKEY=$SAUCELABS_ACCESSKEY -DbuildNumber=$TRAVIS_BUILD_NUMBER; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then mvn clean install -DskipTests=true; fi'
