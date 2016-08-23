@@ -1,0 +1,3 @@
+language: java
+script:
+  - mvn clean integration-test -Pci -DSAUCELABS_USERNAME=$SAUCELABS_USERNAME -DSAUCELABS_ACCESSKEY=$SAUCELABS_ACCESSKEY -DbuildNumber=$TRAVIS_BUILD_NUMBER
