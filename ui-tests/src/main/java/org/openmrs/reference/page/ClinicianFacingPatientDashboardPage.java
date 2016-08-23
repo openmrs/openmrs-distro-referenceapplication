@@ -228,7 +228,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 //Contact Info
 	public void clickOnShowContact(){ clickOn(SHOW_CONTACT_INFO);}
-	public void clickOnEditContact(){ clickOn(EDIT_CONTACT_INFO);}
+	public RegistrationEditSectionPage clickOnEditContact(){
+		clickOn(EDIT_CONTACT_INFO);
+		return new RegistrationEditSectionPage(this);
+	}
 
 	//Find Patient Id
 	public String findPatientId(){

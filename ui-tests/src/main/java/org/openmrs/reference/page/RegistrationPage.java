@@ -248,7 +248,7 @@ public class RegistrationPage extends Page {
 	    return "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
 
-	public void confirmPatient() throws InterruptedException{
+	public ClinicianFacingPatientDashboardPage confirmPatient() throws InterruptedException{
 		clickOn(CONFIRM);
         boolean timeoutFlag = false;
         try {
@@ -259,6 +259,8 @@ public class RegistrationPage extends Page {
         }
         if(timeoutFlag) {
             throw new TimeoutException("Alert handling took too long");
+        } else {
+            return new ClinicianFacingPatientDashboardPage(this);
         }
     }
 
