@@ -27,11 +27,7 @@ public class CaptureVitalsTest  extends ReferenceApplicationTestBase {
     private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
     private static final String LOCATION_UUID = "8d6c993e-c2cc-11de-8d13-0010c6dffd0f";
 
-    private ActiveVisitsPage activeVisitsPage;
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
-    private PatientCaptureVitalsPage patientCaptureVitalsPage;
     private TestData.PatientInfo patient;
-
 
     @Before
     public void setup(){
@@ -48,11 +44,11 @@ public class CaptureVitalsTest  extends ReferenceApplicationTestBase {
     @Category(BuildTests.class)
     public void captureVital() throws InterruptedException {
 
-        activeVisitsPage = homePage.goToActiveVisitsSearch();
+        ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
 
-        patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
-        patientCaptureVitalsPage = patientDashboardPage.goToPatientCaptureVitalsPage();
+        ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
+        PatientCaptureVitalsPage patientCaptureVitalsPage = patientDashboardPage.goToPatientCaptureVitalsPage();
         patientCaptureVitalsPage.setHeightField("185");
         patientCaptureVitalsPage.setWeightField("78");
         patientCaptureVitalsPage.setTemperatureField("36.6");
