@@ -165,12 +165,6 @@ public class RegistrationPage extends Page {
     public void enterBirthYear(String bitrthyear){ setText(BIRTHDAY_YEAR, bitrthyear);}
 
     public void clickOnContactInfo() throws InterruptedException {
-        try {
-            closeAlert();
-        } catch(Exception e)
-        {
-
-        }
         clickOn(CONTACT_INFO_SECTION);
     }
 
@@ -259,18 +253,7 @@ public class RegistrationPage extends Page {
 
 	public ClinicianFacingPatientDashboardPage confirmPatient() throws InterruptedException{
 		clickOn(CONFIRM);
-        boolean timeoutFlag = false;
-        try {
-            timeoutFlag = closeAlert();
-        } catch(Exception e)
-        {
-
-        }
-        if(timeoutFlag) {
-            throw new TimeoutException("Alert handling took too long");
-        } else {
-            return new ClinicianFacingPatientDashboardPage(this);
-        }
+        return new ClinicianFacingPatientDashboardPage(this);
     }
 
     public void waitForDeletePatient() {
@@ -328,34 +311,6 @@ public class RegistrationPage extends Page {
         enterAddress1(patient.address1);
         clickOnConfirmSection();
         clickOnConfirmPatient();
-    }
-
-
-    private boolean closeAlert() throws InterruptedException {
-        boolean timeoutFlag = false;
-        Long startTime = System.currentTimeMillis();
-        try {
-            Thread.sleep(500);
-            Alert alert;
-            while(true) {
-                if((System.currentTimeMillis() - startTime) > 30000) {
-                    timeoutFlag = true;
-                    break;
-                }
-                alert = driver.switchTo().alert();
-                Thread.sleep(500);
-                if (acceptNextAlert) {
-                    alert.accept();
-                }
-                else {
-                    alert.dismiss();
-                }
-            }
-
-        } finally {
-            acceptNextAlert = true;
-        }
-        return timeoutFlag;
     }
 }
 
