@@ -15,6 +15,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.helper.PatientGenerator;
@@ -32,6 +33,7 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
     }
 
     // Test for Story RA-71
+    @Ignore("RA-1187")
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void registerPatient() throws InterruptedException {
@@ -59,6 +61,7 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
     }
 
     // Test for RA-472
+    @Ignore("RA-1187")
     @Test
     public void registerUnidentifiedPatient() throws InterruptedException {
         RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
