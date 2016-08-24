@@ -33,7 +33,7 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
         homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         dataManagementPage = new DataManagementPage(driver);
         patient = new TestPatient();
@@ -45,7 +45,7 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
     @Ignore //Ignored due to blocking validation
     @Test
     public void usingBackButtonInMergePatientTest() throws Exception {
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         patient.familyName = "Potter";
         patient.givenName = "John";
         patient.gender = "Male";
@@ -53,9 +53,9 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
         patient.address1 = "address";
         registrationPage.enterMegrePatient(patient);
         id = patientDashboardPage.findPatientId();
-        patient.Uuid =  patientIdFromUrl();
+        patient.uuid =  patientIdFromUrl();
         headerPage.clickOnHomeIcon();
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         patient1.familyName = "Smith";
         patient1.givenName = "Jane";
         patient1.gender = "Female";
@@ -79,8 +79,8 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-        deletePatient(patient.Uuid);
-        waitForPatientDeletion(patient.Uuid);
+        deletePatient(patient.uuid);
+        waitForPatientDeletion(patient.uuid);
         headerPage.logOut();
     }
 

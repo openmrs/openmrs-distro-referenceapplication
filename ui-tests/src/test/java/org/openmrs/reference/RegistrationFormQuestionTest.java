@@ -2,7 +2,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.HeaderPage;
@@ -34,7 +33,7 @@ public class RegistrationFormQuestionTest extends TestBase {
         assertPage(page);
         
         homePage = new HomePage(page);
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         assertPage(homePage);
     }
@@ -51,7 +50,7 @@ public class RegistrationFormQuestionTest extends TestBase {
     @Test
     public void registrationFormQuestionTest() throws InterruptedException {
 
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         assertTrue(driver.getPageSource().contains("What's the patient's name?"));
         patient.familyName = "Edison";
         patient.givenName = "Thomas";

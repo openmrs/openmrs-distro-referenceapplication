@@ -30,7 +30,7 @@ public class AutocompleteForNameTest extends TestBase {
         headerPage = new HeaderPage(driver);
         settingPage = new SettingPage(driver);
         patient = new TestPatient();
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         homePage.goToAdministration();
     }
 
@@ -43,7 +43,7 @@ public class AutocompleteForNameTest extends TestBase {
         settingPage.enterGivenList("samantha");
         settingPage.saveList();
         headerPage.clickOnHomeLink();
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         patient.givenName = "sa";
         registrationPage.enterAndWaitGivenName(patient.givenName);
         assertTrue(settingPage.list().getText().contains(settingPage.GIVEN));

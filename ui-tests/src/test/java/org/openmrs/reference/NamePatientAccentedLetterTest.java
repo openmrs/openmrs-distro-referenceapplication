@@ -26,7 +26,7 @@ public class NamePatientAccentedLetterTest extends TestBase {
         homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         patient = new TestPatient();
     }
@@ -34,7 +34,7 @@ public class NamePatientAccentedLetterTest extends TestBase {
     @Test
     @Ignore
     public void namePatientAccentedLetterTest() throws Exception {
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         patient.familyName = "Kłoczkowski";
         patient.givenName = "Mike";
         patient.gender = "Male";
@@ -43,7 +43,7 @@ public class NamePatientAccentedLetterTest extends TestBase {
         registrationPage.enterMegrePatient(patient);
         patientDashboardPage.waitForVisitLink();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Created Patient Record: " + patient.givenName +" " + patient.familyName));
-        patient.Uuid =  patientIdFromUrl();
+        patient.uuid =  patientIdFromUrl();
     }
 
 
@@ -51,8 +51,8 @@ public class NamePatientAccentedLetterTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-        deletePatient(patient.Uuid);
-        waitForPatientDeletion(patient.Uuid);
+        deletePatient(patient.uuid);
+        waitForPatientDeletion(patient.uuid);
         headerPage.logOut();
     }
 

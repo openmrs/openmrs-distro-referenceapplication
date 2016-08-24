@@ -31,13 +31,13 @@ public class RegistrationTest extends TestBase {
         assertPage(page);
         
         homePage = new HomePage(page);
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
     private void registerAPatient(TestPatient patient) throws InterruptedException{
 
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         patient.familyName = "Edison";
         patient.givenName = "Thomas";
         patient.gender = "Male";
@@ -86,8 +86,8 @@ public class RegistrationTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         registrationPage.exitReview();
-        deletePatient(patient1.Uuid);
-//        waitForPatientDeletion(patient1.Uuid);
+        deletePatient(patient1.uuid);
+//        waitForPatientDeletion(patient1.uuid);
     }
 
     // Test for RA-711
@@ -97,6 +97,6 @@ public class RegistrationTest extends TestBase {
         registerAPatient(patient1);
         registrationPage.confirmPatient();
         assertNotNull(patientDashboardPage.visitLink());
-        patient1.Uuid = patientIdFromUrl();
+        patient1.uuid = patientIdFromUrl();
     }
 }

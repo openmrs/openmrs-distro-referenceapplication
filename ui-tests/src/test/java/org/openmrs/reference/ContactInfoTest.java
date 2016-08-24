@@ -27,7 +27,7 @@ public class ContactInfoTest extends TestBase {
         headerPage = new HeaderPage(driver);
         manageForm = new ManageFormsPage(driver);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         homePage.goToActiveVisitPatient();
     }
 

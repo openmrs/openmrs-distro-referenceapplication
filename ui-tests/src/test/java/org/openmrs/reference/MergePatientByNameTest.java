@@ -33,7 +33,7 @@ public class MergePatientByNameTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         findPatientPage = new FindPatientPage(driver);
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         dataManagementPage = new DataManagementPage(driver);
         patient = new TestPatient();
@@ -44,7 +44,7 @@ public class MergePatientByNameTest extends TestBase {
 
     @Test
     public void mergePatientByNameTest() throws Exception {
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
 //       Register first patient
         patient.familyName = "Mike";
         patient.givenName = "Smith";
@@ -53,10 +53,10 @@ public class MergePatientByNameTest extends TestBase {
         patient.address1 = "address";
         registrationPage.enterMegrePatient(patient);
         id = patientDashboardPage.findPatientId();
-        patient.Uuid =  patientIdFromUrl();
+        patient.uuid =  patientIdFromUrl();
         headerPage.clickOnHomeIcon();
 //     Register second patient
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         patient1.familyName = "Mike";
         patient1.givenName = "Kowalski";
         patient1.gender = "Male";
@@ -64,7 +64,7 @@ public class MergePatientByNameTest extends TestBase {
         patient1.address1 = "address";
         registrationPage.enterMegrePatient(patient1);
         id2 = patientDashboardPage.findPatientId();
-        patient.Uuid =  patientIdFromUrl();
+        patient.uuid =  patientIdFromUrl();
         headerPage.clickOnHomeIcon();
         homePage.goToDataMagament();
         dataManagementPage.goToMegrePatient();
@@ -88,8 +88,8 @@ public class MergePatientByNameTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-        deletePatient(patient.Uuid);
-        waitForPatientDeletion(patient.Uuid);
+        deletePatient(patient.uuid);
+        waitForPatientDeletion(patient.uuid);
         headerPage.logOut();
     }
 

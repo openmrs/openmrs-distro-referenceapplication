@@ -34,7 +34,7 @@ public class RecordMergeIssueTest extends TestBase {
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         findPatientPage = new FindPatientPage(driver);
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         dataManagementPage = new DataManagementPage(driver);
         patient = new TestPatient();
@@ -45,7 +45,7 @@ public class RecordMergeIssueTest extends TestBase {
 
     @Test
     public void recordMergeIssueTest() throws Exception {
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
 //       Register first patient
         patient.familyName = "Mike";
         patient.givenName = "Smith";
@@ -54,10 +54,10 @@ public class RecordMergeIssueTest extends TestBase {
         patient.address1 = "address";
         registrationPage.enterMegrePatient(patient);
         id = patientDashboardPage.findPatientId();
-        patient.Uuid = patientIdFromUrl();
+        patient.uuid = patientIdFromUrl();
         headerPage.clickOnHomeIcon();
 //     Register second patient
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         patient1.familyName = "Mike";
         patient1.givenName = "Kowalski";
         patient1.gender = "Male";
@@ -79,8 +79,8 @@ public class RecordMergeIssueTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-        deletePatient(patient.Uuid);
-        waitForPatientDeletion(patient.Uuid);
+        deletePatient(patient.uuid);
+        waitForPatientDeletion(patient.uuid);
         headerPage.logOut();
     }
 }

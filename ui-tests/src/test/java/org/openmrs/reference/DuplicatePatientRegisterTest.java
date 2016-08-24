@@ -2,7 +2,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
@@ -30,13 +29,13 @@ public class DuplicatePatientRegisterTest  extends TestBase {
         assertPage(page);
         
         homePage = new HomePage(page);
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         assertPage(homePage);
     }
 
     private void registerAPatient(TestPatient patient) throws InterruptedException {
 
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         patient.familyName = "Smith";
         patient.middleName = "";
         patient.givenName = "Bob";
@@ -54,8 +53,8 @@ public class DuplicatePatientRegisterTest  extends TestBase {
     public void tearDown() throws Exception {
         registrationPage.exitReview();
         headerPage.clickOnHomeIcon();
-        deletePatient(patient1.Uuid);
-        waitForPatientDeletion(patient1.Uuid);
+        deletePatient(patient1.uuid);
+        waitForPatientDeletion(patient1.uuid);
         headerPage.logOut();
     }
 
@@ -65,7 +64,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
 
         registerAPatient(patient1);
         registrationPage.confirmPatient();
-        patient1.Uuid = patientIdFromUrl();
+        patient1.uuid = patientIdFromUrl();
         headerPage.clickOnHomeIcon();
 //        assertPage(homePage);
         registerAPatient(patient1);

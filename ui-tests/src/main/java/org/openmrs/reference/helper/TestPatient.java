@@ -20,5 +20,5 @@ public class TestPatient {
 	public String longitude;
 	public String startDate;
 	public String endDate;
-    public String Uuid;
+    public String uuid;
 }

@@ -58,8 +58,9 @@ public class HomePage extends Page {
         return isAppButtonPresent(REGISTER_PATIENT_APP_ID);
     }
 
-    public void openRegisterAPatientApp() throws InterruptedException {
-        openApp(REGISTER_PATIENT_APP_ID);
+    public RegistrationPage goToRegisterPatientApp() throws InterruptedException {
+        clickOn(By.id(REGISTER_PATIENT_APP_ID));
+        return new RegistrationPage(this);
     }
 
     public void openLegacyAdministrationApp()  throws InterruptedException{

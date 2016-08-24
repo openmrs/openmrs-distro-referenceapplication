@@ -27,28 +27,28 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         homePage = new HomePage(page);
-        registrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         assertPage(homePage);
     }
 
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.Uuid);
-        waitForPatientDeletion(patient.Uuid);
+        deletePatient(patient.uuid);
+        waitForPatientDeletion(patient.uuid);
     }
 
     // Test for RA-472,
     @Ignore//ignored due to inability to check unindentified patient by keyboard
     @Test
     public void registerUnidentifiedPatient() throws InterruptedException {
-        homePage.openRegisterAPatientApp();
+        homePage.goToRegisterPatientApp();
         patient = PatientGenerator.generateTestPatient();
 
         assertTrue(registrationPage.getNameInConfirmationPage().contains("--"));
         assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
-        patient.Uuid = patientIdFromUrl();
+        patient.uuid = patientIdFromUrl();
         assertPage(patientDashboardPage);	// remember just-registered patient id, so it can be removed.
         assertTrue(driver.getPageSource().contains("UNKNOWN UNKNOWN"));
     }
