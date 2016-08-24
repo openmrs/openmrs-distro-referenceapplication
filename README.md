@@ -8,7 +8,7 @@ https://wiki.openmrs.org/x/CIC3Ag
 
 ### Running ui-tests locally:
 
-By default tests are run with Firefox, so please be sure to have it installed.
+By default tests are run with Firefox 42.0 ([[download here](https://ftp.mozilla.org/pub/firefox/releases/42.0/)]), so please be sure to have it installed.
 Also tests are run against http://int02.openmrs.org/openmrs so confirm it is accessible from your machine.
 It is also possible that tests start failing due to int02.openmrs.org being redeployed. If it happens, please wait for int02 to be available again and run tests again.
 
