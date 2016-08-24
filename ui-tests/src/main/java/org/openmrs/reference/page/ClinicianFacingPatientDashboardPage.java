@@ -26,6 +26,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
 	private static final By STARTED_AT = By.className("active-visit-started-at-message");
 	private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
+	private static final By PATIENT_CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
 	private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
 	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
 	public static final By VISIT_LINK = By.className("toast-item-wrapper");
@@ -157,6 +158,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public VisitNotePage goToVisitNote(){
 		clickOn(VISIT_NOTE);
 		return new VisitNotePage(this);
+	}
+
+	public PatientCaptureVitalsPage goToPatientCaptureVitalsPage() {
+		clickOn(PATIENT_CAPTURE_VITALS);
+		return new PatientCaptureVitalsPage(this);
 	}
 
 	public void enterDiagnosis(String diag) {

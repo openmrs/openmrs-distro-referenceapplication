@@ -23,8 +23,8 @@ public class PatientCaptureVitalsPage extends Page {
     private static final By CONFIRM_BUTTON_2 = By.id("coreapps-vitals-confirm");
     private static final By SAVE_BUTTON = By.xpath("//button[@type='submit']");
 
-    public PatientCaptureVitalsPage(WebDriver driver) {
-        super(driver);
+    public PatientCaptureVitalsPage(Page page) {
+        super(page);
     }
 
     @Override
