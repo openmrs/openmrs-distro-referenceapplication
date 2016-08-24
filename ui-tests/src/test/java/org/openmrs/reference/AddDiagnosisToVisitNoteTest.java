@@ -10,33 +10,66 @@
 package org.openmrs.reference;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
+import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.VisitNotePage;
+import org.openmrs.uitestframework.test.RestClient;
+import org.openmrs.uitestframework.test.TestData;
 
 
 public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
+
+    private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
+    private static final String LOCATION_UUID = "8d6c993e-c2cc-11de-8d13-0010c6dffd0f";
+
     private ClinicianFacingPatientDashboardPage patientDashboardPage;
     private VisitNotePage visitNotePage;
+    private ActiveVisitsPage activeVisitsPage;
+    private TestData.PatientInfo patient;
+
+    @Before
+    public void setup(){
+        patient = createTestPatient();
+        createTestVisit();
+    }
     
     @Test
     @Category(BuildTests.class)
     public void AddDiagnosisToVisitNoteTest() throws Exception {
-    	
-        patientDashboardPage = homePage.goToActiveVisitPatient();
+
+        activeVisitsPage = homePage.goToActiveVisitsSearch();
+        activeVisitsPage.search(patient.identifier);
+
+        patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         visitNotePage = patientDashboardPage.goToVisitNote();
         visitNotePage.enterDiagnosis("Pne");
         visitNotePage.enterSecondaryDiagnosis("Bleed");
         assertEquals("Pneumonia", visitNotePage.primaryDiagnosis());
         assertEquals("Bleeding", visitNotePage.secondaryDiagnosis());
-        visitNotePage.save();
-        visitNotePage.waitForElement(ClinicianFacingPatientDashboardPage.VISIT_LINK);
-        patientDashboardPage.endVisit();
 
+        visitNotePage.save();
+        patientDashboardPage.waitForPage();
+        assertTrue(driver.getPageSource().contains("Pneumonia"));
+        assertTrue(driver.getPageSource().contains("Bleeding"));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        //TODO: This one causes some issues -> "org.openqa.selenium.remote.SessionNotFoundException: The FirefoxDriver cannot be used after quit() was called."
+        //TODO: This error isn't thrown when patientDashboardPage.waitForPage() isn't called.
+        //TODO: quit() method is called in stopWebDriver() in TestBase class
+        //deletePatient(patient.uuid);
+    }
+
+    private void createTestVisit(){
+        JsonNode visit = RestClient.post("visit", new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, LOCATION_UUID));
     }
 }
