@@ -25,7 +25,6 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
     private VisitNotePage visitNotePage;
     
     @Test
-    @Ignore //unstable
     @Category(BuildTests.class)
     public void AddDiagnosisToVisitNoteTest() throws Exception {
     	
@@ -36,7 +35,7 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
         assertEquals("Pneumonia", visitNotePage.primaryDiagnosis());
         assertEquals("Bleeding", visitNotePage.secondaryDiagnosis());
         visitNotePage.save();
-        assertNotNull(patientDashboardPage.visitLink());
+        visitNotePage.waitForElement(ClinicianFacingPatientDashboardPage.VISIT_LINK);
         patientDashboardPage.endVisit();
 
     }
