@@ -28,7 +28,7 @@ public class RegistrationPage extends Page {
     }
 
     private boolean acceptNextAlert = true;
-	static final By CONTACT_INFO_SECTION = By.id("null");
+	static final By CONTACT_INFO_SECTION = By.id("contactInfo_label");
 	static final By CONFIRM_SECTION = By.id("confirmation_label");
 	static final By BIRTHDATE_LABEL = By.id("birthdateLabel");
     static final By PHONE_NUMBER_LABEL = By.id("phoneNumberLabel");
