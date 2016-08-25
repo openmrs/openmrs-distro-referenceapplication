@@ -13,7 +13,7 @@ public class FindPatientPage extends Page {
 
     public static final By PATIENT_SEARCH_RESULT = By.id("patient-search-results-table");
     public static final By PATIENT_NAME_SEARCH_RESULT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");
-    public static final By PATIENT_ID_SEARCH_RESULT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[1]");
+    public static final By PATIENT_ID_SEARCH_RESULT = By.cssSelector("#patient-search-results-table td");
     private static final By PATIENT_SEARCH = By.id("patient-search");
     private static final By PATIENT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");
     public static final int SLEEP_TIME = 1000; //1 second
