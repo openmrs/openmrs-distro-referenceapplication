@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
@@ -15,21 +16,15 @@ import org.openmrs.uitestframework.test.TestData;
 /**
  * @author yulia
  */
-public class FindPatientRecordTest extends TestBase {
+public class FindPatientRecordTest extends ReferenceApplicationTestBase {
 
     private String idToSearch;
-    private HomePage homePage;
-    private FindPatientPage findPatientPage;
     private TestData.PatientInfo patient;
 
     @Before
-    public void before() {
-        homePage = new HomePage(page);
-        findPatientPage = new FindPatientPage(driver);
+    public void setup() {
         patient = createTestPatient();
         idToSearch = patient.identifier;
-        
-        assertPage(homePage);
     }
 
     @After
@@ -38,10 +33,9 @@ public class FindPatientRecordTest extends TestBase {
     }
 
     @Test
-    @Category(org.openmrs.reference.groups.BuildTests.class)
+    @Category(BuildTests.class)
     public void testFindPatientRecord() throws InterruptedException {
-        //navigate "find patient record" page
-        homePage.clickOnFindPatientRecord();
+        FindPatientPage findPatientPage = homePage.clickOnFindPatientRecord();
         findPatientPage.enterPatient(idToSearch);
         findPatientPage.waitForResultTable();
         assertThat(findPatientPage.findFirstPatientId(), containsString(idToSearch));
