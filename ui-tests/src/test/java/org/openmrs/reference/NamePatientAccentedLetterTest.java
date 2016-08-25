@@ -43,7 +43,7 @@ public class NamePatientAccentedLetterTest extends TestBase {
         registrationPage.enterMegrePatient(patient);
         patientDashboardPage.waitForVisitLink();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Created Patient Record: " + patient.givenName +" " + patient.familyName));
-        patient.uuid =  patientIdFromUrl();
+        patient.uuid =  patientDashboardPage.getPatientUuidFromUrl();
     }
 
 

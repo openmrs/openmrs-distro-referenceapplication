@@ -64,7 +64,7 @@ public class DuplicatePatientRegisterTest  extends TestBase {
 
         registerAPatient(patient1);
         registrationPage.confirmPatient();
-        patient1.uuid = patientIdFromUrl();
+        patient1.uuid = registrationPage.getPatientUuidFromUrl();
         headerPage.clickOnHomeIcon();
 //        assertPage(homePage);
         registerAPatient(patient1);

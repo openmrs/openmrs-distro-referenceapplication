@@ -48,7 +48,7 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
         assertTrue(registrationPage.getNameInConfirmationPage().contains("--"));
         assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
-        patient.uuid = patientIdFromUrl();
+        patient.uuid = patientDashboardPage.getPatientUuidFromUrl();
         assertPage(patientDashboardPage);	// remember just-registered patient id, so it can be removed.
         assertTrue(driver.getPageSource().contains("UNKNOWN UNKNOWN"));
     }

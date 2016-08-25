@@ -54,7 +54,7 @@ public class RecordMergeIssueTest extends TestBase {
         patient.address1 = "address";
         registrationPage.enterMegrePatient(patient);
         id = patientDashboardPage.findPatientId();
-        patient.uuid = patientIdFromUrl();
+        patient.uuid = patientDashboardPage.getPatientUuidFromUrl();
         headerPage.clickOnHomeIcon();
 //     Register second patient
         homePage.goToRegisterPatientApp();

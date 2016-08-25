@@ -97,6 +97,6 @@ public class RegistrationTest extends TestBase {
         registerAPatient(patient1);
         registrationPage.confirmPatient();
         assertNotNull(patientDashboardPage.visitLink());
-        patient1.uuid = patientIdFromUrl();
+        patient1.uuid = patientDashboardPage.getPatientUuidFromUrl();
     }
 }

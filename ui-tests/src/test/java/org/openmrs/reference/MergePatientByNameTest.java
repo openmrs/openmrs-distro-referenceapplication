@@ -53,7 +53,7 @@ public class MergePatientByNameTest extends TestBase {
         patient.address1 = "address";
         registrationPage.enterMegrePatient(patient);
         id = patientDashboardPage.findPatientId();
-        patient.uuid =  patientIdFromUrl();
+        patient.uuid =  patientDashboardPage.getPatientUuidFromUrl();
         headerPage.clickOnHomeIcon();
 //     Register second patient
         homePage.goToRegisterPatientApp();
@@ -64,7 +64,7 @@ public class MergePatientByNameTest extends TestBase {
         patient1.address1 = "address";
         registrationPage.enterMegrePatient(patient1);
         id2 = patientDashboardPage.findPatientId();
-        patient.uuid =  patientIdFromUrl();
+        patient.uuid =  patientDashboardPage.getPatientUuidFromUrl();
         headerPage.clickOnHomeIcon();
         homePage.goToDataMagament();
         dataManagementPage.goToMegrePatient();
