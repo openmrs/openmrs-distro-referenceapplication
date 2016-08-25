@@ -22,6 +22,7 @@ import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
+import org.openmrs.uitestframework.page.Page;
 
 public class RegisterPatientTest extends ReferenceApplicationTestBase {
 	private TestPatient patient;
@@ -33,7 +34,6 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
     }
 
     // Test for Story RA-71
-    @Ignore("RA-1187")
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void registerPatient() throws InterruptedException {
@@ -55,13 +55,12 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
         assertThat(registrationPage.getPhoneInConfirmationPage(), containsString(patient.phone));
 
         ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
-        patient.uuid = patientIdFromUrl();
+        patient.uuid = dashboardPage.getPatientUuidFromUrl();
 		assertThat(dashboardPage.getPatientGivenName(), is(patient.givenName));
         assertThat(dashboardPage.getPatientFamilyName(), is(patient.familyName));
     }
 
     // Test for RA-472
-    @Ignore("RA-1187")
     @Test
     public void registerUnidentifiedPatient() throws InterruptedException {
         RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
@@ -71,7 +70,7 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
         assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
         ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
-        patient.uuid = patientIdFromUrl();
+        patient.uuid = page.getPatientUuidFromUrl();
         assertThat(dashboardPage.getPatientGivenName(), is("UNKNOWN"));
         assertThat(dashboardPage.getPatientFamilyName(), is("UNKNOWN"));
     }
