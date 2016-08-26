@@ -16,7 +16,6 @@ public class FindPatientPage extends Page {
     public static final By PATIENT_ID_SEARCH_RESULT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[1]");
     private static final By PATIENT_SEARCH = By.id("patient-search");
     private static final By PATIENT = By.xpath("//table[@id='patient-search-results-table']/tbody/tr/td[2]");
-    public static final int SLEEP_TIME = 1000; //1 second
 
     public FindPatientPage(WebDriver driver) {
         super(driver);
@@ -33,7 +32,7 @@ public class FindPatientPage extends Page {
      * Finds first record from the result table
      * @return patient id
      */
-    public String findFirstPatientId() {
+    public String getFirstPatientIdentifier() {
         return findElement(PATIENT_ID_SEARCH_RESULT).getText();
     }
     
@@ -45,19 +44,5 @@ public class FindPatientPage extends Page {
     @Override
     public String getPageUrl() {
         return "/findpatient/findPatient.page";
-    }
-
-    /**
-     * waits for results appear in a table
-     */
-    public void waitForResultTable() throws InterruptedException {
-        int sleepTime = SLEEP_TIME;
-        while (sleepTime < SLEEP_TIME * 10) {
-            Thread.sleep(sleepTime);
-            if (findElement(PATIENT_NAME_SEARCH_RESULT) != null) {
-                return;
-            }
-            sleepTime = sleepTime * 2;
-        }
     }
 }
