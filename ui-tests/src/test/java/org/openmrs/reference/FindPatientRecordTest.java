@@ -24,12 +24,12 @@ public class FindPatientRecordTest extends ReferenceApplicationTestBase {
     private TestData.PatientInfo patient;
 
     @Before
-    public void before() {
+    public void createPatient() {
         patient = createTestPatient();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void deletePatient() throws Exception {
         deletePatient(patient.uuid);
     }
 
