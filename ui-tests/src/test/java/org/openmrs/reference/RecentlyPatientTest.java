@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
     public void testRecentlyPatientTest() throws Exception {
         findPatientPage.enterPatient("Bob Smith");
         headerPage.clickOnHomeIcon();
-        assertNotNull(findPatientPage.PATIENT_SEARCH_RESULT);
+        assertNotNull(findPatientPage.getFirstPatientName());
     }
 
 
