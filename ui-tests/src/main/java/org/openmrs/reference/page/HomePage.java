@@ -20,7 +20,7 @@ public class HomePage extends Page {
     static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
     static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
     static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
-    static final By FIND_PATIENT_RECORD = By.cssSelector("i.icon-search");
+    static final By FIND_PATIENT_RECORD = By.id("coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension");
     static final By DATA_MANAGAMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
     static final By PATIENT_HEADER = By.className("patient-header");
 
