@@ -76,7 +76,7 @@ public class MergePatientByNameTest extends TestBase {
         dataManagementPage.clickOnContinue();
         headerPage.clickOnHomeLink();
         assertTrue(patientDashboardPage.visitLink().getText().contains("Records merged! Viewing preferred patient."));
-        homePage.clickOnFindPatientRecord();
+        homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(patient.givenName);
         assertTrue(driver.getPageSource().contains(patient1.givenName));
         findPatientPage.enterPatient(patient1.givenName);

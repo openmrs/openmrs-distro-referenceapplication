@@ -19,16 +19,18 @@ public class FindPatientPage extends Page {
     private static final By PATIENT_ID_SEARCH_RESULT = By.cssSelector("#patient-search-results-table tr:first-child td:first-child");
     private static final By PATIENT_SEARCH = By.id("patient-search");
 
-    public FindPatientPage(Page page) {
-        super(page);
+    public FindPatientPage(Page parent) {
+        super(parent);
     }
-
 
     public void enterPatient(String patient) {
         setTextToFieldNoEnter(PATIENT_SEARCH, patient);
     }
 
-    public void clickOnFirstPatient(){ clickOn(PATIENT_NAME_SEARCH_RESULT);}
+    public ClinicianFacingPatientDashboardPage clickOnFirstPatient(){
+        clickOn(PATIENT_NAME_SEARCH_RESULT);
+        return new ClinicianFacingPatientDashboardPage(this);
+    }
 
     /**
      * Finds first record from the result table
@@ -44,6 +46,9 @@ public class FindPatientPage extends Page {
         return findElement(PATIENT_NAME_SEARCH_RESULT).getText();
     }
 
+    public void search(String text) {
+        setText(PATIENT_SEARCH, text);
+    }
 
     @Override
     public String getPageUrl() {

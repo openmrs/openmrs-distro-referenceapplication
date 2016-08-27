@@ -36,7 +36,7 @@ public class FindPatientRecordTest extends ReferenceApplicationTestBase {
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void testFindPatientRecord() throws InterruptedException {
-        FindPatientPage findPatientPage = homePage.clickOnFindPatientRecord();
+        FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(patient.identifier);
         assertThat(findPatientPage.getFirstPatientIdentifier(), containsString(patient.identifier));
     }

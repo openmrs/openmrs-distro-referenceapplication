@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
         findPatientPage = new FindPatientPage(page);
-        homePage.clickOnFindPatientRecord();
+        homePage.goToFindPatientRecord();
 
     }
 
