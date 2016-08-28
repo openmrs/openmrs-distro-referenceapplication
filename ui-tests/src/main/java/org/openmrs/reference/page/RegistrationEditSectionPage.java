@@ -1,11 +1,13 @@
 package org.openmrs.reference.page;
 
+import org.apache.commons.lang.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-/**
- *
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegistrationEditSectionPage extends Page {
 
     static final By PHONE_NUMBER = By.name("phoneNumber");

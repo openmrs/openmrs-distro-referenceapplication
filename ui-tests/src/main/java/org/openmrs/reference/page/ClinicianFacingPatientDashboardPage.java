@@ -9,14 +9,13 @@
  */
 package org.openmrs.reference.page;
 
-import java.util.Calendar;
-
-import org.hamcrest.Matcher;
+import org.apache.commons.lang.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Calendar;
 
 public class ClinicianFacingPatientDashboardPage extends Page {
 
@@ -78,6 +77,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
 
 	private static final By EYE_REPORT = By.linkText("Eye Report");
+	private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
 
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
@@ -363,5 +363,13 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public String getPatientFamilyName() {
 		String patientFamilyName = findElement(By.cssSelector(".patient-header .demographics .name .PersonName-familyName")).getText();
 		return patientFamilyName;
+	}
+
+	public String getTelephoneNumber() {
+		String phoneNumber = findElement(TELEPHONE_NUMBER_TEXT).getText();
+		if(StringUtils.isNotBlank(phoneNumber)){
+			phoneNumber = phoneNumber.substring(0, phoneNumber.indexOf("\n"));
+		}
+		return phoneNumber;
 	}
 }

@@ -1,6 +1,14 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
 package org.openmrs.reference;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,23 +17,18 @@ import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationEditSectionPage;
-import org.openmrs.uitestframework.test.RestClient;
 import org.openmrs.uitestframework.test.TestData;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.empty;
+import static org.junit.Assert.assertThat;
 
-
-/**
- * Created by nata on 20.07.15.
- */
 public class XSSOnPhoneNumberFieldTest extends ReferenceApplicationTestBase {
 
     private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
     private static final String LOCATION_UUID = "8d6c993e-c2cc-11de-8d13-0010c6dffd0f";
 
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
-    private RegistrationEditSectionPage registrationEditSectionPage;
-    private ActiveVisitsPage activeVisitsPage;
     private TestData.PatientInfo patient;
 
     @Before
@@ -37,22 +40,22 @@ public class XSSOnPhoneNumberFieldTest extends ReferenceApplicationTestBase {
     @Test
     @Category(BuildTests.class)
     public void  XSSOnPhoneNumberFieldTest() throws Exception {
-        activeVisitsPage = homePage.goToActiveVisitsSearch();
+        ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
-        patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
+        ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         patientDashboardPage.clickOnShowContact();
-        registrationEditSectionPage = patientDashboardPage.clickOnEditContact();
+        RegistrationEditSectionPage registrationEditSectionPage = patientDashboardPage.clickOnEditContact();
         registrationEditSectionPage.clickOnPhoneNumberEdit();
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("<script>alert(0)</script>");
         registrationEditSectionPage.clickOnConfirmEdit();
-        assertTrue(driver.getPageSource().contains("Must be a valid phone number (with +, -, numbers or parentheses)"));
+        assertThat(registrationEditSectionPage.getValidationErrors(), is(not(empty())));
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
         patientDashboardPage = registrationEditSectionPage.confirmPatient();
-        assertTrue(driver.getPageSource().contains("111111111\n        <em>Telephone Number</em>"));
-
+        patientDashboardPage.clickOnShowContact();
+        assertThat(patientDashboardPage.getTelephoneNumber(), is("111111111"));
     }
 
     @After
@@ -61,7 +64,7 @@ public class XSSOnPhoneNumberFieldTest extends ReferenceApplicationTestBase {
     }
 
     private void createTestVisit(){
-        JsonNode visit = RestClient.post("visit", new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, LOCATION_UUID));
+        new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, LOCATION_UUID).create();
     }
 }
 
