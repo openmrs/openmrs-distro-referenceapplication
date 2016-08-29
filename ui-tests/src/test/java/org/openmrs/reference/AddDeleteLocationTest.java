@@ -33,7 +33,7 @@ public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
 
     @Before
     public void createLocationTag(){
-        locationTagUuid = createTestLocationTag();
+        //locationTagUuid = createTestLocationTag();
     }
 
     @Test

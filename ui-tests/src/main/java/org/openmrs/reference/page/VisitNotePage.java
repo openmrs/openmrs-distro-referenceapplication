@@ -69,8 +69,9 @@ public class VisitNotePage extends Page {
 		return findElement(SECONDARY_DIAGNOSIS_ELEMENT).getText();
 	}
 	
-	public void save() {
+	public ClinicianFacingPatientDashboardPage save() {
 		clickOn(SAVE_VISIT_NOTE);
+		return new ClinicianFacingPatientDashboardPage(this);
 	}
 
 }
