@@ -15,8 +15,8 @@ import org.openqa.selenium.WebDriver;
 
 public class FindPatientPage extends Page {
 
-    private static final By PATIENT_NAME_SEARCH_RESULT = By.cssSelector("#patient-search-results-table tr:first-child td:nth-child(2)");
-    private static final By PATIENT_ID_SEARCH_RESULT = By.cssSelector("#patient-search-results-table tr:first-child td:first-child");
+    private static final By PATIENT_NAME_SEARCH_RESULT = By.cssSelector("#patient-search-results-table tr:nth-child(2) td:nth-child(2)");
+    private static final By PATIENT_ID_SEARCH_RESULT = By.cssSelector("#patient-search-results-table tr:nth-child(2) td:first-child");
     private static final By PATIENT_SEARCH = By.id("patient-search");
 
     public FindPatientPage(WebDriver driver) {
