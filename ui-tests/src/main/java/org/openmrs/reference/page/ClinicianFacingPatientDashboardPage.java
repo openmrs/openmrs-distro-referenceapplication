@@ -241,9 +241,12 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public void clickOnTranfer(){
 		clickOn(TRANSFER_TO_WARD_SERVICE);
+
 	}
-//Contact Info
-	public void clickOnShowContact(){ clickOn(SHOW_CONTACT_INFO);}
+	public void clickOnShowContact(){
+		clickOn(SHOW_CONTACT_INFO);
+	}
+
 	public RegistrationEditSectionPage clickOnEditContact(){
 		clickOn(EDIT_CONTACT_INFO);
 		return new RegistrationEditSectionPage(this);
