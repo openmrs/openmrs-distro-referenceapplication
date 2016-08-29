@@ -35,6 +35,8 @@ public class FindPatientPage extends Page {
      * @return patient id
      */
     public String getFirstPatientIdentifier() {
+        //let's wait for the name to appear as the identifier selector is ambiguous and may select the loading image
+        getFirstPatientName();
         return findElement(PATIENT_ID_SEARCH_RESULT).getText();
     }
     
