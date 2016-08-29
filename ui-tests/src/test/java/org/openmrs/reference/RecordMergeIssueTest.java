@@ -33,7 +33,7 @@ public class RecordMergeIssueTest extends TestBase {
         homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
-        findPatientPage = new FindPatientPage(driver);
+        findPatientPage = new FindPatientPage(page);
         registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
         dataManagementPage = new DataManagementPage(driver);

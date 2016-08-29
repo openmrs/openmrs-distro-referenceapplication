@@ -37,7 +37,7 @@ public class DeleteRequestAppointmentTest extends TestBase {
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
         manageAppointmentPage = new ManageAppointmentPage(driver);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-        findPatientPage = new FindPatientPage(driver);
+        findPatientPage = new FindPatientPage(page);
     }
 
     @Ignore//ignored due to possible application logout

@@ -120,7 +120,7 @@ public class HomePage extends Page {
 
     public FindPatientPage clickOnFindPatientRecord(){
     	clickOn(FIND_PATIENT_RECORD);
-    	return new FindPatientPage(driver);
+    	return new FindPatientPage(this);
     }
     public void goToDataMagament(){ clickOn(DATA_MANAGAMENT);}
 

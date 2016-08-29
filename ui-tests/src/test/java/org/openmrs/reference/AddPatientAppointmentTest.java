@@ -35,7 +35,7 @@ public class AddPatientAppointmentTest extends TestBase {
         headerPage = new HeaderPage(driver);
         appointmentBlocksPage = new AppointmentBlocksPage(driver);
         manageAppointmentPage = new ManageAppointmentPage(driver);
-        findPatientPage = new FindPatientPage(driver);
+        findPatientPage = new FindPatientPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
