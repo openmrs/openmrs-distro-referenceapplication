@@ -12,6 +12,8 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AddEditLocationPage;
 import org.openmrs.reference.page.ManageLocationsPage;
 import org.openmrs.uitestframework.test.RestClient;
@@ -35,6 +37,7 @@ public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
     }
 
     @Test
+    @Category(BuildTests.class)
     public void addLocationTest() throws Exception {
         AddEditLocationPage addEditLocationPage = homePage.goToConfigureMetadata().goToManageLocations().goToAddLocation();
 
