@@ -1,100 +1,64 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 
 public class AllergyPage extends Page{
 
-    private static final By ADD_NEW_ALLERGY = By.cssSelector("#content > button.confirm");
-    private static By DRUG;
-    private static String DRUG_XPATH = "//div[@id='allergens']/ul/li/label[text()=\"";
-    private static String DRUG_REST_XPATH = "\"]";
-    private static final By SAVE_ALLERGY = By.id("addAllergyBtn");
+    private static final By ADD_NEW_ALLERGY = By.id("allergyui-addNewAllergy");
     private static final By EDIT_ALLERGY = By.cssSelector("i.icon-pencil.edit-action");
-    private static By REACTION;
     private static final By DELETE_ALLERGY = By.cssSelector("i.icon-remove.delete-action");
-    public static final By REMOVE_ALLERGY_MESSAGE = By.id("removeAllergyMessage");
     private static final By CONFIRM_DELETE_ALLERGY = By.cssSelector("#allergyui-remove-allergy-dialog .confirm");
-    private static By DRUG_ID;
-    private static String REACTION_XPATH = "//div[@id='reactions']/ul/li/label[text()=\"";
-    private static By REACTION_ID;
+    private static final By REACTION = By.cssSelector(".reaction");
+    private static final By ALLERGEN = By.cssSelector(".allergen");
+    private static final By ALLERGY_STATUS = By.cssSelector(".allergyStatus");
 
-
-
-    public AllergyPage(WebDriver driver) {
-        super(driver);
+    public AllergyPage(Page page) {
+        super(page);
     }
 
-    public void clickOnAddNewAllergy(){clickOn(ADD_NEW_ALLERGY);}
-
-    public void clickOnSaveAllergy(){clickOn(SAVE_ALLERGY);}
-
-    public void clickOnEditAllergy(){clickOn(EDIT_ALLERGY);}
-
-    public void clickOnDeleteAllergy(){clickOn(DELETE_ALLERGY);}
-
-    public void clickOnConfirmDeleteAllergy(){clickOn(CONFIRM_DELETE_ALLERGY);}
-
-    public WebElement removeAllergyMessage() {return findElement(REMOVE_ALLERGY_MESSAGE);}
-
-
-    public void enterDrug(String drug) {
-        DRUG = By.xpath(DRUG_XPATH + drug + DRUG_REST_XPATH);
-        findElement(DRUG);
-    }
-    public void enterReaction(String reaction){
-        REACTION = By.xpath(REACTION_XPATH + reaction + DRUG_REST_XPATH);
-        findElement(REACTION);
+    public AddOrEditAllergyPage clickOnAddNewAllergy(){
+        clickOn(ADD_NEW_ALLERGY);
+        return new AddOrEditAllergyPage(this);
     }
 
-    public boolean editPresent(){
-        try {
-            return findElement(EDIT_ALLERGY) != null;
-        }
-        catch (Exception ex) {
-            return false;
-        }
+    public AddOrEditAllergyPage clickOnEditAllergy(){
+        clickOn(EDIT_ALLERGY);
+        return new AddOrEditAllergyPage(this);
     }
 
-
-
-
-    public boolean deletePresent(){
-        try {
-            return findElement(DELETE_ALLERGY) != null;
-        }
-        catch (Exception ex) {
-            return false;
-        }
+    public void clickOnDeleteAllergy(){
+        clickOn(DELETE_ALLERGY);
     }
 
-    public String getValue(By field) {
-        return findElement(field).getAttribute("id");
+    public void clickOnConfirmDeleteAllergy(){
+        clickOn(CONFIRM_DELETE_ALLERGY);
     }
 
-    public String getFor(By field){ return findElement(field).getAttribute("for");}
-
-    public String getDrugValue() {
-       return getValue(DRUG);
+    public String getAllergen() {
+        return findElement(ALLERGEN).getText();
     }
 
-    public String getReactionId(){ return getFor(REACTION);}
-
-    public void drugId(){
-        DRUG_ID = By.id(getDrugValue());
-        clickOn(DRUG_ID);
+    public String getReaction() {
+        return findElement(REACTION).getText();
     }
 
-    public void reactionId(){
-        REACTION_ID = By.id(getReactionId());
-        clickOn(REACTION_ID);
+    public String getAllergyStatus() {
+        return findElement(ALLERGY_STATUS).getText();
     }
 
     @Override
     public String getPageUrl() {
-        return "/allergyui/allergy.page";
+        return "/allergyui/allergies.page";
     }
 }
