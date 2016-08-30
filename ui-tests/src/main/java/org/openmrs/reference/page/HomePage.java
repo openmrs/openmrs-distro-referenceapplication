@@ -25,6 +25,7 @@ public class HomePage extends Page {
     static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
     static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
     static final String DATA_MANAGAMENT_APP_ID = "coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension";
+    static final By CONFIGURE_METADATA = By.id(CONFIGURE_METADATA_APP_ID);
     static final By ACTIVE_PATIENT = By.xpath("//td[2]/a");
     static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
     static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
@@ -125,6 +126,11 @@ public class HomePage extends Page {
     public AdministrationPage goToAdministration() {
         clickOn(SYSTEM_ADMINISTRATION);
         return new SystemAdministrationPage(this).goToAdvancedAdministration();
+    }
+
+    public ConfigureMetadataPage goToConfigureMetadata() {
+        clickOn(CONFIGURE_METADATA);
+        return new ConfigureMetadataPage(this);
     }
 
     public FindPatientPage clickOnFindPatientRecord(){
