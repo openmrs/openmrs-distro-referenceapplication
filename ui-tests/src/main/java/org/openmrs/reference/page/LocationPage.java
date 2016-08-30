@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by nata on 14.07.15.
  */
+@Deprecated
 public class LocationPage extends Page {
 
     private static final By MANAGE_LOCATION = By.linkText("Manage Locations");
