@@ -11,6 +11,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -37,6 +38,7 @@ public class RetireProviderTest extends ReferenceApplicationTestBase{
     }
 
     @Test
+    @Ignore("RA-1200")
     @Category(BuildTests.class)
     public void retireProviderTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
