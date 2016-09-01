@@ -32,7 +32,7 @@ public class FindPatientByNameTest extends ReferenceApplicationTestBase {
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void findPatientByIdAndNameTest() throws Exception {
-        findPatientPage = homePage.clickOnFindPatientRecord();
+        findPatientPage = homePage.goToFindPatientRecord();
         // Search by name
         findPatientPage.enterPatient(patient.givenName);
         assertThat(findPatientPage.getFirstPatientName(), containsString(patient.givenName));

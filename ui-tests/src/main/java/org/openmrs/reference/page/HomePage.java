@@ -133,7 +133,7 @@ public class HomePage extends Page {
         return new ConfigureMetadataPage(this);
     }
 
-    public FindPatientPage clickOnFindPatientRecord(){
+    public FindPatientPage goToFindPatientRecord(){
     	clickOn(FIND_PATIENT_RECORD);
     	return new FindPatientPage(this);
     }

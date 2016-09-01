@@ -69,7 +69,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By TODAY = By.cssSelector("td.day.active");
 	private static final By CONFIRM_PAST_VISIT = By.cssSelector("div.dialog-content.form > button.confirm.right");
 	private static final By CHANGE_DATE = By.cssSelector("button.confirm.no-color");
-	public static final By SUCCESS_MESSAGE = By.cssSelector("div.toast-item.toast-type-success > p");
 	private static final By DAY = By.xpath("//table[@class=' table-condensed']/tbody/tr[1]/td[0]");
 	private static final By MERGE_VISIT_BUTTON = By.xpath("//a[@id='org.openmrs.module.coreapps.mergeVisits']/li");
 	private static final By MERGE = By.id("mergeVisitsBtn");
@@ -293,7 +292,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public boolean errorPresent(){
 		try {
-			return driver.findElement(ERROR) != null;
+			return findElement(ERROR) != null;
 		}
 		catch (Exception ex) {
 			return false;
@@ -301,10 +300,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 
-	public void addPastVisit(){
+	public PatientVisitsDashboardPage addPastVisit(){
 		clickOn(ADD_PAST_VISIT);
 		clickOn(TODAY);
 		clickOn(CONFIRM_PAST_VISIT);
+		return new PatientVisitsDashboardPage(this);
 	}
 
 	public void clickChangeDate (){
