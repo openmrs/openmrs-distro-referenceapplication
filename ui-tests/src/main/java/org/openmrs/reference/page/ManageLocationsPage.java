@@ -11,6 +11,10 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+
+import static org.junit.Assert.assertNotNull;
 
 public class ManageLocationsPage extends Page {
 
@@ -19,6 +23,7 @@ public class ManageLocationsPage extends Page {
     private static final By ADD_EDIT_LOCATION = By.cssSelector("#content a[href='/openmrs/" + AddEditLocationPage.PAGE_URL + "']");
     private static final String PURGE_LOCATION_SELECTOR_TMPL = "list-locations > tbody > tr > i[onclick*='purgeLocation('%s', *)']";
     public static final By CONFIRM_PURGE_BUTTON = By.cssSelector("#adminui-purge-location-dialog > div.dialog-content > form > button.confirm.right");
+    public static final By CONFIRM_RETIRE_BUTTON = By.cssSelector("#adminui-retire-location-dialog > div.dialog-content > form > button.confirm.right");
 
     public ManageLocationsPage(Page parent) {
         super(parent);
@@ -38,5 +43,19 @@ public class ManageLocationsPage extends Page {
         clickOn(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '"+name+"')]]/i[@class='icon-trash delete-action']"));
         waitForElement(CONFIRM_PURGE_BUTTON);
         clickOn(CONFIRM_PURGE_BUTTON);
+    }
+
+    public void retireLocation(String name){
+        clickOn(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '"+name+"')]]/i[@class='icon-remove delete-action']"));
+        waitForElement(CONFIRM_RETIRE_BUTTON);
+        clickOn(CONFIRM_RETIRE_BUTTON);
+    }
+
+    public void assertRetired(String name){
+        try{
+            findElement(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + name + "')]]/i[@class='icon-reply edit-action']"));
+        } catch(TimeoutException e){
+            throw new RuntimeException("Couldn't find restore button, failed to retire location "+name);
+        }
     }
 }

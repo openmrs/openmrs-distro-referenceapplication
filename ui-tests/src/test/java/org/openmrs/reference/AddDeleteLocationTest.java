@@ -55,7 +55,7 @@ public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void delete() throws Exception {
         RestClient.delete("/locationtag/"+locationTagUuid, true);
     }
 
