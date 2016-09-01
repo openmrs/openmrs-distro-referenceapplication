@@ -1,37 +1,60 @@
 package org.openmrs.reference.page;
 
+
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 /**
- * Created by tomasz on 15.07.15.
+ *
  */
-public class VisitTypePage extends AdminManagementPage {
+public class VisitTypePage extends Page {
 
-    public VisitTypePage(WebDriver driver) {
-        super(driver);
-        MANAGE = By.linkText("Manage Visit Types");
-        ADD = By.linkText("Add Visit Type");
-        SAVE = By.name("save");
-        NAME = By.name("name");
-        RETIRE = By.name("retire");
+    private static final By SAVE_VISIT_TYPE = By.cssSelector("#content input[name=\"save\"]");
+    private static final By DELETE_VISIT_TYPE = By.cssSelector("#purge input[name=\"purge\"]");
+    private static final By RETIRE_VISIT_TYPE = By.cssSelector("#content input[name=\"retire\"]");
+    private static final By NAME_TEXT_FIELD = By.cssSelector("#content input[name='name']");
+    private static final By DESCRIPTION_TEXT_FIELD = By.cssSelector("#content textarea[name='description']");
+    private static final By RETIRE_REASON_TEXT_FIELD = By.cssSelector("#content input[name=\"retireReason\"]");
+
+    public VisitTypePage(Page parent) {
+        super(parent);
     }
-    private static final By ERROR = By.cssSelector("span.error");
 
-
-
-    public void createVisitType(String name,String description) throws InterruptedException {
-        fillInName(name);
-        fillInDescription(description);
-        save();
+    public VisitTypeListPage save(){
+        findElement(SAVE_VISIT_TYPE).click();
+        return new VisitTypeListPage(this);
     }
-    public void waitForError(){
-        waitForElement(ERROR);
+
+    public void setName(String name){
+        findElement(NAME_TEXT_FIELD).clear();
+        findElement(NAME_TEXT_FIELD).sendKeys(name);
+    }
+
+    public void setDescription(String description){
+        findElement(DESCRIPTION_TEXT_FIELD).clear();
+        findElement(DESCRIPTION_TEXT_FIELD).sendKeys(description);
+    }
+
+    public VisitTypeListPage delete() {
+        findElement(DELETE_VISIT_TYPE).click();
+        acceptAlert();
+        return new VisitTypeListPage(this);
+    }
+
+
+
+    public VisitTypeListPage retire() {
+        findElement(RETIRE_VISIT_TYPE).click();
+        return new VisitTypeListPage(this);
     }
 
     @Override
     public String getPageUrl() {
-        return "/admin/visits/visitType.list";
+        return "/admin/visits/visitType.form";
     }
 
+    public void setRetireReason(String retireReason) {
+        findElement(RETIRE_REASON_TEXT_FIELD).clear();
+        findElement(RETIRE_REASON_TEXT_FIELD).sendKeys(retireReason);
+    }
 }

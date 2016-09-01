@@ -8,27 +8,30 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * Created by tomasz on 17.07.15.
  */
 public abstract class AdminManagementPage extends Page {
+
+    protected static By ADD;
+    protected static By MANAGE;
+    protected static final By HOME = By.id("homeNavLink");
+
+    protected static final By RETIRE_REASON = By.name("retireReason");
+    protected static By NAME = By.name("name");
+    protected static final By DESCRIPTION = By.name("description");
+    protected static By SAVE = By.name("save");
+
+    protected static final By DELETE = By.name("purge");
+    protected static By RETIRE = By.name("retire");
+    protected static final By FOUND_ELEMENT = By.className("odd");
+    static final By SEARCH_ELEMENT = By.id("inputNode");
 
     public AdminManagementPage(WebDriver driver) {
         super(driver);
     }
-    protected static By ADD;
-    protected static By MANAGE;
 
-    protected static final By HOME = By.id("homeNavLink");
-    protected static final By RETIRE_REASON = By.name("retireReason");
-    protected static By NAME = By.name("name");
-    protected static final By DESCRIPTION = By.name("description");
-
-    protected static By SAVE = By.name("save");
-    protected static final By DELETE = By.name("purge");
-    protected static By RETIRE = By.name("retire");
-    protected static final By FOUND_ELEMENT = By.className("odd");
-
-    static final By SEARCH_ELEMENT = By.id("inputNode");
+    public AdminManagementPage(Page parent) {
+        super(parent);
+    }
 
     public void clickOnHomeLink() throws InterruptedException {
         clickOn(HOME);

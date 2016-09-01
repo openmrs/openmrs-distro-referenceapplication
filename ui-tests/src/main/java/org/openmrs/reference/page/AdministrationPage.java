@@ -15,14 +15,17 @@ import org.openqa.selenium.WebDriver;
 
 public class AdministrationPage extends Page {
 
-
     public static String URL_PATH = "/admin/index.htm";
-
-    private static By MANAGE_USERS = By.linkText("Manage Users");
+    private static By MANAGE_USERS = By.cssSelector("#content  table:nth-child(4)  div:nth-child(1) li:nth-child(2)  a");
+    private final static By MANAGE_VISIT_TYPES = By.cssSelector("#content  table:nth-child(4)  div:nth-child(4) li:nth-child(2)  a");
     private static By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
 
     public AdministrationPage(WebDriver driver) {
         super(driver);
+    }
+
+    public AdministrationPage(Page parent){
+        super(parent);
     }
 
 
@@ -39,5 +42,10 @@ public class AdministrationPage extends Page {
     public ManageProviderPage clickOnManageProviders() {
         clickOn(MANAGE_PROVIDERS);
         return new ManageProviderPage(this);
+    }
+
+    public VisitTypeListPage goToVisitTypePage() {
+        findElement(MANAGE_VISIT_TYPES).click();
+        return new VisitTypeListPage(this);
     }
 }
