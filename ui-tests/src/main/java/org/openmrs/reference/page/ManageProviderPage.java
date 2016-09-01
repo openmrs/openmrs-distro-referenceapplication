@@ -37,7 +37,7 @@ public class ManageProviderPage extends Page {
 	public void setProviderNameOrId(String text){
 		WebElement element = findElement(PROVIDERS);
 		setText(SEARCH_ELEMENT, text);
-		findElement(SEARCH_ELEMENT).sendKeys(Keys.BACK_SPACE);
+		findElement(SEARCH_ELEMENT);
 		//wait for new search results to come
 		waitForStalenessOf(element);
 	}
