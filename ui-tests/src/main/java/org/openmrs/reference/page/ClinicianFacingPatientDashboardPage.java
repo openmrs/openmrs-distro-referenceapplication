@@ -77,6 +77,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	private static final By EYE_REPORT = By.linkText("Eye Report");
 	private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
+	private static final By RECENT_VISITS = By.cssSelector("#content div.container  div  div:nth-child(2)  div:nth-child(1)  div.info-header  a");
 
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
@@ -99,6 +100,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(END_VISIT);
 		waitForElement(YES);
 		clickOn(YES);
+	}
+
+	public PatientVisitsDashboardPage goToRecentVisits(){
+		clickOn(RECENT_VISITS);
+		return new PatientVisitsDashboardPage(this);
 	}
 
 	public void clickOnYes (){clickOn(YES);}
