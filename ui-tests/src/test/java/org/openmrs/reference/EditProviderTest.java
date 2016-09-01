@@ -43,8 +43,8 @@ public class EditProviderTest extends ReferenceApplicationTestBase{
     public void editProviderTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageProviderPage manageProviderPage = administrationPage.clickOnManageProviders();
-        manageProviderPage.setProviderNameOrId(person.uuid);
-        ProviderPage providerPage = manageProviderPage.clickOnProvider(person.uuid);
+        manageProviderPage.setProviderNameOrId(person.getName());
+        ProviderPage providerPage = manageProviderPage.clickOnProvider(person.getName());
         providerPage.setIdentifier("uitest-" + person.uuid);
         manageProviderPage = providerPage.clickOnSave();
         assertThat(manageProviderPage.getActionMessage(), is("Provider saved"));

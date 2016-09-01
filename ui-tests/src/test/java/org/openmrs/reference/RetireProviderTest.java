@@ -42,8 +42,8 @@ public class RetireProviderTest extends ReferenceApplicationTestBase{
     public void retireProviderTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageProviderPage manageProviderPage = administrationPage.clickOnManageProviders();
-        manageProviderPage.setProviderNameOrId(personUuid);
-        ProviderPage providerPage = manageProviderPage.clickOnProvider(personUuid);
+        manageProviderPage.setProviderNameOrId(person.getName());
+        ProviderPage providerPage = manageProviderPage.clickOnProvider(person.getName());
         providerPage.setRetireReason("retire reason");
         manageProviderPage = providerPage.clickOnRetire();
         assertThat(manageProviderPage.getActionMessage(), is("Provider retired"));

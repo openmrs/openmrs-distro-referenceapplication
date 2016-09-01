@@ -22,7 +22,8 @@ public class ManageProviderPage extends Page {
 	private static final By SEARCH_ELEMENT = By.id("inputNode");
 	private static final By INCLUDE_RETIRED = By.id("includeVoided");
 	private static final By ADD_PROVIDER = By.cssSelector("#content a[href='provider.form']");
-	private static final By PROVIDERS = By.cssSelector("#openmrsSearchTable tr td:nth-child(2)");
+	private static final By PROVIDERS_IDENTIFIERS = By.cssSelector("#openmrsSearchTable tr td:nth-child(2)");
+	private static final By PROVIDERS_NAMES = By.cssSelector("#openmrsSearchTable tr td:first-child");
 	private static final By OPENMRS_MSG = By.id("openmrs_msg");
 
 	public ManageProviderPage(Page parent) {
@@ -35,9 +36,9 @@ public class ManageProviderPage extends Page {
 	}
 
 	public void setProviderNameOrId(String text){
-		WebElement element = findElement(PROVIDERS);
+		WebElement element = findElement(PROVIDERS_IDENTIFIERS);
 		setText(SEARCH_ELEMENT, text);
-		findElement(SEARCH_ELEMENT);
+		findElement(SEARCH_ELEMENT).sendKeys(Keys.BACK_SPACE);
 		//wait for new search results to come
 		waitForStalenessOf(element);
 	}
@@ -46,16 +47,18 @@ public class ManageProviderPage extends Page {
 		clickOn(INCLUDE_RETIRED);
 	}
 
-	public ProviderPage clickOnProvider(String identifier){
-		List<WebElement> elements = findElements(PROVIDERS);
+	public ProviderPage clickOnProvider(String name){
+		findElement(PROVIDERS_IDENTIFIERS);
+
+		List<WebElement> elements = findElements(PROVIDERS_NAMES);
 		for (WebElement element: elements) {
-			if (element.getText().equals(identifier)) {
+			if (element.getText().equals(name)) {
 				element.click();
 				return new ProviderPage(this);
 			}
 		}
 
-		throw new IllegalStateException("Could not find provider with identifier: " + identifier);
+		throw new IllegalStateException("Could not find provider with identifier: " + name);
 	}
 
 	@Override

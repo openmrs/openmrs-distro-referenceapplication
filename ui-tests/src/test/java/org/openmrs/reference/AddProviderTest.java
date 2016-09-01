@@ -46,7 +46,7 @@ public class AddProviderTest extends ReferenceApplicationTestBase {
         manageProviderPage = providerPage.clickOnSave();
         assertThat(manageProviderPage.getActionMessage(), is("Provider saved"));
         manageProviderPage.setProviderNameOrId(person.getName());
-        providerPage = manageProviderPage.clickOnProvider(personUuid);
+        providerPage = manageProviderPage.clickOnProvider(person.getName());
         providerPage.deleteForever();
     }
 
