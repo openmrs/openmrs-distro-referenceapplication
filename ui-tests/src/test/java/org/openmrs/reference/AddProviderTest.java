@@ -36,18 +36,17 @@ public class AddProviderTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    @Ignore("RA-1200")
     @Category(BuildTests.class)
     public void addProviderTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageProviderPage manageProviderPage = administrationPage.clickOnManageProviders();
         ProviderPage providerPage = manageProviderPage.clickOnAddProvider();
-        providerPage.setIdentifier("UiTest");
+        providerPage.setIdentifier(personUuid);
         providerPage.setPerson(person.getName());
         manageProviderPage = providerPage.clickOnSave();
         assertThat(manageProviderPage.getActionMessage(), is("Provider saved"));
         manageProviderPage.setProviderNameOrId(person.getName());
-        providerPage = manageProviderPage.clickOnFirstProvider();
+        providerPage = manageProviderPage.clickOnProvider(personUuid);
         providerPage.deleteForever();
     }
 

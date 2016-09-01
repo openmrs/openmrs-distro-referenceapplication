@@ -27,25 +27,25 @@ import static org.hamcrest.core.Is.is;
 public class EditProviderTest extends ReferenceApplicationTestBase{
 
     private TestData.PersonInfo person;
-    private String personUuid;
+    private TestData.TestProvider provider;
     private String providerUuid;
 
     @Before
     public void setUp() {
         person  = TestData.generateRandomPerson();
-        personUuid = TestData.createPerson(this.person);
-        providerUuid = new TestData.TestProvider(personUuid, "UiTest").create();
+        TestData.createPerson(this.person);
+        provider = new TestData.TestProvider(person.uuid, person.uuid);
+        providerUuid = provider.create();
     }
 
     @Test
-    @Ignore("RA-1200")
     @Category(BuildTests.class)
     public void editProviderTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageProviderPage manageProviderPage = administrationPage.clickOnManageProviders();
-        manageProviderPage.setProviderNameOrId(person.getName());
-        ProviderPage providerPage = manageProviderPage.clickOnFirstProvider();
-        providerPage.setIdentifier("UiTest2");
+        manageProviderPage.setProviderNameOrId(person.uuid);
+        ProviderPage providerPage = manageProviderPage.clickOnProvider(person.uuid);
+        providerPage.setIdentifier("uitest-" + person.uuid);
         manageProviderPage = providerPage.clickOnSave();
         assertThat(manageProviderPage.getActionMessage(), is("Provider saved"));
     }
@@ -53,6 +53,6 @@ public class EditProviderTest extends ReferenceApplicationTestBase{
     @After
     public void tearDown() throws InterruptedException{
         RestClient.delete("provider/"+providerUuid, true);
-        RestClient.delete("person/"+personUuid, true);
+        RestClient.delete("person/"+person.uuid, true);
     }
 }

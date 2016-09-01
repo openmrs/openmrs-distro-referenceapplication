@@ -12,6 +12,9 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 
 public class ManageProviderPage extends Page {
@@ -19,8 +22,7 @@ public class ManageProviderPage extends Page {
 	private static final By SEARCH_ELEMENT = By.id("inputNode");
 	private static final By INCLUDE_RETIRED = By.id("includeVoided");
 	private static final By ADD_PROVIDER = By.cssSelector("#content a[href='provider.form']");
-	//selecting the second column as the first column may match loading or no results
-	private static final By FIRST_PROVIDER = By.cssSelector("#openmrsSearchTable tr:first-child td:nth-child(2)");
+	private static final By PROVIDERS = By.cssSelector("#openmrsSearchTable tr td:nth-child(2)");
 	private static final By OPENMRS_MSG = By.id("openmrs_msg");
 
 	public ManageProviderPage(Page parent) {
@@ -33,17 +35,27 @@ public class ManageProviderPage extends Page {
 	}
 
 	public void setProviderNameOrId(String text){
+		WebElement element = findElement(PROVIDERS);
 		setText(SEARCH_ELEMENT, text);
 		findElement(SEARCH_ELEMENT).sendKeys(Keys.BACK_SPACE);
+		//wait for new search results to come
+		waitForStalenessOf(element);
 	}
 
 	public void clickOnIncludeRetired(){
 		clickOn(INCLUDE_RETIRED);
 	}
 
-	public ProviderPage clickOnFirstProvider(){
-		clickOn(FIRST_PROVIDER);
-		return new ProviderPage(this);
+	public ProviderPage clickOnProvider(String identifier){
+		List<WebElement> elements = findElements(PROVIDERS);
+		for (WebElement element: elements) {
+			if (element.getText().equals(identifier)) {
+				element.click();
+				return new ProviderPage(this);
+			}
+		}
+
+		throw new IllegalStateException("Could not find provider with identifier: " + identifier);
 	}
 
 	@Override
