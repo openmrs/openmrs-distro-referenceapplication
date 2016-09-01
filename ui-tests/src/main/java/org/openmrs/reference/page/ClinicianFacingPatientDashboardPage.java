@@ -83,10 +83,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		super(page);
 	}
 
-	public void startVisit() {
+	public PatientVisitsDashboardPage startVisit() {
 		clickOn(START_VISIT);
 		waitForElement(CONFIRM);
 		clickOn(CONFIRM);
+		return new PatientVisitsDashboardPage(this);
 	}
 
 	public void back() {
