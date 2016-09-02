@@ -1,86 +1,72 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 package org.openmrs.reference;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by nata on 21.07.15.
- */
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.openmrs.reference.page.AddEditUserPage;
 import org.openmrs.reference.page.AdministrationPage;
-import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ManageUserPage;
-import org.openmrs.reference.page.SettingPage;
-import org.openmrs.uitestframework.test.TestBase;
+import org.openmrs.reference.page.SystemAdministrationPage;
 
+import java.util.List;
 
-
-public class AddUserTest extends TestBase {
-    private HomePage homePage;
-    private HeaderPage headerPage;
-    private SettingPage settingPage;
-    private AdministrationPage administrationPage;
-    private ManageUserPage manageUserPage;
-
-
-    @Before
-    public void setUp() throws Exception {
-        homePage = new HomePage(page);
-        assertPage(homePage);
-        headerPage = new HeaderPage(driver);
-        settingPage = new SettingPage(driver);
-        administrationPage = new AdministrationPage(driver);
-        manageUserPage = new ManageUserPage(driver);
-        homePage.goToAdministration();
-    }
+public class AddUserTest extends ReferenceApplicationTestBase {
 
     @Test
     public void addUserTest() throws Exception {
-        administrationPage.clickOnManageUsers();
+        SystemAdministrationPage systemAdministrationPage = homePage.goToSystemAdministrationPage();
+        AdministrationPage administrationPage = systemAdministrationPage.goToAdvancedAdministration();
+        ManageUserPage manageUserPage = administrationPage.clickOnManageUsers();
+
         if (manageUserPage.userExists("super_nurse")) {
             manageUserPage.removeUser("super_nurse");
         }
         else {
-            manageUserPage.clickOnAddUser();
-            manageUserPage.createNewPerson();
-            manageUserPage.saveUser();
-            assertTrue(manageUserPage.errorDemographic().contains("You must define at least one name"));
-            assertTrue(manageUserPage.errorGender().contains("Cannot be empty or null"));
-            assertTrue(manageUserPage.errorUser().contains("User can log in with either Username or System Id"));
-            manageUserPage.enterGivenFamily("Super", "Nurse");
-            manageUserPage.saveUser();
-            assertTrue(manageUserPage.errorUser().contains("User can log in with either Username or System Id"));
-            assertTrue(driver.getPageSource().contains("Cannot be empty or null"));
-            manageUserPage.clickOnFemale();
-            manageUserPage.saveUser();
-            assertTrue(driver.getPageSource().contains("User can log in with either Username or System Id"));
-            manageUserPage.enterUsernamePassword("super_nurse", "supernurse", "supernurse123");
-            manageUserPage.saveUser();
-            assertFalse(manageUserPage.errorPassword().isEmpty());
-            manageUserPage.enterUsernamePassword("super_nurse", "Nurse123", "Nurse123");
-            manageUserPage.saveUser();
-            settingPage.waitForMessage();
-            assertTrue(driver.getPageSource().contains("User Saved"));
-            headerPage.logOut();
-            goToLoginPage().login("super_nurse", "Nurse123");
-            assertTrue(driver.getPageSource().contains("super_nurse"));
-            headerPage.logOut();
+            AddEditUserPage addEditUserPage = manageUserPage.clickOnAddUser();
+            addEditUserPage.createNewPerson();
+
+            addEditUserPage.saveUser();
+            List<String> validationErrors = addEditUserPage.getValidationErrors();
+            assertTrue(validationErrors.contains("You must define at least one name"));
+            assertTrue(validationErrors.contains("Cannot be empty or null"));
+            assertFalse(addEditUserPage.isDataCorrect(validationErrors));
+
+            addEditUserPage.enterGivenFamily("Super", "Nurse");
+            addEditUserPage.saveUser();
+            validationErrors = addEditUserPage.getValidationErrors();
+            assertFalse(addEditUserPage.isDataCorrect(validationErrors));
+
+            addEditUserPage.clickOnFemale();
+            addEditUserPage.enterUsernamePassword("super_nurse", "supernurse", "supernurse123");
+            addEditUserPage.saveUser();
+            assertFalse(addEditUserPage.isDataCorrect(validationErrors));
+            addEditUserPage.enterUsernamePassword("super_nurse", "Nurse123", "Nurse123");
+            addEditUserPage.saveUser();
+            assertFalse(addEditUserPage.isDataCorrect(validationErrors));
+
+            manageUserPage.waitForPage();
+            assertTrue(manageUserPage.getUserSavedNotification().contains("User Saved"));
+
+            homePage = new HomePage(goToLoginPage().login("super_nurse", "Nurse123"));
+            homePage.getLoggedUsername().contains("super_nurse");
             goToLoginPage().loginAsAdmin();
             homePage.goToAdministration();
             administrationPage.clickOnManageUsers();
             manageUserPage.removeUser("super_nurse");
-            settingPage.waitForMessage();
-            assertTrue(driver.getPageSource().contains("Successfully deleted user."));
+            manageUserPage.waitForPage();
+            assertTrue(manageUserPage.getUserSavedNotification().contains("Successfully deleted user."));
         }
     }
-
-    @After
-    public void tearDown() throws Exception {
-        headerPage.clickOnHomeLink();
-        headerPage.logOut();
-    }
-
 }

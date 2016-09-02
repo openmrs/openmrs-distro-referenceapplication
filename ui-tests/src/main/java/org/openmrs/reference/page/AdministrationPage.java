@@ -11,32 +11,27 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class AdministrationPage extends Page {
 
-    public static String URL_PATH = "/admin/index.htm";
-    private static By MANAGE_USERS = By.cssSelector("#content  table:nth-child(4)  div:nth-child(1) li:nth-child(2)  a");
+    private static final String URL = "/admin/index.htm";
+
+    private static final By MANAGE_USERS = By.linkText("Manage Users");
     private final static By MANAGE_VISIT_TYPES = By.cssSelector("#content  table:nth-child(4)  div:nth-child(4) li:nth-child(2)  a");
-    private static By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
+    private static final By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
 
-    public AdministrationPage(WebDriver driver) {
-        super(driver);
+    public AdministrationPage(Page page) {
+        super(page);
     }
-
-    public AdministrationPage(Page parent){
-        super(parent);
-    }
-
 
     @Override
     public String getPageUrl() {
-        return URL_PATH;
+        return URL;
     }
 
     public ManageUserPage clickOnManageUsers() {
         findElement(MANAGE_USERS).click();
-        return new ManageUserPage(driver);
+        return new ManageUserPage(this);
     }
 
     public ManageProviderPage clickOnManageProviders() {

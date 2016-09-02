@@ -66,7 +66,7 @@ public class MergePatientByNameTest extends TestBase {
         id2 = patientDashboardPage.findPatientId();
         patient.uuid =  patientDashboardPage.getPatientUuidFromUrl();
         headerPage.clickOnHomeIcon();
-        homePage.goToDataMagament();
+        homePage.goToDataManagement();
         dataManagementPage.goToMegrePatient();
         dataManagementPage.enterPatient1(id);
         dataManagementPage.enterPatient2(id2);

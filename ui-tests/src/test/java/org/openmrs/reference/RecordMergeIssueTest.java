@@ -66,7 +66,7 @@ public class RecordMergeIssueTest extends TestBase {
         registrationPage.enterMegrePatient(patient1);
         id2 = patientDashboardPage.findPatientId();
         headerPage.clickOnHomeIcon();
-        homePage.goToDataMagament();
+        homePage.goToDataManagement();
         dataManagementPage.goToMegrePatient();
         dataManagementPage.enterPatient1(id);
         dataManagementPage.enterPatient2(id2);

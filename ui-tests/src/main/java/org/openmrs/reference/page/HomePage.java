@@ -7,32 +7,27 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
+
 package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
-import org.openmrs.uitestframework.test.TestData;
 import org.openqa.selenium.By;
 
 public class HomePage extends Page {
 
-    static final String FIND_PATIENT_APP_ID = "coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension";
-    static final String REGISTER_PATIENT_APP_ID = "referenceapplication-registrationapp-registerPatient-homepageLink-referenceapplication-registrationapp-registerPatient-homepageLink-extension";
-    static final String ACTIVE_VISITS_APP_ID = "org-openmrs-module-coreapps-activeVisitsHomepageLink-org-openmrs-module-coreapps-activeVisitsHomepageLink-extension";
-    static final String APPOINTMENT_SCHEDULING_APP_ID = "appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension";
-    static final String STYLE_GUIDE_APP_ID = "referenceapplication-styleGuide-referenceapplication-styleGuide-extension";
-    static final String SYSTEM_ADMIN_APP_ID = "coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension";
-    static final String CONFIGURE_METADATA_APP_ID = "org-openmrs-module-adminui-configuremetadata-homepageLink-org-openmrs-module-adminui-configuremetadata-homepageLink-extension";
-    static final String DISPENSING_MEDICATION_APP_ID = "dispensing-app-homepageLink-dispensing-app-homepageLink-extension";
-    static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
-    static final String DATA_MANAGAMENT_APP_ID = "coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension";
-    static final By CONFIGURE_METADATA = By.id(CONFIGURE_METADATA_APP_ID);
-    static final By ACTIVE_PATIENT = By.xpath("//td[2]/a");
-    static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
-    static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
-    static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
-    static final By FIND_PATIENT_RECORD = By.id("coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension");
-    static final By DATA_MANAGAMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
-    static final By PATIENT_HEADER = By.className("patient-header");
+    private static final String FIND_PATIENT_APP_ID = "coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension";
+    private static final String REGISTER_PATIENT_APP_ID = "referenceapplication-registrationapp-registerPatient-homepageLink-referenceapplication-registrationapp-registerPatient-homepageLink-extension";
+    private static final String ACTIVE_VISITS_APP_ID = "org-openmrs-module-coreapps-activeVisitsHomepageLink-org-openmrs-module-coreapps-activeVisitsHomepageLink-extension";
+    private static final String APPOINTMENT_SCHEDULING_APP_ID = "appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension";
+    private static final String SYSTEM_ADMIN_APP_ID = "coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension";
+    private static final String CONFIGURE_METADATA_APP_ID = "org-openmrs-module-adminui-configuremetadata-homepageLink-org-openmrs-module-adminui-configuremetadata-homepageLink-extension";
+    private static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
+    private static final String DATA_MANAGEMENT_APP_ID = "coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension";
+    private static final By CONFIGURE_METADATA = By.id("org-openmrs-module-adminui-configuremetadata-homepageLink-org-openmrs-module-adminui-configuremetadata-homepageLink-extension");
+    private static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
+    private static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
+    private static final By FIND_PATIENT_RECORD = By.id("coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension");
+    private static final By DATA_MANAGEMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
 
     public HomePage(Page page) {
         super(page);
@@ -47,13 +42,8 @@ public class HomePage extends Page {
         }
     }
 
-    private void openApp(String appIdentifier) throws InterruptedException {
-        driver.get(properties.getWebAppUrl());
-        clickOn(By.id(appIdentifier));
-    }
-
-    public void captureVitals() {
-        clickOn(By.id(CAPTURE_VITALS_APP_ID));
+    public String getLoggedUsername() {
+        return findElement(By.cssSelector(".identifier")).getText();
     }
 
     public int numberOfAppsPresent() {
@@ -73,8 +63,9 @@ public class HomePage extends Page {
         return new RegistrationPage(this);
     }
 
-    public void openLegacyAdministrationApp()  throws InterruptedException{
-        openApp(SYSTEM_ADMIN_APP_ID);
+    public SystemAdministrationPage goToSystemAdministrationPage() {
+        clickOn(By.id(SYSTEM_ADMIN_APP_ID));
+        return new SystemAdministrationPage(this);
     }
 
     public Boolean isActiveVisitsAppPresent() {
@@ -85,10 +76,6 @@ public class HomePage extends Page {
         return isAppButtonPresent(APPOINTMENT_SCHEDULING_APP_ID);
     }
 
-    public Boolean isStyleGuideAppPresent() {
-        return isAppButtonPresent(STYLE_GUIDE_APP_ID);
-    }
-
     public Boolean isSystemAdministrationAppPresent() {
         return isAppButtonPresent(SYSTEM_ADMIN_APP_ID);
     }
@@ -97,16 +84,12 @@ public class HomePage extends Page {
         return isAppButtonPresent(CONFIGURE_METADATA_APP_ID);
     }
 
-    public Boolean isDispensingMedicationAppPresent() {
-        return isAppButtonPresent(DISPENSING_MEDICATION_APP_ID);
-    }
-
     public boolean isCaptureVitalsAppPresent() {
         return isAppButtonPresent(CAPTURE_VITALS_APP_ID);
     }
 
     public boolean isDataManagementAppPresent() {
-        return isAppButtonPresent(DATA_MANAGAMENT_APP_ID);
+        return isAppButtonPresent(DATA_MANAGEMENT_APP_ID);
     }
 
     public ClinicianFacingPatientDashboardPage goToActiveVisitPatient(){
@@ -137,8 +120,10 @@ public class HomePage extends Page {
     	clickOn(FIND_PATIENT_RECORD);
     	return new FindPatientPage(this);
     }
-    public void goToDataMagament(){ clickOn(DATA_MANAGAMENT);}
 
+    public void goToDataManagement(){
+        clickOn(DATA_MANAGEMENT);
+    }
 
     @Override
     public String getPageUrl() {
