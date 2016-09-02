@@ -16,9 +16,10 @@ public class AdministrationPage extends Page {
 
     private static final String URL = "/admin/index.htm";
 
-    private static final By MANAGE_USERS = By.linkText("Manage Users");
-    private final static By MANAGE_VISIT_TYPES = By.cssSelector("#content  table:nth-child(4)  div:nth-child(4) li:nth-child(2)  a");
+    private static final By MANAGE_USERS = By.cssSelector("#content  table:nth-child(4)  div:nth-child(1) li:nth-child(2)  a");
+    private static final By MANAGE_VISIT_TYPES = By.cssSelector("#content  table:nth-child(4)  div:nth-child(4) li:nth-child(2)  a");
     private static final By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
+    private static final By MANAGE_PERSONS = By.cssSelector("#content a[href=\"/openmrs/admin/person/index.htm\"]");
 
     public AdministrationPage(Page page) {
         super(page);
@@ -42,5 +43,10 @@ public class AdministrationPage extends Page {
     public VisitTypeListPage goToVisitTypePage() {
         findElement(MANAGE_VISIT_TYPES).click();
         return new VisitTypeListPage(this);
+    }
+
+    public ManagePersonPage clickOnManagePersons() {
+        findElement(MANAGE_PERSONS).click();
+        return new ManagePersonPage(this);
     }
 }
