@@ -76,8 +76,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
 
 	private static final By EYE_REPORT = By.linkText("Eye Report");
+	private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
 	private static final By RECENT_VISITS = By.cssSelector("#content div.container  div  div:nth-child(2)  div:nth-child(1)  div.info-header  a");
-	private static final By TELEPHONE_NUMBER_TEXT = By.id("coreapps-telephoneNumber");
 
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
@@ -376,6 +376,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 	public String getTelephoneNumber() {
-		return findElement(TELEPHONE_NUMBER_TEXT).getText();
+		String phoneNumber = findElement(TELEPHONE_NUMBER_TEXT).getText();
+		if(StringUtils.isNotBlank(phoneNumber)){
+			phoneNumber = phoneNumber.substring(0, phoneNumber.indexOf("\n"));
+		}
+		return phoneNumber;
 	}
 }

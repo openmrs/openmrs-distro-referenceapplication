@@ -11,17 +11,23 @@ package org.openmrs.reference.page;
 
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.Page;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+
 
 /**
  * The register-a-new-patient page.
  */
 public class RegistrationPage extends Page {
 
+
 	public RegistrationPage(Page page) {
         super(page);
     }
 
+    private boolean acceptNextAlert = true;
 	static final By CONTACT_INFO_SECTION = By.id("contactInfo_label");
 	static final By CONFIRM_SECTION = By.id("confirmation_label");
 	static final By BIRTHDATE_LABEL = By.id("birthdateLabel");
@@ -31,6 +37,7 @@ public class RegistrationPage extends Page {
     static final By MIDDLE_NAME = By.name("middleName");
     static final By GENDER_LABEL = By.id("genderLabel");
     static final String GENDER_FIELD_ID = ("gender-field");
+    static final By GENDER = By.id(GENDER_FIELD_ID);
     static final By GENDER_SELECT = By.name("gender");
     static final String BIRTHDAY_DAY_TEXTBOX_ID = "birthdateDay-field";
     public static final By BIRTHDAY_DAY = By.id(BIRTHDAY_DAY_TEXTBOX_ID);
@@ -55,28 +62,15 @@ public class RegistrationPage extends Page {
 	static final By ADDRESS_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[4]");
 	static final By PHONE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[5]");
 
+	static final By PATIENT_HEADER = By.className("patient-header");
 	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
+    public static final By FIELD_ERROR = By.id("field-error");
     static By AUTO_LIST;
     private static final By CONFIRM_DATA = By.id("submit");
 
-	@Override
-	public boolean hasPageReadyIndicator() {
-		return true;
-	}
-
-	@Override
-	public String getPageReadyIndicatorName() {
-		return "Navigator.isReady";
-	}
-
-    @Override
-    public String getPageUrl() {
-        return "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
-    }
-
-    public void enterPatient(TestPatient patient) throws InterruptedException{
+	public void enterPatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName(patient.middleName);  // no middle name
         enterPatientFamilyName(patient.familyName);
@@ -92,6 +86,16 @@ public class RegistrationPage extends Page {
         }
         clickOnConfirmSection();
     }
+
+	@Override
+	public boolean hasPageReadyIndicator() {
+		return true;
+	}
+
+	@Override
+	public String getPageReadyIndicatorName() {
+		return "Navigator.isReady";
+	}
 
     public void enterUnidentifiedPatient(TestPatient patient) throws InterruptedException {
         selectUnidentifiedPatient();
@@ -130,6 +134,7 @@ public class RegistrationPage extends Page {
     public void enterAddress1(String address1) {
         setText(ADDRESS1, address1);
     }
+
 
     public void selectUnidentifiedPatient() {
         clickOn(UNKNOWN_PATIENT);
@@ -191,6 +196,7 @@ public class RegistrationPage extends Page {
         }
     }
 
+
     public String getNameInConfirmationPage() {
         return getText(NAME_CONFIRM) ;
     }
@@ -239,9 +245,19 @@ public class RegistrationPage extends Page {
         clickOn(CONFIRM_EDIT);
     }
 
+
+	@Override
+    public String getPageUrl() {
+	    return "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
+    }
+
 	public ClinicianFacingPatientDashboardPage confirmPatient() throws InterruptedException{
 		clickOn(CONFIRM);
         return new ClinicianFacingPatientDashboardPage(this);
+    }
+
+    public void waitForDeletePatient() {
+        waitForElementToBeHidden(PATIENT_HEADER);
     }
 
     public void exitReview() {
@@ -251,7 +267,27 @@ public class RegistrationPage extends Page {
 
         }
     }
+//  Edit  Contact Info
+    public void clearVillage(){findElement(CITY_VILLAGE).clear();}
+    public void clearState(){findElement(STATE_PROVINCE).clear();}
+    public void clearCountry(){findElement(COUNTRY).clear();}
+    public void clearPostalCode(){findElement(POSTAL_CODE).clear();}
+    public void clearPhoneNumber(){findElement(PHONE_NUMBER).clear();}
+    private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
 
+    public void clickOnPhoneNumberEdit(){clickOn(PHONE_NUMBER_EDIT);}
+    public void enterVillage(String familyName) {
+        setText(CITY_VILLAGE, familyName);
+    }
+    public void enterState(String familyName) {
+        setText(STATE_PROVINCE, familyName);
+    }
+    public void enterPostalCode(String familyName) {
+        setText(POSTAL_CODE, familyName);
+    }
+    public void enterCountry(String familyName) {
+        setText(COUNTRY, familyName);
+    }
 //  AutocompleteTest
     public void enterAndWaitFamilyName(String family){
         setTextToFieldNoEnter(FAMILY_NAME, family);
@@ -262,7 +298,6 @@ public class RegistrationPage extends Page {
         setTextToFieldNoEnter(GIVEN_NAME, given);
         waitForElement(By.className("ui-autocomplete"));
     }
-
 //    Merge Patients
     public void clickOnConfirmPatient(){ clickOn(CONFIRM_DATA);}
     public void enterMegrePatient(TestPatient patient) throws InterruptedException{
