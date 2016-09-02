@@ -1,4 +1,4 @@
 language: java
 script:
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_wait mvn clean verify -Pci -DbuildNumber=$TRAVIS_BUILD_NUMBER; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_wait mvn clean verify -Dfailsafe.rerunFailingTestsCount=1 -Pci -DbuildNumber=$TRAVIS_BUILD_NUMBER; fi'
   - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then mvn clean install -DskipTests=true; fi'
