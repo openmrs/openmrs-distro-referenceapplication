@@ -1,62 +1,43 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
 package org.openmrs.reference;
 
-/**
- * Created by nata on 16.07.15.
- */
 import org.junit.*;
-import static org.junit.Assert.*;
 
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.*;
-import org.openmrs.uitestframework.test.TestBase;
+import org.openmrs.uitestframework.test.RestClient;
+import org.openmrs.uitestframework.test.TestData;
 
 
-public class RetireLocationTest extends TestBase {
-    private HomePage homePage;
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
-    private HeaderPage headerPage;
-    private LocationPage locationPage;
-    private SettingPage settingPage;
+public class RetireLocationTest extends ReferenceApplicationTestBase {
 
+    private String locationName = "TEST"+TestData.randomSuffix();
+    private String locationUuid = null;
 
     @Before
-    public void setUp() throws Exception {
-
-        
-        homePage = new HomePage(page);
-        assertPage(homePage);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-        headerPage = new HeaderPage(driver);
-        locationPage = new LocationPage(driver);
-        settingPage = new SettingPage(driver);
-        homePage.goToAdministration();
+    public void createLocation(){
+        locationUuid = new TestData.TestLocation(locationName).create();
     }
 
     @Test
-    @Ignore
+    @Category(BuildTests.class)
     public void retireLocationTest() throws Exception {
-        locationPage.clickOnManageLocation();
-        if(locationPage.locationPresent()) {
-            locationPage.checkLocation();
-            locationPage.clickOnDelete();
-        }
-        locationPage.clickOnAddLocation();
-        locationPage.clickOnSaveLocation();
-        assertTrue(driver.getPageSource().contains("Please fix all errors and try again."));
-        locationPage.enterName("psychiatric hospital");
-        locationPage.chooseTags("Admission Location");
-        locationPage.clickOnTags();
-        locationPage.clickOnSaveLocation();
-        locationPage.addedLocation();
-        locationPage.enterRetireReason("atomic bomb");
-        settingPage.waitForMessage();
-        assertTrue(driver.getPageSource().contains("Location retired successfully"));
-
+        ManageLocationsPage manageLocationsPage = homePage.goToConfigureMetadata().goToManageLocations();
+        manageLocationsPage.retireLocation(locationName);
+        manageLocationsPage.assertRetired(locationName);
     }
 
     @After
-    public void tearDown() throws Exception {
-        headerPage.clickOnHomeLink();
-        headerPage.logOut();
+    public void deleteLocation(){
+        RestClient.delete("location/"+locationUuid, true);
     }
-
 }
