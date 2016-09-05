@@ -41,7 +41,7 @@ public class EndVisitTest extends ReferenceApplicationTestBase {
         findPatientPage.enterPatient(patient.identifier);
         ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage = findPatientPage.clickOnFirstPatient();
         PatientVisitsDashboardPage patientVisitsDashboardPage = clinicianFacingPatientDashboardPage.goToRecentVisits();
-        patientVisitsDashboardPage.endVisit();
+        patientVisitsDashboardPage = patientVisitsDashboardPage.endVisit();
         assertNull(patientVisitsDashboardPage.getActiveVisit());
     }
 

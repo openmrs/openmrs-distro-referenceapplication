@@ -29,6 +29,10 @@ public class PatientVisitsDashboardPage extends Page {
 		super(parent);
 	}
 
+	public PatientVisitsDashboardPage(Page parent, WebElement waitForStaleness){
+		super(parent, waitForStaleness);
+	}
+
 	@Override
 	public String getPageUrl() {
 		return "coreapps/patientdashboard/patientDashboard.page";
@@ -51,10 +55,12 @@ public class PatientVisitsDashboardPage extends Page {
 		return findElements(VISIT_LIST);
 	}
 
-	public void endVisit(){
+	public PatientVisitsDashboardPage endVisit(){
+		WebElement visit_list = findElement(VISIT_LIST);
 		clickOn(END_VISIT);
 		waitForElement(END_VISIT_DIALOG);
 		clickOn(END_VISIT_CONFIRM);
+		return new PatientVisitsDashboardPage(this, visit_list);
 	}
 
 	public AdmitToInpatientPage goToAdmitToInpatient(){
