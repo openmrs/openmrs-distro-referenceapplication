@@ -10,8 +10,6 @@
 
 package org.openmrs.reference;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,12 +21,13 @@ import org.openmrs.reference.page.AllergyPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
 
+import static org.junit.Assert.assertTrue;
+
 public class AddNewAllergyTest extends ReferenceApplicationTestBase {
 
     private TestData.PatientInfo patient;
 
     private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
-    private static final String LOCATION_UUID = "8d6c993e-c2cc-11de-8d13-0010c6dffd0f";
     private static final String DRUG_NAME = "Aspirin";
 
     @Before
@@ -60,7 +59,7 @@ public class AddNewAllergyTest extends ReferenceApplicationTestBase {
     }
 
     private void createTestVisit(){
-        new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, LOCATION_UUID).create();
+        new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, getLocationUuid(homePage)).create();
     }
 
 }
