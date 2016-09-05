@@ -10,7 +10,6 @@
 package org.openmrs.reference;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.After;
@@ -24,15 +23,13 @@ import org.openmrs.reference.page.VisitNotePage;
 import org.openmrs.uitestframework.test.RestClient;
 import org.openmrs.uitestframework.test.TestData;
 
+import java.util.List;
 
 public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
 
     private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
     private static final String LOCATION_UUID = "8d6c993e-c2cc-11de-8d13-0010c6dffd0f";
 
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
-    private VisitNotePage visitNotePage;
-    private ActiveVisitsPage activeVisitsPage;
     private TestData.PatientInfo patient;
 
     @Before
@@ -45,27 +42,26 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
     @Category(BuildTests.class)
     public void AddDiagnosisToVisitNoteTest() throws Exception {
 
-        activeVisitsPage = homePage.goToActiveVisitsSearch();
+        ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
 
-        patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
-        visitNotePage = patientDashboardPage.goToVisitNote();
+        ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
+        VisitNotePage visitNotePage = patientDashboardPage.goToVisitNote();
         visitNotePage.enterDiagnosis("Pne");
         visitNotePage.enterSecondaryDiagnosis("Bleed");
         assertEquals("Pneumonia", visitNotePage.primaryDiagnosis());
         assertEquals("Bleeding", visitNotePage.secondaryDiagnosis());
 
-        visitNotePage.save();
-        patientDashboardPage.waitForPage();
-        assertTrue(driver.getPageSource().contains("Pneumonia"));
-        assertTrue(driver.getPageSource().contains("Bleeding"));
+        patientDashboardPage = visitNotePage.save();
+
+        List<String> diagnoses = patientDashboardPage.getDiagnoses();
+        assertEquals(diagnoses.get(0), "Pneumonia");
+        assertEquals(diagnoses.get(1), "Bleeding");
     }
 
     @After
     public void tearDown() throws Exception {
-        //TODO: This one causes some issues -> "org.openqa.selenium.remote.SessionNotFoundException: The FirefoxDriver cannot be used after quit() was called."
-        //TODO: This error isn't thrown when patientDashboardPage.waitForPage() isn't called.
-        //TODO: quit() method is called in stopWebDriver() in TestBase class
+        //There's a validation error when deleting a patient with a visit note. Some obs has an invalid value and cannot be voided.
         //deletePatient(patient.uuid);
     }
 

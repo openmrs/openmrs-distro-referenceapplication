@@ -10,12 +10,15 @@
 package org.openmrs.reference.page;
 
 import org.apache.commons.lang.StringUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
-import java.util.Calendar;
 
 public class ClinicianFacingPatientDashboardPage extends Page {
 
@@ -46,6 +49,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By UI_MENU_ITEM = By.className("ui-menu-item");
 	private static final By PRIMARY_DIAGNOSIS_ELEMENT = By.cssSelector(".diagnosis.primary .matched-name");
 	private static final By SECONDARY_DIAGNOSIS_ELEMENT = By.xpath("//ul[2]/li/span/div/strong");
+	private static final By DIAGNOSES_LIST = By.cssSelector("#coreapps-diagnosesList");
 	private static final By CURRENT_DATE = By.linkText("Today");
 	private static final By VISIT_NOTE_ENCOUNTER = By.xpath("//div[@id='visit-details']/ul/li/ul/li/div/strong/span[text()='Visit Note']");
 	private static final By NOTE = By.id("w10");
@@ -305,8 +309,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 			return false;
 		}
 	}
-
-
+	
 	public PatientVisitsDashboardPage addPastVisit(){
 		clickOn(ADD_PAST_VISIT);
 		clickOn(TODAY);
@@ -377,9 +380,17 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public String getTelephoneNumber() {
 		String phoneNumber = findElement(TELEPHONE_NUMBER_TEXT).getText();
-		if(StringUtils.isNotBlank(phoneNumber)){
+		if (StringUtils.isNotBlank(phoneNumber)) {
 			phoneNumber = phoneNumber.substring(0, phoneNumber.indexOf("\n"));
 		}
 		return phoneNumber;
+	}
+
+	public List<String> getDiagnoses() {
+		String diagnosesListRaw = findElement(DIAGNOSES_LIST).getText();
+		diagnosesListRaw = diagnosesListRaw.replace("DIAGNOSES","");
+		List<String> diagnosesList = new ArrayList<String>(Arrays.asList(diagnosesListRaw.split("[\r\n]+")));
+		diagnosesList.remove(0);
+		return diagnosesList;
 	}
 }
