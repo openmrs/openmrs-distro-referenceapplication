@@ -41,7 +41,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
 	public static final By FORM_EXIST = By.className("action-section");
 	private static final By EDIT_PATIENT = By.linkText("Edit");
-	private static final By SHOW_CONTACT_INFO = By.cssSelector("span.show");
+	private static final By SHOW_CONTACT_INFO = By.id("coreapps-showContactInfo");
 	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
 	private static final By PATIENT_ID = By.cssSelector("div.identifiers > span");
 	private static final By CODE = By.className("code");
