@@ -13,11 +13,13 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.uitestframework.test.TestBase;
 
+@Ignore("Test doesn't extend ReferenceApplicationTestBase and fails on fresh distribution")
 public class LoginTest extends TestBase {
     private HomePage homePage;
 

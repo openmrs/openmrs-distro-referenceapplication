@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HomePage;
@@ -28,6 +29,7 @@ public class CheckModules extends TestBase {
      */
     @Test
     @Category(org.openmrs.reference.groups.BuildTests.class)
+    @Ignore("Test doesn't extend ReferenceApplicationTestBase and fails on fresh distribution")
     public void checkModules() throws Exception {
     	assertPage(homePage);
         modulesPage.go();
