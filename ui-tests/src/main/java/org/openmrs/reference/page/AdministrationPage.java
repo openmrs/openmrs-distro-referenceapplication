@@ -16,8 +16,8 @@ public class AdministrationPage extends Page {
 
     private static final String URL = "/admin/index.htm";
 
-    private static final By MANAGE_USERS = By.cssSelector("#content  table:nth-child(4)  div:nth-child(1) li:nth-child(2)  a");
-    private static final By MANAGE_VISIT_TYPES = By.cssSelector("#content  table:nth-child(4)  div:nth-child(4) li:nth-child(2)  a");
+    private static final By MANAGE_USERS = By.cssSelector("#legacyui-manageUsers a");
+    private final static By MANAGE_VISIT_TYPES = By.cssSelector("#legacyui-manageVisitTypes a");
     private static final By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
     private static final By MANAGE_PERSONS = By.cssSelector("#content a[href=\"/openmrs/admin/person/index.htm\"]");
 
