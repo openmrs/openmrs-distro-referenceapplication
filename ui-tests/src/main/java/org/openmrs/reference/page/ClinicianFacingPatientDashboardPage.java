@@ -50,6 +50,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By PRIMARY_DIAGNOSIS_ELEMENT = By.cssSelector(".diagnosis.primary .matched-name");
 	private static final By SECONDARY_DIAGNOSIS_ELEMENT = By.xpath("//ul[2]/li/span/div/strong");
 	private static final By DIAGNOSES_LIST = By.cssSelector("#coreapps-diagnosesList");
+	private static final By APPOINTMENT_LIST = By.id("miniPatientAppointments");
+	private static final By APPOINTMENT_REQUESTS_LIST = By.id("miniPatientAppointmentRequests");
 	private static final By CURRENT_DATE = By.linkText("Today");
 	private static final By VISIT_NOTE_ENCOUNTER = By.xpath("//div[@id='visit-details']/ul/li/ul/li/div/strong/span[text()='Visit Note']");
 	private static final By NOTE = By.id("w10");
@@ -61,11 +63,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By LOCATION = By.id("w3");
 	private static final By WHO_WHEN_WHERE = By.id("who-when-where");
 	private static final By REQUEST_APPOINTMENT = By.linkText("Request Appointment");
-	private static final By FRAME_VALUE = By.id("min-time-frame-value");
-	private static final By FRAME_UNITS = By.id("min-time-frame-units");
-	private static final By SAVE_REQUEST = By.id("save-button");
-	private static final By APPOINTMENT_TYPE = By.id("appointment-type");
-	private static final By SERVICE_DROPDOWN = By.cssSelector("a.ng-scope.ng-binding");
+	private static final By APPOINTMENT_EDIT = By.cssSelector("div.info-section:nth-child(4) > div > a:nth-child(3)");
 
 	private static final By ERROR = By.cssSelector("li.error > span");
 	private static final By ADD_PAST_VISIT = By.id("org.openmrs.module.coreapps.createRetrospectiveVisit");
@@ -119,6 +117,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public void clickOnYes() {
 		clickOn(YES);
+	}
+
+	public ManageAppointmentsPage goToManageAppointments() {
+		clickOn(APPOINTMENT_EDIT);
+		return new ManageAppointmentsPage(this);
 	}
 
 	public void clickOnSave() {
@@ -396,30 +399,14 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		return text;
 	}
 
-	public void clickOnRequest() {
-		clickOn(REQUEST_APPOINTMENT);
-	}
-
-	public void enterValue(String value) {
-		setText(FRAME_VALUE, value);
-	}
-
-	public void selectUnits(String units) {
-		selectFrom(FRAME_UNITS, units);
-	}
-
-	public void saveRequest() {
-		clickOn(SAVE_REQUEST);
-	}
-
-	public void enterAppointmentType(String type) {
-		setTextToFieldNoEnter(APPOINTMENT_TYPE, type);
-		waitForElement(SERVICE_DROPDOWN);
-		clickOn(SERVICE_DROPDOWN);
-	}
-
 	public String getPatientGivenName() {
 		return findElement(PATIENT_GIVENNAME).getText();
+	}
+
+	public RequestAppointmentPage clickOnRequest() {
+		clickOn(REQUEST_APPOINTMENT);
+		return new RequestAppointmentPage(this);
+
 	}
 
 	public String getPatientFamilyName() {
@@ -447,6 +434,17 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public HomePage goToHomePage() {
 		goToPage("/referenceapplication/home.page");
 		return new HomePage(this);
+	}
+	public List<String> getAppointments() {
+		String appointmentsRaw = findElement(APPOINTMENT_LIST).getText();
+		List<String> appointmentsList = new ArrayList<String>(Arrays.asList(appointmentsRaw.split("[\r\n]+")));
+		return appointmentsList;
+	}
+
+	public List<String> getAppointmentRequestsList() {
+		String appointmentsRequestsRaw = findElement(APPOINTMENT_REQUESTS_LIST).getText();
+		List<String> appointmentsRequestsList = new ArrayList<String>(Arrays.asList(appointmentsRequestsRaw.split("[\r\n]+")));
+		return appointmentsRequestsList;
 	}
 
 	public String getActiveVisitMessage(){

@@ -10,6 +10,7 @@ import java.util.Arrays;
 public class LocationSensitiveApplicationTestBase extends ReferenceApplicationTestBase {
 
     private String locationUuid;
+    private String locationName;
 
     @Before
     public void createTaggedLocation() {
@@ -18,8 +19,8 @@ public class LocationSensitiveApplicationTestBase extends ReferenceApplicationTe
         String transfer = TestData.getLocationTag("Transfer");
         String admission = TestData.getLocationTag("Admission");
 
-        String locationName = "Location" + TestData.randomSuffix();
-        locationUuid = new TestData.TestLocation(locationName, Arrays.asList(visit, login)).create();
+        locationName = "Location" + TestData.randomSuffix();
+        locationUuid = new TestData.TestLocation(locationName, Arrays.asList(visit, login, transfer, admission)).create();
 
         goToLoginPage().loginAsAdmin(locationName);
     }
@@ -27,5 +28,9 @@ public class LocationSensitiveApplicationTestBase extends ReferenceApplicationTe
     @After
     public void deleteTestLocation(){
         RestClient.delete("location/"+locationUuid);
+    }
+
+    public String getLocationName() {
+        return locationName;
     }
 }
