@@ -1,75 +1,60 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
 package org.openmrs.reference;
 
-/**
- * Created by nata on 22.06.15.
- */
-
+import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.openmrs.reference.helper.TestPatient;
-import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
-import org.openmrs.reference.page.RegistrationPage;
-import org.openmrs.uitestframework.test.TestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Select;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.RegistrationEditSectionPage;
+import org.openmrs.uitestframework.test.TestData;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 
-public class EditDemographicTest extends TestBase {
-    private StringBuffer verificationErrors = new StringBuffer();
-    private HomePage homePage;
-    private HeaderPage headerPage;
-    private RegistrationPage registrationPage;
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
+public class EditDemographicTest extends ReferenceApplicationTestBase {
 
+    private TestData.PatientInfo testPatient;
+    private String prefix;
 
     @Before
     public void setUp() throws Exception {
-
-        
-        homePage = new HomePage(page);
-        assertPage(homePage);
-        headerPage = new HeaderPage(driver);
-        registrationPage = new RegistrationPage(page);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-
+        testPatient = createTestPatient();
+        prefix = RandomStringUtils.randomAlphanumeric(6);
     }
 
     @Test
     public void editDemographicTest() throws Exception {
-        homePage.goToActiveVisitPatient();
-        patientDashboardPage.clickOnEditPatient();
-        registrationPage.clearName();
-        registrationPage.enterPatientGivenName("John");
-        registrationPage.clearMiddleName();
-        registrationPage.enterPatientMiddleName("Bob");
-        registrationPage.clearFamilyName();
-        registrationPage.enterPatientFamilyName("Smith");
-        registrationPage.clickOnGenderLink();
-        registrationPage.selectPatientGender("Male");
-        registrationPage.clickOnBirthdateLabel();
-        registrationPage.clearBirthDay();
-        registrationPage.enterBirthDay("02");
-        registrationPage.selectBirthMonth("April");
-        registrationPage.clearBirthdateYear();
-        registrationPage.enterBirthYear("1985");
-        registrationPage.clickOnConfirmEdit();
-        registrationPage.confirmPatient();
-        assertTrue(driver.getPageSource().contains("Saved changes in contact info for: John Bob Smith"));
+        FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
+        findPatientPage.enterPatient(testPatient.identifier);
+        ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage = findPatientPage.clickOnFirstPatient();
+        RegistrationEditSectionPage registrationEditSectionPage = clinicianFacingPatientDashboardPage.clickOnEditPatient();
+        registrationEditSectionPage.enterGivenName(testPatient.givenName+prefix);
+        registrationEditSectionPage.enterMiddleName(testPatient.middleName+prefix);
+        registrationEditSectionPage.enterFamilyName(testPatient.familyName+prefix);
+        registrationEditSectionPage.selectPatientGender("Male");
+        registrationEditSectionPage.clickOnBirthdateLabel();
+        registrationEditSectionPage.enterBirthDay("21");
+        registrationEditSectionPage.selectBirthMonth("May");
+        registrationEditSectionPage.enterBirthYear("1992");
+        registrationEditSectionPage.clickOnConfirmEdit();
+        clinicianFacingPatientDashboardPage = registrationEditSectionPage.confirmPatient();
+        assertThat(clinicianFacingPatientDashboardPage.getPatientGivenName(), is(testPatient.givenName+prefix));
     }
 
     @After
     public void tearDown() throws Exception {
-
-        headerPage.clickOnHomeIcon();
-        headerPage.logOut();
+        deletePatient(testPatient.uuid);
     }
 
 

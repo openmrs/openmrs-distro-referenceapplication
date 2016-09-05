@@ -40,8 +40,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public static final By SELECT_LOCATION = By.id("w5");
 	private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
 	public static final By FORM_EXIST = By.className("action-section");
-	private static final By EDIT_PATIENT = By.linkText("Edit");
 	private static final By SHOW_CONTACT_INFO = By.id("coreapps-showContactInfo");
+	private static final By EDIT_PATIENT = By.cssSelector("#edit-patient-demographics a");
 	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
 	private static final By PATIENT_ID = By.cssSelector("div.identifiers > span");
 	private static final By CODE = By.className("code");
@@ -82,6 +82,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By EYE_REPORT = By.linkText("Eye Report");
 	private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
 	private static final By RECENT_VISITS = By.cssSelector("#content div.container  div  div:nth-child(2)  div:nth-child(1)  div.info-header  a");
+	private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
 
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
@@ -97,8 +98,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public void back() {
 		clickOn(PATIENT);
 	}
-	public void clickOnEditPatient(){
+
+	public RegistrationEditSectionPage clickOnEditPatient(){
 		clickOn(EDIT_PATIENT);
+		return new RegistrationEditSectionPage(this);
 	}
 
 	public void endVisit() throws InterruptedException{
@@ -118,10 +121,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(SAVE);
 	}
 
-
 	public void clickOnAdmitToInpatient() throws InterruptedException {
 		clickOn(ADMIT_TO_INPATIENT);
 	}
+
 
 	public boolean inpatientPresent(){
 		try {
@@ -164,7 +167,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(VISIT_NOTE);
 		waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
 	}
-	
+
 	public VisitNotePage goToVisitNote(){
 		clickOn(VISIT_NOTE);
 		return new VisitNotePage(this);
@@ -224,10 +227,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		findElement(NOTE).clear();
 		enterNote(note);
 	}
+
 	public void save() {
 		clickOn(SAVE_VISIT_NOTE);
 	}
-
 	public WebElement visitLink() {
 		return findElement(VISIT_LINK);
 	}
@@ -253,10 +256,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(TRANSFER_TO_WARD_SERVICE);
 
 	}
+
 	public void clickOnShowContact(){
 		clickOn(SHOW_CONTACT_INFO);
 	}
-
 	public RegistrationEditSectionPage clickOnEditContact(){
 		clickOn(EDIT_CONTACT_INFO);
 		return new RegistrationEditSectionPage(this);
@@ -271,8 +274,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(ADD_ALLERGY);
 		return new AllergyPage(this);
 	}
-	public void clickOnEyeForm(){ clickOn(EYE_REPORT);}
 
+	public void clickOnEyeForm(){ clickOn(EYE_REPORT);}
 	public void goToEditVisitNote() throws InterruptedException {
 		clickOn(CURRENT_DATE);
 		String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
@@ -287,10 +290,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public void confirmDeletion() {
 		clickOn(CONFIRM_DEL_BUTTON);
 	}
+
 	public void deleteDiagnosis() {
 		clickOn(DEL_DIAGNOSIS);
 	}
-
 	public void getCurrentDate() {
 		findElement(DATE_FIELD).click();
 		findElement(By.linkText("" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH))).click();
@@ -320,6 +323,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(CONFIRM_PAST_VISIT);
 		return new PatientVisitsDashboardPage(this);
 	}
+
 
 	public void clickChangeDate (){
 		waitForElement(CHANGE_DATE);
@@ -362,6 +366,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 	public void clickOnRequest(){ clickOn(REQUEST_APPOINTMENT);}
+
 	public void enterValue(String value){ setText(FRAME_VALUE, value);}
 	public void selectUnits(String units){ selectFrom(FRAME_UNITS, units);}
 	public void saveRequest(){ clickOn(SAVE_REQUEST);}
@@ -371,10 +376,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(SERVICE_DROPDOWN);
 	}
 
-
-	public String getPatientGivenName() {
-		String patientGivenName = findElement(By.cssSelector(".patient-header .demographics .name .PersonName-givenName")).getText();
-		return patientGivenName;
+	public String getPatientGivenName(){
+		return findElement(PATIENT_GIVENNAME).getText();
 	}
 
 	public String getPatientFamilyName() {
