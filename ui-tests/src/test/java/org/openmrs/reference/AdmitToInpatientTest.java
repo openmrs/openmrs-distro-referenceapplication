@@ -1,5 +1,7 @@
 package org.openmrs.reference;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -7,56 +9,38 @@ import static org.junit.Assert.assertTrue;
  */
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
-import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HomePage;
-import org.openmrs.uitestframework.test.TestBase;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.PatientVisitsDashboardPage;
+import org.openmrs.uitestframework.test.TestData;
 
 
-public class AdmitToInpatientTest extends TestBase {
-    private HomePage homePage;
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
-    private HeaderPage headerPage;
+public class AdmitToInpatientTest extends ReferenceApplicationTestBase {
 
+    private static final String INPATIENT_WARD = "Inpatient Ward";
 
+    private TestData.PatientInfo testPatient;
 
     @Before
-    public void setUp() throws Exception {
-        homePage = new HomePage(page);
-        assertPage(homePage);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-        headerPage = new HeaderPage(driver);
-        homePage.goToActiveVisitPatient();
-
-
+    public void createTestData() throws Exception {
+        testPatient = createTestPatient();
     }
 
-    @Ignore//ignored due to adding choose provider functionality
     @Test
     public void admitToInpatientTest() throws Exception {
+        FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
+        findPatientPage.enterPatient(testPatient.identifier);
+        PatientVisitsDashboardPage patientVisitsDashboardPage = findPatientPage.clickOnFirstPatient().startVisit();
 
-        if(patientDashboardPage.inpatientPresent()) {
-            patientDashboardPage.exitFromInpatient();
+        patientVisitsDashboardPage = patientVisitsDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);
+        assertThat(patientVisitsDashboardPage.getEncountersCount(), is(1));
 
-        }
-        patientDashboardPage.clickOnAdmitToInpatient();
-        patientDashboardPage.selectLocation("Unknown Location");
-        assertTrue(patientDashboardPage.location().getText().contains("Unknown Location"));
-
-        patientDashboardPage.clickOnSave();
-        assertTrue(patientDashboardPage.visitLink().getText().contains("Entered Admission"));
-        patientDashboardPage.exitFromInpatient();
-        patientDashboardPage.waitForVisitLink();
-        assertTrue(patientDashboardPage.visitLink().getText().contains("Entered Discharge"));
-
+        patientVisitsDashboardPage.goToExitFromInpatient().confirm(INPATIENT_WARD);
+        assertThat(patientVisitsDashboardPage.getEncountersCount(), is(2));
     }
 
     @After
-    public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
-        headerPage.logOut();
+    public void deleteTestPatient(){
+        deletePatient(testPatient.uuid);
     }
-
 }
