@@ -266,7 +266,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public String findPatientId(){
 		return findElement(PATIENT_ID).getText();
 	}
-	public void clickOnAddAllergy(){ clickOn(ADD_ALLERGY);}
+
+	public AllergyPage clickOnAllergyManagement(){
+		clickOn(ADD_ALLERGY);
+		return new AllergyPage(this);
+	}
 	public void clickOnEyeForm(){ clickOn(EYE_REPORT);}
 
 	public void goToEditVisitNote() throws InterruptedException {
