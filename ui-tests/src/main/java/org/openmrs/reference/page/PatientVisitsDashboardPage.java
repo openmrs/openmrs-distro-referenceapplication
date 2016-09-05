@@ -11,6 +11,7 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class PatientVisitsDashboardPage extends Page {
 	private static final By END_VISIT = By.cssSelector("#visit-details div.visit-actions.active-visit a:nth-child(1)");
 	private static final By END_VISIT_DIALOG = By.id("end-visit-dialog");
 	private static final By END_VISIT_CONFIRM = By.cssSelector("#end-visit-dialog button[class='confirm right']");
+	private static final By ADMIT_TO_INPATIENT = By.id("referenceapplication.realTime.simpleAdmission");
+	private static final By EXIT_FROM_INPATIENT = By.id("referenceapplication.realTime.simpleDischarge");
 
 	public PatientVisitsDashboardPage(Page parent) {
 		super(parent);
@@ -54,4 +57,24 @@ public class PatientVisitsDashboardPage extends Page {
 		clickOn(END_VISIT_CONFIRM);
 	}
 
+	public AdmitToInpatientPage goToAdmitToInpatient(){
+		clickOn(ADMIT_TO_INPATIENT);
+		return new AdmitToInpatientPage(this);
+	}
+
+	public ExitFromInpatientPage goToExitFromInpatient(){
+		clickOn(EXIT_FROM_INPATIENT);
+		return new ExitFromInpatientPage(this);
+	}
+
+	/**
+	 * Before using it, note that it will take full timeout time if encountersList is empty
+     */
+	public int getEncountersCount(){
+		try {
+			return findElements(By.xpath("//*[@id='encountersList']/li")).size();
+		} catch(TimeoutException e){
+			return 0;
+		}
+	}
 }
