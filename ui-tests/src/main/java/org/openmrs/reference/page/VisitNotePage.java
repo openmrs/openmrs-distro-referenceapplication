@@ -12,6 +12,7 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class VisitNotePage extends Page {
 	
@@ -22,7 +23,11 @@ public class VisitNotePage extends Page {
 	private static final By PRIMARY_DIAGNOSIS_ELEMENT = By.cssSelector(".diagnosis.primary .matched-name");
 	private static final By SECONDARY_DIAGNOSIS_ELEMENT = By.xpath("//ul[2]/li/span/div/strong");
 	private static final By SAVE_VISIT_NOTE = By.cssSelector(".submitButton.confirm");
-	
+	private static final By NOTE = By.id("w10");
+	private static final By PROVIDER = By.id("w1");
+	private static final By LOCATION = By.id("w3");
+	private static final By DEL_DIAGNOSIS = By.xpath("//div[@id='display-encounter-diagnoses-container']/ul/li/span/i");
+
 	public VisitNotePage(Page page) {
 		super(page);
 	}
@@ -46,6 +51,16 @@ public class VisitNotePage extends Page {
 
 	}
 
+	public void addNote(String note) {
+		findElement(NOTE).clear();
+		setText(NOTE, note);
+	}
+
+	public void selectProviderAndLocation() {
+		new Select(findElement(PROVIDER)).selectByVisibleText("Super User");
+		new Select(findElement(LOCATION)).selectByVisibleText("Isolation Ward");
+	}
+
 	public void addSecondaryDiagnosis(String diag) {
 		WebElement diagnosisElement = findElement(DIAGNOSIS_SEARCH);
 		diagnosisElement.click();
@@ -59,6 +74,10 @@ public class VisitNotePage extends Page {
 		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
 		waitForElement(UI_ID_1);
 		clickOn(UI_MENU_ITEM);
+	}
+
+	public void deleteDiagnosis() {
+		clickOn(DEL_DIAGNOSIS);
 	}
 
 	public String primaryDiagnosis() {

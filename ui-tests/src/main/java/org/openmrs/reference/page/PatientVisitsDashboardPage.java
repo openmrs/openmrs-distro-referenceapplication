@@ -27,6 +27,7 @@ public class PatientVisitsDashboardPage extends Page {
 	private static final By ACTIONS_DROPDOWN = By.cssSelector("#content span.dropdown-name");
 	private static final By MERGE_VISITS = By.cssSelector("#content div.actions.dropdown ul li:nth-child(2) > a");
 	private static final By FAMILY_NAME = By.cssSelector(".patient-header .demographics .name .PersonName-familyName");
+	private static final By VISIT_NOTE_ENCOUNTER = By.xpath("//div[@id='visit-details']/ul/li/ul/li/div/strong/span[text()='Visit Note']");
 
 	public PatientVisitsDashboardPage(Page parent) {
 		super(parent);
@@ -80,9 +81,19 @@ public class PatientVisitsDashboardPage extends Page {
 		clickOn(ACTIONS_DROPDOWN);
 	}
 
-	public MergeVisitsPage clickOnMergeVisits(){
+	public MergeVisitsPage clickOnMergeVisits() {
 		clickOn(MERGE_VISITS);
 		return new MergeVisitsPage(this);
+	}
+	public void deleteVisitNote() {
+		String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
+		clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='" + visitNoteId + "'][2]"));
+	}
+
+	public EditVisitNotePage goToEditVisitNote() throws InterruptedException {
+		String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
+		clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='"+visitNoteId+"']"));
+		return new EditVisitNotePage(this);
 	}
 
 	/**
