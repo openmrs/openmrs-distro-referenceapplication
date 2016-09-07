@@ -15,7 +15,7 @@ import org.openmrs.reference.page.PatientVisitsDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
 
 
-public class AdmitToInpatientTest extends ReferenceApplicationTestBase {
+public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
 
     private static final String INPATIENT_WARD = "Inpatient Ward";
 
@@ -27,7 +27,7 @@ public class AdmitToInpatientTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    public void admitToInpatientTest() throws Exception {
+    public void admitExitInpatientTest() throws Exception {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(testPatient.identifier);
         PatientVisitsDashboardPage patientVisitsDashboardPage = findPatientPage.clickOnFirstPatient().startVisit();
