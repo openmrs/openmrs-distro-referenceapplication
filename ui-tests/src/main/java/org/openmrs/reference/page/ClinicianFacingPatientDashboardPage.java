@@ -316,7 +316,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 			return false;
 		}
 	}
-	
+
 	public PatientVisitsDashboardPage addPastVisit(){
 		clickOn(ADD_PAST_VISIT);
 		clickOn(TODAY);
@@ -332,8 +332,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public void enterDate(){
 		Calendar currentDay = Calendar.getInstance();
-	 	Integer dayOfMoth = currentDay.get(Calendar.DAY_OF_MONTH);
-	 	A: for(int j = 6; j > 0; j--) {
+		Integer dayOfMoth = currentDay.get(Calendar.DAY_OF_MONTH);
+		A: for(int j = 6; j > 0; j--) {
 			for (int i = 7; i > 0; i--) {
 				WebElement day = findElement(By.xpath(String.format("//table[@class=' table-condensed']/tbody/tr[%s]/td[%s]",j, i)));
 				if(!day.getAttribute("class").contains("disabled")) {
@@ -393,6 +393,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		return phoneNumber;
 	}
 
+
 	public List<String> getDiagnoses() {
 		String diagnosesListRaw = findElement(DIAGNOSES_LIST).getText();
 		diagnosesListRaw = diagnosesListRaw.replace("DIAGNOSES","");
@@ -400,4 +401,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		diagnosesList.remove(0);
 		return diagnosesList;
 	}
+
+	public HomePage goToHomePage(){
+		goToPage("/referenceapplication/home.page");
+		return new HomePage(this);
+	}
+
 }

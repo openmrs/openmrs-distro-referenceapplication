@@ -1,74 +1,83 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 package org.openmrs.reference;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
-import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
-import org.openmrs.uitestframework.test.TestBase;
 
 import java.awt.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThat;
 
 
-public class DuplicatePatientRegisterTest  extends TestBase {
-    private HeaderPage headerPage;
-    private RegistrationPage registrationPage;
-    private HomePage homePage;
-    private TestPatient patient1;
+public class DuplicatePatientRegisterTest  extends ReferenceApplicationTestBase {
+    private TestPatient patient;
 
     @Before
     public void setUp() throws AWTException {
-        headerPage = new HeaderPage(driver);
-        patient1 = PatientGenerator.generateTestPatient();
-
-        assertPage(page);
-        
-        homePage = new HomePage(page);
-        registrationPage = new RegistrationPage(page);
-        assertPage(homePage);
-    }
-
-    private void registerAPatient(TestPatient patient) throws InterruptedException {
-
-        homePage.goToRegisterPatientApp();
-        patient.familyName = "Smith";
-        patient.middleName = "";
-        patient.givenName = "Bob";
-        patient.gender = "Male";
-        patient.birthYear = "1999";
-        patient.birthMonth = "January";
-        patient.birthDay = "1";
-        patient.address1 = "address";
-        patient.address2 = "address";
-        registrationPage.enterPatient(patient);
-    }
-
-
-    @After
-    public void tearDown() throws Exception {
-        registrationPage.exitReview();
-        headerPage.clickOnHomeIcon();
-        deletePatient(patient1.uuid);
-        waitForPatientDeletion(patient1.uuid);
-        headerPage.logOut();
+        patient = PatientGenerator.generateTestPatient();
     }
 
     // Test for RA-714
     @Test
-    public void duplicateRegisterTest() throws InterruptedException {
+    @Category(BuildTests.class)
+    public void duplicateRegisterTest() throws InterruptedException, ParseException {
+        RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
+        registrationPage.enterPatient(patient);
+        ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
 
-        registerAPatient(patient1);
-        registrationPage.confirmPatient();
-        patient1.uuid = registrationPage.getPatientUuidFromUrl();
-        headerPage.clickOnHomeIcon();
-//        assertPage(homePage);
-        registerAPatient(patient1);
-        assertTrue(driver.getPageSource().contains("There seems to be a patient in the database that exactly matches this one. Please review before confirming:"));
-        assertTrue(registrationPage.clickOnReviewButton());
+        patient.uuid = dashboardPage.getPatientUuidFromUrl();
+
+        dashboardPage.goToHomePage();
+
+        registrationPage = homePage.goToRegisterPatientApp();
+        registrationPage.enterPatient(patient);
+
+        String name = registrationPage.getSimilarPatientName();
+        assertThat(name, Matchers.is(patient.givenName + " " + patient.familyName));
+
+
+        final String OLD_FORMAT = "d.MMM.yyyy";
+        final String NEW_FORMAT = "dd.MMM.yyyy";
+
+        String oldBirthDate = patient.birthDay + "." + patient.birthMonth.substring(0,3) + "." + patient.birthYear;
+        String newBirthDate;
+
+        SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+        Date date = sdf.parse(oldBirthDate);
+        sdf.applyPattern(NEW_FORMAT);
+        newBirthDate = sdf.format(date);
+
+
+        String info = registrationPage.getSimilarPatientInfo();
+        assertThat(info, Matchers.is(patient.gender + ", " + newBirthDate + ", " + patient.address1 + " " + patient.address2 + " " + patient.city + patient.state + patient.country + patient.postalCode ));
     }
+
+
+
+    @After
+    public void tearDown() throws Exception {
+        deletePatient(patient.uuid);
+        waitForPatientDeletion(patient.uuid);
+    }
+
 }
