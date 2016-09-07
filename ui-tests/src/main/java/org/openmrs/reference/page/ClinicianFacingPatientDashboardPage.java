@@ -84,6 +84,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By RECENT_VISITS = By.cssSelector("#content div.container  div  div:nth-child(2)  div:nth-child(1)  div.info-header  a");
 	private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
 
+	private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
+
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
 	}
@@ -140,6 +142,21 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		new Select(driver.findElement(By.id("w5"))).selectByVisibleText("Unknown Location");
 		clickOn(SAVE);
 
+	}
+
+	public AdmitToInpatientPage goToAdmitToInpatient(){
+		clickOn(ADMIT_TO_INPATIENT);
+		return new AdmitToInpatientPage(this);
+	}
+
+	public ExitFromInpatientPage goToExitFromInpatient(){
+		clickOn(EXIT_FROM_INPATIENT);
+		return new ExitFromInpatientPage(this);
+	}
+
+	public TransferToWardServicePage goToTransferToWardServicePage(){
+		clickOn(EXIT_FROM_INPATIENT);
+		return new TransferToWardServicePage(this);
 	}
 
 	@Override
@@ -252,9 +269,9 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		selectFrom(SELECT_LOCATION, loctation);
 	}
 
-	public void clickOnTranfer(){
+	public TransferToWardServicePage clickOnTranfer(){
 		clickOn(TRANSFER_TO_WARD_SERVICE);
-
+		return new TransferToWardServicePage(this);
 	}
 
 	public void clickOnShowContact(){
@@ -412,6 +429,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public HomePage goToHomePage(){
 		goToPage("/referenceapplication/home.page");
 		return new HomePage(this);
+	}
+
+	public String getActiveVisitMessage(){
+		return findElement(ACTIVE_VISIT_MESSAGE).getText();
 	}
 
 }
