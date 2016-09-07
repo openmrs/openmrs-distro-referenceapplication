@@ -325,12 +325,13 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 
-	public void clickChangeDate (){
+	public PatientVisitsDashboardPage clickChangeDate (){
 		waitForElement(CHANGE_DATE);
 		clickOn(CHANGE_DATE);
+		return new PatientVisitsDashboardPage(this);
 	}
 
-	public void enterDate(){
+	public PatientVisitsDashboardPage enterDate(){
 		Calendar currentDay = Calendar.getInstance();
 		Integer dayOfMoth = currentDay.get(Calendar.DAY_OF_MONTH);
 		A: for(int j = 6; j > 0; j--) {
@@ -340,17 +341,23 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 					if (day.getText().equals("" + dayOfMoth)) {
 						day.click();
 						dayOfMoth--;
-						clickOn(CONFIRM_PAST_VISIT);
+						PatientVisitsDashboardPage patientVisitsDashboardPage = clickOnConfirmPastVisit();
 						try {
 							clickChangeDate();
 						} catch(Exception e) {
-							break A;
+							return patientVisitsDashboardPage;
 						}
 
 					}
 				}
 			}
 		}
+		return null;
+	}
+
+	public PatientVisitsDashboardPage clickOnConfirmPastVisit(){
+		clickOn(CONFIRM_PAST_VISIT);
+		return new PatientVisitsDashboardPage(this);
 	}
 
 	public String mergeVisits() {

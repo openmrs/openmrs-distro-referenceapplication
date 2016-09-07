@@ -24,6 +24,8 @@ public class PatientVisitsDashboardPage extends Page {
 	private static final By END_VISIT_CONFIRM = By.cssSelector("#end-visit-dialog button[class='confirm right']");
 	private static final By ADMIT_TO_INPATIENT = By.id("referenceapplication.realTime.simpleAdmission");
 	private static final By EXIT_FROM_INPATIENT = By.id("referenceapplication.realTime.simpleDischarge");
+	private static final By ACTIONS_DROPDOWN = By.cssSelector("#content span.dropdown-name");
+	private static final By MERGE_VISITS = By.cssSelector("#content div.actions.dropdown ul li:nth-child(2) > a");
 
 	public PatientVisitsDashboardPage(Page parent) {
 		super(parent);
@@ -71,6 +73,15 @@ public class PatientVisitsDashboardPage extends Page {
 	public ExitFromInpatientPage goToExitFromInpatient(){
 		clickOn(EXIT_FROM_INPATIENT);
 		return new ExitFromInpatientPage(this);
+	}
+
+	public void clickOnActions(){
+		clickOn(ACTIONS_DROPDOWN);
+	}
+
+	public MergeVisitsPage clickOnMergeVisits(){
+		clickOn(MERGE_VISITS);
+		return new MergeVisitsPage(this);
 	}
 
 	/**

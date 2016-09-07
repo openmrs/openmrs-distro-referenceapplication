@@ -1,60 +1,60 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
 package org.openmrs.reference;
 
-import static junit.framework.Assert.assertTrue;
-
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
-import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HomePage;
-import org.openmrs.uitestframework.test.TestBase;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.MergeVisitsPage;
+import org.openmrs.reference.page.PatientVisitsDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
 
-/**
- * Created by tomasz on 23.07.15.
- */
-public class MergeVisitsTest extends TestBase {
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
-    private HomePage homePage;
-    private HeaderPage headerPage;
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
+public class MergeVisitsTest extends ReferenceApplicationTestBase {
+
+    private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
+    private static final String LOCATION_UUID = "8d6c993e-c2cc-11de-8d13-0010c6dffd0f";
+
     private TestData.PatientInfo patient;
 
     @Before
     public void setUp() {
         patient = createTestPatient();
+        new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, LOCATION_UUID).create();
+    }
 
-        homePage = new HomePage(page);
-        assertPage(homePage);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-        headerPage = new HeaderPage(driver);
+    @Test
+    @Category(BuildTests.class)
+    public void mergeVisitsTest() {
+        FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
+        findPatientPage.enterPatient(patient.identifier);
+        ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage = findPatientPage.clickOnFirstPatient();
+        clinicianFacingPatientDashboardPage.addPastVisit();
+        clinicianFacingPatientDashboardPage.clickChangeDate();
+        PatientVisitsDashboardPage patientVisitsDashboardPage = clinicianFacingPatientDashboardPage.enterDate();
+        patientVisitsDashboardPage.clickOnActions();
+        MergeVisitsPage mergeVisitsPage = patientVisitsDashboardPage.clickOnMergeVisits();
+        mergeVisitsPage.checkFirstVisit();
+        mergeVisitsPage.checkSecondVisit();
+        mergeVisitsPage= mergeVisitsPage.clickOnMergeSelecetdVisits();
+        assertThat(mergeVisitsPage.getAllVisit().size(), is(1));
     }
 
     @After
     public void tearDown() throws InterruptedException {
-        headerPage.clickOnHomeIcon();
         deletePatient(patient.uuid);
-        headerPage.logOut();
-    }
-
-    @Ignore //ignored due to problems in enter date algorithm
-    @Test
-    public void mergeVisitsTest() {
-    	patientDashboardPage.go(patient.uuid);
-        assertPage(patientDashboardPage);
-        patientDashboardPage.startVisit();
-        Assert.assertTrue(patientDashboardPage.hasActiveVisit());
-        patientDashboardPage.back();
-        patientDashboardPage.addPastVisit();
-        if(patientDashboardPage.errorPresent()) {
-            patientDashboardPage.clickChangeDate();
-            patientDashboardPage.enterDate();
-        }
-        patientDashboardPage.back();
-        assertTrue(patientDashboardPage.mergeVisits().contains("Visits merged successfully"));
-
     }
 }
