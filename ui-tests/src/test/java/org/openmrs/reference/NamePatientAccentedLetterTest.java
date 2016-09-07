@@ -1,59 +1,59 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 package org.openmrs.reference;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
+import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
 import org.junit.*;
+
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 
-/**
- * Created by nata on 24.07.15.
- */
-
-public class NamePatientAccentedLetterTest extends TestBase {
-    private HomePage homePage;
-    private HeaderPage headerPage;
+public class NamePatientAccentedLetterTest extends ReferenceApplicationTestBase {
     private TestPatient patient;
-    private RegistrationPage registrationPage;
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
 
     @Before
     public void setUp() throws Exception {
-        
-        homePage = new HomePage(page);
-        assertPage(homePage);
-        headerPage = new HeaderPage(driver);
-        registrationPage = new RegistrationPage(page);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-        patient = new TestPatient();
+
+        patient = PatientGenerator.generateTestPatient();
     }
 
     @Test
-    @Ignore
+    @Category(BuildTests.class)
     public void namePatientAccentedLetterTest() throws Exception {
-        homePage.goToRegisterPatientApp();
-        patient.familyName = "Kłoczkowski";
+        RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
         patient.givenName = "Mike";
+        patient.familyName = "Kłoczkowski";
         patient.gender = "Male";
-        patient.estimatedYears = "25";
-        patient.address1 = "5109 Jumillá";
-        registrationPage.enterMegrePatient(patient);
-        patientDashboardPage.waitForVisitLink();
-        assertTrue(patientDashboardPage.visitLink().getText().contains("Created Patient Record: " + patient.givenName +" " + patient.familyName));
-        patient.uuid =  patientDashboardPage.getPatientUuidFromUrl();
+        registrationPage.enterPatient(patient);
+        ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
+        String name = dashboardPage.getPatientFamilyName();
+        assertThat(name, Matchers.is(patient.familyName));
+        patient.uuid = dashboardPage.getPatientUuidFromUrl();
     }
 
 
 
     @After
     public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
         deletePatient(patient.uuid);
         waitForPatientDeletion(patient.uuid);
-        headerPage.logOut();
     }
 
 }

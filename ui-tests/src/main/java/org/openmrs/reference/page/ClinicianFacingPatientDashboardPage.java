@@ -101,25 +101,27 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		clickOn(PATIENT);
 	}
 
-	public RegistrationEditSectionPage clickOnEditPatient(){
+	public RegistrationEditSectionPage clickOnEditPatient() {
 		clickOn(EDIT_PATIENT);
 		return new RegistrationEditSectionPage(this);
 	}
 
-	public void endVisit() throws InterruptedException{
+	public void endVisit() throws InterruptedException {
 		clickOn(END_VISIT);
 		waitForElement(YES);
 		clickOn(YES);
 	}
 
-	public PatientVisitsDashboardPage goToRecentVisits(){
+	public PatientVisitsDashboardPage goToRecentVisits() {
 		clickOn(RECENT_VISITS);
 		return new PatientVisitsDashboardPage(this);
 	}
 
-	public void clickOnYes (){clickOn(YES);}
+	public void clickOnYes() {
+		clickOn(YES);
+	}
 
-	public void clickOnSave(){
+	public void clickOnSave() {
 		clickOn(SAVE);
 	}
 
@@ -128,16 +130,15 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 
-	public boolean inpatientPresent(){
+	public boolean inpatientPresent() {
 		try {
 			return findElement(EXIT_FROM_INPATIENT) != null;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			return false;
 		}
 	}
 
-	public void exitFromInpatient(){
+	public void exitFromInpatient() {
 		clickOn(EXIT_FROM_INPATIENT);
 		new Select(driver.findElement(By.id("w5"))).selectByVisibleText("Unknown Location");
 		clickOn(SAVE);
@@ -171,7 +172,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public boolean hasActiveVisit() {
 		try {
 			return findElement(STARTED_AT) != null;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}
@@ -185,7 +186,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
 	}
 
-	public VisitNotePage goToVisitNote(){
+	public VisitNotePage goToVisitNote() {
 		clickOn(VISIT_NOTE);
 		return new VisitNotePage(this);
 	}
@@ -248,6 +249,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public void save() {
 		clickOn(SAVE_VISIT_NOTE);
 	}
+
 	public WebElement visitLink() {
 		return findElement(VISIT_LINK);
 	}
@@ -265,7 +267,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		waitForElementToBeHidden(VISIT_LINK);
 	}
 
-	public void selectLocation(String loctation){
+	public void selectLocation(String loctation) {
 		selectFrom(SELECT_LOCATION, loctation);
 	}
 
@@ -274,29 +276,33 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		return new TransferToWardServicePage(this);
 	}
 
-	public void clickOnShowContact(){
+	public void clickOnShowContact() {
 		clickOn(SHOW_CONTACT_INFO);
 	}
-	public RegistrationEditSectionPage clickOnEditContact(){
+
+	public RegistrationEditSectionPage clickOnEditContact() {
 		clickOn(EDIT_CONTACT_INFO);
 		return new RegistrationEditSectionPage(this);
 	}
 
 	//Find Patient Id
-	public String findPatientId(){
+	public String findPatientId() {
 		return findElement(PATIENT_ID).getText();
 	}
 
-	public AllergyPage clickOnAllergyManagement(){
+	public AllergyPage clickOnAllergyManagement() {
 		clickOn(ADD_ALLERGY);
 		return new AllergyPage(this);
 	}
 
-	public void clickOnEyeForm(){ clickOn(EYE_REPORT);}
+	public void clickOnEyeForm() {
+		clickOn(EYE_REPORT);
+	}
+
 	public void goToEditVisitNote() throws InterruptedException {
 		clickOn(CURRENT_DATE);
 		String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
-		clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='"+visitNoteId+"']"));
+		clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='" + visitNoteId + "']"));
 	}
 
 	public void deleteVisitNote() {
@@ -311,6 +317,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public void deleteDiagnosis() {
 		clickOn(DEL_DIAGNOSIS);
 	}
+
 	public void getCurrentDate() {
 		findElement(DATE_FIELD).click();
 		findElement(By.linkText("" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH))).click();
@@ -325,16 +332,15 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		return findElement(WHO_WHEN_WHERE);
 	}
 
-	public boolean errorPresent(){
+	public boolean errorPresent() {
 		try {
 			return findElement(ERROR) != null;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			return false;
 		}
 	}
 
-	public PatientVisitsDashboardPage addPastVisit(){
+	public PatientVisitsDashboardPage addPastVisit() {
 		clickOn(ADD_PAST_VISIT);
 		clickOn(TODAY);
 		clickOn(CONFIRM_PAST_VISIT);
@@ -342,25 +348,27 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 
+
 	public void clickChangeDate (){
 		waitForElement(CHANGE_DATE);
 		clickOn(CHANGE_DATE);
 	}
 
-	public PatientVisitsDashboardPage enterDate(){
+	public PatientVisitsDashboardPage enterDate() {
 		Calendar currentDay = Calendar.getInstance();
 		Integer dayOfMoth = currentDay.get(Calendar.DAY_OF_MONTH);
-		A: for(int j = 6; j > 0; j--) {
+		A:
+		for (int j = 6; j > 0; j--) {
 			for (int i = 7; i > 0; i--) {
-				WebElement day = findElement(By.xpath(String.format("//table[@class=' table-condensed']/tbody/tr[%s]/td[%s]",j, i)));
-				if(!day.getAttribute("class").contains("disabled")) {
+				WebElement day = findElement(By.xpath(String.format("//table[@class=' table-condensed']/tbody/tr[%s]/td[%s]", j, i)));
+				if (!day.getAttribute("class").contains("disabled")) {
 					if (day.getText().equals("" + dayOfMoth)) {
 						day.click();
 						dayOfMoth--;
 						PatientVisitsDashboardPage patientVisitsDashboardPage = clickOnConfirmPastVisit();
 						try {
 							clickChangeDate();
-						} catch(Exception e) {
+						} catch (Exception e) {
 							return patientVisitsDashboardPage;
 						}
 
@@ -371,7 +379,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		return null;
 	}
 
-	public PatientVisitsDashboardPage clickOnConfirmPastVisit(){
+	public PatientVisitsDashboardPage clickOnConfirmPastVisit() {
 		clickOn(CONFIRM_PAST_VISIT);
 		return new PatientVisitsDashboardPage(this);
 	}
@@ -388,18 +396,29 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		return text;
 	}
 
-	public void clickOnRequest(){ clickOn(REQUEST_APPOINTMENT);}
+	public void clickOnRequest() {
+		clickOn(REQUEST_APPOINTMENT);
+	}
 
-	public void enterValue(String value){ setText(FRAME_VALUE, value);}
-	public void selectUnits(String units){ selectFrom(FRAME_UNITS, units);}
-	public void saveRequest(){ clickOn(SAVE_REQUEST);}
-	public void enterAppointmentType(String type){
+	public void enterValue(String value) {
+		setText(FRAME_VALUE, value);
+	}
+
+	public void selectUnits(String units) {
+		selectFrom(FRAME_UNITS, units);
+	}
+
+	public void saveRequest() {
+		clickOn(SAVE_REQUEST);
+	}
+
+	public void enterAppointmentType(String type) {
 		setTextToFieldNoEnter(APPOINTMENT_TYPE, type);
 		waitForElement(SERVICE_DROPDOWN);
 		clickOn(SERVICE_DROPDOWN);
 	}
 
-	public String getPatientGivenName(){
+	public String getPatientGivenName() {
 		return findElement(PATIENT_GIVENNAME).getText();
 	}
 
@@ -419,13 +438,13 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public List<String> getDiagnoses() {
 		String diagnosesListRaw = findElement(DIAGNOSES_LIST).getText();
-		diagnosesListRaw = diagnosesListRaw.replace("DIAGNOSES","");
+		diagnosesListRaw = diagnosesListRaw.replace("DIAGNOSES", "");
 		List<String> diagnosesList = new ArrayList<String>(Arrays.asList(diagnosesListRaw.split("[\r\n]+")));
 		diagnosesList.remove(0);
 		return diagnosesList;
 	}
 
-	public HomePage goToHomePage(){
+	public HomePage goToHomePage() {
 		goToPage("/referenceapplication/home.page");
 		return new HomePage(this);
 	}
