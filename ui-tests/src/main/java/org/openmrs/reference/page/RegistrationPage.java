@@ -23,17 +23,17 @@ import org.openqa.selenium.WebDriver;
 public class RegistrationPage extends Page {
 
 
-	public RegistrationPage(Page page) {
+    public RegistrationPage(Page page) {
         super(page);
     }
 
     private boolean acceptNextAlert = true;
-	static final By CONTACT_INFO_SECTION = By.id("contactInfo_label");
-	static final By CONFIRM_SECTION = By.id("confirmation_label");
-	static final By BIRTHDATE_LABEL = By.id("birthdateLabel");
+    static final By CONTACT_INFO_SECTION = By.id("contactInfo_label");
+    static final By CONFIRM_SECTION = By.id("confirmation_label");
+    static final By BIRTHDATE_LABEL = By.id("birthdateLabel");
     static final By PHONE_NUMBER_LABEL = By.id("phoneNumberLabel");
-	static final By GIVEN_NAME = By.name("givenName");
-	static final By FAMILY_NAME = By.name("familyName");
+    static final By GIVEN_NAME = By.name("givenName");
+    static final By FAMILY_NAME = By.name("familyName");
     static final By MIDDLE_NAME = By.name("middleName");
     static final By GENDER_LABEL = By.id("genderLabel");
     static final String GENDER_FIELD_ID = ("gender-field");
@@ -43,9 +43,9 @@ public class RegistrationPage extends Page {
     public static final By BIRTHDAY_DAY = By.id(BIRTHDAY_DAY_TEXTBOX_ID);
     public static final By BIRTHDAY_MONTH = By.id("birthdateMonth-field");
     public static final By BIRTHDAY_YEAR = By.id("birthdateYear-field");
-	static final By ADDRESS1 = By.id("address1");
-	static final By ADDRESS2 = By.id("address2");
-	static final By CITY_VILLAGE = By.id("cityVillage");
+    static final By ADDRESS1 = By.id("address1");
+    static final By ADDRESS2 = By.id("address2");
+    static final By CITY_VILLAGE = By.id("cityVillage");
     static final By STATE_PROVINCE = By.id("stateProvince");
     static final By COUNTRY = By.id("country");
     static final By POSTAL_CODE = By.id("postalCode");
@@ -56,21 +56,21 @@ public class RegistrationPage extends Page {
     // These xpath expressions should be replaced by id's or cssSelectors if possible.
     static final By CONFIRM_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li[2]/span");
     static final String CONFIRMATION_DIV = "//div[@id='confirmation']";
-	public static final By NAME_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[1]");
-	public static final By GENDER_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[2]");
-	public static final By BIRTHDATE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[3]");
-	static final By ADDRESS_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[4]");
-	static final By PHONE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[5]");
+    public static final By NAME_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[1]");
+    public static final By GENDER_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[2]");
+    public static final By BIRTHDATE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[3]");
+    static final By ADDRESS_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[4]");
+    static final By PHONE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[5]");
 
-	static final By PATIENT_HEADER = By.className("patient-header");
-	static final By CONFIRM = By.cssSelector("input[value='Confirm']");
+    static final By PATIENT_HEADER = By.className("patient-header");
+    static final By CONFIRM = By.cssSelector("input[value='Confirm']");
     static final By REVIEW = By.id("reviewSimilarPatientsButton");
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
     public static final By FIELD_ERROR = By.id("field-error");
     static By AUTO_LIST;
     private static final By CONFIRM_DATA = By.id("submit");
 
-	public void enterPatient(TestPatient patient) throws InterruptedException{
+    public void enterPatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
         enterPatientMiddleName(patient.middleName);  // no middle name
         enterPatientFamilyName(patient.familyName);
@@ -87,15 +87,15 @@ public class RegistrationPage extends Page {
         clickOnConfirmSection();
     }
 
-	@Override
-	public boolean hasPageReadyIndicator() {
-		return true;
-	}
+    @Override
+    public boolean hasPageReadyIndicator() {
+        return true;
+    }
 
-	@Override
-	public String getPageReadyIndicatorName() {
-		return "Navigator.isReady";
-	}
+    @Override
+    public String getPageReadyIndicatorName() {
+        return "Navigator.isReady";
+    }
 
     public void enterUnidentifiedPatient(TestPatient patient) throws InterruptedException {
         selectUnidentifiedPatient();
@@ -104,7 +104,7 @@ public class RegistrationPage extends Page {
         clickOnConfirmSection();
     }
 
-	public void enterPatientAddress(TestPatient patient) {
+    public void enterPatientAddress(TestPatient patient) {
         setText(ADDRESS1, patient.address1);
         setText(ADDRESS2, patient.address2);
         if(patient.city != null && !patient.city.isEmpty()) {
@@ -151,7 +151,7 @@ public class RegistrationPage extends Page {
     }
 
     public void enterPatientGivenName(String givenName) {
-		setText(GIVEN_NAME, givenName);
+        setText(GIVEN_NAME, givenName);
     }
 
     public void enterPatientMiddleName(String middleName) {
@@ -169,21 +169,21 @@ public class RegistrationPage extends Page {
     }
 
     public void clickOnPhoneNumber() throws InterruptedException {
-    	clickOn(PHONE_NUMBER_LABEL);
+        clickOn(PHONE_NUMBER_LABEL);
     }
 
-	public void enterPhoneNumber(String phone) {
+    public void enterPhoneNumber(String phone) {
         setText(PHONE_NUMBER, phone);
     }
 
     public void clickOnConfirmSection() throws InterruptedException{
-    	clickOn(CONFIRM_SECTION);
+        clickOn(CONFIRM_SECTION);
     }
 
     public void clickOnGenderLink() throws InterruptedException {clickOn(GENDER_LABEL);}
 
     public void clickOnBirthDateLink() throws InterruptedException{
-    	clickOn(BIRTHDATE_LABEL);
+        clickOn(BIRTHDATE_LABEL);
         waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
 
@@ -202,19 +202,19 @@ public class RegistrationPage extends Page {
     }
 
     public String getGenderInConfirmationPage() {
-    	return getText(GENDER_CONFIRM) ;
+        return getText(GENDER_CONFIRM) ;
     }
 
     public String getBirthdateInConfirmationPage() {
-    	return getText(BIRTHDATE_CONFIRM) ;
+        return getText(BIRTHDATE_CONFIRM) ;
     }
 
     public String getAddressInConfirmationPage() {
-    	return getText(ADDRESS_CONFIRM) ;
+        return getText(ADDRESS_CONFIRM) ;
     }
 
     public String getPhoneInConfirmationPage() {
-    	return getText(PHONE_CONFIRM) ;
+        return getText(PHONE_CONFIRM) ;
     }
 
     public void clearName(){
@@ -246,13 +246,13 @@ public class RegistrationPage extends Page {
     }
 
 
-	@Override
+    @Override
     public String getPageUrl() {
-	    return "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
+        return "/registrationapp/registerPatient.page?appId=referenceapplication.registrationapp.registerPatient";
     }
 
-	public ClinicianFacingPatientDashboardPage confirmPatient() throws InterruptedException{
-		clickOn(CONFIRM);
+    public ClinicianFacingPatientDashboardPage confirmPatient() throws InterruptedException{
+        clickOn(CONFIRM);
         return new ClinicianFacingPatientDashboardPage(this);
     }
 
@@ -267,7 +267,7 @@ public class RegistrationPage extends Page {
 
         }
     }
-//  Edit  Contact Info
+    //  Edit  Contact Info
     public void clearVillage(){findElement(CITY_VILLAGE).clear();}
     public void clearState(){findElement(STATE_PROVINCE).clear();}
     public void clearCountry(){findElement(COUNTRY).clear();}
@@ -288,7 +288,7 @@ public class RegistrationPage extends Page {
     public void enterCountry(String familyName) {
         setText(COUNTRY, familyName);
     }
-//  AutocompleteTest
+    //  AutocompleteTest
     public void enterAndWaitFamilyName(String family){
         setTextToFieldNoEnter(FAMILY_NAME, family);
         AUTO_LIST = By.xpath("//ul[4]/li/a");
@@ -298,7 +298,7 @@ public class RegistrationPage extends Page {
         setTextToFieldNoEnter(GIVEN_NAME, given);
         waitForElement(By.className("ui-autocomplete"));
     }
-//    Merge Patients
+    //    Merge Patients
     public void clickOnConfirmPatient(){ clickOn(CONFIRM_DATA);}
     public void enterMegrePatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
@@ -311,6 +311,14 @@ public class RegistrationPage extends Page {
         enterAddress1(patient.address1);
         clickOnConfirmSection();
         clickOnConfirmPatient();
+    }
+
+    public String getSimilarPatientName() {
+        return findElement(By.cssSelector("#similarPatientsSelect .name")).getText();
+    }
+
+    public String getSimilarPatientInfo() {
+        return findElement(By.cssSelector("#similarPatientsSelect .info")).getText();
     }
 }
 
