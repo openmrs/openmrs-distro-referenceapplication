@@ -14,6 +14,7 @@ import static org.junit.Assert.assertEquals;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -40,6 +41,7 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
     
     @Test
     @Category(BuildTests.class)
+    @Ignore
     public void AddDiagnosisToVisitNoteTest() throws Exception {
 
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
