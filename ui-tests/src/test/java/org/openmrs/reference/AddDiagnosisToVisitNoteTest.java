@@ -9,12 +9,9 @@
  */
 package org.openmrs.reference;
 
-import static org.junit.Assert.assertEquals;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -25,6 +22,10 @@ import org.openmrs.uitestframework.test.RestClient;
 import org.openmrs.uitestframework.test.TestData;
 
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.junit.Assert.assertEquals;
+import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 
 public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
 
@@ -41,7 +42,6 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
     
     @Test
     @Category(BuildTests.class)
-    @Ignore
     public void AddDiagnosisToVisitNoteTest() throws Exception {
 
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -57,9 +57,10 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
         patientDashboardPage = visitNotePage.save();
 
         List<String> diagnoses = patientDashboardPage.getDiagnoses();
-        assertEquals(diagnoses.get(0), "Pneumonia");
-        assertEquals(diagnoses.get(1), "Bleeding");
+        assertThat(diagnoses, hasItems("Pneumonia", "Bleeding"));
     }
+
+
 
     @After
     public void tearDown() throws Exception {
