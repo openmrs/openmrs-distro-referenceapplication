@@ -1,53 +1,49 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
 package org.openmrs.reference.page;
 
+import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-/**
- * Created by tomasz on 15.07.15.
- */
-public class ManagePersonPage extends AdminManagementPage {
+public class ManagePersonPage extends Page {
 
-    static final By AGE = By.id("age");
-    static final By DESCRIPTION = By.name("description");
-    static final By CREATE_PERSON = By.cssSelector("input[type=\"submit\"]");
-    static final By FAMILY_NAME = By.name("names[0].familyName");
-    static final By GIVEN_NAME = By.name("names[0].givenName");
-    public ManagePersonPage(WebDriver driver) {
-        super(driver);
-        ADD = By.linkText("Create Person");
-        MANAGE = By.linkText("Manage Persons");
-        SAVE = By.id("saveButton");
-        RETIRE = By.cssSelector("fieldset > input[name=\"action\"]");
-        NAME = By.name("addName");
+    private static final By CREATE_PERSON = By.cssSelector("#content a:nth-child(9)");
+    private static final By PERSON_NAME_FIELD = By.id("inputNode");
+    private static final By OPENMRS_MSG = By.id("openmrs_msg");
+    private static final By FIRST_FOUND_PERSON = By.cssSelector("#openmrsSearchTable tbody tr td:nth-child(1)");
+
+    public ManagePersonPage(Page parent) {
+        super(parent);
     }
 
-
-    public void fillInAge(String age) {
-        fillInField(findElement(AGE),age);
-    }
-
-    public void fillInFamilyName(String familyName) {
-        fillInField(findElement(FAMILY_NAME),familyName);
-    }
-
-    public void fillInGivenName(String givenName) {
-        fillInField(findElement(GIVEN_NAME),givenName);
-    }
-
-    public void createPerson(String name, String age, char gender) {
-        fillInName(name);
-        fillInAge(age);
-        clickOn(By.id("gender-"+gender));
-        create();
-    }
-
-    public void create() {
+    public AddPersonPage createPerson(){
         clickOn(CREATE_PERSON);
+        return new AddPersonPage(this);
     }
+
+    public void setPersonName(String personName){
+        findElement(PERSON_NAME_FIELD).clear();
+        findElement(PERSON_NAME_FIELD).sendKeys(personName);
+    }
+
+    public PersonFormPage clickFirstFoundPerson() {
+        clickOn(FIRST_FOUND_PERSON);
+        return new PersonFormPage(this);
+    }
+
     @Override
     public String getPageUrl() {
         return "/admin/person/index.htm";
     }
 
+    public String getActionMessage() {
+        return findElement(OPENMRS_MSG).getText();
+    }
 }
