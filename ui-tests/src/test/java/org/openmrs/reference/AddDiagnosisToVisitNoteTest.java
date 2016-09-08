@@ -25,7 +25,7 @@ import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 
-public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
+public class AddDiagnosisToVisitNoteTest extends VisitReferenceApplicationTestBase {
 
     private TestData.PatientInfo patient;
 

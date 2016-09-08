@@ -2,6 +2,8 @@ package org.openmrs.reference;
 
 import org.junit.Before;
 import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.ReferenceApplicationLoginPage;
+import org.openmrs.uitestframework.page.LoginPage;
 import org.openmrs.uitestframework.page.Page;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
@@ -40,4 +42,8 @@ public class ReferenceApplicationTestBase extends TestBase {
 		return page.findElement(SELECTED_LOCATION).getAttribute("location-uuid");
 	}
 
+	@Override
+	protected LoginPage getLoginPage() {
+		return new ReferenceApplicationLoginPage(driver);
+	}
 }

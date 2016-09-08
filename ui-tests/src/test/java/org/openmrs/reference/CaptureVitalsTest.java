@@ -20,7 +20,7 @@ import org.openmrs.reference.page.PatientCaptureVitalsPage;
 import org.openmrs.uitestframework.test.TestData;
 
 
-public class CaptureVitalsTest  extends ReferenceApplicationTestBase {
+public class CaptureVitalsTest  extends VisitReferenceApplicationTestBase {
 
     private TestData.PatientInfo patient;
 
