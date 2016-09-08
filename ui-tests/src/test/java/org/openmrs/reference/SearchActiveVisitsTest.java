@@ -13,6 +13,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -22,6 +23,7 @@ public class SearchActiveVisitsTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
+    @Ignore("It searches for active visit but doesn't add any")
     public void searchActiveVisitsByPatientNameOrIdOrLastSeenTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
 

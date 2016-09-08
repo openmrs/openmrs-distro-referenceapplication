@@ -27,7 +27,6 @@ public class DeleteAllergyTest extends ReferenceApplicationTestBase {
 
     private TestData.PatientInfo patient;
 
-    private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
     private static final String DRUG_NAME = "Aspirin";
 
     @Before
@@ -58,7 +57,7 @@ public class DeleteAllergyTest extends ReferenceApplicationTestBase {
     }
 
     private void createTestVisit(){
-        new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, getLocationUuid(homePage)).create();
+        new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
 
     private void createTestAllergy(AllergyPage allergyPage) {
