@@ -3,6 +3,8 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 public class RegistrationEditSectionPage extends Page {
 
     private static final By PHONE_NUMBER = By.name("phoneNumber");
@@ -17,6 +19,10 @@ public class RegistrationEditSectionPage extends Page {
     private static final By BIRTHDAY_YEAR = By.id("birthdateYear-field");
     private static final By BIRTHDAY_DAY = By.id("birthdateDay-field");
     private static final By BIRTHDATE_LABEL = By.id("birthdateLabel");
+    private static final By CITY_VILLAGE = By.id("cityVillage");
+    private static final By STATE_PROVINCE = By.id("stateProvince");
+    private static final By COUNTRY = By.id("country");
+    private static final By POSTAL_CODE = By.id("postalCode");
 
     public RegistrationEditSectionPage(Page parent) {
         super(parent);
@@ -54,9 +60,48 @@ public class RegistrationEditSectionPage extends Page {
         setText(BIRTHDAY_YEAR, bitrthYear);
     }
 
-    public void clickOnPhoneNumberEdit(){clickOn(PHONE_NUMBER_EDIT);}
+    @Override
+    public String getPageUrl() {
+        return "/registrationapp/editSection.page";
+    }
 
-    public void clearPhoneNumber(){findElement(PHONE_NUMBER).clear();}
+
+    public void clearPhoneNumber(){
+        findElement(PHONE_NUMBER).clear();
+    }
+
+    public void clearVillage(){
+        findElement(CITY_VILLAGE).clear();
+    }
+
+    public void clearState(){
+        findElement(STATE_PROVINCE).clear();
+    }
+
+    public void clearCountry(){
+        findElement(COUNTRY).clear();
+    }
+
+    public void clearPostalCode(){
+        findElement(POSTAL_CODE).clear();
+    }
+
+    public void clickOnPhoneNumberEdit(){
+        clickOn(PHONE_NUMBER_EDIT);
+    }
+
+    public void enterVillage(String familyName) {
+        setText(CITY_VILLAGE, familyName);
+    }
+    public void enterState(String familyName) {
+        setText(STATE_PROVINCE, familyName);
+    }
+    public void enterPostalCode(String familyName) {
+        setText(POSTAL_CODE, familyName);
+    }
+    public void enterCountry(String familyName) {
+        setText(COUNTRY, familyName);
+    }
 
     public void clickOnConfirmEdit(){
         clickOn(CONFIRM_EDIT);
@@ -66,13 +111,18 @@ public class RegistrationEditSectionPage extends Page {
         setText(PHONE_NUMBER, phone);
     }
 
-    public ClinicianFacingPatientDashboardPage confirmPatient() throws InterruptedException{
-        clickOn(CONFIRM);
-        return new ClinicianFacingPatientDashboardPage(this);
+    public String getInvalidPhoneNumberNotification() {
+        List<String> errors = getValidationErrors();
+        String search = "valid phone number";
+        for(String str: errors) {
+            if(str.trim().contains(search))
+                return str;
+        }
+        return null;
     }
 
-    @Override
-    public String getPageUrl() {
-        return "/registrationapp/editSection.page";
+    public ClinicianFacingPatientDashboardPage confirmPatient() throws InterruptedException {
+        clickOn(CONFIRM);
+        return new ClinicianFacingPatientDashboardPage(this);
     }
 }
