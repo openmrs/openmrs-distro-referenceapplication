@@ -7,7 +7,7 @@ import org.openmrs.uitestframework.test.TestData;
 
 import java.util.Arrays;
 
-public class VisitReferenceApplicationTestBase extends ReferenceApplicationTestBase {
+public class LocationSensitiveApplicationTestBase extends ReferenceApplicationTestBase {
 
     private String locationUuid;
 
@@ -15,6 +15,9 @@ public class VisitReferenceApplicationTestBase extends ReferenceApplicationTestB
     public void createTaggedLocation() {
         String visit = TestData.getLocationTag("Visit");
         String login = TestData.getLocationTag("Login");
+        String transfer = TestData.getLocationTag("Transfer");
+        String admission = TestData.getLocationTag("Admission");
+
         String locationName = "Location" + TestData.randomSuffix();
         locationUuid = new TestData.TestLocation(locationName, Arrays.asList(visit, login)).create();
 
@@ -23,6 +26,6 @@ public class VisitReferenceApplicationTestBase extends ReferenceApplicationTestB
 
     @After
     public void deleteTestLocation(){
-        RestClient.delete("location/"+locationUuid, true);
+        RestClient.delete("location/"+locationUuid);
     }
 }

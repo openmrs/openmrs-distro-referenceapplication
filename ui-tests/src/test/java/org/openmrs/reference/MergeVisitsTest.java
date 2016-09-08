@@ -23,7 +23,7 @@ import org.openmrs.uitestframework.test.TestData;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class MergeVisitsTest extends VisitReferenceApplicationTestBase {
+public class MergeVisitsTest extends LocationSensitiveApplicationTestBase {
 
     private TestData.PatientInfo patient;
 
