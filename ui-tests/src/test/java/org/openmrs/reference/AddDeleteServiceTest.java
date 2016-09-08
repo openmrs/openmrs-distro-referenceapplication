@@ -10,7 +10,6 @@
 package org.openmrs.reference;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.reference.page.AppointmentSchedulingPage;
@@ -42,9 +41,9 @@ public class AddDeleteServiceTest extends ReferenceApplicationTestBase {
         servicePage.setDuration(duration);
         servicePage.setDescription(description);
         manageServiceTypesPage = servicePage.save();
-        assertThat(manageServiceTypesPage.getSertviceType(name), is(true));
+        assertThat(manageServiceTypesPage.getServiceType(name), is(true));
         manageServiceTypesPage.deleteServiceType(name);
         manageServiceTypesPage.confirmDelete();
-        assertThat(manageServiceTypesPage.getSertviceType(name), is(false));
+        assertThat(manageServiceTypesPage.getServiceType(name), is(false));
     }
 }

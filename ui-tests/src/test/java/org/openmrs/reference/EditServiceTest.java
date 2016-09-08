@@ -41,11 +41,11 @@ public class EditServiceTest extends ReferenceApplicationTestBase{
         servicePage.setDuration(duration);
         servicePage.setDescription(description);
         manageServiceTypesPage = servicePage.save();
-        assertThat(manageServiceTypesPage.getSertviceType(name), is(true));
+        assertThat(manageServiceTypesPage.getServiceType(name), is(true));
         servicePage = manageServiceTypesPage.editServiceType(name);
         servicePage.setName(name+name);
         manageServiceTypesPage = servicePage.save();
-        assertThat(manageServiceTypesPage.getSertviceType(name+name), is(true));
+        assertThat(manageServiceTypesPage.getServiceType(name+name), is(true));
         manageServiceTypesPage.deleteServiceType(name+name);
         manageServiceTypesPage.confirmDelete();
     }
