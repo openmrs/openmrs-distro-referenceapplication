@@ -27,8 +27,6 @@ import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 
 public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
 
-    private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
-
     private TestData.PatientInfo patient;
 
     @Before
@@ -66,6 +64,6 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
     }
 
     private void createTestVisit(){
-        new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, getLocationUuid(homePage)).create();
+        new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
 }
