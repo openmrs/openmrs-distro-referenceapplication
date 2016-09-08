@@ -21,7 +21,7 @@ import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertNull;
 
-public class EndVisitTest extends VisitReferenceApplicationTestBase {
+public class EndVisitTest extends LocationSensitiveApplicationTestBase {
 
     private TestData.PatientInfo patient;
 

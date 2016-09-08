@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class AddPastVisitTest extends ReferenceApplicationTestBase {
+public class AddPastVisitTest extends LocationSensitiveApplicationTestBase {
 
     private TestData.PatientInfo testPatient;
 

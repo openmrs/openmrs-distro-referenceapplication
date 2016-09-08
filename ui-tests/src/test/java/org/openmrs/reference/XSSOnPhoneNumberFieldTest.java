@@ -24,7 +24,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.empty;
 import static org.junit.Assert.assertThat;
 
-public class XSSOnPhoneNumberFieldTest extends VisitReferenceApplicationTestBase {
+public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestBase {
 
     private TestData.PatientInfo patient;
 
