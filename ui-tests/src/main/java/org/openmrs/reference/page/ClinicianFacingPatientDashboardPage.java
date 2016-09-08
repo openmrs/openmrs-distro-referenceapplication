@@ -325,10 +325,9 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 
-	public PatientVisitsDashboardPage clickChangeDate (){
+	public void clickChangeDate (){
 		waitForElement(CHANGE_DATE);
 		clickOn(CHANGE_DATE);
-		return new PatientVisitsDashboardPage(this);
 	}
 
 	public PatientVisitsDashboardPage enterDate(){
