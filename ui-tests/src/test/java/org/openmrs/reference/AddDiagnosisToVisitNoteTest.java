@@ -9,7 +9,6 @@
  */
 package org.openmrs.reference;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +17,6 @@ import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.VisitNotePage;
-import org.openmrs.uitestframework.test.RestClient;
 import org.openmrs.uitestframework.test.TestData;
 
 import java.util.List;
@@ -30,7 +28,6 @@ import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
 
     private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
-    private static final String LOCATION_UUID = "8d6c993e-c2cc-11de-8d13-0010c6dffd0f";
 
     private TestData.PatientInfo patient;
 
@@ -69,6 +66,6 @@ public class AddDiagnosisToVisitNoteTest extends ReferenceApplicationTestBase {
     }
 
     private void createTestVisit(){
-        JsonNode visit = RestClient.post("visit", new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, LOCATION_UUID));
+        new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, getLocationUuid(homePage)).create();
     }
 }

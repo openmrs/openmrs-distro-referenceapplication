@@ -24,14 +24,13 @@ import static org.junit.Assert.assertNull;
 public class EndVisitTest extends ReferenceApplicationTestBase {
 
     private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
-    private static final String LOCATION_UUID = "8d6c993e-c2cc-11de-8d13-0010c6dffd0f";
 
     private TestData.PatientInfo patient;
 
     @Before
     public void setUp() throws Exception {
         patient = createTestPatient();
-        new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, LOCATION_UUID).create();
+        new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, getLocationUuid(homePage)).create();
     }
 
     @Test
