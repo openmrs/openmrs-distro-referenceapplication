@@ -68,7 +68,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By SERVICE_DROPDOWN = By.cssSelector("a.ng-scope.ng-binding");
 
 	private static final By ERROR = By.cssSelector("li.error > span");
-	private static final By ADD_PAST_VISIT = By.linkText("Add Past Visit");
+	private static final By ADD_PAST_VISIT = By.id("org.openmrs.module.coreapps.createRetrospectiveVisit");
 
 	private static final By TODAY = By.cssSelector("td.day.active");
 	private static final By CONFIRM_PAST_VISIT = By.cssSelector("div.dialog-content.form > button.confirm.right");

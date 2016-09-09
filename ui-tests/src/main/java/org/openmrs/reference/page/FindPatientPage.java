@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 
 public class FindPatientPage extends Page {
 
-    private static final By PATIENT_NAME_SEARCH_RESULT = By.cssSelector("#patient-search-results-table tr:first-child td:nth-child(2)");
+    private static final By PATIENT_NAME_SEARCH_RESULT = By.cssSelector("#patient-search-results-table tbody tr:first-child td:nth-child(2)");
     private static final By PATIENT_ID_SEARCH_RESULT = By.cssSelector("#patient-search-results-table tr:first-child td:first-child");
     private static final By PATIENT_SEARCH = By.id("patient-search");
 
@@ -47,11 +47,11 @@ public class FindPatientPage extends Page {
     }
 
     public void search(String text) {
-        setText(PATIENT_SEARCH, text);
+        setTextToFieldNoEnter(PATIENT_SEARCH, text);
     }
 
     @Override
     public String getPageUrl() {
-        return "/findpatient/findPatient.page";
+        return "/coreapps/findpatient/findPatient.page";
     }
 }
