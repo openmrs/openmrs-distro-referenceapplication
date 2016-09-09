@@ -8,8 +8,8 @@ public class ModulesPage extends Page {
 
     private static final String ADMIN_MODULE_LIST_PATH = "/admin/modules/module.list";
 
-	public ModulesPage(WebDriver driver) {
-        super(driver);
+	public ModulesPage(Page page) {
+        super(page);
     }
 
 	@Override
