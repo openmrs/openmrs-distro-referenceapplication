@@ -38,6 +38,11 @@ public class AppointmentSchedulingPage extends Page {
         return new ManageServiceTypesPage(this);
     }
 
+    public AppointmentBlocksPage goToAppointmentBlock(){
+        clickOn(MANAGE_PROVIDER_SCHEDULES);
+        return new AppointmentBlocksPage(this);
+    }
+
     @Override
     public String getPageUrl() {
         return "/appointmentschedulingui/home.page";
