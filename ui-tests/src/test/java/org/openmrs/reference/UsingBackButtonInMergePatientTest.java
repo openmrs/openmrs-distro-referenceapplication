@@ -35,7 +35,7 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
         headerPage = new HeaderPage(driver);
         registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-        dataManagementPage = new DataManagementPage(driver);
+        dataManagementPage = new DataManagementPage(page);
         patient = new TestPatient();
         patient1 = new TestPatient();
 
@@ -51,7 +51,7 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
         patient.gender = "Male";
         patient.estimatedYears = "45";
         patient.address1 = "address";
-        registrationPage.enterMegrePatient(patient);
+        registrationPage.enterMergePatient(patient);
         id = patientDashboardPage.findPatientId();
         patient.uuid =  patientDashboardPage.getPatientUuidFromUrl();
         headerPage.clickOnHomeIcon();
@@ -61,11 +61,11 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
         patient1.gender = "Female";
         patient1.estimatedYears = "25";
         patient1.address1 = "address";
-        registrationPage.enterMegrePatient(patient1);
+        registrationPage.enterMergePatient(patient1);
         id2 = patientDashboardPage.findPatientId();
         headerPage.clickOnHomeIcon();
         homePage.goToDataManagement();
-        dataManagementPage.goToMegrePatient();
+        dataManagementPage.goToMergePatient();
         dataManagementPage.enterPatient1(id);
         dataManagementPage.enterPatient2(id2);
         dataManagementPage.searchId(id);
