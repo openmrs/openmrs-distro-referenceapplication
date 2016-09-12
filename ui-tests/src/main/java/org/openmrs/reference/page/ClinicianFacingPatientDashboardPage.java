@@ -40,7 +40,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public static final By SELECT_LOCATION = By.id("w5");
 	private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
 	public static final By FORM_EXIST = By.className("action-section");
-	private static final By SHOW_CONTACT_INFO = By.id("coreapps-showContactInfo");
+	private static final By SHOW_CONTACT_INFO = By.id("patient-header-contactInfo");
 	private static final By EDIT_PATIENT = By.cssSelector("#edit-patient-demographics a");
 	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
 	private static final By PATIENT_ID = By.cssSelector("div.identifiers > span");
