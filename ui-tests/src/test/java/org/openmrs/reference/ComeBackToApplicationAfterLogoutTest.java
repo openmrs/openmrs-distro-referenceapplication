@@ -17,7 +17,7 @@ public class ComeBackToApplicationAfterLogoutTest extends ReferenceApplicationTe
     @Test
     public void comeBackToApplicationAfterLogoutTest() throws Exception {
         //Logout
-        homePage.goToPage("/logout");
+        getLoginPage().go();
         assertPage(getLoginPage());
     }
 }
