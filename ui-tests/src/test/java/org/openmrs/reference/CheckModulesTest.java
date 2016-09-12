@@ -3,15 +3,11 @@ package org.openmrs.reference;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.AdministrationPage;
-import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ModulesPage;
-import org.openmrs.reference.page.SystemAdministrationPage;
-import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -21,12 +17,11 @@ public class CheckModulesTest extends ReferenceApplicationTestBase {
      * Check the list of modules to be sure they are all started.
      */
     @Test
+    @Ignore("Waiting for https://github.com/openmrs/openmrs-module-legacyui/pull/62 to be merged")
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void checkModules() throws Exception {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ModulesPage modulesPage = administrationPage.goToManageModulesPage();
-        Thread.sleep(500);
-        assertPage(modulesPage);
         // Get the modulesListing <div>, which contains the table of modules.
         WebElement moduleListing = modulesPage.findElementById("moduleListing");
         // Grab all the <input> elements from the first column of the table.
