@@ -13,23 +13,16 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 
-public class DataManagementPage extends Page {
-    public DataManagementPage(Page page) {
-        super(page);
-    }
+public class MergePatientsPage extends Page {
+    public MergePatientsPage(Page page){super(page);}
 
     private final static By MERGE_PATIENT_ELECTRONIC_RECORD = By.id("coreapps-mergePatientsHomepageLink-app");
     private final static By ID_PATIENT_1 = By.id("patient1-text");
-    public final static By ID_PATIENT_2 = By.id("patient2-text");
-    public final static By CONTINUE = By.id("confirm-button");
+    private final static By ID_PATIENT_2 = By.id("patient2-text");
+    private final static By CONTINUE = By.id("confirm-button");
     private final static By MERGE_PATIENT = By.id("second-patient");
     private final static By NO = By.id("cancel-button");
     private final static By SEARCH = By.id("patient-search");
-
-    public MergePatientsPage goToMergePatient(){
-        clickOn(MERGE_PATIENT_ELECTRONIC_RECORD);
-        return new MergePatientsPage(this);
-    }
 
     public void enterPatient1( String patient1){
         setText(ID_PATIENT_1, patient1);
@@ -37,15 +30,19 @@ public class DataManagementPage extends Page {
     public void enterPatient2(String patient2){
         setText(ID_PATIENT_2, patient2);
     }
-    public void clickOnContinue(){
+    public PatientVisitsDashboardPage clickOnContinue(){
         waitForElementToBeEnabled(CONTINUE);
-        clickOn(CONTINUE);}
+        clickOn(CONTINUE);
+        return new PatientVisitsDashboardPage(this);
+    }
+
+
     public void clickOnMergePatient(){
         waitForElement(MERGE_PATIENT);
         clickOn(MERGE_PATIENT);}
     public void clickOnNo(){ clickOn(NO);}
     public void waitCont() throws InterruptedException {
-    	clickOn(CONTINUE);
+        clickOn(CONTINUE);
     }
     public void searchId(String id){
         setTextToFieldNoEnter(SEARCH, id);
@@ -54,6 +51,7 @@ public class DataManagementPage extends Page {
         return findElement(SEARCH).getText();}
     @Override
     public String getPageUrl() {
-        return "/datamanagement/dataManagement.page";
+        return "/datamanagement/mergePatients.page";
     }
+
 }

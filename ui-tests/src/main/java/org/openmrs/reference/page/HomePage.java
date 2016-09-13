@@ -127,8 +127,9 @@ public class HomePage extends Page {
         return new AppointmentSchedulingPage(this);
     }
 
-    public void goToDataManagement(){
+    public DataManagementPage goToDataManagement(){
         clickOn(DATA_MANAGEMENT);
+        return new DataManagementPage(this);
     }
 
     @Override

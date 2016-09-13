@@ -300,7 +300,7 @@ public class RegistrationPage extends Page {
     }
     //    Merge Patients
     public void clickOnConfirmPatient(){ clickOn(CONFIRM_DATA);}
-    public void enterMegrePatient(TestPatient patient) throws InterruptedException{
+    public void enterMergePatient(TestPatient patient) throws InterruptedException{
         enterPatientGivenName(patient.givenName);
         enterPatientFamilyName(patient.familyName);
         clickOnGenderLink();
