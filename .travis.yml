@@ -10,8 +10,6 @@ addons:
     username: $SAUCELABS_USERNAME
     access_key: $SAUCELABS_ACCESSKEY
 
-before_script: ./travis-ci-setup.sh
+before_script: ./travis_before_script.sh
 
-script:
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_wait 50 mvn clean verify -Pci -Dwebapp.url=http://localhost:8080/openmrs -Dsaucelabs.hub.url=localhost:4445 -DbuildNumber=$TRAVIS_BUILD_NUMBER -Dtunnel.identifier=$TRAVIS_JOB_NUMBER; fi'
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then mvn clean install -DskipTests=true; fi'
+script: ./travis_script.sh
