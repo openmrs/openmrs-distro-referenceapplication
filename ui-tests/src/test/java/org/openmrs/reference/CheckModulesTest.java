@@ -17,7 +17,6 @@ public class CheckModulesTest extends ReferenceApplicationTestBase {
      * Check the list of modules to be sure they are all started.
      */
     @Test
-    @Ignore("Waiting for https://github.com/openmrs/openmrs-module-legacyui/pull/62 to be merged")
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void checkModules() throws Exception {
         AdministrationPage administrationPage = homePage.goToAdministration();
