@@ -36,6 +36,6 @@ To setup Continuous Integration on your fork, execute following steps:
 
 And that's it!
 
-If you would like to setup a similar configuraiton for your distribution, please have a look at [.travis.yml](https://github.com/openmrs/openmrs-distro-referenceapplication/blob/master/.travis.yml) and  [travis-ci-setup.sh](https://github.com/openmrs/openmrs-distro-referenceapplication/blob/master/travis-ci-setup.sh). The test server is created using `openmrs-sdk:build-distro` and started with `docker-compose up` on Travis-CI. 
+If you would like to setup a similar configuraiton for your distribution, please have a look at [.travis.yml](https://github.com/openmrs/openmrs-distro-referenceapplication/blob/master/.travis.yml). The test server is created using `openmrs-sdk:build-distro` and started with `docker-compose up` on Travis-CI. 
 
 Travis-CI creates a tunnel to SauceLabs, which allows SauceLabs to access the test server and execute tests against that server in a browser. In order to speed up the build, we always run 5 UI tests in parallel using agents provided by SauceLabs. The test server is automatically terminated by Travis-CI once tests are done. 
