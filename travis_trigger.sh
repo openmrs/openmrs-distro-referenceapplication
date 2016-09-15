@@ -8,5 +8,5 @@ curl -s -X POST \
   -H "Accept: application/json" \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token $TRAVIS_ACCESS_TOKEN" \
-  -d '{ "request": { "branch": "master", "message": "$TRAVIS_MESSAGE" } }' \
+  -d "{ \"request\": { \"branch\": \"master\", \"message\": \"$TRAVIS_MESSAGE\" } }" \
   https://api.travis-ci.org/repo/openmrs%2Fopenmrs-distro-referenceapplication/requests
