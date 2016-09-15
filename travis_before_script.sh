@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Run UI tests only, if the build was triggered by API from Bamboo, see travis_trigger.sh
-if [ "$TRAVIS_EVENT_TYPE" = "api" ]
+if [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
 mvn org.openmrs.maven.plugins:openmrs-sdk-maven-plugin:setup-sdk -DbatchAnswers=n
 mvn org.openmrs.maven.plugins:openmrs-sdk-maven-plugin:build-distro -Ddir=distro -e
