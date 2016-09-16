@@ -60,18 +60,5 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
         assertThat(dashboardPage.getPatientFamilyName(), is(patient.familyName));
     }
 
-    // Test for RA-472
-    @Test
-    public void registerUnidentifiedPatient() throws InterruptedException {
-        RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
-        patient = PatientGenerator.generateTestPatient();
-        registrationPage.enterUnidentifiedPatient(patient);
 
-        assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
-
-        ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
-        patient.uuid = page.getPatientUuidFromUrl();
-        assertThat(dashboardPage.getPatientGivenName(), is("UNKNOWN"));
-        assertThat(dashboardPage.getPatientFamilyName(), is("UNKNOWN"));
-    }
 }
