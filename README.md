@@ -1,9 +1,9 @@
 openmrs-distro-referenceapplication
 ===================================
 
-[master](https://github.com/openmrs/openmrs-distro-referenceapplication/) (platform-2.0.x): [![Build Status](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication.svg?branch=master)](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication)
+[master](https://github.com/openmrs/openmrs-distro-referenceapplication/) (platform-2.0.x): [![Build Status](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication.svg?branch=master)](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication/branches)
 
-[platform-2.1.x](https://github.com/openmrs/openmrs-distro-referenceapplication/tree/platform-2.1.x): [![Build Status](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication.svg?branch=platform-2.1.x)](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication)
+[platform-2.1.x](https://github.com/openmrs/openmrs-distro-referenceapplication/tree/platform-2.1.x): [![Build Status](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication.svg?branch=platform-2.1.x)](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication/branches)
 
 [![Build Status](https://saucelabs.com/browser-matrix/rkorytkowski.svg)](https://saucelabs.com/open_sauce/user/openmrs)
 
