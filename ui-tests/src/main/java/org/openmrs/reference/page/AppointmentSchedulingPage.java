@@ -12,15 +12,28 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 
-public class AppointmentSchedulingPage extends Page{
+public class AppointmentSchedulingPage extends Page {
 
     private static final By MANAGE_SERVICES_TYPES = By.id("appointmentschedulingui-manageAppointmentTypes-app");
+    private static final By MANAGE_PROVIDER_SCHEDULES = By.id("appointmentschedulingui-scheduleProviders-app");
+    private static final By MANAGE_APPOINTMENTS = By.id("appointmentschedulingui-manageAppointments-app");
+    private static final By DAILY_APPOINTMENTS = By.id("appointmentschedulingui-scheduledAppointments-app");
 
-    public AppointmentSchedulingPage(Page parent) {
-        super(parent);
+    public AppointmentSchedulingPage(Page page) {
+        super(page);
     }
 
-    public ManageServiceTypesPage goToManageServices(){
+    public ManageProviderSchedulesPage goToManageProviderSchedules() {
+        clickOn(MANAGE_PROVIDER_SCHEDULES);
+        return new ManageProviderSchedulesPage(this);
+    }
+
+    public FindPatientPage goToManageAppointments() {
+        clickOn(MANAGE_APPOINTMENTS);
+        return new FindPatientPage(this);
+    }
+
+    public ManageServiceTypesPage goToManageServices() {
         clickOn(MANAGE_SERVICES_TYPES);
         return new ManageServiceTypesPage(this);
     }

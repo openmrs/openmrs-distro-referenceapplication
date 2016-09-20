@@ -32,6 +32,11 @@ public class FindPatientPage extends Page {
         return new ClinicianFacingPatientDashboardPage(this);
     }
 
+    public ManageAppointmentsPage clickOnFirstPatientAppointment() {
+        clickOn(PATIENT_NAME_SEARCH_RESULT);
+        return new ManageAppointmentsPage(this);
+    }
+
     /**
      * Finds first record from the result table
      * @return patient id
