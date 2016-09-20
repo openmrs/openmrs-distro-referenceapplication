@@ -1,76 +1,88 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ *
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
 package org.openmrs.reference;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
+import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
-import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HomePage;
-import org.openmrs.uitestframework.test.TestBase;
+import org.openmrs.reference.page.EditVisitNotePage;
+import org.openmrs.reference.page.PatientVisitsDashboardPage;
+import org.openmrs.reference.page.VisitNotePage;
+import org.openmrs.uitestframework.test.TestData;
 import org.openmrs.uitestframework.test.TestData.PatientInfo;
 
-/**
- * Created by tomasz on 19.06.15.
- */
-@Ignore
-public class VisitNoteTest extends TestBase {
+public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
 
-    private HomePage homePage;
-    private HeaderPage headerPage;
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
+    private static final String DIAGNOSIS_PRIMARY = "CANCER";
+    private static final String DIAGNOSIS_SECONDARY = "MALARIA";
+    private static final String DIAGNOSIS_SECONDARY_UPDATED = "Pneumonia";
+
     private PatientInfo patient;
 
     @Before
-    public void before() {
-        headerPage = new HeaderPage(driver);
+    public void setup() {
         patient = createTestPatient();
+        createTestVisit();
+    }
 
-        homePage = new HomePage(page);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-        assertPage(homePage);
+    @Test
+    @Ignore //See RA-1223 for details
+    @Category(BuildTests.class)
+    public void VisitNoteTest() throws Exception {
+
+
+        ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
+        activeVisitsPage.search(patient.identifier);
+        ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
+        VisitNotePage visitNotePage = patientDashboardPage.goToVisitNote();
+
+        visitNotePage.selectProviderAndLocation();
+        visitNotePage.addDiagnosis(DIAGNOSIS_PRIMARY);
+        visitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY);
+        visitNotePage.addNote("This is a note");
+        patientDashboardPage = visitNotePage.save();
+        assertEquals(DIAGNOSIS_PRIMARY, visitNotePage.primaryDiagnosis());
+        assertEquals(DIAGNOSIS_SECONDARY, visitNotePage.secondaryDiagnosis());
+
+        PatientVisitsDashboardPage patientVisitsDashboardPage = patientDashboardPage.goToRecentVisits();
+
+        EditVisitNotePage editVisitNotePage = patientVisitsDashboardPage.goToEditVisitNote();
+
+        editVisitNotePage.deleteDiagnosis();
+        editVisitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY_UPDATED);
+
+        //TODO Edit function doesn't work int02
+        patientDashboardPage = editVisitNotePage.save();
+        assertEquals(DIAGNOSIS_SECONDARY_UPDATED, patientDashboardPage.secondaryDiagnosis());
+        patientVisitsDashboardPage = patientDashboardPage.goToRecentVisits();
+
+        //TODO Delete function doesn't work on int02
+        patientVisitsDashboardPage.deleteVisitNote();
+        patientDashboardPage.confirmDeletion();
+        //Assert that visit note is not present on encounter list and its done
     }
 
     @After
     public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
-//        deletePatient(patient.uuid);
-        headerPage.logOut();
+        deletePatient(patient.uuid);
     }
 
-    //Test for RA-720, RA-682, RA-694
-    @Test
-    public void testAddEditVisitNote() throws InterruptedException {
-    	patientDashboardPage.go(patient.uuid);
-        assertPage(patientDashboardPage);
-        if(!patientDashboardPage.hasActiveVisit()) {
-            patientDashboardPage.startVisit();
-            patientDashboardPage.waitForVisitLinkHidden();
-        }
-        patientDashboardPage.visitNote();
-        assertNotNull(patientDashboardPage.findPageElement());
-        patientDashboardPage.selectProviderAndLocation();
-        patientDashboardPage.addDiagnosis("MALARIA");
-        patientDashboardPage.enterSecondaryDiagnosis("CANCER");
-        patientDashboardPage.addNote("This is a note");
-        patientDashboardPage.save();
-        assertTrue(driver.getPageSource().contains("MALARIA") && driver.getPageSource().contains("CANCER"));
-        patientDashboardPage.back();
-        patientDashboardPage.goToEditVisitNote();
-        patientDashboardPage.deleteDiagnosis();
-        patientDashboardPage.addSecondaryDiagnosis("flue");
-        assertEquals("flue", patientDashboardPage.secondaryDiagnosis());
-        patientDashboardPage.save();
-        assertNotNull(patientDashboardPage.visitLink());
-
-        patientDashboardPage.deleteVisitNote();
-        assertTrue(driver.getPageSource().contains("Are you sure you want to delete this encounter from the visit?"));
-        patientDashboardPage.confirmDeletion();
-        assertNotNull(patientDashboardPage.visitLink());
-
+    private void createTestVisit(){
+        new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
+
 }

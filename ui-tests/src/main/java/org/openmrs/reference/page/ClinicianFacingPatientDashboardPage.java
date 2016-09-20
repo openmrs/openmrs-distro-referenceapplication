@@ -52,7 +52,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By DIAGNOSES_LIST = By.cssSelector("#coreapps-diagnosesList");
 	private static final By CURRENT_DATE = By.linkText("Today");
 	private static final By VISIT_NOTE_ENCOUNTER = By.xpath("//div[@id='visit-details']/ul/li/ul/li/div/strong/span[text()='Visit Note']");
-	private static final By NOTE = By.id("w10");
 	private static final By SAVE_VISIT_NOTE = By.cssSelector(".submitButton.confirm");
 	private static final By CONFIRM_DEL_BUTTON = By.cssSelector("#delete-encounter-dialog > div.dialog-content > button.confirm.right");
 	private static final By DEL_DIAGNOSIS = By.xpath("//div[@id='display-encounter-diagnoses-container']/ul/li/span/i");
@@ -235,15 +234,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public WebElement location() {
 		return findElement(SELECT_LOCATION);
-	}
-
-	public void enterNote(String note) {
-		setText(NOTE, note);
-	}
-
-	public void addNote(String note) {
-		findElement(NOTE).clear();
-		enterNote(note);
 	}
 
 	public void save() {
