@@ -7,6 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
+
 package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
@@ -31,6 +32,7 @@ public class AppointmentBlocksPage extends Page {
     private static final By DELETE_CONFIRM = By.cssSelector("#delete-appointment-block-modal-buttons .confirm");
     private static final By SERVICE_DELETE = By.xpath("//div[@id='appointment-block-form']/selectmultipleappointmenttypes/div/div/div/div/i");
     private static final By CLOSE_WINDOW = By.cssSelector("#delete-appointment-block-modal > div.dialog-header > h3");
+    private static final By COUNT_BLOCK = By.xpath("//div[@id='calendar']/div/div/div/div");
     public void goToAppointmentBlock(){
         clickOn(APPOINTMENT_SCHEDULING);
         clickOn(MANAGE_PROVIDER_SCHEDULES);
@@ -85,15 +87,13 @@ public class AppointmentBlocksPage extends Page {
     public void clickOnConfirmDelete(){clickOn(DELETE_CONFIRM);}
     public void clickOnEdit(){clickOn(EDIT_BLOCK);}
     public void clickOnServiceDelete(){clickOn(SERVICE_DELETE);}
-    public AppointmentBlocksPage(WebDriver driver) {super(driver);}
+    public AppointmentBlocksPage(Page page) {super(page);}
 
 
     public void findBlock() {
-        int iCount = 0;
 
         try {
-            iCount = driver.findElements(By.xpath("//div[@id='calendar']/div/div/div/div")).size();
-            findElement(By.xpath("//div[@id='calendar']/div/div/div/div[" + iCount + "]/div/span[2]")).click();
+            findElement(By.xpath("//div[@id='calendar']/div/div/div/div[" + driver.findElements(COUNT_BLOCK).size() + "]/div/span[2]")).click();
         } catch (Exception e) {
 
         }
@@ -102,6 +102,7 @@ public class AppointmentBlocksPage extends Page {
         findElement(CLOSE_WINDOW);
         clickOn(CLOSE_WINDOW);
     }
+
 
 
 

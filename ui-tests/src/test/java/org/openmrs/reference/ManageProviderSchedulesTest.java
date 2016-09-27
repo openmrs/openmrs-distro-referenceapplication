@@ -26,7 +26,7 @@ public class ManageProviderSchedulesTest extends TestBase {
         homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
-        appointmentBlocksPage = new AppointmentBlocksPage(driver);
+        appointmentBlocksPage = new AppointmentBlocksPage(page);
     }
 
     @Ignore //ignored due to RA-904
