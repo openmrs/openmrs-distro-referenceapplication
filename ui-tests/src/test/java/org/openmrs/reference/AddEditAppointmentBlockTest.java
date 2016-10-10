@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 public class AddEditAppointmentBlockTest extends ReferenceApplicationTestBase {
 
     @Test
+    @Ignore
     @Category(BuildTests.class)
     public void editAppointmentBlockTest() throws Exception {
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
