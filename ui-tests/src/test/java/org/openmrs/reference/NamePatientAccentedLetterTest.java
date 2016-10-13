@@ -36,7 +36,6 @@ public class NamePatientAccentedLetterTest extends ReferenceApplicationTestBase 
 
     @Test
     @Category(BuildTests.class)
-    @Ignore("Test depends on server configuration, fails on fresh setup")
     public void namePatientAccentedLetterTest() throws Exception {
         RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
         patient.givenName = "Mike";
