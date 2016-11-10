@@ -47,6 +47,7 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>2.18.1</version>
                         <configuration>
+                            <skipTests>false</skipTests>
                             <groups>org.openmrs.reference.groups.BuildTests</groups>
                         </configuration>
                     </plugin>
@@ -60,6 +61,9 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>2.18.1</version>
+                        <configuration>
+                            <skipTests>false</skipTests>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -77,8 +81,8 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
+                            <skipTests>false</skipTests>
                         	<groups>org.openmrs.reference.groups.BuildTests</groups>
-                            <runOrder>alphabetical</runOrder>
                             <forkCount>5</forkCount>
                             <reuseForks>true</reuseForks>
                         </configuration>
@@ -119,6 +123,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <skipTests>true</skipTests>
                     <rerunFailingTestsCount>1</rerunFailingTestsCount>
                 	<runOrder>alphabetical</runOrder>
                     <includes>
