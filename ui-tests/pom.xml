@@ -37,38 +37,6 @@
 
     <profiles>
         <profile>
-            <id>run-build-tests</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.18.1</version>
-                        <configuration>
-                            <skipTests>false</skipTests>
-                            <groups>org.openmrs.reference.groups.BuildTests</groups>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>run-all-tests</id>
-            <build>
-			   <plugins>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.18.1</version>
-                        <configuration>
-                            <skipTests>false</skipTests>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>ci</id>
 
             <properties>
