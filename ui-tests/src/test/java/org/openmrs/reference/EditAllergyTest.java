@@ -12,6 +12,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -37,6 +38,7 @@ public class EditAllergyTest extends ReferenceApplicationTestBase {
     }
 
     @Test
+    @Ignore("RA-1253")
     @Category(BuildTests.class)
     public void editAllergyTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
