@@ -31,6 +31,7 @@ public class MergeVisitsTest extends LocationSensitiveApplicationTestBase {
     public void setUp() {
         patient = createTestPatient();
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
+        new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
 
     @Test
@@ -39,9 +40,7 @@ public class MergeVisitsTest extends LocationSensitiveApplicationTestBase {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(patient.identifier);
         ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage = findPatientPage.clickOnFirstPatient();
-        clinicianFacingPatientDashboardPage.addPastVisit();
-        clinicianFacingPatientDashboardPage.clickChangeDate();
-        PatientVisitsDashboardPage patientVisitsDashboardPage = clinicianFacingPatientDashboardPage.enterDate();
+        PatientVisitsDashboardPage patientVisitsDashboardPage = clinicianFacingPatientDashboardPage.goToRecentVisits();
         patientVisitsDashboardPage.clickOnActions();
         MergeVisitsPage mergeVisitsPage = patientVisitsDashboardPage.clickOnMergeVisits();
         mergeVisitsPage.checkFirstVisit();
