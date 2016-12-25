@@ -38,7 +38,6 @@ public class DeleteAllergyTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    @Ignore("RA-1253")
     public void deleteAllergyTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
