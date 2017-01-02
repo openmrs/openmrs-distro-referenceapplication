@@ -37,7 +37,6 @@ public class AddNewAllergyTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    @Ignore("RA-1253")
     @Category(BuildTests.class)
     public void addNewAllergyTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
