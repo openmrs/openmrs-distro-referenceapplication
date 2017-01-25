@@ -13,14 +13,11 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HomePage;
-import org.openmrs.uitestframework.test.TestBase;
 
-@Ignore("Test doesn't extend ReferenceApplicationTestBase and fails on fresh distribution")
-public class LoginTest extends TestBase {
+public class LoginTest extends ReferenceApplicationTestBase {
     private HomePage homePage;
 
     @Test
@@ -53,7 +50,7 @@ public class LoginTest extends TestBase {
     }
     @Test
     public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
-    	goToLoginPage().login("doctor", "Doctor123");
+    	goToLoginPage().loginAsDoctor();
         homePage = new HomePage(page);
     	assertPage(homePage);
         assertTrue(homePage.isFindAPatientAppPresent());
