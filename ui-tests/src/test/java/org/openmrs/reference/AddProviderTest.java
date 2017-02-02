@@ -36,7 +36,6 @@ public class AddProviderTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    @Ignore("RA-1200")
     @Category(BuildTests.class)
     public void addProviderTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
