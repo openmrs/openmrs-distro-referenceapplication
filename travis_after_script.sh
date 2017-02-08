@@ -2,5 +2,5 @@
 
 if [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
-docker logs openmrs-referenceapplication
+docker logs distro_web
 fi
