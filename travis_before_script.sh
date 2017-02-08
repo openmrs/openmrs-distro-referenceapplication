@@ -8,12 +8,10 @@ cd distro
 export TOMCAT_PORT=8080
 
 if [ "$DB" = "mysql" ]
-then
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d #detached mode
 fi
 
 if [ "$DB" = "mariadb" ]
-then
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml -f ../docker/docker-compose.mariadb.yml up -d #detached mode
 fi
 
