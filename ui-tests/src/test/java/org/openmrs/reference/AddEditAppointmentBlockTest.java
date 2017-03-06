@@ -36,11 +36,13 @@ public class AddEditAppointmentBlockTest extends ManageProviderSchedulesTest {
     @Category(BuildTests.class)
     public void editAppointmentBlockTest() throws Exception {
         
-        //The logic behind the text is:
-    	//- create an appointment and assert that exists 
-    	//- change the service and assert that it has been changed
-    	//- search the newly created service
-    	//- delete the appointment
+        /*
+         * The logic behind the text is:
+         * create an appointment and assert that exists 
+         * change the service and assert that it has been changed
+         * search the newly created service
+         * delete the appointment
+    	*/
     	appointmentBlocksPage.selectLocation(locationName);
         appointmentBlocksPage.clickOnDay();
         appointmentBlocksPage.enterStartTime(startTimeFirstAppointment);

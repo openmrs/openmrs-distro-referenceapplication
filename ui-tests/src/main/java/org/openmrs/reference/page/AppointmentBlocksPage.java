@@ -50,9 +50,10 @@ public class AppointmentBlocksPage extends Page {
     }
 
     /**
-     * This method removes an appointment.  
+     * Removes an appointment.  
      * Before calling this method is necessary to 
-     * click on the day (There should be only one block on the page)
+     * click on the day (User should click on the day button on the left)
+     * @see #clickOnDay()
      */
     public void removeAppointment(){
     	clickOn(REMOVE_APPOINTMENT);
@@ -92,11 +93,11 @@ public class AppointmentBlocksPage extends Page {
     public void enterStartTime(String start){setTextToFieldNoEnter(START_TIME, start);}
 
     /**
-     * This method scrolls the page up 
+     * Scrolls the page up 
      * This method has been created since the delete button 
      * is hidden by the tooltip. 
      * An alternative solution to this method is to create a method 
-     * that close the tooltip such as:
+     * that closes the tooltip such as:
      * private static final By CLOSE_TOOLTIP = By.cssSelector("span.ui-icon.ui-icon-close");
      * public void clickOnCloseTooltip(){
      *	clickOn(CLOSE_TOOLTIP);
@@ -108,8 +109,8 @@ public class AppointmentBlocksPage extends Page {
     }
     
     /**
-     * This method clicks on the current day and open the "editing page"
-     * 
+     * Clicks on the current day and open the "editing page".
+     * This method should be invoked when the page shows only a block with the day
      */
     public void clickOnDay(){
     	clickOn(DAY);
@@ -117,8 +118,7 @@ public class AppointmentBlocksPage extends Page {
     }
     
     /**
-     *This method clicks on the Cancel button available in the "editing page" 
-     * 
+     *Clicks on the Cancel button available in the "editing page" 
      **/
     public void clickOnCancel(){
     	clickOn(CANCEL);
@@ -136,7 +136,6 @@ public class AppointmentBlocksPage extends Page {
     /**
      *Checks if the the Save button available in the "editing page" is enabled 
      */
-    
     public Boolean isSaveEnabled(){
     	return findElement(SAVE).isEnabled();
     }
@@ -155,7 +154,7 @@ public class AppointmentBlocksPage extends Page {
     }
     
     /**
-     * This method clicks on the Cancel button
+     * Clicks on the Close button available in the "editing page"
      */
     public void clickOnClose(){
         findElement(CLOSE_WINDOW);
@@ -163,9 +162,9 @@ public class AppointmentBlocksPage extends Page {
     }
     
     /**
-     * This methods extracts the service from a row displayed in the block
+     * Extracts the service from a row displayed in the block
      * 
-     * @param serviceChoice, the index of the service. For instance if there are 2 rows on the block, to get the first one searchChoice = 0
+     * @param serviceChoice, the index of the service. For instance if there are 2 rows on the block, to get the first one serviceChoice = 0
      * @return the Service in the row  (e.g. Dermatology)
      */
     public String getServiceOfDay(int serviceChoice){

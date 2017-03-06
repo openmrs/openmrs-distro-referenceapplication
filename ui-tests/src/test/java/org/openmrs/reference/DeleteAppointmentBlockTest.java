@@ -35,9 +35,10 @@ public class DeleteAppointmentBlockTest extends ManageProviderSchedulesTest {
     	//The logic behind the text is to create an appointment and delete it
     	appointmentBlocksPage.selectLocation(locationName);
         appointmentBlocksPage.clickOnDay();
-        //Here we make negative test: using outbound values for start time should result 
-        // that Save button is disabled
-        
+        /*
+         * Here we make negative test: using outbound values for start time should result
+         * that Save button is disabled 
+         */
         appointmentBlocksPage.enterStartTime(outboundStartTime);
         assertTrue(!appointmentBlocksPage.isSaveEnabled());
         appointmentBlocksPage.enterStartTime(correctStartTimeFirtAppointment);
