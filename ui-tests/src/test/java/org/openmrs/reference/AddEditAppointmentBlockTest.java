@@ -12,46 +12,70 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
-import org.openmrs.reference.page.*;
-import org.openmrs.uitestframework.test.TestBase;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-
-public class AddEditAppointmentBlockTest extends ReferenceApplicationTestBase {
-
-    @Test
-    @Ignore
-    @Category(BuildTests.class)
-    public void editAppointmentBlockTest() throws Exception {
-        AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
-        AppointmentBlocksPage appointmentBlocksPage = appointmentSchedulingPage.goToAppointmentBlock();
-
-        appointmentBlocksPage.selectLocation("Outpatient Clinic");
-        appointmentBlocksPage.clickOnCurrentDay();
-        appointmentBlocksPage.selectLocationBlock("Outpatient Clinic");
-        appointmentBlocksPage.enterService("derm");
-        appointmentBlocksPage.clickOnSave();
-
-        assertNotNull("Dermatology", appointmentBlocksPage.CURRENT_DAY);
-
-        appointmentBlocksPage.findBlock();
-        appointmentBlocksPage.clickOnEdit();
-        appointmentBlocksPage.enterProvider("Jake Smith");
-        appointmentBlocksPage.clickOnServiceDelete();
-        appointmentBlocksPage.enterService("onco");
-        appointmentBlocksPage.clickOnSave();
-
-        assertNotNull("Oncology", appointmentBlocksPage.CURRENT_DAY);
-
-        appointmentBlocksPage.findBlock();
-        appointmentBlocksPage.clickOnDelete();
-        appointmentBlocksPage.clickOnClose();
-        appointmentBlocksPage.clickOnConfirmDelete();
-    }
+public class AddEditAppointmentBlockTest extends ManageProviderSchedulesTest {
+	
+	private final String startTimeFirstAppointment = "09";
+	
+	private String firstAppointment = "Gynecology";
+	
+	private String secondAppointment = "Dermatology";
+	
+	int firstAppointmentIndex = 0;
+	
+	int secondAppointmentIndex = 1;
+	
+	@Before
+	public void setUp() throws Exception {
+		super.setUp();
+	}
+	
+	/*
+	 *@verifies the creation and editing of an appointment  
+	 */
+	@Test
+	@Category(BuildTests.class)
+	public void editAppointmentBlockTest() throws Exception {
+		
+		/*
+		 * The logic behind the text is:
+		 * create an appointment and assert that exists 
+		 * change the service and assert that it has been changed
+		 * search the newly created service
+		 * delete the appointment
+		*/
+		appointmentBlocksPage.selectLocation(locationName);
+		appointmentBlocksPage.clickOnDay();
+		appointmentBlocksPage.enterStartTime(startTimeFirstAppointment);
+		appointmentBlocksPage.enterService("gyne");
+		appointmentBlocksPage.enterProvider(provider);
+		appointmentBlocksPage.clickOnSave();
+		assertTrue(appointmentBlocksPage.getServiceOfDay(firstAppointmentIndex).equals(firstAppointment));
+		appointmentBlocksPage.clickOnAppointment();
+		appointmentBlocksPage.clickOnEdit();
+		appointmentBlocksPage.removeAppointment();
+		appointmentBlocksPage.enterService("derma");
+		appointmentBlocksPage.clickOnSave();
+		assertTrue(appointmentBlocksPage.getServiceOfDay(firstAppointmentIndex).equals(secondAppointment));
+		appointmentBlocksPage.goToPage(appointmentBlocksPage.getPageUrl());
+		appointmentBlocksPage.selectLocation(locationName);
+		appointmentBlocksPage.clickOnDay();
+		//let's check that also the Cancel button works 
+		appointmentBlocksPage.clickOnCancel();
+		appointmentBlocksPage.clickOnAppointment();
+		appointmentBlocksPage.clickOnDelete();
+		//click on "left area" is needed because the tooltip shadows the delete button
+		appointmentBlocksPage.clickOnleft();
+		appointmentBlocksPage.clickOnConfirmDelete();
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		super.tearDown();
+	}
+	
 }
-
