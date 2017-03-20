@@ -7,8 +7,20 @@ openmrs-distro-referenceapplication
 
 [![Build Status](https://saucelabs.com/browser-matrix/rkorytkowski.svg)](https://saucelabs.com/open_sauce/user/openmrs)
 
-## Running locally with Vagrant 
-https://wiki.openmrs.org/x/CIC3Ag
+## Running locally with OpenMRS SDK
+
+You must first have a server (named sdk1, say) set up with OpenMRS platform before doing the following. Instructions on how to setup a platform server with the SDK can be found [here](https://wiki.openmrs.org/display/docs/OpenMRS+SDK#OpenMRSSDK-Settingupservers). Please use the latest platform snapshot.
+
+1. Build the Reference Application with "mvn clean install".
+2. Copy the modules from /package/target/distro folder to the folder of the server set up previously within {user-home}/openmrs. (eg: {user-home}/openmrs/sdk1/modules). Note that the distro folder also contains an openmrs platform .war file. This need not be copied.
+3. Run the server. (eg: $mvn openmrs-sdk:run -DserverId=sdk1)
+
+By default the server will run on port 8080. If you wish to use a different port, say 8081, pass "-Dport=8081" when running the server.
+
+The first time the server is run, it will update the database. The initial username/password will be admin/Admin123.
+
+For more details on using the SDK, please refer to its [Wiki page](https://wiki.openmrs.org/display/docs/OpenMRS+SDK). If you encounter errors, please first try restarting the server.
+
 
 ### Running ui-tests locally:
 
@@ -43,3 +55,9 @@ And that's it!
 If you would like to setup a similar configuraiton for your distribution, please have a look at [.travis.yml](https://github.com/openmrs/openmrs-distro-referenceapplication/blob/master/.travis.yml). The test server is created using `openmrs-sdk:build-distro` and started with `docker-compose up` on Travis-CI. 
 
 Travis-CI creates a tunnel to SauceLabs, which allows SauceLabs to access the test server and execute tests against that server in a browser. In order to speed up the build, we always run 5 UI tests in parallel using agents provided by SauceLabs. The test server is automatically terminated by Travis-CI once tests are done. 
+
+
+## Running locally with Vagrant
+
+As of March 2017, the resources for this method are outdated/ no longer maintained. 
+https://wiki.openmrs.org/x/CIC3Ag
