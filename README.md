@@ -7,19 +7,9 @@ openmrs-distro-referenceapplication
 
 [![Build Status](https://saucelabs.com/browser-matrix/rkorytkowski.svg)](https://saucelabs.com/open_sauce/user/openmrs)
 
-## Running locally with OpenMRS SDK
+## Running with OpenMRS SDK
 
-You must first have a server (named sdk1, say) set up with OpenMRS platform before doing the following. Instructions on how to setup a platform server with the SDK can be found [here](https://wiki.openmrs.org/display/docs/OpenMRS+SDK#OpenMRSSDK-Settingupservers). Please use the latest platform snapshot.
-
-1. Build the Reference Application with "mvn clean install".
-2. Copy the modules from /package/target/distro folder to the folder of the server set up previously within {user-home}/openmrs. (eg: {user-home}/openmrs/sdk1/modules). Note that the distro folder also contains an openmrs platform .war file. This need not be copied.
-3. Run the server. (eg: $mvn openmrs-sdk:run -DserverId=sdk1)
-
-By default the server will run on port 8080. If you wish to use a different port, say 8081, pass "-Dport=8081" when running the server.
-
-The first time the server is run, it will update the database. The initial username/password will be admin/Admin123.
-
-For more details on using the SDK, please refer to its [Wiki page](https://wiki.openmrs.org/display/docs/OpenMRS+SDK). If you encounter errors, please first try restarting the server.
+Please follow the instructions at the [OpenMRS SDK Wiki page](https://wiki.openmrs.org/display/docs/OpenMRS+SDK). Set up a server with the Reference Application distribution.
 
 
 ### Running ui-tests locally:
