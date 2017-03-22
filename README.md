@@ -7,8 +7,10 @@ openmrs-distro-referenceapplication
 
 [![Build Status](https://saucelabs.com/browser-matrix/rkorytkowski.svg)](https://saucelabs.com/open_sauce/user/openmrs)
 
-## Running locally with Vagrant 
-https://wiki.openmrs.org/x/CIC3Ag
+## Running with OpenMRS SDK
+
+Please follow the instructions at the [OpenMRS SDK Wiki page](https://wiki.openmrs.org/display/docs/OpenMRS+SDK). Set up a server with the Reference Application distribution.
+
 
 ### Running ui-tests locally:
 
@@ -43,3 +45,9 @@ And that's it!
 If you would like to setup a similar configuraiton for your distribution, please have a look at [.travis.yml](https://github.com/openmrs/openmrs-distro-referenceapplication/blob/master/.travis.yml). The test server is created using `openmrs-sdk:build-distro` and started with `docker-compose up` on Travis-CI. 
 
 Travis-CI creates a tunnel to SauceLabs, which allows SauceLabs to access the test server and execute tests against that server in a browser. In order to speed up the build, we always run 5 UI tests in parallel using agents provided by SauceLabs. The test server is automatically terminated by Travis-CI once tests are done. 
+
+
+## Running locally with Vagrant
+
+As of March 2017, the resources for this method are outdated/ no longer maintained. 
+https://wiki.openmrs.org/x/CIC3Ag
