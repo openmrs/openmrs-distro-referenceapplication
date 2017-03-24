@@ -9,6 +9,7 @@
  */
 package org.openmrs.reference.page;
 
+import com.thoughtworks.selenium.webdriven.commands.Open;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -62,7 +63,15 @@ public class ManageProviderPage extends Page {
 		return "/admin/provider/index.htm";
 	}
 
-	public String getActionMessage() {
-		return findElement(OPENMRS_MSG).getText();
+	public void waitForProviderToBeSaved() {
+		waitForTextToBePresentInElement(OPENMRS_MSG, "Provider saved");
+	}
+
+	public void waitForProviderToBeDeleted() {
+		waitForTextToBePresentInElement(OPENMRS_MSG, "Provider deleted forever successfully");
+	}
+
+	public void waitForProviderToBeRetired() {
+		waitForTextToBePresentInElement(OPENMRS_MSG, "Provider retired");
 	}
 }

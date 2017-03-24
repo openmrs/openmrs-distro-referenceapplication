@@ -41,10 +41,11 @@ public class AddProviderTest extends ReferenceApplicationTestBase {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageProviderPage manageProviderPage = administrationPage.clickOnManageProviders();
         ProviderPage providerPage = manageProviderPage.clickOnAddProvider();
+
         providerPage.setIdentifier(personUuid);
         providerPage.setPerson(person.getName());
         manageProviderPage = providerPage.clickOnSave();
-        assertThat(manageProviderPage.getActionMessage(), is("Provider saved"));
+
         manageProviderPage.setProviderNameOrId(person.getName());
         providerPage = manageProviderPage.clickOnProvider(person.getName());
         providerPage.deleteForever();

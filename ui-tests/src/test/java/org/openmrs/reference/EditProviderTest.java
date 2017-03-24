@@ -46,8 +46,7 @@ public class EditProviderTest extends ReferenceApplicationTestBase{
         manageProviderPage.setProviderNameOrId(person.getName());
         ProviderPage providerPage = manageProviderPage.clickOnProvider(person.getName());
         providerPage.setIdentifier("uitest-" + person.uuid);
-        manageProviderPage = providerPage.clickOnSave();
-        assertThat(manageProviderPage.getActionMessage(), is("Provider saved"));
+        providerPage.clickOnSave();
     }
 
     @After

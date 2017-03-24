@@ -39,7 +39,9 @@ public class ProviderPage extends Page{
 
     public ManageProviderPage clickOnSave(){
         clickOn(SAVE);
-        return new ManageProviderPage(this);
+        ManageProviderPage manageProviderPage = new ManageProviderPage(this);
+        manageProviderPage.waitForProviderToBeSaved();
+        return manageProviderPage;
     }
 
     public ManageProviderPage clickOnCancel(){
@@ -55,7 +57,9 @@ public class ProviderPage extends Page{
     public ManageProviderPage deleteForever() {
         clickOn(DELETE_FOREVER);
         acceptAlert();
-        return new ManageProviderPage(this);
+        ManageProviderPage manageProviderPage = new ManageProviderPage(this);
+        manageProviderPage.waitForProviderToBeDeleted();
+        return manageProviderPage;
     }
 
     public void setRetireReason(String retireReason) {
@@ -64,6 +68,8 @@ public class ProviderPage extends Page{
 
     public ManageProviderPage clickOnRetire() {
         clickOn(RETIRE);
-        return new ManageProviderPage(this);
+        ManageProviderPage manageProviderPage = new ManageProviderPage(this);
+        manageProviderPage.waitForProviderToBeRetired();
+        return manageProviderPage;
     }
 }

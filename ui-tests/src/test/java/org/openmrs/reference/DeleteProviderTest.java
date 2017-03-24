@@ -44,8 +44,7 @@ public class DeleteProviderTest extends ReferenceApplicationTestBase{
         ManageProviderPage manageProviderPage = administrationPage.clickOnManageProviders();
         manageProviderPage.setProviderNameOrId(person.getName());
         ProviderPage providerPage = manageProviderPage.clickOnProvider(person.getName());
-        manageProviderPage = providerPage.deleteForever();
-        assertThat(manageProviderPage.getActionMessage(), is("Provider deleted forever successfully"));
+        providerPage.deleteForever();
     }
 
     @After

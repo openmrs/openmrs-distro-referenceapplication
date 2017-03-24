@@ -45,8 +45,7 @@ public class RetireProviderTest extends ReferenceApplicationTestBase{
         manageProviderPage.setProviderNameOrId(person.getName());
         ProviderPage providerPage = manageProviderPage.clickOnProvider(person.getName());
         providerPage.setRetireReason("retire reason");
-        manageProviderPage = providerPage.clickOnRetire();
-        assertThat(manageProviderPage.getActionMessage(), is("Provider retired"));
+        providerPage.clickOnRetire();
     }
 
     @After
