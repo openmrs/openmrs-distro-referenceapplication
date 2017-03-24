@@ -27,30 +27,24 @@ public class PersonFormPage extends Page{
         super(parent);
     }
 
-    public PersonFormPage(Page parent, WebElement waitForStaleness) {
-        super(parent, waitForStaleness);
-    }
-
     public PersonFormPage savePerson(){
-        WebElement saveButton = findElement(SAVE_PERSON);
         clickOn(SAVE_PERSON);
-        return new PersonFormPage(this, saveButton);
+        waitForTextToBePresentInElement(OPENMRS_MSG, "Person saved");
+        return new PersonFormPage(this);
     }
 
     public ManagePersonPage deletePersonForever(){
         clickOn(DELETE_PERSON_FOREVER);
         clickOn(DELETE_PERSON_CONFIRM);
         acceptAlert();
-        return new ManagePersonPage(this);
+        ManagePersonPage managePersonPage = new ManagePersonPage(this);
+        managePersonPage.waitForPersonToBeDeleted();
+        return managePersonPage;
     }
 
     public void setFamilyNameField(String familyName){
         findElement(FAMILY_NAME_FIELD).clear();
         findElement(FAMILY_NAME_FIELD).sendKeys(familyName);
-    }
-
-    public String getActionMessage(){
-        return findElement(OPENMRS_MSG).getText();
     }
 
     public String getFamilyName(){
@@ -68,8 +62,8 @@ public class PersonFormPage extends Page{
     }
 
     public PersonFormPage retirePerson() {
-        WebElement retireField = findElement(RETIRE_REASON_FIELD);
         clickOn(RETIRE_PERSON);
-        return new PersonFormPage(this, retireField);
+        waitForTextToBePresentInElement(OPENMRS_MSG, "Person deleted");
+        return new PersonFormPage(this);
     }
 }

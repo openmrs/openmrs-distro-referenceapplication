@@ -41,8 +41,7 @@ public class DeletePersonTest extends ReferenceApplicationTestBase{
         ManagePersonPage managePersonPage = administrationPage.clickOnManagePersons();
         managePersonPage.setPersonName(personInfo.givenName);
         PersonFormPage personFormPage = managePersonPage.clickFirstFoundPerson();
-        managePersonPage = personFormPage.deletePersonForever();
-        assertThat(managePersonPage.getActionMessage(), is("Person deleted forever"));
+        personFormPage.deletePersonForever();
     }
 
     @After

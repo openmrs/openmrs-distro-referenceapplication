@@ -38,12 +38,12 @@ public class ManagePersonPage extends Page {
         return new PersonFormPage(this);
     }
 
+    public void waitForPersonToBeDeleted() {
+        waitForTextToBePresentInElement(OPENMRS_MSG, "Person deleted forever");
+    }
+
     @Override
     public String getPageUrl() {
         return "/admin/person/index.htm";
-    }
-
-    public String getActionMessage() {
-        return findElement(OPENMRS_MSG).getText();
     }
 }
