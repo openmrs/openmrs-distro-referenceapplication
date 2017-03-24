@@ -6,7 +6,15 @@ mvn org.openmrs.maven.plugins:openmrs-sdk-maven-plugin:3.8.0:setup-sdk -DbatchAn
 mvn org.openmrs.maven.plugins:openmrs-sdk-maven-plugin:3.8.0:build-distro -Ddir=distro -e
 cd distro
 export TOMCAT_PORT=8080
+
+if [ "$DB" = "mysql" ]
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d #detached mode
+fi
+
+if [ "$DB" = "mariadb" ]
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml -f ../docker/docker-compose.mariadb.yml up -d #detached mode
+fi
+
 cd ..
 sleep 60
 fi
