@@ -39,7 +39,7 @@ public class ManageProviderPage extends Page {
 	public void setProviderNameOrId(String text){
 		setText(SEARCH_ELEMENT, text);
 		findElement(SEARCH_ELEMENT).sendKeys(Keys.BACK_SPACE);
-		waitForTextToBePresentInElement(SEARCH_STATUS, text);
+		waitForTextToBePresentInElement(SEARCH_STATUS, text.substring(0, text.length() - 1));
 	}
 
 	public void clickOnIncludeRetired(){
