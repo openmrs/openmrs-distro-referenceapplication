@@ -42,7 +42,7 @@ public class EditPersonTest extends ReferenceApplicationTestBase{
         managePersonPage.setPersonName(personInfo.givenName);
         PersonFormPage personFormPage = managePersonPage.clickFirstFoundPerson();
         personFormPage.setFamilyNameField("newFamilyName");
-        personFormPage = personFormPage.savePerson();
+        personFormPage.savePerson();
         assertThat(personFormPage.getFamilyName(), is("newFamilyName"));
     }
 

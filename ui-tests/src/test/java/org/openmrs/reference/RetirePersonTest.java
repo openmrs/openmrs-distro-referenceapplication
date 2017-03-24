@@ -41,7 +41,7 @@ public class RetirePersonTest extends ReferenceApplicationTestBase{
         managePersonPage.setPersonName(personInfo.givenName);
         PersonFormPage personFormPage = managePersonPage.clickFirstFoundPerson();
         personFormPage.setRetireReason("retire reason");
-        personFormPage = personFormPage.retirePerson();
+        personFormPage.retirePerson();
     }
 
     @After

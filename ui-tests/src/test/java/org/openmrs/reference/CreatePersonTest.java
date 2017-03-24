@@ -46,7 +46,7 @@ public class CreatePersonTest extends ReferenceApplicationTestBase {
         personPage.clickGenderMale();
         PersonFormPage personFormPage = personPage.createPerson();
         personFormPage.setFamilyNameField(personFamilyName);
-        personFormPage = personFormPage.savePerson();
+        personFormPage.savePerson();
         personFormPage.deletePersonForever();
     }
 }

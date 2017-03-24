@@ -27,10 +27,9 @@ public class PersonFormPage extends Page{
         super(parent);
     }
 
-    public PersonFormPage savePerson(){
+    public void savePerson(){
         clickOn(SAVE_PERSON);
         waitForTextToBePresentInElement(OPENMRS_MSG, "Person saved");
-        return new PersonFormPage(this);
     }
 
     public ManagePersonPage deletePersonForever(){
@@ -61,9 +60,8 @@ public class PersonFormPage extends Page{
         findElement(RETIRE_REASON_FIELD).sendKeys(reason);
     }
 
-    public PersonFormPage retirePerson() {
+    public void retirePerson() {
         clickOn(RETIRE_PERSON);
         waitForTextToBePresentInElement(OPENMRS_MSG, "Person deleted");
-        return new PersonFormPage(this);
     }
 }
