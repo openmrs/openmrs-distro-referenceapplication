@@ -155,12 +155,7 @@ public class AppointmentBlocksPage extends Page {
 	
 	public void clickOnSave() {
 		clickOn(SAVE);
-		try {
 			waitForElementToBeHidden(SAVE);
-		}
-		catch (Exception e) {
-			
-		}
 	}
 	
 	/**
@@ -193,7 +188,6 @@ public class AppointmentBlocksPage extends Page {
 	
 	public void clickOnAppointment() {
 		findElement(SERVICE_BLOCK).click();
-		;
 	}
 	
 	/**
