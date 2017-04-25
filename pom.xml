@@ -54,7 +54,6 @@
 		<uicommonsVersion>2.2.0</uicommonsVersion>
 		<appuiVersion>1.8.0</appuiVersion>
 		<htmlformentryVersion>3.3.2</htmlformentryVersion>
-		<htmlformentry19extVersion>1.8-SNAPSHOT</htmlformentry19extVersion>
 		<htmlformentryuiVersion>1.6.2</htmlformentryuiVersion>
 		<coreappsVersion>1.12.1-SNAPSHOT</coreappsVersion>
 		<webservices.restVersion>2.19.0</webservices.restVersion>
@@ -306,12 +305,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>htmlformentry19ext-api</artifactId>
-				<version>${htmlformentry19extVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
 				<artifactId>htmlformentryui-api</artifactId>
 				<version>${htmlformentryuiVersion}</version>
 				<scope>provided</scope>
@@ -532,13 +525,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>htmlformentry19ext-api</artifactId>
-				<version>${htmlformentry19extVersion}</version>
-				<classifier>tests</classifier>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
 				<artifactId>htmlformentryui-api</artifactId>
 				<version>${htmlformentryuiVersion}</version>
 				<classifier>tests</classifier>
@@ -729,12 +715,6 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>htmlformentry-omod</artifactId>
 				<version>${htmlformentryVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>htmlformentry19ext-omod</artifactId>
-				<version>${htmlformentry19extVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -1147,7 +1127,7 @@
 							<allowSnapshots>true</allowSnapshots>
 							<excludeProperties>
 								uiframeworkVersion,openMRSVersion,logicVersion,appframeworkVersion,
-								htmlformentryVersion,htmlformentry19extVersion,reportingVersion,
+								htmlformentryVersion,reportingVersion,
 								metadatasharingVersion,metadatamappingVersion
 							</excludeProperties>
 						</configuration>
