@@ -7,21 +7,10 @@
     </formats>
     <fileSets>
         <fileSet>
-            <directory>${project.basedir}/target/distro</directory>
-            <outputDirectory>/</outputDirectory>
-
-            <includes>
-                <include>README*</include>
-                <include>LICENSE*</include>
-                <include>NOTICE*</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${project.build.directory}/distro</directory>
+            <directory>${project.build.directory}/distro/web/modules</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>*.omod</include>
-                <include>*.war</include>
             </includes>
         </fileSet>
     </fileSets>

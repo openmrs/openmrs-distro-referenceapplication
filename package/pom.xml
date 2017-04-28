@@ -7,7 +7,7 @@
 	<version>2.6-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Reference Application Distribution Package</name>
-	<description>Scripts for building the Reference Application distribution package</description>
+	<description>Reference Application Distribution Package</description>
 	<url>https://wiki.openmrs.org/x/yQRDAg</url>
 
 	<parent>
@@ -26,246 +26,44 @@
 		<developerConnection>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</developerConnection>
 		<url>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</url>
 	  <tag>HEAD</tag>
-  </scm>
-
-	<properties>
-		<db.url><![CDATA[jdbc:mysql://localhost:3306/openmrs?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8]]></db.url>
-		<db.user>root</db.user>
-		<db.password>Admin123</db.password>
-	</properties>
-
+	</scm>
+	
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.8</version>
+				<groupId>org.openmrs.maven.plugins</groupId>
+				<artifactId>openmrs-sdk-maven-plugin</artifactId>
+				<version>3.9.0</version>
 				<executions>
 					<execution>
-						<id>prepare-distro</id>
-						<phase>package</phase>
+						<id>build-distro</id>
+						<phase>generate-resources</phase>
 						<goals>
-							<goal>copy</goal>
+							<goal>build-distro</goal>
 						</goals>
 						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.openmrs.web</groupId>
-									<artifactId>openmrs-webapp</artifactId>
-									<type>war</type>
-									<destFileName>openmrs-${openMRSVersion}.war</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>referencemetadata-omod</artifactId>
-									<destFileName>referencemetadata-${referencemetadataVersion}.omod
-									</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>appframework-omod</artifactId>
-									<destFileName>appframework-${appframeworkVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>uiframework-omod</artifactId>
-									<destFileName>uiframework-${uiframeworkVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>registrationcore-omod</artifactId>
-									<destFileName>registrationcore-${registrationcoreVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>registrationapp-omod</artifactId>
-									<destFileName>registrationapp-${registrationappVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>idgen-omod</artifactId>
-									<destFileName>idgen-${idgenVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>emrapi-omod</artifactId>
-									<destFileName>emrapi-${emrapiVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>providermanagement-omod</artifactId>
-									<destFileName>providermanagement-${providermanagementVersion}.omod
-									</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>uilibrary-omod</artifactId>
-									<destFileName>uilibrary-${uilibraryVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>uicommons-omod</artifactId>
-									<destFileName>uicommons-${uicommonsVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>referenceapplication-omod</artifactId>
-									<destFileName>referenceapplication-${referenceapplicationVersion}.omod
-									</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>calculation-omod</artifactId>
-									<destFileName>calculation-${calculationVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>reporting-omod</artifactId>
-									<destFileName>reporting-${reportingVersion}.omod</destFileName>
-								</artifactItem>
-                                <artifactItem>
-                                    <groupId>org.openmrs.module</groupId>
-                                    <artifactId>metadatadeploy-omod</artifactId>
-                                    <destFileName>metadatadeploy-${metadatadeployVersion}.omod</destFileName>
-                                </artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>metadatasharing-omod</artifactId>
-									<destFileName>metadatasharing-${metadatasharingVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>metadatamapping-omod</artifactId>
-									<destFileName>metadatamapping-${metadatamappingVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>serialization.xstream-omod</artifactId>
-									<type>omod</type>
-									<destFileName>serialization.xstream-${serialization.xstreamVersion}.omod
-									</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>htmlwidgets-omod</artifactId>
-									<destFileName>htmlwidgets-${htmlwidgetsVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>htmlformentry-omod</artifactId>
-									<destFileName>htmlformentry-${htmlformentryVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>htmlformentryui-omod</artifactId>
-									<destFileName>htmlformentryui-${htmlformentryuiVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>appui-omod</artifactId>
-									<destFileName>appui-${appuiVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs</groupId>
-									<artifactId>event-omod</artifactId>
-									<destFileName>event-${eventVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>coreapps-omod</artifactId>
-									<destFileName>coreapps-${coreappsVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>webservices.rest-omod</artifactId>
-									<destFileName>webservices.rest-${webservices.restVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>referencedemodata-omod</artifactId>
-									<destFileName>referencedemodata-${referencedemodataVersion}.omod
-									</destFileName>
-								</artifactItem>
-                                <artifactItem>
-                                    <groupId>org.openmrs.module</groupId>
-                                    <artifactId>reportingrest-omod</artifactId>
-                                    <destFileName>reportingrest-${reportingRestVersion}.omod</destFileName>
-                                </artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>dataexchange-omod</artifactId>
-									<destFileName>dataexchange-${dataexchangeVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>allergyui-omod</artifactId>
-									<destFileName>allergyui-${allergyuiVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>formentryapp-omod</artifactId>
-									<destFileName>formentryapp-${formentryappVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>atlas-omod</artifactId>
-									<type>omod</type>
-									<destFileName>atlas-${atlasVersion}.omod</destFileName>
-								</artifactItem>
-                               <artifactItem>
-                                    <groupId>org.openmrs.module</groupId>
-                                    <artifactId>appointmentscheduling-omod</artifactId>
-                                    <destFileName>appointmentscheduling-${appointmentschedulingVersion}.omod</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.openmrs.module</groupId>
-                                    <artifactId>appointmentschedulingui-omod</artifactId>
-                                    <destFileName>appointmentschedulingui-${appointmentschedulinguiVersion}.omod</destFileName>
-                                </artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>chartsearch-omod</artifactId>
-									<destFileName>chartsearch-${chartsearchVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>adminui-omod</artifactId>
-									<destFileName>adminui-${adminuiVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>fhir-omod</artifactId>
-									<destFileName>fhir-${fhirVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>owa-omod</artifactId>
-									<destFileName>owa-${owaVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>legacyui-omod</artifactId>
-									<destFileName>legacyui-${legacyuiVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>reportingcompatibility-omod</artifactId>
-									<destFileName>reportingcompatibility-${reportingcompatibilityVersion}.omod</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.openmrs.module</groupId>
-									<artifactId>reportingui-omod</artifactId>
-									<destFileName>reportingui-${reportinguiVersion}.omod</destFileName>
-								</artifactItem>
-							</artifactItems>
-							<outputDirectory>${project.build.directory}/distro</outputDirectory>
+							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
+							<dir>${project.build.directory}/distro</dir>
+							<bundled>false</bundled>
+						</configuration>
+					</execution>
+					<execution>
+						<id>build-bundled-distro</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>build-distro</goal>
+						</goals>
+						<configuration>
+							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
+							<dir>${project.build.directory}/bundled-distro</dir>
+							<bundled>true</bundled>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
 			<!--
-			Assemble all of these omods into a zip file
+			Assemble all of omods into a zip file
 			-->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -285,142 +83,29 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+				  <execution>
+					<id>attach-artifacts</id>
+					<phase>package</phase>
+					<goals>
+						<goal>attach-artifact</goal>
+					</goals>
+					<configuration>
+					  <artifacts>
+						<artifact>
+							<file>${project.build.directory}/distro/web/openmrs.war</file>
+							<type>war</type>
+						</artifact>
+					  </artifacts>
+					</configuration>
+				  </execution>
+				</executions>
+			  </plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>setupdatabase</id>
-			<activation>
-				<property>
-					<name>setupDatabase</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-dependency-plugin</artifactId>
-						<executions>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.liquibase</groupId>
-						<artifactId>liquibase-maven-plugin</artifactId>
-						<version>2.0.1</version>
-						<configuration>
-							<!--<changeLogFile>src/main/resources/db-changelog.xml</changeLogFile>-->
-							<driver>com.mysql.jdbc.Driver</driver>
-							<url>${db.url}</url>
-							<username>${db.user}</username>
-							<password>${db.password}</password>
-						</configuration>
-						<dependencies>
-							<dependency>
-								<groupId>mysql</groupId>
-								<artifactId>mysql-connector-java</artifactId>
-								<version>5.1.8</version>
-							</dependency>
-							<dependency>
-								<groupId>org.openmrs.liquibase.ext</groupId>
-								<artifactId>modify-column</artifactId>
-								<version>2.0.2</version>
-							</dependency>
-							<dependency>
-								<groupId>org.openmrs.liquibase.ext</groupId>
-								<artifactId>identity-insert</artifactId>
-								<version>1.2.1</version>
-							</dependency>
-							<dependency>
-								<groupId>org.openmrs.api</groupId>
-								<artifactId>openmrs-api</artifactId>
-								<version>${openMRSVersion}</version>
-								<type>jar</type>
-								<scope>compile</scope>
-							</dependency>
-						</dependencies>
-						<executions>
-							<execution>
-								<id>empty-db-create-schema</id>
-								<phase>generate-resources</phase>
-								<configuration>
-									<driver>com.mysql.jdbc.Driver</driver>
-									<changeLogFile>liquibase-schema-only.xml</changeLogFile>
-									<verbose>true</verbose>
-									<dropFirst>false</dropFirst>
-									<systemProperties>
-										<property>
-											<name>liquibase.databaseChangeLogTableName</name>
-											<value>liquibasechangelog</value>
-										</property>
-										<property>
-											<name>liquibase.databaseChangeLogLockTableName</name>
-											<value>liquibasechangeloglock</value>
-										</property>
-									</systemProperties>
-								</configuration>
-								<goals>
-									<goal>update</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>empty-db-add-core-data</id>
-								<phase>generate-resources</phase>
-								<configuration>
-									<driver>com.mysql.jdbc.Driver</driver>
-									<changeLogFile>liquibase-core-data.xml</changeLogFile>
-									<url>${db.url}</url>
-									<username>${db.user}</username>
-									<password>${db.password}</password>
-									<verbose>true</verbose>
-									<dropFirst>false</dropFirst>
-									<systemProperties>
-										<property>
-											<name>liquibase.databaseChangeLogTableName</name>
-											<value>liquibasechangelog</value>
-										</property>
-										<property>
-											<name>liquibase.databaseChangeLogLockTableName</name>
-											<value>liquibasechangeloglock</value>
-										</property>
-									</systemProperties>
-								</configuration>
-								<goals>
-									<goal>update</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>empty-db-update-to-latest</id>
-								<phase>generate-resources</phase>
-								<configuration>
-									<driver>com.mysql.jdbc.Driver</driver>
-									<changeLogFile>liquibase-update-to-latest.xml</changeLogFile>
-									<url>${db.url}</url>
-									<username>${db.user}</username>
-									<password>${db.password}</password>
-									<verbose>true</verbose>
-									<dropFirst>false</dropFirst>
-									<systemProperties>
-										<property>
-											<name>liquibase.databaseChangeLogTableName</name>
-											<value>liquibasechangelog</value>
-										</property>
-										<property>
-											<name>liquibase.databaseChangeLogLockTableName</name>
-											<value>liquibasechangeloglock</value>
-										</property>
-									</systemProperties>
-								</configuration>
-								<goals>
-									<goal>update</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-
-			</build>
-		</profile>
-	</profiles>
 </project>
