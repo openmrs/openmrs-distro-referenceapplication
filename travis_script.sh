@@ -2,6 +2,7 @@
 
 if [ "$TRAVIS_PULL_REQUEST" = "false" ]
 then
+mvn org.openmrs.maven.plugins:openmrs-sdk-maven-plugin:3.9.0:setup-sdk -DbatchAnswers=n
 mvn clean install -U
 cd package/target/distro
 export TOMCAT_PORT=8080
