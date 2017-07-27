@@ -13,7 +13,7 @@ fi
 
 if [ "$DB" = "mariadb" ]
 then
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml -f ../docker/docker-compose.mariadb.yml up -d #detached mode
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml -f ../../../docker/docker-compose.mariadb.yml up -d #detached mode
 fi
 
 sleep 60
