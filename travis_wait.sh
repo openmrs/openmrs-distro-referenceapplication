@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-echo "\nWaiting for Travis-CI build to start...\n";
+echo "";
+echo "Waiting for Travis-CI build to start...";
+echo "";
 sleep 300;
 while true
 do
@@ -33,10 +35,11 @@ do
       exit 1;
     fi
     
-    echo "Travis-CI build is running...\n";
+    echo "Travis-CI build is running...";
     build=`echo "$response" | grep -Po '(?<="last_build_id":)[0-9]*'`;
     buildNumber=`echo "$response" | grep -Po '(?<="last_build_number":")[^"]*'`;
-    echo "Please visit https://travis-ci.org/openmrs/openmrs-distro-referenceapplication/builds/$build or see build $buildNumber at https://saucelabs.com/u/openmrs for details\n"
+    echo "Please visit https://travis-ci.org/openmrs/openmrs-distro-referenceapplication/builds/$build or see build $buildNumber at https://saucelabs.com/u/openmrs for details"
+	echo "";
   fi
   
   sleep 60;
