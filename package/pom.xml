@@ -37,24 +37,26 @@
 				<executions>
 					<execution>
 						<id>build-distro</id>
-						<phase>generate-resources</phase>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>build-distro</goal>
 						</goals>
 						<configuration>
 							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
+							<dbSql>${basedir}/src/main/resources/openmrs-distro.sql</dbSql>
 							<dir>${project.build.directory}/distro</dir>
 							<bundled>false</bundled>
 						</configuration>
 					</execution>
 					<execution>
 						<id>build-bundled-distro</id>
-						<phase>generate-resources</phase>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>build-distro</goal>
 						</goals>
 						<configuration>
 							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
+							<dbSql>${basedir}/src/main/resources/openmrs-distro.sql</dbSql>
 							<dir>${project.build.directory}/bundled-distro</dir>
 							<bundled>true</bundled>
 						</configuration>
