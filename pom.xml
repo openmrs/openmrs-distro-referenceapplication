@@ -80,6 +80,7 @@
 		<isanteplusVersion>1.2-SNAPSHOT</isanteplusVersion>
 		<isanteplusreportsVersion>1.0</isanteplusreportsVersion>
 		<m2sys-biometricsVersion>1.0.0</m2sys-biometricsVersion>
+		<xds-senderVersion>1.0.0</xds-senderVersion>
 
 	</properties>
 
@@ -1009,6 +1010,12 @@
 	            <groupId>org.openmrs.module</groupId>
 	            <artifactId>m2sys-biometrics-omod</artifactId>
 	            <version>${m2sys-biometricsVersion}</version>
+	            <scope>provided</scope>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.openmrs.module</groupId>
+	            <artifactId>xds-sender-omod</artifactId>
+	            <version>${xds-senderVersion}</version>
 	            <scope>provided</scope>
 	        </dependency>
 
