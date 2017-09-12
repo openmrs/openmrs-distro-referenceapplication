@@ -75,7 +75,8 @@
 		<reportinguiVersion>1.3.0</reportinguiVersion>
 
 		<!--iSantePlus modules not in Reference Application Distro -->
-		<addresshierarchyVersion>2.10.0</addresshierarchyVersion>
+		<addresshierarchyVersion>2.11.0-SNAPSHOT</addresshierarchyVersion>
+		<exti18nVersion>1.1.0-SNAPSHOT</exti18nVersion>
 		<haiticoreVersion>1.0.0-SNAPSHOT</haiticoreVersion>
 		<isanteplusVersion>1.2-SNAPSHOT</isanteplusVersion>
 		<isanteplusreportsVersion>1.0</isanteplusreportsVersion>
@@ -986,6 +987,12 @@
 	            <groupId>org.openmrs.module</groupId>
 	            <artifactId>addresshierarchy-omod</artifactId>
 	            <version>${addresshierarchyVersion}</version>
+	            <scope>provided</scope>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.openmrs.module</groupId>
+	            <artifactId>exti18n-omod</artifactId>
+	            <version>${exti18nVersion}</version>
 	            <scope>provided</scope>
 	        </dependency>
 	        <dependency>
