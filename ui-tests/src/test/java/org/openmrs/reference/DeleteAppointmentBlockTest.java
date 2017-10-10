@@ -16,32 +16,32 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 public class DeleteAppointmentBlockTest extends ManageProviderSchedulesTest {
-	
+
 	private String correctStartTimeFirtAppointment = "08";
-	
+
 	private String outboundStartTime = "30";
-	
+
 	private String firstAppointment = "Gynecology";
-	
+
 	int firstAppointmentIndex = 0;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 	}
-	
+
 	/*
 	 * @verifies creation and delete of an appointment
 	 */
 	@Test
 	public void deleteAppointmentBlockTest() throws Exception {
-		
+	
 		//The logic behind the text is to create an appointment and delete it
 		appointmentBlocksPage.selectLocation(locationName);
 		appointmentBlocksPage.clickOnDay();
 		/*
 		 * Here we make negative test: using outbound values for start time should result
-		 * that Save button is disabled 
+		 * that Save button is disabled
 		 */
 		appointmentBlocksPage.enterStartTime(outboundStartTime);
 		assertTrue(!appointmentBlocksPage.isSaveEnabled());
@@ -56,7 +56,7 @@ public class DeleteAppointmentBlockTest extends ManageProviderSchedulesTest {
 		appointmentBlocksPage.clickOnleft();
 		appointmentBlocksPage.clickOnConfirmDelete();
 	}
-	
+
 	@After
 	public void tearDown() throws Exception {
 		super.tearDown();

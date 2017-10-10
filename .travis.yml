@@ -4,7 +4,7 @@ jdk: oraclejdk8
 
 services:
   - docker
-  
+ 
 addons:
   sauce_connect:
     username: $SAUCELABS_USERNAME
@@ -13,14 +13,14 @@ addons:
 env:
   - DB=mysql
   - DB=mariadb
-  
+ 
 cache:
   directories:
   - $HOME/.m2
-  
+ 
 before_cache:
   - rm -rf $HOME/.m2/repository/org/openmrs
-  
+ 
 install: true
 
 script: ./travis_script.sh
@@ -28,7 +28,7 @@ script: ./travis_script.sh
 after_script: ./travis_after_script.sh
 
 notifications:
-  irc: 
+  irc:
     channels:
       - "chat.freenode.net#openmrs"
     on_failure: always

@@ -46,7 +46,7 @@ public class FindPatientPage extends Page {
         getFirstPatientName();
         return findElement(PATIENT_ID_SEARCH_RESULT).getText();
     }
-    
+   
     public String getFirstPatientName() {
         return findElement(PATIENT_NAME_SEARCH_RESULT).getText();
     }

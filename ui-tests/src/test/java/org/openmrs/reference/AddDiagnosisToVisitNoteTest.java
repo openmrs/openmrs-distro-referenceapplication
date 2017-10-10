@@ -34,7 +34,7 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
         patient = createTestPatient();
         createTestVisit();
     }
-    
+   
     @Test
     @Category(BuildTests.class)
     public void AddDiagnosisToVisitNoteTest() throws Exception {

@@ -25,17 +25,17 @@ import org.openmrs.uitestframework.test.TestData;
  * in future if the test code become hard to maintain/read
  */
 public class ManageProviderSchedulesTest extends ReferenceApplicationTestBase {
-	
+
 	protected HomePage homePage;
-	
+
 	protected AppointmentBlocksPage appointmentBlocksPage;
-	
+
 	protected String locationName;
-	
+
 	protected String locationUuid;
-	
+
 	protected String provider;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		homePage = new HomePage(page);
@@ -53,12 +53,12 @@ public class ManageProviderSchedulesTest extends ReferenceApplicationTestBase {
 		locationName = "Isolation Ward";
 		provider = "Provider " + TestData.randomSuffix();
 	}
-	
+
 	@After
 	public void tearDown() throws Exception {
 		/*
 		 *  TODO delete the location. Re-enable when bug AM-186 is fixed.
-		 * TestData.permanetDelete(locationUuid);  
+		 * TestData.permanetDelete(locationUuid); 
 		 */
 	}
 }

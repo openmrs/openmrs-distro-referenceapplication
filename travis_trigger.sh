@@ -10,7 +10,7 @@ response=$(curl -s -X POST \
   -H "Authorization: token $TRAVIS_ACCESS_TOKEN" \
   -d "{ \"request\": { \"branch\": \"master\", \"message\": \"$TRAVIS_MESSAGE\" } }" \
   https://api.travis-ci.org/repo/openmrs%2Fopenmrs-distro-referenceapplication/requests)
-  
+ 
 echo "$response";
 
 # Uncomment to trigger the build of the platform-2.1.x branch.

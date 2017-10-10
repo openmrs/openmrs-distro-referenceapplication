@@ -21,7 +21,7 @@ Types of Downloads
 TYPES OF DOWNLOADS
 ==================
 
-Standalone 
+Standalone
 -------------------------
 Recommended for new people exploring OpenMRS Reference Application. A self-contained ZIP archive that includes an embedded database and application server, as well as demo data with sample patients. Expand the ZIP archive and run the .jar file to start the OpenMRS Reference Application.
 Username: admin
@@ -36,7 +36,7 @@ Zip with modules
 Intended for most advanced users. You must download and install an OpenMRS Platform WAR, which requires an existing Java servlet container such as Apache Tomcat, and an existing database such as MySQL. Next you need to unzip all Reference Application modules into the OpenMRS Application Data directory. Please see https://wiki.openmrs.org/display/docs/Installing+OpenMRS+2.x for more detailed instructions.
 
 ---------------------------------------------------------------------
-Copyright (C) 2004-2017 OpenMRS Inc. Use of this software is subject to 
+Copyright (C) 2004-2017 OpenMRS Inc. Use of this software is subject to
 the terms of the Mozilla Public License v. 2.0, available at:
-http://openmrs.org/license 
+http://openmrs.org/license
 ---------------------------------------------------------------------

@@ -39,7 +39,7 @@ public class FindPatientByNameTest extends ReferenceApplicationTestBase {
 
         findPatientPage.enterPatient(patient.middleName);
         assertThat(findPatientPage.getFirstPatientName(), containsString(patient.middleName));
-        
+       
         findPatientPage.enterPatient(patient.familyName);
         assertThat(findPatientPage.getFirstPatientName(), containsString(patient.familyName));
     }
