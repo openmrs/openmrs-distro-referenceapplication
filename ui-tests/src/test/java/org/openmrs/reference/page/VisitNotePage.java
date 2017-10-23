@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class VisitNotePage extends Page {
-	
+
 	private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
 	private static final By CODE = By.className("code");
 	private static final By UI_ID_1 = By.id("ui-id-1");
@@ -36,7 +36,7 @@ public class VisitNotePage extends Page {
 	public String getPageUrl() {
 		return "htmlformentryui/htmlform/enterHtmlFormWithStandardUi.page";
 	}
-	
+
 	public void enterDiagnosis(String diag) {
 		setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
 		clickOn(CODE);
@@ -87,7 +87,7 @@ public class VisitNotePage extends Page {
 	public String secondaryDiagnosis() {
 		return findElement(SECONDARY_DIAGNOSIS_ELEMENT).getText();
 	}
-	
+
 	public ClinicianFacingPatientDashboardPage save() {
 		clickOn(SAVE_VISIT_NOTE);
 		return new ClinicianFacingPatientDashboardPage(this);

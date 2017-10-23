@@ -23,7 +23,7 @@ public class DeleteFormTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-        
+       
         homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);

@@ -23,7 +23,7 @@ public class EyeReportTest extends TestBase {
     @Before
     public void setUp() throws Exception {
 
-        
+       
         homePage = new HomePage(page);
         assertPage(homePage);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);

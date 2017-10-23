@@ -24,11 +24,11 @@ It is also possible that tests start failing due to qa-refapp being redeployed. 
 
 ### Running ui-tests on Travis CI with SauceLabs
 
-This project contains configuration for running tests on [Travis CI](https://travis-ci.org/) with [SauceLabs](https://saucelabs.com/). These platforms provide free plan for Open Source projects. 
+This project contains configuration for running tests on [Travis CI](https://travis-ci.org/) with [SauceLabs](https://saucelabs.com/). These platforms provide free plan for Open Source projects.
 
 If you want to know why a test fails you can view logs, screenshots and even screencasts on [SauceLabs](https://saucelabs.com/u/rkorytkowski) and see build logs on [Travis CI](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication/builds).
 
-To setup Continuous Integration on your fork, execute following steps: 
+To setup Continuous Integration on your fork, execute following steps:
 
 1. Create accounts on [Travis CI](https://travis-ci.org/)(it has to be synced with Github owner of fork repository) and [SauceLabs](https://saucelabs.com/)
 2. Enable CI on your fork repository on Travis CI (URL is like https://travis-ci.org/profile/${travis_username})
@@ -36,22 +36,22 @@ To setup Continuous Integration on your fork, execute following steps:
 4. Add Environment variables to your repository on Travis.org:
   - 'SAUCELABS_USERNAME' equal to your SauceLabs username
   - 'SAUCELABS_ACCESSKEY' equal to access key you got in step 3.
-  
+ 
   [Guide for adding environment variables from official Travis CI documentation](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings)
 5. Push any commit to your master branch to trigger Travis CI build.
 
 And that's it!
 
-If you would like to setup a similar configuration for your distribution, please have a look at [.travis.yml](https://github.com/openmrs/openmrs-distro-referenceapplication/blob/master/.travis.yml). The test server is created using `openmrs-sdk:build-distro` and started with `docker-compose up` on Travis-CI. 
+If you would like to setup a similar configuration for your distribution, please have a look at [.travis.yml](https://github.com/openmrs/openmrs-distro-referenceapplication/blob/master/.travis.yml). The test server is created using `openmrs-sdk:build-distro` and started with `docker-compose up` on Travis-CI.
 
-Travis-CI creates a tunnel to SauceLabs, which allows SauceLabs to access the test server and execute tests against that server in a browser. In order to speed up the build, we always run 5 UI tests in parallel using agents provided by SauceLabs. The test server is automatically terminated by Travis-CI once tests are done. 
+Travis-CI creates a tunnel to SauceLabs, which allows SauceLabs to access the test server and execute tests against that server in a browser. In order to speed up the build, we always run 5 UI tests in parallel using agents provided by SauceLabs. The test server is automatically terminated by Travis-CI once tests are done.
 
 
 ## Running locally with Vagrant
 
-As of March 2017, the resources for this method are outdated/ no longer maintained. 
+As of March 2017, the resources for this method are outdated/ no longer maintained.
 https://wiki.openmrs.org/x/CIC3Ag
 
-## Writing test cases 
+## Writing test cases
 
-While writing the code for the test cases, please, follow the instructions in the [Code Style paragraph](https://wiki.openmrs.org/display/docs/Java+Conventions) and the [guidelines](https://wiki.openmrs.org/display/docs/Automated+Testing+Guidelines) 
+While writing the code for the test cases, please, follow the instructions in the [Code Style paragraph](https://wiki.openmrs.org/display/docs/Java+Conventions) and the [guidelines](https://wiki.openmrs.org/display/docs/Automated+Testing+Guidelines)
