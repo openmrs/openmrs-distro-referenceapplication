@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.openmrs.distro</groupId>
+	<artifactId>referenceapplication-package</artifactId>
+	<version>2.8.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>Reference Application Distribution Package</name>
+	<description>Reference Application Distribution Package</description>
+	<url>https://wiki.openmrs.org/x/yQRDAg</url>
+
+	<parent>
+		<groupId>org.openmrs.distro</groupId>
+		<artifactId>referenceapplication</artifactId>
+		<version>2.8.0-SNAPSHOT</version>
+	</parent>
+
+	<organization>
+		<name>OpenMRS</name>
+		<url>http://openmrs.org</url>
+	</organization>
+
+	<scm>
+		<connection>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</connection>
+		<developerConnection>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</developerConnection>
+		<url>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</url>
+	  <tag>HEAD</tag>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.openmrs.maven.plugins</groupId>
+				<artifactId>openmrs-sdk-maven-plugin</artifactId>
+				<version>3.12.0</version>
+				<executions>
+					<execution>
+						<id>build-distro</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>build-distro</goal>
+						</goals>
+						<configuration>
+							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
+							<dbSql>${basedir}/src/main/resources/openmrs-distro.sql</dbSql>
+							<dir>${project.build.directory}/distro</dir>
+							<bundled>false</bundled>
+						</configuration>
+					</execution>
+					<execution>
+						<id>build-bundled-distro</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>build-distro</goal>
+						</goals>
+						<configuration>
+							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
+							<dbSql>${basedir}/src/main/resources/openmrs-distro.sql</dbSql>
+							<dir>${project.build.directory}/bundled-distro</dir>
+							<bundled>true</bundled>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!--
+			Assemble all of omods into a zip file
+			-->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<descriptors>
+						<descriptor>${basedir}/src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+				  <execution>
+					<id>attach-artifacts</id>
+					<phase>package</phase>
+					<goals>
+						<goal>attach-artifact</goal>
+					</goals>
+					<configuration>
+					  <artifacts>
+						<artifact>
+							<file>${project.build.directory}/bundled-distro/web/openmrs.war</file>
+							<type>war</type>
+						</artifact>
+					  </artifacts>
+					</configuration>
+				  </execution>
+				</executions>
+			  </plugin>
+		</plugins>
+	</build>
+</project>

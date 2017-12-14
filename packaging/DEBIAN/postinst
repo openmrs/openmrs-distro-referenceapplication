@@ -1,0 +1,53 @@
+#!/bin/bash
+
+TomcatAppDir=/usr/share/tomcat7/.OpenMRS/
+ModulesDir=${TomcatAppDir}/modules
+WarFile=/var/lib/tomcat7/webapps/openmrs.war
+ExplodedWar=/var/lib/tomcat7/webapps/openmrs
+##Set ownership of war file t tomcat user
+chown -R tomcat7:tomcat7 ${TomcatAppDir}
+chown -R tomcat7:tomcat7 ${WarFile}
+
+##Wait for WAR File to expand before restart
+
+restartTomcat() {
+/etc/init.d/tomcat7 restart
+}
+
+checkTomcat() {
+  ps -ef | grep -v grep | grep tomcat > /dev/null
+  result=$?
+  echo "exit code: ${result}"
+  if [ "${result}" -eq "0" ];
+    then
+      echo "Tomcat service running, everything is fine"
+    else
+      echo "Tomcat is not running so I'm staring it"
+      restartTomcat
+fi
+}
+
+wait() {
+OldTimeStamp="$(date -r ${ExplodedWar})"
+NewTimeStamp=${OldTimeStamp}
+
+echo -n "Waiting for new WAR file to expand."
+while [ "${NewTimeStamp}" = "${OldTimeStamp}" ];
+  do
+    NewTimeStamp="$(date -r ${ExplodedWar})"
+    sleep 1
+    count=$((count+1))
+    if [ ${count} == 120 ];
+      then break
+    fi
+  done
+
+}
+
+##Below is the main execution of this script to see if tomcat service is running and then deploy.
+checkTomcat
+if [ -e ${ExplodedWar} ];
+  then
+    wait
+    restartTomcat
+fi
