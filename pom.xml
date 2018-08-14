@@ -74,6 +74,9 @@
 		<owaVersion>1.9.0</owaVersion>
 		<reportinguiVersion>1.6.0</reportinguiVersion>
 		<addresshierarchyVersion>2.11.0</addresshierarchyVersion>
+		<atomfeedVersion>1.0.5-SNAPSHOT</atomfeedVersion>
+		<sync2Version>1.2.0-SNAPSHOT</sync2Version>
+		<msfcoreVersion>1.0.0-SNAPSHOT</msfcoreVersion>
 		<!-- OWAs -->
 		<sysadminVersion>1.1</sysadminVersion>
 		
@@ -976,7 +979,42 @@
 				<version>${reportinguiVersion}</version>
 				<scope>provided</scope>
 			</dependency>
-		
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>atomfeed-api</artifactId>
+				<version>${atomfeedVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>atomfeed-omod</artifactId>
+				<version>${atomfeedVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>sync2-api</artifactId>
+				<version>${sync2Version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>sync2-omod</artifactId>
+				<version>${sync2Version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>msfcore-api</artifactId>
+				<version>${msfcoreVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>msfcore-omod</artifactId>
+				<version>${msfcoreVersion}</version>
+				<scope>provided</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
