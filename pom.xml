@@ -77,6 +77,7 @@
 		<atomfeedVersion>1.0.5-SNAPSHOT</atomfeedVersion>
 		<sync2Version>1.2.0-SNAPSHOT</sync2Version>
 		<msfcoreVersion>1.0.0-SNAPSHOT</msfcoreVersion>
+		<attachmentsVersion>2.1.0-SNAPSHOT</attachmentsVersion>
 		<!-- OWAs -->
 		<sysadminVersion>1.1</sysadminVersion>
 		
@@ -1013,6 +1014,18 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>msfcore-omod</artifactId>
 				<version>${msfcoreVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>attachments-api</artifactId>
+				<version>${attachmentsVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>attachments-omod</artifactId>
+				<version>${attachmentsVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>
