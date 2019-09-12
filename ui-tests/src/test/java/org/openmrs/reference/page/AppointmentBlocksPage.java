@@ -41,7 +41,7 @@ public class AppointmentBlocksPage extends Page {
 	//This identifier works if the calendar shows only the day
 	private static final By SERVICE_TITLE_OF_THE_DAY = By.className("fc-event-title");
 
-	private static final By DAY = By.xpath("/html/body/div/div[3]/div[2]/div[1]/div[2]/table/tbody/tr/td[1]/span[5]");
+	private static final By DAY = By.xpath("/html/body/div/div[3]/div[2]/div[1]/div[2]/div[1]/table/tbody/tr/td[1]/span[5]");
 
 	private static final By DAY_CLASS = By.className("fc-day-content");
 
