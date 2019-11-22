@@ -19,6 +19,10 @@ env:
   - DB=mysql
   - DB=mariadb
  
+cache:
+  directories:
+  - $HOME/.m2
+ 
 before_cache:
   - rm -rf $HOME/.m2/repository/org/openmrs
  
