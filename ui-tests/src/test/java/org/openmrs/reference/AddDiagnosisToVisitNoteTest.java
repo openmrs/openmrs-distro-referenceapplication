@@ -23,7 +23,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertEquals;
-import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTestBase {
 
