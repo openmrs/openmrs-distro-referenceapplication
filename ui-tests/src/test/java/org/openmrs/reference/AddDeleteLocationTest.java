@@ -24,7 +24,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
-import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
