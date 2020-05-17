@@ -2849,6 +2849,18 @@ INSERT INTO `liquibasechangelog` VALUES ('0','bwolfe','liquibase-update-to-lates
 UNLOCK TABLES;
 
 --
+-- Add missing references to two more change sets from `openmrs-core/api/src/main/resources/org/openmrs/liquibase/snapshots/schema-only/liquibase-schema-only-1.9.x.xml` to the table `liquibasechangelog`.
+--
+-- openmrs-core/api uses Liquibase snapshots since 2.4.0 and without those references updating the OpenMRS database fails.
+--
+
+LOCK TABLES `liquibasechangelog` WRITE;
+/*!40000 ALTER TABLE `liquibasechangelog` DISABLE KEYS */;
+INSERT INTO `liquibasechangelog` VALUES ('20120529-2230','mvorobey','liquibase-schema-only.xml','2016-07-07 08:14:28',401,'EXECUTED',NULL,'Add Foreign Key Constraint','',NULL,'2.0.5'),('20120529-2231','mvorobey','liquibase-schema-only.xml','2016-07-07 08:14:28',402,'EXECUTED',NULL,'Add Foreign Key Constraint','',NULL,'2.0.5');
+/*!40000 ALTER TABLE `liquibasechangelog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `liquibasechangeloglock`
 --
 
