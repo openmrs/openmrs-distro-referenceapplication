@@ -68,7 +68,7 @@
 		<uitestframeworkVersion>2.4.0-SNAPSHOT</uitestframeworkVersion>
 		<legacyuiVersion>1.7.0-SNAPSHOT</legacyuiVersion>
 		<reportingcompatibilityVersion>2.0.7-SNAPSHOT</reportingcompatibilityVersion>
-		<fhirVersion>1.21.0-SNAPSHOT</fhirVersion>
+		<fhirVersion>1.0.0-SNAPSHOT</fhirVersion>
 		<owaVersion>1.12.0-SNAPSHOT</owaVersion>
 		<reportinguiVersion>1.8.0-SNAPSHOT</reportinguiVersion>
 		<addresshierarchyVersion>2.14.0-SNAPSHOT</addresshierarchyVersion>
@@ -959,7 +959,25 @@
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>fhir-omod</artifactId>
+				<artifactId>fhir2-api</artifactId>
+				<version>${fhirVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>fhir2-api-2.1</artifactId>
+				<version>${fhirVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>fhir2-api-2.2</artifactId>
+				<version>${fhirVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>fhir2-omod</artifactId>
 				<version>${fhirVersion}</version>
 				<scope>provided</scope>
 			</dependency>
