@@ -1,0 +1,67 @@
+services:
+  # Proxy
+  proxy:
+    build: ./proxy
+    ports:
+      - 80:80
+
+  # Microfrontends
+  mf:
+    build: ./mf
+    ports:
+      - 8081:8081
+    environment:
+      SPA_PATH: /mf
+      API_URL: /openmrs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/"]
+      timeout: 5s
+    volumes:
+      - ./distro/microfrontends:/var/www/mf/
+
+  # OpenMRS:
+  openmrs:
+    ports:
+      - 8080:8080
+    build: openmrs/
+    depends_on:
+      - mysql
+    environment:
+      MODULE_WEB_ADMIN: "true"
+      DB_AUTO_UPDATE: "true"
+      DB_CREATE_TABLES: "true"
+      DB_HOST: mysql
+      DB_DATABASE: openmrs
+      DB_USERNAME: ${OPENMRS_DB_USER}
+      DB_PASSWORD: ${OPENMRS_DB_PASSWORD}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
+      timeout: 5s
+    volumes:
+      - ./distro/openmrs_core/openmrs-webapp.war:/usr/local/tomcat/webapps/openmrs.war
+      - openmrs-data:/usr/local/tomcat/.OpenMRS/
+      - ./distro/openmrs_modules:/usr/local/tomcat/.OpenMRS/modules/
+      - ./distro/openmrs_config:/usr/local/tomcat/.OpenMRS/configuration/
+      - openmrs-config-checksums:/usr/local/tomcat/.OpenMRS/configuration_checksums/
+      - ./properties/openmrs:/etc/properties
+
+  # MySQL
+  mysql:
+    image: mariadb:10.3
+    command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
+    environment:
+      MYSQL_DATABASE: openmrs
+      MYSQL_USER: ${OPENMRS_DB_USER}
+      MYSQL_PASSWORD: ${OPENMRS_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+version: "3.7"
+volumes:
+  openmrs-data: ~
+  mysql-data: ~
+  openmrs-config: ~
+  openmrs-config-checksums: ~
+  openmrs-modules: ~
+  openmrs-owas: ~
