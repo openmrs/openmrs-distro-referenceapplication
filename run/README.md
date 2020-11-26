@@ -12,6 +12,9 @@ cd docker/
 docker-compose up
 ```
 
+Microfrontend is accessible at http://localhost/mf
+OpenMRS is accessible at http://localhost/openmrs
+
 ### Notes
 
 Unpacking the OpenMRS distro package **is not needed** if you've already run `mvn clean package` from the [root folder](../) project
