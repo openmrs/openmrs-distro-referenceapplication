@@ -1,113 +1,331 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.openmrs</groupId>
+  <artifactId>openmrs-distro-package</artifactId>
+  <name>OpenMRS package</name>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-	<groupId>org.openmrs.distro</groupId>
-	<artifactId>referenceapplication-package</artifactId>
-	<version>2.11.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	<name>Reference Application Distribution Package</name>
-	<description>Reference Application Distribution Package</description>
-	<url>https://wiki.openmrs.org/x/yQRDAg</url>
+  <organization>
+    <name>OpenMRS Inc.</name>
+    <url>http://openmrs.org</url>
+  </organization>
 
-	<parent>
-		<groupId>org.openmrs.distro</groupId>
-		<artifactId>referenceapplication</artifactId>
-		<version>2.11.0-SNAPSHOT</version>
-	</parent>
+  <developers>
+    <developer>
+      <name>Romain Buisson</name>
+    </developer>
+  </developers>
 
-	<organization>
-		<name>OpenMRS</name>
-		<url>http://openmrs.org</url>
-	</organization>
+  <modules>
+    <module>openmrs-config</module>
+    <module>microfrontends-config</module>
+    <module>microfrontends</module>
+  </modules>
 
-	<scm>
-		<connection>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</connection>
-		<developerConnection>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</developerConnection>
-		<url>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</url>
-	  <tag>HEAD</tag>
-	</scm>
+  <properties>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.openmrs.maven.plugins</groupId>
-				<artifactId>openmrs-sdk-maven-plugin</artifactId>
-				<version>3.12.4</version>
-				<executions>
-					<execution>
-						<id>build-distro</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>build-distro</goal>
-						</goals>
-						<configuration>
-							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
-							<dbSql>${basedir}/src/main/resources/openmrs-distro.sql</dbSql>
-							<dir>${project.build.directory}/distro</dir>
-							<bundled>false</bundled>
-						</configuration>
-					</execution>
-					<execution>
-						<id>build-bundled-distro</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>build-distro</goal>
-						</goals>
-						<configuration>
-							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
-							<dbSql>${basedir}/src/main/resources/openmrs-distro.sql</dbSql>
-							<dir>${project.build.directory}/bundled-distro</dir>
-							<bundled>true</bundled>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-			<!--
-			Assemble all of omods into a zip file
-			-->
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<descriptors>
-						<descriptor>${basedir}/src/main/assembly/assembly.xml</descriptor>
-					</descriptors>
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>3.0.0</version>
-				<executions>
-				  <execution>
-					<id>attach-artifacts</id>
-					<phase>package</phase>
-					<goals>
-						<goal>attach-artifact</goal>
-					</goals>
-					<configuration>
-					  <artifacts>
-						<artifact>
-							<file>${project.build.directory}/bundled-distro/web/openmrs.war</file>
-							<type>war</type>
-						</artifact>
-					  </artifacts>
-					</configuration>
-				  </execution>
-				</executions>
-			  </plugin>
-		</plugins>
-	</build>
+    <distro.baseDir>${project.build.directory}/${project.artifactId}</distro.baseDir>
+    <distro.openmrsConfigDir>${distro.baseDir}/openmrs_config</distro.openmrsConfigDir>
+    <distro.openmrsCoreDir>${distro.baseDir}/openmrs_core</distro.openmrsCoreDir>
+    <distro.openmrsModulesDir>${distro.baseDir}/openmrs_modules</distro.openmrsModulesDir>
+    <distro.microfrontendsDir>${distro.baseDir}/microfrontends</distro.microfrontendsDir>
+    <distro.microfrontendsConfigDir>${distro.baseDir}/microfrontends_config</distro.microfrontendsConfigDir>
+
+    <!-- Configs -->
+    <openmrsConfigVersion>1.0.0-SNAPSHOT</openmrsConfigVersion>
+    <microfrontendsConfigVersion>1.0.0-SNAPSHOT</microfrontendsConfigVersion>
+
+    <!-- Frontends -->
+    <microfrontendsVersion>1.0.0-SNAPSHOT</microfrontendsVersion>
+
+    <!-- OpenMRS modules -->
+    <initializerVersion>2.1.0-SNAPSHOT</initializerVersion>
+    <fhir2Version>1.1.0-SNAPSHOT</fhir2Version>
+    <idgenVersion>4.4.1</idgenVersion>
+    <webservices.restVersion>2.24.0</webservices.restVersion>
+    <legacyuiVersion>1.3.3</legacyuiVersion>
+    <addresshierarchyVersion>2.12.0</addresshierarchyVersion>
+    <metadatamappingVersion>1.3.1</metadatamappingVersion>
+    <metadatasharingVersion>1.2.2</metadatasharingVersion>
+    <appuiVersion>1.9.0</appuiVersion>
+    <uicommonsVersion>2.3.0</uicommonsVersion>
+    <uiframeworkVersion>3.8</uiframeworkVersion>
+    <appframeworkVersion>2.10.0</appframeworkVersion>
+
+    <!-- OpenMRS Core -->
+    <openMRSVersion>2.1.3</openMRSVersion>
+
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.openmrs</groupId>
+      <artifactId>openmrs-config</artifactId>
+      <type>zip</type>
+      <version>${openmrsConfigVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs</groupId>
+      <artifactId>microfrontends-config</artifactId>
+      <type>zip</type>
+      <version>${microfrontendsConfigVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs</groupId>
+      <artifactId>microfrontends</artifactId>
+      <type>zip</type>
+      <version>${microfrontendsVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.web</groupId>
+      <artifactId>openmrs-webapp</artifactId>
+      <version>${openMRSVersion}</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>legacyui-omod</artifactId>
+      <version>${legacyuiVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>idgen-omod</artifactId>
+      <version>${idgenVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>fhir2-omod</artifactId>
+      <version>${fhir2Version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>webservices.rest-omod</artifactId>
+      <version>${webservices.restVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>initializer-omod</artifactId>
+      <version>${initializerVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>addresshierarchy-omod</artifactId>
+      <version>${addresshierarchyVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>metadatamapping-omod</artifactId>
+      <version>${metadatamappingVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>metadatasharing-omod</artifactId>
+      <version>${metadatasharingVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>appui-omod</artifactId>
+      <version>${appuiVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>appframework-omod</artifactId>
+      <version>${appframeworkVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>uiframework-omod</artifactId>
+      <version>${uiframeworkVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>uicommons-omod</artifactId>
+      <version>${uicommonsVersion}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.8</version>
+        <executions>
+          <!-- OpenMRS Core -->
+          <execution>
+            <id>copy-openmrs-war</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <excludeTransitive>true</excludeTransitive>
+              <useBaseVersion>true</useBaseVersion>
+              <outputDirectory>${distro.openmrsCoreDir}</outputDirectory>
+              <stripVersion>true</stripVersion>
+              <includeArtifactIds>openmrs-webapp</includeArtifactIds>
+            </configuration>
+          </execution>
+          <!-- OpenMRS modules -->
+          <execution>
+            <id>copy-jars</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <excludeTransitive>true</excludeTransitive>
+              <useBaseVersion>true</useBaseVersion>
+              <outputDirectory>${distro.openmrsModulesDir}</outputDirectory>
+              <!-- copying jars and omods only -->
+              <includeTypes>jar, omod</includeTypes>
+            </configuration>
+          </execution>
+          <!-- OpenMRS config -->
+          <execution>
+            <id>unpack-openmrs-config-refapp</id>
+            <phase>package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <excludeTransitive>true</excludeTransitive>
+              <useBaseVersion>true</useBaseVersion>
+              <outputDirectory>${distro.openmrsConfigDir}</outputDirectory>
+              <includeArtifactIds>openmrs-config</includeArtifactIds>
+            </configuration>
+          </execution>
+          <!-- Microfrontends -->
+          <execution>
+            <id>unpack-microfrontends</id>
+            <phase>package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <excludeTransitive>true</excludeTransitive>
+              <useBaseVersion>true</useBaseVersion>
+              <outputDirectory>${distro.microfrontendsDir}</outputDirectory>
+              <includeArtifactIds>microfrontends</includeArtifactIds>
+            </configuration>
+          </execution>
+          <!-- Microfrontends config -->
+          <execution>
+            <id>unpack-microfrontends-config</id>
+            <phase>package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <excludeTransitive>true</excludeTransitive>
+              <useBaseVersion>true</useBaseVersion>
+              <outputDirectory>${distro.microfrontendsConfigDir}</outputDirectory>
+              <includeArtifactIds>microfrontends-config</includeArtifactIds>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>rename-jars-to-omod</id>
+            <phase>package</phase>
+            <configuration>
+              <target>
+                <move todir="${distro.openmrsModulesDir}">
+                  <fileset dir="${distro.openmrsModulesDir}"/>
+                  <mapper type="regexp" from="^(.+)-omod-(.+)\.jar" to="\1-\2.omod"/>
+                </move>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>rename-openmrs-config</id>
+            <phase>package</phase>
+            <configuration>
+              <target>
+                <move todir="${distro.openmrsConfigDir}">
+                  <fileset dir="${distro.openmrsConfigDir}"/>
+                  <mapper type="regexp" from="^openmrs-config-refapp(.+)\.zip" to="config.zip"/>
+                </move>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- packaging the distro as a installable/deployable file -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>package-distro-artifact</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>assembly.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>mks-nexus-public</id>
+      <url>https://nexus.mekomsolutions.net/repository/maven-public/</url>
+      <snapshots>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>openmrs-repo</id>
+      <name>OpenMRS Nexus Repository</name>
+      <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+    </repository>
+    <repository>
+      <id>sonatype-nexus-snapshots</id>
+      <name>Sonatype Nexus Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>interval:10080</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>openmrs-repo</id>
+      <name>OpenMRS Nexus Repository</name>
+      <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
 </project>
