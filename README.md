@@ -14,6 +14,7 @@ docker-compose up
 
 Microfrontend is accessible at http://localhost/mf
 OpenMRS is accessible at http://localhost/openmrs
+
 ---
 
 ## Notes
