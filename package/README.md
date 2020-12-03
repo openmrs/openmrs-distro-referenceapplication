@@ -12,9 +12,9 @@ Output:
 
 Package contents:
 * `microfrontends/`
-<br/>The Mircro Frontends ESMs.
+<br/>The Micro Frontends ESMs.
 * `microfrontends_config/`
-<br/>The Configuration for Mircro Frontends.
+<br/>The Configuration for Micro Frontends.
 * `openmrs_modules/`
 <br/>The required set of OpenMRS modules.
 * `openmrs_config/`
