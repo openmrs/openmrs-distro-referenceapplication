@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.openmrs.distro</groupId>
 		<artifactId>referenceapplication</artifactId>
-		<version>2.6.0</version>
+		<version>2.7.0-SNAPSHOT</version>
 	</parent>
 	
 	<organization>
@@ -25,7 +25,7 @@
 		<connection>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</connection>
 		<developerConnection>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</developerConnection>
 		<url>scm:git:https://github.com/openmrs/openmrs-distro-referenceapplication</url>
-	  <tag>2.6.0</tag>
+	  <tag>HEAD</tag>
 	</scm>
 	
 	<build>
@@ -37,24 +37,26 @@
 				<executions>
 					<execution>
 						<id>build-distro</id>
-						<phase>generate-resources</phase>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>build-distro</goal>
 						</goals>
 						<configuration>
 							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
+							<dbSql>${basedir}/src/main/resources/openmrs-distro.sql</dbSql>
 							<dir>${project.build.directory}/distro</dir>
 							<bundled>false</bundled>
 						</configuration>
 					</execution>
 					<execution>
 						<id>build-bundled-distro</id>
-						<phase>generate-resources</phase>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>build-distro</goal>
 						</goals>
 						<configuration>
 							<distro>${basedir}/src/main/resources/openmrs-distro.properties</distro>
+							<dbSql>${basedir}/src/main/resources/openmrs-distro.sql</dbSql>
 							<dir>${project.build.directory}/bundled-distro</dir>
 							<bundled>true</bundled>
 						</configuration>

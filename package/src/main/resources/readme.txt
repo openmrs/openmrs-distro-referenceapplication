@@ -1,6 +1,6 @@
-+-------------------------------+
-| OpenMRS Reference Application ${project.version}	|
-+-------------------------------+
++---------------------------------------------------+
+| OpenMRS Reference Application ${project.version}
++---------------------------------------------------+
 
 Thank you for downloading the OpenMRS Reference Application. Please read this README file carefully to help you determine what version of the OpenMRS Reference Application may be best suited for your situation.
 
@@ -29,7 +29,7 @@ Password: Admin123
 
 WAR package
 --------------------------------
-Intended for more advanced users. Our Reference Application war package requires an existing installed Java servlet container such as Apache Tomcat and an existing installed database such as MySQL. The war contains all Reference Application modules, which simplifies the enterprise setup, but has a limitation of preserving your custom versions of modules in case you upgrade to a newer version of Reference Application.
+Intended for more advanced users. Our Reference Application war package requires an existing installed Java servlet container such as Apache Tomcat and an existing installed database such as MySQL. The war contains all Reference Application modules, which simplifies the enterprise setup, but has a limitation of not preserving your custom versions of modules in case you upgrade to a newer version of Reference Application.
 
 Zip with modules
 --------------------------------

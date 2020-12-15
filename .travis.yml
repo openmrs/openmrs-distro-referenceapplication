@@ -5,10 +5,6 @@ jdk: oraclejdk8
 services:
   - docker
   
-cache:
-  directories:
-    - $HOME/.m2
-
 addons:
   sauce_connect:
     username: $SAUCELABS_USERNAME
@@ -18,9 +14,14 @@ env:
   - DB=mysql
   - DB=mariadb
   
+cache:
+  directories:
+  - $HOME/.m2
+  
+before_cache:
+  - rm -rf $HOME/.m2/repository/org/openmrs
+  
 install: true
-
-before_script: ./travis_before_script.sh
 
 script: ./travis_script.sh
 
