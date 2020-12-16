@@ -1,7 +1,7 @@
 iSantePlus OpenMRS Distribution
 ===================================
 
-[master](https://github.com/openmrs/openmrs-distro-referenceapplication/) (platform-2.0.x): [![Build Status](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication.svg?branch=master)](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication/branches)
+![Publish package to GitHub Packages](https://github.com/IsantePlus/openmrs-distro-isanteplus/workflows/Publish%20package%20to%20GitHub%20Packages/badge.svg)
 
 ## Building
 
