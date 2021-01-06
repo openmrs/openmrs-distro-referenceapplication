@@ -28,13 +28,13 @@ fhir2 --> xds-sender, mpi-client
 
 labintegration --> xds-sender
 
-coreapps --> registrationapp
+coreapps --> registrationapp, isanteplus
 
 -----
 
 mpi-client --> registrationcore
 
-xds-sender --> registrationcore, registrationapp
+xds-sender --> registrationcore, registrationapp, isanteplus
 
 m2sys-biometrics --> registrationapp
 
@@ -42,7 +42,7 @@ m2sys-biometrics --> registrationapp
 
 registrationcore --> m2sys-biometrics,registrationapp
 
-registrationapp --> (none)
+registrationapp --> isanteplus
 
 
 
