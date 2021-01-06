@@ -20,3 +20,30 @@ mvn clean process-resources
 
 Please follow the instructions at the [OpenMRS SDK Wiki page](https://wiki.openmrs.org/display/docs/OpenMRS+SDK). Set up a server with the Reference Application distribution.
 test cases, please, follow the instructions in the [Code Style paragraph](https://wiki.openmrs.org/display/docs/Java+Conventions) and the [guidelines](https://wiki.openmrs.org/display/docs/Automated+Testing+Guidelines) 
+
+
+## iSantePlus-specific module dependency tree:
+
+fhir2 --> xds-sender, mpi-client
+
+labintegration --> xds-sender
+
+coreapps --> registrationapp
+
+-----
+
+mpi-client --> registrationcore
+
+xds-sender --> registrationcore, registrationapp
+
+m2sys-biometrics --> registrationapp
+
+-----
+
+registrationcore --> m2sys-biometrics,registrationapp
+
+registrationapp --> (none)
+
+
+
+
