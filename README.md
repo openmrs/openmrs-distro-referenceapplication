@@ -45,5 +45,28 @@ registrationcore --> m2sys-biometrics,registrationapp,outgoingmessageexceptions,
 registrationapp --> isanteplus
 
 
+## Configuration Options (Dev-focused)
 
+1. Create location in the location admin if needed.
+
+2. Set the following in Admin/Settings:
+  - **General Settings/Default Locale**: `en_gb` (for english version)
+  - **General Settings/Default Location**: `<location from step 1>`
+  - **M 2 Sys - Biometrics/Server Const Test Template:** (for dev)
+    ```xml
+       <Fingers AccessPointInfo=""><Finger POS="3" SOURCE="LEFT" FORMAT="ISO">Rk1SACAyMAAAAADkAAABZQGIAMUAxQEACAAAIUCKAKzpZECMAJ99ZEBxAOK2NUBsAPE1NUA8AIqZZED0AOzJZEDxAPpIZIBWASdEZED5ASbRXUCKAA52ZEBBAWJTXYCmALxjZECWAJNxZECdAHtsZEBOAKujZID6ALfSZEBgAR3FZEBBAGiTZEC5ATrPV0CXAU7TZEAnADAQB0EjADvUZECZAMxsZECAAOTkNUDIAJVZZEBNANizZEAuAOK1ZIAlAM2qUICLAD91ZIEYALxTXUD/ATVQXUA6ACAHSUEqACxSUAAA</Finger><Finger POS="8" SOURCE="RIGHT" FORMAT="ISO">Rk1SACAyMAAAAADqAAABZQGIAMUAxQEAAwAAIkCOAK1uUEB/AI/qZEBiANc3V0DoANZIZEBBAMG0ZEBXAQLHZIBMAQ5EZECOATLUZED3ARZRUEDHAVFZZEDwAWVcZEAdABF7PICdAJ9kZEB+AIGBZEC7AHNeZIDuAJLTZEBAAJOmZEDvAQPRUEC2ASpNXUAiAM22UEAwAFGTZEA4AUtSZEEPABbWXYB4ANHDL0CIAHZyZEDqAMnIZECMAFxwZECyARvNXUEKAJxSZIDAASvVXUAsAHKdZEB3AB55XUEsADBRUEEoABxZQwAA</Finger></Fingers>
+    ```
+  - **M 2 Sys - Biometrics/National - Service Url:** `<national fingerprint url>`
+  - **Mpi - Client/Endpoint Pdq Addr:** `http://sedish-haiti.org:5001/fhir`
+  - **Mpi - Client/Endpoint Pix Addr:** `http://sedish-haiti.org:5001`
+  - **Mpi - Client/Msg Sending Facility:** `name of your instance's facility`
+  - **Mpi - Client/Pid Auto Xref:** `ENTID`
+  - **Mpi - Client/Background Threads:** `true`
+  - **Mpi - Client/Endpoint Format:** `fhir`
+  - **Mpi - Client/Security Auth Type:** `basic`
+  - **Mpi - Client/Msg Sending Application:** `isanteplus`
+  - **Mpi - Client/Security Authtoken:** `<your basicauth password>`  
+  - **Mpi - Client/Pid Local:** `<your domain or ip>/ws/fhir2/pid/openmrsid/`
+  - **Mpi - Client/Pid Export Identitifer Type:** `Patient ID=iSantePlus ID`
+  
 
