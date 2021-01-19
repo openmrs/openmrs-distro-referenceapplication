@@ -68,5 +68,13 @@ registrationapp --> isanteplus
   - **Mpi - Client/Security Authtoken:** `<your basicauth password>`  
   - **Mpi - Client/Pid Local:** `<your domain or ip>/ws/fhir2/pid/openmrsid/`
   - **Mpi - Client/Pid Export Identitifer Type:** `Patient ID=iSantePlus ID`
+  - **Registrationcore/Mpi Implementation:** `registrationcore.mpi.implementation.Fhir`
+  - **Xdssender/Export Ccd Endpoint:** `http://sedish-haiti.org:5001/SHR/fhir`
+  - **Xdssender/Mpi Endpoint:** `http://sedish-haiti.org:5001/fhir`
+  - **Xdssender/Openmrs Password:** `<openmrs login password>`
+  - **Xdssender/Openmrs Username:** `<openmrs username>`
+  - **Xdssender/Oshr Password:** `<basic auth password>`
+  - **Xdssender/Oshr Username:** `<basic auth password>`
+  - **Xdssender/Shr Type:** `fhir`
   
 
