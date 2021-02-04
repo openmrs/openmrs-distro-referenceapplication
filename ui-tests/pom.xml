@@ -34,11 +34,6 @@
             <artifactId>uitestframework</artifactId>
             <version>${uitestframeworkVersion}</version>
         </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.0.0-alpha-7</version>
-        </dependency>
     </dependencies>
 
 
@@ -56,7 +51,7 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
-                            <skipTests>false</skipTests>
+                            <skipTests>${skipTests}</skipTests>
                             <groups>org.openmrs.reference.groups.BuildTests</groups>
                             <forkCount>5</forkCount>
                             <reuseForks>true</reuseForks>
