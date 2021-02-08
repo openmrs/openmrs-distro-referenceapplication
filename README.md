@@ -54,4 +54,4 @@ https://wiki.openmrs.org/x/CIC3Ag
 
 ## Writing test cases 
 
-While writing the code for the test cases, please, follow the instructions in the [Code Style paragraph](https://wiki.openmrs.org/display/docs/Java+Conventions) and the [guidelines](https://wiki.openmrs.org/display/docs/Automated+Testing+Guidelines)
+While writing the code for the test cases, please, follow the instructions in the [Code Style paragraph](https://wiki.openmrs.org/display/docs/Java+Conventions) and the [guidelines](https://wiki.openmrs.org/display/docs/Automated+Testing+Guidelines).
