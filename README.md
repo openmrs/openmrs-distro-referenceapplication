@@ -38,7 +38,7 @@ To setup Continuous Integration on your fork, execute following steps:
   - 'SAUCELABS_ACCESSKEY' equal to access key you got in step 3.
  
   [Guide for adding environment variables from official Travis CI documentation](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings)
-5. Push any commit to your master branch to trigger Travis CI build.
+5. Push any  commit to your master branch to trigger Travis CI build.
 
 And that's it!
 
