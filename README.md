@@ -38,7 +38,7 @@ To setup Continuous Integration on your fork, execute following steps:
   - 'SAUCELABS_ACCESSKEY' equal to access key you got in step 3.
  
   [Guide for adding environment variables from official Travis CI documentation](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings)
-5. Push any  commit to your master branch to trigger Travis CI build.
+5. Push any commit to your master branch to trigger Travis CI build.
 
 And that's it!
 
@@ -54,4 +54,4 @@ https://wiki.openmrs.org/x/CIC3Ag
 
 ## Writing test cases
 
-While writing the code for the test cases, please, follow the instructions in the [Code Style paragraph](https://wiki.openmrs.org/display/docs/Java+Conventions) and the [guidelines](https://wiki.openmrs.org/display/docs/Automated+Testing+Guidelines)
+While writing the code for the test cases, please, follow the instructions in the [Code Style paragraph](https://wiki.openmrs.org/display/docs/Java+Conventions) and the [guidelines](https://wiki.openmrs.org/display/docs/Automated+Testing+Guidelines).
