@@ -29,7 +29,6 @@ public class RecordMergeIssueTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-       
         homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
@@ -39,8 +38,6 @@ public class RecordMergeIssueTest extends TestBase {
         dataManagementPage = new DataManagementPage(page);
         patient = new TestPatient();
         patient1 = new TestPatient();
-
-
     }
 
     @Test
@@ -71,7 +68,6 @@ public class RecordMergeIssueTest extends TestBase {
         dataManagementPage.enterPatient1(id);
         dataManagementPage.enterPatient2(id2);
         dataManagementPage.clickOnContinue();
-        Thread.sleep(300);
         assertFalse(driver.getPageSource().contains("java.lang.NullPointerException"));
     }
 
