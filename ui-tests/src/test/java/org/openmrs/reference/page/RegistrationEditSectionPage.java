@@ -9,7 +9,7 @@ public class RegistrationEditSectionPage extends Page {
 
     private static final By PHONE_NUMBER = By.name("phoneNumber");
     private static final By CONFIRM_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li[2]/span");
-    private static final By CONFIRM = By.cssSelector("input[value='Confirm']");
+    private static final By CONFIRM = By.id("registration-submit");
     private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
     private static final By GIVEN_NAME_FIELD = By.cssSelector("#demographics-name input[name='givenName']");
     private static final By MIDDLE_NAME_FIELD = By.cssSelector("#demographics-name input[name='middleName']");
