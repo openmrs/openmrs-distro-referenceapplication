@@ -55,6 +55,7 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
         assertThat(registrationPage.getPhoneInConfirmationPage(), containsString(patient.phone));
 
         ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
+        dashboardPage.waitForPage();
         patient.uuid = dashboardPage.getPatientUuidFromUrl();
 		assertThat(dashboardPage.getPatientGivenName(), is(patient.givenName));
         assertThat(dashboardPage.getPatientFamilyName(), is(patient.familyName));
