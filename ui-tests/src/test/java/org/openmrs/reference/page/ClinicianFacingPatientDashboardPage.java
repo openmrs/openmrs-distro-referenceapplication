@@ -43,7 +43,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By SHOW_CONTACT_INFO = By.id("patient-header-contactInfo");
 	private static final By EDIT_PATIENT = By.cssSelector("#edit-patient-demographics a");
 	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
-	private static final By PATIENT_ID = By.cssSelector("div.identifiers > span");
+	private static final By PATIENT_ID = By.cssSelector("div.identifiers span");
 	private static final By CODE = By.className("code");
 	private static final By UI_ID_1 = By.id("ui-id-1");
 	private static final By UI_MENU_ITEM = By.className("ui-menu-item");
@@ -184,17 +184,17 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 	public void visitNote() {
-		clickOn(VISIT_NOTE);
+		clickOnLast(VISIT_NOTE);
 		waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
 	}
 
 	public VisitNotePage goToVisitNote() {
-		clickOn(VISIT_NOTE);
+		clickOnLast(VISIT_NOTE);
 		return new VisitNotePage(this);
 	}
 
 	public PatientCaptureVitalsPage goToPatientCaptureVitalsPage() {
-		clickOn(PATIENT_CAPTURE_VITALS);
+		clickOnLast(PATIENT_CAPTURE_VITALS);
 		return new PatientCaptureVitalsPage(this);
 	}
 
