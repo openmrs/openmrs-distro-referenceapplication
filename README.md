@@ -12,7 +12,7 @@ cd run/docker
 docker-compose up
 ```
 
-OpenMRS Microfrontends UI is accessible at http://localhost/mf
+OpenMRS Microfrontends UI is accessible at http://localhost/ui
 
 OpenMRS Legacy UI is accessible at http://localhost/openmrs
 
