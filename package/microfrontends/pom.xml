@@ -76,8 +76,7 @@
 						<configuration>
 							<!-- Using a bash script for consistency with build.sh ¯\_(ツ)_/¯ -->
 							<executable>scripts/assemble.sh</executable>
-							<commandlineArgs>${project.build.directory}/${project.artifactId}</commandlineArgs>
-							<commandlineArgs>${microfrontendsJSONPath}</commandlineArgs>
+							<commandlineArgs>${project.build.directory}/${project.artifactId} ${microfrontendsJSONPath}</commandlineArgs>
 						</configuration>
 					</execution>
 
