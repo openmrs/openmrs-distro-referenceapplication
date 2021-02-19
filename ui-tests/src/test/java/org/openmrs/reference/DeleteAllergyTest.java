@@ -36,7 +36,7 @@ public class DeleteAllergyTest extends ReferenceApplicationTestBase {
         createTestVisit();
     }
 
-    @Test
+    @Ignore
     @Category(BuildTests.class)
     public void deleteAllergyTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();

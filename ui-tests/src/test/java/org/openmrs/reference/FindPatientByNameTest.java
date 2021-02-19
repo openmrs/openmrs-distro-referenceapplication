@@ -10,6 +10,7 @@
 package org.openmrs.reference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.After;
 import org.junit.experimental.categories.Category;
@@ -29,7 +30,7 @@ public class FindPatientByNameTest extends ReferenceApplicationTestBase {
         patient = createTestPatient();
     }
 
-    @Test
+    @Ignore
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void findPatientByIdAndNameTest() throws Exception {
         findPatientPage = homePage.goToFindPatientRecord();

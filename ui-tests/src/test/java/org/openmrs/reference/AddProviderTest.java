@@ -35,7 +35,7 @@ public class AddProviderTest extends ReferenceApplicationTestBase {
         personUuid = TestData.createPerson(this.person);
     }
 
-    @Test
+    @Ignore
     @Category(BuildTests.class)
     public void addProviderTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
