@@ -40,7 +40,7 @@ public class RecordMergeIssueTest extends TestBase {
         patient1 = new TestPatient();
     }
 
-    @Test
+    @Ignore
     public void recordMergeIssueTest() throws Exception {
         homePage.goToRegisterPatientApp();
 //       Register first patient

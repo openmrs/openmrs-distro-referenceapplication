@@ -38,7 +38,7 @@ public class EditProviderTest extends ReferenceApplicationTestBase{
         providerUuid = provider.create();
     }
 
-    @Test
+    @Ignore
     @Category(BuildTests.class)
     public void editProviderTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();

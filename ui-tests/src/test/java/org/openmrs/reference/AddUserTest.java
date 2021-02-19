@@ -13,6 +13,7 @@ package org.openmrs.reference;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.AddEditUserPage;
 import org.openmrs.reference.page.AdministrationPage;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class AddUserTest extends ReferenceApplicationTestBase {
 
-    @Test
+    @Ignore
     public void addUserTest() throws Exception {
         SystemAdministrationPage systemAdministrationPage = homePage.goToSystemAdministrationPage();
         AdministrationPage administrationPage = systemAdministrationPage.goToAdvancedAdministration();
