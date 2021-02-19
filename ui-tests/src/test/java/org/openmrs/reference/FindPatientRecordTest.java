@@ -14,6 +14,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.FindPatientPage;
@@ -33,7 +34,7 @@ public class FindPatientRecordTest extends ReferenceApplicationTestBase {
         deletePatient(patient.uuid);
     }
 
-    @Test
+    @Ignore
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void testFindPatientRecord() throws InterruptedException {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();

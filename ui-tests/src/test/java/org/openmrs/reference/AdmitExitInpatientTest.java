@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
  */
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.reference.page.PatientVisitsDashboardPage;
@@ -26,7 +27,7 @@ public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
         testPatient = createTestPatient();
     }
 
-    @Test
+    @Ignore
     public void admitExitInpatientTest() throws Exception {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(testPatient.identifier);
