@@ -16,7 +16,7 @@ public class CheckModulesTest extends ReferenceApplicationTestBase {
     /**
      * Check the list of modules to be sure they are all started.
      */
-    @Test
+    @Ignore
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void checkModules() throws Exception {
         AdministrationPage administrationPage = homePage.goToAdministration();
