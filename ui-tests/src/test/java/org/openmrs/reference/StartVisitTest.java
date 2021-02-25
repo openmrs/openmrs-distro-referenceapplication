@@ -32,9 +32,8 @@ public class StartVisitTest extends LocationSensitiveApplicationTestBase {
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
-    public void startVisitTest() throws Exception {
+    public void startVisitTest() {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(patient.identifier);
         ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage = findPatientPage.clickOnFirstPatient();
