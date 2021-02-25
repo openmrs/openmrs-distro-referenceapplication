@@ -13,7 +13,6 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HomePage;
@@ -39,6 +38,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
         // this comment and lower the expected count of apps present by 1 when we clean up this test server.
         assertThat(homePage.numberOfAppsPresent(), is(9));
     }
+
     @Test
     public void verifyClerkModulesAvailableOnHomePage() throws Exception {
     	goToLoginPage().loginAsClerk();
@@ -49,6 +49,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
     	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(3));
     }
+
     @Test
     public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
     	goToLoginPage().loginAsDoctor();
@@ -59,6 +60,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(3));
     }
+
     @Test
     public void verifyNurseModulesAvailableOnHomePage() throws Exception {
     	goToLoginPage().loginAsNurse();
@@ -70,6 +72,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
     	assertTrue(homePage.isCaptureVitalsAppPresent());
         assertThat(homePage.numberOfAppsPresent(), is(4));
     }
+
     @Test
     public void verifySysadminModulesAvailableOnHomePage() throws Exception {
         goToLoginPage().loginAsSysadmin();
