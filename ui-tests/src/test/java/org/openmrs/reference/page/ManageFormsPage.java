@@ -10,11 +10,12 @@ import org.openqa.selenium.WebDriver;
 
 public class ManageFormsPage extends Page{
 
-    public static final By ADD = By.linkText("Add");
+    public static final By ADD_FORM= By.linkText("Add");
     private static final By SAVE = By.cssSelector("input[type=\"submit\"]");
     private static final By EXTENSION_FORM_LABEL = By.id("extensionForm.label");
     private static final By EXTENSION_FORM_ICON = By.id("extensionForm.icon");
     private static final By DELETE = By.cssSelector("i.icon-remove.delete-action");
+	public static final Object FORM_EXIST = By.linkText("formEdit.form?formid=");
     public String id;
     private static String EDIT_FORM = "//i[@onclick=\"location.href='forms/extension.page?formId=";
     private static String REST_PATH = "&extensionId=patientDashboard.overallActions.form.";
@@ -35,9 +36,9 @@ public class ManageFormsPage extends Page{
     public ManageFormsPage(WebDriver driver) {
         super(driver);
     }
-
+//Adds the form
     public void add (){
-        clickOn(ADD);
+        clickOn(ADD_FORM);
     }
 
     public void addLabel(String lab){
@@ -56,7 +57,7 @@ public class ManageFormsPage extends Page{
 
     public boolean addPresent(){
         try {
-            return driver.findElement(ADD) != null;
+            return driver.findElement(ADD_FORM) != null;
         }
         catch (Exception ex) {
             return false;

@@ -15,12 +15,13 @@ import org.openqa.selenium.By;
 
 public class SystemAdministrationPage extends Page {
 
-    private static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
+    private static final By  ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
 
     public SystemAdministrationPage(Page parent) {
         super(parent);
     }
 
+    
     @Override
     public String getPageUrl() {
         return "coreapps/systemadministration/systemAdministration.page";
@@ -30,4 +31,5 @@ public class SystemAdministrationPage extends Page {
         clickOn(ADVANCED_ADMINISTRATION);
         return new AdministrationPage(this);
     }
+ 
 }

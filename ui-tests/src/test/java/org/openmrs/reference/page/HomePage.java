@@ -29,6 +29,7 @@ public class HomePage extends Page {
     private static final By FIND_PATIENT_RECORD = By.id("coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension");
     private static final By DATA_MANAGEMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
     private static final By APPOINTMENT_SCHEDULING = By.id("appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension");
+    
 
     public HomePage(Page page) {
         super(page);
@@ -65,7 +66,7 @@ public class HomePage extends Page {
     }
 
     public SystemAdministrationPage goToSystemAdministrationPage() {
-        clickOn(By.id(SYSTEM_ADMIN_APP_ID));
+        clickOn(SYSTEM_ADMINISTRATION);
         return new SystemAdministrationPage(this);
     }
 
