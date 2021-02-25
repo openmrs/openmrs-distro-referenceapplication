@@ -36,7 +36,7 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
         createTestVisit();
     }
    
-    @Test
+    @Ignore
     @Category(BuildTests.class)
     public void AddDiagnosisToVisitNoteTest() {
 
@@ -55,8 +55,6 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
         List<String> diagnoses = patientDashboardPage.getDiagnoses();
         assertThat(diagnoses, hasItems("Pneumonia", "Bleeding"));
     }
-
-
 
     @After
     public void tearDown() throws Exception {
