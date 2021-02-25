@@ -184,17 +184,17 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 	public void visitNote() {
-		clickOnLast(VISIT_NOTE);
+		clickOn(VISIT_NOTE);
 		waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
 	}
 
 	public VisitNotePage goToVisitNote() {
-		clickOnLast(VISIT_NOTE);
+		clickOn(VISIT_NOTE);
 		return new VisitNotePage(this);
 	}
 
 	public PatientCaptureVitalsPage goToPatientCaptureVitalsPage() {
-		clickOnLast(PATIENT_CAPTURE_VITALS);
+		clickOn(PATIENT_CAPTURE_VITALS);
 		return new PatientCaptureVitalsPage(this);
 	}
 
