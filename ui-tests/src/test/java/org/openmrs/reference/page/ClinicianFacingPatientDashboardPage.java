@@ -9,12 +9,12 @@
  */
 package org.openmrs.reference.page;
 
-import org.apache.commons.lang.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -85,9 +85,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	private static final By ALLERGIES_LINK = By.id("allergyui-editAllergies");
 
-	private static final By CONDITIONS_LINK = By
-			.cssSelector(".conditions .info-header i.right");
+	private static final By CONDITIONS_LINK = By.cssSelector(".conditions .info-header i.right");
 
+	private static final By ATTACHMENTS_LINK = By.className("icon-share-alt edit-action right");
+	
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
 	}
@@ -453,5 +454,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public void clickOnConditionsWidgetLink() {
 		clickOn(CONDITIONS_LINK);
 	}
-
+	
+	public void clickOnAttachmentAppLink() {
+		driver.findElement(ATTACHMENTS_LINK).click();
+	}
 }
