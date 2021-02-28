@@ -9,12 +9,12 @@
  */
 package org.openmrs.reference.page;
 
-import org.apache.commons.lang.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -87,6 +87,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	private static final By CONDITIONS_LINK = By
 			.cssSelector(".conditions .info-header i.right");
+	
+	//Organising imports to make it more readable
 
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
@@ -189,17 +191,17 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 	public void visitNote() {
-		clickOnLast(VISIT_NOTE);
+		clickOn(VISIT_NOTE);
 		waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
 	}
 
 	public VisitNotePage goToVisitNote() {
-		clickOnLast(VISIT_NOTE);
+		clickOn(VISIT_NOTE);
 		return new VisitNotePage(this);
 	}
 
 	public PatientCaptureVitalsPage goToPatientCaptureVitalsPage() {
-		clickOnLast(PATIENT_CAPTURE_VITALS);
+		clickOn(PATIENT_CAPTURE_VITALS);
 		return new PatientCaptureVitalsPage(this);
 	}
 
