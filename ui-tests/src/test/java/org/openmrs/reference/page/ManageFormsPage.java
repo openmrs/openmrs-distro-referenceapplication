@@ -15,7 +15,7 @@ public class ManageFormsPage extends Page{
     private static final By EXTENSION_FORM_LABEL = By.id("extensionForm.label");
     private static final By EXTENSION_FORM_ICON = By.id("extensionForm.icon");
     private static final By DELETE = By.cssSelector("i.icon-remove.delete-action");
-	public static final Object FORM_EXIST = null;
+	public static final Object FORM_EXIST =  By.linkText("formEdit.form?formid=");
     public String id;
     private static String EDIT_FORM = "//i[@onclick=\"location.href='forms/extension.page?formId=";
     private static String REST_PATH = "&extensionId=patientDashboard.overallActions.form.";
