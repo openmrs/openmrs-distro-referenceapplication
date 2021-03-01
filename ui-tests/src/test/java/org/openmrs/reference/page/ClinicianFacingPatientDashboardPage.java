@@ -83,6 +83,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
 
+	private static final By ALLERGIES_LINK = By.id("allergyui-editAllergies");
+
+	private static final By CONDITIONS_LINK = By
+			.cssSelector(".conditions .info-header i.right");
+
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
 	}
@@ -439,6 +444,14 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public String getActiveVisitMessage(){
 		return findElement(ACTIVE_VISIT_MESSAGE).getText();
+	}
+
+	public void clickOnAllergiesWidgetLink() {
+		clickOn(ALLERGIES_LINK);
+	}
+
+	public void clickOnConditionsWidgetLink() {
+		clickOn(CONDITIONS_LINK);
 	}
 
 }
