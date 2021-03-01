@@ -21,7 +21,6 @@ public class SystemAdministrationPage extends Page {
         super(parent);
     }
 
-    
     @Override
     public String getPageUrl() {
         return "coreapps/systemadministration/systemAdministration.page";
