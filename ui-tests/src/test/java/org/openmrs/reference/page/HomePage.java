@@ -65,7 +65,7 @@ public class HomePage extends Page {
     }
 
     public SystemAdministrationPage goToSystemAdministrationPage() {
-        clickOn(By.id(SYSTEM_ADMIN_APP_ID));
+        clickOn(SYSTEM_ADMINISTRATION);
         return new SystemAdministrationPage(this);
     }
 
