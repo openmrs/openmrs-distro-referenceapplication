@@ -15,7 +15,6 @@ public class ManageFormsPage extends Page{
     private static final By EXTENSION_FORM_LABEL = By.id("extensionForm.label");
     private static final By EXTENSION_FORM_ICON = By.id("extensionForm.icon");
     private static final By DELETE = By.cssSelector("i.icon-remove.delete-action");
-	public static final Object FORM_EXIST =  By.linkText("formEdit.form?formid=");
     public String id;
     private static String EDIT_FORM = "//i[@onclick=\"location.href='forms/extension.page?formId=";
     private static String REST_PATH = "&extensionId=patientDashboard.overallActions.form.";
@@ -32,6 +31,7 @@ public class ManageFormsPage extends Page{
     private static By ENTER_FORM = By.cssSelector("input.submitButton");
     private static By CURRENT_DAY = By.className("ui-state-highlight");
     private static By PATIENT = By.className("name");
+    private static final By FORM_EXIST =  By.linkText("formEdit.form?formid=");
 
     public ManageFormsPage(WebDriver driver) {
         super(driver);
