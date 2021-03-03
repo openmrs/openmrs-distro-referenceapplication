@@ -33,9 +33,8 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
-    public void bookRequestAppointmentTest() throws Exception {
+    public void bookRequestAppointmentTest() {
 
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
@@ -51,7 +50,12 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
         ManageProviderSchedulesPage manageProviderSchedulesPage = appointmentSchedulingPage.goToManageProviderSchedules();
         manageProviderSchedulesPage.selectLocation(getLocationName());
-        manageProviderSchedulesPage.clickOnCurrentDay();
+        try {
+		manageProviderSchedulesPage.clickOnCurrentDay();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
         manageProviderSchedulesPage.selectLocationBlock(getLocationName());
         manageProviderSchedulesPage.enterService(SERVICE_NAME);
         manageProviderSchedulesPage.clickOnEndTimeButton();
