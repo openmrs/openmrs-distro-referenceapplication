@@ -40,9 +40,8 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
     }
 
     @Test
-    @Ignore //See RA-1223 for details
     @Category(BuildTests.class)
-    public void VisitNoteTest() throws Exception {
+    public void VisitNoteTest() {
 
 
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -60,13 +59,20 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
 
         PatientVisitsDashboardPage patientVisitsDashboardPage = patientDashboardPage.goToRecentVisits();
 
-        EditVisitNotePage editVisitNotePage = patientVisitsDashboardPage.goToEditVisitNote();
+        EditVisitNotePage editVisitNotePage;
+		try {
+		editVisitNotePage = patientVisitsDashboardPage.goToEditVisitNote();
+		editVisitNotePage.deleteDiagnosis();
+		editVisitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY_UPDATED);
 
-        editVisitNotePage.deleteDiagnosis();
-        editVisitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY_UPDATED);
+		//TODO Edit function doesn't work int02
+		patientDashboardPage = editVisitNotePage.save();
+		
+		 } catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
 
-        //TODO Edit function doesn't work int02
-        patientDashboardPage = editVisitNotePage.save();
         assertEquals(DIAGNOSIS_SECONDARY_UPDATED, patientDashboardPage.secondaryDiagnosis());
         patientVisitsDashboardPage = patientDashboardPage.goToRecentVisits();
 
