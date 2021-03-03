@@ -34,7 +34,7 @@ public class MergePatientTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void mergePatientByNameTest() throws Exception {
+    public void mergePatientByNameTest()  {
 
         DataManagementPage dataManagementPage = homePage.goToDataManagement();
         MergePatientsPage mergePatientsPage = dataManagementPage.goToMergePatient();
