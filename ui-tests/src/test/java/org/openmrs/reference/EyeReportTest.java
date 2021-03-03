@@ -34,9 +34,8 @@ public class EyeReportTest extends TestBase {
 
     }
 
-    @Ignore// ignored due to eye form changes
     @Test
-    public void eyeReportTest() throws Exception {
+    public void eyeReportTest() {
         patientDashboardPage.clickOnEyeForm();
         manageFormsPage.clickOnCalendarEyeReport();
         manageFormsPage.selectYear("1999");
