@@ -34,7 +34,7 @@ public class TransferToWardServiceTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    public void transferToWardServiceTest() throws Exception {
+    public void transferToWardServiceTest() {
 
         ClinicianFacingPatientDashboardPage patientDashboardPage = homePage.goToActiveVisitPatient();
 
