@@ -38,13 +38,17 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
-    public void addPatientAppointmentTest() throws Exception {
+    public void addPatientAppointmentTest()  {
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
         ManageProviderSchedulesPage manageProviderSchedulesPage = appointmentSchedulingPage.goToManageProviderSchedules();
         manageProviderSchedulesPage.selectLocation(getLocationName());
-        manageProviderSchedulesPage.clickOnCurrentDay();
+        try {
+			manageProviderSchedulesPage.clickOnCurrentDay();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
         manageProviderSchedulesPage.selectLocationBlock(getLocationName());
         manageProviderSchedulesPage.enterService(SERVICE_NAME);
         manageProviderSchedulesPage.clickOnEndTimeButton();
