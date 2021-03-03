@@ -39,10 +39,14 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
     }
 
     // Test for RA-472,
-    @Ignore//ignored due to inability to check unindentified patient by keyboard
     @Test
-    public void registerUnidentifiedPatient() throws InterruptedException {
-        homePage.goToRegisterPatientApp();
+    public void registerUnidentifiedPatient() {
+        try {
+			homePage.goToRegisterPatientApp();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         patient = PatientGenerator.generateTestPatient();
 
         assertTrue(registrationPage.getNameInConfirmationPage().contains("--"));
