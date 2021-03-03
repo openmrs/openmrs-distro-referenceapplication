@@ -34,9 +34,8 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
-    public void contactInfoTest() throws Exception {
+    public void contactInfoTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
@@ -58,7 +57,13 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
-        patientDashboardPage = registrationEditSectionPage.confirmPatient();
+        
+        try {
+			patientDashboardPage = registrationEditSectionPage.confirmPatient();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        
         homePage = patientDashboardPage.goToHomePage();
         activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
