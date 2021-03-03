@@ -10,12 +10,13 @@
 package org.openmrs.reference.page;
 
 import org.apache.commons.lang.StringUtils;
+import org.openmrs.uitestframework.page.Page;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
