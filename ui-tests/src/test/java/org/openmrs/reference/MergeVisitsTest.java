@@ -36,7 +36,6 @@ public class MergeVisitsTest extends LocationSensitiveApplicationTestBase {
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
     public void mergeVisitsTest() {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
