@@ -32,9 +32,8 @@ public class EditFormTest extends TestBase {
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
-    @Ignore//ignore due to moving forms functionality
     @Test
-    public void EditFormTest() throws Exception {
+    public void EditFormTest() {
         homePage.goToManageForm();
         if(!manageForm.addPresent()) {
             manageForm.delete();
@@ -43,17 +42,52 @@ public class EditFormTest extends TestBase {
         manageForm.addLabel("Eye Report");
         manageForm.addIcon("icon-align-justify");
         manageForm.formIdFromUrl();
-        manageForm.save();
-        headerPage.clickOnHomeIcon();
+        
+        try {
+        	
+			manageForm.save();
+			
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+        
+        try {
+        	
+			headerPage.clickOnHomeIcon();
+			
+		} catch (InterruptedException e) {
+		
+			e.printStackTrace();
+		}
         homePage.goToManageForm();
         manageForm.editPath();
         manageForm.addLabel("Eye Test");
-        manageForm.save();
-        headerPage.clickOnHomeIcon();
+        
+        try {
+        	
+			manageForm.save();
+			
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+        
+        try {
+			headerPage.clickOnHomeIcon();
+		}
+        catch (InterruptedException e) {
+			e.printStackTrace();
+		}
         homePage.goToActiveVisitPatient();
         assertNotNull("Eye Test", patientDashboardPage.FORM_EXIST);
-//        Delete Form
-        headerPage.clickOnHomeIcon();
+        //Delete Form
+        try {
+			headerPage.clickOnHomeIcon();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         homePage.goToManageForm();
         manageForm.deletePath();
         assertNotNull("Add", manageForm.ADD);
