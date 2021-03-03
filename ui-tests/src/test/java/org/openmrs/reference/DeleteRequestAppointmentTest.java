@@ -34,9 +34,8 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
-    public void deleteRequestAppointmentTest() throws Exception {
+    public void deleteRequestAppointmentTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
