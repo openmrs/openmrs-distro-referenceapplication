@@ -18,7 +18,7 @@ import org.openmrs.uitestframework.test.TestBase;
  */
 public class AddFormTest extends TestBase {
 	
-    private HomePages homePage;
+    private HomePage homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
     private ClinicianFacingPatientDashboardPage patientDashboardPage;
