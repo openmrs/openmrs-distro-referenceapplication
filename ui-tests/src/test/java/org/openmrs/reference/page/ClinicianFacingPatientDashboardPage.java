@@ -82,12 +82,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
 
 	private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
-
 	private static final By ALLERGIES_LINK = By.id("allergyui-editAllergies");
-
-	private static final By CONDITIONS_LINK = By
-			.cssSelector(".conditions .info-header i.right");
-
+	private static final By CONDITIONS_LINK = By.cssSelector(".conditions .info-header i.right");
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
 	}
