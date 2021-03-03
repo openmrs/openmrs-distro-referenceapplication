@@ -17,7 +17,8 @@ import org.openmrs.uitestframework.test.TestBase;
  * Created by nata on 24.06.15.
  */
 public class AddFormTest extends TestBase {
-    private HomePage homePage;
+	
+    private HomePages homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
     private ClinicianFacingPatientDashboardPage patientDashboardPage;
