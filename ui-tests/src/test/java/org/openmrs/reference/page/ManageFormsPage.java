@@ -10,12 +10,12 @@ import org.openqa.selenium.WebDriver;
 
 public class ManageFormsPage extends Page{
 
+    public String id;
     public static final By ADD = By.linkText("Add");
     private static final By SAVE = By.cssSelector("input[type=\"submit\"]");
     private static final By EXTENSION_FORM_LABEL = By.id("extensionForm.label");
     private static final By EXTENSION_FORM_ICON = By.id("extensionForm.icon");
     private static final By DELETE = By.cssSelector("i.icon-remove.delete-action");
-    public String id;
     private static String EDIT_FORM = "//i[@onclick=\"location.href='forms/extension.page?formId=";
     private static String REST_PATH = "&extensionId=patientDashboard.overallActions.form.";
     private static String DELETE_FORM = "//i[@onclick=\"location.href='forms/deleteExtension.page?formId=";
