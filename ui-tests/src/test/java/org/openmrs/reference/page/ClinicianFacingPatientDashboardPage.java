@@ -85,9 +85,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	private static final By ALLERGIES_LINK = By.id("allergyui-editAllergies");
 
-	private static final By CONDITIONS_LINK = By
-			.cssSelector(".conditions .info-header i.right");
+	private static final By CONDITIONS_LINK = By.cssSelector(".conditions .info-header i.right");
 
+	private static final By ATTACHMENTS_LINK = By.id("attachments.attachments.visitActions.default");
+	
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
 	}
@@ -345,8 +346,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 		return new PatientVisitsDashboardPage(this);
 	}
 
-
-
 	public void clickChangeDate (){
 		waitForElement(CHANGE_DATE);
 		clickOn(CHANGE_DATE);
@@ -453,5 +452,9 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	public void clickOnConditionsWidgetLink() {
 		clickOn(CONDITIONS_LINK);
 	}
-
+	
+	public AttachmentsPage clickOnAttachmentsAppLink() {
+		clickOn(ATTACHMENTS_LINK);
+		return new AttachmentsPage(this);
+	}
 }
