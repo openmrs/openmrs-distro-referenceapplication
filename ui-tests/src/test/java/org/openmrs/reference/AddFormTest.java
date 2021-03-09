@@ -38,6 +38,8 @@ public class AddFormTest extends TestBase {
         if(!manageForm.addPresent()) {
             manageForm.delete();
         }
+        
+        
         manageForm.add();
         manageForm.addLabel("Eye Report");
         manageForm.addIcon("icon-align-justify");
