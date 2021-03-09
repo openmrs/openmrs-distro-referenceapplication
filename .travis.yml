@@ -28,6 +28,10 @@ script: travis_wait 60 ./travis_script.sh
 
 after_script: ./travis_after_script.sh
 
+branches:
+  only:
+  - qa
+
 notifications:
   irc:
     channels:
