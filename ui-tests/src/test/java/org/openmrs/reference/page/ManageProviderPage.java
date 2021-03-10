@@ -9,7 +9,6 @@
  */
 package org.openmrs.reference.page;
 
-import com.thoughtworks.selenium.webdriven.commands.Open;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

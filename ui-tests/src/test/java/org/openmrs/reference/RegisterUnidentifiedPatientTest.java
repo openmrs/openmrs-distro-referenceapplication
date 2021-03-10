@@ -42,6 +42,7 @@ public class RegisterUnidentifiedPatientTest extends ReferenceApplicationTestBas
 		assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
 		ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
+		dashboardPage.waitForPage();
 		patient.uuid = page.getPatientUuidFromUrl();
 		assertThat(dashboardPage.getPatientGivenName(), is("UNKNOWN"));
 		assertThat(dashboardPage.getPatientFamilyName(), is("UNKNOWN"));

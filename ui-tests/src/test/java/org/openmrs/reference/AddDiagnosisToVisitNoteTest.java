@@ -11,6 +11,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -35,9 +36,9 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
         createTestVisit();
     }
    
-    @Test
+    @Ignore
     @Category(BuildTests.class)
-    public void AddDiagnosisToVisitNoteTest() throws Exception {
+    public void AddDiagnosisToVisitNoteTest() {
 
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
@@ -55,12 +56,9 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
         assertThat(diagnoses, hasItems("Pneumonia", "Bleeding"));
     }
 
-
-
     @After
     public void tearDown() throws Exception {
-        //There's a validation error when deleting a patient with a visit note. Some obs has an invalid value and cannot be voided.
-        //deletePatient(patient.uuid);
+        deletePatient(patient.uuid);
     }
 
     private void createTestVisit(){
