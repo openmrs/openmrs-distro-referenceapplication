@@ -17,6 +17,8 @@ public class SystemAdministrationPage extends Page {
 
     private static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
 
+    private static By STYLES_GUIDE_LINK = By.className("icon-magic");
+
     public SystemAdministrationPage(Page parent) {
         super(parent);
     }
@@ -30,4 +32,9 @@ public class SystemAdministrationPage extends Page {
         clickOn(ADVANCED_ADMINISTRATION);
         return new AdministrationPage(this);
     }
+
+    public void clickOnStylesGuideAppLink() {
+        clickOn(STYLES_GUIDE_LINK);
+    }
+
 }

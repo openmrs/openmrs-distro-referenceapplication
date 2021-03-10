@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.openmrs.distro</groupId>
     <artifactId>referenceapplication-ui-tests</artifactId>
-    <version>2.12.0-SNAPSHOT</version>
+    <version>${parent.version}</version>
     <name>Reference Application Distribution UI Tests</name>
     <packaging>jar</packaging>
     <url>http://maven.apache.org</url>
@@ -20,10 +19,12 @@
         <!-- Remote server -->
         <webapp.url>https://qa-refapp.openmrs.org/openmrs</webapp.url>
         <!-- Local server -->
-        <!--<webapp.url>http://localhost:8080/openmrs</webapp.url>-->
+        <!--webapp.url>http://localhost:8080/openmrs</webapp.url-->
         <login.username>admin</login.username>
         <login.password>Admin123</login.password>
-        <webdriver>firefox</webdriver>
+        <webdriver>chrome</webdriver>
+        <headless>true</headless>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
@@ -31,9 +32,9 @@
             <groupId>org.openmrs.contrib</groupId>
             <artifactId>uitestframework</artifactId>
             <version>${uitestframeworkVersion}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
-
 
     <profiles>
         <profile>
@@ -49,7 +50,7 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
-                            <skipTests>false</skipTests>
+                            <skipTests>true</skipTests>
                             <groups>org.openmrs.reference.groups.BuildTests</groups>
                             <forkCount>5</forkCount>
                             <reuseForks>true</reuseForks>
@@ -73,14 +74,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.18.1</version>
                 <executions>
@@ -92,7 +85,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <skipTests>${skipTests}</skipTests>
                     <rerunFailingTestsCount>2</rerunFailingTestsCount>
                     <runOrder>alphabetical</runOrder>
                     <includes>

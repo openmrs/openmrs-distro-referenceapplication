@@ -12,6 +12,7 @@ public class HeaderPage extends Page {
 
 	static final String HOME_ICON = "logo";
 	static final String HOME_LINK_TEXT = "Home";
+	static final By LOGOUT = By.className("logout");
 
 	public void clickOnHomeIcon() throws InterruptedException {
 		clickOn(By.className(HOME_ICON));
@@ -24,7 +25,7 @@ public class HeaderPage extends Page {
 	}
 
 	public void logOut() throws InterruptedException{
-		clickOnLinkFromHref(newContextPageUrl("/logout"));
+		clickOn(LOGOUT);
 	}
 
 	@Override

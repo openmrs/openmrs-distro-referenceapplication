@@ -43,7 +43,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By SHOW_CONTACT_INFO = By.id("patient-header-contactInfo");
 	private static final By EDIT_PATIENT = By.cssSelector("#edit-patient-demographics a");
 	private static final By EDIT_CONTACT_INFO = By.id("contact-info-inline-edit");
-	private static final By PATIENT_ID = By.cssSelector("div.identifiers > span");
+	private static final By PATIENT_ID = By.cssSelector("div.identifiers span");
 	private static final By CODE = By.className("code");
 	private static final By UI_ID_1 = By.id("ui-id-1");
 	private static final By UI_MENU_ITEM = By.className("ui-menu-item");
@@ -82,6 +82,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
 
 	private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
+
+	private static final By ALLERGIES_LINK = By.id("allergyui-editAllergies");
+
+	private static final By CONDITIONS_LINK = By
+			.cssSelector(".conditions .info-header i.right");
 
 	public ClinicianFacingPatientDashboardPage(Page page) {
 		super(page);
@@ -184,17 +189,17 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 	}
 
 	public void visitNote() {
-		clickOn(VISIT_NOTE);
+		clickOnLast(VISIT_NOTE);
 		waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
 	}
 
 	public VisitNotePage goToVisitNote() {
-		clickOn(VISIT_NOTE);
+		clickOnLast(VISIT_NOTE);
 		return new VisitNotePage(this);
 	}
 
 	public PatientCaptureVitalsPage goToPatientCaptureVitalsPage() {
-		clickOn(PATIENT_CAPTURE_VITALS);
+		clickOnLast(PATIENT_CAPTURE_VITALS);
 		return new PatientCaptureVitalsPage(this);
 	}
 
@@ -439,6 +444,14 @@ public class ClinicianFacingPatientDashboardPage extends Page {
 
 	public String getActiveVisitMessage(){
 		return findElement(ACTIVE_VISIT_MESSAGE).getText();
+	}
+
+	public void clickOnAllergiesWidgetLink() {
+		clickOn(ALLERGIES_LINK);
+	}
+
+	public void clickOnConditionsWidgetLink() {
+		clickOn(CONDITIONS_LINK);
 	}
 
 }
