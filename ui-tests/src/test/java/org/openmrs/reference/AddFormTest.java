@@ -6,7 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.openmrs.reference.groups.BuildTests;
 import org.junit.experimental.categories.Category;
-//import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -34,11 +33,9 @@ public class AddFormTest extends  ReferenceApplicationTestBase {
          manageForm = new ManageFormsPage(driver);
     }
 
-//    @Ignore //ignore due to moving forms functionality
     @Test
     @Category(BuildTests.class)
     public void addFormTest() throws Exception {
-//        homePage.goToManageForm();
     	administrationPage.goToManageForms();
     	assertPage(administrationPage);
         if(!manageForm.addPresent()) {
@@ -51,11 +48,9 @@ public class AddFormTest extends  ReferenceApplicationTestBase {
         manageForm.save();
         headerPage.clickOnHomeIcon();
         administrationPage.goToManageForms();
-//        homePage.goToActiveVisitPatient();
         assertNotNull("Eye Report", manageForm.FORM_EXIST);
         headerPage.clickOnHomeIcon();
         administrationPage.goToManageForms();
-//        homePage.goToManageForm();
         manageForm.deletePath();
 
     }
