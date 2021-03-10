@@ -31,6 +31,7 @@ public class ManageFormsPage extends Page{
     private static By ENTER_FORM = By.cssSelector("input.submitButton");
     private static By CURRENT_DAY = By.className("ui-state-highlight");
     private static By PATIENT = By.className("name");
+    public static final By FORM_EXIST =  By.linkText("formEdit.form?formid=");
 
     public ManageFormsPage(WebDriver driver) {
         super(driver);

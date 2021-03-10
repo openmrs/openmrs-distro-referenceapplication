@@ -4,37 +4,43 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.openmrs.reference.groups.BuildTests;
+import org.junit.experimental.categories.Category;
+//import org.junit.Ignore;
 import org.junit.Test;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
+import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ManageFormsPage;
-import org.openmrs.uitestframework.test.TestBase;
+
 
 
 /**
  * Created by nata on 24.06.15.
  */
-public class AddFormTest extends TestBase {
-    private HomePage homePage;
+public class AddFormTest extends  ReferenceApplicationTestBase {
+
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
-    private ClinicianFacingPatientDashboardPage patientDashboardPage;
+    private AdministrationPage administrationPage;
+
 
     @Before
     public void setUp() throws Exception {
-        homePage = new HomePage(page);
-        assertPage(homePage);
-        headerPage = new HeaderPage(driver);
-        manageForm = new ManageFormsPage(driver);
-        patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
+    	 administrationPage = new AdministrationPage(page);
+         assertPage(administrationPage);
+         headerPage = new HeaderPage(driver);
+         manageForm = new ManageFormsPage(driver);
     }
 
-    @Ignore //ignore due to moving forms functionality
+//    @Ignore //ignore due to moving forms functionality
     @Test
+    @Category(BuildTests.class)
     public void addFormTest() throws Exception {
-        homePage.goToManageForm();
+//        homePage.goToManageForm();
+    	administrationPage.goToManageForms();
+    	assertPage(administrationPage);
         if(!manageForm.addPresent()) {
             manageForm.delete();
         }
@@ -44,10 +50,12 @@ public class AddFormTest extends TestBase {
         manageForm.formIdFromUrl();
         manageForm.save();
         headerPage.clickOnHomeIcon();
-        homePage.goToActiveVisitPatient();
-        assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
+        administrationPage.goToManageForms();
+//        homePage.goToActiveVisitPatient();
+        assertNotNull("Eye Report", manageForm.FORM_EXIST);
         headerPage.clickOnHomeIcon();
-        homePage.goToManageForm();
+        administrationPage.goToManageForms();
+//        homePage.goToManageForm();
         manageForm.deletePath();
 
     }

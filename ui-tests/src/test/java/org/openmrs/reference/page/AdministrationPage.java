@@ -11,17 +11,19 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class AdministrationPage extends Page {
 
     private static final String URL = "/admin/index.htm";
 
-    private static final By MANAGE_USERS = By.cssSelector("#legacyui-mangeUsers a");
+    private static final By MANAGE_USERS = By.cssSelector("#legacyui-manageUsers a");
     private static final By MANAGE_MODULES = By.cssSelector("#legacyui-manageModules a");
     private final static By MANAGE_VISIT_TYPES = By.cssSelector("#legacyui-manageVisitTypes a");
     private static final By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
     private static final By MANAGE_PERSONS = By.cssSelector("#content a[href=\"/openmrs/admin/person/index.htm\"]");
-
+    private static final By MANAGE_FORMS = By.cssSelector("#content a[href=\"/openmrs/admin/forms/form.list\"]");
+    
     public AdministrationPage(Page page) {
         super(page);
     }
@@ -54,5 +56,11 @@ public class AdministrationPage extends Page {
     public ManagePersonPage clickOnManagePersons() {
         findElement(MANAGE_PERSONS).click();
         return new ManagePersonPage(this);
+    }
+    
+    public ManageFormsPage goToManageForms() {
+    	findElement(MANAGE_FORMS).click();
+    	return new ManageFormsPage((WebDriver) this);
+
     }
 }
