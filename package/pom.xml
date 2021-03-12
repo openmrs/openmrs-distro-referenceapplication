@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openmrs</groupId>
-  <artifactId>openmrs-distro-package</artifactId>
+  <artifactId>openmrs-distro-refapp</artifactId>
   <name>OpenMRS package</name>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -18,9 +18,8 @@
   </developers>
 
   <modules>
-    <module>openmrs-config</module>
     <module>microfrontends-config</module>
-    <module>microfrontends</module>
+    <module>openmrs-config</module>
   </modules>
 
   <properties>
@@ -38,25 +37,31 @@
     <openmrsConfigVersion>1.0.0-SNAPSHOT</openmrsConfigVersion>
     <microfrontendsConfigVersion>1.0.0-SNAPSHOT</microfrontendsConfigVersion>
 
-    <!-- Frontends -->
-    <microfrontendsVersion>1.0.0-SNAPSHOT</microfrontendsVersion>
+    <!-- App Shell -->
+    <appShellVersion>next</appShellVersion>
+
+    <!-- JSON file of the microfrontends used and their version -->
+    <microfrontendsJSONPath>microfrontends.json</microfrontendsJSONPath>
 
     <!-- OpenMRS modules -->
+
+    <!-- in dev -->
     <initializerVersion>2.1.0-SNAPSHOT</initializerVersion>
     <fhir2Version>1.2.0-SNAPSHOT</fhir2Version>
-    <idgenVersion>4.7.0-SNAPSHOT</idgenVersion>
     <webservices.restVersion>2.30.0-SNAPSHOT</webservices.restVersion>
-    <legacyuiVersion>1.8.2-SNAPSHOT</legacyuiVersion>
-    <addresshierarchyVersion>2.15.0-SNAPSHOT</addresshierarchyVersion>
-    <metadatamappingVersion>1.4.0-SNAPSHOT</metadatamappingVersion>
-    <metadatasharingVersion>1.8.0-SNAPSHOT</metadatasharingVersion>
-    <appuiVersion>1.14.0-SNAPSHOT</appuiVersion>
-    <uicommonsVersion>2.17.0-SNAPSHOT</uicommonsVersion>
-    <uiframeworkVersion>3.21.0-SNAPSHOT</uiframeworkVersion>
-    <appframeworkVersion>2.17.0-SNAPSHOT</appframeworkVersion>
+
+    <idgenVersion>4.6.0</idgenVersion>
+    <legacyuiVersion>1.8.2</legacyuiVersion>
+    <addresshierarchyVersion>2.14.2</addresshierarchyVersion>
+    <metadatamappingVersion>1.3.5</metadatamappingVersion>
+    <metadatasharingVersion>1.7.0</metadatasharingVersion>
+    <appuiVersion>1.13.0</appuiVersion>
+    <uicommonsVersion>2.16.0</uicommonsVersion>
+    <uiframeworkVersion>3.20.0</uiframeworkVersion>
+    <appframeworkVersion>2.16.0</appframeworkVersion>
 
     <!-- OpenMRS Core -->
-    <openMRSVersion>2.5.0-SNAPSHOT</openMRSVersion>
+    <openMRSVersion>2.4.0</openMRSVersion>
 
   </properties>
 
@@ -69,15 +74,9 @@
     </dependency>
     <dependency>
       <groupId>org.openmrs</groupId>
-      <artifactId>microfrontends-config</artifactId>
+      <artifactId>microfrontends-config-refapp</artifactId>
       <type>zip</type>
       <version>${microfrontendsConfigVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs</groupId>
-      <artifactId>microfrontends</artifactId>
-      <type>zip</type>
-      <version>${microfrontendsVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.openmrs.web</groupId>
@@ -196,7 +195,7 @@
               <excludeTransitive>true</excludeTransitive>
               <useBaseVersion>true</useBaseVersion>
               <outputDirectory>${distro.openmrsConfigDir}</outputDirectory>
-              <includeArtifactIds>openmrs-config</includeArtifactIds>
+              <includeArtifactIds>openmrs-config-refapp</includeArtifactIds>
             </configuration>
           </execution>
           <!-- Microfrontends -->
@@ -215,7 +214,7 @@
           </execution>
           <!-- Microfrontends config -->
           <execution>
-            <id>unpack-microfrontends-config</id>
+            <id>unpack-microfrontends-config-refapp</id>
             <phase>package</phase>
             <goals>
               <goal>unpack-dependencies</goal>
@@ -224,7 +223,7 @@
               <excludeTransitive>true</excludeTransitive>
               <useBaseVersion>true</useBaseVersion>
               <outputDirectory>${distro.microfrontendsConfigDir}</outputDirectory>
-              <includeArtifactIds>microfrontends-config</includeArtifactIds>
+              <includeArtifactIds>microfrontends-config-refapp</includeArtifactIds>
             </configuration>
           </execution>
         </executions>
@@ -263,6 +262,53 @@
             <goals>
               <goal>run</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Assemble all Micro Frontends -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.3.2</version>
+        <executions>
+          <execution>
+            <id>npm install openmrs</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>initialize</phase>
+            <configuration>
+              <executable>npm</executable>
+              <arguments>
+                <argument>install</argument>
+                <argument>openmrs@${appShellVersion}</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npx openmrs build</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <!-- Using a bash script to support setting environment variables (and has other advantages) -->
+              <executable>scripts/build.sh</executable>
+              <commandlineArgs>${distro.microfrontendsDir}</commandlineArgs>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npx openmrs assemble</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <!-- Using a bash script for consistency with build.sh ¯\_(ツ)_/¯ -->
+              <executable>scripts/assemble.sh</executable>
+              <commandlineArgs>${distro.microfrontendsDir} ${microfrontendsJSONPath}</commandlineArgs>
+            </configuration>
           </execution>
         </executions>
       </plugin>

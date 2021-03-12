@@ -11,8 +11,6 @@ Output:
 `target/openmrs-distro-package/openmrs-distro-package-$version.zip`
 
 Package contents:
-* `microfrontends/`
-<br/>The Micro Frontends ESMs.
 * `microfrontends_config/`
 <br/>The Configuration for Micro Frontends.
 * `openmrs_modules/`
@@ -32,7 +30,7 @@ Package contents:
 OpenMRS config can be set in [openmrs-config/configuration/](openmrs-config/configuration/) folder
 
 #### Micro Frontends
-ESMs are set in the [microfrontends/microfrontends.json](microfrontends/microfrontends.json) file.
+ESMs are set in the [microfrontends.json](microfrontends.json) file.
 
 #### Micro Frontends configuration
 MF Config can be set in [microfrontends-config/configuration/](microfrontends-config/configuration/) folder
