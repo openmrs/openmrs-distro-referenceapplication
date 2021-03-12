@@ -21,6 +21,7 @@ import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
+import org.openmrs.uitestframework.test.TestData;
 
 import java.awt.*;
 import java.text.ParseException;
@@ -77,7 +78,9 @@ public class DuplicatePatientRegisterTest  extends ReferenceApplicationTestBase 
 
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.uuid);
+        TestData.PatientInfo p = new TestData.PatientInfo();
+        p.uuid = patient.uuid;
+        deletePatient(p);
         waitForPatientDeletion(patient.uuid);
     }
 

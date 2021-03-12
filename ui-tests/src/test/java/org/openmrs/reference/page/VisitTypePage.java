@@ -20,17 +20,17 @@ public class VisitTypePage extends Page {
         super(parent);
     }
 
-    public VisitTypeListPage save(){
+    public VisitTypeListPage save() {
         findElement(SAVE_VISIT_TYPE).click();
         return new VisitTypeListPage(this);
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         findElement(NAME_TEXT_FIELD).clear();
         findElement(NAME_TEXT_FIELD).sendKeys(name);
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         findElement(DESCRIPTION_TEXT_FIELD).clear();
         findElement(DESCRIPTION_TEXT_FIELD).sendKeys(description);
     }
@@ -40,7 +40,6 @@ public class VisitTypePage extends Page {
         acceptAlert();
         return new VisitTypeListPage(this);
     }
-
 
 
     public VisitTypeListPage retire() {

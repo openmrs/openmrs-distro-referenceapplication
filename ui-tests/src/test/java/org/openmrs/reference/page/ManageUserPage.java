@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -15,15 +15,14 @@ import org.openqa.selenium.By;
 
 public class ManageUserPage extends Page {
 
-    public static String URL_PATH = "/admin/users/users.list";
-
     private static final By ADD_USER = By.linkText("Add User");
     private static final By SAVE_BUTTON = By.id("saveButton");
     private static final By HOME = By.id("homeNavLink");
-    private static final By ACTION = By.name("action") ;
+    private static final By ACTION = By.name("action");
     private static final By USER_LINK = By.xpath("//table[@class='openmrsSearchTable']/tbody/tr/td/a");
     private static final By FIND_USER = By.name("name");
     private static final By USER_SAVED_NOTIFICATION = By.id("openmrs_msg");
+    public static String URL_PATH = "/admin/users/users.list";
 
     public ManageUserPage(Page page) {
         super(page);
@@ -49,7 +48,7 @@ public class ManageUserPage extends Page {
         clickOn(ACTION);
         clickOn(USER_LINK);
         AddEditUserPage editPage = new AddEditUserPage(this);
-        if(roleToUnassign != null) {
+        if (roleToUnassign != null) {
             editPage.unassignRole(roleToUnassign);
         }
         editPage.clickOn(By.id(roleToAssign));

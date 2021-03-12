@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -11,9 +11,8 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-public class PersonFormPage extends Page{
+public class PersonFormPage extends Page {
 
     private static final By FAMILY_NAME_FIELD = By.cssSelector("#namePortlet > div > table > tbody > tr:nth-child(4) > td:nth-child(2) > input[type=\"text\"]");
     private static final By SAVE_PERSON = By.id("saveButton");
@@ -27,12 +26,12 @@ public class PersonFormPage extends Page{
         super(parent);
     }
 
-    public void savePerson(){
+    public void savePerson() {
         clickOn(SAVE_PERSON);
         waitForTextToBePresentInElement(OPENMRS_MSG, "Person saved");
     }
 
-    public ManagePersonPage deletePersonForever(){
+    public ManagePersonPage deletePersonForever() {
         clickOn(DELETE_PERSON_FOREVER);
         clickOn(DELETE_PERSON_CONFIRM);
         acceptAlert();
@@ -41,12 +40,12 @@ public class PersonFormPage extends Page{
         return managePersonPage;
     }
 
-    public void setFamilyNameField(String familyName){
+    public void setFamilyNameField(String familyName) {
         findElement(FAMILY_NAME_FIELD).clear();
         findElement(FAMILY_NAME_FIELD).sendKeys(familyName);
     }
 
-    public String getFamilyName(){
+    public String getFamilyName() {
         return findElement(FAMILY_NAME_FIELD).getAttribute("value");
     }
 

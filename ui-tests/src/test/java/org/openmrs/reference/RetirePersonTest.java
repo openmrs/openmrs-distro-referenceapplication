@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -20,22 +20,19 @@ import org.openmrs.reference.page.PersonFormPage;
 import org.openmrs.uitestframework.test.RestClient;
 import org.openmrs.uitestframework.test.TestData;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-
-public class RetirePersonTest extends ReferenceApplicationTestBase{
+public class RetirePersonTest extends ReferenceApplicationTestBase {
     private String personUuid;
     private TestData.PersonInfo personInfo;
 
     @Before
-    public void setup(){
+    public void setup() {
         personInfo = TestData.generateRandomPerson();
         personUuid = TestData.createPerson(personInfo);
     }
 
     @Test
     @Category(BuildTests.class)
-    public void retirePersonTest(){
+    public void retirePersonTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManagePersonPage managePersonPage = administrationPage.clickOnManagePersons();
         managePersonPage.setPersonName(personInfo.givenName);
@@ -45,7 +42,7 @@ public class RetirePersonTest extends ReferenceApplicationTestBase{
     }
 
     @After
-    public void teardown(){
-        RestClient.delete("person/"+personUuid, true);
+    public void teardown() {
+        RestClient.delete("person/" + personUuid, true);
     }
 }

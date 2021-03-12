@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -16,7 +16,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.page.ActiveVisitsPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
+import org.openmrs.reference.page.RegistrationEditSectionPage;
 import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertTrue;
@@ -66,12 +68,13 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         patientDashboardPage.clickOnShowContact();
         assertTrue(patientDashboardPage.getTelephoneNumber().contains("111111111"));
     }
+
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.uuid);
+        deletePatient(patient);
     }
 
-    private void createTestVisit(){
+    private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, getLocationUuid(homePage)).create();
     }
 }
