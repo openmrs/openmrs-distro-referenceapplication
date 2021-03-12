@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -11,7 +11,6 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class FindPatientPage extends Page {
 
@@ -27,7 +26,7 @@ public class FindPatientPage extends Page {
         setTextToFieldNoEnter(PATIENT_SEARCH, patient);
     }
 
-    public ClinicianFacingPatientDashboardPage clickOnFirstPatient(){
+    public ClinicianFacingPatientDashboardPage clickOnFirstPatient() {
         clickOn(PATIENT_NAME_SEARCH_RESULT);
         return new ClinicianFacingPatientDashboardPage(this);
     }
@@ -46,7 +45,7 @@ public class FindPatientPage extends Page {
         getFirstPatientName();
         return findElement(PATIENT_ID_SEARCH_RESULT).getText();
     }
-   
+
     public String getFirstPatientName() {
         return findElement(PATIENT_NAME_SEARCH_RESULT).getText();
     }

@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -27,7 +27,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  */
-public class DeleteVisitTypeTest extends ReferenceApplicationTestBase{
+public class DeleteVisitTypeTest extends ReferenceApplicationTestBase {
 
     private String visitTypeName;
     private String visitTypeDesc;
@@ -35,7 +35,7 @@ public class DeleteVisitTypeTest extends ReferenceApplicationTestBase{
     private String visitTypeUuid;
 
     @Before
-    public void setup(){
+    public void setup() {
         visitTypeName = RandomStringUtils.randomAlphanumeric(8);
         visitTypeDesc = RandomStringUtils.randomAlphanumeric(16);
         visitTypeUuid = new TestData.TestVisitType(visitTypeName, visitTypeDesc).create();
@@ -43,7 +43,7 @@ public class DeleteVisitTypeTest extends ReferenceApplicationTestBase{
 
     @Test
     @Category(BuildTests.class)
-    public void deleteVisitTypeTest(){
+    public void deleteVisitTypeTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         VisitTypeListPage visitTypeListPage = administrationPage.goToVisitTypePage();
         VisitTypePage visitTypePage = visitTypeListPage.goToVisitType(visitTypeName);
@@ -52,7 +52,7 @@ public class DeleteVisitTypeTest extends ReferenceApplicationTestBase{
     }
 
     @After
-    public void teardown(){
-        RestClient.delete("visittype/"+visitTypeUuid, true);
+    public void teardown() {
+        RestClient.delete("visittype/" + visitTypeUuid, true);
     }
 }

@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -13,7 +13,7 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 
-public class AllergyPage extends Page{
+public class AllergyPage extends Page {
 
     private static final By ADD_NEW_ALLERGY = By.id("allergyui-addNewAllergy");
     private static final By EDIT_ALLERGY = By.cssSelector("i.icon-pencil.edit-action");
@@ -30,21 +30,21 @@ public class AllergyPage extends Page{
         super(page);
     }
 
-    public AddOrEditAllergyPage clickOnAddNewAllergy(){
+    public AddOrEditAllergyPage clickOnAddNewAllergy() {
         clickOn(ADD_NEW_ALLERGY);
         return new AddOrEditAllergyPage(this);
     }
 
-    public AddOrEditAllergyPage clickOnEditAllergy(){
+    public AddOrEditAllergyPage clickOnEditAllergy() {
         clickOn(EDIT_ALLERGY);
         return new AddOrEditAllergyPage(this);
     }
 
-    public void clickOnDeleteAllergy(){
+    public void clickOnDeleteAllergy() {
         clickOn(DELETE_ALLERGY);
     }
 
-    public void clickOnConfirmDeleteAllergy(){
+    public void clickOnConfirmDeleteAllergy() {
         clickOn(CONFIRM_DELETE_ALLERGY);
     }
 

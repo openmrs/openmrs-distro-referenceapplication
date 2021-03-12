@@ -16,17 +16,21 @@ public class RequestAppointmentPage extends Page {
     }
 
 
-    public void enterAppointmentType(String type){
+    public void enterAppointmentType(String type) {
         setTextToFieldNoEnter(APPOINTMENT_TYPE, type);
         waitForElement(SERVICE_DROPDOWN);
         clickOn(SERVICE_DROPDOWN);
     }
 
-    public void enterValue(String value){ setText(FRAME_VALUE, value);}
+    public void enterValue(String value) {
+        setText(FRAME_VALUE, value);
+    }
 
-    public void selectUnits(String units){ selectFrom(FRAME_UNITS, units);}
+    public void selectUnits(String units) {
+        selectFrom(FRAME_UNITS, units);
+    }
 
-    public ClinicianFacingPatientDashboardPage saveRequest(){
+    public ClinicianFacingPatientDashboardPage saveRequest() {
         clickOn(SAVE_REQUEST);
         return new ClinicianFacingPatientDashboardPage(this);
     }

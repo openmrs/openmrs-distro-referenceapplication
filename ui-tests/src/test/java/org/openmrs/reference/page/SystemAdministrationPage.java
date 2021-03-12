@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -17,7 +17,7 @@ public class SystemAdministrationPage extends Page {
 
     private static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
 
-    private static By STYLES_GUIDE_LINK = By.className("icon-magic");
+    private static By STYLES_GUIDE_LINK = By.id("referenceapplication-styleGuide-app");
 
     public SystemAdministrationPage(Page parent) {
         super(parent);
@@ -28,13 +28,14 @@ public class SystemAdministrationPage extends Page {
         return "coreapps/systemadministration/systemAdministration.page";
     }
 
-    public AdministrationPage goToAdvancedAdministration(){
+    public AdministrationPage goToAdvancedAdministration() {
         clickOn(ADVANCED_ADMINISTRATION);
         return new AdministrationPage(this);
     }
 
-    public void clickOnStylesGuideAppLink() {
+    public StylesGuidePage clickOnStylesGuideAppLink() {
         clickOn(STYLES_GUIDE_LINK);
+        return new StylesGuidePage(this);
     }
 
 }

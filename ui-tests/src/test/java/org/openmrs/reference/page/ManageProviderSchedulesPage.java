@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -36,33 +36,34 @@ public class ManageProviderSchedulesPage extends Page {
         clickOn(CURRENT_DAY);
     }
 
-    public void selectLocationBlock(String locblock){
+    public void selectLocationBlock(String locblock) {
         waitForElement(LOCATION_IN_BLOCK);
         selectFrom(LOCATION_IN_BLOCK, locblock);
         clickOn(LOCATION_IN_BLOCK);
     }
 
-    public void enterService(String service){
+    public void enterService(String service) {
         boolean flag = false;
-        while(!flag) {
+        while (!flag) {
             try {
                 findElement(SERVICE).clear();
                 setTextToFieldNoEnter(SERVICE, service);
                 waitForElement(SERVICE_DROPDOWN);
                 clickOn(SERVICE_DROPDOWN);
                 flag = true;
-            } catch(Exception e) {
+            } catch (Exception e) {
                 flag = false;
             }
         }
 
     }
 
-    public void clickOnSave(){
+    public void clickOnSave() {
         clickOn(SAVE);
         try {
             waitForElementToBeHidden(SAVE);
-        } catch(Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public void clickOnEndTimeButton() {

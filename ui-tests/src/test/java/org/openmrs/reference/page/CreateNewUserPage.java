@@ -19,12 +19,13 @@ public class CreateNewUserPage extends Page {
 
     @Override
     public String getPageUrl() {
-        return AddEditUserPage.URL+"?createNewPerson=true";
+        return AddEditUserPage.URL + "?createNewPerson=true";
     }
 
     public void fillInPersonName(String givenName, String familyName, String username, String password) {
         findElement(USERNAME).clear();
-        findElement(USERNAME).sendKeys(username);findElement(PERSON_GIVEN_NAME).clear();
+        findElement(USERNAME).sendKeys(username);
+        findElement(PERSON_GIVEN_NAME).clear();
         findElement(PERSON_GIVEN_NAME).sendKeys(givenName);
         findElement(PERSON_FAMILY_NAME).clear();
         findElement(PERSON_FAMILY_NAME).sendKeys(familyName);

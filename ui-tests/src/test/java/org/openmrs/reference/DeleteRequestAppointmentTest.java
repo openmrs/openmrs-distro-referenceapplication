@@ -58,7 +58,7 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
 
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.uuid);
+        deletePatient(patient);
     }
 
     private void createTestVisit(){

@@ -9,11 +9,12 @@ import org.openqa.selenium.WebDriver;
 public class RelationTypePage extends AdminManagementPage {
 
     static final By DELETE_RELATION_TYPE = By.name("purge");
-    static final By RETIRE_RELATION_TYPE= By.name("retire");
+    static final By RETIRE_RELATION_TYPE = By.name("retire");
     static final By A_IS_TO_B = By.name("aIsToB");
     static final By B_IS_TO_A = By.name("bIsToA");
     static final By DESCRIPTION = By.name("description");
     static final By ERROR = By.cssSelector("span.error");
+
     public RelationTypePage(WebDriver driver) {
         super(driver);
         MANAGE = By.linkText("Manage Relationship Types");
@@ -23,24 +24,22 @@ public class RelationTypePage extends AdminManagementPage {
     }
 
 
-
-
     public void fillInRelationTypeAIsToB(String name) {
-        fillInField(findElement(A_IS_TO_B),name);
+        fillInField(findElement(A_IS_TO_B), name);
     }
 
     public void fillInRelationTypeBIsToA(String name) {
-        fillInField(findElement(B_IS_TO_A),name);
+        fillInField(findElement(B_IS_TO_A), name);
     }
 
-    public void createRelationType(String aistob,String bistoa, String description) throws InterruptedException {
+    public void createRelationType(String aistob, String bistoa, String description) throws InterruptedException {
         fillInRelationTypeAIsToB(aistob);
         fillInRelationTypeBIsToA(bistoa);
         fillInDescription(description);
         save();
     }
 
-    public void waitForError(){
+    public void waitForError() {
         waitForElement(ERROR);
     }
 

@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -31,11 +31,11 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
     private TestData.PatientInfo patient;
 
     @Before
-    public void setup(){
+    public void setup() {
         patient = createTestPatient();
         createTestVisit();
     }
-   
+
     @Ignore
     @Category(BuildTests.class)
     public void AddDiagnosisToVisitNoteTest() {
@@ -58,10 +58,10 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
 
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.uuid);
+        deletePatient(patient);
     }
 
-    private void createTestVisit(){
+    private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
 }

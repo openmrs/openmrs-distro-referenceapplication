@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -32,16 +32,16 @@ public class AddEditLocationPage extends Page {
     /**
      * @return go back to manage locations page, but only if there are no validation errors
      */
-    public ManageLocationsPage save(){
+    public ManageLocationsPage save() {
         clickOn(SAVE_BUTTON);
         return new ManageLocationsPage(this);
     }
 
-    public void enterName(String name){
+    public void enterName(String name) {
         findElement(NAME_FIELD).sendKeys(name);
     }
 
-    public void selectFirstTag(){
+    public void selectFirstTag() {
         clickOn(FIRST_TAG);
     }
 }
