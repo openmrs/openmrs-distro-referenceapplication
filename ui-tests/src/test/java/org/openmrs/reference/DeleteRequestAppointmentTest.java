@@ -10,6 +10,7 @@
 package org.openmrs.reference;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -53,7 +54,7 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
         manageAppointmentsPage.deleteRequest();
         patientDashboardPage = manageAppointmentsPage.clickCancel();
         appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
-        assertTrue(appointmentRequestsList.get(0).equals("None"));
+        Assert.assertEquals(appointmentRequestsList.size(),0);
     }
 
     @After
