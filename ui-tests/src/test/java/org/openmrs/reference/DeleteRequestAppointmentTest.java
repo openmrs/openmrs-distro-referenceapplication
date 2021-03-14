@@ -10,6 +10,7 @@
 package org.openmrs.reference;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -34,7 +35,6 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
     public void deleteRequestAppointmentTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -46,6 +46,7 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
         requestAppointmentPage.selectUnits("Day(s)");
         patientDashboardPage = requestAppointmentPage.saveRequest();
 
+
         List<String> appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
         assertTrue(appointmentRequestsList.get(0).equals(SERVICE_NAME));
 
@@ -53,7 +54,8 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
         manageAppointmentsPage.deleteRequest();
         patientDashboardPage = manageAppointmentsPage.clickCancel();
         appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
-        assertTrue(appointmentRequestsList.get(0).equals("None"));
+        Assert.assertEquals(appointmentRequestsList.size(),0);
+    
     }
 
     @After
