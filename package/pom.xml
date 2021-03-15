@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openmrs</groupId>
-  <artifactId>openmrs-distro-refapp</artifactId>
+  <artifactId>openmrs-distro-package</artifactId>
   <name>OpenMRS package</name>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -68,7 +68,7 @@
   <dependencies>
     <dependency>
       <groupId>org.openmrs</groupId>
-      <artifactId>openmrs-config</artifactId>
+      <artifactId>openmrs-config-refapp</artifactId>
       <type>zip</type>
       <version>${openmrsConfigVersion}</version>
     </dependency>
@@ -241,21 +241,6 @@
                 <move todir="${distro.openmrsModulesDir}">
                   <fileset dir="${distro.openmrsModulesDir}"/>
                   <mapper type="regexp" from="^(.+)-omod-(.+)\.jar" to="\1-\2.omod"/>
-                </move>
-              </target>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>rename-openmrs-config</id>
-            <phase>package</phase>
-            <configuration>
-              <target>
-                <move todir="${distro.openmrsConfigDir}">
-                  <fileset dir="${distro.openmrsConfigDir}"/>
-                  <mapper type="regexp" from="^openmrs-config-refapp(.+)\.zip" to="config.zip"/>
                 </move>
               </target>
             </configuration>
