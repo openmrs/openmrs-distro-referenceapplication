@@ -9,6 +9,7 @@ addons:
   sauce_connect:
     username: $SAUCELABS_USERNAME
     access_key: $SAUCELABS_ACCESSKEY
+  firefox: "86.0"
 
 cache:
   directories:
@@ -23,6 +24,9 @@ before_cache:
   - rm -rf $HOME/.m2/repository/org/openmrs
  
 install: true
+
+before_script:
+  - cp -f ui-tests/src/test/resources/org/openmrs/uitestframework/test-travis-ci.properties ui-tests/src/test/resources/org/openmrs/uitestframework/test.properties
 
 script: travis_wait 60 ./travis_script.sh
 
