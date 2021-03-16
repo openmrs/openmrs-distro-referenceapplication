@@ -15,6 +15,7 @@ import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
+import org.openmrs.uitestframework.test.TestData;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -29,7 +30,9 @@ public class RegisterUnidentifiedPatientTest extends ReferenceApplicationTestBas
 
 	@After
 	public void tearDown() throws Exception {
-		deletePatient(patient.uuid);
+		TestData.PatientInfo p = new TestData.PatientInfo();
+		p.uuid = patient.uuid;
+		deletePatient(p);
 		waitForPatientDeletion(patient.uuid);
 	}
 

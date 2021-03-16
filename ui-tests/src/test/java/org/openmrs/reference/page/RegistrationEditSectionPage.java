@@ -28,19 +28,19 @@ public class RegistrationEditSectionPage extends Page {
         super(parent);
     }
 
-    public void clickOnBirthdateLabel(){
+    public void clickOnBirthdateLabel() {
         clickOn(BIRTHDATE_LABEL);
     }
 
-    public void enterGivenName(String name){
+    public void enterGivenName(String name) {
         setText(GIVEN_NAME_FIELD, name);
     }
 
-    public void enterMiddleName(String name){
+    public void enterMiddleName(String name) {
         setText(MIDDLE_NAME_FIELD, name);
     }
 
-    public void enterFamilyName(String name){
+    public void enterFamilyName(String name) {
         setText(FAMILY_NAME_FIELD, name);
     }
 
@@ -56,7 +56,7 @@ public class RegistrationEditSectionPage extends Page {
         setText(BIRTHDAY_DAY, birthday);
     }
 
-    public void enterBirthYear(String bitrthYear){
+    public void enterBirthYear(String bitrthYear) {
         setText(BIRTHDAY_YEAR, bitrthYear);
     }
 
@@ -66,44 +66,47 @@ public class RegistrationEditSectionPage extends Page {
     }
 
 
-    public void clearPhoneNumber(){
+    public void clearPhoneNumber() {
         findElement(PHONE_NUMBER).clear();
     }
 
-    public void clearVillage(){
+    public void clearVillage() {
         findElement(CITY_VILLAGE).clear();
     }
 
-    public void clearState(){
+    public void clearState() {
         findElement(STATE_PROVINCE).clear();
     }
 
-    public void clearCountry(){
+    public void clearCountry() {
         findElement(COUNTRY).clear();
     }
 
-    public void clearPostalCode(){
+    public void clearPostalCode() {
         findElement(POSTAL_CODE).clear();
     }
 
-    public void clickOnPhoneNumberEdit(){
+    public void clickOnPhoneNumberEdit() {
         clickOn(PHONE_NUMBER_EDIT);
     }
 
     public void enterVillage(String familyName) {
         setText(CITY_VILLAGE, familyName);
     }
+
     public void enterState(String familyName) {
         setText(STATE_PROVINCE, familyName);
     }
+
     public void enterPostalCode(String familyName) {
         setText(POSTAL_CODE, familyName);
     }
+
     public void enterCountry(String familyName) {
         setText(COUNTRY, familyName);
     }
 
-    public void clickOnConfirmEdit(){
+    public void clickOnConfirmEdit() {
         clickOn(CONFIRM_EDIT);
     }
 
@@ -114,8 +117,8 @@ public class RegistrationEditSectionPage extends Page {
     public String getInvalidPhoneNumberNotification() {
         List<String> errors = getValidationErrors();
         String search = "valid phone number";
-        for(String str: errors) {
-            if(str.trim().contains(search))
+        for (String str : errors) {
+            if (str.trim().contains(search))
                 return str;
         }
         return null;

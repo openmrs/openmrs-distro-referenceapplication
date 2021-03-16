@@ -4,12 +4,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ManageFormsPage;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestBase;
-import org.openqa.selenium.By;
+
 import static org.junit.Assert.assertNotNull;
 
 
@@ -24,7 +24,7 @@ public class EditFormTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-       
+
         homePage = new HomePage(page);
         assertPage(homePage);
         headerPage = new HeaderPage(driver);
@@ -36,7 +36,7 @@ public class EditFormTest extends TestBase {
     @Test
     public void EditFormTest() throws Exception {
         homePage.goToManageForm();
-        if(!manageForm.addPresent()) {
+        if (!manageForm.addPresent()) {
             manageForm.delete();
         }
         manageForm.add();
@@ -59,6 +59,7 @@ public class EditFormTest extends TestBase {
         assertNotNull("Add", manageForm.ADD);
 
     }
+
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();

@@ -6,6 +6,7 @@ import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
 import org.junit.*;
+import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -79,7 +80,9 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
-        deletePatient(patient.uuid);
+        TestData.PatientInfo p = new TestData.PatientInfo();
+        p.uuid = patient.uuid;
+        deletePatient(p);
         waitForPatientDeletion(patient.uuid);
         headerPage.logOut();
     }

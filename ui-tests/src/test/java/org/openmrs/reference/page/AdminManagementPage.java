@@ -8,22 +8,21 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
+ *
  */
 public abstract class AdminManagementPage extends Page {
 
-    protected static By ADD;
-    protected static By MANAGE;
     protected static final By HOME = By.id("homeNavLink");
-
     protected static final By RETIRE_REASON = By.name("retireReason");
-    protected static By NAME = By.name("name");
     protected static final By DESCRIPTION = By.name("description");
-    protected static By SAVE = By.name("save");
-
     protected static final By DELETE = By.name("purge");
-    protected static By RETIRE = By.name("retire");
     protected static final By FOUND_ELEMENT = By.className("odd");
     static final By SEARCH_ELEMENT = By.id("inputNode");
+    protected static By ADD;
+    protected static By MANAGE;
+    protected static By NAME = By.name("name");
+    protected static By SAVE = By.name("save");
+    protected static By RETIRE = By.name("retire");
 
     public AdminManagementPage(WebDriver driver) {
         super(driver);
@@ -55,7 +54,7 @@ public abstract class AdminManagementPage extends Page {
         clickOn(FOUND_ELEMENT);
     }
 
-    public void findBySearch(String element){
+    public void findBySearch(String element) {
         findElement(SEARCH_ELEMENT).sendKeys(element);
         waitForElement(FOUND_ELEMENT);
         clickOnFound();
@@ -63,14 +62,12 @@ public abstract class AdminManagementPage extends Page {
 
     public boolean exists(String element) throws InterruptedException {
         findElement(SEARCH_ELEMENT).sendKeys(element);
-        if(driver.getPageSource().contains("No matches found for")) {
+        if (driver.getPageSource().contains("No matches found for")) {
             return false;
-        }
-        else {
+        } else {
             try {
                 waitForElement(FOUND_ELEMENT);
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 return false;
             }
             clickOnFound();
@@ -78,11 +75,10 @@ public abstract class AdminManagementPage extends Page {
         }
     }
 
-    public void find(String item){
+    public void find(String item) {
         List<WebElement> elements = findElements(By.linkText(item));
-        for(WebElement element : elements) {
-            if (element.findElements(By.tagName("del")).isEmpty())
-            {
+        for (WebElement element : elements) {
+            if (element.findElements(By.tagName("del")).isEmpty()) {
                 element.click();
                 break;
             }
@@ -99,16 +95,15 @@ public abstract class AdminManagementPage extends Page {
                 }
             }
             return false;
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public void findRetired(String item){
+    public void findRetired(String item) {
         List<WebElement> elements = findElements(By.linkText(item));
-        for(WebElement element : elements) {
-            if (!element.findElements(By.tagName("del")).isEmpty())
-            {
+        for (WebElement element : elements) {
+            if (!element.findElements(By.tagName("del")).isEmpty()) {
                 element.click();
                 break;
             }
@@ -116,12 +111,12 @@ public abstract class AdminManagementPage extends Page {
     }
 
 
-    public void retire() throws InterruptedException  {
+    public void retire() throws InterruptedException {
         clickOn(RETIRE);
     }
 
-    public void delete() throws InterruptedException  {
-    	clickOn(DELETE);
+    public void delete() throws InterruptedException {
+        clickOn(DELETE);
     }
 
     protected void fillInField(WebElement field, String text) {
@@ -138,9 +133,8 @@ public abstract class AdminManagementPage extends Page {
     }
 
     public void fillInDescription(String description) {
-        fillInField(findElement(DESCRIPTION),description);
+        fillInField(findElement(DESCRIPTION), description);
     }
-
 
 
 }

@@ -1,7 +1,5 @@
 package org.openmrs.reference;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.After;
 import org.junit.Before;
 import org.openmrs.reference.groups.BuildTests;
@@ -14,6 +12,8 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.ManageFormsPage;
 
 
+import static org.junit.Assert.assertNotNull;
+
 
 /**
  * Created by nata on 24.06.15.
@@ -23,7 +23,6 @@ public class AddFormTest extends  ReferenceApplicationTestBase {
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
     private AdministrationPage administrationPage;
-
 
     @Before
     public void setUp() throws Exception {
@@ -39,6 +38,7 @@ public class AddFormTest extends  ReferenceApplicationTestBase {
     	administrationPage.goToManageForms();
     	assertPage(administrationPage);
         if(!manageForm.addPresent()) {
+
             manageForm.delete();
         }
         manageForm.add();
@@ -54,6 +54,7 @@ public class AddFormTest extends  ReferenceApplicationTestBase {
         manageForm.deletePath();
 
     }
+
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();

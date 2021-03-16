@@ -2,7 +2,6 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -38,7 +37,7 @@ public class PatientCaptureVitalsPage extends Page {
             heightField.clear();
             heightField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -49,7 +48,7 @@ public class PatientCaptureVitalsPage extends Page {
             weightField.clear();
             weightField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[4]")).click();
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -60,7 +59,7 @@ public class PatientCaptureVitalsPage extends Page {
             temperatureField.clear();
             temperatureField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[5]")).click();
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -71,7 +70,7 @@ public class PatientCaptureVitalsPage extends Page {
             pulseField.clear();
             pulseField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[6]")).click();
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -82,7 +81,7 @@ public class PatientCaptureVitalsPage extends Page {
             respiratoryField.clear();
             respiratoryField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[7]")).click();
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -92,7 +91,7 @@ public class PatientCaptureVitalsPage extends Page {
         try {
             bloodPressureField1.clear();
             bloodPressureField1.sendKeys(value1);
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
 
@@ -101,7 +100,7 @@ public class PatientCaptureVitalsPage extends Page {
             bloodPressureField2.clear();
             bloodPressureField2.sendKeys(value2);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[8]")).click();
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -116,11 +115,12 @@ public class PatientCaptureVitalsPage extends Page {
 
         }
     }
+
     public void confirm() {
         try {
             WebElement confirmButton = findElement(CONFIRM_BUTTON);
             confirmButton.click();
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -132,7 +132,7 @@ public class PatientCaptureVitalsPage extends Page {
 
             findElementById("info-message").getText().contains("Entered Vitals");
             return true;
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -140,7 +140,7 @@ public class PatientCaptureVitalsPage extends Page {
     public void checkIfRightPatient() {
         WebElement confirmButton2 = findElement(CONFIRM_BUTTON_2);
         //WebDriverWait waiter = new WebDriverWait(driver, 30L);
-        if(confirmButton2 != null) {
+        if (confirmButton2 != null) {
             //waiter.until(ExpectedConditions.elementToBeClickable(CONFIRM_BUTTON_2));
             confirmButton2.click();
         }

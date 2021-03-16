@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -29,31 +29,31 @@ public class VisitTypeListPage extends AdminManagementPage {
         ADD = By.cssSelector("#content a[href=\"visitType.form\"]");
     }
 
-    public void waitForError(){
+    public void waitForError() {
         waitForElement(ERROR);
     }
 
-    public VisitTypePage addVisitType(){
+    public VisitTypePage addVisitType() {
         clickOn(ADD);
         return new VisitTypePage(this);
     }
 
-    public VisitTypePage goToVisitType(String name){
+    public VisitTypePage goToVisitType(String name) {
         findElement(By.linkText(name)).click();
         return new VisitTypePage(this);
     }
 
-    public List<String> getVisitTypeList(){
+    public List<String> getVisitTypeList() {
         List<String> visitTypeList = new ArrayList<String>();
-        for(WebElement webElement: findElements(VISIT_TYPE_LIST)){
+        for (WebElement webElement : findElements(VISIT_TYPE_LIST)) {
             visitTypeList.add(webElement.getText());
         }
         return visitTypeList;
     }
 
-    public List<String> getRetiredVisitTypeList(){
+    public List<String> getRetiredVisitTypeList() {
         List<String> retiredVisitTypeList = new ArrayList<String>();
-        for(WebElement webElement: findElements(RETIRED_VISIT_TYPE_LIST)){
+        for (WebElement webElement : findElements(RETIRED_VISIT_TYPE_LIST)) {
             retiredVisitTypeList.add(webElement.getText());
         }
         return retiredVisitTypeList;

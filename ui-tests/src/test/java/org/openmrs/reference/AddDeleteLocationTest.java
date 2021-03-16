@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -19,12 +19,9 @@ import org.openmrs.reference.page.ManageLocationsPage;
 import org.openmrs.uitestframework.test.RestClient;
 import org.openmrs.uitestframework.test.TestData;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 
 public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
@@ -32,7 +29,7 @@ public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
     private String locationTagUuid;
 
     @Before
-    public void createLocationTag(){
+    public void createLocationTag() {
         //locationTagUuid = createTestLocationTag();
     }
 
@@ -44,7 +41,7 @@ public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
         addEditLocationPage.save();
         assertThat(addEditLocationPage.getValidationErrors(), hasItem("This field is required."));
 
-        String locationName = "TEST"+TestData.randomSuffix();
+        String locationName = "TEST" + TestData.randomSuffix();
         addEditLocationPage.enterName(locationName);
         addEditLocationPage.selectFirstTag();
         ManageLocationsPage manageLocationsPage = addEditLocationPage.save();
@@ -56,7 +53,7 @@ public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
 
     @After
     public void delete() throws Exception {
-        RestClient.delete("/locationtag/"+locationTagUuid, true);
+        RestClient.delete("/locationtag/" + locationTagUuid, true);
     }
 
 }

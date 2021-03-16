@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -12,7 +12,7 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 
-public class ProviderPage extends Page{
+public class ProviderPage extends Page {
 
     private static final By IDENTIFIER_FIELD = By.cssSelector("#content input[name=\"identifier\"]");
     private static final By PERSON_FIELD = By.id("person_id_selection");
@@ -27,24 +27,24 @@ public class ProviderPage extends Page{
         super(parent);
     }
 
-    public void setIdentifier(String identifier){
+    public void setIdentifier(String identifier) {
         setTextToFieldNoEnter(IDENTIFIER_FIELD, identifier);
     }
 
-    public void setPerson(String person){
+    public void setPerson(String person) {
         findElement(PERSON_FIELD).sendKeys(person);
         waitForElement(FIRST_AUTOCOMPLETE_RESULT);
         clickOn(FIRST_AUTOCOMPLETE_RESULT);
     }
 
-    public ManageProviderPage clickOnSave(){
+    public ManageProviderPage clickOnSave() {
         clickOn(SAVE);
         ManageProviderPage manageProviderPage = new ManageProviderPage(this);
         manageProviderPage.waitForProviderToBeSaved();
         return manageProviderPage;
     }
 
-    public ManageProviderPage clickOnCancel(){
+    public ManageProviderPage clickOnCancel() {
         clickOn(CANCEL);
         return new ManageProviderPage(this);
     }

@@ -3,22 +3,21 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
 package org.openmrs.reference;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.uitestframework.test.TestData;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertThat;
 
 public class FindPatientRecordTest extends ReferenceApplicationTestBase {
 
@@ -31,7 +30,7 @@ public class FindPatientRecordTest extends ReferenceApplicationTestBase {
 
     @After
     public void deletePatient() throws Exception {
-        deletePatient(patient.uuid);
+        deletePatient(patient);
     }
 
     @Ignore

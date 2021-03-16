@@ -50,7 +50,7 @@
 		<metadatamappingVersion>1.4.0-SNAPSHOT</metadatamappingVersion>
 		<uicommonsVersion>2.17.0-SNAPSHOT</uicommonsVersion>
 		<appuiVersion>1.14.0-SNAPSHOT</appuiVersion>
-		<htmlformentryVersion>4.0.0-SNAPSHOT</htmlformentryVersion>
+		<htmlformentryVersion>4.0.1-SNAPSHOT</htmlformentryVersion>
 		<htmlformentryuiVersion>2.0.0-SNAPSHOT</htmlformentryuiVersion>
 		<coreappsVersion>1.32.0-SNAPSHOT</coreappsVersion>
 		<webservices.restVersion>2.30.0-SNAPSHOT</webservices.restVersion>
@@ -99,6 +99,28 @@
 				<artifactId>openmrs-api</artifactId>
 				<version>${openMRSVersion}</version>
 				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-databind</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-annotations</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.codehaus.jackson</groupId>
+						<artifactId>jackson-core-asl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.codehaus.jackson</groupId>
+						<artifactId>jackson-mapper-asl</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.api</groupId>
@@ -113,6 +135,28 @@
 				<version>${openMRSVersion}</version>
 				<classifier>tests</classifier>
 				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.codehaus.jackson</groupId>
+						<artifactId>jackson-core-asl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-databind</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.codehaus.jackson</groupId>
+						<artifactId>jackson-mapper-asl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-annotations</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.web</groupId>

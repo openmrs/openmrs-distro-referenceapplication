@@ -13,6 +13,7 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
+import org.openmrs.uitestframework.test.TestData;
 
 /**
  * Created by tomasz on 22.07.15.
@@ -34,7 +35,9 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
 
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.uuid);
+        TestData.PatientInfo p = new TestData.PatientInfo();
+        p.uuid = patient.uuid;
+        deletePatient(p);
         waitForPatientDeletion(patient.uuid);
     }
 
