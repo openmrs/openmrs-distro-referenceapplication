@@ -37,7 +37,7 @@ public class AddFormTest extends  ReferenceApplicationTestBase {
     public void addFormTest() throws Exception {
     	administrationPage.goToManageForms();
     	assertPage(administrationPage);
-        if(!manageForm.addPresent()) {
+        if (!manageForm.addPresent()) {
 
             manageForm.delete();
         }
