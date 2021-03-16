@@ -83,6 +83,7 @@ public class ManageFormsPage extends Page{
         DELETE_FORM_PATH = By.xpath(DELETE_FORM + id + REST_PATH + id + REST_PATH_2);
         clickOn(DELETE_FORM_PATH);
     }
+    
 //    Eye Form
     public void clickOnCalendarEyeReport(){ clickOn(CALENDAR_EYE_FORM);}
     public void selectYear (String year){ selectFrom(DATAPICKER_YEAR, year);}
