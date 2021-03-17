@@ -11,8 +11,8 @@
 package org.openmrs.reference;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -36,7 +36,6 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
     public void contactInfoTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -44,6 +43,7 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         patientDashboardPage.clickOnShowContact();
         RegistrationEditSectionPage registrationEditSectionPage = patientDashboardPage.clickOnEditContact();
+        
         registrationEditSectionPage.clearVillage();
         registrationEditSectionPage.enterVillage("Adidas Abbeba");
         registrationEditSectionPage.clearState();
@@ -56,10 +56,13 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("aaaaaaaaa");
         registrationEditSectionPage.clickOnConfirmEdit();
+        
         assertTrue(registrationEditSectionPage.getInvalidPhoneNumberNotification().contains("Must be a valid phone number (with +, -, numbers or parentheses)"));
+        
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
+        
         patientDashboardPage = registrationEditSectionPage.confirmPatient();
         homePage = patientDashboardPage.goToHomePage();
         activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -67,6 +70,7 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         patientDashboardPage.clickOnShowContact();
         assertTrue(patientDashboardPage.getTelephoneNumber().contains("111111111"));
+       
     }
 
     @After
