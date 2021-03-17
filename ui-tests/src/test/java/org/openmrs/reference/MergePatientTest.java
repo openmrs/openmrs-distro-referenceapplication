@@ -19,7 +19,6 @@ import org.openmrs.reference.page.DataManagementPage;
 import org.openmrs.reference.page.MergePatientsPage;
 import org.openmrs.reference.page.PatientVisitsDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -37,7 +36,6 @@ public class MergePatientTest extends ReferenceApplicationTestBase {
     @Test
     @Category(BuildTests.class)
     public void mergePatientByNameTest() throws Exception {
-
         DataManagementPage dataManagementPage = homePage.goToDataManagement();
         MergePatientsPage mergePatientsPage = dataManagementPage.goToMergePatient();
         mergePatientsPage.enterPatient1(testPatient.identifier);
@@ -45,11 +43,9 @@ public class MergePatientTest extends ReferenceApplicationTestBase {
         mergePatientsPage.clickOnContinue();
         mergePatientsPage.clickOnMergePatient();
         PatientVisitsDashboardPage dashboardPage = mergePatientsPage.clickOnContinue();
-
         assertThat(dashboardPage.getPatientFamilyName(), is(testPatient1.familyName));
     }
-
-
+    
     @After
     public void tearDown() throws Exception {
         deletePatient(testPatient);
