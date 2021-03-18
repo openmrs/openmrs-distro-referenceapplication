@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ManageFormsPage extends Page {
 
-    public static final By ADD = By.linkText("Add");
+    public final By ADD = By.linkText("Add");
     private static final By SAVE = By.cssSelector("input[type=\"submit\"]");
     private static final By EXTENSION_FORM_LABEL = By.id("extensionForm.label");
     private static final By EXTENSION_FORM_ICON = By.id("extensionForm.icon");

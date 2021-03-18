@@ -48,7 +48,7 @@ public class AddFormTest extends  ReferenceApplicationTestBase{
         manageForm.save();
         headerPage.clickOnHomeIcon();
         homePage.goToActiveVisitPatient();
-        assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
+        assertNotNull("Eye Report", manageForm.ADD);
         headerPage.clickOnHomeIcon();
 //        homePage.goToAdministration();
 //        administrationPage.clickOnManageForms();

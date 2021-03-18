@@ -35,7 +35,8 @@ public class EditFormTest extends TestBase {
     @Ignore//ignore due to moving forms functionality
     @Test
     public void EditFormTest() throws Exception {
-        homePage.goToManageForm();
+    	 homePage.goToAdministration();
+//        homePage.goToManageForm();
         if (!manageForm.addPresent()) {
             manageForm.delete();
         }
@@ -45,7 +46,8 @@ public class EditFormTest extends TestBase {
         manageForm.formIdFromUrl();
         manageForm.save();
         headerPage.clickOnHomeIcon();
-        homePage.goToManageForm();
+        homePage.goToAdministration();
+//        homePage.goToManageForm();
         manageForm.editPath();
         manageForm.addLabel("Eye Test");
         manageForm.save();
@@ -54,7 +56,8 @@ public class EditFormTest extends TestBase {
         assertNotNull("Eye Test", patientDashboardPage.FORM_EXIST);
 //        Delete Form
         headerPage.clickOnHomeIcon();
-        homePage.goToManageForm();
+        homePage.goToAdministration();
+//        homePage.goToManageForm();
         manageForm.deletePath();
         assertNotNull("Add", manageForm.ADD);
 

@@ -32,7 +32,8 @@ public class DeleteFormTest extends TestBase {
     @Ignore//ignore due to moving forms functionality
     @Test
     public void deleteFormTest() throws Exception {
-        homePage.goToManageForm();
+      homePage.goToAdministration();
+//    	homePage.goToManageForm();
         if (!manageForm.addPresent()) {
             manageForm.delete();
         }
@@ -42,7 +43,8 @@ public class DeleteFormTest extends TestBase {
         manageForm.formIdFromUrl();
         manageForm.save();
         headerPage.clickOnHomeIcon();
-        homePage.goToManageForm();
+        homePage.goToAdministration();
+//        homePage.goToManageForm();
         manageForm.deletePath();
         assertNotNull("Add", manageForm.ADD);
 

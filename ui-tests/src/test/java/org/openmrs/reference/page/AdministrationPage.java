@@ -23,7 +23,7 @@ public class AdministrationPage extends Page {
     private final static By MANAGE_VISIT_TYPES = By.cssSelector("#legacyui-manageVisitTypes a");
     private static final By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
     private static final By MANAGE_PERSONS = By.cssSelector("#content a[href=\"/openmrs/admin/person/index.htm\"]");
-    private static final By MANAGE_FORMS = By.cssSelector("#content a[href=\"/openmrs/admin/forms/form.list\"]");
+    private static final By MANAGE_FORMS = By.cssSelector("#content a[href=\'/openmrs/admin/forms/form.list\']");
 //	 private static final  MANAGE_FORMS ="/openmrs/admin/forms/form.list";
 
     public AdministrationPage(Page page) {
@@ -31,14 +31,14 @@ public class AdministrationPage extends Page {
     }
     
 
-    public ManageFormsPage goToManageForms() {
-        clickOn(MANAGE_FORMS);
-        return new ManageFormsPage((WebDriver) this);
-    }
-
     @Override
     public String getPageUrl() {
         return URL;
+    }
+
+    public ManageFormsPage goToManageForms() {
+        clickOn(MANAGE_FORMS);
+        return new ManageFormsPage((WebDriver) this);
     }
 
     public ManageUserPage clickOnManageUsers() {
