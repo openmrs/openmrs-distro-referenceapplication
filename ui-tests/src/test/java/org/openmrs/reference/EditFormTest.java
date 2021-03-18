@@ -32,7 +32,7 @@ public class EditFormTest extends TestBase {
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
-    @Ignore//ignore due to moving forms functionality
+//    @Ignore//ignore due to moving forms functionality
     @Test
     public void EditFormTest() throws Exception {
     	 homePage.goToAdministration();
