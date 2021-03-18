@@ -11,6 +11,8 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class AdministrationPage extends Page {
 
@@ -21,9 +23,17 @@ public class AdministrationPage extends Page {
     private final static By MANAGE_VISIT_TYPES = By.cssSelector("#legacyui-manageVisitTypes a");
     private static final By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
     private static final By MANAGE_PERSONS = By.cssSelector("#content a[href=\"/openmrs/admin/person/index.htm\"]");
+    private static final By MANAGE_FORMS = By.cssSelector("#content a[href=\"/openmrs/admin/forms/form.list\"]");
+//	 private static final  MANAGE_FORMS ="/openmrs/admin/forms/form.list";
 
     public AdministrationPage(Page page) {
         super(page);
+    }
+    
+
+    public ManageFormsPage goToManageForms() {
+        clickOn(MANAGE_FORMS);
+        return new ManageFormsPage((WebDriver) this);
     }
 
     @Override
@@ -55,4 +65,27 @@ public class AdministrationPage extends Page {
         findElement(MANAGE_PERSONS).click();
         return new ManagePersonPage(this);
     }
+
+	public AdministrationPage goToManageForm() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ManageFormsPage clickOnManageForms() {
+		findElement(MANAGE_FORMS).click();
+		return ManageFormsPage(this);
+//	    return null;
+
+		
+	}
+
+	private ManageFormsPage ManageFormsPage(AdministrationPage administrationPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private WebElement findElement(String manageForms) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

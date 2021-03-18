@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
@@ -16,7 +17,8 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by nata on 24.06.15.
  */
-public class AddFormTest extends TestBase {
+public class AddFormTest extends  ReferenceApplicationTestBase{
+	private AdministrationPage administrationPage;
     private HomePage homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
@@ -31,10 +33,11 @@ public class AddFormTest extends TestBase {
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
-    @Ignore //ignore due to moving forms functionality
+//    @Ignore //ignore due to moving forms functionality
     @Test
     public void addFormTest() throws Exception {
-        homePage.goToManageForm();
+    	 homePage.goToAdministration();
+//        homePage.goToManageForm();
         if (!manageForm.addPresent()) {
             manageForm.delete();
         }
@@ -47,7 +50,10 @@ public class AddFormTest extends TestBase {
         homePage.goToActiveVisitPatient();
         assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
         headerPage.clickOnHomeIcon();
-        homePage.goToManageForm();
+//        homePage.goToAdministration();
+//        administrationPage.clickOnManageForms();
+        
+//        homePage.goToManageForm();
         manageForm.deletePath();
 
     }

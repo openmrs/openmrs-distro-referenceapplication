@@ -35,7 +35,8 @@ public class ManageFormsPage extends Page {
         super(driver);
     }
 
-    public void add() {
+
+	public void add() {
         clickOn(ADD);
     }
 

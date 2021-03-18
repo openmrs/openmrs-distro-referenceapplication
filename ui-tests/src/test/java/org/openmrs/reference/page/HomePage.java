@@ -12,6 +12,7 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class HomePage extends Page {
 
@@ -24,12 +25,13 @@ public class HomePage extends Page {
     private static final String CAPTURE_VITALS_APP_ID = "referenceapplication-vitals-referenceapplication-vitals-extension";
     private static final String DATA_MANAGEMENT_APP_ID = "coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension";
     private static final By CONFIGURE_METADATA = By.id("org-openmrs-module-adminui-configuremetadata-homepageLink-org-openmrs-module-adminui-configuremetadata-homepageLink-extension");
-    private static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
+    private static final String MANAGE_FORM ="/openmrs/admin/forms/form.list";
+//    private static final By MANAGE_FORM = By.id("formentryapp-forms-homepageLink-formentryapp-forms-homepageLink-extension");
     private static final By SYSTEM_ADMINISTRATION = By.id("coreapps-systemadministration-homepageLink-coreapps-systemadministration-homepageLink-extension");
     private static final By FIND_PATIENT_RECORD = By.id("coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension");
     private static final By DATA_MANAGEMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
     private static final By APPOINTMENT_SCHEDULING = By.id("appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension");
-
+    private static final By ADVANCED_SYSTEM_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
     public HomePage(Page page) {
         super(page);
     }
@@ -101,14 +103,15 @@ public class HomePage extends Page {
         return new ActiveVisitsPage(this);
     }
 
-    public void goToManageForm() {
-        clickOn(By.id(CONFIGURE_METADATA_APP_ID));
-        clickOn(MANAGE_FORM);
-    }
+//    public void goToManageForm() {
+//        clickOn(MANAGE_FORM);
+//        return;
+////        clickOnLast(MANAGE_FORM);
+//    }
 
     public AdministrationPage goToAdministration() {
         clickOn(SYSTEM_ADMINISTRATION);
-        return new SystemAdministrationPage(this).goToAdvancedAdministration();
+        return new SystemAdministrationPage(this).goToAdvancedAdministration().goToManageForm();
     }
 
     public ConfigureMetadataPage goToConfigureMetadata() {
