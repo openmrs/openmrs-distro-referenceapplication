@@ -32,7 +32,6 @@ public class MergeVisitsTest extends LocationSensitiveApplicationTestBase {
     public void setUp() {
         patient = createTestPatient();
         new TestData.TestVisit(patient.uuid,"Facility Visit", getLocationUuid(homePage)).create();
-        
         new TestData.TestVisit(patient.uuid,TestData.getAVisitType(), getLocationUuid(homePage)).create();
        
     }
