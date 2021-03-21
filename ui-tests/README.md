@@ -1,4 +1,4 @@
-#UI Tests
+# UI Tests
 
 [Bamboo CI](https://ci.openmrs.org/browse/REFAPP-UI) (Chrome): ![Build Status](https://ci.openmrs.org/plugins/servlet/wittified/build-status/REFAPP-UI)
 
