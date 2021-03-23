@@ -34,7 +34,7 @@ public class ReferenceApplicationTestBase extends TestBase {
 	}
 
 	@Before
-	public void before() throws Exception {
+	public void before() {
 	    homePage = new HomePage(page);
 	}
 
