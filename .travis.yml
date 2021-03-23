@@ -25,9 +25,6 @@ before_cache:
  
 install: true
 
-before_script:
-  - cp -f ui-tests/src/test/resources/org/openmrs/uitestframework/test-travis-ci.properties ui-tests/src/test/resources/org/openmrs/uitestframework/test.properties
-
 script: travis_wait 60 ./travis_script.sh
 
 after_script: ./travis_after_script.sh
