@@ -9,12 +9,14 @@
  */
 package org.openmrs.reference;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HomePage;
 
 import static org.junit.Assert.assertTrue;
 
+@Ignore
 public class LoginTest extends ReferenceApplicationTestBase {
     private HomePage homePage;
 
