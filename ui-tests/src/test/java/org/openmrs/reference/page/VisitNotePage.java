@@ -26,7 +26,9 @@ public class VisitNotePage extends Page {
     private static final By NOTE = By.id("w10");
     private static final By PROVIDER = By.id("w1");
     private static final By LOCATION = By.id("w3");
-    private static final By DEL_DIAGNOSIS = By.xpath("//div[@id='display-encounter-diagnoses-container']/ul/li/span/i");
+    private static final By DEL_DIAGNOSIS = By.cssSelector("#delete-button");
+    private static final By EDIT_DIAGNOSIS = By.cssSelector("#edit-button");
+    private static final By DELETE_SECONDARY_DIAGNOSIS = By.cssSelector("#display-encounter-diagnoses-container > ul:nth-child(7) > li > span > i");
 
     public VisitNotePage(Page page) {
         super(page);
@@ -79,13 +81,18 @@ public class VisitNotePage extends Page {
     public void deleteDiagnosis() {
         clickOn(DEL_DIAGNOSIS);
     }
-
+    public void editDiagnosis() {
+        clickOn(EDIT_DIAGNOSIS);
+    }
+    public void deleteSecondaryDiagnosis() {
+        clickOn(DELETE_SECONDARY_DIAGNOSIS);
+    }
     public String primaryDiagnosis() {
         return findElement(PRIMARY_DIAGNOSIS_ELEMENT).getText().trim();
     }
 
     public String secondaryDiagnosis() {
-        return findElement(SECONDARY_DIAGNOSIS_ELEMENT).getText().trim();
+        return findElement(SECONDARY_DIAGNOSIS_ELEMENT).getText();
     }
 
     public ClinicianFacingPatientDashboardPage save() {
