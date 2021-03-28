@@ -56,8 +56,7 @@ public class EditFormTest extends TestBase {
     		     assertNotNull("Add", manageForm.ADD);
     		    }
     		 }
-
-    	}
+    	  }
 
     @After
     public void tearDown() throws Exception {
