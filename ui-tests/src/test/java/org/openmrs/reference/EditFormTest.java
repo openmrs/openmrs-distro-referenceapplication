@@ -35,30 +35,29 @@ public class EditFormTest extends TestBase {
     @Ignore//ignore due to moving forms functionality
     @Test
     public void EditFormTest() throws Exception {
-        homePage.goToManageForm();
-        if (!manageForm.addPresent()) {
-            manageForm.delete();
-        }
-        manageForm.add();
-        manageForm.addLabel("Eye Report");
-        manageForm.addIcon("icon-align-justify");
-        manageForm.formIdFromUrl();
-        manageForm.save();
-        headerPage.clickOnHomeIcon();
-        homePage.goToManageForm();
-        manageForm.editPath();
-        manageForm.addLabel("Eye Test");
-        manageForm.save();
-        headerPage.clickOnHomeIcon();
-        homePage.goToActiveVisitPatient();
-        assertNotNull("Eye Test", patientDashboardPage.FORM_EXIST);
-//        Delete Form
-        headerPage.clickOnHomeIcon();
-        homePage.goToManageForm();
-        manageForm.deletePath();
-        assertNotNull("Add", manageForm.ADD);
+    	 String Add = "containing add button";
+         if(!manageForm.containsText(Add)) {
+     		headerPage.clickOnHomeIcon();
+         	assertNotNull("Eye Report","patientDashboardPage.FORM_EXIST");
+    	}else {
+    		 if (!manageForm.addPresent()){
+    		     manageForm.delete();
+    		     manageForm.add();
+    		     manageForm.addLabel("Eye Report");
+    		     manageForm.addIcon("icon-align-justify");
+    		     manageForm.formIdFromUrl();
+    		     manageForm.save();
+    		     headerPage.clickOnHomeIcon();
+    		     homePage.goToActiveVisitPatient();
+    		     assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
+    		     headerPage.clickOnHomeIcon();
+    		     homePage.goToManageForm();
+    		     manageForm.deletePath();
+    		     assertNotNull("Add", manageForm.ADD);
+    		    }
+    		 }
 
-    }
+    	}
 
     @After
     public void tearDown() throws Exception {
