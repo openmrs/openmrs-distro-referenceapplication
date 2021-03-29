@@ -31,13 +31,17 @@ public class AddFormTest extends TestBase {
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
-    @Ignore //ignore due to moving forms functionality
     @Test
     public void addFormTest() throws Exception {
+    	String Add = "containing add button";
         homePage.goToManageForm();
-        if (!manageForm.addPresent()) {
-            manageForm.delete();
-        }
+        if(!manageForm.containsText(Add)){
+    		headerPage.clickOnHomeIcon();
+        	assertNotNull("Eye Report","patientDashboardPage.FORM_EXIST");
+        	
+  	}else {	
+  	 if(!manageForm.addPresent()){
+        manageForm.delete();
         manageForm.add();
         manageForm.addLabel("Eye Report");
         manageForm.addIcon("icon-align-justify");
@@ -49,9 +53,9 @@ public class AddFormTest extends TestBase {
         headerPage.clickOnHomeIcon();
         homePage.goToManageForm();
         manageForm.deletePath();
-
+  	 }
     }
-
+  }
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
