@@ -7,11 +7,11 @@ public class AttachmentsPage extends Page {
 	
 	private static final By ATTACH_FILE = By.cssSelector("#visit-documents-dropzone");
 	private static final By ADD_CAPTION = By.cssSelector("textarea.ng-pristine");
-	private static final By UPLOAD_FILE = By.cssSelector("button.confirm:nth-child(1)");
-	private static final By CLEAR_FORMS = By.cssSelector("button.ng-binding:nth-child(2)");
-	public static final By CAMERA_ICON = By.cssSelector(".left > i:nth-child(1)");
-	private static final By CAMERA_BUTTON = By.cssSelector("a.button:nth-child(1) > i:nth-child(1)");
-	public static final By SAVE_IMAGE = By.cssSelector("a.confirm:nth-child(3)");
+	private static final By UPLOAD_FILE = By.cssSelector("button[ng-click='uploadFile()']");
+	private static final By CLEAR_FORMS = By.cssSelector("button[ng-click='clearForms()']");
+	public static final By CAMERA_ICON = By.className("icon-camera");
+	private static final By CAMERA_BUTTON = By.cssSelector("button[ng-click='snap()']");
+	public static final By SAVE_IMAGE = By.cssSelector("button[ng-click='finalise()']");
 	
 	public AttachmentsPage(ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage) {
 		super(clinicianFacingPatientDashboardPage);
@@ -32,7 +32,7 @@ public class AttachmentsPage extends Page {
 	}
 
 	public void clickOnUploadFile() {
-		driver.findElement(UPLOAD_FILE).click();
+		clickOn(UPLOAD_FILE);
 	}
 
 	public void clickClearForms() {
