@@ -88,6 +88,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By CONDITIONS_LINK = By
             .cssSelector(".conditions .info-header i.right");
 
+	private static final By ATTACHMENTS_LINK = By.id("attachments.attachments.visitActions.default");
+	
     public ClinicianFacingPatientDashboardPage(Page page) {
         super(page);
     }
@@ -455,5 +457,9 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         clickOn(CONDITIONS_LINK);
         return new ConditionsPage(this);
     }
-
+	
+	public AttachmentsPage clickOnAttachmentsAppLink() {
+		clickOn(ATTACHMENTS_LINK);
+		return new AttachmentsPage(this);
+	}
 }
