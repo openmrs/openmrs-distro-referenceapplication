@@ -9,15 +9,13 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ManageFormsPage;
 import org.openmrs.uitestframework.test.TestBase;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 import static org.junit.Assert.assertNotNull;
 
 
 /**
  * Created by nata on 24.06.15.
  */
-public class AddFormTest extends TestBase {
+public class AddFormTest extends ReferenceApplicationTestBase {
     private static final String ADD = "add button config";
 	private HomePage homePage;
     private HeaderPage headerPage;
@@ -37,11 +35,11 @@ public class AddFormTest extends TestBase {
     public void addFormTest() throws Exception {
     	String Add= "add button present";
         homePage.goToManageForm();
-        if(!manageForm.containsText(Add)){
+        if(manageForm.containsText(Add)){
     		headerPage.clickOnHomeIcon();
         	assertNotNull("Eye Report","patientDashboardPage.FORM_EXIST");
-  	}else {	
-  	 if(!manageForm.addPresent()){
+ 	}else {	
+ 	 if(!manageForm.addPresent()){
         manageForm.delete();
         manageForm.add();
         manageForm.addLabel("Eye Report");
@@ -54,16 +52,13 @@ public class AddFormTest extends TestBase {
         headerPage.clickOnHomeIcon();
         homePage.goToManageForm();
         manageForm.deletePath();
-  	 }
+ 	 }
     }
-  }
+ }
   
-    
     @After
     public void tearDown() throws Exception {
-    	
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
-        driver.quit();
     }
 }

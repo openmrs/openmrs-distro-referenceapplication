@@ -53,13 +53,14 @@ public class ManageFormsPage extends Page {
         driver.findElement(EXTENSION_FORM_ICON).sendKeys(icon);
     }
 
-    public boolean addPresent() {
-        try {
-            return driver.findElement(ADD) != null;
-        } catch (Exception ex) {
-            return false;
-        }
-    }
+
+	public boolean addPresent() {
+	     try {
+	            return driver.findElement(ADD) != null;
+	       } catch (Exception ex) {
+	           return false;
+	        }
+	   }
 
     public void delete() {
         clickOn(DELETE);
@@ -119,6 +120,8 @@ public class ManageFormsPage extends Page {
     public String getPageUrl() {
         return "/formentryapp/forms/extension.page";
     }
+
+
 
 
 }
