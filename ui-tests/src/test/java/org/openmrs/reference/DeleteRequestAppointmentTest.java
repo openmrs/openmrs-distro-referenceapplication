@@ -12,7 +12,6 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -35,26 +34,22 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
     public void deleteRequestAppointmentTest() throws Exception {
-        ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
-        activeVisitsPage.search(patient.identifier);
-        ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
-        RequestAppointmentPage requestAppointmentPage = patientDashboardPage.clickOnRequest();
-        requestAppointmentPage.enterAppointmentType(SERVICE_NAME);
-        requestAppointmentPage.enterValue("0");
-        requestAppointmentPage.selectUnits("Day(s)");
-        patientDashboardPage = requestAppointmentPage.saveRequest();
-
-        List<String> appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
-        assertTrue(appointmentRequestsList.get(0).equals(SERVICE_NAME));
-
-        ManageAppointmentsPage manageAppointmentsPage = patientDashboardPage.goToManageAppointments();
-        manageAppointmentsPage.deleteRequest();
-        patientDashboardPage = manageAppointmentsPage.clickCancel();
-        appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
-        Assert.assertEquals(appointmentRequestsList.size(),0);
+    	  ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
+          activeVisitsPage.search(patient.identifier);
+          ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
+          RequestAppointmentPage requestAppointmentPage = patientDashboardPage.clickOnRequest();
+          requestAppointmentPage.enterAppointmentType(SERVICE_NAME);
+          requestAppointmentPage.enterValue("0");
+          requestAppointmentPage.selectUnits("Day(s)");
+          patientDashboardPage = requestAppointmentPage.saveRequest();
+          List<String> appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
+          assertTrue(appointmentRequestsList.get(0).equals(SERVICE_NAME));
+          ManageAppointmentsPage manageAppointmentsPage = patientDashboardPage.goToManageAppointments();
+          manageAppointmentsPage.deleteRequest();
+          patientDashboardPage = manageAppointmentsPage.clickCancel();
+          Assert.assertEquals(patientDashboardPage.getAppointmentRequestsList().size(),0);
     }
 
     @After

@@ -62,7 +62,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By LOCATION = By.id("w3");
     private static final By WHO_WHEN_WHERE = By.id("who-when-where");
     private static final By REQUEST_APPOINTMENT = By.linkText("Request Appointment");
-    private static final By APPOINTMENT_EDIT = By.xpath("/html/body/div[1]/div[3]/div[9]/div[1]/div/div[1]/div[7]/div[1]/a/i");
+    private static final By APPOINTMENT_EDIT = By.xpath("#content > div.dashboard.clear.row > div.col-12.col-lg-9 > div > div:nth-child(1) > div:nth-child(7) > div.info-header > a > i");
 
     private static final By ERROR = By.cssSelector("li.error > span");
     private static final By ADD_PAST_VISIT = By.id("org.openmrs.module.coreapps.createRetrospectiveVisit");
