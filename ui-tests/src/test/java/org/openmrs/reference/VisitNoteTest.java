@@ -59,8 +59,6 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
         patientVisitsDashboardPage = patientDashboardPage.goToRecentVisits();
         patientVisitsDashboardPage.deleteVisitNote();
        
-       
-        
     }
 
     @After
