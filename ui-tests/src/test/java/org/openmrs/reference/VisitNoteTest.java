@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
 
     private static final String DIAGNOSIS_PRIMARY = "CANCER";
-    private static final String DIAGNOSIS_SECONDARY = "MALARIA";
+    private static final String DIAGNOSIS_SECONDARY = "Malaria";
     private static final String DIAGNOSIS_SECONDARY_UPDATED = "Pneumonia";
 
     private PatientInfo patient;
@@ -51,23 +51,23 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
         patientDashboardPage = visitNotePage.save();
         assertEquals(DIAGNOSIS_PRIMARY, visitNotePage.primaryDiagnosis());
         assertEquals(DIAGNOSIS_SECONDARY, visitNotePage.secondaryDiagnosis());
-
+        
         PatientVisitsDashboardPage patientVisitsDashboardPage = patientDashboardPage.goToRecentVisits();
-
         EditVisitNotePage editVisitNotePage = patientVisitsDashboardPage.goToEditVisitNote();
-
-        editVisitNotePage.deleteDiagnosis();
+        editVisitNotePage.editDiagnosis();
+        editVisitNotePage.deleteSecondaryDiagnosis();
         editVisitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY_UPDATED);
-
         //TODO Edit function doesn't work int02
         patientDashboardPage = editVisitNotePage.save();
         assertEquals(DIAGNOSIS_SECONDARY_UPDATED, patientDashboardPage.secondaryDiagnosis());
+        
         patientVisitsDashboardPage = patientDashboardPage.goToRecentVisits();
-
-        //TODO Delete function doesn't work on int02
-        patientVisitsDashboardPage.deleteVisitNote();
+        patientVisitsDashboardPage.goToEditVisitNote();
         patientDashboardPage.confirmDeletion();
-        //Assert that visit note is not present on encounter list and its done
+        
+        
+
+       
     }
 
     @After
