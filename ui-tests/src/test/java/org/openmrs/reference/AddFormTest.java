@@ -32,25 +32,27 @@ public class AddFormTest extends ReferenceApplicationTestBase {
 
     @Test
     public void addFormTest() throws Exception {
-    	String Add = "add button present";
+//    	String Add = "add button present";
         homePage.goToManageForm();
-        if(!manageForm.containsText(Add)){
-    		headerPage.clickOnHomeIcon();
-        	assertNotNull("Eye Report","patientDashboardPage.FORM_EXIST");
- 	}else {	
+//       if(!manageForm.containsText(Add)) 
+       if(manageForm.equals(manageForm))
+       {
+    	   headerPage.clickOnHomeIcon();		
+    	   assertNotNull("Eye Report","patientDashboardPage.FORM_EXIST");
+ 	} else {	
  	 if(!manageForm.addPresent()){
-        manageForm.delete();
-        manageForm.add();
-        manageForm.addLabel("Eye Report");
-        manageForm.addIcon("icon-align-justify");
-        manageForm.formIdFromUrl();
-        manageForm.save();
-        headerPage.clickOnHomeIcon();
-        homePage.goToActiveVisitPatient();
-        assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
-        headerPage.clickOnHomeIcon();
-        homePage.goToManageForm();
-        manageForm.deletePath();
+       manageForm.delete();
+       manageForm.add();
+       manageForm.addLabel("Eye Report");
+       manageForm.addIcon("icon-align-justify");
+       manageForm.formIdFromUrl();
+       manageForm.save();
+       headerPage.clickOnHomeIcon();
+       homePage.goToActiveVisitPatient();
+       assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
+       headerPage.clickOnHomeIcon();
+       homePage.goToManageForm();
+       manageForm.deletePath();
  	 }
     }
  }
