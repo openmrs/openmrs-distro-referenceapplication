@@ -16,7 +16,6 @@ import static org.junit.Assert.assertNotNull;
  * Created by nata on 24.06.15.
  */
 public class AddFormTest extends ReferenceApplicationTestBase {
-    private static final String ADD = "add button config";
 	private HomePage homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
@@ -33,9 +32,9 @@ public class AddFormTest extends ReferenceApplicationTestBase {
 
     @Test
     public void addFormTest() throws Exception {
-    	String Add= "add button present";
+    	String Add = "add button present";
         homePage.goToManageForm();
-        if(manageForm.containsText(Add)){
+        if(!manageForm.containsText(Add)){
     		headerPage.clickOnHomeIcon();
         	assertNotNull("Eye Report","patientDashboardPage.FORM_EXIST");
  	}else {	
