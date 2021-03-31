@@ -11,7 +11,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -36,7 +35,6 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
     public void XSSOnPhoneNumberFieldTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -46,16 +44,15 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
         RegistrationEditSectionPage registrationEditSectionPage = patientDashboardPage.clickOnEditContact();
         registrationEditSectionPage.clickOnPhoneNumberEdit();
         registrationEditSectionPage.clearPhoneNumber();
-        registrationEditSectionPage.enterPhoneNumber("<script>alert(0)</script>");
+		registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
         assertThat(registrationEditSectionPage.getValidationErrors(), is(not(empty())));
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
         patientDashboardPage = registrationEditSectionPage.confirmPatient();
-        //Ignored as show contact may hide under success message
-        //patientDashboardPage.clickOnShowContact();
-        //assertThat(patientDashboardPage.getTelephoneNumber(), is("111111111"));
+		patientDashboardPage.clickOnShowContact();
+		assertThat(patientDashboardPage.getTelephoneNumber(), is("111111111"));
     }
 
     @After
