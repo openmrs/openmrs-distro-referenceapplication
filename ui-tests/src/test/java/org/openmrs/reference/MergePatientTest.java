@@ -28,11 +28,10 @@ public class MergePatientTest extends ReferenceApplicationTestBase {
 
     @Before
     public void setUp() throws Exception {
-
         testPatient = createTestPatient();
         testPatient1 = createTestPatient();
     }
-
+    
     @Test
     @Category(BuildTests.class)
     public void mergePatientByNameTest() throws Exception {
