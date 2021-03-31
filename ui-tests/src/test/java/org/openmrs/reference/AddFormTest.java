@@ -31,7 +31,7 @@ public class AddFormTest extends TestBase {
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
-    @Ignore //ignore due to moving forms functionality
+//    @Ignore //ignore due to moving forms functionality
     @Test
     public void addFormTest() throws Exception {
         homePage.goToManageForm();
@@ -44,7 +44,7 @@ public class AddFormTest extends TestBase {
         manageForm.formIdFromUrl();
         manageForm.save();
         headerPage.clickOnHomeIcon();
-        homePage.goToActiveVisitPatient();
+//        homePage.goToActiveVisitPatient();
         assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
         headerPage.clickOnHomeIcon();
         homePage.goToManageForm();
