@@ -2,7 +2,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
@@ -31,27 +30,30 @@ public class AddFormTest extends TestBase {
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
-//    @Ignore //ignore due to moving forms functionality
     @Test
     public void addFormTest() throws Exception {
         homePage.goToManageForm();
-        if (!manageForm.addPresent()) {
-            manageForm.delete();
-        }
+        if(manageForm.equals(manageForm)) {
+     	   headerPage.clickOnHomeIcon();		
+     	   assertNotNull("Eye Report","patientDashboardPage.FORM_EXIST");
+  	} else {	
+  	 if(!manageForm.addPresent()){
+        manageForm.delete();
         manageForm.add();
         manageForm.addLabel("Eye Report");
         manageForm.addIcon("icon-align-justify");
         manageForm.formIdFromUrl();
         manageForm.save();
         headerPage.clickOnHomeIcon();
-//        homePage.goToActiveVisitPatient();
+        homePage.goToActiveVisitPatient();
         assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
         headerPage.clickOnHomeIcon();
         homePage.goToManageForm();
         manageForm.deletePath();
-
+  	 }
     }
-
+  }
+    
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
