@@ -53,7 +53,6 @@ public class AddFormTest extends TestBase {
   	 }
     }
   }
-    
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
