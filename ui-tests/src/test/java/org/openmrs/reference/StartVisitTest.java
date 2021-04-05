@@ -29,7 +29,8 @@ public class StartVisitTest extends LocationSensitiveApplicationTestBase {
     public void setUp() throws Exception {
         patient = createTestPatient();
     }
-
+	
+	//This test should pass with bamboo ci
     @Test
     @Category(BuildTests.class)
     public void startVisitTest() {
