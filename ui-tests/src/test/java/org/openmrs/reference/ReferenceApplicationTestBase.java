@@ -27,6 +27,7 @@ import org.openqa.selenium.By;
 public class ReferenceApplicationTestBase extends TestBase {
 
 	private static final By SELECTED_LOCATION = By.id("selected-location");
+	
 	protected HomePage homePage;
 
 	public ReferenceApplicationTestBase() {

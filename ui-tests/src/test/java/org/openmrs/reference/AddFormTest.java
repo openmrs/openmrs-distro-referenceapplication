@@ -53,7 +53,9 @@ public class AddFormTest extends ReferenceApplicationTestBase {
   }
     @After
     public void tearDown() throws Exception {
+    	if(headerPage != null) {
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
+    	}
     }
 }
