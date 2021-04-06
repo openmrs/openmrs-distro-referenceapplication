@@ -7,15 +7,13 @@ import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ManageFormsPage;
-import org.openmrs.uitestframework.test.TestBase;
-
 import static org.junit.Assert.assertNotNull;
 
 
 /**
  * Created by nata on 24.06.15.
  */
-public class AddFormTest extends TestBase {
+public class AddFormTest extends ReferenceApplicationTestBase {
     private HomePage homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
@@ -37,7 +35,7 @@ public class AddFormTest extends TestBase {
      	   headerPage.clickOnHomeIcon();		
      	   assertNotNull("Eye Report","patientDashboardPage.FORM_EXIST");
   	} else {	
-  	 if(!manageForm.addPresent()){
+  	 if(manageForm.addPresent()){
         manageForm.delete();
         manageForm.add();
         manageForm.addLabel("Eye Report");
@@ -46,7 +44,7 @@ public class AddFormTest extends TestBase {
         manageForm.save();
         headerPage.clickOnHomeIcon();
         homePage.goToActiveVisitPatient();
-        assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
+        assertNotNull("Eye Report","patientDashboardPage.FORM_EXIST");
         headerPage.clickOnHomeIcon();
         homePage.goToManageForm();
         manageForm.deletePath();
