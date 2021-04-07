@@ -163,7 +163,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     }
 
     public TransferToWardServicePage goToTransferToWardServicePage() {
-        clickOn(EXIT_FROM_INPATIENT);
+		clickOn(TRANSFER_TO_WARD_SERVICE);
         return new TransferToWardServicePage(this);
     }
 

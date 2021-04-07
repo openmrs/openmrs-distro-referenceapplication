@@ -11,7 +11,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
@@ -31,17 +30,16 @@ public class TransferToWardServiceTest extends ReferenceApplicationTestBase {
     public void createTestData() throws Exception {
         testPatient = createTestPatient();
         String visitType = TestData.getAVisitType();
-        String visit = new TestData.TestVisit(testPatient.uuid, visitType, getLocationUuid(homePage)).create();
+        new TestData.TestVisit(testPatient.uuid, visitType, getLocationUuid(homePage)).create();
     }
 
-    @Ignore("TODO fix, inpatient_ward doesn't exisit on the page, fix workflow")
     @Test
     public void transferToWardServiceTest() throws Exception {
 
         ClinicianFacingPatientDashboardPage patientDashboardPage = homePage.goToActiveVisitPatient();
 
-        patientDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);
-        patientDashboardPage.waitForPage();
+		patientDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);
+		patientDashboardPage.waitForPage();
 
         patientDashboardPage.goToTransferToWardServicePage().confirm(ISOLATION_WARD);
         patientDashboardPage.waitForPage();
