@@ -39,7 +39,7 @@ public class EyeReportTest extends TestBase {
         patientDashboardPage.clickOnEyeForm();
         manageFormsPage.clickOnCalendarEyeReport();
         manageFormsPage.selectYear("1999");
-        manageFormsPage.selectMoth("12");
+        manageFormsPage.selectMonth("12");
         manageFormsPage.selectDay("3");
         manageFormsPage.selectWho("Super, User");
         manageFormsPage.selectWhere("Inpatient Ward");

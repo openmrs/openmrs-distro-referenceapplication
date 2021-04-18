@@ -22,7 +22,7 @@ public class ManageFormsPage extends Page {
     private static String REST_PATH_2 = "'\"]";
     private static By CALENDAR_EYE_FORM = By.id("w1-display");
     private static By DATAPICKER_YEAR = By.className("ui-datepicker-year");
-    private static By DATAPICKER_MONTH = By.className("ui-datepicker-moth");
+    private static By DATAPICKER_MONTH = By.className("ui-datepicker-month");
     private static By DATAPICKER_DAY = By.className("ui-state-default");
     private static By WHERE_EYE_REPORT = By.id("w5");
     private static By WHO_EYE_REPORT = By.name("w3");
@@ -90,7 +90,7 @@ public class ManageFormsPage extends Page {
         selectFrom(DATAPICKER_YEAR, year);
     }
 
-    public void selectMoth(String month) {
+    public void selectMonth(String month) {
         selectFrom(DATAPICKER_MONTH, month);
     }
 
