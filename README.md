@@ -64,8 +64,8 @@ registrationapp --> isanteplus
   - **Mpi - Client/Background Threads:** `true`
   - **Mpi - Client/Endpoint Format:** `fhir`
   - **Mpi - Client/Security Auth Type:** `basic`
-  - **Mpi - Client/Msg Sending Application:** `isanteplus`
-  - **Mpi - Client/Security Authtoken:** `<your basicauth password>`  
+  - **Mpi - Client/Msg Sending Application:** `<openhim client name>`
+  - **Mpi - Client/Security Authtoken:** `<openhim client basic auth password>`  
   - **Mpi - Client/Pid Local:** `<your domain or ip>/ws/fhir2/pid/openmrsid/`
   - **Mpi - Client/Pid Export Identitifer Type:** `Patient ID=iSantePlus ID`
   - **Registrationcore/Mpi Implementation:** `registrationcore.mpi.implementation.Fhir`
@@ -73,8 +73,8 @@ registrationapp --> isanteplus
   - **Xdssender/Mpi Endpoint:** `http://sedish-haiti.org:5001/fhir`
   - **Xdssender/Openmrs Password:** `<openmrs login password>`
   - **Xdssender/Openmrs Username:** `<openmrs username>`
-  - **Xdssender/Oshr Password:** `<basic auth password>`
-  - **Xdssender/Oshr Username:** `<basic auth password>`
+  - **Xdssender/Oshr Password:** `<openhim client basic auth password>`
+  - **Xdssender/Oshr Username:** `<openhim client name>`
   - **Xdssender/Shr Type:** `fhir`
   
 
