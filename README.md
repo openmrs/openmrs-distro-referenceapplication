@@ -57,6 +57,7 @@ registrationapp --> isanteplus
        <Fingers AccessPointInfo=""><Finger POS="3" SOURCE="LEFT" FORMAT="ISO">Rk1SACAyMAAAAADkAAABZQGIAMUAxQEACAAAIUCKAKzpZECMAJ99ZEBxAOK2NUBsAPE1NUA8AIqZZED0AOzJZEDxAPpIZIBWASdEZED5ASbRXUCKAA52ZEBBAWJTXYCmALxjZECWAJNxZECdAHtsZEBOAKujZID6ALfSZEBgAR3FZEBBAGiTZEC5ATrPV0CXAU7TZEAnADAQB0EjADvUZECZAMxsZECAAOTkNUDIAJVZZEBNANizZEAuAOK1ZIAlAM2qUICLAD91ZIEYALxTXUD/ATVQXUA6ACAHSUEqACxSUAAA</Finger><Finger POS="8" SOURCE="RIGHT" FORMAT="ISO">Rk1SACAyMAAAAADqAAABZQGIAMUAxQEAAwAAIkCOAK1uUEB/AI/qZEBiANc3V0DoANZIZEBBAMG0ZEBXAQLHZIBMAQ5EZECOATLUZED3ARZRUEDHAVFZZEDwAWVcZEAdABF7PICdAJ9kZEB+AIGBZEC7AHNeZIDuAJLTZEBAAJOmZEDvAQPRUEC2ASpNXUAiAM22UEAwAFGTZEA4AUtSZEEPABbWXYB4ANHDL0CIAHZyZEDqAMnIZECMAFxwZECyARvNXUEKAJxSZIDAASvVXUAsAHKdZEB3AB55XUEsADBRUEEoABxZQwAA</Finger></Fingers>
     ```
   - **M 2 Sys - Biometrics/National - Service Url:** `<national fingerprint url>`
+  
   - **Mpi - Client/Endpoint Pdq Addr:** `http://sedish-haiti.org:5001/fhir`
   - **Mpi - Client/Endpoint Pix Addr:** `http://sedish-haiti.org:5001`
   - **Mpi - Client/Msg Sending Facility:** `name of your instance's facility`
@@ -68,7 +69,9 @@ registrationapp --> isanteplus
   - **Mpi - Client/Security Authtoken:** `<openhim client basic auth password>`  
   - **Mpi - Client/Pid Local:** `<your domain or ip>/ws/fhir2/pid/openmrsid/`
   - **Mpi - Client/Pid Export Identitifer Type:** `Patient ID=iSantePlus ID`
+  
   - **Registrationcore/Mpi Implementation:** `registrationcore.mpi.implementation.Fhir`
+  
   - **Xdssender/Export Ccd Endpoint:** `http://sedish-haiti.org:5001/SHR/fhir`
   - **Xdssender/Mpi Endpoint:** `http://sedish-haiti.org:5001/fhir`
   - **Xdssender/Openmrs Password:** `<openmrs login password>`
