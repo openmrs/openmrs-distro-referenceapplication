@@ -9,14 +9,12 @@
  */
 package org.openmrs.reference;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.page.HomePage;
 
 import static org.junit.Assert.assertTrue;
 
-@Ignore
 public class LoginTest extends ReferenceApplicationTestBase {
     private HomePage homePage;
 
@@ -24,7 +22,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
     @Category(org.openmrs.reference.groups.BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
         homePage = new HomePage(page);
-        assertPage(homePage);
+        assertPage(page);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
@@ -39,7 +37,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
     public void verifyClerkModulesAvailableOnHomePage() throws Exception {
         goToLoginPage().loginAsClerk();
         homePage = new HomePage(page);
-        assertPage(homePage);
+        assertPage(page);
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
@@ -49,7 +47,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
     public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
         goToLoginPage().loginAsDoctor();
         homePage = new HomePage(page);
-        assertPage(homePage);
+        assertPage(page);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
@@ -59,7 +57,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
     public void verifyNurseModulesAvailableOnHomePage() throws Exception {
         goToLoginPage().loginAsNurse();
         homePage = new HomePage(page);
-        assertPage(homePage);
+        assertPage(page);
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
@@ -70,7 +68,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
     public void verifySysadminModulesAvailableOnHomePage() throws Exception {
         goToLoginPage().loginAsSysadmin();
         homePage = new HomePage(page);
-        assertPage(homePage);
+        assertPage(page);
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
     }
