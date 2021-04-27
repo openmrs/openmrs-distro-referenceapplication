@@ -48,7 +48,7 @@ public class EditFormTest extends TestBase {
 //            HtmlFormsPage newHtmlForms = new HtmlFormsPage(manageHtmlFormsPage);
 //            newHtmlForms.CreateNewFormTest(name, description, version);
 //        }
-        homePage.go();
+//        homePage.go();
 
         homePage.goToManageForm();
         if (!manageForm.addPresent()) {
