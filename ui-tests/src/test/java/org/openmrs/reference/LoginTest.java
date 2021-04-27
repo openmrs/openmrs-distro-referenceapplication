@@ -11,6 +11,7 @@ package org.openmrs.reference;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.HomePage;
 
 import static org.junit.Assert.assertTrue;
@@ -19,7 +20,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
     private HomePage homePage;
 
     @Test
-    @Category(org.openmrs.reference.groups.BuildTests.class)
+    @Category(BuildTests.class)
     public void verifyModulesAvailableOnHomePage() throws Exception {
         homePage = new HomePage(page);
         assertTrue(homePage.isFindAPatientAppPresent());
