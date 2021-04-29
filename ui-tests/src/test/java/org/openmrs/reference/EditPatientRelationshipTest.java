@@ -6,10 +6,13 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.*;
+import org.openmrs.uitestframework.test.RestClient;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
 
 public class EditPatientRelationshipTest  extends ReferenceApplicationTestBase {
+    private static String name = "patients";
     private HomePage homePage;
     private ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage;
     private RegistrationSummaryPage registrationSummaryPage;
@@ -29,19 +32,25 @@ public class EditPatientRelationshipTest  extends ReferenceApplicationTestBase {
         @Test
         @Category(BuildTests.class)
         public void editPatientRelationshipTest() throws Exception {
+
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage = findPatientPage.clickOnFirstPatient();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         clinicianFacingPatientDashboardPage.goToRegistrationSummary();
-            RegistrationSummaryPage registrationSummary = new RegistrationSummaryPage(page);
-            registrationSummary.goToEditPatientRelationship();
-            assertPage(editPatientRelationshipPage);
+
+        RegistrationSummaryPage registrationSummary = new RegistrationSummaryPage(page);
+        registrationSummary.goToEditPatientRelationship();
+        EditPatientRelationshipPage editPatientRelationshipPage = new EditPatientRelationshipPage(registrationSummaryPage);
+        editPatientRelationshipPage.clickOnSelectRelationshipType();
 
         }
+
     @After
     public void tearDown() throws Exception {
-
+        if (headerPage != null) {
+            headerPage.clickOnHomeIcon();
+            headerPage.logOut();
+        }
     }
-    }
+}
 
 
