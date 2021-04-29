@@ -80,6 +80,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
     private static final By RECENT_VISITS = By.cssSelector("visitbyencountertype > ul > li:nth-child(1) > a");
     private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
+    private static final By EDIT_REGISTRATION_INFORMATION = By.id("application.registrationapp.summary.editPatientLink");
 
     private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
 
@@ -201,6 +202,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     public PatientCaptureVitalsPage goToPatientCaptureVitalsPage() {
         clickOnLast(PATIENT_CAPTURE_VITALS);
         return new PatientCaptureVitalsPage(this);
+    }
+
+    public RegistrationSummaryPage goToRegistrationSummary(){
+        clickOn(EDIT_REGISTRATION_INFORMATION);
+        return  new RegistrationSummaryPage(this);
     }
 
     public void enterDiagnosis(String diag) {

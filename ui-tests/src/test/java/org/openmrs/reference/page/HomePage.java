@@ -141,4 +141,7 @@ public class HomePage extends Page {
         return "/index.htm";
     }
 
+//    public ClinicianFacingPatientDashboardPage goToRegistrationSummary() {
+//        return goToRegistrationSummary();
+//    }
 }
