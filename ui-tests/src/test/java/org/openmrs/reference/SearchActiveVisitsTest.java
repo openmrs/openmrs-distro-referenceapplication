@@ -11,7 +11,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ActiveVisitsPage;
@@ -31,7 +31,7 @@ public class SearchActiveVisitsTest extends ReferenceApplicationTestBase {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
 
-    @Ignore
+    @Test
     @Category(BuildTests.class)
     public void searchActiveVisitsByPatientNameOrIdOrLastSeenTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
