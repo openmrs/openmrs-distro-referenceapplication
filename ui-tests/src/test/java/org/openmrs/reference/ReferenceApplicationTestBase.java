@@ -39,7 +39,7 @@ public class ReferenceApplicationTestBase extends TestBase {
 	}
 
 	public String getLocationUuid(Page page){
-		return page.findElement(SELECTED_LOCATION).getAttribute("location-uuid");
+		return driver.findElement(SELECTED_LOCATION).getAttribute("location-uuid");
 	}
 
 	@Override
