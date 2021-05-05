@@ -34,6 +34,7 @@ public class SearchActiveVisitsTest extends ReferenceApplicationTestBase {
     @Test
     @Category(BuildTests.class)
     public void searchActiveVisitsByPatientNameOrIdOrLastSeenTest() throws Exception {
+        // checking travis failure
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
 
