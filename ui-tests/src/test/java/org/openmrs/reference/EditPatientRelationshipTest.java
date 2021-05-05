@@ -41,6 +41,7 @@ public class EditPatientRelationshipTest  extends ReferenceApplicationTestBase {
         registrationSummary.goToEditPatientRelationship();
         EditPatientRelationshipPage editPatientRelationshipPage = new EditPatientRelationshipPage(registrationSummaryPage);
         editPatientRelationshipPage.clickOnSelectRelationshipType();
+        editPatientRelationshipPage.getPageUrl();
 
         }
 
