@@ -1,5 +1,8 @@
 package org.openmrs.reference;
 
+import liquibase.pro.packaged.W;
+import org.aspectj.bridge.ISourceLocation;
+import org.aspectj.weaver.bcel.Utility;
 import org.junit.Before;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ReferenceApplicationLoginPage;
@@ -7,6 +10,15 @@ import org.openmrs.uitestframework.page.LoginPage;
 import org.openmrs.uitestframework.page.Page;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
+<<<<<<< HEAD
+=======
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+>>>>>>> 578e892... RATEST-155T
 /**
  * Each test class should extend ReferenceApplicationTestBase.
  *
@@ -38,7 +50,11 @@ public class ReferenceApplicationTestBase extends TestBase {
 	}
 
 	public String getLocationUuid(Page page){
+<<<<<<< HEAD
 		return driver.findElement(SELECTED_LOCATION).getAttribute("location-uuid");
+=======
+		return page.findElement(SELECTED_LOCATION).getAttribute(String.valueOf(SELECTED_LOCATION));
+>>>>>>> 578e892... RATEST-155T
 	}
 
 	@Override
@@ -46,4 +62,33 @@ public class ReferenceApplicationTestBase extends TestBase {
 		return new ReferenceApplicationLoginPage(driver);
 	}
 
+<<<<<<< HEAD
+=======
+	public static  void waitVisibilityOfElementLocated(WebDriver driver, String SELECTOR_LOCATION){
+		String key = "";
+		WebElement element = null;
+		try{
+			key = Utility.beautifyLocation((ISourceLocation) SELECTED_LOCATION);
+		} catch (Exception e){
+			System.out.println("Exception in get method," + e.getMessage());
+		}
+		if (key.endsWith("id")){
+			WebDriverWait wait = new WebDriverWait(driver, 60);
+			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("selected-locator")));
+
+		} else if (key.endsWith("cssSelector")){
+			WebDriverWait wait = new WebDriverWait(driver,60);
+		    element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("selected-locator")));
+
+		} else if (key.endsWith("linkText")) {
+			WebDriverWait wait = new WebDriverWait(driver, 60);
+			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("selected-locator")));
+
+		} else if (key.endsWith("xpath")) {
+			WebDriverWait wait = new WebDriverWait(driver, 60);
+			element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("selected-locator")));
+		}
+
+	}
+>>>>>>> 578e892... RATEST-155T
 }

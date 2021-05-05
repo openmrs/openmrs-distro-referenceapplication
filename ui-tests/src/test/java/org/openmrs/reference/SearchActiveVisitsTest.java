@@ -13,7 +13,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.uitestframework.test.TestData;
 
@@ -32,7 +31,11 @@ public class SearchActiveVisitsTest extends ReferenceApplicationTestBase {
     }
 
     @Test
+<<<<<<< HEAD
     @Category(BuildTests.class)
+=======
+    @Category(org.openmrs.reference.groups.BuildTests.class)
+>>>>>>> 578e892... RATEST-155T
     public void searchActiveVisitsByPatientNameOrIdOrLastSeenTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
