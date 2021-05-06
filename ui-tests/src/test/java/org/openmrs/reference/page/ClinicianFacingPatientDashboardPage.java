@@ -80,7 +80,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
     private static final By RECENT_VISITS = By.cssSelector("visitbyencountertype > ul > li:nth-child(1) > a");
     private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
-
+    private static final By EDIT_REGISTRATION_INFORMATION = By.id("application.registrationapp.summary.editPatientLink");
     private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
 
     private static final By ALLERGIES_LINK = By.id("allergyui-editAllergies");
@@ -206,6 +206,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     public void enterDiagnosis(String diag) {
         setTextToFieldNoEnter(DIAGNOSIS_SEARCH, diag);
         clickOn(CODE);
+    }
+
+    public RegistrationSummaryPage goToRegistrationSummary(){
+        clickOn(EDIT_REGISTRATION_INFORMATION);
+        return  new RegistrationSummaryPage(this);
     }
 
     public void addDiagnosis(String diag) {
