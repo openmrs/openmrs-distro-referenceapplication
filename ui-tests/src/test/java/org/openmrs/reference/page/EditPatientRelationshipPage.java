@@ -24,7 +24,6 @@ public class EditPatientRelationshipPage  extends Page {
         clickOn(NEXT_BUTTON);
         clickOn(CONFIRM_BUTTON);
 
-
     }
 
     @Override

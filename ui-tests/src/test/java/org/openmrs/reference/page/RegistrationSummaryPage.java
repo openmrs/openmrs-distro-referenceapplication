@@ -8,7 +8,8 @@ public class RegistrationSummaryPage extends Page {
     private static final By DEMOGRAPHICS = By.id("demographics-edit-link");
     private  static final By CONTACT_INFO = By.id("contactInfo-edit-link");
 
-    // TODO Create other corresponding pages like Demographics, and contact info, or resuse them via clinicianFacingPatientDashboard
+    // TODO Create other corresponding pages like Demographics,
+    //  and contact info, or resuse them via clinicianFacingPatientDashboard
     public RegistrationSummaryPage(Page parent) {
         super(parent);
     }
