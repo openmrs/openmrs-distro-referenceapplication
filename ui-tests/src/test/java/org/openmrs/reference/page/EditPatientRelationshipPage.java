@@ -5,26 +5,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 public class EditPatientRelationshipPage  extends Page {
-
+    
     private  HomePage homePage;
+    private static String name = "john";
     private  static  final By SELECT_RELATIONSHIP_TYPE = By.id("relationship_type");
-    private static final By NAME = By.cssSelector("button, input");
+    private static final By PERSON_NAME = By.cssSelector("#relationship > p:nth-child(2) > input.person-typeahead.ng-pristine.ng-valid.ng-empty.ng-touched");
     private static final By NEXT_BUTTON = By.id("next-button");
-    private static final By CONFIRM_BUTTON = By.id("registration-submit");
+    private static final By CONFIRM_BUTTON = By.id("registration-submit");   
 
-    public EditPatientRelationshipPage(RegistrationSummaryPage parent) {
+    
+    public EditPatientRelationshipPage(Page parent) {
         super(parent);
     }
 
     public void clickOnSelectRelationshipType() throws InterruptedException{
         clickOn(SELECT_RELATIONSHIP_TYPE);
-        // Create object of the select class
         Select relationshipType = new Select(driver.findElement(By.id("relationship_type")));
-        //We need to loop through such that the driver can always use another relationship type
         relationshipType.selectByVisibleText("Doctor");
+        setTextToFieldNoEnter(PERSON_NAME, name);
         clickOn(NEXT_BUTTON);
         clickOn(CONFIRM_BUTTON);
-
     }
 
     @Override
@@ -32,5 +32,3 @@ public class EditPatientRelationshipPage  extends Page {
         return "/registrationapp/editSection.page";
     }
 }
-
-
