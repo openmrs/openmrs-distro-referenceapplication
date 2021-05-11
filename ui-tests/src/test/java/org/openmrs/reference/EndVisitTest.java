@@ -33,6 +33,7 @@ public class EndVisitTest extends LocationSensitiveApplicationTestBase {
     }
 
     @Test
+    @Ignore
     @Category(BuildTests.class)
     public void EndVisitTest() throws Exception {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();

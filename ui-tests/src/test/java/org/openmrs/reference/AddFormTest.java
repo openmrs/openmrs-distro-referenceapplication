@@ -31,6 +31,7 @@ public class AddFormTest extends TestBase {
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
     }
 
+    @Ignore //ignore due to moving forms functionality
     @Test
     public void addFormTest() throws Exception {
         homePage.goToManageForm();
