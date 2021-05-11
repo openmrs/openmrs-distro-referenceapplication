@@ -4,7 +4,6 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
-  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,7 +27,13 @@ jobs:
       - name: Checkout distro/uitests
         uses: actions/checkout@master
         with:
-          repository: openmrs/openmrs-distro-referenceapplication
+          repository: ${{github.repository}}
+      - name: run db and web containers
+        run: |
+          cd docker
+          docker-compose -f docker-compose-refqa.yml up -d
+      - name: wait for openmrs instance to start
+        run: while ! nc -z localhost 8080 </dev/null; do sleep 1; done
       - name: Build distro/uitests
         run: |
           cd ui-tests
