@@ -12,6 +12,7 @@ package org.openmrs.reference;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -41,7 +42,7 @@ public class DeleteVisitTypeTest extends ReferenceApplicationTestBase {
         visitTypeUuid = new TestData.TestVisitType(visitTypeName, visitTypeDesc).create();
     }
 
-    @Test
+    @Ignore
     @Category(BuildTests.class)
     public void deleteVisitTypeTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
