@@ -1,0 +1,45 @@
+version: '2.1'
+
+services:
+  openmrs-referenceapplication-mysql:
+    restart: "always"
+    image: mysql:5.7
+    command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
+    environment:
+      MYSQL_DATABASE: openmrs
+      MYSQL_ROOT_PASSWORD: Admin123
+      MYSQL_USER: openmrs
+      MYSQL_PASSWORD: Admin123
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: "exit 0"
+    volumes:
+      - openmrs-referenceapplication-mysql-data:/var/lib/mysql
+
+  openmrs-referenceapplication:
+    restart: "always"
+    image: openmrs/openmrs-reference-application-distro:qa
+    depends_on:
+      - openmrs-referenceapplication-mysql
+    ports:
+      - "8080:8080"
+    environment:
+      DB_DATABASE: openmrs
+      DB_HOST: openmrs-referenceapplication-mysql
+      DB_USERNAME: openmrs
+      DB_PASSWORD: Admin123
+      DB_CREATE_TABLES: 'true'
+      DB_AUTO_UPDATE: 'true'
+      MODULE_WEB_ADMIN: 'true'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs/"]
+      timeout: 20s
+    volumes:
+      - openmrs-referenceapplication-data:/usr/local/tomcat/.OpenMRS/
+      - /usr/local/tomcat/.OpenMRS/modules/
+      - /usr/local/tomcat/.OpenMRS/owa/
+
+volumes:
+  openmrs-referenceapplication-mysql-data:
+  openmrs-referenceapplication-data:
