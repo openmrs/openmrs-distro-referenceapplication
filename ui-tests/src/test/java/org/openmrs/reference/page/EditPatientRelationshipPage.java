@@ -20,6 +20,7 @@ public class EditPatientRelationshipPage  extends Page {
         clickOn(SELECT_RELATIONSHIP_TYPE);
         // Create object of the select class
         Select relationshipType = new Select(driver.findElement(By.id("relationship_type")));
+        //We need to loop through such that the driver can always use another relationship type
         relationshipType.selectByVisibleText("Doctor");
         clickOn(NEXT_BUTTON);
         clickOn(CONFIRM_BUTTON);
