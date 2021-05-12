@@ -30,13 +30,12 @@ jobs:
         with:
           repository: ${{github.repository}}
       - name: run db and web containers
-        run: |
-          cd docker
-          docker-compose -f docker-compose-refqa.yml up -d
+        run:
+          docker-compose -f docker/docker-compose-refqa.yml up -d
       - name: wait for openmrs instance to start
         run: while ! nc -z localhost 8080 </dev/null; do sleep 1; done
       - name: Build distro/uitests
         run: |
           cd ui-tests
-          cp -f src/test/resources/org/openmrs/uitestframework/test-ci.properties src/test/resources/org/openmrs/uitestframework/test.properties
+          cp -f src/test/resources/org/openmrs/uitestframework/test-firefox.properties src/test/resources/org/openmrs/uitestframework/test.properties
           mvn clean install -B -DskipTests=false
