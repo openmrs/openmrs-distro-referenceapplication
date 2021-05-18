@@ -34,7 +34,6 @@ public class ManagePersonPage extends Page {
     }
 
     public PersonFormPage clickFirstFoundPerson() {
-        waiter.until(ExpectedConditions.stalenessOf(findElement(FIRST_FOUND_PERSON)));
         clickOn(FIRST_FOUND_PERSON);
         return new PersonFormPage(this);
     }
