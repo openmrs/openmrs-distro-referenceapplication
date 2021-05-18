@@ -13,6 +13,8 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.reference.page.RegistrationEditSectionPage;
@@ -34,6 +36,7 @@ public class EditDemographicTest extends ReferenceApplicationTestBase {
     }
 
     @Test
+    @Category(BuildTests.class)
     public void editDemographicTest() throws Exception {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(testPatient.identifier);
