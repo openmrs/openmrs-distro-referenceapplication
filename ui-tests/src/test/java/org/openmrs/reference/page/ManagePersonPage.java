@@ -11,6 +11,7 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ManagePersonPage extends Page {
 
@@ -29,11 +30,11 @@ public class ManagePersonPage extends Page {
     }
 
     public void setPersonName(String personName) {
-        findElement(PERSON_NAME_FIELD).clear();
         findElement(PERSON_NAME_FIELD).sendKeys(personName);
     }
 
     public PersonFormPage clickFirstFoundPerson() {
+        waiter.until(ExpectedConditions.stalenessOf(findElement(FIRST_FOUND_PERSON)));
         clickOn(FIRST_FOUND_PERSON);
         return new PersonFormPage(this);
     }
