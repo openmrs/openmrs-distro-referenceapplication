@@ -34,7 +34,7 @@ jobs:
           cd docker
           docker-compose -f docker-compose-refqa.yml up -d
       - name: wait for openmrs instance to start
-        run: until curl -I localhost:8080/openmrs/login.htm 2>&1 | grep -w "200\|301" > /dev/null 2>&1; do :; done
+        run: until curl -I localhost:8080/openmrs/login.htm 2>&1 | grep -w "200" > /dev/null 2>&1; do :; done
       - name: Build distro/uitests
         run: |
           cd ui-tests
