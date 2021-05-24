@@ -11,7 +11,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
@@ -31,7 +31,7 @@ public class DeletePersonTest extends ReferenceApplicationTestBase {
         personUuid = TestData.createPerson(personInfo);
     }
 
-    @Ignore
+    @Test
     @Category(BuildTests.class)
     public void deletePersonTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
