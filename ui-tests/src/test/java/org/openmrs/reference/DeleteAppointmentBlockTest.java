@@ -12,10 +12,12 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
+@Ignore
 public class DeleteAppointmentBlockTest extends ManageProviderSchedulesTest {
 
     int firstAppointmentIndex = 0;

@@ -34,12 +34,12 @@ public class ReferenceApplicationTestBase extends TestBase {
 	}
 
 	@Before
-	public void before() throws Exception {
+	public void before() {
 	    homePage = new HomePage(page);
 	}
 
 	public String getLocationUuid(Page page){
-		return page.findElement(SELECTED_LOCATION).getAttribute("location-uuid");
+		return driver.findElement(SELECTED_LOCATION).getAttribute("location-uuid");
 	}
 
 	@Override
