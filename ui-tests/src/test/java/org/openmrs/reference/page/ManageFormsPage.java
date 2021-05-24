@@ -117,7 +117,7 @@ public class ManageFormsPage extends Page {
 
     @Override
     public String getPageUrl() {
-        return "/formentryapp/forms/extension.page";
+        return "/openmrs/formentryapp/forms.page";
     }
 
 
