@@ -10,9 +10,7 @@
 
 package org.openmrs.reference;
 
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import org.openmrs.reference.groups.BuildTests;
+import org.junit.Ignore;
 import org.openmrs.reference.page.*;
 
 import java.util.List;
@@ -22,9 +20,8 @@ import static org.junit.Assert.assertTrue;
 
 public class AddUserTest extends ReferenceApplicationTestBase {
 
-    @Test
-    @Category(BuildTests.class)
-    public void addUserTest() {
+    @Ignore
+    public void addUserTest() throws Exception {
         SystemAdministrationPage systemAdministrationPage = homePage.goToSystemAdministrationPage();
         AdministrationPage administrationPage = systemAdministrationPage.goToAdvancedAdministration();
         ManageUserPage manageUserPage = administrationPage.clickOnManageUsers();
