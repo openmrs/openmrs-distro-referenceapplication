@@ -34,7 +34,7 @@ public class SearchActiveVisitsTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void searchActiveVisitsByPatientNameOrIdOrLastSeenTest() throws Exception {
+    public void searchActiveVisitsByPatientNameOrIdOrLastSeenTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
 
