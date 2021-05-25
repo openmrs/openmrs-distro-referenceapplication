@@ -30,8 +30,7 @@ public class SearchActiveVisitsTest extends ReferenceApplicationTestBase {
         patient = createTestPatient();
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
-
+    
     @Test
     @Category(BuildTests.class)
     public void searchActiveVisitsByPatientNameOrIdOrLastSeenTest() {
