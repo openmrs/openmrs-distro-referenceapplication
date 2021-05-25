@@ -11,7 +11,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -36,9 +35,9 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
         createTestVisit();
     }
 
-    @Ignore
+    @Test
     @Category(BuildTests.class)
-    public void AddDiagnosisToVisitNoteTest() {
+    public void addDiagnosisToVisitNoteTest() {
 
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
