@@ -42,7 +42,7 @@ public class EditAllergyTest extends ReferenceApplicationTestBase {
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
 
-        AllergyPage allergyPage = patientDashboardPage.clickOnAllergyManagement();
+        AllergyPage allergyPage = patientDashboardPage.clickOnAllergiesWidgetLink();
         createTestAllergy(allergyPage);
 
         AddOrEditAllergyPage addOrEditAllergyPage = allergyPage.clickOnEditAllergy();
