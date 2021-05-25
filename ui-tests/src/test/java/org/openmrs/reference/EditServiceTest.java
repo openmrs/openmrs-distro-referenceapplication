@@ -11,7 +11,9 @@ package org.openmrs.reference;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AppointmentSchedulingPage;
 import org.openmrs.reference.page.ManageServiceTypesPage;
 import org.openmrs.reference.page.ServicePage;
@@ -32,8 +34,9 @@ public class EditServiceTest extends ReferenceApplicationTestBase {
         description = RandomStringUtils.randomAlphabetic(10);
     }
 
-    @Ignore
-    public void editServiceTest() throws InterruptedException {
+    @Test
+    @Category(BuildTests.class)
+    public void editServiceTest() {
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
         ManageServiceTypesPage manageServiceTypesPage = appointmentSchedulingPage.goToManageServices();
         ServicePage servicePage = manageServiceTypesPage.clickOnNewServiceType();
