@@ -2,7 +2,9 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.reference.page.PatientVisitsDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
@@ -22,8 +24,9 @@ public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
         testPatient = createTestPatient();
     }
 
-    @Ignore
-    public void admitExitInpatientTest() throws Exception {
+    @Test
+    @Category(BuildTests.class)
+    public void admitExitInpatientTest() {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(testPatient.identifier);
         PatientVisitsDashboardPage patientVisitsDashboardPage = findPatientPage.clickOnFirstPatient().startVisit();
