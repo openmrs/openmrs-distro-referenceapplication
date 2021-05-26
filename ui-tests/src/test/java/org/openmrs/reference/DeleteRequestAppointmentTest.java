@@ -50,7 +50,7 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
         ManageAppointmentsPage manageAppointmentsPage = patientDashboardPage.goToManageAppointments();
         manageAppointmentsPage.deleteRequest();
         patientDashboardPage = manageAppointmentsPage.clickCancel();
-        manageAppointmentsPage=patientDashboardPage.goToManageAppointments();
+        manageAppointmentsPage = patientDashboardPage.goToManageAppointments();
         assertTrue(manageAppointmentsPage.containsText("No appointment requests"));
     }
 
