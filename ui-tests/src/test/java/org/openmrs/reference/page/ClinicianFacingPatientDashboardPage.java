@@ -30,7 +30,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By START_VISIT = By.id("org.openmrs.module.coreapps.createVisit");
     private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
     private static final By STARTED_AT = By.className("active-visit-started-at-message");
-    private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
+    private static final By VISIT_NOTE = By.linkText("Visit Note");
     private static final By PATIENT_CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
     private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
     private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
@@ -73,7 +73,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By DAY = By.xpath("//table[@class=' table-condensed']/tbody/tr[1]/td[0]");
     private static final By MERGE_VISIT_BUTTON = By.xpath("//a[@id='org.openmrs.module.coreapps.mergeVisits']/li");
     private static final By MERGE = By.id("mergeVisitsBtn");
-    private static final By ADD_ALLERGY = By.id("allergyui-editAllergies");
     private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
 
     private static final By EYE_REPORT = By.linkText("Eye Report");
@@ -286,11 +285,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     //Find Patient Id
     public String findPatientId() {
         return findElement(PATIENT_ID).getText();
-    }
-
-    public AllergyPage clickOnAllergyManagement() {
-        clickOn(ADD_ALLERGY);
-        return new AllergyPage(this);
     }
 
     public void clickOnEyeForm() {

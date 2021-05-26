@@ -41,7 +41,7 @@ public class AddNewAllergyTest extends ReferenceApplicationTestBase {
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
 
-        AllergyPage allergyPage = patientDashboardPage.clickOnAllergyManagement();
+        AllergyPage allergyPage = patientDashboardPage.clickOnAllergiesWidgetLink();
 
         AddOrEditAllergyPage addOrEditAllergyPage = allergyPage.clickOnAddNewAllergy();
         addOrEditAllergyPage.enterDrug(DRUG_NAME);
