@@ -31,7 +31,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
     private static final By STARTED_AT = By.className("active-visit-started-at-message");
     private static final By VISIT_NOTE = By.linkText("Visit Note");
-    private static final By PATIENT_CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
+    private static final By PATIENT_CAPTURE_VITALS = By.linkText("Capture Vitals");
     private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
     private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
     private static final By VISIT_LINK_2 = By.className("visit-link");
