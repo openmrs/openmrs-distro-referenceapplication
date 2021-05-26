@@ -62,7 +62,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By LOCATION = By.id("w3");
     private static final By WHO_WHEN_WHERE = By.id("who-when-where");
     private static final By REQUEST_APPOINTMENT = By.linkText("Request Appointment");
-    private static final By APPOINTMENT_EDIT = By.cssSelector("div.info-section:nth-child(4) > div > a:nth-child(3)");
+    private static final By APPOINTMENT_LINK = By.cssSelector("a.right > i");
 
     private static final By ERROR = By.cssSelector("li.error > span");
     private static final By ADD_PAST_VISIT = By.id("org.openmrs.module.coreapps.createRetrospectiveVisit");
@@ -123,7 +123,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     }
 
     public ManageAppointmentsPage goToManageAppointments() {
-        clickOn(APPOINTMENT_EDIT);
+        clickOn(APPOINTMENT_LINK);
         return new ManageAppointmentsPage(this);
     }
 
