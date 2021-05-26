@@ -45,6 +45,7 @@ public class VisitTypeListPage extends AdminManagementPage {
 
     public List<String> getVisitTypeList() {
         List<String> visitTypeList = new ArrayList<String>();
+        driver.navigate().refresh();
         for (WebElement webElement : findElements(VISIT_TYPE_LIST)) {
             visitTypeList.add(webElement.getText());
         }
