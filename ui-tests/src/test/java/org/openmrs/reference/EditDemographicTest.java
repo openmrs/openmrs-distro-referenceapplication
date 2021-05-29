@@ -12,7 +12,6 @@ package org.openmrs.reference;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -24,7 +23,6 @@ import org.openmrs.uitestframework.test.TestData;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-@Ignore
 public class EditDemographicTest extends ReferenceApplicationTestBase {
 
     private TestData.PatientInfo testPatient;
