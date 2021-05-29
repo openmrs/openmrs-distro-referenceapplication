@@ -12,6 +12,7 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class VisitTypeListPage extends AdminManagementPage {
 
     public List<String> getVisitTypeList() {
         List<String> visitTypeList = new ArrayList<String>();
-        driver.navigate().refresh();
+        waiter.until(ExpectedConditions.visibilityOfElementLocated(VISIT_TYPE_LIST));
         for (WebElement webElement : findElements(VISIT_TYPE_LIST)) {
             visitTypeList.add(webElement.getText());
         }
