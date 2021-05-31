@@ -18,7 +18,7 @@ import java.util.List;
 
 public class PatientVisitsDashboardPage extends Page {
     private static final By CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
-    private static final By VISIT_LIST = By.cssSelector("#visits-list li.menu-item.viewVisitDetails span.menu-date");
+    private static final By VISIT_LIST = By.cssSelector("#visits-list li span.menu-date");
     private static final By END_VISIT = By.cssSelector("#visit-details div.visit-actions.active-visit a:nth-child(1)");
     private static final By END_VISIT_DIALOG = By.id("end-visit-dialog");
     private static final By END_VISIT_CONFIRM = By.cssSelector("#end-visit-dialog button[class='confirm right']");
