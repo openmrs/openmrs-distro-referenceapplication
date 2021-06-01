@@ -39,7 +39,7 @@ public class ManageProviderSchedulesTest extends ReferenceApplicationTestBase {
 	@Before
 	public void setUp() throws Exception {
 		homePage = new HomePage(page);
-		assertPage(homePage);
+		assertPage(homePage.waitForPage());
 		AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
 		appointmentBlocksPage = appointmentSchedulingPage.goToAppointmentBlock();
 		/*
