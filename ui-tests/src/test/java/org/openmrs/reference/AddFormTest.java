@@ -66,7 +66,6 @@ public class AddFormTest extends TestBase {
 	headerPage.clickOnHomeIcon();
 	homePage.goToManageForm();
 	manageForm.deletePath();
-
 	}
 	@After
 	public void tearDown() throws Exception {
