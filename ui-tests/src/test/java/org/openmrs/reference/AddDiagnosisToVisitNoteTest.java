@@ -27,6 +27,7 @@ import static org.junit.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTestBase {
+    
     private TestData.PatientInfo patient;
 
     @Before
