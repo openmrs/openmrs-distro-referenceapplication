@@ -65,7 +65,6 @@ public class RegistrationEditSectionPage extends Page {
         return "/registrationapp/editSection.page";
     }
 
-
     public void clearPhoneNumber() {
         findElement(PHONE_NUMBER).clear();
     }
