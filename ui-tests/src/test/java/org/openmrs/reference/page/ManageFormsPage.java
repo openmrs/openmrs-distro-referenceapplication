@@ -81,6 +81,7 @@ public class ManageFormsPage extends Page {
         clickOn(DELETE_FORM_PATH);
     }
 
+    //    Eye Form
     public void clickOnCalendarEyeReport() {
         clickOn(CALENDAR_EYE_FORM);
     }
@@ -113,9 +114,11 @@ public class ManageFormsPage extends Page {
         clickOn(CURRENT_DAY);
     }
 
+
     @Override
     public String getPageUrl() {
-        return "/formentryapp/forms.page";
+        return "/formentryapp/forms/extension.page";
     }
+
 
 }
