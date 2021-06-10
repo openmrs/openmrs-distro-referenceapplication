@@ -12,6 +12,7 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends Page {
 
@@ -29,6 +30,7 @@ public class HomePage extends Page {
     private static final By FIND_PATIENT_RECORD = By.id("coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension");
     private static final By DATA_MANAGEMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
     private static final By APPOINTMENT_SCHEDULING = By.id("appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension");
+    private static final By LOGGED_IN_USER = By.xpath("//*[@id='navbarSupportedContent']/ul/li[1]");
 
     public HomePage(Page page) {
         super(page);
@@ -43,7 +45,8 @@ public class HomePage extends Page {
     }
 
     public String getLoggedUsername() {
-        return findElement(By.cssSelector(".identifier")).getText();
+    	  waiter.until(ExpectedConditions.visibilityOfElementLocated(LOGGED_IN_USER));
+        return findElement(LOGGED_IN_USER).getText();
     }
 
     public int numberOfAppsPresent() {
