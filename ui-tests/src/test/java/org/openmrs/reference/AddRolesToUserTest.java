@@ -1,7 +1,9 @@
 package org.openmrs.reference;
 
 import org.junit.After;
-import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.ManageUserPage;
 
@@ -15,7 +17,6 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
     private static final String NURSE_PASSWORD = "Nurse321";
     private static final String NURSE_USERNAME = "newNurse" + new Random().nextInt(1024);
 
-
     private void reLoginAsUser() throws InterruptedException {
         goToLoginPage().login(NURSE_USERNAME, NURSE_PASSWORD);
     }
@@ -24,13 +25,13 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
         goToLoginPage().loginAsAdmin();
     }
 
-    @Ignore
-//    @Category(org.openmrs.reference.groups.BuildTests.class)
+    @Test
+    @Category(BuildTests.class)
     public void addRolesToUserTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageUserPage manageUserPage = administrationPage.clickOnManageUsers();
 
-        Map<String, Integer> roleModules = new HashMap();
+        Map<String, Integer> roleModules = new HashMap<String,  Integer>();
 
         fillInRoleModules(roleModules);
         if (!manageUserPage.userExists(NURSE_USERNAME)) {
@@ -44,7 +45,7 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
             reLoginAsUser();
             if (homePage.numberOfAppsPresent() != role.getValue()) {
                 throw new AssertionError("role " + role + " doesn't have matching number of accessible applications: should be:" + role.getValue() + "is:" + homePage.numberOfAppsPresent());
-            }
+            } 
 
             reLoginAsAdmin();
             oldRole = role.getKey();
@@ -57,7 +58,7 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
         roleModules.put("roleStrings.Anonymous", 0);
         roleModules.put("roleStrings.Authenticated", 0);
         roleModules.put("roleStrings.Organizational:SystemAdministrator", 2);
-        roleModules.put("roleStrings.SystemDeveloper", 10);
+        roleModules.put("roleStrings.SystemDeveloper", 9);
         roleModules.put("roleStrings.Application:AdministersSystem", 1);
         roleModules.put("roleStrings.Organizational:Doctor", 3);
         roleModules.put("roleStrings.Organizational:Nurse", 4);
