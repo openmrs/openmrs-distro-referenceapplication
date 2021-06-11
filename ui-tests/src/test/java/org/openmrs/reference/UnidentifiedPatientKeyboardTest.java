@@ -4,8 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
@@ -30,7 +31,7 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
         homePage = new HomePage(page);
         registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
-        assertPage(homePage);
+        assertPage(homePage.waitForPage());
     }
 
     @After
@@ -40,19 +41,22 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
         deletePatient(p);
         waitForPatientDeletion(patient.uuid);
     }
-
-    // Test for RA-472,
-    @Ignore//ignored due to inability to check unindentified patient by keyboard
+    
     @Test
-    public void registerUnidentifiedPatient() throws InterruptedException {
+    @Category(BuildTests.class)
+    public void unidentifiedPatientKeyboardTest() throws InterruptedException {
         homePage.goToRegisterPatientApp();
         patient = PatientGenerator.generateTestPatient();
+        registrationPage.enterUnidentifiedPatient(patient);
 
         assertTrue(registrationPage.getNameInConfirmationPage().contains("--"));
         assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
+        patientDashboardPage = registrationPage.confirmPatient();
+        patientDashboardPage.waitForPage();
+        
         patient.uuid = patientDashboardPage.getPatientUuidFromUrl();
-        assertPage(patientDashboardPage);	// remember just-registered patient id, so it can be removed.
+        assertPage(patientDashboardPage.waitForPage());	// remember just-registered patient id, so it can be removed.
         assertTrue(driver.getPageSource().contains("UNKNOWN UNKNOWN"));
     }
 }
