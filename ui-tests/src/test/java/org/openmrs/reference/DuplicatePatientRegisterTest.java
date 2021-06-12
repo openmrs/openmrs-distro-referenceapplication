@@ -29,7 +29,6 @@ import java.util.Date;
 
 import static org.junit.Assert.assertThat;
 
-
 public class DuplicatePatientRegisterTest  extends ReferenceApplicationTestBase {
     private TestPatient patient;
 
@@ -56,7 +55,6 @@ public class DuplicatePatientRegisterTest  extends ReferenceApplicationTestBase 
         String name = registrationPage.getSimilarPatientName();
         assertThat(name, Matchers.is(patient.givenName + " " + patient.familyName));
 
-
         final String OLD_FORMAT = "d.MMM.yyyy";
         final String NEW_FORMAT = "dd.MMM.yyyy";
 
@@ -68,12 +66,9 @@ public class DuplicatePatientRegisterTest  extends ReferenceApplicationTestBase 
         sdf.applyPattern(NEW_FORMAT);
         newBirthDate = sdf.format(date);
 
-
         String info = registrationPage.getSimilarPatientInfo();
         assertThat(info, Matchers.is(patient.gender + ", " + newBirthDate + ", " + patient.address1 + " " + patient.address2 + " " + patient.city + patient.state + patient.country + patient.postalCode ));
     }
-
-
 
     @After
     public void tearDown() throws Exception {
@@ -82,5 +77,4 @@ public class DuplicatePatientRegisterTest  extends ReferenceApplicationTestBase 
         deletePatient(p);
         waitForPatientDeletion(patient.uuid);
     }
-
 }
