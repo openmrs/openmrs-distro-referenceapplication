@@ -36,15 +36,15 @@ public class FindPatientByNameTest extends ReferenceApplicationTestBase {
         findPatientPage = homePage.goToFindPatientRecord();
         // Search by name
         findPatientPage.enterPatient(patient.givenName);
-        findPatientPage.waitForPage();
+        findPatientPage.waitForPageToLoad();
         assertThat(findPatientPage.getFirstPatientName(), containsString(patient.givenName));
 
         findPatientPage.enterPatient(patient.middleName);
-        findPatientPage.waitForPage();
+        findPatientPage.waitForPageToLoad();
         assertThat(findPatientPage.getFirstPatientName(), containsString(patient.middleName));
 
         findPatientPage.enterPatient(patient.familyName);
-        findPatientPage.waitForPage();
+        findPatientPage.waitForPageToLoad();
         assertThat(findPatientPage.getFirstPatientName(), containsString(patient.familyName));
     }
 
