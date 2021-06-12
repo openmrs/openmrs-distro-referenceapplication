@@ -13,7 +13,6 @@ package org.openmrs.reference;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -39,13 +38,13 @@ public class DuplicatePatientRegisterTest  extends ReferenceApplicationTestBase 
         patient = PatientGenerator.generateTestPatient();
     }
 
-    // Test for RA-714
-    @Ignore
+    @Test
     @Category(BuildTests.class)
-    public void duplicateRegisterTest() throws InterruptedException, ParseException {
+    public void duplicatePatientRegisterTest() throws InterruptedException, ParseException {
         RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
         registrationPage.enterPatient(patient);
         ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
+        dashboardPage.waitForPage();
 
         patient.uuid = dashboardPage.getPatientUuidFromUrl();
 
