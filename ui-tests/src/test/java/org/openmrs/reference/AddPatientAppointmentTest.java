@@ -12,7 +12,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -34,13 +33,12 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
     public void addPatientAppointmentTest() throws Exception {
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
         ManageProviderSchedulesPage manageProviderSchedulesPage = appointmentSchedulingPage.goToManageProviderSchedules();
         manageProviderSchedulesPage.selectLocation(getLocationName());
-        manageProviderSchedulesPage.clickOnCurrentDay();
+        manageProviderSchedulesPage.clickOnNextWeekday();
         manageProviderSchedulesPage.selectLocationBlock(getLocationName());
         manageProviderSchedulesPage.enterService(SERVICE_NAME);
         manageProviderSchedulesPage.clickOnEndTimeButton();

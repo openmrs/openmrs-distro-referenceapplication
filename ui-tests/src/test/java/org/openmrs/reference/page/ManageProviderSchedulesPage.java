@@ -15,6 +15,8 @@ import org.openqa.selenium.By;
 public class ManageProviderSchedulesPage extends Page {
 
     public static final By CURRENT_DAY = By.className("fc-state-highlight");
+    public static final By NEXT_WORK_DAY = By.xpath("/html/body/div/div[3]/div[2]/div[1]/div[2]/div/div/div/table/tbody/tr[1]/td[3]");
+    private static final By NEXT_MONTH = By.xpath("//*[@id=\"calendar\"]/table/tbody/tr/td[3]/span[4]/span");
     private static final By LOCATION = By.className("ng-pristine");
     private static final By LOCATION_IN_BLOCK = By.xpath("//div[@id='select-location']/select");
     private static final By SERVICE_DROPDOWN = By.cssSelector("a.ng-scope.ng-binding");
@@ -31,6 +33,11 @@ public class ManageProviderSchedulesPage extends Page {
         selectFrom(LOCATION, location);
         clickOn(LOCATION);
     }
+    public void clickOnNextWeekday() {
+   	 clickOn(NEXT_MONTH);
+   	 clickOn(NEXT_WORK_DAY);
+   	
+   }
 
     public void clickOnCurrentDay() throws InterruptedException {
         clickOn(CURRENT_DAY);
