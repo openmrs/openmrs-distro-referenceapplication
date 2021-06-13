@@ -2,6 +2,9 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.ManageUserPage;
 
@@ -24,8 +27,8 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
         goToLoginPage().loginAsAdmin();
     }
 
-    @Ignore
-//    @Category(org.openmrs.reference.groups.BuildTests.class)
+    @Test
+    @Category(BuildTests.class)
     public void addRolesToUserTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageUserPage manageUserPage = administrationPage.clickOnManageUsers();
