@@ -24,7 +24,6 @@ public class FindPatientByNameTest extends ReferenceApplicationTestBase {
     private FindPatientPage findPatientPage;
     private TestData.PatientInfo patient;
 
-
     @Before
     public void setUp() throws Exception {
         patient = createTestPatient();
@@ -53,5 +52,4 @@ public class FindPatientByNameTest extends ReferenceApplicationTestBase {
         deletePatient(patient);
         waitForPatientDeletion(patient.uuid);
     }
-
 }
