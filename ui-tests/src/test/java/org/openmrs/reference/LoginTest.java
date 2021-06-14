@@ -17,6 +17,7 @@ import org.openmrs.reference.page.HomePage;
 import static org.junit.Assert.assertTrue;
 
 public class LoginTest extends ReferenceApplicationTestBase {
+    
     private HomePage homePage;
 
     public void initiateHomePage() {
@@ -47,7 +48,6 @@ public class LoginTest extends ReferenceApplicationTestBase {
 	assertTrue(homePage.isActiveVisitsAppPresent());
 	assertTrue(homePage.isAppointmentSchedulingAppPresent());
 	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
-
     }
 
     @Test
@@ -78,6 +78,5 @@ public class LoginTest extends ReferenceApplicationTestBase {
 	initiateHomePage();
 	assertTrue(homePage.isAppointmentSchedulingAppPresent());
 	assertTrue(homePage.isSystemAdministrationAppPresent());
-    }
-
+    }  
 }
