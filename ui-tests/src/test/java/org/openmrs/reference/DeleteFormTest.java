@@ -12,6 +12,7 @@ import org.openmrs.uitestframework.test.TestBase;
 
 import static org.junit.Assert.assertNotNull;
 
+
 /**
  * Created by nata on 24.06.15.
  */
