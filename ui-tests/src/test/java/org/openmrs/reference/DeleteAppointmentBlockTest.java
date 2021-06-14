@@ -34,6 +34,7 @@ public class DeleteAppointmentBlockTest extends ManageProviderSchedulesTest {
      * @verifies creation and delete of an appointment
      */
     @Test
+    // Rebuild the tests present in the module
     public void deleteAppointmentBlockTest() throws Exception {
 
         //The logic behind the text is to create an appointment and delete it
