@@ -12,11 +12,13 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import static org.junit.Assert.assertTrue;
 
+@Ignore
 public class AddEditAppointmentBlockTest extends ManageProviderSchedulesTest {
 
 	private final String startTimeFirstAppointment = "09";
@@ -72,4 +74,5 @@ public class AddEditAppointmentBlockTest extends ManageProviderSchedulesTest {
 	public void tearDown() throws Exception {
 		super.tearDown();
 	}
+
 }
