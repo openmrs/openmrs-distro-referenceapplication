@@ -9,17 +9,17 @@
  */
 package org.openmrs.reference;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.HomePage;
 
 import static org.junit.Assert.assertTrue;
 
-
 public class LoginTest extends ReferenceApplicationTestBase {
-    private HomePage homePage;
     
+    private HomePage homePage;
+
     public void initiateHomePage() {
         homePage = new HomePage(page);
         assertPage(homePage.waitForPage());
@@ -27,7 +27,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void verifyModulesAvailableOnHomePage() throws Exception {
+    public void verifyModulesAvailableOnHomePage() {
         initiateHomePage();
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
@@ -38,10 +38,10 @@ public class LoginTest extends ReferenceApplicationTestBase {
         assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
     }
-
+    
     @Test
     @Category(BuildTests.class)
-    public void verifyClerkModulesAvailableOnHomePage() throws Exception {
+    public void verifyClerkModulesAvailableOnHomePage() {
         goToLoginPage().loginAsClerk();
         initiateHomePage();
         assertTrue(homePage.isActiveVisitsAppPresent());
@@ -51,7 +51,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void verifyDoctorModulesAvailableOnHomePage() throws Exception {
+    public void verifyDoctorModulesAvailableOnHomePage()  {
         goToLoginPage().loginAsDoctor();
         initiateHomePage();
         assertTrue(homePage.isFindAPatientAppPresent());
@@ -61,7 +61,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void verifyNurseModulesAvailableOnHomePage() throws Exception {
+    public void verifyNurseModulesAvailableOnHomePage()  {
         goToLoginPage().loginAsNurse();
         initiateHomePage();
         assertTrue(homePage.isFindAPatientAppPresent());
@@ -72,11 +72,10 @@ public class LoginTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void verifySysadminModulesAvailableOnHomePage() throws Exception {
+    public void verifySysadminModulesAvailableOnHomePage() {
         goToLoginPage().loginAsSysadmin();
         initiateHomePage();
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
     }
-
 }
