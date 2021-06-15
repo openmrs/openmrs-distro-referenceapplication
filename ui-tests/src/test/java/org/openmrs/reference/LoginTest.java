@@ -16,67 +16,66 @@ import org.openmrs.reference.page.HomePage;
 
 import static org.junit.Assert.assertTrue;
 
-public class LoginTest extends ReferenceApplicationTestBase {
-    
+public class LoginTest extends ReferenceApplicationTestBase { 
     private HomePage homePage;
 
     public void initiateHomePage() {
-	homePage = new HomePage(page);
-	assertPage(homePage.waitForPage());
+        homePage = new HomePage(page);
+        assertPage(homePage.waitForPage());
     }
 
     @Test
     @Category(BuildTests.class)
     public void verifyModulesAvailableOnHomePage() {
-	goToLoginPage().loginAsAdmin();
-	initiateHomePage();
-	assertTrue(homePage.isFindAPatientAppPresent());
-	assertTrue(homePage.isActiveVisitsAppPresent());
-	assertTrue(homePage.isAppointmentSchedulingAppPresent());
-	assertTrue(homePage.isCaptureVitalsAppPresent());
-	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
-	assertTrue(homePage.isDataManagementAppPresent());
-	assertTrue(homePage.isConfigureMetadataAppPresent());
-	assertTrue(homePage.isSystemAdministrationAppPresent());
+        goToLoginPage().loginAsAdmin();
+        initiateHomePage();
+        assertTrue(homePage.isFindAPatientAppPresent());
+        assertTrue(homePage.isActiveVisitsAppPresent());
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
+        assertTrue(homePage.isCaptureVitalsAppPresent());
+        assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
+        assertTrue(homePage.isDataManagementAppPresent());
+        assertTrue(homePage.isConfigureMetadataAppPresent());
+        assertTrue(homePage.isSystemAdministrationAppPresent());
     }
 
     @Test
     @Category(BuildTests.class)
     public void verifyClerkModulesAvailableOnHomePage() {
-	goToLoginPage().loginAsClerk();
-	initiateHomePage();
-	assertTrue(homePage.isActiveVisitsAppPresent());
-	assertTrue(homePage.isAppointmentSchedulingAppPresent());
-	assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
+        goToLoginPage().loginAsClerk();
+        initiateHomePage();
+        assertTrue(homePage.isActiveVisitsAppPresent());
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
+        assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
     }
 
     @Test
     @Category(BuildTests.class)
     public void verifyDoctorModulesAvailableOnHomePage() {
-	goToLoginPage().loginAsDoctor();
-	initiateHomePage();
-	assertTrue(homePage.isFindAPatientAppPresent());
-	assertTrue(homePage.isActiveVisitsAppPresent());
-	assertTrue(homePage.isAppointmentSchedulingAppPresent());
+        goToLoginPage().loginAsDoctor();
+        initiateHomePage();
+        assertTrue(homePage.isFindAPatientAppPresent());
+        assertTrue(homePage.isActiveVisitsAppPresent());
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
     }
 
     @Test
     @Category(BuildTests.class)
     public void verifyNurseModulesAvailableOnHomePage() {
-	goToLoginPage().loginAsNurse();
-	initiateHomePage();
-	assertTrue(homePage.isFindAPatientAppPresent());
-	assertTrue(homePage.isActiveVisitsAppPresent());
-	assertTrue(homePage.isAppointmentSchedulingAppPresent());
-	assertTrue(homePage.isCaptureVitalsAppPresent());
+        goToLoginPage().loginAsNurse();
+        initiateHomePage();
+        assertTrue(homePage.isFindAPatientAppPresent());
+        assertTrue(homePage.isActiveVisitsAppPresent());
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
+        assertTrue(homePage.isCaptureVitalsAppPresent());
     }
 
     @Test
     @Category(BuildTests.class)
     public void verifySysadminModulesAvailableOnHomePage() {
-	goToLoginPage().loginAsSysadmin();
-	initiateHomePage();
-	assertTrue(homePage.isAppointmentSchedulingAppPresent());
-	assertTrue(homePage.isSystemAdministrationAppPresent());
-    }  
+        goToLoginPage().loginAsSysadmin();
+        initiateHomePage();
+        assertTrue(homePage.isAppointmentSchedulingAppPresent());
+        assertTrue(homePage.isSystemAdministrationAppPresent());
+    }
 }
