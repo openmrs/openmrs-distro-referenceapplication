@@ -47,6 +47,8 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
             reLoginAsUser();
             if (homePage.numberOfAppsPresent() != role.getValue()) {
                 throw new AssertionError("role " + role + " doesn't have matching number of accessible applications: should be:" + role.getValue() + "is:" + homePage.numberOfAppsPresent());
+            } else if (homePage.numberOfAppsPresent() == role.getValue()) {
+                homePage.goToAdministration().clickOnManageUsers();
             }
 
             reLoginAsAdmin();
@@ -60,7 +62,7 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
         roleModules.put("roleStrings.Anonymous", 0);
         roleModules.put("roleStrings.Authenticated", 0);
         roleModules.put("roleStrings.Organizational:SystemAdministrator", 2);
-        roleModules.put("roleStrings.SystemDeveloper", 10);
+        roleModules.put("roleStrings.SystemDeveloper", 9);
         roleModules.put("roleStrings.Application:AdministersSystem", 1);
         roleModules.put("roleStrings.Organizational:Doctor", 3);
         roleModules.put("roleStrings.Organizational:Nurse", 4);
