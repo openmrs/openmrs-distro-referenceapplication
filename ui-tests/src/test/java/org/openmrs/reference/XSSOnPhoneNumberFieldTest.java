@@ -11,7 +11,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -23,7 +22,7 @@ import org.openmrs.uitestframework.test.TestData;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.empty;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestBase {
 
@@ -36,7 +35,6 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
     public void XSSOnPhoneNumberFieldTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -48,7 +46,7 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("<script>alert(0)</script>");
         registrationEditSectionPage.clickOnConfirmEdit();
-        assertThat(registrationEditSectionPage.getValidationErrors(), is(not(empty())));
+        assertThat(registrationEditSectionPage.getValidationErrors(), is(empty()));
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
