@@ -1,7 +1,6 @@
 package org.openmrs.reference;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -33,7 +32,7 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageUserPage manageUserPage = administrationPage.clickOnManageUsers();
 
-        Map<String, Integer> roleModules = new HashMap();
+        Map<String, Integer> roleModules = new HashMap<String,  Integer>();
 
         fillInRoleModules(roleModules);
         if (!manageUserPage.userExists(NURSE_USERNAME)) {
@@ -47,9 +46,7 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
             reLoginAsUser();
             if (homePage.numberOfAppsPresent() != role.getValue()) {
                 throw new AssertionError("role " + role + " doesn't have matching number of accessible applications: should be:" + role.getValue() + "is:" + homePage.numberOfAppsPresent());
-            } else if (homePage.numberOfAppsPresent() == role.getValue()) {
-                homePage.goToAdministration().clickOnManageUsers();
-            }
+            } 
 
             reLoginAsAdmin();
             oldRole = role.getKey();
