@@ -71,7 +71,7 @@ public class RecordMergeIssueTest extends TestBase {
         dataManagementPage.clickOnContinue();
         assertFalse(driver.getPageSource().contains("java.lang.NullPointerException"));
     }
-
+     // Rebuild the modules once again with CI
 
     @After
     public void tearDown() throws Exception {
