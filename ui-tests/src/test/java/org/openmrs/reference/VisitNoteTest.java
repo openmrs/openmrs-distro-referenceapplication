@@ -36,8 +36,7 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
         patient = createTestPatient();
         createTestVisit();
         patientVisitsDashboardPage = new PatientVisitsDashboardPage(page);
-        editVisitNotePage = new  EditVisitNotePage(page);
-        
+        editVisitNotePage = new  EditVisitNotePage(page);     
     }
 
     @Test
@@ -67,14 +66,15 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
         editVisitNotePage.confirmDeleteDiagnosis();
         patientVisitsDashboardPage.waitForPage();
         patientVisitsDashboardPage.goToVisitNote();
+        
+//      Add a new  diagnosis
         visitNotePage.selectProviderAndLocation();
         visitNotePage.addDiagnosis(DIAGNOSIS_PRIMARY);
         visitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY);
         visitNotePage.addNote("This is a note");
         patientDashboardPage = visitNotePage.save();
  
-
- //       Editting visit Note 
+ //     Editing visit Note 
         editVisitNotePage.waitForPage();
         editVisitNotePage = patientVisitsDashboardPage.goToEditVisitNote();
         editVisitNotePage.EditVisitNote();
