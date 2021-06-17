@@ -22,8 +22,8 @@ public class LoginTest extends ReferenceApplicationTestBase {
     public void initiateHomePage() {
         homePage = new HomePage(page);
         assertPage(homePage.waitForPage());
-    }
-
+    } 
+    
     @Test
     @Category(BuildTests.class)
     public void verifyModulesAvailableOnHomePage() {
@@ -36,7 +36,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
         assertTrue(homePage.isDataManagementAppPresent());
         assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
-    }
+    } 
     
     @Test
     @Category(BuildTests.class)
@@ -46,8 +46,8 @@ public class LoginTest extends ReferenceApplicationTestBase {
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
-    }
-
+    } 
+    
     @Test
     @Category(BuildTests.class)
     public void verifyDoctorModulesAvailableOnHomePage()  {
@@ -57,7 +57,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
     }
-
+    
     @Test
     @Category(BuildTests.class)
     public void verifyNurseModulesAvailableOnHomePage()  {
@@ -68,7 +68,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertTrue(homePage.isCaptureVitalsAppPresent());
     }
-
+    
     @Test
     @Category(BuildTests.class)
     public void verifySysadminModulesAvailableOnHomePage() {
