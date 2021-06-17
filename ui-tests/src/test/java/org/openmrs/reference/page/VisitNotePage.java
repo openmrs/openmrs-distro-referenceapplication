@@ -26,7 +26,11 @@ public class VisitNotePage extends Page {
     private static final By NOTE = By.id("w10");
     private static final By PROVIDER = By.id("w1");
     private static final By LOCATION = By.id("w3");
-    private static final By DEL_DIAGNOSIS = By.xpath("//div[@id='display-encounter-diagnoses-container']/ul/li/span/i");
+    private static final By DELETE_DIAGNOSIS = By.cssSelector("#delete-button");
+    private static final By CONFORM_DELETE_DIAGNOSIS = By.cssSelector("#confirm-delete-dialog > div.dialog-content > div > button.confirm.right");
+    private static final By CANCEL_DELETE_DIAGNOSIS = By.cssSelector("#confirm-delete-dialog > div.dialog-content > div > button.cancel");
+    private static final By EDIT_VISIT_NOTE = By.cssSelector("#encountersList > li > span > i.editEncounter.edit-action.icon-pencil");
+
 
     public VisitNotePage(Page page) {
         super(page);
@@ -55,6 +59,9 @@ public class VisitNotePage extends Page {
         findElement(NOTE).clear();
         setText(NOTE, note);
     }
+    public void EditVisitNote() {
+        findElement(EDIT_VISIT_NOTE).click();
+    }
 
     public void selectProviderAndLocation() {
         new Select(findElement(PROVIDER)).selectByVisibleText("Super User");
@@ -77,15 +84,24 @@ public class VisitNotePage extends Page {
     }
 
     public void deleteDiagnosis() {
-        clickOn(DEL_DIAGNOSIS);
+        clickOn(DELETE_DIAGNOSIS);
+    }
+    
+    public void confirmDeleteDiagnosis() {
+        clickOn(CONFORM_DELETE_DIAGNOSIS);
+    }
+    
+    public void cancelDeleteDiagnosis() {
+        clickOn(CANCEL_DELETE_DIAGNOSIS);
     }
 
+    
     public String primaryDiagnosis() {
         return findElement(PRIMARY_DIAGNOSIS_ELEMENT).getText().trim();
     }
 
     public String secondaryDiagnosis() {
-        return findElement(SECONDARY_DIAGNOSIS_ELEMENT).getText();
+        return findElement(SECONDARY_DIAGNOSIS_ELEMENT).getText().trim();
     }
 
     public ClinicianFacingPatientDashboardPage save() {

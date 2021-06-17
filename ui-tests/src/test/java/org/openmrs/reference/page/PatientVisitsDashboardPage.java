@@ -28,6 +28,7 @@ public class PatientVisitsDashboardPage extends Page {
     private static final By MERGE_VISITS = By.cssSelector("#content div.actions.dropdown ul li:nth-child(2) > a");
     private static final By FAMILY_NAME = By.cssSelector(".patient-header .demographics .name .PersonName-familyName");
     private static final By VISIT_NOTE_ENCOUNTER = By.xpath("//div[@id='visit-details']/ul/li/ul/li/div/strong/span[text()='Visit Note']");
+    private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
 
     public PatientVisitsDashboardPage(Page parent) {
         super(parent);
@@ -44,6 +45,10 @@ public class PatientVisitsDashboardPage extends Page {
 
     public void goToCaptureVitals() {
         findElement(CAPTURE_VITALS).click();
+    }
+    
+    public void goToVisitNote() {
+        findElement(VISIT_NOTE).click();
     }
 
     public WebElement getActiveVisit() {
