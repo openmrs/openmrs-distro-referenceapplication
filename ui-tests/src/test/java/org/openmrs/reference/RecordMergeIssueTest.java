@@ -12,7 +12,6 @@ import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertFalse;
 
-
 /**
  * Created by tomasz on 09.07.15.
  */
@@ -28,7 +27,6 @@ public class RecordMergeIssueTest extends TestBase {
     private DataManagementPage dataManagementPage;
     private String id;
     private String id2;
-
 
     @Before
     public void setUp() throws Exception {
@@ -74,7 +72,6 @@ public class RecordMergeIssueTest extends TestBase {
         dataManagementPage.clickOnContinue();
         assertFalse(driver.getPageSource().contains("java.lang.NullPointerException"));
     }
-
 
     @After
     public void tearDown() throws Exception {
