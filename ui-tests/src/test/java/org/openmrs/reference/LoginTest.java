@@ -16,8 +16,7 @@ import org.openmrs.reference.page.HomePage;
 
 import static org.junit.Assert.assertTrue;
 
-public class LoginTest extends ReferenceApplicationTestBase {
-    
+public class LoginTest extends ReferenceApplicationTestBase {   
     private HomePage homePage;
 
     public void initiateHomePage() {
