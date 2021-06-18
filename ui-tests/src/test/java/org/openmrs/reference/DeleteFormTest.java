@@ -2,8 +2,9 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ManageFormsPage;
@@ -22,15 +23,14 @@ public class DeleteFormTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
-
-        homePage = new HomePage(page);
-        assertPage(homePage);
+        homePage = new HomePage(page);    
+        assertPage(homePage.waitForPage());
         headerPage = new HeaderPage(driver);
         manageForm = new ManageFormsPage(driver);
     }
 
-    @Ignore//ignore due to moving forms functionality
     @Test
+    @Category(BuildTests.class)
     public void deleteFormTest() throws Exception {
         homePage.goToManageForm();
         if (!manageForm.addPresent()) {
@@ -45,12 +45,13 @@ public class DeleteFormTest extends TestBase {
         homePage.goToManageForm();
         manageForm.deletePath();
         assertNotNull("Add", manageForm.ADD);
-
     }
 
     @After
     public void tearDown() throws Exception {
+	if(headerPage !=null) {
         headerPage.clickOnHomeIcon();
         headerPage.logOut();
     }
+  }
 }
