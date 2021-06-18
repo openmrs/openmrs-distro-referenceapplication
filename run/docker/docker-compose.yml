@@ -9,8 +9,6 @@ services:
 
   # Frontend
   frontend:
-    ports:
-      - 8081:8080
     build: ./ui
     environment:
       SPA_PATH: /ui
@@ -23,8 +21,6 @@ services:
 
   # OpenMRS:
   openmrs:
-    ports:
-      - 8080:8080
     build: openmrs/
     depends_on:
       - db
