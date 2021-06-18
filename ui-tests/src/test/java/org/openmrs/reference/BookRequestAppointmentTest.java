@@ -20,6 +20,7 @@ import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertTrue;
 
+@Ignore
 public class BookRequestAppointmentTest extends LocationSensitiveApplicationTestBase {
 
     private static final String SERVICE_NAME = "Oncology";
@@ -33,10 +34,8 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
     public void bookRequestAppointmentTest() throws Exception {
-
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
@@ -78,6 +77,5 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
 

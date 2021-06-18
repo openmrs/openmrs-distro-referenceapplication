@@ -11,11 +11,12 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class ManageProviderSchedulesPage extends Page {
 
     public static final By CURRENT_DAY = By.className("fc-state-highlight");
-    private static final By LOCATION = By.className("ng-pristine");
+    private static final By LOCATION = By.xpath("//*[@id='filter-location']/select");
     private static final By LOCATION_IN_BLOCK = By.xpath("//div[@id='select-location']/select");
     private static final By SERVICE_DROPDOWN = By.cssSelector("a.ng-scope.ng-binding");
     private static final By SERVICE = By.id("createAppointmentBlock");
@@ -29,7 +30,9 @@ public class ManageProviderSchedulesPage extends Page {
 
     public void selectLocation(String location) {
         selectFrom(LOCATION, location);
-        clickOn(LOCATION);
+        driver.findElement(LOCATION);
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click()", LOCATION);
     }
 
     public void clickOnCurrentDay() throws InterruptedException {
