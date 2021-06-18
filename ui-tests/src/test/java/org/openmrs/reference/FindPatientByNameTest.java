@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
 public class FindPatientByNameTest extends ReferenceApplicationTestBase {
+    
     private FindPatientPage findPatientPage;
     private TestData.PatientInfo patient;
 

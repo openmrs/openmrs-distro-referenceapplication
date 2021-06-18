@@ -25,13 +25,10 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-/**
- */
 public class DeleteVisitTypeTest extends ReferenceApplicationTestBase {
 
     private String visitTypeName;
     private String visitTypeDesc;
-
     private String visitTypeUuid;
 
     @Before

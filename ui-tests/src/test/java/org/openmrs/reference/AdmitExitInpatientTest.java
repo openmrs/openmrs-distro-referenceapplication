@@ -12,7 +12,6 @@ import org.openmrs.uitestframework.test.TestData;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
 
     private static final String INPATIENT_WARD = "Inpatient Ward";

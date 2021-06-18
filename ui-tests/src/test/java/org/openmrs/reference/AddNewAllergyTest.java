@@ -59,5 +59,4 @@ public class AddNewAllergyTest extends ReferenceApplicationTestBase {
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
