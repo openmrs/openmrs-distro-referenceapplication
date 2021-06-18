@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.openmrs</groupId>
     <artifactId>openmrs-distro-refapp</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>openmrs-distro-package</artifactId>
@@ -21,10 +21,6 @@
     <distro.microfrontendsDir>${distro.baseDir}/microfrontends</distro.microfrontendsDir>
     <distro.microfrontendsConfigDir>${distro.baseDir}/microfrontends_config</distro.microfrontendsConfigDir>
 
-    <!-- Configs -->
-    <openmrsConfigVersion>1.0.0-SNAPSHOT</openmrsConfigVersion>
-    <microfrontendsConfigVersion>1.0.0-SNAPSHOT</microfrontendsConfigVersion>
-
     <!-- App Shell -->
     <appShellVersion>next</appShellVersion>
 
@@ -32,11 +28,9 @@
     <microfrontendsJSONPath>microfrontends.json</microfrontendsJSONPath>
 
     <!-- OpenMRS modules -->
-
-    <!-- in dev -->
-    <initializerVersion>2.1.0-SNAPSHOT</initializerVersion>
-    <fhir2Version>1.2.0-SNAPSHOT</fhir2Version>
-    <webservices.restVersion>2.31.0-SNAPSHOT</webservices.restVersion>
+    <initializerVersion>2.1.0</initializerVersion>
+    <fhir2Version>1.2.1</fhir2Version>
+    <webservices.restVersion>2.31.0</webservices.restVersion>
 
     <idgenVersion>4.6.0</idgenVersion>
     <legacyuiVersion>1.8.2</legacyuiVersion>
@@ -57,13 +51,13 @@
       <groupId>org.openmrs</groupId>
       <artifactId>openmrs-config-refapp</artifactId>
       <type>zip</type>
-      <version>${openmrsConfigVersion}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.openmrs</groupId>
       <artifactId>microfrontends-config-refapp</artifactId>
       <type>zip</type>
-      <version>${microfrontendsConfigVersion}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.openmrs.web</groupId>
