@@ -224,7 +224,7 @@
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
           <execution>
-            <id>rename-jars-to-omod</id>
+            <id>rename jars to omod</id>
             <phase>package</phase>
             <configuration>
               <target>
@@ -232,6 +232,19 @@
                   <fileset dir="${distro.openmrsModulesDir}"/>
                   <mapper type="regexp" from="^(.+)-omod-(.+)\.jar" to="\1-\2.omod"/>
                 </move>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>rename war</id>
+            <phase>package</phase>
+            <configuration>
+              <target>
+                <move file="${distro.openmrsCoreDir}${file.separator}openmrs-webapp.war"
+                      tofile="${distro.openmrsCoreDir}${file.separator}openmrs.war"/>
               </target>
             </configuration>
             <goals>
