@@ -18,14 +18,14 @@
     <distro.openmrsConfigDir>${distro.baseDir}/openmrs_config</distro.openmrsConfigDir>
     <distro.openmrsCoreDir>${distro.baseDir}/openmrs_core</distro.openmrsCoreDir>
     <distro.openmrsModulesDir>${distro.baseDir}/openmrs_modules</distro.openmrsModulesDir>
-    <distro.microfrontendsDir>${distro.baseDir}/microfrontends</distro.microfrontendsDir>
-    <distro.microfrontendsConfigDir>${distro.baseDir}/microfrontends_config</distro.microfrontendsConfigDir>
+    <distro.spaDir>${distro.baseDir}/spa</distro.spaDir>
+    <distro.spaConfigDir>${distro.baseDir}/spa_config</distro.spaConfigDir>
 
     <!-- App Shell -->
     <appShellVersion>next</appShellVersion>
 
     <!-- JSON file of the microfrontends used and their version -->
-    <microfrontendsJSONPath>microfrontends.json</microfrontendsJSONPath>
+    <spaVersionConfigFile>spa-config.json</spaVersionConfigFile>
 
     <!-- OpenMRS modules -->
     <initializerVersion>2.1.0</initializerVersion>
@@ -55,7 +55,7 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>microfrontends-config-refapp</artifactId>
+      <artifactId>spa-config-refapp</artifactId>
       <type>zip</type>
       <version>${project.version}</version>
     </dependency>
@@ -176,7 +176,7 @@
               <includeArtifactIds>openmrs-config-refapp</includeArtifactIds>
             </configuration>
           </execution>
-          <!-- Microfrontends -->
+          <!-- SPA -->
           <execution>
             <id>unpack-microfrontends</id>
             <phase>package</phase>
@@ -185,21 +185,21 @@
             </goals>
             <configuration>
               <excludeTransitive>true</excludeTransitive>
-              <outputDirectory>${distro.microfrontendsDir}</outputDirectory>
-              <includeArtifactIds>microfrontends</includeArtifactIds>
+              <outputDirectory>${distro.spaDir}</outputDirectory>
+              <includeArtifactIds>spa</includeArtifactIds>
             </configuration>
           </execution>
-          <!-- Microfrontends config -->
+          <!-- SPA config -->
           <execution>
-            <id>unpack-microfrontends-config-refapp</id>
+            <id>unpack-refapp-config-spa</id>
             <phase>package</phase>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
               <excludeTransitive>true</excludeTransitive>
-              <outputDirectory>${distro.microfrontendsConfigDir}</outputDirectory>
-              <includeArtifactIds>microfrontends-config-refapp</includeArtifactIds>
+              <outputDirectory>${distro.spaConfigDir}</outputDirectory>
+              <includeArtifactIds>spa-config-refapp</includeArtifactIds>
             </configuration>
           </execution>
           <!-- Unpack OpenMRS distro package -->
@@ -275,7 +275,7 @@
                 <argument>--api-url</argument>
                 <argument>${env.API_URL}</argument>
                 <argument>--target</argument>
-                <argument>${distro.microfrontendsDir}</argument>
+                <argument>${distro.spaDir}</argument>
               </arguments>
             </configuration>
           </execution>
@@ -294,9 +294,9 @@
                 <argument>--mode</argument>
                 <argument>config</argument>
                 <argument>--target</argument>
-                <argument>${distro.microfrontendsDir}</argument>
+                <argument>${distro.spaDir}</argument>
                 <argument>--config</argument>
-                <argument>${microfrontendsJSONPath}</argument>
+                <argument>${spaVersionConfigFile}</argument>
               </arguments>
             </configuration>
           </execution>

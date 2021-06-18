@@ -7,7 +7,7 @@ services:
     ports:
       - 80:80
 
-  # Microfrontends
+  # Frontend
   frontend:
     ports:
       - 8081:8080
@@ -19,7 +19,7 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8080/ui"]
       timeout: 5s
     volumes:
-      - ./distro/microfrontends:/var/www/ui/
+      - ./distro/spa:/var/www/ui/
 
   # OpenMRS:
   openmrs:
