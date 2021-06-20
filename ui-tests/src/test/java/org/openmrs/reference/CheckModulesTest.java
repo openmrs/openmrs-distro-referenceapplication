@@ -1,8 +1,9 @@
 package org.openmrs.reference;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.ModulesPage;
 import org.openqa.selenium.By;
@@ -15,8 +16,8 @@ public class CheckModulesTest extends ReferenceApplicationTestBase {
     /**
      * Check the list of modules to be sure they are all started.
      */
-    @Test
-    @Category(org.openmrs.reference.groups.BuildTests.class)
+    @Ignore
+    @Category(BuildTests.class)
     public void checkModules() throws Exception {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ModulesPage modulesPage = administrationPage.goToManageModulesPage();
