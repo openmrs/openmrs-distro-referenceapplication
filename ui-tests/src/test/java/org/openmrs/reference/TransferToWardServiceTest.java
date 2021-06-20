@@ -13,13 +13,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertTrue;
 
-
-public class TransferToWardServiceTest extends ReferenceApplicationTestBase {
+@Ignore
+public class TransferToWardServiceTest extends LocationSensitiveApplicationTestBase {
 
     private static final String INPATIENT_WARD = "Inpatient Ward";
 
@@ -34,19 +36,21 @@ public class TransferToWardServiceTest extends ReferenceApplicationTestBase {
         String visit = new TestData.TestVisit(testPatient.uuid, visitType, getLocationUuid(homePage)).create();
     }
 
-    @Ignore("TODO fix, inpatient_ward doesn't exisit on the page, fix workflow")
     @Test
-    public void transferToWardServiceTest() throws Exception {
+    @Category(BuildTests.class)
+    public void transferToWardServiceTest() {
 
         ClinicianFacingPatientDashboardPage patientDashboardPage = homePage.goToActiveVisitPatient();
 
+        patientDashboardPage.clickOnLocation();
         patientDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);
         patientDashboardPage.waitForPage();
 
+        patientDashboardPage.clickOnLocation();
         patientDashboardPage.goToTransferToWardServicePage().confirm(ISOLATION_WARD);
         patientDashboardPage.waitForPage();
 
-        assertTrue(patientDashboardPage.containsText("Outpatient"));
+        assertTrue(patientDashboardPage.containsText(ISOLATION_WARD));
     }
 
     @After

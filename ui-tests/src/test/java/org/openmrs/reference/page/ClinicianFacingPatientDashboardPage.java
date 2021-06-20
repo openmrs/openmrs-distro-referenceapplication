@@ -36,9 +36,9 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
     private static final By VISIT_LINK_2 = By.className("visit-link");
     private static final By YES = By.cssSelector("#end-visit-dialog .confirm");
-    private static final By ADMIT_TO_INPATIENT = By.linkText("Admit to Inpatient");
+    private static final By ADMIT_TO_INPATIENT = By.xpath("//*[@id='session-location']/ul/li[1]");
     private static final By SAVE = By.xpath("//input[@value='Save']");
-    private static final By EXIT_FROM_INPATIENT = (By.linkText("Exit from Inpatient"));
+    private static final By EXIT_FROM_INPATIENT = By.xpath("//*[@id='session-location']/ul/li[2]");
     private static final By TRANSFER_TO_WARD_SERVICE = By.id("referenceapplication.realTime.simpleTransfer");
     private static final By SHOW_CONTACT_INFO = By.id("patient-header-contactInfo");
     private static final By EDIT_PATIENT = By.cssSelector("#edit-patient-demographics a");
@@ -63,6 +63,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By WHO_WHEN_WHERE = By.id("who-when-where");
     private static final By REQUEST_APPOINTMENT = By.linkText("Request Appointment");
     private static final By APPOINTMENT_LINK = By.cssSelector("a.right > i");
+    private static final By CHANGE_SESSION_LOCATION = By.className("change-location");
 
     private static final By ERROR = By.cssSelector("li.error > span");
     private static final By ADD_PAST_VISIT = By.id("org.openmrs.module.coreapps.createRetrospectiveVisit");
@@ -449,5 +450,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         clickOn(CONDITIONS_LINK);
         return new ConditionsPage(this);
     }
-
+    
+    public void clickOnLocation() {
+        clickOn(CHANGE_SESSION_LOCATION);
+    }  
 }
