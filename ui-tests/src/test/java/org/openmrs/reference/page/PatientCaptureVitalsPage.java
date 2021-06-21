@@ -1,5 +1,9 @@
 package org.openmrs.reference.page;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -145,4 +149,48 @@ public class PatientCaptureVitalsPage extends Page {
             confirmButton2.click();
         }
     }
+    
+    public void clearPatientHeight() {
+        findElement(HEIGHT_FIELD).clear();
+    }
+    
+    public void clearPatientWeight() {
+        findElement(WEIGHT_FIELD).clear();
+    }
+    
+    public void clearPatientTemperature() {
+        findElement(TEMPERATURE_FIELD).clear();
+    }
+    
+    public void clearPatientPulse() {
+        findElement(PULSE_FIELD).clear();
+    }
+    
+    public void clearPatientRespiratoryRate() {
+        findElement(RESPIRATORY_FIELD).clear();
+    }
+    
+    public void clearPatientBloodPressure1() {
+        findElement(BLOOD_PRESSURE_FIELD_1).clear();
+    }
+    
+    public void clearPatientBloodPressure2() {
+        findElement(BLOOD_PRESSURE_FIELD_2).clear();
+    }
+    
+    public void clearPatientBloodOxygenSaturation() {
+        findElement(BLOOD_OXYGEN_SATURATION_FIELD).clear();
+    }
+    
+    /**
+     * 
+        public List<String> getValidationErrors(){
+    	List<String> validationError = new ArrayList<>();
+    	for(WebElement webElement : driver.findElements(PAGE_ELEMENT)) {
+            if (StringUtils.isNotBlank(webElement.getText())) {
+                validationError.add(webElement.getText());
+            }
+            return validationError;
+    }   
+     */
 }
