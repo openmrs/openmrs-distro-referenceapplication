@@ -7,7 +7,6 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-
 package org.openmrs.reference;
 
 import org.junit.After;
@@ -29,15 +28,13 @@ public class MergePatientTest extends ReferenceApplicationTestBase {
 
     @Before
     public void setUp() throws Exception {
-
         testPatient = createTestPatient();
         testPatient1 = createTestPatient();
     }
 
     @Test
     @Category(BuildTests.class)
-    public void mergePatientByNameTest() throws Exception {
-
+    public void mergePatientTest() {
         DataManagementPage dataManagementPage = homePage.goToDataManagement();
         MergePatientsPage mergePatientsPage = dataManagementPage.goToMergePatient();
         mergePatientsPage.enterPatient1(testPatient.identifier);
@@ -49,10 +46,8 @@ public class MergePatientTest extends ReferenceApplicationTestBase {
         assertThat(dashboardPage.getPatientFamilyName(), is(testPatient1.familyName));
     }
 
-
     @After
     public void tearDown() throws Exception {
         deletePatient(testPatient);
     }
-
 }
