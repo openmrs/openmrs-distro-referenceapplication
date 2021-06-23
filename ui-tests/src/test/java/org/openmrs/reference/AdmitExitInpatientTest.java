@@ -12,7 +12,6 @@ import org.openmrs.uitestframework.test.TestData;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
 
     private static final String INPATIENT_WARD = "Inpatient Ward";
@@ -29,6 +28,7 @@ public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
     public void admitExitInpatientTest() {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(testPatient.identifier);
+        findPatientPage.waitForPageToLoad();
         PatientVisitsDashboardPage patientVisitsDashboardPage = findPatientPage.clickOnFirstPatient().startVisit();
 
         patientVisitsDashboardPage = (PatientVisitsDashboardPage) patientVisitsDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);
