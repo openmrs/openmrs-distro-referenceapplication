@@ -29,6 +29,7 @@ public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
     public void admitExitInpatientTest() {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(testPatient.identifier);
+        findPatientPage.waitForPageToLoad();
         PatientVisitsDashboardPage patientVisitsDashboardPage = findPatientPage.clickOnFirstPatient().startVisit();
 
         patientVisitsDashboardPage = (PatientVisitsDashboardPage) patientVisitsDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);
