@@ -65,5 +65,4 @@ public class DeleteAllergyTest extends ReferenceApplicationTestBase {
         addOrEditAllergyPage.drugId();
         addOrEditAllergyPage.clickOnSaveAllergy();
     }
-
 }

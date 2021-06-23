@@ -19,7 +19,6 @@ import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.PatientCaptureVitalsPage;
 import org.openmrs.uitestframework.test.TestData;
 
-
 public class CaptureVitalsTest extends LocationSensitiveApplicationTestBase {
 
     private TestData.PatientInfo patient;
@@ -38,7 +37,6 @@ public class CaptureVitalsTest extends LocationSensitiveApplicationTestBase {
     @Test
     @Category(BuildTests.class)
     public void captureVitalsTest() {
-
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
 
