@@ -61,10 +61,10 @@ RUN sed -i '/Connector port="8080"/a URIEncoding="UTF-8" relaxedPathChars="[]|" 
 
 # This is run at the end primarily so that all the previous steps in building the image remain cacheable
 RUN apt-get update && apt-get install -y \
-       zip \
+       zip dumb-init \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && rm -rf /usr/local/tomcat/webapps/*
 
 EXPOSE 8080
 
-CMD ["/usr/local/tomcat/startup.sh"]
+CMD ["dumb-init", "/usr/local/tomcat/startup.sh"]
