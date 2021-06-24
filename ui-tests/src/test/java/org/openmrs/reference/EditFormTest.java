@@ -17,6 +17,7 @@ import static org.junit.Assert.assertNotNull;
  * Created by nata on 24.06.15.
  */
 public class EditFormTest extends TestBase {
+    
     private HomePage homePage;
     private HeaderPage headerPage;
     private ManageFormsPage manageForm;
