@@ -10,11 +10,23 @@
 package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
+import org.openqa.selenium.By;
 
 public class EditVisitNotePage extends VisitNotePage {
-
+    private static final By NOTE = By.id("w10");
+    String note = "this is edited note";
+    private static final By REMOVE_DIAGNOSIS = By.cssSelector("#display-encounter-diagnoses-container > ul:nth-child(7) > li > span > i");
     public EditVisitNotePage(Page page) {
         super(page);
+    }
+    
+    public void clearNote() {
+        findElement(NOTE).clear();
+        setTextToFieldNoEnter(NOTE, note);
+    }
+    
+    public void removeDiagnosis() {
+        clickOn(REMOVE_DIAGNOSIS);
     }
 
     @Override

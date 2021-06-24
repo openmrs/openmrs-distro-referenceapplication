@@ -30,8 +30,11 @@ public class VisitNotePage extends Page {
     private static final By CONFORM_DELETE_DIAGNOSIS = By.cssSelector("#confirm-delete-dialog > div.dialog-content > div > button.confirm.right");
     private static final By CANCEL_DELETE_DIAGNOSIS = By.cssSelector("#confirm-delete-dialog > div.dialog-content > div > button.cancel");
     private static final By EDIT_VISIT_NOTE = By.cssSelector("#encountersList > li > span > i.editEncounter.edit-action.icon-pencil");
-
-
+    private static final By VIEW_VISIT_NOTE  = By.cssSelector("##encountersList > li > span > i.viewEncounter.view-action.icon-file-alt");
+    private static final By EDIT_BUTTON     = By.id("#edit-button");
+    private static final By DELETE_VISIT_NOTE = By.cssSelector("#encountersList > li > span > i.deleteEncounterId.delete-action.icon-remove");
+    private static final By COMFIRM_DELETE_BUTTON  = By.cssSelector("#delete-encounter-dialog > div.dialog-content > button.confirm.right");
+    
     public VisitNotePage(Page page) {
         super(page);
     }
@@ -59,8 +62,16 @@ public class VisitNotePage extends Page {
         findElement(NOTE).clear();
         setText(NOTE, note);
     }
-    public void EditVisitNote() {
+    public void editVisitNote() {
         findElement(EDIT_VISIT_NOTE).click();
+    }
+    
+    public void viewVisitNote() {
+        findElement(VIEW_VISIT_NOTE).click();
+    }
+    
+    public void editButton() {
+        findElement(EDIT_BUTTON).click();
     }
 
     public void selectProviderAndLocation() {
@@ -93,6 +104,14 @@ public class VisitNotePage extends Page {
     
     public void cancelDeleteDiagnosis() {
         clickOn(CANCEL_DELETE_DIAGNOSIS);
+    }
+    
+    public void deleteVisitNote() {
+        clickOn(DELETE_VISIT_NOTE);
+    }
+    
+    public void confirmDeleteButton() {
+        findElement(COMFIRM_DELETE_BUTTON).click();
     }
 
     

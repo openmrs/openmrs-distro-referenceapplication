@@ -43,7 +43,6 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
     @Category(BuildTests.class)
     public void visitNoteTest() throws Exception {
 
-
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
@@ -55,37 +54,28 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
         visitNotePage.addNote("This is a note");
         patientDashboardPage = visitNotePage.save();
         patientDashboardPage.waitForPage();
-//      assertEquals(DIAGNOSIS_PRIMARY, visitNotePage.primaryDiagnosis());
-//      assertEquals(DIAGNOSIS_SECONDARY, visitNotePage.secondaryDiagnosis());
-        patientDashboardPage.waitForPage();
         patientVisitsDashboardPage = patientDashboardPage.goToRecentVisits();
-
         EditVisitNotePage editVisitNotePage = patientVisitsDashboardPage.goToEditVisitNote();
-//    Deleting visit Diagnosis
-        editVisitNotePage.deleteDiagnosis();
-        editVisitNotePage.confirmDeleteDiagnosis();
-        patientVisitsDashboardPage.waitForPage();
-        patientVisitsDashboardPage.goToVisitNote();
         
-//      Add a new  diagnosis
-        visitNotePage.selectProviderAndLocation();
-        visitNotePage.addDiagnosis(DIAGNOSIS_PRIMARY);
-        visitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY);
-        visitNotePage.addNote("This is a note");
-        patientDashboardPage = visitNotePage.save();
- 
- //     Editing visit Note 
+        //Editing visit Note 
         editVisitNotePage.waitForPage();
-        editVisitNotePage = patientVisitsDashboardPage.goToEditVisitNote();
-        editVisitNotePage.EditVisitNote();
+        editVisitNotePage.removeDiagnosis();
+        editVisitNotePage.clearNote();
+        editVisitNotePage.addNote("This is edited note");
         editVisitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY_UPDATED);
         assertEquals(DIAGNOSIS_SECONDARY_UPDATED, patientDashboardPage.secondaryDiagnosis());
-        patientVisitsDashboardPage = patientDashboardPage.goToRecentVisits();
+        patientDashboardPage = visitNotePage.save();
+      
+        //Deleting visit Note
+   
+        //Add a new  diagnosis
+        patientDashboardPage.goToVisitNote();
+        editVisitNotePage.selectProviderAndLocation();
+        editVisitNotePage.addDiagnosis(DIAGNOSIS_PRIMARY);
+        editVisitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY);
+        editVisitNotePage.addNote("This is a new note");
+        patientDashboardPage = visitNotePage.save();
 
-        //TODO Delete function doesn't work on int02
-        patientVisitsDashboardPage.deleteVisitNote();
-        patientDashboardPage.confirmDeletion();
-        //Assert that visit note is not present on encounter list and its done
     }
 
     @After

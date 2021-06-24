@@ -98,7 +98,8 @@ public class PatientVisitsDashboardPage extends Page {
 
     public EditVisitNotePage goToEditVisitNote() throws InterruptedException {
         String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
-        clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='" + visitNoteId + "']"));
+        clickOn(By.xpath("//*[@id=\"encountersList\"]/li/span/i[2]"));
+//        clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='" + visitNoteId + "']"));
         return new EditVisitNotePage(this);
     }
 
