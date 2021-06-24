@@ -51,5 +51,4 @@ public class PatientGenerator {
         // First n digits of the current time.
         return String.valueOf(System.currentTimeMillis()).substring(0, digits - 1);
     }
-
 }

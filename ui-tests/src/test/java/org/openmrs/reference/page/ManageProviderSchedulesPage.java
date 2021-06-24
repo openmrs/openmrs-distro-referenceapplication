@@ -22,7 +22,6 @@ public class ManageProviderSchedulesPage extends Page {
     private static final By END_TIME_BUTTON = By.cssSelector("#end-time button");
     private static final By SAVE = By.cssSelector("button.confirm");
 
-
     public ManageProviderSchedulesPage(Page page) {
         super(page);
     }
@@ -55,15 +54,13 @@ public class ManageProviderSchedulesPage extends Page {
                 flag = false;
             }
         }
-
     }
 
     public void clickOnSave() {
         clickOn(SAVE);
         try {
             waitForElementToBeHidden(SAVE);
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
     }
 
     public void clickOnEndTimeButton() {

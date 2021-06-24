@@ -21,6 +21,7 @@ public class MergePatientsPage extends Page {
     private final static By MERGE_PATIENT = By.id("second-patient");
     private final static By NO = By.id("cancel-button");
     private final static By SEARCH = By.id("patient-search");
+    
     public MergePatientsPage(Page page) {
         super(page);
     }
@@ -38,7 +39,6 @@ public class MergePatientsPage extends Page {
         clickOn(CONTINUE);
         return new PatientVisitsDashboardPage(this);
     }
-
 
     public void clickOnMergePatient() {
         waitForElement(MERGE_PATIENT);
@@ -65,5 +65,4 @@ public class MergePatientsPage extends Page {
     public String getPageUrl() {
         return "/datamanagement/mergePatients.page";
     }
-
 }
