@@ -30,8 +30,10 @@ public class VisitNotePage extends Page {
     private static final By CONFORM_DELETE_DIAGNOSIS = By.cssSelector("#confirm-delete-dialog > div.dialog-content > div > button.confirm.right");
     private static final By CANCEL_DELETE_DIAGNOSIS = By.cssSelector("#confirm-delete-dialog > div.dialog-content > div > button.cancel");
     private static final By EDIT_VISIT_NOTE = By.cssSelector("#encountersList > li > span > i.editEncounter.edit-action.icon-pencil");
-
-
+    private static final By VIEW_VISIT_NOTE  = By.cssSelector("#encountersList > li > span > i.viewEncounter.view-action.icon-file-alt");
+    private static final By DELETE_ENCOUNTER_NOTE = By.cssSelector("#encountersList > li > span > i.deleteEncounterId.delete-action.icon-remove");
+    private static final By COMFIRM_DELETE_BUTTON  = By.cssSelector("#delete-encounter-dialog > div.dialog-content > button.confirm.right");
+    
     public VisitNotePage(Page page) {
         super(page);
     }
@@ -59,8 +61,12 @@ public class VisitNotePage extends Page {
         findElement(NOTE).clear();
         setText(NOTE, note);
     }
-    public void EditVisitNote() {
+    public void editVisitNote() {
         findElement(EDIT_VISIT_NOTE).click();
+    }
+    
+    public void viewVisitNote() {
+        findElement(VIEW_VISIT_NOTE).click();
     }
 
     public void selectProviderAndLocation() {
@@ -91,11 +97,18 @@ public class VisitNotePage extends Page {
         clickOn(CONFORM_DELETE_DIAGNOSIS);
     }
     
-    public void cancelDeleteDiagnosis() {
+    public void cancelDiagnosisButton() {
         clickOn(CANCEL_DELETE_DIAGNOSIS);
     }
-
     
+    public void deleteEncounterNote() {
+        findElement(DELETE_ENCOUNTER_NOTE).click();
+    }
+    
+    public void confirmDeleteButton() {
+        findElement(COMFIRM_DELETE_BUTTON).click();
+    }
+  
     public String primaryDiagnosis() {
         return findElement(PRIMARY_DIAGNOSIS_ELEMENT).getText().trim();
     }
@@ -108,5 +121,4 @@ public class VisitNotePage extends Page {
         clickOn(SAVE_VISIT_NOTE);
         return new ClinicianFacingPatientDashboardPage(this);
     }
-
 }
