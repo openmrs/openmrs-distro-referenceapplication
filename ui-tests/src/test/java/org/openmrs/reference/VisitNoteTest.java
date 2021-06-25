@@ -66,8 +66,7 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
         assertEquals(DIAGNOSIS_SECONDARY_UPDATED, patientDashboardPage.secondaryDiagnosis());
         patientDashboardPage = visitNotePage.save();
       
-        //Deleting visit Note
-   
+        //Deleting visit Note.....
         //Add a new  diagnosis
         patientDashboardPage.goToVisitNote();
         editVisitNotePage.selectProviderAndLocation();
