@@ -23,6 +23,7 @@
     <module>package/spa-config</module>
     <module>package/openmrs-config</module>
     <module>package</module>
+    <module>run/docker</module>
   </modules>
 
   <properties>
@@ -58,6 +59,11 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>io.fabric8</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>0.36.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
