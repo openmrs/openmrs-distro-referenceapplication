@@ -15,7 +15,7 @@ import org.openqa.selenium.By;
 public class EditVisitNotePage extends VisitNotePage {
     private static final By NOTE = By.id("w10");
     String note = "this is edited note";
-    private static final By REMOVE_DIAGNOSIS = By.cssSelector("#display-encounter-diagnoses-container > ul:nth-child(7) > li > span > i");
+    private static final By REMOVE_DIAGNOSIS = By.cssSelector(".icon-remove.delete-item");
     public EditVisitNotePage(Page page) {
         super(page);
     }

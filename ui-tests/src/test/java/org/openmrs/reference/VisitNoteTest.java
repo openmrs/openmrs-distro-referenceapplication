@@ -25,18 +25,15 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
     private static final String DIAGNOSIS_PRIMARY = "CANCER";
     private static final String DIAGNOSIS_SECONDARY = "MALARIA";
     private static final String DIAGNOSIS_SECONDARY_UPDATED = "Pneumonia";
-    private PatientVisitsDashboardPage patientVisitsDashboardPage;
-    private EditVisitNotePage editVisitNotePage;
     
-
+    private PatientVisitsDashboardPage patientVisitsDashboardPage;
     private PatientInfo patient;
 
     @Before
     public void setup() {
         patient = createTestPatient();
         createTestVisit();
-        patientVisitsDashboardPage = new PatientVisitsDashboardPage(page);
-        editVisitNotePage = new  EditVisitNotePage(page);     
+        patientVisitsDashboardPage = new PatientVisitsDashboardPage(page);  
     }
 
     @Test
@@ -66,7 +63,6 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
         assertEquals(DIAGNOSIS_SECONDARY_UPDATED, patientDashboardPage.secondaryDiagnosis());
         patientDashboardPage = visitNotePage.save();
       
-        //Deleting visit Note.....
         //Add a new  diagnosis
         patientDashboardPage.goToVisitNote();
         editVisitNotePage.selectProviderAndLocation();
@@ -74,7 +70,11 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
         editVisitNotePage.addSecondaryDiagnosis(DIAGNOSIS_SECONDARY);
         editVisitNotePage.addNote("This is a new note");
         patientDashboardPage = visitNotePage.save();
-
+        
+        //Deleting visit Note.....
+        visitNotePage.viewVisitNote();
+        visitNotePage.deleteDiagnosis();
+        visitNotePage.confirmDeleteDiagnosis();
     }
 
     @After
