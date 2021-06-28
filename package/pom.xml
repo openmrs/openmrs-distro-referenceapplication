@@ -1,59 +1,41 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.openmrs</groupId>
+
+  <parent>
+    <groupId>org.openmrs.distro</groupId>
+    <artifactId>openmrs-distro-refapp</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+  </parent>
+
   <artifactId>openmrs-distro-package</artifactId>
   <name>OpenMRS package</name>
-  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <organization>
-    <name>OpenMRS Inc.</name>
-    <url>http://openmrs.org</url>
-  </organization>
-
-  <developers>
-    <developer>
-      <name>Romain Buisson</name>
-    </developer>
-  </developers>
-
-  <modules>
-    <module>microfrontends-config</module>
-    <module>openmrs-config</module>
-  </modules>
-
   <properties>
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <distro.baseDir>${project.build.directory}/${project.artifactId}</distro.baseDir>
     <distro.openmrsConfigDir>${distro.baseDir}/openmrs_config</distro.openmrsConfigDir>
     <distro.openmrsCoreDir>${distro.baseDir}/openmrs_core</distro.openmrsCoreDir>
     <distro.openmrsModulesDir>${distro.baseDir}/openmrs_modules</distro.openmrsModulesDir>
-    <distro.microfrontendsDir>${distro.baseDir}/microfrontends</distro.microfrontendsDir>
-    <distro.microfrontendsConfigDir>${distro.baseDir}/microfrontends_config</distro.microfrontendsConfigDir>
-
-    <!-- Configs -->
-    <openmrsConfigVersion>1.0.0-SNAPSHOT</openmrsConfigVersion>
-    <microfrontendsConfigVersion>1.0.0-SNAPSHOT</microfrontendsConfigVersion>
+    <distro.spaDir>${distro.baseDir}/spa</distro.spaDir>
+    <distro.spaConfigDir>${distro.baseDir}/spa_config</distro.spaConfigDir>
 
     <!-- App Shell -->
     <appShellVersion>next</appShellVersion>
 
     <!-- JSON file of the microfrontends used and their version -->
-    <microfrontendsJSONPath>microfrontends.json</microfrontendsJSONPath>
+    <spaVersionConfigFile>spa-config.json</spaVersionConfigFile>
 
     <!-- OpenMRS modules -->
-
-    <!-- in dev -->
-    <initializerVersion>2.2.0-SNAPSHOT</initializerVersion>
-    <fhir2Version>1.2.0-SNAPSHOT</fhir2Version>
-    <webservices.restVersion>2.31.0-SNAPSHOT</webservices.restVersion>
+    <initializerVersion>2.1.0</initializerVersion>
+    <fhir2Version>1.2.1</fhir2Version>
+    <webservices.restVersion>2.31.0</webservices.restVersion>
 
     <idgenVersion>4.6.0</idgenVersion>
     <legacyuiVersion>1.8.2</legacyuiVersion>
     <addresshierarchyVersion>2.14.2</addresshierarchyVersion>
-    <metadatamappingVersion>1.4.0-SNAPSHOT</metadatamappingVersion>
+    <metadatamappingVersion>1.3.5</metadatamappingVersion>
     <metadatasharingVersion>1.7.0</metadatasharingVersion>
     <appuiVersion>1.13.0</appuiVersion>
     <uicommonsVersion>2.16.0</uicommonsVersion>
@@ -61,22 +43,21 @@
     <appframeworkVersion>2.16.0</appframeworkVersion>
 
     <!-- OpenMRS Core -->
-    <openMRSVersion>2.3.3</openMRSVersion>
-
+    <openMRSVersion>2.4.0</openMRSVersion>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>org.openmrs</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>openmrs-config-refapp</artifactId>
       <type>zip</type>
-      <version>${openmrsConfigVersion}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.openmrs</groupId>
-      <artifactId>microfrontends-config-refapp</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>spa-config-refapp</artifactId>
       <type>zip</type>
-      <version>${microfrontendsConfigVersion}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.openmrs.web</groupId>
@@ -148,11 +129,9 @@
 
   <build>
     <plugins>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.8</version>
         <executions>
           <!-- OpenMRS Core -->
           <execution>
@@ -193,12 +172,11 @@
             </goals>
             <configuration>
               <excludeTransitive>true</excludeTransitive>
-              <useBaseVersion>true</useBaseVersion>
               <outputDirectory>${distro.openmrsConfigDir}</outputDirectory>
               <includeArtifactIds>openmrs-config-refapp</includeArtifactIds>
             </configuration>
           </execution>
-          <!-- Microfrontends -->
+          <!-- SPA -->
           <execution>
             <id>unpack-microfrontends</id>
             <phase>package</phase>
@@ -207,34 +185,46 @@
             </goals>
             <configuration>
               <excludeTransitive>true</excludeTransitive>
-              <useBaseVersion>true</useBaseVersion>
-              <outputDirectory>${distro.microfrontendsDir}</outputDirectory>
-              <includeArtifactIds>microfrontends</includeArtifactIds>
+              <outputDirectory>${distro.spaDir}</outputDirectory>
+              <includeArtifactIds>spa</includeArtifactIds>
             </configuration>
           </execution>
-          <!-- Microfrontends config -->
+          <!-- SPA config -->
           <execution>
-            <id>unpack-microfrontends-config-refapp</id>
+            <id>unpack-refapp-config-spa</id>
             <phase>package</phase>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
               <excludeTransitive>true</excludeTransitive>
-              <useBaseVersion>true</useBaseVersion>
-              <outputDirectory>${distro.microfrontendsConfigDir}</outputDirectory>
-              <includeArtifactIds>microfrontends-config-refapp</includeArtifactIds>
+              <outputDirectory>${distro.spaConfigDir}</outputDirectory>
+              <includeArtifactIds>spa-config-refapp</includeArtifactIds>
+            </configuration>
+          </execution>
+          <!-- Unpack OpenMRS distro package -->
+          <execution>
+            <id>unpack-openmrs-distro-package</id>
+            <!-- pre-integration-test is immediately after the package phase
+                 ideally, this would be done in a post-package phase -->
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${openmrsRunDistroTargetDir}</outputDirectory>
+              <artifact>${project.groupId}:openmrs-distro-package:${project.version}:zip</artifact>
             </configuration>
           </execution>
         </executions>
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
         <executions>
           <execution>
-            <id>rename-jars-to-omod</id>
+            <id>rename jars to omod</id>
             <phase>package</phase>
             <configuration>
               <target>
@@ -248,6 +238,19 @@
               <goal>run</goal>
             </goals>
           </execution>
+          <execution>
+            <id>rename war</id>
+            <phase>package</phase>
+            <configuration>
+              <target>
+                <move file="${distro.openmrsCoreDir}${file.separator}openmrs-webapp.war"
+                      tofile="${distro.openmrsCoreDir}${file.separator}openmrs.war"/>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
 
@@ -255,22 +258,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>1.3.2</version>
         <executions>
-          <execution>
-            <id>npm install openmrs</id>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <phase>initialize</phase>
-            <configuration>
-              <executable>npm</executable>
-              <arguments>
-                <argument>install</argument>
-                <argument>openmrs@${appShellVersion}</argument>
-              </arguments>
-            </configuration>
-          </execution>
           <execution>
             <id>npx openmrs build</id>
             <goals>
@@ -278,9 +266,17 @@
             </goals>
             <phase>compile</phase>
             <configuration>
-              <!-- Using a bash script to support setting environment variables (and has other advantages) -->
-              <executable>scripts/build.sh</executable>
-              <commandlineArgs>${distro.microfrontendsDir}</commandlineArgs>
+              <executable>npx</executable>
+              <arguments>
+                <argument>openmrs@${appShellVersion}</argument>
+                <argument>build</argument>
+                <argument>--spa-path</argument>
+                <argument>${env.SPA_PATH}</argument>
+                <argument>--api-url</argument>
+                <argument>${env.API_URL}</argument>
+                <argument>--target</argument>
+                <argument>${distro.spaDir}</argument>
+              </arguments>
             </configuration>
           </execution>
           <execution>
@@ -291,8 +287,17 @@
             <phase>compile</phase>
             <configuration>
               <!-- Using a bash script for consistency with build.sh ¯\_(ツ)_/¯ -->
-              <executable>scripts/assemble.sh</executable>
-              <commandlineArgs>${distro.microfrontendsDir} ${microfrontendsJSONPath}</commandlineArgs>
+              <executable>npx</executable>
+              <arguments>
+                <argument>openmrs@${appShellVersion}</argument>
+                <argument>assemble</argument>
+                <argument>--mode</argument>
+                <argument>config</argument>
+                <argument>--target</argument>
+                <argument>${distro.spaDir}</argument>
+                <argument>--config</argument>
+                <argument>${spaVersionConfigFile}</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>
@@ -320,43 +325,4 @@
       </plugin>
     </plugins>
   </build>
-
-  <repositories>
-    <repository>
-      <id>mks-nexus-public</id>
-      <url>https://nexus.mekomsolutions.net/repository/maven-public/</url>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>openmrs-repo</id>
-      <name>OpenMRS Nexus Repository</name>
-      <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
-    </repository>
-    <repository>
-      <id>sonatype-nexus-snapshots</id>
-      <name>Sonatype Nexus Snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>interval:10080</updatePolicy>
-      </snapshots>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>openmrs-repo</id>
-      <name>OpenMRS Nexus Repository</name>
-      <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
-
 </project>

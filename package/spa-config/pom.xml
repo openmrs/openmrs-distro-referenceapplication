@@ -1,27 +1,17 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.openmrs</groupId>
-  <artifactId>microfrontends-config-refapp</artifactId>
-  <name>Microfrontends Configuration</name>
-  <description>Microfrontends configuration for the OpenMRS Reference Application</description>
 
-  <version>1.0.0-SNAPSHOT</version>
+  <parent>
+    <groupId>org.openmrs.distro</groupId>
+    <artifactId>openmrs-distro-refapp</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>spa-config-refapp</artifactId>
+  <name>SPA Configuration</name>
+  <description>SPA configuration for the OpenMRS Reference Application</description>
   <packaging>pom</packaging>
-
-  <organization>
-    <name>OpenMRS Inc.</name>
-    <url>http://openmrs.org</url>
-  </organization>
-
-  <developers>
-    <developer>
-      <name>Romain Buisson</name>
-    </developer>
-  </developers>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
   <build>
     <plugins>
@@ -46,5 +36,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>

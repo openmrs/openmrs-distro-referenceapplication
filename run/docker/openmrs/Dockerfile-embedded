@@ -44,16 +44,17 @@ ENV OMRS_CONFIG_CONNECTION_DATABASE="openmrs"
 ENV OMRS_WEBAPP_NAME="openmrs"
 
 # Copy in the start-up scripts
-COPY wait-for-it.sh /usr/local/tomcat/wait-for-it.sh
-COPY startup.sh /usr/local/tomcat/startup.sh
+COPY ./openmrs/wait-for-it.sh /usr/local/tomcat/wait-for-it.sh
+COPY ./openmrs/startup.sh /usr/local/tomcat/startup.sh
 RUN chmod +x /usr/local/tomcat/wait-for-it.sh
 RUN chmod +x /usr/local/tomcat/startup.sh
 
 # Add Dockerfile and commit info for documentation
-ADD Dockerfile /openmrs/docker
+ADD ./openmrs/Dockerfile /openmrs/docker
 
 # /openmrs/distribution is expected to be mounted into the container with the artifacts making up the distribution
 # /openmrs/data represents the data persisted inside the container to the filesystem for OpenMRS
+COPY ./distro /openmrs/distribution
 
 # Take some initial steps to improve overall security, size, and functionality of the container
 # This includes updating packages and removing all of the default Tomcat webapps
