@@ -1,0 +1,15 @@
+FROM httpd:2.4
+
+COPY ./ui/httpd.conf /usr/local/apache2/conf/httpd.conf
+
+RUN rm -rf /usr/local/apache2/conf/extra/*
+
+COPY ./ui/startup.sh /usr/local/apache2/startup.sh
+RUN chmod +x /usr/local/apache2/startup.sh
+
+COPY ./distro/spa /var/www/ui
+
+RUN apt update \
+  && apt install -y gettext-base moreutils curl
+
+CMD ["./startup.sh"]

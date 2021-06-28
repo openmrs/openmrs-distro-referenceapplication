@@ -1,76 +1,130 @@
 #!/bin/bash -eux
 
-DB_CREATE_TABLES=${DB_CREATE_TABLES:-false}
-DB_AUTO_UPDATE=${DB_AUTO_UPDATE:-false}
-MODULE_WEB_ADMIN=${MODULE_WEB_ADMIN:-true}
-DEBUG=${DEBUG:-false}
-DEBUG_PORT=${DEBUG_PORT:-8000}
-catalina_params=()
+echo "Initiating OpenMRS startup"
 
-cat > /usr/local/tomcat/openmrs-server.properties << EOF
-install_method=auto
-connection.url=jdbc\:mysql\://${DB_HOST}\:3306/${DB_DATABASE}?autoReconnect\=true&sessionVariables\=default_storage_engine\=InnoDB&useUnicode\=true&characterEncoding\=UTF-8
-connection.username=${DB_USERNAME}
-connection.password=${DB_PASSWORD}
-has_current_openmrs_database=true
-create_database_user=false
-module_web_admin=${MODULE_WEB_ADMIN}
-create_tables=${DB_CREATE_TABLES}
-auto_update_database=${DB_AUTO_UPDATE}
-EOF
+# This startup script is responsible for fully preparing the OpenMRS Tomcat environment.
 
-configFiles=`ls -d /etc/properties/*`
-for file in $configFiles
-do
-    name=$(basename "${file}")
-    envsubst < ${file} > /usr/local/tomcat/.OpenMRS/${name}
-done
+OMRS_HOME="/openmrs"
+OMRS_WEBAPP_NAME=${OMRS_WEBAPP_NAME:-openmrs}
 
+# A volume mount is expected that contains distribution artifacts.  The expected format is shown in these environment vars.
 
-# create datbase credentials file to check the existance of data
-mkdir -p /etc/mysql/ && touch /etc/mysql/db-credentials.cnf
-cat > /etc/mysql/db-credentials.cnf << EOF
-[client]
-user=${DB_USERNAME}
-password=${DB_PASSWORD}
-EOF
+OMRS_DISTRO_DIR="$OMRS_HOME/distribution"
+OMRS_DISTRO_CORE="$OMRS_DISTRO_DIR/openmrs_core"
+OMRS_DISTRO_MODULES="$OMRS_DISTRO_DIR/openmrs_modules"
+OMRS_DISTRO_OWAS="$OMRS_DISTRO_DIR/openmrs_owas"
+OMRS_DISTRO_CONFIG="$OMRS_DISTRO_DIR/openmrs_config"
 
-# wait for mysql to initialise
-/usr/local/tomcat/wait-for-it.sh --timeout=3600 ${DB_HOST}:3306
+# Each of these mounted directories are used to populate expected configurations on the server, defined here
 
-# checking if the database is already available
-db_tables_count=`mysql --defaults-extra-file=/etc/mysql/db-credentials.cnf -h${DB_HOST} --skip-column-names -e "SELECT count(*) FROM information_schema.tables WHERE table_schema = '${DB_DATABASE}'"`
+OMRS_DATA_DIR="$OMRS_HOME/data"
+OMRS_MODULES_DIR="$OMRS_DATA_DIR/modules"
+OMRS_OWA_DIR="$OMRS_DATA_DIR/owa"
+OMRS_CONFIG_DIR="$OMRS_DATA_DIR/configuration"
 
-# generate encryption keys
-encryption_key=`openssl rand -base64 22 | sed 's/=/\\\=/g'`
-encryption_vector=`openssl rand -base64 22 | sed 's/=/\\\=/g'`
+OMRS_SERVER_PROPERTIES_FILE="$OMRS_HOME/$OMRS_WEBAPP_NAME-server.properties"
+OMRS_RUNTIME_PROPERTIES_FILE="$OMRS_DATA_DIR/$OMRS_WEBAPP_NAME-runtime.properties"
 
-if [ ${db_tables_count} > 1 ]; then
-    cat > /usr/local/tomcat/.OpenMRS/openmrs-runtime.properties << EOF
-encryption.vector=${encryption_vector}
-connection.url=jdbc\:mysql\://${DB_HOST}\:3306/${DB_DATABASE}?autoReconnect\=true&sessionVariables\=default_storage_engine\=InnoDB&useUnicode\=true&characterEncoding\=UTF-8
-module.allow_web_admin=true
-connection.username=${DB_USERNAME}
-auto_update_database==${DB_AUTO_UPDATE}
-encryption.key=${encryption_key}
-connection.driver_class=com.mysql.jdbc.Driver
-connection.password=${DB_PASSWORD}
-EOF
+TOMCAT_DIR="/usr/local/tomcat"
+TOMCAT_WEBAPPS_DIR="$TOMCAT_DIR/webapps"
+TOMCAT_WORK_DIR="$TOMCAT_DIR/work"
+TOMCAT_TEMP_DIR="$TOMCAT_DIR/temp"
+TOMCAT_SETENV_FILE="$TOMCAT_DIR/bin/setenv.sh"
+
+echo "Clearing out existing directories of any previous artifacts"
+
+rm -fR $TOMCAT_WEBAPPS_DIR;
+rm -fR $OMRS_MODULES_DIR;
+rm -fR $OMRS_OWA_DIR
+rm -fR $OMRS_CONFIG_DIR
+rm -fR $TOMCAT_WORK_DIR
+rm -fR $TOMCAT_TEMP_DIR
+
+mkdir -p $TOMCAT_TEMP_DIR
+
+echo "Loading artifacts into appropriate locations"
+
+cp -r $OMRS_DISTRO_CORE $TOMCAT_WEBAPPS_DIR
+[ -d "$OMRS_DISTRO_MODULES" ] && cp -r $OMRS_DISTRO_MODULES $OMRS_MODULES_DIR
+[ -d "$OMRS_DISTRO_OWAS" ] && cp -r $OMRS_DISTRO_OWAS $OMRS_OWA_DIR
+[ -d "$OMRS_DISTRO_CONFIG" ] && cp -r $OMRS_DISTRO_CONFIG $OMRS_CONFIG_DIR
+
+# setup database configuration properties
+# Setup database configuration properties
+OMRS_CONFIG_DATABASE="${OMRS_CONFIG_DATABASE:-mysql}"
+OMRS_CONFIG_CONNECTION_SERVER="${OMRS_CONFIG_CONNECTION_SERVER:-localhost}"
+OMRS_CONFIG_CONNECTION_DATABASE="${OMRS_CONFIG_CONNECTION_DATABASE:-openmrs}"
+OMRS_CONFIG_CONNECTION_EXTRA_ARGS="${OMRS_CONFIG_CONNECTION_EXTRA_ARGS-}"
+
+if [[ -z $OMRS_CONFIG_DATABASE || "$OMRS_CONFIG_DATABASE" == "mysql" ]]; then
+  OMRS_CONFIG_JDBC_URL_PROTOCOL=mysql
+  OMRS_CONFIG_CONNECTION_DRIVER_CLASS="${OMRS_CONFIG_CONNECTION_DRIVER_CLASS:-com.mysql.jdbc.Driver}"
+  OMRS_CONFIG_CONNECTION_PORT="${OMRS_CONFIG_CONNECTION_PORT:-3306}"
+  OMRS_CONFIG_CONNECTION_ARGS="${OMRS_CONFIG_CONNECTION_ARGS:-?autoReconnect=true&sessionVariables=default_storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8}"
+elif [[ "$OMRS_CONFIG_DATABASE" == "postgresql" ]]; then
+  OMRS_CONFIG_JDBC_URL_PROTOCOL=postgresql
+  OMRS_CONFIG_CONNECTION_DRIVER_CLASS="${OMRS_CONFIG_CONNECTION_DRIVER_CLASS:-org.postgresql.Driver}"
+  OMRS_CONFIG_CONNECTION_PORT="${OMRS_CONFIG_CONNECTION_PORT:-5432}"
+else
+  echo "Unknown database type $OMRS_CONFIG_DATABASE. Using properties for MySQL"
+  OMRS_CONFIG_JDBC_URL_PROTOCOL=mysql
+  OMRS_CONFIG_CONNECTION_DRIVER_CLASS="${OMRS_CONFIG_CONNECTION_DRIVER_CLASS:-com.mysql.jdbc.Driver}"
+  OMRS_CONFIG_CONNECTION_PORT="${OMRS_CONFIG_CONNECTION_PORT:-3306}"
+  OMRS_CONFIG_CONNECTION_ARGS="${OMRS_CONFIG_CONNECTION_ARGS:-?autoReconnect=true&sessionVariables=default_storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8}"
 fi
 
-if [ $DEBUG == true ]; then
-    export JPDA_ADDRESS=$DEBUG_PORT
-    export JPDA_TRANSPORT=dt_socket
-    catalina_params+=(jpda)
+# Build the JDBC URL using the above properties
+OMRS_CONFIG_CONNECTION_URL="${OMRS_CONFIG_CONNECTION_URL:-jdbc:${OMRS_CONFIG_JDBC_URL_PROTOCOL}://${OMRS_CONFIG_CONNECTION_SERVER}:${OMRS_CONFIG_CONNECTION_PORT}/${OMRS_CONFIG_CONNECTION_DATABASE}${OMRS_CONFIG_CONNECTION_ARGS}${OMRS_CONFIG_CONNECTION_EXTRA_ARGS}}"
+
+echo "Writing out $OMRS_SERVER_PROPERTIES_FILE"
+
+cat > $OMRS_SERVER_PROPERTIES_FILE << EOF
+add_demo_data=${OMRS_CONFIG_ADD_DEMO_DATA}
+admin_user_password=${OMRS_CONFIG_ADMIN_USER_PASSWORD}
+auto_update_database=${OMRS_CONFIG_AUTO_UPDATE_DATABASE}
+connection.driver_class=${OMRS_CONFIG_CONNECTION_DRIVER_CLASS}
+connection.username=${OMRS_CONFIG_CONNECTION_USERNAME}
+connection.password=${OMRS_CONFIG_CONNECTION_PASSWORD}
+connection.url=${OMRS_CONFIG_CONNECTION_URL}
+create_database_user=${OMRS_CONFIG_CREATE_DATABASE_USER}
+create_tables=${OMRS_CONFIG_CREATE_TABLES}
+has_current_openmrs_database=${OMRS_CONFIG_HAS_CURRENT_OPENMRS_DATABASE}
+install_method=${OMRS_CONFIG_INSTALL_METHOD}
+module_web_admin=${OMRS_CONFIG_MODULE_WEB_ADMIN}
+module.allow_web_admin=${OMRS_CONFIG_MODULE_WEB_ADMIN}
+EOF
+
+if [ -f $OMRS_RUNTIME_PROPERTIES_FILE ]; then
+  echo "Found existing runtime properties file at $OMRS_RUNTIME_PROPERTIES_FILE.  Overwriting with $OMRS_SERVER_PROPERTIES_FILE"
+  cp $OMRS_SERVER_PROPERTIES_FILE $OMRS_RUNTIME_PROPERTIES_FILE
 fi
-catalina_params+=(run)
 
-# start tomcat
-/usr/local/tomcat/bin/catalina.sh "${catalina_params[@]}" &
+echo "Writing out $TOMCAT_SETENV_FILE file"
 
-# trigger first filter to start database initialization
+JAVA_OPTS="$OMRS_JAVA_SERVER_OPTS"
+CATALINA_OPTS="$OMRS_JAVA_MEMORY_OPTS -DOPENMRS_INSTALLATION_SCRIPT=$OMRS_SERVER_PROPERTIES_FILE -DOPENMRS_APPLICATION_DATA_DIRECTORY=$OMRS_DATA_DIR/"
+
+if [ -n "${OMRS_DEV_DEBUG_PORT-}" ]; then
+  echo "Enabling debugging on port $OMRS_DEV_DEBUG_PORT"
+  CATALINA_OPTS="$CATALINA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=$OMRS_DEV_DEBUG_PORT"
+fi
+
+cat > $TOMCAT_SETENV_FILE << EOF
+export JAVA_OPTS="$JAVA_OPTS"
+export CATALINA_OPTS="$CATALINA_OPTS"
+EOF
+
+echo "Waiting for database to initialize..."
+
+/usr/local/tomcat/wait-for-it.sh --timeout=3600 "${OMRS_CONFIG_CONNECTION_SERVER}:${OMRS_CONFIG_CONNECTION_PORT}"
+
+echo "Starting up OpenMRS..."
+
+/usr/local/tomcat/bin/catalina.sh run &
+
+# Trigger first filter to start data importation
 sleep 15
-curl -L http://localhost:8080/openmrs/ > /dev/null
+curl -sL "http://localhost:8080/$OMRS_WEBAPP_NAME/" > /dev/null
 sleep 15
 
 # bring tomcat process to foreground again

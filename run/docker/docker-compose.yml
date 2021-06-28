@@ -1,3 +1,5 @@
+version: "3.7"
+
 services:
   # Proxy
   proxy:
@@ -5,10 +7,8 @@ services:
     ports:
       - 80:80
 
-  # Microfrontends
+  # Frontend
   frontend:
-    ports:
-      - 8081:8080
     build: ./ui
     environment:
       SPA_PATH: /ui
@@ -17,33 +17,29 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8080/ui"]
       timeout: 5s
     volumes:
-      - ./distro/microfrontends:/var/www/ui/
+      - ./distro/spa:/var/www/ui/
 
   # OpenMRS:
   openmrs:
-    ports:
-      - 8080:8080
     build: openmrs/
     depends_on:
       - db
     environment:
-      MODULE_WEB_ADMIN: "true"
-      DB_AUTO_UPDATE: "true"
-      DB_CREATE_TABLES: "true"
-      DB_HOST: db
-      DB_DATABASE: openmrs
-      DB_USERNAME: ${OPENMRS_DB_USER}
-      DB_PASSWORD: ${OPENMRS_DB_PASSWORD}
+      OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
+      OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
+      OMRS_CONFIG_CREATE_TABLES: "true"
+      OMRS_CONFIG_CONNECTION_SERVER: db
+      OMRS_CONFIG_CONNECTION_DATABASE: openmrs
+      OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER}
+      OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
       timeout: 5s
     volumes:
-      - ./distro/openmrs_core/openmrs-webapp.war:/usr/local/tomcat/webapps/openmrs.war
-      - openmrs-data:/usr/local/tomcat/.OpenMRS/
-      - ./distro/openmrs_modules:/usr/local/tomcat/.OpenMRS/modules/
-      - ./distro/openmrs_config:/usr/local/tomcat/.OpenMRS/configuration/
-      - openmrs-config-checksums:/usr/local/tomcat/.OpenMRS/configuration_checksums/
-      - ./properties/openmrs:/etc/properties
+      - openmrs-data:/openmrs/data
+      - ./distro/openmrs_core/:/openmrs/distribution/openmrs_core/
+      - ./distro/openmrs_modules:/openmrs/distribution/openmrs_modules/
+      - ./distro/openmrs_config:/openmrs/distribution/openmrs_config/
 
   # MariaDB
   db:
@@ -57,11 +53,6 @@ services:
     volumes:
       - db-data:/var/lib/mysql
 
-version: "3.7"
 volumes:
   openmrs-data: ~
   db-data: ~
-  openmrs-config: ~
-  openmrs-config-checksums: ~
-  openmrs-modules: ~
-  openmrs-owas: ~
