@@ -131,6 +131,7 @@ public class AppointmentBlocksPage extends Page {
      */
     public void clickOnDay() {
         clickOn(DAY);
+        waiter.until(ExpectedConditions.elementToBeClickable(DAY_CLASS));
         clickOn(DAY_CLASS);
     }
 
