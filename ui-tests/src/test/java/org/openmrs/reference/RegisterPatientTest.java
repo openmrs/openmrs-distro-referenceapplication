@@ -24,6 +24,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class RegisterPatientTest extends ReferenceApplicationTestBase {
+
     private TestPatient patient;
 
     @After
@@ -61,6 +62,4 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
         assertThat(dashboardPage.getPatientGivenName(), is(patient.givenName));
         assertThat(dashboardPage.getPatientFamilyName(), is(patient.familyName));
     }
-
-
 }
