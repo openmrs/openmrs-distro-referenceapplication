@@ -2,7 +2,9 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
@@ -31,7 +33,7 @@ public class RecordMergeIssueTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         homePage = new HomePage(page);
-        assertPage(homePage);
+        assertPage(homePage.waitForPage());
         headerPage = new HeaderPage(driver);
         findPatientPage = new FindPatientPage(page);
         registrationPage = new RegistrationPage(page);
@@ -41,9 +43,10 @@ public class RecordMergeIssueTest extends TestBase {
         patient1 = new TestPatient();
     }
 
-    @Ignore
+    @Test
+    @Category(BuildTests.class)
     public void recordMergeIssueTest() throws Exception {
-        homePage.goToRegisterPatientApp();
+        homePage.goToRegisterPatientApp().waitForPage();
 //       Register first patient
         patient.familyName = "Mike";
         patient.givenName = "Smith";
@@ -80,6 +83,5 @@ public class RecordMergeIssueTest extends TestBase {
         p.uuid = patient.uuid;
         deletePatient(p);
         waitForPatientDeletion(patient.uuid);
-        headerPage.logOut();
     }
 }
