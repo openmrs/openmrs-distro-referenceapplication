@@ -47,5 +47,4 @@ public class EndVisitTest extends LocationSensitiveApplicationTestBase {
     public void tearDown() throws Exception {
         deletePatient(patient);
     }
-
 }
