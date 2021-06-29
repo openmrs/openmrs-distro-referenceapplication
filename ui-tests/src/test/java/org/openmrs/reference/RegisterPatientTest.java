@@ -48,6 +48,7 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
                 patient.country + ", " +
                 patient.postalCode;
 
+         registrationPage.SelectRelationshipType();
         assertThat(registrationPage.getNameInConfirmationPage(), containsString(patient.givenName + ", " + patient.familyName));
         assertThat(registrationPage.getGenderInConfirmationPage(), containsString(patient.gender));
         assertThat(registrationPage.getBirthdateInConfirmationPage(), containsString(patient.birthDay + ", " + patient.birthMonth + ", " + patient.birthYear));

@@ -12,6 +12,7 @@ package org.openmrs.reference.page;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 
 
 /**
@@ -59,8 +60,15 @@ public class RegistrationPage extends Page {
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
     private static final By CONFIRM_DATA = By.id("submit");
     private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
+    private static final By SELECT_RELATIONSHIPTYPE = By.id("relationship_type");
+    private static final By PERSON_NAME = By.cssSelector("#relationship > p:nth-child(2) > input.person-typeahead.ng-pristine.ng-valid.ng-empty.ng-touched");
+    private static final By ADD_NEW_RELATIONSHIPTYPE = By.cssSelector("#relationship > p:nth-child(3) > a:nth-child(1) > i");
+    private static final By REMOVE_RELATIONSHIPTYPE = By.cssSelector("##relationship > p:nth-child(3) > a:nth-child(2) > i");
+    static final By RELATIONSHIPTYPE_CONFIRM = By.xpath(CONFIRMATION_DIV + "//div/div/p[6]");
     static By AUTO_LIST;
     private boolean acceptNextAlert = true;
+    
+    public String personName = "JOHN";
 
     public RegistrationPage(Page page) {
         super(page);
@@ -187,7 +195,7 @@ public class RegistrationPage extends Page {
         clickOn(BIRTHDATE_LABEL);
         waitForFocusById(BIRTHDAY_DAY_TEXTBOX_ID);
     }
-
+    
     public boolean clickOnReviewButton() {
         try {
             clickOn(REVIEW);
@@ -345,5 +353,24 @@ public class RegistrationPage extends Page {
     public String getSimilarPatientInfo() {
         return findElement(By.cssSelector("#similarPatientsSelect .info")).getText();
     }
+    
+    // relationships 
+    public void SelectRelationshipType() {
+        Select relationshipTypes = new Select(driver.findElement(By.id(("relationship_type"))));
+        relationshipTypes.selectByVisibleText("Doctor"); //we only set this to select doctor but it can be improved to select other relationshipTypes
+        driver.findElement(By.cssSelector("PERSON_NAME ")).sendKeys(personName);
+    }
+    
+    public void addNewRelationshipType() {
+        clickOn(ADD_NEW_RELATIONSHIPTYPE);
+    }
+    
+    public void removeRelationshipType() {
+        clickOn(REMOVE_RELATIONSHIPTYPE);
+    }
+    public String getRelationshipTypeConfirmationPage() {
+        return getText(RELATIONSHIPTYPE_CONFIRM);
+    }
+    
 }
 
