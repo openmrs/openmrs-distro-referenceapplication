@@ -28,8 +28,6 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- TODO do this in a more sensible way -->
-    <openmrsRunDistroTargetDir>${project.basedir}${file.separator}..${file.separator}run${file.separator}docker${file.separator}distro</openmrsRunDistroTargetDir>
   </properties>
 
   <build>
@@ -47,13 +45,13 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.1.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.1.2</version>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>

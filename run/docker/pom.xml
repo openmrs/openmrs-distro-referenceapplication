@@ -12,8 +12,53 @@
   <name>OpenMRS Docker</name>
   <packaging>pom</packaging>
 
+  <properties>
+    <!-- TODO do this in a more sensible way -->
+    <openmrsRunDistroTargetDir>distro</openmrsRunDistroTargetDir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.openmrs.distro</groupId>
+      <artifactId>openmrs-distro-package</artifactId>
+      <type>zip</type>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${openmrsRunDistroTargetDir}</directory>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <!-- Unpack OpenMRS distro package -->
+          <execution>
+            <id>unpack-openmrs-distro-package</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <excludeTransitive>false</excludeTransitive>
+              <includeArtifactIds>openmrs-distro-package</includeArtifactIds>
+              <outputDirectory>${openmrsRunDistroTargetDir}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>

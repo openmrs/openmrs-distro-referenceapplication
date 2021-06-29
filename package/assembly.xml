@@ -13,6 +13,43 @@
   <includeBaseDirectory>false</includeBaseDirectory>
   <fileSets>
     <fileSet>
+        <directory>${project.build.directory}/sdk-distro</directory>
+        <outputDirectory>/</outputDirectory>
+        <includes>
+            <include>README*</include>
+            <include>LICENSE*</include>
+            <include>NOTICE*</include>
+        </includes>
+    </fileSet>
+    <fileSet>
+        <directory>${project.build.directory}/sdk-distro/web</directory>
+        <outputDirectory>openmrs_core</outputDirectory>
+        <includes>
+            <include>**/*.war</include>
+        </includes>
+    </fileSet>
+    <fileSet>
+        <directory>${project.build.directory}/sdk-distro/web/modules</directory>
+        <outputDirectory>openmrs_modules</outputDirectory>
+        <includes>
+            <include>**/*.omod</include>
+        </includes>
+    </fileSet>
+    <fileSet>
+        <directory>${project.build.directory}/sdk-distro/web/owa</directory>
+        <outputDirectory>openmrs_owas</outputDirectory>
+        <includes>
+            <include>**/*</include>
+        </includes>
+    </fileSet>
+    <fileSet>
+        <directory>${project.build.directory}/sdk-distro/web/frontend</directory>
+        <outputDirectory>spa</outputDirectory>
+        <includes>
+            <include>**/*</include>
+        </includes>
+    </fileSet>
+    <fileSet>
       <outputDirectory>..</outputDirectory>
       <directory>${project.build.directory}/${project.artifactId}</directory>
     </fileSet>

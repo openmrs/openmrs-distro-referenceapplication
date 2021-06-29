@@ -20,30 +20,6 @@
     <distro.openmrsModulesDir>${distro.baseDir}/openmrs_modules</distro.openmrsModulesDir>
     <distro.spaDir>${distro.baseDir}/spa</distro.spaDir>
     <distro.spaConfigDir>${distro.baseDir}/spa_config</distro.spaConfigDir>
-
-    <!-- App Shell -->
-    <appShellVersion>next</appShellVersion>
-
-    <!-- JSON file of the microfrontends used and their version -->
-    <spaVersionConfigFile>spa-config.json</spaVersionConfigFile>
-
-    <!-- OpenMRS modules -->
-    <initializerVersion>2.1.0</initializerVersion>
-    <fhir2Version>1.2.1</fhir2Version>
-    <webservices.restVersion>2.31.0</webservices.restVersion>
-
-    <idgenVersion>4.6.0</idgenVersion>
-    <legacyuiVersion>1.8.2</legacyuiVersion>
-    <addresshierarchyVersion>2.14.2</addresshierarchyVersion>
-    <metadatamappingVersion>1.3.5</metadatamappingVersion>
-    <metadatasharingVersion>1.7.0</metadatasharingVersion>
-    <appuiVersion>1.13.0</appuiVersion>
-    <uicommonsVersion>2.16.0</uicommonsVersion>
-    <uiframeworkVersion>3.20.0</uiframeworkVersion>
-    <appframeworkVersion>2.16.0</appframeworkVersion>
-
-    <!-- OpenMRS Core -->
-    <openMRSVersion>2.4.0</openMRSVersion>
   </properties>
 
   <dependencies>
@@ -59,72 +35,6 @@
       <type>zip</type>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.openmrs.web</groupId>
-      <artifactId>openmrs-webapp</artifactId>
-      <version>${openMRSVersion}</version>
-      <type>war</type>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>legacyui-omod</artifactId>
-      <version>${legacyuiVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>idgen-omod</artifactId>
-      <version>${idgenVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>fhir2-omod</artifactId>
-      <version>${fhir2Version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>webservices.rest-omod</artifactId>
-      <version>${webservices.restVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>initializer-omod</artifactId>
-      <version>${initializerVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>addresshierarchy-omod</artifactId>
-      <version>${addresshierarchyVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>metadatamapping-omod</artifactId>
-      <version>${metadatamappingVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>metadatasharing-omod</artifactId>
-      <version>${metadatasharingVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>appui-omod</artifactId>
-      <version>${appuiVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>appframework-omod</artifactId>
-      <version>${appframeworkVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>uiframework-omod</artifactId>
-      <version>${uiframeworkVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>uicommons-omod</artifactId>
-      <version>${uicommonsVersion}</version>
-    </dependency>
   </dependencies>
 
   <build>
@@ -133,36 +43,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
-          <!-- OpenMRS Core -->
-          <execution>
-            <id>copy-openmrs-war</id>
-            <phase>package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <excludeTransitive>true</excludeTransitive>
-              <useBaseVersion>true</useBaseVersion>
-              <outputDirectory>${distro.openmrsCoreDir}</outputDirectory>
-              <stripVersion>true</stripVersion>
-              <includeArtifactIds>openmrs-webapp</includeArtifactIds>
-            </configuration>
-          </execution>
-          <!-- OpenMRS modules -->
-          <execution>
-            <id>copy-jars</id>
-            <phase>package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <excludeTransitive>true</excludeTransitive>
-              <useBaseVersion>true</useBaseVersion>
-              <outputDirectory>${distro.openmrsModulesDir}</outputDirectory>
-              <!-- copying jars and omods only -->
-              <includeTypes>jar, omod</includeTypes>
-            </configuration>
-          </execution>
           <!-- OpenMRS config -->
           <execution>
             <id>unpack-openmrs-config-refapp</id>
@@ -174,19 +54,6 @@
               <excludeTransitive>true</excludeTransitive>
               <outputDirectory>${distro.openmrsConfigDir}</outputDirectory>
               <includeArtifactIds>openmrs-config-refapp</includeArtifactIds>
-            </configuration>
-          </execution>
-          <!-- SPA -->
-          <execution>
-            <id>unpack-microfrontends</id>
-            <phase>package</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <excludeTransitive>true</excludeTransitive>
-              <outputDirectory>${distro.spaDir}</outputDirectory>
-              <includeArtifactIds>spa</includeArtifactIds>
             </configuration>
           </execution>
           <!-- SPA config -->
@@ -218,86 +85,20 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
+        <groupId>org.openmrs.maven.plugins</groupId>
+        <artifactId>openmrs-sdk-maven-plugin</artifactId>
+        <version>4.0.2-SNAPSHOT</version>
         <executions>
           <execution>
-            <id>rename jars to omod</id>
+            <id>openmrs-sdk:build-distro</id>
+            <goals>
+              <goal>build-distro</goal>
+            </goals>
             <phase>package</phase>
             <configuration>
-              <target>
-                <move todir="${distro.openmrsModulesDir}">
-                  <fileset dir="${distro.openmrsModulesDir}"/>
-                  <mapper type="regexp" from="^(.+)-omod-(.+)\.jar" to="\1-\2.omod"/>
-                </move>
-              </target>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>rename war</id>
-            <phase>package</phase>
-            <configuration>
-              <target>
-                <move file="${distro.openmrsCoreDir}${file.separator}openmrs-webapp.war"
-                      tofile="${distro.openmrsCoreDir}${file.separator}openmrs.war"/>
-              </target>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Assemble all Micro Frontends -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>npx openmrs build</id>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <phase>compile</phase>
-            <configuration>
-              <executable>npx</executable>
-              <arguments>
-                <argument>openmrs@${appShellVersion}</argument>
-                <argument>build</argument>
-                <argument>--spa-path</argument>
-                <argument>${env.SPA_PATH}</argument>
-                <argument>--api-url</argument>
-                <argument>${env.API_URL}</argument>
-                <argument>--target</argument>
-                <argument>${distro.spaDir}</argument>
-              </arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npx openmrs assemble</id>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <phase>compile</phase>
-            <configuration>
-              <!-- Using a bash script for consistency with build.sh ¯\_(ツ)_/¯ -->
-              <executable>npx</executable>
-              <arguments>
-                <argument>openmrs@${appShellVersion}</argument>
-                <argument>assemble</argument>
-                <argument>--mode</argument>
-                <argument>config</argument>
-                <argument>--target</argument>
-                <argument>${distro.spaDir}</argument>
-                <argument>--config</argument>
-                <argument>${spaVersionConfigFile}</argument>
-              </arguments>
+              <distro>${project.basedir}/distro.properties</distro>
+              <dir>${project.build.directory}/sdk-distro</dir>
             </configuration>
           </execution>
         </executions>
