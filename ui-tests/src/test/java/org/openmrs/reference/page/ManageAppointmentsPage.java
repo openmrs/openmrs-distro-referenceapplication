@@ -67,7 +67,6 @@ public class ManageAppointmentsPage extends Page {
     }
 
     public void clickOnService(String serviceName) {
-
         By link = By.xpath("/" +
                 "/div[@id='allAppointmentTypesModal']" +
                 "/div[@class='dialog-content']" +
