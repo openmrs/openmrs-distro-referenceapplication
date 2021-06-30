@@ -1,11 +1,9 @@
 package org.openmrs.reference.page;
 
-
 import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 
 public class ManageFormsPage extends Page {
 
@@ -114,11 +112,8 @@ public class ManageFormsPage extends Page {
         clickOn(CURRENT_DAY);
     }
 
-
     @Override
     public String getPageUrl() {
         return "/formentryapp/forms/extension.page";
     }
-
-
 }

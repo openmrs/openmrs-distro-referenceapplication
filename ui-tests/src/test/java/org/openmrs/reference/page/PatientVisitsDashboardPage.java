@@ -9,14 +9,15 @@
  */
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
 public class PatientVisitsDashboardPage extends Page {
+	
     private static final By CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
     private static final By VISIT_LIST = By.cssSelector("#visits-list li.menu-item.viewVisitDetails span.menu-date");
     private static final By END_VISIT = By.cssSelector("#visit-details div.visit-actions.active-visit a:nth-child(1)");
@@ -112,5 +113,4 @@ public class PatientVisitsDashboardPage extends Page {
         String patientFamilyName = findElement(FAMILY_NAME).getText();
         return patientFamilyName;
     }
-
 }

@@ -16,7 +16,6 @@ import org.openqa.selenium.By;
 public class SystemAdministrationPage extends Page {
 
     private static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
-
     private static By STYLES_GUIDE_LINK = By.id("referenceapplication-styleGuide-app");
 
     public SystemAdministrationPage(Page parent) {
@@ -37,5 +36,4 @@ public class SystemAdministrationPage extends Page {
         clickOn(STYLES_GUIDE_LINK);
         return new StylesGuidePage(this);
     }
-
 }
