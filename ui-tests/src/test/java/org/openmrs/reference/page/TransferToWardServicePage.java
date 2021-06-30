@@ -7,5 +7,4 @@ public class TransferToWardServicePage extends TransferPatientPage {
     public TransferToWardServicePage(Page parent) {
         super(parent);
     }
-
 }

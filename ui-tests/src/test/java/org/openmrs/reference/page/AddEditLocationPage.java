@@ -15,7 +15,6 @@ import org.openqa.selenium.By;
 public class AddEditLocationPage extends Page {
 
     protected static final String PAGE_URL = "adminui/metadata/locations/location.page";
-
     private static final By SAVE_BUTTON = By.id("save-button");
     private static final By NAME_FIELD = By.id("name-field");
     private static final By FIRST_TAG = By.cssSelector("#locationForm fieldset table tbody tr:first-child td:first-child input[type=\"checkbox\"]");

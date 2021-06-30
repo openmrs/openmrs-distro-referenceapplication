@@ -13,12 +13,10 @@ import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 
-
 /**
  * The register-a-new-patient page.
  */
 public class RegistrationPage extends Page {
-
 
     public static final By BIRTHDAY_MONTH = By.id("birthdateMonth-field");
     public static final By BIRTHDAY_YEAR = By.id("birthdateYear-field");
@@ -262,9 +260,7 @@ public class RegistrationPage extends Page {
     public void exitReview() {
         try {
             clickOn(CANCEL);
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     //  Edit  Contact Info

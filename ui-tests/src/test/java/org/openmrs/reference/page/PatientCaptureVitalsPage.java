@@ -37,9 +37,7 @@ public class PatientCaptureVitalsPage extends Page {
             heightField.clear();
             heightField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     public void setWeightField(String value) {
@@ -48,9 +46,7 @@ public class PatientCaptureVitalsPage extends Page {
             weightField.clear();
             weightField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[4]")).click();
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     public void setTemperatureField(String value) {
@@ -59,9 +55,7 @@ public class PatientCaptureVitalsPage extends Page {
             temperatureField.clear();
             temperatureField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[5]")).click();
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     public void setPulseField(String value) {
@@ -70,9 +64,7 @@ public class PatientCaptureVitalsPage extends Page {
             pulseField.clear();
             pulseField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[6]")).click();
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     public void setRespiratoryField(String value) {
@@ -81,9 +73,7 @@ public class PatientCaptureVitalsPage extends Page {
             respiratoryField.clear();
             respiratoryField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[7]")).click();
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     public void setBloodPressureFields(String value1, String value2) {
@@ -91,18 +81,14 @@ public class PatientCaptureVitalsPage extends Page {
         try {
             bloodPressureField1.clear();
             bloodPressureField1.sendKeys(value1);
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
 
         WebElement bloodPressureField2 = findElement(BLOOD_PRESSURE_FIELD_2);
         try {
             bloodPressureField2.clear();
             bloodPressureField2.sendKeys(value2);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[8]")).click();
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     public void setBloodOxygenSaturationField(String value) {
@@ -111,18 +97,14 @@ public class PatientCaptureVitalsPage extends Page {
             bloodOxygenSaturationField.clear();
             bloodOxygenSaturationField.sendKeys(value);
             findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     public void confirm() {
         try {
             WebElement confirmButton = findElement(CONFIRM_BUTTON);
             confirmButton.click();
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     public boolean save() {
