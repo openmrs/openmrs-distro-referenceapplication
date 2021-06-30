@@ -370,7 +370,6 @@ public class RegistrationPage extends Page {
     }
     public String getRelationshipTypeConfirmationPage() {
         return getText(RELATIONSHIPTYPE_CONFIRM);
-    }
-    
+    }   
 }
 
