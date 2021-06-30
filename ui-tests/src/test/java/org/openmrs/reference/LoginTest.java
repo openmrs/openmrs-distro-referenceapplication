@@ -16,14 +16,14 @@ import org.openmrs.reference.page.HomePage;
 
 import static org.junit.Assert.assertTrue;
 
-public class LoginTest extends ReferenceApplicationTestBase {   
+public class LoginTest extends ReferenceApplicationTestBase {
     private HomePage homePage;
 
     public void initiateHomePage() {
         homePage = new HomePage(page);
-        assertPage(homePage.waitForPage());
-    } 
-    
+        assertPage(homePage.waitForPage());//waiting for the homepage to be reachable
+    }
+
     @Test
     @Category(BuildTests.class)
     public void verifyModulesAvailableOnHomePage() {
@@ -36,8 +36,8 @@ public class LoginTest extends ReferenceApplicationTestBase {
         assertTrue(homePage.isDataManagementAppPresent());
         assertTrue(homePage.isConfigureMetadataAppPresent());
         assertTrue(homePage.isSystemAdministrationAppPresent());
-    } 
-    
+    }
+
     @Test
     @Category(BuildTests.class)
     public void verifyClerkModulesAvailableOnHomePage() {
@@ -46,21 +46,21 @@ public class LoginTest extends ReferenceApplicationTestBase {
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertTrue(homePage.isRegisterPatientCustomizedForRefAppPresent());
-    } 
-    
+    }
+
     @Test
     @Category(BuildTests.class)
-    public void verifyDoctorModulesAvailableOnHomePage()  {
+    public void verifyDoctorModulesAvailableOnHomePage() {
         goToLoginPage().loginAsDoctor();
         initiateHomePage();
         assertTrue(homePage.isFindAPatientAppPresent());
         assertTrue(homePage.isActiveVisitsAppPresent());
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
     }
-    
+
     @Test
     @Category(BuildTests.class)
-    public void verifyNurseModulesAvailableOnHomePage()  {
+    public void verifyNurseModulesAvailableOnHomePage() {
         goToLoginPage().loginAsNurse();
         initiateHomePage();
         assertTrue(homePage.isFindAPatientAppPresent());
@@ -68,7 +68,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
         assertTrue(homePage.isAppointmentSchedulingAppPresent());
         assertTrue(homePage.isCaptureVitalsAppPresent());
     }
-    
+
     @Test
     @Category(BuildTests.class)
     public void verifySysadminModulesAvailableOnHomePage() {
