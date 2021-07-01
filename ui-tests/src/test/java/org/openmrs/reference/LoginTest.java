@@ -21,7 +21,7 @@ public class LoginTest extends ReferenceApplicationTestBase {
 
     public void initiateHomePage() {
         homePage = new HomePage(page);
-        assertPage(homePage.waitForPage());//waiting for the homepage to be reachable
+        assertPage(homePage.waitForPage());
     }
 
     @Test
