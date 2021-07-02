@@ -78,6 +78,11 @@ public class PatientVisitsDashboardPage extends Page {
         return new ExitFromInpatientPage(this);
     }
 
+    public TransferToWardServicePage goToTransferToWardServicePage() {
+    	clickOn(EXIT_FROM_INPATIENT);
+    	return new TransferToWardServicePage(this);
+    }
+    
     public void clickOnActions() {
         clickOn(ACTIONS_DROPDOWN);
     }
