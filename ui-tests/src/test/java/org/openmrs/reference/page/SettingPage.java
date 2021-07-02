@@ -1,13 +1,12 @@
 package org.openmrs.reference.page;
 
-
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-
 public class SettingPage extends Page {
+	
     private static final By SETTING = By.xpath("//a[contains(@href, '/openmrs/admin/maintenance/settings.list')]");
     private static final By REGISTRATIONCORE = By.linkText("Registrationcore");
     private static final By FAMILY_NAME_LIST = By.id("settings0.globalProperty.propertyValue");
@@ -28,6 +27,7 @@ public class SettingPage extends Page {
     public static By LIST = By.className("ui-corner-all");
     public String GIVEN;
     public String FAMILY;
+    
     public SettingPage(WebDriver driver) {
         super(driver);
     }
@@ -130,6 +130,4 @@ public class SettingPage extends Page {
     public String getPageUrl() {
         return "admin/maintenance/settings.list";
     }
-
-
 }

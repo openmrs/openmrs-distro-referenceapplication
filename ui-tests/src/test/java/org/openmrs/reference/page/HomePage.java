@@ -141,5 +141,4 @@ public class HomePage extends Page {
     public String getPageAliasUrl() {
         return "/index.htm";
     }
-
 }
