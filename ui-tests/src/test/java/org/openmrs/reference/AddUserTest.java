@@ -15,7 +15,11 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.page.AddEditUserPage;
+import org.openmrs.reference.page.AdministrationPage;
+import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.ManageUserPage;
+import org.openmrs.reference.page.SystemAdministrationPage;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
