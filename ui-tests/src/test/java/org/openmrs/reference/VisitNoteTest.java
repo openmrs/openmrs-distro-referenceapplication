@@ -25,7 +25,6 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
     private static final String DIAGNOSIS_PRIMARY = "CANCER";
     private static final String DIAGNOSIS_SECONDARY = "MALARIA";
     private static final String DIAGNOSIS_SECONDARY_UPDATED = "Pneumonia";
-    
     private PatientVisitsDashboardPage patientVisitsDashboardPage;
     private PatientInfo patient;
 
