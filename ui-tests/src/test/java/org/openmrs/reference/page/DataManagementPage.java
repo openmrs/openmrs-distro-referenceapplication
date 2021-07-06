@@ -14,6 +14,7 @@ import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 
 public class DataManagementPage extends Page {
+	
     public final static By ID_PATIENT_2 = By.id("patient2-text");
     public final static By CONTINUE = By.id("confirm-button");
     private final static By MERGE_PATIENT_ELECTRONIC_RECORD = By.id("coreapps-mergePatientsHomepageLink-app");
@@ -21,6 +22,7 @@ public class DataManagementPage extends Page {
     private final static By MERGE_PATIENT = By.id("second-patient");
     private final static By NO = By.id("cancel-button");
     private final static By SEARCH = By.id("patient-search");
+    
     public DataManagementPage(Page page) {
         super(page);
     }

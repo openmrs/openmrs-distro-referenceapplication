@@ -1,12 +1,8 @@
 package org.openmrs.reference.page;
 
-
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 
-/**
- *
- */
 public class VisitTypePage extends Page {
 
     private static final By SAVE_VISIT_TYPE = By.cssSelector("#content input[name=\"save\"]");
@@ -40,7 +36,6 @@ public class VisitTypePage extends Page {
         acceptAlert();
         return new VisitTypeListPage(this);
     }
-
 
     public VisitTypeListPage retire() {
         findElement(RETIRE_VISIT_TYPE).click();

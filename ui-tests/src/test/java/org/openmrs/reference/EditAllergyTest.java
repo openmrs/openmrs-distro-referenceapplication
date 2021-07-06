@@ -7,12 +7,11 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-
 package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ActiveVisitsPage;
@@ -35,14 +34,14 @@ public class EditAllergyTest extends ReferenceApplicationTestBase {
         createTestVisit();
     }
 
-    @Ignore
+    @Test
     @Category(BuildTests.class)
-    public void editAllergyTest() throws Exception {
+    public void editAllergyTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
 
-        AllergyPage allergyPage = patientDashboardPage.clickOnAllergyManagement();
+        AllergyPage allergyPage = patientDashboardPage.clickOnAllergiesWidgetLink();
         createTestAllergy(allergyPage);
 
         AddOrEditAllergyPage addOrEditAllergyPage = allergyPage.clickOnEditAllergy();
@@ -68,5 +67,4 @@ public class EditAllergyTest extends ReferenceApplicationTestBase {
         addOrEditAllergyPage.drugId();
         addOrEditAllergyPage.clickOnSaveAllergy();
     }
-
 }

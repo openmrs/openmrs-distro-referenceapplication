@@ -11,7 +11,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
@@ -34,9 +34,9 @@ public class EditProviderTest extends ReferenceApplicationTestBase {
         providerUuid = provider.create();
     }
 
-    @Ignore
+    @Test
     @Category(BuildTests.class)
-    public void editProviderTest() throws InterruptedException {
+    public void editProviderTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageProviderPage manageProviderPage = administrationPage.clickOnManageProviders();
         manageProviderPage.setProviderNameOrId(person.getName());

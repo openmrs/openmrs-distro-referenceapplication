@@ -13,6 +13,8 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.reference.page.RegistrationEditSectionPage;
@@ -20,7 +22,6 @@ import org.openmrs.uitestframework.test.TestData;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-
 
 public class EditDemographicTest extends ReferenceApplicationTestBase {
 
@@ -34,6 +35,7 @@ public class EditDemographicTest extends ReferenceApplicationTestBase {
     }
 
     @Test
+    @Category(BuildTests.class)
     public void editDemographicTest() throws Exception {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(testPatient.identifier);

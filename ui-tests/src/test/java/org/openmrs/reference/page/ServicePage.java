@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
  * Created by tomasz on 24.06.15.
  */
 public class ServicePage extends Page {
+	
     public static final String URL_PATH = "/appointmentschedulingui/appointmentType.page";
     public static final By NAME_FIELD = By.id("name-field");
     public static final By DURATION_FIELD = By.id("duration-field");
@@ -63,5 +64,4 @@ public class ServicePage extends Page {
     public String getDescriptionValue() {
         return getValue(DESCRIPTION_FIELD);
     }
-
 }

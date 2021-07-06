@@ -12,7 +12,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.ActiveVisitsPage;
@@ -34,14 +34,14 @@ public class AddNewAllergyTest extends ReferenceApplicationTestBase {
         createTestVisit();
     }
 
-    @Ignore
+    @Test
     @Category(BuildTests.class)
-    public void addNewAllergyTest() throws Exception {
+    public void addNewAllergyTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
 
-        AllergyPage allergyPage = patientDashboardPage.clickOnAllergyManagement();
+        AllergyPage allergyPage = patientDashboardPage.clickOnAllergiesWidgetLink();
 
         AddOrEditAllergyPage addOrEditAllergyPage = allergyPage.clickOnAddNewAllergy();
         addOrEditAllergyPage.enterDrug(DRUG_NAME);
@@ -59,5 +59,4 @@ public class AddNewAllergyTest extends ReferenceApplicationTestBase {
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }

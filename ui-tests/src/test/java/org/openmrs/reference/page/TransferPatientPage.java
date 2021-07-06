@@ -9,6 +9,7 @@ public abstract class TransferPatientPage extends Page {
     private static final By SELECT_LOCATION = By.id("w5");
     private static final By SAVE = By.cssSelector(".submitButton");
     private final Page parent;
+    
     public TransferPatientPage(Page parent) {
         super(parent);
         this.parent = parent;

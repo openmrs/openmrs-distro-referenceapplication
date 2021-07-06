@@ -15,7 +15,6 @@ public class RequestAppointmentPage extends Page {
         super(page);
     }
 
-
     public void enterAppointmentType(String type) {
         setTextToFieldNoEnter(APPOINTMENT_TYPE, type);
         waitForElement(SERVICE_DROPDOWN);

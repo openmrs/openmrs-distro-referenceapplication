@@ -11,8 +11,9 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.uitestframework.test.TestData;
 
@@ -33,11 +34,12 @@ public class FindPatientRecordTest extends ReferenceApplicationTestBase {
         deletePatient(patient);
     }
 
-    @Ignore
-    @Category(org.openmrs.reference.groups.BuildTests.class)
-    public void testFindPatientRecord() throws InterruptedException {
+    @Test
+    @Category(BuildTests.class)
+    public void findPatientRecordTest() {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(patient.identifier);
+        findPatientPage.waitForPageToLoad();
         assertThat(findPatientPage.getFirstPatientIdentifier(), containsString(patient.identifier));
     }
 }

@@ -9,6 +9,7 @@ public class HeaderPage extends Page {
     static final String HOME_ICON = "logo";
     static final String HOME_LINK_TEXT = "Home";
     static final By LOGOUT = By.className("logout");
+    
     public HeaderPage(WebDriver driver) {
         super(driver);
     }
@@ -16,7 +17,6 @@ public class HeaderPage extends Page {
     public void clickOnHomeIcon() throws InterruptedException {
         clickOn(By.className(HOME_ICON));
     }
-
 
     // TODO This is unused, do we really need it?
     public void clickOnHomeLink() {
@@ -31,5 +31,4 @@ public class HeaderPage extends Page {
     public String getPageUrl() {
         return null;
     }
-
 }

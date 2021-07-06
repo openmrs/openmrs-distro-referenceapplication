@@ -11,8 +11,9 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.uitestframework.test.TestData;
 
@@ -20,27 +21,30 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
 public class FindPatientByNameTest extends ReferenceApplicationTestBase {
+    
     private FindPatientPage findPatientPage;
     private TestData.PatientInfo patient;
-
 
     @Before
     public void setUp() throws Exception {
         patient = createTestPatient();
     }
 
-    @Ignore
-    @Category(org.openmrs.reference.groups.BuildTests.class)
-    public void findPatientByIdAndNameTest() throws Exception {
+    @Test
+    @Category(BuildTests.class)
+    public void findPatientByNameTest() {
         findPatientPage = homePage.goToFindPatientRecord();
         // Search by name
         findPatientPage.enterPatient(patient.givenName);
+        findPatientPage.waitForPageToLoad();
         assertThat(findPatientPage.getFirstPatientName(), containsString(patient.givenName));
 
         findPatientPage.enterPatient(patient.middleName);
+        findPatientPage.waitForPageToLoad();
         assertThat(findPatientPage.getFirstPatientName(), containsString(patient.middleName));
 
         findPatientPage.enterPatient(patient.familyName);
+        findPatientPage.waitForPageToLoad();
         assertThat(findPatientPage.getFirstPatientName(), containsString(patient.familyName));
     }
 
@@ -49,5 +53,4 @@ public class FindPatientByNameTest extends ReferenceApplicationTestBase {
         deletePatient(patient);
         waitForPatientDeletion(patient.uuid);
     }
-
 }

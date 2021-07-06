@@ -2,7 +2,9 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestBase;
@@ -10,12 +12,12 @@ import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertFalse;
 
-
 /**
  * Created by tomasz on 09.07.15.
  */
 
 public class RecordMergeIssueTest extends TestBase {
+
     private HomePage homePage;
     private HeaderPage headerPage;
     private FindPatientPage findPatientPage;
@@ -27,11 +29,10 @@ public class RecordMergeIssueTest extends TestBase {
     private String id;
     private String id2;
 
-
     @Before
     public void setUp() throws Exception {
         homePage = new HomePage(page);
-        assertPage(homePage);
+        assertPage(homePage.waitForPage());
         headerPage = new HeaderPage(driver);
         findPatientPage = new FindPatientPage(page);
         registrationPage = new RegistrationPage(page);
@@ -41,9 +42,10 @@ public class RecordMergeIssueTest extends TestBase {
         patient1 = new TestPatient();
     }
 
-    @Ignore
+    @Test
+    @Category(BuildTests.class)
     public void recordMergeIssueTest() throws Exception {
-        homePage.goToRegisterPatientApp();
+        homePage.goToRegisterPatientApp().waitForPage();
 //       Register first patient
         patient.familyName = "Mike";
         patient.givenName = "Smith";
@@ -72,7 +74,6 @@ public class RecordMergeIssueTest extends TestBase {
         assertFalse(driver.getPageSource().contains("java.lang.NullPointerException"));
     }
 
-
     @After
     public void tearDown() throws Exception {
         headerPage.clickOnHomeIcon();
@@ -80,6 +81,5 @@ public class RecordMergeIssueTest extends TestBase {
         p.uuid = patient.uuid;
         deletePatient(p);
         waitForPatientDeletion(patient.uuid);
-        headerPage.logOut();
     }
 }

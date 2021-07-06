@@ -23,7 +23,6 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
-
 public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
 
     private String locationTagUuid;
@@ -35,7 +34,7 @@ public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void addLocationTest() throws Exception {
+    public void addLocationTest() {
         AddEditLocationPage addEditLocationPage = homePage.goToConfigureMetadata().goToManageLocations().goToAddLocation();
 
         addEditLocationPage.save();
@@ -55,5 +54,4 @@ public class AddDeleteLocationTest extends ReferenceApplicationTestBase {
     public void delete() throws Exception {
         RestClient.delete("/locationtag/" + locationTagUuid, true);
     }
-
 }

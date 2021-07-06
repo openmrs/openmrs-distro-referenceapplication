@@ -35,7 +35,7 @@ public class RetireProviderTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void retireProviderTest() throws InterruptedException {
+    public void retireProviderTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageProviderPage manageProviderPage = administrationPage.clickOnManageProviders();
         manageProviderPage.setProviderNameOrId(person.getName());

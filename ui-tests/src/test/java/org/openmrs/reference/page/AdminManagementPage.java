@@ -1,15 +1,12 @@
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-/**
- *
- */
 public abstract class AdminManagementPage extends Page {
 
     protected static final By HOME = By.id("homeNavLink");
@@ -40,7 +37,6 @@ public abstract class AdminManagementPage extends Page {
         clickOn(ADD);
     }
 
-
     public void manage() {
         clickOn(MANAGE);
     }
@@ -48,7 +44,6 @@ public abstract class AdminManagementPage extends Page {
     public void save() throws InterruptedException {
         clickOn(SAVE);
     }
-
 
     public void clickOnFound() {
         clickOn(FOUND_ELEMENT);
@@ -110,7 +105,6 @@ public abstract class AdminManagementPage extends Page {
         }
     }
 
-
     public void retire() throws InterruptedException {
         clickOn(RETIRE);
     }
@@ -135,6 +129,4 @@ public abstract class AdminManagementPage extends Page {
     public void fillInDescription(String description) {
         fillInField(findElement(DESCRIPTION), description);
     }
-
-
 }

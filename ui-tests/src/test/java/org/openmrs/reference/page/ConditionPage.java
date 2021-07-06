@@ -1,23 +1,21 @@
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
 public class ConditionPage extends Page {
+	
     public static final By SAVE = By.id("addConditionBtn");
     private static final By CANCEL = By.className("cancel");
     private static final By CONDITION = By.id("conceptId-input");
-    private static final By ICON_CALENDAR = By
-            .cssSelector(".date .icon-calendar");
-    private static final By ICON_CALENDAR_TODATE = By
-            .cssSelector("td.day.active");
+    private static final By ICON_CALENDAR = By.cssSelector(".date .icon-calendar");
+    private static final By ICON_CALENDAR_TODATE = By.cssSelector("td.day.active");
     private static final By ACTIVE = By.id("status-1");
     private static final By INACTIVE = By.id("status-2");
-    private static final By FIRST_CONDITION = By
-            .cssSelector(".dropdown-menu:first-of-type li a:first-of-type");
+    private static final By FIRST_CONDITION = By.cssSelector(".dropdown-menu:first-of-type li a:first-of-type");
 
     public ConditionPage(ConditionsPage conditionsPage) {
         super(conditionsPage);

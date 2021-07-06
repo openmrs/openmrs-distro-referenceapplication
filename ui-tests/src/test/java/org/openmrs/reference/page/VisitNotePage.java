@@ -67,7 +67,6 @@ public class VisitNotePage extends Page {
         enterSecondaryDiagnosis(diag);
         diagnosisElement.clear();
         diagnosisElement.click();
-
     }
 
     public void enterSecondaryDiagnosis(String diag) {
@@ -92,5 +91,4 @@ public class VisitNotePage extends Page {
         clickOn(SAVE_VISIT_NOTE);
         return new ClinicianFacingPatientDashboardPage(this);
     }
-
 }

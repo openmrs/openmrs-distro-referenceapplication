@@ -1,9 +1,9 @@
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-
-import java.util.List;
 
 public class RegistrationEditSectionPage extends Page {
 
@@ -64,7 +64,6 @@ public class RegistrationEditSectionPage extends Page {
     public String getPageUrl() {
         return "/registrationapp/editSection.page";
     }
-
 
     public void clearPhoneNumber() {
         findElement(PHONE_NUMBER).clear();

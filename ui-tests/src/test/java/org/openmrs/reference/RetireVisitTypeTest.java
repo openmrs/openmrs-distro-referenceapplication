@@ -10,6 +10,7 @@
 package org.openmrs.reference;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -30,9 +31,9 @@ import static org.junit.Assert.assertThat;
 public class RetireVisitTypeTest extends ReferenceApplicationTestBase {
 
     public static final String RETIRE_REASON = "Retire reason";
+    
     private String visitTypeName;
     private String visitTypeDesc;
-
     private String visitTypeUuid;
 
     @Before

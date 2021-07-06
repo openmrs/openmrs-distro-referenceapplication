@@ -37,7 +37,7 @@ public class CreatePersonTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void createPersonTest() throws InterruptedException {
+    public void createPersonTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManagePersonPage managePersonPage = administrationPage.clickOnManagePersons();
         AddPersonPage personPage = managePersonPage.createPerson();

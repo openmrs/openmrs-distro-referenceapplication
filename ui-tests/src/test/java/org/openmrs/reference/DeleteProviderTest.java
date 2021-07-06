@@ -35,7 +35,7 @@ public class DeleteProviderTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void deleteProviderTest() throws InterruptedException {
+    public void deleteProviderTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageProviderPage manageProviderPage = administrationPage.clickOnManageProviders();
         manageProviderPage.setProviderNameOrId(person.getName());
