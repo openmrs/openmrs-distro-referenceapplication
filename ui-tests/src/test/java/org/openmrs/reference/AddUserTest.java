@@ -10,18 +10,25 @@
 
 package org.openmrs.reference;
 
-import org.junit.Ignore;
-import org.openmrs.reference.page.*;
-
 import java.util.List;
+
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
+import org.openmrs.reference.page.AddEditUserPage;
+import org.openmrs.reference.page.AdministrationPage;
+import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.ManageUserPage;
+import org.openmrs.reference.page.SystemAdministrationPage;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AddUserTest extends ReferenceApplicationTestBase {
 
-    @Ignore
-    public void addUserTest() throws Exception {
+    @Test
+    @Category(BuildTests.class)
+    public void addUserTest() {
         SystemAdministrationPage systemAdministrationPage = homePage.goToSystemAdministrationPage();
         AdministrationPage administrationPage = systemAdministrationPage.goToAdvancedAdministration();
         ManageUserPage manageUserPage = administrationPage.clickOnManageUsers();
@@ -55,6 +62,7 @@ public class AddUserTest extends ReferenceApplicationTestBase {
             assertTrue(manageUserPage.getUserSavedNotification().contains("User Saved"));
 
             homePage = new HomePage(goToLoginPage().login("super_nurse", "Nurse123"));
+            homePage.waitForPage();
             homePage.getLoggedUsername().contains("super_nurse");
             goToLoginPage().loginAsAdmin();
             homePage.goToAdministration();
