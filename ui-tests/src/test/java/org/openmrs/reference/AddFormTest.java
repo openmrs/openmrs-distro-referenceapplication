@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNotNull;
  * Created by nata on 24.06.15.
  */
 public class AddFormTest extends TestBase {
-    
+
     private static String name = "newFormTest1";
     private static String description = "description of new form";
     private static String version = "1.2";
@@ -34,7 +34,7 @@ public class AddFormTest extends TestBase {
     private HtmlFormsPage htmlFormsPage;
 
     @Before
-    public void setUp() throws Exception {    
+    public void setUp() throws Exception {
         homePage = new HomePage(page);
         assertPage(homePage.waitForPage());
         administrationPage = new AdministrationPage(page);
@@ -64,7 +64,7 @@ public class AddFormTest extends TestBase {
         manageForm.formIdFromUrl();
         manageForm.save();
         headerPage.clickOnHomeIcon();
-        homePage.goToActiveVisitPatient();
+//        homePage.goToActiveVisitPatient().waitForPage();
         assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
         headerPage.clickOnHomeIcon();
         homePage.goToManageForm();
