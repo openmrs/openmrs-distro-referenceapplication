@@ -29,7 +29,6 @@ public class HomePage extends Page {
     private static final By FIND_PATIENT_RECORD = By.id("coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension");
     private static final By DATA_MANAGEMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
     private static final By APPOINTMENT_SCHEDULING = By.id("appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension");
-    private static final By LOGGED_IN_USER = By.cssSelector("li.nav-item.identifier");
 
     public HomePage(Page page) {
         super(page);
@@ -44,7 +43,7 @@ public class HomePage extends Page {
     }
 
     public String getLoggedUsername() {
-        return findElement(LOGGED_IN_USER).getText();
+        return findElement(By.cssSelector(".identifier")).getText();
     }
 
     public int numberOfAppsPresent() {

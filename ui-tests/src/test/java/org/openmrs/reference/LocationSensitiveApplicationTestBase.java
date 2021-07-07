@@ -1,12 +1,12 @@
 package org.openmrs.reference;
 
-import java.util.Arrays;
-
 import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.openmrs.uitestframework.test.RestClient;
 import org.openmrs.uitestframework.test.TestData;
+
+import java.util.Arrays;
 
 public class LocationSensitiveApplicationTestBase extends ReferenceApplicationTestBase {
 
