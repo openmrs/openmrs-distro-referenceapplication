@@ -20,6 +20,7 @@ import org.openmrs.uitestframework.test.TestData;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class TransferToWardServiceTest extends ReferenceApplicationTestBase {
 
@@ -41,8 +42,10 @@ public class TransferToWardServiceTest extends ReferenceApplicationTestBase {
         PatientVisitsDashboardPage patientVisitsDashboardPage = findPatientPage.clickOnFirstPatient().startVisit();
 
         patientVisitsDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);
+        assertTrue(patientVisitsDashboardPage.containsText("Admission"));
 
         patientVisitsDashboardPage.goToTransferToWardServicePage().confirm(ISOLATION_WARD);
+        assertTrue(patientVisitsDashboardPage.containsText("Discharge"));
         patientVisitsDashboardPage.waitForPage();
 
         assertThat(patientVisitsDashboardPage.getEncountersCount(), is(2));
