@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class LoginTest extends ReferenceApplicationTestBase {
     private HomePage homePage;
     
-    public void initiateHomePage() {
+    private void initiateHomePage() {
         homePage = new HomePage(page);
         assertPage(homePage.waitForPage());
     }
