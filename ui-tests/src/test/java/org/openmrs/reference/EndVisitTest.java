@@ -11,6 +11,7 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -32,15 +33,14 @@ public class EndVisitTest extends LocationSensitiveApplicationTestBase {
     }
 
     @Test
+    @Ignore
     @Category(BuildTests.class)
-    public void endVisitTest() {
+    public void EndVisitTest() throws Exception {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(patient.identifier);
-        findPatientPage.waitForPageToLoad();
         ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage = findPatientPage.clickOnFirstPatient();
         PatientVisitsDashboardPage patientVisitsDashboardPage = clinicianFacingPatientDashboardPage.goToRecentVisits();
         patientVisitsDashboardPage = patientVisitsDashboardPage.endVisit();
-        patientVisitsDashboardPage.waitForPageToLoad();
         assertNull(patientVisitsDashboardPage.getActiveVisit());
     }
 
@@ -48,4 +48,5 @@ public class EndVisitTest extends LocationSensitiveApplicationTestBase {
     public void tearDown() throws Exception {
         deletePatient(patient);
     }
+
 }
