@@ -12,7 +12,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -36,7 +35,6 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
     public void contactInfoTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -66,6 +64,7 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         activeVisitsPage.search(patient.identifier);
         patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         patientDashboardPage.clickOnShowContact();
+        patientDashboardPage.waitForPage();
         assertTrue(patientDashboardPage.getTelephoneNumber().contains("111111111"));
     }
 
