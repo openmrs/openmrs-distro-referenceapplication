@@ -72,7 +72,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By MERGE_VISIT_BUTTON = By.xpath("//a[@id='org.openmrs.module.coreapps.mergeVisits']/li");
     private static final By MERGE = By.id("mergeVisitsBtn");
     private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
-    private static final By EYE_REPORT = By.linkText("Eye Report");
     private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
     private static final By RECENT_VISITS = By.cssSelector("visitbyencountertype > ul > li:nth-child(1) > a");
     private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
@@ -275,10 +274,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     //Find Patient Id
     public String findPatientId() {
         return findElement(PATIENT_ID).getText();
-    }
-
-    public void clickOnEyeForm() {
-        clickOn(EYE_REPORT);
     }
 
     public void goToEditVisitNote() throws InterruptedException {

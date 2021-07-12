@@ -18,7 +18,6 @@ public class ManageFormsPage extends Page {
     private static By EDIT_FORM_PATH;
     private static By DELETE_FORM_PATH;
     private static String REST_PATH_2 = "'\"]";
-    private static By CALENDAR_EYE_FORM = By.id("w1-display");
     private static By DATAPICKER_YEAR = By.className("ui-datepicker-year");
     private static By DATAPICKER_MONTH = By.className("ui-datepicker-moth");
     private static By DATAPICKER_DAY = By.className("ui-state-default");
@@ -77,11 +76,6 @@ public class ManageFormsPage extends Page {
     public void deletePath() {
         DELETE_FORM_PATH = By.xpath(DELETE_FORM + id + REST_PATH + id + REST_PATH_2);
         clickOn(DELETE_FORM_PATH);
-    }
-
-    //    Eye Form
-    public void clickOnCalendarEyeReport() {
-        clickOn(CALENDAR_EYE_FORM);
     }
 
     public void selectYear(String year) {
