@@ -11,6 +11,7 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ActiveVisitsPage extends Page {
 
@@ -44,6 +45,7 @@ public class ActiveVisitsPage extends Page {
     }
 
     public ClinicianFacingPatientDashboardPage goToPatientDashboardOfLastActiveVisit() {
+        waiter.until(ExpectedConditions.visibilityOfElementLocated(ACTIVE_PATIENT));
         clickOn(ACTIVE_PATIENT);
         return new ClinicianFacingPatientDashboardPage(this);
     }
