@@ -9,13 +9,12 @@
  */
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
-
 
 public class ManageProviderPage extends Page {
 
@@ -53,7 +52,6 @@ public class ManageProviderPage extends Page {
                 return new ProviderPage(this);
             }
         }
-
         throw new IllegalStateException("Could not find provider with identifier: " + name);
     }
 

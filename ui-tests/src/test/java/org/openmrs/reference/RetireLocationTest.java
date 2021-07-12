@@ -18,7 +18,6 @@ import org.openmrs.reference.page.ManageLocationsPage;
 import org.openmrs.uitestframework.test.RestClient;
 import org.openmrs.uitestframework.test.TestData;
 
-
 public class RetireLocationTest extends ReferenceApplicationTestBase {
 
     private String locationName = "TEST" + TestData.randomSuffix();
@@ -31,7 +30,7 @@ public class RetireLocationTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void retireLocationTest() throws Exception {
+    public void retireLocationTest() {
         ManageLocationsPage manageLocationsPage = homePage.goToConfigureMetadata().goToManageLocations();
         manageLocationsPage.retireLocation(locationName);
         manageLocationsPage.assertRetired(locationName);

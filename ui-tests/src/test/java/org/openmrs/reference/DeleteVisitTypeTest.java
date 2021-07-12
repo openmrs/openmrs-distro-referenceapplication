@@ -12,7 +12,6 @@ package org.openmrs.reference;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -26,13 +25,10 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-/**
- */
 public class DeleteVisitTypeTest extends ReferenceApplicationTestBase {
 
     private String visitTypeName;
     private String visitTypeDesc;
-
     private String visitTypeUuid;
 
     @Before
@@ -42,7 +38,7 @@ public class DeleteVisitTypeTest extends ReferenceApplicationTestBase {
         visitTypeUuid = new TestData.TestVisitType(visitTypeName, visitTypeDesc).create();
     }
 
-    @Ignore
+    @Test
     @Category(BuildTests.class)
     public void deleteVisitTypeTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();

@@ -23,7 +23,6 @@ public class RelationTypePage extends AdminManagementPage {
         RETIRE = By.name("retire");
     }
 
-
     public void fillInRelationTypeAIsToB(String name) {
         fillInField(findElement(A_IS_TO_B), name);
     }
@@ -47,5 +46,4 @@ public class RelationTypePage extends AdminManagementPage {
     public String getPageUrl() {
         return "/admin/person/relationshipType.list";
     }
-
 }

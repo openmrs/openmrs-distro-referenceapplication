@@ -49,5 +49,4 @@ public class ActiveVisitsPage extends Page {
         clickOn(ACTIVE_PATIENT); 
         return new ClinicianFacingPatientDashboardPage(this);
     }
-
 }

@@ -33,5 +33,4 @@ public class HeaderPage extends Page {
     public String getPageUrl() {
         return null;
     }
-
 }

@@ -11,6 +11,8 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
@@ -37,7 +39,8 @@ public class RegisterUnidentifiedPatientTest extends ReferenceApplicationTestBas
 	}
 
 	@Test
-	public void registerUnidentifiedPatient() throws InterruptedException {
+	@Category(BuildTests.class)
+	public void registerUnidentifiedPatientTest() throws InterruptedException {
 		RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
 		patient = PatientGenerator.generateTestPatient();
 		registrationPage.enterUnidentifiedPatient(patient);

@@ -11,10 +11,13 @@
 package org.openmrs.reference;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 
 public class ComeBackToApplicationAfterLogoutTest extends ReferenceApplicationTestBase {
 
     @Test
+    @Category(BuildTests.class)
     public void comeBackToApplicationAfterLogoutTest() throws Exception {
         //Logout
         getLoginPage().go();

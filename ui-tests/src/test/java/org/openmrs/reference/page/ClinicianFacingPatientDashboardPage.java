@@ -9,16 +9,16 @@
  */
 package org.openmrs.reference.page;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
 
 public class ClinicianFacingPatientDashboardPage extends Page {
 
@@ -30,8 +30,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By START_VISIT = By.id("org.openmrs.module.coreapps.createVisit");
     private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
     private static final By STARTED_AT = By.className("active-visit-started-at-message");
-    private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
-    private static final By PATIENT_CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
+    private static final By VISIT_NOTE = By.linkText("Visit Note");
+    private static final By PATIENT_CAPTURE_VITALS = By.linkText("Capture Vitals");
     private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
     private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
     private static final By VISIT_LINK_2 = By.className("visit-link");
@@ -62,31 +62,23 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By LOCATION = By.id("w3");
     private static final By WHO_WHEN_WHERE = By.id("who-when-where");
     private static final By REQUEST_APPOINTMENT = By.linkText("Request Appointment");
-    private static final By APPOINTMENT_EDIT = By.cssSelector("div.info-section:nth-child(4) > div > a:nth-child(3)");
-
+    private static final By APPOINTMENT_LINK = By.cssSelector("a.right > i");
     private static final By ERROR = By.cssSelector("li.error > span");
     private static final By ADD_PAST_VISIT = By.id("org.openmrs.module.coreapps.createRetrospectiveVisit");
-
     private static final By TODAY = By.cssSelector("td.day.active");
     private static final By CONFIRM_PAST_VISIT = By.cssSelector("div.dialog-content.form > button.confirm.right");
     private static final By CHANGE_DATE = By.cssSelector("button.confirm.no-color");
     private static final By DAY = By.xpath("//table[@class=' table-condensed']/tbody/tr[1]/td[0]");
     private static final By MERGE_VISIT_BUTTON = By.xpath("//a[@id='org.openmrs.module.coreapps.mergeVisits']/li");
     private static final By MERGE = By.id("mergeVisitsBtn");
-    private static final By ADD_ALLERGY = By.id("allergyui-editAllergies");
     private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
-
     private static final By EYE_REPORT = By.linkText("Eye Report");
     private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
     private static final By RECENT_VISITS = By.cssSelector("visitbyencountertype > ul > li:nth-child(1) > a");
     private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
-
     private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
-
     private static final By ALLERGIES_LINK = By.id("allergyui-editAllergies");
-
-    private static final By CONDITIONS_LINK = By
-            .cssSelector(".conditions .info-header i.right");
+    private static final By CONDITIONS_LINK = By.cssSelector(".conditions .info-header i.right");
 
     public ClinicianFacingPatientDashboardPage(Page page) {
         super(page);
@@ -124,7 +116,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     }
 
     public ManageAppointmentsPage goToManageAppointments() {
-        clickOn(APPOINTMENT_EDIT);
+        clickOn(APPOINTMENT_LINK);
         return new ManageAppointmentsPage(this);
     }
 
@@ -149,7 +141,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         clickOn(EXIT_FROM_INPATIENT);
         new Select(driver.findElement(By.id("w5"))).selectByVisibleText("Unknown Location");
         clickOn(SAVE);
-
     }
 
     public AdmitToInpatientPage goToAdmitToInpatient() {
@@ -214,7 +205,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         enterDiagnosis(diag);
         diagnosisElement.clear();
         diagnosisElement.click();
-
     }
 
     public void addSecondaryDiagnosis(String diag) {
@@ -223,7 +213,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         enterSecondaryDiagnosis(diag);
         diagnosisElement.clear();
         diagnosisElement.click();
-
     }
 
     public void enterSecondaryDiagnosis(String diag) {
@@ -286,11 +275,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     //Find Patient Id
     public String findPatientId() {
         return findElement(PATIENT_ID).getText();
-    }
-
-    public AllergyPage clickOnAllergyManagement() {
-        clickOn(ADD_ALLERGY);
-        return new AllergyPage(this);
     }
 
     public void clickOnEyeForm() {
@@ -368,7 +352,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
                         } catch (Exception e) {
                             return patientVisitsDashboardPage;
                         }
-
                     }
                 }
             }
@@ -400,7 +383,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     public RequestAppointmentPage clickOnRequest() {
         clickOn(REQUEST_APPOINTMENT);
         return new RequestAppointmentPage(this);
-
     }
 
     public String getPatientFamilyName() {
@@ -415,7 +397,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         }
         return phoneNumber;
     }
-
 
     public List<String> getDiagnoses() {
         String diagnosesListRaw = findElement(DIAGNOSES_LIST).getText();
@@ -455,5 +436,4 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         clickOn(CONDITIONS_LINK);
         return new ConditionsPage(this);
     }
-
 }

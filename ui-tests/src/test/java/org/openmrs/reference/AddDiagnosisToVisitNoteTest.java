@@ -9,9 +9,10 @@
  */
 package org.openmrs.reference;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -20,11 +21,9 @@ import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.VisitNotePage;
 import org.openmrs.uitestframework.test.TestData;
 
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.junit.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTestBase {
     private TestData.PatientInfo patient;
@@ -35,10 +34,9 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
         createTestVisit();
     }
 
-    @Ignore
+    @Test
     @Category(BuildTests.class)
-    public void AddDiagnosisToVisitNoteTest() {
-
+    public void addDiagnosisToVisitNoteTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
 
