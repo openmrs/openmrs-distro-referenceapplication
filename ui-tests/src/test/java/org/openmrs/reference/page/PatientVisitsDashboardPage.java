@@ -28,6 +28,7 @@ public class PatientVisitsDashboardPage extends Page {
     private static final By MERGE_VISITS = By.cssSelector("#content div.actions.dropdown ul li:nth-child(2) > a");
     private static final By FAMILY_NAME = By.cssSelector(".patient-header .demographics .name .PersonName-familyName");
     private static final By VISIT_NOTE_ENCOUNTER = By.xpath("//div[@id='visit-details']/ul/li/ul/li/div/strong/span[text()='Visit Note']");
+    private static final By RETURN_TO_DASHBOARD = By.xpath("//*[@id='breadcrumbs']/li[2]/a");
 
     public PatientVisitsDashboardPage(Page parent) {
         super(parent);
@@ -89,6 +90,11 @@ public class PatientVisitsDashboardPage extends Page {
         return new MergeVisitsPage(this);
     }
 
+    public ClinicianFacingPatientDashboardPage goToPatientDashboard() {
+        clickOn(RETURN_TO_DASHBOARD);
+        return new ClinicianFacingPatientDashboardPage(this);
+    }
+    
     public void deleteVisitNote() {
         String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
         clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='" + visitNoteId + "'][2]"));
