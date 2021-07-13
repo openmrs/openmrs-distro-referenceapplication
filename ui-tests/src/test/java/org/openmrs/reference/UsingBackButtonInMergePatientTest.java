@@ -54,7 +54,7 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
         patient.address1 = "address";
         registrationPage.enterMergePatient(patient);
         id = patientDashboardPage.findPatientId();
-        patient.uuid = patientDashboardPage.getPatientUuidFromUrl();
+        patient.uuid =  patientDashboardPage.getPatientUuidFromUrl();
         headerPage.clickOnHomeIcon();
         homePage.goToRegisterPatientApp();
         patient1.familyName = "Smith";
@@ -78,12 +78,10 @@ public class UsingBackButtonInMergePatientTest extends TestBase {
 
     @After
     public void tearDown() throws Exception {
-        if (headerPage != null) {
-            headerPage.clickOnHomeIcon();
-            TestData.PatientInfo p = new TestData.PatientInfo();
-            p.uuid = patient.uuid;
-            deletePatient(p);
-            waitForPatientDeletion(patient.uuid);
-        }
+        headerPage.clickOnHomeIcon();
+        TestData.PatientInfo p = new TestData.PatientInfo();
+        p.uuid = patient.uuid;
+        deletePatient(p);
+        waitForPatientDeletion(patient.uuid);
     }
 }

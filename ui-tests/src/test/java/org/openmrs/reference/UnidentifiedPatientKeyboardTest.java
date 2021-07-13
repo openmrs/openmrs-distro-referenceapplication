@@ -56,7 +56,7 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
         patientDashboardPage.waitForPage();
         
         patient.uuid = patientDashboardPage.getPatientUuidFromUrl();
-        assertPage(patientDashboardPage.waitForPage());	// remember just-registered patient id, so it can be removed.
+        assertPage(patientDashboardPage.waitForPage()); // remember just-registered patient id, so it can be removed.
         assertTrue(driver.getPageSource().contains("UNKNOWN UNKNOWN"));
     }
 }
