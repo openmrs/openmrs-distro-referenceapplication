@@ -34,14 +34,6 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
         assertPage(homePage.waitForPage());
     }
 
-    @After
-    public void tearDown() throws Exception {
-        TestData.PatientInfo p = new TestData.PatientInfo();
-        p.uuid = patient.uuid;
-        deletePatient(p);
-        waitForPatientDeletion(patient.uuid);
-    }
-
     @Test
     @Category(BuildTests.class)
     public void unidentifiedPatientKeyboardTest() throws InterruptedException {
@@ -54,9 +46,16 @@ public class UnidentifiedPatientKeyboardTest extends TestBase {
 
         patientDashboardPage = registrationPage.confirmPatient();
         patientDashboardPage.waitForPage();
-        
         patient.uuid = patientDashboardPage.getPatientUuidFromUrl();
-        assertPage(patientDashboardPage.waitForPage());	// remember just-registered patient id, so it can be removed.
+        assertPage(patientDashboardPage.waitForPage()); // remember just-registered patient id, so it can be removed.
         assertTrue(driver.getPageSource().contains("UNKNOWN UNKNOWN"));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        TestData.PatientInfo p = new TestData.PatientInfo();
+        p.uuid = patient.uuid;
+        deletePatient(p);
+        waitForPatientDeletion(patient.uuid);
     }
 }
