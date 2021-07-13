@@ -59,28 +59,84 @@ public class AddEditDeleteFormTest extends TestBase {
         if (!manageForm.addPresent()) {
             manageForm.delete();
         }
-        // add Form
+        manageForm.add();
+        manageForm.addLabel("Eye Report");
+        manageForm.addIcon("icon-align-justify");
+        manageForm.formIdFromUrl();
+        manageForm.save();
+        assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
+    }
+
+    @Test
+    @Category(BuildTests.class)
+    public void editFormTest() throws Exception {
+        
+        manageHtmlFormsPage = homePage.goToAdministration().clickOnManageHtmlForms();
+        if (manageHtmlFormsPage.getElementsIfExisting(By.xpath("//*[contains(text(), '" + name + "')]")).isEmpty()) {
+            manageHtmlFormsPage.clickOnNewHtmlForm();
+            htmlFormsPage.createNewFormTest(name, description, version);
+        }
+        homePage.goToManageForm();
+        if (!manageForm.addPresent()) {
+            manageForm.delete();
+        }
         manageForm.add();
         manageForm.addLabel("Eye Report");
         manageForm.addIcon("icon-align-justify");
         manageForm.formIdFromUrl();
         manageForm.save();
         headerPage.clickOnHomeIcon();
-        // edit Form
         homePage.goToManageForm();
         manageForm.editPath();
         manageForm.addLabel("Eye Test");
         manageForm.save();
         headerPage.clickOnHomeIcon();
         homePage.goToActiveVisitPatient();
-        assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
-        // delete form
+        assertNotNull("Eye Test", patientDashboardPage.FORM_EXIST);
+    }
+
+    @Test
+    @Category(BuildTests.class)
+    public void deleteFormTest() throws Exception {
+        
+        homePage.goToManageForm();
+        if (!manageForm.addPresent()) {
+            manageForm.delete();
+        }
+        manageForm.add();
+        manageForm.addLabel("Eye Report");
+        manageForm.addIcon("icon-align-justify");
+        manageForm.formIdFromUrl();
+        manageForm.save();
         headerPage.clickOnHomeIcon();
         homePage.goToManageForm();
         manageForm.deletePath();
         assertNotNull("Add", manageForm.ADD);
 
     }
+
+//        // add Form
+//        manageForm.add();
+//        manageForm.addLabel("Eye Report");
+//        manageForm.addIcon("icon-align-justify");
+//        manageForm.formIdFromUrl();
+//        manageForm.save();
+//        headerPage.clickOnHomeIcon();
+//        // edit Form
+//        homePage.goToManageForm();
+//        manageForm.editPath();
+//        manageForm.addLabel("Eye Test");
+//        manageForm.save();
+//        headerPage.clickOnHomeIcon();
+//        homePage.goToActiveVisitPatient();
+//        assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
+//        // delete form
+//        headerPage.clickOnHomeIcon();
+//        homePage.goToManageForm();
+//        manageForm.deletePath();
+//        assertNotNull("Add", manageForm.ADD);
+
+//    }
 
     @After
     public void tearDown() throws Exception {
