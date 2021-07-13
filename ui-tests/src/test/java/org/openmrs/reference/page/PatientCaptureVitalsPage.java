@@ -127,4 +127,36 @@ public class PatientCaptureVitalsPage extends Page {
             confirmButton2.click();
         }
     }
+    
+    public void clearPatientHeight() {
+        findElement(HEIGHT_FIELD).clear();
+    }
+    
+    public void clearPatientWeight() {
+        findElement(WEIGHT_FIELD).clear();
+    }
+    
+    public void clearPatientTemperature() {
+        findElement(TEMPERATURE_FIELD).clear();
+    }
+
+    public void clearPatientPulse() {
+        findElement(PULSE_FIELD).clear();
+    }
+
+    public void clearPatientRespiratoryRate() {
+        findElement(RESPIRATORY_FIELD).clear();
+    }
+
+    public void clearPatientBloodPressure1() {
+        findElement(BLOOD_PRESSURE_FIELD_1).clear();
+    }
+
+    public void clearPatientBloodPressure2() {
+        findElement(BLOOD_PRESSURE_FIELD_2).clear();
+    }
+
+    public void clearPatientBloodOxygenSaturation() {
+        findElement(BLOOD_OXYGEN_SATURATION_FIELD).clear();
+    }
 }
