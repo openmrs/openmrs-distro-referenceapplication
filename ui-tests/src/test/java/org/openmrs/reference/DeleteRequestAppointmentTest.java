@@ -41,8 +41,8 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         RequestAppointmentPage requestAppointmentPage = patientDashboardPage.clickOnRequest();
         requestAppointmentPage.enterAppointmentType(SERVICE_NAME);
-        requestAppointmentPage.enterValue("0");
-        requestAppointmentPage.selectUnits("Day(s)");
+        requestAppointmentPage.enterMinimumValue("0");
+        requestAppointmentPage.selectMinimumUnits("Day(s)");
         patientDashboardPage = requestAppointmentPage.saveRequest();
 
         List<String> appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
