@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by nata on 24.06.15.
  */
-public class AddEditDeleteFormTest extends TestBase {
+public class FormTest extends TestBase {
 
     private static String name = "newFormTest1";
     private static String description = "description of new form";
@@ -71,11 +71,6 @@ public class AddEditDeleteFormTest extends TestBase {
     @Category(BuildTests.class)
     public void editFormTest() throws Exception {
         
-        manageHtmlFormsPage = homePage.goToAdministration().clickOnManageHtmlForms();
-        if (manageHtmlFormsPage.getElementsIfExisting(By.xpath("//*[contains(text(), '" + name + "')]")).isEmpty()) {
-            manageHtmlFormsPage.clickOnNewHtmlForm();
-            htmlFormsPage.createNewFormTest(name, description, version);
-        }
         homePage.goToManageForm();
         if (!manageForm.addPresent()) {
             manageForm.delete();
@@ -114,29 +109,6 @@ public class AddEditDeleteFormTest extends TestBase {
         assertNotNull("Add", manageForm.ADD);
 
     }
-
-//        // add Form
-//        manageForm.add();
-//        manageForm.addLabel("Eye Report");
-//        manageForm.addIcon("icon-align-justify");
-//        manageForm.formIdFromUrl();
-//        manageForm.save();
-//        headerPage.clickOnHomeIcon();
-//        // edit Form
-//        homePage.goToManageForm();
-//        manageForm.editPath();
-//        manageForm.addLabel("Eye Test");
-//        manageForm.save();
-//        headerPage.clickOnHomeIcon();
-//        homePage.goToActiveVisitPatient();
-//        assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
-//        // delete form
-//        headerPage.clickOnHomeIcon();
-//        homePage.goToManageForm();
-//        manageForm.deletePath();
-//        assertNotNull("Add", manageForm.ADD);
-
-//    }
 
     @After
     public void tearDown() throws Exception {
