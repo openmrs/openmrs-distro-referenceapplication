@@ -360,7 +360,7 @@ public class RegistrationPage extends Page {
         relationshipTypes.selectByVisibleText("Doctor"); //we only set this to select doctor but it can be improved to select other relationshipTypes
         driver.findElement(By.cssSelector("PERSON_NAME ")).sendKeys(personName);
     }
-    
+     
     public void addNewRelationshipType() {
         clickOn(ADD_NEW_RELATIONSHIPTYPE);
     }
