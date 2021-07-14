@@ -352,8 +352,7 @@ public class RegistrationPage extends Page {
 
     public String getSimilarPatientInfo() {
         return findElement(By.cssSelector("#similarPatientsSelect .info")).getText();
-    }
-    
+    } 
     // relationships 
     public void SelectRelationshipType() {
         Select relationshipTypes = new Select(driver.findElement(By.id(("relationship_type"))));
