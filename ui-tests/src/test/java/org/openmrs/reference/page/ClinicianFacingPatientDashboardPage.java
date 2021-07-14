@@ -78,6 +78,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
     private static final By ALLERGIES_LINK = By.id("allergyui-editAllergies");
     private static final By CONDITIONS_LINK = By.cssSelector(".conditions .info-header i.right");
+    private static final By ATTACHMENTS_LINK = By.cssSelector("a[id='attachments.attachments.visitActions.default']");
+    private static final By ACTIVE_VISIT = By.cssSelector("a.ng-binding");
 
     public ClinicianFacingPatientDashboardPage(Page page) {
         super(page);
@@ -240,6 +242,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         return findElement(VISIT_LINK);
     }
 
+    public List<WebElement> getActiveVisitList() {
+        return findElements(ACTIVE_VISIT);
+    }
+    
     public WebElement findLinkToVisit() {
         waitForElement(VISIT_LINK_2);
         return findElement(VISIT_LINK_2);
@@ -430,5 +436,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     public ConditionsPage clickOnConditionsWidgetLink() {
         clickOn(CONDITIONS_LINK);
         return new ConditionsPage(this);
+    }
+    
+    public AttachmentsPage goToAttachmentsPage() {
+        clickOn(ATTACHMENTS_LINK);
+        return new AttachmentsPage(this);
     }
 }

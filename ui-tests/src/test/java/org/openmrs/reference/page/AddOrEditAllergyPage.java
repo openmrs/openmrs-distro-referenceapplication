@@ -10,8 +10,11 @@
 
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class AddOrEditAllergyPage extends Page {
 
@@ -23,6 +26,9 @@ public class AddOrEditAllergyPage extends Page {
     private static By DRUG_ID;
     private static String REACTION_XPATH = "//div[@id='reactions']/ul/li/label[text()=\"";
     private static By REACTION_ID;
+    private static By ALLERGY_NOTE = By.id("allergy-comment");
+    private static By ALLERGIES_LIST = By.cssSelector("#allergies tbody tr td.allergen");
+    private static By RETURN = By.cssSelector("#content > button.cancel");
 
     public AddOrEditAllergyPage(Page page) {
         super(page);
@@ -69,6 +75,20 @@ public class AddOrEditAllergyPage extends Page {
         clickOn(REACTION_ID);
     }
 
+    public void addAllergyNote(String note) {
+        findElement(ALLERGY_NOTE).clear();
+        setText(ALLERGY_NOTE, note);
+    }
+
+    public List<WebElement> getAllergiesList() {
+        return findElements(ALLERGIES_LIST);
+    }
+
+    public ClinicianFacingPatientDashboardPage clickReturn() {
+        clickOn(RETURN);
+        return new ClinicianFacingPatientDashboardPage(this);
+    }
+    
     @Override
     public String getPageUrl() {
         return "/allergyui/allergy.page";

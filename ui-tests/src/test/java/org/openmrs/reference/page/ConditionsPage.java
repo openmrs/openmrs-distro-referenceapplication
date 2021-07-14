@@ -1,7 +1,10 @@
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class ConditionsPage extends Page {
 	
@@ -14,6 +17,7 @@ public class ConditionsPage extends Page {
     private static final By FIRST_CONDITION_NAME = By.xpath("//table/tbody[2]/tr[1]/td[1]");
     private static final By EDIT = By.cssSelector("i[title='Edit Condition: ']");
     private static final By DELETE = By.cssSelector("i[title='Delete']");
+    private static final By CONDITIONS_LIST = By.cssSelector("tr.clickable-tr");
 
     public ConditionsPage(ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage) {
         super(clinicianFacingPatientDashboardPage);
@@ -80,5 +84,9 @@ public class ConditionsPage extends Page {
     public ConditionPage clickOnAddNewCondition() {
         clickOn(ADD_NEW_CONDITION);
         return new ConditionPage(this);
+    }
+    
+    public List<WebElement> getConditionsList() {
+        return findElements(CONDITIONS_LIST);
     }
 }
