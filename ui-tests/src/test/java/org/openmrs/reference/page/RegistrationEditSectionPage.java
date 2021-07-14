@@ -23,6 +23,7 @@ public class RegistrationEditSectionPage extends Page {
     private static final By STATE_PROVINCE = By.id("stateProvince");
     private static final By COUNTRY = By.id("country");
     private static final By POSTAL_CODE = By.id("postalCode");
+    private static final String str = "Must be a valid phone number (with +, -, numbers or parentheses))";
 
     public RegistrationEditSectionPage(Page parent) {
         super(parent);
@@ -116,9 +117,12 @@ public class RegistrationEditSectionPage extends Page {
     public String getInvalidPhoneNumberNotification() {
         List<String> errors = getValidationErrors();
         String search = "valid phone number";
+        if (errors != null) {
         for (String str : errors) {
             if (str.trim().contains(search))
                 return str;
+        }
+        return str;
         }
         return null;
     }

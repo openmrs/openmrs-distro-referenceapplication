@@ -10,9 +10,10 @@
 
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -20,8 +21,6 @@ import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationEditSectionPage;
 import org.openmrs.uitestframework.test.TestData;
-
-import static org.junit.Assert.assertTrue;
 
 public class ContactInfoTest extends ReferenceApplicationTestBase {
 
@@ -36,7 +35,6 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
     public void contactInfoTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -66,7 +64,9 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         activeVisitsPage.search(patient.identifier);
         patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         patientDashboardPage.clickOnShowContact();
-        assertTrue(patientDashboardPage.getTelephoneNumber().contains("111111111"));
+        patientDashboardPage.waitForPageToLoad();
+        assertTrue(patientDashboardPage.getTelephoneNumber().contains("111111111"));   
+        homePage = patientDashboardPage.goToHomePage();
     }
 
     @After
