@@ -12,7 +12,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -30,11 +29,11 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
     @Before
     public void setUp() throws Exception {
         patient = createTestPatient();
+        includeWeekends();
         createTestVisit();
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
     public void addPatientAppointmentTest() throws Exception {
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
@@ -62,12 +61,26 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
 
     @After
     public void tearDown() throws Exception {
+    	removeWeekends();
         deletePatient(patient);
+    }
+    
+    public void includeWeekends() {
+    	SystemAdministrationPage systemAdministrationPage = new SystemAdministrationPage(page);
+		systemAdministrationPage.activateWeekends("true");
+		homePage.goToPage("index.htm");	
+    }
+    
+    public void removeWeekends() {
+    	homePage.goToPage("index.htm");
+    	SystemAdministrationPage systemAdministrationPage = new SystemAdministrationPage(page);
+		systemAdministrationPage.activateWeekends("false");
     }
 
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
+    
 
 }
 
