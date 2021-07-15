@@ -59,7 +59,7 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
         roleModules.put("roleStrings.Anonymous", 0);
         roleModules.put("roleStrings.Authenticated", 0);
         roleModules.put("roleStrings.Organizational:SystemAdministrator", 2);
-        roleModules.put("roleStrings.SystemDeveloper", 10);
+        roleModules.put("roleStrings.SystemDeveloper", 9);
         roleModules.put("roleStrings.Application:AdministersSystem", 1);
         roleModules.put("roleStrings.Organizational:Doctor", 3);
         roleModules.put("roleStrings.Organizational:Nurse", 4);
