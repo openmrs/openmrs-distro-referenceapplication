@@ -1,14 +1,17 @@
 package org.openmrs.reference;
 
-import org.junit.After;
-import org.junit.Ignore;
-import org.openmrs.reference.page.AdministrationPage;
-import org.openmrs.reference.page.ManageUserPage;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+
+import org.junit.After;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
+import org.openmrs.reference.page.AdministrationPage;
+import org.openmrs.reference.page.ManageUserPage;
+
 
 public class AddRolesToUserTest extends ReferenceApplicationTestBase {
 
@@ -23,9 +26,9 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
     private void reLoginAsAdmin() throws InterruptedException {
         goToLoginPage().loginAsAdmin();
     }
-
-    @Ignore
-//    @Category(org.openmrs.reference.groups.BuildTests.class)
+    
+    @Test
+    @Category(BuildTests.class)
     public void addRolesToUserTest() throws InterruptedException {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ManageUserPage manageUserPage = administrationPage.clickOnManageUsers();
