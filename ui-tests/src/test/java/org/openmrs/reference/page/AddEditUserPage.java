@@ -29,6 +29,7 @@ public class AddEditUserPage extends Page {
     private static final By USERNAME = By.name("username");
     private static final By CREATE_NEW_PERSON = By.id("createNewPersonButton");
     private static final By DELETE_USER = By.xpath("(//input[@name='action'])[3]");
+    private static final By CLICK_ON_CONFIRM = By.id("roleStrings.<script>alert(1);</script>");
 
     public AddEditUserPage(Page parent) {
         super(parent);
@@ -78,6 +79,10 @@ public class AddEditUserPage extends Page {
 
     public void clickOnFemale() {
         clickOn(GENDER_FEMALE);
+    }
+    
+    public void clickOnConfirmAdmin() {
+    	clickOn(CLICK_ON_CONFIRM);
     }
 
     public boolean isDataCorrect(List<String> validationErrors) {
