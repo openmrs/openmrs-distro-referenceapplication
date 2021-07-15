@@ -12,7 +12,6 @@ import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.ManageUserPage;
 
-
 public class AddRolesToUserTest extends ReferenceApplicationTestBase {
 
     private static final String NURSE_PASSWORD = "Nurse321";
