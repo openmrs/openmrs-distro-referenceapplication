@@ -9,7 +9,6 @@ public class RoleFormPage extends Page {
 	private static final By DESCRIPTION = By.cssSelector("#content > form > table > tbody > tr:nth-child(2) > td > textarea");
 	private static String user = "<script>alert(1);</script>";
 	private static String description = "some description";
-	
 
 	public RoleFormPage(Page page) {
 		super(page);
@@ -25,6 +24,5 @@ public class RoleFormPage extends Page {
 	public String getPageUrl() {
 	
 		return "/openmrs/admin/users/role.form";
-	}
-	
+	}	
 }

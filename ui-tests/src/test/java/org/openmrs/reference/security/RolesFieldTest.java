@@ -17,23 +17,14 @@ import org.openmrs.uitestframework.test.TestBase;
 public class RolesFieldTest extends TestBase {
 	
 	private HomePage homePage;
-	
 	private HeaderPage headerPage;
-	
 	private ManageRolesPage manageRolesPage;
-	
 	private AdministrationPage administrationPage;
-	
 	private RoleFormPage roleFormPage;
-	
 	private ManageUserPage manageUserPage;
-	
 	private AddEditUserPage addEditUserPage;
-	
 	private static String user = "<script>alert(1);</script>";
-	
 	private static String description = "some description";
-	
 	private static String findUser = "admin";
 	
 	@Before
