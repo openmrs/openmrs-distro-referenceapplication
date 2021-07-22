@@ -20,8 +20,7 @@ public class PatientVisitsDashboardPage extends Page {
 	
     private static final By CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
     private static final By VISIT_LIST = By.cssSelector("#visits-list li.menu-item.viewVisitDetails span.menu-date");
-    private static final By END_VISIT = By.cssSelector("#visit-details div.visit-actions.active-visit a:nth-child(1)");
-    private static final By END_VISIT_DIALOG = By.id("end-visit-dialog");
+    private static final By END_VISIT = By.className("icon-off");
     private static final By END_VISIT_CONFIRM = By.cssSelector("#end-visit-dialog button[class='confirm right']");
     private static final By ADMIT_TO_INPATIENT = By.id("referenceapplication.realTime.simpleAdmission");
     private static final By EXIT_FROM_INPATIENT = By.id("referenceapplication.realTime.simpleDischarge");
@@ -60,12 +59,10 @@ public class PatientVisitsDashboardPage extends Page {
         return findElements(VISIT_LIST);
     }
 
-    public PatientVisitsDashboardPage endVisit() {
-        WebElement visit_list = findElement(VISIT_LIST);
+    public void endVisit() {
         clickOn(END_VISIT);
-        waitForElement(END_VISIT_DIALOG);
+        waitForElement(END_VISIT_CONFIRM);
         clickOn(END_VISIT_CONFIRM);
-        return new PatientVisitsDashboardPage(this, visit_list);
     }
 
     public AdmitToInpatientPage goToAdmitToInpatient() {
@@ -78,6 +75,11 @@ public class PatientVisitsDashboardPage extends Page {
         return new ExitFromInpatientPage(this);
     }
 
+    public TransferToWardServicePage goToTransferToWardServicePage() {
+    	clickOn(EXIT_FROM_INPATIENT);
+    	return new TransferToWardServicePage(this);
+    }
+    
     public void clickOnActions() {
         clickOn(ACTIONS_DROPDOWN);
     }

@@ -40,7 +40,7 @@ public class RegisterUnidentifiedPatientTest extends ReferenceApplicationTestBas
 
 	@Test
 	@Category(BuildTests.class)
-	public void registerUnidentifiedPatient() throws InterruptedException {
+	public void registerUnidentifiedPatientTest() throws InterruptedException {
 		RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
 		patient = PatientGenerator.generateTestPatient();
 		registrationPage.enterUnidentifiedPatient(patient);
