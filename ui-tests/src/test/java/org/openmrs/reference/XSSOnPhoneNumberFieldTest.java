@@ -46,7 +46,7 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("<script>alert(0)</script>");
         registrationEditSectionPage.clickOnConfirmEdit();
-        assertThat(registrationEditSectionPage.getValidationErrors(), is(empty()));
+        assertThat(registrationEditSectionPage.getPageValidationErrors(), is(not(empty())));
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
