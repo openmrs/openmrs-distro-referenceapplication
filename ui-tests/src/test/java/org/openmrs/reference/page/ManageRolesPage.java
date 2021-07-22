@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ManageRolesPage  extends Page {
-	private static final By ADD_ROLE = By.cssSelector("#content > a");
+	private static final By ADD_ROLE = By.cssSelector("a[href='role.form']");
 	public ManageRolesPage(Page page) {
 		super(page);
 
@@ -19,7 +19,7 @@ public class ManageRolesPage  extends Page {
 
 	@Override
 	public String getPageUrl() {
-		
+
 		return "/openmrs/admin/users/role.list";
 	}
 	

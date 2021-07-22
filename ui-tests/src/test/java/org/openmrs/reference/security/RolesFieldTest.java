@@ -49,7 +49,7 @@ public class RolesFieldTest extends TestBase {
 		homePage.go();
 		homePage.goToAdministration().clickOnManageUsers();
 		manageUserPage.findUser(findUser);
-		manageUserPage.clickOnAdminAfterSearch();
+		manageUserPage.clickOnFirstSearchResult();
 		addEditUserPage.clickOnConfirmAdmin();
 		addEditUserPage.saveUser();
 	}

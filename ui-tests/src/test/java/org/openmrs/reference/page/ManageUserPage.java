@@ -23,7 +23,7 @@ public class ManageUserPage extends Page {
     private static final By FIND_USER = By.name("name");
     private static final By USER_SAVED_NOTIFICATION = By.id("openmrs_msg");
     public static String URL_PATH = "/admin/users/users.list";
-    private static final By ADMIN = By.cssSelector("#content > div.box > table > tbody > tr > td:nth-child(1) > a");
+    private static final By FIRST_RESULT = By.cssSelector("#openmrsSearchTable td:first-of-type > a");
 
     public ManageUserPage(Page page) {
         super(page);
@@ -61,8 +61,8 @@ public class ManageUserPage extends Page {
     	  clickOn(ACTION);
     }
     
-    public void clickOnAdminAfterSearch() {
-    	clickOn(ADMIN);
+    public void clickOnFirstSearchResult() {
+    	clickOn(FIRST_RESULT);
     }
     
     public void removeUser(String user) {

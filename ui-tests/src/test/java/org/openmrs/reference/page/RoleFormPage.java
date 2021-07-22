@@ -22,7 +22,7 @@ public class RoleFormPage extends Page {
 
 	@Override
 	public String getPageUrl() {
-	
+
 		return "/openmrs/admin/users/role.form";
 	}	
 }
