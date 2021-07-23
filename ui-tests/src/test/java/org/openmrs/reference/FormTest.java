@@ -100,7 +100,6 @@ public class FormTest extends TestBase {
 	public void deleteFormTest() throws Exception {
 		
 		addFormTest();
-		headerPage.clickOnHomeIcon();
 		homePage.goToManageForm();
 		manageForm.waitForPage();
 		manageForm.deletePath();
