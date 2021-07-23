@@ -21,18 +21,27 @@ import static org.junit.Assert.assertNotNull;
  * Created by nata on 24.06.15.
  */
 public class FormTest extends TestBase {
-
+	
 	private static String name = "newFormTest1";
+	
 	private static String description = "description of new form";
+	
 	private static String version = "1.2";
+	
 	private HomePage homePage;
+	
 	private AdministrationPage administrationPage;
+	
 	private HeaderPage headerPage;
+	
 	private ManageFormsPage manageForm;
+	
 	private ManageHtmlFormsPage manageHtmlFormsPage;
+	
 	private HtmlFormsPage htmlFormsPage;
+	
 	private ClinicianFacingPatientDashboardPage patientDashboardPage;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		homePage = new HomePage(page);
@@ -44,8 +53,8 @@ public class FormTest extends TestBase {
 		manageHtmlFormsPage = new ManageHtmlFormsPage(page);
 		patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
 	}
-
-	private void initatiateFormPresence() throws InterruptedException {
+	
+	private void initiateFormPresence() throws InterruptedException {
 		manageHtmlFormsPage = homePage.goToAdministration().clickOnManageHtmlForms();
 		if (manageHtmlFormsPage.getElementsIfExisting(By.xpath("//*[contains(text(), '" + name + "')]")).isEmpty()) {
 			manageHtmlFormsPage.clickOnNewHtmlForm();
@@ -57,12 +66,12 @@ public class FormTest extends TestBase {
 			manageForm.delete();
 		}
 	}
-
+	
 	@Test
 	@Category(BuildTests.class)
 	public void addFormTest() throws Exception {
 		
-		initatiateFormPresence();
+		initiateFormPresence();
 		manageForm.add();
 		manageForm.addLabel("Eye Report");
 		manageForm.addIcon("icon-align-justify");
@@ -71,11 +80,11 @@ public class FormTest extends TestBase {
 		headerPage.clickOnHomeIcon();
 		assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
 	}
-
+	
 	@Test
 	@Category(BuildTests.class)
 	public void editFormTest() throws Exception {
-
+		
 		addFormTest();
 		homePage.goToManageForm();
 		manageForm.waitForPage();
@@ -85,11 +94,11 @@ public class FormTest extends TestBase {
 		headerPage.clickOnHomeIcon();
 		assertNotNull("Eye Test", patientDashboardPage.FORM_EXIST);
 	}
-
+	
 	@Test
 	@Category(BuildTests.class)
 	public void deleteFormTest() throws Exception {
-
+		
 		addFormTest();
 		headerPage.clickOnHomeIcon();
 		homePage.goToManageForm();
@@ -97,7 +106,7 @@ public class FormTest extends TestBase {
 		manageForm.deletePath();
 		assertNotNull("Add", manageForm.ADD);
 	}
-
+	
 	@After
 	public void tearDown() throws Exception {
 		if (headerPage != null) {
