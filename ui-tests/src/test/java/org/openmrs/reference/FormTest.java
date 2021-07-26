@@ -1,5 +1,7 @@
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,14 +10,13 @@ import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.HeaderPage;
-import org.openmrs.reference.page.HtmlFormsPage;
-import org.openmrs.reference.page.ManageHtmlFormsPage;
 import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.HtmlFormsPage;
 import org.openmrs.reference.page.ManageFormsPage;
-import org.openqa.selenium.By;
+import org.openmrs.reference.page.ManageHtmlFormsPage;
 import org.openmrs.uitestframework.test.TestBase;
+import org.openqa.selenium.By;
 
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by nata on 24.06.15.
@@ -110,6 +111,7 @@ public class FormTest extends TestBase {
 	public void tearDown() throws Exception {
 		if (headerPage != null) {
 			headerPage.clickOnHomeIcon();
+			headerPage.waitForPageToLoad();
 			headerPage.logOut();
 		}
 	}
