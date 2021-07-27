@@ -19,8 +19,7 @@ public class AdministrationPage extends Page {
     private static final By MANAGE_MODULES = By.cssSelector("#legacyui-manageModules a");
     private final static By MANAGE_VISIT_TYPES = By.cssSelector("#legacyui-manageVisitTypes a");
     private static final By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
-    private static final By MANAGE_PERSONS = By.cssSelector("#content a[href='/openmrs/admin/person/index.htm']");
-    private static final By MANAGE_HTMLFORMS_PAGE = By.cssSelector("#content a[href*='/module/htmlformentry/htmlForms.list']");
+    private static final By MANAGE_PERSONS = By.cssSelector("#content a[href=\"/openmrs/admin/person/index.htm\"]");
 
     public AdministrationPage(Page page) {
         super(page);
@@ -49,11 +48,6 @@ public class AdministrationPage extends Page {
     public ModulesPage goToManageModulesPage() {
         findElement(MANAGE_MODULES).click();
         return new ModulesPage(this);
-    }
-    
-    public ManageHtmlFormsPage clickOnManageHtmlForms(){
-        clickOn(MANAGE_HTMLFORMS_PAGE);
-        return new ManageHtmlFormsPage(this);
     }
 
     public ManagePersonPage clickOnManagePersons() {
