@@ -21,6 +21,7 @@ public class AdministrationPage extends Page {
     private static final By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
     private static final By MANAGE_PERSONS = By.cssSelector("#content a[href=\"/openmrs/admin/person/index.htm\"]");
     private static final By MANAGE_ROLES = By.cssSelector("#legacyui-manageRoles a");
+    
     public AdministrationPage(Page page) {
         super(page);
     }
