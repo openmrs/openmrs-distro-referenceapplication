@@ -344,3 +344,4 @@ public class RegistrationPage extends Page {
         return findElement(By.cssSelector("#similarPatientsSelect .info")).getText();
     }
 }
+
