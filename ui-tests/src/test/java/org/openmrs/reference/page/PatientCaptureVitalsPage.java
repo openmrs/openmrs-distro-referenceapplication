@@ -31,6 +31,10 @@ public class PatientCaptureVitalsPage extends Page {
         return URL_PATH;
     }
 
+    public void clearPatientHeight() {
+        findElement(HEIGHT_FIELD).clear();
+    }
+    
     public void setHeightField(String value) {
         WebElement heightField = findElement(HEIGHT_FIELD);
         try {
@@ -40,6 +44,10 @@ public class PatientCaptureVitalsPage extends Page {
         } catch (Exception e) {}
     }
 
+    public void clearPatientWeight() {
+        findElement(WEIGHT_FIELD).clear();
+    }
+    
     public void setWeightField(String value) {
         WebElement weightField = findElement(WEIGHT_FIELD);
         try {
@@ -49,6 +57,10 @@ public class PatientCaptureVitalsPage extends Page {
         } catch (Exception e) {}
     }
 
+    public void clearPatientTemperature() {
+        findElement(TEMPERATURE_FIELD).clear();
+    }
+    
     public void setTemperatureField(String value) {
         WebElement temperatureField = findElement(TEMPERATURE_FIELD);
         try {
@@ -58,6 +70,10 @@ public class PatientCaptureVitalsPage extends Page {
         } catch (Exception e) {}
     }
 
+    public void clearPatientPulse() {
+        findElement(PULSE_FIELD).clear();
+    }
+    
     public void setPulseField(String value) {
         WebElement pulseField = findElement(PULSE_FIELD);
         try {
@@ -67,6 +83,10 @@ public class PatientCaptureVitalsPage extends Page {
         } catch (Exception e) {}
     }
 
+    public void clearPatientRespiratoryRate() {
+        findElement(RESPIRATORY_FIELD).clear();
+    }
+    
     public void setRespiratoryField(String value) {
         WebElement respiratoryField = findElement(RESPIRATORY_FIELD);
         try {
@@ -76,6 +96,14 @@ public class PatientCaptureVitalsPage extends Page {
         } catch (Exception e) {}
     }
 
+    public void clearPatientBloodPressure1() {
+        findElement(BLOOD_PRESSURE_FIELD_1).clear();
+    }
+  
+    public void clearPatientBloodPressure2() {
+        findElement(BLOOD_PRESSURE_FIELD_2).clear();
+    }
+    
     public void setBloodPressureFields(String value1, String value2) {
         WebElement bloodPressureField1 = findElement(BLOOD_PRESSURE_FIELD_1);
         try {
@@ -91,6 +119,10 @@ public class PatientCaptureVitalsPage extends Page {
         } catch (Exception e) {}
     }
 
+    public void clearPatientBloodOxygenSaturation() {
+        findElement(BLOOD_OXYGEN_SATURATION_FIELD).clear();
+    }
+    
     public void setBloodOxygenSaturationField(String value) {
         WebElement bloodOxygenSaturationField = findElement(BLOOD_OXYGEN_SATURATION_FIELD);
         try {
