@@ -167,7 +167,7 @@ public class RegistrationPage extends Page {
     }
 
     public void clickOnPhoneNumber() throws InterruptedException {
-	  waiter.until(ExpectedConditions.visibilityOfElementLocated(PHONE_NUMBER_LABEL));
+	  waiter.until(ExpectedConditions.elementToBeClickable(PHONE_NUMBER_LABEL));
         clickOn(PHONE_NUMBER_LABEL);
     }
 
