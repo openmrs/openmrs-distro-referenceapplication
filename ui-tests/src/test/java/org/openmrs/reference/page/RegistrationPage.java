@@ -12,6 +12,7 @@ package org.openmrs.reference.page;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * The register-a-new-patient page.
@@ -166,6 +167,7 @@ public class RegistrationPage extends Page {
     }
 
     public void clickOnPhoneNumber() throws InterruptedException {
+	  waiter.until(ExpectedConditions.elementToBeClickable(PHONE_NUMBER_LABEL));
         clickOn(PHONE_NUMBER_LABEL);
     }
 
