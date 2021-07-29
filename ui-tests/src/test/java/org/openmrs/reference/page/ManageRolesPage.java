@@ -22,6 +22,5 @@ public class ManageRolesPage  extends Page {
 
 		return "/openmrs/admin/users/role.list";
 	}
-	
-	
+
 }
