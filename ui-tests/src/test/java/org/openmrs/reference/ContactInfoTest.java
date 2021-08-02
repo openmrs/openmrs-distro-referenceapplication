@@ -36,7 +36,6 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
     @Test
     @Category(BuildTests.class)
     public void contactInfoTest() throws Exception {
-    
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
@@ -78,4 +77,3 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, getLocationUuid(homePage)).create();
     }
 }
-
