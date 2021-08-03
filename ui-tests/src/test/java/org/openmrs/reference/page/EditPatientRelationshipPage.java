@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 public class EditPatientRelationshipPage  extends Page {
     
     private  HomePage homePage;
-    private static String name = "john";
+    private static String name = "John";
     private  static  final By SELECT_RELATIONSHIP_TYPE = By.id("relationship_type");
     private static final By PERSON_NAME = By.cssSelector("#relationship > p:nth-child(2) > input.person-typeahead.ng-pristine.ng-valid.ng-empty.ng-touched");
     private static final By NEXT_BUTTON = By.id("next-button");
