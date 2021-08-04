@@ -80,7 +80,6 @@ public class VisitNotePage extends Page {
         enterSecondaryDiagnosis(diag);
         diagnosisElement.clear();
         diagnosisElement.click();
-
     }
 
     public void enterSecondaryDiagnosis(String diag) {

@@ -7,7 +7,6 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-
 package org.openmrs.reference;
 
 import org.junit.After;
@@ -68,5 +67,4 @@ public class EditAllergyTest extends ReferenceApplicationTestBase {
         addOrEditAllergyPage.drugId();
         addOrEditAllergyPage.clickOnSaveAllergy();
     }
-
 }

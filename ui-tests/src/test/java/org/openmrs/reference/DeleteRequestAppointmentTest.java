@@ -9,6 +9,8 @@
  */
 package org.openmrs.reference;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +18,6 @@ import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.*;
 import org.openmrs.uitestframework.test.TestData;
-import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -40,8 +41,8 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         RequestAppointmentPage requestAppointmentPage = patientDashboardPage.clickOnRequest();
         requestAppointmentPage.enterAppointmentType(SERVICE_NAME);
-        requestAppointmentPage.enterValue("0");
-        requestAppointmentPage.selectUnits("Day(s)");
+        requestAppointmentPage.enterMinimumValue("0");
+        requestAppointmentPage.selectMinimumUnits("Day(s)");
         patientDashboardPage = requestAppointmentPage.saveRequest();
 
         List<String> appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
@@ -62,6 +63,5 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
     private void createTestVisit(){
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
 

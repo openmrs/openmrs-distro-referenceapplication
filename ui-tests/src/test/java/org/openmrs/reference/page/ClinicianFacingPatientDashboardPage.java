@@ -9,16 +9,16 @@
  */
 package org.openmrs.reference.page;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
 
 public class ClinicianFacingPatientDashboardPage extends Page {
 
@@ -63,10 +63,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By WHO_WHEN_WHERE = By.id("who-when-where");
     private static final By REQUEST_APPOINTMENT = By.linkText("Request Appointment");
     private static final By APPOINTMENT_LINK = By.cssSelector("a.right > i");
-
     private static final By ERROR = By.cssSelector("li.error > span");
     private static final By ADD_PAST_VISIT = By.id("org.openmrs.module.coreapps.createRetrospectiveVisit");
-
     private static final By TODAY = By.cssSelector("td.day.active");
     private static final By CONFIRM_PAST_VISIT = By.cssSelector("div.dialog-content.form > button.confirm.right");
     private static final By CHANGE_DATE = By.cssSelector("button.confirm.no-color");
@@ -74,18 +72,14 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By MERGE_VISIT_BUTTON = By.xpath("//a[@id='org.openmrs.module.coreapps.mergeVisits']/li");
     private static final By MERGE = By.id("mergeVisitsBtn");
     private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
-
-    private static final By EYE_REPORT = By.linkText("Eye Report");
     private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
     private static final By RECENT_VISITS = By.cssSelector("visitbyencountertype > ul > li:nth-child(1) > a");
     private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
-
     private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
-
     private static final By ALLERGIES_LINK = By.id("allergyui-editAllergies");
-
-    private static final By CONDITIONS_LINK = By
-            .cssSelector(".conditions .info-header i.right");
+    private static final By CONDITIONS_LINK = By.cssSelector(".conditions .info-header i.right");
+    private static final By ATTACHMENTS_LINK = By.cssSelector("a[id='attachments.attachments.visitActions.default']");
+    private static final By ACTIVE_VISIT = By.cssSelector("visitbyencountertype ul li a");
 
     public ClinicianFacingPatientDashboardPage(Page page) {
         super(page);
@@ -148,7 +142,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         clickOn(EXIT_FROM_INPATIENT);
         new Select(driver.findElement(By.id("w5"))).selectByVisibleText("Unknown Location");
         clickOn(SAVE);
-
     }
 
     public AdmitToInpatientPage goToAdmitToInpatient() {
@@ -213,7 +206,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         enterDiagnosis(diag);
         diagnosisElement.clear();
         diagnosisElement.click();
-
     }
 
     public void addSecondaryDiagnosis(String diag) {
@@ -222,7 +214,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         enterSecondaryDiagnosis(diag);
         diagnosisElement.clear();
         diagnosisElement.click();
-
     }
 
     public void enterSecondaryDiagnosis(String diag) {
@@ -251,6 +242,10 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         return findElement(VISIT_LINK);
     }
 
+    public List<WebElement> getActiveVisitList() {
+        return findElements(ACTIVE_VISIT);
+    }
+    
     public WebElement findLinkToVisit() {
         waitForElement(VISIT_LINK_2);
         return findElement(VISIT_LINK_2);
@@ -285,10 +280,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     //Find Patient Id
     public String findPatientId() {
         return findElement(PATIENT_ID).getText();
-    }
-
-    public void clickOnEyeForm() {
-        clickOn(EYE_REPORT);
     }
 
     public void goToEditVisitNote() throws InterruptedException {
@@ -362,7 +353,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
                         } catch (Exception e) {
                             return patientVisitsDashboardPage;
                         }
-
                     }
                 }
             }
@@ -394,7 +384,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     public RequestAppointmentPage clickOnRequest() {
         clickOn(REQUEST_APPOINTMENT);
         return new RequestAppointmentPage(this);
-
     }
 
     public String getPatientFamilyName() {
@@ -409,7 +398,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         }
         return phoneNumber;
     }
-
 
     public List<String> getDiagnoses() {
         String diagnosesListRaw = findElement(DIAGNOSES_LIST).getText();
@@ -449,5 +437,9 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         clickOn(CONDITIONS_LINK);
         return new ConditionsPage(this);
     }
-
+    
+    public AttachmentsPage goToAttachmentsPage() {
+        clickOn(ATTACHMENTS_LINK);
+        return new AttachmentsPage(this);
+    }
 }

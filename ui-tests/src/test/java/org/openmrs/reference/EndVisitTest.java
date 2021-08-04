@@ -19,7 +19,7 @@ import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.reference.page.PatientVisitsDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 public class EndVisitTest extends LocationSensitiveApplicationTestBase {
 
@@ -36,15 +36,16 @@ public class EndVisitTest extends LocationSensitiveApplicationTestBase {
     public void endVisitTest() {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(patient.identifier);
+        findPatientPage.waitForPageToLoad();
         ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage = findPatientPage.clickOnFirstPatient();
         PatientVisitsDashboardPage patientVisitsDashboardPage = clinicianFacingPatientDashboardPage.goToRecentVisits();
-        patientVisitsDashboardPage = patientVisitsDashboardPage.endVisit();
-        assertTrue(patientVisitsDashboardPage.containsText("No active visit"));
+        patientVisitsDashboardPage.endVisit();
+        patientVisitsDashboardPage.waitForPageToLoad();
+        assertNull(patientVisitsDashboardPage.getActiveVisit());
     }
 
     @After
     public void tearDown() throws Exception {
         deletePatient(patient);
     }
-
 }

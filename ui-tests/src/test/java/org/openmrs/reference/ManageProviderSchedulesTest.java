@@ -7,7 +7,6 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-
 package org.openmrs.reference;
 
 import org.junit.After;
@@ -27,13 +26,9 @@ import org.openmrs.uitestframework.test.TestData;
 public class ManageProviderSchedulesTest extends ReferenceApplicationTestBase {
 
 	protected HomePage homePage;
-
 	protected AppointmentBlocksPage appointmentBlocksPage;
-
 	protected String locationName;
-
 	protected String locationUuid;
-
 	protected String provider;
 
 	@Before

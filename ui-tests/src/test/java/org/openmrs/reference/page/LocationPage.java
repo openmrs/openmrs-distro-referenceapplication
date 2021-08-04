@@ -4,7 +4,6 @@ import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-
 /**
  * Created by nata on 14.07.15.
  */
@@ -23,7 +22,6 @@ public class LocationPage extends Page {
     private static String LOCATION_PATH = "//table[@id='locationTable']/tbody/tr/td/input[@value=\"";
     private static String REST_PATH = "\"]";
     private static By CHECK_LOCATION;
-
 
     public LocationPage(WebDriver driver) {
         super(driver);

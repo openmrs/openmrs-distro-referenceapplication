@@ -10,6 +10,11 @@
 
 package org.openmrs.reference;
 
+import java.awt.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
@@ -22,14 +27,10 @@ import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestData;
 
-import java.awt.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import static org.junit.Assert.assertThat;
 
 public class DuplicatePatientRegisterTest  extends ReferenceApplicationTestBase {
+    
     private TestPatient patient;
 
     @Before

@@ -9,18 +9,18 @@
  */
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
 public class PatientVisitsDashboardPage extends Page {
+	
     private static final By CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
     private static final By VISIT_LIST = By.cssSelector("#visits-list li.menu-item.viewVisitDetails span.menu-date");
-    private static final By END_VISIT = By.cssSelector("#visit-details div.visit-actions.active-visit a:nth-child(1)");
-    private static final By END_VISIT_DIALOG = By.id("end-visit-dialog");
+    private static final By END_VISIT = By.className("icon-off");
     private static final By END_VISIT_CONFIRM = By.cssSelector("#end-visit-dialog button[class='confirm right']");
     private static final By ADMIT_TO_INPATIENT = By.id("referenceapplication.realTime.simpleAdmission");
     private static final By EXIT_FROM_INPATIENT = By.id("referenceapplication.realTime.simpleDischarge");
@@ -29,6 +29,7 @@ public class PatientVisitsDashboardPage extends Page {
     private static final By FAMILY_NAME = By.cssSelector(".patient-header .demographics .name .PersonName-familyName");
     private static final By VISIT_NOTE_ENCOUNTER = By.xpath("//div[@id='visit-details']/ul/li/ul/li/div/strong/span[text()='Visit Note']");
     private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
+    private static final By RETURN_TO_DASHBOARD = By.xpath("//*[@id='breadcrumbs']/li[2]/a");
 
     public PatientVisitsDashboardPage(Page parent) {
         super(parent);
@@ -64,12 +65,10 @@ public class PatientVisitsDashboardPage extends Page {
         return findElements(VISIT_LIST);
     }
 
-    public PatientVisitsDashboardPage endVisit() {
-        WebElement visit_list = findElement(VISIT_LIST);
+    public void endVisit() {
         clickOn(END_VISIT);
-        waitForElement(END_VISIT_DIALOG);
+        waitForElement(END_VISIT_CONFIRM);
         clickOn(END_VISIT_CONFIRM);
-        return new PatientVisitsDashboardPage(this, visit_list);
     }
 
     public AdmitToInpatientPage goToAdmitToInpatient() {
@@ -82,6 +81,11 @@ public class PatientVisitsDashboardPage extends Page {
         return new ExitFromInpatientPage(this);
     }
 
+    public TransferToWardServicePage goToTransferToWardServicePage() {
+    	clickOn(EXIT_FROM_INPATIENT);
+    	return new TransferToWardServicePage(this);
+    }
+    
     public void clickOnActions() {
         clickOn(ACTIONS_DROPDOWN);
     }
@@ -91,6 +95,11 @@ public class PatientVisitsDashboardPage extends Page {
         return new MergeVisitsPage(this);
     }
 
+    public ClinicianFacingPatientDashboardPage goToPatientDashboard() {
+        clickOn(RETURN_TO_DASHBOARD);
+        return new ClinicianFacingPatientDashboardPage(this);
+    }
+    
     public void deleteVisitNote() {
         String visitNoteId = findElement(VISIT_NOTE_ENCOUNTER).getAttribute("data-encounter-id");
         clickOn(By.xpath("//div[@id='visit-details']/ul/li/span/i[@data-encounter-id='" + visitNoteId + "'][2]"));
@@ -118,5 +127,4 @@ public class PatientVisitsDashboardPage extends Page {
         String patientFamilyName = findElement(FAMILY_NAME).getText();
         return patientFamilyName;
     }
-
 }
