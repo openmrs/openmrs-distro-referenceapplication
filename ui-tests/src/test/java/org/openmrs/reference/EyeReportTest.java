@@ -1,5 +1,7 @@
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by nata on 25.06.15.
  */
@@ -13,8 +15,6 @@ import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.ManageFormsPage;
 import org.openmrs.uitestframework.test.TestBase;
-
-import static org.junit.Assert.assertTrue;
 
 public class EyeReportTest extends TestBase {
     private HomePage homePage;
@@ -36,7 +36,6 @@ public class EyeReportTest extends TestBase {
     @Ignore// ignored due to eye form changes
     @Test
     public void eyeReportTest() throws Exception {
-        patientDashboardPage.clickOnEyeForm();
         manageFormsPage.clickOnCalendarEyeReport();
         manageFormsPage.selectYear("1999");
         manageFormsPage.selectMoth("12");
