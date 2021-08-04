@@ -21,8 +21,6 @@ import org.openmrs.reference.page.VisitTypePage;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-/**
- */
 public class AddVisitTypeTest extends ReferenceApplicationTestBase {
 
     private String visitTypeName;
@@ -36,7 +34,7 @@ public class AddVisitTypeTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void addVisitTypeTest() throws InterruptedException {
+    public void addVisitTypeTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         VisitTypeListPage visitTypeListPage = administrationPage.goToVisitTypePage();
         VisitTypePage visitTypePage = visitTypeListPage.addVisitType();
@@ -50,9 +48,5 @@ public class AddVisitTypeTest extends ReferenceApplicationTestBase {
         visitTypePage = visitTypeListPage.goToVisitType(visitTypeName);
         visitTypePage.delete();
     }
-
-
 }
-
-
 

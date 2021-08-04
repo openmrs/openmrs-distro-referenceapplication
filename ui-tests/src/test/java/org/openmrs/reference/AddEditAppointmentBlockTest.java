@@ -12,23 +12,18 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
+
 import static org.junit.Assert.assertTrue;
 
-@Ignore
 public class AddEditAppointmentBlockTest extends ManageProviderSchedulesTest {
 
 	private final String startTimeFirstAppointment = "09";
-
 	private String firstAppointment = "Gynecology";
-
 	private String secondAppointment = "Dermatology";
-
 	int firstAppointmentIndex = 0;
-
 	int secondAppointmentIndex = 1;
 
 	@Before
@@ -41,8 +36,7 @@ public class AddEditAppointmentBlockTest extends ManageProviderSchedulesTest {
 	 */
 	@Test
 	@Category(BuildTests.class)
-	public void editAppointmentBlockTest() throws Exception {
-	
+	public void addEditAppointmentBlockTest() throws Exception {
 		/*
 		 * The logic behind the text is:
 		 * create an appointment and assert that exists
@@ -74,5 +68,4 @@ public class AddEditAppointmentBlockTest extends ManageProviderSchedulesTest {
 	public void tearDown() throws Exception {
 		super.tearDown();
 	}
-
 }

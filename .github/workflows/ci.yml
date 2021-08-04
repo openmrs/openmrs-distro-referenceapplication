@@ -1,7 +1,5 @@
 name: Legacy Selenium Firefox
 on:
-  push:
-    branches: [master]
   pull_request:
     branches: [master]
   workflow_dispatch:
@@ -29,12 +27,12 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: ${{github.repository}}
-      - name: run db and web containers
-        run: |
-          cd docker
-          docker-compose -f docker-compose-refqa.yml up -d
-      - name: wait for openmrs instance to start
-        run: while ! nc -z localhost 8080 </dev/null; do sleep 1; done
+      #- name: run db and web containers
+        #run: |
+          #cd docker
+          #docker-compose -f docker-compose-refqa.yml up -d
+      #- name: wait for openmrs instance to start
+          #run: until curl -I localhost:8080/openmrs/login.htm 2>&1 | grep -w "200" > /dev/null 2>&1; do :; done
       - name: Build distro/uitests
         run: |
           cd ui-tests

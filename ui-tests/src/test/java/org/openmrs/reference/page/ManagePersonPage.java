@@ -29,7 +29,6 @@ public class ManagePersonPage extends Page {
     }
 
     public void setPersonName(String personName) {
-        findElement(PERSON_NAME_FIELD).clear();
         findElement(PERSON_NAME_FIELD).sendKeys(personName);
     }
 

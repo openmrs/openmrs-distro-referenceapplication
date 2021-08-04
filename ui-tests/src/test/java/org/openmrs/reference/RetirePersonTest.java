@@ -21,6 +21,7 @@ import org.openmrs.uitestframework.test.RestClient;
 import org.openmrs.uitestframework.test.TestData;
 
 public class RetirePersonTest extends ReferenceApplicationTestBase {
+    
     private String personUuid;
     private TestData.PersonInfo personInfo;
 

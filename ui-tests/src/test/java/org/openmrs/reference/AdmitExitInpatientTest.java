@@ -2,7 +2,9 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.FindPatientPage;
 import org.openmrs.reference.page.PatientVisitsDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
@@ -10,11 +12,9 @@ import org.openmrs.uitestframework.test.TestData;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
 
     private static final String INPATIENT_WARD = "Inpatient Ward";
-
     private TestData.PatientInfo testPatient;
 
     @Before
@@ -22,10 +22,12 @@ public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
         testPatient = createTestPatient();
     }
 
-    @Ignore
-    public void admitExitInpatientTest() throws Exception {
+    @Test
+    @Category(BuildTests.class)
+    public void admitExitInpatientTest() {
         FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
         findPatientPage.enterPatient(testPatient.identifier);
+        findPatientPage.waitForPageToLoad();
         PatientVisitsDashboardPage patientVisitsDashboardPage = findPatientPage.clickOnFirstPatient().startVisit();
 
         patientVisitsDashboardPage = (PatientVisitsDashboardPage) patientVisitsDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);

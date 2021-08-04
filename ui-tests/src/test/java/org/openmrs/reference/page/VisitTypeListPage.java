@@ -9,15 +9,14 @@
  */
 package org.openmrs.reference.page;
 
-import org.openmrs.uitestframework.page.Page;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- */
+import org.openmrs.uitestframework.page.Page;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 public class VisitTypeListPage extends AdminManagementPage {
 
     private static final By ERROR = By.cssSelector("span.error");
@@ -45,6 +44,7 @@ public class VisitTypeListPage extends AdminManagementPage {
 
     public List<String> getVisitTypeList() {
         List<String> visitTypeList = new ArrayList<String>();
+        waiter.until(ExpectedConditions.visibilityOfElementLocated(VISIT_TYPE_LIST));
         for (WebElement webElement : findElements(VISIT_TYPE_LIST)) {
             visitTypeList.add(webElement.getText());
         }
@@ -63,5 +63,4 @@ public class VisitTypeListPage extends AdminManagementPage {
     public String getPageUrl() {
         return "/admin/visits/visitType.list";
     }
-
 }
