@@ -30,9 +30,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By START_VISIT = By.id("org.openmrs.module.coreapps.createVisit");
     private static final By CONFIRM = By.cssSelector("#quick-visit-creation-dialog .confirm");
     private static final By STARTED_AT = By.className("active-visit-started-at-message");
-    private static final By VISIT_NOTE = By.linkText("Visit Note");
-    private static final By PATIENT_CAPTURE_VITALS = By.linkText("Capture Vitals");
+    private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
+    private static final By PATIENT_CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
+    private static final By APPOINTMENT_EDIT = By.cssSelector("div.info-section:nth-child(4) > div > a:nth-child(3)");
     private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
+    private static final By ADD_ALLERGY = By.id("allergyui-editAllergies");
     private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
     private static final By VISIT_LINK_2 = By.className("visit-link");
     private static final By YES = By.cssSelector("#end-visit-dialog .confirm");
@@ -80,6 +82,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By CONDITIONS_LINK = By.cssSelector(".conditions .info-header i.right");
     private static final By ATTACHMENTS_LINK = By.cssSelector("a[id='attachments.attachments.visitActions.default']");
     private static final By ACTIVE_VISIT = By.cssSelector("visitbyencountertype ul li a");
+    private static final By EDIT_REGISTRATION_INFORMATION = By.cssSelector("a[id='application.registrationapp.summary.editPatientLink']");
 
     public ClinicianFacingPatientDashboardPage(Page page) {
         super(page);
@@ -117,7 +120,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     }
 
     public ManageAppointmentsPage goToManageAppointments() {
-        clickOn(APPOINTMENT_LINK);
+        clickOn(APPOINTMENT_EDIT);
         return new ManageAppointmentsPage(this);
     }
 
@@ -158,6 +161,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         clickOn(EXIT_FROM_INPATIENT);
         return new TransferToWardServicePage(this);
     }
+    
+    public RegistrationSummaryPage goToRegistrationSummary(){
+        clickOn(EDIT_REGISTRATION_INFORMATION);
+        return  new RegistrationSummaryPage(this);
+    }
 
     @Override
     public String getPageUrl() {
@@ -183,6 +191,11 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     public void visitNote() {
         clickOnLast(VISIT_NOTE);
         waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
+    }
+    
+    public AllergyPage clickOnAllergyManagement() {
+        clickOn(ADD_ALLERGY);
+        return new AllergyPage(this);
     }
 
     public VisitNotePage goToVisitNote() {
