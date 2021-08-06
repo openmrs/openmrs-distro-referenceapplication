@@ -1,11 +1,8 @@
 package org.openmrs.reference.page;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrationEditSectionPage extends Page {
@@ -125,16 +122,6 @@ public class RegistrationEditSectionPage extends Page {
                 return str;
         }
         return null;
-    }
-    
-    public List<String> getPageValidationErrors(){
-    	List<String> errors = new ArrayList<String>();
-		for(WebElement webElement : driver.findElements(By.className("field-error"))) {
-    		if(StringUtils.isNotBlank(webElement.getAttribute("innerHTML"))) {
-    			errors.add(webElement.getText());
-    		}
-    	}
-    	return errors;
     }
 
     public ClinicianFacingPatientDashboardPage confirmPatient() throws InterruptedException {

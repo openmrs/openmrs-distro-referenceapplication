@@ -19,11 +19,6 @@ import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationEditSectionPage;
 import org.openmrs.uitestframework.test.TestData;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestBase {
 
     private TestData.PatientInfo patient;
@@ -46,7 +41,6 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("<script>alert(0)</script>");
         registrationEditSectionPage.clickOnConfirmEdit();
-        assertThat(registrationEditSectionPage.getPageValidationErrors(), is(not(empty())));
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
