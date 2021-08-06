@@ -7,7 +7,7 @@ RUN rm -rf /usr/local/apache2/conf/extra/*
 COPY ./ui/startup.sh /usr/local/apache2/startup.sh
 RUN chmod +x /usr/local/apache2/startup.sh
 
-COPY ./distro/spa /var/www/ui
+ADD ./distro/spa /var/www/ui
 
 RUN apt update \
   && apt install -y gettext-base moreutils curl

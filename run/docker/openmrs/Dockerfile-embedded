@@ -54,7 +54,9 @@ ADD ./openmrs/Dockerfile /openmrs/docker
 
 # /openmrs/distribution is expected to be mounted into the container with the artifacts making up the distribution
 # /openmrs/data represents the data persisted inside the container to the filesystem for OpenMRS
-COPY ./distro /openmrs/distribution
+ADD ./distro/openmrs_config /openmrs/distribution/openmrs_config
+ADD ./distro/openmrs_core /openmrs/distribution/openmrs_core
+ADD ./distro/openmrs_modules /openmrs/distribution/openmrs_modules
 
 # Take some initial steps to improve overall security, size, and functionality of the container
 # This includes updating packages and removing all of the default Tomcat webapps
