@@ -119,8 +119,9 @@ public class RegistrationEditSectionPage extends Page {
         String search = "valid phone number";
         if (errors != null) {
         for (String str : errors) {
-            if (str.trim().contains(search))
+            if (str.trim().contains(search)) {
                 return str;
+            }
         }
         return str;
         }

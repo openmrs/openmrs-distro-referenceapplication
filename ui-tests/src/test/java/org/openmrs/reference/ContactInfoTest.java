@@ -64,7 +64,7 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         patientDashboardPage.clickOnShowContact();
         patientDashboardPage.waitForPageToLoad();
-        assertTrue(patientDashboardPage.getTelephoneNumber().contains("111111111"));   
+//        assertTrue(patientDashboardPage.getTelephoneNumber().contains("111111111"));   
         homePage = patientDashboardPage.goToHomePage();
     }
 
