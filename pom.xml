@@ -119,4 +119,50 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
+
+  <distributionManagement>
+    <repository>
+      <id>openmrs-repo-modules</id>
+      <name>OpenMRS Modules Repo</name>
+      <url>https://mavenrepo.openmrs.org/modules</url>
+    </repository>
+    <snapshotRepository>
+      <id>openmrs-repo-snapshots</id>
+      <name>OpenMRS Snapshots Repo</name>
+      <url>https://mavenrepo.openmrs.org/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <profiles>
+    <profile>
+      <!--demo profile builds the latest released versions of the frontend -->
+      <id>demo</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>demo</name>
+        </property>
+      </activation>
+      <properties>
+        <spa.version>latest</spa.version>
+        <maybeDash>-</maybeDash>
+        <distribution>demo</distribution>
+      </properties>
+    </profile>
+    <profile>
+      <!-- dev profile builds the cutting-edge versions of the frontend -->
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>demo</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <properties>
+        <spa.version>next</spa.version>
+        <distribution />
+      </properties>
+    </profile>
+  </profiles>
 </project>

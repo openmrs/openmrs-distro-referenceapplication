@@ -21,6 +21,7 @@
     <dependency>
       <groupId>org.openmrs.distro</groupId>
       <artifactId>openmrs-distro-package</artifactId>
+      <classifier>${distribution}</classifier>
       <type>zip</type>
       <version>${project.version}</version>
     </dependency>
@@ -88,8 +89,8 @@
               <name>openmrs/openmrs-reference-application-3-gateway</name>
               <build>
                 <tags>${docker.tag}</tags>
-                <contextDir>${project.basedir}</contextDir>
-                <dockerFile>${project.basedir}${file.separator}proxy${file.separator}Dockerfile</dockerFile>
+                <contextDir>${project.basedir}${file.separator}proxy</contextDir>
+                <dockerFile>Dockerfile</dockerFile>
               </build>
             </image>
           </images>
