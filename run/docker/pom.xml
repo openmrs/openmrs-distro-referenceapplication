@@ -100,6 +100,33 @@
 
   <profiles>
     <profile>
+      <!--demo profile builds the latest released versions of the frontend -->
+      <id>demo</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>demo</name>
+        </property>
+      </activation>
+      <properties>
+        <docker.tag>demo</docker.tag>
+      </properties>
+    </profile>
+    <profile>
+      <!-- dev profile builds the cutting-edge versions of the frontend -->
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>demo</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <properties>
+        <docker.tag>latest</docker.tag>
+      </properties>
+    </profile>
+    <profile>
       <id>build-docker</id>
       <activation>
         <property>

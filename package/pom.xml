@@ -97,7 +97,7 @@
             </goals>
             <phase>package</phase>
             <configuration>
-              <distro>${project.basedir}/distro.properties</distro>
+              <distro>${project.basedir}/distro-${spa.version}.properties</distro>
               <dir>${project.build.directory}/sdk-distro</dir>
             </configuration>
           </execution>
@@ -126,4 +126,34 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <!--demo profile builds the latest released versions of the frontend -->
+      <id>demo</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>demo</name>
+        </property>
+      </activation>
+      <properties>
+        <spa.version>demo</spa.version>
+      </properties>
+    </profile>
+    <profile>
+      <!-- dev profile builds the cutting-edge versions of the frontend -->
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>demo</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <properties>
+        <spa.version>dev</spa.version>
+      </properties>
+    </profile>
+  </profiles>
 </project>
