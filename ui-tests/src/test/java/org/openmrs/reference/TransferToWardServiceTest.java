@@ -45,7 +45,7 @@ public class TransferToWardServiceTest extends ReferenceApplicationTestBase {
         assertTrue(patientVisitsDashboardPage.containsText("Admission"));
 
         patientVisitsDashboardPage.goToTransferToWardServicePage().confirm(ISOLATION_WARD);
-        assertTrue(patientVisitsDashboardPage.containsText("Discharge"));
+        assertTrue(patientVisitsDashboardPage.containsText("Transfer"));
         patientVisitsDashboardPage.waitForPage();
 
         assertThat(patientVisitsDashboardPage.getEncountersCount(), is(2));
