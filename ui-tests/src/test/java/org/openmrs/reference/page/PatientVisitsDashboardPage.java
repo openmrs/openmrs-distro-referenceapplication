@@ -23,6 +23,7 @@ public class PatientVisitsDashboardPage extends Page {
     private static final By END_VISIT = By.className("icon-off");
     private static final By END_VISIT_CONFIRM = By.cssSelector("#end-visit-dialog button[class='confirm right']");
     private static final By ADMIT_TO_INPATIENT = By.id("referenceapplication.realTime.simpleAdmission");
+    private static final By TRANSFER_TO_WARD = By.id("referenceapplication.realTime.simpleTransfer");
     private static final By EXIT_FROM_INPATIENT = By.id("referenceapplication.realTime.simpleDischarge");
     private static final By ACTIONS_DROPDOWN = By.cssSelector("#content span.dropdown-name");
     private static final By MERGE_VISITS = By.cssSelector("#content div.actions.dropdown ul li:nth-child(2) > a");
@@ -82,7 +83,7 @@ public class PatientVisitsDashboardPage extends Page {
     }
 
     public TransferToWardServicePage goToTransferToWardServicePage() {
-    	clickOn(EXIT_FROM_INPATIENT);
+    	clickOn(TRANSFER_TO_WARD);
     	return new TransferToWardServicePage(this);
     }
     
