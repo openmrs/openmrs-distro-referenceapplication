@@ -17,30 +17,20 @@ import org.openmrs.reference.page.ManageHtmlFormsPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openqa.selenium.By;
 
-
 /**
  * Created by nata on 24.06.15.
  */
 public class FormTest extends TestBase {
 	
 	private static String name = "newFormTest1";
-	
 	private static String description = "description of new form";
-	
 	private static String version = "1.2";
-	
 	private HomePage homePage;
-	
 	private AdministrationPage administrationPage;
-	
 	private HeaderPage headerPage;
-	
 	private ManageFormsPage manageForm;
-	
 	private ManageHtmlFormsPage manageHtmlFormsPage;
-	
 	private HtmlFormsPage htmlFormsPage;
-	
 	private ClinicianFacingPatientDashboardPage patientDashboardPage;
 	
 	@Before
@@ -70,8 +60,7 @@ public class FormTest extends TestBase {
 	
 	@Test
 	@Category(BuildTests.class)
-	public void addFormTest() throws Exception {
-		
+	public void addFormTest() throws Exception {	
 		initiateFormPresence();
 		manageForm.add();
 		manageForm.addLabel("Eye Report");
@@ -85,7 +74,6 @@ public class FormTest extends TestBase {
 	@Test
 	@Category(BuildTests.class)
 	public void editFormTest() throws Exception {
-		
 		addFormTest();
 		homePage.goToManageForm();
 		manageForm.waitForPage();
@@ -99,7 +87,6 @@ public class FormTest extends TestBase {
 	@Test
 	@Category(BuildTests.class)
 	public void deleteFormTest() throws Exception {
-		
 		addFormTest();
 		homePage.goToManageForm();
 		manageForm.waitForPage();
@@ -109,10 +96,6 @@ public class FormTest extends TestBase {
 	
 	@After
 	public void tearDown() throws Exception {
-		if (headerPage != null) {
-			headerPage.clickOnHomeIcon();
-			headerPage.waitForPageToLoad();
-			headerPage.logOut();
-		}
+	       homePage.go();
 	}
 }
