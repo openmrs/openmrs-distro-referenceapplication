@@ -10,57 +10,31 @@ public class MarkPatientDeceasedPage extends Page {
 	String URL = "/coreapps/markPatientDead.page";
 	
 	private static final By DICTIONARY = By.id("dictionaryNavLink");
-	
 	private static final By ADD_NEW_CONCEPT = By.xpath("//*[@id=\"content\"]/a[2]");
-	
 	private static final By CONCEPT_NAME = By.id("namesByLocale[en].name");
-	
 	private static final By ADD_ALERGY = By.xpath("//*[@id=\"codedDatatypeRow\"]/td/table/tbody/tr/td[2]/input[1]");
-	
 	private static final By CAUSEBOX = By.id("newAnswerConcept");
-	
 	private static final By FEVER = By.xpath("/html/body/ul[1]/li[2]/a");
-	
 	private static final By ADDBUTTON = By.xpath("/html/body/div[5]/div[11]/button[1]");
-	
 	private static final By SAVE = By.cssSelector("#saveDeleteButtons > input:nth-child(1)");
-	
 	private static final By SEARCH = By.id("inputNode");
-	
 	private static final By CONCEPT_SEARCH_MESSAGE = By.id("openmrsSearchTable_info");
-	
 	private static final By COD = By.xpath("//*[@id=\"openmrsSearchTable\"]/tbody/tr[1]/td/span");
-	
 	private static final By COD_ID = By.xpath("//*[@id=\"conceptTable\"]/tbody/tr[1]/td");
-	
 	private static final By NEW_COD_ID = By.xpath("//*[@id=\"conceptTable\"]/tbody/tr[1]/td");
-	
 	private static final By ADMINISTRATION = By.id("administrationNavLink");
-	
 	private static final By ADVANCED_SETTINGS = By.linkText("Advanced Settings");
-	
 	private static final By CONCEPT_VALUE = By.xpath("//*[@id=\"globalPropsList\"]/tr[133]/td[2]/input");
-	
 	private static final By SAVE_CONCEPT_VALUE = By.xpath("//*[@id=\"buttonsAtBottom\"]/input[1]");
-	
 	private static final By HOME = By.id("homeNavLink");
-	
 	String conceptname = "Cause Of Death";
-	
 	private static final By MARK_PATIENT_DECEASED = By.id("org.openmrs.module.coreapps.markPatientDead");
-	
 	private static final By CHECK_BOX = By.id("deceased");
-	
 	private static final By DATE_PICKER = By.id("death-date-display");
-	
 	private static final By SAVE_DECEASED = By.xpath("//*[@id=\"mark-patient-dead\"]/fieldset/p[3]/span[2]/input");
-	
 	private static final By ACTIVE_DAY = By.cssSelector("td.day.active");
-	
 	private static final By DEATH_MESSAGE = By.className("death-message");
-	
 	private static final By EDIT = By.id("editConcept");
-	
 	private static final By DELETE_BUTTON = By.xpath("//*[@id=\"saveDeleteButtons\"]/input[4]");
 	
 	public MarkPatientDeceasedPage(Page page) {
@@ -74,9 +48,9 @@ public class MarkPatientDeceasedPage extends Page {
 	}
 	
 	/*
-	 * If there is a concept called Cause Of Death, The method gets its ID
+	 * If there is a concept called Cause Of Death, The method gets its concept code
 	 * if there is no concept at all or no concept called Cause of death, the method creates one
-	 * and copies its ID
+	 * and copies its concept code
 	 */
 	public void Concept() {
 		findElement(SEARCH).sendKeys("cause of death");
