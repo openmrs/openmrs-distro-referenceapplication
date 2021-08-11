@@ -80,7 +80,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By CONDITIONS_LINK = By.cssSelector(".conditions .info-header i.right");
     private static final By ATTACHMENTS_LINK = By.cssSelector("a[id='attachments.attachments.visitActions.default']");
     private static final By ACTIVE_VISIT = By.cssSelector("visitbyencountertype ul li a");
-    private static final By DELETE_PATIENT = By.id("org.openmrs.module.coreapps.deletePatient");
+    private static final By DELETE_PATIENT_LINK = By.id("org.openmrs.module.coreapps.deletePatient");
     private static final By DELETE_PATIENT_REASON = By.id("delete-reason");
     private static final By DELETE_PATIENT_CONFIRM = By.cssSelector("#delete-patient-creation-dialog > div.dialog-content > button.confirm.right");
     private static final By DELETE_PATIENT_CANCEL  = By.cssSelector("#delete-patient-creation-dialog > div.dialog-content > button.cancel");
@@ -444,8 +444,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     }
     
     public void deletePatient(String REASON) {
-    	  clickOn(DELETE_PATIENT);
-    	  setTextToFieldNoEnter(DELETE_PATIENT_REASON,REASON);
+    	  clickOn(DELETE_PATIENT_LINK);
+    	  setTextToFieldNoEnter(DELETE_PATIENT_REASON, REASON);
     	  clickOn(DELETE_PATIENT_CONFIRM);		
     }
     
