@@ -86,7 +86,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By DELETE_PATIENT_CANCEL  = By.cssSelector("#delete-patient-creation-dialog > div.dialog-content > button.cancel");
     private static final String REASON = "patient nolonger needed ";
     
-
     public ClinicianFacingPatientDashboardPage(Page page) {
         super(page);
     }
