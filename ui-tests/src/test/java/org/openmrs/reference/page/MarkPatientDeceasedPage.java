@@ -7,8 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class MarkPatientDeceasedPage extends Page {
 	
-	String URL = "/coreapps/markPatientDead.page";
-	
+	private static final String URL = "/coreapps/markPatientDead.page";
 	private static final By DICTIONARY = By.id("dictionaryNavLink");
 	private static final By ADD_NEW_CONCEPT = By.xpath("//*[@id=\"content\"]/a[2]");
 	private static final By CONCEPT_NAME = By.id("namesByLocale[en].name");
@@ -27,7 +26,6 @@ public class MarkPatientDeceasedPage extends Page {
 	private static final By CONCEPT_VALUE = By.xpath("//*[@id=\"globalPropsList\"]/tr[133]/td[2]/input");
 	private static final By SAVE_CONCEPT_VALUE = By.xpath("//*[@id=\"buttonsAtBottom\"]/input[1]");
 	private static final By HOME = By.id("homeNavLink");
-	String conceptname = "Cause Of Death";
 	private static final By MARK_PATIENT_DECEASED = By.id("org.openmrs.module.coreapps.markPatientDead");
 	private static final By CHECK_BOX = By.id("deceased");
 	private static final By DATE_PICKER = By.id("death-date-display");
