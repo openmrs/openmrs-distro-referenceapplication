@@ -22,5 +22,4 @@ public class RegistrationSummaryPage extends Page {
     public String getPageUrl() {
         return "/registrationapp/registrationSummary.page";
     }
-	
 }
