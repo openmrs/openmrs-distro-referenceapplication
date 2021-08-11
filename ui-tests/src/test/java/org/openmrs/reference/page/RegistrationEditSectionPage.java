@@ -23,7 +23,7 @@ public class RegistrationEditSectionPage extends Page {
     private static final By STATE_PROVINCE = By.id("stateProvince");
     private static final By COUNTRY = By.id("country");
     private static final By POSTAL_CODE = By.id("postalCode");
-    private static final String str = "Must be a valid phone number (with +, -, numbers or parentheses))";
+    private static final String PHONE_NUMBER_VALIDATOR = "Must be a valid phone number (with +, -, numbers or parentheses))";
 
     public RegistrationEditSectionPage(Page parent) {
         super(parent);
@@ -123,7 +123,7 @@ public class RegistrationEditSectionPage extends Page {
                 return str;
             }
         }
-        return str;
+        return PHONE_NUMBER_VALIDATOR;
         }
         return null;
     }
