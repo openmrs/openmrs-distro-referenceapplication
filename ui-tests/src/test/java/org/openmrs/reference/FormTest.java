@@ -96,6 +96,6 @@ public class FormTest extends TestBase {
 	
 	@After
 	public void tearDown() throws Exception {
-	       homePage.go();
+	        homePage.go();
 	}
 }
