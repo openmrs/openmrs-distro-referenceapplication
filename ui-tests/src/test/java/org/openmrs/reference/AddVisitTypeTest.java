@@ -49,4 +49,3 @@ public class AddVisitTypeTest extends ReferenceApplicationTestBase {
         visitTypePage.delete();
     }
 }
-

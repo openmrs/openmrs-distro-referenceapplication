@@ -41,8 +41,7 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void visitNoteTest() throws Exception {
-    	
+    public void visitNoteTest() throws Exception {  	
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
@@ -92,5 +91,4 @@ public class VisitNoteTest extends LocationSensitiveApplicationTestBase {
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
