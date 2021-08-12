@@ -11,42 +11,44 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.PatientVisitsDashboardPage;
 import org.openmrs.uitestframework.test.TestData;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
-
 
 public class TransferToWardServiceTest extends ReferenceApplicationTestBase {
 
     private static final String INPATIENT_WARD = "Inpatient Ward";
-
     private static final String ISOLATION_WARD = "Isolation Ward";
-
     private TestData.PatientInfo testPatient;
 
     @Before
     public void createTestData() throws Exception {
         testPatient = createTestPatient();
-        String visitType = TestData.getAVisitType();
-        String visit = new TestData.TestVisit(testPatient.uuid, visitType, getLocationUuid(homePage)).create();
     }
 
-    @Ignore("TODO fix, inpatient_ward doesn't exisit on the page, fix workflow")
     @Test
-    public void transferToWardServiceTest() throws Exception {
+    @Category(BuildTests.class)
+    public void transferToWardServiceTest() {
+        FindPatientPage findPatientPage = homePage.goToFindPatientRecord();
+        findPatientPage.enterPatient(testPatient.identifier);
+        findPatientPage.waitForPageToLoad();
+        PatientVisitsDashboardPage patientVisitsDashboardPage = findPatientPage.clickOnFirstPatient().startVisit();
 
-        ClinicianFacingPatientDashboardPage patientDashboardPage = homePage.goToActiveVisitPatient();
+        patientVisitsDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);
+        assertTrue(patientVisitsDashboardPage.containsText("Admission"));
 
-        patientDashboardPage.goToAdmitToInpatient().confirm(INPATIENT_WARD);
-        patientDashboardPage.waitForPage();
+        patientVisitsDashboardPage.goToTransferToWardServicePage().confirm(ISOLATION_WARD);
+        assertTrue(patientVisitsDashboardPage.containsText("Transfer"));
+        patientVisitsDashboardPage.waitForPage();
 
-        patientDashboardPage.goToTransferToWardServicePage().confirm(ISOLATION_WARD);
-        patientDashboardPage.waitForPage();
-
-        assertTrue(patientDashboardPage.containsText("Outpatient"));
+        assertThat(patientVisitsDashboardPage.getEncountersCount(), is(2));
     }
 
     @After

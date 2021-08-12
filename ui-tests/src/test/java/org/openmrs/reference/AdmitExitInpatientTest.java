@@ -15,7 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class AdmitExitInpatientTest extends ReferenceApplicationTestBase {
 
     private static final String INPATIENT_WARD = "Inpatient Ward";
-
     private TestData.PatientInfo testPatient;
 
     @Before

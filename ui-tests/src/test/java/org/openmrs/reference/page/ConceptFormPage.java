@@ -1,13 +1,12 @@
 package org.openmrs.reference.page;
 
-
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-
 public class ConceptFormPage extends Page {
+	
     private static final By VIEW_CONCEPT_DICTIONARY = By.linkText("View Concept Dictionary");
     private static final By ADD_NEW_CONCEPT = By.linkText("Add new Concept");
     private static final By FULLY_NAME = By.id("namesByLocale[en].name");
@@ -23,6 +22,7 @@ public class ConceptFormPage extends Page {
     private static By ADDED_DRUG;
     public String CONCEPT;
     private boolean acceptNextAlert = true;
+    
     public ConceptFormPage(WebDriver driver) {
         super(driver);
     }
@@ -60,7 +60,6 @@ public class ConceptFormPage extends Page {
             return false;
         }
     }
-
 
     public void clickOnAddedConcept() {
         ADDED_DRUG = By.xpath("//table[@id='openmrsSearchTable']/tbody/tr/td");
@@ -101,11 +100,8 @@ public class ConceptFormPage extends Page {
         clickOn(UNRETIRE);
     }
 
-
     @Override
     public String getPageUrl() {
         return "/admin/maintenance/settings.list";
     }
-
-
 }

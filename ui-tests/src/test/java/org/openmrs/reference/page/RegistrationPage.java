@@ -12,14 +12,15 @@ package org.openmrs.reference.page;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.support.ui.Select;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * The register-a-new-patient page.
  */
 public class RegistrationPage extends Page {
-
 
     public static final By BIRTHDAY_MONTH = By.id("birthdateMonth-field");
     public static final By BIRTHDAY_YEAR = By.id("birthdateYear-field");
@@ -176,6 +177,7 @@ public class RegistrationPage extends Page {
     }
 
     public void clickOnPhoneNumber() throws InterruptedException {
+	  waiter.until(ExpectedConditions.elementToBeClickable(PHONE_NUMBER_LABEL));
         clickOn(PHONE_NUMBER_LABEL);
     }
 
@@ -270,9 +272,7 @@ public class RegistrationPage extends Page {
     public void exitReview() {
         try {
             clickOn(CANCEL);
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     //  Edit  Contact Info

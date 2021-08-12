@@ -19,5 +19,4 @@ public class StylesGuidePage extends Page {
     public String getPageUrl() {
         return "/uicommons/styleGuide.page";
     }
-
 }

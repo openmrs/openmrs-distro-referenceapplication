@@ -12,6 +12,7 @@ package org.openmrs.reference;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
@@ -23,6 +24,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class RegisterPatientTest extends ReferenceApplicationTestBase {
+
     private TestPatient patient;
 
     @After
@@ -35,8 +37,8 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
 
     // Test for Story RA-71
     @Test
-    @Category(org.openmrs.reference.groups.BuildTests.class)
-    public void registerPatient() throws InterruptedException {
+    @Category(BuildTests.class)
+    public void registerPatientTest() throws InterruptedException {
         RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
         patient = PatientGenerator.generateTestPatient();
         registrationPage.enterPatient(patient);
@@ -61,6 +63,4 @@ public class RegisterPatientTest extends ReferenceApplicationTestBase {
         assertThat(dashboardPage.getPatientGivenName(), is(patient.givenName));
         assertThat(dashboardPage.getPatientFamilyName(), is(patient.familyName));
     }
-
-
 }

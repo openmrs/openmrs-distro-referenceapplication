@@ -12,12 +12,12 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 
 import static org.junit.Assert.assertTrue;
 
-@Ignore
 public class DeleteAppointmentBlockTest extends ManageProviderSchedulesTest {
 
     int firstAppointmentIndex = 0;
@@ -34,6 +34,7 @@ public class DeleteAppointmentBlockTest extends ManageProviderSchedulesTest {
      * @verifies creation and delete of an appointment
      */
     @Test
+    @Category(BuildTests.class)
     public void deleteAppointmentBlockTest() throws Exception {
 
         //The logic behind the text is to create an appointment and delete it
