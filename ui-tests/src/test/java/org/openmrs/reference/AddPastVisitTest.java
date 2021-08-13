@@ -47,4 +47,3 @@ public class AddPastVisitTest extends LocationSensitiveApplicationTestBase {
         deletePatient(testPatient);
     }
 }
-

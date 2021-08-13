@@ -75,4 +75,3 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, getLocationUuid(homePage)).create();
     }
 }
-

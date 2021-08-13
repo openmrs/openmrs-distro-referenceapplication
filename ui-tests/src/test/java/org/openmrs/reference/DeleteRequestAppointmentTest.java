@@ -64,4 +64,3 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
 }
-
