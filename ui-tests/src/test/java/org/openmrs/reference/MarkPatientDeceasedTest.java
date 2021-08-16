@@ -29,7 +29,7 @@ public class MarkPatientDeceasedTest extends ReferenceApplicationTestBase {
 		findPatientPage.enterPatient(patient.identifier);
 		findPatientPage.waitForPageToLoad();
 		findPatientPage.clickOnFirstPatient();
-		markPatientDeceased.markPatientDead();
+		markPatientDeceased.clickOnMarkPatientDead();
 		assertTrue(markPatientDeceased.confirmDeadMessage().contains("The patient is deceased"));
 		homePage.go();
 		homePage.goToAdministration();

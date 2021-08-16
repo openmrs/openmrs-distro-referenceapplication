@@ -14,7 +14,7 @@ public class MarkPatientDeceasedPage extends Page {
 	private static final By ADD_ANSWER= By.cssSelector("#codedDatatypeRow > td > table > tbody > tr > td.buttons > input:nth-child(1)");
 	private static final By CAUSEBOX = By.id("newAnswerConcept");
 	private static final By FEVER = By.xpath("/html/body/ul[1]/li[2]/a");
-	private static final By ADDBUTTON = By.xpath("/html/body/div[5]/div[11]/button[1]");
+	private static final By ADD_BUTTON = By.xpath("/html/body/div[5]/div[11]/button[1]");
 	private static final By SAVE = By.cssSelector("#saveDeleteButtons > input:nth-child(1)");
 	private static final By SEARCH = By.id("inputNode");
 	private static final By COD = By.xpath("//*[@id=\"openmrsSearchTable\"]/tbody/tr[1]/td/span");
@@ -53,7 +53,7 @@ public class MarkPatientDeceasedPage extends Page {
 		getConceptid(newId());
 	}
 	
-	public void markPatientDead() {
+	public void clickOnMarkPatientDead() {
 		findElement(MARK_PATIENT_DECEASED).click();
 		findElement(CHECK_BOX).click();
 		findElement(DATE_PICKER).click();
@@ -71,7 +71,7 @@ public class MarkPatientDeceasedPage extends Page {
 		findElement(ADD_ANSWER).click();
 		findElement(CAUSEBOX).sendKeys("Fever");
 		findElement(FEVER).click();
-		findElement(ADDBUTTON).click();
+		findElement(ADD_BUTTON).click();
 		findElement(SAVE).click();
 	}
 	
