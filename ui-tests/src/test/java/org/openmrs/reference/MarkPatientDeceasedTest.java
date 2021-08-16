@@ -12,6 +12,7 @@ import org.openmrs.reference.page.MarkPatientDeceasedPage;
 import org.openmrs.uitestframework.test.TestData;
 
 public class MarkPatientDeceasedTest extends ReferenceApplicationTestBase {
+	
 	private TestData.PatientInfo patient;
 	
 	@Before
@@ -19,6 +20,7 @@ public class MarkPatientDeceasedTest extends ReferenceApplicationTestBase {
 		patient = createTestPatient();
 		createTestVisit();
 	}
+	
 	@Test
 	@Category(BuildTests.class)
 	public void markPatientDeceasedTest() {
@@ -35,10 +37,12 @@ public class MarkPatientDeceasedTest extends ReferenceApplicationTestBase {
 		homePage.goToAdministration();
 		markPatientDeceased.deleteConcept();
 	}
+	
 	@After
 	public void tearDown() throws Exception {
 		deletePatient(patient);
 	}
+	
 	private void createTestVisit() {
 		new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
 	}

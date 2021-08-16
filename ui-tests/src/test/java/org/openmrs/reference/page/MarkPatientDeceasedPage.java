@@ -6,12 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 public class MarkPatientDeceasedPage extends Page {
-	
 	private static final String URL = "/coreapps/markPatientDead.page";
 	private static final By DICTIONARY = By.id("dictionaryNavLink");
 	private static final By ADD_NEW_CONCEPT = By.linkText("Add new Concept");
 	private static final By CONCEPT_NAME = By.id("namesByLocale[en].name");
-	private static final By ADD_ANSWER= By.cssSelector("#codedDatatypeRow > td > table > tbody > tr > td.buttons > input:nth-child(1)");
+	private static final By ADD_ANSWER = By
+	        .cssSelector("#codedDatatypeRow > td > table > tbody > tr > td.buttons > input:nth-child(1)");
 	private static final By CAUSEBOX = By.id("newAnswerConcept");
 	private static final By FEVER = By.xpath("/html/body/ul[1]/li[2]/a");
 	private static final By ADD_BUTTON = By.xpath("/html/body/div[5]/div[11]/button[1]");
@@ -27,12 +27,12 @@ public class MarkPatientDeceasedPage extends Page {
 	private static final By MARK_PATIENT_DECEASED = By.id("org.openmrs.module.coreapps.markPatientDead");
 	private static final By CHECK_BOX = By.id("deceased");
 	private static final By DATE_PICKER = By.id("death-date-display");
-	private static final By SAVE_DECEASED = By.cssSelector("#mark-patient-dead > fieldset > p:nth-child(4) > span:nth-child(2) > input");
+	private static final By SAVE_DECEASED = By
+	        .cssSelector("#mark-patient-dead > fieldset > p:nth-child(4) > span:nth-child(2) > input");
 	private static final By ACTIVE_DAY = By.cssSelector("td.day.active");
 	private static final By DEATH_MESSAGE = By.className("death-message");
 	private static final By EDIT = By.id("editConcept");
 	private static final By DELETE_BUTTON = By.cssSelector("#saveDeleteButtons > input[type=submit]:nth-child(4)");
-	
 	public MarkPatientDeceasedPage(Page page) {
 		super(page);
 	}
