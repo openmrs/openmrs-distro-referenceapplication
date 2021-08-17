@@ -25,35 +25,35 @@ import org.openmrs.uitestframework.test.TestData;
  */
 public class ManageProviderSchedulesTest extends ReferenceApplicationTestBase {
 
-	protected HomePage homePage;
-	protected AppointmentBlocksPage appointmentBlocksPage;
-	protected String locationName;
-	protected String locationUuid;
-	protected String provider;
+    protected HomePage homePage;
+    protected AppointmentBlocksPage appointmentBlocksPage;
+    protected String locationName;
+    protected String locationUuid;
+    protected String provider;
 
-	@Before
-	public void setUp() throws Exception {
-		homePage = new HomePage(page);
-		assertPage(homePage.waitForPage());
-		AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
-		appointmentBlocksPage = appointmentSchedulingPage.goToAppointmentBlock();
-		/*
-		 * TODO The following code should be re-nabled when bug AM-186 is fixed
-		 * Location might not be available when running this test, thus we create one
-		 * locationName = "Location-"+TestData.randomSuffix();
-		 * We must be sure that the location has been created, the test will fail otherwise
-		 * locationUuid = TestData.createLocation(locationName);
-		 * assertNotNull(locationUuid);
-		*/
-		locationName = "Isolation Ward";
-		provider = "Provider " + TestData.randomSuffix();
-	}
+    @Before
+    public void setUp() throws Exception {
+        homePage = new HomePage(page);
+        assertPage(homePage.waitForPage());
+        AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
+        appointmentBlocksPage = appointmentSchedulingPage.goToAppointmentBlock();
+        /*
+         * TODO The following code should be re-nabled when bug AM-186 is fixed
+         * Location might not be available when running this test, thus we create one
+         * locationName = "Location-"+TestData.randomSuffix();
+         * We must be sure that the location has been created, the test will fail otherwise
+         * locationUuid = TestData.createLocation(locationName);
+         * assertNotNull(locationUuid);
+        */
+        locationName = "Isolation Ward";
+        provider = "Provider " + TestData.randomSuffix();
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		/*
-		 *  TODO delete the location. Re-enable when bug AM-186 is fixed.
-		 * TestData.permanetDelete(locationUuid); 
-		 */
-	}
+    @After
+    public void tearDown() throws Exception {
+        /*
+         * TODO delete the location. Re-enable when bug AM-186 is fixed.
+         * TestData.permanetDelete(locationUuid);
+         */
+    }
 }

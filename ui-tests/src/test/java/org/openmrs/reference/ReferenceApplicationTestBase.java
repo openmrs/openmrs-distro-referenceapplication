@@ -26,24 +26,24 @@ import org.openqa.selenium.By;
  */
 public class ReferenceApplicationTestBase extends TestBase {
 
-	private static final By SELECTED_LOCATION = By.id("selected-location");
-	protected HomePage homePage;
+    private static final By SELECTED_LOCATION = By.id("selected-location");
+    protected HomePage homePage;
 
-	public ReferenceApplicationTestBase() {
-		super();
-	}
+    public ReferenceApplicationTestBase() {
+        super();
+    }
 
-	@Before
-	public void before() {
-	    homePage = new HomePage(page);
-	}
+    @Before
+    public void before() {
+        homePage = new HomePage(page);
+    }
 
-	public String getLocationUuid(Page page){
-		return driver.findElement(SELECTED_LOCATION).getAttribute("location-uuid");
-	}
-
-	@Override
-	protected LoginPage getLoginPage() {
-		return new ReferenceApplicationLoginPage(driver);
-	}
+    public String getLocationUuid(Page page) {
+        return driver.findElement(SELECTED_LOCATION).getAttribute("location-uuid");
+    }
+    
+    @Override
+    protected LoginPage getLoginPage() {
+        return new ReferenceApplicationLoginPage(driver);
+    }
 }

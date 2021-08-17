@@ -18,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 
 public class LoginTest extends ReferenceApplicationTestBase {
+
     private HomePage homePage;
     
     private void initiateHomePage() {
