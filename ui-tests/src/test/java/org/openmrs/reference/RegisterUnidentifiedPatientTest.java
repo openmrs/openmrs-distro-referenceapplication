@@ -28,29 +28,29 @@ import static org.junit.Assert.assertTrue;
  */
 public class RegisterUnidentifiedPatientTest extends ReferenceApplicationTestBase {
 
-	private TestPatient patient;
+    private TestPatient patient;
 
-	@After
-	public void tearDown() throws Exception {
-		TestData.PatientInfo p = new TestData.PatientInfo();
-		p.uuid = patient.uuid;
-		deletePatient(p);
-		waitForPatientDeletion(patient.uuid);
-	}
+    @After
+    public void tearDown() throws Exception {
+        TestData.PatientInfo p = new TestData.PatientInfo();
+        p.uuid = patient.uuid;
+        deletePatient(p);
+        waitForPatientDeletion(patient.uuid);
+    }
 
-	@Test
-	@Category(BuildTests.class)
-	public void registerUnidentifiedPatientTest() throws InterruptedException {
-		RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
-		patient = PatientGenerator.generateTestPatient();
-		registrationPage.enterUnidentifiedPatient(patient);
+    @Test
+    @Category(BuildTests.class)
+    public void registerUnidentifiedPatientTest() throws InterruptedException {
+        RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
+        patient = PatientGenerator.generateTestPatient();
+        registrationPage.enterUnidentifiedPatient(patient);
+        
+        assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
-		assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
-
-		ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
-		dashboardPage.waitForPage();
-		patient.uuid = page.getPatientUuidFromUrl();
-		assertThat(dashboardPage.getPatientGivenName(), is("UNKNOWN"));
-		assertThat(dashboardPage.getPatientFamilyName(), is("UNKNOWN"));
-	}
+        ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
+        dashboardPage.waitForPage();
+        patient.uuid = page.getPatientUuidFromUrl();
+        assertThat(dashboardPage.getPatientGivenName(), is("UNKNOWN"));
+        assertThat(dashboardPage.getPatientFamilyName(), is("UNKNOWN"));
+    }
 }

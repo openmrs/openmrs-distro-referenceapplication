@@ -23,7 +23,6 @@ import static org.junit.Assert.assertTrue;
 public class BookRequestAppointmentTest extends LocationSensitiveApplicationTestBase {
 
     private static final String SERVICE_NAME = "Oncology";
-
     private TestData.PatientInfo patient;
 
     @Before
@@ -78,6 +77,4 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
-
