@@ -33,7 +33,7 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
 
     @Test
     @Category(BuildTests.class)
-    public void XSSOnPhoneNumberFieldTest() throws Exception {
+    public void xssOnPhoneNumberFieldTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
@@ -48,6 +48,8 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
         registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
         patientDashboardPage = registrationEditSectionPage.confirmPatient();
+        patientDashboardPage.clickOnShowContact();
+        assertTrue(patientDashboardPage.getTelephoneNumber().contains("111111111"));
     }
 
     @After
@@ -59,4 +61,3 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
 }
-
