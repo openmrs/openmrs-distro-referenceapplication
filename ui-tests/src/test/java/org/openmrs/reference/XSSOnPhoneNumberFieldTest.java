@@ -9,9 +9,10 @@
  */
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -19,11 +20,6 @@ import org.openmrs.reference.page.ActiveVisitsPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationEditSectionPage;
 import org.openmrs.uitestframework.test.TestData;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.empty;
-import static org.junit.Assert.assertThat;
 
 public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestBase {
 
@@ -36,7 +32,6 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
     public void XSSOnPhoneNumberFieldTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -48,14 +43,11 @@ public class XSSOnPhoneNumberFieldTest extends LocationSensitiveApplicationTestB
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("<script>alert(0)</script>");
         registrationEditSectionPage.clickOnConfirmEdit();
-        assertThat(registrationEditSectionPage.getValidationErrors(), is(not(empty())));
+        assertTrue(registrationEditSectionPage.getInvalidPhoneNumberNotification().contains(("Must be a valid phone number (with +, -, numbers or parentheses)")));
         registrationEditSectionPage.clearPhoneNumber();
         registrationEditSectionPage.enterPhoneNumber("111111111");
         registrationEditSectionPage.clickOnConfirmEdit();
         patientDashboardPage = registrationEditSectionPage.confirmPatient();
-        //Ignored as show contact may hide under success message
-        //patientDashboardPage.clickOnShowContact();
-        //assertThat(patientDashboardPage.getTelephoneNumber(), is("111111111"));
     }
 
     @After
