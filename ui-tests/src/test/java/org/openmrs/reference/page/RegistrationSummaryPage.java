@@ -23,3 +23,4 @@ public class RegistrationSummaryPage extends Page {
         return "/registrationapp/registrationSummary.page";
     }
 }
+
