@@ -32,9 +32,8 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By STARTED_AT = By.className("active-visit-started-at-message");
     private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
     private static final By PATIENT_CAPTURE_VITALS = By.id("referenceapplication.realTime.vitals");
-    private static final By APPOINTMENT_EDIT = By.cssSelector("div.info-section:nth-child(4) > div > a:nth-child(3)");
+    private static final By APPOINTMENT_LINK = By.cssSelector("div.info-section:nth-child(4) > div > a:nth-child(3)");
     private static final By DIAGNOSIS_SEARCH_CONTAINER = By.id("diagnosis-search-container");
-    private static final By ADD_ALLERGY = By.id("allergyui-editAllergies");
     private static final By DIAGNOSIS_SEARCH = By.id("diagnosis-search");
     private static final By VISIT_LINK_2 = By.className("visit-link");
     private static final By YES = By.cssSelector("#end-visit-dialog .confirm");
@@ -64,7 +63,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By LOCATION = By.id("w3");
     private static final By WHO_WHEN_WHERE = By.id("who-when-where");
     private static final By REQUEST_APPOINTMENT = By.linkText("Request Appointment");
-    private static final By APPOINTMENT_LINK = By.cssSelector("a.right > i");
+    private static final By APPOINTMENT_EDIT = By.cssSelector("a.right > i");
     private static final By ERROR = By.cssSelector("li.error > span");
     private static final By ADD_PAST_VISIT = By.id("org.openmrs.module.coreapps.createRetrospectiveVisit");
     private static final By TODAY = By.cssSelector("td.day.active");
@@ -193,11 +192,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
         waitForElement(DIAGNOSIS_SEARCH_CONTAINER);
     }
     
-    public AllergyPage clickOnAllergyManagement() {
-        clickOn(ADD_ALLERGY);
-        return new AllergyPage(this);
-    }
-
     public VisitNotePage goToVisitNote() {
         clickOnLast(VISIT_NOTE);
         return new VisitNotePage(this);
