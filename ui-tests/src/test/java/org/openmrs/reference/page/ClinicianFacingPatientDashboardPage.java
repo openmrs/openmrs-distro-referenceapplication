@@ -120,7 +120,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     }
 
     public ManageAppointmentsPage goToManageAppointments() {
-        clickOn(APPOINTMENT_EDIT);
+        clickOn(APPOINTMENT_LINK);
         return new ManageAppointmentsPage(this);
     }
 
