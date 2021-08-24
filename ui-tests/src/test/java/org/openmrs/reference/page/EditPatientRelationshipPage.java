@@ -31,3 +31,5 @@ public class EditPatientRelationshipPage extends Page {
         return "/registrationapp/editSection.page";
     }
 }
+
+
