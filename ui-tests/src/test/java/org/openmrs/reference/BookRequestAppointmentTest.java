@@ -11,11 +11,16 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.page.ActiveVisitsPage;
+import org.openmrs.reference.page.AppointmentSchedulingPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.ManageAppointmentsPage;
+import org.openmrs.reference.page.ManageProviderSchedulesPage;
+import org.openmrs.reference.page.RequestAppointmentPage;
 import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertTrue;
@@ -32,10 +37,8 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
     public void bookRequestAppointmentTest() throws Exception {
-
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
