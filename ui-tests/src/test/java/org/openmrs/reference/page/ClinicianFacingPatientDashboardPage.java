@@ -84,7 +84,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By DELETE_PATIENT_REASON = By.id("delete-reason");
     private static final By DELETE_PATIENT_CONFIRM = By.cssSelector("#delete-patient-creation-dialog > div.dialog-content > button.confirm.right");
     private static final By DELETE_PATIENT_CANCEL  = By.cssSelector("#delete-patient-creation-dialog > div.dialog-content > button.cancel");
-    private static final By EDIT_REGISTRATION_INFORMATION = By.cssSelector("a[id='application.registrationapp.summary.editPatientLink']");
+    private static final By EDIT_PATIENT_LINK = By.cssSelector("a[id='application.registrationapp.summary.editPatientLink']");
     private static final String REASON = "patient nolonger needed";
     
     public ClinicianFacingPatientDashboardPage(Page page) {
@@ -456,7 +456,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     }
     
     public RegistrationSummaryPage goToRegistrationSummary(){
-        clickOn(EDIT_REGISTRATION_INFORMATION);
+        clickOn(EDIT_PATIENT_LINK);
         return new RegistrationSummaryPage(this);
     }
 }
