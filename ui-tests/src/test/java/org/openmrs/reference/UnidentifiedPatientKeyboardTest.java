@@ -20,7 +20,6 @@ import org.openmrs.uitestframework.test.TestData;
  * Created by tomasz on 22.07.15.
  */
 public class UnidentifiedPatientKeyboardTest extends TestBase {
-    private HeaderPage headerPage;
     private RegistrationPage registrationPage;
     private HomePage homePage;
     private ClinicianFacingPatientDashboardPage patientDashboardPage;
