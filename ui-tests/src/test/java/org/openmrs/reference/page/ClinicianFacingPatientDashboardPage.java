@@ -457,6 +457,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     
     public RegistrationSummaryPage goToRegistrationSummary(){
         clickOn(EDIT_REGISTRATION_INFORMATION);
-        return  new RegistrationSummaryPage(this);
+        return new RegistrationSummaryPage(this);
     }
 }
