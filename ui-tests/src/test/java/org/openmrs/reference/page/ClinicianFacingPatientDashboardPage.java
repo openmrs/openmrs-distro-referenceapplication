@@ -73,7 +73,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By MERGE_VISIT_BUTTON = By.xpath("//a[@id='org.openmrs.module.coreapps.mergeVisits']/li");
     private static final By MERGE = By.id("mergeVisitsBtn");
     private static final By PATIENT = By.xpath("//ul[@id='breadcrumbs']/li[2]/a");
-    private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#contactInfoContent div span.left-margin");
+    private static final By TELEPHONE_NUMBER_TEXT = By.cssSelector("#coreapps-telephoneNumber");
     private static final By RECENT_VISITS = By.cssSelector("visitbyencountertype > ul > li:nth-child(1) > a");
     private static final By PATIENT_GIVENNAME = By.cssSelector("#content div span.PersonName-givenName");
     private static final By ACTIVE_VISIT_MESSAGE = By.cssSelector("active-visit-message");
@@ -82,7 +82,12 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By ATTACHMENTS_LINK = By.cssSelector("a[id='attachments.attachments.visitActions.default']");
     private static final By ACTIVE_VISIT = By.cssSelector("visitbyencountertype ul li a");
     private static final By EDIT_REGISTRATION_INFORMATION = By.cssSelector("a[id='application.registrationapp.summary.editPatientLink']");
-
+    private static final By DELETE_PATIENT_LINK = By.id("org.openmrs.module.coreapps.deletePatient");
+    private static final By DELETE_PATIENT_REASON = By.id("delete-reason");
+    private static final By DELETE_PATIENT_CONFIRM = By.cssSelector("#delete-patient-creation-dialog > div.dialog-content > button.confirm.right");
+    private static final By DELETE_PATIENT_CANCEL  = By.cssSelector("#delete-patient-creation-dialog > div.dialog-content > button.cancel");
+    private static final String REASON = "patient nolonger needed";
+    
     public ClinicianFacingPatientDashboardPage(Page page) {
         super(page);
     }
@@ -401,7 +406,7 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     public String getTelephoneNumber() {
         String phoneNumber = findElement(TELEPHONE_NUMBER_TEXT).getText();
         if (StringUtils.isNotBlank(phoneNumber)) {
-            phoneNumber = phoneNumber.substring(0, phoneNumber.indexOf("\n"));
+            phoneNumber = phoneNumber.trim();
         }
         return phoneNumber;
     }
@@ -443,6 +448,12 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     public ConditionsPage clickOnConditionsWidgetLink() {
         clickOn(CONDITIONS_LINK);
         return new ConditionsPage(this);
+    }
+    
+    public void deletePatient(String REASON) {
+    	  clickOn(DELETE_PATIENT_LINK);
+    	  setTextToFieldNoEnter(DELETE_PATIENT_REASON, REASON);
+    	  clickOn(DELETE_PATIENT_CONFIRM);		
     }
     
     public AttachmentsPage goToAttachmentsPage() {
