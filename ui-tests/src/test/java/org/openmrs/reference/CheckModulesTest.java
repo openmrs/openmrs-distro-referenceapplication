@@ -1,23 +1,24 @@
 package org.openmrs.reference;
 
+import java.util.List;
+
 import org.junit.Assert;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.ModulesPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class CheckModulesTest extends ReferenceApplicationTestBase {
 
     /**
      * Check the list of modules to be sure they are all started.
      */
-    @Ignore
-    @Category(org.openmrs.reference.groups.BuildTests.class)
-    public void checkModules() throws Exception {
+    @Test
+    @Category(BuildTests.class)
+    public void checkModulesTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         ModulesPage modulesPage = administrationPage.goToManageModulesPage();
         // Get the modulesListing <div>, which contains the table of modules.
