@@ -21,10 +21,10 @@ import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertTrue;
 
+@Ignore
 public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestBase {
 
     private static final String SERVICE_NAME = "Oncology";
-
     private TestData.PatientInfo patient;
 
     @Before
@@ -34,7 +34,6 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
     public void addPatientAppointmentTest() throws Exception {
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
@@ -68,6 +67,4 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
-
