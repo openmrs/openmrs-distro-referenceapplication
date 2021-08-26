@@ -32,7 +32,7 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
     }
 
     @Test
-    @Ignore //See RA-1216 for details
+    @Ignore ///See RA-1216 for details
     @Category(BuildTests.class)
     public void bookRequestAppointmentTest() throws Exception {
 
