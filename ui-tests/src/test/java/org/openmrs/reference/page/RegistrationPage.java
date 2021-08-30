@@ -63,7 +63,7 @@ public class RegistrationPage extends Page {
     private static final By PERSON_NAME = By.xpath("//ul[@id='relationship']/p[2]/input[1]");
     private static final By ADD_NEW_RELATIONSHIP_TYPE_ICON = By.xpath("//ul[@id='relationship']/p[3]/a[1]/i");
     private static final By REMOVE_RELATIONSHIP_TYPE_ICON = By.cssSelector("//ul[@id='relationship']/p[3]/a[2]/i");
-    private static final By CONFIRM_RELATIONSHIP_TYPE = By.xpath(CONFIRMATION_DIV + "//div/div/p[6]");
+    private static final By CONFIRM_RELATIONSHIP_TYPE_BUTTON = By.xpath(CONFIRMATION_DIV + "//div/div/p[6]");
     static By AUTO_LIST;
     private boolean acceptNextAlert = true;
     private static final String NAME = "JOHN";
@@ -367,6 +367,6 @@ public class RegistrationPage extends Page {
     }
     
     public String getRelationshipTypeConfirmationPage() {
-        return getText(CONFIRM_RELATIONSHIP_TYPE);
+        return getText(CONFIRM_RELATIONSHIP_TYPE_BUTTON);
     }   
 }
