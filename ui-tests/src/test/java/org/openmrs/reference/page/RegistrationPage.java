@@ -60,7 +60,7 @@ public class RegistrationPage extends Page {
     private static final By CONFIRM_DATA = By.id("submit");
     private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
     private static final By SELECT_RELATIONSHIP_TYPE = By.id("relationship_type");
-    private static final By PERSON_NAME = By.xpath("//ul[@id='relationship']/p[2]/input[1]");
+    private static final By PERSON_NAME_INPUT = By.xpath("//ul[@id='relationship']/p[2]/input[1]");
     private static final By ADD_NEW_RELATIONSHIP_TYPE_ICON = By.xpath("//ul[@id='relationship']/p[3]/a[1]/i");
     private static final By REMOVE_RELATIONSHIP_TYPE_ICON = By.cssSelector("//ul[@id='relationship']/p[3]/a[2]/i");
     private static final By CONFIRM_RELATIONSHIP_TYPE_BUTTON = By.xpath(CONFIRMATION_DIV + "//div/div/p[6]");
@@ -355,7 +355,7 @@ public class RegistrationPage extends Page {
     	clickOn(SELECT_RELATIONSHIP_TYPE);
 	Select relationshipType = new Select(driver.findElement(By.id("relationship_type")));
     	relationshipType.selectByVisibleText("Doctor");
-    	setTextToFieldNoEnter(PERSON_NAME, NAME);
+    	setTextToFieldNoEnter(PERSON_NAME_INPUT, NAME);
     }
 
     public void addNewRelationshipType() {
