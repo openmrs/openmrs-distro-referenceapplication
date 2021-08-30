@@ -10,7 +10,6 @@ import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
-import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
@@ -20,7 +19,7 @@ import org.openmrs.uitestframework.test.TestData;
  * Created by tomasz on 22.07.15.
  */
 public class UnidentifiedPatientKeyboardTest extends TestBase {
-    private HeaderPage headerPage;
+    
     private RegistrationPage registrationPage;
     private HomePage homePage;
     private ClinicianFacingPatientDashboardPage patientDashboardPage;

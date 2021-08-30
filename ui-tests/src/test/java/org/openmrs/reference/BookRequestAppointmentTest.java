@@ -22,7 +22,6 @@ import static org.junit.Assert.assertTrue;
 public class BookRequestAppointmentTest extends LocationSensitiveApplicationTestBase {
 
     private static final String SERVICE_NAME = "Oncology";
-
     private TestData.PatientInfo patient;
 
     @Before
@@ -40,8 +39,8 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         RequestAppointmentPage requestAppointmentPage = patientDashboardPage.clickOnRequest();
         requestAppointmentPage.enterAppointmentType("Oncology");
-        requestAppointmentPage.enterValue("0");
-        requestAppointmentPage.selectUnits("Day(s)");
+        requestAppointmentPage.enterMinimumValue("0");
+        requestAppointmentPage.selectMinimumUnits("Day(s)");
         patientDashboardPage = requestAppointmentPage.saveRequest();
         patientDashboardPage.waitForPage();
         patientDashboardPage.goToHomePage();
@@ -76,6 +75,4 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
-

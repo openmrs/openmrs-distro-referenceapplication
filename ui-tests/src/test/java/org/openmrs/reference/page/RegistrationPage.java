@@ -13,6 +13,7 @@ import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * The register-a-new-patient page.
@@ -58,8 +59,14 @@ public class RegistrationPage extends Page {
     static final By CANCEL = By.id("reviewSimilarPatients-button-cancel");
     private static final By CONFIRM_DATA = By.id("submit");
     private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
+    private static final By SELECT_RELATIONSHIP_TYPE = By.id("relationship_type");
+    private static final By PERSON_NAME_INPUT = By.xpath("//ul[@id='relationship']/p[2]/input[1]");
+    private static final By ADD_NEW_RELATIONSHIP_TYPE_ICON = By.xpath("//ul[@id='relationship']/p[3]/a[1]/i");
+    private static final By REMOVE_RELATIONSHIP_TYPE_ICON = By.cssSelector("//ul[@id='relationship']/p[3]/a[2]/i");
+    private static final By CONFIRM_RELATIONSHIP_TYPE_BUTTON = By.xpath(CONFIRMATION_DIV + "//div/div/p[6]");
     static By AUTO_LIST;
     private boolean acceptNextAlert = true;
+    private static final String NAME = "JOHN";
 
     public RegistrationPage(Page page) {
         super(page);
@@ -343,5 +350,23 @@ public class RegistrationPage extends Page {
     public String getSimilarPatientInfo() {
         return findElement(By.cssSelector("#similarPatientsSelect .info")).getText();
     }
-}
+    
+    public void selectRelationshipType() {
+    	clickOn(SELECT_RELATIONSHIP_TYPE);
+	Select relationshipType = new Select(driver.findElement(By.id("relationship_type")));
+    	relationshipType.selectByVisibleText("Doctor");
+    	setTextToFieldNoEnter(PERSON_NAME_INPUT, NAME);
+    }
 
+    public void addNewRelationshipType() {
+        clickOn(ADD_NEW_RELATIONSHIP_TYPE_ICON);
+    }
+
+    public void removeRelationshipType() {
+        clickOn(REMOVE_RELATIONSHIP_TYPE_ICON);
+    }
+    
+    public String getRelationshipTypeConfirmationPage() {
+        return getText(CONFIRM_RELATIONSHIP_TYPE_BUTTON);
+    }   
+}

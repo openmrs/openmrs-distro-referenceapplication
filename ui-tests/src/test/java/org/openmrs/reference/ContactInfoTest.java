@@ -10,9 +10,10 @@
 
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -21,12 +22,9 @@ import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationEditSectionPage;
 import org.openmrs.uitestframework.test.TestData;
 
-import static org.junit.Assert.assertTrue;
-
 public class ContactInfoTest extends ReferenceApplicationTestBase {
 
     private static final String VISIT_TYPE_UUID = "7b0f5697-27e3-40c4-8bae-f4049abfb4ed";
-
     private TestData.PatientInfo patient;
 
     @Before
@@ -36,7 +34,6 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
     }
 
     @Test
-    @Ignore
     @Category(BuildTests.class)
     public void contactInfoTest() throws Exception {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
@@ -78,4 +75,3 @@ public class ContactInfoTest extends ReferenceApplicationTestBase {
         new TestData.TestVisit(patient.uuid, VISIT_TYPE_UUID, getLocationUuid(homePage)).create();
     }
 }
-

@@ -50,7 +50,6 @@ public class AddRolesToUserTest extends ReferenceApplicationTestBase {
             oldRole = role.getKey();
             homePage.goToAdministration().clickOnManageUsers();
         }
-
     }
 
     private void fillInRoleModules(Map<String, Integer> roleModules) {
