@@ -61,8 +61,8 @@ public class RegistrationPage extends Page {
     private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
     private static final By SELECT_RELATIONSHIP_TYPE = By.id("relationship_type");
     private static final By PERSON_NAME = By.xpath("//ul[@id='relationship']/p[2]/input[1]");
-    private static final By ADD_NEW_RELATIONSHIP_TYPE = By.xpath("//ul[@id='relationship']/p[3]/a[1]/i");
-    private static final By REMOVE_RELATIONSHIP_TYPE = By.cssSelector("//ul[@id='relationship']/p[3]/a[2]/i");
+    private static final By ADD_NEW_RELATIONSHIP_TYPE_ICON = By.xpath("//ul[@id='relationship']/p[3]/a[1]/i");
+    private static final By REMOVE_RELATIONSHIP_TYPE_ICON = By.cssSelector("//ul[@id='relationship']/p[3]/a[2]/i");
     private static final By CONFIRM_RELATIONSHIP_TYPE = By.xpath(CONFIRMATION_DIV + "//div/div/p[6]");
     static By AUTO_LIST;
     private boolean acceptNextAlert = true;
@@ -359,11 +359,11 @@ public class RegistrationPage extends Page {
     }
 
     public void addNewRelationshipType() {
-        clickOn(ADD_NEW_RELATIONSHIP_TYPE);
+        clickOn(ADD_NEW_RELATIONSHIP_TYPE_ICON);
     }
 
     public void removeRelationshipType() {
-        clickOn(REMOVE_RELATIONSHIP_TYPE);
+        clickOn(REMOVE_RELATIONSHIP_TYPE_ICON);
     }
     
     public String getRelationshipTypeConfirmationPage() {
