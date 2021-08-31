@@ -99,10 +99,6 @@ public class MarkPatientDeceasedPage extends Page {
 		findElement(CAUSEBOX).sendKeys("Fever");
 		findElement(FEVER).click();
 		findElement(ADD_BUTTON).click();
-		//		
-		//		Actions actions = new Actions(driver);
-		//		actions.moveToElement((WebElement) SAVE).click();
-		//      actions.moveToElement(SAVE).click().perform();
 		waiter.until(ExpectedConditions.elementToBeClickable(SAVE));
 		findElement(SAVE).click();
 	}
