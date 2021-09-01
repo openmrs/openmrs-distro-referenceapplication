@@ -445,9 +445,9 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     }
     
     public void deletePatient(String REASON) {
-    	  clickOn(DELETE_PATIENT_LINK);
-    	  setTextToFieldNoEnter(DELETE_PATIENT_REASON, REASON);
-    	  clickOn(DELETE_PATIENT_CONFIRM);		
+    	clickOn(DELETE_PATIENT_LINK);
+    	setTextToFieldNoEnter(DELETE_PATIENT_REASON, REASON);
+    	clickOn(DELETE_PATIENT_CONFIRM);		
     }
     
     public AttachmentsPage goToAttachmentsPage() {
