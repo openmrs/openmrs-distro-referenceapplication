@@ -12,7 +12,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -24,7 +23,6 @@ import static org.junit.Assert.assertTrue;
 public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestBase {
 
     private static final String SERVICE_NAME = "Oncology";
-
     private TestData.PatientInfo patient;
 
     @Before
@@ -34,7 +32,6 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
     public void addPatientAppointmentTest() throws Exception {
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
@@ -42,6 +39,10 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
         manageProviderSchedulesPage.selectLocation(getLocationName());
         manageProviderSchedulesPage.clickOnCurrentDay();
         manageProviderSchedulesPage.selectLocationBlock(getLocationName());
+        manageProviderSchedulesPage.enterMinimumTimeValue("06", "30");
+        manageProviderSchedulesPage.clickOnStartTimeButton();
+        manageProviderSchedulesPage.enterMaximumTimeValue("09", "30");
+        manageProviderSchedulesPage.clickOnEndTimeButton();
         manageProviderSchedulesPage.enterService(SERVICE_NAME);
         manageProviderSchedulesPage.clickOnEndTimeButton();
         manageProviderSchedulesPage.clickOnSave();
@@ -57,7 +58,7 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
         findPatientPage = manageAppointmentsPage.saveAppointment();
         findPatientPage.enterPatient(patient.getName());
         manageAppointmentsPage = findPatientPage.clickOnFirstPatientAppointment();
-        assertTrue(manageAppointmentsPage.getAppointmentServiceType().contains(SERVICE_NAME));
+        assertTrue(manageAppointmentsPage.containsText(SERVICE_NAME));
     }
 
     @After
@@ -68,6 +69,4 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
-
