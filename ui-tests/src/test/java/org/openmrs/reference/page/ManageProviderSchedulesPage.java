@@ -19,6 +19,11 @@ public class ManageProviderSchedulesPage extends Page {
     private static final By LOCATION_IN_BLOCK = By.xpath("//div[@id='select-location']/select");
     private static final By SERVICE_DROPDOWN = By.cssSelector("a.ng-scope.ng-binding");
     private static final By SERVICE = By.id("createAppointmentBlock");
+    private static final By MIN_HOUR_VALUE_FIELD = By.xpath("//*[@id='start-time']/table/tbody/tr[2]/td[1]/input");
+    private static final By MAX_HOUR_VALUE_FIELD = By.xpath("//*[@id='end-time']/table/tbody/tr[2]/td[1]/input");
+    private static final By MIN_MINUTES_VALUE_FIELD = By.xpath("//*[@id='start-time']/table/tbody/tr[2]/td[3]/input");
+    private static final By MAX_MINUTES_VALUE_FIELD = By.xpath("//*[@id='end-time']/table/tbody/tr[2]/td[3]/input");
+    private static final By START_TIME_BUTTON = By.cssSelector("#start-time button");
     private static final By END_TIME_BUTTON = By.cssSelector("#end-time button");
     private static final By SAVE = By.cssSelector("button.confirm");
 
@@ -28,6 +33,7 @@ public class ManageProviderSchedulesPage extends Page {
 
     public void selectLocation(String location) {
         selectFrom(LOCATION, location);
+        waitForElement(LOCATION);
         clickOn(LOCATION);
     }
 
@@ -36,8 +42,8 @@ public class ManageProviderSchedulesPage extends Page {
     }
 
     public void selectLocationBlock(String locblock) {
-        waitForElement(LOCATION_IN_BLOCK);
         selectFrom(LOCATION_IN_BLOCK, locblock);
+        waitForElement(LOCATION_IN_BLOCK);
         clickOn(LOCATION_IN_BLOCK);
     }
 
@@ -63,6 +69,24 @@ public class ManageProviderSchedulesPage extends Page {
         } catch (Exception e) {}
     }
 
+    public void enterMinimumTimeValue(String hour, String minutes) {
+        findElement(MIN_HOUR_VALUE_FIELD).clear();
+        setText(MIN_HOUR_VALUE_FIELD, hour);
+        findElement(MIN_MINUTES_VALUE_FIELD).clear();
+        setText(MIN_MINUTES_VALUE_FIELD, minutes);       
+    }
+ 
+    public void clickOnStartTimeButton() {
+        clickOn(START_TIME_BUTTON);
+    }
+    
+    public void enterMaximumTimeValue(String hour, String minutes) {
+        findElement(MAX_HOUR_VALUE_FIELD).clear();
+        setText(MAX_HOUR_VALUE_FIELD, hour);
+        findElement(MAX_MINUTES_VALUE_FIELD).clear();
+        setText(MAX_MINUTES_VALUE_FIELD, minutes);
+    }
+     
     public void clickOnEndTimeButton() {
         clickOn(END_TIME_BUTTON);
     }
