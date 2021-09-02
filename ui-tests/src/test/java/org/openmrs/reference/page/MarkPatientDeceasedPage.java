@@ -51,7 +51,7 @@ public class MarkPatientDeceasedPage extends Page {
      */
     public void Concept() {
         newConcept();
-        getConceptid(newId());
+        enterConceptid(getConceptId());
     }
 
     public void clickOnMarkPatientDead() {
@@ -77,7 +77,7 @@ public class MarkPatientDeceasedPage extends Page {
         findElement(SAVE).click();
     }
 
-    public void getConceptid(String ID) {
+    public void enterConceptid(String ID) {
         findElement(ADMINISTRATION).click();
         findElement(ADVANCED_SETTINGS).click();
         findElement(CONCEPT_VALUE).clear();
@@ -99,7 +99,7 @@ public class MarkPatientDeceasedPage extends Page {
         findElement(ACTIVE_DAY).click();
     }
 
-    public String newId() {
+    public String getConceptId() {
         String newId = findElement(NEW_COD_ID).getText();
         return newId;
     }
