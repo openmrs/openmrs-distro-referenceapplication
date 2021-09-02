@@ -100,8 +100,8 @@ public class MarkPatientDeceasedPage extends Page {
     }
 
     public String getConceptId() {
-        String newId = findElement(NEW_COD_ID).getText();
-        return newId;
+        String conceptId = findElement(NEW_COD_ID).getText();
+        return conceptId;
     }
 
     public String confirmDeadMessage() {
