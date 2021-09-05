@@ -1,5 +1,7 @@
 package org.openmrs.reference.page;
 
+import static org.junit.Assert.assertTrue;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -13,26 +15,27 @@ public class MarkPatientDeceasedPage extends Page {
     private static final By ADD_NEW_CONCEPT = By.linkText("Add new Concept");
     private static final By CONCEPT_NAME = By.id("namesByLocale[en].name");
     private static final By ADD_ANSWER_BUTTON = By.cssSelector("#codedDatatypeRow > td > table > tbody > tr > td.buttons > input:nth-child(1)");
-    private static final By CAUSE_BOX = By.id("newAnswerConcept");
-    private static final By FEVER = By.xpath("/html/body/ul[1]/li[2]/a");
-    private static final By ADD_BUTTON = By.xpath("/html/body/div[5]/div[11]/button[1]");
-    private static final By SAVE_CONCEPT_BUTTON = By.xpath("/html/body/div[1]/div[3]/div[2]/form/div/input[1]");
+    private static final By CAUSE_SEARCH_FIELD = By.id("newAnswerConcept");
+    private static final By FIRST_CAUSE_OPTION = By.className("autocompleteresult");
+    private static final By ADD_BUTTON = By.className("ui-button-text");
+    private static final By SAVE_CONCEPT_BUTTON = By.cssSelector("#saveDeleteButtons > input[type=submit]:nth-child(1)");
     private static final By SEARCH_CONCEPT_FIELD = By.id("inputNode");
-    private static final By FIRST_RESULT = By.xpath("//*[@id=\"openmrsSearchTable\"]/tbody/tr[1]/td/span");
-    private static final By CONCEPT_ID = By.xpath("//*[@id=\"conceptTable\"]/tbody/tr[1]/td");
+    private static final By FIRST_RESULT = By.className("odd");
+    private static final By CONCEPT_ID = By.cssSelector("#conceptTable > tbody > tr:nth-child(1) > td");
     private static final By ADMINISTRATION_PAGE = By.id("administrationNavLink");
     private static final By ADVANCED_SETTINGS = By.linkText("Advanced Settings");
-    private static final By CONCEPT_VALUE_FIELD = By.xpath("//*[@id=\"globalPropsList\"]/tr[133]/td[2]/input");
-    private static final By SAVE_CONCEPT_VALUE = By.xpath("//*[@id=\"buttonsAtBottom\"]/input[1]");
+    private static final By CONCEPT_VALUE_FIELD = By.cssSelector("#globalPropsList > tr:nth-child(133) > td:nth-child(2) > input[type=text]");
+    private static final By SAVE_CONCEPT_VALUE = By.name("action");
     private static final By HOME_LINK = By.id("homeNavLink");
-    private static final By MARK_PATIENT_DECEASED = By.id("org.openmrs.module.coreapps.markPatientDead");
-    private static final By CHECK_BOX = By.id("deceased");
+    private static final By MARK_PATIENT_DECEASED_LINK = By.id("org.openmrs.module.coreapps.markPatientDead");
+    private static final By MARK_PATIENT_DECEASED_CHECK_BOX = By.id("deceased");
     private static final By DATE_PICKER = By.id("death-date-display");
     private static final By SAVE_DECEASED_BUTTON= By.cssSelector("#mark-patient-dead > fieldset > p:nth-child(4) > span:nth-child(2) > input");
     private static final By ACTIVE_DAY = By.cssSelector("td.day.active");
-    private static final By DEATH_MESSAGE = By.className("death-message");
-    private static final By EDIT_CONCEPT = By.id("editConcept");
+    private static final By DEATH_MESSAGE_TEXT = By.className("death-message");
+    private static final By EDIT_CONCEPT_LINK = By.id("editConcept");
     private static final By DELETE_BUTTON = By.cssSelector("#saveDeleteButtons > input[type=submit]:nth-child(4)");
+    private static final By DELETE_CONFIRMATION = By.id("openmrs_msg");
 
     public MarkPatientDeceasedPage(Page page) {
         super(page);
@@ -55,12 +58,12 @@ public class MarkPatientDeceasedPage extends Page {
     }
 
     public void clickOnMarkPatientDead() {
-        findElement(MARK_PATIENT_DECEASED).click();
-        findElement(CHECK_BOX).click();
+        findElement(MARK_PATIENT_DECEASED_LINK).click();
+        findElement(MARK_PATIENT_DECEASED_CHECK_BOX).click();
         findElement(DATE_PICKER).click();
         pickDate();
         Select dropdown = new Select(findElement(By.id("cause-of-death")));
-        dropdown.selectByValue("140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        dropdown.selectByValue("113230AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         findElement(SAVE_DECEASED_BUTTON).click();
     }
 
@@ -70,8 +73,8 @@ public class MarkPatientDeceasedPage extends Page {
         Select datatype = new Select(findElement(By.id("datatype")));
         datatype.selectByVisibleText("Coded");
         findElement(ADD_ANSWER_BUTTON).click();
-        findElement(CAUSE_BOX).sendKeys("Fever");
-        findElement(FEVER).click();
+        findElement(CAUSE_SEARCH_FIELD).sendKeys("Fever");
+        findElement(FIRST_CAUSE_OPTION).click();
         findElement(ADD_BUTTON).click();
         waiter.until(ExpectedConditions.elementToBeClickable(SAVE_CONCEPT_BUTTON));
         findElement(SAVE_CONCEPT_BUTTON).click();
@@ -89,10 +92,13 @@ public class MarkPatientDeceasedPage extends Page {
         findElement(DICTIONARY_LINK).click();
         findElement(SEARCH_CONCEPT_FIELD).sendKeys("cause of death");
         findElement(FIRST_RESULT).click();
-        findElement(EDIT_CONCEPT).click();
+        findElement(EDIT_CONCEPT_LINK).click();
         findElement(DELETE_BUTTON).click();
         Alert alert = driver.switchTo().alert();
         alert.accept();
+        String delete_message = findElement(DELETE_CONFIRMATION).getText();
+        assertTrue(delete_message.contains("Concept deleted successfully"));
+        
     }
 
     public void pickDate() {
@@ -105,7 +111,7 @@ public class MarkPatientDeceasedPage extends Page {
     }
 
     public String confirmDeadMessage() {
-        String confirmdeadMessage = findElement(DEATH_MESSAGE).getText();
+        String confirmdeadMessage = findElement(DEATH_MESSAGE_TEXT).getText();
         return confirmdeadMessage;
     }
 
