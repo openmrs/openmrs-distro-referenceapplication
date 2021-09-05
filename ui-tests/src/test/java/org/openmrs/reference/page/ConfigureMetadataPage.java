@@ -15,7 +15,9 @@ import org.openqa.selenium.By;
 public class ConfigureMetadataPage extends Page {
 
     protected static final String PAGE_URL = "adminui/metadata/configureMetadata.page";
-    private static final By MANAGE_LOCATIONS = By.id("org-openmrs-module-adminui-manageLocations-link-org-openmrs-module-adminui-manageLocations-link-extension");
+    private static final By MANAGE_LOCATION_ATTRIBUTE_TYPE_LINK = By.id("org-openmrs-module-adminui-manageLocationAttributeTypes-link-org-openmrs-module-adminui-manageLocationAttributeTypes-link-extension");
+    private static final By MANAGE_LOCATIONS_LINK = By.id("org-openmrs-module-adminui-manageLocations-link-org-openmrs-module-adminui-manageLocations-link-extension");
+    private static final By MANAGE_LOCATION_TAGS_LINK = By.id("org-openmrs-module-adminui-manageLocationTags-link-org-openmrs-module-adminui-manageLocationTags-link-extension");
 
     public ConfigureMetadataPage(Page parent) {
         super(parent);
@@ -27,7 +29,17 @@ public class ConfigureMetadataPage extends Page {
     }
 
     public ManageLocationsPage goToManageLocations() {
-        clickOn(MANAGE_LOCATIONS);
+        clickOn(MANAGE_LOCATIONS_LINK);
         return new ManageLocationsPage(this);
     }
+    
+    public ManageLocationTagsPage goToManageLocationTagPage() {
+        clickOn(MANAGE_LOCATION_TAGS_LINK);
+        return new ManageLocationTagsPage(this);
+    }
+    
+    public ManageLocationAttributeTypesPage goToManageLocationAttributeTypesPage() {
+        clickOn(MANAGE_LOCATION_ATTRIBUTE_TYPE_LINK);
+        return new ManageLocationAttributeTypesPage(this);
+    }   
 }
