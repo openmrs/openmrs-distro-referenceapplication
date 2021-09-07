@@ -15,7 +15,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.page.AppointmentSchedulingPage;
+import org.openmrs.reference.page.ManageProviderSchedulesPage;
+import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.ManageAppointmentsPage;
 import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertTrue;
