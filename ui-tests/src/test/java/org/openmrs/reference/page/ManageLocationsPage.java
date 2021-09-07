@@ -19,7 +19,7 @@ public class ManageLocationsPage extends Page {
     private static final By EDIT_LOCATION_LINK = By.cssSelector("i.icon-pencil.edit-action");
     public static final By CONFIRM_PURGE_BUTTON = By.cssSelector("#adminui-purge-location-dialog button.confirm.right");
     public static final By CONFIRM_RETIRE_BUTTON = By.cssSelector("#adminui-retire-location-dialog > div.dialog-content > form > button.confirm.right");
-    private static final By LOCATION_TAG = By.cssSelector("#locationForm fieldset table tbody tr:first-child td:first-child input[type=\"checkbox\"]");
+    private static final By LOCATION_TAG_BUTTON = By.cssSelector("#locationForm fieldset table tbody tr:first-child td:first-child input[type=\"checkbox\"]");
     private static final By ADD_NEW_LOCATION_BUTTON = By.xpath("//*[@id='content']/a");
     private static final By LOCATION_NAME_FIELD = By.id("name-field");  
     private static final By ADD_EDIT_LOCATION = By.cssSelector("#content a[href='/openmrs/" + AddEditLocationPage.PAGE_URL + "']");
@@ -102,7 +102,7 @@ public class ManageLocationsPage extends Page {
     }
 
     public void selectLocationTag() {
-        clickOn(LOCATION_TAG);
+        clickOn(LOCATION_TAG_BUTTON);
     }
 
     public void saveLocation() {

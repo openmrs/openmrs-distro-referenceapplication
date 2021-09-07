@@ -29,10 +29,11 @@ public class ManageLocationAttributeTypesPage extends Page {
     private static final By CANCEL_BUTTON = By.cssSelector("#locationAttributeTypeForm input.cancel");
     private static final By EDIT_LOCATION_ATTRIBUTE_TYPE_ICON = By.cssSelector("i.icon-pencil.edit-action");
     private static final By DELETE_LOCATION_ICON = By.cssSelector("i.icon-trash.delete-action.right");
+    private static final By RETIRE_LOCATION_ICON = By.cssSelector("i.icon-remove.delete-action");
     private static final By CONFIRM_DELETE_LOCATION_BUTTON = By.cssSelector("#purgeLocationAttributeTypeForm button.confirm.right");
     private static final By CONFIRM_RETIRE_LOCATION_BUTTON = By.cssSelector("#retireLocationAttributeTypeForm button.confirm.right");
     private static final By CANCEL_RETIRE_LOCATION_BUTTON = By.cssSelector("#retireLocationAttributeTypeForm button.cancel");
-    private static final By CANCEL_DELETE_LOACTION_BUTTON = By.cssSelector("#purgeLocationAttributeTypeForm button.cancel");
+    private static final By CANCEL_DELETE_LOCATION_BUTTON = By.cssSelector("#purgeLocationAttributeTypeForm button.cancel");
 
     public ManageLocationAttributeTypesPage(Page parent) {
         super(parent);
@@ -51,12 +52,12 @@ public class ManageLocationAttributeTypesPage extends Page {
         clickOn(EDIT_LOCATION_ATTRIBUTE_TYPE_ICON);
     }
     
-    public void enterAttributeTypeName(String locationName) {
+    public void enterLocationAttributeTypeName(String locationName) {
         findElement(ATTRIBUTE_TYPE_NAME_FIELD).clear();
         findElement(ATTRIBUTE_TYPE_NAME_FIELD).sendKeys(locationName);
     }
 
-    public void enterAttributeTypeDescription(String locationDescription) {
+    public void enterLocationAttributeTypeDescription(String locationDescription) {
         findElement(ATTRIBUTE_TYPE_DESCRIPTION_FIELD).clear();
         findElement(ATTRIBUTE_TYPE_DESCRIPTION_FIELD).sendKeys(locationDescription);
     }
@@ -101,11 +102,11 @@ public class ManageLocationAttributeTypesPage extends Page {
     }
 
     public void cancelPurgeLocation() {
-        clickOn(CANCEL_DELETE_LOACTION_BUTTON);
+        clickOn(CANCEL_DELETE_LOCATION_BUTTON);
     }
     
     public void retireLocation() {
-        clickOn(By.cssSelector("i.icon-remove.delete-action"));
+        clickOn(RETIRE_LOCATION_ICON);
         waitForElement(CONFIRM_RETIRE_LOCATION_BUTTON);
         clickOn(CONFIRM_RETIRE_LOCATION_BUTTON);
     }
