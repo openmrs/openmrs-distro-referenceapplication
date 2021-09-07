@@ -109,23 +109,23 @@ public class ManageLocationsPage extends Page {
         clickOn(SAVE_BUTTON);
     }
     
-    public void purgeLocation(String name) {
-        clickOn(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + name + "')]]/i[@class='icon-trash delete-action']"));
+    public void purgeLocation(String locationName) {
+        clickOn(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + locationName + "')]]/i[@class='icon-trash delete-action']"));
         waitForElement(CONFIRM_PURGE_BUTTON);
         clickOn(CONFIRM_PURGE_BUTTON);
     }
 
-    public void retireLocation(String name) {
-        clickOn(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + name + "')]]/i[@class='icon-remove delete-action']"));
+    public void retireLocation(String locationName) {
+        clickOn(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + locationName + "')]]/i[@class='icon-remove delete-action']"));
         waitForElement(CONFIRM_RETIRE_BUTTON);
         clickOn(CONFIRM_RETIRE_BUTTON);
     }
 
-    public void assertRetired(String name) {
+    public void assertRetired(String locationName) {
         try {
-            findElement(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + name + "')]]/i[@class='icon-reply edit-action']"));
+            findElement(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + locationName + "')]]/i[@class='icon-reply edit-action']"));
         } catch (TimeoutException e) {
-            throw new RuntimeException("Couldn't find restore button, failed to retire location " + name);
+            throw new RuntimeException("Couldn't find restore button, failed to retire location " + locationName);
         }
     }
 }

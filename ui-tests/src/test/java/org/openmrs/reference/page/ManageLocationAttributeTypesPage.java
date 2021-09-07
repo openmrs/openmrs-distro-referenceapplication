@@ -52,14 +52,14 @@ public class ManageLocationAttributeTypesPage extends Page {
         clickOn(EDIT_LOCATION_ATTRIBUTE_TYPE_ICON);
     }
     
-    public void enterLocationAttributeTypeName(String locationName) {
+    public void enterLocationAttributeTypeName(String locationAttributeTypeName) {
         findElement(ATTRIBUTE_TYPE_NAME_FIELD).clear();
-        findElement(ATTRIBUTE_TYPE_NAME_FIELD).sendKeys(locationName);
+        findElement(ATTRIBUTE_TYPE_NAME_FIELD).sendKeys(locationAttributeTypeName);
     }
 
-    public void enterLocationAttributeTypeDescription(String locationDescription) {
+    public void enterLocationAttributeTypeDescription(String locationAttributeTypeDescription) {
         findElement(ATTRIBUTE_TYPE_DESCRIPTION_FIELD).clear();
-        findElement(ATTRIBUTE_TYPE_DESCRIPTION_FIELD).sendKeys(locationDescription);
+        findElement(ATTRIBUTE_TYPE_DESCRIPTION_FIELD).sendKeys(locationAttributeTypeDescription);
     }
     
     public void enterMinimumOccurs(String value) {

@@ -45,14 +45,14 @@ public class ManageLocationTagsPage extends Page {
     	clickOn(EDIT_LOCATION_LINK);
     }
     
-    public void enterLocationTagName(String locationName) {
+    public void enterLocationTagName(String locationTagName) {
         findElement(LOCATION_TAG_NAME_FIELD).clear();
-        findElement(LOCATION_TAG_NAME_FIELD).sendKeys(locationName);
+        findElement(LOCATION_TAG_NAME_FIELD).sendKeys(locationTagName);
     }
   
-    public void enterLocationTagDescription(String locationDescription) {
+    public void enterLocationTagDescription(String locationTagDescription) {
         findElement(LOCATION_TAG_DESCRIPTION_FIELD).clear();
-        findElement(LOCATION_TAG_DESCRIPTION_FIELD).sendKeys(locationDescription);
+        findElement(LOCATION_TAG_DESCRIPTION_FIELD).sendKeys(locationTagDescription);
     }
     
     public void saveLocationTag() {
