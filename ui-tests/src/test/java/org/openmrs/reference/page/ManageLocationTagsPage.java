@@ -73,20 +73,10 @@ public class ManageLocationTagsPage extends Page {
         clickOn(CANCEL_DELETE_LOCATION_BUTTON);
     }
     
-    public void retireLocation(String locationName) {
-        clickOn(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + locationName + "')]]/i[@class='icon-remove delete-action']"));
+    public void retireLocation() {
+        clickOn(By.cssSelector("i.icon-remove.delete-action"));
         waitForElement(CONFIRM_RETIRE_LOCATION_BUTTON);
         clickOn(CONFIRM_RETIRE_LOCATION_BUTTON);
-    }
-    
-    public void assertRetired(String name, String reason) {
-        try {
-            findElement(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + name + "')]]/i[@class='icon-reply edit-action']"));
-            findElement(REASON_TO_RETIRE_LOCATION_FIELD).clear();
-            findElement(REASON_TO_RETIRE_LOCATION_FIELD).sendKeys(reason);
-        } catch (TimeoutException exception) {
-            throw new RuntimeException("Couldn't find restore button, failed to retire location " + name);
-        }
     }
     
     public void cancelRetireLocation() {

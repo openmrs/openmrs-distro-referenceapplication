@@ -31,7 +31,6 @@ public class ManageLocationAttributeTypesPage extends Page {
     private static final By DELETE_LOCATION_ICON = By.cssSelector("i.icon-trash.delete-action.right");
     private static final By CONFIRM_DELETE_LOCATION_BUTTON = By.cssSelector("#purgeLocationAttributeTypeForm button.confirm.right");
     private static final By CONFIRM_RETIRE_LOCATION_BUTTON = By.cssSelector("#retireLocationAttributeTypeForm button.confirm.right");
-    private static final By REASON_TO_RETIRE_LOCATION_BUTTON = By.cssSelector("#retireLocationAttributeTypeForm input[type=text]");
     private static final By CANCEL_RETIRE_LOCATION_BUTTON = By.cssSelector("#retireLocationAttributeTypeForm button.cancel");
     private static final By CANCEL_DELETE_LOACTION_BUTTON = By.cssSelector("#purgeLocationAttributeTypeForm button.cancel");
 
@@ -105,20 +104,10 @@ public class ManageLocationAttributeTypesPage extends Page {
         clickOn(CANCEL_DELETE_LOACTION_BUTTON);
     }
     
-    public void retireLocation(String name) {
-        clickOn(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + name + "')]]/i[@class='icon-remove delete-action']"));
+    public void retireLocation() {
+        clickOn(By.cssSelector("i.icon-remove.delete-action"));
         waitForElement(CONFIRM_RETIRE_LOCATION_BUTTON);
         clickOn(CONFIRM_RETIRE_LOCATION_BUTTON);
-    }
-
-    public void assertRetired(String name, String reason) {
-        try {
-            findElement(By.xpath("//tr/td[preceding-sibling::td[contains(text(), '" + name + "')]]/i[@class='icon-reply edit-action']"));
-            findElement(REASON_TO_RETIRE_LOCATION_BUTTON).clear();
-            findElement(REASON_TO_RETIRE_LOCATION_BUTTON).sendKeys(reason);
-        } catch (TimeoutException e) {
-            throw new RuntimeException("Couldn't find restore button, failed to retire location " + name);
-        }
     }
     
     public void cancelRetireLocation() {
