@@ -56,14 +56,14 @@ public class ManageLocationsPage extends Page {
     	clickOn(EDIT_LOCATION_LINK);
     }
     
-    public void enterLocationName(String name) {     
+    public void enterLocationName(String locationName) {     
         findElement(LOCATION_NAME_FIELD).clear();
-        findElement(LOCATION_NAME_FIELD).sendKeys(name);
+        findElement(LOCATION_NAME_FIELD).sendKeys(locationName);
     }
 
-    public void enterLocationDescription(String description) {
+    public void enterLocationDescription(String locationDescription) {
         findElement(LOCATION_DESCRIPTION_FIELD).clear();
-        findElement(LOCATION_DESCRIPTION_FIELD).sendKeys(description);
+        findElement(LOCATION_DESCRIPTION_FIELD).sendKeys(locationDescription);
     }
 
     public void enterAddress1(String address) {
@@ -96,9 +96,8 @@ public class ManageLocationsPage extends Page {
         findElement(POSTAL_CODE_FIELD).sendKeys(postalCode);
     }
     
-    public void selectParentLocation(String locationName) {
-        findElement(PARENT_LOCATION_FIELD).clear();
-        findElement(PARENT_LOCATION_FIELD).sendKeys(locationName);
+    public void selectParentLocation(String parentLocation) {
+        selectFrom(PARENT_LOCATION_FIELD, parentLocation);
     }
 
     public void selectLocationTag() {
