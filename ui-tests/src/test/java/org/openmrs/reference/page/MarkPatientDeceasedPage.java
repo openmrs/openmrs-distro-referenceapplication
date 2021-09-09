@@ -53,6 +53,7 @@ public class MarkPatientDeceasedPage extends Page {
      * if there is no concept at all or no concept called Cause of death, the method
      * creates one and copies its concept code
      */
+    
     public void Concept() {
         newConcept();
         enterConceptid(getConceptId());
