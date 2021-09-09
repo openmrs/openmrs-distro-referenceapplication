@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -98,7 +99,6 @@ public class MarkPatientDeceasedPage extends Page {
         alert.accept();
         String delete_message = findElement(DELETE_CONFIRMATION).getText();
         assertTrue(delete_message.contains("Concept deleted successfully"));
-        
     }
 
     public void pickDate() {
