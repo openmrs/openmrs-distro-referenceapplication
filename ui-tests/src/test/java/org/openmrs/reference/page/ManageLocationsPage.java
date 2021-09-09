@@ -96,7 +96,7 @@ public class ManageLocationsPage extends Page {
         findElement(POSTAL_CODE_FIELD).sendKeys(postalCode);
     }
     
-    public void selectParentLocation(String parentLocation) {
+    public void setParentLocation(String parentLocation) {
         selectFrom(PARENT_LOCATION_FIELD, parentLocation);
     }
 
