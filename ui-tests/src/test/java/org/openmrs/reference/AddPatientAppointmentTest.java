@@ -7,7 +7,6 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-
 package org.openmrs.reference;
 
 import org.junit.After;
@@ -15,7 +14,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.page.AppointmentSchedulingPage;
+import org.openmrs.reference.page.ManageProviderSchedulesPage;
+import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.ManageAppointmentsPage;
 import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertTrue;
@@ -44,7 +47,6 @@ public class AddPatientAppointmentTest extends LocationSensitiveApplicationTestB
         manageProviderSchedulesPage.enterMaximumTimeValue("09", "30");
         manageProviderSchedulesPage.clickOnEndTimeButton();
         manageProviderSchedulesPage.enterService(SERVICE_NAME);
-        manageProviderSchedulesPage.clickOnEndTimeButton();
         manageProviderSchedulesPage.clickOnSave();
         homePage = new HomePage(login());
         appointmentSchedulingPage = homePage.goToAppointmentScheduling();
