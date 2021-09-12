@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -43,9 +42,10 @@ public class MarkPatientDeceasedPage extends Page {
     }
 
     public void getConcept() {
-        findElement(DICTIONARY_LINK).click();
+        clickOn(DICTIONARY_LINK); 
         Concept();
-        findElement(HOME_LINK).click();
+        clickOn(HOME_LINK); 
+     
     }
 
     /*
@@ -60,9 +60,9 @@ public class MarkPatientDeceasedPage extends Page {
     }
 
     public void clickOnMarkPatientDead() {
-        findElement(MARK_PATIENT_DECEASED_LINK).click();
-        findElement(MARK_PATIENT_DECEASED_CHECK_BOX).click();
-        findElement(DATE_PICKER).click();
+        clickOn(MARK_PATIENT_DECEASED_LINK); 
+        clickOn(MARK_PATIENT_DECEASED_CHECK_BOX);
+        clickOn(DATE_PICKER);
         pickDate();
         Select dropdown = new Select(findElement(By.id("cause-of-death")));
         dropdown.selectByValue("113230AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
@@ -70,32 +70,33 @@ public class MarkPatientDeceasedPage extends Page {
     }
 
     public void newConcept() {
-        findElement(ADD_NEW_CONCEPT).click();
+        clickOn(ADD_NEW_CONCEPT); 
         findElement(CONCEPT_NAME).sendKeys("cause of death");
         Select datatype = new Select(findElement(By.id("datatype")));
         datatype.selectByVisibleText("Coded");
-        findElement(ADD_ANSWER_BUTTON).click();
+        clickOn(ADD_ANSWER_BUTTON); 
         findElement(CAUSE_SEARCH_FIELD).sendKeys("Fever");
-        findElement(FIRST_CAUSE_OPTION).click();
-        findElement(ADD_BUTTON).click();
+        clickOn(FIRST_CAUSE_OPTION); 
+        clickOn(ADD_BUTTON);
         waiter.until(ExpectedConditions.elementToBeClickable(SAVE_CONCEPT_BUTTON));
-        findElement(SAVE_CONCEPT_BUTTON).click();
+        clickOn(SAVE_CONCEPT_BUTTON); 
+
     }
 
     public void enterConceptid(String ID) {
-        findElement(ADMINISTRATION_PAGE).click();
-        findElement(ADVANCED_SETTINGS).click();
+        clickOn(ADMINISTRATION_PAGE);
+        clickOn(ADVANCED_SETTINGS);
         findElement(CONCEPT_VALUE_FIELD).clear();
         findElement(CONCEPT_VALUE_FIELD).sendKeys(ID);
-        findElement(SAVE_CONCEPT_VALUE).click();
+        clickOn(SAVE_CONCEPT_VALUE);
     }
 
     public void deleteConcept() {
-        findElement(DICTIONARY_LINK).click();
+        clickOn(DICTIONARY_LINK);
         findElement(SEARCH_CONCEPT_FIELD).sendKeys("cause of death");
-        findElement(FIRST_RESULT).click();
-        findElement(EDIT_CONCEPT_LINK).click();
-        findElement(DELETE_BUTTON).click();
+        clickOn(FIRST_RESULT);
+        clickOn(EDIT_CONCEPT_LINK);
+        clickOn(DELETE_BUTTON);
         Alert alert = driver.switchTo().alert();
         alert.accept();
         String delete_message = findElement(DELETE_CONFIRMATION).getText();
