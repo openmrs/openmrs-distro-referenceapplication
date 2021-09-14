@@ -57,5 +57,4 @@ public class CaptureVitalsTest extends LocationSensitiveApplicationTestBase {
     private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-    
 }
