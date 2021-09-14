@@ -3,7 +3,6 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * Created by tomasz on 25.05.15.
@@ -22,13 +21,13 @@ public class CaptureVitalsPage extends Page {
         return "/coreapps/findpatient/findPatient.page?app=referenceapplication.vitals";
     }
 
-    public void search(String text) {
-        WebElement searchField = findElement(PATIENT_SEARCH);
-        try {
-            searchField.sendKeys(text);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        clickOn(FIRST_FOUND_PATIENT);
-    }
+//    public void search(String text) {
+//        WebElement searchField = findElement(PATIENT_SEARCH);
+//        try {
+//            searchField.sendKeys(text);
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//        clickOn(FIRST_FOUND_PATIENT);
+//    }
 }

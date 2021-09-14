@@ -122,7 +122,7 @@ public class PatientCaptureVitalsPage extends Page {
         } catch (Exception e) {}
     }
 
-    public void clearPatientBloodOxygenSaturation() {	
+    public void clearPatientBloodOxygenSaturation() {
         findElement(BLOOD_OXYGEN_SATURATION_FIELD).clear();
     }
     
