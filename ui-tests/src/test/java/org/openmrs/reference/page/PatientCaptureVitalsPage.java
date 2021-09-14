@@ -3,7 +3,6 @@ package org.openmrs.reference.page;
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Created by tomasz on 26.05.15.
@@ -98,12 +97,10 @@ public class PatientCaptureVitalsPage extends Page {
     }
 
     public void clearPatientBloodPressure1() {
-    	waiter.until(ExpectedConditions.visibilityOfElementLocated(BLOOD_PRESSURE_FIELD_1));
         findElement(BLOOD_PRESSURE_FIELD_1).clear();
     }
   
     public void clearPatientBloodPressure2() {
-    	waiter.until(ExpectedConditions.visibilityOfElementLocated(BLOOD_PRESSURE_FIELD_2));
         findElement(BLOOD_PRESSURE_FIELD_2).clear();
     }
     
