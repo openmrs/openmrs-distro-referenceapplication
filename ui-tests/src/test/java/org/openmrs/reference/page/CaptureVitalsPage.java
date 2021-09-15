@@ -30,5 +30,4 @@ public class CaptureVitalsPage extends Page {
 //        }
 //        clickOn(FIRST_FOUND_PATIENT);
 //    }
-
 }
