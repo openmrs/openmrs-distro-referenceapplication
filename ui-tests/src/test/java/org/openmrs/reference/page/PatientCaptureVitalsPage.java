@@ -21,6 +21,7 @@ public class PatientCaptureVitalsPage extends Page {
     private static final By CONFIRM_BUTTON = By.xpath("//ul[@id='formBreadcrumb']/li[2]/span");
     private static final By CONFIRM_BUTTON_2 = By.id("coreapps-vitals-confirm");
     private static final By SAVE_BUTTON = By.xpath("//button[@type='submit']");
+    private static final By SAVE_CHANGES_BUTTON = By.xpath("//input[@type='button']");
 
     public PatientCaptureVitalsPage(Page page) {
         super(page);
@@ -137,6 +138,10 @@ public class PatientCaptureVitalsPage extends Page {
             WebElement confirmButton = findElement(CONFIRM_BUTTON);
             confirmButton.click();
         } catch (Exception e) {}
+    }
+    
+    public void saveChanges() {
+    	clickOn(SAVE_CHANGES_BUTTON);
     }
 
     public boolean save() {
