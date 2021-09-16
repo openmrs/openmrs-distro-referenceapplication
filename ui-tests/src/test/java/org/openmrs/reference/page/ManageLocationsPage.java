@@ -31,7 +31,7 @@ public class ManageLocationsPage extends Page {
     private static final By STATE_FIELD = By.cssSelector("#stateProvince-field");
     private static final By COUNTRY_FIELD = By.cssSelector("#country-field");
     private static final By POSTAL_CODE_FIELD = By.cssSelector("#postalCode-field");
-    private static final By PARENT_LOCATION_FIELD = By.cssSelector("#fr7903-field");
+    private static final By PARENT_LOCATION_FIELD = By.className("parentLocation");
     private static final By SAVE_BUTTON = By.id("save-button");
     private static final String PURGE_LOCATION_SELECTOR_TMPL = "list-locations > tbody > tr > i[onclick*='purgeLocation('%s', *)']";
 
