@@ -27,7 +27,7 @@ public class ManageLocationsPage extends Page {
     private static final By LOCATION_DESCRIPTION_FIELD = By.cssSelector("#description-field");
     private static final By LOCATION_ADDRESS_FIELD_1 = By.cssSelector("#address1-field");
     private static final By LOCATION_ADDRESS_FIELD_2 = By.cssSelector("#address2-field");
-    private static final By CITY_FIELD = By.cssSelector("#cityVillage-field");
+    private static final By CITY_FIELD = By.cssSelector("#testing123");
     private static final By STATE_FIELD = By.cssSelector("#stateProvince-field");
     private static final By COUNTRY_FIELD = By.cssSelector("#country-field");
     private static final By POSTAL_CODE_FIELD = By.cssSelector("#postalCode-field");
