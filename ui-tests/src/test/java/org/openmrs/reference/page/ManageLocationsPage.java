@@ -21,7 +21,7 @@ public class ManageLocationsPage extends Page {
     public static final By CONFIRM_PURGE_BUTTON = By.cssSelector("#adminui-purge-location-dialog button.confirm.right");
     public static final By CONFIRM_RETIRE_BUTTON = By.cssSelector("#adminui-retire-location-dialog > div.dialog-content > form > button.confirm.right");
     private static final By LOCATION_TAG_BUTTON = By.cssSelector("#locationForm fieldset table tbody tr:first-child td:first-child input[type=\"checkbox\"]");
-    private static final By ADD_NEW_LOCATION_BUTTON = By.xpath("//*[@id='content']/a");
+    private static final By ADD_NEW_LOCATION_BUTTON = By.cssSelector("a.button");
     private static final By LOCATION_NAME_FIELD = By.id("name-field");  
     private static final By ADD_EDIT_LOCATION = By.cssSelector("#content a[href='/openmrs/" + AddEditLocationPage.PAGE_URL + "']");
     private static final By LOCATION_DESCRIPTION_FIELD = By.cssSelector("#description-field");
