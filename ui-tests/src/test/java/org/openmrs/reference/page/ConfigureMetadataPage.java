@@ -18,6 +18,7 @@ public class ConfigureMetadataPage extends Page {
     private static final By MANAGE_LOCATION_ATTRIBUTE_TYPE_LINK = By.id("org-openmrs-module-adminui-manageLocationAttributeTypes-link-org-openmrs-module-adminui-manageLocationAttributeTypes-link-extension");
     private static final By MANAGE_LOCATIONS_LINK = By.id("org-openmrs-module-adminui-manageLocations-link-org-openmrs-module-adminui-manageLocations-link-extension");
     private static final By MANAGE_LOCATION_TAGS_LINK = By.id("org-openmrs-module-adminui-manageLocationTags-link-org-openmrs-module-adminui-manageLocationTags-link-extension");
+    private static final By MANAGE_OCL_LINK = By.id("owa-openconceptlab-adminLink-owa-openconceptlab-adminLink-extension");
 
     public ConfigureMetadataPage(Page parent) {
         super(parent);
@@ -42,4 +43,9 @@ public class ConfigureMetadataPage extends Page {
         clickOn(MANAGE_LOCATION_ATTRIBUTE_TYPE_LINK);
         return new ManageLocationAttributeTypesPage(this);
     }   
+
+    public OpenConceptLabPage goToOpenConceptLabPage() {
+        clickOn(MANAGE_OCL_LINK);
+        return new OpenConceptLabPage(this);
+    }
 }
