@@ -16,10 +16,16 @@
         <directory>${project.build.directory}/sdk-distro</directory>
         <outputDirectory>/</outputDirectory>
         <includes>
-            <include>README*</include>
             <include>LICENSE*</include>
             <include>NOTICE*</include>
         </includes>
+    </fileSet>
+    <fileSet>
+      <directory>${project.build.directory}/sdk-distro/web</directory>
+      <outputDirectory>/</outputDirectory>
+      <includes>
+          <include>openmrs-distro.properties</include>
+      </includes>
     </fileSet>
     <fileSet>
         <directory>${project.build.directory}/sdk-distro/web</directory>
