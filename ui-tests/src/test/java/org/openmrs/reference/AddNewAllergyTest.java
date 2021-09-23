@@ -28,6 +28,7 @@ public class AddNewAllergyTest extends ReferenceApplicationTestBase {
     private static final String DRUG_NAME = "Aspirin";
     private TestData.PatientInfo patient;
 
+    //Set up def
     @Before
     public void setUp() throws Exception {
         patient = createTestPatient();
