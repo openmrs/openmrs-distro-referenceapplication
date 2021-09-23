@@ -20,6 +20,17 @@
     <distro.openmrsModulesDir>${distro.baseDir}/openmrs_modules</distro.openmrsModulesDir>
     <distro.spaDir>${distro.baseDir}/spa</distro.spaDir>
     <distro.spaConfigDir>${distro.baseDir}/spa_config</distro.spaConfigDir>
+
+    <!-- track module versions
+         we do so here so that we can utilise Maven to track updates, etc. -->
+    <initializer.version>2.2.0-SNAPSHOT</initializer.version>
+    <fhir2.version>1.2.2</fhir2.version>
+    <webservices.rest.version>2.32.0</webservices.rest.version>
+    <idgen.version>4.7.0</idgen.version>
+    <legacyui.version>1.8.4</legacyui.version>
+    <addresshierarchy.version>2.14.2</addresshierarchy.version>
+    <metadatamapping.version>1.4.0</metadatamapping.version>
+    <metadatasharing.version>1.8.0</metadatasharing.version>
   </properties>
 
   <dependencies>
@@ -34,6 +45,56 @@
       <artifactId>spa-config-refapp</artifactId>
       <type>zip</type>
       <version>${project.version}</version>
+    </dependency>
+
+    <!-- Module dependencies -->
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>initializer-omod</artifactId>
+      <version>${initializer.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>fhir2-omod</artifactId>
+      <version>${fhir2.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>webservices.rest-omod</artifactId>
+      <version>${webservices.rest.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>idgen-omod</artifactId>
+      <version>${idgen.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>legacyui-omod</artifactId>
+      <version>${legacyui.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>addresshierarchy-omod</artifactId>
+      <version>${addresshierarchy.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>metadatamapping-omod</artifactId>
+      <version>${metadatamapping.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>metadatasharing-omod</artifactId>
+      <version>${metadatasharing.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
