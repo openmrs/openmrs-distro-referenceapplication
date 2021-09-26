@@ -1,9 +1,3 @@
-FROM httpd:2.4
+FROM nginx:1.21-alpine
 
-COPY httpd.conf /usr/local/apache2/conf/httpd.conf
-
-# Remove ununsed configs
-RUN rm -rf /usr/local/apache2/conf/extra/*
-
-# Add our proxy Vhost
-COPY proxy.conf /usr/local/apache2/conf/extra/proxy.conf
+COPY nginx.conf /etc/nginx/nginx.conf

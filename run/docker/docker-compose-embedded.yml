@@ -15,9 +15,9 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS: ""
+      SPA_CONFIG_URLS:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/ui"]
+      test: ["CMD", "curl", "-f", "http://localhost/"]
       timeout: 5s
 
   # OpenMRS:

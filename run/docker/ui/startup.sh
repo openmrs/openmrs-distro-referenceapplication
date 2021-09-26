@@ -1,12 +1,11 @@
 #!/bin/sh
 set -e
 
-# Apache gets grumpy about PID files pre-existing
-rm -f /usr/local/apache2/logs/httpd.pid
-
+# if we are using the $IMPORTMAP_URL environment variable, we have to make this useful,
+# so we change "importmap.json" into "$IMPORTMAP_URL" allowing it to be changed by envsubst
 if [ -n "${IMPORTMAP_URL}" ]; then
-  # substitute importmap.json for $IMPORTMAP_URL allowimg us to populate it from a URL
-  sed -i -e 's/"importmap.json"/"$IMPORTMAP_URL"/g' "/var/www/ui/index.html"
+  sed -i -e 's/"importmap.json"/"$IMPORTMAP_URL"/g' "/usr/share/nginx/html/index.html"
+fi
 
 # setting the config urls to "" causes an error reported in the console, so if we aren't using
 # the SPA_CONFIG_URLS, we'll leave it alone
@@ -35,7 +34,8 @@ else
   sed -i -e 's/"$SPA_CONFIG_URLS"/$SPA_CONFIG_URLS/' "/usr/share/nginx/html/index.html"
 fi
 
-# Substitute envvars in packaged files
-envsubst < "/var/www/ui/index.html" | sponge "/var/www/ui/index.html"
+# Substitute environment variables in the html file
+# This allows us to override parts of the compiled file at runtime
+envsubst < "/usr/share/nginx/html/index.html" | sponge "/usr/share/nginx/html/index.html"
 
-exec httpd -DFOREGROUND "$@"
+exec nginx -g "daemon off;"

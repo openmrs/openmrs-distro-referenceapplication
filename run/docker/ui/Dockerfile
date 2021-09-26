@@ -1,13 +1,17 @@
-FROM httpd:2.4
+FROM nginx:1.21-alpine
 
-RUN apt update \
-  && apt install -y gettext-base moreutils curl
+RUN apk update && \
+    apk upgrade && \
+    # add dumb-init so it's less silly to run startup.sh as our command
+    # add more utils for sponge to support our startup script
+    apk add --no-cache dumb-init moreutils
 
-COPY httpd.conf /usr/local/apache2/conf/httpd.conf
+# clear any default files installed by nginx
+RUN rm -rf /usr/share/nginx/html/*
 
-RUN rm -rf /usr/local/apache2/conf/extra/*
+COPY startup.sh /usr/local/bin/startup.sh
+RUN chmod +x /usr/local/bin/startup.sh
 
-COPY startup.sh /usr/local/apache2/startup.sh
-RUN chmod +x /usr/local/apache2/startup.sh
+COPY nginx.conf /etc/nginx/nginx.conf
 
-CMD ["./startup.sh"]
+CMD ["dumb-init", "/usr/local/bin/startup.sh"]
