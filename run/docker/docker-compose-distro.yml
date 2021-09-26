@@ -1,0 +1,57 @@
+version: "3.7"
+
+services:
+  # Proxy
+  proxy:
+    image: openmrs/openmrs-reference-application-3-gateway:latest
+    depends_on:
+      - frontend
+      - openmrs
+    ports:
+      - "80:80"
+
+  # Frontend
+  frontend:
+    image: openmrs/openmrs-reference-application-3-frontend:latest
+    environment:
+      SPA_PATH: /openmrs/spa
+      API_URL: /openmrs
+      SPA_CONFIG_URLS:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      timeout: 5s
+
+  # OpenMRS:
+  openmrs:
+    image: openmrs/openmrs-reference-application-3-backend:latest
+    depends_on:
+      - db
+    environment:
+      OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
+      OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
+      OMRS_CONFIG_CREATE_TABLES: "true"
+      OMRS_CONFIG_CONNECTION_SERVER: db
+      OMRS_CONFIG_CONNECTION_DATABASE: openmrs
+      OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER}
+      OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
+      timeout: 5s
+    volumes:
+      - openmrs-data:/openmrs/data
+
+  # MariaDB
+  db:
+    image: mariadb:10
+    command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
+    environment:
+      MYSQL_DATABASE: openmrs
+      MYSQL_USER: ${OPENMRS_DB_USER}
+      MYSQL_PASSWORD: ${OPENMRS_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  openmrs-data: ~
+  db-data: ~
