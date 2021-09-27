@@ -4,7 +4,11 @@ set -e
 # if we are using the $IMPORTMAP_URL environment variable, we have to make this useful,
 # so we change "importmap.json" into "$IMPORTMAP_URL" allowing it to be changed by envsubst
 if [ -n "${IMPORTMAP_URL}" ]; then
-  sed -i -e 's/"importmap.json"/"$IMPORTMAP_URL"/g' "/usr/share/nginx/html/index.html"
+  if [ -n "$SPA_PATH" ]; then
+    sed -i -e "s/\"$SPA_PATH/importmap.json\"/\"\$IMPORTMAP_URL\"/g" "/usr/share/nginx/html/index.html"
+  else
+    sed -i -e 's/"importmap.json"/"$IMPORTMAP_URL"/g' "/usr/share/nginx/html/index.html"
+  fi
 fi
 
 # setting the config urls to "" causes an error reported in the console, so if we aren't using
