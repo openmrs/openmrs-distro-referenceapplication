@@ -35,7 +35,7 @@ public class PatientVisitsDashboardPage extends Page {
     private static final By VIEW_VITALS_ICON  = By.cssSelector("#encountersList i.viewEncounter.view-action.icon-file-alt");
     private static final By DELETE_VITALS_ICON = By.cssSelector("#encountersList i.deleteEncounterId.delete-action.icon-remove");
     private static final By COMFIRM_DELETE_BUTTON  = By.cssSelector("#delete-encounter-dialog button.confirm.right");
-    
+
     public PatientVisitsDashboardPage(Page parent) {
         super(parent);
     }
@@ -49,6 +49,7 @@ public class PatientVisitsDashboardPage extends Page {
         return "coreapps/patientdashboard/patientDashboard.page";
     }
     
+
     public EditVitalsPage goToEditVitalsPage() {
         clickOn(EDIT_VITALS_ICON);
         return new EditVitalsPage(this);
@@ -146,7 +147,6 @@ public class PatientVisitsDashboardPage extends Page {
         }
     }
 
-    
     public String getPatientFamilyName() {
         String patientFamilyName = findElement(FAMILY_NAME).getText();
         return patientFamilyName;
