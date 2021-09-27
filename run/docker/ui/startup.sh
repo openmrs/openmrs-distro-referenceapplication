@@ -30,7 +30,7 @@ else
   done
 
   IFS="$old_IFS"
-  export SPA_CONFIG_URLS=CONFIG_URLS
+  export SPA_CONFIG_URLS=$CONFIG_URLS
   sed -i -e 's/"$SPA_CONFIG_URLS"/$SPA_CONFIG_URLS/' "/usr/share/nginx/html/index.html"
 fi
 
