@@ -91,7 +91,7 @@ public class ConditionsPage extends Page {
         return findElements(CONDITIONS_LIST);
     }
 
-    public void confirmDeleteCondition2(){
+    public void confirmDeleteCondition(){
         clickOn(CONFIRM_DELETE_CONDITION);
     }
 }
