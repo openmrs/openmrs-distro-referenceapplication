@@ -5,7 +5,7 @@ set -e
 # so we change "importmap.json" into "$IMPORTMAP_URL" allowing it to be changed by envsubst
 if [ -n "${IMPORTMAP_URL}" ]; then
   if [ -n "$SPA_PATH" ]; then
-    sed -i -e "s/\"$SPA_PATH/importmap.json\"/\"\$IMPORTMAP_URL\"/g" "/usr/share/nginx/html/index.html"
+    sed -i -e "s|\"$SPA_PATH/importmap.json\"|\"\$IMPORTMAP_URL\"|g" "/usr/share/nginx/html/index.html"
   else
     sed -i -e 's/"importmap.json"/"$IMPORTMAP_URL"/g' "/usr/share/nginx/html/index.html"
   fi
