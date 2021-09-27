@@ -20,6 +20,6 @@ OpenMRS Legacy UI is accessible at http://localhost/openmrs
 
 ## Notes
 
-`package/` Package the OpenMRS distribution with the specified dependencies (omod, microfrontends, configurations...). See [package/README.md](package/README.md) for more info.
+`package/` Package the OpenMRS distribution with the specified dependencies (omod, frontend modules, configurations...). See [package/README.md](package/README.md) for more info.
 
-`run/` Run the OpenMRS distribution. Currently supports only Docker. See [run/README.md](run/README.md) for more info.
+`run/` Run the OpenMRS distribution. Currently, this only supports Docker. See [run/README.md](run/README.md) for more info.

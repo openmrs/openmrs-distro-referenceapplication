@@ -11,18 +11,15 @@ Output:
 `target/openmrs-distro-package/openmrs-distro-package-$version.zip`
 
 Package contents:
-* `spa_config/`
-  
-  The Configuration for OpenMRS frontend.
-* `openmrs_modules/`
-  
-  The required set of OpenMRS modules.
-* `openmrs_config/`
-  
-  The OpenMRS local configuration (more [here](https://github.com/mekomsolutions/openmrs-config-haiti)) to be processed by the [Initializer module](https://github.com/mekomsolutions/openmrs-module-initializer).
-* `openmrs_core/`
-  
-  The target version of OpenMRS Core.
+
+|File or Directory|Description|
+|-----------------|-----------|
+|`openmrs_config` |The OpenMRS configuration, particularly including any files to be processed by the [Initializer module](https://github.com/mekomsolutions/openmrs-module-initializer). An example configuration can be found [here](https://github.com/mekomsolutions/openmrs-config-haiti).
+|`openmrs_core`   |The main OpenMRS WAR file.|
+|`openmrs_module` |The modules (OMODs) to be run in this OpenMRS instance.|
+|`spa`            |The compiled SPA for the 3.x frontend.|
+|`spa_config`     |Any configuration files used by the SPA.|
+|`openmrs-distro.properties`|The distro.properties used to generate this package.|
 
 ----
 
