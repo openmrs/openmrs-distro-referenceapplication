@@ -4,7 +4,7 @@ RUN apk update && \
     apk upgrade && \
     # add dumb-init so it's less silly to run startup.sh as our command
     # add more utils for sponge to support our startup script
-    apk add --no-cache dumb-init moreutils
+    apk add --no-cache moreutils
 
 # clear any default files installed by nginx
 RUN rm -rf /usr/share/nginx/html/*
@@ -14,4 +14,4 @@ RUN chmod +x /usr/local/bin/startup.sh
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-CMD ["dumb-init", "/usr/local/bin/startup.sh"]
+CMD ["/usr/local/bin/startup.sh"]
