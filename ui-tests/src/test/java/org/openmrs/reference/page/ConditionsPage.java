@@ -18,7 +18,7 @@ public class ConditionsPage extends Page {
     private static final By EDIT = By.cssSelector("i[title='Edit Condition: ']");
     private static final By DELETE = By.cssSelector("i[title='Delete']");
     private static final By CONDITIONS_LIST = By.cssSelector("tr.clickable-tr");
-    private static final By CONFIRM_DELETE_CONDITION = By.cssSelector("#remove-condition-dialog > div.dialog-content > button.confirm.right");
+    private static final By CONFIRM_DELETE_CONDITION_BUTTON = By.cssSelector("#remove-condition-dialog > div.dialog-content > button.confirm.right");
 
     public ConditionsPage(ClinicianFacingPatientDashboardPage clinicianFacingPatientDashboardPage) {
         super(clinicianFacingPatientDashboardPage);
@@ -92,6 +92,6 @@ public class ConditionsPage extends Page {
     }
 
     public void confirmDeleteCondition(){
-        clickOn(CONFIRM_DELETE_CONDITION);
+        clickOn(CONFIRM_DELETE_CONDITION_BUTTON);
     }
 }
