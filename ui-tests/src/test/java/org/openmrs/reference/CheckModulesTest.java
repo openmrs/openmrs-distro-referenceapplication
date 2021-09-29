@@ -18,7 +18,7 @@ public class CheckModulesTest extends ReferenceApplicationTestBase {
      */
     @Test
     @Category(BuildTests.class)
-    public void checkModulesTest() {
+    public void checkModulesTest(){
         AdministrationPage administrationPage = homePage.goToAdministration();
         ModulesPage modulesPage = administrationPage.goToManageModulesPage();
         // Get the modulesListing <div>, which contains the table of modules.
