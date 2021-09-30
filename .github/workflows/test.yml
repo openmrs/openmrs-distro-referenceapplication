@@ -71,8 +71,8 @@ jobs:
           cache-to: type=inline
       - name: Start up iSantePlus Containers
         run: docker-compose -f ci.docker-compose.yaml up -d
-      - name: Sleep for 15 minutes
-        run: sleep 15m
+      - name: Sleep for 10 minutes
+        run: sleep 10m
         shell: bash
       - name: Check containers
         run: docker ps
