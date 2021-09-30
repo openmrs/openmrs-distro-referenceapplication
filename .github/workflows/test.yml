@@ -71,13 +71,13 @@ jobs:
           cache-to: type=inline
       - name: Start up iSantePlus Containers
         run: docker-compose -f ci.docker-compose.yaml up -d
-      - name: Sleep for 10 minutes
-        run: sleep 10m
+      - name: Sleep for 5 minutes
+        run: sleep 5m
         shell: bash
       - name: Check containers
         run: docker ps
-      - name: Check containers logs
-        run: docker logs isanteplus  
+#       - name: Check containers logs
+#         run: docker logs isanteplus  
       - name: wait for openmrs instance to start
         run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 1; done
       - name: Set up JDK 1.8
