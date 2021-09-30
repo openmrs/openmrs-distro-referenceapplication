@@ -72,7 +72,7 @@ jobs:
       - name: Start up iSantePlus Containers
         run: docker-compose -f ci.docker-compose.yaml up -d
       - name: Sleep for 15 minutes
-        run: sleep 5m
+        run: sleep 15m
         shell: bash
       - name: Check containers
         run: docker ps
