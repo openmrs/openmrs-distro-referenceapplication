@@ -1,7 +1,7 @@
 iSantePlus OpenMRS Distribution
 ===================================
 
-![Publish package to GitHub Packages](https://github.com/IsantePlus/openmrs-distro-isanteplus/workflows/Publish%20package%20to%20GitHub%20Packages/badge.svg)
+[![Publish package to GitHub Packages](https://github.com/IsantePlus/openmrs-distro-isanteplus/actions/workflows/release.yml/badge.svg)](https://github.com/IsantePlus/openmrs-distro-isanteplus/actions/workflows/release.yml)
 
 ## Building
 
