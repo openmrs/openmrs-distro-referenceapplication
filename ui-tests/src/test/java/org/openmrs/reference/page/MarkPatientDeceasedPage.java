@@ -12,7 +12,7 @@ public class MarkPatientDeceasedPage extends Page {
 
     private static final String URL = "/coreapps/markPatientDead.page";
     private static final By DICTIONARY_LINK= By.id("dictionaryNavLink");
-    private static final By ADD_NEW_CONCEPT_LINK = By.linkText("Add new Concept");
+    private static final By ADD_NEW_CONCEPT_LINK = By.xpath("//*[@id=\"content\"]/a[2]");
     private static final By CONCEPT_NAME = By.id("namesByLocale[en].name");
     private static final By ADD_ANSWER_BUTTON = By.cssSelector("#codedDatatypeRow > td > table > tbody > tr > td.buttons > input:nth-child(1)");
     private static final By CAUSE_SEARCH_FIELD = By.id("newAnswerConcept");
@@ -71,7 +71,8 @@ public class MarkPatientDeceasedPage extends Page {
     public void newConcept() {
         clickOn(ADD_NEW_CONCEPT_LINK); 
         findElement(CONCEPT_NAME).sendKeys("cause of death");
-        Select datatype = new Select(findElement(By.id("datatype")));
+        Select datatype = new Select(findElement(By.name("concept.datatype")));
+
         datatype.selectByVisibleText("Coded");
         clickOn(ADD_ANSWER_BUTTON); 
         findElement(CAUSE_SEARCH_FIELD).sendKeys("Fever");
