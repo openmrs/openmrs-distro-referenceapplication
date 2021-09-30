@@ -9,7 +9,6 @@ import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
-import org.openmrs.reference.page.HeaderPage;
 import org.openmrs.reference.page.HomePage;
 import org.openmrs.reference.page.HtmlFormsPage;
 import org.openmrs.reference.page.ManageFormsPage;
@@ -27,7 +26,6 @@ public class FormTest extends TestBase {
     private static String version = "1.2";
     private HomePage homePage;
     private AdministrationPage administrationPage;
-    private HeaderPage headerPage;
     private ManageFormsPage manageForm;
     private ManageHtmlFormsPage manageHtmlFormsPage;
     private HtmlFormsPage htmlFormsPage;
@@ -37,7 +35,6 @@ public class FormTest extends TestBase {
     public void setUp() throws Exception {
         homePage = new HomePage(page);
         assertPage(homePage.waitForPage());
-        headerPage = new HeaderPage(driver);
         administrationPage = new AdministrationPage(page);
         manageForm = new ManageFormsPage(driver);
         htmlFormsPage = new HtmlFormsPage(page);
@@ -69,7 +66,7 @@ public class FormTest extends TestBase {
         manageForm.addIcon("icon-align-justify");
         manageForm.formIdFromUrl();
         manageForm.save();
-        headerPage.clickOnHomeIcon();
+        homePage.go();
         assertNotNull("Eye Report", patientDashboardPage.FORM_EXIST);
     }
 
@@ -82,7 +79,7 @@ public class FormTest extends TestBase {
         manageForm.editPath();
         manageForm.addLabel("Eye Test");
         manageForm.save();
-        headerPage.clickOnHomeIcon();
+        homePage.go();
         assertNotNull("Eye Test", patientDashboardPage.FORM_EXIST);
     }
 
