@@ -24,7 +24,6 @@ public class AllergyPage extends Page {
     private static final By ALLERGY_STATUS = By.cssSelector(".allergyStatus");
     private static final By ADD_NO_KNOWN = By.xpath("//*[contains(text(),'No Known Allergy')]");
     private static final By DELETE_NO_KNOWN = By.className("delete-action");
-    private static final By SELECT_NEW_ALLERGY = By.id("allergen-73667-label");  //codein
     private static final By CANCEL_ALLERGY_BUTTON = By.cssSelector("#actions > input.cancel");
 
     public AllergyPage(Page page) {
@@ -72,10 +71,6 @@ public class AllergyPage extends Page {
     @Override
     public String getPageUrl() {
         return "/allergyui/allergies.page";
-    }
-
-    public void selectNewAllergy(){
-        clickOn(SELECT_NEW_ALLERGY);
     }
 
     public void confirmCancelAllergy(){
