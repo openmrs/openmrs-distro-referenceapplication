@@ -26,3 +26,7 @@ echo "cucumber.publish.enabled=false" > src/test/resources/cucumber.properties
 mvn clean install -DskipTests=true
 cp -f src/test/resources/test-local.properties src/test/resources/test.properties
 mvn test
+
+cd ../..
+
+rm -rf ./build_area
