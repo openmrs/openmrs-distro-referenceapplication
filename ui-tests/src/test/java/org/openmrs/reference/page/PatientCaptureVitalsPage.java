@@ -117,8 +117,8 @@ public class PatientCaptureVitalsPage extends Page {
     }
 
     public void confirm() {
-            WebElement confirmButton = findElement(CONFIRM_BUTTON);
-            confirmButton.click();
+        WebElement confirmButton = findElement(CONFIRM_BUTTON);
+        confirmButton.click();
     }
 
     public boolean save() {
