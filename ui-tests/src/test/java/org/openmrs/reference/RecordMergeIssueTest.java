@@ -85,4 +85,3 @@ public class RecordMergeIssueTest extends TestBase {
         waitForPatientDeletion(patient.uuid);
     }
 }
-
