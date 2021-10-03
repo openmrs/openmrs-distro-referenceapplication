@@ -1,16 +1,20 @@
 package org.openmrs.reference;
 
+import static org.junit.Assert.assertFalse;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.helper.TestPatient;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
+import org.openmrs.reference.page.DataManagementPage;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.HomePage;
+import org.openmrs.reference.page.RegistrationPage;
 import org.openmrs.uitestframework.test.TestBase;
 import org.openmrs.uitestframework.test.TestData;
-
-import static org.junit.Assert.assertFalse;
 
 /**
  * Created by tomasz on 09.07.15.
@@ -19,7 +23,6 @@ import static org.junit.Assert.assertFalse;
 public class RecordMergeIssueTest extends TestBase {
 
     private HomePage homePage;
-    private HeaderPage headerPage;
     private FindPatientPage findPatientPage;
     private TestPatient patient;
     private TestPatient patient1;
@@ -33,7 +36,6 @@ public class RecordMergeIssueTest extends TestBase {
     public void setUp() throws Exception {
         homePage = new HomePage(page);
         assertPage(homePage.waitForPage());
-        headerPage = new HeaderPage(driver);
         findPatientPage = new FindPatientPage(page);
         registrationPage = new RegistrationPage(page);
         patientDashboardPage = new ClinicianFacingPatientDashboardPage(page);
@@ -55,7 +57,7 @@ public class RecordMergeIssueTest extends TestBase {
         registrationPage.enterMergePatient(patient);
         id = patientDashboardPage.findPatientId();
         patient.uuid = patientDashboardPage.getPatientUuidFromUrl();
-        headerPage.clickOnHomeIcon();
+        homePage.go();
 //     Register second patient
         homePage.goToRegisterPatientApp();
         patient1.familyName = "Mike";
@@ -65,7 +67,7 @@ public class RecordMergeIssueTest extends TestBase {
         patient1.address1 = "address";
         registrationPage.enterMergePatient(patient1);
         id2 = patientDashboardPage.findPatientId();
-        headerPage.clickOnHomeIcon();
+        homePage.go();
         homePage.goToDataManagement();
         dataManagementPage.goToMergePatient();
         dataManagementPage.enterPatient1(id);
@@ -76,7 +78,7 @@ public class RecordMergeIssueTest extends TestBase {
 
     @After
     public void tearDown() throws Exception {
-        headerPage.clickOnHomeIcon();
+    	  homePage.go();
         TestData.PatientInfo p = new TestData.PatientInfo();
         p.uuid = patient.uuid;
         deletePatient(p);
