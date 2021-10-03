@@ -37,9 +37,9 @@ public class PatientCaptureVitalsPage extends Page {
     
     public void setHeightField(String value) {
         WebElement heightField = findElement(HEIGHT_FIELD);
-            heightField.clear();
-            heightField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
+        heightField.clear();
+        heightField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
     }
 
     public void clearPatientWeight() {
@@ -48,9 +48,9 @@ public class PatientCaptureVitalsPage extends Page {
     
     public void setWeightField(String value) {
         WebElement weightField = findElement(WEIGHT_FIELD);
-            weightField.clear();
-            weightField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[4]")).click();
+        weightField.clear();
+        weightField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[4]")).click();
     }
 
     public void clearPatientTemperature() {
@@ -59,9 +59,9 @@ public class PatientCaptureVitalsPage extends Page {
     
     public void setTemperatureField(String value) {
         WebElement temperatureField = findElement(TEMPERATURE_FIELD);
-            temperatureField.clear();
-            temperatureField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[5]")).click();
+        temperatureField.clear();
+        temperatureField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[5]")).click();
     }
 
     public void clearPatientPulse() {
@@ -70,9 +70,9 @@ public class PatientCaptureVitalsPage extends Page {
     
     public void setPulseField(String value) {
         WebElement pulseField = findElement(PULSE_FIELD);
-            pulseField.clear();
-            pulseField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[6]")).click();
+        pulseField.clear();
+        pulseField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[6]")).click();
     }
 
     public void clearPatientRespiratoryRate() {
@@ -81,9 +81,9 @@ public class PatientCaptureVitalsPage extends Page {
     
     public void setRespiratoryField(String value) {
         WebElement respiratoryField = findElement(RESPIRATORY_FIELD);
-            respiratoryField.clear();
-            respiratoryField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[7]")).click();
+        respiratoryField.clear();
+        respiratoryField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[7]")).click();
     }
 
     public void clearPatientBloodPressure1() {
@@ -96,13 +96,13 @@ public class PatientCaptureVitalsPage extends Page {
     
     public void setBloodPressureFields(String value1, String value2) {
         WebElement bloodPressureField1 = findElement(BLOOD_PRESSURE_FIELD_1);
-            bloodPressureField1.clear();
-            bloodPressureField1.sendKeys(value1);
+        bloodPressureField1.clear();
+        bloodPressureField1.sendKeys(value1);
 
         WebElement bloodPressureField2 = findElement(BLOOD_PRESSURE_FIELD_2);
-            bloodPressureField2.clear();
-            bloodPressureField2.sendKeys(value2);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[8]")).click();
+        bloodPressureField2.clear();
+        bloodPressureField2.sendKeys(value2);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[8]")).click();
     }
 
     public void clearPatientBloodOxygenSaturation() {
@@ -111,9 +111,9 @@ public class PatientCaptureVitalsPage extends Page {
     
     public void setBloodOxygenSaturationField(String value) {
         WebElement bloodOxygenSaturationField = findElement(BLOOD_OXYGEN_SATURATION_FIELD);
-            bloodOxygenSaturationField.clear();
-            bloodOxygenSaturationField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
+        bloodOxygenSaturationField.clear();
+        bloodOxygenSaturationField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
     }
 
     public void confirm() {
