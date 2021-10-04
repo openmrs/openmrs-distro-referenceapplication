@@ -53,6 +53,10 @@ public class ManageProviderSchedulesPage extends Page {
         clickOn(LOCATION);
     }
 
+    /**
+     * Clicks on the next available weekday. We use this because the default for the appointment's module is to only show
+     * appointments for weekdays.
+     */
     public void clickOnNextWeekday() {
         clickOn(NEXT_WEEKDAY);
     }
