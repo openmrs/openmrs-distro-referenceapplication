@@ -53,7 +53,7 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
         ManageProviderSchedulesPage manageProviderSchedulesPage = appointmentSchedulingPage.goToManageProviderSchedules();
         manageProviderSchedulesPage.selectLocation(getLocationName());
-        manageProviderSchedulesPage.clickOnCurrentDay();
+        manageProviderSchedulesPage.clickOnNextWeekday();
         manageProviderSchedulesPage.selectLocationBlock(getLocationName());
         manageProviderSchedulesPage.enterMinimumTimeValue("06", "30");
         manageProviderSchedulesPage.clickOnStartTimeButton();
