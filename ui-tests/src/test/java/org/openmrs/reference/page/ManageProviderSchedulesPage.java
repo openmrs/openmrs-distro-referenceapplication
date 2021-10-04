@@ -9,12 +9,28 @@
  */
 package org.openmrs.reference.page;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 
 public class ManageProviderSchedulesPage extends Page {
 
-    public static final By CURRENT_DAY = By.className("fc-state-highlight");
+    private static final By NEXT_WEEKDAY;
+    static {
+        LocalDate nextWeekday = LocalDate.now();
+        switch (nextWeekday.getDayOfWeek()) {
+            case SATURDAY:
+                nextWeekday.plus(2, ChronoUnit.DAYS);
+                break;
+            case SUNDAY:
+                nextWeekday.plus(1, ChronoUnit.DAYS);
+                break;
+        }
+
+        NEXT_WEEKDAY = By.cssSelector(String.format("[data-date=\"%s\"]", nextWeekday));
+    }
     private static final By LOCATION = By.className("ng-pristine");
     private static final By LOCATION_IN_BLOCK = By.xpath("//div[@id='select-location']/select");
     private static final By SERVICE_DROPDOWN = By.cssSelector("a.ng-scope.ng-binding");
@@ -37,8 +53,8 @@ public class ManageProviderSchedulesPage extends Page {
         clickOn(LOCATION);
     }
 
-    public void clickOnCurrentDay() throws InterruptedException {
-        clickOn(CURRENT_DAY);
+    public void clickOnNextWeekday() {
+        clickOn(NEXT_WEEKDAY);
     }
 
     public void selectLocationBlock(String locblock) {
