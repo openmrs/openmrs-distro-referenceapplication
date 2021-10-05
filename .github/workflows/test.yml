@@ -50,8 +50,8 @@ jobs:
           build-args: |
             ISANTEPLUS_VERSION=${{ github.head_ref }}
           tags: ghcr.io/isanteplus/docker-isanteplus-db:test
-          cache-from: type=registry,ref= ${{ steps.meta.outputs.tags }}
-          cache-to: type=inline
+#           cache-from: type=registry,ref= ${{ steps.meta.outputs.tags }}
+#           cache-to: type=inline
     
       - name: Checkout IsantePlus/docker-isanteplus-server
         uses: actions/checkout@v2
