@@ -41,7 +41,6 @@ jobs:
         with:
           context: .
           push: true
-          load: true
           build-args: |
             ISANTEPLUS_VERSION=${{ github.head_ref }}
             USERNAME=${{ secrets.RELEASE_USERNAME }}
@@ -61,7 +60,6 @@ jobs:
         with:
           context: .
           push: true
-          load: true
           build-args: |
             ISANTEPLUS_VERSION=${{ github.head_ref }}
             USERNAME=${{ secrets.RELEASE_USERNAME }}
