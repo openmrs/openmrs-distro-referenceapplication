@@ -30,6 +30,12 @@ jobs:
         run: |
            echo "${{ github.base_ref }} | ${{ github.head_ref }} | ${{ github.ref }} | ${{ github.event.branch }}"
     
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+           registry: ${{ env.REGISTRY }}
+           username: ${{ github.actor }}
+           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout IsantePlus/docker-isanteplus-db
         uses: actions/checkout@v2
         with:
