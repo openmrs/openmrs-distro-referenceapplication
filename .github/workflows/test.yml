@@ -35,7 +35,6 @@ jobs:
       - name: Test Tag
         run: |
            echo "${{ github.base_ref }} | ${{ github.head_ref }} | ${{ github.ref }} | ${{ github.event.branch }}"
-    
   
       - name: Checkout IsantePlus/docker-isanteplus-db
         uses: actions/checkout@v2
