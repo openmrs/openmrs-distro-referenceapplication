@@ -49,8 +49,6 @@ jobs:
           push: true
           build-args: |
             ISANTEPLUS_VERSION=${{ github.head_ref }}
-            USERNAME=${{ secrets.RELEASE_USERNAME }}
-            TOKEN=${{ secrets.RELEASE_TOKEN }}
           tags: ghcr.io/isanteplus/docker-isanteplus-db:test
           cache-from: type=registry,ref= ${{ steps.meta.outputs.tags }}
           cache-to: type=inline
