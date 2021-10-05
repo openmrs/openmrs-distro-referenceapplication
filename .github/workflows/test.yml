@@ -49,7 +49,7 @@ jobs:
           context: .
           push: true
           build-args: |
-            ISANTEPLUS_VERSION=${{ github.head_ref }}
+            ISANTEPLUS_VERSION=main
           tags: ghcr.io/isanteplus/docker-isanteplus-db:test
           cache-from: type=registry,ref= ${{ steps.meta.outputs.tags }}
           cache-to: type=inline
