@@ -29,7 +29,8 @@ public class HomePage extends Page {
     private static final By FIND_PATIENT_RECORD = By.id("coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension");
     private static final By DATA_MANAGEMENT = By.id("coreapps-datamanagement-homepageLink-coreapps-datamanagement-homepageLink-extension");
     private static final By APPOINTMENT_SCHEDULING = By.id("appointmentschedulingui-homeAppLink-appointmentschedulingui-homeAppLink-extension");
-
+    private static final By REPORTS = By.cssSelector("#reportingui-reports-homepagelink-reportingui-reports-homepagelink-extension");
+    
     public HomePage(Page page) {
         super(page);
     }
@@ -121,6 +122,11 @@ public class HomePage extends Page {
         return new FindPatientPage(this);
     }
 
+    public ReportsPage goToReportsPage() {
+    	clickOn(REPORTS);
+    	return new ReportsPage(this);
+    }
+    
     public AppointmentSchedulingPage goToAppointmentScheduling() {
         clickOn(APPOINTMENT_SCHEDULING);
         return new AppointmentSchedulingPage(this);

@@ -18,7 +18,8 @@ public class SystemAdministrationPage extends Page {
     private static final By ADVANCED_ADMINISTRATION = By.id("referenceapplication-legacyAdmin-app");
     private static By STYLES_GUIDE_LINK = By.id("referenceapplication-styleGuide-app");
     private static By MANAGE_ACCOUNTS = By.cssSelector("#org-openmrs-module-adminui-accounts-app i");
-
+    private static By MANAGE_APPS     = By.cssSelector("#referenceapplication-manageApps-app");
+    
     public SystemAdministrationPage(Page parent) {
         super(parent);
     }
@@ -36,6 +37,11 @@ public class SystemAdministrationPage extends Page {
     public ManageUserAccountPage goToManageAccounts() {
         clickOn(MANAGE_ACCOUNTS);
         return new ManageUserAccountPage(this);
+    }
+    
+    public ManageAppsPage goToManageAppsPage() {
+    	clickOn(MANAGE_APPS);
+    	return new ManageAppsPage(this);
     }
     
     public StylesGuidePage clickOnStylesGuideAppLink() {
