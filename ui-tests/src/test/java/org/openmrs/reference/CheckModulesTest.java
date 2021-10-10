@@ -11,6 +11,8 @@ import org.openmrs.reference.page.ModulesPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static org.junit.Assert.assertFalse;
+
 public class CheckModulesTest extends ReferenceApplicationTestBase {
 
     /**
@@ -28,7 +30,7 @@ public class CheckModulesTest extends ReferenceApplicationTestBase {
         for (WebElement eachModule : firstColumn) {
             // The name attr on the <input> elements should all be "stop" which indicates the module is correctly started.
             // If not, then grab the text from the 3rd column to show which module is not started.
-            Assert.assertEquals("module not ready: " + eachModule.findElement(By.xpath("../../td[3]")).getText(), "stop", eachModule.getAttribute("name"));
+            assertFalse(eachModule.getText().contains("moduleNotStarted"));
         }
     }
 }
