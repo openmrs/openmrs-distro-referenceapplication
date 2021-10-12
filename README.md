@@ -58,8 +58,8 @@ registrationapp --> isanteplus
     ```
   - **M 2 Sys - Biometrics/National - Service Url:** `<national fingerprint url>`
   
-  - **Mpi - Client/Endpoint Pdq Addr:** `http://sedish-haiti.org:5001/fhir`
-  - **Mpi - Client/Endpoint Pix Addr:** `http://sedish-haiti.org:5001`
+  - **Mpi - Client/Endpoint Pdq Addr:** `http://sedish-haiti.org:5001/CR/fhir`
+  - **Mpi - Client/Endpoint Pix Addr:** `http://sedish-haiti.org:5001/CR/`
   - **Mpi - Client/Msg Sending Facility:** `name of your instance's facility`
   - **Mpi - Client/Pid Auto Xref:** `ENTID`
   - **Mpi - Client/Background Threads:** `true`
@@ -73,7 +73,7 @@ registrationapp --> isanteplus
   - **Registrationcore/Mpi Implementation:** `registrationcore.mpi.implementation.Fhir`
   
   - **Xdssender/Export Ccd Endpoint:** `http://sedish-haiti.org:5001/SHR/fhir`
-  - **Xdssender/Mpi Endpoint:** `http://sedish-haiti.org:5001/fhir`
+  - **Xdssender/Mpi Endpoint:** `http://sedish-haiti.org:5001/CR/fhir`
   - **Xdssender/Openmrs Password:** `<openmrs login password>`
   - **Xdssender/Openmrs Username:** `<openmrs username>`
   - **Xdssender/Oshr Password:** `<openhim client basic auth password>`
