@@ -8,7 +8,6 @@ public class ReportsPage extends Page{
 		super(page);
 	}
 
-	
 	@Override
 	public String getPageUrl() {
 		return "/reportingui/reportsapp/home.page";
