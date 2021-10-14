@@ -21,6 +21,7 @@ public class AdministrationPage extends Page {
     private static final By MANAGE_PROVIDERS = By.cssSelector("#content a[href='/openmrs/admin/provider/index.htm']");
     private static final By MANAGE_PERSONS = By.cssSelector("#content a[href='/openmrs/admin/person/index.htm']");
     private static final By MANAGE_HTMLFORMS_PAGE = By.cssSelector("#content a[href*='/module/htmlformentry/htmlForms.list']");
+    private static final By REPORT_ADMINISTRATION_LINK = By.cssSelector("//*[@id=\"menu\"]/li[1]/a");
 
     public AdministrationPage(Page page) {
         super(page);
@@ -59,5 +60,10 @@ public class AdministrationPage extends Page {
     public ManagePersonPage clickOnManagePersons() {
         findElement(MANAGE_PERSONS).click();
         return new ManagePersonPage(this);
+    }
+
+    public ManageReportsPage clickOnManageReportsPage(){
+        clickOn(REPORT_ADMINISTRATION_LINK);
+        return new ManageReportsPage(this);
     }
 }
