@@ -21,7 +21,6 @@
     <dependency>
       <groupId>org.openmrs.distro</groupId>
       <artifactId>openmrs-distro-package</artifactId>
-      <classifier>${distribution}</classifier>
       <type>zip</type>
       <version>${project.version}</version>
     </dependency>
@@ -69,7 +68,10 @@
               <registry>docker.io</registry>
               <name>openmrs/openmrs-reference-application-3-backend</name>
               <build>
-                <tags>${docker.tag}</tags>
+                <tags>
+                  <tag>${docker.tag}</tag>
+                  <tag>${docker.tag.version}</tag>
+                </tags>
                 <contextDir>${project.basedir}</contextDir>
                 <dockerFile>${project.basedir}${file.separator}openmrs${file.separator}Dockerfile-embedded
                 </dockerFile>
@@ -79,7 +81,10 @@
               <registry>docker.io</registry>
               <name>openmrs/openmrs-reference-application-3-frontend</name>
               <build>
-                <tags>${docker.tag}</tags>
+                <tags>
+                  <tag>${docker.tag}</tag>
+                  <tag>${docker.tag.version}</tag>
+                </tags>
                 <contextDir>${project.basedir}</contextDir>
                 <dockerFile>${project.basedir}${file.separator}ui${file.separator}Dockerfile-embedded</dockerFile>
               </build>
@@ -88,7 +93,10 @@
               <registry>docker.io</registry>
               <name>openmrs/openmrs-reference-application-3-gateway</name>
               <build>
-                <tags>${docker.tag}</tags>
+                <tags>
+                  <tag>${docker.tag}</tag>
+                  <tag>${docker.tag.version}</tag>
+                </tags>
                 <contextDir>${project.basedir}${file.separator}proxy</contextDir>
                 <dockerFile>Dockerfile</dockerFile>
               </build>
@@ -111,6 +119,7 @@
       </activation>
       <properties>
         <docker.tag>demo</docker.tag>
+        <docker.tag.version>${project.version}</docker.tag.version>
       </properties>
     </profile>
     <profile>
@@ -125,6 +134,8 @@
       </activation>
       <properties>
         <docker.tag>latest</docker.tag>
+        <!-- don't tag the version for snapshots -->
+        <docker.tag.version />
       </properties>
     </profile>
     <profile>
