@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 
 public class ManageReportsPage extends Page {
 	
-	private static final By EDIT_REPORT_ICON = By.cssSelector("#container > div > table > tbody > tr:nth-child(13) > td:nth-child(6) > a:nth-child(1)");
+	private static final By EDIT_REPORT_ICON = By.xpath("//tbody/tr[12]/td[6]/a[1]/img[1]");
 	
 	public ManageReportsPage(Page page) {
 	    super(page);
