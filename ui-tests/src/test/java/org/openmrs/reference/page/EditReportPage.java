@@ -10,8 +10,6 @@ public class EditReportPage extends Page {
 	private static final By END_DATE_FIELD = By.cssSelector("#endDate");
 	private static final By RUN_BUTTON = By.cssSelector("#preview-parameterizable-button");
 	private static final By CLOSE_TAB = By.xpath("//span[contains(text(),'close')]");
-	private static final String StartDate = "05/07/2008";
-	private static final String EndDate = "20/06/2020";
 	
 	public EditReportPage(Page parent) {
 	    super(parent);
@@ -21,12 +19,12 @@ public class EditReportPage extends Page {
 	    clickOn(PREVIEW_BUTTON);
 	}
 	
-	public void enterStartDate(String StartDate) {
-	    setTextToFieldNoEnter(START_DATE_FIELD, StartDate);
+	public void enterStartDate(String startDate) {
+	    setTextToFieldNoEnter(START_DATE_FIELD, startDate);
 	}
 	
-	public void enterEndDate(String EndDate) {
-	    setTextToFieldNoEnter(END_DATE_FIELD, EndDate);
+	public void enterEndDate(String endDate) {
+	    setTextToFieldNoEnter(END_DATE_FIELD, endDate);
 	}
 	
 	public void clickOnRun() {
