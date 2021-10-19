@@ -15,6 +15,7 @@ import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class PatientVisitsDashboardPage extends Page {
 	
@@ -31,6 +32,10 @@ public class PatientVisitsDashboardPage extends Page {
     private static final By VISIT_NOTE_ENCOUNTER = By.xpath("//div[@id='visit-details']/ul/li/ul/li/div/strong/span[text()='Visit Note']");
     private static final By VISIT_NOTE = By.id("referenceapplication.realTime.simpleVisitNote");
     private static final By RETURN_TO_DASHBOARD = By.xpath("//*[@id='breadcrumbs']/li[2]/a");
+    private static final By EDIT_VITALS_ICON = By.cssSelector("#encountersList i.editEncounter.edit-action.icon-pencil");
+    private static final By VIEW_VITALS_ICON  = By.cssSelector("#encountersList i.viewEncounter.view-action.icon-file-alt");
+    private static final By DELETE_VITALS_ICON = By.cssSelector("#encountersList i.deleteEncounterId.delete-action.icon-remove");
+    private static final By COMFIRM_DELETE_BUTTON  = By.cssSelector("#delete-encounter-dialog button.confirm.right");
 
     public PatientVisitsDashboardPage(Page parent) {
         super(parent);
@@ -44,9 +49,29 @@ public class PatientVisitsDashboardPage extends Page {
     public String getPageUrl() {
         return "coreapps/patientdashboard/patientDashboard.page";
     }
+    
+    public PatientCaptureVitalsPage goToPatientCaptureVitalsPage() {
+        waiter.until(ExpectedConditions.presenceOfElementLocated(CAPTURE_VITALS));
+        clickOnLast(CAPTURE_VITALS);
+        return new PatientCaptureVitalsPage(this);
+    }
+    
+    public EditVitalsPage goToEditVitalsPage() {
+        waiter.until(ExpectedConditions.presenceOfElementLocated(EDIT_VITALS_ICON));
+        clickOn(EDIT_VITALS_ICON);
+        return new EditVitalsPage(this);
+    }
 
-    public void goToCaptureVitals() {
-        findElement(CAPTURE_VITALS).click();
+    public void goToViewVitalsPage() {
+        waiter.until(ExpectedConditions.presenceOfElementLocated(VIEW_VITALS_ICON));
+        clickOn(VIEW_VITALS_ICON);
+    }
+
+    public void deleteVitals() {
+        waiter.until(ExpectedConditions.presenceOfElementLocated(DELETE_VITALS_ICON));
+        clickOn(DELETE_VITALS_ICON);
+        waitForElement(COMFIRM_DELETE_BUTTON);
+        clickOn(COMFIRM_DELETE_BUTTON);
     }
     
     public void goToVisitNote() {
@@ -122,7 +147,6 @@ public class PatientVisitsDashboardPage extends Page {
             return 0;
         }
     }
-
     
     public String getPatientFamilyName() {
         String patientFamilyName = findElement(FAMILY_NAME).getText();

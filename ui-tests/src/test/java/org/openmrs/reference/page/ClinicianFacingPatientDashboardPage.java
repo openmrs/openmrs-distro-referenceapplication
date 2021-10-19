@@ -86,10 +86,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     private static final By DELETE_PATIENT_CANCEL  = By.cssSelector("#delete-patient-creation-dialog > div.dialog-content > button.cancel");
     private static final By EDIT_PATIENT_LINK = By.cssSelector("a[id='application.registrationapp.summary.editPatientLink']");
     private static final String REASON = "patient nolonger needed";
-    private static final By EDIT_VITALS_ICON = By.cssSelector("#encountersList i.editEncounter.edit-action.icon-pencil");
-    private static final By VIEW_VITALS_ICON  = By.cssSelector("#encountersList i.viewEncounter.view-action.icon-file-alt");
-    private static final By DELETE_VITALS_ICON = By.cssSelector("#encountersList i.deleteEncounterId.delete-action.icon-remove");
-    private static final By COMFIRM_DELETE_BUTTON  = By.cssSelector("#delete-encounter-dialog button.confirm.right");
     
     public ClinicianFacingPatientDashboardPage(Page page) {
         super(page);
@@ -203,21 +199,6 @@ public class ClinicianFacingPatientDashboardPage extends Page {
     public PatientCaptureVitalsPage goToPatientCaptureVitalsPage() {
         clickOnLast(PATIENT_CAPTURE_VITALS);
         return new PatientCaptureVitalsPage(this);
-    }
-    
-    public EditVitalsPage goToEditVitalsPage() {
-        clickOn(EDIT_VITALS_ICON);
-        return new EditVitalsPage(this);
-    }
-    
-    public void goToViewVitalsPage() {
-        clickOn(VIEW_VITALS_ICON);
-    }
-    
-    public void deleteVitals() {
-        clickOn(DELETE_VITALS_ICON);
-        waitForElement(COMFIRM_DELETE_BUTTON);
-        clickOn(COMFIRM_DELETE_BUTTON);
     }
 
     public void enterDiagnosis(String diag) {
