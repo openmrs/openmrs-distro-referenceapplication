@@ -3,8 +3,8 @@ package org.openmrs.reference;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.experimental.categories.Category;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.page.AdministrationPage;
 import org.openmrs.reference.page.ModulesPage;
