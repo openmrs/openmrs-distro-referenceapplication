@@ -52,7 +52,7 @@ public class PatientVisitsDashboardPage extends Page {
     
     public PatientCaptureVitalsPage goToPatientCaptureVitalsPage() {
         waiter.until(ExpectedConditions.presenceOfElementLocated(CAPTURE_VITALS));
-        clickOnLast(CAPTURE_VITALS);
+        clickOn(CAPTURE_VITALS);
         return new PatientCaptureVitalsPage(this);
     }
     
