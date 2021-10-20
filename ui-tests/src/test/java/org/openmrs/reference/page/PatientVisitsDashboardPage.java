@@ -62,7 +62,7 @@ public class PatientVisitsDashboardPage extends Page {
         return new EditVitalsPage(this);
     }
 
-    public void goToViewVitalsPage() {
+    public void clickOnViewVitalsIcon() {
         waiter.until(ExpectedConditions.presenceOfElementLocated(VIEW_VITALS_ICON));
         clickOn(VIEW_VITALS_ICON);
     }
