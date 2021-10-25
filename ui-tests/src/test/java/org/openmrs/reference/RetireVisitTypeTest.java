@@ -3,13 +3,14 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
 package org.openmrs.reference;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -27,12 +28,12 @@ import static org.junit.Assert.assertThat;
 
 /**
  */
-public class RetireVisitTypeTest extends ReferenceApplicationTestBase{
+public class RetireVisitTypeTest extends ReferenceApplicationTestBase {
 
     public static final String RETIRE_REASON = "Retire reason";
+    
     private String visitTypeName;
     private String visitTypeDesc;
-
     private String visitTypeUuid;
 
     @Before
@@ -44,7 +45,7 @@ public class RetireVisitTypeTest extends ReferenceApplicationTestBase{
 
     @Test
     @Category(BuildTests.class)
-    public void retireVisitTypeTest(){
+    public void retireVisitTypeTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         VisitTypeListPage visitTypeListPage = administrationPage.goToVisitTypePage();
         VisitTypePage visitTypePage = visitTypeListPage.goToVisitType(visitTypeName);
@@ -54,7 +55,7 @@ public class RetireVisitTypeTest extends ReferenceApplicationTestBase{
     }
 
     @After
-    public void teardown(){
-        RestClient.delete("visittype/"+visitTypeUuid, true);
+    public void teardown() {
+        RestClient.delete("visittype/" + visitTypeUuid, true);
     }
 }

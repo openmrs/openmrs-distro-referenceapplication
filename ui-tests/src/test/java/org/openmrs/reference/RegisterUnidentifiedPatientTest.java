@@ -11,10 +11,13 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.openmrs.reference.groups.BuildTests;
 import org.openmrs.reference.helper.PatientGenerator;
 import org.openmrs.reference.helper.TestPatient;
 import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.RegistrationPage;
+import org.openmrs.uitestframework.test.TestData;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -25,25 +28,29 @@ import static org.junit.Assert.assertTrue;
  */
 public class RegisterUnidentifiedPatientTest extends ReferenceApplicationTestBase {
 
-	private TestPatient patient;
+    private TestPatient patient;
 
-	@After
-	public void tearDown() throws Exception {
-		deletePatient(patient.uuid);
-		waitForPatientDeletion(patient.uuid);
-	}
+    @After
+    public void tearDown() throws Exception {
+        TestData.PatientInfo p = new TestData.PatientInfo();
+        p.uuid = patient.uuid;
+        deletePatient(p);
+        waitForPatientDeletion(patient.uuid);
+    }
 
-	@Test
-	public void registerUnidentifiedPatient() throws InterruptedException {
-		RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
-		patient = PatientGenerator.generateTestPatient();
-		registrationPage.enterUnidentifiedPatient(patient);
+    @Test
+    @Category(BuildTests.class)
+    public void registerUnidentifiedPatientTest() throws InterruptedException {
+        RegistrationPage registrationPage = homePage.goToRegisterPatientApp();
+        patient = PatientGenerator.generateTestPatient();
+        registrationPage.enterUnidentifiedPatient(patient);
+        
+        assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
 
-		assertTrue(registrationPage.getGenderInConfirmationPage().contains(patient.gender));
-
-		ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
-		patient.uuid = page.getPatientUuidFromUrl();
-		assertThat(dashboardPage.getPatientGivenName(), is("UNKNOWN"));
-		assertThat(dashboardPage.getPatientFamilyName(), is("UNKNOWN"));
-	}
+        ClinicianFacingPatientDashboardPage dashboardPage = registrationPage.confirmPatient();
+        dashboardPage.waitForPage();
+        patient.uuid = page.getPatientUuidFromUrl();
+        assertThat(dashboardPage.getPatientGivenName(), is("UNKNOWN"));
+        assertThat(dashboardPage.getPatientFamilyName(), is("UNKNOWN"));
+    }
 }

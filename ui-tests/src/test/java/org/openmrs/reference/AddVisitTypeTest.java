@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -21,8 +21,6 @@ import org.openmrs.reference.page.VisitTypePage;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-/**
- */
 public class AddVisitTypeTest extends ReferenceApplicationTestBase {
 
     private String visitTypeName;
@@ -36,7 +34,7 @@ public class AddVisitTypeTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void addVisitTypeTest() throws InterruptedException {
+    public void addVisitTypeTest() {
         AdministrationPage administrationPage = homePage.goToAdministration();
         VisitTypeListPage visitTypeListPage = administrationPage.goToVisitTypePage();
         VisitTypePage visitTypePage = visitTypeListPage.addVisitType();
@@ -50,10 +48,4 @@ public class AddVisitTypeTest extends ReferenceApplicationTestBase {
         visitTypePage = visitTypeListPage.goToVisitType(visitTypeName);
         visitTypePage.delete();
     }
-
-
-
 }
-
-
-

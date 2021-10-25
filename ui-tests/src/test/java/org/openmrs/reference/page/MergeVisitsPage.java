@@ -3,19 +3,19 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-public class MergeVisitsPage extends Page{
+public class MergeVisitsPage extends Page {
 
     private static final By RETURN = By.cssSelector("#content form div input.cancel");
     private static final By MERGE_SELECTED_VISITS = By.id("mergeVisitsBtn");
@@ -31,21 +31,21 @@ public class MergeVisitsPage extends Page{
         super(parent, waitForStaleness);
     }
 
-    public void checkFirstVisit(){
+    public void checkFirstVisit() {
         clickOn(FIRST_CHECKBOX);
     }
 
-    public void checkSecondVisit(){
+    public void checkSecondVisit() {
         clickOn(SECOND_CHECKBOX);
     }
 
-    public MergeVisitsPage clickOnMergeSelecetdVisits(){
+    public MergeVisitsPage clickOnMergeSelecetdVisits() {
         WebElement mergeBtn = findElement(MERGE_SELECTED_VISITS);
         clickOn(MERGE_SELECTED_VISITS);
         return new MergeVisitsPage(this, mergeBtn);
     }
 
-    public List<WebElement> getAllVisit(){
+    public List<WebElement> getAllVisit() {
         return findElements(VISITS);
     }
 

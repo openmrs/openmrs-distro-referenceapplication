@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -19,26 +19,24 @@ import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.PatientCaptureVitalsPage;
 import org.openmrs.uitestframework.test.TestData;
 
-
-public class CaptureVitalsTest  extends LocationSensitiveApplicationTestBase {
+public class CaptureVitalsTest extends LocationSensitiveApplicationTestBase {
 
     private TestData.PatientInfo patient;
 
     @Before
-    public void setup(){
+    public void setup() {
         patient = createTestPatient();
         createTestVisit();
     }
 
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.uuid);
+        deletePatient(patient);
     }
 
     @Test
     @Category(BuildTests.class)
-    public void captureVital() throws InterruptedException {
-
+    public void captureVitalsTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
 
@@ -48,14 +46,14 @@ public class CaptureVitalsTest  extends LocationSensitiveApplicationTestBase {
         patientCaptureVitalsPage.setWeightField("78");
         patientCaptureVitalsPage.setTemperatureField("36.6");
         patientCaptureVitalsPage.setPulseField("120");
-        patientCaptureVitalsPage.setRespiratoryField("110");
+        patientCaptureVitalsPage.setRespiratoryField("99");
         patientCaptureVitalsPage.setBloodPressureFields("120", "70");
         patientCaptureVitalsPage.setBloodOxygenSaturationField("50");
         patientCaptureVitalsPage.confirm();
         patientCaptureVitalsPage.save();
     }
 
-    private void createTestVisit(){
+    private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
 }

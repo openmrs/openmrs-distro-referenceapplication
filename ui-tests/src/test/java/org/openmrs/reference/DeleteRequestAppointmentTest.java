@@ -9,22 +9,24 @@
  */
 package org.openmrs.reference;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.page.ActiveVisitsPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
+import org.openmrs.reference.page.RequestAppointmentPage;
+import org.openmrs.reference.page.ManageAppointmentsPage;
 import org.openmrs.uitestframework.test.TestData;
-import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
 public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTestBase {
 
     private static final String SERVICE_NAME = "Oncology";
-
     private TestData.PatientInfo patient;
 
     @Before
@@ -34,16 +36,15 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
-    public void deleteRequestAppointmentTest() throws Exception {
+    public void deleteRequestAppointmentTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         RequestAppointmentPage requestAppointmentPage = patientDashboardPage.clickOnRequest();
         requestAppointmentPage.enterAppointmentType(SERVICE_NAME);
-        requestAppointmentPage.enterValue("0");
-        requestAppointmentPage.selectUnits("Day(s)");
+        requestAppointmentPage.enterMinimumValue("0");
+        requestAppointmentPage.selectMinimumUnits("Day(s)");
         patientDashboardPage = requestAppointmentPage.saveRequest();
 
         List<String> appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
@@ -52,18 +53,16 @@ public class DeleteRequestAppointmentTest extends LocationSensitiveApplicationTe
         ManageAppointmentsPage manageAppointmentsPage = patientDashboardPage.goToManageAppointments();
         manageAppointmentsPage.deleteRequest();
         patientDashboardPage = manageAppointmentsPage.clickCancel();
-        appointmentRequestsList = patientDashboardPage.getAppointmentRequestsList();
-        assertTrue(appointmentRequestsList.get(0).equals("None"));
+        manageAppointmentsPage = patientDashboardPage.goToManageAppointments();
+        assertTrue(manageAppointmentsPage.containsText("No appointment requests"));
     }
 
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.uuid);
+        deletePatient(patient);
     }
 
     private void createTestVisit(){
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
-

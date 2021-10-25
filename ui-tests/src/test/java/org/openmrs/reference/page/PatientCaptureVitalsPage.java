@@ -2,7 +2,6 @@ package org.openmrs.reference.page;
 
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -32,97 +31,94 @@ public class PatientCaptureVitalsPage extends Page {
         return URL_PATH;
     }
 
+    public void clearPatientHeight() {
+        findElement(HEIGHT_FIELD).clear();
+    }
+    
     public void setHeightField(String value) {
         WebElement heightField = findElement(HEIGHT_FIELD);
-        try {
-            heightField.clear();
-            heightField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
-        } catch(Exception e) {
-
-        }
+        heightField.clear();
+        heightField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
     }
 
+    public void clearPatientWeight() {
+        findElement(WEIGHT_FIELD).clear();
+    }
+    
     public void setWeightField(String value) {
         WebElement weightField = findElement(WEIGHT_FIELD);
-        try {
-            weightField.clear();
-            weightField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[4]")).click();
-        } catch(Exception e) {
-
-        }
+        weightField.clear();
+        weightField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[4]")).click();
     }
 
+    public void clearPatientTemperature() {
+        findElement(TEMPERATURE_FIELD).clear();
+    }
+    
     public void setTemperatureField(String value) {
         WebElement temperatureField = findElement(TEMPERATURE_FIELD);
-        try {
-            temperatureField.clear();
-            temperatureField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[5]")).click();
-        } catch(Exception e) {
-
-        }
+        temperatureField.clear();
+        temperatureField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[5]")).click();
     }
 
+    public void clearPatientPulse() {
+        findElement(PULSE_FIELD).clear();
+    }
+    
     public void setPulseField(String value) {
         WebElement pulseField = findElement(PULSE_FIELD);
-        try {
-            pulseField.clear();
-            pulseField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[6]")).click();
-        } catch(Exception e) {
-
-        }
+        pulseField.clear();
+        pulseField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[6]")).click();
     }
 
+    public void clearPatientRespiratoryRate() {
+        findElement(RESPIRATORY_FIELD).clear();
+    }
+    
     public void setRespiratoryField(String value) {
         WebElement respiratoryField = findElement(RESPIRATORY_FIELD);
-        try {
-            respiratoryField.clear();
-            respiratoryField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[7]")).click();
-        } catch(Exception e) {
-
-        }
+        respiratoryField.clear();
+        respiratoryField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[7]")).click();
     }
 
+    public void clearPatientBloodPressure1() {
+        findElement(BLOOD_PRESSURE_FIELD_1).clear();
+    }
+  
+    public void clearPatientBloodPressure2() {
+        findElement(BLOOD_PRESSURE_FIELD_2).clear();
+    }
+    
     public void setBloodPressureFields(String value1, String value2) {
         WebElement bloodPressureField1 = findElement(BLOOD_PRESSURE_FIELD_1);
-        try {
-            bloodPressureField1.clear();
-            bloodPressureField1.sendKeys(value1);
-        } catch(Exception e) {
-
-        }
+        bloodPressureField1.clear();
+        bloodPressureField1.sendKeys(value1);
 
         WebElement bloodPressureField2 = findElement(BLOOD_PRESSURE_FIELD_2);
-        try {
-            bloodPressureField2.clear();
-            bloodPressureField2.sendKeys(value2);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[8]")).click();
-        } catch(Exception e) {
-
-        }
+        bloodPressureField2.clear();
+        bloodPressureField2.sendKeys(value2);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[8]")).click();
     }
 
+    public void clearPatientBloodOxygenSaturation() {
+        findElement(BLOOD_OXYGEN_SATURATION_FIELD).clear();
+    }
+    
     public void setBloodOxygenSaturationField(String value) {
         WebElement bloodOxygenSaturationField = findElement(BLOOD_OXYGEN_SATURATION_FIELD);
-        try {
-            bloodOxygenSaturationField.clear();
-            bloodOxygenSaturationField.sendKeys(value);
-            findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
-        } catch (Exception e) {
-
-        }
+        bloodOxygenSaturationField.clear();
+        bloodOxygenSaturationField.sendKeys(value);
+        findElement(By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]")).click();
     }
-    public void confirm() {
-        try {
-            WebElement confirmButton = findElement(CONFIRM_BUTTON);
-            confirmButton.click();
-        } catch(Exception e) {
 
-        }
+    public void confirm() {
+        WebElement confirmButton = findElement(CONFIRM_BUTTON);
+        confirmButton.click();
     }
 
     public boolean save() {
@@ -132,7 +128,7 @@ public class PatientCaptureVitalsPage extends Page {
 
             findElementById("info-message").getText().contains("Entered Vitals");
             return true;
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -140,7 +136,7 @@ public class PatientCaptureVitalsPage extends Page {
     public void checkIfRightPatient() {
         WebElement confirmButton2 = findElement(CONFIRM_BUTTON_2);
         //WebDriverWait waiter = new WebDriverWait(driver, 30L);
-        if(confirmButton2 != null) {
+        if (confirmButton2 != null) {
             //waiter.until(ExpectedConditions.elementToBeClickable(CONFIRM_BUTTON_2));
             confirmButton2.click();
         }

@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -12,7 +12,6 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
@@ -26,9 +25,8 @@ import static org.junit.Assert.assertTrue;
 
 public class AddNewAllergyTest extends ReferenceApplicationTestBase {
 
-    private TestData.PatientInfo patient;
-
     private static final String DRUG_NAME = "Aspirin";
+    private TestData.PatientInfo patient;
 
     @Before
     public void setUp() throws Exception {
@@ -38,12 +36,12 @@ public class AddNewAllergyTest extends ReferenceApplicationTestBase {
 
     @Test
     @Category(BuildTests.class)
-    public void addNewAllergyTest() throws Exception {
+    public void addNewAllergyTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
 
-        AllergyPage allergyPage = patientDashboardPage.clickOnAllergyManagement();
+        AllergyPage allergyPage = patientDashboardPage.clickOnAllergiesWidgetLink();
 
         AddOrEditAllergyPage addOrEditAllergyPage = allergyPage.clickOnAddNewAllergy();
         addOrEditAllergyPage.enterDrug(DRUG_NAME);
@@ -55,11 +53,10 @@ public class AddNewAllergyTest extends ReferenceApplicationTestBase {
 
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.uuid);
+        deletePatient(patient);
     }
 
-    private void createTestVisit(){
+    private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }

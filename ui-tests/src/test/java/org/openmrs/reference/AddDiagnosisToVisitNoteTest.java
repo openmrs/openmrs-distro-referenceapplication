@@ -3,11 +3,13 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
 package org.openmrs.reference;
+
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,26 +21,23 @@ import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
 import org.openmrs.reference.page.VisitNotePage;
 import org.openmrs.uitestframework.test.TestData;
 
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 
 public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTestBase {
 
     private TestData.PatientInfo patient;
 
     @Before
-    public void setup(){
+    public void setup() {
         patient = createTestPatient();
         createTestVisit();
     }
-   
+
     @Test
     @Category(BuildTests.class)
-    public void AddDiagnosisToVisitNoteTest() throws Exception {
-
+    public void addDiagnosisToVisitNoteTest() {
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
 
@@ -55,15 +54,12 @@ public class AddDiagnosisToVisitNoteTest extends LocationSensitiveApplicationTes
         assertThat(diagnoses, hasItems("Pneumonia", "Bleeding"));
     }
 
-
-
     @After
     public void tearDown() throws Exception {
-        //There's a validation error when deleting a patient with a visit note. Some obs has an invalid value and cannot be voided.
-        //deletePatient(patient.uuid);
+        deletePatient(patient);
     }
 
-    private void createTestVisit(){
+    private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
 }

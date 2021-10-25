@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -11,11 +11,16 @@ package org.openmrs.reference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openmrs.reference.groups.BuildTests;
-import org.openmrs.reference.page.*;
+import org.openmrs.reference.page.ActiveVisitsPage;
+import org.openmrs.reference.page.AppointmentSchedulingPage;
+import org.openmrs.reference.page.ClinicianFacingPatientDashboardPage;
+import org.openmrs.reference.page.FindPatientPage;
+import org.openmrs.reference.page.ManageAppointmentsPage;
+import org.openmrs.reference.page.ManageProviderSchedulesPage;
+import org.openmrs.reference.page.RequestAppointmentPage;
 import org.openmrs.uitestframework.test.TestData;
 
 import static org.junit.Assert.assertTrue;
@@ -23,7 +28,6 @@ import static org.junit.Assert.assertTrue;
 public class BookRequestAppointmentTest extends LocationSensitiveApplicationTestBase {
 
     private static final String SERVICE_NAME = "Oncology";
-
     private TestData.PatientInfo patient;
 
     @Before
@@ -33,17 +37,15 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
     }
 
     @Test
-    @Ignore //See RA-1216 for details
     @Category(BuildTests.class)
     public void bookRequestAppointmentTest() throws Exception {
-
         ActiveVisitsPage activeVisitsPage = homePage.goToActiveVisitsSearch();
         activeVisitsPage.search(patient.identifier);
         ClinicianFacingPatientDashboardPage patientDashboardPage = activeVisitsPage.goToPatientDashboardOfLastActiveVisit();
         RequestAppointmentPage requestAppointmentPage = patientDashboardPage.clickOnRequest();
         requestAppointmentPage.enterAppointmentType("Oncology");
-        requestAppointmentPage.enterValue("0");
-        requestAppointmentPage.selectUnits("Day(s)");
+        requestAppointmentPage.enterMinimumValue("0");
+        requestAppointmentPage.selectMinimumUnits("Day(s)");
         patientDashboardPage = requestAppointmentPage.saveRequest();
         patientDashboardPage.waitForPage();
         patientDashboardPage.goToHomePage();
@@ -51,10 +53,13 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
         AppointmentSchedulingPage appointmentSchedulingPage = homePage.goToAppointmentScheduling();
         ManageProviderSchedulesPage manageProviderSchedulesPage = appointmentSchedulingPage.goToManageProviderSchedules();
         manageProviderSchedulesPage.selectLocation(getLocationName());
-        manageProviderSchedulesPage.clickOnCurrentDay();
+        manageProviderSchedulesPage.clickOnNextWeekday();
         manageProviderSchedulesPage.selectLocationBlock(getLocationName());
-        manageProviderSchedulesPage.enterService(SERVICE_NAME);
+        manageProviderSchedulesPage.enterMinimumTimeValue("06", "30");
+        manageProviderSchedulesPage.clickOnStartTimeButton();
+        manageProviderSchedulesPage.enterMaximumTimeValue("09", "30");
         manageProviderSchedulesPage.clickOnEndTimeButton();
+        manageProviderSchedulesPage.enterService(SERVICE_NAME);
         manageProviderSchedulesPage.clickOnSave();
         patientDashboardPage.goToHomePage();
 
@@ -67,17 +72,15 @@ public class BookRequestAppointmentTest extends LocationSensitiveApplicationTest
         manageAppointmentsPage.saveAppointment();
         findPatientPage.enterPatient(patient.getName());
         manageAppointmentsPage = findPatientPage.clickOnFirstPatientAppointment();
-        assertTrue(manageAppointmentsPage.getAppointmentStatus().equals("Scheduled"));
+        assertTrue(manageAppointmentsPage.containsText("Scheduled"));
     }
 
     @After
     public void tearDown() throws Exception {
-        deletePatient(patient.uuid);
+        deletePatient(patient);
     }
 
-    private void createTestVisit(){
+    private void createTestVisit() {
         new TestData.TestVisit(patient.uuid, TestData.getAVisitType(), getLocationUuid(homePage)).create();
     }
-
 }
-

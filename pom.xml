@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>org.openmrs.distro</groupId>
 	<artifactId>referenceapplication</artifactId>
+<<<<<<< HEAD
 	<version>2.7.0-SNAPSHOT</version>
+=======
+	<version>2.13.0-SNAPSHOT</version>
+>>>>>>> e9fc61805869e75541d71d6175a4292929ec6051
 	<packaging>pom</packaging>
 	<name>Reference Application Distribution</name>
 	<description>Reference Application Distribution</description>
@@ -29,6 +32,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<<<<<<< HEAD
 
 		<openMRSVersion>2.0.6</openMRSVersion>
 		<referencemetadataVersion>2.7.0</referencemetadataVersion>
@@ -74,9 +78,56 @@
 		<owaVersion>1.8.1</owaVersion>
 		<reportinguiVersion>1.5.0</reportinguiVersion>
 		<addresshierarchyVersion>2.11.0</addresshierarchyVersion>
+=======
+		<openMRSVersion>2.4.0</openMRSVersion>
+		<referencemetadataVersion>2.12.0</referencemetadataVersion>
+		<appframeworkVersion>2.16.0</appframeworkVersion>
+		<uiframeworkVersion>3.22.0</uiframeworkVersion>
+		<registrationcoreVersion>1.11.0</registrationcoreVersion>
+		<registrationappVersion>1.24.0</registrationappVersion>
+		<eventVersion>2.10.0</eventVersion>
+		<idgenVersion>4.7.0</idgenVersion>
+		<emrapiVersion>1.32.0</emrapiVersion>
+		<referenceapplicationVersion>2.12.0</referenceapplicationVersion>
+		<providermanagementVersion>2.13.0</providermanagementVersion>
+		<uilibraryVersion>2.0.7</uilibraryVersion>
+		<calculationVersion>1.3.0</calculationVersion>
+		<serialization.xstreamVersion>0.2.15</serialization.xstreamVersion>
+		<htmlwidgetsVersion>1.10.0</htmlwidgetsVersion>
+		<reportingVersion>1.23.0</reportingVersion>
+		<reportingRestVersion>1.12.0</reportingRestVersion>
+		<metadatadeployVersion>1.13.0</metadatadeployVersion>
+		<metadatasharingVersion>1.8.0</metadatasharingVersion>
+		<metadatamappingVersion>1.4.0</metadatamappingVersion>
+		<uicommonsVersion>2.19.0</uicommonsVersion>
+		<appuiVersion>1.15.0</appuiVersion>
+		<htmlformentryVersion>4.1.0</htmlformentryVersion>
+		<htmlformentryuiVersion>2.0.0</htmlformentryuiVersion>
+		<coreappsVersion>1.35.0</coreappsVersion>
+		<webservices.restVersion>2.32.0</webservices.restVersion>
+		<referencedemodataVersion>1.4.7</referencedemodataVersion>
+		<dataexchangeVersion>1.3.7</dataexchangeVersion>
+		<allergyuiVersion>1.8.4</allergyuiVersion>
+		<formentryappVersion>1.4.2</formentryappVersion>
+		<atlasVersion>2.2.5</atlasVersion>
+		<appointmentschedulingVersion>1.16.0</appointmentschedulingVersion>
+		<appointmentschedulinguiVersion>1.12.0</appointmentschedulinguiVersion>
+		<namephoneticsVersion>1.18.0</namephoneticsVersion> <!-- The omod for namephonetics is not included in the distro, but we keep the version around since it's a semi-supported add-on -->
+		<adminuiVersion>1.6.0</adminuiVersion>
+		<uitestframeworkVersion>2.4.0</uitestframeworkVersion>
+		<legacyuiVersion>1.8.4</legacyuiVersion>
+		<reportingcompatibilityVersion>2.0.8</reportingcompatibilityVersion>
+		<fhirVersion>1.3.0</fhirVersion>
+		<owaVersion>1.13.0</owaVersion>
+		<reportinguiVersion>1.8.0</reportinguiVersion>
+		<addresshierarchyVersion>2.14.2</addresshierarchyVersion>
+		<attachmentsVersion>2.5.0</attachmentsVersion>
+		<openconceptlabVersion>1.2.9</openconceptlabVersion>
+		<spaVersion>1.0.8</spaVersion>
+>>>>>>> e9fc61805869e75541d71d6175a4292929ec6051
 		<!-- OWAs -->
-		<sysadminVersion>1.0.1</sysadminVersion>
-		
+		<sysadminVersion>1.2</sysadminVersion>
+
 	</properties>
 
 	<dependencyManagement>
@@ -101,6 +152,28 @@
 				<artifactId>openmrs-api</artifactId>
 				<version>${openMRSVersion}</version>
 				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-databind</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-annotations</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.codehaus.jackson</groupId>
+						<artifactId>jackson-core-asl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.codehaus.jackson</groupId>
+						<artifactId>jackson-mapper-asl</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.api</groupId>
@@ -115,6 +188,28 @@
 				<version>${openMRSVersion}</version>
 				<classifier>tests</classifier>
 				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.codehaus.jackson</groupId>
+						<artifactId>jackson-core-asl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-databind</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.codehaus.jackson</groupId>
+						<artifactId>jackson-mapper-asl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.fasterxml.jackson.core</groupId>
+						<artifactId>jackson-annotations</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.web</groupId>
@@ -161,12 +256,6 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>uiframework-api</artifactId>
 				<version>${uiframeworkVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>logic-api</artifactId>
-				<version>${logicVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -320,6 +409,18 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>attachments-api</artifactId>
+				<version>${attachmentsVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>openconceptlab-api</artifactId>
+				<version>${openconceptlabVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
 				<groupId>org.openmrs</groupId>
 				<artifactId>event-api</artifactId>
 				<version>${eventVersion}</version>
@@ -385,6 +486,7 @@
 				<version>${reportinguiVersion}</version>
 				<scope>provided</scope>
 			</dependency>
+
 			<!-- API test dependencies -->
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
@@ -610,7 +712,6 @@
 				<classifier>tests</classifier>
 				<scope>provided</scope>
 			</dependency>
-	
 			<!-- OMOD dependencies -->
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
@@ -852,7 +953,7 @@
 				<version>${allergyuiVersion}</version>
 				<scope>provided</scope>
 			</dependency>
-		
+
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>formentryapp-api</artifactId>
@@ -899,8 +1000,15 @@
                 <version>${appointmentschedulinguiVersion}</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>spa-omod</artifactId>
+                <version>${spaVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+           
 
-	<!-- Other dependencies -->	
+	<!-- Other dependencies -->
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>uicommons-scss</artifactId>
@@ -960,7 +1068,25 @@
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>fhir-omod</artifactId>
+				<artifactId>fhir2-api</artifactId>
+				<version>${fhirVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>fhir2-api-2.1</artifactId>
+				<version>${fhirVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>fhir2-api-2.2</artifactId>
+				<version>${fhirVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>fhir2-omod</artifactId>
 				<version>${fhirVersion}</version>
 				<scope>provided</scope>
 			</dependency>
@@ -976,7 +1102,6 @@
 				<version>${reportinguiVersion}</version>
 				<scope>provided</scope>
 			</dependency>
-		
 		</dependencies>
 	</dependencyManagement>
 
@@ -991,7 +1116,7 @@
             <artifactId>openmrs-api</artifactId>
             <classifier>tests</classifier>
         </dependency>
-	
+
 		<dependency>
             <groupId>org.openmrs.test</groupId>
             <artifactId>openmrs-test</artifactId>
@@ -1007,8 +1132,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<target>1.6</target>
-						<source>1.6</source>
+						<target>1.8</target>
+						<source>1.8</source>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -1084,7 +1209,7 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-	
+
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -1110,7 +1235,7 @@
 				<targetPath>web/module</targetPath>
 			</resource>
 		</resources>
-	
+
 		<testResources>
 			<testResource>
 				<directory>src/test/resources</directory>
@@ -1197,15 +1322,14 @@
 		<repository>
 			<id>openmrs-repo</id>
 			<name>OpenMRS Nexus Repository</name>
-			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+			<url>https://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
 		</repository>
 	</repositories>
-
 	<pluginRepositories>
 		<pluginRepository>
 			<id>openmrs-repo</id>
 			<name>OpenMRS Nexus Repository</name>
-			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+			<url>https://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -1216,12 +1340,12 @@
         <repository>
             <id>openmrs-repo-releases</id>
             <name>Releases</name>
-            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/releases</url>
+            <url>https://mavenrepo.openmrs.org/nexus/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
             <id>openmrs-repo-snapshots</id>
             <name>OpenMRS Snapshots</name>
-            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/snapshots</url>
+            <url>https://mavenrepo.openmrs.org/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 </project>

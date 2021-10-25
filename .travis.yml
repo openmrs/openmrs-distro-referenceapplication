@@ -1,6 +1,6 @@
 language: java
 
-jdk: oraclejdk8
+jdk: openjdk8
 
 services:
   - docker
@@ -9,21 +9,23 @@ addons:
   sauce_connect:
     username: $SAUCELABS_USERNAME
     access_key: $SAUCELABS_ACCESSKEY
+  firefox: "86.0"
+
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
 
 env:
   - DB=mysql
   - DB=mariadb
- 
-cache:
-  directories:
-  - $HOME/.m2
- 
+
 before_cache:
   - rm -rf $HOME/.m2/repository/org/openmrs
  
 install: true
 
-script: ./travis_script.sh
+script: travis_wait 60 ./travis_script.sh
 
 after_script: ./travis_after_script.sh
 

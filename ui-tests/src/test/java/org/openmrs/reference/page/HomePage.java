@@ -3,7 +3,7 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
+ * <p>
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -37,8 +37,7 @@ public class HomePage extends Page {
     private boolean isAppButtonPresent(String appId) {
         try {
             return driver.findElement(By.id(appId)) != null;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             return false;
         }
     }
@@ -93,7 +92,7 @@ public class HomePage extends Page {
         return isAppButtonPresent(DATA_MANAGEMENT_APP_ID);
     }
 
-    public ClinicianFacingPatientDashboardPage goToActiveVisitPatient(){
+    public ClinicianFacingPatientDashboardPage goToActiveVisitPatient() {
         return goToActiveVisitsSearch().goToPatientDashboardOfLastActiveVisit();
     }
 
@@ -117,17 +116,17 @@ public class HomePage extends Page {
         return new ConfigureMetadataPage(this);
     }
 
-    public FindPatientPage goToFindPatientRecord(){
-    	clickOn(FIND_PATIENT_RECORD);
-    	return new FindPatientPage(this);
+    public FindPatientPage goToFindPatientRecord() {
+        clickOn(FIND_PATIENT_RECORD);
+        return new FindPatientPage(this);
     }
 
-    public AppointmentSchedulingPage goToAppointmentScheduling(){
+    public AppointmentSchedulingPage goToAppointmentScheduling() {
         clickOn(APPOINTMENT_SCHEDULING);
         return new AppointmentSchedulingPage(this);
     }
 
-    public DataManagementPage goToDataManagement(){
+    public DataManagementPage goToDataManagement() {
         clickOn(DATA_MANAGEMENT);
         return new DataManagementPage(this);
     }
@@ -139,7 +138,6 @@ public class HomePage extends Page {
 
     @Override
     public String getPageAliasUrl() {
-    	return "/index.htm";
+        return "/index.htm";
     }
-
 }

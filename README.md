@@ -5,8 +5,6 @@ openmrs-distro-referenceapplication
 
 [platform-2.1.x](https://github.com/openmrs/openmrs-distro-referenceapplication/tree/platform-2.1.x): [![Build Status](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication.svg?branch=platform-2.1.x)](https://travis-ci.org/openmrs/openmrs-distro-referenceapplication/branches)
 
-[![Build Status](https://saucelabs.com/browser-matrix/rkorytkowski.svg)](https://saucelabs.com/open_sauce/user/openmrs)
-
 ## Running with OpenMRS SDK
 
 Please follow the instructions at the [OpenMRS SDK Wiki page](https://wiki.openmrs.org/display/docs/OpenMRS+SDK). Set up a server with the Reference Application distribution.
@@ -47,11 +45,11 @@ If you would like to setup a similar configuration for your distribution, please
 Travis-CI creates a tunnel to SauceLabs, which allows SauceLabs to access the test server and execute tests against that server in a browser. In order to speed up the build, we always run 5 UI tests in parallel using agents provided by SauceLabs. The test server is automatically terminated by Travis-CI once tests are done.
 
 
-## Running locally with Vagrant
+##  Running locally with Vagrant
 
 As of March 2017, the resources for this method are outdated/ no longer maintained.
 https://wiki.openmrs.org/x/CIC3Ag
 
-## Writing test cases
+## Writing test cases 
 
 While writing the code for the test cases, please, follow the instructions in the [Code Style paragraph](https://wiki.openmrs.org/display/docs/Java+Conventions) and the [guidelines](https://wiki.openmrs.org/display/docs/Automated+Testing+Guidelines)

@@ -1,15 +1,15 @@
 package org.openmrs.reference.page;
 
+import java.util.List;
+
 import org.openmrs.uitestframework.page.Page;
 import org.openqa.selenium.By;
-
-import java.util.List;
 
 public class RegistrationEditSectionPage extends Page {
 
     private static final By PHONE_NUMBER = By.name("phoneNumber");
     private static final By CONFIRM_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li[2]/span");
-    private static final By CONFIRM = By.cssSelector("input[value='Confirm']");
+    private static final By CONFIRM = By.id("registration-submit");
     private static final By PHONE_NUMBER_EDIT = By.xpath("//ul[@id='formBreadcrumb']/li/ul/li[2]/span");
     private static final By GIVEN_NAME_FIELD = By.cssSelector("#demographics-name input[name='givenName']");
     private static final By MIDDLE_NAME_FIELD = By.cssSelector("#demographics-name input[name='middleName']");
@@ -23,24 +23,25 @@ public class RegistrationEditSectionPage extends Page {
     private static final By STATE_PROVINCE = By.id("stateProvince");
     private static final By COUNTRY = By.id("country");
     private static final By POSTAL_CODE = By.id("postalCode");
+    private static final String PHONE_NUMBER_VALIDATION_MESSAGE = "Must be a valid phone number (with +, -, numbers or parentheses))";
 
     public RegistrationEditSectionPage(Page parent) {
         super(parent);
     }
 
-    public void clickOnBirthdateLabel(){
+    public void clickOnBirthdateLabel() {
         clickOn(BIRTHDATE_LABEL);
     }
 
-    public void enterGivenName(String name){
+    public void enterGivenName(String name) {
         setText(GIVEN_NAME_FIELD, name);
     }
 
-    public void enterMiddleName(String name){
+    public void enterMiddleName(String name) {
         setText(MIDDLE_NAME_FIELD, name);
     }
 
-    public void enterFamilyName(String name){
+    public void enterFamilyName(String name) {
         setText(FAMILY_NAME_FIELD, name);
     }
 
@@ -56,7 +57,7 @@ public class RegistrationEditSectionPage extends Page {
         setText(BIRTHDAY_DAY, birthday);
     }
 
-    public void enterBirthYear(String bitrthYear){
+    public void enterBirthYear(String bitrthYear) {
         setText(BIRTHDAY_YEAR, bitrthYear);
     }
 
@@ -65,45 +66,47 @@ public class RegistrationEditSectionPage extends Page {
         return "/registrationapp/editSection.page";
     }
 
-
-    public void clearPhoneNumber(){
+    public void clearPhoneNumber() {
         findElement(PHONE_NUMBER).clear();
     }
 
-    public void clearVillage(){
+    public void clearVillage() {
         findElement(CITY_VILLAGE).clear();
     }
 
-    public void clearState(){
+    public void clearState() {
         findElement(STATE_PROVINCE).clear();
     }
 
-    public void clearCountry(){
+    public void clearCountry() {
         findElement(COUNTRY).clear();
     }
 
-    public void clearPostalCode(){
+    public void clearPostalCode() {
         findElement(POSTAL_CODE).clear();
     }
 
-    public void clickOnPhoneNumberEdit(){
+    public void clickOnPhoneNumberEdit() {
         clickOn(PHONE_NUMBER_EDIT);
     }
 
     public void enterVillage(String familyName) {
         setText(CITY_VILLAGE, familyName);
     }
+
     public void enterState(String familyName) {
         setText(STATE_PROVINCE, familyName);
     }
+
     public void enterPostalCode(String familyName) {
         setText(POSTAL_CODE, familyName);
     }
+
     public void enterCountry(String familyName) {
         setText(COUNTRY, familyName);
     }
 
-    public void clickOnConfirmEdit(){
+    public void clickOnConfirmEdit() {
         clickOn(CONFIRM_EDIT);
     }
 
@@ -114,9 +117,13 @@ public class RegistrationEditSectionPage extends Page {
     public String getInvalidPhoneNumberNotification() {
         List<String> errors = getValidationErrors();
         String search = "valid phone number";
-        for(String str: errors) {
-            if(str.trim().contains(search))
+        if (errors != null) {
+        for (String str : errors) {
+            if (str.trim().contains(search)) {
                 return str;
+            }
+        }
+        return PHONE_NUMBER_VALIDATION_MESSAGE;
         }
         return null;
     }
