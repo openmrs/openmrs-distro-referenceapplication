@@ -22,10 +22,10 @@ public class ManageProviderSchedulesPage extends Page {
         LocalDate nextWeekday = LocalDate.now();
         switch (nextWeekday.getDayOfWeek()) {
             case SATURDAY:
-                nextWeekday.plus(2, ChronoUnit.DAYS);
+                nextWeekday = nextWeekday.plus(2, ChronoUnit.DAYS);
                 break;
             case SUNDAY:
-                nextWeekday.plus(1, ChronoUnit.DAYS);
+                nextWeekday = nextWeekday.plus(1, ChronoUnit.DAYS);
                 break;
         }
 
