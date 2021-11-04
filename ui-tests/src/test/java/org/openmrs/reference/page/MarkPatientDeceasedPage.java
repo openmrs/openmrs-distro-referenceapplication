@@ -35,7 +35,7 @@ public class MarkPatientDeceasedPage extends Page {
     private static final By DEATH_MESSAGE_TEXT = By.className("death-message");
     private static final By EDIT_CONCEPT_LINK = By.id("editConcept");
     private static final By DELETE_BUTTON = By.cssSelector("#saveDeleteButtons > input[type=submit]:nth-child(4)");
-    private static final By DELETE_CONFIRMATION = By.id("openmrs_msg");
+    private static final By DELETE_CONFIRMATION_TEXT = By.id("openmrs_msg");
 
     public MarkPatientDeceasedPage(Page page) {
         super(page);
@@ -98,7 +98,7 @@ public class MarkPatientDeceasedPage extends Page {
         clickOn(DELETE_BUTTON);
         Alert alert = driver.switchTo().alert();
         alert.accept();
-        String delete_message = findElement(DELETE_CONFIRMATION).getText();
+        String delete_message = findElement(DELETE_CONFIRMATION_TEXT).getText();
         assertTrue(delete_message.contains("Concept deleted successfully"));
     }
 
