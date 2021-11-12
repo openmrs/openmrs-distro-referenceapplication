@@ -121,20 +121,7 @@
             <configuration>
               <excludeTransitive>true</excludeTransitive>
               <outputDirectory>${distro.openmrsConfigDir}</outputDirectory>
-              <includeArtifactIds>openmrs-config-refapp</includeArtifactIds>
-            </configuration>
-          </execution>
-          <!-- SPA config -->
-          <execution>
-            <id>unpack-refapp-config-spa</id>
-            <phase>package</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <excludeTransitive>true</excludeTransitive>
-              <outputDirectory>${distro.spaConfigDir}</outputDirectory>
-              <includeArtifactIds>spa-config-refapp</includeArtifactIds>
+              <includeArtifactIds>referenceapplication-config</includeArtifactIds>
             </configuration>
           </execution>
           <!-- Unpack OpenMRS distro package -->
@@ -148,7 +135,7 @@
             </goals>
             <configuration>
               <outputDirectory>${openmrsRunDistroTargetDir}</outputDirectory>
-              <artifact>${project.groupId}:openmrs-distro-package:${project.version}:zip</artifact>
+              <artifact>${project.groupId}:${project.artifactId}:${project.version}:zip</artifact>
             </configuration>
           </execution>
         </executions>
