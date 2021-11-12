@@ -3,12 +3,12 @@
 
   <parent>
     <groupId>org.openmrs.distro</groupId>
-    <artifactId>openmrs-distro-refapp</artifactId>
+    <artifactId>referenceapplication</artifactId>
     <version>3.0.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <artifactId>openmrs-distro-docker</artifactId>
+  <artifactId>referenceapplication-docker</artifactId>
   <name>OpenMRS Docker</name>
   <packaging>pom</packaging>
 
@@ -20,7 +20,7 @@
   <dependencies>
     <dependency>
       <groupId>org.openmrs.distro</groupId>
-      <artifactId>openmrs-distro-package</artifactId>
+      <artifactId>referenceapplication-package</artifactId>
       <type>zip</type>
       <version>${project.version}</version>
     </dependency>
@@ -119,7 +119,6 @@
       </activation>
       <properties>
         <docker.tag>demo</docker.tag>
-        <docker.tag.version>${project.version}</docker.tag.version>
       </properties>
     </profile>
     <profile>
