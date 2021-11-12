@@ -6,6 +6,8 @@ services:
     build: ./proxy
     ports:
       - 80:80
+    depends_on:
+      - openmrs
 
   # Frontend
   frontend:
