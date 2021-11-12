@@ -63,6 +63,17 @@
           <version>3.1.0</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>3.0.0-M4</version>
+          <configuration>
+            <preparationGoals>clean install</preparationGoals>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <releaseProfiles>demo,build-docker,release-images</releaseProfiles>
+            <tagNameFormat>@{project.version}</tagNameFormat>
+          </configuration>
+        </plugin>
+        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
           <version>3.0.0</version>
@@ -78,7 +89,7 @@
 
   <repositories>
     <repository>
-      <id>openmrs-repo</id>
+      <id>openmrs-repo-releases</id>
       <name>OpenMRS Nexus Repository</name>
       <url>https://mavenrepo.openmrs.org/public</url>
     </repository>
@@ -129,9 +140,9 @@
 
   <distributionManagement>
     <repository>
-      <id>openmrs-repo-modules</id>
-      <name>OpenMRS Modules Repo</name>
-      <url>https://mavenrepo.openmrs.org/modules</url>
+      <id>openmrs-repo-releases</id>
+      <name>OpenMRS Releases Repo</name>
+      <url>https://mavenrepo.openmrs.org/releases</url>
     </repository>
     <snapshotRepository>
       <id>openmrs-repo-snapshots</id>
