@@ -12,11 +12,6 @@
   <name>OpenMRS Docker</name>
   <packaging>pom</packaging>
 
-  <properties>
-    <!-- TODO do this in a more sensible way -->
-    <openmrsRunDistroTargetDir>distro</openmrsRunDistroTargetDir>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.openmrs.distro</groupId>
@@ -35,7 +30,7 @@
         <configuration>
           <filesets>
             <fileset>
-              <directory>${openmrsRunDistroTargetDir}</directory>
+              <directory>${project.basedir}/distro</directory>
             </fileset>
           </filesets>
         </configuration>
@@ -47,14 +42,15 @@
           <!-- Unpack OpenMRS distro package -->
           <execution>
             <id>unpack-openmrs-distro-package</id>
-            <phase>compile</phase>
+            <!-- pre-integration-test is immediately after the package phase
+                 ideally, this would be done in a post-package phase -->
+            <phase>generate-resources</phase>
             <goals>
-              <goal>unpack-dependencies</goal>
+              <goal>unpack</goal>
             </goals>
             <configuration>
-              <excludeTransitive>false</excludeTransitive>
-              <includeArtifactIds>openmrs-distro-package</includeArtifactIds>
-              <outputDirectory>${openmrsRunDistroTargetDir}</outputDirectory>
+              <outputDirectory>${project.basedir}/distro</outputDirectory>
+              <artifact>${project.groupId}:referenceapplication-package:${project.version}:zip</artifact>
             </configuration>
           </execution>
         </executions>

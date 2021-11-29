@@ -124,20 +124,6 @@
               <includeArtifactIds>referenceapplication-config</includeArtifactIds>
             </configuration>
           </execution>
-          <!-- Unpack OpenMRS distro package -->
-          <execution>
-            <id>unpack-openmrs-distro-package</id>
-            <!-- pre-integration-test is immediately after the package phase
-                 ideally, this would be done in a post-package phase -->
-            <phase>pre-integration-test</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${openmrsRunDistroTargetDir}</outputDirectory>
-              <artifact>${project.groupId}:${project.artifactId}:${project.version}:zip</artifact>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
       <plugin>
