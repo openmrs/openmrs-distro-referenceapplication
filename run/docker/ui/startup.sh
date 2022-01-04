@@ -40,6 +40,8 @@ fi
 
 # Substitute environment variables in the html file
 # This allows us to override parts of the compiled file at runtime
-envsubst < "/usr/share/nginx/html/index.html" | sponge "/usr/share/nginx/html/index.html"
+if [ -f "/usr/share/nginx/html/index.html" ]; then
+  envsubst < "/usr/share/nginx/html/index.html" | sponge "/usr/share/nginx/html/index.html"
+fi
 
 exec nginx -g "daemon off;"
