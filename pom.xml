@@ -70,6 +70,8 @@
             <autoVersionSubmodules>true</autoVersionSubmodules>
             <releaseProfiles>demo,build-docker,release-images,!dev</releaseProfiles>
             <tagNameFormat>@{project.version}</tagNameFormat>
+            <!-- temporary setting to allow releases with snapshot version of Iniz -->
+            <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
           </configuration>
         </plugin>
         <plugin>
