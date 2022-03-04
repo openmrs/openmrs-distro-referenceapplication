@@ -3,7 +3,7 @@ version: "3.7"
 services:
   # Proxy
   proxy:
-    image: openmrs/openmrs-reference-application-3-gateway:latest
+    image: openmrs/openmrs-reference-application-3-gateway:ohri-latest
     depends_on:
       - frontend
       - openmrs
@@ -12,7 +12,7 @@ services:
 
   # Frontend
   frontend:
-    image: openmrs/openmrs-reference-application-3-frontend:latest
+    image: openmrs/openmrs-reference-application-3-frontend:ohri-latest
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
@@ -23,7 +23,7 @@ services:
 
   # OpenMRS:
   openmrs:
-    image: openmrs/openmrs-reference-application-3-backend:latest
+    image: openmrs/openmrs-reference-application-3-backend:ohri-latest
     depends_on:
       - db
     environment:
