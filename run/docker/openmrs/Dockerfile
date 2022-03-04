@@ -5,7 +5,7 @@ FROM tomcat:7-jdk8-adoptopenjdk-hotspot
 # for clarity. These list the variables supported, and the default values if not overridden
 
 # These environment variables are appended to configure the Tomcat JAVA_OPTS
-ENV OMRS_JAVA_MEMORY_OPTS="-Xms256m -Xmx768m -XX:NewSize=128m"
+ENV OMRS_JAVA_MEMORY_OPTS="-XX:NewSize=128m"
 ENV OMRS_JAVA_SERVER_OPTS="-Dfile.encoding=UTF-8 -server -Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Djava.awt.headlesslib=true"
 
 # These environment variables are used to create the openmrs-server.properties file, which controls how OpenMRS initializes
