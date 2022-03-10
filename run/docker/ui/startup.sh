@@ -44,4 +44,8 @@ if [ -f "/usr/share/nginx/html/index.html" ]; then
   envsubst < "/usr/share/nginx/html/index.html" | sponge "/usr/share/nginx/html/index.html"
 fi
 
+if [ -f "/usr/share/nginx/html/service-worker.js" ]; then
+  envsubst < "/usr/share/nginx/html/index.html" | sponge "/usr/share/nginx/html/index.html"
+fi
+
 exec nginx -g "daemon off;"
