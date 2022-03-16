@@ -114,8 +114,8 @@
         </property>
       </activation>
       <properties>
-        <docker.tag>ohri</docker.tag>
-        <docker.tag.version>${project.parent.version}</docker.tag.version>
+        <docker.tag>ohri-demo</docker.tag>
+        <docker.tag.version>ohri-${project.parent.version}</docker.tag.version>
       </properties>
     </profile>
     <profile>
@@ -129,9 +129,8 @@
         </property>
       </activation>
       <properties>
-        <docker.tag>ohri</docker.tag>
         <!-- don't tag the version for snapshots -->
-        <docker.tag.version>latest</docker.tag.version>
+        <docker.tag>ohri-latest</docker.tag>
       </properties>
     </profile>
     <profile>
