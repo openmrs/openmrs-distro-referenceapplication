@@ -28,12 +28,11 @@
     <fhir2.version>1.4.0-SNAPSHOT</fhir2.version>
     <webservices.rest.version>2.36.0-SNAPSHOT</webservices.rest.version>
     <idgen.version>4.7.0</idgen.version>
-    <legacyui.version>1.10.0</legacyui.version>
+    <legacyui.version>1.12.0</legacyui.version>
     <addresshierarchy.version>2.14.2</addresshierarchy.version>
     <metadatamapping.version>1.4.0</metadatamapping.version>
     <metadatasharing.version>1.8.0</metadatasharing.version>
     <owa.version>1.13.0</owa.version>
-    <attachments.version>2.5.0</attachments.version>
     <queue.version>1.0.0-SNAPSHOT</queue.version>
     <appointments.version>1.4.0-SNAPSHOT</appointments.version>
     <appframework.version>2.16.0</appframework.version>
@@ -42,13 +41,15 @@
     <cohort.version>3.0.0-SNAPSHOT</cohort.version>
     <htmlformentry.version>4.0.1</htmlformentry.version>
     <htmlwidgets.version>1.10.0</htmlwidgets.version>
-    <reporting.version>1.24.0</reporting.version>
+    <reporting.version>1.25.0-SNAPSHOT</reporting.version>
     <reportingcompatibility.version>2.0.8</reportingcompatibility.version>
-    <!--<reportingmds.version>1.0-SNAPSHOT</reportingmds.version>-->
+    <reportingmds.version>1.0-SNAPSHOT</reportingmds.version>
     <reportingrest.version>1.13.0-SNAPSHOT</reportingrest.version>
-    <!--<serialization.xstream.version>0.2.14</serialization.xstream.version>-->
+    <serialization.xstream.version>0.2.15</serialization.xstream.version>
     <uicommons.version>2.16.0</uicommons.version>
     <uiframework.version>3.22.1</uiframework.version>
+    <ohricore.version>1.0.0</ohricore.version>
+    <ohrireports.version>1.0.0</ohrireports.version>
   </properties>
 
   <dependencies>
@@ -123,12 +124,6 @@
     </dependency>
     <dependency>
       <groupId>org.openmrs.module</groupId>
-      <artifactId>attachments-omod</artifactId>
-      <version>${attachments.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
       <artifactId>queue-omod</artifactId>
       <version>${queue.version}</version>
       <scope>provided</scope>
@@ -187,24 +182,24 @@
       <version>${reportingcompatibility.version}</version>
       <scope>provided</scope>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>org.openmrs.module</groupId>
       <artifactId>reportingmds-omod</artifactId>
       <version>${reportingmds.version}</version>
       <scope>provided</scope>
-    </dependency> -->
+    </dependency>
     <dependency>
       <groupId>org.openmrs.module</groupId>
       <artifactId>reportingrest-omod</artifactId>
       <version>${reportingrest.version}</version>
       <scope>provided</scope>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>org.openmrs.module</groupId>
       <artifactId>serialization.xstream-omod</artifactId>
       <version>${serialization.xstream.version}</version>
       <scope>provided</scope>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>org.openmrs.module</groupId>
       <artifactId>uicommons-omod</artifactId>
@@ -215,6 +210,18 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>uiframework-omod</artifactId>
       <version>${uiframework.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>ohricore-omod</artifactId>
+      <version>${ohricore.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>ohrireports-omod</artifactId>
+      <version>${ohrireports.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
