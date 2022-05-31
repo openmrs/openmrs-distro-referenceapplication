@@ -23,8 +23,8 @@
 
     <!-- track module versions
          we do so here so that we can utilise Maven to track updates, etc. -->
-    <openmrs.version>2.3.6-SNAPSHOT</openmrs.version>
-    <initializer.version>2.3.0-SNAPSHOT</initializer.version>
+    <openmrs.version>2.5.5</openmrs.version>
+    <initializer.version>2.3.0</initializer.version>
     <fhir2.version>1.4.0-SNAPSHOT</fhir2.version>
     <webservices.rest.version>2.36.0</webservices.rest.version>
     <idgen.version>4.7.0</idgen.version>
@@ -50,9 +50,10 @@
     </dependency>
 
     <dependency>
-      <groupId>org.openmrs.distro</groupId>
-      <artifactId>platform</artifactId>
+      <groupId>org.openmrs.web</groupId>
+      <artifactId>openmrs-webapp</artifactId>
       <version>${openmrs.version}</version>
+      <type>war</type>
       <scope>provided</scope>
     </dependency>
 
@@ -153,6 +154,33 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>populate-distro-properties</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>
+                ${project.build.directory}
+              </outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}</directory>
+                  <includes>
+                    <include>distro.properties</include>
+                  </includes>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
           <!-- OpenMRS config -->
@@ -173,7 +201,6 @@
       <plugin>
         <groupId>org.openmrs.maven.plugins</groupId>
         <artifactId>openmrs-sdk-maven-plugin</artifactId>
-        <version>4.3.0</version>
         <executions>
           <execution>
             <id>openmrs-sdk:build-distro</id>
@@ -182,14 +209,13 @@
             </goals>
             <phase>package</phase>
             <configuration>
-              <distro>${project.basedir}/distro.properties</distro>
+              <distro>${project.build.directory}/distro.properties</distro>
               <dir>${project.build.directory}/sdk-distro</dir>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
-      <!-- packaging the distro as a installable/deployable file -->
+      <!-- packaging the distro as an installable/deployable file -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
