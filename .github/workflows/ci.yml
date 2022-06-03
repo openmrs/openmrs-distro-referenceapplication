@@ -1,4 +1,4 @@
-name: Legacy Selenium Firefox
+name: Build with Maven
 on:
   pull_request:
     branches: [master]
@@ -17,12 +17,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Checkout ui test framework
-        uses: actions/checkout@master
-        with:
-          repository: openmrs/openmrs-contrib-uitestframework
-      - name: Build ui test framework
-        run: mvn clean install -B
       - name: Checkout distro/uitests
         uses: actions/checkout@master
         with:
@@ -33,8 +27,5 @@ jobs:
           #docker-compose -f docker-compose-refqa.yml up -d
       #- name: wait for openmrs instance to start
           #run: until curl -I localhost:8080/openmrs/login.htm 2>&1 | grep -w "200" > /dev/null 2>&1; do :; done
-      - name: Build distro/uitests
-        run: |
-          cd ui-tests
-          cp -f src/test/resources/org/openmrs/uitestframework/test-ci.properties src/test/resources/org/openmrs/uitestframework/test.properties
-          mvn clean install -B -DskipTests=false
+      - name: Build distro refapp module
+        run: mvn clean package
