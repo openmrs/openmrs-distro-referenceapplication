@@ -1,0 +1,217 @@
+{
+	"name": "POC Covid",
+    "description" : "Test 1 Description",
+    "version" : "1",
+    "published" : true,
+    "retired" : false,
+    "encounter" : "Admission",
+	"pages": [
+		{
+			"label": "COVID  19",
+			"sections": [
+				{
+					"label": "Presence of Symptoms",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Presence of Symptoms",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "f412690e-465d-4c5a-a32f-d22e90ef2e20",
+								"answers": [
+									{
+										"concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+										"label": "Yes",
+										"conceptMappings": []
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "Symp"
+						}
+					]
+				},
+				{
+					"label": "Signs and Symptoms ",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Signs",
+							"type": "obsGroup",
+							"questionOptions": {
+								"rendering": "group",
+								"concept": "464d8752-45f8-4a25-8972-772cbc52efbe"
+							},
+							"id": "SaS",
+							"questions": [
+								{
+									"label": "Covid 19 Signs and Symptom in past 14 days",
+									"id": "__vq8LnvqLq",
+									"questionOptions": {
+										"rendering": "select",
+										"concept": "0eaa21e0-5f69-41a9-9dea-942796590bbb",
+										"answers": [
+											{
+												"label": "Congestion",
+												"concept": "30e2da8f-34ca-4c93-94c8-d429f22d381c",
+												"conceptMappings": []
+											},
+											{
+												"label": "Sneezing",
+												"concept": "2395de62-f5a6-49b6-ab0f-57a21a9029c1",
+												"conceptMappings": []
+											},
+											{
+												"label": "Fever",
+												"concept": "1f0f8ec6-4e15-11e4-8a57-0800271c1b75",
+												"conceptMappings": []
+											},
+											{
+												"label": "Sore throat or pain with swallowing",
+												"concept": "2c75944e-5fc5-4d9d-b389-fe878fde38e3",
+												"conceptMappings": []
+											},
+											{
+												"label": "Shortness of breath",
+												"concept": "21835173-4e15-11e4-8a57-0800271c1b75",
+												"conceptMappings": []
+											},
+											{
+												"label": "Loss of taste",
+												"concept": "40829791-1535-4c02-9b6f-e97dd1a516f6",
+												"conceptMappings": []
+											},
+											{
+												"label": "Loss of smell",
+												"concept": "c1fb49bd-0ca5-43ae-bf8d-df35e73c34ea",
+												"conceptMappings": []
+											},
+											{
+												"label": "Diarrea, Vomiting or Abdominal pain",
+												"concept": "87b3f6a1-6d79-4923-9485-200dfd937782",
+												"conceptMappings": []
+											},
+											{
+												"label": "Practicing social distancing",
+												"concept": "64fb3f91-08d8-4a3b-92ba-16655e834b1c",
+												"conceptMappings": []
+											},
+											{
+												"label": "Rash, nonvesicular, unspec.",
+												"concept": "2134b7e3-4e15-11e4-8a57-0800271c1b75",
+												"conceptMappings": []
+											}
+										]
+									},
+									"type": "obs"
+								},
+								{
+									"label": "Date",
+									"id": "__3LsKFILu5",
+									"questionOptions": {
+										"rendering": "date",
+										"concept": "0f38dd50-95b0-4226-b418-a3d78f253842"
+									},
+									"type": "obs"
+								}
+							]
+						}
+					]
+				},
+				{
+					"label": "Covid 19 Test",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Tested for Covid 19",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "89c5bc03-8ce2-40d8-a77d-20b5a62a1ca1",
+								"answers": [
+									{
+										"concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+										"label": "Yes",
+										"conceptMappings": []
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "Test"
+						}
+					]
+				},
+				{
+					"label": "Test Done",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Type of Test Done",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "611190b4-2b83-42c5-bbb1-8d99bfaec9ed",
+								"answers": [
+									{
+										"concept": "efe34fae-de1e-4430-86ac-3198d0fb4a70",
+										"label": "Respiratory PCR",
+										"conceptMappings": []
+									},
+									{
+										"concept": "7149a26d-c0a7-42c4-86ae-099616830831",
+										"label": "Rapid blood test",
+										"conceptMappings": []
+									},
+									{
+										"concept": "c1cc178c-390c-4194-b286-f9c57e0f313d",
+										"label": "ELISA blood test",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "TesD"
+						}
+					]
+				},
+				{
+					"label": "Test Results",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Test Results",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "192f67ac-247c-4e1d-966a-4c223e33d38b",
+								"answers": [
+									{
+										"concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Positive",
+										"conceptMappings": []
+									},
+									{
+										"concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Negative",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "Results"
+						}
+					]
+				}
+			]
+		}
+	],
+	"processor": "EncounterFormProcessor",
+	"referencedForms": []
+}
