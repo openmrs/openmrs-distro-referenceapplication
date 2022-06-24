@@ -39,6 +39,8 @@
     <queue.version>1.0.0-SNAPSHOT</queue.version>
     <appointments.version>1.4.0</appointments.version>
     <cohort.version>3.0.0-SNAPSHOT</cohort.version>
+    <reporting.version>1.24.0</reporting.version>
+    <reportingrest.version>1.13.0</reportingrest.version>
   </properties>
 
   <dependencies>
@@ -146,6 +148,18 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>cohort-omod</artifactId>
       <version>${cohort.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>reporting-omod</artifactId>
+      <version>${reporting.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>reportingrest-omod</artifactId>
+      <version>${reportingrest.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
