@@ -70,4 +70,6 @@ EXPOSE 8080
 CMD ["dumb-init", "/usr/local/tomcat/startup.sh"]
 
 FROM base AS embedded
-COPY --from=openmrs/3-reference-distro:latest /openmrs /openmrs
+COPY --from=openmrs/3-reference-distro:latest /openmrs/openmrs_config /openmrs/distribution/openmrs_config
+COPY --from=openmrs/3-reference-distro:latest /openmrs/openmrs_core /openmrs/distribution/openmrs_core
+COPY --from=openmrs/3-reference-distro:latest /openmrs/openmrs_modules /openmrs/distribution/openmrs_modules
