@@ -1,0 +1,25 @@
+# syntax=docker/dockerfile:1.3
+FROM maven:3-eclipse-temurin-11 AS mvn-builder
+RUN mkdir -p /openmrs
+WORKDIR /openmrs
+COPY pom.xml .
+COPY distro ./distro
+RUN mvn clean install
+
+FROM node:lts-alpine as npm-builder
+ARG APP_SHELL_VERSION=latest
+RUN mkdir -p /openmrs
+WORKDIR /openmrs
+COPY spa-build-config.json .
+RUN npx openmrs@$APP_SHELL_VERSION build --build-config spa-build-config.json --target ./spa
+RUN npx openmrs@$APP_SHELL_VERSION assemble --mode config --config spa-build-config.json --target ./spa
+
+FROM alpine:latest AS unpacker
+RUN mkdir -p /openmrs
+WORKDIR /openmrs
+COPY --from=mvn-builder /openmrs/distro/target/referenceapplication-distro-*.tar.gz ./
+RUN tar -xzf referenceapplication-distro-*.tar.gz && rm referenceapplication-distro-*.tar.gz
+COPY --from=npm-builder /openmrs/spa /openmrs/spa
+
+FROM scratch as distro
+COPY --from=unpacker /openmrs /openmrs

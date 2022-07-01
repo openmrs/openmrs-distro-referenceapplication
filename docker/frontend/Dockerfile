@@ -1,8 +1,8 @@
-FROM nginx:1.21-alpine
+# syntax=docker/dockerfile:1.3
+FROM nginx:1.21-alpine AS base
 
 RUN apk update && \
     apk upgrade && \
-    # add dumb-init so it's less silly to run startup.sh as our command
     # add more utils for sponge to support our startup script
     apk add --no-cache moreutils
 
@@ -15,3 +15,6 @@ RUN chmod +x /usr/local/bin/startup.sh
 COPY nginx.conf /etc/nginx/nginx.conf
 
 CMD ["/usr/local/bin/startup.sh"]
+
+FROM base AS embedded
+COPY --from=openmrs/3-reference-distro:latest /openmrs/spa /usr/share/nginx/html

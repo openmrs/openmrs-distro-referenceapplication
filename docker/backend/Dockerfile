@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM tomcat:7-jdk8-adoptopenjdk-hotspot
+FROM tomcat:9-jdk11 as base
 
 # All environment variables that are available to configure on this container are listed here
 # for clarity. These list the variables supported, and the default values if not overridden
@@ -43,20 +43,8 @@ ENV OMRS_CONFIG_CONNECTION_DATABASE="openmrs"
 # Additional environment variables as needed. This should match the name of the distribution supplied OpenMRS war file
 ENV OMRS_WEBAPP_NAME="openmrs"
 
-# Copy in the start-up scripts
-COPY ./openmrs/wait-for-it.sh /usr/local/tomcat/wait-for-it.sh
-COPY ./openmrs/startup.sh /usr/local/tomcat/startup.sh
-RUN chmod +x /usr/local/tomcat/wait-for-it.sh
-RUN chmod +x /usr/local/tomcat/startup.sh
-
-# Add Dockerfile and commit info for documentation
-ADD ./openmrs/Dockerfile /openmrs/docker
-
 # /openmrs/distribution is expected to be mounted into the container with the artifacts making up the distribution
 # /openmrs/data represents the data persisted inside the container to the filesystem for OpenMRS
-ADD ./distro/openmrs_config /openmrs/distribution/openmrs_config
-ADD ./distro/openmrs_core /openmrs/distribution/openmrs_core
-ADD ./distro/openmrs_modules /openmrs/distribution/openmrs_modules
 
 # Take some initial steps to improve overall security, size, and functionality of the container
 # This includes updating packages and removing all of the default Tomcat webapps
@@ -68,6 +56,18 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && rm -rf /usr/local/tomcat/webapps/*
 
+# Copy in the start-up scripts
+COPY wait-for-it.sh /usr/local/tomcat/wait-for-it.sh
+COPY startup.sh /usr/local/tomcat/startup.sh
+RUN chmod +x /usr/local/tomcat/wait-for-it.sh
+RUN chmod +x /usr/local/tomcat/startup.sh
+
+# Add Dockerfile and commit info for documentation
+COPY Dockerfile /openmrs/docker
+
 EXPOSE 8080
 
 CMD ["dumb-init", "/usr/local/tomcat/startup.sh"]
+
+FROM base AS embedded
+COPY --from=openmrs/3-reference-distro:latest /openmrs /openmrs

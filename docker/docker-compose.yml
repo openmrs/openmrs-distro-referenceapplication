@@ -1,18 +1,21 @@
 version: "3.7"
 
 services:
-  # Proxy
-  proxy:
-    build: ./proxy
+  # Gateway
+  gateway:
+    build:
+      context: ./gateway
     depends_on:
       - frontend
-      - openmrs
+      - backend
     ports:
       - 80:80
 
   # Frontend
   frontend:
-    build: ./ui
+    build:
+      context: ./frontend
+      target: ${target:-base}
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
@@ -24,8 +27,10 @@ services:
       - ./distro/spa:/usr/share/nginx/html/
 
   # OpenMRS:
-  openmrs:
-    build: openmrs/
+  backend:
+    build:
+      context: backend
+      target: ${target:-base}
     depends_on:
       - db
     environment:
@@ -47,7 +52,7 @@ services:
 
   # MariaDB
   db:
-    image: mariadb:10.3
+    image: mariadb:10.8.2
     command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
     environment:
       MYSQL_DATABASE: openmrs
