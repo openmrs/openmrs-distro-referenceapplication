@@ -7,7 +7,7 @@ COPY distro ./distro
 RUN mvn clean install
 
 FROM node:lts-alpine as npm-builder
-ARG APP_SHELL_VERSION=latest
+ARG APP_SHELL_VERSION=next
 RUN mkdir -p /openmrs
 WORKDIR /openmrs
 COPY spa-build-config.json .
