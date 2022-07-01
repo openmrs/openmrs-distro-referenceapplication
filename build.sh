@@ -13,7 +13,7 @@ echoerr() {
 }
 
 TARGET=base
-APP_SHELL_VERSION=next
+APP_SHELL_VERSION=3.1.1-pre.188
 
 while getopts "h:T:a:" opt; do
   case $opt in
