@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM tomcat:9-jdk11 as base
+FROM tomcat:7-jdk8-adoptopenjdk-hotspot as base
 
 # All environment variables that are available to configure on this container are listed here
 # for clarity. These list the variables supported, and the default values if not overridden
