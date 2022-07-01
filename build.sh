@@ -12,7 +12,7 @@ echoerr() {
   echo "$@" 1>&2
 }
 
-TARGET=base
+TARGET=embedded
 APP_SHELL_VERSION=3.1.1-pre.188
 
 while getopts "h:T:a:" opt; do
