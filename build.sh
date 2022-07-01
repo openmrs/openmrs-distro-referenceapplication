@@ -25,6 +25,6 @@ while getopts "h:T:a:" opt; do
 done
 
 docker build -f Dockerfile.build --tag openmrs/3-reference-distro:latest --target distro .
-docker build -f docker/backend/Dockerfile --tag openmrs/openmrs-referenceapplication-backend:latest --target "$TARGET" docker/backend
-docker build -f docker/frontend/Dockerfile --tag openmrs/openmrs-referenceapplication-frontend:latest --target "$TARGET" --build-arg APP_SHELL_VERSION="$APP_SHELL_VERSION" docker/frontend
-docker build -f docker/gateway/Dockerfile --tag openmrs/openmrs-referenceapplication-gateway:latest docker/gateway
+docker build -f docker/backend/Dockerfile --tag openmrs/openmrs-reference-application-3-backend:latest --target "$TARGET" docker/backend
+docker build -f docker/frontend/Dockerfile --tag openmrs/openmrs-reference-application-3-frontend:latest --target "$TARGET" --build-arg APP_SHELL_VERSION="$APP_SHELL_VERSION" docker/frontend
+docker build -f docker/gateway/Dockerfile --tag openmrs/openmrs-reference-application-3-gateway:latest docker/gateway
