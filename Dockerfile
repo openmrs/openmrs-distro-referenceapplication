@@ -20,6 +20,8 @@ RUN mvn $MVN_ARGS_SETTINGS $OPENMRS_SDK_PLUGIN:build-distro -Ddistro=openmrs-dis
 # Replace 'nightly' with the exact version of openmrs-core built for production (if available)
 FROM openmrs/openmrs-core:nightly
 
+COPY openmrs-distro.properties /openmrs/distribution
+
 # Do not copy the war if using the correct openmrs-core image version
 COPY --from=dev /app/docker/web/openmrs.war /openmrs/distribution/openmrs_core
 COPY --from=dev /app/docker/web/modules /openmrs/distribution/openmrs_modules

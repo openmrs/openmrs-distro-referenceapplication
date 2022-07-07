@@ -13,7 +13,7 @@ services:
             - db-data:/var/lib/mysql
 
     openmrs-refapp:
-        image: openmrs-refapp:latest
+        image: openmrs/openmrs-referenceapplication:${TAG:-nightly}
         build: .
         depends_on:
             - db
@@ -24,6 +24,7 @@ services:
             OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
             OMRS_CONFIG_CREATE_TABLES: "true"
             OMRS_CONFIG_CONNECTION_SERVER: db
+            OMRS_CONFIG_CONNECTION_URL: ${OPENMRS_DB_URL}
             OMRS_CONFIG_CONNECTION_DATABASE: ${OPENMRS_DB_NAME:-openmrs}
             OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
             OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
@@ -31,8 +32,7 @@ services:
             test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
             timeout: 5s
         volumes:
-            - ./openmrs-data:/openmrs/data:z
-
+            - ./target/openmrs-data:/openmrs/data/:z
 
 volumes:
     db-data:
