@@ -1,18 +1,20 @@
 version: "3.7"
 
 services:
-  # Proxy
-  proxy:
-    image: openmrs/openmrs-reference-application-3-gateway:latest
+  gateway:
+    image: openmrs/openmrs-reference-application-3-gateway:${TAG:-nightly}
+    build:
+      context: ./gateway
     depends_on:
       - frontend
       - backend
     ports:
-      - "80:80"
+      - 80:80
 
-  # Frontend
   frontend:
-    image: openmrs/openmrs-reference-application-3-frontend:latest
+    image: openmrs/openmrs-reference-application-3-frontend:${TAG:-nightly}
+    build:
+      context: ./frontend
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
@@ -21,9 +23,10 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost/"]
       timeout: 5s
 
-  # OpenMRS:
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:latest
+    image: openmrs/openmrs-reference-application-3-backend:${TAG:-nightly}
+    build:
+      context: .
     depends_on:
       - db
     environment:
