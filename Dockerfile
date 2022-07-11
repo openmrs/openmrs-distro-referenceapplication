@@ -25,4 +25,4 @@ COPY --from=dev /app/distro/target/sdk-distro/web/openmrs-distro.properties /ope
 
 COPY --from=dev /app/distro/target/sdk-distro/web/modules /openmrs/distribution/openmrs_modules
 COPY --from=dev /app/distro/target/sdk-distro/web/owa /openmrs/distribution/openmrs_owas
-COPY --from=dev /app/distro/target/referenceapplication-distro/openmrs_config /openmrs/distribution/openmrs_config
+COPY --from=dev /app/distro/configuration /openmrs/distribution/openmrs_config

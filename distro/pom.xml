@@ -217,25 +217,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <!-- OpenMRS config -->
-          <execution>
-            <id>unpack-openmrs-config-refapp</id>
-            <phase>package</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <excludeTransitive>true</excludeTransitive>
-              <outputDirectory>${distro.openmrsConfigDir}</outputDirectory>
-              <includeArtifactIds>referenceapplication-config</includeArtifactIds>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.openmrs.maven.plugins</groupId>
         <artifactId>openmrs-sdk-maven-plugin</artifactId>
         <executions>
@@ -248,27 +229,6 @@
             <configuration>
               <distro>${project.build.directory}/distro.properties</distro>
               <dir>${project.build.directory}/sdk-distro</dir>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- packaging the distro as an installable/deployable file -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>package-distro-artifact</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <appendAssemblyId>false</appendAssemblyId>
-              <finalName>${project.artifactId}-${project.version}</finalName>
-              <descriptors>
-                <descriptor>assembly.xml</descriptor>
-              </descriptors>
             </configuration>
           </execution>
         </executions>
