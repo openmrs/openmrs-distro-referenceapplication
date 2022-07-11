@@ -1,0 +1,54 @@
+version: "3.7"
+
+services:
+  gateway:
+    image: openmrs/openmrs-reference-application-3-gateway:nightly
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - 80:80
+
+  frontend:
+    image: openmrs/openmrs-reference-application-3-frontend:nightly
+    environment:
+      SPA_PATH: /openmrs/spa
+      API_URL: /openmrs
+      SPA_CONFIG_URLS:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      timeout: 5s
+
+  backend:
+    image: openmrs/openmrs-reference-application-3-backend:nightly
+    depends_on:
+      - db
+    environment:
+      OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
+      OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
+      OMRS_CONFIG_CREATE_TABLES: "true"
+      OMRS_CONFIG_CONNECTION_SERVER: db
+      OMRS_CONFIG_CONNECTION_DATABASE: ${OPENMRS_DB:-openmrs}
+      OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
+      OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
+      timeout: 5s
+    volumes:
+      - openmrs-data:/openmrs/data
+
+  # MariaDB
+  db:
+    image: mariadb:10.8.2
+    command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
+    environment:
+      MYSQL_DATABASE: ${OPENMRS_DB:-openmrs}
+      MYSQL_USER: ${OPENMRS_DB_USER:-openmrs}
+      MYSQL_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  openmrs-data: ~
+  db-data: ~
