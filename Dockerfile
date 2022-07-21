@@ -26,3 +26,7 @@ COPY --from=dev /app/distro/target/sdk-distro/web/openmrs-distro.properties /ope
 COPY --from=dev /app/distro/target/sdk-distro/web/modules /openmrs/distribution/openmrs_modules
 COPY --from=dev /app/distro/target/sdk-distro/web/owa /openmrs/distribution/openmrs_owas
 COPY --from=dev /app/distro/configuration /openmrs/distribution/openmrs_config
+
+USER root
+RUN chown -R openmrs:openmrs /openmrs
+USER openmrs
