@@ -18,7 +18,7 @@ RUN mvn $MVN_ARGS_SETTINGS $MVN_ARGS
 FROM openmrs/openmrs-core:nightly
 
 # Do not copy the war if using the correct openmrs-core image version
-COPY --from=dev /app/package/target/distro/web/ /openmrs/distribution/openmrs_core/
+COPY --from=dev /app/package/target/distro/web/openmrs.war /openmrs/distribution/openmrs_core/
 
 COPY --from=dev /app/package/target/distro/web/openmrs-distro.properties /openmrs/distribution
 
