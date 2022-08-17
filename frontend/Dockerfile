@@ -4,8 +4,8 @@ ARG APP_SHELL_VERSION=next
 RUN mkdir -p /app
 WORKDIR /app
 COPY spa-build-config.json .
-RUN npx openmrs@$APP_SHELL_VERSION build --build-config spa-build-config.json --target ./spa
-RUN npx openmrs@$APP_SHELL_VERSION assemble --mode config --config spa-build-config.json --target ./spa
+RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
+RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --mode config --config spa-build-config.json --target ./spa
 
 FROM nginx:1.21-alpine
 
