@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.3
-FROM node:18.6-alpine as dev
+FROM node:16.17-alpine as dev
 ARG APP_SHELL_VERSION=next
 # Fix for npx looking for node in /usr/local/sbin/node
 RUN mkdir -p /usr/local/sbin/ && ln -s /usr/local/bin/node /usr/local/sbin/node
