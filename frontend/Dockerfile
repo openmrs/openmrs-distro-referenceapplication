@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1.3
 FROM node:18.6-alpine as dev
 ARG APP_SHELL_VERSION=next
+RUN mkdir -p /usr/local/sbin/ && ln -s /usr/local/bin/node /usr/local/sbin/node
 RUN mkdir -p /app
 WORKDIR /app
 COPY spa-build-config.json .
