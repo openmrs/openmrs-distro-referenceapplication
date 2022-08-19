@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.3
-FROM node:lts-slim as dev
+FROM node:lts-alpine as dev
 ARG APP_SHELL_VERSION=next
 RUN mkdir -p /app
 WORKDIR /app
