@@ -1,8 +1,6 @@
 # syntax=docker/dockerfile:1.3
-FROM node:18.7-alpine as dev
+FROM node:18.6-alpine as dev
 ARG APP_SHELL_VERSION=next
-# Fix for arm64 build trying to locate node in /usr/local/sbin/node
-RUN mkdir -p /usr/local/sbin && ln -s /usr/bin/node /usr/local/sbin/node
 RUN mkdir -p /app
 WORKDIR /app
 COPY spa-build-config.json .
