@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.3
-FROM node:lts-alpine as dev
+FROM node:18.7-alpine as dev
 ARG APP_SHELL_VERSION=next
-RUN ln -s /usr/bin/nodejs /usr/sbin/node
+RUN ln -s /usr/bin/nodejs /usr/local/sbin/node
 RUN mkdir -p /app
 WORKDIR /app
 COPY spa-build-config.json .
