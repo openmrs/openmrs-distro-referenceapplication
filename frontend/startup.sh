@@ -22,7 +22,7 @@ fi
 # setting the config urls to "" causes an error reported in the console, so if we aren't using
 # the SPA_CONFIG_URLS, we remove it from the source, leaving config urls as []
 if [ -z "$SPA_CONFIG_URLS" ]; then
-  sed -i -e 's/\("|''\)$SPA_CONFIG_URLS\("|''\)//' "/usr/share/nginx/html/index.html"
+  sed -i -e 's/"$SPA_CONFIG_URLS"//' "/usr/share/nginx/html/index.html"
 # otherwise convert the URLs into a Javascript list
 # we support two formats, a comma-separated list or a space separated list
 else
@@ -43,7 +43,7 @@ else
 
   IFS="$old_IFS"
   export SPA_CONFIG_URLS=$CONFIG_URLS
-  sed -i -e 's/\("|''\)$SPA_CONFIG_URLS\("|''\)/$SPA_CONFIG_URLS/' "/usr/share/nginx/html/index.html"
+  sed -i -e 's/"$SPA_CONFIG_URLS"/$SPA_CONFIG_URLS/' "/usr/share/nginx/html/index.html"
 fi
 
 # Substitute environment variables in the html file
