@@ -4,7 +4,7 @@
 FROM --platform=$BUILDPLATFORM openmrs/openmrs-core:dev as dev
 WORKDIR /app
 
-ARG MVN_ARGS_SETTINGS="-s /usr/share/maven/ref/settings-docker.xml"
+ARG MVN_ARGS_SETTINGS="-s /usr/share/maven/ref/settings-docker.xml -U"
 ARG MVN_ARGS="install"
 
 # Copy build files
