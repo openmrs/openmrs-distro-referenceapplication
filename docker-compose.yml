@@ -7,7 +7,7 @@ services:
       - frontend
       - backend
     ports:
-      - "88:80"
+      - 80:80
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:${TAG:-nightly}
