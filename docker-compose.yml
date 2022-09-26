@@ -3,18 +3,14 @@ version: "3.7"
 services:
   gateway:
     image: openmrs/openmrs-reference-application-3-gateway:${TAG:-nightly}
-    build:
-      context: ./gateway
     depends_on:
       - frontend
       - backend
     ports:
-      - 80:80
+      - "88:80"
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:${TAG:-nightly}
-    build:
-      context: ./frontend
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
@@ -25,8 +21,6 @@ services:
 
   backend:
     image: openmrs/openmrs-reference-application-3-backend:${TAG:-nightly}
-    build:
-      context: .
     depends_on:
       - db
     environment:
