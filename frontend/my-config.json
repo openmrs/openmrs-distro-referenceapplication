@@ -1,5 +1,6 @@
 {
     "@openmrs/esm-patient-registration-app": {
+      "sections": ["demographics", "contact"],
       "fieldDefinitions": [
         {
           "id": "telephoneField",
@@ -14,17 +15,39 @@
             "uuid": "7e142fa0-64ca-4220-ae90-a8f7f955458b",
             "label": "Occupation",
             "placeholder": "placeholder"
-          }
+          },
+          {
+            "id": "ethnicityField",
+            "type": "person attribute",
+            "uuid": "632d27a5-58c6-49f3-acb1-2a7b5855eaca",
+            "label": "Ethnicity",
+            "placeholder": "placeholder"
+          },
+          {
+              "id": "birthPlaceField",
+              "type": "person attribute",
+              "uuid": "4752b0ca-d8dd-4de9-b59a-7c77895b7657",
+              "label": "Place of birth",
+              "placeholder": "placeholder"
+            },
+            {
+              "id": "socialStatusField",
+              "type": "person attribute",
+              "uuid": "157d3d3c-fdc7-443d-82be-71b7b3d92940",
+              "label": "Social Status",
+              "placeholder": "placeholder"
+            }
       ],
       "sectionDefinitions": [
         {
-          "id": "section",
-          "name": "Custom section",
-          "fields": [
-            "telephoneField",
-            "occupationField"
-          ]
-        }
+          "id": "demographics",
+          "name": "Basic Info",
+          "fields": ["name", "gender", "dob", "id"]
+        },
+        { "id": "contact", "name": "Contact Details", "fields": ["address", "telephoneField","occupationField","ethnicityField","birthPlaceField","socialStatusField"] },
+        { "id": "death", "name": "Death Info", "fields": [] },
+        { "id": "relationships", "name": "Relationships", "fields": [] }
+        
       ]
     }
   }
