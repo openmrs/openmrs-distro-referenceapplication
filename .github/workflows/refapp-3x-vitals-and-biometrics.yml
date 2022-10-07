@@ -1,0 +1,36 @@
+name: RefApp 3.x All E2E Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  repository_dispatch:
+    types: [ qa ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout qaframework
+        uses: actions/checkout@main
+        with :
+          repository: ${{github.repository}}
+      - name: Run db and web container
+        run: docker compose up -d --build
+      - name: Wait for Openmrs instance to start
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+      - name: Clone tests
+        uses: actions/checkout@v3
+        with:
+          repository: openmrs/openmrs-test-3refapp
+          path: openmrs-test-3refapp
+      - name: Installing Repo Dependencies
+        run: cd openmrs-test-3refapp && yarn install
+      - name: Run e2e tests
+        run: cd openmrs-test-3refapp/packages/cypress && yarn refappCypress
+      - name: Upload screen recordings of failed tests
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Screen recordings of failed tests
+          path: packages/cypress/cypress/videos
