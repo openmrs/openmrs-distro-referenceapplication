@@ -25,7 +25,7 @@ jobs:
           repository: openmrs/openmrs-test-3refapp
           path: openmrs-test-3refapp
       - name: Installing Repo Dependencies
-        run: cd openmrs-test-3refapp && yarn install
+        run: cd openmrs-test-3refapp && yarn install --immutable
       - name: Run e2e tests
         run: cd openmrs-test-3refapp/packages/cypress && yarn refappCypress
       - name: Upload screen recordings of failed tests
