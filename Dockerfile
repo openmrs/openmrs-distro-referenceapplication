@@ -12,7 +12,7 @@ COPY pom.xml ./
 COPY distro ./distro/
 
 # Build the distro
-RUN --mount=type=secret,id=m2,target=/root/.m2 mvn $MVN_ARGS_SETTINGS $MVN_ARGS
+RUN --mount=type=secret,id=m2settings,target=/root/.m2/settings.xml mvn $MVN_ARGS_SETTINGS $MVN_ARGS
 
 ### Run Stage
 # Replace 'nightly' with the exact version of openmrs-core built for production (if available)
