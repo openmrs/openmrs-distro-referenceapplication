@@ -10,85 +10,70 @@
     "referencedForms": [],
     "pages": [
         {
-            "label": "Life Style",
+            "label": "General",
             "sections": [
                 {
-                    "label": "Life Style",
                     "isExpanded": "true",
+                    "label": "General",
                     "questions": [
                         {
-                            "label": "Life Style",
-                            "type": "obsGroup",
+                            "label": "Does the patient smoke?",
+                            "id": "smoked",
                             "questionOptions": {
-                                "rendering": "group",
-                                "concept": "01ceaad9-40a9-45e5-b860-4647c30d5677"
+                                "rendering": "radio",
+                                "concept": "7533aa7e-04cb-4cfd-9c97-6ac36f114bab",
+                                "answers": [
+                                    {
+                                        "concept": "60bf95e1-04b5-48cf-8d05-3f5883a891e0",
+                                        "label": "Never smoked"
+                                    },
+                                    {
+                                        "concept": "fd676d9a-1a47-4f6c-a24e-f57ac796b7f1",
+                                        "label": "Current smoker"
+                                    },
+                                    {
+                                        "concept": "57ce8832-7ea7-45f9-91ba-09e1c064073b"
+                                    }
+                                ]
                             },
-                            "id": "Life_Style",
-                            "questions": [
-                                {
-                                    "label": "Smoker",
-                                    "id": "__1GxrFGLFo",
-                                    "questionOptions": {
-                                        "rendering": "radio",
-                                        "concept": "e7349618-0aad-411c-aaf5-6772b080abcc",
-                                        "answers": [
-                                            {
-                                                "label": "Yes",
-                                                "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            },
-                                            {
-                                                "label": "No",
-                                                "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            }
-                                        ]
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "exercise",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "c31a2da0-f16b-44e3-baea-8a259d8beb31",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
                                     },
-                                    "type": "obs"
-                                },
-                                {
-                                    "label": "Exercises",
-                                    "id": "__2GxrFGLFo",
-                                    "questionOptions": {
-                                        "rendering": "radio",
-                                        "concept": "16f84f54-d1c6-4ab3-84fd-18efb6131d74",
-                                        "answers": [
-                                            {
-                                                "label": "Yes",
-                                                "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            },
-                                            {
-                                                "label": "No",
-                                                "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            }
-                                        ]
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "drinkAlcohol",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "e737c8c9-a154-47a1-aa20-ed13008d46cf",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
                                     },
-                                    "type": "obs"
-                                },
-                                {
-                                    "label": "Alcohol use",
-                                    "id": "__3GxrFGLFo",
-                                    "questionOptions": {
-                                        "rendering": "radio",
-                                        "concept": "b6a6debf-503e-4b43-8517-905e07e0e6a5",
-                                        "answers": [
-                                            {
-                                                "label": "Yes",
-                                                "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            },
-                                            {
-                                                "label": "No",
-                                                "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            }
-                                        ]
-                                    },
-                                    "type": "obs"
-                                }
-                            ]
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
                         }
                     ]
                 }
@@ -102,145 +87,149 @@
             "label": "Past Medical History",
             "sections": [
                 {
-                    "label": "Past Medical History",
                     "isExpanded": "true",
+                    "label": "Past Medical History",
                     "questions": [
                         {
-                            "label": "Past Medical History",
-                            "type": "obsGroup",
+                            "id": "knownHypertensive",
                             "questionOptions": {
-                                "rendering": "group",
-                                "concept": "ad8f9ff4-63f1-40b9-b405-aef4ae674c2d"
+                                "rendering": "radio",
+                                "concept": "f8fd0782-a9fc-4c02-b556-72740853bc18",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
                             },
-                            "id": "Past_Medical_History",
-                            "questions": [
-                                {
-                                    "label": "Known Hypertensive",
-                                    "id": "__4GxrFGLFo",
-                                    "questionOptions": {
-                                        "rendering": "radio",
-                                        "concept": "f8fd0782-a9fc-4c02-b556-72740853bc18",
-                                        "answers": [
-                                            {
-                                                "label": "Yes",
-                                                "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            },
-                                            {
-                                                "label": "No",
-                                                "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            }
-                                        ]
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "knownHypertensivemedsUse",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "c311aec0-dd3d-4c84-a4ab-601fab82ca37",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
                                     },
-                                    "type": "obs"
-                                },
-                                {
-                                    "label": "Known Diabetic",
-                                    "id": "__5GxrFGLFo",
-                                    "questionOptions": {
-                                        "rendering": "radio",
-                                        "concept": "b8edfbde-5f94-421e-8b25-e86afe35d0f7",
-                                        "answers": [
-                                            {
-                                                "label": "Yes",
-                                                "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            },
-                                            {
-                                                "label": "No",
-                                                "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            }
-                                        ]
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "knownDiabetic",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "b8edfbde-5f94-421e-8b25-e86afe35d0f7",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
                                     },
-                                    "type": "obs"
-                                },
-                                {
-                                    "label": "Antihypertensive medication use",
-                                    "id": "__6GxrFGLFo",
-                                    "questionOptions": {
-                                        "rendering": "radio",
-                                        "concept": "c311aec0-dd3d-4c84-a4ab-601fab82ca37",
-                                        "answers": [
-                                            {
-                                                "label": "Yes",
-                                                "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            },
-                                            {
-                                                "label": "No",
-                                                "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            }
-                                        ]
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "antidiabeticmedsUse",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "3c803217-425c-4d7c-a2cb-fc2256ad7ca2",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
                                     },
-                                    "type": "obs"
-                                },
-                                {
-                                    "label": "Antidiabetic medication use",
-                                    "id": "__7GxrFGLFo",
-                                    "questionOptions": {
-                                        "rendering": "radio",
-                                        "concept": "3c803217-425c-4d7c-a2cb-fc2256ad7ca2",
-                                        "answers": [
-                                            {
-                                                "label": "Yes",
-                                                "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            },
-                                            {
-                                                "label": "No",
-                                                "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            }
-                                        ]
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "hxHeartDisease",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "7cf6d87c-4a23-467d-83c1-cd5efacd8cd1",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
                                     },
-                                    "type": "obs"
-                                },
-                                {
-                                    "label": "Diabetes/Kidney disease in first degree relatives",
-                                    "id": "__8GxrFGLFo",
-                                    "questionOptions": {
-                                        "rendering": "radio",
-                                        "concept": "7cf6d87c-4a23-467d-83c1-cd5efacd8cd1",
-                                        "answers": [
-                                            {
-                                                "label": "Yes",
-                                                "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            },
-                                            {
-                                                "label": "No",
-                                                "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            }
-                                        ]
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "hxDiabetesAndHeartDisease",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "157621ff-16ac-4dd4-bc96-6164d3248807",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
                                     },
-                                    "type": "obs"
-                                },
-                                {
-                                    "label": "Premature Heart disease/Stroke in first degree relatives",
-                                    "id": "__9GxrFGLFo",
-                                    "questionOptions": {
-                                        "rendering": "radio",
-                                        "concept": "157621ff-16ac-4dd4-bc96-6164d3248807",
-                                        "answers": [
-                                            {
-                                                "label": "Yes",
-                                                "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            },
-                                            {
-                                                "label": "No",
-                                                "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                "conceptMappings": []
-                                            }
-                                        ]
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+
+
+
+
+        {
+            "label": "Investigations",
+            "sections": [
+                {
+                    "isExpanded": "true",
+                    "label": "Vitals and biometrics",
+                    "questions": [
+                        {
+                            "id": "Ht",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "f8fd0782-a9fc-4c02-b556-72740853bc18",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
                                     },
-                                    "type": "obs"
-                                }
-                            ]
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
                         }
                     ]
                 }
