@@ -1,0 +1,461 @@
+{
+    "name": "Adult NCD Registration",
+    "description": "Adult NCD Registration Form",
+    "version": "1",
+    "published": true,
+    "retired": false,
+    "encounter": "Consultation",
+    "processor": "EncounterFormProcessor",
+    "uuid": "xxxx",
+    "referencedForms": [],
+    "pages": [
+        {
+            "label": "General",
+            "sections": [
+                {
+                    "isExpanded": "true",
+                    "label": "General",
+                    "questions": [
+                        {
+                            "id": "referralType",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "fd588078-9286-46ea-b133-36aab1b025ec",
+                                "answers": [
+                                    {
+                                        "concept": "37811074-14d1-41f3-bda9-e3422f6e22b0"
+                                    },
+                                    {
+                                        "concept": "989a3c74-141f-4dcf-9716-d4d3e2eaacdb"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Past Medical History",
+            "sections": [
+                {
+                    "isExpanded": "true",
+                    "label": "Past Medical History",
+                    "questions": [
+                        {
+                            "id": "diagnosedForDM",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "7083941d-1342-4dd7-ba16-ddc78b61f239",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "prevDMdx",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "fe0b5b8e-c9a2-4c87-813d-f10884987d9c",
+                                "answers": [
+                                    {
+                                        "concept": "105903f4-7b6d-496a-b613-37ab9d0f5450"
+                                    },
+                                    {
+                                        "concept": "8b26ecd3-8726-4c8e-b042-cbe71e44a863"
+                                    },
+                                    {
+                                        "concept": "932d395c-d509-4d42-bac4-5a3281efe149"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "yearOfDx",
+                            "questionOptions": {
+                                "rendering": "date",
+                                "concept": "3fe4ac96-893f-4193-a896-1b7e9528719d"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "HighBloodPressureSx",
+                            "questionOptions": {
+                                "rendering": "textArea",
+                                "concept": "d3c8a8d4-c141-401f-8354-adbeda86011f",
+                                "rows": 5
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "currentTherapy",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "00808084-99a8-4ea8-98b4-63cae2a34273",
+                                "answers": [
+                                    {
+                                        "concept": "4aea53d6-88d1-4e4c-8702-a8142366af02"
+                                    },
+                                    {
+                                        "concept": "8c0fc1cc-f430-4201-968b-db0071b01dfd"
+                                    },
+                                    {
+                                        "concept": "d99b139e-4d8f-462c-9825-a0cdc0824417"
+                                    },
+                                    {
+                                        "concept": "c4c14717-6624-4963-b038-863eb51669a8"
+                                    },
+                                    {
+                                        "concept": "35eaca92-c94d-404c-aa06-1d366db4e8b9"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "traditionmedicineUse",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "5d65d35a-8ccc-474a-a2ce-746a518ed6f5",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "previousMedicalComplications",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "a9e26e21-126f-45ed-98f2-f4fb423bc634",
+                                "answers": [
+                                    {
+                                        "concept": "634f28c7-74c9-4b4e-b74d-6ac6a7a797ea"
+                                    },
+                                    {
+                                        "concept": "871389dc-a412-40ba-aa6d-d12497065ce0"
+                                    },
+                                    {
+                                        "concept": "63ab6543-78c9-4079-887a-8498a51bb98c"
+                                    },
+                                    {
+                                        "concept": "fcf078a5-a839-49d7-99cf-5427b0fbaad3"
+                                    },
+                                    {
+                                        "concept": "c64409ef-18fb-4e33-a187-e127243cb30c"
+                                    },
+                                    {
+                                        "concept": "11a2da88-7235-4182-b808-99ba2fb4a1a5"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "otherHealthComplications",
+                            "questionOptions": {
+                                "rendering": "textArea",
+                                "concept": "868e9ebe-86fd-467a-b7a8-345437f340af",
+                                "rows": 5
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "presenceOfAllergies",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "c67a6c5e-2559-46a8-b9da-2cb38bfff8a3",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "allergiesDetails",
+                            "questionOptions": {
+                                "rendering": "textArea",
+                                "concept": "b082eb80-3495-4af8-a970-0ae0af6ce184",
+                                "rows": 5
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "severityOfAllergies",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "436880a8-e47a-4fc1-9ad6-07fe543034c8",
+                                "answers": [
+                                    {
+                                        "concept": "cfb6f0f6-b5a8-433f-8e2d-70ef668e2094"
+                                    },
+                                    {
+                                        "concept": "8a72a904-5931-4780-9d6c-603215fa5e51"
+                                    },
+                                    {
+                                        "concept": "c6f4a5ac-75ff-45b2-b0a6-cc44d1c80499"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Life Style",
+            "sections": [
+                {
+                    "isExpanded": "true",
+                    "label": "Life Style",
+                    "questions": [
+                        {
+                            "label": "Does the patient smoke?",
+                            "id": "smoked",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "7533aa7e-04cb-4cfd-9c97-6ac36f114bab",
+                                "answers": [
+                                    {
+                                        "concept": "60bf95e1-04b5-48cf-8d05-3f5883a891e0",
+                                        "label": "Never smoked"
+                                    },
+                                    {
+                                        "concept": "fd676d9a-1a47-4f6c-a24e-f57ac796b7f1",
+                                        "label": "Current smoker"
+                                    },
+                                    {
+                                        "concept": "57ce8832-7ea7-45f9-91ba-09e1c064073b"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "exercise",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "c31a2da0-f16b-44e3-baea-8a259d8beb31",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "drinkAlcohol",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "e737c8c9-a154-47a1-aa20-ed13008d46cf",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+
+
+        {
+            "label": "Vitals and Biometrics",
+            "sections": [
+                {
+                    "isExpanded": "true",
+                    "label": "Vitals and Biometrics",
+                    "questions": [
+                        {
+                            "id": "Ht",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                "max": "272",
+                                "min": "10",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "Wt",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                "max": "250",
+                                "min": "0",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "waistCircumference",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "90c9e0ae-d9f6-477c-9f23-bd7af88994e4",
+                                "max": "",
+                                "min": "",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "BMI",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a89c60c0-1350-11df-a1f1-0026b9348838",
+                                "max": "",
+                                "min": "",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "systole",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                "max": "250",
+                                "min": "0",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "diastole",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                "max": "150",
+                                "min": "0",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "pulse",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                "max": "230",
+                                "min": "0",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "temp",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                "max": "43",
+                                "min": "25",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "isExpanded": "true",
+                    "label": "Blood sugar levels",
+                    "questions": [
+                        {
+                            "id": "FBS",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "4a6ad2db-86af-4acc-906b-b749b7f6cda6",
+                                "max": "",
+                                "min": "",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "RBS",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "f52d731e-58da-4f3a-a480-77c5e9d8d2eb",
+                                "max": "",
+                                "min": "",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "HBA1c",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8af7520-1350-11df-a1f1-0026b9348838",
+                                "max": "",
+                                "min": "",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
