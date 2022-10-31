@@ -1,6 +1,6 @@
 {
-    "name": "Adult NCD Screening",
-    "description": "Adult NCD Screening Form",
+    "name": "Adult NCD Consultation",
+    "description": "Adult NCD Consultation Form",
     "version": "1",
     "published": true,
     "retired": false,
@@ -15,6 +15,233 @@
                 {
                     "isExpanded": "true",
                     "label": "General",
+                    "questions": [
+                        {
+                            "id": "referralType",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "fd588078-9286-46ea-b133-36aab1b025ec",
+                                "answers": [
+                                    {
+                                        "concept": "37811074-14d1-41f3-bda9-e3422f6e22b0"
+                                    },
+                                    {
+                                        "concept": "989a3c74-141f-4dcf-9716-d4d3e2eaacdb"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Past Medical History",
+            "sections": [
+                {
+                    "isExpanded": "true",
+                    "label": "Past Medical History",
+                    "questions": [
+                        {
+                            "id": "diagnosedForDM",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "7083941d-1342-4dd7-ba16-ddc78b61f239",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "prevDMdx",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "fe0b5b8e-c9a2-4c87-813d-f10884987d9c",
+                                "answers": [
+                                    {
+                                        "concept": "105903f4-7b6d-496a-b613-37ab9d0f5450"
+                                    },
+                                    {
+                                        "concept": "8b26ecd3-8726-4c8e-b042-cbe71e44a863"
+                                    },
+                                    {
+                                        "concept": "932d395c-d509-4d42-bac4-5a3281efe149"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "yearOfDx",
+                            "questionOptions": {
+                                "rendering": "date",
+                                "concept": "3fe4ac96-893f-4193-a896-1b7e9528719d"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "HighBloodPressureSx",
+                            "questionOptions": {
+                                "rendering": "textArea",
+                                "concept": "d3c8a8d4-c141-401f-8354-adbeda86011f",
+                                "rows": 5
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "currentTherapy",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "00808084-99a8-4ea8-98b4-63cae2a34273",
+                                "answers": [
+                                    {
+                                        "concept": "4aea53d6-88d1-4e4c-8702-a8142366af02"
+                                    },
+                                    {
+                                        "concept": "8c0fc1cc-f430-4201-968b-db0071b01dfd"
+                                    },
+                                    {
+                                        "concept": "d99b139e-4d8f-462c-9825-a0cdc0824417"
+                                    },
+                                    {
+                                        "concept": "c4c14717-6624-4963-b038-863eb51669a8"
+                                    },
+                                    {
+                                        "concept": "35eaca92-c94d-404c-aa06-1d366db4e8b9"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "traditionmedicineUse",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "5d65d35a-8ccc-474a-a2ce-746a518ed6f5",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "previousMedicalComplications",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "a9e26e21-126f-45ed-98f2-f4fb423bc634",
+                                "answers": [
+                                    {
+                                        "concept": "634f28c7-74c9-4b4e-b74d-6ac6a7a797ea"
+                                    },
+                                    {
+                                        "concept": "871389dc-a412-40ba-aa6d-d12497065ce0"
+                                    },
+                                    {
+                                        "concept": "63ab6543-78c9-4079-887a-8498a51bb98c"
+                                    },
+                                    {
+                                        "concept": "fcf078a5-a839-49d7-99cf-5427b0fbaad3"
+                                    },
+                                    {
+                                        "concept": "c64409ef-18fb-4e33-a187-e127243cb30c"
+                                    },
+                                    {
+                                        "concept": "11a2da88-7235-4182-b808-99ba2fb4a1a5"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "otherHealthComplications",
+                            "questionOptions": {
+                                "rendering": "textArea",
+                                "concept": "868e9ebe-86fd-467a-b7a8-345437f340af",
+                                "rows": 5
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "presenceOfAllergies",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "c67a6c5e-2559-46a8-b9da-2cb38bfff8a3",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "allergiesDetails",
+                            "questionOptions": {
+                                "rendering": "textArea",
+                                "concept": "b082eb80-3495-4af8-a970-0ae0af6ce184",
+                                "rows": 5
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "severityOfAllergies",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "436880a8-e47a-4fc1-9ad6-07fe543034c8",
+                                "answers": [
+                                    {
+                                        "concept": "cfb6f0f6-b5a8-433f-8e2d-70ef668e2094"
+                                    },
+                                    {
+                                        "concept": "8a72a904-5931-4780-9d6c-603215fa5e51"
+                                    },
+                                    {
+                                        "concept": "c6f4a5ac-75ff-45b2-b0a6-cc44d1c80499"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Life Style",
+            "sections": [
+                {
+                    "isExpanded": "true",
+                    "label": "Life Style",
                     "questions": [
                         {
                             "label": "Does the patient smoke?",
@@ -79,108 +306,20 @@
                 }
             ]
         },
+
+
         {
-            "label": "Past Medical History",
+            "label": "Medical Assesment",
             "sections": [
                 {
                     "isExpanded": "true",
-                    "label": "Past Medical History",
+                    "label": "TB Sx",
                     "questions": [
                         {
-                            "id": "knownHypertensive",
+                            "id": "TBsx",
                             "questionOptions": {
                                 "rendering": "radio",
-                                "concept": "f8fd0782-a9fc-4c02-b556-72740853bc18",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        },
-                        {
-                            "id": "knownHypertensivemedsUse",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "c311aec0-dd3d-4c84-a4ab-601fab82ca37",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        },
-                        {
-                            "id": "knownDiabetic",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "b8edfbde-5f94-421e-8b25-e86afe35d0f7",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        },
-                        {
-                            "id": "antidiabeticmedsUse",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "3c803217-425c-4d7c-a2cb-fc2256ad7ca2",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        },
-                        {
-                            "id": "hxHeartDisease",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "7cf6d87c-4a23-467d-83c1-cd5efacd8cd1",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        },
-                        {
-                            "id": "hxDiabetesAndHeartDisease",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "157621ff-16ac-4dd4-bc96-6164d3248807",
+                                "concept": "e0fffb24-5973-40a9-af11-2e4033831747",
                                 "answers": [
                                     {
                                         "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -195,15 +334,10 @@
                             "validators": []
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "label": "Investigations",
-            "sections": [
+                },
                 {
                     "isExpanded": "true",
-                    "label": "Vitals and Biometrics",
+                    "label": "Medical Assesment",
                     "questions": [
                         {
                             "id": "Ht",
@@ -247,7 +381,7 @@
                                 "rendering": "number",
                                 "concept": "a89c60c0-1350-11df-a1f1-0026b9348838",
                                 "max": "",
-                                "min": "0",
+                                "min": "",
                                 "showDate": "false"
                             },
                             "type": "obs",
@@ -288,18 +422,6 @@
                             },
                             "type": "obs",
                             "validators": []
-                        },
-                        {
-                            "id": "temp",
-                            "questionOptions": {
-                                "rendering": "number",
-                                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                "max": "43",
-                                "min": "25",
-                                "showDate": "false"
-                            },
-                            "type": "obs",
-                            "validators": []
                         }
                     ]
                 },
@@ -330,9 +452,22 @@
                             },
                             "type": "obs",
                             "validators": []
+                        },
+                        {
+                            "id": "HBA1c",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8af7520-1350-11df-a1f1-0026b9348838",
+                                "max": "",
+                                "min": "",
+                                "showDate": "false"
+                            },
+                            "type": "obs",
+                            "validators": []
                         }
                     ]
                 },
+
                 {
                     "isExpanded": "true",
                     "label": "Urine Tests",
@@ -368,183 +503,49 @@
                     "label": "Lipids",
                     "questions": [
                         {
-                            "id": "cholestrol",
+                            "id": "lowDenseLipoProtein",
                             "questionOptions": {
                                 "rendering": "number",
-                                "concept": "f5f76f5e-2e6a-4112-ab4e-629299829ae3",
+                                "concept": "0bf33271-d553-42ae-a854-624e5258551d",
                                 "max": "",
                                 "min": "",
                                 "showDate": "false"
                             },
                             "type": "obs",
                             "validators": []
-                        }
-                    ]
-                },
-                {
-                    "isExpanded": "true",
-                    "label": "TB Sx",
-                    "questions": [
+                        },
                         {
-                            "id": "TBsx",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "e0fffb24-5973-40a9-af11-2e4033831747",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "label": "Assessment",
-            "sections": [
-                {
-                    "isExpanded": "true",
-                    "label": "Assessment",
-                    "questions": [
-                        {
-                            "id": "CVDscore",
+                            "id": "highDenseLipoProtein",
                             "questionOptions": {
                                 "rendering": "number",
-                                "concept": "dff491e3-b14c-4b32-ab64-63b96966d72d",
-                                "max": "100",
-                                "min": "0",
+                                "concept": "a5d68184-6849-4a1d-9a86-5bcea3297f70",
+                                "max": "",
+                                "min": "",
                                 "showDate": "false"
                             },
                             "type": "obs",
                             "validators": []
                         },
                         {
-                            "id": "hospitalReferral",
+                            "id": "triglyceride",
                             "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "41648b2c-9caf-4f2f-8ce2-ef7d94db48a5",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "label": "Management",
-            "sections": [
-                {
-                    "isExpanded": "true",
-                    "label": "Management",
-                    "questions": [
-                        {
-                            "id": "CVDfollowUpScreening",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "7a67e555-1320-4197-a5df-54be3e68a1fe",
-                                "answers": [
-                                    {
-
-                                        "concept": "1dbd741d-b9d9-49d1-b021-90931a6bdd1a"
-                                    },
-                                    {
-                                        "concept": "a085b404-2596-48d6-a454-cd164d4a83fc"
-                                    },
-                                    {
-                                        "concept": "9b305de5-9df6-4db9-820d-9a24541418ab"
-                                    }
-                                ]
+                                "rendering": "number",
+                                "concept": "a86c14a1-9453-46af-9b9a-f950b21b8952",
+                                "max": "",
+                                "min": "",
+                                "showDate": "false"
                             },
                             "type": "obs",
                             "validators": []
                         },
                         {
-                            "id": "followUpDate",
+                            "id": "totalCholestrol",
                             "questionOptions": {
-                                "rendering": "date",
-                                "concept": "e9c145c1-f4e9-4c34-b237-da069939dc38"
-                            },
-                            "type": "obs",
-                            "validators": []
-                        },
-                        {
-                            "id": "tobaccoCessationCounselling",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "d7035879-6668-4cb0-87ab-a1311ccb774c",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        },
-                        {
-                            "id": "dietAndExerciseCounselling",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "dc833bb7-2d04-4be0-ab58-47b9fb2bf771",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        },
-                        {
-                            "id": "medicinePrescribed",
-                            "questionOptions": {
-                                "rendering": "radio",
-                                "concept": "805c3a0b-cd38-4ed6-b4f8-f3af0fc118ad",
-                                "answers": [
-                                    {
-                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "label": "Yes"
-                                    },
-                                    {
-                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    }
-                                ]
-                            },
-                            "type": "obs",
-                            "validators": []
-                        },
-                        {
-                            "id": "medicineDetails",
-                            "questionOptions": {
-                                "rendering": "textArea",
-                                "concept": "62e5ac97-0fb6-478b-bd30-2157374b3cc0",
-								"rows": 5
+                                "rendering": "number",
+                                "concept": "f5f76f5e-2e6a-4112-ab4e-629299829ae3",
+                                "max": "",
+                                "min": "",
+                                "showDate": "false"
                             },
                             "type": "obs",
                             "validators": []
