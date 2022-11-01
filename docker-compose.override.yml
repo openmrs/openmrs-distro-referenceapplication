@@ -5,6 +5,8 @@ services:
   gateway:
     build:
       context: ./gateway
+    volumes:
+      - "./nginx-no-csp-headers.conf:/etc/nginx/nginx.conf"
 
   frontend:
     build:
