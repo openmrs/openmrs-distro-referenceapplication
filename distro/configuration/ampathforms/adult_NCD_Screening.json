@@ -1,6 +1,6 @@
 {
-    "name": "Adult NCD Screening",
-    "description": "Adult NCD Screening Form",
+    "name": "ទម្រង់ពិនិត្យស្រាវជ្រាវរុករកជំងឺមិនឆ្លង សម្រាប់មនុស្សពេញវ័យ  (Adult NCD Screening)",
+    "description": "ទម្រង់ពិនិត្យស្រាវជ្រាវរុករកជំងឺមិនឆ្លង សម្រាប់មនុស្សពេញវ័យ (Adult NCD Screening Form)",
     "version": "1",
     "published": true,
     "retired": false,
@@ -10,11 +10,11 @@
     "referencedForms": [],
     "pages": [
         {
-            "label": "General",
+            "label": "ទូទៅ (General)",
             "sections": [
                 {
                     "isExpanded": "true",
-                    "label": "General",
+                    "label": "ទូទៅ (General)",
                     "questions": [
                         {
                             "id": "smoked",
@@ -75,11 +75,11 @@
             ]
         },
         {
-            "label": "Past Medical History",
+            "label": "ប្រវត្តិជំងឺ (Past Medical History)",
             "sections": [
                 {
                     "isExpanded": "true",
-                    "label": "Past Medical History",
+                    "label": "ប្រវត្តិជំងឺ (Past Medical History)",
                     "questions": [
                         {
                             "id": "knownHypertensive",
@@ -188,11 +188,11 @@
             ]
         },
         {
-            "label": "Investigations",
+            "label": "ការពិនិត្យវិភាគ (Investigations)",
             "sections": [
                 {
                     "isExpanded": "true",
-                    "label": "Vitals and Biometrics",
+                    "label": "សញ្ញាជីវិត និងជីវមាត្រ (Vitals and Biometrics)",
                     "questions": [
                         {
                             "id": "Ht",
@@ -297,7 +297,7 @@
                 },
                 {
                     "isExpanded": "true",
-                    "label": "Blood sugar levels",
+                    "label": "កម្រិតជាតិស្ករក្នុងឈាម (Blood sugar levels)",
                     "questions": [
                         {
                             "id": "FBS",
@@ -327,7 +327,7 @@
                 },
                 {
                     "isExpanded": "true",
-                    "label": "Urine Tests",
+                    "label": "ការធ្វើតេស្តទឹកនោម (Urine Tests)",
                     "questions": [
                         {
                             "id": "albumin",
@@ -357,7 +357,7 @@
                 },
                 {
                     "isExpanded": "true",
-                    "label": "Lipids",
+                    "label": "ជាតិខ្លាញ់ (Lipids)",
                     "questions": [
                         {
                             "id": "cholestrol",
@@ -375,7 +375,7 @@
                 },
                 {
                     "isExpanded": "true",
-                    "label": "TB Sx",
+                    "label": "រោគសញ្ញាសង្ស័យជំងឺរបេង (Tuberculosis Symptoms)",
                     "questions": [
                         {
                             "id": "TBsx",
@@ -399,11 +399,11 @@
             ]
         },
         {
-            "label": "Assessment",
+            "label": "ការវាយតម្លៃ (Assessment)",
             "sections": [
                 {
                     "isExpanded": "true",
-                    "label": "Assessment",
+                    "label": "ការវាយតម្លៃ (Assessment)",
                     "questions": [
                         {
                             "id": "CVDscore",
@@ -412,7 +412,10 @@
                                 "concept": "dff491e3-b14c-4b32-ab64-63b96966d72d",
                                 "max": "100",
                                 "min": "0",
-                                "showDate": "false"
+                                "showDate": "false",
+                                "calculate": {
+                                    "calculateExpression": "calcSouthEastAsiaNonLabCVDRisk(sex, smoked === 'fd676d9a-1a47-4f6c-a24e-f57ac796b7f1' ? true : false , age, systole, BMI)"
+                                 }
                             },
                             "type": "obs",
                             "validators": []
@@ -439,11 +442,11 @@
             ]
         },
         {
-            "label": "Management",
+            "label": "ការគ្រប់គ្រង (Management)",
             "sections": [
                 {
                     "isExpanded": "true",
-                    "label": "Management",
+                    "label": "ការគ្រប់គ្រង (Management)",
                     "questions": [
                         {
                             "id": "CVDfollowUpScreening",
