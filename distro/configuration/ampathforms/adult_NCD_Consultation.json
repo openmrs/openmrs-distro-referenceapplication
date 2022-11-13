@@ -37,7 +37,7 @@
 				},
 				{
 					"isExpanded": "true",
-					"label": "Medical Assesment",
+					"label": "Vitals and Biometrics",
 					"questions": [
 						{
 							"id": "Ht",
@@ -659,9 +659,6 @@
 							"type": "obsGroup",
 							"label": "Abdominal Exam Set",
 							"questionOptions": {
-								
-
-
 								"concept": "99829097-4c1d-43a5-b19e-eda807dd64d5",
 								"rendering": "group"
 							},
@@ -825,7 +822,7 @@
                                         "concept": "111103AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                                     },
                                     {
-                                        "concept": "f2d24b16-aff5-46df-b764-444a544993c9"
+                                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                                     }
                                 ]
                             },
@@ -862,6 +859,141 @@
 										"concept": "c4c14717-6624-4963-b038-863eb51669a8"
 									}
 								]
+							},
+							"type": "obs",
+							"validators": []
+						}
+					]
+				}
+			]
+		},
+
+
+
+
+
+
+
+		{
+			"label": "Treatment plan",
+			"sections": [
+				{
+					"isExpanded": "true",
+					"label": "Treatment plan",
+					"questions": [
+						{
+                            "id": "currentTherapy",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "00808084-99a8-4ea8-98b4-63cae2a34273",
+                                "answers": [
+                                    {
+                                        "concept": "4aea53d6-88d1-4e4c-8702-a8142366af02"
+                                    },
+                                    {
+                                        "concept": "8c0fc1cc-f430-4201-968b-db0071b01dfd"
+                                    },
+                                    {
+                                        "concept": "d99b139e-4d8f-462c-9825-a0cdc0824417"
+                                    },
+                                    {
+                                        "concept": "c4c14717-6624-4963-b038-863eb51669a8"
+                                    },
+                                    {
+                                        "concept": "35eaca92-c94d-404c-aa06-1d366db4e8b9"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+						{
+                            "id": "medicinePrescribed",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "805c3a0b-cd38-4ed6-b4f8-f3af0fc118ad",
+                                "answers": [
+                                    {
+                                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "id": "medicineDetails",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "62e5ac97-0fb6-478b-bd30-2157374b3cc0",
+								"answers": [
+                                    {
+                                        "concept": "49ea1422-dfca-4b6d-b8d5-e8688f33d780"
+                                    },
+                                    {
+                                        "concept": "98a3d43a-1a0e-4f92-809b-894d5833cc1f"
+                                    },
+                                    {
+                                        "concept": "39f9ad3a-88f4-400d-a854-c2433dacbb91"
+                                    },
+                                    {
+                                        "concept": "ad0a4f7f-cb96-4b99-b2cf-52fae54f442a"
+                                    },
+                                    {
+                                        "concept": "bad6ded9-26e1-4512-b1ac-c40728cd741f"
+                                    },
+                                    {
+                                        "concept": "2c18c145-faad-41ba-99e2-4547a0ca05aa"
+                                    },
+                                    {
+                                        "concept": "691ebd60-f916-4f9e-990e-8cc21420c6d9"
+                                    },
+                                    {
+                                        "concept": "54b53e46-def0-4aa1-b8ff-2728e377c0b3"
+                                    },
+                                    {
+                                        "concept": "b24f1ef6-3118-4019-b835-91ada855e0c9"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+
+
+
+						{
+                            "id": "recommendations",
+                            "questionOptions": {
+                                "rendering": "radio",
+                                "concept": "9f7c8739-3ea3-4f7f-8648-d6c36fef7be2",
+                                "answers": [
+                                    {
+                                        "concept": "7feb6724-dd34-411a-aa24-2422bfefe407"
+                                    },
+                                    {
+                                        "concept": "91ac05d8-174b-4127-ae40-ae90b2244993"
+                                    },
+                                    {
+                                        "concept": "73ac6960-6205-466e-8fad-54165e8a55f7"
+                                    },
+									{
+                                        "concept": "f24e644d-7c12-476a-9ec4-9734f148502a"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+						{
+							"id": "otherRecomendations",
+							"questionOptions": {
+								"rendering": "textarea",
+								"concept": "2aad4642-7c64-4249-a9ac-8e52aa94c4f4",
+								"rows": 5
 							},
 							"type": "obs",
 							"validators": []
