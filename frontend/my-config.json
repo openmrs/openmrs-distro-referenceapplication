@@ -47,7 +47,30 @@
         { "id": "relationships", "name": "Relationships", "fields": [] }
         
       ],
-      "defaultPatientIdentifierTypes": ["a4949ae8-d858-444b-ac9f-33c1d8825442","177c01be-789a-4c47-9515-3e6b092d4322"]
+      "defaultPatientIdentifierTypes": ["a4949ae8-d858-444b-ac9f-33c1d8825442","177c01be-789a-4c47-9515-3e6b092d4322"],
+      "Translation overrides": {
+        "en": {
+          "address1": "Commune",
+          "contact": "Contact Details test"
+        },
+        "km": {
+          "address1": "Commune",
+          "contact": "Contact Details test"
 
-    }
+        }
+      }
+    },
+    
+    "@openmrs/esm-patient-chart-app": {
+      "visitAttributeTypes":[{
+        "uuid": "6f9f22c3-c3e8-4683-b55b-42943a46d8bb",
+        "required": true
+      },
+      {
+        "uuid": "5b17c708-9416-4dc7-b649-f30c4d751470",
+        "required": true
+      }
+    ]
+     }
+    
   }
