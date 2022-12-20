@@ -1,6 +1,9 @@
 {
   "@openmrs/esm-patient-registration-app": {
-    "sections": ["demographics", "contact"],
+    "sections": [
+      "demographics",
+      "contact"
+    ],
     "fieldDefinitions": [
       {
         "id": "telephoneField",
@@ -9,54 +12,80 @@
         "placeholder": "placeholder"
       },
       {
-          "id": "occupationField",
-          "type": "person attribute",
-          "uuid": "7e142fa0-64ca-4220-ae90-a8f7f955458b",
-          "placeholder": "placeholder",
-          "answerConceptSetUuid": "2ef163b6-eec8-4678-abed-0dd261220168"
-        },
-        {
-          "id": "ethnicityField",
-          "type": "person attribute",
-          "uuid": "632d27a5-58c6-49f3-acb1-2a7b5855eaca",
-          "placeholder": "placeholder",
-          "answerConceptSetUuid": "c8b01687-086e-4f7e-ad0d-db77c423a2a7"
-        },
-        {
-            "id": "birthPlaceField",
-            "type": "person attribute",
-            "uuid": "4752b0ca-d8dd-4de9-b59a-7c77895b7657",
-            "placeholder": "placeholder"
-          },
-          {
-            "id": "socialStatusField",
-            "type": "person attribute",
-            "uuid": "157d3d3c-fdc7-443d-82be-71b7b3d92940",
-            "placeholder": "placeholder",
-            "answerConceptSetUuid": "4e7a07f2-345f-419c-8d30-b060d9b8681a"
-          }
+        "id": "occupationField",
+        "type": "person attribute",
+        "uuid": "7e142fa0-64ca-4220-ae90-a8f7f955458b",
+        "placeholder": "placeholder",
+        "answerConceptSetUuid": "2ef163b6-eec8-4678-abed-0dd261220168"
+      },
+      {
+        "id": "ethnicityField",
+        "type": "person attribute",
+        "uuid": "632d27a5-58c6-49f3-acb1-2a7b5855eaca",
+        "placeholder": "placeholder",
+        "answerConceptSetUuid": "c8b01687-086e-4f7e-ad0d-db77c423a2a7"
+      },
+      {
+        "id": "birthPlaceField",
+        "type": "person attribute",
+        "uuid": "4752b0ca-d8dd-4de9-b59a-7c77895b7657",
+        "placeholder": "placeholder"
+      },
+      {
+        "id": "socialStatusField",
+        "type": "person attribute",
+        "uuid": "157d3d3c-fdc7-443d-82be-71b7b3d92940",
+        "placeholder": "placeholder",
+        "answerConceptSetUuid": "4e7a07f2-345f-419c-8d30-b060d9b8681a"
+      }
     ],
     "sectionDefinitions": [
       {
         "id": "demographicsSection",
         "name": "Basic Info",
-        "fields": ["name", "gender", "dob", "id"]
+        "fields": [
+          "name",
+          "gender",
+          "dob",
+          "id"
+        ]
       },
-      { "id": "contactSection", "name": "Contact Details", "fields": ["address","telephoneField","occupationField","ethnicityField","birthPlaceField","socialStatusField"] },
-      { "id": "deathSection", "name": "Death Info", "fields": [] },
-      { "id": "relationshipsSection", "name": "Relationships", "fields": [] }
-      
+      {
+        "id": "contactSection",
+        "name": "Contact Details",
+        "fields": [
+          "address",
+          "telephoneField",
+          "occupationField",
+          "ethnicityField",
+          "birthPlaceField",
+          "socialStatusField"
+        ]
+      },
+      {
+        "id": "deathSection",
+        "name": "Death Info",
+        "fields": []
+      },
+      {
+        "id": "relationshipsSection",
+        "name": "Relationships",
+        "fields": []
+      }
     ],
-    "defaultPatientIdentifierTypes": ["a4949ae8-d858-444b-ac9f-33c1d8825442","177c01be-789a-4c47-9515-3e6b092d4322"],
+    "defaultPatientIdentifierTypes": [
+      "a4949ae8-d858-444b-ac9f-33c1d8825442",
+      "177c01be-789a-4c47-9515-3e6b092d4322"
+    ],
     "Translation overrides": {
       "en": {
         "address1": "Commune",
-        "cityVillage":"City",
-        "country":"Country",
-        "stateProvince":"Province",
-        "countyDistrict":"District",
+        "cityVillage": "City",
+        "country": "Country",
+        "stateProvince": "Province",
+        "countyDistrict": "District",
         "contactSection": "Contact Details",
-        "demographicsSection":"Basic Info",
+        "demographicsSection": "Basic Info",
         "Male": "Male",
         "Female": "Female",
         "Other": "Other",
@@ -64,12 +93,12 @@
       },
       "km": {
         "address1": "ឃុំ/សង្កាត់",
-        "cityVillage":"ទីក្រុង",
-        "country":"ប្រទេស",
-        "stateProvince":"ខេត្ត",
-        "countyDistrict":"ស្រុក/ខ័ណ្ឌ",
+        "cityVillage": "ទីក្រុង",
+        "country": "ប្រទេស",
+        "stateProvince": "ខេត្ត",
+        "countyDistrict": "ស្រុក/ខ័ណ្ឌ",
         "contactSection": "Contact Details",
-        "demographicsSection":"Basic Info",
+        "demographicsSection": "Basic Info",
         "Male": "ប្រុស",
         "Female": "ស្រី",
         "Other": "ផ្សេងៗ",
@@ -78,42 +107,134 @@
     }
   },
   "@openmrs/esm-patient-chart-app": {
-    "visitAttributeTypes":[
-    {
-      "uuid": "af89d44d-5074-472f-b5bc-470feb567633",
-      "required": true
-    }
-  ],
-  "extensionSlots": {
-    "patient-chart-summary-dashboard-slot": {
-      "add": [
-        "obs-by-encounter-widget#distressDASS21"
-      ],
-      "order": [
-        "obs-by-encounter-widget#distressDASS21"
-      ],
-      "configure": {
-        "obs-by-encounter-widget#distressDASS21": {
-          "title": "Distress: DASS-21",
-          "showGraphByDefault": true,
-          "encounterTypes": ["67a71486-1a54-468f-ac3e-7091a9a79584"],
-          "Display conditions": {
-            "privileges": ["Add Users"]
-          },
-          "data": [
-            {
-              "label": "Height",
-              "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "color": "green"
+    "Display conditions": {
+      "privileges": [
+        "View Patient Summary"
+      ]
+    },
+    "visitAttributeTypes": [
+      {
+        "uuid": "af89d44d-5074-472f-b5bc-470feb567633",
+        "required": true
+      }
+    ],
+    "extensionSlots": {
+      "patient-chart-summary-dashboard-slot": {
+        "add": [
+          "obs-by-encounter-widget#distressDASS21"
+        ],
+        "order": [
+          "obs-by-encounter-widget#distressDASS21"
+        ],
+        "configure": {
+          "obs-by-encounter-widget#distressDASS21": {
+            "title": "Distress: DASS-21",
+            "showGraphByDefault": true,
+            "encounterTypes": [
+              "67a71486-1a54-468f-ac3e-7091a9a79584"
+            ],
+            "Display conditions": {
+              "privileges": [
+                "Add Users"
+              ]
+            },
+            "data": [
+              {
+                "label": "Height",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "color": "green"
+              }
+            ],
+            "table": {
+              "pageSize": 6
             }
-          ],
-          "table": {
-            "pageSize": 6
           }
         }
       }
     }
+  },
+  "@openmrs/esm-patient-biometrics-app": {
+    "Display conditions": {
+      "privileges": [
+        "View Forms, Get Forms"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-appointments-app": {
+    "Display conditions": {
+      "privileges": [
+        "Manage Appointments"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-immunizations-app": {
+    "Display conditions": {
+      "privileges": [
+        "Add Immunizations"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-allergies-app": {
+    "Display conditions": {
+      "privileges": [
+        "Add Allergies"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-attachments-app": {
+    "Display conditions": {
+      "privileges": [
+        "Add Attachments"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-conditions-app": {
+    "Display conditions": {
+      "privileges": [
+        "Add Conditions"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-forms-app": {
+    "Display conditions": {
+      "privileges": [
+        "View Forms, Get Forms"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-medications-app": {
+    "Display conditions": {
+      "privileges": [
+        "Add Orders"
+      ]
+    }
+  },
+  "@openmrsesm-patient-notes-app": {
+    "Display conditions": {
+      "privileges": [
+        "Get Notes"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-programs-app": {
+    "Display conditions": {
+      "privileges": [
+        "Add Patient Programs"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-test-results-app": {
+    "Display conditions": {
+      "privileges": [
+        "Add Orders"
+      ]
+    }
+  },
+  "@openmrs/esm-patient-vitals-app": {
+    "Display conditions": {
+      "privileges": [
+        "View Forms, Get Forms"
+      ]
+    }
   }
-   }
-  
 }
