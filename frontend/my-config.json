@@ -121,17 +121,17 @@
     "extensionSlots": {
       "patient-chart-summary-dashboard-slot": {
         "add": [
-          "obs-by-encounter-widget#distressDASS21"
+          "obs-by-encounter-widget#referral"
         ],
         "order": [
-          "obs-by-encounter-widget#distressDASS21"
+          "obs-by-encounter-widget#referral"
         ],
         "configure": {
-          "obs-by-encounter-widget#distressDASS21": {
-            "title": "Distress: DASS-21",
+          "obs-by-encounter-widget#referral": {
+            "title": "Referral",
             "showGraphByDefault": true,
             "encounterTypes": [
-              "67a71486-1a54-468f-ac3e-7091a9a79584"
+              "dd528487-82a5-4082-9c72-ed246bd49591"
             ],
             "Display conditions": {
               "privileges": [
@@ -140,8 +140,13 @@
             },
             "data": [
               {
-                "label": "Height",
-                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "label": "Facility",
+                "concept": "758b9dd8-b6d0-4ac2-b245-0e7bffb4693a",
+                "color": "green"
+              },
+              {
+                "label": "Reason for referral",
+                "concept": "dee2db0c-5a06-4b1e-8be6-0f327fe6158d",
                 "color": "green"
               }
             ],
@@ -236,5 +241,55 @@
         "Add Vitals and Biometrics"
       ]
     }
+  },
+    "@openmrs/esm-primary-navigation-app": {
+      "extensionSlots": {
+        "app-menu-slot": {
+          "configure": {
+            "appointments-link": {
+              "Display conditions": {
+                "privileges": [
+                  "No show"
+                ]
+              }
+            },
+            "form-builder-app-menu-link": {
+              "Display conditions": {
+                "privileges": [
+                  "No show"
+                ]
+              }
+            },
+            "dispensing-link": {
+              "Display conditions": {
+                "privileges": [
+                  "No show"
+                ]
+              }
+            },
+            "forms-app-link": {
+              "Display conditions": {
+                "privileges": [
+                  "No show"
+                ]
+              }
+            },
+            "patient-list-linkq": {
+              "Display conditions": {
+                "privileges": [
+                  "No show"
+                ]
+              }
+            },
+            "offline-tools-linkq": {
+              "Display conditions": {
+                "privileges": [
+                  "No show"
+                ]
+              }
+            }
+          }
+        }
+      }
   }
 }
