@@ -100,6 +100,9 @@
                         },
                         {
                             "id": "knownHypertensivemedsUse",
+                            "hide": {
+                                "hideWhenExpression": "isEmpty(knownHypertensive) || knownHypertensive !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                            },
                             "questionOptions": {
                                 "rendering": "radio",
                                 "concept": "c311aec0-dd3d-4c84-a4ab-601fab82ca37",
@@ -134,6 +137,9 @@
                         },
                         {
                             "id": "antidiabeticmedsUse",
+                            "hide": {
+                                "hideWhenExpression": "isEmpty(knownDiabetic) || knownDiabetic !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                            },
                             "questionOptions": {
                                 "rendering": "radio",
                                 "concept": "3c803217-425c-4d7c-a2cb-fc2256ad7ca2",
