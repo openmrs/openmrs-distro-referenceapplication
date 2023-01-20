@@ -52,6 +52,9 @@
 
 						{
 							"id": "numberOfPregnancies",
+							"hide": {
+                                "hideWhenExpression": "isEmpty(previousPregnancy) || previousPregnancy !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                            },
 							"questionOptions": {
 								"rendering": "number",
 								"concept": "b5913f28-31f5-4634-8970-316fba5f0eaf",
@@ -64,6 +67,9 @@
 						},
 						{
 							"id": "numberOfDeliveries",
+							"hide": {
+                                "hideWhenExpression": "isEmpty(previousPregnancy) || previousPregnancy !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                            },
 							"questionOptions": {
 								"rendering": "number",
 								"concept": "ac127f70-514c-4f42-aa46-a13bb0d26a79",
@@ -76,6 +82,9 @@
 						},
 						{
 							"id": "numberOfMiscarriages",
+							"hide": {
+                                "hideWhenExpression": "isEmpty(previousPregnancy) || previousPregnancy !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                            },
 							"questionOptions": {
 								"rendering": "number",
 								"concept": "e83196b4-793a-40dc-b30f-3a0ddac746bc",
@@ -106,6 +115,9 @@
 						},
 						{
 							"id": "WOA",
+							"hide": {
+                                "hideWhenExpression": "isEmpty(currentPregancy) || currentPregancy !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                            },
 							"questionOptions": {
 								"rendering": "number",
 								"concept": "40026557-6b03-4f1d-9592-ced1369814ff",
