@@ -799,7 +799,7 @@
 								"min": "0",
 								"showDate": "false",
 								"calculate": {
-									"calculateExpression": "calcSouthEastAsiaNonLabCVDRisk(sex,(extractObsValue(rawPrevObs,'7533aa7e-04cb-4cfd-9c97-6ac36f114bab',smoked)==='fd676d9a-1a47-4f6c-a24e-f57ac796b7f1' ? true : false),age,systole,BMI)"
+									"calculateExpression": "calcSouthEastAsiaNonLabCVDRisk(sex,((!isEmpty(getObsFromControlOrEncounter(smoked,rawPrevObs,'7533aa7e-04cb-4cfd-9c97-6ac36f114bab')) && getObsFromControlOrEncounter(smoked,rawPrevObs,'7533aa7e-04cb-4cfd-9c97-6ac36f114bab')==='fd676d9a-1a47-4f6c-a24e-f57ac796b7f1' ? true : false)),age,systole,BMI)"
 								}
 							},
 							"type": "obs",
