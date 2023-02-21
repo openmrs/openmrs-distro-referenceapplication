@@ -1,0 +1,449 @@
+{
+    "name":"Viral Load Lab Result",
+    "pages":[
+      {
+        "label":"Viral Load Lab Result",
+        "sections":[
+          {
+            "label":"Viral Load",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "label": "Viral Load",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "toggle",
+                  "concept": "2dbf01ab-77f6-4b35-aa2c-46dfc14b0af0",
+                  "toggleOptions": {
+                    "labelTrue": "Yes",
+                    "labelFalse": "No"
+                  },
+                  "conceptMappings": [
+                    {
+                      "type": "OCT",
+                      "value": "LabOrdered"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                      "label": "Yes",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373066001"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                      "label": "No",
+                      "conceptMappings": []
+                    }                  
+                  ]
+                },
+                "id": "viralLoad",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "false",                
+                    "hide": {
+                      "hideWhenExpression": "true"
+                    }
+                  },
+                  {
+                    "intent": "VIRAL_LOAD_LAB_RESULTS_EMBED",
+                    "required": "false",                
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ]
+              },
+              {
+                "label":"Test Result Date",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"date",
+                  "concept":"163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "weeksList":""
+                },
+                "id":"testResultDate",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": [
+                        {
+                          "type": "date",
+                          "allowFutureDates": "false"
+                        },
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"									}
+                      ]
+                    },
+                    {
+                      "intent": "VIRAL_LOAD_LAB_RESULTS_EMBED",
+                      "required": "true",                
+                      "hide": {
+                        "hideWhenExpression": "viralLoad == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                      }
+                    }
+                  ]
+              },
+              {
+                "label":"Reason for viral Load",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"86cc0cfe-bace-4969-94b6-d139f4971d13",
+                  "conceptMappings":[
+                    {
+                      "type":"OCT",
+                      "value":"ViralLoadRequest"
+                    }
+                  ],
+                  "answers":[
+                    {
+                      "concept":"163523AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Clinical failure",
+                      "conceptMappings":[
+                        {
+                          "type":"CIEL",
+                          "value":"163523"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"be5d6a4a-4018-49dd-869f-273c9f5fec9e",
+                      "label":"Routine Viral Load",
+                      "conceptMappings":[
+                        {
+                          "type":"OCT",
+                          "value":"RoutineViralLoad"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"1259AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Change regimen",
+                      "conceptMappings":[
+                        {
+                          "type":"AMPATH",
+                          "value":"1259"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1259"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1259"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"843AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Regimen failure",
+                      "conceptMappings":[
+                        {
+                          "type":"org.openmrs.module.mdrtb",
+                          "value":"FAILED"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"843"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1259"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"266721009"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"857e08cb-1ca7-4b4e-9698-38cdb76df59b",
+                      "label":"Confirmation of Persistent Low-Level Viremia",
+                      "conceptMappings":[
+                        {
+                          "type":"OCT",
+                          "value":"BaselineVL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"4fe5857e-c804-41cf-b3c9-0acc1f516ab7",
+                      "label":"Recency testing",
+                      "conceptMappings":[]
+                    },
+                    {
+                      "concept":"5d4e13af-92ec-4b91-a8e4-97818810e577",
+                      "label":"Baseline Viral Load",
+                      "conceptMappings":[
+                        {
+                          "type":"OCT",
+                          "value":"BaselineVL"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id":"reasonViralLoad",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    },
+                    {
+                      "intent": "VIRAL_LOAD_LAB_RESULTS_EMBED",
+                      "required": "true",                
+                      "hide": {
+                        "hideWhenExpression": "viralLoad == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                      }
+                    }
+                  ]
+              },
+              {
+                "label":"Viral Load Result",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"1305AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings":[
+                    {
+                      "type":"SNOMED-CT",
+                      "value":"315124004"
+                    },
+                    {
+                      "type":"CIEL",
+                      "value":"1305"
+                    },
+                    {
+                      "type":"SNOMED-MVP",
+                      "value":"13051000105000"
+                    },
+                    {
+                      "type":"AMPATH",
+                      "value":"1305"
+                    }
+                  ],
+                  "answers":[
+                    {
+                      "concept":"1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Detected",
+                      "conceptMappings":[
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"260373001"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1301"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"260373001"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1301"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1301"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"1302AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Not detected",
+                      "conceptMappings":[
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"260415000"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1302"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"260415000"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1302"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1302"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id":"resultViralLoad",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    },
+                    {
+                      "intent": "VIRAL_LOAD_LAB_RESULTS_EMBED",
+                      "required": "true",                
+                      "hide": {
+                        "hideWhenExpression": "viralLoad == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                      }
+                    }
+                  ]
+              },
+              {
+                "label":"Viral Load (Copies/ml)",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"number",
+                  "concept":"856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "max":"",
+                  "min":"51",
+                  "showDate":"",
+                  "conceptMappings":[
+                    {
+                      "type":"IMO-ProcedureIT",
+                      "value":"929811"
+                    },
+                    {
+                      "type":"IMO-ProcedureIT",
+                      "value":"929811"
+                    },
+                    {
+                      "type":"CIEL",
+                      "value":"856"
+                    },
+                    {
+                      "type":"AMPATH",
+                      "value":"856"
+                    },
+                    {
+                      "type":"CIEL",
+                      "value":"856"
+                    },
+                    {
+                      "type":"SNOMED-CT",
+                      "value":"315124004"
+                    },
+                    {
+                      "type":"LOINC",
+                      "value":"25836-8"
+                    },
+                    {
+                      "type":"AMPATH",
+                      "value":"856"
+                    },
+                    {
+                      "type":"SNOMED-CT",
+                      "value":"315124004"
+                    }
+                  ]
+                },
+                "id":"copiesVL",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    },
+                    {
+                      "intent": "VIRAL_LOAD_LAB_RESULTS_EMBED",
+                      "required": "true",                
+                      "hide": {
+                        "hideWhenExpression": "viralLoad == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                      }
+                    }
+                  ]
+              },
+              {
+                "label":"Notes",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"textarea",
+                  "concept":"161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rows":"5",
+                  "conceptMappings":[
+                    {
+                      "type":"CIEL",
+                      "value":"161011"
+                    }
+                  ]
+                },
+                "id":"notes",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "false",
+                    "unspecified": "false",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": []
+                  },
+                  {
+                    "intent": "VIRAL_LOAD_LAB_RESULTS_EMBED",
+                    "required": "true",                
+                    "hide": {
+                      "hideWhenExpression": "viralLoad == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "availableIntents": [
+        {
+          "intent": "*",
+          "display": "Viral Load Lab Result"
+        }        
+      ],
+    "processor":"EncounterFormProcessor",
+    "uuid":"xxxx",
+    "referencedForms":[],
+    "encounterType": "41af1931-184e-45f8-86ca-d42e0db0b8a1",
+    "encounter": "Viral Load results",
+    "allowUnspecifiedAll": true
+  }

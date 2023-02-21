@@ -1,0 +1,246 @@
+{
+    "name":"CD4 Lab Result",
+    "pages":[
+      {
+        "label":"CD4 Lab Result",
+        "sections":[
+          {
+            "label":"CD4 Lab Result",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "label": "CD4 Lab Results",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "toggle",
+                  "concept": "2dbf01ab-77f6-4b35-aa2c-46dfc14b0af0",
+                  "toggleOptions": {
+                    "labelTrue": "Yes",
+                    "labelFalse": "No"
+                  },
+                  "conceptMappings": [
+                    {
+                      "type": "OCT",
+                      "value": "LabOrdered"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                      "label": "Yes",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373066001"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                      "label": "No",
+                      "conceptMappings": []
+                    }                  
+                  ]
+                },
+                "id": "cd4Lab",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "false",                
+                    "hide": {
+                      "hideWhenExpression": "true"
+                    }
+                  },
+                  {
+                    "intent": "CD4_LAB_RESULTS_EMBED",
+                    "required": "false",                
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ]
+              },
+              {
+                "label":"Test Result Date",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"date",
+                  "concept":"163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "weeksList":""
+                },
+                "id":"testResultDate",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": [
+                        {
+                          "type": "date",
+                          "allowFutureDates": "false"
+                        },
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"									}
+                      ]
+                    },
+                    {
+                      "intent": "CD4_LAB_RESULTS_EMBED",
+                      "required": "true",
+                      "unspecified": "true",                
+                      "hide": {
+                        "hideWhenExpression": "cd4Lab == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                      }
+                    }
+                  ]
+              },
+              {
+                "label":"CD4 count",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"number",
+                  "concept":"5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings":[
+                    {
+                      "type":"AMPATH",
+                      "value":"5497"
+                    },
+                    {
+                      "type":"LOINC",
+                      "value":"24467-3"
+                    },
+                    {
+                      "type":"IMO-ProcedureIT",
+                      "value":"923416"
+                    },
+                    {
+                      "type":"CIEL",
+                      "value":"5497"
+                    },
+                    {
+                      "type":"SNOMED-CT",
+                      "value":"313660005"
+                    },
+                    {
+                      "type":"org.openmrs.module.mdrtb",
+                      "value":"CD4 COUNT"
+                    }
+                  ]
+                },
+                "id":"cd4Result",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    },
+                    {
+                      "intent": "CD4_LAB_RESULTS_EMBED",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                       "hideWhenExpression": "cd4Lab == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                      }
+                    }
+                  ]
+              },
+              {
+                "label":"CD4%",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"number",
+                  "concept":"730AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                "id":"cd%",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    },
+                    {
+                      "intent": "CD4_LAB_RESULTS_EMBED",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                       "hideWhenExpression": "cd4Lab == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                      }
+                    }
+                  ]
+              },
+              {
+                "label":"Notes",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"textarea",
+                  "concept":"161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rows":"5",
+                  "conceptMappings":[
+                    {
+                      "type":"CIEL",
+                      "value":"161011"
+                    }
+                  ]
+                },
+                "id":"notes",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "false",
+                    "unspecified": "false",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": []
+                  },
+                  {
+                    "intent": "CD4_LAB_RESULTS_EMBED",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                     "hideWhenExpression": "cd4Lab == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "availableIntents": [
+        {
+          "intent": "*",
+          "display": "CD4 Lab results"
+        }
+      ],
+    "processor":"EncounterFormProcessor",
+    "uuid":"xxxx",
+    "referencedForms":[],
+    "encounterType": "96adb28e-e417-43a3-8f7d-682f8af5e912",
+    "encounter": "CD4 Lab results",
+    "allowUnspecifiedAll": true
+  }

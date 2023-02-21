@@ -1,0 +1,170 @@
+{
+    "name":"Age Appropriate Disclosure Form",
+    "pages":[
+      {
+        "label":"Stage of Disclosure",
+        "sections":[
+          {
+            "label":"Introduction",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "type":"markdown",
+                "questionOptions":{
+                  "rendering":"markdown"
+                },
+                "id":"fooMarkdown",
+                "value":[
+                  "**This form is used to:** Document age-appropriate disclosure counselling for children and adolescents."
+                ]
+              }
+            ]
+          },
+          {
+            "label":"Current Stage of Disclosure",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "label":"Date of Disclosure",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"date",
+                  "concept":"85fbdcc8-8dbc-40a9-b85f-5d1bfe1ab63d",
+                  "weeksList":""
+                },
+                "id":"disclosureDate",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": [
+                        {
+                          "type": "date",
+                          "allowFutureDates": "false"
+                        },
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"									}
+                      ]
+                    }
+                  ]
+              },
+              {
+                "label":"Stage of disclosure",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"573f93e2-12f6-483e-aa6e-14e9b76b311a",
+                  "answers":[
+                    {
+                      "concept":"2961369f-6d08-4553-bc52-329c43135d76",
+                      "label":"Pre-disclosure",
+                      "conceptMappings":[]
+                    },
+                    {
+                      "concept":"621816e2-16ba-4ae3-aa62-b5b3812780c1",
+                      "label":"Partial disclosure",
+                      "conceptMappings":[]
+                    },
+                    {
+                      "concept":"761c9ffb-8a75-44c6-bad3-b62cd700d41c",
+                      "label":"Full disclosure :Stage 1",
+                      "conceptMappings":[]
+                    },
+                    {
+                      "concept":"13784dde-37e1-4e40-b224-dbc9701bc605",
+                      "label":"Full disclosure: Stage 2",
+                      "conceptMappings":[]
+                    },
+                    {
+                      "concept":"708acbc1-d493-499c-b3e7-67abd685a943",
+                      "label":"Full disclosure: Stage 3",
+                      "conceptMappings":[]
+                    },
+                    {
+                      "concept":"37c60d5a-e873-429d-a59f-aeff839ada3c",
+                      "label":"Full disclosure: Stage 4",
+                      "conceptMappings":[]
+                    }
+                  ]
+                },
+                "id":"stageOfDisclosure",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    }
+                  ]
+              }
+            ]
+          },
+          {
+            "label":"Notes",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "label":"Disclosure Notes",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"textarea",
+                  "concept":"165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rows":"",
+                  "conceptMappings":[
+                    {
+                      "type":"AMPATH",
+                      "value":"1915"
+                    },
+                    {
+                      "type":"AMPATH",
+                      "value":"1915"
+                    },
+                    {
+                      "type":"LOINC",
+                      "value":"48767-8"
+                    },
+                    {
+                      "type":"CIEL",
+                      "value":"160632"
+                    }
+                  ]
+                },
+                "id":"discolsureNotes",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "false",
+                      "unspecified": "false",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    }
+                  ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "availableIntents":[
+        {
+          "intent":"*",
+          "display":"Peads Disclosure Form"
+        }
+      ],
+    "processor":"EncounterFormProcessor",
+    "uuid":"xxxx",
+    "referencedForms":[],
+	"encounterType":"390c2f21-c1c4-4246-94ca-a026157cd1db",
+    "encounter": "Peads Disclosure Form",
+	"allowUnspecifiedAll":true
+  }

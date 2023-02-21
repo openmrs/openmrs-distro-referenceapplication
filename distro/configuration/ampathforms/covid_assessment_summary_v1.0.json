@@ -1,0 +1,505 @@
+{
+  "name": "COVID Assessment Summary",
+  "pages": [
+    {
+      "label": "Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Reasons for testing",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "ae46f4b1-c15d-4bba-ab41-b9157b82b0ce",
+                "answers": [
+                  {
+                    "concept": "1068AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Symptomatic",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "1068"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "264931009"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "0ed2e3ca-b9a6-4ff6-ac74-4d4cd9520acc",
+                    "label": "RDT confirmatory",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "f974e267-feeb-42be-9d37-61554dad16b1",
+                    "label": "Voluntary",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1cee0ab3-bf06-49e9-a49c-baf261620c67",
+                    "label": "Post-mortem",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "e0f1584a-cc8b-48e9-980f-64d9f724caf8",
+                    "label": "Quarantine",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "ad8be6bf-ced7-4390-a6af-c5acebeac216",
+                    "label": "Follow-up",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "30320fb8-b29b-443f-98cf-f3ef491f8947",
+                    "label": "Health worker",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "38769c82-a3d3-4714-97b7-015726cdb209",
+                    "label": "Other frontline worker",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "f8c9c2cc-3070-444e-8818-26fb8100bb78",
+                    "label": "Travel out of country",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "677f4d21-7293-4810-abe6-57a192acde57",
+                    "label": "Entry into a country",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "8a6ab892-1b1d-4ad9-82da-c6c38ee8fcfb",
+                    "label": "Surveillance",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5340f478-ec5d-41e6-bc62-961c52014d4d",
+                    "label": "Contact of a case",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other (specify)",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "6408"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "OTHER"
+                      },
+                      {
+                        "type": "SNOMED-MVP",
+                        "value": "56221000105001"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "74964007"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "reasonsForCovidTest",
+              "behaviours": [
+                {
+                  "intent": "COVID_ASSESSMENT_RETROSPECTIVE",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Other reasons for testing",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "a782ce41-5499-4521-ae42-16347fe6b9e0"
+              },
+              "questions": [
+                {
+                  "label": "Other reasons for testing",
+                  "id": "othersReasonForCovidTest",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "type": "obs",
+                  "behaviours": [
+                    {
+                      "intent": "COVID_ASSESSMENT_RETROSPECTIVE",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('reasonsForCovidTest','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": []
+                    }
+                  ]
+                }
+              ],
+              "id": "othersReasonForCovidTestGroup"
+            },
+            {
+              "label": "Patient status",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "de3bc9b7-05b5-41b6-a38d-8d2eec646c4f",
+                "answers": [
+                  {
+                    "concept": "5006AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Asymptomatic",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "5006"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "84387000"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1068AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Symptomatic",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "1068"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "264931009"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "patientStatus",
+              "behaviours": [
+                {
+                  "intent": "COVID_ASSESSMENT_RETROSPECTIVE",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Comorbidity present",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "166020AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "398192003"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes",
+                    "conceptMappings": [
+                      {
+                        "type": "CIEL",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 373066001"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "label": "No",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown",
+                    "conceptMappings": [
+                      {
+                        "type": "CIEL",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 261665006"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1067"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "comorbidityPresent",
+              "behaviours": [
+                {
+                  "intent": "COVID_ASSESSMENT_RETROSPECTIVE",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "COVID Lab Test",
+      "sections": [
+        {
+          "label": "Sample",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date specimen collected",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "159951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "SPUTUM COLLECTION DATE"
+                  }
+                ]
+              },
+              "id": "specimenCollectionDate",
+              "behaviours": [
+                {
+                  "intent": "COVID_LAB_TEST_FORM_RETROSPECTIVE",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue > today() || myValue <= '1/1/2020'"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "SARS-Cov2 test requested",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "069f6dfe-88c1-4a45-a894-0d99549c8718",
+                "answers": [
+                  {
+                    "concept": "165852AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Rapid Antigen Test",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165840AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diagnostic PCR Test",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "sarsCovidTestType",
+              "behaviours": [
+                {
+                  "intent": "COVID_LAB_TEST_FORM_RETROSPECTIVE",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "specimenCollected !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Result",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Final COVID-19 Test Result",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5da5c21b-969f-41bd-9091-e40d4c707544",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "664"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "260385009"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "664"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "NEGATIVE"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "665"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH",
+                        "value": "703"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "704"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "10828004"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "703"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "POSITIVE"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "165649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Inconclusive",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "finalCovidTestResult",
+              "behaviours": [
+                {
+                  "intent": "COVID_LAB_TEST_FORM_RETROSPECTIVE",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "COVID Outcome",
+      "sections": [
+        {
+          "label": "COVID-19 Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "What was the patient’s outcome",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a845f3e6-4432-4de4-9fff-37fa270b1a06",
+                "answers": [
+                  {
+                    "concept": "165870AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Recovered (Symptoms resolved)",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "166183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Long COVID",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "patientOutcome"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "xxxx",
+  "referencedForms": [],
+  "allowUnspecifiedAll": true
+}

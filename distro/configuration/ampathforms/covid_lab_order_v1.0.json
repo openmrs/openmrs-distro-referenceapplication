@@ -1,0 +1,534 @@
+{
+  "name": "COVID Lab Order Form",
+  "pages": [
+    {
+      "label": "Lab Order",
+      "sections": [
+        {
+          "label": "Lab Order Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Order Labs",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "2dbf01ab-77f6-4b35-aa2c-46dfc14b0af0",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                },
+                "conceptMappings": [
+                  {
+                    "type": "OCT",
+                    "value": "LabOrdered"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                    "label": "Yes",
+                    "conceptMappings": [
+                      {
+                        "type": "CIEL",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 373066001"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "label": "No",
+                    "conceptMappings": []
+                  }                  
+                ]
+              },
+              "id": "orderLabs",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",                
+                  "hide": {
+                    "hideWhenExpression": "true"
+                  }
+                },
+                {
+                  "intent": "COVID_LAB_ORDER_EMBED",
+                  "required": "false",                
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                },
+                {
+                  "intent": "COVID_LAB_ORDER_RESULT_EMBED",
+                  "required": "false",                
+                  "hide": {
+                    "hideWhenExpression": "true"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Order date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "162078AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "162078"
+                  }
+                ]
+              },
+              "id": "orderDate",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression":"myValue > today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "COVID_LAB_ORDER_EMBED",
+                  "required": "false",                
+                  "hide": {
+                    "hideWhenExpression": "orderLabs == '488b58ff-64f5-4f8a-8979-fa79940b1594'"                  
+                  }
+                }               
+              ]
+            },
+            {
+              "label": "Sample type",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ae127f82-1861-4165-ac81-8554e5a3aac4",
+                "answers": [
+                  {
+                    "concept": "163364AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Nasopharyngeal Swab",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163363AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Anterior nasal swab",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown",
+                    "conceptMappings": [
+                      {
+                        "type": "CIEL",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 261665006"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "UNKNOWN"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "6408"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "OTHER"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "SNOMED-MVP",
+                        "value": "56221000105001"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "74964007"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "specimenType",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                },
+                {
+                  "intent": "COVID_LAB_ORDER_EMBED",
+                  "required": "false",                
+                  "hide": {
+                    "hideWhenExpression": "orderLabs == '488b58ff-64f5-4f8a-8979-fa79940b1594'"                  }
+                }
+              ]
+            },
+            {
+              "label": "Other sample type",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d07aba2e-f37d-49dd-bb65-b27e8df80399"
+              },
+              "id": "otherSpecimenType",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('specimenType','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Test requested",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "069f6dfe-88c1-4a45-a894-0d99549c8718",
+                "answers": [
+                  {
+                    "concept": "165852AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ag-RDTs (SARS-COV-2 Rapid Antigen Test)",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165840AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NAAT (SARS-COV-2 Diagnostic PCR Test)",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "testRequested",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true"
+                },
+                {
+                  "intent": "COVID_LAB_ORDER_EMBED",
+                  "required": "false",                
+                  "hide": {
+                    "hideWhenExpression": "orderLabs == '488b58ff-64f5-4f8a-8979-fa79940b1594'"                  }
+                }
+              ]
+            },
+            {
+              "label": "Reasons for testing (select all that apply)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "ae46f4b1-c15d-4bba-ab41-b9157b82b0ce",
+                "answers": [
+                  {
+                    "concept": "5340f478-ec5d-41e6-bc62-961c52014d4d",
+                    "label": "Contact of a case",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "8a6ab892-1b1d-4ad9-82da-c6c38ee8fcfb",
+                    "label": "Surveillance",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "677f4d21-7293-4810-abe6-57a192acde57",
+                    "label": "Entry into a country",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "f8c9c2cc-3070-444e-8818-26fb8100bb78",
+                    "label": "Travel out of country",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "30320fb8-b29b-443f-98cf-f3ef491f8947",
+                    "label": "Health worker",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "38769c82-a3d3-4714-97b7-015726cdb209",
+                    "label": "Other frontline worker",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "ad8be6bf-ced7-4390-a6af-c5acebeac216",
+                    "label": "Follow-up",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "e0f1584a-cc8b-48e9-980f-64d9f724caf8",
+                    "label": "Quarantine",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1cee0ab3-bf06-49e9-a49c-baf261620c67",
+                    "label": "Post-mortem",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "f974e267-feeb-42be-9d37-61554dad16b1",
+                    "label": "Voluntary",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "0ed2e3ca-b9a6-4ff6-ac74-4d4cd9520acc",
+                    "label": "RDT confirmatory",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1068AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Symptomatic",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "1068"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "264931009"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "6408"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "OTHER"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "SNOMED-MVP",
+                        "value": "56221000105001"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "74964007"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "labOrderReasonsForTesting",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true"
+                },
+                {
+                  "intent": "COVID_LAB_ORDER_EMBED",
+                  "required": "false",                
+                  "hide": {
+                    "hideWhenExpression": "orderLabs == '488b58ff-64f5-4f8a-8979-fa79940b1594'"                  }
+                }
+              ]
+            },
+            {
+              "label": "Other reason for testing",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a782ce41-5499-4521-ae42-16347fe6b9e0"
+              },
+              "id": "otherReasonForTesting",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labOrderReasonsForTesting', '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Requested by",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "healthcareprovider",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                },
+                {
+                  "intent": "COVID_LAB_ORDER_EMBED",
+                  "required": "false",                
+                  "hide": {
+                    "hideWhenExpression": "orderLabs == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Status",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "fixed-value",
+                "concept": "6681366c-2174-489a-b951-13a1404935bf",
+                "conceptMappings": [
+                  {
+                    "type": "OCT",
+                    "value": "LabOrderStatus"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "162866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pending status",
+                    "conceptMappings": [
+                      {
+                        "type": "CIEL",
+                        "value": "162866"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "307824009"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "162866"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "status",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "hide": {
+                    "hideWhenExpression": "isEmpty('testRequested')"
+                  },
+                  "value": "162866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" 
+                }
+              ]
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "5",
+                "conceptMappings": [
+                  {
+                    "type": "LOINC",
+                    "value": "48767-8"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "161011"
+                  }
+                ]
+              },
+              "id": "notes",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false"
+                },
+                {
+                  "intent": "COVID_LAB_ORDER_EMBED",
+                  "hide": {
+                    "hideWhenExpression": "orderLabs == '488b58ff-64f5-4f8a-8979-fa79940b1594'"                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "Lab Order"
+    },
+    {
+      "intent": "COVID_LAB_ORDER_EMBED",
+      "display": "COVID Lab Order Embed"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "2e97620c-3bed-11ec-bbd2-e10134727b73",
+  "encounterType": "a77d3e7f-5c8f-4074-a207-77a70e197b0c",
+  "encounter": "COVID Lab Encounter",
+  "referencedForms": [],
+  "allowUnspecifiedAll": true
+}

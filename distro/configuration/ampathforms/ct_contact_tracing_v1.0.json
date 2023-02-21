@@ -1,0 +1,1118 @@
+{
+    "name":"Contact Tracing Form",
+    "pages":[
+      {
+        "label":"Introduction",
+        "sections":[
+          {
+            "label":"",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "type":"markdown",
+                "questionOptions":{
+                  "rendering":"markdown"
+                },
+                "id":"fooMarkdown",
+                "value":[
+                  "**Use this form to:** Trace a contact of an index client (Child/Sex partner/Someone who they shared a needle with) "
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label":"Contact Tracing",
+        "sections":[
+          {
+            "label":"Contact Tracing Details",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "label":"Contact date",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"date",
+                  "concept":"160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings":[
+                    {
+                      "type":"CIEL",
+                      "value":"160753"
+                    },
+                    {
+                      "type":"CIEL",
+                      "value":"160753"
+                    },
+                    {
+                      "type":"SNOMED-CT",
+                      "value":"439771001"
+                    },
+                    {
+                      "type":"SNOMED-CT",
+                      "value":"439771001"
+                    }
+                  ]
+                },
+                "id":"contactDate",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": [
+                        {
+                          "type": "date",
+                          "allowFutureDates": "false"
+                        },
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"									}
+                      ]
+                    }
+                  ]
+              },
+              {
+                "label":"Contact Method",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"59c023dd-eed2-4b11-8c34-b88e9439db3c",
+                  "answers":[
+                    {
+                      "concept":"166457AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Physical contact/client tracing",
+                      "conceptMappings":[
+                        
+                      ]
+                    },
+                    {
+                      "concept":"166458AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Telephone contact/client tracing",
+                      "conceptMappings":[
+                        
+                      ]
+                    },
+                    {
+                      "concept":"5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Other non-coded",
+                      "conceptMappings":[
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"6408"
+                        },
+                        {
+                          "type":"org.openmrs.module.mdrtb",
+                          "value":"OTHER"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"5622"
+                        },
+                        {
+                          "type":"org.openmrs.module.mdrtb",
+                          "value":"OTHER"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"6408"
+                        },
+                        {
+                          "type":"SNOMED-MVP",
+                          "value":"56221000105001"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"5622"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"5622"
+                        },
+                        {
+                          "type":"SNOMED-MVP",
+                          "value":"56221000105001"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"5622"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"5622"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"74964007"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id":"contactMethod",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    }
+                  ]
+              }
+            ]
+          },
+          {
+            "label":"Outcome Contact",
+            "isExpanded":"true",
+            "questions":[
+                {
+                    "label":"Contacted Successfully",
+                    "type":"obs",
+                    "questionOptions":{
+                      "rendering":"radio",
+                      "concept":"911d08b4-b523-46e4-8b65-e6924e95d015",
+                      "answers":[
+                        {
+                          "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label":"Yes",
+                          "conceptMappings":[
+                            {
+                              "type":"AMPATH",
+                              "value":"1065"
+                            },
+                            {
+                              "type":"SNOMED CT",
+                              "value":"CT: 373066001"
+                            },
+                            {
+                              "type":"PIH",
+                              "value":"1065"
+                            },
+                            {
+                              "type":"CIEL",
+                              "value":"1065"
+                            },
+                            {
+                              "type":"PIH",
+                              "value":"1065"
+                            },
+                            {
+                              "type":"SNOMED-CT",
+                              "value":"373066001"
+                            },
+                            {
+                              "type":"PIH-Malawi",
+                              "value":"1065"
+                            },
+                            {
+                              "type":"AMPATH",
+                              "value":"1065"
+                            }
+                          ]
+                        },
+                        {
+                          "concept":"1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label":"No",
+                          "conceptMappings":[
+                            {
+                              "type":"PIH",
+                              "value":"1066"
+                            },
+                            {
+                              "type":"PIH-Malawi",
+                              "value":"1066"
+                            },
+                            {
+                              "type":"SNOMED-CT",
+                              "value":"373067005"
+                            },
+                            {
+                              "type":"AMPATH",
+                              "value":"1066"
+                            },
+                            {
+                              "type":"PIH-Malawi",
+                              "value":"1066"
+                            },
+                            {
+                              "type":"AMPATH",
+                              "value":"1066"
+                            },
+                            {
+                              "type":"SNOMED-CT",
+                              "value":"373067005"
+                            },
+                            {
+                              "type":"PIH",
+                              "value":"1066"
+                            }
+                          ]
+                        },
+                        {
+                          "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label":"Unknown",
+                          "conceptMappings":[
+                            {
+                              "type":"AMPATH",
+                              "value":"1067"
+                            },
+                            {
+                              "type":"CIEL",
+                              "value":"1067"
+                            },
+                            {
+                              "type":"SNOMED-CT",
+                              "value":"261665006"
+                            },
+                            {
+                              "type":"PIH",
+                              "value":"1067"
+                            },
+                            {
+                              "type":"org.openmrs.module.mdrtb",
+                              "value":"UNKNOWN"
+                            },
+                            {
+                              "type":"AMPATH",
+                              "value":"1067"
+                            },
+                            {
+                              "type":"PIH",
+                              "value":"1067"
+                            },
+                            {
+                              "type":"SNOMED CT",
+                              "value":"CT: 261665006"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "id":"patientContacted",
+                    "behaviours": [
+                        {
+                          "intent": "*",
+                          "required": "true",
+                          "unspecified": "true",
+                          "hide": {
+                            "hideWhenExpression": "false"
+                          },
+                          "validators": []
+                        }
+                      ]
+                  },
+              {
+                "label":"Outcome",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"36a3e671-9d60-4109-b41f-046f44f4b389",
+                  "answers":[
+                    {
+                      "concept":"83f1c235-de6f-4141-8d8d-73a917b781de",
+                      "label":"Contact came for HTS",
+                      "conceptMappings":[
+                        
+                      ]
+                    },
+                    {
+                      "concept":"56f6a5a4-7ef9-4af3-a250-26b3894e711b",
+                      "label":"Contact will test elsewhere",
+                      "conceptMappings":[
+                        
+                      ]
+                    },
+                    {
+                      "concept":"e7a0e18e-56e2-49da-b518-673f13c7bfba",
+                      "label":"Refused Test",
+                      "conceptMappings":[
+                        
+                      ]
+                    },
+                    {
+                      "concept":"5566AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Partner confirmed HIV+",
+                      "conceptMappings":[
+                        {
+                          "type":"CIEL",
+                          "value":"5566"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"5566"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id":"outcomePatient",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('patientContacted','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": []
+                    }
+                  ]
+              }
+            ]
+          },
+          {
+            "label":"HIV Testing",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "label":"Contact booked for HIV test",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"24c9e221-bc34-4a41-8a2e-ffb7331890e1",
+                  "answers":[
+                    {
+                      "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Yes",
+                      "conceptMappings":[
+                        {
+                          "type":"AMPATH",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"SNOMED CT",
+                          "value":"CT: 373066001"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"373066001"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1065"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"No",
+                      "conceptMappings":[
+                        {
+                          "type":"PIH",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"373067005"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"373067005"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1066"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Unknown",
+                      "conceptMappings":[
+                        {
+                          "type":"AMPATH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"261665006"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"org.openmrs.module.mdrtb",
+                          "value":"UNKNOWN"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"SNOMED CT",
+                          "value":"CT: 261665006"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id":"contactBooked",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('outcomePatient','56f6a5a4-7ef9-4af3-a250-26b3894e711b')"
+                      },
+                      "validators": []
+                    }
+                  ]
+              },
+              {
+                "label":"Date booked for HIV test",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"date",
+                  "concept":"04dcb442-384c-41b5-9f0e-2fe24b977cb2",
+                  "weeksList":""
+                },
+                "id":"dateBooked",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('outcomePatient','56f6a5a4-7ef9-4af3-a250-26b3894e711b')"
+                      },
+                      "validators": [
+                        {
+                            "type": "date",
+                            "allowFutureDates": "false"
+                        },
+                        {
+                            "type": "js_expression",
+                            "failsWhenExpression": "myValue <= useFieldValue('contactDate')"
+                        }
+                      ]
+                    }
+                  ]
+              },
+              {
+                "label":"Contact Tested for HIV",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"161557AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings":[
+                    {
+                      "type":"CIEL",
+                      "value":"161557"
+                    }
+                  ],
+                  "answers":[
+                    {
+                      "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Yes",
+                      "conceptMappings":[
+                        {
+                          "type":"AMPATH",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"SNOMED CT",
+                          "value":"CT: 373066001"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"373066001"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1065"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"No",
+                      "conceptMappings":[
+                        {
+                          "type":"PIH",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"373067005"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"373067005"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1066"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Unknown",
+                      "conceptMappings":[
+                        {
+                          "type":"AMPATH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"261665006"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"org.openmrs.module.mdrtb",
+                          "value":"UNKNOWN"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"SNOMED CT",
+                          "value":"CT: 261665006"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id":"contactHIVTesting",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('outcomePatient','83f1c235-de6f-4141-8d8d-73a917b781de')"
+                      },
+                      "validators": []
+                    }
+                  ]
+              },
+              {
+                "label":"Contact HIV Status",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"1436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings":[
+                    {
+                      "type":"SNOMED-MVP",
+                      "value":"14361000105003"
+                    },
+                    {
+                      "type":"AMPATH",
+                      "value":"2313"
+                    },
+                    {
+                      "type":"SNOMED-CT",
+                      "value":"278977008"
+                    },
+                    {
+                      "type":"PIH",
+                      "value":"3082"
+                    },
+                    {
+                      "type":"PIH",
+                      "value":"3082"
+                    },
+                    {
+                      "type":"SNOMED-MVP",
+                      "value":"14361000105003"
+                    },
+                    {
+                      "type":"CIEL",
+                      "value":"1436"
+                    }
+                  ],
+                  "answers":[
+                    {
+                      "concept":"703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Positive",
+                      "conceptMappings":[
+                        {
+                          "type":"PIH",
+                          "value":"703"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"704"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"703"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"10828004"
+                        },
+                        {
+                          "type":"org.openmrs.module.mdrtb",
+                          "value":"POSITIVE"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Negative",
+                      "conceptMappings":[
+                        {
+                          "type":"AMPATH",
+                          "value":"664"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"664"
+                        },
+                        {
+                          "type":"org.openmrs.module.mdrtb",
+                          "value":"NEGATIVE"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"260385009"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"664"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"664"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"260385009"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"664"
+                        },
+                        {
+                          "type":"org.openmrs.module.mdrtb",
+                          "value":"NEGATIVE"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"665"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"665"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Indeterminate",
+                      "conceptMappings":[
+                        {
+                          "type":"AMPATH",
+                          "value":"1138"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1138"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1138"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"82334004"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"82334004"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Unknown",
+                      "conceptMappings":[
+                        {
+                          "type":"AMPATH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"261665006"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"org.openmrs.module.mdrtb",
+                          "value":"UNKNOWN"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1067"
+                        },
+                        {
+                          "type":"SNOMED CT",
+                          "value":"CT: 261665006"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id":"contactHIVStatus",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('outcomePatient','83f1c235-de6f-4141-8d8d-73a917b781de')"
+                      },
+                      "validators": []
+                    }
+                  ]
+              }
+            ],
+            "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "!includes('outcomePatient','56f6a5a4-7ef9-4af3-a250-26b3894e711b') || outcomePatient !== '83f1c235-de6f-4141-8d8d-73a917b781de' "
+                  },
+                  "validators": []
+                }
+              ]
+          }
+        ]
+      },
+      {
+        "label":"Outcome",
+        "sections":[
+          {
+            "label":"Final Outcome Contact",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "label":"Final Outcome reached (After successful or multiple unsuccessful tracing attempts)",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"eeba884c-67fc-4f03-be2e-8dd3eb64ae10",
+                  "answers":[
+                    {
+                      "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Yes",
+                      "conceptMappings":[
+                        {
+                          "type":"AMPATH",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"SNOMED CT",
+                          "value":"CT: 373066001"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"CIEL",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"373066001"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"1065"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1065"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"No",
+                      "conceptMappings":[
+                        {
+                          "type":"PIH",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"373067005"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"PIH-Malawi",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"1066"
+                        },
+                        {
+                          "type":"SNOMED-CT",
+                          "value":"373067005"
+                        },
+                        {
+                          "type":"PIH",
+                          "value":"1066"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id":"finalOutcomeReached",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    }
+                  ]
+              },
+              {
+                "label":"Final outcome contact tracking",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"radio",
+                  "concept":"a51f1923-80ff-422a-8c22-5d6fb39bcf67",
+                  "answers":[
+                    {
+                      "concept":"161557AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Partner HIV tested",
+                      "conceptMappings":[
+                        {
+                          "type":"CIEL",
+                          "value":"161557"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"5566AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Partner confirmed HIV+",
+                      "conceptMappings":[
+                        {
+                          "type":"CIEL",
+                          "value":"5566"
+                        },
+                        {
+                          "type":"AMPATH",
+                          "value":"5566"
+                        }
+                      ]
+                    },
+                    {
+                      "concept":"3e25107e-4973-4cab-9892-ed030b90f6dd",
+                      "label":"Will test elsewhere",
+                      "conceptMappings":[
+                        
+                      ]
+                    },
+                    {
+                      "concept":"34a71cb0-5663-4e48-84f2-7150f26f4398",
+                      "label":"Contact is far from this facility",
+                      "conceptMappings":[
+                        
+                      ]
+                    },
+                    {
+                      "concept":"4d1fbba8-478c-4876-abee-bffe6ee060f7",
+                      "label":"Contact unwilling to come",
+                      "conceptMappings":[
+                        
+                      ]
+                    },
+                    {
+                      "concept":"160432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Dead",
+                      "conceptMappings":[
+                        
+                      ]
+                    },
+                    {
+                      "concept":"166994AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label":"Unsuccessful",
+                      "conceptMappings":[
+                        
+                      ]
+                    }
+                  ]
+                },
+                "id":"finalContactOutcome",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('finalOutcomeReached','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": []
+                    }
+                  ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label":"Notes",
+        "sections":[
+          {
+            "label":"Contact tracking notes",
+            "isExpanded":"true",
+            "questions":[
+              {
+                "label":"Notes",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"textarea",
+                  "concept":"165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rows":"",
+                  "conceptMappings":[
+                    {
+                      "type":"CIEL",
+                      "value":"165095"
+                    }
+                  ]
+                },
+                "id":"contactTracingNotes"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "availableIntents": [
+        {
+          "intent": "*",
+          "display": "Contact Tracing Form"
+        }
+      ],
+    "processor":"EncounterFormProcessor",
+    "uuid":"xxxx",
+    "referencedForms":[],
+    "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
+    "encounter": "Contact Tracing Form",
+    "allowUnspecifiedAll": true
+  }

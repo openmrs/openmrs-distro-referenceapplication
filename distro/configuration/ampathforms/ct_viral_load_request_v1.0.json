@@ -1,0 +1,602 @@
+{
+    "name": "Viral Load request Form",
+    "pages": [
+      {
+        "label": "Viral Load Request",
+        "sections": [
+          {
+            "label": "Order details",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Date Ordered",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "162078AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "weeksList": "",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "162078"
+                    }
+                  ]
+                },
+                "id": "labOrderDate"
+              },
+              {
+                "label": "Reason for Viral Load",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "86cc0cfe-bace-4969-94b6-d139f4971d13",
+                  "answers": [
+                    {
+                      "concept": "5d4e13af-92ec-4b91-a8e4-97818810e577",
+                      "label": "Baseline Viral Load",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "BaselineVL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "163523AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Clinical failure",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "163523"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1259AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Change regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "AMPATH",
+                          "value": "1259"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1259"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1259"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "67143af5-c443-4a4f-a678-f3981b4fcb0f",
+                      "label": "Confirmation of treatment failure",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "5632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Currently breastfeeding child",
+                      "conceptMappings": [
+                        {
+                          "type": "AMPATH",
+                          "value": "5632"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "413712001"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "2056"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "413712001"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "5632"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "5632"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Currently pregnant",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "77386006"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1434"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "77386006"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1484"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "Z33"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "52609"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1484"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "52609"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "c2aed192-73fc-405f-8cc2-776a4da81d59",
+                      "label": "Recency Assay",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "843AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Regimen failure",
+                      "conceptMappings": [
+                        {
+                          "type": "org.openmrs.module.mdrtb",
+                          "value": "FAILED"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "843"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "843"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "843"
+                        },
+                        {
+                          "type": "org.openmrs.module.mdrtb",
+                          "value": "FAILED"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "843"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "843"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "266721009"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "266721009"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "be5d6a4a-4018-49dd-869f-273c9f5fec9e",
+                      "label": "Routine Viral Load",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RoutineViralLoad"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "e185de1e-a9b3-4b10-86df-2300bf4476bb",
+                      "label": "Persistent low-Level viremia",
+                      "conceptMappings": []
+                    }
+                  ],
+                  "conceptMappings": [
+                    {
+                      "type": "OCT",
+                      "value": "ViralLoadRequest"
+                    }
+                  ]
+                },
+                "id": "vlReason"
+              },
+              {
+                "label": "Requested by",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "PIH",
+                      "value": "1392"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "1392"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "1473"
+                    }
+                  ]
+                },
+                "id": "requestedBy"
+              },
+              {
+                "label": "Was Lab Specimen Collected?",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "510102a5-6b9e-4dfe-996f-11e214dbd144",
+                  "answers": [
+                    {
+                      "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                      "label": "Yes",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "PIH-Malawi",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373066001"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                      "label": "No",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "PIH-Malawi",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "373067005"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1066"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "specimenCollected"
+              },
+              {
+                "label": "Notes",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rows": "5",
+                  "conceptMappings": [
+                    {
+                      "type": "LOINC",
+                      "value": "48767-8"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "161011"
+                    }
+                  ]
+                },
+                "id": "notes",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "false"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Specimen Collection",
+        "sections": [
+          {
+            "label": "Specimen Collection Details",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Date sample collected*",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "159951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                "id": "dateSpecimenCollected"
+              },
+              {
+                "label": "Specimen type*",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "9103ae1f-1461-4fcb-91d7-3705a40f5f5c",
+                  "answers": [
+                    {
+                      "concept": "a9ecc403-25b5-48c8-974f-815acc074328",
+                      "label": "Dried Blood Spot",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "1002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Plasma",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "165888AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Venous blood specimen",
+                      "conceptMappings": []
+                    }
+                  ],
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "159959"
+                    }
+                  ]
+                },
+                "id": "specimenType"
+              },
+              {
+                "label": "Other sample type",
+                "type": "obsGroup",
+                "questionOptions": {
+                  "rendering": "group",
+                  "concept": "d07aba2e-f37d-49dd-bb65-b27e8df80399"
+                },
+                "id": "otherSpecimenTypeGroup",
+                "questions": [
+                  {
+                    "label": "Other specimen type",
+                    "id": "otherSpecimenType",
+                    "questionOptions": {
+                      "rendering": "text",
+                      "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    },
+                    "type": "obs",
+                    "behaviours": [
+                      {
+                        "intent": "*",
+                        "required": "true",
+                        "unspecified": "true",
+                        "hide": {
+                          "hideWhenExpression": "!includes('specimenType','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                        },
+                        "validators": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "label": "Specimen ID",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "159968AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "159968"
+                    },
+                    {
+                      "type": "org.openmrs.module.mdrtb",
+                      "value": "TUBERCULOSIS SPECIMEN ID"
+                    }
+                  ]
+                },
+                "id": "specimenId",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "false",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Referral Lab",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Forwarded to reference lab",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "161934AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "161934"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "7818"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "161934"
+                    },
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "129125009"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Yes",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373066001"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "No",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Unknown",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "1067"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1067"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 261665006"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1067"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "isSpecimenSentToLab",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": []
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "behaviours": [
+          {
+            "intent": "*",
+            "hide": {
+              "hideWhenExpression": "isEmpty(specimenCollected) || specimenCollected === '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Specimen Dispatch",
+        "sections": [
+          {
+            "label": "Referral Lab Dispatch",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Reference Lab sample sent to",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "161562AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rows": "5",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "161562"
+                    }
+                  ]
+                },
+                "id": "referenceLabSampleSentTo"
+              },
+              {
+                "label": "Date dispatched*",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "159951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                "id": "dateSpecimendispatched"               
+              }
+            ]
+          }
+        ],
+        "behaviours": [
+          {
+            "intent": "*",
+            "hide": {
+              "hideWhenExpression": "!includes('isSpecimenSentToLab', '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+            },
+            "validators": []
+          }
+        ]
+      }
+    ],
+    "availableIntents": [
+      {
+        "intent": "*",
+        "display": "Viral Load request"
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "uuid": "xxxx",
+    "encounterType": "41af1931-184e-45f8-86ca-d42e0db0b8a1",
+    "encounter": "Viral Load results",
+    "referencedForms": []
+  }

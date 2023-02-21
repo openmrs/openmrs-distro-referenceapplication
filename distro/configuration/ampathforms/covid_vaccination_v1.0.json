@@ -1,0 +1,434 @@
+{
+  "name": "COVID Vaccination Form",
+  "pages": [
+    {
+      "label": "COVID Vaccination",
+      "sections": [
+        {
+          "label": "Vaccination Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Vaccination Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "1410"
+                  }
+                ],
+                "weeksList": ""
+              },
+              "id": "vaccinationDate",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue > today() || myValue <= '1/1/2020'"
+                    }
+                  ]
+                }
+              ]
+            },
+             {
+                "label":"Vaccine Dose",
+                "type":"obs",
+                "questionOptions":{
+                  "rendering":"number",
+                  "concept":"6ec64cb3-e710-4d3e-9db4-38c135966a45",
+                  "max":"9",
+                  "min":"1",
+                  "showDate":""
+                },
+                "id":"vaccineDose",
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "false"
+                      },
+                      "validators": []
+                    }
+                  ] 
+              },
+               {
+              "label": "Vaccine Series",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45b3959d-f897-4e01-b6e5-16ef6ae0a687",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "fdef4623-6b7e-4ab0-a5f0-22b440b630dd",
+                    "label": "Primary Vaccine",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "166660AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Booster Vaccine",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "vaccineSeries",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "What vacccine was administered?",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"radio",
+                "concept":"e41fbe17-4aee-4a44-950b-6676d6e0ede2",
+                "answers":[
+                  {
+                    "concept":"166156AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Astrazeneca",
+                    "conceptMappings":[
+                      {
+                        "type":"RxNORM",
+                        "value":"2471010"
+                      },
+                      {
+                        "type":"ICD-11-WHO",
+                        "value":"XM4YL8"
+                      },
+                      {
+                        "type":"CIEL",
+                        "value":"166156"
+                      }
+                    ]
+                  },
+                  {
+                    "concept":"166389AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Covaxin",
+                    "conceptMappings":[
+                      {
+                        "type":"ICD-11-WHO",
+                        "value":"XM1G90"
+                      },
+                      {
+                        "type":"CIEL",
+                        "value":"166389"
+                      }
+                    ]
+                  },
+                  {
+                    "concept":"166378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Cansino",
+                    "conceptMappings":[
+                      {
+                        "type":"SNOMED-CT",
+                        "value":"836369007"
+                      },
+                      {
+                        "type":"ICD-11-WHO",
+                        "value":"XM9QW8"
+                      },
+                      {
+                        "type":"CIEL",
+                        "value":"166378"
+                      }
+                    ]
+                  },
+                  {
+                    "concept":"166355AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Johnson and Johnson",
+                    "conceptMappings":[
+                      {
+                        "type":"ICD-11-WHO",
+                        "value":"XM1AG7"
+                      },
+                      {
+                        "type":"CIEL",
+                        "value":"166378"
+                      }
+                    ]
+                  },
+                  {
+                    "concept":"166154AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Moderna",
+                    "conceptMappings":[
+                      {
+                        "type":"RxNORM",
+                        "value":"2470232"
+                      },
+                      {
+                        "type":"CIEL",
+                        "value":"166154"
+                      },
+                      {
+                        "type":"ICD-11-WHO",
+                        "value":"XM3DT5"
+                      }
+                    ]
+                  },
+                  {
+                    "concept":"166390AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Novavax",
+                    "conceptMappings":[
+                      {
+                        "type":"CIEL",
+                        "value":"166390"
+                      },
+                      {
+                        "type":"ICD-11-WHO",
+                        "value":"XM5JC5"
+                      }
+                    ]
+                  },
+                  {
+                    "concept":"166155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Pfizer-BioNtech",
+                    "conceptMappings":[
+                      {
+                        "type":"ICD-11-WHO",
+                        "value":"XM8NQ0"
+                      },
+                      {
+                        "type":"RxNORM",
+                        "value":"8468230"
+                      },
+                      {
+                        "type":"CIEL",
+                        "value":"166155"
+                      }
+                    ]
+                  },
+                  {
+                    "concept":"166253AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Sinopharm",
+                    "conceptMappings":[
+                      {
+                        "type":"ICD-11-WHO",
+                        "value":"XM8866"
+                      }
+                    ]
+                  },
+                  {
+                    "concept":"166249AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Sinovac",
+                    "conceptMappings":[
+                      {
+                        "type":"CIEL",
+                        "value":"166249"
+                      },
+                      {
+                        "type":"ICD-11-WHO",
+                        "value":"XM7HT3"
+                      }
+                    ]
+                  },
+                   {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other (Specify)",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "6408"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "OTHER"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "SNOMED-MVP",
+                        "value": "56221000105001"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "5622"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id":"vaccineAdministered",
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"false"
+                  },
+                  "validators":[]
+                }
+              ]
+            },
+            {
+              "label": "Other vaccine",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0cc868bd-e9dd-4b59-b278-f923afe22d82",
+                "rows": "5"
+              },
+              "id": "otherVaccine",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('vaccineAdministered','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Vaccine lot number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1420AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "1420"
+                  }
+                ]
+              },
+              "id": "vaccineLotNumber",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "vaccineDose == null"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date of the next Vaccination (If Scheduled)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "AMPATH",
+                    "value": "5096"
+                  },
+                  {
+                    "type": "SNOMED-MVP",
+                    "value": "50961000105000"
+                  },
+                  {
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "RETURN VISIT DATE"
+                  },
+                  {
+                    "type": "PIH-Malawi",
+                    "value": "5096"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "5096"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "406543005"
+                  }
+                ]
+              },
+              "id": "nextVaccineDate",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue,'2020-01-01') || myValue <= useFieldValue('vaccinationDate')"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "5",
+                "conceptMappings": [
+                  {
+                    "type": "LOINC",
+                    "value": "48767-8"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "161011"
+                  }
+                ]
+              },
+              "id": "vaccinationNotes",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "COVID Vaccination"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "xxxx",
+  "referencedForms": [],
+  "encounterType": "5b37ce7a-c55e-4226-bdc8-5af04025a6de",
+  "encounter": "COVID Vaccination",
+  "allowUnspecifiedAll": true
+}

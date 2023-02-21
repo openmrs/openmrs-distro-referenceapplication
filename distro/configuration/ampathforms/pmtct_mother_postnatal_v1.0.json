@@ -1,0 +1,522 @@
+{
+    "name":"Mother - Postnatal Form",
+    "pages":[
+       {
+          "label":"Visit Details",
+          "sections":[
+             {
+                "label":"PTracker ID Capture",
+                "isExpanded":"true",
+                "questions":[
+                  {
+                    "label": "Visit Date",
+                    "type": "obs",
+                    "id": "visit_date",
+                    "questionOptions": {
+                      "concept": "163260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "rendering": "date"
+                    },
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"true",
+                        "unspecified":"true",
+                        "hide":{
+                          "hideWhenExpression":"false"
+                        },
+                        "validators": [
+                          {
+                            "type":"date",
+                            "allowFutureDates":"false"
+                          },
+                          {
+                            "type":"js_expression",
+                            "failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                      "label":"PTracker Id",
+                      "type":"obs",
+                      "id":"ptrackerid",
+                      "questionOptions":{
+                         "concept":"6c45421e-2566-47cb-bbb3-07586fffbfe2",
+                         "rendering":"text"
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "hide":{
+                            "hideWhenExpression":"false"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   }
+                ]
+             }      
+            ]
+            },
+            {
+               "label": "HTS and ART",
+               "sections": [
+             {
+                "label":"HIV Testing And ART Initiation",
+                "isExpanded":"true",
+                "questions":[
+                   {
+                      "label":"HIV Test Status",
+                      "type":"obs",
+                      "id":"hiv-test",
+                      "questionOptions":{
+                         "concept":"164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"radio",
+                         "answers":[
+                            {
+                               "concept":"6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f",
+                               "label":"Tested for HIV during this visit"
+                            },
+                            {
+                               "concept":"d18fa331-f158-47d0-b344-cf147c7125a4",
+                               "label":"Not tested for HIV during this visit"
+                            },
+                            {
+                               "concept":"8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
+                               "label":"Previously known positive"
+                            },
+                            {
+                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                               "label":"Missing"
+                            }
+                         ]
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "hide":{
+                            "hideWhenExpression":"false"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"HIV Test Result",
+                      "type":"obs",
+                      "id":"hiv-test-result",
+                      "questionOptions":{
+                         "concept":"159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"radio",
+                         "answers":[
+                            {
+                               "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Unknown"
+                            },
+                            {
+                               "concept":"138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Positive"
+                            },
+                            {
+                               "concept":"664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Negative"
+                            },
+                            {
+                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                               "label":"Missing"
+                            }
+                         ]
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "hide":{
+                            "hideWhenExpression":"!includes('hiv-test','6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f')"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"ART Initiation",
+                      "type":"obs",
+                      "id":"art-initiation",
+                      "questionOptions":{
+                         "concept":"6e62bf7e-2107-4d09-b485-6e60cbbb2d08",
+                         "rendering":"radio",
+                         "answers":[
+                            {
+                               "concept":"160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Refused ART"
+                            },
+                            {
+                               "concept":"160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Started on ART in PNC"
+                            },
+                            {
+                               "concept":"1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Not started due to stockout of ART"
+                            },
+                            {
+                               "concept":"160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Already on ART"
+                            },
+                            {
+                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                               "label":"Missing"
+                            }
+                         ]
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "hide":{
+                            "hideWhenExpression":"hiv-test-result !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && hiv-test !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8'"
+                          },
+                          "validators":[
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                    "label":"ART Unique Number",
+                    "type":"obs",
+                    "id":"art-number",
+                    "questionOptions":{
+                       "concept":"164402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                       "rendering":"number"
+                    },
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"true",
+                        "unspecified":"true",
+                        "hide":{
+                          "hideWhenExpression":"art-initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || art-initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                        },
+                        "validators":[
+
+                        ]
+                      }
+                    ]
+                 },
+                   {
+                      "label":"Reason why client has refused ART",
+                      "type":"obs",
+                      "id":"reason-for-refusing-art",
+                      "questionOptions":{
+                         "concept":"0117ec63-6fc8-4b37-99e9-7f6d99652852",
+                         "rendering":"textarea",
+                         "rows":""
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "unspecified":"true",
+                          "hide":{
+                            "hideWhenExpression":"art-initiation !== '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                          },
+                          "validators":[]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"ART Start Date",
+                      "type":"obs",
+                      "id":"art_start_date",
+                      "questionOptions":{
+                         "concept":"159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"date"
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "unspecified":"true",
+                          "hide":{
+                            "hideWhenExpression":"art-initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art-initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"Has the patient had a recent viral load test?",
+                      "type":"obs",
+                      "id":"recent-viral-load",
+                      "questionOptions":{
+                         "concept":"163310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"radio",
+                         "answers":[
+                            {
+                               "concept":"1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"No"
+                            },
+                            {
+                               "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Yes"
+                            },
+                            {
+                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                               "label":"Missing"
+                            }
+                         ]
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "hide":{
+                            "hideWhenExpression":"art-initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art-initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"Viral Load Test Date",
+                      "type":"obs",
+                      "id":"viral_load_test_date",
+                      "questionOptions":{
+                         "concept":"163281AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"date"
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "unspecified":"true",
+                          "hide":{
+                            "hideWhenExpression":"!includes('recent-viral-load','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"Viral Load Results",
+                      "type":"obs",
+                      "id":"viral-load-results",
+                      "questionOptions":{
+                         "concept":"1305AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"radio",
+                         "answers":[
+                            {
+                               "concept":"159971AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Results pending"
+                            },
+                            {
+                               "concept":"1304AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Sample Rejected"
+                            },
+                            {
+                               "concept":"1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Target Detected"
+                            },
+                            {
+                               "concept":"1306AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Not Detected"
+                            },
+                            {
+                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                               "label":"Missing"
+                            }
+                         ]
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "hide":{
+                            "hideWhenExpression":"!includes('recent-viral-load','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"Viral Load Copies",
+                      "type":"obs",
+                      "id":"viral_load_copies",
+                      "questionOptions":{
+                         "concept":"856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"number"
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "unspecified":"true",
+                          "hide":{
+                            "hideWhenExpression":"!includes('viral-load-results','1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   }
+                ]
+             }
+            ]
+         },
+         {
+            "label": "Next Appointment",
+            "sections": [
+             {
+                "label":"Follow Up",
+                "isExpanded":"true",
+                "questions":[
+                   {
+                      "label":"Next Vist Date",
+                      "type":"obs",
+                      "id":"next_visit_date",
+                      "questionOptions":{
+                         "concept":"5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"date"
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "unspecified":"true",
+                          "hide":{
+                            "hideWhenExpression":"false"
+                          },
+                          "validators":[
+                              {
+                                 "type": "date",
+                                 "allowFutureDates": "true"
+                              },
+                              {
+                                 "type": "js_expression",
+                                 "failsWhenExpression": "myValue <= today()"
+                              }
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"Facility of next appointment",
+                      "type":"obs",
+                      "id":"transfer-out",
+                      "questionOptions":{
+                         "concept":"efc87cd5-2fd8-411c-ba52-b0d858f541e7",
+                         "rendering":"radio",
+                         "answers":[
+                            {
+                               "concept":"160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Transfer out"
+                            },
+                            {
+                               "concept":"163266AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"This facility"
+                            },
+                            {
+                               "concept":"52f7fc03-611b-4b62-8498-37beb2fa99ed",
+                               "label":"In Transit"
+                            },
+                            {
+                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                               "label":"Missing"
+                            }
+                         ]
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "hide":{
+                            "hideWhenExpression":"false"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"Tranfer Out To",
+                      "type":"obs",
+                      "id":"transfer-out-to",
+                      "questionOptions":{
+                         "concept":"159495AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"text"
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "unspecified":"true",
+                          "hide":{
+                            "hideWhenExpression":"transfer-out !== '160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                          },
+                          "validators":[
+
+                          ]
+                        }
+                      ]
+                   },
+                   {
+                      "label":"Transfer Out Date",
+                      "type":"obs",
+                      "id":"transfer_out_date",
+                      "questionOptions":{
+                         "concept":"160649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rendering":"date"
+                      },
+                      "behaviours":[
+                        {
+                          "intent":"*",
+                          "required":"true",
+                          "unspecified":"true",
+                          "hide":{
+                            "hideWhenExpression":"transfer-out !== '160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                          },
+                          "validators":[
+                           {
+                              "type": "date",
+                              "allowFutureDates": ""
+                           }
+                          ]
+                        }
+                      ]
+                   }
+                ]
+             }
+          ]
+       }
+    ],
+    "availableIntents":[
+       {
+          "intent":"*",
+          "display":"Mother - Postnatal Form"
+       }
+    ],
+    "processor":"EncounterFormProcessor",
+    "uuid":"xxxx",
+    "referencedForms":[],
+    "encounterType":"269bcc7f-04f8-4ddc-883d-7a3a0d569aad",
+    "encounter": "Mother Postnatal",
+    "allowUnspecifiedAll":true
+ }

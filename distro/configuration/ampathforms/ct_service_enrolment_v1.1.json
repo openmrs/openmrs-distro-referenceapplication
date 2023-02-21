@@ -1,0 +1,2292 @@
+{
+	"name":"HIV Enrolment Form v1.1",
+	"pages":[
+	  {
+		"label":"Introduction",
+		"sections":[
+		  {
+			"label":"",
+			"isExpanded":"true",
+			"questions":[
+			  {
+				"type":"markdown",
+				"questionOptions":{
+				  "rendering":"markdown"
+				},
+				"id":"fooMarkdown",
+				"value":[
+				  "**Use this form to:** Enrol or Re-enrol a client into HIV Care"
+				]
+			  },
+			  {
+				"label":"What do you want to do?",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"radio",
+				  "concept":"83e40f2c-c316-43e6-a12e-20a338100281",
+				  "answers":[
+					{
+					  "concept":"164144AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Enrol a new client",
+					  "conceptMappings":[
+					  ]
+					},
+					{
+					  "concept":"160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Transfer in a client",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"163532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Enrol a Mother into PMTCT program",
+					  "conceptMappings":[
+					  ]
+					},
+					{
+					  "concept":"159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Re-enrol a client",
+					  "conceptMappings":[
+
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"false",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"clientDescription"
+			  },
+			  {
+				"label":"Enrolment Date",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"date",
+				  "concept":"160555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					},
+					"validators":[
+					  {
+						"type":"date",
+						"allowFutureDates":"false"
+					  },
+					  {
+						"type":"js_expression",
+						"failsWhenExpression":"myValue > today()"
+					  }
+					]
+				  }
+				],
+				"id":"hivEnrolmentDate"
+			  },
+			  {
+				"label":"Unique ID",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"text",
+				  "concept":"162576AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					},
+					"validators":[
+					  {
+						"type":"js_expression",
+						"failsWhenExpression":"isEmpty(patientIdentifier)"
+					  }
+					]
+				  }
+				],
+				"id":"patientIdentifier"
+			  },
+			  {
+				"label":"Other Unique ID",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"text",
+				  "concept":"162727AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"otherUniquePatientIdentifier"
+			  },
+			  {
+				"label":"Entry Point",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"select",
+				  "concept":"160540AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+				  "answers":[
+					{
+					  "concept":"162223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Voluntary male circumcision clinic",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"257585005"
+						}
+					  ]
+					},
+					{
+					  "concept":"161359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Private home-based care",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"66280005"
+						}
+					  ]
+					},
+					{
+					  "concept":"5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Other",
+					  "conceptMappings":[
+						{
+						  "type":"PIH-Malawi",
+						  "value":"6408"
+						},
+						{
+						  "type":"org.openmrs.module.mdrtb",
+						  "value":"OTHER"
+						},
+						{
+						  "type":"SNOMED-MVP",
+						  "value":"56221000105001"
+						},
+						{
+						  "type":"PIH",
+						  "value":"5622"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"5622"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"74964007"
+						}
+					  ]
+					},
+					{
+					  "concept":"160549AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Adolescent outreach program",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"43741000"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1789"
+						}
+					  ]
+					},
+					{
+					  "concept":"160547AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Private company",
+					  "conceptMappings":[
+						{
+						  "type":"PIH",
+						  "value":"1787"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"43741000"
+						}
+					  ]
+					},
+					{
+					  "concept":"160545AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Outreach program",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"43741000"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1785"
+						}
+					  ]
+					},
+					{
+					  "concept":"160543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Community-based organization",
+					  "conceptMappings":[
+						{
+						  "type":"PIH",
+						  "value":"1741"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"43741000"
+						}
+					  ]
+					},
+					{
+					  "concept":"160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Outpatient department",
+					  "conceptMappings":[
+						{
+						  "type":"PIH",
+						  "value":"1651"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1965"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"33022008"
+						}
+					  ]
+					},
+					{
+					  "concept":"160537AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Pediatric inpatient service",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"398156002"
+						}
+					  ]
+					},
+					{
+					  "concept":"160539AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Voluntary counseling and testing program",
+					  "conceptMappings":[
+						{
+						  "type":"AMPATH",
+						  "value":"2047"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1649"
+						}
+					  ]
+					},
+					{
+					  "concept":"159937AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Maternal and child health program",
+					  "conceptMappings":[
+						{
+						  "type":"AMPATH",
+						  "value":"2050"
+						}
+					  ]
+					},
+					{
+					  "concept":"160564AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Vaccination service",
+					  "conceptMappings":[
+						{
+						  "type":"PIH",
+						  "value":"6714"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"284548004"
+						}
+					  ]
+					},
+					{
+					  "concept":"160552AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Nutrition program",
+					  "conceptMappings":[
+						{
+						  "type":"PIH",
+						  "value":"1845"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"386373004"
+						}
+					  ]
+					},
+					{
+					  "concept":"160550AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Sex worker outreach program",
+					  "conceptMappings":[
+						{
+						  "type":"PIH",
+						  "value":"1790"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"43741000"
+						}
+					  ]
+					},
+					{
+					  "concept":"160548AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Intravenous venous drug user outreach program",
+					  "conceptMappings":[
+						{
+						  "type":"PIH",
+						  "value":"1788"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"43741000"
+						}
+					  ]
+					},
+					{
+					  "concept":"160546AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Sexually transmitted infection program/clinic",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"25681007"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1786"
+						}
+					  ]
+					},
+					{
+					  "concept":"160544AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Under five clinic",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"702900003"
+						}
+					  ]
+					},
+					{
+					  "concept":"160541AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Tuberculosis treatment program",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"401173007"
+						}
+					  ]
+					},
+					{
+					  "concept":"160536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Adult inpatient service",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"398156002"
+						}
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"enrollmentMethod"
+			  },
+			  {
+				"label":"Entry Point - Other",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"text",
+				  "concept":"161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+				  "conceptMappings":[
+					{
+						"type": "CIEL",
+						"value": "161011"
+					}
+				  ]
+				},
+				"id":"otherEntryPoint",
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"!includes('enrollmentMethod','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+					}
+				  }
+				]
+			  }
+			]
+		  },
+      {
+        "label": "Population Category",
+        "isExpanded": "true",
+        "questions": [
+          {
+            "label": "Population Category",
+            "type": "obs",
+            "questionOptions": {
+              "rendering": "radio",
+              "concept": "746737c0-4201-4d7f-b580-816e36dc425a",
+              "conceptMappings": [
+                {
+                  "type": "CIEL",
+                  "value": "166432"
+                }
+              ],
+              "answers": [
+                {
+                  "concept": "166430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "General population",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "166430"
+                    }
+                  ]
+                },
+                {
+                  "concept": "166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Key population",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "166431"
+                    }
+                  ]
+                },
+                {
+                  "concept": "167143AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Priority population",
+                  "conceptMappings": []
+                }
+              ]
+            },
+            "id": "clientPopulationCategory"
+          },
+          {
+            "label": "Key Population Type",
+            "type": "obs",
+            "questionOptions": {
+              "rendering": "radio",
+              "concept": "d3d4ae96-8c8a-43db-a9dc-dac951f5dcb3",
+              "answers": [
+                {
+                  "concept": "157351AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Intravenous drug user",
+                  "conceptMappings": []
+                },
+                {
+                  "concept": "160578AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Male who has sex with men",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "160578"
+                    }
+                  ]
+                },
+                {
+                  "concept": "8da9bf92-22f6-40be-b468-1ad08de7d457",
+                  "label": "Prisoners",
+                  "conceptMappings": [
+                    {
+                      "type": "OHTSTemp",
+                      "value": "Prisoners"
+                    }
+                  ]
+                },
+                {
+                  "concept": "160579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Sex worker",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "160579"
+                    },
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "53713009"
+                    }
+                  ]
+                },
+                {
+                  "concept": "22b202fc-67de-4af9-8c88-46e22559d4b2",
+                  "label": "Transgender Persons",
+                  "conceptMappings": [
+                    {
+                      "type": "OHTSTemp",
+                      "value": "Transgender"
+                    }
+                  ]
+                }
+              ]
+            },
+            "behaviours": [
+              {
+                "intent": "*",
+                "required": "true",
+                "unspecified": "true",
+                "hide": {
+                  "hideWhenExpression": "clientPopulationCategory !== '166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              }
+            ],
+            "id": "keyPopulationType"
+          },
+          {
+            "label": "Priority Population Type",
+            "type": "obs",
+            "questionOptions": {
+              "rendering": "select",
+              "concept": "2bf14240-b2b2-42b2-8cf3-b5f8a0cb7764",
+              "conceptMappings": [
+                {
+                  "type": "CIEL",
+                  "value": "167143"
+                }
+              ],
+              "answers": [
+                {
+                  "concept": "678f3144-302f-493e-ba22-7ec60a84732a",
+                  "label": "Adolescent Girls & Young Women",
+                  "conceptMappings": [
+                    {
+                      "type": "OHTSTemp",
+                      "value": "AGYW"
+                    }
+                  ]
+                },
+                {
+                  "concept": "160580AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Client of sex worker",
+                  "conceptMappings": []
+                },
+                {
+                  "concept": "def00c73-f6d5-42fb-bcec-0b192b5be22d",
+                  "label": "Fisher Folk",
+                  "conceptMappings": [
+                    {
+                      "type": "OHTSTemp",
+                      "value": "Fisherfolk"
+                    }
+                  ]
+                },
+                {
+                  "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Long distance truck driver",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "162198"
+                    },
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "87447002"
+                    }
+                  ]
+                },
+                {
+                  "concept": "63ea75cb-205f-4e7b-9ede-5f9b8a4dda9f",
+                  "label": "Migrant Workers",
+                  "conceptMappings": [
+                    {
+                      "type": "OHTSTemp",
+                      "value": "MigrantWorkers"
+                    }
+                  ]
+                },
+                {
+                  "concept": "166514AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Non-intravenous drug user",
+                  "conceptMappings": []
+                },
+                {
+                  "concept": "164100AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Refugee",
+                  "conceptMappings": []
+                },
+                {
+                  "concept": "b282bb08-62a7-42c2-9bea-8751c267d13e",
+                  "label": "Uniformed Forces",
+                  "conceptMappings": [
+                    {
+                      "type": "OHTSTemp",
+                      "value": "UniformedForces"
+                    }
+                  ]
+                },
+                {
+                  "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "label": "Other",
+                  "conceptMappings": [
+                    {
+                      "type": "PIH-Malawi",
+                      "value": "6408"
+                    },
+                    {
+                      "type": "SNOMED-MVP",
+                      "value": "56221000105001"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "5622"
+                    },
+                    {
+                      "type": "AMPATH",
+                      "value": "5622"
+                    },
+                    {
+                      "type": "org.openmrs.module.mdrtb",
+                      "value": "OTHER"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "5622"
+                    }
+                  ]
+                }
+              ]
+            },
+            "behaviours": [
+              {
+                "intent": "*",
+                "required": "true",
+                "unspecified": "true",
+                "hide": {
+                  "hideWhenExpression": "clientPopulationCategory !== '167143AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              }
+            ],
+            "id": "priorityPopulationType"
+          }
+        ]
+      }
+    ]
+	  },
+	  {
+		"label":"Transfer-In",
+		"sections":[
+		  {
+			"label":"Transfer-In",
+			"isExpanded":"true",
+			"questions":[
+			  {
+				"label":"Transferring Facility",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"text",
+				  "concept":"160535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"locationTransferedFrom"
+			  },
+			  {
+				"label":"Start ART Date",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"date",
+				  "concept":"159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"artStartDate"
+			  },
+			  {
+				"label":"Current ART Regimen",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"select",
+				  "concept":"dfbe256e-30ba-4033-837a-2e8477f2e7cd",
+				  "answers":[
+					{
+					  "concept":"d8051638-0123-4322-a094-4a48adffdc37",
+					  "label":"d4T + 3TC + NVP",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"67701961-f6c1-4ebf-a7f5-c2c5d25021a0",
+					  "label":"TDF + FTC + EFV",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"083d46c5-dea7-49de-abd5-e16f252255a7",
+					  "label":"TDF + FTC + DTG",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"36685ad3-a223-4c3c-b6ee-d8358432a600",
+					  "label":"TDF + 3TC + NVP",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"380e5e7c-7c2f-4ba8-a93c-90b1e638dc2c",
+					  "label":"TDF + 3TC + LPV/r",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"5f123dc8-c697-47f6-bc67-007322a9bb48",
+					  "label":"TDF + 3TC + EFV",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"5679c813-cfed-4fb2-b252-d6149297e013",
+					  "label":"TDF + 3TC + DTG + ETR + DRV + RTV",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"907d304b-ebc4-4387-8af8-2d2c92f82910",
+					  "label":"TDF + 3TC + DTG + DRV + RTV",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"5a4587e2-de9e-4b99-9ea0-00717fa5605a",
+					  "label":"TAF + 3TC + LPV/r",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"5f7da36e-1a83-4ede-ae6f-41aaa5304601",
+					  "label":"TAF + 3TC + DTG",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"6b7cd8a1-77b3-4853-bbe7-ff6bf51c41c3",
+					  "label":"TAF + 3TC + DRV/r",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"0fd8a042-81a3-4106-8470-63d29380d7d5",
+					  "label":"RAL + 3TC + DRV + RTV + TDF",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"3ae355dd-fc83-43c6-9312-ebbb30b51bf7",
+					  "label":"RAL + 3TC + DRV + RTV + AZT",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"1431d032-9eeb-46b3-84e5-79f0c19354d8",
+					  "label":"RAL + 3TC + DRV + RTV",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"9e82e55d-dbbf-49a6-900c-d8ead9985b0a",
+					  "label":"ETV + 3TC + DRV + RTV",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"e9540e20-1ba4-4573-b189-088f5fd9dc57",
+					  "label":"AZT + 3TC + RAL",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"bafb40ca-b0c7-4366-bd8e-9eb923237c94",
+					  "label":"AZT + 3TC + NVP",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"d2b1d784-a880-42a9-b0a6-19de2db7afd6",
+					  "label":"AZT + 3TC + LPV/r",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"b1336ea0-3a87-4018-9fce-3a7a22d95d7d",
+					  "label":"AZT + 3TC + EFV",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"f2247788-6d05-490d-ad04-64544c8020b7",
+					  "label":"AZT + 3TC + DTG",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"60bec021-c05c-4ae9-93fe-b798c0bf82d2",
+					  "label":"AZT + 3TC + DRV + RTV + RAL",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"62243dfe-6284-48a9-afcc-63149ac6d709",
+					  "label":"AZT + 3TC + ATV/r",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"dc25af21-7816-44d8-92d2-3332c7db113a",
+					  "label":"ABC + 3TC + RAL",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"98bec34c-608a-46ce-8f1a-3ee3b8b6f92b",
+					  "label":"ABC + 3TC + NVP",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"162199"
+						}
+					  ]
+					},
+					{
+					  "concept":"0da33711-7b3f-4997-bc9e-4a2445fbaf63",
+					  "label":"ABC + 3TC + LPV/r",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"162200"
+						}
+					  ]
+					},
+					{
+					  "concept":"70e9b78a-a6d8-49c2-8217-0ba57b05803a",
+					  "label":"ABC + 3TC + EFV",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"162563"
+						}
+					  ]
+					},
+					{
+					  "concept":"159db6bc-1303-4829-8fe4-32212751c934",
+					  "label":"ABC + 3TC + DTG",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"165606"
+						}
+					  ]
+					},
+					{
+					  "concept":"396d668b-b1e6-4997-b9b9-2d57f53c2321",
+					  "label":"ABC + 3TC + DRVr",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"5bb0348b-fc27-460e-b6cd-df7a4a253372",
+					  "label":"ABC + 3TC + DRV+RTV+RAL",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"f827ed18-f816-4cd0-b77c-28a0209c96c0",
+					  "label":"ABC + 3TC + ATVr",
+					  "conceptMappings":[
+
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"patientIdentifier"
+			  },
+			  {
+				"label":"Transfer Documents",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"radio",
+				  "concept":"7962d0ed-0fb5-4580-8e46-6fd318091154",
+				  "answers":[
+					{
+					  "concept":"163532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Mother enrolled in prevention of maternal to child transmission (PMTCT) program",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"71a489e5-e393-4859-a2df-a3b14ea6b4bf",
+					  "label":"Transfer-in with Records",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"a484d55e-dfc7-4791-82a4-eff8f21e26de",
+					  "label":"Transfer-in without records",
+					  "conceptMappings":[
+
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"transferInDoc"
+			  },
+			  {
+				"label":"Date of Enrolment into HIV Care",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"date",
+				  "concept":"163260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"dateOfFirstVisit"
+			  }
+			]
+		  }
+		],
+		"behaviours":[
+		  {
+			"intent":"*",
+			"hide":{
+			  "hideWhenExpression":"isEmpty(clientDescription) || clientDescription !== '160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+			}
+		  }
+		]
+	  },
+	  {
+		"label":"HIV Diagnosis",
+		"sections":[
+		  {
+			"label":"HIV Diagnosis",
+			"isExpanded":"true",
+			"questions":[
+			  {
+				"label":"Date Confirmed HIV Positive",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"date",
+				  "concept":"160554AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					},
+					"validators":[
+					  {
+						"type":"date",
+						"allowFutureDates":"false"
+					  },
+					  {
+						"type":"js_expression",
+						"failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+					  }
+					]
+				  }
+				],
+				"id":"hivDiagnosisDate"
+			  },
+			  {
+				"label":"Test Type",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"radio",
+				  "concept":"ca4953af-9ad4-4514-b54a-6832acd7cae9",
+				  "answers":[
+					{
+					  "concept":"163722AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Rapid test for HIV",
+					  "conceptMappings":[
+              {
+                "type":"CIEL",
+                "value":"163722"
+              },
+              {
+                "type":"SNOMED-CT",
+                "value":"165813002"
+              }
+					  ]
+					},
+					{
+					  "concept":"844AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"HIV DNA polymerase chain reaction",
+					  "conceptMappings":[
+              {
+                "type":"CIEL",
+                "value":"844"
+              },
+              {
+                "type":"SNOMED-CT",
+                "value":"399256002"
+              },
+              {
+                "type":"AMPATH",
+                "value":"844"
+              }
+					  ]
+					},
+            {
+              "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "label":"Unknown",
+              "conceptMappings":[
+                {
+                  "type":"CIEL",
+                  "value":"1067"
+                },
+                {
+                  "type":"AMPATH",
+                  "value":"1067"
+                },
+                {
+                  "type":"SNOMED CT",
+                  "value":"CT: 261665006"
+                },
+                {
+                  "type":"PIH",
+                  "value":"1067"
+                }
+              ]
+            }
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"diagnosticHivTestType"
+			  },
+			  {
+				"label":"Test Location",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"text",
+				  "concept":"c4768674-0c26-4353-8a3f-608e7b40ac57"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"diagnosisLocation"
+			  }
+			]
+		  }
+		],
+		"behaviours":[
+		  {
+			"intent":"*",
+			"hide":{
+			  "hideWhenExpression":"isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+			}
+		  }
+		]
+	  },
+	  {
+		"label":"Previous ARV/HAART Use",
+		"sections":[
+		  {
+			"label":"Previous ARV/HAART Use",
+			"isExpanded":"true",
+			"questions":[
+			  {
+				"label":"Use of Pre Exposure Prophylaxis (PrEP)",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"radio",
+				  "concept":"5d397775-0155-4033-95dc-edcec98e8190",
+				  "answers":[
+					{
+					  "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Yes",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1065"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1065"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1065"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 373066001"
+						}
+					  ]
+					},
+					{
+					  "concept":"1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"No",
+					  "conceptMappings":[
+              {
+                "type":"AMPATH",
+                "value":"1066"
+              },
+              {
+                "type":"SNOMED CT",
+                "value":"373067005"
+              },
+              {
+                "type":"PIH",
+                "value":"1067"
+              }
+
+					  ]
+					},
+					{
+					  "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Unknown",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1067"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1067"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 261665006"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1067"
+						}
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"previousUseOfPrep"
+			  },
+			  {
+				"label":"Date Last Used",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"date",
+				  "concept":"5af829e9-2427-4ed7-bb55-de4381610364"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"isEmpty(previousUseOfPrep) || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+					},
+					"validators":[
+					  {
+						"type":"date",
+						"allowFutureDates":"false"
+					  },
+					  {
+						"type":"js_expression",
+						"failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+					  }
+					]
+				  }
+				],
+				"id":"datePrepLastUsed"
+			  },
+			  {
+				"label":"Use of Post exposure prophylaxis (PEP)",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"radio",
+				  "concept":"8bfdc328-1970-446c-9d7b-97d62703801b",
+				  "answers":[
+					{
+					  "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Yes",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1065"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1065"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1065"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 373066001"
+						}
+					  ]
+					},
+					{
+					  "concept":"488b58ff-64f5-4f8a-8979-fa79940b1594",
+					  "label":"No",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Unknown",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1067"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1067"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 261665006"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1067"
+						}
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"previousUseOfPep"
+			  },
+			  {
+				"label":"Date Last Used",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"date",
+				  "concept":"fbe937b6-a4ad-4ce5-9c43-002222fbabfb"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"isEmpty(previousUseOfPep) || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+					},
+					"validators":[
+					  {
+						"type":"date",
+						"allowFutureDates":"false"
+					  },
+					  {
+						"type":"js_expression",
+						"failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+					  }
+					]
+				  }
+				],
+				"id":"datePepLastUsed"
+			  },
+			  {
+				"label":"ARV Use for Management of Hepatitis",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"radio",
+				  "concept":"906ed69c-949b-47b5-b469-2205f0da473a",
+				  "answers":[
+					{
+					  "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Yes",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1065"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1065"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1065"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 373066001"
+						}
+					  ]
+					},
+					{
+					  "concept":"488b58ff-64f5-4f8a-8979-fa79940b1594",
+					  "label":"No",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Unknown",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1067"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1067"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 261665006"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1067"
+						}
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"useOfArvs"
+			  },
+			  {
+				"label":"Date Last Used",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"date",
+				  "concept":"6a6cbda5-b155-4144-9ff9-ec3d1d1cd509"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"isEmpty(useOfArvs) || useOfArvs !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+					},
+					"validators":[
+					  {
+						"type":"date",
+						"allowFutureDates":"false"
+					  },
+					  {
+						"type":"js_expression",
+						"failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+					  }
+					]
+				  }
+				],
+				"id":"dateHepBLastUsed"
+			  },
+			  {
+				"label":"ART Use for Prevention of Mother to Child Transmission of HIV",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"radio",
+				  "concept":"163532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+				  "answers":[
+					{
+					  "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Yes",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1065"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1065"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1065"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 373066001"
+						}
+					  ]
+					},
+					{
+					  "concept":"488b58ff-64f5-4f8a-8979-fa79940b1594",
+					  "label":"No",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Unknown",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1067"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1067"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 261665006"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1067"
+						}
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					}
+				  }
+				],
+				"id":"previousUseOfArt"
+			  },
+			  {
+				"label":"Date Last Used",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"date",
+				  "concept":"163782AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"isEmpty(previousUseOfArt) || previousUseOfArt !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+					},
+					"validators":[
+					  {
+						"type":"date",
+						"allowFutureDates":"false"
+					  },
+					  {
+						"type":"js_expression",
+						"failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+					  }
+					]
+				  }
+				],
+				"id":"datePmtctLastUsed"
+			  }
+			]
+		  },
+		  {
+			"label":"Previous ARV/HAART Drugs",
+			"isExpanded":"false",
+			"questions":[
+			  {
+				"label":"Nucleoside Reverse Transcriptase Inhibitors (NRTIS)",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"checkbox",
+				  "concept":"54e7ff9b-4d93-41ba-ad0b-cb5f565785f2",
+				  "answers":[
+					{
+					  "concept":"5424AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Other antiretroviral drug",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"86663AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Zidovudine",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"84795AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Tenofovir",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"78643AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Lamivudine",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"75628AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Emtricitabine",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"70056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Abacavir",
+					  "conceptMappings":[
+
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false",
+					  "validators":[
+
+					  ]
+					}
+				  }
+				],
+				"id":"nrtisDrugsUsed"
+			  },
+			  {
+				"label":"Non-Nucleoside Reverse Transcriptase Inhibitors (NNRTIS)",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"checkbox",
+				  "concept":"9064043b-5b18-4228-97ff-f0e20aaf9448",
+				  "answers":[
+					{
+					  "concept":"159810AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Etravirine",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"80586AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Nevirapine",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"75523AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Efavirenz",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Unknown",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1067"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1067"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 261665006"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1067"
+						}
+					  ]
+					},
+					{
+					  "concept":"5424AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Other antiretroviral drug",
+					  "conceptMappings":[
+
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					},
+					"validators":[
+
+					]
+				  }
+				],
+				"id":"nnrtisDrugsUsed"
+			  },
+			  {
+				"label":"Protease Inhibitors (PIS)",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"checkbox",
+				  "concept":"77eed025-0f5c-4173-bf45-36e05a175aaf",
+				  "answers":[
+					{
+					  "concept":"85160AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Tipranavir",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"83690AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Saquinavir",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"83412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Ritonavir",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"76658AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Fosamprenavir",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"74258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Darunavir",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"71647AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Atazanavir",
+					  "conceptMappings":[
+
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					},
+					"validators":[
+
+					]
+				  }
+				],
+				"id":"proteaseInhibitors"
+			  },
+			  {
+				"label":"Other HIV Drug Classes",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"checkbox",
+				  "concept":"3509e1d9-93d0-4a6b-b5cb-90259699b01a",
+				  "answers":[
+					{
+					  "concept":"154378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Raltegravir",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"165085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Dolutegravir",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"154376AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"maraviroc",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"75676AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Enfuvirtide",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"5424AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Other antiretroviral drug",
+					  "conceptMappings":[
+
+					  ]
+					},
+					{
+					  "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Unknown",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1067"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1067"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 261665006"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1067"
+						}
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					},
+					"validators":[
+
+					]
+				  }
+				],
+				"id":"otherArvDrugClasses"
+			  }
+			],
+			"behaviours":[
+			  {
+				"intent":"*",
+				"hide":{
+				  "hideWhenExpression":"isEmpty(previousUseOfArt) || isEmpty(previousUseOfPep) || isEmpty(useOfArvs) || previousUseOfArt !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || useOfArvs !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+				}
+			  }
+			]
+		  }
+		],
+		"behaviours":[
+		  {
+			"intent":"*",
+			"hide":{
+			  "hideWhenExpression":"isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+			}
+		  }
+		]
+	  },
+	  {
+		"label":"Treatment Supporter",
+		"sections":[
+		  {
+			"label":"Treatment Supporter",
+			"isExpanded":"true",
+			"questions":[
+			  {
+				"label":"Treatment Supporter Available",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"radio",
+				  "concept":"0a540601-8cc4-4d18-9360-d760780f3eb1",
+				  "answers":[
+					{
+					  "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Yes",
+					  "conceptMappings":[
+						{
+						  "type":"CIEL",
+						  "value":"1065"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1065"
+						},
+						{
+						  "type":"PIH",
+						  "value":"1065"
+						},
+						{
+						  "type":"SNOMED CT",
+						  "value":"CT: 373066001"
+						}
+					  ]
+					},
+					{
+					  "concept":"488b58ff-64f5-4f8a-8979-fa79940b1594",
+					  "label":"No",
+					  "conceptMappings":[
+
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					},
+					"validators":[
+
+					]
+				  }
+				],
+				"id":"hasTreatmentSupporter"
+			  },
+			  {
+				"label":"Treatment Supporter Name",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"text",
+				  "concept":"160638AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+					},
+					"validators":[
+
+					]
+				  }
+				],
+				"id":"treatmentSupporter"
+			  },
+			  {
+				"label":"Treatment Supporter Phone Number",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"text",
+				  "concept":"160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+					},
+					"validators":[
+
+					]
+				  }
+				],
+				"id":"treatmentSupporterPhoneNumber"
+			  },
+			  {
+				"label":"Treatment Supporter Relationship",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"select",
+				  "concept":"160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+				  "answers":[
+					{
+					  "concept":"5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Other",
+					  "conceptMappings":[
+						{
+						  "type":"PIH-Malawi",
+						  "value":"6408"
+						},
+						{
+						  "type":"org.openmrs.module.mdrtb",
+						  "value":"OTHER"
+						},
+						{
+						  "type":"SNOMED-MVP",
+						  "value":"56221000105001"
+						},
+						{
+						  "type":"PIH",
+						  "value":"5622"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"5622"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"74964007"
+						}
+					  ]
+					},
+					{
+					  "concept":"160639AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Guardian",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"394619001"
+						}
+					  ]
+					},
+					{
+					  "concept":"973AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Grandparent",
+					  "conceptMappings":[
+						{
+						  "type":"AMPATH",
+						  "value":"973"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"38312007"
+						}
+					  ]
+					},
+					{
+					  "concept":"5617AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Partner or spouse",
+					  "conceptMappings":[
+						{
+						  "type":"AMPATH",
+						  "value":"5617"
+						},
+						{
+						  "type":"SNOMED-CT",
+						  "value":"127848009"
+						}
+					  ]
+					},
+					{
+					  "concept":"1527AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Parent",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"40683002"
+						},
+						{
+						  "type":"PIH",
+						  "value":"2173"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"1672"
+						}
+					  ]
+					},
+					{
+					  "concept":"972AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+					  "label":"Sibling",
+					  "conceptMappings":[
+						{
+						  "type":"SNOMED-CT",
+						  "value":"375005"
+						},
+						{
+						  "type":"PIH",
+						  "value":"2178"
+						},
+						{
+						  "type":"AMPATH",
+						  "value":"972"
+						}
+					  ]
+					}
+				  ]
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+					},
+					"validators":[
+
+					]
+				  }
+				],
+				"id":"relationToTreatmentSupporter"
+			  }
+			]
+		  }
+		],
+		"behaviours":[
+		  {
+			"intent":"*",
+			"hide":{
+			  "hideWhenExpression":"isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+			}
+		  }
+		]
+	  },
+	  {
+		"label":"Re-enrollment",
+		"sections":[
+		  {
+			"label":"Re-enrollment Details",
+			"isExpanded":"true",
+			"questions":[
+			  {
+				"label":"Date of Re-enrolment",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"date",
+				  "concept":"20efadf9-86d3-4498-b3ab-7da4dad9c429"
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"false",
+					"hide":{
+					  "hideWhenExpression":"false"
+					},
+					"validators":[
+
+					]
+				  }
+				],
+				"id":"Reenrolment"
+			  },
+			  {
+				"label":"Reason For Re-enrolment",
+				"type":"obs",
+				"questionOptions":{
+				  "rendering":"textarea",
+				  "concept":"14ae2dc9-5964-425a-87e8-9ca525cf055e",
+				  "rows":""
+				},
+				"behaviours":[
+				  {
+					"intent":"*",
+					"required":"true",
+					"unspecified":"true",
+					"hide":{
+					  "hideWhenExpression":"false"
+					},
+					"validators":[
+
+					]
+				  }
+				],
+				"id":"ReasonReenrolment"
+			  }
+			]
+		  }
+		],
+		"behaviours":[
+		  {
+			"intent":"*",
+			"hide":{
+			  "hideWhenExpression":"isEmpty(clientDescription) || clientDescription !== '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+			}
+		  }
+		]
+	  },
+	  {
+		"label": "Notes",
+		"sections": [
+		  {
+			"label": "",
+			"isExpanded": "true",
+			"questions": [
+			  {
+				"label": "",
+				"type": "obs",
+				"questionOptions": {
+				  "rendering": "textarea",
+				  "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+				  "rows": "",
+				  "conceptMappings": [
+					{
+					  "type": "CIEL",
+					  "value": "160632"
+					},
+					{
+					  "type": "AMPATH",
+					  "value": "1915"
+					},
+					{
+					  "type": "LOINC",
+					  "value": "48767-8"
+					},
+					{
+					  "type": "AMPATH",
+					  "value": "1915"
+					}
+				  ]
+				},
+				"id": "addNotes"
+			  }
+			]
+		  }
+		]
+	  }
+	],
+	"availableIntents":[
+	  {
+		"intent":"*",
+		"display":"Service Enrolment Form"
+	  }
+	],
+	"processor":"EncounterFormProcessor",
+	"uuid":"xxxx",
+	"referencedForms":[],
+	"encounterType":"7e54cd64-f9c3-11eb-8e6a-57478ce139b0",
+	"encounter": "Care and Treatment Service Enrolment",
+	"allowUnspecifiedAll":true
+}

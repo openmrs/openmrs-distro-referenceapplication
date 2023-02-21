@@ -1,0 +1,217 @@
+{
+  "name": "Lab Order Cancellation",
+  "pages": [
+    {
+      "label": "",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "covid_lab_order",
+        "package": "covid",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "COVID_LAB_ORDER_EMBED",
+            "readonly": "true"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Order Cancellation",
+      "sections": [
+        {
+          "label": "Cancellation Details",
+          "isExpanded": "true",
+          "questions": [             
+            {
+              "label": "Cancellation Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "defaultValue": "now()",
+                "concept": "05ec039d-2bcb-47e5-8165-65411295fc32",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "OCT",
+                    "value": "CancellationDate"
+                  }
+                ]
+              },
+              "id": "cancellationDate",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Cancellation Reason",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "14628774-2647-436c-b8f3-d42c6dc305ce",
+                "conceptMappings": [
+                  {
+                    "type": "OCT",
+                    "value": "OrderCancellationReason"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "c566ca6e-1dc1-40b2-a309-f4bde03df748",
+                    "label": "Duplicate order",
+                    "conceptMappings": [
+                      {
+                        "type": "OCT",
+                        "value": "DuplicateOrder"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "bc10dec2-6c39-494b-8db1-b18ce75a21ba",
+                    "label": "No sample collected",
+                    "conceptMappings": [
+                      {
+                        "type": "OCT",
+                        "value": "NoSample"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "c1ec84ed-f9df-4ea1-b58b-2381457c3848",
+                    "label": "Sample rejected",
+                    "conceptMappings": [
+                      {
+                        "type": "OCT",
+                        "value": "SampleRejected"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "786a82a4-5b26-4d70-be0d-9931b6f47e96",
+                    "label": "Old order",
+                    "conceptMappings": [
+                      {
+                        "type": "OCT",
+                        "value": "OldOrder"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "a9357eb8-cb73-495d-9648-8d44ec3d4af7",
+                    "label": "No longer required",
+                    "conceptMappings": [
+                      {
+                        "type": "OCT",
+                        "value": "NotRequired"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "c4384456-087d-47a7-b093-3474d96fbe38",
+                    "label": "Improperly ordered",
+                    "conceptMappings": [
+                      {
+                        "type": "OCT",
+                        "value": "ImproperlyOrdered"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "165246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Wrong entry",
+                    "conceptMappings": [
+                      {
+                        "type": "CIEL",
+                        "value": "165246"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "cancellationReason",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Status",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "fixed-value",
+                "concept": "6681366c-2174-489a-b951-13a1404935bf",
+                "conceptMappings": [
+                  {
+                    "type": "OCT",
+                    "value": "LabOrderStatus"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "162866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pending status",
+                    "conceptMappings": [
+                      {
+                        "type": "CIEL",
+                        "value": "162866"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "307824009"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "162866"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "labOrderStatus",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [],
+                   "value": "165170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "COVID Lab Order Cancellation"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "xxxx",
+  "referencedForms": [],
+  "encounterType": "a77d3e7f-5c8f-4074-a207-77a70e197b0c",
+  "encounter": "COVID Lab Encounter",
+  "allowUnspecifiedAll": true
+}

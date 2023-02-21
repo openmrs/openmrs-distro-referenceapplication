@@ -1,0 +1,244 @@
+{
+  "name": "COVID Outcome Form",
+  "pages": [
+    {
+      "label": "COVID Assessment",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "covid_assessment",
+        "package": "covid",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "COVID_LAB_ASSESSMENT_EMBED",
+            "readonly": "true"
+          },
+          {
+            "intent": "COVID_OUTCOME_EMBED",
+            "subform_intent": "COVID_LAB_ASSESSMENT_EMBED",
+            "isHidden": "true"
+          }
+        ]
+      }
+    },
+    {
+      "label": "COVID-19 Outcome",
+      "sections": [
+        {
+          "label": "Outcome Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient’s Outcome",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a845f3e6-4432-4de4-9fff-37fa270b1a06",
+                "answers": [
+                  {
+                    "concept": "165870AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Recovered (Symptoms resolved)",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "166183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Long COVID/Post COVID",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "patientOutcome",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                },
+                {
+                  "intent": "COVID_OUTCOME_EMBED",
+                  "required": "true"
+                }
+              ]
+            },
+            {
+              "label": "Date recovered or date symptoms resolved",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "162868AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "308928005"
+                  }
+                ],
+                "weeksList": ""
+              },
+              "id": "symptomEndDate",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "patientOutcome !== '165870AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue > today() || isDateBefore(myValue, '2020-01-01') || myValue < useFieldValue('dateOfAssessment')"
+                    }
+                  ]
+                },
+                {
+                  "intent": "COVID_OUTCOME_EMBED",
+                  "required": "true"
+                }
+              ]
+            },
+            {
+              "label": "Date died",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "AMPATH",
+                    "value": "1570"
+                  },
+                  {
+                    "type": "PIH",
+                    "value": "1815"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "399753006"
+                  }
+                ],
+                "weeksList": ""
+              },
+              "id": "dateOfDeath",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "patientOutcome !== '160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue > today() || isDateBefore(myValue, '2020-01-01') || myValue < useFieldValue('dateOfAssessment')"
+                    }
+                  ]
+                },
+                {
+                  "intent": "COVID_OUTCOME_EMBED",
+                  "required": "true"
+                }
+              ]
+            },
+            {
+              "label": "Long COVID (describe)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4560c560-4bd6-4989-bff8-6e4e1fa39972"
+              },
+              "id": "longCovid",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "patientOutcome !== '166183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue > today() || myValue <= '1/1/2020'"
+                    }
+                  ]
+                },
+                {
+                  "intent": "COVID_OUTCOME_EMBED",
+                  "required": "true"
+                }
+              ]
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "5",
+                "conceptMappings": [
+                  {
+                    "type": "LOINC",
+                    "value": "48767-8"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "161011"
+                  }
+                ]
+              },
+              "id": "notes",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false"
+                },
+                {
+                  "intent": "COVID_OUTCOME_EMBED",
+                  "required": "true",
+                  "hide": {
+                    "hideWhenExpression": "true"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "COVID Outcome Default"
+    },
+    {
+      "intent": "COVID_OUTCOME_EMBED",
+      "display": "COVID Outcome Embed"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "6515d898-439c-11ec-9103-238295f2dfd7",
+  "referencedForms": [],
+  "encounterType": "253a43d3-c99e-415c-8b78-ee7d4d3c1d54",
+  "encounter": "COVID Case Assessment",
+  "allowUnspecifiedAll": true
+}

@@ -1,0 +1,200 @@
+{
+  "name": "COVID-19 Outcome tracking Form",
+  "pages": [
+    {
+      "label": "COVID Outcome",
+      "sections": [
+        {
+          "label": "COVID-19 Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "What was the patient’s outcome",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a845f3e6-4432-4de4-9fff-37fa270b1a06",
+                "answers": [
+                  {
+                    "concept": "165870AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Recovered (Symptoms resolved)",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "166183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Long COVID",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "patientOutcome"
+            },
+            {
+              "label": "Date recovered or date symptoms resolved",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "162868AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "308928005"
+                  }
+                ],
+                "weeksList": ""
+              },
+              "id": "symptomEndDate",
+              "behaviours": [
+                {
+                  "intent": "COVID_OUTCOME_RETROSPECTIVE",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('patientOutcome','165870AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue > today() || myValue <= '1/1/2020'"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Date died",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "AMPATH",
+                    "value": "1570"
+                  },
+                  {
+                    "type": "PIH",
+                    "value": "1815"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "399753006"
+                  }
+                ],
+                "weeksList": ""
+              },
+              "id": "dateOfDeath",
+              "behaviours": [
+                {
+                  "intent": "COVID_OUTCOME_RETROSPECTIVE",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('patientOutcome','160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue > today() || myValue <= '1/1/2020'"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Long COVID (describe)",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "4560c560-4bd6-4989-bff8-6e4e1fa39972"
+              },
+              "id": "longCovidDescriptionGroup",
+              "questions": [
+                {
+                  "label": "Long COVID (describe)",
+                  "id": "longCovidDescription",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "type": "obs",
+                  "behaviours": [
+                    {
+                      "intent": "COVID_OUTCOME_RETROSPECTIVE",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('patientOutcome','166183AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": [
+                        {
+                          "type": "date",
+                          "allowFutureDates": "false"
+                        },
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "myValue > today() || myValue <= '1/1/2020'"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "165095"
+                  }
+                ]
+              },
+              "id": "patientNote",
+              "behaviours": [
+                {
+                  "intent": "COVID_OUTCOME_RETROSPECTIVE",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "COVID_OUTCOME_RETROSPECTIVE",
+      "display": "COVID Outcome Retrospective"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "xxxx",
+  "referencedForms": [],
+  "encounterType": "253a43d3-c99e-415c-8b78-ee7d4d3c1d54",
+  "encounter": "COVID Case Assessment",
+  "allowUnspecifiedAll": true
+}
