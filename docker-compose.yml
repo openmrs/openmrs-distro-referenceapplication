@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   gateway:
-    image: openmrs/openmrs-reference-application-3-gateway:${TAG:-nightly}
+    image: openmrs/openmrs-reference-ohri-3-gateway:2.5.8
     depends_on:
       - frontend
       - backend
@@ -10,7 +10,7 @@ services:
       - "80:80"
 
   frontend:
-    image: openmrs/openmrs-reference-application-3-frontend:${TAG:-nightly}
+    image: histacoohri/o3-reference-ohri-frontend:1.0.2
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
@@ -22,7 +22,7 @@ services:
       - backend
 
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-nightly}
+    image: openmrs/o3-reference-ohri-backend:2.5.9
     depends_on:
       - db
     environment:
@@ -44,7 +44,7 @@ services:
     image: mariadb:10.8.2
     command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
     healthcheck:
-      test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
+      test: 'mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute "SHOW DATABASES;"'
       interval: 3s
       timeout: 1s
       retries: 5
