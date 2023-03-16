@@ -239,23 +239,34 @@ Release docker image:
             set -x
             
             version="${bamboo.maven.release.version}"
-            cd docker
-            docker build -t ${bamboo.docker.image.name}:${version} .
-            docker push ${bamboo.docker.image.name}:${version}
-            docker image inspect --format='{{index .RepoDigests 0}}' ${bamboo.docker.image.name}:${version} > docker-image.txt
+            
+            export DEV_IMAGE=${bamboo.docker.image.name}:${version}-dev
+            export IMAGE=${bamboo.docker.image.name}:${version}
+            
+            echo "Building dev image"
+            
+            docker buildx build --push --platform ${bamboo.docker.image.platforms} --target dev -t ${DEV_IMAGE} .
+            
+            docker run --rm -w="/app" -v /home/bamboo-agent/.m2:/.m2 ${DEV_IMAGE} mvn deploy --settings /.m2/settings.xml
+            
+            echo "Building production image"
+            
+            docker buildx build --push --platform ${bamboo.docker.image.platforms} -t ${IMAGE} .
+            
+            sleep 10
+            
+            docker pull ${IMAGE}
+            
+            echo "Inspecting image for id"
+            docker image inspect --format='{{index .RepoDigests 0}}' ${IMAGE} > docker-image.txt
             
             # Tag as major version as well
             major_version=$(echo "${version}" | sed -r "s/^([0-9]+\.[0-9]+).*/\1/")
             if [ "${major_version}" != "${version}" ]; then
-              docker tag ${bamboo.docker.image.name}:${version} \
-                         ${bamboo.docker.image.name}:${major_version}
-              docker push ${bamboo.docker.image.name}:${major_version}
+              docker buildx imagetools create -t ${bamboo.docker.image.name}:${major_version} ${IMAGE}
             fi
             
-            docker tag ${bamboo.docker.image.name}:${version} \
-                         ${bamboo.docker.image.name}:latest
-            docker push ${bamboo.docker.image.name}:latest
-
+            docker buildx imagetools create -t ${bamboo.docker.image.name}:latest ${IMAGE}
         description: Build and push docker image
     - any-task:
         plugin-key: com.atlassian.bamboo.plugins.variable.updater.variable-updater-generic:variable-file-reader
