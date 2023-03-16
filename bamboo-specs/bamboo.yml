@@ -17,13 +17,6 @@ stages:
       final: false
       jobs:
         - Deploy to qa-refapp
-  - Validate:
-      description: Runs validation tasks
-      manual: false
-      final: false
-      jobs:
-        - Build standalone
-        - Run UI tests on Travis
   - Release:
       manual: true
       final: false
@@ -41,7 +34,6 @@ stages:
         - Release addons
         - Release war
         - Release readme
-        - Release standalone
         - Release docker image
 Build and push:
   key: DNDI
@@ -111,62 +103,6 @@ Deploy to qa-refapp:
                 bamboo@qa-refapp.openmrs.org \
                 sudo deploy-compose qa-refapp
         description: Redeploy qa-refapp (dockerhub image)
-  artifact-subscriptions: []
-Build standalone:
-  key: TS
-  tasks:
-    - checkout:
-        repository: Standalone RA
-        path: standalone
-        force-clean-build: 'false'
-        description: Checkout Default Repository
-    - script:
-        interpreter: BINSH_OR_CMDEXE
-        file: stop-mysql.sh
-        working-dir: standalone
-        description: Stop MySQL
-    - maven:
-        executable: Maven 3
-        jdk: openjdk-8-jdk
-        goal: clean package -Dopenmrs.version=${bamboo.distro.war.openmrs} -Drefapp.version=${bamboo.distro.version} -U
-        environment: MAVEN_OPTS="-Xms1012m -Xmx2024m -XX:PermSize=556m -XX:MaxPermSize=1012m"
-        working-dir: standalone
-        description: Package Standalone
-  artifacts:
-    - name: referenceapplication-standalone-snapshot
-      location: standalone/target
-      pattern: referenceapplication-standalone-*.zip
-      shared: true
-      required: false
-  artifact-subscriptions: []
-Run UI tests on Travis:
-  key: INTTESTS
-  other:
-    all-other-apps:
-      custom:
-        auto: {}
-        processes: (chromium|chrome|webdriver|mysql|java |mvn )
-        clover: {}
-        delete:
-          workingdir: 'true'
-          stable: "true\n        \n      \n        \n      \n        \n      \n        \n      \n        \n      \n        \n      \n        \n      "
-          stable.free: '20.0'
-          stable.age: '15.0'
-          files: ~/.npmrc,~/.docker/config.json
-          snapshot: 'true'
-        agents: .*
-        fail: 'false'
-        buildHangingConfig.enabled: 'false'
-        keep.workingdir.activebranches: 'false'
-        sauceondemand:
-          ssh.enabled: 'true'
-          enabled: 'false'
-          selenium: {}
-        commands: docker system prune -af; docker ps | egrep "(hours|days|weeks|months)" | cut -d\  -f1 | xargs docker rm -f
-  tasks:
-  # com.atlassian.bamboo.plugins.vcs:task.vcs.checkout is disabled. This state is not supported at YAML
-  # com.atlassian.bamboo.plugins.scripttask:task.builder.command is disabled. This state is not supported at YAML
-  # com.atlassian.bamboo.plugins.scripttask:task.builder.command is disabled. This state is not supported at YAML
   artifact-subscriptions: []
 Release to maven:
   key: RTM
@@ -288,48 +224,6 @@ Release readme:
         description: Deploy to sourceforge
   artifact-subscriptions:
     - artifact: referenceapplication-readme
-Release standalone:
-  key: PS
-  description: Releases standalone to sourceforge
-  tasks:
-    - checkout:
-        repository: Standalone RA
-        path: standalone
-        force-clean-build: 'true'
-        description: Checkout Default Repository
-    - checkout:
-        repository: Release scripts
-        path: release-scripts
-        force-clean-build: 'true'
-        description: Checkout Default Repository
-    - script:
-        interpreter: BINSH_OR_CMDEXE
-        file: stop-mysql.sh
-        working-dir: standalone
-        description: Stop MySQL
-    - maven:
-        executable: Maven 3
-        jdk: openjdk-8-jdk
-        goal: clean package -Dopenmrs.version=${bamboo.distro.war.openmrs} -Drefapp.version=${bamboo.distro.version}
-        environment: MAVEN_OPTS="-Xms1012m -Xmx2024m -XX:PermSize=556m -XX:MaxPermSize=1012m"
-        working-dir: standalone
-        description: Package Standalone
-    - maven:
-        executable: Maven 3
-        jdk: openjdk-8-jdk
-        goal: deploy:deploy-file -DgroupId=org.openmrs.distro -DartifactId=referenceapplication-standalone -Dversion=${bamboo.distro.version} -Dpackaging=zip -Dfile=standalone/target/referenceapplication-standalone-${bamboo.distro.version}.zip -DrepositoryId=openmrs-repo-releases -Durl=https://mavenrepo.openmrs.org/nexus/content/repositories/releases
-        description: Deploy standalone to mavenrepo
-    - command:
-        executable: Bash
-        argument: release-scripts/scp-to-sourceforge.sh ${bamboo.build.working.directory}/standalone/target referenceapplication-standalone-${bamboo.distro.version}.zip releases/OpenMRS_Reference_Application_${bamboo.distro.version} referenceapplication-standalone-${bamboo.distro.version}.zip
-        description: Deploy standalone to sourceforge
-  artifacts:
-    - name: referenceapplication-standalone
-      location: standalone/target
-      pattern: referenceapplication-standalone*.zip
-      shared: true
-      required: false
-  artifact-subscriptions: []
 Release docker image:
   key: RDITD
   tasks:
@@ -386,18 +280,6 @@ variables:
 repositories:
   - Distribution:
       scope: global
-  - Standalone RA:
-      type: git
-      url: https://github.com/openmrs/openmrs-standalone
-      branch: openmrs-emr2
-      command-timeout-minutes: '180'
-      lfs: 'false'
-      verbose-logs: 'false'
-      use-shallow-clones: 'true'
-      cache-on-agents: 'false'
-      submodules: 'false'
-      ssh-key-applies-to-submodules: 'false'
-      fetch-all: 'false'
   - Release scripts:
       scope: global
 triggers:
@@ -405,7 +287,6 @@ triggers:
       period: '60'
       repositories:
         - Distribution
-        - Standalone RA
 # Trigger type TriggerProperties{name='Single daily build', description='', conditions=[], enabled=true} is not supported yet
 branches:
   create: manually
