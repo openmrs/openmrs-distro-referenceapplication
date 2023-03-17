@@ -271,14 +271,14 @@ Release docker image:
     - any-task:
         plugin-key: com.atlassian.bamboo.plugins.variable.updater.variable-updater-generic:variable-file-reader
         configuration:
-          filename: docker/docker-image.txt
+          filename: docker-image.txt
           variable: docker.image.id
           variableScope: RESULT
         description: Read docker image ID
 variables:
   checkVersions: versions:update-properties -Pupdate-to-latest
   docker.image.id: none
-  docker.image.name: openmrs/openmrs-distro-referenceapplication
+  docker.image.name: openmrs/openmrs-reference-application
   docker.image.tag: nightly
   maven.development.version: 2.13.0-SNAPSHOT
   maven.release.version: 2.13.0
