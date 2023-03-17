@@ -275,9 +275,6 @@ Release docker image:
           variable: docker.image.id
           variableScope: RESULT
         description: Read docker image ID
-  artifact-subscriptions:
-    - artifact: referenceapplication-docker
-      destination: docker
 variables:
   checkVersions: versions:update-properties -Pupdate-to-latest
   docker.image.id: none
