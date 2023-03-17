@@ -58,7 +58,7 @@ Build and push:
             
             docker buildx build --push --platform ${bamboo.docker.image.platforms} --target dev -t ${DEV_IMAGE} .
             
-            docker run --rm -w="/app" -v /home/bamboo-agent/.m2:/.m2 ${DEV_IMAGE} mvn deploy --settings /.m2/settings.xml
+            #docker run --rm -w="/app" -v /home/bamboo-agent/.m2:/.m2 ${DEV_IMAGE} mvn deploy --settings /.m2/settings.xml
             
             echo "Building production image"
             
