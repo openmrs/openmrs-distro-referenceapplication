@@ -20,20 +20,20 @@ stages:
   - Release:
       manual: true
       final: false
-      #jobs:
-      #  - Release to maven
+      jobs:
+        - Release to maven
   - Set variables:
       manual: false
       final: false
-#      jobs:
-#        - Set variables
+      jobs:
+        - Set variables
   - Release others:
       manual: false
       final: false
       jobs:
-        #- Release addons
-        #- Release war
-        #- Release readme
+        - Release addons
+        - Release war
+        - Release readme
         - Release docker image
 Build and push:
   key: DNDI
@@ -58,7 +58,7 @@ Build and push:
             
             docker buildx build --push --platform ${bamboo.docker.image.platforms} --target dev -t ${DEV_IMAGE} .
             
-            #docker run --rm -w="/app" -v /home/bamboo-agent/.m2:/.m2 ${DEV_IMAGE} mvn deploy --settings /.m2/settings.xml
+            docker run --rm -w="/app" -v /home/bamboo-agent/.m2:/.m2 ${DEV_IMAGE} mvn deploy --settings /.m2/settings.xml
             
             echo "Building production image"
             
@@ -104,126 +104,126 @@ Deploy to qa-refapp:
                 sudo deploy-compose qa-refapp
         description: Redeploy qa-refapp (dockerhub image)
   artifact-subscriptions: []
-#Release to maven:
-#  key: RTM
-#  other:
-#    all-other-apps:
-#      custom:
-#        auto:
-#          label: release
-#        clover: {}
-#        buildHangingConfig.enabled: 'false'
-#  tasks:
-#    - checkout:
-#        force-clean-build: 'true'
-#        description: Checkout Default Repository
-#    - checkout:
-#        repository: Release scripts
-#        path: release-scripts
-#        force-clean-build: 'true'
-#        description: Checkout Default Repository
-#    - command:
-#        executable: Bash
-#        argument: release-scripts/release-prepare-perform.sh -r "${bamboo.maven.release.version}" -d "${bamboo.maven.development.version}"
-#        envrionment: JAVA_HOME=${bamboo.capability.system.jdk.openjdk-8-jdk} MAVEN_HOME=${bamboo.capability.system.builder.mvn3.Maven 3}
-#        description: Release prepare perform
-#  artifacts:
-#    - name: referenceapplication-addons
-#      location: target/checkout/package/target
-#      pattern: '*.zip'
-#      shared: true
-#      required: false
-#    - name: ' referenceapplication-war'
-#      location: target/checkout/package/target/bundled-distro/web
-#      pattern: '*.war'
-#      shared: true
-#      required: false
-#    - name: ' referenceapplication-properties'
-#      location: target/checkout/package/target/distro/web
-#      pattern: openmrs-distro.properties
-#      shared: true
-#      required: false
-#    - name: referenceapplication-docker
-#      location: target/checkout/package/target/bundled-distro/web
-#      pattern: '**/*'
-#      shared: true
-#      required: false
-#    - name: referenceapplication-readme
-#      location: target/checkout/package/target/classes
-#      pattern: readme.txt
-#      shared: true
-#      required: false
-#  artifact-subscriptions: []
-#Set variables:
-#  key: SV
-#  other:
-#    all-other-apps:
-#      custom:
-#        auto:
-#          label: release
-#        clover: {}
-#        buildHangingConfig.enabled: 'false'
-#  tasks:
-#    # Checkout Task for default repository will be added implicitly during Specs import
-#    - script:
-#        interpreter: BINSH_OR_CMDEXE
-#        scripts:
-#          - echo "false" > false.txt
-#        description: Preparing to reset preparing.refapp.distro.release global variable
-#    - any-task:
-#        plugin-key: com.atlassian.bamboo.plugins.variable.updater.variable-updater-generic:variable-file-reader
-#        configuration:
-#          filename: false.txt
-#          variable: preparing.refapp.distro.release
-#          includeGlobals: 'true'
-#          variableScope: PLAN
-#        description: Reseting preparing.refapp.distro.release global variable
-#    - inject-variables:
-#        file: openmrs-distro.properties
-#        scope: RESULT
-#        namespace: distro
-#        description: Load versions from openmrs-distro.properties
-#  artifact-subscriptions:
-#    - artifact: ' referenceapplication-properties'
-#Release addons:
-#  key: RA
-#  tasks:
-#    - checkout:
-#        repository: Release scripts
-#        path: release-scripts
-#        force-clean-build: 'false'
-#    - command:
-#        executable: Bash
-#        argument: release-scripts/scp-to-sourceforge.sh ${bamboo.build.working.directory} referenceapplication-package-${bamboo.distro.version}-addons.zip releases/OpenMRS_Reference_Application_${bamboo.distro.version} referenceapplication-addons-${bamboo.distro.version}.zip
-#        description: Deploy to sourceforge
-#  artifact-subscriptions:
-#    - artifact: referenceapplication-addons
-#Release war:
-#  key: RW
-#  tasks:
-#    - checkout:
-#        repository: Release scripts
-#        path: release-scripts
-#        force-clean-build: 'false'
-#    - command:
-#        executable: Bash
-#        argument: release-scripts/scp-to-sourceforge.sh ${bamboo.build.working.directory} openmrs.war releases/OpenMRS_Reference_Application_${bamboo.distro.version} openmrs.war
-#        description: Deploy to sourceforge
-#  artifact-subscriptions:
-#    - artifact: ' referenceapplication-war'
-#Release readme:
-#  key: RR
-#  tasks:
-#    - checkout:
-#        repository: Release scripts
-#        path: release-scripts
-#        force-clean-build: 'false'
-#    - command:
-#        executable: Bash
-#        argument: release-scripts/scp-to-sourceforge.sh ${bamboo.build.working.directory} readme.txt releases/OpenMRS_Reference_Application_${bamboo.distro.version} readme.txt
-#        description: Deploy to sourceforge
-#  artifact-subscriptions:
-#    - artifact: referenceapplication-readme
+Release to maven:
+  key: RTM
+  other:
+    all-other-apps:
+      custom:
+        auto:
+          label: release
+        clover: {}
+        buildHangingConfig.enabled: 'false'
+  tasks:
+    - checkout:
+        force-clean-build: 'true'
+        description: Checkout Default Repository
+    - checkout:
+        repository: Release scripts
+        path: release-scripts
+        force-clean-build: 'true'
+        description: Checkout Default Repository
+    - command:
+        executable: Bash
+        argument: release-scripts/release-prepare-perform.sh -r "${bamboo.maven.release.version}" -d "${bamboo.maven.development.version}"
+        envrionment: JAVA_HOME=${bamboo.capability.system.jdk.openjdk-8-jdk} MAVEN_HOME=${bamboo.capability.system.builder.mvn3.Maven 3}
+        description: Release prepare perform
+  artifacts:
+    - name: referenceapplication-addons
+      location: target/checkout/package/target
+      pattern: '*.zip'
+      shared: true
+      required: false
+    - name: ' referenceapplication-war'
+      location: target/checkout/package/target/bundled-distro/web
+      pattern: '*.war'
+      shared: true
+      required: false
+    - name: ' referenceapplication-properties'
+      location: target/checkout/package/target/distro/web
+      pattern: openmrs-distro.properties
+      shared: true
+      required: false
+    - name: referenceapplication-docker
+      location: target/checkout/package/target/bundled-distro/web
+      pattern: '**/*'
+      shared: true
+      required: false
+    - name: referenceapplication-readme
+      location: target/checkout/package/target/classes
+      pattern: readme.txt
+      shared: true
+      required: false
+  artifact-subscriptions: []
+Set variables:
+  key: SV
+  other:
+    all-other-apps:
+      custom:
+        auto:
+          label: release
+        clover: {}
+        buildHangingConfig.enabled: 'false'
+  tasks:
+    # Checkout Task for default repository will be added implicitly during Specs import
+    - script:
+        interpreter: BINSH_OR_CMDEXE
+        scripts:
+          - echo "false" > false.txt
+        description: Preparing to reset preparing.refapp.distro.release global variable
+    - any-task:
+        plugin-key: com.atlassian.bamboo.plugins.variable.updater.variable-updater-generic:variable-file-reader
+        configuration:
+          filename: false.txt
+          variable: preparing.refapp.distro.release
+          includeGlobals: 'true'
+          variableScope: PLAN
+        description: Reseting preparing.refapp.distro.release global variable
+    - inject-variables:
+        file: openmrs-distro.properties
+        scope: RESULT
+        namespace: distro
+        description: Load versions from openmrs-distro.properties
+  artifact-subscriptions:
+    - artifact: ' referenceapplication-properties'
+Release addons:
+  key: RA
+  tasks:
+    - checkout:
+        repository: Release scripts
+        path: release-scripts
+        force-clean-build: 'false'
+    - command:
+        executable: Bash
+        argument: release-scripts/scp-to-sourceforge.sh ${bamboo.build.working.directory} referenceapplication-package-${bamboo.distro.version}-addons.zip releases/OpenMRS_Reference_Application_${bamboo.distro.version} referenceapplication-addons-${bamboo.distro.version}.zip
+        description: Deploy to sourceforge
+  artifact-subscriptions:
+    - artifact: referenceapplication-addons
+Release war:
+  key: RW
+  tasks:
+    - checkout:
+        repository: Release scripts
+        path: release-scripts
+        force-clean-build: 'false'
+    - command:
+        executable: Bash
+        argument: release-scripts/scp-to-sourceforge.sh ${bamboo.build.working.directory} openmrs.war releases/OpenMRS_Reference_Application_${bamboo.distro.version} openmrs.war
+        description: Deploy to sourceforge
+  artifact-subscriptions:
+    - artifact: ' referenceapplication-war'
+Release readme:
+  key: RR
+  tasks:
+    - checkout:
+        repository: Release scripts
+        path: release-scripts
+        force-clean-build: 'false'
+    - command:
+        executable: Bash
+        argument: release-scripts/scp-to-sourceforge.sh ${bamboo.build.working.directory} readme.txt releases/OpenMRS_Reference_Application_${bamboo.distro.version} readme.txt
+        description: Deploy to sourceforge
+  artifact-subscriptions:
+    - artifact: referenceapplication-readme
 Release docker image:
   key: RDITD
   tasks:
@@ -247,7 +247,7 @@ Release docker image:
             
             docker buildx build --push --platform ${bamboo.docker.image.platforms} --target dev -t ${DEV_IMAGE} .
             
-            #docker run --rm -w="/app" -v /home/bamboo-agent/.m2:/.m2 ${DEV_IMAGE} mvn deploy --settings /.m2/settings.xml
+            docker run --rm -w="/app" -v /home/bamboo-agent/.m2:/.m2 ${DEV_IMAGE} mvn deploy --settings /.m2/settings.xml
             
             echo "Building production image"
             
