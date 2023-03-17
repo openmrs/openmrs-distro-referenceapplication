@@ -25,8 +25,8 @@ stages:
   - Set variables:
       manual: false
       final: false
-      jobs:
-        - Set variables
+#      jobs:
+#        - Set variables
   - Release others:
       manual: false
       final: false
@@ -154,37 +154,37 @@ Deploy to qa-refapp:
 #      shared: true
 #      required: false
 #  artifact-subscriptions: []
-Set variables:
-  key: SV
-  other:
-    all-other-apps:
-      custom:
-        auto:
-          label: release
-        clover: {}
-        buildHangingConfig.enabled: 'false'
-  tasks:
-    # Checkout Task for default repository will be added implicitly during Specs import
-    - script:
-        interpreter: BINSH_OR_CMDEXE
-        scripts:
-          - echo "false" > false.txt
-        description: Preparing to reset preparing.refapp.distro.release global variable
-    - any-task:
-        plugin-key: com.atlassian.bamboo.plugins.variable.updater.variable-updater-generic:variable-file-reader
-        configuration:
-          filename: false.txt
-          variable: preparing.refapp.distro.release
-          includeGlobals: 'true'
-          variableScope: PLAN
-        description: Reseting preparing.refapp.distro.release global variable
-    - inject-variables:
-        file: openmrs-distro.properties
-        scope: RESULT
-        namespace: distro
-        description: Load versions from openmrs-distro.properties
-  artifact-subscriptions:
-    - artifact: ' referenceapplication-properties'
+#Set variables:
+#  key: SV
+#  other:
+#    all-other-apps:
+#      custom:
+#        auto:
+#          label: release
+#        clover: {}
+#        buildHangingConfig.enabled: 'false'
+#  tasks:
+#    # Checkout Task for default repository will be added implicitly during Specs import
+#    - script:
+#        interpreter: BINSH_OR_CMDEXE
+#        scripts:
+#          - echo "false" > false.txt
+#        description: Preparing to reset preparing.refapp.distro.release global variable
+#    - any-task:
+#        plugin-key: com.atlassian.bamboo.plugins.variable.updater.variable-updater-generic:variable-file-reader
+#        configuration:
+#          filename: false.txt
+#          variable: preparing.refapp.distro.release
+#          includeGlobals: 'true'
+#          variableScope: PLAN
+#        description: Reseting preparing.refapp.distro.release global variable
+#    - inject-variables:
+#        file: openmrs-distro.properties
+#        scope: RESULT
+#        namespace: distro
+#        description: Load versions from openmrs-distro.properties
+#  artifact-subscriptions:
+#    - artifact: ' referenceapplication-properties'
 #Release addons:
 #  key: RA
 #  tasks:
