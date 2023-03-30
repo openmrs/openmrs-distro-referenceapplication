@@ -63,6 +63,26 @@ jobs:
           cache-from: type=inline,ref=user/app:buildcache
           cache-to: type=inline,ref=user/app:buildcache,mode=max
 
+  run_containers:
+    runs-on: ubuntu-latest
+
+    needs: docker_distro
+
+    steps:
+      - name: SSH into Azure Ubuntu Instance
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AZURE_INSTANCE }}
+          username: ${{ secrets.AZURE_USERNAME }}
+          password: ${{ secrets.AZURE_PASSWORD }}
+          script: |
+            docker stop $(docker ps -aq)
+            docker rm $(docker ps -aq)
+            docker run -d -p 8080:8080 ${DOCKERHUB_USERNAME}/openmrs3-backend:staging
+
+      - name: Wait for server to start
+        run: sleep 30
+
   sandbox:
     runs-on: ubuntu-latest
 
