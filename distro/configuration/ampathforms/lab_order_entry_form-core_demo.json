@@ -1,386 +1,322 @@
 {
-   "name":"Laboratory Tests",
-   "description":"Simple lab order entry form",
-   "version":"2",
-   "published":true,
-   "retired":false,
-   "encounter":"Consultation",
-   "pages":[
-      {
-         "label":"Lab Orders",
-         "sections":[
+  "name": "Laboratory Tests",
+  "description": "Simple lab order entry form",
+  "version": "2",
+  "published": true,
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Lab Orders",
+      "sections": [
+        {
+          "label": "Add Test Orders",
+          "isExpanded": "true",
+          "questions": [
             {
-               "label":"Test Orders",
-               "isExpanded":"true",
-               "questions":[
-                  {
-                     "type":"obsGroup",
-                     "label":"Test orders",
-                     "questionOptions":{
-                        "concept":"ad2218e0-4bb1-11ed-bdc3-0242ac120002",
-                        "rendering":"group"
-                     },
-                     "questions":[
-                        {
-                           "label":"Tests Ordered",
-                           "id":"order1",
-                           "type":"testOrder",
-                           "questionOptions":{
-                              "rendering":"repeating",
-                              "orderSettingUuid":"INPATIENT",
-                              "orderType":"testorder",
-                              "selectableOrders":[
-                                 {
-                                    "concept":"851AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Mean corpuscular volume",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163695AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Crystals type in urine sediment by light microscopy test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"1338AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Lymphocytes (%) - microscopic exam",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"161447AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Stool microscopy with concentration",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Platelets",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163686AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Yeast presence in urine sediment by light microscopy",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"1325AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Hepatitis C test - qualitative",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"161448AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Kinyoun's stain for coccidians",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"160735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Bacteriuria test",
-                                    "FIELD3":" urine",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"1015AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Hematocrit",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163688AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Spore presence in urine test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163687AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Yeast hyphae presence in urine sediment by light microscopy test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"1016AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Red cell distribution width",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163689AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Trichomonas vaginalis presence in urine sediment by light microscopy",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163426AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Combined % of monocytes",
-                                    "FIELD3":" eosinophils and basophils",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"655AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Total bilirubin",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"161450AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Stool fat test",
-                                    "FIELD3":" semi-quantitative",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"678AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"White blood cells",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"717AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Total protein",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"857AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Blood urea nitrogen",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163683AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Erythrocytes presence in urine sediment by light microscopy test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"161445AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Urine routine and microscopy",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163699AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Urea measurement (calculated)",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Haemoglobin",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"654AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Serum glutamic-pyruvic transaminase",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"160225AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Sickle cell screening test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"159430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Hepatitis B Surface Antigen Test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163684AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Leukocytes presence in urine sediment by light microscopy",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"161449AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Stool test for reducing substance",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"653AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Serum glutamic-oxaloacetic transaminase",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"790AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Serum creatinine (umol/L)",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163696AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Casts presence in urine sediment by light microscopy test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Serum glucose",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"304AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Stool exam",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Alkaline phosphatase",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"159362AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Fecal occult blood test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"679AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Red blood cells",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"1336AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Neutrophils (%) - microscopic exam",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163692AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Epithelial casts presence in urine sediment by light microscopy test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"1018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Mean corpuscular hemoglobin",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"1017AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Mean cell hemoglobin concentration",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"161431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Sickling test only",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"161488AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Renal function panel",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"953AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Liver function tests",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"161451AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Stool test",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"163697AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Urine microscopy panel",
-                                    "conceptMappings":[
-                                       
-                                    ]
-                                 },
-                                 {
-                                    "concept":"1019AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                    "label":"Complete blood count"
-                                 }
-                              ]
-                           }
-                        },
-                        {
-                           "type":"encounterLocation",
-                           "label":"Facility name (site/satellite clinic required):",
-                           "id":"location",
-                           "required":"true",
-                           "questionOptions":{
-                              "rendering":"ui-select-extended"
-                           }
-                        }
-                     ]
+              "type": "obsGroup",
+              "label": "Test orders",
+              "questionOptions": {
+                "concept": "ad2218e0-4bb1-11ed-bdc3-0242ac120002",
+                "rendering": "group"
+              },
+              "questions": [
+                {
+                  "label": "Tests Ordered",
+                  "id": "order1",
+                  "type": "testOrder",
+                  "questionOptions": {
+                    "rendering": "repeating",
+                    "orderSettingUuid": "INPATIENT",
+                    "orderType": "testorder",
+                    "selectableOrders": [
+                      {
+                        "concept": "851AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Mean corpuscular volume",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163695AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Crystals type in urine sediment by light microscopy test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "1338AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Lymphocytes (%) - microscopic exam",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "161447AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Stool microscopy with concentration",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Platelets",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163686AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yeast presence in urine sediment by light microscopy",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "1325AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Hepatitis C test - qualitative",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "161448AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Kinyoun's stain for coccidians",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "160735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Bacteriuria test",
+                        "FIELD3": " urine",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "1015AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Hematocrit",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163688AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Spore presence in urine test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163687AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yeast hyphae presence in urine sediment by light microscopy test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "1016AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Red cell distribution width",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163689AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Trichomonas vaginalis presence in urine sediment by light microscopy",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163426AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Combined % of monocytes",
+                        "FIELD3": " eosinophils and basophils",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "655AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Total bilirubin",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "161450AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Stool fat test",
+                        "FIELD3": " semi-quantitative",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "678AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "White blood cells",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "717AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Total protein",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "857AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Blood urea nitrogen",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163683AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Erythrocytes presence in urine sediment by light microscopy test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "161445AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Urine routine and microscopy",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163699AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Urea measurement (calculated)",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Haemoglobin",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "654AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Serum glutamic-pyruvic transaminase",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "160225AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sickle cell screening test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "159430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Hepatitis B Surface Antigen Test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163684AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Leukocytes presence in urine sediment by light microscopy",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "161449AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Stool test for reducing substance",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "653AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Serum glutamic-oxaloacetic transaminase",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "790AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Serum creatinine (umol/L)",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163696AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Casts presence in urine sediment by light microscopy test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Serum glucose",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "304AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Stool exam",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Alkaline phosphatase",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "159362AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Fecal occult blood test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "679AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Red blood cells",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "1336AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Neutrophils (%) - microscopic exam",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163692AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Epithelial casts presence in urine sediment by light microscopy test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "1018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Mean corpuscular hemoglobin",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "1017AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Mean cell hemoglobin concentration",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "161431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sickling test only",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "161488AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Renal function panel",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "953AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Liver function tests",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "161451AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Stool test",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "163697AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Urine microscopy panel",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "1019AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Complete blood count"
+                      }
+                    ]
                   }
-               ]
+                },
+                {
+                  "type": "encounterLocation",
+                  "label": "Facility name (site/satellite clinic required):",
+                  "id": "location",
+                  "required": "true",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended"
+                  }
+                }
+              ]
             }
-         ]
-      }
-   ],
-   "processor":"EncounterFormProcessor",
-   "uuid":"xxxx",
-   "referencedForms":[
-      
-   ]
+          ]
+        },
+        {
+          "label": "Relevant Clinical Notes",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Gestation in weeks",
+              "type": "complex-obs",
+              "required": true,
+              "id": "2",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "162251AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "307470009"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "162251"
+                  }
+                ],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "xxxx",
+  "referencedForms": []
 }
