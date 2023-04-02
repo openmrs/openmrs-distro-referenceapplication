@@ -12,3 +12,6 @@ services:
   backend:
     build:
       context: .
+    # Include volume for local configs
+    volumes:
+      - ./distro/configuration:/openmrs/distribution/openmrs_configz
