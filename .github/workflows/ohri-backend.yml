@@ -118,14 +118,14 @@ jobs:
 
   #working_3_ohri job, the tags property for the docker/build-push-action step is updated to include ${{ github.run_number }}, which will tag the image with the runner timestamp. Also, the if property is updated to check for the working_3_ohri branch, and the `needs
 
-  working_3_ohri:
+  dev_3_ohri:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         os: [ubuntu-last, macos-latest]
 
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/working_3_ohri' }}
+    # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/working_3_ohri' }}
 
     steps:
       - name: Set up QEMU
@@ -142,11 +142,13 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/openmrs3-backend:working_${{ github.run_number }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/openmrs3-backend:dev_${{ github.run_number }}
+            cache-from: type=gha
+            cache-to: type=gha,mode=max
       - name: Save image digest
         run: echo "::set-output name=image::${{ steps.build-and-push.outputs.digest }}"
 
-  dev_3_ohri:
+  qa_3_ohri:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -155,7 +157,7 @@ jobs:
 
     needs: working_3_ohri
 
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev_3_ohri' }}
+    # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev_3_ohri' }}
 
     steps:
       - name: Set up QEMU
@@ -167,13 +169,20 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+       - name: Get version number
+        id: get_version
+        run: echo "::set-output name=VERSION::$(git describe --tags --abbrev=0 | cut -c 2-)"
+      - name: Get minor release
+        id: get_minor_release
+        run: echo "::set-output name=MINOR_RELEASE::$(git describe --tags --abbrev=0 | cut -d '.' -f 2)"
       - name: Build and push
-        id: build-an-push
         uses: docker/build-push-action@v4
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/openmrs3-backend:dev-${{ github.run_number}}
+          tags: 
+            - latest
+            - ${{ secrets.DOCKERHUB_USERNAME }}/openmrs3-backend:${{ steps.get_version.outputs.VERSION }}.${{ steps.get_minor_release.outputs.MINOR_RELEASE }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Save image digest
