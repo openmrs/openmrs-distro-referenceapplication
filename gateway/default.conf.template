@@ -18,6 +18,7 @@ server {
 
   add_header X-XSS-Protection "1; mode=block";
   add_header Content-Security-Policy $csp_header;
+  add_header X-Content-Type-Options nosniff;
 
   proxy_set_header      HOST $host;
   proxy_set_header      X-Forwarded-Proto $scheme;
