@@ -18,7 +18,7 @@ on:
     types:
       - created
 jobs:
-  update_import_map_dev:
+  rename_import_map_dev:
     runs-on: ubuntu-latest
 
     if: ${{ github.ref == 'refs/heads/dev_config' }}
@@ -36,6 +36,10 @@ jobs:
             cd /usr/share/tomcat/microfrontends/dev 
             mv importmap.json /path/to/importmap_backup_$(date +"%Y-%m-%d").json
 
+  update_import_map_dev:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Copy Branch Dev Import Map to remote
         uses: garygrossgarten/github-action-scp@release
         with:
