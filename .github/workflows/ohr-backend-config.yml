@@ -31,6 +31,7 @@ jobs:
           host: ${{ secrets.HISTAC_HOST }}
           username: ${{ secrets.HISTAC_USERNAME }}
           privateKey: ${{ secrets.HISTAC_KEY}}
+          port: ${{ secrets.HISTAC_PORT }}
           command: |
             cd /usr/share/tomcat/microfrontends/dev 
             mv importmap.json /path/to/importmap_backup_$(date +"%Y-%m-%d").json
