@@ -24,8 +24,8 @@ jobs:
     if: ${{ github.ref == 'refs/heads/dev_config' }}
 
     steps:
-      - name: SSH into server and rename file
-        uses: appleboy/ssh-action@master
+      - name: SSH into Dev Server and rename, backup importmap
+        uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.HISTAC_HOST }}
           username: ${{ secrets.HISTAC_USERNAME }}
@@ -34,7 +34,7 @@ jobs:
             cd /usr/share/tomcat/microfrontends/dev 
             mv importmap.json /path/to/importmap_backup_$(date +"%Y-%m-%d").json
 
-      - name: Copy Branch Import Map to remote
+      - name: Copy Branch Dev Import Map to remote
         uses: garygrossgarten/github-action-scp@release
         with:
           local: config/importmap_dev.json
