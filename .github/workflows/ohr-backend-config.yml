@@ -18,27 +18,6 @@ on:
     types:
       - created
 jobs:
-  dev:
-    runs-on: ubuntu-latest
-
-    needs: pre_release
-
-    if: ${{ github.ref == 'refs/heads/dev' }}
-
-    steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v3
-      - name: Compute Timestamp
-        run: echo "TIMESTAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - uses: garygrossgarten/github-action-ssh@release
-        name: Run the Update MicroFronEnd Script
-        with:
-          command: cd /usr/share/tomcat/microfrontends/dev && /bin/bash update_microfrontends.sh
-          host: ${{ secrets.HISTAC_HOST }}
-          username: ${{ secrets.HISTAC_USERNAME }}
-          privateKey: ${{ secrets.HISTAC_KEY}}
-          port: ${{ secrets.HISTAC_PORT }}
-
   update_import_map_dev:
     runs-on: ubuntu-latest
 
