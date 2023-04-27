@@ -25,12 +25,13 @@ jobs:
 
     steps:
       - name: SSH into Dev Server and rename, backup importmap
-        uses: appleboy/ssh-action@v0.1.10
+        uses: garygrossgarten/github-action-ssh@release
+        # uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.HISTAC_HOST }}
           username: ${{ secrets.HISTAC_USERNAME }}
           privateKey: ${{ secrets.HISTAC_KEY}}
-          script: |
+          command: |
             cd /usr/share/tomcat/microfrontends/dev 
             mv importmap.json /path/to/importmap_backup_$(date +"%Y-%m-%d").json
 
