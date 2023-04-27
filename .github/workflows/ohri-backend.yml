@@ -2,8 +2,7 @@ name: OHRI Distro WITH O3 Images
 
 on:
   push:
-    branches:
-      - "*"
+    branches: ["master", "dev", "3.1-ohri"]
     # Publish semver tags as releases.
     tags: ["v*.*.*"]
   pull_request:
@@ -169,7 +168,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-       - name: Get version number
+      - name: Get version number
         id: get_version
         run: echo "::set-output name=VERSION::$(git describe --tags --abbrev=0 | cut -c 2-)"
       - name: Get minor release

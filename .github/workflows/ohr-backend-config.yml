@@ -1,0 +1,66 @@
+name: OHRI Config - Importmap, Deployment
+
+on:
+  push:
+    branches:
+      - dev_config
+      - working_config
+      - demo_config
+
+  pull_request:
+    branches:
+      - dev_config
+      - working_config
+      - demo_config
+
+    types: [opened, synchronize]
+  release:
+    types:
+      - created
+jobs:
+  dev:
+    runs-on: ubuntu-latest
+
+    needs: pre_release
+
+    if: ${{ github.ref == 'refs/heads/dev' }}
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+      - name: Compute Timestamp
+        run: echo "TIMESTAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - uses: garygrossgarten/github-action-ssh@release
+        name: Run the Update MicroFronEnd Script
+        with:
+          command: cd /usr/share/tomcat/microfrontends/dev && /bin/bash update_microfrontends.sh
+          host: ${{ secrets.HISTAC_HOST }}
+          username: ${{ secrets.HISTAC_USERNAME }}
+          privateKey: ${{ secrets.HISTAC_KEY}}
+          port: ${{ secrets.HISTAC_PORT }}
+
+  update_import_map_dev:
+    runs-on: ubuntu-latest
+
+    if: ${{ github.ref == 'refs/heads/dev_config' }}
+
+    steps:
+      - name: SSH into server and rename file
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HISTAC_HOST }}
+          username: ${{ secrets.HISTAC_USERNAME }}
+          privateKey: ${{ secrets.HISTAC_KEY}}
+          script: |
+            cd /usr/share/tomcat/microfrontends/dev 
+            mv importmap.json /path/to/importmap_backup_$(date +"%Y-%m-%d").json
+
+      - name: Copy Branch Import Map to remote
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: config/importmap_dev.json
+          remote: /usr/share/tomcat/microfrontends/dev
+          host: ${{ secrets.HISTAC_HOST }}
+          username: ${{ secrets.HISTAC_USERNAME }}
+          privateKey: ${{ secrets.HISTAC_KEY}}
+          port: ${{ secrets.HISTAC_PORT }}
