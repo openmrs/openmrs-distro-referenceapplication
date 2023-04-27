@@ -1,7 +1,7 @@
 {
   "name": "Laboratory Tests",
   "description": "Simple lab order entry form",
-  "version": "2",
+  "version": "2.2",
   "published": true,
   "retired": false,
   "encounter": "Consultation",
@@ -266,6 +266,22 @@
                       {
                         "concept": "1019AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Complete blood count"
+                      },
+                      {
+                        "concept": "161481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Prothrombin time"
+                      },
+                      {
+                        "concept": "161482AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "International Normalized Ratio (INR)"
+                      },
+                      {
+                        "concept": "161157AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "ECG: 12-Lead Electrocardiogram"
+                      },
+                      {
+                        "concept": "12AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Chest X-Ray (CXR)"
                       }
                     ]
                   }
@@ -309,7 +325,10 @@
                 ],
                 "answers": []
               },
-              "validators": []
+              "validators": [],
+              "hide": {
+                "hideWhenExpression": "sex !== 'F'"
+              }
             }
           ]
         }
