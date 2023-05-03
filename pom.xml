@@ -117,17 +117,6 @@
 
   <repositories>
     <repository>
-      <id>mks-nexus-public</id>
-      <url>https://nexus.mekomsolutions.net/repository/maven-public/</url>
-    </repository>
-    <repository>
-      <id>mks-nexus-snapshots</id>
-      <url>https://nexus.mekomsolutions.net/repository/maven-snapshots/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
       <id>openmrs-repo</id>
       <name>OpenMRS Nexus Repository</name>
       <url>https://mavenrepo.openmrs.org/public</url>
@@ -152,6 +141,17 @@
       </releases>
     </repository>
     <repository>
+      <id>mks-nexus-public</id>
+      <url>https://nexus.mekomsolutions.net/repository/maven-public/</url>
+    </repository>
+    <repository>
+      <id>mks-nexus-snapshots</id>
+      <url>https://nexus.mekomsolutions.net/repository/maven-snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
       <id>sonatype-nexus-snapshots</id>
       <name>Sonatype Nexus Snapshots</name>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
@@ -169,7 +169,7 @@
     <pluginRepository>
       <id>openmrs-repo</id>
       <name>OpenMRS Public Repository</name>
-      <url>https://openmrs.jfrog.io/artifactory/releases</url>
+      <url>https://mavenrepo.openmrs.org/public</url>
     </pluginRepository>
     <pluginRepository>
       <id>openmrs-snapshots</id>
@@ -182,13 +182,24 @@
         <enabled>false</enabled>
       </releases>
     </pluginRepository>
+    <pluginRepository>
+      <id>mks-nexus-public</id>
+      <url>https://nexus.mekomsolutions.net/repository/maven-public/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>mks-nexus-snapshots</id>
+      <url>https://nexus.mekomsolutions.net/repository/maven-snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
   </pluginRepositories>
 
   <distributionManagement>
     <repository>
       <id>openmrs-repo-releases</id>
       <name>OpenMRS Releases Repo</name>
-      <url>https://openmrs.jfrog.io/artifactory/releases</url>
+      <url>https://mavenrepo.openmrs.org/releases</url>
     </repository>
     <snapshotRepository>
       <id>openmrs-repo-snapshots</id>
