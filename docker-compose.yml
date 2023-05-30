@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   gateway:
-    image: histacoohri/o3-reference-ohri-gateway:2.5.9
+    image: histacoohri/o3-reference-ohri-gateway:2.6
     depends_on:
       - frontend
       - backend
@@ -10,7 +10,7 @@ services:
       - "80:80"
 
   frontend:
-    image: histacoohri/o3-reference-ohri-frontend:1.0.3
+    image: histacoohri/o3-reference-ohri-frontend:1.0.7
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
@@ -25,7 +25,7 @@ services:
       - ./frontend/ohri-config.json:/usr/share/nginx/html/ohri-config.json
 
   backend:
-    image: histacoohri/o3-reference-ohri-backend:2.5.9
+    image: histacoohri/o3-reference-ohri-backend:2.6
     depends_on:
       - db
     environment:
