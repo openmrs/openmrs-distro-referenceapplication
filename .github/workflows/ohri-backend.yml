@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: docker_setup
 
-    if: github.event_name == 'push' && github.event.changes != null && contains(github.event.changes, 'distro/')
+    if: github.event_name == 'push' && github.event.changes != null && (contains(github.event.changes, 'distro/') || github.event.pull_request != null && github.event.pull_request.merged)
 
     steps:
       - name: Login to Docker Hub
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: docker_setup
 
-    if: github.event_name == 'push' && github.event.changes != null && contains(github.event.changes, 'frontend/')
+    if: github.event_name == 'push' && github.event.changes != null && (contains(github.event.changes, 'frontend/') || github.event.pull_request != null && github.event.pull_request.merged)
 
     steps:
       - name: Login to Docker Hub
@@ -98,7 +98,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: docker_setup
 
-    if: github.event_name == 'push' && github.event.changes != null && contains(github.event.changes, 'gateway/')
+    if: github.event_name == 'push' && github.event.changes != null && (contains(github.event.changes, 'gateway/') || github.event.pull_request != null && github.event.pull_request.merged)
 
     steps:
       - name: Login to Docker Hub
