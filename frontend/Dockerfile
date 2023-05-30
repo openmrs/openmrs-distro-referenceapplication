@@ -16,7 +16,7 @@ FROM nginx:1.23-alpine
 
 RUN apk update && \
     apk upgrade && \
-    # add more utils for sponge to support our startup s    cript
+    # add more utils for sponge to support our startup script
     apk add --no-cache moreutils
 
 # clear any default files installed by nginx
