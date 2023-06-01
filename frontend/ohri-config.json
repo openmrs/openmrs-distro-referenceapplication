@@ -1,0 +1,48 @@
+{
+  "@openmrs/esm-patient-registration-app": {
+    "fieldDefinitions": [
+      {
+        "id": "referredby",
+        "name": "Referred by",
+        "type": "person attribute",
+        "uuid": "4dd56a75-14ab-4148-8700-1f4f704dc5b0",
+        "answerConceptSetUuid": "6682d17f-0777-45e4-a39b-93f77eb3531c",
+        "validation": {
+          "matches": ""
+        }
+      }
+    ],
+    "sectionDefinitions": [
+      {
+        "id": "additionalDetails",
+        "name": "Additional Details",
+        "fields": ["referredby"]
+      }
+    ],
+    "sections": [
+      "demographics",
+      "relationships",
+      "contact",
+      "additionalDetails"
+    ],
+    "fieldConfigurations": {
+      "gender": [
+        {
+          "id": "male",
+          "value": "Male",
+          "label": "Male"
+        },
+        {
+          "id": "female",
+          "value": "Female",
+          "label": "Female"
+        },
+        {
+          "id": "other",
+          "value": "Other",
+          "label": "Other"
+        }
+      ]
+    }
+  }
+}

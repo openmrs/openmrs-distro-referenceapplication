@@ -1,0 +1,2570 @@
+{
+    "name": "ART Therapy Form",
+    "version" : "1",
+    "published" : true,
+    "retired" : false,
+    "pages": [
+      {
+        "label": "Introduction",
+        "sections": [
+          {
+            "label": "",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "type": "markdown",
+                "questionOptions": {
+                  "rendering": "markdown"
+                },
+                "id": "fooMarkdown",
+                "value": [
+                  "**Use this form to:** start ART, substitute an ART line, switch an ART regimen, to stop ART or to restart ART."
+                ]
+              },
+              {
+                "label": "What do you want to do?",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "7557d77c-172b-4673-9335-67a38657dd01",
+                  "conceptMappings": [
+                    {
+                      "type": "AMPATH",
+                      "value": "1255"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "1255"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Start ART",
+                      "conceptMappings": [
+                        {
+                          "type": "AMPATH",
+                          "value": "1256"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1256"
+                        },
+                        {
+                          "type": "SNOMED-MVP",
+                          "value": "12561000105002"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1256"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Substitute ART Regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "1258"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1258"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1259AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Switch ART Regimen Line",
+                      "conceptMappings": [
+                        {
+                          "type": "AMPATH",
+                          "value": "1259"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1259"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Stop ART",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "1260"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1260"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1260"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "3e69cb60-2943-410f-83d4-b359ae83fefd",
+                      "label": "Restart ART therapy",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "therapyPlan"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Start ART",
+        "sections": [
+          {
+            "label": "Start ART Regimen",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Date of ART initiation",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "weeksList": "",
+                  "conceptMappings": [
+                    {
+                      "type": "AMPATH",
+                      "value": "5869"
+                    },
+                    {
+                      "type": "PIH-Malawi",
+                      "value": "2516"
+                    },
+                    {
+                      "type": "AMPATH",
+                      "value": "1499"
+                    },
+                    {
+                      "type": "SNOMED-MVP",
+                      "value": "1595991000105005"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "2516"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "159599"
+                    },
+                    {
+                      "type": "PIH-Malawi",
+                      "value": "2516"
+                    },
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "413946009"
+                    },
+                    {
+                      "type": "SNOMED-MVP",
+                      "value": "1595991000105005"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "2516"
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": [
+                      {
+                        "type": "date",
+                        "allowFutureDates": "false"
+                      },
+                      {
+                        "type": "js_expression",
+                        "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('dateOfFirstVisit')"
+                      }
+                    ]
+                  }
+                ],
+                "id": "initiationDate"
+              },
+              {
+                "label": "Regimen line",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "164515AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "answers": [
+                    {
+                      "concept": "164506AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Adult 1st line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164506"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "164507AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Child 1st line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164507"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "regimenInitiated"
+              },
+              {
+                "label": "Regimen",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "dfbe256e-30ba-4033-837a-2e8477f2e7cd",
+                  "answers": [
+                    {
+                      "concept": "f827ed18-f816-4cd0-b77c-28a0209c96c0",
+                      "label": "ABC + 3TC + ATVr",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_ATVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5bb0348b-fc27-460e-b6cd-df7a4a253372",
+                      "label": "ABC + 3TC + DRV+RTV+RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DRV_RTV_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "396d668b-b1e6-4997-b9b9-2d57f53c2321",
+                      "label": "ABC + 3TC + DRVr",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DRVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "159db6bc-1303-4829-8fe4-32212751c934",
+                      "label": "ABC + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "165606"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "165606"
+                        },
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "70e9b78a-a6d8-49c2-8217-0ba57b05803a",
+                      "label": "ABC + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_EFV"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162563"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162563"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "0da33711-7b3f-4997-bc9e-4a2445fbaf63",
+                      "label": "ABC + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_LPVr"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162200"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162200"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "98bec34c-608a-46ce-8f1a-3ee3b8b6f92b",
+                      "label": "ABC + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162199"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162199"
+                        },
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "dc25af21-7816-44d8-92d2-3332c7db113a",
+                      "label": "ABC + 3TC + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "62243dfe-6284-48a9-afcc-63149ac6d709",
+                      "label": "AZT + 3TC + ATV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_ATVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "60bec021-c05c-4ae9-93fe-b798c0bf82d2",
+                      "label": "AZT + 3TC + DRV + RTV + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_DRV_RTV_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "f2247788-6d05-490d-ad04-64544c8020b7",
+                      "label": "AZT + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "b1336ea0-3a87-4018-9fce-3a7a22d95d7d",
+                      "label": "AZT + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "d2b1d784-a880-42a9-b0a6-19de2db7afd6",
+                      "label": "AZT + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "bafb40ca-b0c7-4366-bd8e-9eb923237c94",
+                      "label": "AZT + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "e9540e20-1ba4-4573-b189-088f5fd9dc57",
+                      "label": "AZT + 3TC + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "6a3d196a-67fa-4d4f-b78d-76103d91972a",
+                      "label": "d4T + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "4ad80d98-0a1a-41d1-a9d7-2110692bf5eb",
+                      "label": "d4T + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "d8051638-0123-4322-a094-4a48adffdc37",
+                      "label": "d4T + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "9e82e55d-dbbf-49a6-900c-d8ead9985b0a",
+                      "label": "ETV + 3TC + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ETV_3TC_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1431d032-9eeb-46b3-84e5-79f0c19354d8",
+                      "label": "RAL + 3TC + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "f47f98e7-f17a-466a-ba8e-aa4423049c7e",
+                      "label": "RAL + 3TC + DRV + RTV + ABC",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_ABC"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "3ae355dd-fc83-43c6-9312-ebbb30b51bf7",
+                      "label": "RAL + 3TC + DRV + RTV + AZT",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_AZT"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "0fd8a042-81a3-4106-8470-63d29380d7d5",
+                      "label": "RAL + 3TC + DRV + RTV + TDF",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_TDF"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "6b7cd8a1-77b3-4853-bbe7-ff6bf51c41c3",
+                      "label": "TAF + 3TC + DRV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_DRVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5f7da36e-1a83-4ede-ae6f-41aaa5304601",
+                      "label": "TAF + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5a4587e2-de9e-4b99-9ea0-00717fa5605a",
+                      "label": "TAF + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "907d304b-ebc4-4387-8af8-2d2c92f82910",
+                      "label": "TDF + 3TC + DTG + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_DTG_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5679c813-cfed-4fb2-b252-d6149297e013",
+                      "label": "TDF + 3TC + DTG + ETR + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_DTG_ETR_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5f123dc8-c697-47f6-bc67-007322a9bb48",
+                      "label": "TDF + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "380e5e7c-7c2f-4ba8-a93c-90b1e638dc2c",
+                      "label": "TDF + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "36685ad3-a223-4c3c-b6ee-d8358432a600",
+                      "label": "TDF + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "083d46c5-dea7-49de-abd5-e16f252255a7",
+                      "label": "TDF + FTC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_FTC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "67701961-f6c1-4ebf-a7f5-c2c5d25021a0",
+                      "label": "TDF + FTC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_FTC_EFV"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "false",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "initiationRegimen"
+              }
+            ]
+          }
+        ],
+        "behaviours": [
+          {
+            "intent": "*",
+            "hide": {
+              "hideWhenExpression": "isEmpty(therapyPlan) || therapyPlan !== '1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Switch ART Regimen Line",
+        "sections": [
+          {
+            "label": "Switch Regimen Line",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Date regimen line switched",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "164516AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": [
+                      {
+                        "type": "date",
+                        "allowFutureDates": "false"
+                      },
+                      {
+                        "type": "js_expression",
+                        "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('initiationDate')"
+                      }
+                    ]
+                  }
+                ],
+                "id": "switchDate"
+              },
+              {
+                "label": "Reason for switching regimen line",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "160568AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "160568"
+                    },
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "309298003"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "1780"
+                    },
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "170564007"
+                    },
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "170564007"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "1780"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "160569AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Virologic failure",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "182985004"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160569"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1765"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1765"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160566AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Immunologic failure",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160566"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "182985004"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1764"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1764"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "switchReason"
+              },
+              {
+                "label": "Regimen line",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "164515AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "answers": [
+                    {
+                      "concept": "164513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Adult 2nd line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164513"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "164514AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Child 2nd line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164514"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "regimenSwitched"
+              },
+              {
+                "label": "Regimen",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "dfbe256e-30ba-4033-837a-2e8477f2e7cd",
+                  "answers": [
+                    {
+                      "concept": "f827ed18-f816-4cd0-b77c-28a0209c96c0",
+                      "label": "ABC + 3TC + ATVr",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_ATVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5bb0348b-fc27-460e-b6cd-df7a4a253372",
+                      "label": "ABC + 3TC + DRV+RTV+RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DRV_RTV_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "396d668b-b1e6-4997-b9b9-2d57f53c2321",
+                      "label": "ABC + 3TC + DRVr",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DRVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "159db6bc-1303-4829-8fe4-32212751c934",
+                      "label": "ABC + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "165606"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "165606"
+                        },
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "70e9b78a-a6d8-49c2-8217-0ba57b05803a",
+                      "label": "ABC + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_EFV"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162563"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162563"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "0da33711-7b3f-4997-bc9e-4a2445fbaf63",
+                      "label": "ABC + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_LPVr"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162200"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162200"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "98bec34c-608a-46ce-8f1a-3ee3b8b6f92b",
+                      "label": "ABC + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162199"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162199"
+                        },
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "dc25af21-7816-44d8-92d2-3332c7db113a",
+                      "label": "ABC + 3TC + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "62243dfe-6284-48a9-afcc-63149ac6d709",
+                      "label": "AZT + 3TC + ATV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_ATVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "60bec021-c05c-4ae9-93fe-b798c0bf82d2",
+                      "label": "AZT + 3TC + DRV + RTV + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_DRV_RTV_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "f2247788-6d05-490d-ad04-64544c8020b7",
+                      "label": "AZT + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "b1336ea0-3a87-4018-9fce-3a7a22d95d7d",
+                      "label": "AZT + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "d2b1d784-a880-42a9-b0a6-19de2db7afd6",
+                      "label": "AZT + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "bafb40ca-b0c7-4366-bd8e-9eb923237c94",
+                      "label": "AZT + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "e9540e20-1ba4-4573-b189-088f5fd9dc57",
+                      "label": "AZT + 3TC + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "6a3d196a-67fa-4d4f-b78d-76103d91972a",
+                      "label": "d4T + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "4ad80d98-0a1a-41d1-a9d7-2110692bf5eb",
+                      "label": "d4T + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "d8051638-0123-4322-a094-4a48adffdc37",
+                      "label": "d4T + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "9e82e55d-dbbf-49a6-900c-d8ead9985b0a",
+                      "label": "ETV + 3TC + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ETV_3TC_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1431d032-9eeb-46b3-84e5-79f0c19354d8",
+                      "label": "RAL + 3TC + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "f47f98e7-f17a-466a-ba8e-aa4423049c7e",
+                      "label": "RAL + 3TC + DRV + RTV + ABC",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_ABC"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "3ae355dd-fc83-43c6-9312-ebbb30b51bf7",
+                      "label": "RAL + 3TC + DRV + RTV + AZT",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_AZT"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "0fd8a042-81a3-4106-8470-63d29380d7d5",
+                      "label": "RAL + 3TC + DRV + RTV + TDF",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_TDF"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "6b7cd8a1-77b3-4853-bbe7-ff6bf51c41c3",
+                      "label": "TAF + 3TC + DRV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_DRVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5f7da36e-1a83-4ede-ae6f-41aaa5304601",
+                      "label": "TAF + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5a4587e2-de9e-4b99-9ea0-00717fa5605a",
+                      "label": "TAF + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "907d304b-ebc4-4387-8af8-2d2c92f82910",
+                      "label": "TDF + 3TC + DTG + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_DTG_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5679c813-cfed-4fb2-b252-d6149297e013",
+                      "label": "TDF + 3TC + DTG + ETR + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_DTG_ETR_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5f123dc8-c697-47f6-bc67-007322a9bb48",
+                      "label": "TDF + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "380e5e7c-7c2f-4ba8-a93c-90b1e638dc2c",
+                      "label": "TDF + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "36685ad3-a223-4c3c-b6ee-d8358432a600",
+                      "label": "TDF + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "083d46c5-dea7-49de-abd5-e16f252255a7",
+                      "label": "TDF + FTC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_FTC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "67701961-f6c1-4ebf-a7f5-c2c5d25021a0",
+                      "label": "TDF + FTC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_FTC_EFV"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "false",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "combinationSwitched"
+              }
+            ]
+          }
+        ],
+        "behaviours": [
+          {
+            "intent": "*",
+            "hide": {
+              "hideWhenExpression": "isEmpty(therapyPlan) || therapyPlan !== '1259AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Substitute ART Regimen",
+        "sections": [
+          {
+            "label": "Substitute ART Regimen",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Date regimen substituted",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "164431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "164431"
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": [
+                      {
+                        "type": "date",
+                        "allowFutureDates": "false"
+                      },
+                      {
+                        "type": "js_expression",
+                        "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('initiationDate')"
+                      }
+                    ]
+                  }
+                ],
+                "id": "substitutionDate"
+              },
+              {
+                "label": "Reason for substituting regimen",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "160562AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "170564007"
+                    },
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "309298003"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "1779"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "1779"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "160562"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "160567AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "New diagnosis of Tuberculosis",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "1763"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1763"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160567"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Currently pregnant",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "77386006"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "52609"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "77386006"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1484"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "Z33"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1484"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1434"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "52609"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Medications unavailable",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED-MVP",
+                          "value": "17541000105004"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1761"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1754"
+                        },
+                        {
+                          "type": "SNOMED-MVP",
+                          "value": "17541000105004"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "182856006"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1761"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "182856006"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Other non-coded",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "5622"
+                        },
+                        {
+                          "type": "PIH-Malawi",
+                          "value": "6408"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "5622"
+                        },
+                        {
+                          "type": "org.openmrs.module.mdrtb",
+                          "value": "OTHER"
+                        },
+                        {
+                          "type": "SNOMED-MVP",
+                          "value": "56221000105001"
+                        },
+                        {
+                          "type": "SNOMED-MVP",
+                          "value": "56221000105001"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "5622"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "5622"
+                        },
+                        {
+                          "type": "org.openmrs.module.mdrtb",
+                          "value": "OTHER"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "5622"
+                        },
+                        {
+                          "type": "PIH-Malawi",
+                          "value": "6408"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "74964007"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "102AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Toxicity, drug",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "7895008"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "102"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "381740"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "7895008"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "381740"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "102"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "102"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "R89.2"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "substituteReason"
+              },
+              {
+                "label": "Regimen line",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "164515AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "answers": [
+                    {
+                      "concept": "164506AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Adult 1st line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164506"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "164513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Adult 2nd line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164513"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "164507AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Child 1st line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164507"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "164514AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Child 2nd line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164514"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "regimenSubstituted"
+              },
+              {
+                "label": "Regimen",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "dfbe256e-30ba-4033-837a-2e8477f2e7cd",
+                  "answers": [
+                    {
+                      "concept": "f827ed18-f816-4cd0-b77c-28a0209c96c0",
+                      "label": "ABC + 3TC + ATVr",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_ATVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5bb0348b-fc27-460e-b6cd-df7a4a253372",
+                      "label": "ABC + 3TC + DRV+RTV+RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DRV_RTV_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "396d668b-b1e6-4997-b9b9-2d57f53c2321",
+                      "label": "ABC + 3TC + DRVr",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DRVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "159db6bc-1303-4829-8fe4-32212751c934",
+                      "label": "ABC + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "165606"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "165606"
+                        },
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "70e9b78a-a6d8-49c2-8217-0ba57b05803a",
+                      "label": "ABC + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_EFV"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162563"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162563"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "0da33711-7b3f-4997-bc9e-4a2445fbaf63",
+                      "label": "ABC + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_LPVr"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162200"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162200"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "98bec34c-608a-46ce-8f1a-3ee3b8b6f92b",
+                      "label": "ABC + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162199"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162199"
+                        },
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "dc25af21-7816-44d8-92d2-3332c7db113a",
+                      "label": "ABC + 3TC + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "62243dfe-6284-48a9-afcc-63149ac6d709",
+                      "label": "AZT + 3TC + ATV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_ATVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "60bec021-c05c-4ae9-93fe-b798c0bf82d2",
+                      "label": "AZT + 3TC + DRV + RTV + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_DRV_RTV_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "f2247788-6d05-490d-ad04-64544c8020b7",
+                      "label": "AZT + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "b1336ea0-3a87-4018-9fce-3a7a22d95d7d",
+                      "label": "AZT + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "d2b1d784-a880-42a9-b0a6-19de2db7afd6",
+                      "label": "AZT + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "bafb40ca-b0c7-4366-bd8e-9eb923237c94",
+                      "label": "AZT + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "e9540e20-1ba4-4573-b189-088f5fd9dc57",
+                      "label": "AZT + 3TC + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "6a3d196a-67fa-4d4f-b78d-76103d91972a",
+                      "label": "d4T + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "4ad80d98-0a1a-41d1-a9d7-2110692bf5eb",
+                      "label": "d4T + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "d8051638-0123-4322-a094-4a48adffdc37",
+                      "label": "d4T + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "9e82e55d-dbbf-49a6-900c-d8ead9985b0a",
+                      "label": "ETV + 3TC + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ETV_3TC_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1431d032-9eeb-46b3-84e5-79f0c19354d8",
+                      "label": "RAL + 3TC + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "f47f98e7-f17a-466a-ba8e-aa4423049c7e",
+                      "label": "RAL + 3TC + DRV + RTV + ABC",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_ABC"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "3ae355dd-fc83-43c6-9312-ebbb30b51bf7",
+                      "label": "RAL + 3TC + DRV + RTV + AZT",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_AZT"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "0fd8a042-81a3-4106-8470-63d29380d7d5",
+                      "label": "RAL + 3TC + DRV + RTV + TDF",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_TDF"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "6b7cd8a1-77b3-4853-bbe7-ff6bf51c41c3",
+                      "label": "TAF + 3TC + DRV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_DRVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5f7da36e-1a83-4ede-ae6f-41aaa5304601",
+                      "label": "TAF + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5a4587e2-de9e-4b99-9ea0-00717fa5605a",
+                      "label": "TAF + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "907d304b-ebc4-4387-8af8-2d2c92f82910",
+                      "label": "TDF + 3TC + DTG + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_DTG_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5679c813-cfed-4fb2-b252-d6149297e013",
+                      "label": "TDF + 3TC + DTG + ETR + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_DTG_ETR_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5f123dc8-c697-47f6-bc67-007322a9bb48",
+                      "label": "TDF + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "380e5e7c-7c2f-4ba8-a93c-90b1e638dc2c",
+                      "label": "TDF + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "36685ad3-a223-4c3c-b6ee-d8358432a600",
+                      "label": "TDF + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "083d46c5-dea7-49de-abd5-e16f252255a7",
+                      "label": "TDF + FTC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_FTC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "67701961-f6c1-4ebf-a7f5-c2c5d25021a0",
+                      "label": "TDF + FTC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_FTC_EFV"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "false",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "combinationSubstituted"
+              }
+            ]
+          }
+        ],
+        "behaviours": [
+          {
+            "intent": "*",
+            "hide": {
+              "hideWhenExpression": "isEmpty(therapyPlan) || therapyPlan !== '1258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Stop ART - Refused treatment",
+        "sections": [
+          {
+            "label": "Refused (stopped) treatment",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Date patient refused HIV care/treatment",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "162572AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                "type": "obs",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": [
+                      {
+                        "type": "date",
+                        "allowFutureDates": "false"
+                      },
+                      {
+                        "type": "js_expression",
+                        "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('initiationDate')"
+                      }
+                    ]
+                  }
+                ],
+                "id": "datePatientRefusedTreatment"
+              },
+              {
+                "label": "Reason for discontinuing service (text)",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "163513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                "type": "obs",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "reasonForDiscontinuing"
+              }
+            ]
+          }
+        ],
+        "behaviours": [
+          {
+            "intent": "*",
+            "hide": {
+              "hideWhenExpression": "isEmpty(therapyPlan) || therapyPlan !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Restart ART",
+        "sections": [
+          {
+            "label": "Restart ART Regimen",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Date restarted ART",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "160738AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "weeksList": "",
+                  "conceptMappings": [
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "410684002"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "160738"
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": [
+                      {
+                        "type": "date",
+                        "allowFutureDates": "false"
+                      },
+                      {
+                        "type": "js_expression",
+                        "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                      }
+                    ]
+                  }
+                ],
+                "id": "dateRestarted"
+              },
+              {
+                "label": "Regimen line",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "164515AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "answers": [
+                    {
+                      "concept": "164506AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Adult 1st line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164506"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "164513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Adult 2nd line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164513"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "164507AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Child 1st line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164507"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "164514AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Child 2nd line ARV regimen",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "164514"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "regimenRestarted"
+              },
+              {
+                "label": "Regimen",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "dfbe256e-30ba-4033-837a-2e8477f2e7cd",
+                  "answers": [
+                    {
+                      "concept": "f827ed18-f816-4cd0-b77c-28a0209c96c0",
+                      "label": "ABC + 3TC + ATVr",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_ATVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5bb0348b-fc27-460e-b6cd-df7a4a253372",
+                      "label": "ABC + 3TC + DRV+RTV+RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DRV_RTV_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "396d668b-b1e6-4997-b9b9-2d57f53c2321",
+                      "label": "ABC + 3TC + DRVr",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DRVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "159db6bc-1303-4829-8fe4-32212751c934",
+                      "label": "ABC + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "165606"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "165606"
+                        },
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "70e9b78a-a6d8-49c2-8217-0ba57b05803a",
+                      "label": "ABC + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_EFV"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162563"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162563"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "0da33711-7b3f-4997-bc9e-4a2445fbaf63",
+                      "label": "ABC + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_LPVr"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162200"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162200"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "98bec34c-608a-46ce-8f1a-3ee3b8b6f92b",
+                      "label": "ABC + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162199"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162199"
+                        },
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "dc25af21-7816-44d8-92d2-3332c7db113a",
+                      "label": "ABC + 3TC + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ABC_3TC_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "62243dfe-6284-48a9-afcc-63149ac6d709",
+                      "label": "AZT + 3TC + ATV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_ATVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "60bec021-c05c-4ae9-93fe-b798c0bf82d2",
+                      "label": "AZT + 3TC + DRV + RTV + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_DRV_RTV_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "f2247788-6d05-490d-ad04-64544c8020b7",
+                      "label": "AZT + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "b1336ea0-3a87-4018-9fce-3a7a22d95d7d",
+                      "label": "AZT + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "d2b1d784-a880-42a9-b0a6-19de2db7afd6",
+                      "label": "AZT + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "bafb40ca-b0c7-4366-bd8e-9eb923237c94",
+                      "label": "AZT + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "e9540e20-1ba4-4573-b189-088f5fd9dc57",
+                      "label": "AZT + 3TC + RAL",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "AZT_3TC_RAL"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "6a3d196a-67fa-4d4f-b78d-76103d91972a",
+                      "label": "d4T + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "4ad80d98-0a1a-41d1-a9d7-2110692bf5eb",
+                      "label": "d4T + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "d8051638-0123-4322-a094-4a48adffdc37",
+                      "label": "d4T + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "d4T_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "9e82e55d-dbbf-49a6-900c-d8ead9985b0a",
+                      "label": "ETV + 3TC + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "ETV_3TC_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1431d032-9eeb-46b3-84e5-79f0c19354d8",
+                      "label": "RAL + 3TC + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "f47f98e7-f17a-466a-ba8e-aa4423049c7e",
+                      "label": "RAL + 3TC + DRV + RTV + ABC",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_ABC"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "3ae355dd-fc83-43c6-9312-ebbb30b51bf7",
+                      "label": "RAL + 3TC + DRV + RTV + AZT",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_AZT"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "0fd8a042-81a3-4106-8470-63d29380d7d5",
+                      "label": "RAL + 3TC + DRV + RTV + TDF",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "RAL_3TC_DRV_RTV_TDF"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "6b7cd8a1-77b3-4853-bbe7-ff6bf51c41c3",
+                      "label": "TAF + 3TC + DRV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_DRVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5f7da36e-1a83-4ede-ae6f-41aaa5304601",
+                      "label": "TAF + 3TC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5a4587e2-de9e-4b99-9ea0-00717fa5605a",
+                      "label": "TAF + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TAF_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "907d304b-ebc4-4387-8af8-2d2c92f82910",
+                      "label": "TDF + 3TC + DTG + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_DTG_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5679c813-cfed-4fb2-b252-d6149297e013",
+                      "label": "TDF + 3TC + DTG + ETR + DRV + RTV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_DTG_ETR_DRV_RTV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "5f123dc8-c697-47f6-bc67-007322a9bb48",
+                      "label": "TDF + 3TC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_EFV"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "380e5e7c-7c2f-4ba8-a93c-90b1e638dc2c",
+                      "label": "TDF + 3TC + LPV/r",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_LPVr"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "36685ad3-a223-4c3c-b6ee-d8358432a600",
+                      "label": "TDF + 3TC + NVP",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_3TC_NVP"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "083d46c5-dea7-49de-abd5-e16f252255a7",
+                      "label": "TDF + FTC + DTG",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_FTC_DTG"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "67701961-f6c1-4ebf-a7f5-c2c5d25021a0",
+                      "label": "TDF + FTC + EFV",
+                      "conceptMappings": [
+                        {
+                          "type": "OCT",
+                          "value": "TDF_FTC_EFV"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "false",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "combinationRestarted"
+              },
+              {
+                "label": "Reason for restarting ART",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "161011"
+                    }
+                  ]
+                },
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ],
+                "id": "reasonRestarting"
+              }
+            ]
+          }
+        ],
+        "behaviours": [
+          {
+            "intent": "*",
+            "hide": {
+              "hideWhenExpression": "isEmpty(therapyPlan) || therapyPlan !== '3e69cb60-2943-410f-83d4-b359ae83fefd'"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Notes",
+        "sections": [
+          {
+            "label": "",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rows": "",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "160632"
+                    },
+                    {
+                      "type": "AMPATH",
+                      "value": "1915"
+                    },
+                    {
+                      "type": "LOINC",
+                      "value": "48767-8"
+                    },
+                    {
+                      "type": "AMPATH",
+                      "value": "1915"
+                    }
+                  ]
+                },
+                "id": "addNotes"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "availableIntents": [
+      {
+        "intent": "*",
+        "display": "ART Therapy Form"
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "uuid": "xxxx",
+    "referencedForms": [],
+    "encounterType": "74bf4fe6-8fdb-4228-be39-680a93a9cf6d",
+    "encounter": "ART Therapy",
+    "allowUnspecifiedAll": true
+  }

@@ -1,0 +1,784 @@
+{
+    "name": "Death Form",
+    "version" : "1",
+    "published" : true,
+    "retired" : false,
+    "pages": [
+      {
+        "label": "HIV Death Form",
+        "sections": [
+          {
+            "label": "Introduction",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "type": "markdown",
+                "questionOptions": {
+                  "rendering": "markdown"
+                },
+                "id": "fooMarkdown",
+                "value": [
+                  "**This form is used to:** Document the cause of death of a HIV patient."
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Cause of Death",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Date of death",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "1543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "weeksList": "",
+                  "conceptMappings": [
+                    {
+                      "type": "AMPATH",
+                      "value": "1570"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "1815"
+                    },
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "399753006"
+                    }
+                  ]
+                },
+                "id": "Deathdate",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "false",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": [
+                      {
+                        "type": "date",
+                        "allowFutureDates": "false"
+                      },
+                      {
+                        "type": "js_expression",
+                        "failsWhenExpression": "myValue > today() || myValue < useFieldValue('dateOfFirstVisit') || myValue <= '159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "label": "Cause of Death",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "ef973f1f-557f-4620-acf5-9c4c18bf1eda",
+                  "answers": [
+                    {
+                      "concept": "156673AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "HIV disease resulting in mycobacterial infection",
+                      "conceptMappings": [
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10121433"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122568"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10121433"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186717007"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.0"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156673"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122568"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156673"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186717007"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.0"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "159988AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "HIV disease resulting in malignant neoplasm",
+                      "conceptMappings": [
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "21876188"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "86406008"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B21.9"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "21876188"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "159988"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "159988"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "HIV resulting in infectious or parasitic disease",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160159"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.9"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "7143"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "7143"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186708007"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160159"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160160AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "HIV resulting in other conditions",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160160"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "7144"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B23"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "7144"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160160"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "133481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Natural Death",
+                      "conceptMappings": [
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "27170"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "133481"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "27170"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "133481"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "R98"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "38605008"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "38605008"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "166078AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Unnatural death",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "166078"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "419620001"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "166078"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "142917AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Death of unknown cause",
+                      "conceptMappings": [
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "27137"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "87309006"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "87309006"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "27137"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "142917"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "R99"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "142917"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "A96"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10026772"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10026772"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "A96"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "Deathreason",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "false",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    },
+                    "validators": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Specific Cause of Death",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "HIV disease resulting in other malignant neoplasms",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "efd206db-ed68-4ac3-8916-da524f029643",
+                  "answers": [
+                    {
+                      "concept": "b35448c5-d696-435f-b722-5f284a0995c1",
+                      "label": "HIV disease resulting in Kaposi's sarcoma",
+                      "conceptMappings": [
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B21.0"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "156667AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "HIV disease resulting in Burkitt's lymphoma",
+                      "conceptMappings": [
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122570"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156667"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186723002"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186723002"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B21.1"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10015825"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10015825"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156667"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B21.1"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122570"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "a0081f9b-afd9-400a-97d7-b39d921cfb66",
+                      "label": "HIV disease resulting in other type of non-Hodgkin lymphoma",
+                      "conceptMappings": [
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B21.2"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "156672AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "HIV disease resulting in multiple malignant neoplasms",
+                      "conceptMappings": [
+                        {
+                          "type": "3BT",
+                          "value": "10057480"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156672"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10057480"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B21.7"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B21.7"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122566"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186725009"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122566"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186725009"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156672"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "42ca0273-6afa-44c8-94ad-8400e5835570",
+                      "label": "HIV disease resulting in unspecified malignant neoplasms",
+                      "conceptMappings": [
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B21.9"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "otherNeoplasms",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "isEmpty(Deathreason) || Deathreason !=='159988AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
+                    },
+                    "validators": []
+                  }
+                ]
+              },
+              {
+                "label": "HIV disease resulting in infectious & parasitic diseases",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "1c06de20-fbc0-4d42-a638-f273e5db2146",
+                  "answers": [
+                    {
+                      "concept": "156668AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "HIV disease resulting in candidiasis",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "156668"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186719005"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10004937"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186719005"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156668"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.4"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122571"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.4"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122571"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10004937"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "156669AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "HIV disease resulting in cytomegaloviral disease",
+                      "conceptMappings": [
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122565"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186718002"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156669"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10023841"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.2"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156669"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186718002"
+                        },
+                        {
+                          "type": "3BT",
+                          "value": "10023841"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.2"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122565"
+                        },
+                        {
+                          "type": "ICPC2",
+                          "value": "B90"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "156671AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "HIV disease resulting in multiple infections",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186721000"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.7"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122567"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "186721000"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156671"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "156671"
+                        },
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.7"
+                        },
+                        {
+                          "type": "IMO-ProblemIT",
+                          "value": "30122567"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "af8b7e7c-c3f7-4985-a2db-8864468adbab",
+                      "label": "HIV disease resulting in other bacterial infections",
+                      "conceptMappings": [
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.1"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "e466147b-a02e-4e8a-a978-58f1c94512b6",
+                      "label": "HIV disease resulting in other viral infections",
+                      "conceptMappings": [
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B20.3"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "infectionParasitic",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "isEmpty(Deathreason) || Deathreason !=='160159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
+                    },
+                    "validators": []
+                  }
+                ]
+              },
+              {
+                "label": "Other diseases or conditions leading to death",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "e5ede6ae-aae8-4605-8500-88690f034fdc",
+                  "conceptMappings": [
+                    {
+                      "type": "ICD-10-WHO",
+                      "value": "B22"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "160158AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Human immunodeficiency virus disease resulting in other specified diseases",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "a3a83d0d-bfe8-464e-9a1a-67857c88dfa3",
+                      "label": "HIV disease resulting in other conditions",
+                      "conceptMappings": [
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B23"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "746d0622-21d3-4c57-8ee9-4e2a69637d8c",
+                      "label": "Unspecified HIV disease",
+                      "conceptMappings": [
+                        {
+                          "type": "ICD-10-WHO",
+                          "value": "B24"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "OtherConditonsDeath",
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "unspecified": "true",
+                    "hide": {
+                      "hideWhenExpression": "isEmpty(Deathreason) || Deathreason !=='160160AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
+                    },
+                    "validators": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Notes",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Death NOtes",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rows": "",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "165095"
+                    }
+                  ]
+                },
+                "id": "deathNotes"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "availableIntents": [
+      {
+        "intent": "*",
+        "display": "HIV Death Form"
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "uuid": "xxxx",
+    "referencedForms": [],
+    "encounterType": "111c2104-991d-4b58-a30e-ce84bb275534",
+    "encounter": "HIV Death Form",
+    "allowUnspecifiedAll": true
+  }

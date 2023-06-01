@@ -1,0 +1,89 @@
+{
+  "name": "COVID Case Form",
+  "version" : "1",
+  "published" : true,
+  "retired" : false,
+  "pages": [
+    {
+      "label": "COVID Assessment",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "covid_assessment",
+        "package": "covid",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "COVID_LAB_ASSESSMENT_EMBED",
+            "readonly": "false"
+          }
+        ]
+      }
+    },
+    {
+      "label": "COVID Outcome",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "covid_outcome",
+        "package": "covid",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "COVID_OUTCOME_EMBED",
+            "readonly": "false"
+          }
+        ]
+      }
+    },
+    {
+      "label": "",
+      "sections": [
+        {
+          "label": "",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Notes",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "5",
+                "conceptMappings": [
+                  {
+                    "type": "LOINC",
+                    "value": "48767-8"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "161011"
+                  }
+                ]
+              },
+              "id": "notes",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "COVID Case"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "014437f8-42b9-11ec-9103-238295f2dfd7",
+  "referencedForms": [],
+  "encounterType": "253a43d3-c99e-415c-8b78-ee7d4d3c1d54",
+  "encounter": "COVID Case Assessment",
+  "allowUnspecifiedAll": true
+}

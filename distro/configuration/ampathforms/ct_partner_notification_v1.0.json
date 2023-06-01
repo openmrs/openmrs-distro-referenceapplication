@@ -1,0 +1,680 @@
+{
+    "name":"Partner Notification Form",
+    "version" : "1",
+    "published" : true,
+    "retired" : false,
+    "pages":[
+       {
+          "label":"Partner Notification",
+          "sections":[
+             {
+                "label":"Introduction",
+                "isExpanded":"true",
+                "questions":[
+                   {
+                      "type":"markdown",
+                      "questionOptions":{
+                         "rendering":"markdown"
+                      },
+                      "id":"fooMarkdown",
+                      "value":[
+                         "**Use this form to:** Document and screen an index client's contacts for Partner Notification Services."
+                      ]
+                   }
+                ]
+             },
+             {
+                "label":"Contact's Information",
+                "isExpanded":"true",
+                "questions":[
+                   {
+                      "label":"Encounter Date",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"date",
+                         "concept":"160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                      },
+                      "id":"dateOfEncounter",
+                      "behaviours":[
+                         {
+                            "intent":"*",
+                            "required":"true",
+                            "unspecified":"true",
+                            "validators":[
+                               {
+                                  "type":"date",
+                                  "allowFutureDates":"false"
+                               },
+                               {
+                                  "type":"js_expression",
+                                  "failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                               }
+                            ]
+                         }
+                      ]
+                   },
+                   {
+                      "label":"Contact's First Name",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"text",
+                         "concept":"166102AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "conceptMappings":[
+                            {
+                                "type":"PIH",
+                                "value":"2725"
+                              },
+                            {
+                              "type":"SNOMED-CT",
+                              "value":"408677003"
+                            }
+                          ]
+                      },
+                      "id":"firstOfContact",
+                      "behaviours": [
+                          {
+                            "intent": "*",
+                            "required": "true",
+                            "unspecified": "false",
+                            "hide": {
+                              "hideWhenExpression": "false"
+                            }
+                          }
+                        ]
+                   },
+                   {
+                      "label":"Contact's Middle Name",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"text",
+                         "concept":"166574AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                      },
+                      "id":"middleNameOfContact",
+                      "behaviours": [
+                          {
+                            "intent": "*",
+                            "required": "true",
+                            "unspecified": "true",
+                            "hide": {
+                              "hideWhenExpression": "false"
+                            }
+                          }
+                        ]
+                   },
+                   {
+                      "label":"Contact's Last Name",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"text",
+                         "concept":"166103AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "conceptMappings":[
+                            {
+                               "type":"PIH",
+                               "value":"2724"
+                            },
+                            {
+                               "type":"SNOMED-CT",
+                               "value":"397678008"
+                            }
+                         ]
+                      },
+                      "id":"lastNameOfContact",
+                      "behaviours": [
+                          {
+                            "intent": "*",
+                            "required": "true",
+                            "unspecified": "true",
+                            "hide": {
+                              "hideWhenExpression": "false"
+                            }
+                          }
+                        ]
+                   },
+                   {
+                      "label":"Date of Birth is known?",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"radio",
+                         "concept":"455a7760-1bb4-4d15-969d-aedfa4e5e20d",
+                         "answers":[
+                            {
+                               "label":"Yes",
+                               "concept":"cf82933b-3f3f-45e7-a5ab-5d31aaee3da3"
+                            },
+                            {
+                               "label":"No",
+                               "concept":"488b58ff-64f5-4f8a-8979-fa79940b1594"
+                            }
+                         ],
+                         "conceptMappings":[
+                            
+                         ]
+                      },
+                      "id":"ageIsKnown",
+                      "behaviours":[
+                         {
+                            "intent":"*",
+                            "required":"true",
+                            "unspecified":"true",
+                            "hide":{
+                               "hideWhenExpression":"false"
+                            },
+                            "validators":[
+                               
+                            ]
+                         }
+                      ]
+                   },
+                   {
+                      "label":"Date of Birth",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"date",
+                         "concept":"163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                      },
+                      "id":"dateOfBirth",
+                      "behaviours":[
+                         {
+                            "intent":"*",
+                            "required":"true",
+                            "unspecified":"true",
+                            "hide":{
+                               "hideWhenExpression":"!includes('ageIsKnown','cf82933b-3f3f-45e7-a5ab-5d31aaee3da3')"
+                            },
+                            "validators": [
+                                {
+                                  "type": "date",
+                                  "allowFutureDates": "false"
+                                },
+                                {
+                                  "type": "js_expression",
+                                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"									}
+                              ]
+                         }
+                      ]
+                   },
+                   {
+                      "label":"Gender",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"radio",
+                         "concept":"166025AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "answers":[
+                            {
+                               "concept":"1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Female",
+                               "conceptMappings":[
+                                  {
+                                     "type":"PIH",
+                                     "value":"2844"
+                                  },
+                                  {
+                                     "type":"SNOMED-CT",
+                                     "value":"248152002"
+                                  }
+                               ]
+                            },
+                            {
+                               "concept":"1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Male",
+                               "conceptMappings":[
+                                  {
+                                     "type":"SNOMED-CT",
+                                     "value":"248153007"
+                                  },
+                                  {
+                                     "type":"PIH",
+                                     "value":"2843"
+                                  }
+                               ]
+                            }
+                         ]
+                      },
+                      "id":"sexAtBirth",
+                      "behaviours": [
+                          {
+                            "intent": "*",
+                            "required": "true",
+                            "unspecified": "true",
+                            "hide": {
+                              "hideWhenExpression": "false"
+                            }
+                          }
+                        ]
+                   },
+                   {
+                      "label":"Phone Number",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"number",
+                         "concept":"159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "max":"00112233445566778899",
+                         "min":"0",
+                         "showDate":""
+                      },
+                      "id":"phoneNumber",
+                      "behaviours": [
+                          {
+                            "intent": "*",
+                            "required": "true",
+                            "unspecified": "true",
+                            "hide": {
+                              "hideWhenExpression": "false"
+                            }
+                          }
+                        ]
+                   },
+                   {
+                      "label":"Address",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"textarea",
+                         "concept":"160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                      },
+                      "id":"addressOfContact",
+                      "behaviours": [
+                          {
+                            "intent": "*",
+                            "required": "true",
+                            "unspecified": "false",
+                            "hide": {
+                              "hideWhenExpression": "false"
+                            }
+                          }
+                        ]
+                   }
+                ]
+             },
+             {
+                "label":"Index Typology",
+                "isExpanded":"true",
+                "questions":[
+                   {
+                      "label":"Relationship",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"radio",
+                         "concept":"85d3b4fe-c1a9-4e27-a86b-dcc1e30c8a93",
+                         "answers":[
+                            {
+                               "concept":"1528AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Child",
+                               "conceptMappings":[
+                                  
+                               ]
+                            },
+                            {
+                               "concept":"68a39d12-49c1-49aa-bd23-e8d505af8e93",
+                               "label":"Drug Injecting Partner",
+                               "conceptMappings":[
+                                  
+                               ]
+                            },
+                            {
+                               "concept":"5617AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Sexual Partner",
+                               "conceptMappings":[
+                                  {
+                                     "type":"AMPATH",
+                                     "value":"5617"
+                                  },
+                                  {
+                                     "type":"CIEL",
+                                     "value":"5617"
+                                  },
+                                  {
+                                     "type":"SNOMED-CT",
+                                     "value":"127848009"
+                                  }
+                               ]
+                            }
+                         ]
+                      },
+                      "id":"relationshipToIndexClient",
+                      "behaviours": [
+                          {
+                            "intent": "*",
+                            "required": "true",
+                            "unspecified": "false",
+                            "hide": {
+                              "hideWhenExpression": "false"
+                            }
+                          }
+                        ]
+                   }
+                ]
+             },
+             {
+                "label":"Contact's HIV Status",
+                "isExpanded":"true",
+                "questions":[
+                   {
+                      "label":"What is the contact HIV status as reported by the Index",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"radio",
+                         "concept":"1436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "conceptMappings":[
+                            {
+                               "type":"SNOMED-MVP",
+                               "value":"14361000105003"
+                            },
+                            {
+                               "type":"AMPATH",
+                               "value":"2313"
+                            },
+                            {
+                               "type":"SNOMED-CT",
+                               "value":"278977008"
+                            },
+                            {
+                               "type":"PIH",
+                               "value":"3082"
+                            },
+                            {
+                               "type":"CIEL",
+                               "value":"1436"
+                            }
+                         ],
+                         "answers":[
+                            {
+                               "concept":"703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Positive",
+                               "conceptMappings":[
+                                  
+                               ]
+                            },
+                            {
+                               "concept":"664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Negative",
+                               "conceptMappings":[
+                                  {
+                                     "type":"AMPATH",
+                                     "value":"664"
+                                  },
+                                  {
+                                     "type":"PIH",
+                                     "value":"664"
+                                  },
+                                  {
+                                     "type":"org.openmrs.module.mdrtb",
+                                     "value":"NEGATIVE"
+                                  },
+                                  {
+                                     "type":"CIEL",
+                                     "value":"664"
+                                  },
+                                  {
+                                     "type":"SNOMED-CT",
+                                     "value":"260385009"
+                                  },
+                                  {
+                                     "type":"AMPATH",
+                                     "value":"665"
+                                  }
+                               ]
+                            },
+                            {
+                               "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                               "label":"Unknown",
+                               "conceptMappings":[
+                                  {
+                                     "type":"AMPATH",
+                                     "value":"1067"
+                                  },
+                                  {
+                                     "type":"CIEL",
+                                     "value":"1067"
+                                  },
+                                  {
+                                     "type":"SNOMED-CT",
+                                     "value":"261665006"
+                                  },
+                                  {
+                                     "type":"PIH",
+                                     "value":"1067"
+                                  },
+                                  {
+                                     "type":"org.openmrs.module.mdrtb",
+                                     "value":"UNKNOWN"
+                                  }
+                               ]
+                            }
+                         ]
+                      },
+                      "id":"indexHIVStatus",
+                      "behaviours": [
+                          {
+                            "intent": "*",
+                            "required": "true",
+                            "unspecified": "false",
+                            "hide": {
+                              "hideWhenExpression": "false"
+                            }
+                          }
+                        ]
+                   }
+                ]
+             },
+             {
+                "label":"IPV Assessment",
+                "isExpanded":"true",
+                "questions":[
+                   {
+                      "label":"Within the past year, has this person ever hit, kicked, slapped, or otherwise physically hurt you?",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"radio",
+                         "concept":"2a228c6a-1575-43d7-9d42-9b68d0629f46",
+                         "answers":[
+                            {
+                               "label":"Yes",
+                               "concept":"cf82933b-3f3f-45e7-a5ab-5d31aaee3da3"
+                            },
+                            {
+                               "label":"No",
+                               "concept":"488b58ff-64f5-4f8a-8979-fa79940b1594"
+                            }
+                         ],
+                         "conceptMappings":[
+                            
+                         ]
+                      },
+                      "id":"everBeenAssaulted",
+                      "behaviours":[
+                         {
+                            "intent":"*",
+                            "required":"true",
+                            "unspecified":"false",
+                            "validators":[
+                               
+                            ]
+                         }
+                      ]
+                   },
+                   {
+                      "label":"Has this person ever threatened to hurt you?",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"radio",
+                         "concept":"bd86f7ee-1d5f-4f5d-aa0f-4680aa6e65cb",
+                         "answers":[
+                            {
+                               "label":"Yes",
+                               "concept":"cf82933b-3f3f-45e7-a5ab-5d31aaee3da3"
+                            },
+                            {
+                               "label":"No",
+                               "concept":"488b58ff-64f5-4f8a-8979-fa79940b1594"
+                            }
+                         ],
+                         "conceptMappings":[
+                            
+                         ]
+                      },
+                      "id":"everBeenThreatened",
+                      "behaviours":[
+                         {
+                            "intent":"*",
+                            "required":"true",
+                            "unspecified":"false",
+                            "validators":[
+                               
+                            ]
+                         }
+                      ]
+                   },
+                   {
+                      "label":"Has this person ever forced you to do something sexually that made you feel uncomfortable?",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"radio",
+                         "concept":"aad380bb-ddc2-43de-bd24-6a123f6b2486",
+                         "answers":[
+                            {
+                               "label":"Yes",
+                               "concept":"cf82933b-3f3f-45e7-a5ab-5d31aaee3da3"
+                            },
+                            {
+                               "label":"No",
+                               "concept":"488b58ff-64f5-4f8a-8979-fa79940b1594"
+                            }
+                         ],
+                         "conceptMappings":[
+                            
+                         ]
+                      },
+                      "id":"everBeenSexuallyAssaulted",
+                      "behaviours":[
+                         {
+                            "intent":"*",
+                            "required":"true",
+                            "unspecified":"false",
+                            "validators":[
+                               
+                            ]
+                         }
+                      ]
+                   }
+                ],
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": " indexHIVStatus === '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                      },
+                      "validators": []
+                    }
+                  ]
+             },
+             {
+                "label":"Partner Notification Approach",
+                "isExpanded":"true",
+                "questions":[
+                   {
+                      "label":"PNS Strategy",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"radio",
+                         "concept":"8a211f7d-169f-44a4-9fc2-f1c39bbdb492",
+                         "answers":[
+                            {
+                               "label":"Passive Referral",
+                               "concept":"bb68ce09-a3e3-4d01-8671-6944462ad33e"
+                            },
+                            {
+                               "label":"Dual Referral",
+                               "concept":"2b05a01a-b628-4bef-9693-28f32803bb78"
+                            },
+                            {
+                               "label":"Provider Referral",
+                               "concept":"495b592f-3f9e-4ac4-ae74-767e8b6ad322"
+                            },
+                            {
+                               "label":"Contract Referral",
+                               "concept":"0564d564-a45d-4e1b-a3ce-7b19d012c5a7"
+                            }
+                         ],
+                         "conceptMappings":[]
+                      },
+                      "id":"refferalApproach",
+                      "behaviours":[
+                         {
+                            "intent":"*",
+                            "required":"true",
+                            "unspecified":"false",
+                            "validators":[
+                               
+                            ]
+                         }
+                      ]
+                   },
+                   {
+                      "label":"Date by which the contact should have been notified of exposure",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"date",
+                         "concept":"160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                      },
+                      "behaviours":[
+                         {
+                            "intent":"*",
+                            "required":"true",
+                            "unspecified":"true"
+                         }
+                      ],
+                      "id":"notificationDate"
+                   }
+                ],
+                "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": " everBeenAssaulted !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3' && everBeenThreatened !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3' && everBeenSexuallyAssaulted !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3' "
+                      },
+                      "validators": []
+                    }
+                  ]
+             },
+             {
+                "label":"Notes",
+                "isExpanded":"true",
+                "questions":[
+                   {
+                      "label":"Comments",
+                      "type":"obs",
+                      "questionOptions":{
+                         "rendering":"textarea",
+                         "concept":"165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                         "rows":"",
+                         "conceptMappings":[
+                           {
+                             "type":"CIEL",
+                             "value":"165095"
+                           }
+                         ]
+                      },
+                      "id":"patnerNotes"
+                   }
+                ]
+             }
+          ]
+       }
+    ],
+    "availableIntents":[
+       {
+          "intent":"*",
+          "display":"Partner Notification Form"
+       }
+    ],
+    "processor":"EncounterFormProcessor",
+    "uuid":"xxxx",
+    "referencedForms":[],
+    "encounterType":"4dd0ee63-805f-43e9-833c-6386ba97fdc1",
+    "encounter": "Partner Notification Form",
+    "allowUnspecifiedAll":true
+ }

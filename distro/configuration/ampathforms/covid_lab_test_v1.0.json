@@ -1,0 +1,119 @@
+{
+  "name": "COVID Lab Test",
+  "version" : "1",
+  "published" : true,
+  "retired" : false,
+  "pages": [
+    {
+      "label": "COVID Lab Test",
+      "sections": [
+        {
+          "label": "COVID Lab Test",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Status",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "fixed-value",
+                "concept": "6681366c-2174-489a-b951-13a1404935bf",
+                "conceptMappings": [
+                  {
+                    "type": "OCT",
+                    "value": "LabOrderStatus"
+                  }
+                ]
+              },
+              "id": "labOrderxStatus",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "value": "165170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Lab Order",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "covid_lab_order",
+        "package": "covid",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "COVID_LAB_ORDER_EMBED",
+            "readonly": "true"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Lab Sample Collection",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "covid_sample_collection",
+        "package": "covid",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "COVID_SAMPLE_COLLECTION_EMBED",
+            "readonly": "true"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Lab Cancellation",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "covid_lab_order_cancellation",
+        "package": "covid",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "COVID_LAB_CANCELLATION_EMBED",
+            "readonly": "true"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Lab Result",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "covid_lab_result",
+        "package": "covid",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "COVID_LAB_RESULT_EMBED",
+            "readonly": "true"
+          }
+        ]
+      }
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "COVID Lab Test"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "e92fe922-4863-11ec-99cc-1fdd2d4e9d88",
+  "referencedForms": [],
+  "encounterType": "a77d3e7f-5c8f-4074-a207-77a70e197b0c",
+  "encounter": "COVID Lab Encounter",
+  "allowUnspecifiedAll": true
+}

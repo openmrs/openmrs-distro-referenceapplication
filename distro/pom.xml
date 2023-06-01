@@ -23,29 +23,47 @@
 
     <!-- track module versions
          we do so here so that we can utilise Maven to track updates, etc. -->
-    <fhir2.version>1.9.0</fhir2.version>
     <openmrs.version>2.6.0</openmrs.version>
-    <initializer.version>2.5.0</initializer.version>
+    <initializer.version>2.5.2</initializer.version>
+    <fhir2.version>1.9.0</fhir2.version>
     <webservices.rest.version>2.39.0</webservices.rest.version>
-    <addresshierarchy.version>2.15.1</addresshierarchy.version>
+    <addresshierarchy.version>2.15.2</addresshierarchy.version>
     <idgen.version>4.10.0</idgen.version>
     <legacyui.version>1.15.0</legacyui.version>
-    <metadatamapping.version>1.6.0</metadatamapping.version>
+    <metadatamapping.version>1.7.0-SNAPSHOT</metadatamapping.version>
     <metadatasharing.version>1.9.0</metadatasharing.version>
     <openconceptlab.version>2.1.0</openconceptlab.version>
+    
     <!-- this is request for the OCL UI -->
     <owa.version>1.14.0</owa.version>
     <attachments.version>3.0.0</attachments.version>
-    <referencedemodata.version>2.3.0</referencedemodata.version>
-    <queue.version>1.0.0-alpha.1</queue.version>
-    <appointments.version>1.6.0</appointments.version>
+    
+    <!--  OpenMRS Vanilla Clean installation  -->
+    <!-- <referencedemodata.version>2.1.0-SNAPSHOT</referencedemodata.version> -->
+
+    <queue.version>1.0.0-alpha</queue.version>
+    <appointments.version>1.8.0-SNAPSHOT</appointments.version>
     <cohort.version>3.4.0</cohort.version>
     <reporting.version>1.25.0</reporting.version>
-    <reportingrest.version>1.14.0</reportingrest.version>
+    <reportingrest.version>1.14.0</reportingrest.version> 
+
     <!-- the next three are required for reporting -->
     <calculation.version>1.3.0</calculation.version>
     <htmlwidgets.version>1.11.0</htmlwidgets.version>
-    <serialization-xstream.version>0.2.16</serialization-xstream.version>
+    <serialization-xstream.version>0.2.16</serialization-xstream.version> 
+    
+    <!-- Versions required for OHRI -->     
+    
+    <appframework.version>2.17.0</appframework.version>
+    <appui.version>1.15.0</appui.version>      
+    <htmlformentry.version>5.1.0</htmlformentry.version>
+    <reportingcompatibility.version>2.0.8</reportingcompatibility.version>
+    <uicommons.version>2.23.0</uicommons.version>
+    <uiframework.version>3.23.0</uiframework.version>
+    <ohricore.version>1.0.2-SNAPSHOT</ohricore.version>
+    <ohrireports.version>1.0.0</ohrireports.version>
+
+    <casereport.version>2.0-SNAPSHOT</casereport.version>
     <ordertemplates.version>1.0.2-SNAPSHOT</ordertemplates.version>
   </properties>
 
@@ -79,6 +97,12 @@
     </dependency>
     <dependency>
       <groupId>org.openmrs.module</groupId>
+      <artifactId>addresshierarchy-omod</artifactId>
+      <version>${addresshierarchy.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
       <artifactId>idgen-omod</artifactId>
       <version>${idgen.version}</version>
       <scope>provided</scope>
@@ -89,12 +113,7 @@
       <version>${legacyui.version}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>org.openmrs.module</groupId>
-      <artifactId>addresshierarchy-omod</artifactId>
-      <version>${addresshierarchy.version}</version>
-      <scope>provided</scope>
-    </dependency>
+    
     <dependency>
       <groupId>org.openmrs.module</groupId>
       <artifactId>metadatamapping-omod</artifactId>
@@ -125,12 +144,15 @@
       <version>${attachments.version}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
+   
+    <!--  OpenMRS Vanilla Clean installation  -->
+    <!-- <dependency>
       <groupId>org.openmrs.module</groupId>
       <artifactId>referencedemodata-omod</artifactId>
       <version>${referencedemodata.version}</version>
       <scope>provided</scope>
-    </dependency>
+    </dependency> -->
+    
     <dependency>
       <groupId>org.openmrs.module</groupId>
       <artifactId>queue-omod</artifactId>
@@ -179,6 +201,77 @@
       <version>${serialization-xstream.version}</version>
       <scope>provided</scope>
     </dependency>
+
+
+     <!-- Versions required for OHRI -->
+     <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>ohrireports-omod</artifactId>
+          <version>${ohrireports.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>ohricore-omod</artifactId>
+          <version>${ohricore.version}</version>
+      <scope>provided</scope> 
+    </dependency>
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>appframework-omod</artifactId>
+      <version>${appframework.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>appui</artifactId>
+      <version>${appui.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>reportingcompatibility-omod </artifactId>
+      <version>${reportingcompatibility.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>uicommons-omod </artifactId>
+      <version>${uicommons.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>uiframework-omod </artifactId>
+      <version>${uiframework.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    
+    <!-- TransferFailedException --> 
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>casereport-omod</artifactId>
+      <version>${casereport.version}</version> 
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>ordertemplates-omod</artifactId>
+      <version>${ordertemplates.version}</version> 
+      <scope>provided</scope>
+    </dependency>
+
   </dependencies>
 
   <build>

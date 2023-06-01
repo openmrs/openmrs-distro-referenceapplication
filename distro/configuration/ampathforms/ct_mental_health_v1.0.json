@@ -1,0 +1,608 @@
+{
+	"name": "Mental Health Assessment Form",
+	"version" : "1",
+	"published" : true,
+	"retired" : false,
+	"pages": [{
+			"label": "PHQ-2",
+			"sections": [{
+					"label": "Introduction",
+					"isExpanded": "true",
+					"questions": [{
+						"type": "markdown",
+						"questionOptions": {
+							"rendering": "markdown"
+						},
+						"id": "fooMarkdown",
+						"value": [
+							"**This form is used :** for screening, diagnosing, monitoring and measuring the severity of depression."
+						]
+					}]
+				},
+				{
+					"label": "Patient Health Questionnaire-2 (PHQ-2)",
+					"isExpanded": "true",
+					"questions": [{
+							"label": "Screening Date",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "date",
+								"concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"conceptMappings": [{
+										"type": "CIEL",
+										"value": "160753"
+									},
+									{
+										"type": "CIEL",
+										"value": "160753"
+									},
+									{
+										"type": "SNOMED-CT",
+										"value": "439771001"
+									},
+									{
+										"type": "SNOMED-CT",
+										"value": "439771001"
+									}
+								]
+							},
+							"behaviours": [
+								{
+								  "intent": "*",
+								  "required": "true",
+								  "unspecified": "true",
+								  "hide": {
+									"hideWhenExpression": "false"
+								  },
+								  "validators": [
+									{
+									  "type": "date",
+									  "allowFutureDates": "false"
+									},
+									{
+									  "type": "js_expression",
+									  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01')"
+									}
+								  ]
+								}
+							  ],
+							"id": "phq9Date"
+						},
+						{
+							"label": "1. Little interest or pleasure in doing things",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "167006AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"answers": [{
+										"concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Not at all",
+										"conceptMappings": []
+									},
+									{
+										"concept": "167000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Several days",
+										"conceptMappings": []
+									},
+									{
+										"concept": "167001AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "More than half the days",
+										"conceptMappings": []
+									},
+									{
+										"concept": "167002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Nearly every day",
+										"conceptMappings": []
+									}
+								]
+							},
+							"behaviours": [
+								{
+									"intent": "*",
+									"required": "true",
+									"unspecified": "true",
+									"hide": {
+										"hideWhenExpression": "false"
+									  }
+								}
+								
+							],
+							"id": "phq2_1"
+						},
+						{
+							"label": "2. Feeling down, depressed or hopeless",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "167007AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"answers": [{
+										"concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Not at all",
+										"conceptMappings": []
+									},
+									{
+										"concept": "167000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Several days",
+										"conceptMappings": []
+									},
+									{
+										"concept": "167001AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "More than half the days",
+										"conceptMappings": []
+									},
+									{
+										"concept": "167002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Nearly every day",
+										"conceptMappings": []
+									}
+								],
+								"conceptMappings": [{
+										"type": "CIEL",
+										"value": "167007"
+									},
+									{
+										"type": "LOINC",
+										"value": "44255-8"
+									}
+								]
+							},
+							"behaviours": [
+								{
+									"intent": "*",
+									"required": "true",
+									"unspecified": "true",
+									"hide": {
+										"hideWhenExpression": "false"
+									  }
+								}
+								
+							],
+							"id": "phq2_2"
+						}
+					]
+				}
+			]
+		},
+		{
+			"label": "PHQ-9",
+			"sections": [{
+				"label": "Further evaluation",
+				"isExpanded": "true",
+				"questions": [{
+						"label": "3. Trouble falling asleep, staying asleep, or sleeping too much",
+						"type": "obs",
+						"questionOptions": {
+							"rendering": "radio",
+							"concept": "167068AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+							"conceptMappings": [{
+									"type": "LOINC",
+									"value": "44259-0"
+								},
+								{
+									"type": "CIEL",
+									"value": "167068"
+								}
+							],
+							"answers": [{
+									"concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Not at all",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Several days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167001AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "More than half the days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Nearly every day",
+									"conceptMappings": []
+								}
+							]
+						},
+						"behaviours": [
+							{
+								"intent": "*",
+								"required": "true",
+								"unspecified": "true",
+								"hide": {
+									"hideWhenExpression": "false"
+								  }
+							}
+							
+						],
+						"id": "phq9_3"
+					},
+					{
+						"label": "4. Feeling tired or having little energy",
+						"type": "obs",
+						"questionOptions": {
+							"rendering": "radio",
+							"concept": "167069AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+							"conceptMappings": [{
+									"type": "LOINC",
+									"value": "44254-1"
+								},
+								{
+									"type": "CIEL",
+									"value": "167069"
+								}
+							],
+							"answers": [{
+									"concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Not at all",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Several days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167001AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "More than half the days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Nearly every day",
+									"conceptMappings": []
+								}
+							]
+						},
+						"behaviours": [
+							{
+								"intent": "*",
+								"required": "true",
+								"unspecified": "true",
+								"hide": {
+									"hideWhenExpression": "false"
+								  }
+							}
+							
+						],
+						"id": "phq9_4"
+					},
+					{
+						"label": "5. Poor appetite or overeating",
+						"type": "obs",
+						"questionOptions": {
+							"rendering": "radio",
+							"concept": "167070AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+							"conceptMappings": [{
+									"type": "CIEL",
+									"value": "167070"
+								},
+								{
+									"type": "LOINC",
+									"value": "44251-7"
+								}
+							],
+							"answers": [{
+									"concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Not at all",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Several days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167001AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "More than half the days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Nearly every day",
+									"conceptMappings": []
+								}
+							]
+						},
+						"behaviours": [
+							{
+								"intent": "*",
+								"required": "true",
+								"unspecified": "true",
+								"hide": {
+									"hideWhenExpression": "false"
+								  }
+							}
+							
+						],
+						"id": "phq9_5"
+					},
+					{
+						"label": "6. Feeling bad about yourself - or that you’re a failure or have let yourself or your family down",
+						"type": "obs",
+						"questionOptions": {
+							"rendering": "radio",
+							"concept": "167071AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+							"conceptMappings": [{
+									"type": "CIEL",
+									"value": "167071"
+								},
+								{
+									"type": "LOINC",
+									"value": "44258-2"
+								}
+							],
+							"answers": [{
+									"concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Not at all",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Several days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167001AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "More than half the days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Nearly every day",
+									"conceptMappings": []
+								}
+							]
+						},
+						"behaviours": [
+							{
+								"intent": "*",
+								"required": "true",
+								"unspecified": "true",
+								"hide": {
+									"hideWhenExpression": "false"
+								  }
+							}
+							
+						],
+						"id": "phq9_6"
+					},
+					
+					{
+						"label": "7. Trouble concentrating on things, such as reading the newspaper or watching television",
+						"type": "obs",
+						"questionOptions": {
+							"rendering": "radio",
+							"concept": "167072AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+							"conceptMappings": [{
+									"type": "LOINC",
+									"value": "44252-5"
+								},
+								{
+									"type": "CIEL",
+									"value": "167072"
+								}
+							],
+							"answers": [{
+									"concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Not at all",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Several days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167001AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "More than half the days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Nearly every day",
+									"conceptMappings": []
+								}
+							]
+						},
+						"behaviours": [
+							{
+								"intent": "*",
+								"required": "true",
+								"unspecified": "true",
+								"hide": {
+									"hideWhenExpression": "false"
+								  }
+							}
+							
+						],
+						"id": "phq9_7"
+					},
+					{
+						"label": "8. Moving or speaking so slowly that other people could have noticed. Or, the opposite - being so fidgety or restless that you have been moving around a lot more than usual",
+						"type": "obs",
+						"questionOptions": {
+							"rendering": "radio",
+							"concept": "167073AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+							"conceptMappings": [{
+									"type": "CIEL",
+									"value": "167073"
+								},
+								{
+									"type": "LOINC",
+									"value": "44253-3"
+								}
+							],
+							"answers": [{
+									"concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Not at all",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Several days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167001AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "More than half the days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Nearly every day",
+									"conceptMappings": []
+								}
+							]
+						},
+						"behaviours": [
+							{
+								"intent": "*",
+								"required": "true",
+								"unspecified": "true",
+								"hide": {
+									"hideWhenExpression": "false"
+								  }
+
+							}
+							
+						],
+						"id": "phq9_8"
+					},
+					{
+						"label": "9. Thoughts that you would be better off dead or of hurting yourself in some way",
+						"type": "obs",
+						"questionOptions": {
+							"rendering": "radio",
+							"concept": "167074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+							"conceptMappings": [{
+									"type": "CIEL",
+									"value": "167074"
+								},
+								{
+									"type": "LOINC",
+									"value": "44260-8"
+								}
+							],
+							"answers": [{
+									"concept": "160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Not at all",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Several days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167001AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "More than half the days",
+									"conceptMappings": []
+								},
+								{
+									"concept": "167002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+									"label": "Nearly every day",
+									"conceptMappings": []
+								}
+							]
+						},
+						"behaviours": [
+							{
+								"intent": "*",
+								"required": "true",
+								"unspecified": "true",
+								"hide": {
+									"hideWhenExpression": "false"
+								  }
+							}
+							
+						],
+						"id": "phq9_9"
+					}
+				]
+			}],
+			"behaviours": [
+                {
+					"intent": "*",
+					"hide": {
+                    	"hideWhenExpression": "phq2_1 === '160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && phq2_2 === '160215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                }
+              ]
+		},
+		{
+			"label": "PHQ-9 score",
+			"sections": [{
+				"label": "Total scores",
+				"isExpanded": "true",
+				"questions": [{
+					"label": "PHQ-9 score obtained by adding score for each question",
+					"type": "obs",
+					"questionOptions": {
+						"rendering": "number",
+						"concept": "165137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+						"max": "27",
+						"min": "0",
+						"showDate": "",
+						"conceptMappings": [{
+								"type": "SNOMED-CT",
+								"value": "720433000"
+							},
+							{
+								"type": "CIEL",
+								"value": "165137"
+							}
+						]
+					},
+					"id": "phq9Score"
+				}]
+			}]
+		},
+		{
+			"label": "Notes",
+			"sections": [{
+				"label": "Notes",
+				"isExpanded": "true",
+				"questions": [{
+					"label": "Mental Health Assessment Notes",
+					"type": "obs",
+					"questionOptions": {
+						"rendering": "textarea",
+						"concept": "165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+						"rows": "",
+						"conceptMappings": [{
+								"type": "AMPATH",
+								"value": "1915"
+							},
+							{
+								"type": "AMPATH",
+								"value": "1915"
+							},
+							{
+								"type": "LOINC",
+								"value": "48767-8"
+							},
+							{
+								"type": "CIEL",
+								"value": "160632"
+							}
+						]
+					},
+					"id": "phq9Notes"
+				}]
+			}]
+		}
+	],
+	"availableIntents": [
+        {
+          "intent": "*",
+          "display": "Mental Health Assessment Form"
+        }
+      ],
+	"processor": "EncounterFormProcessor",
+	"uuid": "xxxx",
+	"referencedForms": [],
+	"encounterType": "36db5123-0ad5-41c0-9037-625b46e0ceef",
+	"encounter": "Mental Health Assessment"
+}

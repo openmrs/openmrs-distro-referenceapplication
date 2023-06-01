@@ -1,0 +1,894 @@
+{
+  "name": "HIV Lab Order Form",
+  "version" : "1",
+  "published" : true,
+  "retired" : false,
+  "pages": [
+    {
+      "label": "HIV Lab Order Form",
+      "sections": [
+        {
+          "label": "HIV Lab Order",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date test ordered",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "162078AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": ""
+              },
+              "id": "dateTestOrdered",
+              "behaviours": [
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_CD4_REQUEST",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_RESULT",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_CD4_RESULT",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Test",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "aa0703b3-cf6e-4eb2-840f-f7e166dc1971",
+                "answers": [
+                  {
+                    "concept": "5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "CD4 count",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "5497"
+                      },
+                      {
+                        "type": "LOINC",
+                        "value": "24467-3"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "313660005"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "CD4 COUNT"
+                      },
+                      {
+                        "type": "LOINC",
+                        "value": "20605-2"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "5497"
+                      },
+                      {
+                        "type": "IMO-ProcedureIT",
+                        "value": "923416"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HIV viral load",
+                    "conceptMappings": [
+                      {
+                        "type": "IMO-ProcedureIT",
+                        "value": "929811"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "315124004"
+                      },
+                      {
+                        "type": "LOINC",
+                        "value": "25836-8"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "856"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "labTestOrdered",
+              "behaviours": [
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_CD4_REQUEST",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_RESULT",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_CD4_RESULT",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue < today()"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Reason for Viral Load Request",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "86cc0cfe-bace-4969-94b6-d139f4971d13",
+                "answers": [
+                  {
+                    "concept": "163523AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clinical failure",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "843AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Regimen failure",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "843"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "FAILED"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "843"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "266721009"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1259AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Change regimen",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "1259"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "5d4e13af-92ec-4b91-a8e4-97818810e577",
+                    "label": "Baseline Viral Load",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "reasonForViralLoadRequest",
+              "behaviours": [
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_CD4_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_CD4_RESULT",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_RESULT",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Reason for CD4 Request",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "759e89a6-3260-4aee-9922-86a6301bcff3",
+                "answers": [
+                  {
+                    "concept": "634628d2-0566-4a9d-a749-239ae267b399",
+                    "label": "Baseline CD4",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "843AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Regimen failure",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "843"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "FAILED"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "843"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "266721009"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "reasonForCd4Request",
+              "behaviours": [
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_CD4_REQUEST",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_CD4_RESULT",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_RESULT",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "HIV Lab Result",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Viral Load Result",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "163281AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "399651003"
+                  }
+                ]
+              },
+              "id": "dateOfViralLoadResult",
+              "behaviours": [
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_CD4_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_RESULT",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_CD4_RESULT",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Viral Load Result Interpretation",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "686dc1b2-68b5-4024-b311-bd2f5e3ce394",
+                "answers": [
+                  {
+                    "concept": "1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Detected",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "260373001"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1301"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1302AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not detected",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "260415000"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1302"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "viralLoadResultInterpretation",
+              "behaviours": [
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_CD4_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_CD4_RESULT",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_RESULT",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Viral Load Result in Copies/ml",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "IMO-ProcedureIT",
+                    "value": "929811"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "315124004"
+                  },
+                  {
+                    "type": "LOINC",
+                    "value": "25836-8"
+                  },
+                  {
+                    "type": "AMPATH",
+                    "value": "856"
+                  }
+                ]
+              },
+              "id": "viralLoadResult",
+              "behaviours": [
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_CD4_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_CD4_RESULT",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_RESULT",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date of CD4 Result",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "159376AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "PIH",
+                    "value": "3461"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "399651003"
+                  },
+                  {
+                    "type": "SNOMED-MVP",
+                    "value": "1593761000105001"
+                  }
+                ],
+                "weeksList": ""
+              },
+              "id": "dateOfCd4Result",
+              "behaviours": [
+                {
+                  "intent": "LAB_VIRAL_LOAD_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_CD4_REQUEST",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_VIRAL_LOAD_RESULT",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                    }
+                  ]
+                },
+                {
+                  "intent": "LAB_CD4_RESULT",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "CD4 Result",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "657AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "AMPATH",
+                    "value": "657"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "313938009"
+                  },
+                  {
+                    "type": "SNOMED-MVP",
+                    "value": "6571000105005"
+                  }
+                ]
+              },
+              "id": "cd4Result",
+              "questions": [
+                {
+                  "label": "CD4 count",
+                  "id": "cd4Count",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "type": "obs",
+                  "behaviours": [
+                    {
+                      "intent": "LAB_VIRAL_LOAD_REQUEST",
+                      "required": "false",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": [
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                        }
+                      ]
+                    },
+                    {
+                      "intent": "LAB_CD4_REQUEST",
+                      "required": "false",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": [
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                        }
+                      ]
+                    },
+                    {
+                      "intent": "LAB_VIRAL_LOAD_RESULT",
+                      "required": "false",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": [
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                        }
+                      ]
+                    },
+                    {
+                      "intent": "LAB_CD4_RESULT",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": [
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "CD4%",
+                  "id": "cd4Percentage",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "730AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "type": "obs",
+                  "behaviours": [
+                    {
+                      "intent": "LAB_VIRAL_LOAD_REQUEST",
+                      "required": "false",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": [
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                        }
+                      ]
+                    },
+                    {
+                      "intent": "LAB_CD4_REQUEST",
+                      "required": "false",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": [
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                        }
+                      ]
+                    },
+                    {
+                      "intent": "LAB_VIRAL_LOAD_RESULT",
+                      "required": "false",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": [
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                        }
+                      ]
+                    },
+                    {
+                      "intent": "LAB_CD4_RESULT",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('labTestOrdered','5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": [
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "myValue >= today() && myValue <= '1/1/1980'"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "LAB_VIRAL_LOAD_REQUEST",
+      "display": "Lab Viral Load Request"
+    },
+    {
+      "intent": "LAB_CD4_REQUEST",
+      "display": "Lab CD4 Request"
+    },
+    {
+      "intent": "LAB_VIRAL_LOAD_RESULT",
+      "display": "Lab Viral Load Result"
+    },
+    {
+      "intent": "LAB_CD4_RESULT",
+      "display": "Lab CD4 Result"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "xxxx",
+  "referencedForms": [],
+  "encounterType": "15272be5-ae9c-4278-a303-4b8907eae73b",
+  "encounter": "HIV Lab Order and Results",
+  "allowUnspecifiedAll": true
+}
