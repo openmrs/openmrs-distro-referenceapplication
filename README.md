@@ -31,7 +31,7 @@ This distribution consists of four images:
   includes a full Initializer configuration for the reference application intended as a starting point.
 * frontend - This image is a simple nginx container that embeds the 3.x frontend, including the modules described in  the
   `frontend/spa-build-config.json` file.
-* proxy - This image is an even simpler nginx reverse proxy that sits in front of bot hteh `backend` and `frontend` containers
+* proxy - This image is an even simpler nginx reverse proxy that sits in front of the `backend` and `frontend` containers
   and provides a common interface to both. Basically, this help mitigate CORS issues.
 
 ## Contributing to the configuration
