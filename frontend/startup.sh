@@ -46,10 +46,12 @@ else
   sed -i -e 's/"$SPA_CONFIG_URLS"/$SPA_CONFIG_URLS/' "/usr/share/nginx/html/index.html"
 fi
 
+SPA_DEFAULT_LOCALE=${SPA_DEFAULT_LOCALE:-en_GB}
+
 # Substitute environment variables in the html file
 # This allows us to override parts of the compiled file at runtime
 if [ -f "/usr/share/nginx/html/index.html" ]; then
-  envsubst '${IMPORTMAP_URL} ${SPA_PATH} ${API_URL} ${SPA_CONFIG_URLS}' < "/usr/share/nginx/html/index.html" | sponge "/usr/share/nginx/html/index.html"
+  envsubst '${IMPORTMAP_URL} ${SPA_PATH} ${API_URL} ${SPA_CONFIG_URLS} ${SPA_DEFAULT_LOCALE}' < "/usr/share/nginx/html/index.html" | sponge "/usr/share/nginx/html/index.html"
 fi
 
 if [ -f "/usr/share/nginx/html/service-worker.js" ]; then
