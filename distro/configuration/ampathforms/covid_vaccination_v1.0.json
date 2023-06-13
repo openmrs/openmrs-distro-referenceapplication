@@ -1,8 +1,8 @@
 {
   "name": "COVID Vaccination Form",
-  "version" : "1",
-  "published" : true,
-  "retired" : false,
+  "version": "1",
+  "published": true,
+  "retired": false,
   "pages": [
     {
       "label": "COVID Vaccination",
@@ -47,30 +47,30 @@
                 }
               ]
             },
-             {
-                "label":"Vaccine Dose",
-                "type":"obs",
-                "questionOptions":{
-                  "rendering":"number",
-                  "concept":"6ec64cb3-e710-4d3e-9db4-38c135966a45",
-                  "max":"9",
-                  "min":"1",
-                  "showDate":""
-                },
-                "id":"vaccineDose",
-                "behaviours": [
-                    {
-                      "intent": "*",
-                      "required": "true",
-                      "unspecified": "true",
-                      "hide": {
-                        "hideWhenExpression": "false"
-                      },
-                      "validators": []
-                    }
-                  ] 
+            {
+              "label": "Vaccine Dose",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6ec64cb3-e710-4d3e-9db4-38c135966a45",
+                "max": "9",
+                "min": "1",
+                "showDate": ""
               },
-               {
+              "id": "vaccineDose",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
               "label": "Vaccine Series",
               "type": "obs",
               "questionOptions": {
@@ -105,150 +105,150 @@
             },
             {
               "label": "What vacccine was administered?",
-              "type":"obs",
-              "questionOptions":{
-                "rendering":"radio",
-                "concept":"e41fbe17-4aee-4a44-950b-6676d6e0ede2",
-                "answers":[
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e41fbe17-4aee-4a44-950b-6676d6e0ede2",
+                "answers": [
                   {
-                    "concept":"166156AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label":"Astrazeneca",
-                    "conceptMappings":[
+                    "concept": "166156AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Astrazeneca",
+                    "conceptMappings": [
                       {
-                        "type":"RxNORM",
-                        "value":"2471010"
+                        "type": "RxNORM",
+                        "value": "2471010"
                       },
                       {
-                        "type":"ICD-11-WHO",
-                        "value":"XM4YL8"
+                        "type": "ICD-11-WHO",
+                        "value": "XM4YL8"
                       },
                       {
-                        "type":"CIEL",
-                        "value":"166156"
+                        "type": "CIEL",
+                        "value": "166156"
                       }
                     ]
                   },
                   {
-                    "concept":"166389AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label":"Covaxin",
-                    "conceptMappings":[
+                    "concept": "166389AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Covaxin",
+                    "conceptMappings": [
                       {
-                        "type":"ICD-11-WHO",
-                        "value":"XM1G90"
+                        "type": "ICD-11-WHO",
+                        "value": "XM1G90"
                       },
                       {
-                        "type":"CIEL",
-                        "value":"166389"
+                        "type": "CIEL",
+                        "value": "166389"
                       }
                     ]
                   },
                   {
-                    "concept":"166378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label":"Cansino",
-                    "conceptMappings":[
+                    "concept": "166378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cansino",
+                    "conceptMappings": [
                       {
-                        "type":"SNOMED-CT",
-                        "value":"836369007"
+                        "type": "SNOMED-CT",
+                        "value": "836369007"
                       },
                       {
-                        "type":"ICD-11-WHO",
-                        "value":"XM9QW8"
+                        "type": "ICD-11-WHO",
+                        "value": "XM9QW8"
                       },
                       {
-                        "type":"CIEL",
-                        "value":"166378"
+                        "type": "CIEL",
+                        "value": "166378"
                       }
                     ]
                   },
                   {
-                    "concept":"166355AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label":"Johnson and Johnson",
-                    "conceptMappings":[
+                    "concept": "166355AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Johnson and Johnson",
+                    "conceptMappings": [
                       {
-                        "type":"ICD-11-WHO",
-                        "value":"XM1AG7"
+                        "type": "ICD-11-WHO",
+                        "value": "XM1AG7"
                       },
                       {
-                        "type":"CIEL",
-                        "value":"166378"
+                        "type": "CIEL",
+                        "value": "166378"
                       }
                     ]
                   },
                   {
-                    "concept":"166154AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label":"Moderna",
-                    "conceptMappings":[
+                    "concept": "166154AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderna",
+                    "conceptMappings": [
                       {
-                        "type":"RxNORM",
-                        "value":"2470232"
+                        "type": "RxNORM",
+                        "value": "2470232"
                       },
                       {
-                        "type":"CIEL",
-                        "value":"166154"
+                        "type": "CIEL",
+                        "value": "166154"
                       },
                       {
-                        "type":"ICD-11-WHO",
-                        "value":"XM3DT5"
+                        "type": "ICD-11-WHO",
+                        "value": "XM3DT5"
                       }
                     ]
                   },
                   {
-                    "concept":"166390AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label":"Novavax",
-                    "conceptMappings":[
+                    "concept": "166390AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Novavax",
+                    "conceptMappings": [
                       {
-                        "type":"CIEL",
-                        "value":"166390"
+                        "type": "CIEL",
+                        "value": "166390"
                       },
                       {
-                        "type":"ICD-11-WHO",
-                        "value":"XM5JC5"
+                        "type": "ICD-11-WHO",
+                        "value": "XM5JC5"
                       }
                     ]
                   },
                   {
-                    "concept":"166155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label":"Pfizer-BioNtech",
-                    "conceptMappings":[
+                    "concept": "166155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pfizer-BioNtech",
+                    "conceptMappings": [
                       {
-                        "type":"ICD-11-WHO",
-                        "value":"XM8NQ0"
+                        "type": "ICD-11-WHO",
+                        "value": "XM8NQ0"
                       },
                       {
-                        "type":"RxNORM",
-                        "value":"8468230"
+                        "type": "RxNORM",
+                        "value": "8468230"
                       },
                       {
-                        "type":"CIEL",
-                        "value":"166155"
+                        "type": "CIEL",
+                        "value": "166155"
                       }
                     ]
                   },
                   {
-                    "concept":"166253AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label":"Sinopharm",
-                    "conceptMappings":[
+                    "concept": "166253AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sinopharm",
+                    "conceptMappings": [
                       {
-                        "type":"ICD-11-WHO",
-                        "value":"XM8866"
+                        "type": "ICD-11-WHO",
+                        "value": "XM8866"
                       }
                     ]
                   },
                   {
-                    "concept":"166249AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label":"Sinovac",
-                    "conceptMappings":[
+                    "concept": "166249AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sinovac",
+                    "conceptMappings": [
                       {
-                        "type":"CIEL",
-                        "value":"166249"
+                        "type": "CIEL",
+                        "value": "166249"
                       },
                       {
-                        "type":"ICD-11-WHO",
-                        "value":"XM7HT3"
+                        "type": "ICD-11-WHO",
+                        "value": "XM7HT3"
                       }
                     ]
                   },
-                   {
+                  {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Other (Specify)",
                     "conceptMappings": [
@@ -280,16 +280,16 @@
                   }
                 ]
               },
-              "id":"vaccineAdministered",
-              "behaviours":[
+              "id": "vaccineAdministered",
+              "behaviours": [
                 {
-                  "intent":"*",
-                  "required":"true",
-                  "unspecified":"true",
-                  "hide":{
-                    "hideWhenExpression":"false"
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
                   },
-                  "validators":[]
+                  "validators": []
                 }
               ]
             },
@@ -380,7 +380,7 @@
                   "intent": "*",
                   "required": "true",
                   "unspecified": "true",
-                  
+
                   "validators": [
                     {
                       "type": "js_expression",

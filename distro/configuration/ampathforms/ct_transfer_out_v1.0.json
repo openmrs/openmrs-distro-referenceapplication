@@ -1,305 +1,303 @@
 {
-    "name": "Transfer Out Form",
-    "version" : "1",
-    "published" : true,
-    "retired" : false,
-    "pages": [
-      {
-        "label": "Transfer Out",
-        "sections": [
-          {
-            "label": "Introduction",
-            "isExpanded": "true",
-            "questions": [
-              {
-                "type": "markdown",
-                "questionOptions": {
-                  "rendering": "markdown"
-                },
-                "id": "fooMarkdown",
-                "value": [
-                  "**Use this form to:** Transfer out a client"
-                ]
-              }
-            ]
-          },
-          {
-            "label": "Transfer-Out Details",
-            "isExpanded": "true",
-            "questions": [
-              {
-                "label": "Visit Date",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "date",
-                  "concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                },
-                "id": "dateOfVisit",
-                "behaviours": [
-                  {
-                    "intent": "*",
-                    "required": "true",
-                    "unspecified": "ture",
-                    "hide": {
-                      "hideWhenExpression": "false"
+  "name": "Transfer Out Form",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "pages": [
+    {
+      "label": "Transfer Out",
+      "sections": [
+        {
+          "label": "Introduction",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "markdown",
+              "questionOptions": {
+                "rendering": "markdown"
+              },
+              "id": "fooMarkdown",
+              "value": ["**Use this form to:** Transfer out a client"]
+            }
+          ]
+        },
+        {
+          "label": "Transfer-Out Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "dateOfVisit",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "ture",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
                     },
-                    "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('dateOfFirstVisit')"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Receiving Facility",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "recievingHealthFacility",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Transfer-Out Date (Date transfer-out takes effect)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "160649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "160649"
+                  }
+                ]
+              },
+              "id": "transferOutDate",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "true"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('dateOfFirstVisit')"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Transfer-Out Verification",
+          "type": "obs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Transfer-out Verified",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "797e0073-1f3f-46b1-8b1a-8cdad134d2b3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes",
+                    "conceptMappings": [
                       {
-                        "type": "date",
-                        "allowFutureDates": "false"
+                        "type": "CIEL",
+                        "value": "1065"
                       },
                       {
-                        "type": "js_expression",
-                        "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('dateOfFirstVisit')"
+                        "type": "AMPATH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "373066001"
+                      },
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "1065"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "label": "No",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "373067005"
+                      },
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "1066"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown",
+                    "conceptMappings": [
+                      {
+                        "type": "CIEL",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "261665006"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "UNKNOWN"
                       }
                     ]
                   }
                 ]
               },
-              {
-                "label": "Receiving Facility",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "text",
-                  "concept": "162724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                },
-                "id": "recievingHealthFacility",
-                "behaviours": [
+              "id": "isTransferOutVerified",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date verification done",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
                   {
-                    "intent": "*",
-                    "required": "true",
-                    "unspecified": "true",
-                    "hide": {
-                      "hideWhenExpression": "false"
-                    },
-                    "validators": []
+                    "type": "CIEL",
+                    "value": "160753"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "160753"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "439771001"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "439771001"
                   }
                 ]
               },
-              {
-                "label": "Transfer-Out Date (Date transfer-out takes effect)",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "date",
-                  "concept": "160649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "weeksList": "",
-                  "conceptMappings": [
+              "id": "verificationDate",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('isTransferOutVerified','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": [
                     {
-                      "type": "CIEL",
-                      "value": "160649"
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                     }
                   ]
-                },
-                "id": "transferOutDate",
-                "behaviours": [
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Notes",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Transfer-Out Notes",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "",
+                "conceptMappings": [
                   {
-                    "intent": "*",
-                    "required": "true",
-                    "unspecified": "true",
-                    "hide": {
-                      "hideWhenExpression": "false"
-                    },
-                    "validators": [
-                      {
-                        "type": "date",
-                        "allowFutureDates": "true"
-                      },
-                      {
-                        "type": "js_expression",
-                        "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('dateOfFirstVisit')"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "label": "Transfer-Out Verification",
-            "type": "obs",
-            "isExpanded": "true",
-            "questions": [
-              {
-                "label": "Transfer-out Verified",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "radio",
-                  "concept": "797e0073-1f3f-46b1-8b1a-8cdad134d2b3",
-                  "answers": [
-                    {
-                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label": "Yes",
-                      "conceptMappings": [
-                        {
-                          "type": "CIEL",
-                          "value": "1065"
-                        },
-                        {
-                          "type": "AMPATH",
-                          "value": "1065"
-                        },
-                        {
-                          "type": "PIH",
-                          "value": "1065"
-                        },
-                        {
-                          "type": "SNOMED CT",
-                          "value": "373066001"
-                        },
-                        {
-                          "type": "PIH-Malawi",
-                          "value": "1065"
-                        }
-                      ]
-                    },
-                    {
-                      "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
-                      "label": "No",
-                      "conceptMappings": [
-                        {
-                          "type": "AMPATH",
-                          "value": "1066"
-                        },
-                        {
-                          "type": "PIH",
-                          "value": "1066"
-                        },
-                        {
-                          "type": "SNOMED CT",
-                          "value": "373067005"
-                        },
-                        {
-                          "type": "PIH-Malawi",
-                          "value": "1066"
-                        }
-                      ]
-                    },
-                    {
-                      "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label": "Unknown",
-                      "conceptMappings": [
-                        {
-                          "type": "CIEL",
-                          "value": "1067"
-                        },
-                        {
-                          "type": "AMPATH",
-                          "value": "1067"
-                        },
-                        {
-                          "type": "SNOMED CT",
-                          "value": "261665006"
-                        },
-                        {
-                          "type": "PIH",
-                          "value": "1067"
-                        },
-                        {
-                          "type": "org.openmrs.module.mdrtb",
-                          "value": "UNKNOWN"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "id": "isTransferOutVerified",
-                "behaviours": [
-                  {
-                    "intent": "*",
-                    "required": "true",
-                    "unspecified": "true",
-                    "hide": {
-                      "hideWhenExpression": "false"
-                    },
-                    "validators": []
+                    "type": "CIEL",
+                    "value": "165095"
                   }
                 ]
               },
-              {
-                "label": "Date verification done",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "date",
-                  "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "weeksList": "",
-                  "conceptMappings": [
-                    {
-                      "type": "CIEL",
-                      "value": "160753"
-                    },
-                    {
-                      "type": "CIEL",
-                      "value": "160753"
-                    },
-                    {
-                      "type": "SNOMED-CT",
-                      "value": "439771001"
-                    },
-                    {
-                      "type": "SNOMED-CT",
-                      "value": "439771001"
-                    }
-                  ]
-                },
-                "id": "verificationDate",
-                "behaviours": [
-                  {
-                    "intent": "*",
-                    "required": "true",
-                    "unspecified": "true",
-                    "hide": {
-                      "hideWhenExpression": "!includes('isTransferOutVerified','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                    },
-                    "validators": [
-                      {
-                        "type": "date",
-                        "allowFutureDates": "false"
-                      },
-                      {
-                        "type": "js_expression",
-                        "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "label": "Notes",
-            "isExpanded": "true",
-            "questions": [
-              {
-                "label": "Transfer-Out Notes",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "textarea",
-                  "concept": "165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "rows": "",
-                  "conceptMappings": [
-                    {
-                      "type": "CIEL",
-                      "value": "165095"
-                    }
-                  ]
-                },
-                "id": "transferOutNotes"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "availableIntents": [
-      {
-        "intent": "*",
-        "display": "Transfer Form"
-      }
-    ],
-    "processor": "EncounterFormProcessor",
-    "uuid": "xxxx",
-    "referencedForms": [],
-    "encounterType": "3044916a-7e5f-478b-9091-803233f27f91",
-    "encounter": "Transfer Out",
-    "allowUnspecifiedAll": true
-  }
+              "id": "transferOutNotes"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "Transfer Form"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "xxxx",
+  "referencedForms": [],
+  "encounterType": "3044916a-7e5f-478b-9091-803233f27f91",
+  "encounter": "Transfer Out",
+  "allowUnspecifiedAll": true
+}
