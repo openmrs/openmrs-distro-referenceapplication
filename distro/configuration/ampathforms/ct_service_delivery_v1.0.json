@@ -1,341 +1,341 @@
 {
-    "name":"Service Delivery Model Form",
-    "version" : "1",
-    "published" : true,
-    "retired" : false,
-    "pages":[
-      {
-        "label":"Service Delivery Model",
-        "sections":[
-          {
-            "label":"Introduction",
-            "isExpanded":"true",
-            "questions":[
-              {
-                "type":"markdown",
-                "questionOptions":{
-                  "rendering":"markdown"
-                },
-                "id":"fooMarkdown",
-                "value":[
-                  "**This form is used to:** Document differentiated service deliver enrolment/ disenrolment."
+  "name": "Service Delivery Model Form",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "pages": [
+    {
+      "label": "Service Delivery Model",
+      "sections": [
+        {
+          "label": "Introduction",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "markdown",
+              "questionOptions": {
+                "rendering": "markdown"
+              },
+              "id": "fooMarkdown",
+              "value": [
+                "**This form is used to:** Document differentiated service deliver enrolment/ disenrolment."
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Enrolment criteria **Coming Soon**",
+          "isExpanded": "true",
+          "questions": []
+        },
+        {
+          "label": "DSD Enrollment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Differentiated Service Delivery",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8742967d-8107-4cbb-a17e-9a8c7f624673",
+                "answers": [
+                  {
+                    "label": "Enroll to DSD",
+                    "concept": "9cca15ce-db78-4a39-be0d-aae19e089ec1"
+                  },
+                  {
+                    "label": "Disenroll from DSD",
+                    "concept": "b5ddaf2e-dae3-4e4d-81ca-6cead3d59973"
+                  }
                 ]
-              }
-            ]
-          },
-          {
-            "label":"Enrolment criteria **Coming Soon**",
-            "isExpanded":"true",
-            "questions":[
-
-            ]
-          },
-          {
-            "label":"DSD Enrollment",
-            "isExpanded":"true",
-            "questions":[
-              {
-                "label":"Differentiated Service Delivery",
-                "type":"obs",
-                "questionOptions":{
-                  "rendering":"radio",
-                  "concept":"8742967d-8107-4cbb-a17e-9a8c7f624673",
-                  "answers":[
-                    {
-                      "label":"Enroll to DSD",
-                      "concept":"9cca15ce-db78-4a39-be0d-aae19e089ec1"
-                    },
-                    {
-                      "label":"Disenroll from DSD",
-                      "concept":"b5ddaf2e-dae3-4e4d-81ca-6cead3d59973"
-                    }
-                  ]
-                },
-                "id":"dsdService",
-                "behaviours": [
-                    {
-                      "intent": "*",
-                      "required": "true",
-                      "unspecified": "true",
-                      "hide": {
-                        "hideWhenExpression": "false"
-                      },
-                      "validators": []
-                    }
-                  ]
               },
-              {
-                "label":"Date enrolled to DSD",
-                "type":"obs",
-                "questionOptions":{
-                  "rendering":"date",
-                  "concept":"160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "weeksList":"",
-                  "conceptMappings":[
-                    {
-                      "type":"SNOMED-CT",
-                      "value":"439771001"
-                    },
-                    {
-                      "type":"CIEL",
-                      "value":"160753"
-                    }
-                  ]
-                },
-                "id":"dateEnrolledToDSD",
-                "behaviours": [
-                    {
-                      "intent": "*",
-                      "required": "true",
-                      "unspecified": "true",
-                      "hide": {
-                        "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
-                      },
-                      "validators": [
-                        {
-                          "type": "date",
-                          "allowFutureDates": "false"
-                        },
-                        {
-                          "type": "js_expression",
-                          "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"									}
-                      ]
-                    }
-                  ]
+              "id": "dsdService",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date enrolled to DSD",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "439771001"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "160753"
+                  }
+                ]
               },
-              {
-                "label":"Date disenrolled from DSD",
-                "type":"obs",
-                "questionOptions":{
-                  "rendering":"date",
-                  "concept":"160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "weeksList":"",
-                  "conceptMappings":[
+              "id": "dateEnrolledToDSD",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
+                  },
+                  "validators": [
                     {
-                      "type":"SNOMED-CT",
-                      "value":"439771001"
+                      "type": "date",
+                      "allowFutureDates": "false"
                     },
                     {
-                      "type":"CIEL",
-                      "value":"160753"
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                     }
                   ]
-                },
-                "id":"dateDisenrolledDSD",
-                "behaviours": [
-                    {
-                      "intent": "*",
-                      "required": "true",
-                      "unspecified": "true",
-                      "hide": {
-                        "hideWhenExpression": "!includes('dsdService','b5ddaf2e-dae3-4e4d-81ca-6cead3d59973')"
-                      },
-                      "validators": [
-                        {
-                          "type": "date",
-                          "allowFutureDates": "false"
-                        },
-                        {
-                          "type": "js_expression",
-                          "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"									}
-                      ]
-                    }
-                  ]
+                }
+              ]
+            },
+            {
+              "label": "Date disenrolled from DSD",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "439771001"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "160753"
+                  }
+                ]
               },
-              {
-                "label":"Reason for disenrolling from DSD",
-                "type":"obs",
-                "questionOptions":{
-                  "rendering":"text",
-                  "concept":"163513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                },
-                "id":"reasonForDiscontinuingDSD",
-                "behaviours": [
+              "id": "dateDisenrolledDSD",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('dsdService','b5ddaf2e-dae3-4e4d-81ca-6cead3d59973')"
+                  },
+                  "validators": [
                     {
-                      "intent": "*",
-                      "required": "true",
-                      "unspecified": "true",
-                      "hide": {
-                        "hideWhenExpression": "!includes('dsdService','b5ddaf2e-dae3-4e4d-81ca-6cead3d59973')"
-                      },
-                      "validators": []
-                    }
-                  ]
-              }
-            ]
-          },
-          {
-            "label":"Differentiated Service Delivery Models",
-            "isExpanded":"true",
-            "questions":[
-              {
-                "label":"Facility DSD Model",
-                "type":"obs",
-                "questionOptions":{
-                  "rendering":"radio",
-                  "concept":"59f34bfe-4375-461c-88a6-bd3d82ee7b79",
-                  "answers":[
-                    {
-                      "concept":"166446AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label":"Express Care (Fast Track Drug Refill)",
-                      "conceptMappings":[
-                        {
-                          "type":"KenyaEMR",
-                          "value":"164946"
-                        },
-                        {
-                          "type":"CIEL",
-                          "value":"166446"
-                        },
-                        {
-                          "type":"SNOMED-CT",
-                          "value":"373784005"
-                        }
-                      ]
+                      "type": "date",
+                      "allowFutureDates": "false"
                     },
                     {
-                      "concept":"166445AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label":"Facility group medication distribution",
-                      "conceptMappings":[
-                        {
-                          "type":"KenyaEMR",
-                          "value":"164946"
-                        },
-                        {
-                          "type":"CIEL",
-                          "value":"166445"
-                        },
-                        {
-                          "type":"SNOMED-CT",
-                          "value":"373784005"
-                        }
-                      ]
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                     }
                   ]
-                },
-                "id":"facilityDSDModel",
-                "behaviours": [
-                    {
-                      "intent": "*",
-                      "required": "true",
-                      "unspecified": "true",
-                      "hide": {
-                        "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
-                      },
-                      "validators": []
-                    }
-                  ]
+                }
+              ]
+            },
+            {
+              "label": "Reason for disenrolling from DSD",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              {
-                "label":"Community DSD Model",
-                "type":"obs",
-                "questionOptions":{
-                  "rendering":"radio",
-                  "concept":"52824cbe-0e4d-4c18-8179-80b5799f34ed",
-                  "answers":[
-                    {
-                      "concept":"166443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label":"Community ARV Distribution - HCW Led",
-                      "conceptMappings":[
-                        {
-                          "type":"KenyaEMR",
-                          "value":"164944"
-                        },
-                        {
-                          "type":"SNOMED-CT",
-                          "value":"373784005"
-                        },
-                        {
-                          "type":"CIEL",
-                          "value":"166443"
-                        }
-                      ]
-                    },
-                    {
-                      "concept":"166444AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label":"Community ARV Distribution - Peer Led",
-                      "conceptMappings":[
-                        {
-                          "type":"KenyaEMR",
-                          "value":"164945"
-                        },
-                        {
-                          "type":"SNOMED-CT",
-                          "value":"373784005"
-                        },
-                        {
-                          "type":"CIEL",
-                          "value":"166444"
-                        }
-                      ]
-                    },
-                    {
-                      "concept":"cf8de440-a26b-4c8c-8c43-f7ce7d2cd4fb",
-                      "label":"Community Dispensing"
-                    }
-                  ]
-                },
-                "id":"communityDSDModel",
-                "behaviours": [
-                    {
-                      "intent": "*",
-                      "required": "true",
-                      "unspecified": "true",
-                      "hide": {
-                        "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
+              "id": "reasonForDiscontinuingDSD",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('dsdService','b5ddaf2e-dae3-4e4d-81ca-6cead3d59973')"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Differentiated Service Delivery Models",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Facility DSD Model",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "59f34bfe-4375-461c-88a6-bd3d82ee7b79",
+                "answers": [
+                  {
+                    "concept": "166446AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Express Care (Fast Track Drug Refill)",
+                    "conceptMappings": [
+                      {
+                        "type": "KenyaEMR",
+                        "value": "164946"
                       },
-                      "validators": []
-                    }
-                  ]
-              }
-            ],
-            "behaviours": [
-              {
-                "intent": "*",
-                "required": "true",
-                "unspecified": "true",
-                "hide": {
-                  "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
-                },
-                "validators": []
-              }
-            ]
-          },
-          {
-            "label":"Notes",
-            "isExpanded":"true",
-            "questions":[
-              {
-                "label":"Comments",
-                "type":"obs",
-                "questionOptions":{
-                  "rendering":"textarea",
-                  "concept":"165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "rows":"",
-                  "conceptMappings":[
-                    {
-                      "type":"CIEL",
-                      "value":"165095"
-                    }
-                  ]
-                },
-                "id":"dSDNotes"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-	"availableIntents":[
-	  {
-		"intent":"*",
-		"display":"Service Delivery Model"
-	  }
-	],
-    "processor":"EncounterFormProcessor",
-    "uuid":"xxxx",
-    "referencedForms":[],
-	"encounterType":"62ee5922-a229-48d3-a1da-875c1ffa9436",
-    "encounter": "Service Delivery Model Form",
-	"allowUnspecifiedAll":true
-  }
+                      {
+                        "type": "CIEL",
+                        "value": "166446"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "373784005"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "166445AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Facility group medication distribution",
+                    "conceptMappings": [
+                      {
+                        "type": "KenyaEMR",
+                        "value": "164946"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "166445"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "373784005"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "facilityDSDModel",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Community DSD Model",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "52824cbe-0e4d-4c18-8179-80b5799f34ed",
+                "answers": [
+                  {
+                    "concept": "166443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Community ARV Distribution - HCW Led",
+                    "conceptMappings": [
+                      {
+                        "type": "KenyaEMR",
+                        "value": "164944"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "373784005"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "166443"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "166444AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Community ARV Distribution - Peer Led",
+                    "conceptMappings": [
+                      {
+                        "type": "KenyaEMR",
+                        "value": "164945"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "373784005"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "166444"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "cf8de440-a26b-4c8c-8c43-f7ce7d2cd4fb",
+                    "label": "Community Dispensing"
+                  }
+                ]
+              },
+              "id": "communityDSDModel",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ],
+          "behaviours": [
+            {
+              "intent": "*",
+              "required": "true",
+              "unspecified": "true",
+              "hide": {
+                "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Notes",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Comments",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "165095"
+                  }
+                ]
+              },
+              "id": "dSDNotes"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "Service Delivery Model"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "xxxx",
+  "referencedForms": [],
+  "encounterType": "62ee5922-a229-48d3-a1da-875c1ffa9436",
+  "encounter": "Service Delivery Model Form",
+  "allowUnspecifiedAll": true
+}

@@ -1,285 +1,285 @@
 {
-    "name": "Lab Specimen Collection",
-    "version" : "1",
-    "published" : true,
-    "retired" : false,
-    "pages": [
-      {
-        "label": "Specimen Collection",
-        "sections": [
-          {
-            "label": "Specimen Collection Details",
-            "isExpanded": "true",
-            "questions": [
-              {
-                "label": "Date sample collected*",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "date",
-                  "concept": "159951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                },
-                "id": "dateSpecimenCollected"
+  "name": "Lab Specimen Collection",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "pages": [
+    {
+      "label": "Specimen Collection",
+      "sections": [
+        {
+          "label": "Specimen Collection Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date sample collected*",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "159951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              {
-                "label": "Specimen type*",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "select",
-                  "concept": "9103ae1f-1461-4fcb-91d7-3705a40f5f5c",
-                  "answers": [
+              "id": "dateSpecimenCollected"
+            },
+            {
+              "label": "Specimen type*",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9103ae1f-1461-4fcb-91d7-3705a40f5f5c",
+                "answers": [
+                  {
+                    "concept": "a9ecc403-25b5-48c8-974f-815acc074328",
+                    "label": "Dried Blood Spot",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Plasma",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165888AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Venous blood specimen",
+                    "conceptMappings": []
+                  }
+                ],
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "159959"
+                  }
+                ]
+              },
+              "id": "specimenType"
+            },
+            {
+              "label": "Other sample type",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "d07aba2e-f37d-49dd-bb65-b27e8df80399"
+              },
+              "id": "otherSpecimenTypeGroup",
+              "questions": [
+                {
+                  "label": "Other specimen type",
+                  "id": "otherSpecimenType",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "type": "obs",
+                  "behaviours": [
                     {
-                      "concept": "a9ecc403-25b5-48c8-974f-815acc074328",
-                      "label": "Dried Blood Spot",
-                      "conceptMappings": []
-                    },
-                    {
-                      "concept": "1002AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label": "Plasma",
-                      "conceptMappings": []
-                    },
-                    {
-                      "concept": "165888AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label": "Venous blood specimen",
-                      "conceptMappings": []
-                    }
-                  ],
-                  "conceptMappings": [
-                    {
-                      "type": "CIEL",
-                      "value": "159959"
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('specimenType','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": []
                     }
                   ]
-                },
-                "id": "specimenType"
-              },
-              {
-                "label": "Other sample type",
-                "type": "obsGroup",
-                "questionOptions": {
-                  "rendering": "group",
-                  "concept": "d07aba2e-f37d-49dd-bb65-b27e8df80399"
-                },
-                "id": "otherSpecimenTypeGroup",
-                "questions": [
+                }
+              ]
+            },
+            {
+              "label": "Specimen ID",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "159968AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
                   {
-                    "label": "Other specimen type",
-                    "id": "otherSpecimenType",
-                    "questionOptions": {
-                      "rendering": "text",
-                      "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                    },
-                    "type": "obs",
-                    "behaviours": [
+                    "type": "CIEL",
+                    "value": "159968"
+                  },
+                  {
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TUBERCULOSIS SPECIMEN ID"
+                  }
+                ]
+              },
+              "id": "specimenId",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Referral Lab",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Forwarded to reference lab",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "161934AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "161934"
+                  },
+                  {
+                    "type": "PIH",
+                    "value": "7818"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "161934"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "129125009"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes",
+                    "conceptMappings": [
                       {
-                        "intent": "*",
-                        "required": "true",
-                        "unspecified": "true",
-                        "hide": {
-                          "hideWhenExpression": "!includes('specimenType','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                        },
-                        "validators": []
+                        "type": "CIEL",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 373066001"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown",
+                    "conceptMappings": [
+                      {
+                        "type": "CIEL",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 261665006"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1067"
                       }
                     ]
                   }
                 ]
               },
-              {
-                "label": "Specimen ID",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "text",
-                  "concept": "159968AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "conceptMappings": [
-                    {
-                      "type": "CIEL",
-                      "value": "159968"
-                    },
-                    {
-                      "type": "org.openmrs.module.mdrtb",
-                      "value": "TUBERCULOSIS SPECIMEN ID"
-                    }
-                  ]
-                },
-                "id": "specimenId",
-                "behaviours": [
+              "id": "isSpecimenSentToLab",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Specimen Dispatch",
+      "sections": [
+        {
+          "label": "Referral Lab Dispatch",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Reference Lab sample sent to",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161562AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "5",
+                "conceptMappings": [
                   {
-                    "intent": "*",
-                    "required": "false",
-                    "unspecified": "true",
-                    "hide": {
-                      "hideWhenExpression": "false"
-                    },
-                    "validators": []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "label": "Referral Lab",
-            "isExpanded": "true",
-            "questions": [
-              {
-                "label": "Forwarded to reference lab",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "radio",
-                  "concept": "161934AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "conceptMappings": [
-                    {
-                      "type": "CIEL",
-                      "value": "161934"
-                    },
-                    {
-                      "type": "PIH",
-                      "value": "7818"
-                    },
-                    {
-                      "type": "CIEL",
-                      "value": "161934"
-                    },
-                    {
-                      "type": "SNOMED-CT",
-                      "value": "129125009"
-                    }
-                  ],
-                  "answers": [
-                    {
-                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label": "Yes",
-                      "conceptMappings": [
-                        {
-                          "type": "CIEL",
-                          "value": "1065"
-                        },
-                        {
-                          "type": "AMPATH",
-                          "value": "1065"
-                        },
-                        {
-                          "type": "PIH",
-                          "value": "1065"
-                        },
-                        {
-                          "type": "SNOMED CT",
-                          "value": "CT: 373066001"
-                        }
-                      ]
-                    },
-                    {
-                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label": "No",
-                      "conceptMappings": []
-                    },
-                    {
-                      "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "label": "Unknown",
-                      "conceptMappings": [
-                        {
-                          "type": "CIEL",
-                          "value": "1067"
-                        },
-                        {
-                          "type": "AMPATH",
-                          "value": "1067"
-                        },
-                        {
-                          "type": "SNOMED CT",
-                          "value": "CT: 261665006"
-                        },
-                        {
-                          "type": "PIH",
-                          "value": "1067"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "id": "isSpecimenSentToLab",
-                "behaviours": [
-                  {
-                    "intent": "*",
-                    "required": "true",
-                    "unspecified": "true",
-                    "hide": {
-                      "hideWhenExpression": "false"
-                    },
-                    "validators": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "Specimen Dispatch",
-        "sections": [
-          {
-            "label": "Referral Lab Dispatch",
-            "isExpanded": "true",
-            "questions": [
-              {
-                "label": "Reference Lab sample sent to",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "text",
-                  "concept": "161562AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "rows": "5",
-                  "conceptMappings": [
-                    {
-                      "type": "CIEL",
-                      "value": "161562"
-                    }
-                  ]
-                },
-                "id": "referenceLabSampleSentTo",
-                "behaviours": [
-                  {
-                    "intent": "*",
-                    "hide": {
-                      "hideWhenExpression": "!includes('isSpecimenSentToLab', '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                    },
-                    "validators": []
+                    "type": "CIEL",
+                    "value": "161562"
                   }
                 ]
               },
-              {
-                "label": "Date dispatched*",
-                "type": "obs",
-                "questionOptions": {
-                  "rendering": "date",
-                  "concept": "159951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                },
-                "id": "dateSpecimendispatched",
-                "behaviours": [
-                  {
-                    "intent": "*",
-                    "hide": {
-                      "hideWhenExpression": "!includes('isSpecimenSentToLab', '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                    },
-                    "validators": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "availableIntents": [
-      {
-        "intent": "*",
-        "display": "Specimen Collection"
-      },
-      {
-        "intent": "SPECIMEN_COLLECTION_EMBED",
-        "display": "Specimen Collection Embed"
-      }
-    ],
-    "processor": "EncounterFormProcessor",
-    "uuid": "",
-    "referencedForms": [],
-    "encounterType": "",
-    "allowUnspecifiedAll": true
-  }
+              "id": "referenceLabSampleSentTo",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "hide": {
+                    "hideWhenExpression": "!includes('isSpecimenSentToLab', '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date dispatched*",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "159951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "dateSpecimendispatched",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "hide": {
+                    "hideWhenExpression": "!includes('isSpecimenSentToLab', '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "Specimen Collection"
+    },
+    {
+      "intent": "SPECIMEN_COLLECTION_EMBED",
+      "display": "Specimen Collection Embed"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "",
+  "referencedForms": [],
+  "encounterType": "",
+  "allowUnspecifiedAll": true
+}
