@@ -54,10 +54,6 @@
                   {
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "No"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -72,11 +68,11 @@
               ]
             },
             {
-              "label": "PTracker ID",
+              "label": "Latest Unique Pregnancy ID",
               "type": "obs",
               "id": "MotherPtracker_id",
               "questionOptions": {
-                "concept": "6c45421e-2566-47cb-bbb3-07586fffbfe2",
+                "concept": "163530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "text",
                 "calculate": {
                   "calculateExpression": "client_booked == '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? myValue = useFieldValue('latest_anc_ptracker_number'): ''"
@@ -94,25 +90,20 @@
                       "type": "js_expression",
                       "warnsWhenExpression": "myValue == useFieldValue('latest_ptracker_number')",
                       "message": "Another L&D form exists for the same PTracker number. Do you still want to go ahead and create another form?"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "!/^[0-9]{5}[A-S]{1}[0-9]{6,8}$$/.test(myValue)",
-                      "message": "Invalid Ptracker number"
                     }
                   ]
                 }
               ]
             },
             {
-              "label": "Latest Ptracker number",
+              "label": "Latest Unique Pregnancy ID",
               "type": "obs",
               "id": "latest_ptracker_number",
               "questionOptions": {
                 "concept": "",
                 "rendering": "fixed-value",
                 "calculate": {
-                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2678423c-0523-4d76-b0da-18177b439eed')).valueString"
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '163530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '6dc5308d-27c9-4d49-b16f-2c5e3c759757')).valueString"
                 }
               },
               "hide": {
@@ -120,14 +111,14 @@
               }
             },
             {
-              "label": "Latest ANC Ptracker number",
+              "label": "Latest Unique Pregnancy ID",
               "type": "obs",
               "id": "latest_anc_ptracker_number",
               "questionOptions": {
                 "concept": "",
                 "rendering": "fixed-value",
                 "calculate": {
-                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a')).valueString"
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '163530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '6dc5308d-27c9-4d49-b16f-2c5e3c759757')).valueString"
                 }
               },
               "hide": {
@@ -145,42 +136,19 @@
               "type": "obs",
               "id": "anc_hiv_test_status",
               "questionOptions": {
-                "concept": "c5f74c86-62cd-4d22-9260-4238f1e45fe0",
+                "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
                 "calculate": {
-                  "calculateExpression": "resolve(api.getLatestObs('2549af50-75c8-4aeb-87ca-4bb2cef6c69a', '164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+                  "calculateExpression": "resolve(api.getLatestObs('6dc5308d-27c9-4d49-b16f-2c5e3c759757', '164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
                 },
                 "answers": [
                   {
-                    "concept": "8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
+                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Previously known positive"
-                  },
-                  {
-                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Positive",
-                    "conceptMappings": [
-                      {
-                        "type": "CIEL",
-                        "value": "703"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "703"
-                      },
-                      {
-                        "type": "SNOMED CT",
-                        "value": "10828004"
-                      },
-                      {
-                        "type": "PIH",
-                        "value": "703"
-                      }
-                    ]
                   },
                   {
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Negative",
-
                     "conceptMappings": [
                       {
                         "type": "CIEL",
@@ -225,17 +193,12 @@
                   {
                     "concept": "1402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Not Tested",
-
                     "conceptMappings": [
                       {
                         "type": "CIEL",
                         "value": "1402"
                       }
                     ]
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -250,7 +213,7 @@
               ]
             },
             {
-              "label": "HIV Test Status at maternity/delivery",
+              "label": "HIV Test Performed",
               "type": "obs",
               "id": "hiv_test",
               "questionOptions": {
@@ -258,20 +221,16 @@
                 "rendering": "radio",
                 "answers": [
                   {
-                    "concept": "6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f",
-                    "label": "Tested for HIV during this visit"
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
                   },
                   {
-                    "concept": "8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
-                    "label": "Previously known positive"
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
                   },
                   {
-                    "concept": "d18fa331-f158-47d0-b344-cf147c7125a4",
-                    "label": "Not tested for HIV during this visit"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               },
@@ -354,10 +313,6 @@
                         "value": "1067"
                       }
                     ]
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -366,7 +321,7 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "!includes('hiv_test', '6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f')"
+                    "hideWhenExpression": "!includes('hiv_test', '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
                   }
                 }
               ]
@@ -376,7 +331,7 @@
               "type": "obs",
               "id": "anc_retest_thirty_six_weeks",
               "questionOptions": {
-                "concept": "159803AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
                 "answers": [
                   {
@@ -402,20 +357,20 @@
                     ]
                   },
                   {
-                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Positive",
                     "conceptMappings": [
                       {
                         "type": "CIEL",
-                        "value": "138571"
+                        "value": "703"
                       },
                       {
                         "type": "AMPATH",
-                        "value": "1169"
+                        "value": "704"
                       },
                       {
                         "type": "SNOMED CT",
-                        "value": "165816005"
+                        "value": "10828004"
                       }
                     ]
                   },
@@ -440,14 +395,6 @@
                         "value": "1067"
                       }
                     ]
-                  },
-                  {
-                    "concept": "d18fa331-f158-47d0-b344-cf147c7125a4",
-                    "label": "Not tested for HIV during this visit"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -456,17 +403,17 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "hiv_test !== 'd18fa331-f158-47d0-b344-cf147c7125a4'"
+                    "hideWhenExpression": "hiv_test !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
             },
             {
-              "label": "ART initiation",
+              "label": "Anti-retroviral treatment status",
               "type": "obs",
               "id": "art_initiation",
               "questionOptions": {
-                "concept": "6e62bf7e-2107-4d09-b485-6e60cbbb2d08",
+                "concept": "160117AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
                 "answers": [
                   {
@@ -510,36 +457,6 @@
                         "value": "160018"
                       }
                     ]
-                  },
-                  {
-                    "concept": "1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Not started due to stockout of ART",
-                    "conceptMappings": [
-                      {
-                        "type": "CIEL",
-                        "value": "1754"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "664"
-                      },
-                      {
-                        "type": "SNOMED CT",
-                        "value": "182856006"
-                      },
-                      {
-                        "type": "SNOMED MVP",
-                        "value": "17541000105004"
-                      },
-                      {
-                        "type": "PIH",
-                        "value": "1761"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -548,7 +465,7 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "anc_hiv_test_status !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_retest_thirty_six_weeks !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && hiv_test !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && hiv_test !== '6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f' || hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression": "anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_retest_thirty_six_weeks !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && hiv_test !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && hiv_test !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
@@ -569,7 +486,7 @@
                   "required": "true",
                   "unspecified": "true",
                   "hide": {
-                    "hideWhenExpression": "art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression": "art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
@@ -588,7 +505,7 @@
                   "required": "true",
                   "unspecified": "true",
                   "hide": {
-                    "hideWhenExpression": "art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression": "art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": [
                     {
@@ -617,7 +534,7 @@
                   "required": "true",
                   "unspecified": "true",
                   "hide": {
-                    "hideWhenExpression": "art_initiation !== '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression": "art_initiation !== '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
@@ -637,10 +554,6 @@
                   {
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "No"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -649,7 +562,7 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression": "art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
@@ -706,10 +619,6 @@
                   {
                     "concept": "159971AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Results pending"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -771,10 +680,6 @@
                   {
                     "concept": "1692AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Discharged (Still Alive)"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -820,7 +725,7 @@
             {
               "label": "Number of babies born from this pregnancy",
               "type": "obs",
-              "id": "birth_count",
+              "id": "birth-count",
               "questionOptions": {
                 "concept": "1568AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
@@ -845,10 +750,7 @@
               "type": "obsGroup",
               "questionOptions": {
                 "rendering": "repeating",
-                "concept": "1c70c490-cafa-4c95-9fdd-a30b62bb78b8",
-                "repeatOptions": {
-                  "limitExpression": "useFieldValue('birth_count')"
-                }
+                "concept": "1c70c490-cafa-4c95-9fdd-a30b62bb78b8"
               },
               "behaviours": [
                 {
@@ -941,10 +843,6 @@
                       {
                         "concept": "125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Still Birth"
-                      },
-                      {
-                        "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                        "label": "Missing"
                       }
                     ]
                   },
@@ -974,10 +872,6 @@
                       {
                         "concept": "1595AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "RF=Replacement feeding"
-                      },
-                      {
-                        "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                        "label": "Missing"
                       }
                     ]
                   },
@@ -1007,10 +901,6 @@
                       {
                         "concept": "135436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Macerated"
-                      },
-                      {
-                        "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                        "label": "Missing"
                       }
                     ]
                   },
@@ -1031,27 +921,23 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "radio",
-                    "concept": "1148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "1147AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "answers": [
                       {
-                        "concept": "83a60fef-31c6-4937-907b-42ced15474e3",
+                        "concept": "631AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "NVP Prophylaxis daily up to 6 weeks"
                       },
                       {
-                        "concept": "99b29c50-fc67-11e8-8eb2-f2801f1b9fd1",
+                        "concept": "1148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Infant received NVP + AZT prophylaxis up to 6 weeks"
                       },
                       {
-                        "concept": "127750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Refused ARV Prophylaxis"
                       },
                       {
-                        "concept": "1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Stock-out of ARV Prophylaxis"
-                      },
-                      {
-                        "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                        "label": "Missing"
                       }
                     ]
                   },
@@ -1117,7 +1003,7 @@
                   ]
                 },
                 {
-                  "label": "Infant PTracker ID",
+                  "label": "Infant Unique ID",
                   "type": "obs",
                   "id": "infantPtrackerid",
                   "questionOptions": {
@@ -1133,14 +1019,7 @@
                       "required": "true",
                       "hide": {
                         "hideWhenExpression": "infantStatus === '125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                      },
-                      "validators": [
-                        {
-                          "type": "js_expression",
-                          "failsWhenExpression": "!/^[0-9]{5}[A-Z]{1}[0-9]{7,8}$$/.test(myValue)",
-                          "message": "Invalid Ptracker number"
-                        }
-                      ]
+                      }
                     }
                   ]
                 }
@@ -1158,13 +1037,16 @@
     }
   ],
   "processor": "EncounterFormProcessor",
-  "uuid": "1e5614d6-5306-11e6-beb8-9e71128cae77",
+  "uuid": "xxxx",
   "referencedForms": [],
-  "encounterType": "2678423c-0523-4d76-b0da-18177b439eed",
+  "encounterType": "6dc5308d-27c9-4d49-b16f-2c5e3c759757",
   "encounter": "Labor and Delivery",
-  "postSubmissionActions": ["MotherToChildLinkageSubmissionAction", "ArtSubmissionAction"],
+  "postSubmissionActions": [
+    "MotherToChildLinkageSubmissionAction",
+    "ArtSubmissionAction"
+  ],
+  "allowUnspecifiedAll": true,
   "formOptions": {
     "usePreviousValueDisabled": "true"
-  },
-  "allowUnspecifiedAll": true
+  }
 }
