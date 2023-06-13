@@ -1,11 +1,11 @@
 {
-  "name": "Infant - Postanal Form",
+  "name": "HIV Exposed Infant Form",
   "version": "1",
   "published": true,
   "retired": false,
   "pages": [
     {
-      "label": "Infant - Postnatal",
+      "label": "HEI",
       "sections": [
         {
           "label": "Infant Exposure",
@@ -41,11 +41,11 @@
               ]
             },
             {
-              "label": "PTracker ID",
+              "label": "Mother's Patient Identifier",
               "type": "obs",
               "id": "ptracker_id",
               "questionOptions": {
-                "concept": "6c45421e-2566-47cb-bbb3-07586fffbfe2",
+                "concept": "163530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "text"
               },
               "behaviours": [
@@ -63,20 +63,20 @@
               "type": "obs",
               "id": "infant-hiv-exposure-status",
               "questionOptions": {
-                "concept": "6027869c-5d7e-4a82-b22f-6d9c57d61a4d",
+                "concept": "1401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
                 "answers": [
                   {
-                    "concept": "54431b42-dae4-4d19-9034-44ba7489a334",
+                    "concept": "1405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Currently Exposed"
                   },
                   {
-                    "concept": "8c64a106-3db1-4a78-af11-df6f5a054945",
+                    "concept": "1403AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Currently Unexposed"
                   },
                   {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               },
@@ -90,31 +90,32 @@
                   "validators": []
                 }
               ]
-            },
-
+            }
+          ]
+        },
+        {
+          "label": "Prophylaxis",
+          "isExpanded": "true",
+          "questions": [
             {
               "label": "Infant Prophylaxis Status",
               "type": "obs",
               "id": "infant-prophylaxis-status",
               "questionOptions": {
-                "concept": "1148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "1147AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
                 "answers": [
                   {
-                    "concept": "e2ae63f3-e4c9-4822-bf18-c894928556c8",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Never received ARV prophylaxis"
                   },
                   {
-                    "concept": "857c5868-bdcd-4f5c-aadd-8b0fa7de8481",
+                    "concept": "1149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Received ARV prophylaxis"
                   },
                   {
-                    "concept": "8eb8dee6-5342-4529-ad2f-4fc5a66becd9",
-                    "label": "Stopped ARV prophylaxis according to guideline"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
+                    "concept": "167155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Discontinued ARV prophylaxis"
                   }
                 ]
               },
@@ -123,7 +124,7 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "infant-hiv-exposure-status !== '54431b42-dae4-4d19-9034-44ba7489a334'"
+                    "hideWhenExpression": "infant-hiv-exposure-status !== '1405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": []
                 }
@@ -152,10 +153,6 @@
                   {
                     "concept": "1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Starting prophylaxis on this visit"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -164,35 +161,31 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "infant-hiv-exposure-status !== '54431b42-dae4-4d19-9034-44ba7489a334' || infant-prophylaxis-status !== '857c5868-bdcd-4f5c-aadd-8b0fa7de8481'"
+                    "hideWhenExpression": "infant-hiv-exposure-status !== '1405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || infant-prophylaxis-status !== '1149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": []
                 }
               ]
             },
             {
-              "label": "CTX Status",
+              "label": "Co-trimoxazole Status",
               "type": "obs",
-              "id": "infant-ctx-status",
+              "id": "infant-Co-trimoxazole-status",
               "questionOptions": {
-                "concept": "f3de6eb3-5d4a-43ca-8648-74649271238c",
+                "concept": "1261AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
                 "answers": [
                   {
-                    "concept": "a1cab110-9652-4891-90e2-c01a5dbca453",
-                    "label": "Never received CTX prophylaxis"
+                    "concept": "1090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never received Co-trimoxazole prophylaxis"
                   },
                   {
-                    "concept": "f3a26c7d-a612-4b71-bd30-a359cae817bc",
-                    "label": "Received CTX prophylaxis"
+                    "concept": "1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Received Co-trimoxazole prophylaxis"
                   },
                   {
-                    "concept": "3cc14c25-3117-4541-8f8e-705943087385",
-                    "label": "Stopped CTX prophylaxis"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
+                    "concept": "1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Stopped Co-trimoxazole prophylaxis"
                   }
                 ]
               },
@@ -201,16 +194,16 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "infant-hiv-exposure-status !== '54431b42-dae4-4d19-9034-44ba7489a334'"
+                    "hideWhenExpression": "infant-hiv-exposure-status !== '1405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": []
                 }
               ]
             },
             {
-              "label": "CTX Adherence",
+              "label": "Co-trimoxazole Adherence",
               "type": "obs",
-              "id": "infant-ctx-adherence",
+              "id": "infant-Co-trimoxazole-adherence",
               "questionOptions": {
                 "concept": "161652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
@@ -230,10 +223,6 @@
                   {
                     "concept": "1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Starting prophylaxis on this visit"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -242,12 +231,18 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "infant-ctx-status !== 'f3a26c7d-a612-4b71-bd30-a359cae817bc'"
+                    "hideWhenExpression": "infant-Co-trimoxazole-status !== '1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": []
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "label": "HIV Testing",
+          "isExpanded": "true",
+          "questions": [
             {
               "label": "HIV Test Done",
               "type": "obs",
@@ -257,16 +252,12 @@
                 "rendering": "radio",
                 "answers": [
                   {
-                    "concept": "6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f",
-                    "label": "Tested for HIV during this visit"
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
                   },
                   {
-                    "concept": "d18fa331-f158-47d0-b344-cf147c7125a4",
-                    "label": "Not tested for HIV during this visit"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
                   }
                 ]
               },
@@ -286,7 +277,7 @@
               "type": "obs",
               "id": "infant-test-type",
               "questionOptions": {
-                "concept": "ee8c0292-47f8-4c01-8b60-8ba13a560e1a",
+                "concept": "1271AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
                 "answers": [
                   {
@@ -296,10 +287,6 @@
                   {
                     "concept": "844AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "DNA PCR"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -308,7 +295,7 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "infant-hiv-test !== '6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f'"
+                    "hideWhenExpression": "infant-hiv-test !== '1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": []
                 }
@@ -333,10 +320,6 @@
                   {
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Negative"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -366,10 +349,6 @@
                   {
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Negative"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -385,11 +364,11 @@
               ]
             },
             {
-              "label": "Confirmatory Test Done",
+              "label": "Confirmatory HIV Test Done",
               "type": "obs",
               "id": "confirmatory-test-done",
               "questionOptions": {
-                "concept": "8c2b3506-5b77-4916-a5c8-677a37a65007",
+                "concept": "1201b688-45f8-4e56-b089-0b31138a19dd",
                 "rendering": "radio",
                 "answers": [
                   {
@@ -399,10 +378,6 @@
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Yes"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -436,10 +411,6 @@
                   {
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Negative"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -459,7 +430,7 @@
               "type": "obs",
               "id": "link-to-art",
               "questionOptions": {
-                "concept": "a40d8bc4-56b8-4f28-a1dd-412da5cf20ed",
+                "concept": "164849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
                 "answers": [
                   {
@@ -469,10 +440,6 @@
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Yes"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -483,39 +450,6 @@
                   "unspecified": "true",
                   "hide": {
                     "hideWhenExpression": "confirmatory-test-done !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || rapid-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && dnapcr-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  },
-                  "validators": []
-                }
-              ]
-            },
-            {
-              "label": "Infant ART Link",
-              "type": "obs",
-              "id": "infant-art-link",
-              "questionOptions": {
-                "concept": "a40d8bc4-56b8-4f28-a1dd-412da5cf20ed",
-                "rendering": "radio",
-                "answers": [
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  },
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
-                  }
-                ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "final-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || rapid-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && dnapcr-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": []
                 }
@@ -544,10 +478,6 @@
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Other"
-                  },
-                  {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
                   }
                 ]
               },
@@ -581,7 +511,13 @@
                   "validators": []
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "label": "Outcomes",
+          "isExpanded": "true",
+          "questions": [
             {
               "label": "Infant Outcome Status",
               "type": "obs",
@@ -615,8 +551,8 @@
                     "label": "Transfer In to ART Clinic"
                   },
                   {
-                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                    "label": "Missing"
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               },
@@ -625,7 +561,7 @@
                   "intent": "*",
                   "required": "true",
                   "hide": {
-                    "hideWhenExpression": "infant-hiv-exposure-status !== '54431b42-dae4-4d19-9034-44ba7489a334'"
+                    "hideWhenExpression": "infant-hiv-exposure-status !== '1405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": []
                 }
@@ -688,7 +624,7 @@
               "questionOptions": {
                 "concept": "159495AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "encounter-location",
-                "locationTag": "8d4626ca-7abd-42ad-be48-56767bbcf272"
+                "locationTag": "a2327745-2970-4752-ac8a-dd0ba131f40e"
               },
               "behaviours": [
                 {
@@ -817,7 +753,13 @@
                   ]
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "label": "Next Appointment",
+          "isExpanded": "true",
+          "questions": [
             {
               "label": "Next Visit Date",
               "type": "obs",
@@ -851,13 +793,13 @@
   "availableIntents": [
     {
       "intent": "*",
-      "display": "Infant - Postnatal Form"
+      "display": "HEI Form"
     }
   ],
   "processor": "EncounterFormProcessor",
-  "uuid": "5022c5d7-ea45-47ce-bd65-1ba1d8ad2467",
+  "uuid": "xxxx",
   "referencedForms": [],
-  "encounterType": "af1f1b24-d2e8-4282-b308-0bf79b365584",
-  "encounter": "Infant Postnatal",
+  "encounterType": "f3d92c68-27e3-4395-b002-5db5f3ca4ef7",
+  "encounter": "HIV Exposed Infant",
   "allowUnspecifiedAll": true
 }
