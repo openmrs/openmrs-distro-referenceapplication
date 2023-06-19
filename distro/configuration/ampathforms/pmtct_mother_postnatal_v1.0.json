@@ -47,8 +47,12 @@
                       "id":"ptrackerid",
                       "questionOptions":{
                          "concept":"6c45421e-2566-47cb-bbb3-07586fffbfe2",
-                         "rendering":"text"
+                         "rendering":"text",
+                         "calculate": {
+                          "calculateExpression": "!isEmpty('visit_date') && !isEmpty('latest_ptracker_number') ?  latest_ptracker_number : ''"
+                        }
                       },
+                      "readonlyExpression": "!isEmpty('latest_ptracker_number') && !isEmpty('visit_date')",
                       "behaviours":[
                         {
                           "intent":"*",
@@ -66,7 +70,22 @@
                           ]
                         }
                       ]
-                   }
+                   },
+                   {
+                    "label": "Latest Ptracker number",
+                    "type": "obs",
+                    "id": "latest_ptracker_number",
+                    "questionOptions": {
+                      "concept": "",
+                      "rendering": "fixed-value",
+                      "calculate": {
+                         "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a')).valueString"
+                      }
+                    },
+                    "hide":{
+                      "hideWhenExpression":"true"
+                    }
+                  }
                 ]
              }
             ]
