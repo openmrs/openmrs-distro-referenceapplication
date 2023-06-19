@@ -62,7 +62,7 @@
               {
                 "label": "Infant Exposure Status",
                 "type": "obs",
-                "id": "infant-hiv-exposure-status",
+                "id": "infant_hiv_exposure_status",
                 "questionOptions": {
                   "concept": "6027869c-5d7e-4a82-b22f-6d9c57d61a4d",
                   "rendering": "radio",
@@ -98,7 +98,7 @@
           {
             "label": "Infant Prophylaxis Status",
             "type": "obs",
-            "id": "infant-prophylaxis-status",
+            "id": "infant_prophylaxis_status",
             "questionOptions": {
               "concept": "1148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "radio",
@@ -126,7 +126,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-hiv-exposure-status !== '54431b42-dae4-4d19-9034-44ba7489a334'"
+                  "hideWhenExpression":"infant_hiv_exposure_status !== '54431b42-dae4-4d19-9034-44ba7489a334'"
                 },
                 "validators":[
 
@@ -137,7 +137,7 @@
           {
             "label": "Infant Prophylaxis Adherence",
             "type": "obs",
-            "id": "infant-prophylaxis-adherence",
+            "id": "infant_prophylaxis_adherence",
             "questionOptions": {
               "concept": "1658AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "radio",
@@ -169,7 +169,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-hiv-exposure-status !== '54431b42-dae4-4d19-9034-44ba7489a334' || infant-prophylaxis-status !== '857c5868-bdcd-4f5c-aadd-8b0fa7de8481'"
+                  "hideWhenExpression":"infant_hiv_exposure_status !== '54431b42-dae4-4d19-9034-44ba7489a334' || infant_prophylaxis_status !== '857c5868-bdcd-4f5c-aadd-8b0fa7de8481'"
                 },
                 "validators":[
 
@@ -180,7 +180,7 @@
           {
             "label": "CTX Status",
             "type": "obs",
-            "id": "infant-ctx-status",
+            "id": "infant_ctx_status",
             "questionOptions": {
               "concept": "f3de6eb3-5d4a-43ca-8648-74649271238c",
               "rendering": "radio",
@@ -208,7 +208,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-hiv-exposure-status !== '54431b42-dae4-4d19-9034-44ba7489a334'"
+                  "hideWhenExpression":"infant_hiv_exposure_status !== '54431b42-dae4-4d19-9034-44ba7489a334'"
                 },
                 "validators":[
 
@@ -219,7 +219,7 @@
           {
             "label": "CTX Adherence",
             "type": "obs",
-            "id": "infant-ctx-adherence",
+            "id": "infant_ctx_adherence",
             "questionOptions": {
               "concept": "161652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "radio",
@@ -251,7 +251,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-ctx-status !== 'f3a26c7d-a612-4b71-bd30-a359cae817bc'"
+                  "hideWhenExpression":"infant_ctx_status !== 'f3a26c7d-a612-4b71-bd30-a359cae817bc'"
                 },
                 "validators":[
 
@@ -262,7 +262,7 @@
           {
             "label": "HIV Test Done",
             "type": "obs",
-            "id": "infant-hiv-test",
+            "id": "infant_hiv_test",
             "questionOptions": {
               "concept": "164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "radio",
@@ -297,7 +297,7 @@
           {
             "label": "Test Type",
             "type": "obs",
-            "id": "infant-test-type",
+            "id": "infant_test_type",
             "questionOptions": {
               "concept": "ee8c0292-47f8-4c01-8b60-8ba13a560e1a",
               "rendering": "radio",
@@ -321,7 +321,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-hiv-test !== '6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f'"
+                  "hideWhenExpression":"infant_hiv_test !== '6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f'"
                 },
                 "validators":[
 
@@ -332,7 +332,7 @@
           {
             "label": "DNA PCR Test Results",
             "type": "obs",
-            "id": "dnapcr-test-result",
+            "id": "dnapcr_test_result",
             "questionOptions": {
               "concept": "164461AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "radio",
@@ -360,7 +360,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-test-type !== '844AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_test_type !== '844AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
 
@@ -371,7 +371,7 @@
           {
             "label": "Rapid Test Results",
             "type": "obs",
-            "id": "rapid-test-result",
+            "id": "rapid_test_result",
             "questionOptions": {
               "concept": "164860AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "radio",
@@ -395,7 +395,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-test-type !== '1042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_test_type !== '1042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
 
@@ -406,7 +406,7 @@
           {
             "label": "Confirmatory Test Done",
             "type": "obs",
-            "id": "confirmatory-test-done",
+            "id": "confirmatory_test_done",
             "questionOptions": {
               "concept": "8c2b3506-5b77-4916-a5c8-677a37a65007",
               "rendering": "radio",
@@ -430,7 +430,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"rapid-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && dnapcr-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"rapid_test_result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && dnapcr_test_result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
 
@@ -441,7 +441,7 @@
           {
             "label": "Final Test Results",
             "type": "obs",
-            "id": "final-test-result",
+            "id": "final_test_result",
             "questionOptions": {
               "concept": "164460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "radio",
@@ -469,7 +469,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"confirmatory-test-done !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"confirmatory_test_done !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
 
@@ -480,7 +480,7 @@
           {
             "label": "Link To ART",
             "type": "obs",
-            "id": "link-to-art",
+            "id": "link_to_art",
             "questionOptions": {
               "concept": "a40d8bc4-56b8-4f28-a1dd-412da5cf20ed",
               "rendering": "radio",
@@ -505,7 +505,7 @@
                 "required":"true",
                 "unspecified":"true",
                 "hide":{
-                  "hideWhenExpression":"confirmatory-test-done !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || rapid-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && dnapcr-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"confirmatory_test_done !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || rapid_test_result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && dnapcr_test_result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
 
@@ -516,7 +516,7 @@
           {
             "label": "Infant ART Link",
             "type": "obs",
-            "id": "infant-art-link",
+            "id": "infant_art_link",
             "questionOptions": {
               "concept": "a40d8bc4-56b8-4f28-a1dd-412da5cf20ed",
               "rendering": "radio",
@@ -540,7 +540,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"final-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || rapid-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && dnapcr-test-result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"final_test_result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || rapid_test_result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && dnapcr_test_result !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
 
@@ -616,7 +616,7 @@
           {
             "label": "Infant Outcome Status",
             "type": "obs",
-            "id": "infant-transfer-status",
+            "id": "infant_transfer_status",
             "questionOptions": {
               "concept": "160433AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "radio",
@@ -656,7 +656,7 @@
                 "intent":"*",
                 "required":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-hiv-exposure-status !== '54431b42-dae4-4d19-9034-44ba7489a334'"
+                  "hideWhenExpression":"infant_hiv_exposure_status !== '54431b42-dae4-4d19-9034-44ba7489a334'"
                 },
                 "validators":[
 
@@ -667,7 +667,7 @@
           {
             "label": "Transfer to ART clinic",
             "type": "obs",
-            "id": "transfer-in-from",
+            "id": "transfer_in_from",
             "questionOptions": {
               "concept": "160535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "encounter-location",
@@ -679,7 +679,7 @@
                 "required":"true",
                 "unspecified":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-transfer-status !== '160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_transfer_status !== '160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
 
@@ -701,7 +701,7 @@
                 "required":"true",
                 "unspecified":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-transfer-status !== '160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_transfer_status !== '160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
                   {
@@ -719,7 +719,7 @@
           {
             "label": "Transfer Out to",
             "type": "obs",
-            "id": "transfer-out-to",
+            "id": "transfer_out_to",
             "questionOptions": {
               "concept": "159495AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "rendering": "encounter-location",
@@ -731,7 +731,7 @@
                 "required":"true",
                 "unspecified":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-transfer-status !== '159492AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_transfer_status !== '159492AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
 
@@ -753,7 +753,7 @@
                 "required":"true",
                 "unspecified":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-transfer-status !== '159492AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_transfer_status !== '159492AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
                   {
@@ -782,7 +782,7 @@
                 "required":"true",
                 "unspecified":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-transfer-status !== '5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_transfer_status !== '5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
                   {
@@ -811,7 +811,7 @@
                 "required":"true",
                 "unspecified":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-transfer-status !== '164861AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_transfer_status !== '164861AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
                   {
@@ -840,7 +840,7 @@
                 "required":"true",
                 "unspecified":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-transfer-status !== '160432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_transfer_status !== '160432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
                   {
@@ -869,7 +869,7 @@
                 "required":"true",
                 "unspecified":"true",
                 "hide":{
-                  "hideWhenExpression":"infant-transfer-status !== '161636AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "hideWhenExpression":"infant_transfer_status !== '161636AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 },
                 "validators":[
                   {
