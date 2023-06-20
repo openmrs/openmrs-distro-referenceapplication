@@ -47,6 +47,8 @@
     <htmlwidgets.version>1.11.0</htmlwidgets.version>
     <serialization-xstream.version>0.2.16</serialization-xstream.version>
     <ordertemplates.version>1.0.2</ordertemplates.version>
+    <!-- this is required for flasg and taks-->
+    <patientflags.version>3.0.4</patientflags.version>
   </properties>
 
   <dependencies>
@@ -171,6 +173,12 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>htmlwidgets-omod</artifactId>
       <version>${htmlwidgets.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>patientflags-omod</artifactId>
+      <version>${patientflags.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
