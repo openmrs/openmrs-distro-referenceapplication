@@ -42,39 +42,73 @@
                     ]
                   },
                   {
-                      "label":"PTracker Id",
-                      "type":"obs",
-                      "id":"ptrackerid",
-                      "questionOptions":{
-                         "concept":"6c45421e-2566-47cb-bbb3-07586fffbfe2",
-                         "rendering":"text",
-                         "calculate": {
-                          "calculateExpression": "!isEmpty('visit_date') && !isEmpty('latest_ptracker_number') ?  latest_ptracker_number : ''"
-                        }
-                      },
-                      "readonlyExpression": "!isEmpty('latest_ptracker_number') && !isEmpty('visit_date')",
-                      "behaviours":[
+                    "label": "Was this client booked (Does Client have a pink book?) at ANC? ",
+                    "type": "obs",
+                    "id": "client_booked",
+                    "questionOptions": {
+                      "concept": "1719AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "rendering": "radio",
+                      "answers": [
                         {
-                          "intent":"*",
-                          "required":"true",
-                          "hide":{
-                            "hideWhenExpression":"false"
-                          },
-                          "validators":[
-                           {
-                              "type": "js_expression",
-                              "failsWhenExpression": "!/^[0-9]{5}[A-S]{1}[0-9]{6,8}$$/.test(myValue)",
-                              "message": "Invalid Ptracker number"
-                            }
-
-                          ]
+                          "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label": "Yes"
+                        },
+                        {
+                          "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label": "No"
+                        },
+                        {
+                          "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                          "label": "Missing"
                         }
                       ]
-                   },
-                   {
-                    "label": "Latest Ptracker number",
+                    },
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required": "false",
+                        "hide":{
+                          "hideWhenExpression":"false"
+                        }
+                      }
+                    ]
+                  },               
+                  {
+                    "label": "PTracker ID",
                     "type": "obs",
-                    "id": "latest_ptracker_number",
+                    "id": "PtrackerId",
+                    "questionOptions": {
+                      "concept": "6c45421e-2566-47cb-bbb3-07586fffbfe2",
+                      "rendering": "text",
+                      "usePreviousValueDisabled": "true",
+                      "calculate": {
+                        "calculateExpression": "client_booked == '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && !isEmpty('latest_anc_ptracker_number') ? useFieldValue('latest_anc_ptracker_number') : ''"
+                      }
+                    },
+                    "readonlyExpression": "client_booked == '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && !isEmpty('latest_anc_ptracker_number')",
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"true",
+                        "unspecified":"false",
+                        "hide":{
+                          "hideWhenExpression":"false"
+                        },
+                        "validators":[
+                          {
+                             "type": "js_expression",
+                             "failsWhenExpression": "!/^[0-9]{5}[A-S]{1}[0-9]{6,8}$$/.test(myValue)",
+                             "message": "Invalid Ptracker number"
+                           }
+      
+                         ]
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Latest ANC Ptracker number",
+                    "type": "obs",
+                    "id": "latest_anc_ptracker_number",
                     "questionOptions": {
                       "concept": "",
                       "rendering": "fixed-value",
