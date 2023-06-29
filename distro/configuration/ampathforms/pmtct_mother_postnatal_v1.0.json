@@ -330,7 +330,7 @@
                    {
                     "label":"ART Unique Number",
                     "type":"obs",
-                    "id":"art-number",
+                    "id":"art_number",
                     "questionOptions":{
                        "concept":"164402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                        "rendering":"number"
@@ -418,6 +418,9 @@
                         {
                           "intent":"*",
                           "required":"true",
+                          "hide":{
+                            "hideWhenExpression":"hiv_test_status_pnc == 'd18fa331-f158-47d0-b344-cf147c7125a4' || hiv_test_status_pnc == '54b96458-6585-4c4c-a5b1-b3ca7f1be351' || pnc_hiv_test_result == '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_hiv_test_result == '54b96458-6585-4c4c-a5b1-b3ca7f1be351' || pnc_art_initiation == '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_art_initiation == '1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_art_initiation == '54b96458-6585-4c4c-a5b1-b3ca7f1be351'"
+                          },  
                           "validators":[
 
                           ]
