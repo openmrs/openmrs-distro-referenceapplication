@@ -5,13 +5,7 @@
       <field>COUNTRY</field>
       <nameMapping>Location.country</nameMapping>
       <sizeMapping>40</sizeMapping>
-      <elementDefault>Cambodia</elementDefault>
-      <requiredInHierarchy>true</requiredInHierarchy>
-    </addressComponent>
-    <addressComponent>
-      <field>STATE_PROVINCE</field>
-      <nameMapping>Location.province</nameMapping>
-      <sizeMapping>40</sizeMapping>
+      <elementDefault>Namibia</elementDefault>
       <requiredInHierarchy>true</requiredInHierarchy>
     </addressComponent>
     <addressComponent>
@@ -22,21 +16,22 @@
     </addressComponent>
     <addressComponent>
       <field>ADDRESS_1</field>
-      <nameMapping>impl.commune</nameMapping>
+      <nameMapping>Location</nameMapping>
       <sizeMapping>40</sizeMapping>
-      <requiredInHierarchy>true</requiredInHierarchy>
+      <requiredInHierarchy>false</requiredInHierarchy>
     </addressComponent>
     <addressComponent>
-      <field>CITY_VILLAGE</field>
-      <nameMapping>Location.village</nameMapping>
+      <field>ADDRESS_2</field>
+      <nameMapping>Address</nameMapping>
       <sizeMapping>40</sizeMapping>
-      <requiredInHierarchy>true</requiredInHierarchy>
+      <requiredInHierarchy>false</requiredInHierarchy>
     </addressComponent>
   </addressComponents>
   <lineByLineFormat>
-    <string>cityVillage, address1</string>
-    <string>countyDistrict, stateProvince</string>
     <string>country</string>
+    <string>countyDistrict</string>
+    <string>address1</string>
+    <string>address2</string>
   </lineByLineFormat>
   <addressHierarchyFile>
     <filename>addresshierarchy.csv</filename>
