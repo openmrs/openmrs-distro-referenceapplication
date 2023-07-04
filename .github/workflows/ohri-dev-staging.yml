@@ -1,16 +1,11 @@
-name: OHRI Distro with O3 Images
+name: OHRI Namibia Staging with O3 Images
 
 on:
   push:
     branches:
-      - [master-ohri, dev]
-
-    # Publish semver tags as releases.
+      - [dev-staging] 
   pull_request:
-    types: [opened, synchronize, closed]
-  release:
-    types:
-      - created
+    types: [opened, synchronize, closed] 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
@@ -20,6 +15,8 @@ env:
 jobs:
   docker_setup:
     runs-on: ubuntu-latest
+    if: (github.event_name == 'push' ||  github.event.pull_request.merged) 
+
     steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -38,11 +35,9 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-  docker_distro_backend:
+  docker_staging_backend:
     runs-on: ubuntu-latest
-    needs: docker_setup
-
-    if: (github.event_name == 'push' ||  github.event.pull_request.merged) || (github.event.changes != null && contains(github.event.changes, 'distro/'))
+    needs: docker_setup 
 
     steps:
       - name: Login to Docker Hub
@@ -62,15 +57,13 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-distro-backend-2_6:latest,${{ secrets.DOCKERHUB_USERNAME }}/ohri-distro-backend-2_6:ci_${{ github.run_number }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-backend-2_6:next,${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-backend-2_6:ci_${{ github.run_number }}
           cache-from: type=inline,ref=user/app:buildcache
           cache-to: type=inline,ref=user/app:buildcache,mode=max
 
-  docker_distro_frontend:
+  docker_staging_frontend:
     runs-on: ubuntu-latest
     needs: docker_setup
-
-    if: (github.event_name == 'push' ||  github.event.pull_request.merged) && (github.event.changes != null && contains(github.event.changes, 'frontend/'))
 
     steps:
       - name: Login to Docker Hub
@@ -91,16 +84,14 @@ jobs:
           file: ./frontend/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-distro-frontend:latest,${{ secrets.DOCKERHUB_USERNAME }}/ohri-distro-frontend:ci_${{ github.run_number }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-frontend:next,${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-frontend:ci_${{ github.run_number }}
           cache-from: type=inline,ref=user/app:buildcache
           cache-to: type=inline,ref=user/app:buildcache,mode=max
 
-  docker_distro_gateway:
+  docker_staging_gateway:
     runs-on: ubuntu-latest
-    needs: docker_setup
-
-    if: (github.event_name == 'push' ||  github.event.pull_request.merged) || (github.event.changes != null && contains(github.event.changes, 'gateway/'))
-
+    needs: docker_setup 
+    
     steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -121,7 +112,7 @@ jobs:
           file: ./gateway/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-distro_proxy:latest,${{ secrets.DOCKERHUB_USERNAME }}/ohri-distro_proxy:ci_${{ github.run_number }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-proxy:next,${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-proxy:ci_${{ github.run_number }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Save image digest
