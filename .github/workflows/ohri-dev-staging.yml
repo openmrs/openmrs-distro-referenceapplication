@@ -57,7 +57,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-staging-backend-2_6:next,${{ secrets.DOCKERHUB_USERNAME }}/ohri-staging-backend-2_6:ci_${{ github.run_number }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-backend-2_6:next,${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-backend-2_6:ci_${{ github.run_number }}
           cache-from: type=inline,ref=user/app:buildcache
           cache-to: type=inline,ref=user/app:buildcache,mode=max
 
@@ -84,7 +84,7 @@ jobs:
           file: ./frontend/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-staging-frontend:next,${{ secrets.DOCKERHUB_USERNAME }}/ohri-staging-frontend:ci_${{ github.run_number }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-frontend:next,${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-frontend:ci_${{ github.run_number }}
           cache-from: type=inline,ref=user/app:buildcache
           cache-to: type=inline,ref=user/app:buildcache,mode=max
 
@@ -112,7 +112,7 @@ jobs:
           file: ./gateway/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-staging-proxy:next,${{ secrets.DOCKERHUB_USERNAME }}/ohri-staging-proxy:ci_${{ github.run_number }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-proxy:next,${{ secrets.DOCKERHUB_USERNAME }}/ohri-dev-staging-proxy:ci_${{ github.run_number }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Save image digest
