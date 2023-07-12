@@ -1,0 +1,64 @@
+{
+    "name": "UI-Select-Extended Test",
+    "version": "1.0",
+    "published": true,
+    "retired": false,
+    "encounter": "UI select extended test",
+    "pages": [
+      {
+        "label": "Page 1",
+        "sections": [
+          {
+            "label": "Section 1",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Test Text",
+                "type": "obs",
+                "required": false,
+                "id": "test_text",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "161011"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              },
+                  {
+                "label": "Provider",
+                "type": "obs",
+                "id": "encounter_provider",
+                "questionOptions": {
+                  "concept": "5619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rendering": "ui-select-extended",
+                  "datasource": "encounter-provider"
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"true",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":"false"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "encounterType": "111c2104-991d-4b58-a30e-ce84bb275534",
+    "referencedForms": [],
+    "uuid": "4ba0e45a-a614-4b90-9b77-2b7ee26380bb",
+    "description": "Test"
+  }
