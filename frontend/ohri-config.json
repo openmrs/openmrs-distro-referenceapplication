@@ -1,48 +1,68 @@
 {
-  "@openmrs/esm-patient-registration-app": {
-    "fieldDefinitions": [
-      {
-        "id": "referredby",
-        "name": "Referred by",
-        "type": "person attribute",
-        "uuid": "4dd56a75-14ab-4148-8700-1f4f704dc5b0",
-        "answerConceptSetUuid": "6682d17f-0777-45e4-a39b-93f77eb3531c",
-        "validation": {
-          "matches": ""
-        }
+  "@openmrs/esm-patient-chart-app": {
+    "extensionSlots": {
+      "patient-chart-dashboard-slot": {
+        "remove": [
+          "test-results-summary-dashboard",
+          "conditions-summary-dashboard",
+          "results-summary-dashboard",
+          "programs-summary-dashboard",
+          "allergies-summary-dashboard",
+          "attachments-results-summary-dashboard",
+          "drug-orders-summary-dashboard"
+        ]
+      },
+      "action-menu-chart-items-slot": {
+        "remove": [
+          "visit-note-nav-button",
+          "clinical-form-action-menu"
+        ]
       }
-    ],
-    "sectionDefinitions": [
-      {
-        "id": "additionalDetails",
-        "name": "Additional Details",
-        "fields": ["referredby"]
+    },
+    "notesConceptUuids": ["161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "437d1e25-e7ab-481c-aabc-01f21c6cdef1"]
+  },
+  "@openmrs/esm-patient-banner-app": {
+    "extensionSlots": {
+      "patient-actions-slot": {
+        "remove": [
+          "add-patient-to-patient-list-button",
+          "start-visit-button",
+          "stop-visit-button",
+          "cancel-visit-button",
+          "add-past-visit-button"
+        ]
       }
-    ],
-    "sections": [
-      "demographics",
-      "relationships",
-      "contact",
-      "additionalDetails"
-    ],
-    "fieldConfigurations": {
-      "gender": [
-        {
-          "id": "male",
-          "value": "Male",
-          "label": "Male"
-        },
-        {
-          "id": "female",
-          "value": "Female",
-          "label": "Female"
-        },
-        {
-          "id": "other",
-          "value": "Other",
-          "label": "Other"
-        }
-      ]
     }
+  },
+  "@ohri/openmrs-esm-ohri-core-app": {
+    "extensionSlots": {
+      "ohri-dashboard-appointments-slot": {
+        "add": [
+          "clinical-appointments-dashboard"
+        ]
+      },
+      "ohri-dashboard-dispensing-slot": {
+        "add": [
+          "dispensing-dashboard"
+        ]
+      }
+    }
+  },
+  "@openmrs/esm-styleguide": {
+    "Brand color #1": "#1A3054",
+    "Brand color #2": "#131E35",
+    "Brand color #3": "#0078A6"
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "extensionSlots": {
+      "app-menu-slot": {
+        "remove": [
+          "dispensing-link"
+        ]
+      }
+    }
+  },
+  "@openmrs/esm-dispensing-app": {
+    "appName": "Dispensing"
   }
 }
