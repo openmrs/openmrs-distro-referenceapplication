@@ -66,6 +66,11 @@
     <ohricore.version>1.0.2-SNAPSHOT</ohricore.version>
     <ohrireports.version>1.0.0</ohrireports.version>
 
+    <emrapi.version>1.32.0</emrapi.version>
+    <event.version>2.10.0</event.version>
+    <providermanagement.version>2.13.0</providermanagement.version>
+    <uilibrary.version>2.0.7</uilibrary.version>
+
     <!-- Commenting due toArtifactDescriptorException: -->
     <!-- <casereport.version>2.0-SNAPSHOT</casereport.version> -->
 
@@ -231,6 +236,35 @@
       <artifactId>ohricore-omod</artifactId>
           <version>${ohricore.version}</version>
       <scope>provided</scope> 
+    </dependency>
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>emrapi-omod</artifactId>
+      <version>${emrapi.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openmrs</groupId>
+      <artifactId>event-omod</artifactId>
+      <version>${event.version}</version>
+      <type>pom</type>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>providermanagement-omod</artifactId>
+      <version>${providermanagement.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>uilibrary-omod</artifactId>
+      <version>${uilibrary.version}</version>
+      <scope>provided</scope>
     </dependency>
     
     <!-- TransferFailedException --> 
