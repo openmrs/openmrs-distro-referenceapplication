@@ -3,6 +3,7 @@
   "version": "1",
   "published": true,
   "retired": false,
+  "encounter": "Labor and Delivery",
   "pages": [
     {
       "label": "Mother Details",
@@ -19,21 +20,21 @@
                 "concept": "163260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "date"
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
+                  "intent":"*",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"false"
                   },
                   "validators": [
                     {
-                      "type": "date",
-                      "allowFutureDates": "false"
+                      "type":"date",
+                      "allowFutureDates":"false"
                     },
                     {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue > today()"
+                      "type":"js_expression",
+                      "failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue > today()"
                     }
                   ]
                 }
@@ -54,75 +55,86 @@
                   {
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "No"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
                   }
                 ]
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
+                  "intent":"*",
                   "required": "false",
-                  "hide": {
-                    "hideWhenExpression": "false"
+                  "hide":{
+                    "hideWhenExpression":"false"
                   }
                 }
               ]
             },
             {
-              "label": "Latest Unique Pregnancy ID",
+              "label": "PTracker ID",
               "type": "obs",
               "id": "MotherPtracker_id",
               "questionOptions": {
-                "concept": "163530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "6c45421e-2566-47cb-bbb3-07586fffbfe2",
                 "rendering": "text",
+                "usePreviousValueDisabled": "true",
                 "calculate": {
                   "calculateExpression": "client_booked == '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? myValue = useFieldValue('latest_anc_ptracker_number'): ''"
                 }
               },
-              "behaviours": [
+              "readonlyExpression": "client_booked == '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'",
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"false"
                   },
-                  "validators": [
+                  "validators":[
+                    {
+                      "type":"js_expression",
+                      "warnsWhenExpression":"myValue == useFieldValue('latest_ptracker_number')",
+                      "message": "Another L&D form exists for the same PTracker number. Do you still want to go ahead and create another form?"
+                    },
                     {
                       "type": "js_expression",
-                      "warnsWhenExpression": "myValue == useFieldValue('latest_ptracker_number')",
-                      "message": "Another L&D form exists for the same PTracker number. Do you still want to go ahead and create another form?"
+                      "failsWhenExpression": "!/^[0-9]{5}[A-S]{1}[0-9]{6,8}$$/.test(myValue)",
+                      "message": "Invalid Ptracker number"
                     }
                   ]
                 }
               ]
             },
             {
-              "label": "Latest Unique Pregnancy ID",
+              "label": "Latest Ptracker number",
               "type": "obs",
               "id": "latest_ptracker_number",
               "questionOptions": {
                 "concept": "",
                 "rendering": "fixed-value",
                 "calculate": {
-                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '163530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '6dc5308d-27c9-4d49-b16f-2c5e3c759757')).valueString"
+                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2678423c-0523-4d76-b0da-18177b439eed')).valueString"
                 }
               },
-              "hide": {
-                "hideWhenExpression": "true"
+              "hide":{
+                "hideWhenExpression":"true"
               }
             },
             {
-              "label": "Latest Unique Pregnancy ID",
+              "label": "Latest ANC Ptracker number",
               "type": "obs",
               "id": "latest_anc_ptracker_number",
               "questionOptions": {
                 "concept": "",
                 "rendering": "fixed-value",
                 "calculate": {
-                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '163530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '6dc5308d-27c9-4d49-b16f-2c5e3c759757')).valueString"
+                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a')).valueString"
                 }
               },
-              "hide": {
-                "hideWhenExpression": "true"
+              "hide":{
+                "hideWhenExpression":"true"
               }
             }
           ]
@@ -136,84 +148,110 @@
               "type": "obs",
               "id": "anc_hiv_test_status",
               "questionOptions": {
-                "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "c5f74c86-62cd-4d22-9260-4238f1e45fe0",
                 "rendering": "radio",
-                "calculate": {
-                  "calculateExpression": "resolve(api.getLatestObs('6dc5308d-27c9-4d49-b16f-2c5e3c759757', '164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
-                },
+                "calculate": {"calculateExpression": "resolve(api.getLatestObs('2549af50-75c8-4aeb-87ca-4bb2cef6c69a', '164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"},
                 "answers": [
                   {
-                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
                     "label": "Previously known positive"
+                  },
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive",
+                    "conceptMappings":[
+                      {
+                        "type":"CIEL",
+                        "value":"703"
+                      },
+                      {
+                        "type":"AMPATH",
+                        "value":"703"
+                      },
+                      {
+                        "type":"SNOMED CT",
+                        "value":"10828004"
+                      },
+                      {
+                        "type":"PIH",
+                        "value":"703"
+                      }
+                    ]
                   },
                   {
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Negative",
-                    "conceptMappings": [
+
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "664"
+                        "type":"CIEL",
+                        "value":"664"
                       },
                       {
-                        "type": "AMPATH",
-                        "value": "664"
+                        "type":"AMPATH",
+                        "value":"664"
                       },
                       {
-                        "type": "SNOMED CT",
-                        "value": "260385009"
+                        "type":"SNOMED CT",
+                        "value":"260385009"
                       },
                       {
-                        "type": "PIH",
-                        "value": "664"
+                        "type":"PIH",
+                        "value":"664"
                       }
                     ]
                   },
                   {
                     "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Unknown",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "1067"
+                        "type":"CIEL",
+                        "value":"1067"
                       },
                       {
-                        "type": "AMPATH",
-                        "value": "1067"
+                        "type":"AMPATH",
+                        "value":"1067"
                       },
                       {
-                        "type": "SNOMED CT",
-                        "value": "261665006"
+                        "type":"SNOMED CT",
+                        "value":"261665006"
                       },
                       {
-                        "type": "PIH",
-                        "value": "1067"
+                        "type":"PIH",
+                        "value":"1067"
                       }
                     ]
                   },
                   {
                     "concept": "1402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Not Tested",
-                    "conceptMappings": [
+
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "1402"
+                        "type":"CIEL",
+                        "value":"1402"
                       }
                     ]
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
                   }
                 ]
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": ""
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"anc_latest_hiv_test_result == '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
             },
             {
-              "label": "HIV Test Performed",
+              "label": "HIV Test Status at maternity/delivery",
               "type": "obs",
               "id": "hiv_test",
               "questionOptions": {
@@ -221,25 +259,29 @@
                 "rendering": "radio",
                 "answers": [
                   {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
+                    "concept": "6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f",
+                    "label": "Tested for HIV during this visit"
                   },
                   {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
+                    "concept": "8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
+                    "label": "Previously known positive"
                   },
                   {
-                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Unknown"
+                    "concept": "d18fa331-f158-47d0-b344-cf147c7125a4",
+                    "label": "Not tested for HIV during this visit"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
                   }
                 ]
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "anc_hiv_test_status !== '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '1402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '54b96458-6585-4c4c-a5b1-b3ca7f1be351'"
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"anc_hiv_test_status !== '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '1402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '54b96458-6585-4c4c-a5b1-b3ca7f1be351'"
                   }
                 }
               ]
@@ -255,73 +297,78 @@
                   {
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Negative",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "664"
+                        "type":"CIEL",
+                        "value":"664"
                       },
                       {
-                        "type": "AMPATH",
-                        "value": "664"
+                        "type":"AMPATH",
+                        "value":"664"
                       },
                       {
-                        "type": "SNOMED CT",
-                        "value": "260385009"
+                        "type":"SNOMED CT",
+                        "value":"260385009"
                       },
                       {
-                        "type": "PIH",
-                        "value": "664"
+                        "type":"PIH",
+                        "value":"664"
                       }
                     ]
                   },
                   {
                     "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Positive",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "138571"
+                        "type":"CIEL",
+                        "value":"138571"
                       },
                       {
-                        "type": "AMPATH",
-                        "value": "1169"
+                        "type":"AMPATH",
+                        "value":"1169"
                       },
                       {
-                        "type": "SNOMED CT",
-                        "value": "165816005"
+                        "type":"SNOMED CT",
+                        "value":"165816005"
                       }
                     ]
+
                   },
                   {
                     "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Unknown",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "1067"
+                        "type":"CIEL",
+                        "value":"1067"
                       },
                       {
-                        "type": "AMPATH",
-                        "value": "1067"
+                        "type":"AMPATH",
+                        "value":"1067"
                       },
                       {
-                        "type": "SNOMED CT",
-                        "value": "261665006"
+                        "type":"SNOMED CT",
+                        "value":"261665006"
                       },
                       {
-                        "type": "PIH",
-                        "value": "1067"
+                        "type":"PIH",
+                        "value":"1067"
                       }
                     ]
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
                   }
                 ]
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('hiv_test', '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"!includes('hiv_test', '6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f')"
                   }
                 }
               ]
@@ -331,141 +378,218 @@
               "type": "obs",
               "id": "anc_retest_thirty_six_weeks",
               "questionOptions": {
-                "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "159803AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "radio",
                 "answers": [
                   {
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Negative",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "664"
+                        "type":"CIEL",
+                        "value":"664"
                       },
                       {
-                        "type": "AMPATH",
-                        "value": "664"
+                        "type":"AMPATH",
+                        "value":"664"
                       },
                       {
-                        "type": "SNOMED CT",
-                        "value": "260385009"
+                        "type":"SNOMED CT",
+                        "value":"260385009"
                       },
                       {
-                        "type": "PIH",
-                        "value": "664"
+                        "type":"PIH",
+                        "value":"664"
                       }
                     ]
                   },
                   {
-                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Positive",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "703"
+                        "type":"CIEL",
+                        "value":"138571"
                       },
                       {
-                        "type": "AMPATH",
-                        "value": "704"
+                        "type":"AMPATH",
+                        "value":"1169"
                       },
                       {
-                        "type": "SNOMED CT",
-                        "value": "10828004"
+                        "type":"SNOMED CT",
+                        "value":"165816005"
                       }
                     ]
                   },
                   {
                     "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Unknown",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "1067"
+                        "type":"CIEL",
+                        "value":"1067"
                       },
                       {
-                        "type": "AMPATH",
-                        "value": "1067"
+                        "type":"AMPATH",
+                        "value":"1067"
                       },
                       {
-                        "type": "SNOMED CT",
-                        "value": "261665006"
+                        "type":"SNOMED CT",
+                        "value":"261665006"
                       },
                       {
-                        "type": "PIH",
-                        "value": "1067"
+                        "type":"PIH",
+                        "value":"1067"
                       }
                     ]
+                  },
+                  {
+                    "concept": "d18fa331-f158-47d0-b344-cf147c7125a4",
+                    "label": "Not tested for HIV during this visit"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
                   }
                 ]
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "hiv_test !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"hiv_test !== 'd18fa331-f158-47d0-b344-cf147c7125a4'"
                   }
                 }
               ]
             },
             {
-              "label": "Anti-retroviral treatment status",
+              "label": "ANC Latest HIV test result ",
+              "type": "obs",
+              "id": "anc_latest_hiv_test_result",
+              "questionOptions": {
+                "concept": "159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "fixed-field",
+                "calculate":{
+                  "calculateExpression":"resolve(api.getLatestObs(patient.id, '159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
+                },
+                "answers": [
+                  {
+                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"true"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "ART initiation",
               "type": "obs",
               "id": "art_initiation",
               "questionOptions": {
-                "concept": "160117AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "6e62bf7e-2107-4d09-b485-6e60cbbb2d08",
                 "rendering": "radio",
                 "answers": [
                   {
                     "concept": "160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Already on ART",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "160119"
+                        "type":"CIEL",
+                        "value":"160119"
                       },
                       {
-                        "type": "PIH Malawi",
-                        "value": "7010"
+                        "type":"PIH Malawi",
+                        "value":"7010"
                       },
                       {
-                        "type": "PIH",
-                        "value": "1257"
+                        "type":"PIH",
+                        "value":"1257"
                       }
                     ]
                   },
                   {
                     "concept": "160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Started on ART during Labour and Delivery",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "160120"
+                        "type":"CIEL",
+                        "value":"160120"
                       },
                       {
-                        "type": "PIH",
-                        "value": "1256"
+                        "type":"PIH",
+                        "value":"1256"
                       }
                     ]
                   },
                   {
                     "concept": "160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Refused ART",
-                    "conceptMappings": [
+                    "conceptMappings":[
                       {
-                        "type": "CIEL",
-                        "value": "160018"
+                        "type":"CIEL",
+                        "value":"160018"
                       }
                     ]
+                  },
+                  {
+                    "concept": "1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not started due to stockout of ART",
+                    "conceptMappings":[
+                      {
+                        "type":"CIEL",
+                        "value":"1754"
+                      },
+                      {
+                        "type":"AMPATH",
+                        "value":"664"
+                      },
+                      {
+                        "type":"SNOMED CT",
+                        "value":"182856006"
+                      },
+                      {
+                        "type":"SNOMED MVP",
+                        "value":"17541000105004"
+                      },
+                      {
+                        "type":"PIH",
+                        "value":"1761"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
                   }
                 ]
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_retest_thirty_six_weeks !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && hiv_test !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && hiv_test !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"anc_hiv_test_status !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_retest_thirty_six_weeks !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && hiv_test !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && hiv_test !== '6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f' || hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || hiv_test_result == '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || hiv_test_result == '54b96458-6585-4c4c-a5b1-b3ca7f1be351'"
                   }
                 }
               ]
@@ -478,15 +602,19 @@
                 "concept": "164402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
                 "max": "999999999999",
-                "min": "100000000000"
+                "min": "100000000000",
+                "calculate": {
+                  "calculateExpression": "art_initiation == '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? myValue = latest_anc_art_number : ''"
+                }
+
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
@@ -497,24 +625,27 @@
               "id": "art_start_date",
               "questionOptions": {
                 "concept": "159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "date"
+                "rendering": "date",
+                "calculate": {
+                  "calculateExpression": "art_initiation == '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? myValue = formatDate('latest_anc_art_start_date') : ''"
+                }
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": [
                     {
-                      "type": "date",
-                      "allowFutureDates": "false"
+                      "type":"date",
+                      "allowFutureDates":"false"
                     },
                     {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                      "type":"js_expression",
+                      "failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                     }
                   ]
                 }
@@ -528,13 +659,13 @@
                 "concept": "163322AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "textarea"
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "art_initiation !== '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"art_initiation !== '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
@@ -554,15 +685,19 @@
                   {
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "No"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
                   }
                 ]
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || anc_hiv_test_status !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && anc_hiv_test_status !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || hiv_test_result == '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || hiv_test_result == '54b96458-6585-4c4c-a5b1-b3ca7f1be351' || art_initiation == '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || art_initiation == '1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || art_initiation == '54b96458-6585-4c4c-a5b1-b3ca7f1be351' && anc_latest_hiv_test_result !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
@@ -575,22 +710,22 @@
                 "concept": "163281AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "date"
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "recent_viral_load !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"recent_viral_load !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": [
                     {
-                      "type": "date",
-                      "allowFutureDates": "false"
+                      "type":"date",
+                      "allowFutureDates":"false"
                     },
                     {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                      "type":"js_expression",
+                      "failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                     }
                   ]
                 }
@@ -619,15 +754,19 @@
                   {
                     "concept": "159971AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Results pending"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
                   }
                 ]
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "recent_viral_load !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"recent_viral_load !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
@@ -640,17 +779,48 @@
                 "concept": "856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number"
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "viral_load_results !== '1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"viral_load_results !== '1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
+            },
+            {
+              "label": "Latest ANC ART number",
+              "type": "obs",
+              "id": "latest_anc_art_number",
+              "questionOptions": {
+                "concept": "",
+                "rendering": "fixed-value",
+                "calculate": {
+                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '164402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueQuantity?.value"
+                }
+              },
+              "hide":{
+                "hideWhenExpression":"true"
+              }
+            },
+            {
+              "label": "Latest ANC ART start date",
+              "type": "obs",
+              "id": "latest_anc_art_start_date",
+              "questionOptions": {
+                "concept": "",
+                "rendering": "fixed-value",
+                "calculate": {
+                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueDateTime"
+                }
+              },
+              "hide":{
+                "hideWhenExpression":"true"
+              }
             }
+
           ]
         },
         {
@@ -680,15 +850,19 @@
                   {
                     "concept": "1692AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Discharged (Still Alive)"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
                   }
                 ]
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"false"
                   }
                 }
               ]
@@ -701,22 +875,22 @@
                 "concept": "1641AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "date"
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "mother_status !== '1692AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"mother_status !== '1692AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": [
                     {
-                      "type": "date",
-                      "allowFutureDates": "false"
+                      "type":"date",
+                      "allowFutureDates":"false"
                     },
                     {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                      "type":"js_expression",
+                      "failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                     }
                   ]
                 }
@@ -725,12 +899,12 @@
             {
               "label": "Number of babies born from this pregnancy",
               "type": "obs",
-              "id": "birth-count",
+              "id": "birth_count",
               "questionOptions": {
                 "concept": "1568AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
-                "max": "10",
-                "min": "1"
+                "max":"10",
+                "min":"1"
               }
             }
           ]
@@ -750,47 +924,50 @@
               "type": "obsGroup",
               "questionOptions": {
                 "rendering": "repeating",
-                "concept": "1c70c490-cafa-4c95-9fdd-a30b62bb78b8"
+                "concept": "1c70c490-cafa-4c95-9fdd-a30b62bb78b8",
+                "repeatOptions":{
+                  "limitExpression": "useFieldValue('birth_count')"
+                }
               },
-              "behaviours": [
+              "behaviours":[
                 {
-                  "intent": "*",
-                  "required": "false",
-                  "unspecified": "false",
-                  "hide": {
-                    "hideWhenExpression": ""
+                  "intent":"*",
+                  "required":"false",
+                  "unspecified":"false",
+                  "hide":{
+                    "hideWhenExpression":""
                   },
-                  "validators": []
+                  "validators":[]
                 }
               ],
               "questions": [
                 {
                   "label": "Sex",
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "radio",
-                    "concept": "1587AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "answers": [
+                  "type":"obs",
+                  "questionOptions":{
+                    "rendering":"radio",
+                    "concept":"1587AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "answers":[
                       {
-                        "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Female"
+                        "concept":"1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"Female"
                       },
                       {
-                        "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Male"
+                        "concept":"1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"Male"
                       }
                     ]
                   },
-                  "id": "childSex",
-                  "behaviours": [
+                  "id":"childSex",
+                  "behaviours":[
                     {
-                      "intent": "*",
-                      "required": "true",
-                      "unspecified": "true",
-                      "hide": {
-                        "hideWhenExpression": "false"
+                      "intent":"*",
+                      "required":"true",
+                      "unspecified":"true",
+                      "hide":{
+                        "hideWhenExpression":"false"
                       },
-                      "validators": []
+                      "validators":[]
                     }
                   ]
                 },
@@ -827,129 +1004,145 @@
                 },
                 {
                   "label": "Infant Status at birth",
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "radio",
-                    "concept": "159917AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "answers": [
+                  "type":"obs",
+                  "questionOptions":{
+                    "rendering":"radio",
+                    "concept":"159917AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "answers":[
                       {
-                        "concept": "151849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Infant alive"
+                        "concept":"151849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"Infant alive"
                       },
                       {
-                        "concept": "154223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Infant Died (Neonatal Death)"
+                        "concept":"154223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"Infant Died (Neonatal Death)"
                       },
                       {
-                        "concept": "125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Still Birth"
+                        "concept":"125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"Still Birth"
+                      },
+                      {
+                        "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                        "label": "Missing"
                       }
                     ]
                   },
-                  "id": "infantStatus",
-                  "behaviours": [
+                  "id":"infantStatus",
+                  "behaviours":[
                     {
-                      "intent": "*",
-                      "required": "true",
-                      "hide": {
-                        "hideWhenExpression": "false"
+                      "intent":"*",
+                      "required":"true",
+                      "hide":{
+                        "hideWhenExpression":"false"
                       },
-                      "validators": []
+                      "validators":[]
                     }
                   ]
                 },
                 {
                   "label": "Infant Feeding at discharge",
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "radio",
-                    "concept": "1151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "answers": [
+                  "type":"obs",
+                  "questionOptions":{
+                    "rendering":"radio",
+                    "concept":"1151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "answers":[
                       {
-                        "concept": "5526AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "EBF=Exclusive Breastfeeding"
+                        "concept":"5526AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"EBF=Exclusive Breastfeeding"
                       },
                       {
-                        "concept": "1595AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "RF=Replacement feeding"
+                        "concept":"1595AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"RF=Replacement feeding"
+                      },
+                      {
+                        "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                        "label": "Missing"
                       }
                     ]
                   },
-                  "id": "infantFeeding",
-                  "behaviours": [
+                  "id":"infantFeeding",
+                  "behaviours":[
                     {
-                      "intent": "*",
-                      "required": "true",
-                      "hide": {
-                        "hideWhenExpression": "infantStatus !== '151849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && infantStatus !== '154223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                      "intent":"*",
+                      "required":"true",
+                      "hide":{
+                        "hideWhenExpression":"infantStatus !== '151849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && infantStatus !== '154223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                       },
-                      "validators": []
+                      "validators":[]
                     }
                   ]
                 },
                 {
                   "label": "Type of still birth",
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "radio",
-                    "concept": "125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "answers": [
+                  "type":"obs",
+                  "questionOptions":{
+                    "rendering":"radio",
+                    "concept":"125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "answers":[
                       {
-                        "concept": "159916AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Fresh"
+                        "concept":"159916AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"Fresh"
                       },
                       {
-                        "concept": "135436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Macerated"
+                        "concept":"135436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"Macerated"
+                      },
+                      {
+                        "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                        "label": "Missing"
                       }
                     ]
                   },
-                  "id": "stillBirthType",
-                  "behaviours": [
+                  "id":"stillBirthType",
+                  "behaviours":[
                     {
-                      "intent": "*",
-                      "required": "true",
-                      "hide": {
-                        "hideWhenExpression": "infantStatus !== '125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                      "intent":"*",
+                      "required":"true",
+                      "hide":{
+                        "hideWhenExpression":"infantStatus !== '125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                       },
-                      "validators": []
+                      "validators":[]
                     }
                   ]
                 },
                 {
                   "label": "Infant Received ARV",
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "radio",
-                    "concept": "1147AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "answers": [
+                  "type":"obs",
+                  "questionOptions":{
+                    "rendering":"radio",
+                    "concept":"1148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "answers":[
                       {
-                        "concept": "631AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "NVP Prophylaxis daily up to 6 weeks"
+                        "concept":"83a60fef-31c6-4937-907b-42ced15474e3",
+                        "label":"NVP Prophylaxis daily up to 6 weeks"
                       },
                       {
-                        "concept": "1148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Infant received NVP + AZT prophylaxis up to 6 weeks"
+                        "concept":"99b29c50-fc67-11e8-8eb2-f2801f1b9fd1",
+                        "label":"Infant received NVP + AZT prophylaxis up to 6 weeks"
                       },
                       {
-                        "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Refused ARV Prophylaxis"
+                        "concept":"127750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"Refused ARV Prophylaxis"
                       },
                       {
-                        "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Stock-out of ARV Prophylaxis"
+                        "concept":"1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label":"Stock-out of ARV Prophylaxis"
+                      },
+                      {
+                        "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                        "label": "Missing"
                       }
                     ]
                   },
-                  "id": "receivedARV",
-                  "behaviours": [
+                  "id":"receivedARV",
+                  "behaviours":[
                     {
-                      "intent": "*",
-                      "required": "true",
-                      "hide": {
-                        "hideWhenExpression": "infantStatus !== '151849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && infantStatus !== '154223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                      "intent":"*",
+                      "required":"true",
+                      "hide":{
+                        "hideWhenExpression":"infantStatus !== '151849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && infantStatus !== '154223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                       },
-                      "validators": []
+                      "validators":[]
                     }
                   ]
                 },
@@ -961,13 +1154,13 @@
                     "concept": "163322AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "rendering": "textarea"
                   },
-                  "behaviours": [
+                  "behaviours":[
                     {
-                      "intent": "*",
-                      "required": "true",
-                      "unspecified": "true",
-                      "hide": {
-                        "hideWhenExpression": "receivedARV !== '127750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                      "intent":"*",
+                      "required":"true",
+                      "unspecified":"true",
+                      "hide":{
+                        "hideWhenExpression":"receivedARV !== '127750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                       }
                     }
                   ]
@@ -1003,7 +1196,7 @@
                   ]
                 },
                 {
-                  "label": "Infant Unique ID",
+                  "label": "Infant PTracker ID",
                   "type": "obs",
                   "id": "infantPtrackerid",
                   "questionOptions": {
@@ -1013,13 +1206,20 @@
                       "calculateExpression": "!isEmpty('MotherPtracker_id') ? myValue = useFieldValue('MotherPtracker_id') : ''"
                     }
                   },
-                  "behaviours": [
+                  "behaviours":[
                     {
-                      "intent": "*",
-                      "required": "true",
-                      "hide": {
-                        "hideWhenExpression": "infantStatus === '125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                      }
+                      "intent":"*",
+                      "required":"true",
+                      "hide":{
+                        "hideWhenExpression":"infantStatus === '125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                      },
+                      "validators": [
+                        {
+                          "type": "js_expression",
+                          "failsWhenExpression": "!/^[0-9]{5}[A-Z]{1}[0-9]{7,8}$$/.test(myValue)",
+                          "message": "Invalid Ptracker number"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -1030,22 +1230,18 @@
       ]
     }
   ],
-  "availableIntents": [
+  "availableIntents":[
     {
-      "intent": "*",
-      "display": "Labour & Delivery Form"
+      "intent":"*",
+      "display":"Labour & Delivery Form"
     }
   ],
-  "processor": "EncounterFormProcessor",
-  "uuid": "b420d75c-12b1-4c8a-80d1-d41a95ae1bc3",
-  "referencedForms": [],
-  "encounterType": "6dc5308d-27c9-4d49-b16f-2c5e3c759757",
-  "encounter": "Labor and Delivery",
-  "postSubmissionActions": [
-    "MotherToChildLinkageSubmissionAction",
-    "ArtSubmissionAction"
-  ],
-  "allowUnspecifiedAll": true,
+  "processor":"EncounterFormProcessor",
+  "uuid":"1e5614d6-5306-11e6-beb8-9e71128cae77",
+  "referencedForms":[],
+  "encounterType":"2678423c-0523-4d76-b0da-18177b439eed",
+  "postSubmissionActions": ["MotherToChildLinkageSubmissionAction", "ArtSubmissionAction"],
+  "allowUnspecifiedAll":true,
   "formOptions": {
     "usePreviousValueDisabled": "true"
   }
