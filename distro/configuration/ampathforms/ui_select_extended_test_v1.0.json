@@ -50,6 +50,65 @@
                     }
                   }
                 ]
+              },
+              {
+                "label": "Concept",
+                "type": "obs",
+                "id": "concept_picker",
+                "questionOptions": {
+                  "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rendering": "ui-select-extended",
+                  "datasource": "concept-ds",
+                  "isSearchable": "true"
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"true",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":"false"
+                    }
+                  }
+                ]
+              },
+              {
+                "label": "Test Text 2",
+                "type": "obs",
+                "required": false,
+                "id": "test_text2",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "161011"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Test Text 3",
+                "type": "obs",
+                "required": false,
+                "id": "test_text3",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "161011"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
               }
             ]
           }
