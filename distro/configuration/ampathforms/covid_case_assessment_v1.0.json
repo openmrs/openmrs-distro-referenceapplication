@@ -1970,6 +1970,65 @@
               ]
             }
           ]
+        },
+        {
+          "label": "Lab Order Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+            "label": "Add Covid Lab Order?",
+            "type": "obs",
+            "questionOptions": {
+              "rendering": "toggle",
+              "concept": "2dbf01ab-77f6-4b35-aa2c-46dfc14b0af0",
+              "toggleOptions": {
+                "labelTrue": "Yes",
+                "labelFalse": "No"
+              },
+              "conceptMappings": [
+                {
+                  "type": "OCT",
+                  "value": "LabOrdered"
+                }
+              ],
+              "answers": [
+                {
+                  "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                  "label": "Yes",
+                  "conceptMappings": [
+                    {
+                      "type": "CIEL",
+                      "value": "1065"
+                    },
+                    {
+                      "type": "AMPATH",
+                      "value": "1065"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "1065"
+                    },
+                    {
+                      "type": "SNOMED CT",
+                      "value": "CT: 373066001"
+                    }
+                  ]
+                },
+                {
+                  "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                  "label": "No",
+                  "conceptMappings": []
+                }
+              ]
+            },
+            "id": "labOrderToggle",
+            "behaviours": [
+              {
+                "intent": "*",
+                "required": "false"
+              }
+            ]
+          }]
         }
       ]
     },
@@ -1992,7 +2051,15 @@
             "readonly": "true"
           }
         ]
-      }
+      },
+      "behaviours": [
+        {
+          "intent": "*",
+                      "hide": {
+            "hideWhenExpression": "labOrderToggle == '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+          }
+        }
+      ]
     }
   ],
   "availableIntents": [
