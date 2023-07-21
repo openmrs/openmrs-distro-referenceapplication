@@ -1,665 +1,669 @@
 {
-    "name":"Mother - Postnatal Form",
-    "version": "1",
-    "published": true,
-    "retired": false,
-    "encounter": "Mother Postnatal",
-    "pages":[
-       {
-          "label":"Visit Details",
-          "sections":[
-             {
-                "label":"PTracker ID Capture",
-                "isExpanded":"true",
-                "questions":[
-                  {
-                    "label": "Visit Date",
-                    "type": "obs",
-                    "id": "visit_date",
-                    "questionOptions": {
-                      "concept": "163260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "rendering": "date"
-                    },
-                    "behaviours":[
-                      {
-                        "intent":"*",
-                        "required":"true",
-                        "unspecified":"true",
-                        "hide":{
-                          "hideWhenExpression":"false"
-                        },
-                        "validators": [
-                          {
-                            "type":"date",
-                            "allowFutureDates":"false"
-                          },
-                          {
-                            "type":"js_expression",
-                            "failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                          }
-                        ]
-                      }
-                    ]
+  "name":"Mother - Postnatal Form",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "Mother Postnatal",
+  "pages":[
+    {
+      "label":"Visit Details",
+      "sections":[
+        {
+          "label":"PTracker ID Capture",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label": "Visit Date",
+              "type": "obs",
+              "id": "visit_date",
+              "questionOptions": {
+                "concept": "163260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "date"
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"false"
                   },
-                  {
-                    "label": "Was this client booked (Does Client have a pink book?) at ANC? ",
-                    "type": "obs",
-                    "id": "client_booked",
-                    "questionOptions": {
-                      "concept": "1719AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                      "rendering": "radio",
-                      "answers": [
-                        {
-                          "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                          "label": "Yes"
-                        },
-                        {
-                          "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                          "label": "No"
-                        },
-                        {
-                          "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                          "label": "Missing"
-                        }
-                      ]
+                  "validators": [
+                    {
+                      "type":"date",
+                      "allowFutureDates":"false"
                     },
-                    "behaviours":[
-                      {
-                        "intent":"*",
-                        "required": "false",
-                        "hide":{
-                          "hideWhenExpression":"false"
-                        }
-                      }
-                    ]
-                  },               
-                  {
-                    "label": "PTracker ID",
-                    "type": "obs",
-                    "id": "PtrackerId",
-                    "questionOptions": {
-                      "concept": "6c45421e-2566-47cb-bbb3-07586fffbfe2",
-                      "rendering": "text",
-                      "usePreviousValueDisabled": "true",
-                      "calculate": {
-                        "calculateExpression": "client_booked == '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && !isEmpty('latest_anc_ptracker_number') ? useFieldValue('latest_anc_ptracker_number') : ''"
-                      }
-                    },
-                    "readonlyExpression": "client_booked == '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && !isEmpty('latest_anc_ptracker_number')",
-                    "behaviours":[
-                      {
-                        "intent":"*",
-                        "required":"true",
-                        "unspecified":"false",
-                        "hide":{
-                          "hideWhenExpression":"false"
-                        },
-                        "validators":[
-                          {
-                             "type": "js_expression",
-                             "failsWhenExpression": "!/^[0-9]{5}[A-S]{1}[0-9]{6,8}$$/.test(myValue)",
-                             "message": "Invalid Ptracker number"
-                           }
-      
-                         ]
-                      }
-                    ]
-                  },
-                  {
-                    "label": "Latest ANC Ptracker number",
-                    "type": "obs",
-                    "id": "latest_anc_ptracker_number",
-                    "questionOptions": {
-                      "concept": "",
-                      "rendering": "fixed-value",
-                      "calculate": {
-                         "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a')).valueString"
-                      }
-                    },
-                    "hide":{
-                      "hideWhenExpression":"true"
+                    {
+                      "type":"js_expression",
+                      "failsWhenExpression":"isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                     }
-                  }
-                ]
-             }
-            ]
+                  ]
+                }
+              ]
             },
             {
-               "label": "HTS and ART",
-               "sections": [
-             {
-                "label":"HIV Testing And ART Initiation",
-                "isExpanded":"true",
-                "questions":[
+              "label": "Was this client booked (Does Client have a pink book?) at ANC? ",
+              "type": "obs",
+              "id": "client_booked",
+              "questionOptions": {
+                "concept": "1719AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "radio",
+                "answers": [
                   {
-                     "label": "ANC HIV test status ",
-                     "type": "obs",
-                     "id": "testStatusAtANC",
-                     "questionOptions": {
-                       "concept": "164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                       "rendering": "fixed-value",
-                       "calculate": {
-                          "calculateExpression": "resolve(api.getLatestObs(patient.id, '164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
-                        },
-                       "answers": [
-                         {
-                           "concept": "6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f",
-                           "label": "Tested for HIV during this visit"
-                         },
-                         {
-                           "concept": "8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
-                           "label": "Previously known positive"
-                         },
-                         {
-                           "concept": "d18fa331-f158-47d0-b344-cf147c7125a4",
-                           "label": "Not tested for HIV during this visit"
-                         },
-                         {
-                           "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                           "label": "Missing"
-                         }
-                       ]
-                     },
-                     "behaviours":[
-                       {
-                         "intent":"*",
-                         "required":"true",
-                         "hide":{
-                           "hideWhenExpression":"true"
-                         }
-                       }
-                     ]
-                   },
-                   {
-                     "label": "ANC HIV test result ",
-                     "type": "obs",
-                     "id": "ancHivTestResult",
-                     "questionOptions": {
-                       "concept": "159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                       "rendering": "fixed-field",
-                       "calculate":{
-                         "calculateExpression":"resolve(api.getLatestObs(patient.id, '159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
-                       },
-                       "answers": [
-                         {
-                           "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                           "label": "Positive"
-                         },
-                         {
-                           "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                           "label": "Negative"
-                         },
-                         {
-                           "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                           "label": "Unknown"
-                         },
-                         {
-                           "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                           "label": "Missing"
-                         }
-                       ]
-                     },
-                     "behaviours":[
-                       {
-                         "intent":"*",
-                         "required":"true",
-                         "hide":{
-                           "hideWhenExpression":"true"
-                         }
-                       }
-                     ]
-                   },
-                   {
-                      "label":"HIV Test Status",
-                      "type":"obs",
-                      "id":"hiv_test_status_pnc",
-                      "questionOptions":{
-                         "concept":"164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"radio",
-                         "answers":[
-                            {
-                               "concept":"6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f",
-                               "label":"Tested for HIV during this visit"
-                            },
-                            {
-                               "concept":"d18fa331-f158-47d0-b344-cf147c7125a4",
-                               "label":"Not tested for HIV during this visit"
-                            },
-                            {
-                               "concept":"8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
-                               "label":"Previously known positive"
-                            },
-                            {
-                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                               "label":"Missing"
-                            }
-                         ]
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "hide":{
-                            "hideWhenExpression":"testStatusAtANC == '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' || ancHivTestResult == '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                          },
-                          "validators":[
-
-                          ]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"HIV Test Result",
-                      "type":"obs",
-                      "id":"pnc_hiv_test_result",
-                      "questionOptions":{
-                         "concept":"159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"radio",
-                         "answers":[
-                            {
-                               "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Unknown"
-                            },
-                            {
-                               "concept":"138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Positive"
-                            },
-                            {
-                               "concept":"664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Negative"
-                            },
-                            {
-                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                               "label":"Missing"
-                            }
-                         ]
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "hide":{
-                            "hideWhenExpression":"hiv_test_status_pnc !== '6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f'"
-                          },
-                          "validators":[]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"ART Initiation",
-                      "type":"obs",
-                      "id":"pnc_art_initiation",
-                      "questionOptions":{
-                         "concept":"6e62bf7e-2107-4d09-b485-6e60cbbb2d08",
-                         "rendering":"radio",
-                         "answers":[
-                            {
-                               "concept":"160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Refused ART"
-                            },
-                            {
-                               "concept":"160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Started on ART in PNC"
-                            },
-                            {
-                               "concept":"1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Not started due to stockout of ART"
-                            },
-                            {
-                               "concept":"160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Already on ART"
-                            },
-                            {
-                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                               "label":"Missing"
-                            }
-                         ]
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "hide":{
-                            "hideWhenExpression":"hiv_test_status_pnc !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && pnc_hiv_test_result !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                          },
-                          "validators":[
-                          ]
-                        }
-                      ]
-                   },
-                   {
-                    "label":"ART Unique Number",
-                    "type":"obs",
-                    "id":"art_number",
-                    "questionOptions":{
-                       "concept":"164402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                       "rendering":"number"
-                    },
-                    "behaviours":[
-                      {
-                        "intent":"*",
-                        "required":"true",
-                        "unspecified":"true",
-                        "hide":{
-                          "hideWhenExpression":"pnc_art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && pnc_art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                        },
-                        "validators":[
-
-                        ]
-                      }
-                    ]
-                 },
-                   {
-                      "label":"Reason why client has refused ART",
-                      "type":"obs",
-                      "id":"reason-for-refusing-art",
-                      "questionOptions":{
-                         "concept":"163322AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"textarea",
-                         "rows":""
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "unspecified":"true",
-                          "hide":{
-                            "hideWhenExpression":"pnc_art_initiation !== '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                          },
-                          "validators":[]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"ART Start Date",
-                      "type":"obs",
-                      "id":"art_start_date",
-                      "questionOptions":{
-                         "concept":"159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"date"
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "unspecified":"true",
-                          "hide":{
-                            "hideWhenExpression":"pnc_art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && pnc_art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                          },
-                          "validators":[
-
-                          ]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"Has the patient had a recent viral load test?",
-                      "type":"obs",
-                      "id":"pnc_recent_viral_load",
-                      "questionOptions":{
-                         "concept":"163310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"radio",
-                         "answers":[
-                            {
-                               "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Yes"
-                            },
-                            {
-                              "concept":"1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                              "label":"No"
-                           },
-                            {
-                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                               "label":"Missing"
-                            }
-                         ]
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "hide":{
-                            "hideWhenExpression":"hiv_test_status_pnc == 'd18fa331-f158-47d0-b344-cf147c7125a4' || hiv_test_status_pnc == '54b96458-6585-4c4c-a5b1-b3ca7f1be351' || pnc_hiv_test_result == '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_hiv_test_result == '54b96458-6585-4c4c-a5b1-b3ca7f1be351' || pnc_art_initiation == '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_art_initiation == '1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_art_initiation == '54b96458-6585-4c4c-a5b1-b3ca7f1be351'"
-                          },  
-                          "validators":[
-
-                          ]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"Viral Load Test Date",
-                      "type":"obs",
-                      "id":"viral_load_test_date",
-                      "questionOptions":{
-                         "concept":"163281AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"date"
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "unspecified":"true",
-                          "hide":{
-                            "hideWhenExpression":"!includes('pnc_recent_viral_load','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                          },
-                          "validators":[
-
-                          ]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"Viral Load Results",
-                      "type":"obs",
-                      "id":"pnc_viral_load_results",
-                      "questionOptions":{
-                         "concept":"1305AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"radio",
-                         "answers":[
-                            {
-                               "concept":"159971AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Results pending"
-                            },
-                            {
-                               "concept":"1304AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Sample Rejected"
-                            },
-                            {
-                               "concept":"1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Target Detected"
-                            },
-                            {
-                               "concept":"1306AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Not Detected"
-                            },
-                            {
-                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                               "label":"Missing"
-                            }
-                         ]
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "hide":{
-                            "hideWhenExpression":"!includes('pnc_recent_viral_load','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                          },
-                          "validators":[
-
-                          ]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"Viral Load Copies",
-                      "type":"obs",
-                      "id":"viral_load_copies",
-                      "questionOptions":{
-                         "concept":"856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"number"
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "unspecified":"true",
-                          "hide":{
-                            "hideWhenExpression":"!includes('pnc_viral_load_results','1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                          },
-                          "validators":[
-
-                          ]
-                        }
-                      ]
-                   }
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
+                  }
                 ]
-             }
-            ]
-         },
-         {
-            "label": "Next Appointment",
-            "sections": [
-             {
-                "label":"Follow Up",
-                "isExpanded":"true",
-                "questions":[
-                   {
-                      "label":"Next Vist Date",
-                      "type":"obs",
-                      "id":"next_visit_date",
-                      "questionOptions":{
-                         "concept":"5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"date"
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "unspecified":"true",
-                          "hide":{
-                            "hideWhenExpression":"false"
-                          },
-                          "validators":[
-                              {
-                                 "type": "date",
-                                 "allowFutureDates": "true"
-                              },
-                              {
-                                 "type": "js_expression",
-                                 "failsWhenExpression": "myValue <= useFieldValue('visit_date')",
-                                 "message": "Next visit date cannot be less than current visit date"
-                              }
-                          ]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"Facility of next appointment",
-                      "type":"obs",
-                      "id":"pnc_transfer_out",
-                      "questionOptions":{
-                         "concept":"efc87cd5-2fd8-411c-ba52-b0d858f541e7",
-                         "rendering":"radio",
-                         "answers":[
-                            {
-                               "concept":"160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"Transfer out"
-                            },
-                            {
-                               "concept":"163266AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                               "label":"This facility"
-                            },
-                            {
-                               "concept":"52f7fc03-611b-4b62-8498-37beb2fa99ed",
-                               "label":"In Transit"
-                            },
-                            {
-                               "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
-                               "label":"Missing"
-                            }
-                         ]
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "hide":{
-                            "hideWhenExpression":"false"
-                          },
-                          "validators":[
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required": "false",
+                  "hide":{
+                    "hideWhenExpression":"false"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "PTracker ID",
+              "type": "obs",
+              "id": "PtrackerId",
+              "questionOptions": {
+                "concept": "6c45421e-2566-47cb-bbb3-07586fffbfe2",
+                "rendering": "text",
+                "usePreviousValueDisabled": "true",
+                "calculate": {
+                  "calculateExpression": "client_booked == '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && !isEmpty('latest_anc_ptracker_number') ? useFieldValue('latest_anc_ptracker_number') : ''"
+                }
+              },
+              "readonlyExpression": "client_booked == '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && !isEmpty('latest_anc_ptracker_number')",
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"false",
+                  "hide":{
+                    "hideWhenExpression":"false"
+                  },
+                  "validators":[
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!/^[0-9]{5}[A-S]{1}[0-9]{6,8}$$/.test(myValue)",
+                      "message": "Invalid Ptracker number"
+                    }
 
-                          ]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"Tranfer Out To",
-                      "type":"obs",
-                      "id":"transfer-out-to",
-                      "questionOptions":{
-                         "concept":"159495AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering": "encounter-location",
-                         "locationTag": "8d4626ca-7abd-42ad-be48-56767bbcf272"
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "unspecified":"true",
-                          "hide":{
-                            "hideWhenExpression":"pnc_transfer_out !== '160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                          },
-                          "validators":[
-
-                          ]
-                        }
-                      ]
-                   },
-                   {
-                      "label":"Transfer Out Date",
-                      "type":"obs",
-                      "id":"transfer_out_date",
-                      "questionOptions":{
-                         "concept":"160649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                         "rendering":"date"
-                      },
-                      "behaviours":[
-                        {
-                          "intent":"*",
-                          "required":"true",
-                          "unspecified":"true",
-                          "hide":{
-                            "hideWhenExpression":"pnc_transfer_out !== '160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                          },
-                          "validators":[
-                           {
-                              "type": "date",
-                              "allowFutureDates": ""
-                           }
-                          ]
-                        }
-                      ]
-                   }
-                ]
-             }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Latest ANC Ptracker number",
+              "type": "obs",
+              "id": "latest_anc_ptracker_number",
+              "questionOptions": {
+                "concept": "",
+                "rendering": "fixed-value",
+                "calculate": {
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a')).valueString"
+                }
+              },
+              "hide":{
+                "hideWhenExpression":"true"
+              }
+            }
           ]
-       }
-    ],
-    "availableIntents":[
-       {
-          "intent":"*",
-          "display":"Mother - Postnatal Form"
-       }
-    ],
-    "processor":"EncounterFormProcessor",
-    "uuid":"e6b67aa4-6c59-4470-8ad5-b994efeda553",
-    "referencedForms":[],
-    "encounterType":"269bcc7f-04f8-4ddc-883d-7a3a0d569aad",
-    "postSubmissionActions": ["ArtSubmissionAction"],
-    "allowUnspecifiedAll":true,
-    "formOptions": {
-      "usePreviousValueDisabled": "true"
+        }
+      ]
+    },
+    {
+      "label": "HTS and ART",
+      "sections": [
+        {
+          "label":"HIV Testing And ART Initiation",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label": "ANC HIV test status ",
+              "type": "obs",
+              "id": "testStatusAtANC",
+              "questionOptions": {
+                "concept": "164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "fixed-value",
+                "calculate": {
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
+                },
+                "answers": [
+                  {
+                    "concept": "6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f",
+                    "label": "Tested for HIV during this visit"
+                  },
+                  {
+                    "concept": "8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
+                    "label": "Previously known positive"
+                  },
+                  {
+                    "concept": "d18fa331-f158-47d0-b344-cf147c7125a4",
+                    "label": "Not tested for HIV during this visit"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"true"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "ANC HIV test result ",
+              "type": "obs",
+              "id": "ancHivTestResult",
+              "questionOptions": {
+                "concept": "159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "fixed-field",
+                "calculate":{
+                  "calculateExpression":"resolve(api.getLatestObs(patient.id, '159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
+                },
+                "answers": [
+                  {
+                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"true"
+                  }
+                }
+              ]
+            },
+            {
+              "label":"HIV Test Status",
+              "type":"obs",
+              "id":"hiv_test_status_pnc",
+              "questionOptions":{
+                "concept":"164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"radio",
+                "answers":[
+                  {
+                    "concept":"6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f",
+                    "label":"Tested for HIV during this visit"
+                  },
+                  {
+                    "concept":"d18fa331-f158-47d0-b344-cf147c7125a4",
+                    "label":"Not tested for HIV during this visit"
+                  },
+                  {
+                    "concept":"8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
+                    "label":"Previously known positive"
+                  },
+                  {
+                    "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label":"Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "readonly": "mode == 'edit' && ancHivTestResult !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? true : false",
+                  "hide":{
+                    "hideWhenExpression":"testStatusAtANC == '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' || ancHivTestResult == '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators":[
+
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"HIV Test Result",
+              "type":"obs",
+              "id":"pnc_hiv_test_result",
+              "questionOptions":{
+                "concept":"159427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"radio",
+                "answers":[
+                  {
+                    "concept":"1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Unknown"
+                  },
+                  {
+                    "concept":"138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Positive"
+                  },
+                  {
+                    "concept":"664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Negative"
+                  },
+                  {
+                    "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label":"Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"hiv_test_status_pnc !== '6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f'"
+                  },
+                  "validators":[]
+                }
+              ]
+            },
+            {
+              "label":"ART Initiation",
+              "type":"obs",
+              "id":"pnc_art_initiation",
+              "questionOptions":{
+                "concept":"6e62bf7e-2107-4d09-b485-6e60cbbb2d08",
+                "rendering":"radio",
+                "answers":[
+                  {
+                    "concept":"160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Refused ART"
+                  },
+                  {
+                    "concept":"160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Started on ART in PNC"
+                  },
+                  {
+                    "concept":"1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Not started due to stockout of ART"
+                  },
+                  {
+                    "concept":"160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Already on ART"
+                  },
+                  {
+                    "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label":"Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"hiv_test_status_pnc !== '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' && pnc_hiv_test_result !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators":[
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"ART Unique Number",
+              "type":"obs",
+              "id":"art_number",
+              "questionOptions":{
+                "concept":"164402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"number"
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"pnc_art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && pnc_art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators":[
+
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Reason why client has refused ART",
+              "type":"obs",
+              "id":"reason-for-refusing-art",
+              "questionOptions":{
+                "concept":"163322AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"textarea",
+                "rows":""
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"pnc_art_initiation !== '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators":[]
+                }
+              ]
+            },
+            {
+              "label":"ART Start Date",
+              "type":"obs",
+              "id":"art_start_date",
+              "questionOptions":{
+                "concept":"159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"date"
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"pnc_art_initiation !== '160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && pnc_art_initiation !== '160120AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators":[
+
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Has the patient had a recent viral load test?",
+              "type":"obs",
+              "id":"pnc_recent_viral_load",
+              "questionOptions":{
+                "concept":"163310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"radio",
+                "answers":[
+                  {
+                    "concept":"1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Yes"
+                  },
+                  {
+                    "concept":"1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"No"
+                  },
+                  {
+                    "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label":"Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"hiv_test_status_pnc == 'd18fa331-f158-47d0-b344-cf147c7125a4' || hiv_test_status_pnc == '54b96458-6585-4c4c-a5b1-b3ca7f1be351' || pnc_hiv_test_result == '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_hiv_test_result == '54b96458-6585-4c4c-a5b1-b3ca7f1be351' || pnc_art_initiation == '160018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_art_initiation == '1754AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pnc_art_initiation == '54b96458-6585-4c4c-a5b1-b3ca7f1be351'"
+                  },
+                  "validators":[
+
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Viral Load Test Date",
+              "type":"obs",
+              "id":"viral_load_test_date",
+              "questionOptions":{
+                "concept":"163281AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"date"
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"!includes('pnc_recent_viral_load','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators":[
+
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Viral Load Results",
+              "type":"obs",
+              "id":"pnc_viral_load_results",
+              "questionOptions":{
+                "concept":"1305AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"radio",
+                "answers":[
+                  {
+                    "concept":"159971AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Results pending"
+                  },
+                  {
+                    "concept":"1304AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Sample Rejected"
+                  },
+                  {
+                    "concept":"1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Target Detected"
+                  },
+                  {
+                    "concept":"1306AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Not Detected"
+                  },
+                  {
+                    "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label":"Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"!includes('pnc_recent_viral_load','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators":[
+
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Viral Load Copies",
+              "type":"obs",
+              "id":"viral_load_copies",
+              "questionOptions":{
+                "concept":"856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"number"
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"!includes('pnc_viral_load_results','1301AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators":[
+
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Next Appointment",
+      "sections": [
+        {
+          "label":"Follow Up",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"Next Vist Date",
+              "type":"obs",
+              "id":"next_visit_date",
+              "questionOptions":{
+                "concept":"5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"date",
+                "calculate": {
+                  "calculateExpression": "visit_date !== '' ? addDaysToDate(useFieldValue('visit_date'), 30) : ''"
+                }
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"false"
+                  },
+                  "validators":[
+                    {
+                      "type": "date",
+                      "allowFutureDates": "true"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "myValue <= useFieldValue('visit_date')",
+                      "message": "Next visit date cannot be less than current visit date"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Facility of next appointment",
+              "type":"obs",
+              "id":"pnc_transfer_out",
+              "questionOptions":{
+                "concept":"efc87cd5-2fd8-411c-ba52-b0d858f541e7",
+                "rendering":"radio",
+                "answers":[
+                  {
+                    "concept":"160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"Transfer out"
+                  },
+                  {
+                    "concept":"163266AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label":"This facility"
+                  },
+                  {
+                    "concept":"52f7fc03-611b-4b62-8498-37beb2fa99ed",
+                    "label":"In Transit"
+                  },
+                  {
+                    "concept":"54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label":"Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "hide":{
+                    "hideWhenExpression":"false"
+                  },
+                  "validators":[
+
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Tranfer Out To",
+              "type":"obs",
+              "id":"transfer-out-to",
+              "questionOptions":{
+                "concept":"159495AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "encounter-location",
+                "locationTag": "8d4626ca-7abd-42ad-be48-56767bbcf272"
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"pnc_transfer_out !== '160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators":[
+
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Transfer Out Date",
+              "type":"obs",
+              "id":"transfer_out_date",
+              "questionOptions":{
+                "concept":"160649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering":"date"
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"true",
+                  "unspecified":"true",
+                  "hide":{
+                    "hideWhenExpression":"pnc_transfer_out !== '160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators":[
+                    {
+                      "type": "date",
+                      "allowFutureDates": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
- }
+  ],
+  "availableIntents":[
+    {
+      "intent":"*",
+      "display":"Mother - Postnatal Form"
+    }
+  ],
+  "processor":"EncounterFormProcessor",
+  "uuid":"e6b67aa4-6c59-4470-8ad5-b994efeda553",
+  "referencedForms":[],
+  "encounterType":"269bcc7f-04f8-4ddc-883d-7a3a0d569aad",
+  "postSubmissionActions": ["ArtSubmissionAction"],
+  "allowUnspecifiedAll":true,
+  "formOptions": {
+    "usePreviousValueDisabled": "true"
+  }
+}

@@ -115,7 +115,7 @@
                 "concept": "",
                 "rendering": "fixed-value",
                 "calculate": {
-                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2678423c-0523-4d76-b0da-18177b439eed')).valueString"
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2678423c-0523-4d76-b0da-18177b439eed')).valueString"
                 }
               },
               "hide":{
@@ -130,7 +130,7 @@
                 "concept": "",
                 "rendering": "fixed-value",
                 "calculate": {
-                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a')).valueString"
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a')).valueString"
                 }
               },
               "hide":{
@@ -244,6 +244,7 @@
                 {
                   "intent":"*",
                   "required":"true",
+                  "readonly": "mode == 'edit' && anc_latest_hiv_test_result !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? true : false",
                   "hide":{
                     "hideWhenExpression":"anc_latest_hiv_test_result == '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
@@ -798,7 +799,7 @@
                 "concept": "",
                 "rendering": "fixed-value",
                 "calculate": {
-                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '164402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueQuantity?.value"
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '164402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueQuantity?.value"
                 }
               },
               "hide":{
@@ -813,7 +814,7 @@
                 "concept": "",
                 "rendering": "fixed-value",
                 "calculate": {
-                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueDateTime"
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueDateTime"
                 }
               },
               "hide":{

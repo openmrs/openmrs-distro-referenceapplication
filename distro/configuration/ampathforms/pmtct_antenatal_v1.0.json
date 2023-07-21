@@ -101,12 +101,12 @@
                   },
                   "validators":[
                     {
-                       "type": "js_expression",
-                       "failsWhenExpression": "!/^[0-9]{5}[A-S]{1}[0-9]{6,8}$$/.test(myValue)",
-                       "message": "Invalid Ptracker number"
-                     }
+                      "type": "js_expression",
+                      "failsWhenExpression": "!/^[0-9]{5}[A-S]{1}[0-9]{6,8}$$/.test(myValue)",
+                      "message": "Invalid Ptracker number"
+                    }
 
-                   ]
+                  ]
                 }
               ]
             },
@@ -118,7 +118,7 @@
                 "concept": "",
                 "rendering": "fixed-value",
                 "calculate": {
-                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a')).valueString"
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '6c45421e-2566-47cb-bbb3-07586fffbfe2', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a')).valueString"
                 }
               },
               "hide":{
@@ -283,8 +283,9 @@
                 {
                   "intent":"*",
                   "required":"true",
+                  "readonly": "mode == 'edit' && latest_hiv_test_result !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || latest_hiv_test_status == '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' ? true : false",
                   "hide":{
-                    "hideWhenExpression":"latest_hiv_test_result == '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression":"latest_hiv_test_result == '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || latest_hiv_test_status == '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8'"
                   }
                 }
               ]
@@ -297,9 +298,9 @@
                 "concept": "164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "fixed-value",
                 "calculate": {
-                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
-                 },
-                 "answers": [
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
+                },
+                "answers": [
                   {
                     "concept": "6f041992-f0fd-4ec7-b7b6-c06b0f60bf3f",
                     "label": "Tested for HIV during this visit"
@@ -321,7 +322,7 @@
               "behaviours":[
                 {
                   "intent":"*",
-                  "required":"true",
+                  "required":"false",
                   "hide":{
                     "hideWhenExpression":"true"
                   }
@@ -632,7 +633,7 @@
                   "intent":"*",
                   "required":"true",
                   "hide":{
-                    "hideWhenExpression":"latest_hiv_test_result !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || hiv_test_result !== '138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression":"latest_hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'|| latest_hiv_test_result == '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || latest_hiv_test_result == '54b96458-6585-4c4c-a5b1-b3ca7f1be351' || hiv_test_result == '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || hiv_test_result == '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || hiv_test_result == '54b96458-6585-4c4c-a5b1-b3ca7f1be351'"
                   }
                 }
               ]
@@ -756,7 +757,7 @@
                   "intent":"*",
                   "required":"true",
                   "hide":{
-                    "hideWhenExpression":"antenatal_visit_type !== '164180AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && antenatal_visit_type !== '54b96458-6585-4c4c-a5b1-b3ca7f1be351' && antenatal_visit_type !== '54b96458-6585-4c4c-a5b1-b3ca7f1be351' && latest_partner_hiv_test_status === '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8'"
+                    "hideWhenExpression":"antenatal_visit_type == '160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && latest_partner_hiv_test_status == '8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8' || latest_partner_hiv_test_result == '138571AAAAAAA7AAAAAAAAAAAAAAAAAAAAAAA'"
                   }
                 }
               ]
@@ -769,9 +770,9 @@
                 "concept": "161557AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "fixed-value",
                 "calculate": {
-                   "calculateExpression": "resolve(api.getLatestObs(patient.id, '161557AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
-                 },
-                 "answers": [
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '161557AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
+                },
+                "answers": [
                   {
                     "concept": "8b8951a8-e8d6-40ca-ad70-89e8f8f71fa8",
                     "label": "Previously known positive"
@@ -887,6 +888,95 @@
               ]
             },
             {
+              "label": "Latest Partner's HIV test result ",
+              "type": "obs",
+              "id": "latest_partner_hiv_test_result",
+              "questionOptions": {
+                "concept": "1436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "fixed-value",
+                "calculate": {
+                  "calculateExpression": "resolve(api.getLatestObs(patient.id, '1436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', '2549af50-75c8-4aeb-87ca-4bb2cef6c69a'))?.valueCodeableConcept?.coding[0]?.code"
+                },
+                "answers": [
+                  {
+                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive",
+                    "conceptMappings":[
+                      {
+                        "type":"CIEL",
+                        "value":"138571"
+                      },
+                      {
+                        "type":"AMPATH",
+                        "value":"1169"
+                      },
+                      {
+                        "type":"SNOMED CT",
+                        "value":"165816005"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative",
+                    "conceptMappings":[
+                      {
+                        "type":"CIEL",
+                        "value":"664"
+                      },
+                      {
+                        "type":"AMPATH",
+                        "value":"664"
+                      },
+                      {
+                        "type":"SNOMED CT",
+                        "value":"260385009"
+                      },
+                      {
+                        "type":"PIH",
+                        "value":"664"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown",
+                    "conceptMappings":[
+                      {
+                        "type":"CIEL",
+                        "value":"1067"
+                      },
+                      {
+                        "type":"AMPATH",
+                        "value":"1067"
+                      },
+                      {
+                        "type":"SNOMED CT",
+                        "value":"261665006"
+                      },
+                      {
+                        "type":"PIH",
+                        "value":"1067"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "54b96458-6585-4c4c-a5b1-b3ca7f1be351",
+                    "label": "Missing"
+                  }
+                ]
+              },
+              "behaviours":[
+                {
+                  "intent":"*",
+                  "required":"false",
+                  "hide":{
+                    "hideWhenExpression":"true"
+                  }
+                }
+              ]
+            },
+            {
               "label": "Date Partner's HIV test done",
               "type": "obs",
               "id": "partner_hiv_test_date",
@@ -931,7 +1021,10 @@
               "id": "next_visit_date",
               "questionOptions": {
                 "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "date"
+                "rendering": "date",
+                "calculate": {
+                  "calculateExpression": "visit_date !== '' ? addDaysToDate(useFieldValue('visit_date'), 30) : ''"
+                }
               },
               "behaviours":[
                 {
@@ -996,7 +1089,7 @@
               "id": "transfer-out-to",
               "questionOptions": {
                 "concept": "159495AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "encounter-location",
+                "rendering": "text",
                 "locationTag": "8d4626ca-7abd-42ad-be48-56767bbcf272"
               },
               "behaviours":[
