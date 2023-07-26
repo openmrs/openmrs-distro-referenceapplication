@@ -21,6 +21,15 @@ New OpenMRS UI is accessible at http://localhost/openmrs/spa
 
 OpenMRS Legacy UI is accessible at http://localhost/openmrs
 
+### Updated and run the next images
+
+```
+docker compose -f docker-compose.yml pull
+```
+
+```
+docker compose -f docker-compose.yml up
+```
 ## Overview
 
 This distribution consists of four images:
