@@ -6779,6 +6779,36 @@
                     ]
                   },
                   {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other (specify)",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "6408"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "OTHER"
+                      },
+                      {
+                        "type": "SNOMED-MVP",
+                        "value": "56221000105001"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "5622"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "74964007"
+                      }
+                    ]
+                  },
+                  {
                     "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "None",
                     "conceptMappings": [
@@ -6853,7 +6883,7 @@
                 {
                   "intent": "*",
                   "hide": {
-                    "hideWhenExpression": "nutritionalStatus === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalStatus === '1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalInterventions !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression": "!includes(nutritionalSupport, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
                   }
                 }
               ],
