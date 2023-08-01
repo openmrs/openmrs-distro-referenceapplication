@@ -47,8 +47,8 @@
     <htmlwidgets.version>1.11.0</htmlwidgets.version>
     <serialization-xstream.version>0.2.16</serialization-xstream.version>
     <ordertemplates.version>1.0.2</ordertemplates.version>
-    <!-- this is required for flasg and taks-->
     <patientflags.version>3.0.6-SNAPSHOT</patientflags.version>
+    <o3forms.version>1.0.0-SNAPSHOT</o3forms.version>
   </properties>
 
   <dependencies>
@@ -177,14 +177,20 @@
     </dependency>
     <dependency>
       <groupId>org.openmrs.module</groupId>
+      <artifactId>serialization.xstream-api</artifactId>
+      <version>${serialization-xstream.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
       <artifactId>patientflags-omod</artifactId>
       <version>${patientflags.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.openmrs.module</groupId>
-      <artifactId>serialization.xstream-api</artifactId>
-      <version>${serialization-xstream.version}</version>
+      <artifactId>o3forms-omod</artifactId>
+      <version>${o3forms.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
