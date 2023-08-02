@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   gateway:
-    image: openmrs/openmrs-reference-application-3-gateway:${TAG:-nightly}
+    image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
     restart: "unless-stopped"
     depends_on:
       - frontend
@@ -11,7 +11,7 @@ services:
       - "80:80"
 
   frontend:
-    image: openmrs/openmrs-reference-application-3-frontend:${TAG:-nightly}
+    image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
     restart: "unless-stopped"
     environment:
       SPA_PATH: /openmrs/spa
@@ -25,7 +25,7 @@ services:
       - backend
 
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-nightly}
+    image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
     restart: "unless-stopped"
     depends_on:
       - db
