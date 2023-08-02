@@ -3,6 +3,7 @@ version: "3.7"
 services:
   gateway:
     image: openmrs/openmrs-reference-application-3-gateway:${TAG:-nightly}
+    restart: "unless-stopped"
     depends_on:
       - frontend
       - backend
@@ -11,6 +12,7 @@ services:
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:${TAG:-nightly}
+    restart: "unless-stopped"
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
@@ -24,6 +26,7 @@ services:
 
   backend:
     image: openmrs/openmrs-reference-application-3-backend:${TAG:-nightly}
+    restart: "unless-stopped"
     depends_on:
       - db
     environment:
@@ -43,6 +46,7 @@ services:
   # MariaDB
   db:
     image: mariadb:10.8.2
+    restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
     healthcheck:
       test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
