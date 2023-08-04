@@ -1,0 +1,1312 @@
+{
+	"name": "POC Postnatal Register",
+	"pages": [
+		{
+			"label": "Mother's Information",
+			"sections": [
+				{
+					"label": "Visit Summary",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Timing for PNC Visit",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "c7700c4f-3dc6-4270-ba0d-dd42c0557027",
+								"answers": [
+									{
+										"concept": "c08f764d-07d6-436f-aa5d-afdca9e12ae0",
+										"label": "PNC at 6 hours",
+										"conceptMappings": []
+									},
+									{
+										"concept": "abf95a81-d34a-4b3a-8323-f3edc6da542b",
+										"label": "PNC at 24 hours",
+										"conceptMappings": []
+									},
+									{
+										"concept": "d0d97e19-4955-4dc8-93bb-d29084f48d4e",
+										"label": "PNC at 6 days",
+										"conceptMappings": []
+									},
+									{
+										"concept": "b86c8e18-2c4e-4b0f-b7a4-9442c6a90102",
+										"label": "PNC at 6 weeks",
+										"conceptMappings": []
+									},
+									{
+										"concept": "2fdad88f-23a2-45f1-8e16-618e28ea2d83",
+										"label": "PNC at 6 months",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_timing_for_pnc_visit"
+						},
+						{
+							"label": "Referrals In/Out",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "67ea4375-0f4f-4e67-b8b0-403942753a4d",
+								"answers": [
+									{
+										"concept": "1ca0db4a-c5c6-48ed-9e17-84905f4487eb",
+										"label": "Community",
+										"conceptMappings": []
+									},
+									{
+										"concept": "865811ad-796f-48c2-b575-1f530122c408",
+										"label": "Health Facility",
+										"conceptMappings": []
+									},
+									{
+										"concept": "160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Patient transferred out",
+										"conceptMappings": []
+									},
+									{
+										"concept": "14714862-6c78-49da-b65b-f249cccddfb6",
+										"label": "Ref In",
+										"conceptMappings": []
+									},
+									{
+										"concept": "ea730d69-7eec-486a-aaf2-54f8bab5a44c",
+										"label": "TRANSFER IN",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_mother_referred_to_from"
+						}
+					]
+				},
+				{
+					"label": "Family Planning Methods",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Family Planning method used",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "checkbox",
+								"concept": "dc7620b3-30ab-102d-86b0-7a5022ba4115",
+								"answers": [
+									{
+										"concept": "163144AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Oral: Lo-Femenal",
+										"conceptMappings": []
+									},
+									{
+										"concept": "4b0899f2-395e-4e0f-8b58-d304b214615e",
+										"label": "Oral: Microgynon",
+										"conceptMappings": []
+									},
+									{
+										"concept": "aeee4ccf-cbf8-473c-9d9f-846643afbf11",
+										"label": "Oral: Ovrette or Another POP",
+										"conceptMappings": []
+									},
+									{
+										"concept": "670b7048-d71e-483a-b2ec-f10d2326dd84",
+										"label": "Oral: Others",
+										"conceptMappings": []
+									},
+									{
+										"concept": "164814AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Female Condoms",
+										"conceptMappings": []
+									},
+									{
+										"concept": "164813AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Male Condoms",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcb2f595-30ab-102d-86b0-7a5022ba4115",
+										"label": "IUDs",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcb30ba3-30ab-102d-86b0-7a5022ba4115",
+										"label": "Injectable Contraceptives",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcb30381-30ab-102d-86b0-7a5022ba4115",
+										"label": "Natural Family Planning",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcb2fba9-30ab-102d-86b0-7a5022ba4115",
+										"label": "Female Sterilization",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcdd8d8d-30ab-102d-86b0-7a5022ba4115",
+										"label": "Male Sterilization",
+										"conceptMappings": []
+									},
+									{
+										"concept": "bb83fd9d-24c5-4d49-89c0-97e13c792aaf",
+										"label": "Implants",
+										"conceptMappings": []
+									},
+									{
+										"concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Other FP Method",
+										"conceptMappings": [
+											{
+												"type": "PIH Malawi",
+												"value": "Malawi: 6408"
+											},
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "OTHER"
+											},
+											{
+												"type": "CIEL",
+												"value": "5622"
+											},
+											{
+												"type": "SNOMED MVP",
+												"value": "MVP: 56221000105001"
+											},
+											{
+												"type": "PIH",
+												"value": "5622"
+											},
+											{
+												"type": "AMPATH",
+												"value": "5622"
+											},
+											{
+												"type": "SNOMED NP",
+												"value": "NP: 74964007"
+											}
+										]
+									},
+									{
+										"concept": "aaf150a5-92d2-416f-8254-95d34ed9c4ab",
+										"label": "No Family Planning Method Given",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_family_planning_method_given"
+						}
+					]
+				},
+				{
+					"label": "Body Status",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Status of Breast",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "07c10f5c-17fd-4a7e-8d72-c2252f589da0",
+								"answers": [
+									{
+										"concept": "e4c6b70d-aaa6-490b-8edc-01c44d982cb2",
+										"label": "FOM - No swellings pain or discharge",
+										"conceptMappings": []
+									},
+									{
+										"concept": "5e416f86-aaf1-4ae4-96f0-30226b9fdd5f",
+										"label": "SS - Have discharge blood or pus",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dc9825cf-30ab-102d-86b0-7a5022ba4115",
+										"label": "ND - If the health worker did not assess for status of breast",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_status_of_breast"
+						},
+						{
+							"label": "Status of Cervix",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "d858f8cb-fe9e-4131-8d91-cd9929cc53de",
+								"answers": [
+									{
+										"concept": "ec3a0208-0261-450a-a13b-b524e160b8fd",
+										"label": "SS - Cervix is suspicious of malignancy",
+										"conceptMappings": []
+									},
+									{
+										"concept": "14556e6e-9ee4-439c-98ac-079e12fc98fa",
+										"label": "FOM - Cervix is free of malignancy",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dc9825cf-30ab-102d-86b0-7a5022ba4115",
+										"label": "ND - Not Done",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_status_of_cervix",
+							"required": "true"
+						}
+					]
+				},
+				{
+					"label": "Vitals",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Weight",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "number",
+								"concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"max": "",
+								"min": "0"
+							},
+							"id": "pnc_weight"
+						},
+						{
+							"label": "MUAC",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "number",
+								"concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"max": "",
+								"min": "0"
+							},
+							"id": "pnc_muac"
+						},
+						{
+							"label": "MUAC Color Code",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "5f86d19d-9546-4466-89c0-6f80c101191b",
+								"answers": [
+									{
+										"concept": "de330d01-5586-4eed-a645-e04b6bd13701",
+										"label": "RED",
+										"conceptMappings": []
+									},
+									{
+										"concept": "8846c03f-67bf-4aeb-8ca7-39bf79b4ebf3",
+										"label": "GREEN",
+										"conceptMappings": []
+									},
+									{
+										"concept": "a3b1734c-4743-4b9d-8e71-08d0459d29b9",
+										"label": "YELLOW",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_mother_muac_color_code"
+						},
+						{
+							"label": "INR No",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "b644c29c-9bb0-447e-9f73-2ae89496a709"
+							},
+							"id": "id_inr_no_mother"
+						}
+					]
+				},
+				{
+					"label": "eMTCT",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "eMTCT Code Woman",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "d5b0394c-424f-41db-bc2f-37180dcdbe74",
+								"answers": [
+									{
+										"concept": "6da9b915-8668-4642-8ed4-7d2a346881cb",
+										"label": "C - Counselled but declined HIV testing",
+										"conceptMappings": []
+									},
+									{
+										"concept": "05f16fc5-1d82-4ce8-9b44-a3125fbbf2d7",
+										"label": "T - Counseled and tested but didn't receive results",
+										"conceptMappings": []
+									},
+									{
+										"concept": "86e394fd-8d85-4cb3-86d7-d4b9bfc3e43a",
+										"label": "TR - Counseled, tested results given - Client tested HIV Negative in PNC",
+										"conceptMappings": []
+									},
+									{
+										"concept": "25c448ff-5fe4-4a3a-8c0a-b5aaea9d5465",
+										"label": "TRR - Counseled, tested results given - Client tested HIV Positive in PNC",
+										"conceptMappings": []
+									},
+									{
+										"concept": "12d878f9-899c-4b3c-bf57-c6226c307a53",
+										"label": "TR √ - Clients tested previously with known HIV Negative status",
+										"conceptMappings": []
+									},
+									{
+										"concept": "60155e4d-1d49-4e97-9689-758315967e0f",
+										"label": "TRRK - Revisit ANC clients who were tested for HIV on a previous visit with known HIV positive status",
+										"conceptMappings": []
+									},
+									{
+										"concept": "a08d9331-b437-485c-8eff-1923f3d43630",
+										"label": "TR+ - Client tested HIV Negative on a re-test",
+										"conceptMappings": []
+									},
+									{
+										"concept": "8dcaefaa-aa91-4c24-aaeb-122cff549ab3",
+										"label": "TRR+ - Client tested HIV Positive on a re-test",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_emtct_for_mother"
+						},
+						{
+							"label": "eMTCT Code Partner",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "62a37075-fc2a-4729-8950-b9fae9b22cfb",
+								"answers": [
+									{
+										"concept": "6da9b915-8668-4642-8ed4-7d2a346881cb",
+										"label": "C - Counseled but declined HIV testing",
+										"conceptMappings": []
+									},
+									{
+										"concept": "05f16fc5-1d82-4ce8-9b44-a3125fbbf2d7",
+										"label": "T - Counseled and tested but didn't receive results",
+										"conceptMappings": []
+									},
+									{
+										"concept": "86e394fd-8d85-4cb3-86d7-d4b9bfc3e43a",
+										"label": "TR - Counseled tested and results given - Client tested HIV Negative in PNC",
+										"conceptMappings": []
+									},
+									{
+										"concept": "25c448ff-5fe4-4a3a-8c0a-b5aaea9d5465",
+										"label": "TRR - Counseled tested and results given - Client tested HIV Positive in PNC",
+										"conceptMappings": []
+									},
+									{
+										"concept": "12d878f9-899c-4b3c-bf57-c6226c307a53",
+										"label": "TR √ - Clients tested previously with known HIV Negative status",
+										"conceptMappings": []
+									},
+									{
+										"concept": "60155e4d-1d49-4e97-9689-758315967e0f",
+										"label": "TRRK - Revisit ANC clients who were tested for HIV on a previous visit with known HIV Positive status",
+										"conceptMappings": []
+									},
+									{
+										"concept": "a08d9331-b437-485c-8eff-1923f3d43630",
+										"label": "TR+ - Client tested HIV Negative on a re-test",
+										"conceptMappings": []
+									},
+									{
+										"concept": "8dcaefaa-aa91-4c24-aaeb-122cff549ab3",
+										"label": "TRR+ - Client tested HIV Positive on a re-test",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_emtct_code_for_mother"
+						}
+					]
+				},
+				{
+					"label": "TFV",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "TFV Woman",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "27ed8c9d-3101-4d07-9cfe-01ea082af0f5",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH Malawi",
+												"value": "Malawi: 1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH Malawi",
+												"value": "Malawi: 1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "CIEL",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373067005"
+											}
+										]
+									}
+								]
+							},
+							"id": "pnc_tfv_mother"
+						},
+						{
+							"label": "TFV Partner",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "03aad24f-b80f-4f17-af88-90b83592d044",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH Malawi",
+												"value": "Malawi: 1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH Malawi",
+												"value": "Malawi: 1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "CIEL",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373067005"
+											}
+										]
+									}
+								]
+							},
+							"id": "pnc_tfv_partner"
+						}
+					]
+				},
+				{
+					"label": "STK",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "HIV STK Kit Given to woman",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "609c9aee-92b3-4e17-828a-efc7933f2ecf",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH Malawi",
+												"value": "Malawi: 1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH Malawi",
+												"value": "Malawi: 1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "CIEL",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373067005"
+											}
+										]
+									}
+								]
+							},
+							"id": "pnc_stk_given"
+						},
+						{
+							"label": "HIV STK Result for partner",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "e47d9ead-5b33-4315-9ea0-42669e4491b6",
+								"answers": [
+									{
+										"concept": "dc866728-30ab-102d-86b0-7a5022ba4115",
+										"label": "POSITIVE",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dc85aa72-30ab-102d-86b0-7a5022ba4115",
+										"label": "NEGATIVE",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_stk_result",
+							"hide": {
+								"hideWhenExpression": "isEmpty(pnc_stk_given) || pnc_stk_given != '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+							}
+						}
+					]
+				},
+				{
+					"label": "Art Code & Pre-Art Number",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "ART Code Woman",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "a615f932-26ee-449c-8e20-e50a15232763",
+								"answers": [
+									{
+										"concept": "026e31b7-4a26-44d0-8398-9a41c40ff7d3",
+										"label": "ART - Initiated ART for eMTCT during breastfeeding (PNC)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "2c000b41-f9d7-40c1-8de0-bce91dbae932",
+										"label": "ART √  - Client was initiated on ART at an earlier PNC clinic attendance",
+										"conceptMappings": []
+									},
+									{
+										"concept": "2aa7d442-6cbb-4609-9dd3-bc2ad6f05016",
+										"label": "ARTK - Client was already on ART prior to PNC",
+										"conceptMappings": []
+									},
+									{
+										"concept": "bbc63761-0741-4583-9396-a34d3a18601c",
+										"label": "ARTK √ - Client is a revisit; was already on ART prior to PNC",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dc9b0596-30ab-102d-86b0-7a5022ba4115",
+										"label": "NA - Not Applicable",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_art_code_woman"
+						},
+						{
+							"label": "Pre-ART Number Woman",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "9fc5bf9d-a79e-4548-9207-b2afbbeba796"
+							},
+							"id": "pnc_pre_art_no",
+							"hide": {
+								"hideWhenExpression": "isEmpty(pnc_art_code_woman) || pnc_art_code_woman == 'dc9b0596-30ab-102d-86b0-7a5022ba4115'"
+							}
+						},
+						{
+							"label": "ART Code Partner",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "11dafd93-23c1-4b89-86e0-593e5f7ca386",
+								"answers": [
+									{
+										"concept": "026e31b7-4a26-44d0-8398-9a41c40ff7d3",
+										"label": "ART - Initiated ART for eMTCT during breastfeeding (PNC)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "2c000b41-f9d7-40c1-8de0-bce91dbae932",
+										"label": "ART √  - Client was initiated on ART at an earlier PNC clinic attendance",
+										"conceptMappings": []
+									},
+									{
+										"concept": "2aa7d442-6cbb-4609-9dd3-bc2ad6f05016",
+										"label": "ARTK - Client was already on ART prior to PNC",
+										"conceptMappings": []
+									},
+									{
+										"concept": "bbc63761-0741-4583-9396-a34d3a18601c",
+										"label": "ARTK √ - Client is a revisit; was already on ART prior to PNC",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dc9b0596-30ab-102d-86b0-7a5022ba4115",
+										"label": "NA - Not Applicable",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_art_code_partner"
+						},
+						{
+							"label": "Pre-ART Number Partner",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "723c45bf-57eb-4865-b5c9-4a0ad6a36522"
+							},
+							"id": "pnc_pre_art_no_for_partner",
+							"hide": {
+								"hideWhenExpression": "isEmpty(pnc_art_code_partner) || pnc_art_code_partner == 'dc9b0596-30ab-102d-86b0-7a5022ba4115'"
+							}
+						}
+					]
+				},
+				{
+					"label": "Routine Administration",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Routine Administration for Mothers",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "checkbox",
+								"concept": "dc9b5b8f-30ab-102d-86b0-7a5022ba4115",
+								"answers": [
+									{
+										"concept": "315825e8-8ba4-4551-bdd1-aa4e02a36639",
+										"label": "Iron",
+										"conceptMappings": []
+									},
+									{
+										"concept": "8c346216-c444-4528-a174-5139922218ed",
+										"label": "Folic Acid",
+										"conceptMappings": []
+									},
+									{
+										"concept": "d12abd7f-c90d-4798-9240-0f2f81977183",
+										"label": "CTX",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_routine_administration"
+						}
+					]
+				},
+				{
+					"label": "Other Treatment Given",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Other Treatment",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "textarea",
+								"concept": "2aa72406-436e-490d-8aa4-d5336148204f",
+								"rows": "3"
+							},
+							"id": "pnc_mother_other_treatment"
+						}
+					]
+				},
+				{
+					"label": "HIV Information",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "WHO Clinical Stage",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "dcdff274-30ab-102d-86b0-7a5022ba4115",
+								"answers": [
+									{
+										"concept": "dcda2bc2-30ab-102d-86b0-7a5022ba4115",
+										"label": "1",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcda3251-30ab-102d-86b0-7a5022ba4115",
+										"label": "2",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcda3663-30ab-102d-86b0-7a5022ba4115",
+										"label": "3",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcda3a80-30ab-102d-86b0-7a5022ba4115",
+										"label": "4",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dd25e735-30ab-102d-86b0-7a5022ba4115",
+										"label": "T1",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dd2666a5-30ab-102d-86b0-7a5022ba4115",
+										"label": "T2",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dd266d64-30ab-102d-86b0-7a5022ba4115",
+										"label": "T3",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dd269c18-30ab-102d-86b0-7a5022ba4115",
+										"label": "T4",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_who_hiv_stage"
+						}
+					]
+				}
+			]
+		},
+		{
+			"label": "Infant's Information",
+			"sections": [
+				{
+					"label": "Infant Information",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Status of the baby",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "dd8a2ad9-16f6-44db-82d7-87d6eef14886",
+								"answers": [
+									{
+										"concept": "9d9e6b5a-8b5d-4b8c-8ab7-9fdabb279493",
+										"label": "AL - Alive",
+										"conceptMappings": []
+									},
+									{
+										"concept": "811ff634-8d81-454f-9b9d-2850345796d6",
+										"label": "NND7 - Dead within first seven(7) days",
+										"conceptMappings": []
+									},
+									{
+										"concept": "95121db8-6c2a-48e0-b281-cf2dc8229dd1",
+										"label": "NND28 - Dead between eight(8) and twenty eight(28) Days",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_status_of_the_baby"
+						},
+						{
+							"label": "Age (Wks)",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "number",
+								"concept": "274d8abf-f41d-4dce-a496-8c949d362466",
+								"max": "",
+								"min": "0"
+							},
+							"id": "pnc_age_of_baby"
+						}
+					]
+				},
+				{
+					"label": "Infant Vitals",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Weight",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "number",
+								"concept": "94e4aeea-84d0-4207-aacb-ce38fe8e109c",
+								"max": "",
+								"min": "0"
+							},
+							"id": "pnc_weight_of_baby"
+						},
+						{
+							"label": "MUAC",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "number",
+								"concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"max": "",
+								"min": "0"
+							},
+							"id": "pnc_muac_for_baby"
+						},
+						{
+							"label": "MUAC Code",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "5f86d19d-9546-4466-89c0-6f80c101191b",
+								"answers": [
+									{
+										"concept": "de330d01-5586-4eed-a645-e04b6bd13701",
+										"label": "RED < 11.5cm",
+										"conceptMappings": []
+									},
+									{
+										"concept": "8846c03f-67bf-4aeb-8ca7-39bf79b4ebf3",
+										"label": "GREEN 11.5cm - <12.5cm",
+										"conceptMappings": []
+									},
+									{
+										"concept": "a3b1734c-4743-4b9d-8e71-08d0459d29b9",
+										"label": "YELLOW >= 12.5cm",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_infant_muac_code"
+						},
+						{
+							"label": "INR No.",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "40d04ad1-babf-426f-85d7-e6ba156919bd"
+							},
+							"id": "pnc_inr_no_baby"
+						}
+					]
+				},
+				{
+					"label": "Diagnosis",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Infant Diagnosis on PNC Vist",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "textarea",
+								"concept": "a16b3a8e-6412-4344-908a-2a96344fa017",
+								"rows": "3"
+							},
+							"id": "pnc_infant_diagnosis"
+						}
+					]
+				},
+				{
+					"label": "Treatment",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Treatment Given to Baby",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "textarea",
+								"concept": "59560ede-43e2-4e56-a47e-0f876779f0e1",
+								"rows": "3"
+							},
+							"id": "pnc_baby_treatment"
+						}
+					]
+				},
+				{
+					"label": "Feeding And Nutrition",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Infant Feeding Options",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "151283c0-8ef7-442f-8b03-3d7382a9d9cd",
+								"answers": [
+									{
+										"concept": "dcbd637e-30ab-102d-86b0-7a5022ba4115",
+										"label": "EBF - Exclusive Breastfeeding",
+										"conceptMappings": []
+									},
+									{
+										"concept": "40fdb5b6-e8ac-424d-988c-f2f2937348db",
+										"label": "RF - Replacement Feeding (never breastfed)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcd5487d-30ab-102d-86b0-7a5022ba4115",
+										"label": "MF - Mixed Feeding (<6months)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "d89a8589-ac19-48c4-8663-082a7d9a480d",
+										"label": "CF - Complementary Feeding (>6months)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "0080e335-449a-4ebd-9906-3473ff0b0821",
+										"label": "W - Weaning",
+										"conceptMappings": []
+									},
+									{
+										"concept": "0f46cbdc-54cb-40bd-8f75-72abcf6fc852",
+										"label": "NLB - No Longer Breastfeeding",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_infant_feeding_options"
+						},
+						{
+							"label": "Infant Feeding Counseling Done?",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "cfbed699-fbf4-4346-a4a3-1b5c57d2902e",
+								"answers": [
+									{
+										"label": "Yes",
+										"concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115"
+									},
+									{
+										"label": "No",
+										"concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115"
+									}
+								]
+							},
+							"id": "pnc_iycf"
+						},
+						{
+							"label": "Maternal Nutrition Counseling Done?",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "c2acb91f-1435-44e3-9e20-2d2534d2917c",
+								"answers": [
+									{
+										"concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+										"label": "Yes",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+										"label": "No",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_maternal_nutrition_counseling"
+						}
+					]
+				},
+				{
+					"label": "Immunization",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Immunization",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "checkbox",
+								"concept": "dc918618-30ab-102d-86b0-7a5022ba4115",
+								"answers": [
+									{
+										"concept": "dc8e1be9-30ab-102d-86b0-7a5022ba4115",
+										"label": "BCG",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dc883964-30ab-102d-86b0-7a5022ba4115",
+										"label": "OPV",
+										"conceptMappings": []
+									},
+									{
+										"concept": "782AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "DPT-HepB",
+										"conceptMappings": []
+									},
+									{
+										"concept": "680f7f8d-eac6-44b4-8899-101fa2c4f873",
+										"label": "Vitamin A",
+										"conceptMappings": []
+									},
+									{
+										"concept": "62d87122-0a08-4e04-b57c-7e1b2f821854",
+										"label": "PCV",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_immunization"
+						}
+					]
+				},
+				{
+					"label": "Referral Information",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Refered From (Facility Name)",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "dcdffef2-30ab-102d-86b0-7a5022ba4115"
+							},
+							"id": "pnc_facility_name"
+						},
+						{
+							"label": "Facility Type",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "2b00ebe6-edfd-4290-8b8d-942554e3c30d",
+								"answers": [
+									{
+										"concept": "6abc57f2-3718-42f6-84c4-4f71e921d590",
+										"label": "Young Child Clinic",
+										"conceptMappings": []
+									},
+									{
+										"concept": "37549919-5934-448e-b110-cc7868e73ff2",
+										"label": "HIV Chronic Care",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcd68a88-30ab-102d-86b0-7a5022ba4115",
+										"label": "Other Referral",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_facility_referred_to_from"
+						},
+						{
+							"label": "Other Facility",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "13dc84c4-4fc2-44ef-a811-27a4c764bca8"
+							},
+							"id": "pnc_other-facility-referred-from",
+							"hide": {
+								"hideWhenExpression": "isEmpty(pnc_facility_referred_to_from) || pnc_facility_referred_to_from != 'dcd68a88-30ab-102d-86b0-7a5022ba4115'"
+							}
+						}
+					]
+				},
+				{
+					"label": "Enrollment Information",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "HIV+?",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "153ff6e8-776d-42b9-b726-ad56d0ba45a4",
+								"answers": [
+									{
+										"concept": "dcdf4241-30ab-102d-86b0-7a5022ba4115",
+										"label": "Yes",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcdf4653-30ab-102d-86b0-7a5022ba4115",
+										"label": "No",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_infant_hiv_result"
+						},
+						{
+							"label": "FSG Enrollment",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "7e8e0ef3-2fda-4c76-8cf6-c7a6f1584ff2",
+								"answers": [
+									{
+										"concept": "3af0aae4-4ea7-489d-a5be-c5339f7c5a77",
+										"label": "FSG: Newly enrolled into FSG during postnatal visit",
+										"conceptMappings": []
+									},
+									{
+										"concept": "a02f9bdc-1ae2-4cfa-8023-1f534a9e906d",
+										"label": "FSG √: Mother enrolled for FSG on revisit",
+										"conceptMappings": []
+									},
+									{
+										"concept": "0c0edbd7-ce81-48fd-8f56-ab3aa4406f8d",
+										"label": "FSGK: Mother was erolled during pregnancy",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "pnc_fsg_enrollment"
+						},
+						{
+							"label": "Enrolled in MBCP",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "f0d12a70-04a3-4f7f-992b-bed4ad331908",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH Malawi",
+												"value": "Malawi: 1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH Malawi",
+												"value": "Malawi: 1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "CIEL",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373067005"
+											}
+										]
+									}
+								]
+							},
+							"id": "pnc_enrolled_in_mbcp"
+						}
+					]
+				}
+			]
+		}
+	],
+	"processor": "EncounterFormProcessor",
+	"uuid": "xxxx",
+	"referencedForms": [],
+	"encounterType": "fa6f3ff5-b784-43fb-ab35-a08ab7dbf074",
+	"allowUnspecifiedAll": true
+}

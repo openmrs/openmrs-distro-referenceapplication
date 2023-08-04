@@ -1,0 +1,2189 @@
+{
+  "name": "POC-EID Summary Form",
+  "pages": [
+    {
+      "label": "Mother Follow-up",
+      "sections": [
+        {
+          "label": "Care and Entry Point",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Eid Number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c5b695d-4bf3-452f-8a7c-fe3ee3432ffe"
+              },
+              "id": "eid_number",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date Chart Opened",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "159948AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "159948"
+                  },
+                  {
+                    "type": "SNOMED CT",
+                    "value": "CT: 432213005"
+                  }
+                ]
+              },
+              "id": "date_chart_opened",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					  {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            },
+            {
+              "label": "Entry Point",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "90200",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "90012",
+                    "label": "eMTCT",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90016",
+                    "label": "TB",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99593",
+                    "label": "Outreach",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90019",
+                    "label": "Out Patient",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90015",
+                    "label": "STI",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90018",
+                    "label": "Inpatient",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "398156002"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "90002",
+                    "label": "Other-Specify",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "entry_point",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Other Specify",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "90002"
+              },
+              "id": "other_entry_point",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "!includes('entry_point','90002')"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date of NVP",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99771",
+                "weeksList": ""
+              },
+              "id": "date_nvp",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					   {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            },
+            {
+              "label": "Date of CTX",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99773",
+                "weeksList": ""
+              },
+              "id": "date_of_ctx",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					   {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            },
+            {
+              "label": "Birth Defect?",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "165402",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066"
+                  }
+                ],
+                "conceptMappings": []
+              },
+              "id": "birth_defect",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+                        {
+              "label": "Neurotube Defect?",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "165402",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065"
+                  },
+                  {
+                    "label": "Other",
+                    "concept": "90002"
+                  }
+                ],
+                "conceptMappings": []
+              },
+              "id": "neurotube_defect",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "!includes('birth_defect', '1065')"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Other Specify",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "90002",
+                "conceptMappings": []
+              },
+              "id": "mother_name",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "!includes('neurotube_defect', '90002')"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Mother Care Follow-up",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mother's Name",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "99776",
+                "conceptMappings": []
+              },
+              "id": "mother_name",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Common Name",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "99775"
+              },
+              "id": "common_name",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Telephone Number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162889"
+              },
+              "id": "tele_number",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "District ",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162884"
+              },
+              "id": "district",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "County",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162885"
+              },
+              "id": "text",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Sub-county",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162886"
+              },
+              "id": "sub_county",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Village",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162887"
+              },
+              "id": "village",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Parish",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162888"
+              },
+              "id": "parish",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "LC1 Zone",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "99137"
+              },
+              "id": "lc1_zone",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "LC1 Chairman",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162866"
+              },
+              "id": "lc1_chairman",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "How should the outreach workers introduce themselves",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "162867",
+                "rows": "5"
+              },
+              "id": "outreach_intorduce",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Direction to caregivers home address",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "162868",
+                "rows": "5"
+              },
+              "id": "caregiver_direction_to_home",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Alternate Contact Person",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162869"
+              },
+              "id": "alternate_contact_person",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Relationship",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "90269"
+              },
+              "id": "relationship",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Telephone Number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "90269"
+              },
+              "id": "telephone",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Has this person been disclosed to?",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "162871",
+                "answers": [
+                  {
+                    "concept": "90003",
+                    "label": "Yes",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90004",
+                    "label": "No",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "person_disclosed_to",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Mother's History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Place of deliverly",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "99570"
+              },
+              "id": "Place_of_deliverly",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Mode of Deliverly",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5630"
+              },
+              "id": "Mode_of_deliverly",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Mother Received ARVs for PMTCT",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "162872",
+                "answers": [
+                  {
+                    "concept": "90003",
+                    "label": "Yes",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90004",
+                    "label": "No",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90001",
+                    "label": "Unknown",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "Mother_Received_ARVs_for_PMTCT",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Mothers ANC number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "99777"
+              },
+              "id": "Mothers_ANC_number",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Mothers PMTCT ARVS",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Antenatal",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99783",
+                "answers": [
+                  {
+                    "concept": "99786",
+                    "label": "Lifelong ART",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99782",
+                    "label": "No ART",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90001",
+                    "label": "Unknown",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "antenatal",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "During Labour/Deliverly",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99784",
+                "answers": [
+                  {
+                    "concept": "99786",
+                    "label": "Lifelong ART",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99782",
+                    "label": "No ART",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90001",
+                    "label": "Unknown",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "During_labour/deliverly",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Post-natal",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99785",
+                "answers": [
+                  {
+                    "concept": "99786",
+                    "label": "Lifelong ART",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99782",
+                    "label": "No ART",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90001",
+                    "label": "Unknown",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "Post_natal",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Infant PMTCT ARVs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Infant PMTCT ARVs",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99787",
+                "answers": [
+                  {
+                    "concept": "162966",
+                    "label": "Daily NVP from birth to 6wks",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165426",
+                    "label": "Daily NVP from birth to 12wks",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99790",
+                    "label": "No ARVs taken at birth",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "067",
+                    "label": "Unknown",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99005",
+                    "label": "Z-T/3TC/NVP",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90002",
+                    "label": "Other Specify",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "Infant_PMTCT_ARVs",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Others Specify",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "90002"
+              },
+              "id": "others_infant_arvs",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "!includes('Infant_PMTCT_ARVs','90002')"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Testing Information",
+      "sections": [
+        {
+          "label": "1st PCR",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Test Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99606",
+                "weeksList": ""
+              },
+              "id": "test_date_pcr1",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					   {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            },
+            {
+              "label": "Feeding method",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99434",
+                "answers": [
+                  {
+                    "concept": "5526",
+                    "label": "EBF - Exclusive Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99089",
+                    "label": "RF - Replacement Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "6046",
+                    "label": "MF - Mixed Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5254",
+                    "label": "CF - Complementary Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1152",
+                    "label": "W - Wean From Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165421",
+                    "label": "NLB - No longer Breastfeeding",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "feeding_method_pcr1",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Results",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99435",
+                "answers": [
+                  {
+                    "concept": "664",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "703",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "results_pcr1",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date Result given to care giver",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99438",
+                "weeksList": ""
+              },
+              "id": "results_given_date_pcr1",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					   {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "PCR at 9 months",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Test Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99606",
+                "weeksList": ""
+              },
+              "id": "test_date_pcr6",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Feeding method",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99434",
+                "answers": [
+                  {
+                    "concept": "5526",
+                    "label": "EBF - Exclusive Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99089",
+                    "label": "RF - Replacement Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "6046",
+                    "label": "MF - Mixed Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5254",
+                    "label": "CF - Complementary Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1152",
+                    "label": "W - Wean From Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165421",
+                    "label": "NLB - No longer Breastfeeding",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "feeding_method_pcr6"
+            },
+            {
+              "label": "Results",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99435",
+                "answers": [
+                  {
+                    "concept": "664",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "703",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "results_pcr2"
+            },
+            {
+              "label": "Date Result given to care giver",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99438",
+                "weeksList": ""
+              },
+              "id": "results_given_date_pcr6",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					  {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "PCR at 6 weeks after stopping breast feeding",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Test Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99606",
+                "weeksList": ""
+              },
+              "id": "test_date_pcr2",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Feeding method",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99434",
+                "answers": [
+                  {
+                    "concept": "5526",
+                    "label": "EBF - Exclusive Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99089",
+                    "label": "RF - Replacement Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "6046",
+                    "label": "MF - Mixed Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5254",
+                    "label": "CF - Complementary Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1152",
+                    "label": "W - Wean From Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165421",
+                    "label": "NLB - No longer Breastfeeding",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "feeding_method_pcr6"
+            },
+            {
+              "label": "Results",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99435",
+                "answers": [
+                  {
+                    "concept": "664",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "703",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "results_pcr2"
+            },
+            {
+              "label": "Date Result given to care giver",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99438",
+                "weeksList": ""
+              },
+              "id": "results_given_date_pcr6",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					  {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Repeat PCR (if necessary)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Test Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99606",
+                "weeksList": ""
+              },
+              "id": "test_date_pcr2",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Feeding method",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99434",
+                "answers": [
+                  {
+                    "concept": "5526",
+                    "label": "EBF - Exclusive Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99089",
+                    "label": "RF - Replacement Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "6046",
+                    "label": "MF - Mixed Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5254",
+                    "label": "CF - Complementary Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1152",
+                    "label": "W - Wean From Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165421",
+                    "label": "NLB - No longer Breastfeeding",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "feeding_method_pcr6"
+            },
+            {
+              "label": "Results",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99435",
+                "answers": [
+                  {
+                    "concept": "664",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "703",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "results_pcr2"
+            },
+            {
+              "label": "Date Result given to care giver",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99438",
+                "weeksList": ""
+              },
+              "id": "results_given_date_pcr6",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					  {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "18 months rapid test",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Test Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99606",
+                "weeksList": ""
+              },
+              "id": "test_date_pcr2",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Feeding method",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99434",
+                "answers": [
+                  {
+                    "concept": "5526",
+                    "label": "EBF - Exclusive Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99089",
+                    "label": "RF - Replacement Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "6046",
+                    "label": "MF - Mixed Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5254",
+                    "label": "CF - Complementary Feeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1152",
+                    "label": "W - Wean From Breastfeeding",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165421",
+                    "label": "NLB - No longer Breastfeeding",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "feeding_method_pcr6",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Results",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99435",
+                "answers": [
+                  {
+                    "concept": "664",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "703",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "results_pcr2",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date Result given to care giver",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99438",
+                "weeksList": ""
+              },
+              "id": "results_given_date_pcr6",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					  {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Final HIV result",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Final HIV result",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99797",
+                "answers": [
+                  {
+                    "concept": "664",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "703",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "Final HIV result",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Linkage to care/treatment",
+      "sections": [
+        {
+          "label": "Linkage to care",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Reffered to ART clinic",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99430",
+                "answers": [
+                  {
+                    "concept": "1065",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1066",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "reffered_to_art_clinic",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date Referred to ART clinic",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "162981",
+                "weeksList": ""
+              },
+              "id": "date_referred_to_art_clinic",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Enrolled at ART clinic",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "163004",
+                "answers": [
+                  {
+                    "concept": "1065",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1066",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "enrolled_at_art_clinic",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Date enrolled to ART clinic",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "162980",
+                "weeksList": ""
+              },
+              "id": "date_enrolled_to_art_clinic",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Infant PRE-ART number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99751",
+                "answers": [
+                  {
+                    "concept": "1065",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1066",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "infant_pre_art_number",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Presumptive referral",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "163003",
+                "answers": [
+                  {
+                    "concept": "1065",
+                    "label": "Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1066",
+                    "label": "Negative",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "presumptive_referral",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Follow up information",
+      "sections": [
+        {
+          "label": "First attempt",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Test Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "162967",
+                "weeksList": ""
+              },
+              "id": "test_date_followup1_attempt1",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Method",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162968"
+              },
+              "id": "method_attempt1",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Out come",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162969"
+              },
+              "id": "out_come_followup_attempt1",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Second attempt",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "162971",
+                "weeksList": ""
+              },
+              "id": "date_followup_attempt2",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Method",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162972"
+              },
+              "id": "method_followup_attempt2",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Out come",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162973"
+              },
+              "id": "out_come_followup_attempt2",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Third attempt",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "162975",
+                "weeksList": ""
+              },
+              "id": "date_followup_attempt3",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Method",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162976"
+              },
+              "id": "method_followup_attempt3",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Outcome",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162977"
+              },
+              "id": "out_come_followup_attempt3",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Final outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Final outcome date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99428",
+                "weeksList": ""
+              },
+              "id": "Final_outcome_date",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Final outcome",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99428",
+                "answers": [
+                  {
+                    "concept": "99427",
+                    "label": "Discharged Negative",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99430",
+                    "label": "Initiated on ART Clinic",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5240",
+                    "label": "Lost to followup",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90306",
+                    "label": "Transferred",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165420",
+                    "label": "Died Negative",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165421",
+                    "label": "Died Positive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162873",
+                    "label": "Mother in Care",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "final_outcome",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "ART number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162874"
+              },
+              "id": "art_number_final_outcome",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Location Transferred to",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "90211"
+              },
+              "id": "location_transferred",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label": "Transfer out date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "99165",
+                "weeksList": ""
+              },
+              "id": "transfer_out_date_final_outcome",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+					  {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+				  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "EID Summary"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "860c5f2f-cf3c-4c3f-b0c4-9958b6a5a938",
+  "encounterType": "9fcfcc91-ad60-4d84-9710-11cc25258719",
+  "referencedForms": [],
+  "allowUnspecifiedAll": false
+}

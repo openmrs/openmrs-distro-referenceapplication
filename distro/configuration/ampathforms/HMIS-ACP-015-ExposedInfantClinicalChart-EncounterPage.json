@@ -1,0 +1,1581 @@
+{
+  "name":"POC- EID Follow up Form",
+  "pages":[
+    {
+      "label":"Appointment HIV Test Infant Feeding & Imunnisation codes",
+      "sections":[
+        {
+          "label":"Appointment Details",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"Visit Number",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"162992",
+                "answers":[
+                  {
+                    "concept": "162993",
+                    "label": "Visit 1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162994",
+                    "label": "Visit 2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162995",
+                    "label": "Visit 3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162996",
+                    "label": "Visit 4",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162997",
+                    "label": "Visit 5",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162998",
+                    "label": "Visit 6",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162999",
+                    "label": "Visit 7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163000",
+                    "label": "Visit 8",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163001",
+                    "label": "Visit 9",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163002",
+                    "label": "Visit 10",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163018",
+                    "label": "Visit 11",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163019",
+                    "label": "Visit 12",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163020",
+                    "label": "Visit 13",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163021",
+                    "label": "Visit 14",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163022",
+                    "label": "Visit 15",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"visit_number",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Date of Appointment",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"date",
+                "concept":"99443",
+                "weeksList":""
+              },
+              "id":"date_of_appointment",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Date of Visit",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"date",
+                "concept":"",
+                "weeksList":""
+              },
+              "id":"date_of_visit",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label":"Next appointment date",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"date",
+                "concept":"5096",
+                "weeksList":""
+              },
+              "id":"next_appointment_date",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "true"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label":"HIV Test Infant feeding immunisation code",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"HIV Test",
+              "type":"obs",
+              "questionOptions":{
+                "rendering": "radio",
+                "concept": "99080",
+                "answers": [
+                  {
+                    "concept": "163006",
+                    "label": "PCR Test",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163007",
+                    "label": "Antibody Test",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"hiv_test",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Infant feeding code",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"99451",
+                "answers":[
+                  {
+                    "concept":"5526",
+                    "label":"EBF - Exclusive Breast Feeding",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"99089",
+                    "label":"RF - Replacement Feeding (never breastfed)",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"6046",
+                    "label":"MF - Mixed Feeding (below 6 months)",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"99791",
+                    "label":"CF - Complimentary Feeding (above 6 months)",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"99792",
+                    "label":"W - Wean from breastfeeding",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"99793",
+                    "label":"NLB - No longer Breastfeeding",
+                    "conceptMappings":[]
+                  }                  
+                ]
+              },
+              "id":"infant_feeding_code",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Immunisation codes",
+              "type":"obs",
+              "questionOptions":{
+                "rendering": "checkbox",
+                "concept": "162839",
+                "answers": [
+                  {
+                    "concept": "886",
+                    "label": "BCG",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162834",
+                    "label": "Polio",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163014",
+                    "label": "PCV",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162347",
+                    "label": "Rotavirus 2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162838",
+                    "label": "De-Worming ",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162831",
+                    "label": "Polio 0",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1422",
+                    "label": "IPV",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163015",
+                    "label": "PCV 2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165409",
+                    "label": "Measles 1 (MR1)",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162832",
+                    "label": "Polio 1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162835",
+                    "label": "DPT-HepB + Hi",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "163016",
+                    "label": "PCV",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165410",
+                    "label": "Measles",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162833",
+                    "label": "Polio 2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162836",
+                    "label": "DPT-HepB + Hib 2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162346",
+                    "label": "Rotavirus",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99356",
+                    "label": "Vitamin",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90002",
+                    "label": "Others specify",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"immunisation_codes",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Others specify",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"text",
+                "concept":"90002"
+              },
+              "id":"others_specify",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "!includes('immunisation_codes', '90002')"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label":"Clinical Assesment",
+      "sections":[
+        {
+          "label":"Growth Measures",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"Height (cm)",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"number",
+                "concept":"5090",
+                "max": "300",
+                "min": "0"
+              },
+              "id":"height",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Weight (kg)",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"number",
+                "concept":"5089",
+                "max": "500",
+                "min": "0"
+              },
+              "id":"weight",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Z-score",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"99800",
+                "answers":[
+                  {
+                    "concept": "99803",
+                    "label": "< -3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99804",
+                    "label": "-3_-1 >",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99805",
+                    "label": "-1_1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99806",
+                    "label": ">1_3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99807",
+                    "label": ">3 ",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"z_score",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Muac (cm)",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"number",
+                "concept":"1343"
+              },
+              "id":"muac",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"MUAC CODE",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"99801",
+                "answers":[
+                  {
+                    "concept":"99028",
+                    "label":"Red < 11.5cm and/or Oedema Present",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"99029",
+                    "label":"Yellow 11.5 -< 12.5cm and Oedema Absent",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"99027",
+                    "label":"Green >= 12.5cm and Oedema Absent",
+                    "conceptMappings":[]
+                  }                
+                ]
+              },
+              "id":"muac_code",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label":"Clinical Assesment for signs and symptoms for HIV",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"Clinical Assessment for signs and symptoms for HIV",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"checkbox",
+                "concept":"162853",
+                "answers":[
+                  {
+                    "concept": "162848",
+                    "label": "WELL - No Clinical Signs and Symptoms",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90130",
+                    "label": "OT - Oral Thrush",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162851",
+                    "label": "ADR - Acute Diarrhea",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5018",
+                    "label": "PDR - Persistent Diarrhea",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162847",
+                    "label": "LN - Palpable Lymph Nodes",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162849",
+                    "label": "EI - Ear Infection",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162852",
+                    "label": "RDR - Recurrent Diarrhea",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90002",
+                    "label": "Other-Specify",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "832",
+                    "label": "WL - Weight Loss",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162850",
+                    "label": "G - Poor Growth (Height)",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "42",
+                    "label": "PNEU - Pneumonia",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90103",
+                    "label": "F - Fever",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "107",
+                    "label": "C - Coughing",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "512",
+                    "label": "RASH - Skin Rash",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"Clinical_assessment_for_signs_and_symptoms_for_HIV",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Other-specify",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"text",
+                "concept":"90002"
+              },
+              "id":"other_specify",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "!includes('Clinical_assessment_for_signs_and_symptoms_for_HIV','90002')"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label":"Development Assessment for Evidence of delay",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"Development milestone",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"checkbox",
+                "concept":"162864",
+                "answers":[
+                    {
+                    "concept": "162855",
+                    "label": "SMI - Smiling",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162855",
+                    "label": "COG - Cognition(point to 3 familiar objects)",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162860",
+                    "label": "CRA - Crawling",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162862",
+                    "label": "ST - Standing",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162863",
+                    "label": "ROLL - Rolling Over",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162861",
+                    "label": "HEAD - Controlling the Head",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162857",
+                    "label": "SIT - Sitting",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162859",
+                    "label": "TOB - Transfering objects from hand to hand",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162856",
+                    "label": "W - Walking",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"development_milestone",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Head Circumfrence(cm)",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"number",
+                "concept":"5314",
+                "min":"0",
+                "max":"60"
+              },
+              "id":"head_circumfrence",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                 "validators": [
+                      {
+                        "type": "js_expression",
+                        "failsWhenExpression": "false",
+                        "message": "Head Circumfrence cannot be larger than 60cms"
+                      }
+                    ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label":"Investigations",
+      "sections":[
+        {
+          "label":"Laboratory Tests",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"laboratory tests",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"checkbox",
+                "concept":"1271",
+                "answers":[
+                  {
+                    "concept": "165418",
+                    "label": "CrAg",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165417",
+                    "label": "RPR",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165416",
+                    "label": "TB LAM",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165413",
+                    "label": "GeneXpert",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "165415",
+                    "label": "Microscopy",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1019",
+                    "label": "CBC",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "844",
+                    "label": "PCR",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"laboratory_tests",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label":"Medication and Treatment",
+      "sections":[
+        {
+          "label":"other medication",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"Drug",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"text",
+                "concept":"1282"
+              },
+              "id":"drug",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Strength",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"text",
+                "concept":"1444"
+              },
+              "id":"drug_strength",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Quantity",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"text",
+                "concept":"160856"
+              },
+              "id":"quantity",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"QTY Unit",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"165791",
+                "answers":[                  
+                  {
+                    "concept": "162395",
+                    "label": "Bag",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162396",
+                    "label": "Box",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162397",
+                    "label": "Cartridge",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162398",
+                    "label": "Dose Pack",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162399",
+                    "label": "Each",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162400",
+                    "label": "Inhaler",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162401",
+                    "label": "Kit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1514",
+                    "label": "Packets",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162335",
+                    "label": "Ampule(s)",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162376",
+                    "label": "Application",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162351",
+                    "label": "Bar",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162383",
+                    "label": "Biscuit Wafer",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162354",
+                    "label": "Can",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1608",
+                    "label": "Capsule",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162355",
+                    "label": "Container",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162356",
+                    "label": "Drop",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162357",
+                    "label": "Enema",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162358",
+                    "label": "Fluid Ounce",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162359",
+                    "label": "Gallon",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "161554",
+                    "label": "Gram",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162360",
+                    "label": "Gum",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162361",
+                    "label": "Inch",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162264",
+                    "label": "International units",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162362",
+                    "label": "Kilogram",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162262",
+                    "label": "Litre",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162363",
+                    "label": "Lozenge",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162364",
+                    "label": "Milliequivalent",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162365",
+                    "label": "Metric drop",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162366",
+                    "label": "Microgram",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "161553",
+                    "label": "Milligram",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162263",
+                    "label": "Milliliter",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162367",
+                    "label": "Million units",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162368",
+                    "label": "Nebulizer",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162369",
+                    "label": "Pad",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162370",
+                    "label": "Patch",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162371",
+                    "label": "Pint",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162372",
+                    "label": "Puff",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162373",
+                    "label": "Ring pessary",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162374",
+                    "label": "Scoopful",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162375",
+                    "label": "Spray",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1518",
+                    "label": "Suppository",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162377",
+                    "label": "Syringe",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1513",
+                    "label": "Tablet",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162378",
+                    "label": "Tablespoon",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162379",
+                    "label": "Teaspoon",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162380",
+                    "label": "Tube",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162381",
+                    "label": "Unit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "162382",
+                    "label": "Vial",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"quantity_unit",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Duration",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"number",
+                "concept":"159368"
+              },
+              "id":"duration",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Duration Unit",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"1732",
+                "answers":[
+                  {
+                    "concept":"1072",
+                    "label":"Days",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"1822",
+                    "label":"Hours",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"1733",
+                    "label":"Minutes",
+                    "conceptMappings":[]
+                  },                  
+                  {
+                    "concept":"1074",
+                    "label":"Months",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"162582",
+                    "label":"Number of Occurences",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"162583",
+                    "label":"Second",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"1073",
+                    "label":"Weeks",
+                    "conceptMappings":[]
+                  },
+                  {
+                    "concept":"1734",
+                    "label":"Years",
+                    "conceptMappings":[]
+                  }
+                ]
+              },
+              "id":"duration_unit",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label":"Prophylaxis",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"Cotrim",
+              "type":"obs",
+              "questionOptions":{
+                "rendering": "radio",
+                "concept": "99798",
+                "answers": [
+                  {
+                    "concept": "90003",
+                    "label": "Yes",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90004",
+                    "label": "No",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"cotrim",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"NVP",
+              "type":"obs",
+              "questionOptions":{
+                "rendering": "radio",
+                "concept": "99799",
+                "answers": [
+                  {
+                    "concept": "90003",
+                    "label": "Yes",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90004",
+                    "label": "No",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"nvp",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label":"Medication",
+          "isExpanded":"true",
+          "questions":[
+            {
+              "label":"Refill of ART for Mother",
+              "type":"obs",
+              "questionOptions":{
+                "rendering": "radio",
+                "concept": "162854",
+                "answers": [
+                  {
+                    "concept": "90003",
+                    "label": "Yes",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90004",
+                    "label": "No",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"refill_of_art_for_mother",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Other Medication/care items",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"select",
+                "concept":"1193",
+                "answers":[
+                  {
+                    "concept": "922",
+                    "label": "Cloxacillin",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1108",
+                    "label": "EH",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "926",
+                    "label": "Ketoconazole",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99054",
+                    "label": "Nutrition Support",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99127",
+                    "label": "RHE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "916",
+                    "label": "Septrin",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "265",
+                    "label": "Amoxicillin",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99266",
+                    "label": "Coartem",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "272",
+                    "label": "Erythromicin",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "244",
+                    "label": "Mebendazole",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "919",
+                    "label": "Nystatin",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "768",
+                    "label": "RHZ",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "329",
+                    "label": "Vit B Complex",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "779",
+                    "label": "Cetrizine",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90171",
+                    "label": "Dapsone",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "747",
+                    "label": "Fluconazole",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "237",
+                    "label": "Metronidazole",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "89",
+                    "label": "Paracetamol",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1131",
+                    "label": "RHZE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90002",
+                    "label": "Other specify",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "95",
+                    "label": "Doxycycline",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "912",
+                    "label": "Ibuprofen",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "461",
+                    "label": "Multivitamins",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1194",
+                    "label": "RH",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "99128",
+                    "label": "RHZES",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id":"other_medication_careitems",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Others specify",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"text",
+                "concept":"90002"
+              },
+              "id":"others_specify",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "!includes('other_medication_careitems','90002')"
+                  },
+                  "validators": []
+                }
+              ]
+            },
+            {
+              "label":"Actions Taken",
+              "type":"obs",
+              "questionOptions":{
+                "rendering":"textarea",
+                "concept":"162865",
+                "rows": 5
+              },
+              "id":"actions_taken",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "EID Encounter"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "6f6b4802-7642-4226-84dc-ea7db01924b6",
+  "encounterType": "4345dacb-909d-429c-99aa-045f2db77e2b",
+  "referencedForms": [],
+  "allowUnspecifiedAll": false
+}

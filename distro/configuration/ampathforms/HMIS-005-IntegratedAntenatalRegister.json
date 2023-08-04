@@ -1,0 +1,1504 @@
+{
+  "name": "POC IntegratedAntenatalRegister.",
+  "pages": [
+    {
+      "label": "Vitals, Nutrition Assessment and BP",
+      "sections": [
+        {
+          "label": "Vitals and Nutrition Assessment ",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Encounter Date",
+              "type": "obs",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "dce153a7-30ab-102d-86b0-7a5022ba4115"
+              },
+              "id": "90273"
+            },
+            {
+              "label": "Client Number",
+              "type": "obs",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c7231d96-34d8-4bf7-a509-c810f75e3329"
+              },
+              "id": "99727"
+            },
+            {
+              "label": "ANC Visit number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c0b1b5f1-a692-49d1-9a69-ff901e07fa27",
+                "answers": [
+                  {
+                    "concept": "588ac57f-a4d0-47c2-9852-92502194ec4a",
+                    "label": "1st ANC visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "a3ff912e-8298-4743-84cb-62e267c91b58",
+                    "label": "2nd ANC visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "e4f09b29-061e-42b4-a142-68a4ceda373c",
+                    "label": "4th ANC visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "6a6df844-565a-44cc-b0b9-d3f77e42c9cc",
+                    "label": "5th ANC visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "ff8de97a-4279-470e-aae9-927bf2a45f27",
+                    "label": "6th ANC visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "badb383d-022c-40a5-9ddb-82e6653d9676",
+                    "label": "7th ANC visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "e01e2533-6f3c-41e1-a67f-a1e5b84eaebf",
+                    "label": "8th ANC visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "cb56e6a2-4886-4a14-b232-accc37a1043e",
+                    "label": "9th ANC visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "28037205-0d6c-4bf6-8358-71efa198f86f",
+                    "label": "10th ANC visit",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "required": "true",
+              "id": "anvist_001"
+            },
+            {
+              "label": "Gravida",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "dcc39097-30ab-102d-86b0-7a5022ba4115"
+              },
+              "id": "grav_002"
+            },
+            {
+              "label": "Parity",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "parity_003"
+            },
+            {
+              "label": "Gestation Age",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0b995cb8-7d0d-46c0-bd1a-bd322387c870"
+              },
+              "id": "99727"
+            },
+            {
+              "label": "ANC 1 Timing",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3a862ab6-7601-4412-b626-d373c1d4a51e",
+                "answers": [
+                  {
+                    "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                    "label": "YES",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NO",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc9b0596-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NOT APPLICABLE",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99732"
+            },
+            {
+              "label": "EDD",
+              "type": "obs",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5b110c7d-8031-4526-9724-f262d6e2733e"
+              },
+              "id": "99731"
+            },
+            {
+              "label": "Weight(Kg)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "dce09e2f-30ab-102d-86b0-7a5022ba4115"
+              },
+              "id": "90236"
+            },
+            {
+              "label": "Height(CM)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "5090"
+            },
+            {
+              "label": "MUAC(CM + Color Code)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "1343"
+            },
+            {
+              "label": "IRN No.",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b644c29c-9bb0-447e-9f73-2ae89496a709"
+              },
+              "id": "99733"
+            }
+          ]
+        },
+        {
+          "label": "Blood Pressure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": " ",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "LOINC",
+                    "value": "8480-6"
+                  },
+                  {
+                    "type": "AMPATH",
+                    "value": "5085"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "5085"
+                  },
+                  {
+                    "type": "PIH",
+                    "value": "5085"
+                  },
+                  {
+                    "type": "SNOMED CT",
+                    "value": "CT: 271649006"
+                  },
+                  {
+                    "type": "PIH Malawi",
+                    "value": "Malawi: 5085"
+                  },
+                  {
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "SYSTOLIC BLOOD PRESSURE"
+                  },
+                  {
+                    "type": "LOINC",
+                    "value": "53665-6"
+                  }
+                ]
+              },
+              "id": "5085"
+            },
+            {
+              "label": "/",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "PIH",
+                    "value": "5086"
+                  },
+                  {
+                    "type": "LOINC",
+                    "value": "35094-2"
+                  },
+                  {
+                    "type": "LOINC",
+                    "value": "8462-4"
+                  },
+                  {
+                    "type": "PIH Malawi",
+                    "value": "Malawi: 5086"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "5086"
+                  },
+                  {
+                    "type": "SNOMED CT",
+                    "value": "CT: 271650006"
+                  },
+                  {
+                    "type": "AMPATH",
+                    "value": "5086"
+                  }
+                ]
+              },
+              "id": "5086"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "eMTCT Status, Link To ART and VL",
+      "sections": [
+        {
+          "label": "Woman",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "STK Given?",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "609c9aee-92b3-4e17-828a-efc7933f2ecf",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 373066001"
+                      },
+                      {
+                        "type": "PIH Malawi",
+                        "value": "Malawi: 1065"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1065"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "PIH Malawi",
+                        "value": "Malawi: 1066"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 373067005"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "165379"
+            },
+            {
+              "label": "STK RESULT",
+              "type": "obs",
+              "hide": {
+                "hideWhenExpression": "165379 != '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e47d9ead-5b33-4315-9ea0-42669e4491b6",
+                "answers": [
+                  {
+                    "concept": "dc866728-30ab-102d-86b0-7a5022ba4115",
+                    "label": "POSITIVE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc85aa72-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NEGATIVE",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "165385"
+            }
+          ]
+        },
+        {
+          "label": "Partner",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Age",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "49c036eb-7634-4f6b-aec3-81f5b0736e85"
+              },
+              "id": "99729"
+            },
+            {
+              "label": "Facility",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "865811ad-796f-48c2-b575-1f530122c408"
+              },
+              "id": "165235"
+            }
+          ]
+        },
+        {
+          "label": "Link to ART",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "TFV",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "03aad24f-b80f-4f17-af88-90b83592d044",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 373066001"
+                      },
+                      {
+                        "type": "PIH Malawi",
+                        "value": "Malawi: 1065"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1065"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "PIH Malawi",
+                        "value": "Malawi: 1066"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 373067005"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "165422"
+            },
+            {
+              "label": "Pre Art number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9c268284-c9a2-44d9-a9fd-b4fbb686a4fc"
+              },
+              "id": "99778"
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0de0b715-f3ef-4a91-a145-09509112b693"
+              },
+              "id": "99321"
+            }
+          ]
+        },
+        {
+          "label": "VL",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "CD4",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "dcbcba2c-30ab-102d-86b0-7a5022ba4115"
+              },
+              "id": "5497"
+            },
+            {
+              "label": "VIRAL LOAD",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "dc8d83e3-30ab-102d-86b0-7a5022ba4115"
+              },
+              "id": "856"
+            },
+            {
+              "label": "WHO CLINICAL STAGE",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "dcdff274-30ab-102d-86b0-7a5022ba4115",
+                "answers": [
+                  {
+                    "concept": "dcda3663-30ab-102d-86b0-7a5022ba4115",
+                    "label": "HIV WHO CLINICAL STAGE 3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dd269c18-30ab-102d-86b0-7a5022ba4115",
+                    "label": "HIV WHO CLINICAL STAGE T4",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcda3251-30ab-102d-86b0-7a5022ba4115",
+                    "label": "HIV WHO CLINICAL STAGE 2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dd2666a5-30ab-102d-86b0-7a5022ba4115",
+                    "label": "HIV WHO CLINICAL STAGE T2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcda3a80-30ab-102d-86b0-7a5022ba4115",
+                    "label": "HIV WHO CLINICAL STAGE 4",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcda2bc2-30ab-102d-86b0-7a5022ba4115",
+                    "label": "HIV WHO CLINICAL STAGE 1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dd25e735-30ab-102d-86b0-7a5022ba4115",
+                    "label": "HIV WHO CLINICAL STAGE T1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dd266d64-30ab-102d-86b0-7a5022ba4115",
+                    "label": "HIV WHO CLINICAL STAGE T3",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "90203"
+            }
+          ]
+        },
+        {
+          "label": "Risk Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "eMTCT Risk Assesment",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a6037516-7c28-48ac-83c4-98ab4a032fa3",
+                "answers": [
+                  {
+                    "concept": "26514156-31fb-4a99-95f1-f005a4676c16",
+                    "label": "Low",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1408AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HIGH",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc9b0596-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NOT APPLICABLE",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "165380"
+            },
+            {
+              "label": "Linkage Art No",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9db2900d-2b44-4629-bdf8-bf25de650577"
+              },
+              "id": "165382"
+            },
+            {
+              "label": "ART Code",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a615f932-26ee-449c-8e20-e50a15232763",
+                "answers": [
+                  {
+                    "concept": "026e31b7-4a26-44d0-8398-9a41c40ff7d3",
+                    "label": "Initiated ART for eMTCT on that visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "73dcdac8-527c-4c44-ae68-3fb71f71c369",
+                    "label": "No HIV drugs given in maternity",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "2aa7d442-6cbb-4609-9dd3-bc2ad6f05016",
+                    "label": "Client already on HAART prior to ANC first visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "2c000b41-f9d7-40c1-8de0-bce91dbae932",
+                    "label": "Revisit client Initiated on ART on ealier visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "bbc63761-0741-4583-9396-a34d3a18601c",
+                    "label": "Revisit ANC client already on HAART prior to ANC first visit",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc9b0596-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NOT APPLICABLE",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99744"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "TB status, Blood Screening and Hep B",
+      "sections": [
+        {
+          "label": "TB",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Infant Arv Prophylaxis",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f42e40f3-7f76-4c0d-b9cc-f66acbb092c4",
+                "answers": [
+                  {
+                    "concept": "20bcbf56-2784-4bf0-a6b4-23ba43764163",
+                    "label": "TDF-FTC-EFV",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "25b0b83c-a7b8-4663-b727-0c03c982bab2",
+                    "label": "TDF-3TC-EFV",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc887bbb-30ab-102d-86b0-7a5022ba4115",
+                    "label": "ZIDOVUDINE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "54c3bbfc-5814-423a-8893-dd1b486392db",
+                    "label": "ZDV-3TC-NVP",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "901986ef-dce8-4d85-946a-b653530290ee",
+                    "label": "ZDV-3TC-RAL",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc800d9d-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NEVIRAPINE",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "165389"
+            },
+            {
+              "label": "Infant and Young Child Feeding ",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5d993591-9334-43d9-a208-11b10adfad85",
+                "answers": [
+                  {
+                    "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                    "label": "YES",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NO",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99749"
+            },
+            {
+              "label": "WEEKS OF AMMENORRHEA (WOA) AT ULTRA SOUND (U/S) DONE ",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "fbea6522-78f5-4d3d-a695-aaedfef7a76a"
+              },
+              "id": "166196"
+            },
+            {
+              "label": "GBV Risk /TYPE",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6b433917-16af-498d-8fda-0e7919f59c5b",
+                "answers": [
+                  {
+                    "concept": "1490AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Physical trauma",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 417746004"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "1490"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "7175"
+                      },
+                      {
+                        "type": "ICD-10-WHO",
+                        "value": "T14.9"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "6686c0f0-cf27-4b9b-8495-8cf80a7357ae",
+                    "label": "Forced sexual intercourse",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "6d1c2d6f-eb86-4a85-b6b4-c2ff4bb879ce",
+                    "label": "No Signs",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "ee2f128f-9c62-4814-8c9c-fbde017c74f8",
+                    "label": "Psychological Violance",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "165400"
+            },
+            {
+              "label": "TB Status",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "dce02aa1-30ab-102d-86b0-7a5022ba4115",
+                "answers": [
+                  {
+                    "concept": "dcdaaae4-30ab-102d-86b0-7a5022ba4115",
+                    "label": "CURRENTLY ON INH PROPHYLAXIS FOR TB",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcdaccc1-30ab-102d-86b0-7a5022ba4115",
+                    "label": "No signs or symptoms of TB",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcdaaf0f-30ab-102d-86b0-7a5022ba4115",
+                    "label": "Suspect TB - referred or sputum sent",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcdac38b-30ab-102d-86b0-7a5022ba4115",
+                    "label": "Diagnosed with TB",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcdaa6b4-30ab-102d-86b0-7a5022ba4115",
+                    "label": "Currently on TB treatment",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "1435dcb2-9470-4b69-8d05-199e5f13044c",
+                    "label": "TB Diagnosed - Clinically diagnosed",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "36cd82a6-370d-4188-bf69-ad8ebbc86d37",
+                    "label": "TB Diagnosed - Gene Xpert",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "d941bfbc-7546-464b-90ff-b8e28d247d47",
+                    "label": "TB Diagnosed - TB LAM",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "d5a86db5-3e7f-4344-85d7-572c8bb6b966",
+                    "label": "TB Diagnosed - TB Microscopy",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "e2fd439a-619e-4067-a2f1-8e2454120a58",
+                    "label": "TB Diagnosed - Chest Xray",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "ff246b26-f2d1-45f6-9e33-385eb8d19d3f",
+                    "label": "TB Diagnosed - Others",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "2c8ddc0b-d92d-45fa-9c6f-23e640fb4d24",
+                    "label": "Confirmed TB not on Treatment",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "031d9b15-62d5-4f73-a374-5503f0421427",
+                    "label": "TB Treatment Completed",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "90216"
+            }
+          ]
+        },
+        {
+          "label": "Blood Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HB",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "dc548e89-30ab-102d-86b0-7a5022ba4115"
+              },
+              "id": "21"
+            },
+            {
+              "label": "Blood Group",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "dc747e86-30ab-102d-86b0-7a5022ba4115",
+                "answers": [
+                  {
+                    "concept": "dc863095-30ab-102d-86b0-7a5022ba4115",
+                    "label": "A NEGATIVE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc8627f6-30ab-102d-86b0-7a5022ba4115",
+                    "label": "A POSITIVE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc863929-30ab-102d-86b0-7a5022ba4115",
+                    "label": "B POSITIVE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc9f4cdf-30ab-102d-86b0-7a5022ba4115",
+                    "label": "AB NEGATIVE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc9f4893-30ab-102d-86b0-7a5022ba4115",
+                    "label": "AB POSITIVE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc865e8c-30ab-102d-86b0-7a5022ba4115",
+                    "label": "O NEGATIVE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc86419b-30ab-102d-86b0-7a5022ba4115",
+                    "label": "B NEGATIVE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc8655aa-30ab-102d-86b0-7a5022ba4115",
+                    "label": "O POSITIVE",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "300"
+            },
+            {
+              "label": "RH",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1429AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 261665006"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "UNKNOWN"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "1067"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "dc85aa72-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NEGATIVE",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc866728-30ab-102d-86b0-7a5022ba4115",
+                    "label": "POSITIVE",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "1429"
+            },
+            {
+              "label": "Sickle Cell",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "13aafb74-ca33-426b-8094-d1b0ae6588b7",
+                "answers": [
+                  {
+                    "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                    "label": "YES",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NO",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99641"
+            }
+          ]
+        },
+        {
+          "label": "URINE",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Protein",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1d27fe95-27cc-4102-b49d-28bc3f319c74",
+                "conceptMappings": [
+                  {
+                    "type": "LOINC",
+                    "value": "50561-0 (Protein in urine)"
+                  }
+                ]
+              },
+              "id": "166208"
+            },
+            {
+              "label": "Glucose",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "2f813250-3db9-4161-9f4a-e5a2901510ef",
+                "conceptMappings": [
+                  {
+                    "type": "LOINC",
+                    "value": "53328-1 (Glucose in urine)"
+                  }
+                ]
+              },
+              "id": "166210"
+            }
+          ]
+        },
+        {
+          "label": "Woman",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Syphilis",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "112493AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "IMO ProblemIT",
+                    "value": "ProblemIT: 55375"
+                  },
+                  {
+                    "type": "SNOMED CT",
+                    "value": "CT: 76272004"
+                  },
+                  {
+                    "type": "AMPATH",
+                    "value": "223"
+                  },
+                  {
+                    "type": "PIH",
+                    "value": "223"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "112493"
+                  },
+                  {
+                    "type": "ICD-10-WHO",
+                    "value": "A53.9"
+                  }
+                ]
+              },
+              "id": "112493"
+            },
+            {
+              "label": "Hep B",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "9f6ddcaa-1292-410f-b6d7-90eecb6c3c2a"
+              },
+              "id": "162837",
+              "questions": [
+                {
+                  "label": "HEPATITIS B VACCINATION",
+                  "id": "__1HovoGvxs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "782AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "type": "obs"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Partner",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Syphilis",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3f84a63b-1aed-42a1-b59e-49f75626a60e",
+                "answers": [
+                  {
+                    "concept": "f544bf93-327a-4483-b1ff-cf9d95d13a43",
+                    "label": "Client Tested and Results Given",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "e378c65a-945a-4d2e-95bb-cc4b87e2d0b2",
+                    "label": "Client tested positive but not yet given treatment",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "ecdcedbb-c19b-4269-9854-b2c00114d2b8",
+                    "label": "Client tested, results given, client non-reactive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "0e9c5f67-cb23-4140-ae1d-dc895d88c10e",
+                    "label": "Client tested on revisit and results given",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "81c10e53-e2cc-463a-8e9e-7a9083f17a55",
+                    "label": "Client tested positive on revisit but not yet given treatment",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "c152cd81-ee6d-4fa2-b20e-feea53d8e5fe",
+                    "label": "Client tested on revisit, results given to client who is non-reactive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5eaaa364-97cf-47c7-a7af-2e578c128fdc",
+                    "label": "Client tested on retest and results given",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "e769df5e-1ee9-4e87-963d-0e3e8917add7",
+                    "label": "Client tested positive on retest but not yet given treatment",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90277990-32fa-418c-b231-68ffdfce0d7d",
+                    "label": "Client tested non-reactive on retest and results given to client",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "ee5ba4a0-e03d-421a-bbbd-e391884477a4",
+                    "label": "Client not tested for syphilis",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "165471"
+            },
+            {
+              "label": "Hep B",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a4f91143-f591-4ed2-b84f-abfaffcde575",
+                "answers": [
+                  {
+                    "concept": "f544bf93-327a-4483-b1ff-cf9d95d13a43",
+                    "label": "Client Tested and Results Given",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "e378c65a-945a-4d2e-95bb-cc4b87e2d0b2",
+                    "label": "Client tested positive but not yet given treatment",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "ecdcedbb-c19b-4269-9854-b2c00114d2b8",
+                    "label": "Client tested, results given, client non-reactive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "0e9c5f67-cb23-4140-ae1d-dc895d88c10e",
+                    "label": "Client tested on revisit and results given",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "81c10e53-e2cc-463a-8e9e-7a9083f17a55",
+                    "label": "Client tested positive on revisit but not yet given treatment",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "c152cd81-ee6d-4fa2-b20e-feea53d8e5fe",
+                    "label": "Client tested on revisit, results given to client who is non-reactive",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "5eaaa364-97cf-47c7-a7af-2e578c128fdc",
+                    "label": "Client tested on retest and results given",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "e769df5e-1ee9-4e87-963d-0e3e8917add7",
+                    "label": "Client tested positive on retest but not yet given treatment",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "90277990-32fa-418c-b231-68ffdfce0d7d",
+                    "label": "Client tested non-reactive on retest and results given to client",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "bcd35e04-ae77-4cf0-803a-eee20e49c87b",
+                    "label": "Client not tested for Hepatitis B",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "166451"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "FP, Pills and Others",
+      "sections": [
+        {
+          "label": "FP and Counseling",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "FAMILY PLANNING COUNSELING ",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0815c786-5994-49e4-aa07-28b662b0e428",
+                "answers": [
+                  {
+                    "concept": "d142bc94-9ed9-4b99-bd88-30a022b60b3b",
+                    "label": "Counselling and provided with condoms",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "cd054f0f-314e-4e0a-9ea8-c3fd1e685ea8",
+                    "label": "Counselling Done",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99296"
+            },
+            {
+              "label": "TETANUS DIPTHERIA DOSE (Td): ",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "17AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "17"
+            },
+            {
+              "label": "IPT DOSE / CTX:",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1da3cb98-59d8-4bfd-b0bb-c9c1bcd058c6",
+                "answers": [
+                  {
+                    "concept": "dca06bae-30ab-102d-86b0-7a5022ba4115",
+                    "label": "COMPLETED",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "f1d5afce-8dfe-4d2d-b24b-051815d61848",
+                    "label": "Second doze",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "f29f43c6-076a-4f70-9ae8-4563ac3fda80",
+                    "label": "ND",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "0192ca59-b647-4f88-b07e-8fda991ba6d6",
+                    "label": "First Dose",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "a5497b5a-7da1-42d2-9985-b5ec695b4199",
+                    "label": "Third doze",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "da40fa2a-074f-4d90-a875-5bb8316bc753",
+                    "label": "Fourth doze",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "18f11bf4-c986-4cdd-b31c-fb189ea39333",
+                    "label": "Fifty dose",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "fca28768-50dc-4d6b-a3d2-2aae3b376b27",
+                    "label": "Initial Septrin prescription",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "b0439b8e-469e-43e6-9dda-9b6b49f2147b",
+                    "label": "Septrin prescribed on previous visit",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99306"
+            },
+            {
+              "label": "FREE LLIN",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3e7bb52c-e6ae-4a0b-bce0-3b36286e8658",
+                "answers": [
+                  {
+                    "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                    "label": "YES",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NO",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99760"
+            },
+            {
+              "label": "MEBENDAZOLE DOSE ",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9d6abbc4-707a-4ec7-a32a-4090b1c3af87",
+                "answers": [
+                  {
+                    "concept": "0134c1d3-a255-46b2-ac77-38c0edcd9e53",
+                    "label": "Dose not received",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "a7a9d632-b266-4085-9a5e-57fc8dd56f0c",
+                    "label": "Dose received",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dca06bae-30ab-102d-86b0-7a5022ba4115",
+                    "label": "COMPLETED",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "beb5523f-ec5a-46fe-a7c9-f3270a05f4b4",
+                    "label": "Not Due for Dose",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99312"
+            }
+          ]
+        },
+        {
+          "label": "Number Of Pills",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Iron Sulphate",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c02d9887-6a46-43cc-9495-5ec034dc05d6"
+              },
+              "id": "99761"
+            },
+            {
+              "label": "Folic Acid",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8c346216-c444-4528-a174-5139922218ed",
+                "answers": [
+                  {
+                    "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                    "label": "YES",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NO",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99319"
+            },
+            {
+              "label": "Combined",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b1e565e0-833e-4c9e-aea4-43ebf781c1e4"
+              },
+              "id": "165352"
+            },
+            {
+              "label": "Misoprostols",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1743fc63-094c-412b-bcf9-793391102377"
+              },
+              "id": "165488"
+            }
+          ]
+        },
+        {
+          "label": "Others",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Other Treatments",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0aea6828-2328-4038-9cd9-680dbdf29790",
+                "rows": "4"
+              },
+              "id": "99341"
+            },
+            {
+              "label": "Ref",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "cd27f0ac-0fd3-4f40-99a3-57742106f5fd",
+                "answers": [
+                  {
+                    "concept": "6442c9f6-25e8-4c8e-af8a-e9f6845ceaed",
+                    "label": "Ref out",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "14714862-6c78-49da-b65b-f249cccddfb6",
+                    "label": "Ref In",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "03997d45-f6f7-4ee2-a6fe-b16985e3495d",
+                    "label": "C/Ref IN",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "3af0aae4-4ea7-489d-a5be-c5339f7c5a77",
+                    "label": "FSG",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "id": "99322"
+            },
+            {
+              "label": "COMPLICATIONS/ RISK FACTORS",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e23bb619-9f58-4ea3-b380-3f547d23837c"
+              },
+              "id": "166466"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "General Comments",
+      "sections": [
+        {
+          "label": "Provider Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Provider Name",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "1473"
+            },
+            {
+              "label": "General Comments",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "bdd9c3cf-02b0-42a3-96ab-fbba9fbd0af6",
+                "rows": "4"
+              },
+              "id": "166474"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "044daI6d-f80e-48fe-aba9-037f241905Pe",
+  "uuid": "c1ea84d2-c162-4ad1-83fc-a6fd4ad4c60b",
+  "referencedForms": []
+}

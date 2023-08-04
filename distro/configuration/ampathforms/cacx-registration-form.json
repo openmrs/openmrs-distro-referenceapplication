@@ -1,0 +1,1664 @@
+{
+	"name": "Screening and Cancer Treatment Form",
+	"pages": [
+		{
+			"label": "Visit Details",
+			"sections": [
+				{
+					"label": "Client Visit Details",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Encounter Date",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "date",
+								"concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"conceptMappings": [
+									{
+										"type": "SNOMED-CT",
+										"value": "364713004"
+									}
+								]
+							},
+							"id": "cacx_encounter_date"
+						},
+						{
+							"label": "Entry Point",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "8ef61711-3036-4e29-ad0f-340bd18c1168",
+								"answers": [
+									{
+										"concept": "aa5ef0df-b64c-4616-81bf-a85374ae1b07",
+										"label": "Antiretraviral Treatment Clinic",
+										"conceptMappings": []
+									},
+									{
+										"concept": "939cdaee-fb72-404b-89d5-fc697f0339d2",
+										"label": "Cancer Unit",
+										"conceptMappings": []
+									},
+									{
+										"concept": "160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Outpatient department",
+										"conceptMappings": [
+											{
+												"type": "SNOMED-CT",
+												"value": "33022008"
+											},
+											{
+												"type": "PIH",
+												"value": "1651"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1965"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1965"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "33022008"
+											},
+											{
+												"type": "PIH",
+												"value": "1651"
+											},
+											{
+												"type": "CIEL",
+												"value": "160542"
+											}
+										]
+									},
+									{
+										"concept": "160546AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Sexually transmitted infection program/clinic",
+										"conceptMappings": [
+											{
+												"type": "SNOMED-CT",
+												"value": "25681007"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "25681007"
+											},
+											{
+												"type": "CIEL",
+												"value": "160546"
+											},
+											{
+												"type": "PIH",
+												"value": "1786"
+											},
+											{
+												"type": "PIH",
+												"value": "1786"
+											}
+										]
+									},
+									{
+										"concept": "167050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Inpatient department",
+										"conceptMappings": [
+											{
+												"type": "CIEL",
+												"value": "167050"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "284548004"
+											}
+										]
+									},
+									{
+										"concept": "19eeedc1-ed24-4a4a-a2f2-6fb251939d1c",
+										"label": "Tuberculosis Clinic",
+										"conceptMappings": []
+									},
+									{
+										"concept": "1622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Antenatal care services",
+										"conceptMappings": []
+									},
+									{
+										"concept": "5483AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Family planning services",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "5483"
+											},
+											{
+												"type": "AMPATH",
+												"value": "5483"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "310031001"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "310031001"
+											}
+										]
+									},
+									{
+										"concept": "159927AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "outreach clinic",
+										"conceptMappings": []
+									},
+									{
+										"concept": "1623AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Postnatal care services",
+										"conceptMappings": []
+									},
+									{
+										"concept": "07b06c66-7eaa-40d0-b9a5-1cbf167e97b6",
+										"label": "Other Entry Point (Specify)",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "cacx_entry_point"
+						},
+						{
+							"label": "Referral In",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "7b734819-27fb-41bb-af95-f91182c242f2",
+								"conceptMappings": [
+									{
+										"type": "SNOMED-CT",
+										"value": "3457005"
+									},
+									{
+										"type": "SNOMED-CT",
+										"value": "3457005"
+									},
+									{
+										"type": "OCT",
+										"value": "PatientReferral"
+									}
+								],
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373066001"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "PIH",
+												"value": "1066"
+											}
+										]
+									},
+									{
+										"concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Unknown",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1067"
+											},
+											{
+												"type": "CIEL",
+												"value": "1067"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "261665006"
+											},
+											{
+												"type": "PIH",
+												"value": "1067"
+											},
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "UNKNOWN"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1067"
+											},
+											{
+												"type": "PIH",
+												"value": "1067"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 261665006"
+											}
+										]
+									}
+								]
+							},
+							"id": "cacx_referral_in"
+						},
+						{
+							"label": "Purpose of Visit",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "160288AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"answers": [
+									{
+										"concept": "ab4510ac-3feb-4abb-8653-5d252813798f",
+										"label": "ART Initiation",
+										"conceptMappings": []
+									},
+									{
+										"concept": "e06ac289-2920-4b85-80c9-805c69b6e5a9",
+										"label": "ART Refill",
+										"conceptMappings": []
+									},
+									{
+										"concept": "4b19b253-97c4-4b1b-bb14-41f2c576b8c5",
+										"label": "ART Regimen Switch/ Substitution",
+										"conceptMappings": []
+									},
+									{
+										"concept": "163153AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Intensive adherence counseling sessions set",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "cacx_purpose_of_visit"
+						}
+					]
+				},
+				{
+					"label": "HIV Details",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "HIV Status [update with UgandaEMR]",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "1169AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"conceptMappings": [
+									{
+										"type": "ICD-10-WHO",
+										"value": "Z21"
+									}
+								],
+								"answers": [
+									{
+										"concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Unknown",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1067"
+											},
+											{
+												"type": "CIEL",
+												"value": "1067"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "261665006"
+											},
+											{
+												"type": "PIH",
+												"value": "1067"
+											},
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "UNKNOWN"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1067"
+											},
+											{
+												"type": "PIH",
+												"value": "1067"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 261665006"
+											}
+										]
+									},
+									{
+										"concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Negative",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "664"
+											},
+											{
+												"type": "PIH",
+												"value": "664"
+											},
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "NEGATIVE"
+											},
+											{
+												"type": "CIEL",
+												"value": "664"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "260385009"
+											},
+											{
+												"type": "AMPATH",
+												"value": "664"
+											},
+											{
+												"type": "CIEL",
+												"value": "664"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "260385009"
+											},
+											{
+												"type": "PIH",
+												"value": "664"
+											},
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "NEGATIVE"
+											},
+											{
+												"type": "AMPATH",
+												"value": "665"
+											},
+											{
+												"type": "AMPATH",
+												"value": "665"
+											}
+										]
+									},
+									{
+										"concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Positive",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "703"
+											},
+											{
+												"type": "AMPATH",
+												"value": "704"
+											},
+											{
+												"type": "AMPATH",
+												"value": "703"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "10828004"
+											},
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "POSITIVE"
+											}
+										]
+									}
+								]
+							},
+							"id": "cacx_hiv_status"
+						},
+						{
+							"label": "Currently Taking ARV",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373066001"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Unknown",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1067"
+											},
+											{
+												"type": "CIEL",
+												"value": "1067"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "261665006"
+											},
+											{
+												"type": "PIH",
+												"value": "1067"
+											},
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "UNKNOWN"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1067"
+											},
+											{
+												"type": "PIH",
+												"value": "1067"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 261665006"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "PIH",
+												"value": "1066"
+											}
+										]
+									}
+								]
+							},
+							"id": "cacx_currently_taking_ARV",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_hiv_status) || cacx_hiv_status != '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+							}
+						},
+						{
+							"label": "HIV Service Number",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "162054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"conceptMappings": [
+									{
+										"type": "CIEL",
+										"value": "162054"
+									}
+								]
+							},
+							"id": "cacx_hiv_service_number",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_currently_taking_ARV) || cacx_currently_taking_ARV != '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"label": "Screening",
+			"sections": [
+				{
+					"label": "Screening",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Cervical Cancer Screening Methods",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "checkbox",
+								"concept": "53ff5cd0-0f37-4190-87b1-9eb439a15e94",
+								"answers": [
+									{
+										"concept": "160705AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Colposcopy",
+										"conceptMappings": [
+											{
+												"type": "CIEL",
+												"value": "160705"
+											},
+											{
+												"type": "IMO-ProcedureIT",
+												"value": "1241"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "392003006"
+											},
+											{
+												"type": "IMO-ProcedureIT",
+												"value": "1241"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "392003006"
+											},
+											{
+												"type": "CIEL",
+												"value": "160705"
+											}
+										]
+									},
+									{
+										"concept": "9580690a-0e84-451a-ada9-c4478d999dc2",
+										"label": "Human Papillomavirus DNA test (HPV DNA)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "885AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Papanicolaou smear",
+										"conceptMappings": [
+											{
+												"type": "SNOMED-CT",
+												"value": "90226004"
+											},
+											{
+												"type": "AMPATH",
+												"value": "885"
+											},
+											{
+												"type": "CIEL",
+												"value": "885"
+											},
+											{
+												"type": "AMPATH",
+												"value": "41"
+											},
+											{
+												"type": "IMO-ProcedureIT",
+												"value": "1064218"
+											},
+											{
+												"type": "IMO-ProcedureIT",
+												"value": "1064218"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "90226004"
+											},
+											{
+												"type": "AMPATH",
+												"value": "885"
+											},
+											{
+												"type": "CIEL",
+												"value": "885"
+											},
+											{
+												"type": "AMPATH",
+												"value": "41"
+											}
+										]
+									},
+									{
+										"concept": "8304ffef-ac7b-425c-af3b-6ddc4d052ca8",
+										"label": "Visual Inspection of the Cervix with Acetic Acid (VIA)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "46184e00-3417-4b88-9ef5-9990a0979b1a",
+										"label": "Visual Inspection of the Cervix with Lugol’s Iodine (VILI)",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "cacx_screening_methods"
+						},
+						{
+							"label": "HPV test results[missing]",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text"
+							},
+							"id": "cacx_hpv_test_result",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_screening_methods) || cacx_screening_methods != '9580690a-0e84-451a-ada9-c4478d999dc2'"
+							}
+						},
+						{
+							"label": "Date HPV test Done",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "date",
+								"concept": "2f256b46-395b-40f8-b93e-3ea68e5531bc",
+								"weeksList": ""
+							},
+							"id": "cacx_date_HPV_test_done",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_screening_methods) || cacx_screening_methods != '9580690a-0e84-451a-ada9-c4478d999dc2'"
+							}
+						},
+						{
+							"label": "VIA Procedure Screening Results[Missing]",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text"
+							},
+							"id": "cacx_VIA_result",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_screening_methods) || cacx_screening_methods != '8304ffef-ac7b-425c-af3b-6ddc4d052ca8'"
+							}
+						},
+						{
+							"label": "Date VIA/VILLI done",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "date",
+								"concept": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"weeksList": ""
+							},
+							"id": "cacx_VIA_date",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_screening_methods) || cacx_screening_methods != '8304ffef-ac7b-425c-af3b-6ddc4d052ca8'"
+							}
+						},
+						{
+							"label": "Why No VIA[missing]",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text"
+							},
+							"id": "cacx_why_not_via",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_screening_methods) || cacx_screening_methods != '46184e00-3417-4b88-9ef5-9990a0979b1a'"
+							}
+						},
+						{
+							"label": "Colposcopy Results",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "160705AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"conceptMappings": [
+									{
+										"type": "CIEL",
+										"value": "160705"
+									},
+									{
+										"type": "IMO-ProcedureIT",
+										"value": "1241"
+									},
+									{
+										"type": "SNOMED-CT",
+										"value": "392003006"
+									},
+									{
+										"type": "IMO-ProcedureIT",
+										"value": "1241"
+									},
+									{
+										"type": "SNOMED-CT",
+										"value": "392003006"
+									},
+									{
+										"type": "CIEL",
+										"value": "160705"
+									}
+								],
+								"answers": [
+									{
+										"concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Low grade",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "514"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "263654008"
+											},
+											{
+												"type": "AMPATH",
+												"value": "514"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1116"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "263654008"
+											},
+											{
+												"type": "CIEL",
+												"value": "1116"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1116"
+											}
+										]
+									},
+									{
+										"concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Normal",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "CIEL",
+												"value": "1115"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											}
+										]
+									},
+									{
+										"concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "High grade",
+										"conceptMappings": [
+											{
+												"type": "CIEL",
+												"value": "1118"
+											},
+											{
+												"type": "PIH",
+												"value": "2475"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1118"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "385660001"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "385660001"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1118"
+											},
+											{
+												"type": "PIH",
+												"value": "1118"
+											}
+										]
+									},
+									{
+										"concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Unsatisfactory",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "CIEL",
+												"value": "1115"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											}
+										]
+									}
+								]
+							},
+							"id": "cacx_colposcopy",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_screening_methods) || cacx_screening_methods != '160705AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+							}
+						},
+						{
+							"label": "Pap Smear Results ",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "885AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"conceptMappings": [
+									{
+										"type": "SNOMED-CT",
+										"value": "90226004"
+									},
+									{
+										"type": "AMPATH",
+										"value": "885"
+									},
+									{
+										"type": "CIEL",
+										"value": "885"
+									},
+									{
+										"type": "AMPATH",
+										"value": "41"
+									},
+									{
+										"type": "IMO-ProcedureIT",
+										"value": "1064218"
+									},
+									{
+										"type": "IMO-ProcedureIT",
+										"value": "1064218"
+									},
+									{
+										"type": "SNOMED-CT",
+										"value": "90226004"
+									},
+									{
+										"type": "AMPATH",
+										"value": "885"
+									},
+									{
+										"type": "CIEL",
+										"value": "885"
+									},
+									{
+										"type": "AMPATH",
+										"value": "41"
+									}
+								],
+								"answers": [
+									{
+										"concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "NEGATIVE for Intra-epithelial Lesion or Malignancy",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "514"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "263654008"
+											},
+											{
+												"type": "AMPATH",
+												"value": "514"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1116"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "263654008"
+											},
+											{
+												"type": "CIEL",
+												"value": "1116"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1116"
+											}
+										]
+									},
+									{
+										"concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "POSITIVE (Low grade Squamous Intra-epithelial Lesion)",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "CIEL",
+												"value": "1115"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											}
+										]
+									},
+									{
+										"concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "POSITIVE (High grade Squamous Intra-epithelial Lesion)",
+										"conceptMappings": [
+											{
+												"type": "CIEL",
+												"value": "1118"
+											},
+											{
+												"type": "PIH",
+												"value": "2475"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1118"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "385660001"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "385660001"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1118"
+											},
+											{
+												"type": "PIH",
+												"value": "1118"
+											}
+										]
+									},
+									{
+										"concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Suspicious of Cancer",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "CIEL",
+												"value": "1115"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											}
+										]
+									}
+								]
+							},
+							"id": "cacx_pap_smear_result",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_screening_methods) || cacx_screening_methods != '885AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+							}
+						},
+						{
+							"label": "Histology Results",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "f63642da-5da9-4c22-8676-50d2a877d25d",
+								"answers": [
+									{
+										"concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Normal",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1115"
+											},
+											{
+												"type": "CIEL",
+												"value": "1115"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "17621005"
+											}
+										]
+									},
+									{
+										"concept": "78e0e5e7-977d-42f3-86da-b34f1dad8aff",
+										"label": "Cervical intraepithelial neoplasia (CIN 1)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "3f3aba89-e316-4999-bbb4-52c798af0daf",
+										"label": "Cervical intraepithelial neoplasia (CIN 2)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "aae4360f-de32-48b2-a98e-bde5371411e8",
+										"label": "Cervical intraepithelial neoplasia (CIN 3)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "155424AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "carcinoma of uterine cervix, invasive",
+										"conceptMappings": [
+											{
+												"type": "ICD-10-WHO",
+												"value": "C53.9"
+											}
+										]
+									}
+								]
+							},
+							"id": "cacx_histoloty_results",
+							"hide": {
+								"hideWhenExpression": "isEmpty(cacx_screening_methods) || cacx_screening_methods != '160705AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+							}
+						},
+						{
+							"label": "Cervical Map - Describe obs seen",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "textarea",
+								"concept": "162749AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"rows": ""
+							},
+							"id": "cacx_cervical_map"
+						}
+					]
+				}
+			]
+		},
+		{
+			"label": "Management Plan",
+			"sections": [
+				{
+					"label": "Management Plan",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Treatment of cervical pre-cancer lesions",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "checkbox",
+								"concept": "7b5f8ad3-3e10-4993-94d5-5750c42d8cfb",
+								"answers": [
+									{
+										"concept": "8d16da90-a29e-4375-97e8-a47fe1e259e8",
+										"label": "Thermal ablation (Cryotherapy or Thermal ablation)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "efa3d52d-68ae-486d-a9b1-608a289735a1",
+										"label": "Loop Electro Excision  Procedure (LEEP)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "None",
+										"conceptMappings": [
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "NONE"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1107"
+											},
+											{
+												"type": "PIH",
+												"value": "1107"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "260413007"
+											},
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "NONE"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1107"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "260413007"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1107"
+											},
+											{
+												"type": "CIEL",
+												"value": "1107"
+											},
+											{
+												"type": "PIH",
+												"value": "1107"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1107"
+											}
+										]
+									},
+									{
+										"concept": "efa3d52d-68ae-486d-a9b1-608a289735a1",
+										"label": "Loop Electro Excision  Procedure (LEEP)",
+										"conceptMappings": []
+									},
+									{
+										"concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "None",
+										"conceptMappings": [
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "NONE"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1107"
+											},
+											{
+												"type": "PIH",
+												"value": "1107"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "260413007"
+											},
+											{
+												"type": "org.openmrs.module.mdrtb",
+												"value": "NONE"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1107"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "260413007"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1107"
+											},
+											{
+												"type": "CIEL",
+												"value": "1107"
+											},
+											{
+												"type": "PIH",
+												"value": "1107"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1107"
+											}
+										]
+									},
+									{
+										"concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Not done",
+										"conceptMappings": [
+											{
+												"type": "CIEL",
+												"value": "1118"
+											},
+											{
+												"type": "PIH",
+												"value": "2475"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1118"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "385660001"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "385660001"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1118"
+											},
+											{
+												"type": "PIH",
+												"value": "1118"
+											}
+										]
+									},
+									{
+										"concept": "8d16da90-a29e-4375-97e8-a47fe1e259e8",
+										"label": "Thermal ablation (Cryotherapy or Thermal ablation)",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "cacx_treatment_of_cervical_pre_cancer_lesions"
+						},
+						{
+							"label": "Timeliness [missing]",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text"
+							},
+							"id": "cacx_timeliness "
+						},
+						{
+							"label": "Reason for Postponing[missing]",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text"
+							},
+							"id": "cacx_reason_for_postponing"
+						},
+						{
+							"label": "Observations and Complications",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "textarea",
+								"rows": "",
+								"concept": "ae82e6f0-ef22-4c27-825e-1de739182986"
+							},
+							"id": "cacx_observations"
+						},
+						{
+							"label": "Other Services Provided[Missing]",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text"
+							},
+							"id": "cacx_other_services"
+						},
+						{
+							"label": "Other Treatment",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "060dd5b2-2d65-4db5-85f0-cd1ba809350f"
+							},
+							"id": "cacx_other_treatment"
+						},
+						{
+							"label": "Services Referred for",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "checkbox",
+								"concept": "494117dd-c763-4374-8402-5ed91bd9b8d0",
+								"answers": [
+									{
+										"concept": "960f2980-35e2-4677-88ed-79424fe0fc91",
+										"label": "Clinical Services Referred",
+										"conceptMappings": []
+									},
+									{
+										"concept": "b5afd495-00fc-4d94-9e26-8f6c8cc8caa0",
+										"label": "Other Support Services Referred",
+										"conceptMappings": []
+									},
+									{
+										"concept": "5f394708-ca7d-4558-8d23-a73de181b02d",
+										"label": "Prevention Services Referred",
+										"conceptMappings": []
+									},
+									{
+										"concept": "bf634be9-197a-433b-8e4e-7a04242a4e1d",
+										"label": "Sexual and Reproductive Services Referred",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "cacx_services_referred_for"
+						},
+						{
+							"label": "Provider Name",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"required": "true",
+								"concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"conceptMappings": [
+									{
+										"type": "PIH",
+										"value": "1392"
+									},
+									{
+										"type": "PIH",
+										"value": "1392"
+									},
+									{
+										"type": "CIEL",
+										"value": "1473"
+									}
+								]
+							},
+							"id": "cacx_provider_name"
+						}
+					]
+				},
+				{
+					"label": "Appointment",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Reason For Next Appointment",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "select",
+								"concept": "76072178-3545-4eb4-b5d0-55f59134d46a",
+								"answers": [
+									{
+										"concept": "52e74b91-ad02-4efe-9715-6bf332114a45",
+										"label": "Client could not get an off from work/school",
+										"conceptMappings": []
+									},
+									{
+										"concept": "1b9a90ef-d7cb-4ff2-ba5f-0757463fae0b",
+										"label": "COVID-19 Restrictions",
+										"conceptMappings": []
+									},
+									{
+										"concept": "165610AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Exposure to COVID-19",
+										"conceptMappings": []
+									},
+									{
+										"concept": "1d7e550b-3252-4a34-87cf-50702aa8ff2b",
+										"label": "Had enough medications",
+										"conceptMappings": []
+									},
+									{
+										"concept": "160586AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Felt better and stopped taking medication",
+										"conceptMappings": [
+											{
+												"type": "CIEL",
+												"value": "160586"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "397695000"
+											}
+										]
+									},
+									{
+										"concept": "5485AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Inpatient care or hospitalization",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1429"
+											},
+											{
+												"type": "PIH",
+												"value": "1429"
+											},
+											{
+												"type": "AMPATH",
+												"value": "5485"
+											},
+											{
+												"type": "AMPATH",
+												"value": "5485"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "394656005"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "394656005"
+											},
+											{
+												"type": "CIEL",
+												"value": "5485"
+											}
+										]
+									},
+									{
+										"concept": "162192AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Patient forgot to attend appointment",
+										"conceptMappings": []
+									},
+									{
+										"concept": "162888AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Patient was seen in another health center",
+										"conceptMappings": []
+									},
+									{
+										"concept": "124153AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Traveling",
+										"conceptMappings": []
+									}
+								]
+							},
+							"id": "cacx_reason_next_appointment"
+						},
+						{
+							"label": "Date",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "date",
+								"concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"weeksList": "",
+								"conceptMappings": [
+									{
+										"type": "AMPATH",
+										"value": "5096"
+									},
+									{
+										"type": "AMPATH",
+										"value": "5096"
+									},
+									{
+										"type": "PIH-Malawi",
+										"value": "5096"
+									},
+									{
+										"type": "SNOMED-MVP",
+										"value": "50961000105000"
+									},
+									{
+										"type": "CIEL",
+										"value": "5096"
+									},
+									{
+										"type": "org.openmrs.module.mdrtb",
+										"value": "RETURN VISIT DATE"
+									},
+									{
+										"type": "SNOMED-MVP",
+										"value": "50961000105000"
+									},
+									{
+										"type": "PIH-Malawi",
+										"value": "5096"
+									},
+									{
+										"type": "org.openmrs.module.mdrtb",
+										"value": "RETURN VISIT DATE"
+									},
+									{
+										"type": "SNOMED-CT",
+										"value": "406543005"
+									}
+								]
+							},
+							"id": "cacx_date_next_appointment"
+						}
+					]
+				}
+			]
+		},
+		{
+			"label": "Comments ",
+			"sections": [
+				{
+					"label": "General Notes",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "General Patient Note",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "textarea",
+								"concept": "165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"rows": ""
+							},
+							"id": "general_comments"
+						}
+					]
+				}
+			]
+		}
+	],
+	"processor": "EncounterFormProcessor",
+	"uuid": "xxxx",
+	"referencedForms": [],
+  	"encounterType": "6d647bd4-33d6-4d04-a04a-595d2159b456"
+}

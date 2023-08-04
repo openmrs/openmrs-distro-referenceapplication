@@ -1,0 +1,611 @@
+{
+	"name": "POC Cervical Cancer Screening Log",
+	"pages": [
+		{
+			"label": "Registration Details",
+			"sections": [
+				{
+					"label": "Client Registration Details",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Date",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "date",
+								"concept": "2f256b46-395b-40f8-b93e-3ea68e5531bc"
+							},
+							"id": "screening_date"
+						},
+						{
+							"label": "Serial Number",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "162054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+							},
+							"id": "serial_number"
+						}
+					]
+				}
+			]
+		},
+		{
+			"label": "Visit Details",
+			"sections": [
+				{
+					"label": "Visit Details",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "HIV Status",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "dce0e886-30ab-102d-86b0-7a5022ba4115",
+								"answers": [
+									{
+										"concept": "dcdf4241-30ab-102d-86b0-7a5022ba4115",
+										"label": "HIV+",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcdf4653-30ab-102d-86b0-7a5022ba4115",
+										"label": "HIV-",
+										"conceptMappings": []
+									},
+									{
+										"concept": "dcd6865a-30ab-102d-86b0-7a5022ba4115",
+										"label": "UNKNOWN",
+										"conceptMappings": []
+									}
+								],
+								"conceptMappings": [
+									{
+										"type": "ICD-10-WHO",
+										"value": "Z21"
+									}
+								]
+							},
+							"id": "hiv_status"
+						},
+						{
+							"label": "Previously Screened For CaCx",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text"
+							},
+							"id": "previously_screened_for_cacx"
+						},
+						{
+							"label": "Pre-test Counselling for Cervical Cancer",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "d22184d3-be1d-43f0-834b-3cedd0b0f6bf",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373066001"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "PIH",
+												"value": "1066"
+											}
+										]
+									}
+								]
+							},
+							"id": "pretest_counselling_for_cacx"
+						}
+					]
+				}
+			]
+		},
+		{
+			"label": "Eligibility Assessment",
+			"sections": [
+				{
+					"label": "Eligibility Criteria",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "Currently Pregnant ",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"answers": [
+									{
+										"label": "yes",
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+									},
+									{
+										"label": "no",
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+									}
+								]
+							},
+							"id": "currently_pregnant"
+						},
+						{
+							"label": "Currently Menstruating",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "8c028667-8179-485f-bda7-1ceee8b5d533",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373066001"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "PIH",
+												"value": "1066"
+											}
+										]
+									}
+								]
+							},
+							"behaviours": [
+								{
+									"intent": "*",
+									"required": "false",
+									"unspecified": "false",
+									"hide": {
+										"hideWhenExpression": "isEmpty(currently_pregnant) || currently_pregnant !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+									},
+									"validators": []
+								}
+							],
+							"id": "currently_menstruating"
+						},
+						{
+							"label": "Ever Had a Total Hysterectomy",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text",
+								"concept": "a24c644b-2f4b-4a8b-b314-26a50c1e1416",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373066001"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "PIH",
+												"value": "1066"
+											}
+										]
+									}
+								]
+							},
+							"id": "Hysterectomy_done"
+						},
+						{
+							"label": "Previously Received Cancer Treatment",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "text"
+							},
+							"id": "previously_received_cancer_treatment"
+						},
+						{
+							"label": "Eligible for Cancer Screening",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "b77ef6d3-4895-4e88-8b17-fa4aff6eba59",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373066001"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "PIH",
+												"value": "1066"
+											}
+										]
+									}
+								]
+							},
+							"id": "eligible_for_cancer_screening"
+						},
+						{
+							"label": "Ready for cervical cancer screening services",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "radio",
+								"concept": "fa3c067f-89f3-4e34-a388-b1fb8b7c3cb2",
+								"answers": [
+									{
+										"concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "Yes",
+										"conceptMappings": [
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED CT",
+												"value": "CT: 373066001"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "CIEL",
+												"value": "1065"
+											},
+											{
+												"type": "PIH",
+												"value": "1065"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373066001"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1065"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1065"
+											}
+										]
+									},
+									{
+										"concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+										"label": "No",
+										"conceptMappings": [
+											{
+												"type": "PIH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "PIH-Malawi",
+												"value": "1066"
+											},
+											{
+												"type": "AMPATH",
+												"value": "1066"
+											},
+											{
+												"type": "SNOMED-CT",
+												"value": "373067005"
+											},
+											{
+												"type": "PIH",
+												"value": "1066"
+											}
+										]
+									}
+								]
+							},
+							"behaviours": [
+								{
+									"intent": "*",
+									"required": "false",
+									"unspecified": "false",
+									"hide": {
+										"hideWhenExpression": "isEmpty(eligible_for_cancer_screening) || eligible_for_cancer_screening !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+									},
+									"validators": []
+								}
+							],
+							"id": "ready_for_cacx_screening"
+						}
+					]
+				}
+			]
+		},
+		{
+			"label": "Notes",
+			"sections": [
+				{
+					"label": "General Notes",
+					"isExpanded": "true",
+					"questions": [
+						{
+							"label": "General Patient Note",
+							"type": "obs",
+							"questionOptions": {
+								"rendering": "textarea",
+								"concept": "165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+								"rows":5,
+								"conceptMappings": [
+									{
+										"type": "CIEL",
+										"value": "165095"
+									}
+								]
+							},
+							"id": "general_comments"
+						}
+					]
+				}
+			]
+		}
+	],
+	"processor": "EncounterFormProcessor",
+	"uuid": "xxxx",
+	"referencedForms": [],
+	"encounterType": "91725548-2d90-4b28-be6d-0509ba37bb0f"
+}
