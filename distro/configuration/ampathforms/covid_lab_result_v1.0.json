@@ -14,13 +14,21 @@
         "behaviours": [
           {
             "intent": "*",
-            "subform_intent": "COVID_LAB_ORDER_RESULT_EMBED",
+            "subform_intent": "COVID_LAB_ORDER_EMBED",
             "readonly": "true"
           }
         ]
-      }
+      },
+      "behaviours": [
+        {
+          "intent": "COVID_LAB_RESULT_EMBED",
+          "hide": {
+            "hideWhenExpression": "true"
+          }
+        }
+      ]
     },
-    {
+    { 
       "label": "Lab Result",
       "sections": [
         {
@@ -54,6 +62,11 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                },
+                {
+                  "intent": "COVID_LAB_RESULT_EMBED",
                   "required": "true",
                   "unspecified": "true"
                 }
@@ -254,6 +267,13 @@
                   "hide": {
                     "hideWhenExpression": "wasTheTestPerformed !== '488b58ff-64f5-4f8a-8979-fa79940b1594'"
                   }
+                },
+                {
+                  "intent": "COVID_LAB_RESULT_EMBED",
+                  "required": "true",
+                  "hide": {
+                    "hideWhenExpression": "wasTheTestPerformed !== '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                  }
                 }
               ]
             },
@@ -278,6 +298,13 @@
                     "hideWhenExpression": "wasTheTestPerformed !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
                   },
                   "value": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                {
+                  "intent": "COVID_LAB_RESULT_EMBED",
+                  "hide": {
+                    "hideWhenExpression": "wasTheTestPerformed !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
+                  },
+                  "value": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                 }
               ]
             },
@@ -293,6 +320,23 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "required": "true",
+                  "hide": {
+                    "hideWhenExpression": "wasTheTestPerformed !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '2020-01-01')"
+                    }
+                  ]
+                },
+                {
+                  "intent": "COVID_LAB_RESULT_EMBED",
                   "required": "true",
                   "hide": {
                     "hideWhenExpression": "wasTheTestPerformed !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
@@ -327,6 +371,13 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "hide": {
+                    "hideWhenExpression": "wasTheTestPerformed !== '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+                  },
+                  "value": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                {
+                  "intent": "COVID_LAB_RESULT_EMBED",
                   "hide": {
                     "hideWhenExpression": "wasTheTestPerformed !== '488b58ff-64f5-4f8a-8979-fa79940b1594'"
                   },
@@ -397,6 +448,13 @@
                   "hide": {
                     "hideWhenExpression": "testRequested !== '165852AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || wasTheTestPerformed !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
                   }
+                },
+                {
+                  "intent": "COVID_LAB_RESULT_EMBED",
+                  "required": "true",
+                  "hide": {
+                    "hideWhenExpression": "testRequested !== '165852AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || wasTheTestPerformed !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
+                  }
                 }
               ]
             },
@@ -462,6 +520,13 @@
                   "hide": {
                     "hideWhenExpression": "testRequested !== '165840AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || wasTheTestPerformed !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
                   }
+                },
+                {
+                  "intent": "COVID_LAB_RESULT_EMBED",
+                  "required": "true",
+                  "hide": {
+                    "hideWhenExpression": "testRequested !== '165840AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || wasTheTestPerformed !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
+                  }
                 }
               ]
             },
@@ -488,6 +553,10 @@
                 {
                   "intent": "*",
                   "required": "false"
+                },
+                {
+                  "intent": "COVID_LAB_RESULT_EMBED",
+                  "required": "false"
                 }
               ]
             }
@@ -500,6 +569,10 @@
     {
       "intent": "*",
       "display": "Lab Result"
+    },
+    {
+      "intent": "COVID_LAB_RESULT_EMBED",
+      "display": "COVID Lab Result Embed"
     }
   ],
   "processor": "EncounterFormProcessor",
