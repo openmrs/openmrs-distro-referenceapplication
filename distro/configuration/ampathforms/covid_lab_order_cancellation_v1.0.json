@@ -18,7 +18,15 @@
             "readonly": "true"
           }
         ]
-      }
+      },
+      "behaviours": [
+        {
+          "intent": "COVID_LAB_CANCELLATION_EMBED",
+          "hide": {
+            "hideWhenExpression": "true"
+          }
+        }
+      ]
     },
     {
       "label": "Order Cancellation",
@@ -46,6 +54,15 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "COVID_LAB_CANCELLATION_EMBED",
                   "required": "true",
                   "unspecified": "true",
                   "hide": {
@@ -150,6 +167,15 @@
                     "hideWhenExpression": "false"
                   },
                   "validators": []
+                },
+                {
+                  "intent": "COVID_LAB_CANCELLATION_EMBED",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
                 }
               ]
             },
@@ -196,6 +222,15 @@
                     "hideWhenExpression": "false"
                   },
                   "value": "165170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                {
+                  "intent": "COVID_LAB_CANCELLATION_EMBED",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "value": "165170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                 }
               ]
             }
@@ -208,6 +243,10 @@
     {
       "intent": "*",
       "display": "COVID Lab Order Cancellation"
+    },
+    {
+      "intent": "COVID_LAB_CANCELLATION_EMBED",
+      "display": "COVID Lab Cancellation Embed"
     }
   ],
   "processor": "EncounterFormProcessor",

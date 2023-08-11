@@ -30,6 +30,14 @@
                     "hideWhenExpression": "false"
                   },
                   "validators": []
+                },
+                {
+                  "intent": "COVID_SAMPLE_COLLECTION_EMBED",
+                  "required": "false",
+                  "hide": {
+                    "hideWhenExpression": "true"
+                  },
+                  "validators": []
                 }
               ]
             },
@@ -61,6 +69,16 @@
                   "readonly": "true",
                   "hide": {
                     "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "COVID_SAMPLE_COLLECTION_EMBED",
+                  "required": "false",
+                  "unspecified": "true",
+                  "readonly": "true",
+                  "hide": {
+                    "hideWhenExpression": "true"
                   },
                   "validators": []
                 }
@@ -95,6 +113,15 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "COVID_SAMPLE_COLLECTION_EMBED",
                   "required": "true",
                   "unspecified": "true",
                   "hide": {
@@ -143,6 +170,15 @@
                     "hideWhenExpression": "false"
                   },
                   "validators": []
+                },
+                {
+                  "intent": "COVID_SAMPLE_COLLECTION_EMBED",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
                 }
               ]
             },
@@ -166,6 +202,15 @@
                   "behaviours": [
                     {
                       "intent": "*",
+                      "required": "true",
+                      "unspecified": "true",
+                      "hide": {
+                        "hideWhenExpression": "!includes('specimenType','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                      },
+                      "validators": []
+                    },
+                    {
+                      "intent": "COVID_SAMPLE_COLLECTION_EMBED",
                       "required": "true",
                       "unspecified": "true",
                       "hide": {
@@ -198,6 +243,15 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "required": "false",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "COVID_SAMPLE_COLLECTION_EMBED",
                   "required": "false",
                   "unspecified": "true",
                   "hide": {
@@ -293,6 +347,15 @@
                     "hideWhenExpression": "false"
                   },
                   "validators": []
+                },
+                {
+                  "intent": "COVID_SAMPLE_COLLECTION_EMBED",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
                 }
               ]
             },
@@ -314,6 +377,13 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "hide": {
+                    "hideWhenExpression": "!includes('isSpecimenSentToLab', '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "COVID_SAMPLE_COLLECTION_EMBED",
                   "hide": {
                     "hideWhenExpression": "!includes('isSpecimenSentToLab', '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
                   },
@@ -343,6 +413,15 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "COVID_SAMPLE_COLLECTION_EMBED",
                   "required": "false",
                   "unspecified": "false",
                   "hide": {
