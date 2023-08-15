@@ -12,6 +12,8 @@ ARG CACHE_BUST
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-build-config.json --target ./spa
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
 COPY ohri-config.json ./spa/ohri-config.json
+COPY ohri_logo_dark.svg ./spa/ohri_logo_dark.svg
+COPY ohri_logo_light.svg ./spa/ohri_logo_light.svg
 
 FROM nginx:1.23-alpine
 
