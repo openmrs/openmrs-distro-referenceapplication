@@ -1,0 +1,374 @@
+{
+    "name": "Palliative Care Form",
+    "pages": [
+      {
+        "label": "Palliative Care",
+        "sections": [
+          {
+            "label": "Palliative Care and Health Unit Details",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Health Unit Number",
+                "type": "obs",
+                "required": true,
+                "id": "health_unit_number",
+                "questionOptions": {
+                  "rendering": "number",
+                  "concept": "8ea2dd3d-7d16-42f6-b034-5ffe3a4dbc99",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"false",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Condition requiring Palliative Care",
+                "type": "obs",
+                "required": true,
+                "id": "palliative_care_condition",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "70d0c3e5-20c6-48f7-ab82-4ecdd86874d4",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                        "concept": "116030AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Cancer"
+                      },
+                      {
+                        "concept": "dc8e6ad0-30ab-102d-86b0-7a5022ba4115",
+                        "label": "HIV/AIDs"
+                      },
+                      {
+                        "concept": "119270AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Cardio Vascular"
+                      },
+                      {
+                        "concept": "dc91d130-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Respiratory"
+                      },
+                      {
+                        "concept": "dcd4d521-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Renal"
+                      },
+                      {
+                        "concept": "dcd4cb79-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Hepatic"
+                      },
+                      {
+                        "concept": "159347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Musculoskeletal"
+                      },
+                      {
+                        "concept": "5140d982-b2c0-11ed-afa1-0242ac120002",
+                        "label": "Mental Health"
+                      },
+                      {
+                        "concept": "160176AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Neuralogical"
+                      },
+                      {
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Other Specify"
+                      }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"false",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Other Specify",
+                "type": "obs",
+                "required": true,
+                "id": "other_condition",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"false",
+                    "hide":{
+                      "hideWhenExpression":"palliative_care_condition !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    },
+                    "validators":[]
+                  }
+                ]              
+              },
+              {
+                "label": "Need for Palliative Care",
+                "type": "obs",
+                "required": true,
+                "id": "need_for_palliative_care",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "70d0c3e5-20c6-48f7-ab82-4ecdd86874d4",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                        "concept": "0b4aeffe-f595-42f9-b4ad-50208ee6ec77",
+                        "label": "Pain"
+                      },
+                      {
+                        "concept": "5b3ef650-a7e2-11ed-afa1-0242ac120002",
+                        "label": "Other Physical Symptom"
+                      },
+                      {
+                        "concept": "119270AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Cardio Vascular"
+                      },
+                      {
+                        "concept": "ee2f128f-9c62-4814-8c9c-fbde017c74f8",
+                        "label": "Psychological"
+                      },
+                      {
+                        "concept": "dcd4d521-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Social"
+                      },
+                      {
+                        "concept": "dcd4cb79-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Spiritual"
+                      },
+                      {
+                        "concept": "159347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Legal"
+                      }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"false",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Pain Score",
+                "type": "obs",
+                "required": true,
+                "id": "pain_score",
+                "questionOptions": {
+                  "rendering": "number",
+                  "concept": "5f86d19d-9546-4466-89c0-6f80c101191b",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"false",
+                    "hide":{
+                      "hideWhenExpression":"need_for_palliative_care !== '0b4aeffe-f595-42f9-b4ad-50208ee6ec77'"
+                    },
+                    "validators":[]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "WHO Performance and Intervention",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Select WHO Performance Status",
+                "type": "",
+                "required": true,
+                "id": "who_performance_status",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "37d4ac43-b3b4-4445-b63b-e3acf47c8910",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dcdaaae4-30ab-102d-86b0-7a5022ba4115",
+                      "label": "CURRENTLY ON INH PROPHYLAXIS FOR TB"
+                    },
+                    {
+                      "concept": "40b62b3e-bdcf-428c-8902-db5fa741191c",
+                      "label": "Defaulted"
+                    },
+                    {
+                      "concept": "e741d1a6-1206-4223-b0a2-905ecf6500a7",
+                      "label": "MISSED DRUG PICK UP APPOINTMENT"
+                    },
+                    {
+                      "concept": "1090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Never"
+                    },
+                    {
+                      "concept": "dcda4d59-30ab-102d-86b0-7a5022ba4115",
+                      "label": "TOXICITY OR SIDE-EFFECTS"
+                    },
+                    {
+                      "concept": "160035AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Treatment complete"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Select Intervention",
+                "type": "obs",
+                "required": true,
+                "id": "select_intervention",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "eb7c1c34-59e5-46d5-beba-626694badd54",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "934cd2fa-210e-430e-babf-ac846ee4a8b2",
+                      "label": "Group Counselling session"
+                    },
+                    {
+                      "concept": "a806304b-bef4-483f-b4d0-9514bfc80621",
+                      "label": "Health Education Linkages and  Refferals"
+                    },
+                    {
+                      "concept": "f1229461-aa7e-4a4f-a916-e1188c1ce622",
+                      "label": "Individual counseling"
+                    },
+                    {
+                      "concept": "42c8f58f-b2f8-4911-a9d2-90da92e22128",
+                      "label": "Peer counselling"
+                    },
+                    {
+                      "concept": "e8fc9bfa-efa7-4b7f-92ba-1a7d0fc467b3",
+                      "label": "Peer support group"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"false",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Outcome and Notes",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Palliative care Outcomes",
+                "type": "obs",
+                "required": true,
+                "id": "palliative_care_outcomes",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "161033AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "151849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Liveborn, Unspecified Whether Single, Twin, or Multiple"
+                    },
+                    {
+                      "concept": "129218AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Preterm Delivery (Maternal Condition)"
+                    },
+                    {
+                      "concept": "126127AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Spontaneous abortion"
+                    },
+                    {
+                      "concept": "125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "STILLBIRTH"
+                    },
+                    {
+                      "concept": "1395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Term birth of newborn"
+                    },
+                    {
+                      "concept": "159896AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Therapeutic abortion procedure"
+                    },
+                    {
+                      "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Unknown"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"false",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Notes",
+                "type": "obs",
+                "required": false,
+                "id": "notes",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "160029AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"false",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "encounterType": "",
+    "referencedForms": [],
+    "uuid": "",
+    "description": "An OPD Encounter for Palliative Care"
+  }

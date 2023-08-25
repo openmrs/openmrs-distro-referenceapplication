@@ -1,0 +1,1421 @@
+{
+    "name": "Nutrition Clinical Form",
+    "pages": [
+      {
+        "label": "Nutrition Management",
+        "sections": [
+          {
+            "label": "Nutrition and Admission Details",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Exit Outcome",
+                "type": "obs",
+                "required": true,
+                "unspecified": "true",
+                "id": "exit_outcome",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "165061AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "159791AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Cure, outcome"
+                    },
+                    {
+                      "concept": "165059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Default"
+                    },
+                    {
+                      "concept": "ad09a266-eb27-45ac-8ccf-739f6c94ba7a",
+                      "label": "Defaulter unconfirmed"
+                    },
+                    {
+                      "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Died"
+                    },
+                    {
+                      "concept": "dc9f442a-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NON-REACTIVE"
+                    },
+                    {
+                      "concept": "eed11f33-313c-4fbd-b95b-d78e950f96c9",
+                      "label": "Successfully Treated"
+                    },
+                    {
+                      "concept": "165053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Transfer to inpatient"
+                    },
+                    {
+                      "concept": "dd27a783-30ab-102d-86b0-7a5022ba4115",
+                      "label": "TRANSFERED OUT TO ANOTHER FACILITY"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Pregnancy/Lactating Status",
+                "type": "obs",
+                "required": true,
+                "id": "pregnancy_status",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "cd48b900-dd21-45ce-ae6b-b38ad2a3a695",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "165051AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Lactating"
+                    },
+                    {
+                      "concept": "dcd68a88-30ab-102d-86b0-7a5022ba4115",
+                      "label": "OTHER SPECIFY"
+                    },
+                    {
+                      "concept": "db13e1bc-803a-4481-bfd7-7f74e309e08f",
+                      "label": "Non lactating but with child less than 6 months"
+                    },
+                    {
+                      "concept": "dc54fa14-30ab-102d-86b0-7a5022ba4115",
+                      "label": "PREGNANCY"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Other Pregnancy Status",
+                "type": "obs",
+                "required": true,
+                "id": "other_pregancy",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH Malawi",
+                      "value": "6408"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "org.openmrs.module.mdrtb",
+                      "value": "OTHER"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED MVP",
+                      "value": "56221000105001"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "AMPATH",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "NARROWER-THAN",
+                      "type": "SNOMED NP",
+                      "value": "74964007"
+                    }
+                  ],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":"pregnancy_status !== 'dcd68a88-30ab-102d-86b0-7a5022ba4115'"
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Type of Admission",
+                "type": "obs",
+                "required": true,
+                "id": "type_of_admission",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "165044AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "165043AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Admission"
+                    },
+                    {
+                      "concept": "165042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Re-admission"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Type of Nutrition Management",
+                "type": "obs",
+                "required": true,
+                "id": "type_nutrition_management",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "c7848c0f-4711-4501-9d5d-7b5eb5616add",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "bf959776-8be6-4df0-a3c1-6ac4a57baaad",
+                      "label": "Inpatient Therapeutic Care"
+                    },
+                    {
+                      "concept": "608061c9-5dc8-4747-a5e1-3d1fde23557d",
+                      "label": "Outpatient Therapeutic Care"
+                    },
+                    {
+                      "concept": "159854AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Supplemental feeding methods"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Entry Care Point",
+                "type": "obs",
+                "required": true,
+                "id": "entry_care_point",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "164993AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "165047AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Antiretraviral Treatment Clinic"
+                    },
+                    {
+                      "concept": "160456AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Maternity department"
+                    },
+                    {
+                      "concept": "165048AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Tuberculosis Clinic"
+                    },
+                    {
+                      "concept": "8ddbda3a-4217-4029-bab6-b8a2011e4d9b",
+                      "label": "Antenatal care"
+                    },
+                    {
+                      "concept": "dcd7e8e5-30ab-102d-86b0-7a5022ba4115",
+                      "label": "PMTCT"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Assessment Method",
+                "type": "obs",
+                "required": true,
+                "id": "assessment_method",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "b2638dca-4584-4481-89d8-766c6199230c",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "adf312a6-9b34-4786-af7a-43875d7e44ff",
+                      "label": "BMI for Age Z-score"
+                    },
+                    {
+                      "concept": "dca1f717-30ab-102d-86b0-7a5022ba4115",
+                      "label": "BODY MASS INDEX"
+                    },
+                    {
+                      "concept": "5f86d19d-9546-4466-89c0-6f80c101191b",
+                      "label": "MID-UPPER ARM CIRCUMFERENCE-CODE"
+                    },
+                    {
+                      "concept": "165062AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Weight for height Z-score"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Nutritional Status at Enrollment",
+                "type": "obs",
+                "required": true,
+                "id": "nutrition_status_enrollment",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "c7848c0f-4711-4501-9d5d-7b5eb5616add",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "bf959776-8be6-4df0-a3c1-6ac4a57baaad",
+                      "label": "Inpatient Therapeutic Care"
+                    },
+                    {
+                      "concept": "608061c9-5dc8-4747-a5e1-3d1fde23557d",
+                      "label": "Outpatient Therapeutic Care"
+                    },
+                    {
+                      "concept": "159854AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Supplemental feeding methods"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "TB Unit",
+        "sections": [
+          {
+            "label": "TB Unit Number and Status",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "TB Unit Number",
+                "type": "obs",
+                "required": true,
+                "id": "tb_unit_number",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "304df0d0-afe4-4a61-a917-d684b100a65a",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "TB Status",
+                "type": "obs",
+                "required": true,
+                "id": "tb_status",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "dce02aa1-30ab-102d-86b0-7a5022ba4115",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "d5a86db5-3e7f-4344-85d7-572c8bb6b966",
+                      "label": "TB Diagnosed - TB Microscopy"
+                    },
+                    {
+                      "concept": "031d9b15-62d5-4f73-a374-5503f0421427",
+                      "label": "TB Treatment Completed"
+                    },
+                    {
+                      "concept": "d941bfbc-7546-464b-90ff-b8e28d247d47",
+                      "label": "TB Diagnosed - TB LAM"
+                    },
+                    {
+                      "concept": "36cd82a6-370d-4188-bf69-ad8ebbc86d37",
+                      "label": "TB Diagnosed - Gene Xpert"
+                    },
+                    {
+                      "concept": "1435dcb2-9470-4b69-8d05-199e5f13044c",
+                      "label": "TB Diagnosed - Clinically diagnosed"
+                    },
+                    {
+                      "concept": "e2fd439a-619e-4067-a2f1-8e2454120a58",
+                      "label": "TB Diagnosed - Chest Xray"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Disability",
+                "type": "obs",
+                "required": true,
+                "id": "disability",
+                "questionOptions": {
+                  "rendering": "multiCheckbox",
+                  "concept": "c894f746-3a8f-4f9a-a3e1-fa9acb02228d",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "24251e97-950a-4b1d-8335-c4d9936d5a1f",
+                      "label": "Albinism"
+                    },
+                    {
+                      "concept": "cea404c1-9799-4cfa-9897-a527f3a878ce",
+                      "label": "Delayed age specific height for age"
+                    },
+                    {
+                      "concept": "30ae3d6f-7175-4e81-bfdc-302ad3c56df0",
+                      "label": "Difficult in understanding"
+                    },
+                    {
+                      "concept": "6de52807-a28d-4706-bce3-db07835d8487",
+                      "label": "Delayed age specific motor development"
+                    },
+                    {
+                      "concept": "e93c6011-bc8f-40bc-a3e4-a053344f237d",
+                      "label": "Difficulty in reading"
+                    },
+                    {
+                      "concept": "0e1eb893-e3cb-47f7-8d93-9bc3e68af1c4",
+                      "label": "Difficulty in remembering"
+                    },
+                    {
+                      "concept": "85a41710-61df-4341-8f28-01ced16bbb02",
+                      "label": "Difficulty in writing"
+                    },
+                    {
+                      "concept": "5887771d-7e66-4fa4-a5c2-c752eb37515a",
+                      "label": "Difficulty washing all over or dressing"
+                    },
+                    {
+                      "concept": "5513deae-5451-44c4-8b33-73a3f10e39b6",
+                      "label": "Emotionally impaired"
+                    },
+                    {
+                      "concept": "dc8da01e-30ab-102d-86b0-7a5022ba4115",
+                      "label": "HEARING DIFFICULTIES"
+                    },
+                    {
+                      "concept": "28001f61-afd6-498e-a7c3-1efcb4de7ac3",
+                      "label": "Mentally impaired"
+                    },
+                    {
+                      "concept": "dccf6a36-30ab-102d-86b0-7a5022ba4115",
+                      "label": "VISION DIFFICULTIES"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "ART Services",
+        "sections": [
+          {
+            "label": "HIV Status and Enrollment Details",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "HIV Status at Enrollment",
+                "type": "obs",
+                "required": true,
+                "id": "hiv_status_enrollment",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "dce0e886-30ab-102d-86b0-7a5022ba4115",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dcdf4653-30ab-102d-86b0-7a5022ba4115",
+                      "label": "HIV-"
+                    },
+                    {
+                      "concept": "dcdf4241-30ab-102d-86b0-7a5022ba4115",
+                      "label": "HIV+"
+                    },
+                    {
+                      "concept": "dcd6865a-30ab-102d-86b0-7a5022ba4115",
+                      "label": "UNKNOWN"
+                    },
+                    {
+                      "concept": "872139fa-9820-4fde-87fd-f00df9ddcbd6",
+                      "label": "EXPOSED INFANT"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "ART Services at Enrollment",
+                "type": "obs",
+                "required": true,
+                "id": "art_services_enrollment",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "165049AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "6bd7bb95-343a-42ce-801f-d6876e263c57",
+                      "label": "ON ART"
+                    },
+                    {
+                      "concept": "902e30a1-2d10-4e92-8f77-784b6677109a",
+                      "label": "PRIOR ART"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":"!includes(hiv_status_enrollment, 'dcdf4241-30ab-102d-86b0-7a5022ba4115') && hiv_status_enrollment !== '872139fa-9820-4fde-87fd-f00df9ddcbd6'"
+                    },
+                    "validators":[]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Vitals",
+        "sections": [
+          {
+            "label": "Enrolment And Re-visits",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "id": "vitals",
+                "label": "Vitals Details",
+                "type": "obsGroup",
+                "questionOptions": {
+                  "rendering": "repeating",
+                  "concept": "1c70c490-cafa-4c95-9fdd-a30b62bb78b8"
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"false",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ],
+                "questions": [
+                  {
+                    "label": "Visit Date",
+                    "type":"obs",
+                    "questionOptions":{
+                      "rendering":"date",
+                      "concept":"d7824376-36fc-4537-87cd-b699631e2662",
+                      "answers":[]
+                    },
+                    "id":"vitals_date",
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"true",
+                        "unspecified":"true",
+                        "hide":{
+                          "hideWhenExpression":"false"
+                        },
+                        "validators":[]
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Oedema",
+                    "type": "obs",
+                    "questionOptions": {
+                      "rendering": "select",
+                      "concept": "165039AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "165037AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "OEDEMA ++"
+                    },
+                    {
+                      "concept": "165038AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "OEDEMA +++"
+                    },
+                    {
+                      "concept": "165036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "OEDEMA +"
+                    }
+                  ]
+                    },
+                    "id": "oedema",
+                    "behaviours": [
+                      {
+                        "intent": "*",
+                        "required": "true",
+                        "unspecified": "true",
+                        "hide": {
+                          "hideWhenExpression": "false"
+                        },
+                        "validators": []
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Weight",
+                    "type":"obs",
+                    "questionOptions":{
+                      "rendering":"number",
+                      "concept":"5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "max": 500,
+                      "min": 1,
+                      "conceptMappings":[
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "PIH Malawi",
+                          "value": "5089"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "AMPATH",
+                          "value": "5089"
+                        },
+                        {
+                          "relationship": "NARROWER-THAN",
+                          "type": "LOINC",
+                          "value": "3141-9"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "SNOMED CT",
+                          "value": "27113001"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "PIH",
+                          "value": "5089"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "org.openmrs.module.mdrtb",
+                          "value": "WEIGHT"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "CIEL",
+                          "value": "5089"
+                        }
+                      ]
+                    },
+                    "id":"weight",
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"true",
+                        "hide":{
+                          "hideWhenExpression":"false"
+                        },
+                        "validators":[]
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Height",
+                    "type":"obs",
+                    "questionOptions":{
+                      "rendering": "number",
+                      "max": 400,
+                      "min": 10,
+                      "concept":"5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "conceptMappings": [
+                        {
+                          "relationship": "NARROWER-THAN",
+                          "type": "LOINC",
+                          "value": "8302-2"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "SNOMED CT",
+                          "value": "50373000"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "AMPATH",
+                          "value": "5090"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "PIH Malawi",
+                          "value": "5090"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "CIEL",
+                          "value": "5090"
+                        },
+                        {
+                          "relationship": "SAME-AS",
+                          "type": "PIH",
+                          "value": "5090"
+                        }
+                      ]
+                    },
+                    "id":"height",
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"true",
+                        "hide":{
+                          "hideWhenExpression":"false"
+                        },
+                        "validators":[]
+                      }
+                    ]
+                  },
+                  {
+                    "label": "MUAC",
+                    "type": "obs",
+                    "required": true,
+                    "id": "muac",
+                    "questionOptions": {
+                      "rendering": "radio",
+                      "concept": "5f86d19d-9546-4466-89c0-6f80c101191b",
+                      "conceptMappings": [],
+                      "answers": [
+                        {
+                          "concept": "de330d01-5586-4eed-a645-e04b6bd13701",
+                          "label": "RED"
+                        },
+                        {
+                          "concept": "a3b1734c-4743-4b9d-8e71-08d0459d29b9",
+                          "label": "YELLOW"
+                        },
+                        {
+                          "concept": "8846c03f-67bf-4aeb-8ca7-39bf79b4ebf3",
+                          "label": "GREEN"
+                        }
+                      ]
+                    },
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"false",
+                        "unspecified":"true",
+                        "hide":{
+                          "hideWhenExpression":""
+                        },
+                        "validators":[]
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Length Z-SCORE",
+                    "type": "obs",
+                    "required": true,
+                    "id": "length_z_score",
+                    "questionOptions": {
+                      "rendering": "select",
+                      "concept": "165062AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "conceptMappings": [],
+                      "answers": [
+                        {
+                          "concept": "35a89dcf-d35c-4fc6-8d51-e958b666a0f3",
+                          "label": "Z-Score1 (< -3)"
+                        },
+                        {
+                          "concept": "3709d446-3017-4c19-a1af-2da64975928b",
+                          "label": "Z-Score2 (-3_<-1)"
+                        },
+                        {
+                          "concept": "11b62d4d-b879-4727-8e26-9bced62269db",
+                          "label": "Z-Score3 (-1_1)"
+                        },
+                        {
+                          "concept": "ab51899b-e5b9-4b20-965c-fa0d3d2ff6fb",
+                          "label": "Z-Score4 (>1_3)"
+                        },
+                        {
+                          "concept": "73b79d62-17d1-4958-93cb-0f22760db69e",
+                          "label": "Z-Score5 (>3)"
+                        }
+                      ]
+                    },
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"false",
+                        "unspecified":"true",
+                        "hide":{
+                          "hideWhenExpression":""
+                        },
+                        "validators":[]
+                      }
+                    ]
+                  },
+                  {
+                    "label": "BMI",
+                    "type": "obs",
+                    "questionOptions": {
+                      "rendering": "number",
+                      "calculate": {
+                        "calculateExpression": "Math.round(calcBMI('height','weight'))"
+                      },
+                      "concept": "cfce59f0-0ddd-4722-8eea-1ce5efaffc8b"
+                    },
+                    "id": "bmi"
+                  },
+                  {
+                    "label": "Apetite Test",
+                    "type": "obs",
+                    "required": true,
+                    "id": "appetite_test",
+                    "questionOptions": {
+                      "rendering": "select",
+                      "concept": "0888889b-c6a0-45c8-818c-90c7f968f361",
+                      "conceptMappings": [],
+                      "answers": [
+                        {
+                          "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                          "label": "NO"
+                        },
+                        {
+                          "concept": "dc9825cf-30ab-102d-86b0-7a5022ba4115",
+                          "label": "NOT DONE"
+                        },
+                        {
+                          "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                          "label": "YES"
+                        }
+                      ]
+                    },
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"false",
+                        "unspecified":"true",
+                        "hide":{
+                          "hideWhenExpression":""
+                        },
+                        "validators":[]
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Supplementary Foods",
+                    "type": "obs",
+                    "required": true,
+                    "id": "supplementary_foods",
+                    "questionOptions": {
+                      "rendering": "select",
+                      "concept": "165060AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "conceptMappings": [],
+                      "answers": [
+                        {
+                          "concept": "165055AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label": "F75"
+                        },
+                        {
+                          "concept": "165056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label": "F100"
+                        },
+                        {
+                          "concept": "165058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label": "Fortified Blended Foods"
+                        },
+                        {
+                          "concept": "165054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label": "Ready to use therapeutic food"
+                        },
+                        {
+                          "concept": "165057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                          "label": "ReSoMal"
+                        }
+                      ]
+                    },
+                    "behaviours":[
+                      {
+                        "intent":"*",
+                        "required":"false",
+                        "unspecified":"true",
+                        "hide":{
+                          "hideWhenExpression":""
+                        },
+                        "validators":[]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Assessment And Outcome",
+        "sections": [
+          {
+            "label": "Assessment at Exit",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Oedema",
+                "type": "obs",
+                "required": true,
+                "id": "oedema_at_exit",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "165039AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "165036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "OEDEMA +"
+                    },
+                    {
+                      "concept": "165037AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "OEDEMA ++"
+                    },
+                    {
+                      "concept": "165038AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "OEDEMA +++"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Weight",
+                "type": "obs",
+                "required": true,
+                "id": "weight_at_exit",
+                "questionOptions": {
+                  "rendering": "number",
+                  "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH Malawi",
+                      "value": "5089"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "AMPATH",
+                      "value": "5089"
+                    },
+                    {
+                      "relationship": "NARROWER-THAN",
+                      "type": "LOINC",
+                      "value": "3141-9"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED CT",
+                      "value": "27113001"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH",
+                      "value": "5089"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "org.openmrs.module.mdrtb",
+                      "value": "WEIGHT"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "5089"
+                    }
+                  ],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Height",
+                "type": "obs",
+                "required": true,
+                "id": "height_at_exit",
+                "questionOptions": {
+                  "rendering": "number",
+                  "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "NARROWER-THAN",
+                      "type": "LOINC",
+                      "value": "8302-2"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED CT",
+                      "value": "50373000"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "AMPATH",
+                      "value": "5090"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH Malawi",
+                      "value": "5090"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "5090"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH",
+                      "value": "5090"
+                    }
+                  ],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "MUAC",
+                "type": "obs",
+                "required": true,
+                "id": "muac_at_exit",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "5f86d19d-9546-4466-89c0-6f80c101191b",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "de330d01-5586-4eed-a645-e04b6bd13701",
+                      "label": "RED"
+                    },
+                    {
+                      "concept": "a3b1734c-4743-4b9d-8e71-08d0459d29b9",
+                      "label": "YELLOW"
+                    },
+                    {
+                      "concept": "8846c03f-67bf-4aeb-8ca7-39bf79b4ebf3",
+                      "label": "GREEN"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Councelling code",
+                "type": "obs",
+                "required": true,
+                "id": "counselling_code",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "165064AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dcbc8ef8-30ab-102d-86b0-7a5022ba4115",
+                      "label": "ADHERENCE COUNSELING"
+                    },
+                    {
+                      "concept": "5d993591-9334-43d9-a208-11b10adfad85",
+                      "label": "ANC INFANT FEEDING COUNSELING"
+                    },
+                    {
+                      "concept": "dcd68a88-30ab-102d-86b0-7a5022ba4115",
+                      "label": "OTHER SPECIFY"
+                    },
+                    {
+                      "concept": "162175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Shellfish"
+                    },
+                    {
+                      "concept": "598dba00-b878-474c-9a10-9998f1748228",
+                      "label": "THERAPEUTIC FEEDING"
+                    },
+                    {
+                      "concept": "165065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Water Hygiene and Sanitation"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Other Counselling Code",
+                "type": "obs",
+                "required": true,
+                "id": "other_counselling",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH Malawi",
+                      "value": "6408"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "org.openmrs.module.mdrtb",
+                      "value": "OTHER"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED MVP",
+                      "value": "56221000105001"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "AMPATH",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "NARROWER-THAN",
+                      "type": "SNOMED NP",
+                      "value": "74964007"
+                    }
+                  ],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":"counselling_code !== 'dcd68a88-30ab-102d-86b0-7a5022ba4115'"
+                    },
+                    "validators":[]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Outcome and Target Criteria ",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Target Exit Criteria ",
+                "type": "obs",
+                "required": true,
+                "id": "target_exit",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "165063AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Exit Outcome",
+                "type": "obs",
+                "required": true,
+                "id": "exit_outcome",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "165061AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "159791AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Cure, outcome"
+                    },
+                    {
+                      "concept": "165059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Default"
+                    },
+                    {
+                      "concept": "ad09a266-eb27-45ac-8ccf-739f6c94ba7a",
+                      "label": "Defaulter unconfirmed"
+                    },
+                    {
+                      "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Died"
+                    },
+                    {
+                      "concept": "dc9f442a-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NON-REACTIVE"
+                    },
+                    {
+                      "concept": "eed11f33-313c-4fbd-b95b-d78e950f96c9",
+                      "label": "Successfully Treated"
+                    },
+                    {
+                      "concept": "165053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Transfer to inpatient"
+                    },
+                    {
+                      "concept": "dd27a783-30ab-102d-86b0-7a5022ba4115",
+                      "label": "TRANSFERED OUT TO ANOTHER FACILITY"
+                    }
+                  ]
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Exit Date",
+                "type": "obs",
+                "required": true,
+                "id": "exit_date",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "98460957-d508-4dde-95fe-b76d21589179",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Transfer Out To",
+                "type": "obs",
+                "required": true,
+                "id": "transfer_out",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "f233b5e7-163c-495f-9102-8d916a5de833",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              },
+              {
+                "label": "Transfer In",
+                "type": "obs",
+                "required": true,
+                "id": "transfer_in",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "88e07e7c-f7e4-4ccf-8068-b770a3e3957b",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "behaviours":[
+                  {
+                    "intent":"*",
+                    "required":"false",
+                    "unspecified":"true",
+                    "hide":{
+                      "hideWhenExpression":""
+                    },
+                    "validators":[]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "encounterType": "",
+    "referencedForms": [],
+    "uuid": "",
+    "description": "To record detailed information about each client enrolled in any feeding program"
+  }

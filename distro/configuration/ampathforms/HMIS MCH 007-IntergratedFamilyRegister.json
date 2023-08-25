@@ -1,0 +1,867 @@
+{
+    "name": "Integrated Family Planning",
+    "pages": [
+      {
+        "label": "Counselling Details",
+        "sections": [
+          {
+            "label": "Family Planning Methods and Counselling",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Condoms",
+                "type": "obs",
+                "required": false,
+                "id": "condoms",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "dc692ad3-30ab-102d-86b0-7a5022ba4115",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Condoms (Male)"
+                    },
+                    {
+                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "No"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Previous Method Done",
+                "type": "obs",
+                "required": true,
+                "id": "previous_method_done",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "6349deef-231d-464e-87e2-015a71802b85",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dc8d14a2-30ab-102d-86b0-7a5022ba4115",
+                      "label": "ACNE"
+                    },
+                    {
+                      "concept": "84a0b0e1-e6c2-491a-a390-da251884e4d0",
+                      "label": "SAP – Severe lower abdominal pain"
+                    },
+                    {
+                      "concept": "dcbdc2d6-30ab-102d-86b0-7a5022ba4115",
+                      "label": "WEIGHT GAIN"
+                    },
+                    {
+                      "concept": "22f4c064-f278-48ce-b58e-52690d709d4d",
+                      "label": "SP - Suspected pregnancy"
+                    },
+                    {
+                      "concept": "ac918e9b-f863-412b-9eef-8f4f89a3dc54",
+                      "label": "Other side effects of family planning"
+                    },
+                    {
+                      "concept": "6bb9c81f-9576-4267-a1f2-795a481638c9",
+                      "label": "NV- Nausea, vomiting or dizzyness"
+                    },
+                    {
+                      "concept": "68d9f5e5-f9e9-47db-9715-f80821662b8e",
+                      "label": "NB - No Monthly Bleeding (lack of periods)"
+                    },
+                    {
+                      "concept": "949e9fd8-1381-4fec-9ce3-d538cc67a1b4",
+                      "label": "Mood changes"
+                    },
+                    {
+                      "concept": "f8b43fe6-4890-449b-8967-0506ad3e5635",
+                      "label": "ISR - Injection Site Reaction (Injectables)"
+                    },
+                    {
+                      "concept": "c195add5-48e0-42e9-a2d8-3ee8d94fa5c4",
+                      "label": "IB - Irregular bleeding (bleeding at the wrong times)"
+                    },
+                    {
+                      "concept": "d8cacdd4-1235-4435-8a52-3b638b98156b",
+                      "label": "INSR - Insertion Site Reaction (abcess, infection etc) (Implants)"
+                    },
+                    {
+                      "concept": "d40f5ce1-80a4-4408-958d-198a3e74ad0e",
+                      "label": "HB - Heavy Bleeding"
+                    },
+                    {
+                      "concept": "dc7fdcd0-30ab-102d-86b0-7a5022ba4115",
+                      "label": "HEADACHE"
+                    },
+                    {
+                      "concept": "dbe65cc6-0328-4bd7-b563-d0d8a5fce6a3",
+                      "label": "CR – Cramping or mild abdominal pain"
+                    },
+                    {
+                      "concept": "36df93d6-2e9b-4eeb-96ff-82ed71b7991d",
+                      "label": "BR – Breast Tenderness"
+                    },
+                    {
+                      "concept": "dcd68a88-30ab-102d-86b0-7a5022ba4115",
+                      "label": "OTHER SPECIFY"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Family Planning Counselling Done",
+                "type": "obs",
+                "required": true,
+                "id": "FP_planning_done",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "928a4617-436e-44b3-91b3-725cb1b910d1",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NO"
+                    },
+                    {
+                      "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                      "label": "YES"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Switching Method",
+                "type": "obs",
+                "required": true,
+                "id": "switching_method",
+                "questionOptions": {
+                  "rendering": "multiCheckbox",
+                  "concept": "bd71aefe-c535-486a-b98e-2aef27b42d43",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NO"
+                    },
+                    {
+                      "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                      "label": "YES"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Reason for Switching",
+                "type": "obs",
+                "required": true,
+                "id": "reason_for_switching",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "27d7b1c6-e5bc-4924-9cbd-9f21a0f07362",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              }
+            ]
+          },
+          {
+            "label": "Amount of Contraceptive Dispensed",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Oral Pills",
+                "type": "obs",
+                "required": true,
+                "id": "oral_pills",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "336650b2-65f7-4202-80eb-3c6437878262",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Condoms",
+                "type": "obs",
+                "required": false,
+                "id": "condoms",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "40ccea00-1049-4dac-b206-9aafbe87d962",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "de330d01-5586-4eed-a645-e04b6bd13701",
+                      "label": "Male Condom"
+                    },
+                    {
+                      "concept": "a3b1734c-4743-4b9d-8e71-08d0459d29b9",
+                      "label": "Female Condom"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Injectables",
+                "type": "obs",
+                "required": true,
+                "id": "injectables",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "8ed4bfcc-5605-49c4-85db-0f5742c417ff",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "1912a16a-6a5d-479c-90d3-e27af7ebc748",
+                      "label": "Other injectables"
+                    },
+                    {
+                      "concept": "f0644b71-9cd6-4d72-8fcf-22f5ec51d72d",
+                      "label": "DPMA SC 3 months dose"
+                    },
+                    {
+                      "concept": "41ef5f5e-5073-448a-8583-3306ae1bc4db",
+                      "label": "DPMA IM 3 months dose"
+                    },
+                    {
+                      "concept": "085ecbd2-03ed-4021-af6c-8d4761f52bfe",
+                      "label": "2 months"
+                    },
+                    {
+                      "concept": "d1c6264e-1c9c-4295-80b6-7a105ac4a6f2",
+                      "label": "1 month"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Implants",
+                "type": "obs",
+                "required": true,
+                "id": "implants",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "e1c974d8-b08a-4033-bef3-4f647d7d957c",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "d5407c3d-9ad3-4d9a-937d-2ace8ed76f2e",
+                      "label": "4 years"
+                    },
+                    {
+                      "concept": "edac2cb0-cab5-4381-9b87-8e77b23a162a",
+                      "label": "5 years"
+                    },
+                    {
+                      "concept": "9c6bd452-4753-47b5-a5f8-d9527bb7f09b",
+                      "label": "3 years"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Implant Removal done",
+                "type": "obs",
+                "required": true,
+                "id": "implant_removal_done",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "86708376-9786-4b7f-a856-ca0e0eb4e213",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NO"
+                    },
+                    {
+                      "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                      "label": "YES"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Reason for Implant Removal",
+                "type": "obs",
+                "required": true,
+                "id": "reason_for_implant_removal",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "c3cdd12d-5587-427b-b490-3da8ff11b3f2",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "d05d6459-d5d0-409f-9879-2e5ce1201f6b",
+                      "label": "Change in fertility intention (CFI)"
+                    },
+                    {
+                      "concept": "cabbfa22-045f-4752-84df-b06410af32f6",
+                      "label": "Expiry (EX)"
+                    },
+                    {
+                      "concept": "dcd68a88-30ab-102d-86b0-7a5022ba4115",
+                      "label": "OTHER SPECIFY"
+                    },
+                    {
+                      "concept": "677cea54-d613-4d98-b65f-bfc76202505d",
+                      "label": "Side effects"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Other (specify)",
+                "type": "obs",
+                "required": true,
+                "id": "other_implant_reason",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "d4d72333-bca9-443c-a3d8-957e5170960c",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Sterilization",
+                "type": "obs",
+                "required": true,
+                "id": "sterilization",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "dce0aa79-30ab-102d-86b0-7a5022ba4115",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dcdd91a7-30ab-102d-86b0-7a5022ba4115",
+                      "label": "TUBAL LIGATION"
+                    },
+                    {
+                      "concept": "dcdd8d8d-30ab-102d-86b0-7a5022ba4115",
+                      "label": "VASECTOMY"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Intra-uterine contraceptive devices (IUCD)",
+                "type": "obs",
+                "required": true,
+                "id": "IUCD",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "dcb2f595-30ab-102d-86b0-7a5022ba4115",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "ca027b80-88b3-49cb-9da6-470f0577c57b",
+                      "label": "Copper-T"
+                    },
+                    {
+                      "concept": "165059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Hormonal"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "IUD Removal Done",
+                "type": "obs",
+                "required": true,
+                "id": "iud_removal",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "e7bc9392-b4fd-483e-a1ec-d135a0158fa9",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NO"
+                    },
+                    {
+                      "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                      "label": "YES"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Reason for IUD Removal",
+                "type": "obs",
+                "required": true,
+                "id": "reason_iud_removal",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "559081ee-83ab-479e-9543-fd973af9c675",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "d05d6459-d5d0-409f-9879-2e5ce1201f6b",
+                      "label": "Change in fertility intention (CFI)"
+                    },
+                    {
+                      "concept": "cabbfa22-045f-4752-84df-b06410af32f6",
+                      "label": "Expiry (EX)"
+                    },
+                    {
+                      "concept": "f2538f76-c0e3-4a65-9db6-87e236fcc756",
+                      "label": "Other reasons for IUD removal"
+                    },
+                    {
+                      "concept": "5adbb4ba-bd80-469c-82a4-a4db17fa4fb1",
+                      "label": "Side effects (SE)"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Other Specify",
+                "type": "obs",
+                "required": true,
+                "id": "other_iud_removal",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH Malawi",
+                      "value": "6408"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "org.openmrs.module.mdrtb",
+                      "value": "OTHER"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED MVP",
+                      "value": "56221000105001"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "AMPATH",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "NARROWER-THAN",
+                      "type": "SNOMED NP",
+                      "value": "74964007"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Post partum Family Planning",
+                "type": "obs",
+                "required": true,
+                "id": "post_partum_FP",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "3b410c76-2435-42aa-8c38-7e49c575e0f9",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "13bf7056-94c9-42de-8d66-23c7e39e93e0",
+                      "label": "4 weeks to 6 weeks"
+                    },
+                    {
+                      "concept": "22ddaed0-f0b1-4845-993d-74b8b8713fe9",
+                      "label": "6 months to 12 months"
+                    },
+                    {
+                      "concept": "016e79a8-a644-4b3e-849c-fe05028f7d30",
+                      "label": "6 weeks to 6 months"
+                    },
+                    {
+                      "concept": "22660027-f1f7-4f71-b0d3-2f14ffd59211",
+                      "label": "48 hours to less than 4 weeks"
+                    },
+                    {
+                      "concept": "5913604a-e600-4f5b-af77-aa3f61b630d8",
+                      "label": "Less than 48 hours"
+                    }
+                  ]
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Fertility Awareness",
+        "sections": [
+          {
+            "label": "Fertility Awareness and Cacx Screening",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Fertility Awareness Methods",
+                "type": "obs",
+                "required": true,
+                "id": "fertilty_awareness",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "75861fee-71f3-42c3-b4d2-e0ddea3a1a38",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "3ca1d2b2-3cd2-4517-a188-e31567e0aa63",
+                      "label": "2 day method"
+                    },
+                    {
+                      "concept": "c1b7a244-0ab5-4881-aa5f-230fff681536",
+                      "label": "Lactational ammenorrhoea method"
+                    },
+                    {
+                      "concept": "86210cf8-f085-40c9-a401-590640511b81",
+                      "label": "Standard days"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Side effects reported by clients",
+                "type": "obs",
+                "required": true,
+                "id": "side_effects",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "6349deef-231d-464e-87e2-015a71802b85",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "dc8d14a2-30ab-102d-86b0-7a5022ba4115",
+                      "label": "ACNE"
+                    },
+                    {
+                      "concept": "36df93d6-2e9b-4eeb-96ff-82ed71b7991d",
+                      "label": "BR – Breast Tenderness"
+                    },
+                    {
+                      "concept": "dbe65cc6-0328-4bd7-b563-d0d8a5fce6a3",
+                      "label": "CR – Cramping or mild abdominal pain"
+                    },
+                    {
+                      "concept": "d40f5ce1-80a4-4408-958d-198a3e74ad0e",
+                      "label": "HB - Heavy Bleeding"
+                    },
+                    {
+                      "concept": "dc7fdcd0-30ab-102d-86b0-7a5022ba4115",
+                      "label": "HEADACHE"
+                    },
+                    {
+                      "concept": "c195add5-48e0-42e9-a2d8-3ee8d94fa5c4",
+                      "label": "IB - Irregular bleeding (bleeding at the wrong times)"
+                    },
+                    {
+                      "concept": "d8cacdd4-1235-4435-8a52-3b638b98156b",
+                      "label": "INSR - Insertion Site Reaction (abcess, infection etc) (Implants)"
+                    },
+                    {
+                      "concept": "f8b43fe6-4890-449b-8967-0506ad3e5635",
+                      "label": "ISR - Injection Site Reaction (Injectables)"
+                    },
+                    {
+                      "concept": "949e9fd8-1381-4fec-9ce3-d538cc67a1b4",
+                      "label": "Mood changes"
+                    },
+                    {
+                      "concept": "68d9f5e5-f9e9-47db-9715-f80821662b8e",
+                      "label": "NB - No Monthly Bleeding (lack of periods)"
+                    },
+                    {
+                      "concept": "6bb9c81f-9576-4267-a1f2-795a481638c9",
+                      "label": "NV- Nausea, vomiting or dizzyness"
+                    },
+                    {
+                      "concept": "ac918e9b-f863-412b-9eef-8f4f89a3dc54",
+                      "label": "Other side effects of family planning"
+                    },
+                    {
+                      "concept": "84a0b0e1-e6c2-491a-a390-da251884e4d0",
+                      "label": "SAP – Severe lower abdominal pain"
+                    },
+                    {
+                      "concept": "22f4c064-f278-48ce-b58e-52690d709d4d",
+                      "label": "SP - Suspected pregnancy"
+                    },
+                    {
+                      "concept": "dcbdc2d6-30ab-102d-86b0-7a5022ba4115",
+                      "label": "WEIGHT GAIN"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Other Specify",
+                "type": "obs",
+                "required": true,
+                "id": "other_side_effect",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH Malawi",
+                      "value": "6408"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "org.openmrs.module.mdrtb",
+                      "value": "OTHER"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED MVP",
+                      "value": "56221000105001"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "PIH",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "AMPATH",
+                      "value": "5622"
+                    },
+                    {
+                      "relationship": "NARROWER-THAN",
+                      "type": "SNOMED NP",
+                      "value": "74964007"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Cancer cervix screening",
+                "type": "obs",
+                "required": true,
+                "id": "cacx_screening",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "5029d903-51ba-4c44-8745-e97f320739b6",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "6f3bcf5f-f113-4950-949b-2af0926b8110",
+                      "label": "FOM - No evidence of Malignancy"
+                    },
+                    {
+                      "concept": "66a3eee8-68c7-42bc-9f27-a866293c1e68",
+                      "label": "SS - Suspicious of Malignancy"
+                    },
+                    {
+                      "concept": "e644e291-7848-456c-a7a3-197b8659cb54",
+                      "label": "ND - Not screened for cancer"
+                    },
+                    {
+                      "concept": "dc9b0596-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NA - NOT APPLICABLE"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Breast cancer screening",
+                "type": "obs",
+                "required": true,
+                "id": "breast_cancer",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "2fd84c19-bec6-42b3-b53c-e7650511f362",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "6f3bcf5f-f113-4950-949b-2af0926b8110",
+                      "label": "FOM - No evidence of Malignancy"
+                    },
+                    {
+                      "concept": "66a3eee8-68c7-42bc-9f27-a866293c1e68",
+                      "label": "SS - Suspicious of Malignancy"
+                    },
+                    {
+                      "concept": "e644e291-7848-456c-a7a3-197b8659cb54",
+                      "label": "ND - Not screened for cancer"
+                    },
+                    {
+                      "concept": "dc9b0596-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NA - NOT APPLICABLE"
+                    }
+                  ]
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "HIV and GBV",
+        "sections": [
+          {
+            "label": "HIV, STI and GBV Details",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "HCT code",
+                "type": "obs",
+                "required": true,
+                "id": "hct_code",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "d5b0394c-424f-41db-bc2f-37180dcdbe74",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "48723c9c-c931-4fde-81cd-6178c9a9a70b",
+                      "label": "TR √"
+                    },
+                    {
+                      "concept": "4d301db0-c517-4556-9f7c-d837bac90144",
+                      "label": "TRR √"
+                    },
+                    {
+                      "concept": "6da9b915-8668-4642-8ed4-7d2a346881cb",
+                      "label": "Counselled but declined HIV testing"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "HIV positive using Family Planning for the first time",
+                "type": "obs",
+                "required": true,
+                "id": "hiv_positive_using_FP",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "165003AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Yes"
+                    },
+                    {
+                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "No"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Is Client on ARVs",
+                "type": "obs",
+                "required": true,
+                "id": "client_on_arv",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "e7f22710-a83d-11ed-afa1-0242ac120002",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "No"
+                    },
+                    {
+                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Yes"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Screened for STIs",
+                "type": "obs",
+                "required": true,
+                "id": "screened_for_sti",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "2c48beab-1fc0-4000-91e0-523f8d22f0b5",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Yes"
+                    },
+                    {
+                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "No"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "screened for SGBV",
+                "type": "obs",
+                "required": true,
+                "id": "screened_for_gbv",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "2c48beab-1fc0-4000-91e0-523f8d22f0b5",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Yes"
+                    },
+                    {
+                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "No"
+                    }
+                  ]
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "encounterType": "",
+    "referencedForms": [],
+    "uuid": "",
+    "description": "To register family planning clients and monitor the dispensing of Contraceptives"
+  }
