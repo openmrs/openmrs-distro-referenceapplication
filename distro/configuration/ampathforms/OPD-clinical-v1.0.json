@@ -1,0 +1,1645 @@
+{
+    "name": "OutPatient Clinical Form",
+    "pages": [
+      {
+        "label": "Patient Classification",
+        "sections": [
+          {
+            "label": "Visit Details",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Malaria Test Done",
+                "type": "obs",
+                "required": false,
+                "id": "164433",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "18f97e54-9f02-437e-bb67-35761f04531c",
+                  "answers": [
+                    {
+                      "concept": "dc54c43f-30ab-102d-86b0-7a5022ba4115",
+                      "label": "MALARIAL SMEAR",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "dc9825cf-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NOT DONE",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "1643AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "RAPID TEST FOR MALARIA",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "f1468c2d-34f3-4224-9eb5-8fa50294fda5",
+                      "label": "B/S MICROSCOPY",
+                      "conceptMappings": []
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Serial Number",
+                "id": "1646",
+                "type": "obs",
+                "required": "true",
+                "questionOptions": {
+                  "rendering": "number",
+                  "concept": "1646AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "max": "1000000",
+                  "min": "001",
+                  "showDate": ""
+                }
+              },
+              {
+                "label": "Referral Type",
+                "type": "obs",
+                "required": true,
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "67ea4375-0f4f-4e67-b8b0-403942753a4d",
+                  "answers": [
+                    {
+                      "concept": "ea730d69-7eec-486a-aaf2-54f8bab5a44c",
+                      "label": "Transfer in",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Patient transferred out",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "165855"
+              },
+              {
+                "label": "Ref in number",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "message": "Patient marked as transferred in. Please provide the Ref in number.",
+                  "referenceQuestionId": "165855",
+                  "referenceQuestionAnswers": [
+                    "ea730d69-7eec-486a-aaf2-54f8bab5a44c"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "9bf35577-f802-437d-8ca3-84ab15191d6e"
+                },
+                "id": "164436",
+                "validators": [
+                  {
+                    "type": "js_expression",
+                    "failsWhenExpression": "!isEmpty(165855) && arrayContains(['ea730d69-7eec-486a-aaf2-54f8bab5a44c'], 165855) && isEmpty(myValue)",
+                    "message": "Patient marked as transferred in. Please provide the Ref in number."
+                  }
+                ],
+                "hide": {
+                  "hideWhenExpression": "isEmpty(165855) || 165855 !== 'ea730d69-7eec-486a-aaf2-54f8bab5a44c'"
+                }
+              },
+              {
+                "label": "Ref out number",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "referenceQuestionId": "165855",
+                  "referenceQuestionAnswers": [
+                    "160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "6442c9f6-25e8-4c8e-af8a-e9f6845ceaed"
+                },
+                "id": "99763",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(165855) || 165855 != '160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              },
+              {
+                "label": "Patient Type",
+                "type": "obs",
+                "required": false,
+                "id": "patient_type",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "13639b46-6ff3-4abe-b6d0-2fc70462edd6",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Patient Classification",
+                "type": "obs",
+                "required": false,
+                "id": "patient_classification",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "51ad6e56-cdea-4065-866e-96fbf1db16d6",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Social History",
+        "sections": [
+          {
+            "label": "Social behaviour",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Tobacco Use",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "checkbox",
+                  "concept": "163731AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "answers": [
+                    {
+                      "concept": "1090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Never",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "159452AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "In the past",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "159450AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Currently",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "1455AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "SMOKING",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "18b1c8de-4255-4a7f-8538-2965cf2ffb72",
+                      "label": "SNIFFING",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "892eea6d-36aa-49ca-96bb-555abac25673",
+                      "label": "CHEWING",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "3357e620-8f8f-4ad9-8cf4-92201d47d015",
+                      "label": "SHISHA",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "159380AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Pipe tobacco",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "16b272bb-9718-4ea5-8728-c043bd5575bd",
+                      "label": "NOT EXPOSED",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "163731"
+              },
+              {
+                "label": "Tobacco Exposure",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "checkbox",
+                  "concept": "34335b91-89d2-4fec-a928-579eb7795567",
+                  "answers": [
+                    {
+                      "concept": "16b272bb-9718-4ea5-8728-c043bd5575bd",
+                      "label": "NOT EXPOSED",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "1455AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "SMOKING",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "159380AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Pipe tobacco",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "18b1c8de-4255-4a7f-8538-2965cf2ffb72",
+                      "label": "SNIFFING",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "3357e620-8f8f-4ad9-8cf4-92201d47d015",
+                      "label": "SHISHA",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "892eea6d-36aa-49ca-96bb-555abac25673",
+                      "label": "CHEWING",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "165359"
+              },
+              {
+                "label": "Alcohol Use",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "checkbox",
+                  "concept": "159449AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "answers": [
+                    {
+                      "concept": "159452AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "In the past",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "159450AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Currently",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "1090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Never",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "159449"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Investigations",
+        "sections": [
+          {
+            "label": "Investigations",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Patient has fever?",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "SNOMED CT",
+                      "value": "CT: 386661006"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "140238"
+                    },
+                    {
+                      "type": "3BT",
+                      "value": "10049305"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "5945"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "3722"
+                    },
+                    {
+                      "type": "IMO ProblemIT",
+                      "value": "ProblemIT: 27348"
+                    },
+                    {
+                      "type": "AMPATH",
+                      "value": "157"
+                    },
+                    {
+                      "type": "ICPC2",
+                      "value": "A03"
+                    },
+                    {
+                      "type": "ICD-10-WHO",
+                      "value": "R50.9"
+                    },
+                    {
+                      "type": "AMPATH",
+                      "value": "5945"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "No",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "PIH Malawi",
+                          "value": "Malawi: 1066"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373067005"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Unknown",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 261665006"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "1067"
+                        },
+                        {
+                          "type": "org.openmrs.module.mdrtb",
+                          "value": "UNKNOWN"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1067"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1067"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Yes",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373066001"
+                        },
+                        {
+                          "type": "PIH Malawi",
+                          "value": "Malawi: 1065"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1065"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "140238"
+              },
+              {
+                "label": "Malaria Test Done",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "referenceQuestionId": "140238",
+                  "referenceQuestionAnswers": [
+                    "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "18f97e54-9f02-437e-bb67-35761f04531c",
+                  "answers": [
+                    {
+                      "concept": "dc54c43f-30ab-102d-86b0-7a5022ba4115",
+                      "label": "MALARIAL SMEAR",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "dc9825cf-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NOT DONE",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "1643AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "RAPID TEST FOR MALARIA",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "f1468c2d-34f3-4224-9eb5-8fa50294fda5",
+                      "label": "B/S MICROSCOPY",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "164433",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(140238) || 140238 != '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              },
+              {
+                "label": "Malaria Test Result",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "referenceQuestionId": "164433",
+                  "referenceQuestionAnswers": [
+                    "dc54c43f-30ab-102d-86b0-7a5022ba4115",
+                    "1643AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "f1468c2d-34f3-4224-9eb5-8fa50294fda5"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "d6205784-0634-4a2b-b561-a51ed2668bb7",
+                  "answers": [
+                    {
+                      "concept": "dc866728-30ab-102d-86b0-7a5022ba4115",
+                      "label": "POSITIVE",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "dc85aa72-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NEGATIVE",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "dc9825cf-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NOT DONE",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "164434",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(164433) || 164433 == 'dc9825cf-30ab-102d-86b0-7a5022ba4115'"
+                }
+              },
+              {
+                "label": "New Presumed TB Case?",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "b80f04a4-1559-42fd-8923-f8a6d2456a04",
+                  "answers": [
+                    {
+                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Yes",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373066001"
+                        },
+                        {
+                          "type": "PIH Malawi",
+                          "value": "Malawi: 1065"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1065"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "No",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "PIH Malawi",
+                          "value": "Malawi: 1066"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373067005"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "99498"
+              },
+              {
+                "label": "Patient sent to Lab?",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "referenceQuestionId": "99498",
+                  "referenceQuestionAnswers": [
+                    "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "c5da115d-f6a3-4d13-b182-c2e982a3a796",
+                  "answers": [
+                    {
+                      "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                      "label": "YES",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NO",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "165178",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(99498) || 99498 != '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              },
+              {
+                "label": "Patient Lab results",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "referenceQuestionId": "165178",
+                  "referenceQuestionAnswers": [
+                    "dcd695dc-30ab-102d-86b0-7a5022ba4115"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "160108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "SNOMED-CT",
+                      "value": "429599001"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Negative",
+                      "conceptMappings": [
+                        {
+                          "type": "AMPATH",
+                          "value": "664"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "664"
+                        },
+                        {
+                          "type": "org.openmrs.module.mdrtb",
+                          "value": "NEGATIVE"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "664"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "260385009"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "664"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "664"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "260385009"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "664"
+                        },
+                        {
+                          "type": "org.openmrs.module.mdrtb",
+                          "value": "NEGATIVE"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "665"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "665"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Positive",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "703"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "704"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "703"
+                        },
+                        {
+                          "type": "SNOMED-CT",
+                          "value": "10828004"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "703"
+                        },
+                        {
+                          "type": "org.openmrs.module.mdrtb",
+                          "value": "POSITIVE"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "160108",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(165178) || 165178 != 'dcd695dc-30ab-102d-86b0-7a5022ba4115'"
+                }
+              },
+              {
+                "label": "Patient screened for HIV?",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "e0027ef8-b5f1-4098-8586-2a7af9997c65",
+                  "answers": [
+                    {
+                      "label": "Yes",
+                      "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115"
+                    },
+                    {
+                      "label": "No",
+                      "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115"
+                    }
+                  ]
+                },
+                "id": "165968"
+              },
+              {
+                "label": "Patient eligible for HIV testing?",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "93434e17-6570-4990-bc72-f3ee8d6bf7c1",
+                  "answers": [
+                    {
+                      "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                      "label": "YES",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NO",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "166778"
+              },
+              {
+                "label": "Linked to TB Clinic?",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "referenceQuestionId": "160108",
+                  "referenceQuestionAnswers": [
+                    "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "73c78325-fb9f-4473-a387-ef193e3a2a95",
+                  "answers": [
+                    {
+                      "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Yes",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373066001"
+                        },
+                        {
+                          "type": "PIH Malawi",
+                          "value": "Malawi: 1065"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1065"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1065"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "No",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "PIH Malawi",
+                          "value": "Malawi: 1066"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1066"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 373067005"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "164435",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(160108) || 160108 != '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              },
+              {
+                "label": "Clinic Name",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "referenceQuestionId": "164435",
+                  "referenceQuestionAnswers": [
+                    "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "165048AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                "id": "165048",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(164435) || 164435 != '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              },
+              {
+                "label": "Client TB Number",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "referenceQuestionId": "164435",
+                  "referenceQuestionAnswers": [
+                    "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "304df0d0-afe4-4a61-a917-d684b100a65a"
+                },
+                "id": "164955",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(164435) || 164435 != '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Diagnosis",
+        "sections": [
+          {
+            "label": "Diagnosis",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Diagnosis",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "159392AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "rows": "",
+                  "conceptMappings": [
+                    {
+                      "type": "AMPATH",
+                      "value": "6137"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "159392"
+                    },
+                    {
+                      "type": "SNOMED CT",
+                      "value": "CT: 410605003"
+                    },
+                    {
+                      "type": "org.openmrs.module.emrapi",
+                      "value": "Confirmed"
+                    },
+                    {
+                      "type": "PIH",
+                      "value": "1345"
+                    }
+                  ]
+                },
+                "id": "159392"
+              },
+              {
+                "label": "Primary Diagnosis ",
+                "type": "obs",
+                "required": false,
+                "id": "primary_diagnosis",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "9fcafaf4-55ee-4a17-a201-35b0f9ed3f5d",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Secoundary Diagnosis ",
+                "type": "obs",
+                "required": false,
+                "id": "secoundary_diagnosis",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "9fcafaf4-55ee-4a17-a201-35b0f9ed3f5d",
+                  "conceptMappings": [],
+                  "answers": []
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Prescription and Disability",
+        "sections": [
+          {
+            "label": "Prescription",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Drug Name",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                },
+                "id": "1282"
+              },
+              {
+                "label": "Units",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "number",
+                  "concept": "160856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "max": "100",
+                  "min": "0",
+                  "showDate": false
+                },
+                "id": "160856"
+              },
+              {
+                "label": "Dose",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "answers": [
+                    {
+                      "concept": "160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Once daily",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 229797004"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160862"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160863AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Once daily, at bedtime",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160863"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 396142006"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Once daily, in the evening",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED NP",
+                          "value": "NP: 396147000"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160864"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Once daily, in the morning",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160865"
+                        },
+                        {
+                          "type": "SNOMED NP",
+                          "value": "NP: 229797004"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160861AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Twice daily with meals",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160861"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 421589008"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160860AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Twice daily after meals",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160860"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 422231003"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160859AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Twice daily before meals",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160859"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 422231003"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Twice daily",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160858"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 229799001"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Thrice daily",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 229798009"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160866"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160867AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Thrice daily, after meals",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 421409007"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160867"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160868AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Thrice daily, before meals",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 396145008"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160868"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160869AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Thrice daily, with meals",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160869"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 396146009"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160870AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Four times daily",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "160870"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 307439001"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160871AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Four times daily, after meals and at bedtime",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 421969000"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160871"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "160872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Four times daily, before meals and at bedtime",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 420660006"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "160872"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162135AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "One time",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162135"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 307486002"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162243AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every 30 min",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 225767001"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162243"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162244AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every hour",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 225768006"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162244"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162245AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every two hours",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162245"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 225750008"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every three hours",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162246"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 225753005"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162247AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every four hours",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162247"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 225756002"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162248AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every five hours",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 396137003"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162248"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162249AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every six hours",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 307468000"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162249"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162250AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every eight hours",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162250"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 307469008"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162251AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every twelve hours",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162251"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 307470009"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162252AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every twenty-four hours",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162252"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 396125000"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162254AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every thirty-six hours",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162254"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 396126004"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162253AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every forty-eight hours",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 396125000"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162253"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162255AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every seventy-two hours",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "162255"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 396126004"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Every Monday, Wednesday and Friday",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 444763000"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162256"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": "160855"
+              },
+              {
+                "label": "Duration",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "number",
+                  "concept": "159368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "max": "10",
+                  "min": "1"
+                },
+                "id": "159368"
+              },
+              {
+                "label": "Duration Units",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "1732AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "type": "SNOMED NP",
+                      "value": "NP: 258700003"
+                    },
+                    {
+                      "type": "PIH Malawi",
+                      "value": "Malawi: 2286"
+                    },
+                    {
+                      "type": "CIEL",
+                      "value": "1732"
+                    }
+                  ],
+                  "answers": [
+                    {
+                      "concept": "1074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Months",
+                      "conceptMappings": [
+                        {
+                          "type": "AMPATH",
+                          "value": "1074"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "2161"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1074"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 258706009"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1073AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Weeks",
+                      "conceptMappings": [
+                        {
+                          "type": "AMPATH",
+                          "value": "1073"
+                        },
+                        {
+                          "type": "PIH",
+                          "value": "2160"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1073"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 258705008"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1072AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Days",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 258703001"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1072"
+                        },
+                        {
+                          "type": "AMPATH",
+                          "value": "1072"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1734AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Years",
+                      "conceptMappings": [
+                        {
+                          "type": "PIH",
+                          "value": "2287"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 258707000"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1734"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1733AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Minutes",
+                      "conceptMappings": [
+                        {
+                          "type": "CIEL",
+                          "value": "1733"
+                        },
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 258701004"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "1822AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Hours",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 258702006"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "1822"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162582AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Number of occurrences",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 252109000"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162582"
+                        }
+                      ]
+                    },
+                    {
+                      "concept": "162583AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Seconds",
+                      "conceptMappings": [
+                        {
+                          "type": "SNOMED CT",
+                          "value": "CT: 257997001"
+                        },
+                        {
+                          "type": "CIEL",
+                          "value": "162583"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "id": " 1732"
+              }
+            ]
+          },
+          {
+            "label": "Disability",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Disability?",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "162558AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "answers": [
+                    {
+                      "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                      "label": "YES",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                      "label": "NO",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "162558"
+              },
+              {
+                "label": "Type of Disability",
+                "type": "obs",
+                "required": {
+                  "type": "conditionalRequired",
+                  "referenceQuestionId": "162558",
+                  "referenceQuestionAnswers": [
+                    "dcd695dc-30ab-102d-86b0-7a5022ba4115"
+                  ]
+                },
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "c894f746-3a8f-4f9a-a3e1-fa9acb02228d"
+                },
+                "id": "164945",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(162558) || 162558 != 'dcd695dc-30ab-102d-86b0-7a5022ba4115'"
+                }
+              },
+              {
+                "label": "Device Provided",
+                "type": "obs",
+                "questionOptions": {
+                  "rendering": "checkbox",
+                  "concept": "164204AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "answers": [
+                    {
+                      "concept": "164202AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Crutches",
+                      "conceptMappings": []
+                    },
+                    {
+                      "concept": "164203AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                      "label": "Walker",
+                      "conceptMappings": []
+                    }
+                  ]
+                },
+                "id": "164204",
+                "hide": {
+                  "hideWhenExpression": "isEmpty(162558) || 162558 != 'dcd695dc-30ab-102d-86b0-7a5022ba4115'"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "uuid": "xxxx",
+    "referencedForms": [],
+    "encounterType": "ee4780f5-b5eb-423b-932f-00b5879df5ab",
+    "version": "1.2",
+    "description": "This form will be used in the OPD general and specialized OPD clinics to provide clinical care. It incorporates elements of the OPD register and Form 5"
+  }

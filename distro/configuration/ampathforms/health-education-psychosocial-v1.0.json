@@ -1,0 +1,559 @@
+{
+  "name": "Health Education and Psychosocial Support",
+  "pages": [
+    {
+      "label": "Visit Information Details",
+      "sections": [
+        {
+          "label": "Visit Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Is Visit on Schedule",
+              "type": "obs",
+              "required": true,
+              "id": "visit_on_schedule",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "dc9fdc12-30ab-102d-86b0-7a5022ba4115",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Visit Date",
+              "type": "obs",
+              "required": true,
+              "id": "visit_date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "dcac04cf-30ab-102d-86b0-7a5022ba4115",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Encounter Informations Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Setting",
+              "type": "obs",
+              "required": true,
+              "id": "setting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2d5a0641-ef12-4101-be76-533d4ba651df",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "e646fcf7-aaf2-4b04-a24c-9b4506bf634f",
+                    "label": "Community Based"
+                  },
+                  {
+                    "concept": "e9332f1e-3af5-499a-b5ea-5c196cdf24c2",
+                    "label": "HEALTH EDUCATION HOME BASED CARE"
+                  },
+                  {
+                    "concept": "865811ad-796f-48c2-b575-1f530122c408",
+                    "label": "Health Facility"
+                  },
+                  {
+                    "concept": "159928AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "school"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "PSS Issues Identified",
+              "type": "obs",
+              "required": true,
+              "id": "pss_issues_identified",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "1760ea50-8f05-4675-aedd-d55f99541aa8",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "c14695ca-6f11-4f1c-9af5-8f3bd5ddb3a3",
+                    "label": "Alcohol and Substance Abuse"
+                  },
+                  {
+                    "concept": "dcde3d87-30ab-102d-86b0-7a5022ba4115",
+                    "label": "ANXIETY"
+                  },
+                  {
+                    "concept": "1b532410-60c4-4514-be80-12ee3d8224a7",
+                    "label": "Bereavement"
+                  },
+                  {
+                    "concept": "6cec43a1-1f3c-42ab-844a-c3f786ec06f2",
+                    "label": "Denial"
+                  },
+                  {
+                    "concept": "b9884d17-08a1-430b-b003-3b79d467a9f0",
+                    "label": "Dysfunctional Family"
+                  },
+                  {
+                    "concept": "f6e863c5-1e09-445a-a714-fe4a2255ae64",
+                    "label": "Had less than one meal a day"
+                  },
+                  {
+                    "concept": "0cb89eba-5abf-4cb8-bc7f-0ab299035437",
+                    "label": "Lack of life-survival skills"
+                  },
+                  {
+                    "concept": "8595afed-96a0-4f3e-b88d-acc4ca81d03e",
+                    "label": "Malnourished"
+                  },
+                  {
+                    "concept": "01199072-c041-4129-8a12-bd97eb0156fc",
+                    "label": "Non Disclosure"
+                  },
+                  {
+                    "concept": "c8c6939c-a36b-4ee0-8c6e-85c6a259a0eb",
+                    "label": "Poverty"
+                  },
+                  {
+                    "concept": "fbc8c14f-8348-4acc-abd7-f14df60eff2d",
+                    "label": "Risky Sexual Behavior"
+                  },
+                  {
+                    "concept": "762cfa56-2d56-4e89-912a-3f61bf4c23e8",
+                    "label": "Spiritual Issues"
+                  },
+                  {
+                    "concept": "dcdee9a8-30ab-102d-86b0-7a5022ba4115",
+                    "label": "STIGMA"
+                  },
+                  {
+                    "concept": "0e36d228-8f19-407b-ad0b-b8b5bc4d3ba8",
+                    "label": "Stress"
+                  },
+                  {
+                    "concept": "421dbf80-169b-4f02-a285-295d21ff64e9",
+                    "label": "Transition Challenges"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "ART Preparation, Readiness, Adherence and Support",
+              "type": "obs",
+              "required": true,
+              "id": "preparation_support",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "47502ce3-fc55-41e6-a61c-54a4404dd0e1",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "8519d4ef-6d9a-4110-9712-3ccdab4d7a09",
+                    "label": "ART Literacy"
+                  },
+                  {
+                    "concept": "b465e067-a447-44a6-afc2-b4cdfe8189bc",
+                    "label": "HEALTH EDUCATION ART READY"
+                  },
+                  {
+                    "concept": "0df2a7db-caed-4351-925c-8e45a3621504",
+                    "label": "Mild hypertension"
+                  },
+                  {
+                    "concept": "012c5218-25d7-4cd0-aad5-1f028d9404ad",
+                    "label": "Not ready to start and initiate"
+                  },
+                  {
+                    "concept": "bd4f0efb-8a43-4e5c-9048-eda47b675bb7",
+                    "label": "Ongoing Adherence counselling and support"
+                  },
+                  {
+                    "concept": "497bb6d8-f648-49f7-a3fa-d84708a8ce57",
+                    "label": "Severe hypertension"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Depression Status",
+              "type": "obs",
+              "required": true,
+              "id": "depression_status",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "fe9a6bfc-b0db-4bf3-bab6-a8800dd93ded",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "e6284961-f3fa-43be-aa05-8463dab5dbf1",
+                    "label": "More than two weeks in pleasurable activities"
+                  },
+                  {
+                    "concept": "5f22ca76-bead-43fc-8d70-92479c658b38",
+                    "label": "More than two weeks feeling down"
+                  },
+                  {
+                    "concept": "6d1c2d6f-eb86-4a85-b6b4-c2ff4bb879ce",
+                    "label": "No Signs"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "GBV/VAC",
+              "type": "obs",
+              "required": true,
+              "id": "gbv",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5d26ffa1-8b58-45af-a534-bc3b469850cb",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "eae2bbc8-8f82-4241-9b26-0579bf57b833",
+                    "label": "Victim"
+                  },
+                  {
+                    "concept": "fd77a408-514b-4325-8777-77dcc9b4d4e8",
+                    "label": "Perpetrator"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Disclosed Relationship",
+              "type": "obs",
+              "required": true,
+              "id": "disclosed_relationship",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2edfe7ae-b20a-4ef0-b450-751028026c8f",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                    "label": "YES"
+                  },
+                  {
+                    "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                    "label": "NO"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "OVC Screening",
+              "type": "obs",
+              "required": true,
+              "id": "ovc_screening",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c2f9c9f3-3e46-456c-9f17-7bb23c473f1b",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "e1efe10b-50c4-43b1-b04d-01f81e19c215",
+                    "label": "Care giver unemployed"
+                  },
+                  {
+                    "concept": "f6e863c5-1e09-445a-a714-fe4a2255ae64",
+                    "label": "Had less than one meal a day"
+                  },
+                  {
+                    "concept": "32e3fc5e-cfb6-49f5-949a-77e6f191b437",
+                    "label": "Has signs of abuse, exploitation or neglect"
+                  },
+                  {
+                    "concept": "8595afed-96a0-4f3e-b88d-acc4ca81d03e",
+                    "label": "Malnourished"
+                  },
+                  {
+                    "concept": "9ea56d9a-818b-4700-944a-5110c7248379",
+                    "label": "Missed Appointment in the last 3 months"
+                  },
+                  {
+                    "concept": "6d1c2d6f-eb86-4a85-b6b4-c2ff4bb879ce",
+                    "label": "No Signs"
+                  },
+                  {
+                    "concept": "f56e8d46-5b2f-488b-861a-94a89d16adf6",
+                    "label": "Non-suppressed"
+                  },
+                  {
+                    "concept": "0251af24-dc19-4d68-a2bb-4b3f3867b949",
+                    "label": "Not In School"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "OVC Assessment",
+              "type": "obs",
+              "required": true,
+              "id": "ovc_assessment",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "cb07b087-effb-4679-9e1c-5bcc506b5599",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "52aed7c2-ef3d-4220-8302-78b841f6ff24",
+                    "label": "Enrolled"
+                  },
+                  {
+                    "concept": "9669522d-d96a-411d-a534-5b13a7d65fc3",
+                    "label": "Graduated"
+                  },
+                  {
+                    "concept": "160737AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not assessed"
+                  },
+                  {
+                    "concept": "513d3a81-68d2-44f4-88a3-8dc74b5e1249",
+                    "label": "Assessed, Eligible not yet enrolled"
+                  },
+                  {
+                    "concept": "8578c43e-bb81-4adf-a4a5-389a9c716a49",
+                    "label": "Assessed and Not Eligible"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "PHDP Components",
+              "type": "obs",
+              "required": true,
+              "id": "PHDP_components",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "d788b8df-f25d-49e7-b946-bf5fe2d9407c",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "7f84b071-78b0-434b-ae3d-e8fde45e8098",
+                    "label": "Alcohol and Substance abuse reduction"
+                  },
+                  {
+                    "concept": "7c024474-66c3-47fb-8985-1cc5595de174",
+                    "label": "Basic Care package"
+                  },
+                  {
+                    "concept": "0815c786-5994-49e4-aa07-28b662b0e428",
+                    "label": "Family plannign counselling provided"
+                  },
+                  {
+                    "concept": "dc9ae14d-30ab-102d-86b0-7a5022ba4115",
+                    "label": "DISCLOSURE COUNSELING"
+                  },
+                  {
+                    "concept": "dc98d576-2623-4677-8a08-2061e195864f",
+                    "label": "Management of Stigma and Discrimination"
+                  },
+                  {
+                    "concept": "dc7620b3-30ab-102d-86b0-7a5022ba4115",
+                    "label": "METHOD OF FAMILY PLANNING"
+                  },
+                  {
+                    "concept": "7cb048f9-550b-4be2-9eb9-cc8e19c87041",
+                    "label": "NUTRITION COUNSELLING ONLY >2YRS"
+                  },
+                  {
+                    "concept": "ccaba007-ea6c-4dae-a3b0-07118ddf5008",
+                    "label": "Other PHDP Components"
+                  },
+                  {
+                    "concept": "dcd68a88-30ab-102d-86b0-7a5022ba4115",
+                    "label": "OTHER SPECIFY"
+                  },
+                  {
+                    "concept": "dcd7e8e5-30ab-102d-86b0-7a5022ba4115",
+                    "label": "PMTCT"
+                  },
+                  {
+                    "concept": "7e8eefbe-10a1-4a93-b399-04bb3a5f8aaf",
+                    "label": "Risk Reduction Counselling"
+                  },
+                  {
+                    "concept": "cc43847c-ee85-4cf7-8dd1-4a6d70f0fa0f",
+                    "label": "STI screening and treatment"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Other PHDP",
+              "type": "obs",
+              "required": true,
+              "id": "other_phdp",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH Malawi",
+                    "value": "6408"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "OTHER"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5622"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED MVP",
+                    "value": "56221000105001"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5622"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5622"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED NP",
+                    "value": "74964007"
+                  }
+                ],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Intervation Approaches",
+              "type": "obs",
+              "required": true,
+              "id": "intervation_approaches",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "eb7c1c34-59e5-46d5-beba-626694badd54",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "934cd2fa-210e-430e-babf-ac846ee4a8b2",
+                    "label": "Group Counselling session"
+                  },
+                  {
+                    "concept": "a806304b-bef4-483f-b4d0-9514bfc80621",
+                    "label": "Health Education Linkages and  Refferals"
+                  },
+                  {
+                    "concept": "f1229461-aa7e-4a4f-a916-e1188c1ce622",
+                    "label": "Individual counseling"
+                  },
+                  {
+                    "concept": "42c8f58f-b2f8-4911-a9d2-90da92e22128",
+                    "label": "Peer counselling"
+                  },
+                  {
+                    "concept": "e8fc9bfa-efa7-4b7f-92ba-1a7d0fc467b3",
+                    "label": "Peer support group"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Linkages and Referrals",
+              "type": "obs",
+              "required": true,
+              "id": "linkages_and_referrals",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "325e4270-8b1f-447e-a591-b3daf13acea3",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "159937AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Maternal and child health program"
+                  },
+                  {
+                    "concept": "11c12455-2f54-4bb5-b051-0ecfd4a5fe96",
+                    "label": "Nutrition Unit"
+                  },
+                  {
+                    "concept": "dcd7e8e5-30ab-102d-86b0-7a5022ba4115",
+                    "label": "PMTCT"
+                  },
+                  {
+                    "concept": "165048AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tuberculosis Clinic"
+                  },
+                  {
+                    "concept": "c09c3d3d-d07d-4d34-84f0-89ea4fd5d6d5",
+                    "label": "Ward"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Comments",
+              "type": "obs",
+              "required": true,
+              "id": "comments",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "86f85a98-d5ef-468b-bbf2-57a7e4565f3c",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Name of Provider",
+              "type": "encounterProvider",
+              "required": true,
+              "id": "name_of_provide",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "",
+  "referencedForms": [],
+  "uuid": "",
+  "description": "ART Encounter for Health Education and Psychosocial Support"
+}

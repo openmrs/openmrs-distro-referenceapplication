@@ -1,0 +1,142 @@
+{
+    "name": "Admission form",
+    "pages": [
+      {
+        "label": "Admission details",
+        "sections": [
+          {
+            "label": "Details",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "IPD Number",
+                "type": "patientIdentifier",
+                "required": false,
+                "id": "ipd_number",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "475f8db8-2350-421b-a669-eea70ef443c0",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Admission Date",
+                "type": "encounterDatetime",
+                "required": false,
+                "id": "admission_date",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "00b60b33-e6d8-4059-b101-dcd25568aa78",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Admission Time",
+                "type": "encounterDatetime",
+                "required": false,
+                "id": "admission_time",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "162135AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "162135"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED CT",
+                      "value": "307486002"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Ward name",
+                "type": "obs",
+                "required": false,
+                "id": "ward_name",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "dc11e42d-cdcd-49c0-a643-d34afb8df75e",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Bed Number",
+                "type": "obs",
+                "required": false,
+                "id": "bed_number",
+                "questionOptions": {
+                  "rendering": "number",
+                  "concept": "dbc8ef39-daa1-4483-bff0-b3a863d3e9df",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "RxNORM",
+                      "value": "1364505 (bedaquiline 100 MG)"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Patient category",
+                "type": "obs",
+                "required": false,
+                "id": "patient_category",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "13639b46-6ff3-4abe-b6d0-2fc70462edd6",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "13110a9a-aed7-4e8e-92bb-731efceb6c69",
+                      "label": "NEW HIV  PATIENT"
+                    },
+                    {
+                      "concept": "ea730d69-7eec-486a-aaf2-54f8bab5a44c",
+                      "label": "TRANSFER IN"
+                    },
+                    {
+                      "concept": "23594934-b635-4dc4-9d40-0a2e574551fe",
+                      "label": "TRANSFER NOT ON ART"
+                    }
+                  ]
+                },
+                "validators": []
+              },
+              {
+                "label": "Admitted by",
+                "type": "encounterProvider",
+                "required": false,
+                "id": "admitted_by",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "9071436e-e190-49b5-bd5e-451743107dbc",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "encounterType": "",
+    "referencedForms": [],
+    "uuid": "",
+    "description": "This form will be used to admit patients to IPD"
+  }

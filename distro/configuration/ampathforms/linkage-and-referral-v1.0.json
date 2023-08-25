@@ -1,0 +1,95 @@
+{
+    "name": "Comprehensive Patient Referral and Linakage Form",
+    "pages": [
+      {
+        "label": "Patient Category",
+        "sections": [
+          {
+            "label": "Patient Identification",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Patient Type",
+                "type": "obs",
+                "required": false,
+                "id": "patient_type",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "165040AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "HIV ",
+        "sections": [
+          {
+            "label": "Patient ART History",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Initial Regimen",
+                "type": "obs",
+                "required": false,
+                "id": "initial_regimen",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "c3332e8d-2548-4ad6-931d-6855692694a3",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "583a954b-0cd5-4b69-aef6-87c281e03a55",
+                      "label": "ABC-3TC-EFV"
+                    },
+                    {
+                      "concept": "14c56659-3d4e-4b88-b3ff-e2d43dbfb865",
+                      "label": "ABC-3TC-LPV/r"
+                    },
+                    {
+                      "concept": "6cdbfee8-87bf-406c-8dc3-3a22d95e952c",
+                      "label": "ABC-3TC-NVP"
+                    },
+                    {
+                      "concept": "6cc36637-596a-4426-92cf-170f76ea437d",
+                      "label": "ABC/3TC/DTG"
+                    },
+                    {
+                      "concept": "dd2b3eee-30ab-102d-86b0-7a5022ba4115",
+                      "label": "AZT-3TC-EFV"
+                    },
+                    {
+                      "concept": "dd2b361c-30ab-102d-86b0-7a5022ba4115",
+                      "label": "AZT-3TC-NVP"
+                    },
+                    {
+                      "concept": "a779d984-9ccf-4424-a750-47506bf8212b",
+                      "label": "AZT/3TC/DTG"
+                    },
+                    {
+                      "concept": "dd2b8b27-30ab-102d-86b0-7a5022ba4115",
+                      "label": "D4T-3TC-EFV"
+                    },
+                    {
+                      "concept": "dd2b84c5-30ab-102d-86b0-7a5022ba4115",
+                      "label": "D4T-3TC-NVP"
+                    }
+                  ]
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "encounterType": "",
+    "referencedForms": [],
+    "uuid": "",
+    "description": "Form will be used to faciliate referrals and linkage within and acrross facilities "
+  }

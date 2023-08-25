@@ -1,0 +1,339 @@
+{
+    "name": "Theater Form",
+    "pages": [
+      {
+        "label": "Introduction",
+        "sections": [
+          {
+            "label": "Patient details",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Nurses ",
+                "type": "encounterProvider",
+                "required": false,
+                "id": "nurses_theater",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                }
+              },
+              {
+                "label": "IPD Number",
+                "type": "patientIdentifier",
+                "required": false,
+                "id": "ipd_number",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "475f8db8-2350-421b-a669-eea70ef443c0",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "OPD Number",
+                "type": "patientIdentifier",
+                "required": false,
+                "id": "opd_number",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "1646AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Admission number",
+                "type": "patientIdentifier",
+                "required": false,
+                "id": "admission_number",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "a73edeb2-8a34-43a4-916d-1d8954870d92",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Ward",
+                "type": "obs",
+                "required": false,
+                "id": "ward_theater",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "c09c3d3d-d07d-4d34-84f0-89ea4fd5d6d5",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              }
+            ]
+          },
+          {
+            "label": "Clinical  observations",
+            "isExpanded": "true",
+            "questions": []
+          },
+          {
+            "label": "Observations ",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Diagnosis",
+                "type": "obs",
+                "required": false,
+                "id": "diagnosis_theater",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "0de0b715-f3ef-4a91-a145-09509112b693",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Operation procedure",
+                "type": "obs",
+                "required": false,
+                "id": "operation_proceedure",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "d84febfe-f6ae-45fe-8f44-83d302a48f05",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Operation site",
+                "type": "obs",
+                "required": false,
+                "id": "operation_site",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "379b29a3-ba09-4cc6-bf77-ec9a470674b3",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Anethesia Type",
+                "type": "obs",
+                "required": false,
+                "id": "anethesia_type",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "b0d797f5-2c3a-4c8d-b5b6-500e85cc9914",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Blood Transfused",
+                "type": "obs",
+                "required": false,
+                "id": "blood_transfused",
+                "questionOptions": {
+                  "rendering": "number",
+                  "concept": "dc96ee06-30ab-102d-86b0-7a5022ba4115",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Procedure",
+        "sections": [
+          {
+            "label": "Procedure timings",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Time Patient gets on Theater Table",
+                "type": "obs",
+                "required": false,
+                "id": "time_patient_gets_on_theater_table",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "75f545d0-728f-408b-895e-f097dfb0a527",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Anaethesia Start Time",
+                "type": "obs",
+                "required": false,
+                "id": "anaethesia_start_time",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "162135AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "162135"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED CT",
+                      "value": "307486002"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Start Of Surgery",
+                "type": "obs",
+                "required": false,
+                "id": "start_of_surgery",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "162135AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "162135"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED CT",
+                      "value": "307486002"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "End Of Surgery",
+                "type": "obs",
+                "required": false,
+                "id": "end_of_surgery",
+                "questionOptions": {
+                  "rendering": "date",
+                  "concept": "162135AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "162135"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED CT",
+                      "value": "307486002"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Patient Time Off Theater Table",
+                "type": "",
+                "required": false,
+                "id": "patient_time_off_theater_table",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "162135AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "CIEL",
+                      "value": "162135"
+                    },
+                    {
+                      "relationship": "SAME-AS",
+                      "type": "SNOMED CT",
+                      "value": "307486002"
+                    }
+                  ],
+                  "answers": []
+                },
+                "validators": []
+              }
+            ]
+          },
+          {
+            "label": "Providers",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Surgeons",
+                "type": "obs",
+                "required": false,
+                "id": "surgeons_theater",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Anaesthetists",
+                "type": "obs",
+                "required": false,
+                "id": "anaesthetists_theater",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Nurses ",
+                "type": "obs",
+                "required": false,
+                "id": "nurses_theater",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "Notes",
+                "type": "obs",
+                "required": false,
+                "id": "notes_theater",
+                "questionOptions": {
+                  "rendering": "textarea",
+                  "concept": "159395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "encounterType": "",
+    "referencedForms": [],
+    "uuid": "",
+    "description": "This fom will be used to capture data while in the theater"
+  }
