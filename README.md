@@ -1,15 +1,10 @@
-# OpenMRS 3.0 Reference Application
+# OpenMRS 3.0 - OHRI
 
-This project holds the build configuration for the OpenMRS 3.0 reference application, found on
+This project holds the build configuration for the OpenMRS 3.0 OHRI, 
+based on the O3 distro found on
 https://dev3.openmrs.org and https://o3.openmrs.org.
 
 ## Quick start
-
-### Package the distribution and prepare the run
-
-```
-docker compose build
-```
 
 ### Run the app
 
@@ -30,6 +25,15 @@ docker compose -f docker-compose.yml pull
 ```
 docker compose -f docker-compose.yml up
 ```
+
+
+### Package the distribution and prepare the run
+
+```
+docker compose build
+```
+
+
 ## Overview
 
 This distribution consists of four images:
@@ -40,7 +44,7 @@ This distribution consists of four images:
   includes a full Initializer configuration for the reference application intended as a starting point.
 * frontend - This image is a simple nginx container that embeds the 3.x frontend, including the modules described in  the
   `frontend/spa-build-config.json` file.
-* proxy - This image is an even simpler nginx reverse proxy that sits in front of the `backend` and `frontend` containers
+* gateway - This image is an even simpler nginx reverse proxy that sits in front of the `backend` and `frontend` containers
   and provides a common interface to both. Basically, this help mitigate CORS issues.
 
 ## Contributing to the configuration
