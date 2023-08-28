@@ -1,0 +1,632 @@
+{
+  "name": "DR TB: HMIS TB 001 Second Line TB Treatment Card - Followup Section",
+  "pages": [
+    {
+      "label": "Adverse Events",
+      "sections": [
+        {
+          "label": "Adverse Events",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Adverse Event",
+              "type": "obsGroup",
+              "id": "adverse-event",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "31805aa5-4697-4313-a142-405e0aa3483b",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "questions": [
+                {
+                  "label": "Event Date",
+                  "type": "encounterDatetime",
+                  "required": false,
+                  "id": "event-date",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "f773b48e-92b0-4102-b6d6-ff3481711ca5",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Event",
+                  "type": "obs",
+                  "required": false,
+                  "id": "event",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "12403bda-4c4b-41db-8346-10c7880d9f74",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "119270AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Cardiovascular Disease"
+                      },
+                      {
+                        "concept": "dccf6a36-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Vision Changes"
+                      },
+                      {
+                        "concept": "6e09e708-b94d-4796-88d4-07045549dc5c",
+                        "label": "Renal toxicity"
+                      },
+                      {
+                        "concept": "dc88f3d9-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Neuropathy"
+                      },
+                      {
+                        "concept": "159347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Musculoskeletal pain"
+                      },
+                      {
+                        "concept": "134337AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Psychiatric disorder,"
+                      },
+                      {
+                        "concept": "159098AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Hepatotoxicity"
+                      },
+                      {
+                        "concept": "123188AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Vestibular"
+                      },
+                      {
+                        "label": "Ototoxicity",
+                        "concept": "131103AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                      },
+                      {
+                        "concept": "119242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Gastrointestinal Disorder"
+                      },
+                      {
+                        "concept": "155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "New Onset Seizure"
+                      },
+                      {
+                        "concept": "119204AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Electrolyte Abnormality"
+                      },
+                      {
+                        "concept": "2efdeb85-f193-4e3d-b8ab-c834b691b446",
+                        "label": "Dysglycemia"
+                      },
+                      {
+                        "concept": "160179AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Dermatologic"
+                      },
+                      {
+                        "concept": "117321AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Hypothyroid"
+                      },
+                      {
+                        "concept": "9d913f9a-0a69-4dd6-a033-fedcbc0a3204",
+                        "label": "Hematological"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Event Grade",
+                  "type": "obs",
+                  "required": false,
+                  "id": "event-grade",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "421d1c00-c9bb-4aaf-bfce-58c2a4a635cb",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "dcde4a81-30ab-102d-86b0-7a5022ba4115",
+                        "label": "0 - No side effects"
+                      },
+                      {
+                        "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "1 - Grade 1 (mild)"
+                      },
+                      {
+                        "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "2 - Grade 2 (moderate)"
+                      },
+                      {
+                        "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "3 - Grade 3 (severe)"
+                      },
+                      {
+                        "concept": "dca2882a-30ab-102d-86b0-7a5022ba4115",
+                        "label": "4 - Grade 4  life threatening)"
+                      }
+                    ]
+                  },
+                  "validators": []
+                }
+              ],
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Medication",
+      "sections": [
+        {
+          "label": "Medication",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "label": "Drug Side Effects",
+              "id": "drug-side-effects",
+              "questionOptions": {
+                "concept": "",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Drug",
+                  "type": "obs",
+                  "required": false,
+                  "id": "drug",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Side Effects",
+                  "type": "obs",
+                  "required": false,
+                  "id": "drug-side-effects",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "dce05b7f-30ab-102d-86b0-7a5022ba4115",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "dcddca93-30ab-102d-86b0-7a5022ba4115",
+                        "label": "ABDOMINAL PAIN"
+                      },
+                      {
+                        "concept": "dcddc673-30ab-102d-86b0-7a5022ba4115",
+                        "label": "ANEMIA"
+                      },
+                      {
+                        "concept": "dcde3d87-30ab-102d-86b0-7a5022ba4115",
+                        "label": "ANXIETY"
+                      },
+                      {
+                        "concept": "dcddd3a5-30ab-102d-86b0-7a5022ba4115",
+                        "label": "BLUE NAILS"
+                      },
+                      {
+                        "concept": "dcddb5cf-30ab-102d-86b0-7a5022ba4115",
+                        "label": "BURNING"
+                      },
+                      {
+                        "concept": "dcdde239-30ab-102d-86b0-7a5022ba4115",
+                        "label": "CONFUSION"
+                      },
+                      {
+                        "concept": "dcde1dd4-30ab-102d-86b0-7a5022ba4115",
+                        "label": "COUGHING"
+                      },
+                      {
+                        "concept": "dcde4653-30ab-102d-86b0-7a5022ba4115",
+                        "label": "DEPRESSION"
+                      },
+                      {
+                        "concept": "dcdda6ec-30ab-102d-86b0-7a5022ba4115",
+                        "label": "DIARRHOEA"
+                      },
+                      {
+                        "concept": "dcde21ee-30ab-102d-86b0-7a5022ba4115",
+                        "label": "DIFFICULTY BREATHING"
+                      },
+                      {
+                        "concept": "dcde3234-30ab-102d-86b0-7a5022ba4115",
+                        "label": "DIZZINESS"
+                      },
+                      {
+                        "concept": "dcddab4c-30ab-102d-86b0-7a5022ba4115",
+                        "label": "FATIGUE"
+                      },
+                      {
+                        "concept": "dcde2e19-30ab-102d-86b0-7a5022ba4115",
+                        "label": "FAT DISTRIBUTION CHANGES"
+                      },
+                      {
+                        "concept": "dcddd7bf-30ab-102d-86b0-7a5022ba4115",
+                        "label": "FEVER"
+                      },
+                      {
+                        "concept": "dcdddbe2-30ab-102d-86b0-7a5022ba4115",
+                        "label": "FLANK PAIN"
+                      },
+                      {
+                        "concept": "dcde15bb-30ab-102d-86b0-7a5022ba4115",
+                        "label": "FOOT PAIN"
+                      },
+                      {
+                        "concept": "dcddaf94-30ab-102d-86b0-7a5022ba4115",
+                        "label": "HEADACHE"
+                      },
+                      {
+                        "concept": "dcde2606-30ab-102d-86b0-7a5022ba4115",
+                        "label": "INSOMNIA"
+                      },
+                      {
+                        "concept": "dcde2a26-30ab-102d-86b0-7a5022ba4115",
+                        "label": "JAUNDICE"
+                      },
+                      {
+                        "concept": "dcde19b4-30ab-102d-86b0-7a5022ba4115",
+                        "label": "LEG PAIN"
+                      },
+                      {
+                        "concept": "dcde06e9-30ab-102d-86b0-7a5022ba4115",
+                        "label": "MUSCLE INFLAMMATION"
+                      },
+                      {
+                        "concept": "dcde02c1-30ab-102d-86b0-7a5022ba4115",
+                        "label": "MUSCLE TENDERNESS"
+                      },
+                      {
+                        "concept": "dcdd99e5-30ab-102d-86b0-7a5022ba4115",
+                        "label": "NAUSEA"
+                      },
+                      {
+                        "concept": "dcde41ed-30ab-102d-86b0-7a5022ba4115",
+                        "label": "NIGHTMARES"
+                      },
+                      {
+                        "concept": "dcddba10-30ab-102d-86b0-7a5022ba4115",
+                        "label": "NUMBNESS"
+                      },
+                      {
+                        "concept": "dcde119b-30ab-102d-86b0-7a5022ba4115",
+                        "label": "PALLOR"
+                      },
+                      {
+                        "concept": "dcddcf8d-30ab-102d-86b0-7a5022ba4115",
+                        "label": "PSYCHOSIS"
+                      },
+                      {
+                        "concept": "dcddc259-30ab-102d-86b0-7a5022ba4115",
+                        "label": "RASH"
+                      },
+                      {
+                        "concept": "dc662180-30ab-102d-86b0-7a5022ba4115",
+                        "label": "RESPIRATORY TRACT INFECTION, UPPER"
+                      },
+                      {
+                        "concept": "dcde0d21-30ab-102d-86b0-7a5022ba4115",
+                        "label": "SOMNOLENCE"
+                      },
+                      {
+                        "concept": "dcddbe36-30ab-102d-86b0-7a5022ba4115",
+                        "label": "TINGLING"
+                      },
+                      {
+                        "concept": "122983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "VOMITING"
+                      },
+                      {
+                        "concept": "dcd68a88-30ab-102d-86b0-7a5022ba4115",
+                        "label": "OTHER SPECIFY"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Outcome",
+                  "type": "obs",
+                  "required": false,
+                  "id": "tb-treatment-outcome",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "e44c8c4c-db50-4d1e-9d6e-092d3b31cfd6",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "0dbbcf1c-cfdb-42f5-9e4b-d2aec064674d",
+                        "label": "Stop TB Treatment"
+                      },
+                      {
+                        "concept": "b0a1d8af-f3f9-4c69-a7aa-f822b038334c",
+                        "label": "Confirmed Drug Resistant"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Doctor's Review",
+                  "type": "obs",
+                  "required": false,
+                  "id": "doctor-review",
+                  "questionOptions": {
+                    "rendering": "textarea",
+                    "concept": "3993bf94-efdc-44d0-bffb-db4a04642500",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                }
+              ],
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Clinical Review/Outcome",
+      "sections": [
+        {
+          "label": "Appointment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "On Scheduled Appointment",
+              "type": "obs",
+              "required": false,
+              "id": "on-scheduled-appointment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dcda9857-30ab-102d-86b0-7a5022ba4115",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Next Appointment Date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "next-appointment-date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "dcac04cf-30ab-102d-86b0-7a5022ba4115",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Drug Adherence",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Total Doses for DR TB Missed",
+              "type": "obs",
+              "required": false,
+              "id": "total-doses-for-DR-TB-missed",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c79a1434-2ef5-4353-a746-298c12940afb",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Percentage Doses MDR-TB Drugs Missed",
+              "type": "obs",
+              "required": false,
+              "id": "percentage-doses-MDR-TB-drugs-missed",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "180b439a-ebef-4b8e-9019-ab28332163b6",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Percentage Doses ARVs Missed",
+              "type": "obs",
+              "required": false,
+              "id": "percentage-doses-ARVs-missed",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "dc9df4c6-5284-45ef-b811-779e0c2d478d",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": " Date Discharged",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": " date-discharged",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "ff31a419-0eb1-45fc-920a-77b4a3481e00",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Clinical Review Notes",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Key Findings",
+              "type": "obs",
+              "required": false,
+              "id": "key-findings",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "180b439a-ebef-4b8e-9019-ab28332163b6",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Plan of Action",
+              "type": "obs",
+              "required": false,
+              "id": "plan-of-action",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "3993bf94-efdc-44d0-bffb-db4a04642500",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Provider",
+              "type": "obs",
+              "required": false,
+              "id": "provider",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Treatment Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Outcome",
+              "type": "",
+              "required": false,
+              "id": "Outcome",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e44c8c4c-db50-4d1e-9d6e-092d3b31cfd6",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "159791AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cured"
+                  },
+                  {
+                    "concept": "031d9b15-62d5-4f73-a374-5503f0421427",
+                    "label": "Treatment completed"
+                  },
+                  {
+                    "concept": "159874AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Treatment failure"
+                  },
+                  {
+                    "concept": "dcb23465-30ab-102d-86b0-7a5022ba4115",
+                    "label": "Lost to follow up"
+                  },
+                  {
+                    "concept": "160737AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not evaluated"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  },
+                  {
+                    "concept": "dd27a783-30ab-102d-86b0-7a5022ba4115",
+                    "label": "Transferred Out"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "treatment-outcome-date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "dfbf41ad-44de-48db-b653-54273789c0c6",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Transfer Out",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Health Facility",
+              "type": "obs",
+              "required": false,
+              "id": "health-facility",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "dce015bb-30ab-102d-86b0-7a5022ba4115",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "District",
+              "type": "obs",
+              "required": false,
+              "id": "district-of-facility",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ef8aed6d-a64c-4a17-9745-c305f99c658b",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Phone Contact of receiving Health Unit",
+              "type": "obs",
+              "required": false,
+              "id": "phone-contact-of -receiving-health-unit",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "455bad1f-5e97-4ee9-9558-ff1df8808732",
+  "referencedForms": [],
+  "uuid": "cf6bb1c1-6fcd-4cb6-b0c9-28a5d334c562",
+  "description": "This form captures return visits/followup data of the DR TB Treatment program",
+  "version": "1.0"
+}

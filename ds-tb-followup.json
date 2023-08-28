@@ -1,0 +1,875 @@
+{
+  "name": "DS TB: HMIS TB 003 TB Client Card - Followup Section",
+  "pages": [
+    {
+      "label": "Treatment Phase",
+      "sections": [
+        {
+          "label": "Visit Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Encounter Date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-encounter",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Next Date of Appointment",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "next-date-of-appointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Month of Follow up",
+              "type": "obs",
+              "required": false,
+              "id": "month-of-follow-up",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Provider",
+              "type": "obs",
+              "required": false,
+              "id": "health-provider",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "HIV Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIV status",
+              "type": "obs",
+              "required": false,
+              "id": "hiv-status",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "CPT/Dapson",
+              "type": "obs",
+              "required": false,
+              "id": "cpt-dapson",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "ARV drugs",
+              "type": "obs",
+              "required": false,
+              "id": "arv-drugs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Adverse Event",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Adverse Event",
+              "type": "obsGroup",
+              "id": "adverse-event",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "questions": [
+                {
+                  "label": "Adverse event reported during the visit",
+                  "type": "obs",
+                  "required": false,
+                  "id": "adverse-event-reported-during-the-visit",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Adverse event",
+                  "type": "obs",
+                  "required": false,
+                  "id": "adverse-event-type",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Severity of adverse event",
+                  "type": "obs",
+                  "required": false,
+                  "id": "severity-of-adverse-event",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Drug causing",
+                  "type": "",
+                  "required": false,
+                  "id": "drug-causing-adverse-event",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Contact Screening and Management",
+      "sections": [
+        {
+          "label": "Contact Screening and Management",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of report",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-report",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Total # of contacts ≥ 5 years",
+              "type": "obs",
+              "required": false,
+              "id": "total-number-contacts-younger-than-five-years",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Total # of contacts < 5 years",
+              "type": "obs",
+              "required": false,
+              "id": "total-number-contacts-older-than-five-years",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Total # of ≥ 5 years old contacts screened for TB",
+              "type": "obs",
+              "required": false,
+              "id": "total-number-contacts-younger-than-five-years-screened-for-tb",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Total # of < 5 years old contacts screened for TB",
+              "type": "obs",
+              "required": false,
+              "id": "total-number-contacts-older-than-five-years-screened-for-tb",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Total # of ≥ 5 years old contacts with TB",
+              "type": "obs",
+              "required": false,
+              "id": "total-number-contacts-younger-than-five-years-with-tb",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Total # of < 5 years old contacts with TB",
+              "type": "obs",
+              "required": false,
+              "id": "total-number-contacts-older-than-five-years-with-tb",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Total # of ≥ 5 years old contacts on TPT",
+              "type": "obs",
+              "required": false,
+              "id": "total-number-contacts-younger-than-five-years-on-tpt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Total # of < 5 years old contacts on TPT",
+              "type": "obs",
+              "required": false,
+              "id": "total-number-contacts-older-than-five-years-on-tpt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Community Follow-up",
+      "sections": [
+        {
+          "label": "Follow up date",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of follow up",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-follow-up",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Reasons for follow up",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient missed appointment",
+              "type": "obs",
+              "required": false,
+              "id": "patient-missed-appointment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Mode of follow up",
+          "isExpanded": "true",
+          "questions": []
+        },
+        {
+          "label": "Support provided",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "DOT monitoring (Patient active)",
+              "type": "obs",
+              "required": false,
+              "id": "dot-monitoring-patient-active",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Counselling",
+              "type": "obs",
+              "required": false,
+              "id": "counselling",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Pill refill",
+              "type": "obs",
+              "required": false,
+              "id": "pill-refill",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Appointment reminder",
+              "type": "obs",
+              "required": false,
+              "id": "appointment-reminder",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Sputum sample collection",
+              "type": "obs",
+              "required": false,
+              "id": "sputum-sample-collection",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Other Support",
+              "type": "obs",
+              "required": false,
+              "id": "other-support",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient evaluated",
+              "type": "obs",
+              "required": false,
+              "id": "patient-evaluated",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Found with a treatment supporter",
+              "type": "obs",
+              "required": false,
+              "id": "found-with-a-treatment-supporter",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Patient transferred out",
+              "type": "obs",
+              "required": false,
+              "id": "patient-transferred-out",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Outcome of follow up",
+              "type": "obs",
+              "required": false,
+              "id": "outcome-of-follow-up",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "DOT",
+      "sections": [
+        {
+          "label": "Appointment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of DOT report",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-dot-report",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Next date of DOT appointment",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "next-date-of-dot-appointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "No. of days when patient was directly observed (in hospital or by DOT Nurse)",
+              "type": "obs",
+              "required": false,
+              "id": "number-of-days-under-direct-observation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "No. days of incomplete doses",
+              "type": "obs",
+              "required": false,
+              "id": "number-of-days-of-incomplete-doses",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "No. of days electronic message notifications of drug refills were received",
+              "type": "obs",
+              "required": false,
+              "id": "number-of-days-of-electronic-notifications-of-drug-refills-received",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "No. of days of video observed therapy",
+              "type": "obs",
+              "required": false,
+              "id": "number-of-days-video-observed-therapy",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "No. of days when DOT was not supervised",
+              "type": "obs",
+              "required": false,
+              "id": "number-of-days-when-dot-was-not-supervised",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "No. of days when doses were taken under observation of a treatment supporter",
+              "type": "obs",
+              "required": false,
+              "id": "number-of-days-when-doses-were-taken-under-observation-of-a-treatment-supporter",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "No. of days when drugs were not taken",
+              "type": "obs",
+              "required": false,
+              "id": "number-of-days-when-drugs-were-not-taken",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Treatment Outcome",
+      "sections": [
+        {
+          "label": "Treatment Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of outcome",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-outcome",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Outcome",
+              "type": "obs",
+              "required": false,
+              "id": "tb-treatment-outcome",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Transferred to 2nd line",
+              "type": "obs",
+              "required": false,
+              "id": "transferred-to-second-line",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Miss-classification",
+              "type": "obs",
+              "required": false,
+              "id": "miss-classification",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Reason for miss-classification",
+              "type": "obs",
+              "required": false,
+              "id": "reason-for-miss-classification",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Action taken for miss-classification",
+              "type": "obs",
+              "required": false,
+              "id": "action-taken-for-miss-classification",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Comments",
+      "sections": [
+        {
+          "label": "Comments",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Doctor's Reviews",
+              "type": "obs",
+              "required": false,
+              "id": "doctor-review",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "455bad1f-5e97-4ee9-9558-ff1df8808732",
+  "referencedForms": [],
+  "uuid": "fc2591eb-161d-4ac6-9a9b-7ff33bcfa5bf",
+  "description": "This is a followup form for a DS-TB patient",
+  "version": "1.0"
+}
