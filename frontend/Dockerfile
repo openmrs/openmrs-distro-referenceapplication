@@ -11,6 +11,9 @@ COPY spa-build-config.json .
 ARG CACHE_BUST
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-build-config.json --target ./spa
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
+COPY images/ugandaemr_+_logo_white.svg ./spa/images/ugandaemr_+_logo_white.svg
+COPY images/ugandaemr_+_logo_wide.svg ./spa/images/ugandaemr_+_logo_wide.svg
+COPY ugandaemr-config.json ./spa/ugandaemr-config.json
 
 FROM nginx:1.23-alpine
 

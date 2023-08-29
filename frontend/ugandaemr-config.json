@@ -1,0 +1,60 @@
+{
+  "@openmrs/esm-patient-chart-app": {
+    "extensionSlots": {
+      "action-menu-non-chart-items-slot": {
+        "remove": ["patient-list-action-menu"]
+      },
+      "cacx-visits-slot": {
+        "remove": ["cacx-visits-ext"]
+      }
+    },
+    "logo": {
+      "src": "images/ugandaemr_+_logo_white.svg"
+    }
+  },
+  "@openmrs/esm-styleguide": {
+    "Brand color #1": " #009384",
+    "Brand color #2": " #009384",
+    "Brand color #3": " #009384"
+  },
+  "@openmrs/esm-patient-registration-app": {
+    "fieldConfigurations": {
+      "gender": [
+        {
+          "id": "male",
+          "value": "Male",
+          "label": "Male"
+        },
+        {
+          "id": "female",
+          "value": "Female",
+          "label": "Female"
+        }
+      ]
+    }
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "logo": {
+      "src": "images/ugandaemr_+_logo_white.svg"
+    }
+  },
+  "@openmrs/esm-home-app": {
+    "extensionSlots": {
+      "homepage-dashboard-slot": {
+        "remove": [
+          "patient-lists-dashboard-link",
+          "home-widget-db-link",
+          "service-queues-dashboard-link"
+        ]
+      },
+      "homepage-widgets-slot": {
+        "remove": ["active-visits-widget", "home-appointments"]
+      }
+    }
+  },
+  "@ugandaemr/esm-login-app": {
+    "logo": {
+      "src": "images/ugandaemr_+_logo_wide.svg"
+    }
+  }
+}

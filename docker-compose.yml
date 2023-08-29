@@ -8,7 +8,7 @@ services:
       - frontend
       - backend
     ports:
-      - "80:80"
+      - "8433:80"
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
@@ -16,13 +16,15 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS:
-      SPA_DEFAULT_LOCALE:
+      SPA_CONFIG_URLS: /openmrs/spa/ugandaemr-config.json
+      SPA_DEFAULT_LOCALE: en
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
       timeout: 5s
     depends_on:
       - backend
+    volumes:
+      - ./frontend/ugandaemr-config.json:/usr/share/nginx/html/ugandaemr-config.json
 
   backend:
     image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
