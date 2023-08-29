@@ -1,0 +1,504 @@
+{
+  "name": "DS TB Enrollment Form",
+  "pages": [
+    {
+      "label": "Case Summary/Patient Type",
+      "sections": [
+        {
+          "label": "Case Summary - Patient Type",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Registration Date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "registration-date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "District TB No.",
+              "type": "obs",
+              "required": false,
+              "id": "district-tb-number",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": " Unit TB No.",
+              "type": "obs",
+              "required": false,
+              "id": "unit-tb-number",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Disease Classification and Patient Type",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Disease Classification and Patient Type",
+              "type": "obs",
+              "required": false,
+              "id": "disease-classification",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Indicate Site",
+              "type": "obs",
+              "required": false,
+              "id": "indication-site",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Patient Type",
+              "type": "obs",
+              "required": false,
+              "id": "patient-type",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Treatment/Risk Group",
+      "sections": [
+        {
+          "label": "First Line Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Started on First Line Treament",
+              "type": "obs",
+              "required": false,
+              "id": "started-on-first-line-treament",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Date Started",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-started",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": " DS TB Regimen",
+              "type": "obs",
+              "required": false,
+              "id": "ds-tb-regimen",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Specify Other DS TB Regimen",
+              "type": "obs",
+              "required": false,
+              "id": "other-tb-regimen",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "TB Drug Resistance",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosed with DR TB",
+              "type": "obs",
+              "required": false,
+              "id": "diagnosed-with-dr-tb",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "required": false,
+              "id": "date-diagnosed-with-dr-tb",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "TB/HIV",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIV Status",
+              "type": "obs",
+              "required": false,
+              "id": "hiv-status",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "hiv-test-date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "ART Status",
+              "type": "obs",
+              "required": false,
+              "id": "art-status",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "ART Start Date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "art-start-date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "ART No",
+              "type": "obs",
+              "required": false,
+              "id": "art-number",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "475efb37-20f6-44d3-91a0-7002ac8cc532",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "CPT/Dapson",
+              "type": "obs",
+              "required": false,
+              "id": "cpt-dapson",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "CPT/Dapson Start Date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "cpt-dapson-start-date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Risk Group",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Risk Groups",
+              "type": "obs",
+              "required": false,
+              "id": "risk-groups",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "927563c5-cb91-4536-b23c-563a72d3f829",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "5619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Health Worker"
+                  },
+                  {
+                    "concept": "b5171d08-77bf-40a8-a864-51caa6cd2480",
+                    "label": "TB Contact"
+                  },
+                  {
+                    "concept": "159674AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fisher Folk"
+                  },
+                  {
+                    "concept": "162277AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "In prison"
+                  },
+                  {
+                    "concept": "165125AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Uniformed/Armed Personnel"
+                  },
+                  {
+                    "concept": "165127AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Refugee Camp"
+                  },
+                  {
+                    "concept": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diabetic Patient"
+                  },
+                  {
+                    "concept": "952c6973-e163-4c0d-b6c8-a7071bd05e2a",
+                    "label": "Miner"
+                  },
+                  {
+                    "concept": "1455AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tobacco User"
+                  },
+                  {
+                    "concept": "134337AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mentally Ill"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other Risk Group",
+              "type": "obs",
+              "required": false,
+              "id": "other-risk-group",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Baseline Examination/Diabetes Monitoring",
+      "sections": [
+        {
+          "label": "Baseline Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Baseline Examination",
+              "type": "obsGroup",
+              "id": "tb-baseline-examination-set",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "questions": [
+                {
+                  "label": "Date Sample Taken",
+                  "type": "encounterDatetime",
+                  "required": false,
+                  "id": "date-of-baseline-test",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Test",
+                  "type": "obs",
+                  "required": false,
+                  "id": "baseline-tb-test",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Results",
+                  "type": "obs",
+                  "required": false,
+                  "id": "baseline-test-results",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Lab No.",
+                  "type": "",
+                  "required": false,
+                  "id": "lab-number",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Diabetes Monitoring",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diabetes Monitoring",
+              "type": "obsGroup",
+              "id": "diabetes-monitoring-set",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "questions": [
+                {
+                  "label": "Date Sample Taken",
+                  "type": "encounterDatetime",
+                  "required": false,
+                  "id": "date-of-diabetes-test",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "21eced40-aa0d-47a7-bb9a-a5a3fc51a184",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Test",
+                  "type": "obs",
+                  "required": false,
+                  "id": "diabetes-test-done",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Results",
+                  "type": "obs",
+                  "required": false,
+                  "id": "diabetes-test-results",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e2559620-900b-4f66-ae41-0b9c4adfb654",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "334bf97e-28e2-4a27-8727-a5ce31c7cd66",
+  "referencedForms": [],
+  "uuid": "1f860e57-8ccc-4d62-acb9-1de1eaecc86d",
+  "description": "This is the enrollment form for a DS TB patient",
+  "version": "1.0"
+}

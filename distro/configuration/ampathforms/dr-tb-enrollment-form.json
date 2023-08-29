@@ -1,0 +1,1228 @@
+{
+  "name": "DR TB Enrollment Form",
+  "pages": [
+    {
+      "label": "Case Summary/Patient Type",
+      "sections": [
+        {
+          "label": "Case Summary/Patient Type",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Registration",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-registration",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "34c5cbad-681a-4aca-bcc3-c7ddd2a88db8",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "District TB No.",
+              "type": "obs",
+              "required": false,
+              "id": "district-tb-no",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "67e9ec2f-4c72-408b-8122-3706909d77ec",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Unit TB No.",
+              "type": "obs",
+              "required": false,
+              "id": "unit-tb-no",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2e2ec250-f5d3-4de7-8c70-a458f42441e6",
+                "conceptMappings": [],
+                "answers": []
+              }
+            },
+            {
+              "label": "DR TB No.",
+              "type": "obs",
+              "required": false,
+              "id": "dr-tb-no",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c64410a-9f08-4b4f-9d00-23105e8730d4",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Treatment Initiation Facility",
+              "type": "obs",
+              "required": false,
+              "id": "treatment-initiation-facility",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5e448a73-c9ef-41f2-8eee-2605eb75281b",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Followup Health Facility",
+              "type": "encounterLocation",
+              "required": false,
+              "id": "followup-health-facility",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cc6af435-c76d-4b19-bb34-bb522bc11c64",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Date Transferred to this Facility",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-transferred-to-this-facility",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "981368b7-dbb4-4c3f-a62a-28ad16bf1b24",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Care Giver/Treatment Supporter",
+      "sections": [
+        {
+          "label": "Special Risk Groups",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Risk Groups",
+              "type": "obs",
+              "required": false,
+              "id": "risk-groups",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "927563c5-cb91-4536-b23c-563a72d3f829",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "5619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Health Worker"
+                  },
+                  {
+                    "concept": "b5171d08-77bf-40a8-a864-51caa6cd2480",
+                    "label": "TB Contact"
+                  },
+                  {
+                    "concept": "159674AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fisher Folk"
+                  },
+                  {
+                    "concept": "162277AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "In prison"
+                  },
+                  {
+                    "concept": "165125AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Uniformed/Armed Personnel"
+                  },
+                  {
+                    "concept": "165127AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Refugee Camp"
+                  },
+                  {
+                    "concept": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diabetic Patient"
+                  },
+                  {
+                    "concept": "952c6973-e163-4c0d-b6c8-a7071bd05e2a",
+                    "label": "Miner"
+                  },
+                  {
+                    "concept": "1455AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tobacco User"
+                  },
+                  {
+                    "concept": "134337AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mentally Ill"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "GIS Coordinates",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Eastings",
+              "type": "text",
+              "required": false,
+              "id": "eastings",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6d07607f-5cec-4d94-ad14-d4c0e2ce702b",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Northings",
+              "type": "text",
+              "required": false,
+              "id": "northings",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cb37a751-13e7-4dc1-8a03-8356dbe997d1",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Baseline Examination/Diabetes Monitoring",
+      "sections": [
+        {
+          "label": "Baseline Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment Start Date",
+              "type": "obs",
+              "required": false,
+              "id": "treatment-start-date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "ff20a5bb-de72-4617-9fda-546af283d23d",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Date of Prior TB Registration",
+              "type": "obs",
+              "required": false,
+              "id": "date-of-prior-tb-registration",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "49beab96-4bc3-48b8-b014-5ef82bf89a9e",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Reason for 2nd Line Treatment",
+              "type": "obs",
+              "required": false,
+              "id": "reason-for-2nd-line-treatment",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "be45bb4a-eaf3-4727-9358-a3e5bc3924cb",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "c2519882-5047-4692-8148-85f956e02323",
+                    "label": "Presumptive MDR/XDR/RR"
+                  },
+                  {
+                    "concept": "b219e3e4-275b-469e-85c9-4088f4b05779",
+                    "label": "Bacteriologically confirmed MDR/XDR/RR"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Transfer In",
+              "type": "obs",
+              "required": false,
+              "id": "transfer-in",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ea730d69-7eec-486a-aaf2-54f8bab5a44c",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "dcd695dc-30ab-102d-86b0-7a5022ba4115",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "dcd69c06-30ab-102d-86b0-7a5022ba4115",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Health Center Name",
+              "type": "obs",
+              "required": false,
+              "id": "health-center-name",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "88e07e7c-f7e4-4ccf-8068-b770a3e3957b",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Date of GeneXpert Test",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-geneXpert-test",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "d2f31713-aada-4d0d-9340-014b2371bdd8",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Date of DST",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-dst",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Registration Group",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Registration Group",
+              "type": "obs",
+              "required": false,
+              "id": "registration-group",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e077f196-c19a-417f-adc6-b175a3343bfd",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "b3c43c5e-1987-42c1-a7b3-2c71dc58c126",
+                    "label": "N - New"
+                  },
+                  {
+                    "concept": "8ad53c8c-e136-41e3-aab8-eace935a3bbe",
+                    "label": "RP - Relapse"
+                  },
+                  {
+                    "concept": "a37462b6-1f47-4efb-8df5-2bdc742efc17",
+                    "label": "RT - Return after loss to follow up"
+                  },
+                  {
+                    "concept": "ce983c0e-cdea-42e2-b93f-5ad26fe05fba",
+                    "label": "F1 - After failure of first treatment with first-line drugs"
+                  },
+                  {
+                    "concept": "11522b1b-59d3-4c1f-8a9a-5d780127e84f",
+                    "label": "F2 - After failure of regimen with second-line drugs"
+                  },
+                  {
+                    "concept": "8b00c885-edec-47bf-8700-69913741f71c",
+                    "label": "O - Other (previously treated without known outcome)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Known MDR-TB Contact",
+              "type": "obs",
+              "required": false,
+              "id": "known-mdr-tb-contact",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2bc17884-ab3e-46c6-8c19-cff7bb261c4e",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Patient Name",
+              "type": "obs",
+              "required": false,
+              "id": "patient-name",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "07a9ce66-3827-48e5-a3f1-c0bfc42c6176",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Date Initial Home Assessment Completed",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-initial-home-assessment-completed",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a412bf0d-5683-4a18-a248-004021abd726",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "DST Results",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "DST Results",
+              "type": "obsGroup",
+              "id": "tb-dst-results",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "377e6eef-f10f-4b13-8073-029e6587c3d7",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "questions": [
+                {
+                  "label": "Sample Collection Date",
+                  "type": "encounterDatetime",
+                  "required": false,
+                  "id": "sample-collection-date",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "487af85d-de3b-4a90-9928-96516a315ce6",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Test",
+                  "type": "obs",
+                  "required": false,
+                  "id": "test",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "159956AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "71060AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "AMIKACIN"
+                      },
+                      {
+                        "concept": "dc7912c7-30ab-102d-86b0-7a5022ba4115",
+                        "label": "AMOXICILLIN AND CLAVULANIC ACID"
+                      },
+                      {
+                        "concept": "815fa219-29ca-435b-bd15-a3179b83543b",
+                        "label": "Bedaquiline/Delamanid"
+                      },
+                      {
+                        "concept": "72794AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "CAPREOMYCIN"
+                      },
+                      {
+                        "concept": "73449AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "CIPROFLOXACIN"
+                      },
+                      {
+                        "concept": "73498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "CLARITHROMYCIN"
+                      },
+                      {
+                        "concept": "73581AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "CLOFAZIMINE"
+                      },
+                      {
+                        "concept": "75948AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "ETHAMBUTOL"
+                      },
+                      {
+                        "concept": "74123AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "CYCLOSERINE"
+                      },
+                      {
+                        "concept": "75976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "ETHIONAMIDE"
+                      },
+                      {
+                        "concept": "76835AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "GATIFLOXACIN"
+                      },
+                      {
+                        "concept": "78280AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "ISONIAZID"
+                      },
+                      {
+                        "concept": "78385AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "KANAMYCIN"
+                      },
+                      {
+                        "concept": "78788AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "LEVOFLOXACIN"
+                      },
+                      {
+                        "concept": "6a616982-faa1-4f60-9675-7f507baafd3e",
+                        "label": "Linezolid"
+                      },
+                      {
+                        "concept": "80133AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "MOXIFLOXACIN"
+                      },
+                      {
+                        "concept": "81022AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "OFLOXACIN"
+                      },
+                      {
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Other"
+                      },
+                      {
+                        "concept": "81457AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "P-AMINOSALICYLIC ACID"
+                      },
+                      {
+                        "concept": "82772AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "PROTHIONAMIDE"
+                      },
+                      {
+                        "concept": "82900AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "PYRAZINAMIDE"
+                      },
+                      {
+                        "concept": "83352AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "RIFABUTIN"
+                      },
+                      {
+                        "concept": "82912AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "PYRIDOXINE"
+                      },
+                      {
+                        "concept": "dc87f047-30ab-102d-86b0-7a5022ba4115",
+                        "label": "RIFAMPICIN"
+                      },
+                      {
+                        "concept": "84360AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "STREPTOMYCIN"
+                      },
+                      {
+                        "concept": "84836AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "TERIZIDONE"
+                      },
+                      {
+                        "concept": "160019AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "THIOACETAZONE"
+                      },
+                      {
+                        "concept": "160020AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Viomycin"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": " Result",
+                  "type": "obs",
+                  "required": false,
+                  "id": "result",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "159984AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "159956AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "resistant to anti-tuberculosis drugs"
+                      },
+                      {
+                        "concept": "159958AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "susceptible to anti-tuberculosis drugs"
+                      },
+                      {
+                        "concept": "159972AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "contaminated drug sensitivity testing"
+                      },
+                      {
+                        "concept": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Indeterminate"
+                      },
+                      {
+                        "concept": "dcd6865a-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Unknown"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Medication Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Medication Diagnosis",
+              "type": "obsGroup",
+              "id": "medication-diagnosis",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "ce85d44b-9abb-42af-8327-1fc39b1ad1c3",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "questions": [
+                {
+                  "label": "Date of Diagnosis",
+                  "type": "encounterDatetime",
+                  "required": false,
+                  "id": "date-of-diagnosis",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "159948AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Type",
+                  "type": "obs",
+                  "required": false,
+                  "id": "type",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "71aae99f-5e5e-4e8b-be9c-e811ffbd7f8d",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Diabetes"
+                      },
+                      {
+                        "concept": "134337AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Mental Illness"
+                      },
+                      {
+                        "concept": "dc655734-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Malnutrition"
+                      },
+                      {
+                        "concept": "2c948f40-79fa-408b-931a-d82eacbfbf87",
+                        "label": "Liver Disease"
+                      },
+                      {
+                        "concept": "dcd4d521-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Renal Disease"
+                      },
+                      {
+                        "concept": "145131AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Viral Hepatitis"
+                      },
+                      {
+                        "concept": "c14695ca-6f11-4f1c-9af5-8f3bd5ddb3a3",
+                        "label": "Substance Abuse"
+                      },
+                      {
+                        "concept": "983c18d8-8031-4567-b829-6b286a19e551",
+                        "label": "Other Diagnosis"
+                      },
+                      {
+                        "concept": "dcd6865a-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Unknown"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Treatment Provided",
+                  "type": "obs",
+                  "required": false,
+                  "id": "treatment-provided",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c4dbec6b-8024-40b2-a84c-e5210efb3de7",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Nutrition Assessment (extracted. to be found in another section)",
+          "isExpanded": "true",
+          "questions": []
+        },
+        {
+          "label": "Previous TB Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Previous TB Treatment",
+              "type": "obsGroup",
+              "id": "previous-tb-treatment",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "d400e1ff-afcc-43f2-ae07-745e04d89a6c",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "questions": [
+                {
+                  "label": "TB Reg No",
+                  "type": "obs",
+                  "required": false,
+                  "id": "tb-reg-no",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "2e2ec250-f5d3-4de7-8c70-a458f42441e6",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Facility",
+                  "type": "obs",
+                  "required": false,
+                  "id": "facility",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "5e448a73-c9ef-41f2-8eee-2605eb75281b",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Start Date",
+                  "type": "encounterDatetime",
+                  "required": false,
+                  "id": "start-date",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "dc980e0b-30ab-102d-86b0-7a5022ba4115",
+                    "conceptMappings": [],
+                    "answers": []
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Regimen",
+                  "type": "obs",
+                  "required": false,
+                  "id": "regimen",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "16fd7307-0b26-4c8b-afa3-8362baff4042",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "b539f758-b24b-417f-9400-4edeca0f6e06",
+                        "label": "2RHZ/4RH"
+                      },
+                      {
+                        "concept": "d250bcae-5889-4bb4-9903-e47f8594f746",
+                        "label": "2RHZE/4H"
+                      },
+                      {
+                        "concept": "73cd1cda-e82a-43d8-938c-fbaf97b7642b",
+                        "label": "2RHZE/6EH"
+                      },
+                      {
+                        "concept": "eb1f1131-d0e2-414a-94a5-d5c7ad126c9f",
+                        "label": "2RHZE/4RH"
+                      },
+                      {
+                        "concept": "7f47837f-1ea5-4a99-b4dd-5ca268d24ba8",
+                        "label": "2RHZE/10RH"
+                      },
+                      {
+                        "concept": "c25e5586-4660-4020-83cd-ee7f7f7fec20",
+                        "label": "2SRHZE/RHZE/5RHE"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Outcome",
+                  "type": "obs",
+                  "required": false,
+                  "id": "outcome",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e44c8c4c-db50-4d1e-9d6e-092d3b31cfd6",
+                    "conceptMappings": [],
+                    "answers": [
+                      {
+                        "concept": "159791AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Cure, outcome"
+                      },
+                      {
+                        "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Died"
+                      },
+                      {
+                        "concept": "dcb23465-30ab-102d-86b0-7a5022ba4115",
+                        "label": "Lost to follow up"
+                      },
+                      {
+                        "concept": "160737AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Not assessed"
+                      },
+                      {
+                        "concept": "031d9b15-62d5-4f73-a374-5503f0421427",
+                        "label": "TB Treatment Completed"
+                      },
+                      {
+                        "concept": "ef032260-4c35-4c28-82d6-5af55297562d",
+                        "label": "TB treatment not completed"
+                      },
+                      {
+                        "concept": "159874AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Tuberculosis treatment failure"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Previous 2nd Line Drugs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Use of 2nd Line Drug More Than Once Previously",
+              "type": "obs",
+              "required": false,
+              "id": "use-of-2nd-line-drugs-more-than-once",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fc4db3d6-dc2e-4752-9c37-a036f0d568f6",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Inpatient at tx Initiation",
+              "type": "obs",
+              "required": false,
+              "id": "inpatient-at-tx-initiation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "06682a02-c144-4888-b452-255ab0d72f61",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Date of Admission",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-admission",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "cb9b223e-a09c-4f8a-b34d-a0934a2af04a",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "HIV Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Hiv Testing Done in the last 3 months",
+              "type": "obs",
+              "required": false,
+              "id": "hiv-testing-done-in-last-3-months",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e22628ff-ac7d-4621-8886-170e2ae54589",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Date of Test",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date-of-hiv-test",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "Results",
+              "type": "obs",
+              "required": false,
+              "id": "results",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "29c47b5c-b27d-499c-b52c-7be676a0a78f",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "dc866728-30ab-102d-86b0-7a5022ba4115",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "dc85aa72-30ab-102d-86b0-7a5022ba4115",
+                    "label": "Negative"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Started on ART",
+              "type": "obs",
+              "required": false,
+              "id": "started-on-art",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6bd7bb95-343a-42ce-801f-d6876e263c57",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "ART Start Date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "art-start-date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "ab505422-26d9-41f1-a079-c3d222000440",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            },
+            {
+              "label": "ART Regimen",
+              "type": "obs",
+              "required": false,
+              "id": "art-regimen",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "dd2b0b4d-30ab-102d-86b0-7a5022ba4115",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "25186d70-ed8f-486c-83e5-fc31cbe95630",
+                    "label": "ABC-3TC-ATV/r"
+                  },
+                  {
+                    "concept": "583a954b-0cd5-4b69-aef6-87c281e03a55",
+                    "label": "ABC-3TC-EFV"
+                  },
+                  {
+                    "concept": "14c56659-3d4e-4b88-b3ff-e2d43dbfb865",
+                    "label": "ABC-3TC-LPV/r"
+                  },
+                  {
+                    "concept": "6cdbfee8-87bf-406c-8dc3-3a22d95e952c",
+                    "label": "ABC-3TC-NVP"
+                  },
+                  {
+                    "concept": "faf13d3c-7ca8-4995-ab29-749f3960b83d",
+                    "label": "ABC-DDI-ATV/r"
+                  },
+                  {
+                    "concept": "dd2b9181-30ab-102d-86b0-7a5022ba4115",
+                    "label": "ABC-DDI-LPV/R"
+                  },
+                  {
+                    "concept": "dd2b97d3-30ab-102d-86b0-7a5022ba4115",
+                    "label": "ABC-DDI-NFV"
+                  },
+                  {
+                    "concept": "dd2b9e11-30ab-102d-86b0-7a5022ba4115",
+                    "label": "ABC-DDI-SQV/R"
+                  },
+                  {
+                    "concept": "dd2b452c-30ab-102d-86b0-7a5022ba4115",
+                    "label": "ABC-DDI(250)-LPV/R"
+                  },
+                  {
+                    "concept": "dd2b53d6-30ab-102d-86b0-7a5022ba4115",
+                    "label": "ABC-DDI(250)-SQV/R"
+                  },
+                  {
+                    "concept": "dd2b5a01-30ab-102d-86b0-7a5022ba4115",
+                    "label": "ABC-DDI(400)-SQV/R"
+                  },
+                  {
+                    "concept": "dd2b4d82-30ab-102d-86b0-7a5022ba4115",
+                    "label": "ABC-DDI(400)-LPV/R"
+                  },
+                  {
+                    "concept": "6cc36637-596a-4426-92cf-170f76ea437d",
+                    "label": "ABC/3TC/DTG"
+                  },
+                  {
+                    "concept": "d4393bd0-3a9e-4716-8968-1057c58c32bc",
+                    "label": "AZT-3TC-ATV/r"
+                  },
+                  {
+                    "concept": "dd2b3eee-30ab-102d-86b0-7a5022ba4115",
+                    "label": "AZT-3TC-EFV"
+                  },
+                  {
+                    "concept": "f30e9dae-cc6a-4669-98d5-ad25b8a3ce9c",
+                    "label": "AZT-3TC-LPV/r"
+                  },
+                  {
+                    "concept": "a58d12c5-abc2-4575-8fdb-f30960f348fc",
+                    "label": "TDF/3TC/DTG"
+                  },
+                  {
+                    "concept": "f99ef0fa-b299-4573-ae31-f4d09b1b69d5",
+                    "label": "TDF-FTC-NVP"
+                  },
+                  {
+                    "concept": "b06bdb63-dd08-4b80-af5a-d17f6b3062a5",
+                    "label": "TDF-FTC-LPV/r"
+                  },
+                  {
+                    "concept": "20bcbf56-2784-4bf0-a6b4-23ba43764163",
+                    "label": "TDF-FTC-EFV"
+                  },
+                  {
+                    "concept": "dd2b7c12-30ab-102d-86b0-7a5022ba4115",
+                    "label": "TDF-DDI(400)-SQV/R"
+                  },
+                  {
+                    "concept": "dd2b6f61-30ab-102d-86b0-7a5022ba4115",
+                    "label": "TDF-DDI(400)-LPV/R"
+                  },
+                  {
+                    "concept": "dd2b7604-30ab-102d-86b0-7a5022ba4115",
+                    "label": "TDF-DDI(250)-SQV/R"
+                  },
+                  {
+                    "concept": "dd2b603c-30ab-102d-86b0-7a5022ba4115",
+                    "label": "TDF-DDI(250)-LPV/R"
+                  },
+                  {
+                    "concept": "e391909f-6682-4132-a08e-c481127cdeda",
+                    "label": "TDF-DDI-SQV/R"
+                  },
+                  {
+                    "concept": "d239c3d5-d296-4458-b49d-8501258886e5",
+                    "label": "TDF-DDI-LPV/R"
+                  },
+                  {
+                    "concept": "012a1378-b005-4793-8ea0-d01fceea769d",
+                    "label": "TDF-3TC-NVP"
+                  },
+                  {
+                    "concept": "4b9c639e-3d06-4f2a-9c34-dd07e44f4fa6",
+                    "label": "TDF-3TC-LPV/r"
+                  },
+                  {
+                    "concept": "25b0b83c-a7b8-4663-b727-0c03c982bab2",
+                    "label": "TDF-3TC-EFV"
+                  },
+                  {
+                    "concept": "fe78521e-eb7a-440f-912d-0eb9bf2d4b2c",
+                    "label": "TDF-3TC-ATV/r"
+                  },
+                  {
+                    "concept": "dd2b2384-30ab-102d-86b0-7a5022ba4115",
+                    "label": "D4T(40)-3TC-NVP"
+                  },
+                  {
+                    "concept": "dd2b2fec-30ab-102d-86b0-7a5022ba4115",
+                    "label": "D4T(40)-3TC-EFV"
+                  },
+                  {
+                    "concept": "dd2b1d43-30ab-102d-86b0-7a5022ba4115",
+                    "label": "D4T(30)-3TC-NVP"
+                  },
+                  {
+                    "concept": "dd2b29b1-30ab-102d-86b0-7a5022ba4115",
+                    "label": "D4T(30)-3TC-EFV"
+                  },
+                  {
+                    "concept": "dd2b84c5-30ab-102d-86b0-7a5022ba4115",
+                    "label": "D4T-3TC-NVP"
+                  },
+                  {
+                    "concept": "dd2b8b27-30ab-102d-86b0-7a5022ba4115",
+                    "label": "D4T-3TC-EFV"
+                  },
+                  {
+                    "concept": "29439504-5f5d-49ac-b8e4-258adc08c67a",
+                    "label": "AZT-DDI(400)-LPV/r"
+                  },
+                  {
+                    "concept": "a779d984-9ccf-4424-a750-47506bf8212b",
+                    "label": "AZT/3TC/DTG"
+                  },
+                  {
+                    "concept": "942e427c-7a3b-49b6-97f3-5cdbfeb8d0e3",
+                    "label": "AZT-DDI(250)-LPV/r"
+                  },
+                  {
+                    "concept": "4a608d68-516f-44d2-9e0b-1783dc0d870e",
+                    "label": "AZT-DDI-LPV/r"
+                  },
+                  {
+                    "concept": "dd2b361c-30ab-102d-86b0-7a5022ba4115",
+                    "label": "AZT-3TC-NVP"
+                  },
+                  {
+                    "concept": "f00e5ff7-73bb-4385-8ee1-ea7aa772ec3e",
+                    "label": "AZT-ABC-LPV/r"
+                  },
+                  {
+                    "concept": "dcd68a88-30ab-102d-86b0-7a5022ba4115",
+                    "label": "OTHER SPECIFY"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Started on CPT",
+              "type": "obs",
+              "required": false,
+              "id": "started-on-cpt",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bb77f9f0-9743-4c60-8e70-b20b5e800a50",
+                "conceptMappings": [],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "CPT Start Date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "cpt-start-date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1acc8255-87e4-4524-af00-9484def5a515",
+                "conceptMappings": [],
+                "answers": []
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "334bf97e-28e2-4a27-8727-a5ce31c7cd66",
+  "referencedForms": [],
+  "uuid": "c9a82263-4c48-4eb0-afc5-756118edd51b",
+  "description": "This is enrollment page of the DR TB Treatment program",
+  "version": "2.0"
+}
