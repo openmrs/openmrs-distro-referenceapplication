@@ -1,0 +1,75 @@
+{
+    "name": "SMS enrollement ",
+    "pages": [
+      {
+        "label": "Patient Details ",
+        "sections": [
+          {
+            "label": "SMS details ",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "Attending Clinician",
+                "type": "encounterProvider",
+                "required": false,
+                "id": "attending_clinician",
+                "questionOptions": {
+                  "rendering": "select",
+                  "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              },
+              {
+                "label": "SMS Telephone Number",
+                "type": "obs",
+                "required": false,
+                "id": "sms_tele_num",
+                "questionOptions": {
+                  "rendering": "text",
+                  "concept": "0593abe7-6658-43c3-ab53-a714a761de55",
+                  "conceptMappings": [],
+                  "answers": []
+                },
+                "validators": []
+              }
+            ]
+          },
+          {
+            "label": "SMS Reminder Types",
+            "isExpanded": "true",
+            "questions": [
+              {
+                "label": "SMS Reminder Type",
+                "type": "obs",
+                "required": false,
+                "id": "sms_reminder_type",
+                "questionOptions": {
+                  "rendering": "radio",
+                  "concept": "66ba3fca-5d96-42a0-9dcf-a4f20bf33c19",
+                  "conceptMappings": [],
+                  "answers": [
+                    {
+                      "concept": "d102f003-b0aa-4706-978d-239c8f1fc3f6",
+                      "label": "HIV Appointment Reminder"
+                    },
+                    {
+                      "concept": "a81dd50d-79d5-4033-8023-00b402a3e04b",
+                      "label": "Non Suppressed Notice Reminder"
+                    }
+                  ]
+                },
+                "validators": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "processor": "EncounterFormProcessor",
+    "encounterType": "",
+    "referencedForms": [],
+    "uuid": "",
+    "description": "This form is used to enrol patients into getting SMS reminders "
+  }
