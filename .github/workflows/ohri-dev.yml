@@ -130,7 +130,7 @@ jobs:
       - name: Copy files to /home/runner/
         run: |
           ls -la -t
-          cp -r $GITHUB_WORKSPACE/.ssh/ /home/runner/
+          cp -r $GITHUB_WORKSPACE/github/.ssh/ /home/runner/
 
       - name: List contents of /home/runner/
         run: ls -la /home/runner/

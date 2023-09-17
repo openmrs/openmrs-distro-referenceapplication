@@ -1,0 +1,73 @@
+version: "3.7"
+
+services:
+  gateway:
+    image: histacoohri/ohri-dev-proxy:next
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "8083:80"
+        # - "8083:8083"
+
+  frontend:
+    image: histacoohri/ohri-dev-frontend:next
+    environment:
+      SPA_PATH: /openmrs/spa
+      API_URL: /openmrs
+      SPA_CONFIG_URLS: /openmrs/spa/ohri-config.json
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      timeout: 10s
+    depends_on:
+      - backend
+    # OHRI customizations
+    #volumes:
+    #  - ./frontend/ohri-config.json:/usr/share/nginx/html/ohri-config.json
+
+  backend:
+    image: histacoohri/ohri-dev-backend-2_6:next
+    depends_on:
+      - db
+    environment:
+      OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
+      OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
+      OMRS_CONFIG_CREATE_TABLES: "true"
+      OMRS_CONFIG_CONNECTION_SERVER: db
+      OMRS_CONFIG_CONNECTION_DATABASE: openmrs
+      OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
+      OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
+      OMRS_JAVA_SERVER_OPTS: "-Dfile.encoding='UTF-8' -server -Xms1024m -Xmx6144m -Djava.security.egd='file:/dev/./urandom' -Djava.awt.headless='true' -Djava.awt.headlesslib='true'"
+    healthcheck:
+      disable: true
+      #test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
+      #timeout: 10s
+    volumes:
+      - ohri-openmrs-data:/openmrs/data
+
+  # MariaDB
+  db:
+    image: mariadb:10.8.2
+    command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
+    healthcheck:
+      test: 'mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute "SHOW DATABASES;"'
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      MYSQL_DATABASE: openmrs
+      MYSQL_USER: ${OMRS_DB_USER:-openmrs}
+      MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+    volumes:
+      - ohri-db-data:/var/lib/mysql
+
+volumes:
+  ohri-openmrs-data: ~
+  ohri-db-data: ~
+
+
+networks:
+  default:
+    external: true
+    name: ohri
