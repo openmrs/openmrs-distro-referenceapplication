@@ -7,8 +7,7 @@ services:
       - frontend
       - backend
     ports:
-      - "8083:80"
-        # - "8083:8083"
+      - "80:80"
 
   frontend:
     image: histacoohri/ohri-working-frontend:next
@@ -65,9 +64,3 @@ services:
 volumes:
   ohri-openmrs-data: ~
   ohri-db-data: ~
-
-
-networks:
-  default:
-    external: true
-    name: ohri
