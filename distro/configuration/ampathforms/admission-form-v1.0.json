@@ -27,33 +27,9 @@
                 "required": false,
                 "id": "admission_date",
                 "questionOptions": {
-                  "rendering": "date",
+                  "rendering": "datetime",
                   "concept": "00b60b33-e6d8-4059-b101-dcd25568aa78",
                   "conceptMappings": [],
-                  "answers": []
-                },
-                "validators": []
-              },
-              {
-                "label": "Admission Time",
-                "type": "encounterDatetime",
-                "required": false,
-                "id": "admission_time",
-                "questionOptions": {
-                  "rendering": "date",
-                  "concept": "162135AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                  "conceptMappings": [
-                    {
-                      "relationship": "SAME-AS",
-                      "type": "CIEL",
-                      "value": "162135"
-                    },
-                    {
-                      "relationship": "SAME-AS",
-                      "type": "SNOMED CT",
-                      "value": "307486002"
-                    }
-                  ],
                   "answers": []
                 },
                 "validators": []
@@ -64,31 +40,25 @@
                 "required": false,
                 "id": "ward_name",
                 "questionOptions": {
-                  "rendering": "text",
-                  "concept": "dc11e42d-cdcd-49c0-a643-d34afb8df75e",
-                  "conceptMappings": [],
-                  "answers": []
-                },
-                "validators": []
-              },
-              {
-                "label": "Bed Number",
-                "type": "obs",
-                "required": false,
-                "id": "bed_number",
-                "questionOptions": {
-                  "rendering": "number",
-                  "concept": "dbc8ef39-daa1-4483-bff0-b3a863d3e9df",
-                  "conceptMappings": [
-                    {
-                      "relationship": "SAME-AS",
-                      "type": "RxNORM",
-                      "value": "1364505 (bedaquiline 100 MG)"
+                  "isSearchable": "true",
+                  "rendering": "ui-select-extended",
+                  "datasource": {
+                    "id": "concept_location",
+                    "config": {
+                      "tag": "1c783dca-fd54-4ea8-a0fc-2875374e9cb6"
                     }
-                  ],
-                  "answers": []
+                  },
+                  "concept": "c09c3d3d-d07d-4d34-84f0-89ea4fd5d6d5"
                 },
-                "validators": []
+                "behaviours": [
+                  {
+                    "intent": "*",
+                    "required": "true",
+                    "hide": {
+                      "hideWhenExpression": "false"
+                    }
+                  }
+                ]
               },
               {
                 "label": "Patient category",
@@ -117,13 +87,13 @@
                 "validators": []
               },
               {
-                "label": "Admitted by",
-                "type": "encounterProvider",
+                "label": "Clinical Notes",
+                "type": "obs",
                 "required": false,
-                "id": "admitted_by",
+                "id": "clinical_notes",
                 "questionOptions": {
-                  "rendering": "select",
-                  "concept": "9071436e-e190-49b5-bd5e-451743107dbc",
+                  "rendering": "textarea",
+                  "concept": "e7f0ed50-a83d-11ed-afa1-0242ac120002",
                   "conceptMappings": [],
                   "answers": []
                 },
@@ -137,6 +107,7 @@
     "processor": "EncounterFormProcessor",
     "encounterType": "",
     "referencedForms": [],
+    "postSubmissionActions": ["IpdAdmissionSubmissionAction"],
     "uuid": "",
     "description": "This form will be used to admit patients to IPD"
   }
