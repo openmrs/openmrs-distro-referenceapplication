@@ -26,20 +26,7 @@ jobs:
 
       - name: Extract version numbers from the spa-build-config.json file
         id: versions
-        run: |
-          file_path="frontend/spa-build-config.json"
-          
-          patient_management=$(grep '"@openmrs/esm-patient-registration-app":' "$file_path" | awk -F'"' '{print $4}')
-          patient_chart=$(grep '"@openmrs/esm-patient-chart-app":' "$file_path" | awk -F'"' '{print $4}')
-          esm_core=$(grep '"@openmrs/esm-login-app":' "$file_path" | awk -F'"' '{print $4}')
-          form_builder=$(grep '"@openmrs/esm-form-builder-app":' "$file_path" | awk -F'"' '{print $4}')
-          cohort_builder=$(grep '"@openmrs/esm-cohort-builder-app":' "$file_path" | awk -F'"' '{print $4}')
-          
-          echo "patient_management=$patient_management" >> "$GITHUB_OUTPUT"
-          echo "patient_chart=$patient_chart" >> "$GITHUB_OUTPUT"
-          echo "esm_core=$esm_core" >> "$GITHUB_OUTPUT"
-          echo "form_builder=$form_builder" >> "$GITHUB_OUTPUT"
-          echo "cohort_builder=$cohort_builder" >> "$GITHUB_OUTPUT"
+        run: sh e2e_test_support_files/extract_version_numbers.sh
 
       - name: Build and Run Containers
         run: docker-compose -f e2e_test_support_files/docker-compose-build.yml up -d
