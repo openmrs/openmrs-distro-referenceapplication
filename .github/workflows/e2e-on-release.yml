@@ -1,0 +1,343 @@
+name: Run on release
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ startsWith(github.event.pull_request.title, '(release)') }}
+    outputs:
+      patient_management_version: ${{steps.versions.outputs.patient_management}}
+      patient_chart_version: ${{steps.versions.outputs.patient_chart}}
+      esm_core_version: ${{steps.versions.outputs.esm_core}}
+      form_builder_version: ${{steps.versions.outputs.form_builder}}
+      cohort_builder_version: ${{steps.versions.outputs.cohort_builder}}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout to the release commit
+        run: |
+          release_commit_sha=$(git log --oneline | awk 'NR==3 {print $1}')
+          git checkout $release_commit_sha
+
+      - name: Extract version numbers from the spa-build-config.json file
+        id: versions
+        run: |
+          file_path="frontend/spa-build-config.json"
+          
+          patient_management=$(grep '"@openmrs/esm-patient-registration-app":' "$file_path" | awk -F'"' '{print $4}')
+          patient_chart=$(grep '"@openmrs/esm-patient-chart-app":' "$file_path" | awk -F'"' '{print $4}')
+          esm_core=$(grep '"@openmrs/esm-login-app":' "$file_path" | awk -F'"' '{print $4}')
+          form_builder=$(grep '"@openmrs/esm-form-builder-app":' "$file_path" | awk -F'"' '{print $4}')
+          cohort_builder=$(grep '"@openmrs/esm-cohort-builder-app":' "$file_path" | awk -F'"' '{print $4}')
+          
+          echo "patient_management=$patient_management" >> "$GITHUB_OUTPUT"
+          echo "patient_chart=$patient_chart" >> "$GITHUB_OUTPUT"
+          echo "esm_core=$esm_core" >> "$GITHUB_OUTPUT"
+          echo "form_builder=$form_builder" >> "$GITHUB_OUTPUT"
+          echo "cohort_builder=$cohort_builder" >> "$GITHUB_OUTPUT"
+
+      - name: Build and Run Containers
+        run: docker-compose -f e2e_test_support_files/docker-compose-build.yml up -d
+
+      - name: Wait for the backend to start
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+
+      - name: Commit and export Containers
+        run: sh e2e_test_support_files/commit_and_export_images.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: e2e_release_env_images
+          path: e2e_release_env_images.tar.gz
+          retention-days: 1
+
+  run-patient-management-e2e-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Docker Images
+        uses: actions/download-artifact@v3
+        with:
+          name: e2e_release_env_images
+          path: /tmp
+
+      - name: Load Docker Images
+        run: |
+          tar xzvf /tmp/e2e_release_env_images.tar.gz
+          docker load --input e2e_release_env_images.tar
+          docker image ls -a
+
+      - name: Spin up an OpenMRS Instance
+        run: docker-compose up -d
+        working-directory: e2e_test_support_files
+
+      - name: Checkout to the Repo's Tag
+        uses: actions/checkout@v4
+        with:
+          repository: openmrs/openmrs-esm-patient-management
+          ref: refs/tags/v${{ needs.build.outputs.patient_management_version }}
+          path: e2e_repo
+
+      - name: Copy test environment variables
+        run: cp example.env .env
+        working-directory: e2e_repo
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+        working-directory: e2e_repo
+
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+        working-directory: e2e_repo
+
+      - name: Wait for the OpenMRS instance to start
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+
+      - name: Run E2E tests
+        run: yarn playwright test
+        working-directory: e2e_repo
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: report-patient-management
+          path: e2e_repo/playwright-report/
+          retention-days: 30
+
+  run-patient-chart-e2e-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Docker Images
+        uses: actions/download-artifact@v3
+        with:
+          name: e2e_release_env_images
+          path: /tmp
+
+      - name: Load Docker Images
+        run: |
+          tar xzvf /tmp/e2e_release_env_images.tar.gz
+          docker load --input e2e_release_env_images.tar
+          docker image ls -a
+
+      - name: Spin up an OpenMRS Instance
+        run: docker-compose up -d
+        working-directory: e2e_test_support_files
+
+      - name: Checkout to the Repo's Tag
+        uses: actions/checkout@v4
+        with:
+          repository: openmrs/openmrs-esm-patient-chart
+          ref: refs/tags/v${{ needs.build.outputs.patient_chart_version }}
+          path: e2e_repo
+
+      - name: Copy test environment variables
+        run: cp example.env .env
+        working-directory: e2e_repo
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+        working-directory: e2e_repo
+
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+        working-directory: e2e_repo
+
+      - name: Wait for the OpenMRS instance to start
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+
+      - name: Run E2E tests
+        run: yarn playwright test
+        working-directory: e2e_repo
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: report-patient-chart
+          path: e2e_repo/playwright-report/
+          retention-days: 30
+
+  run-form-builder-e2e-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Docker Images
+        uses: actions/download-artifact@v3
+        with:
+          name: e2e_release_env_images
+          path: /tmp
+
+      - name: Load Docker Images
+        run: |
+          tar xzvf /tmp/e2e_release_env_images.tar.gz
+          docker load --input e2e_release_env_images.tar
+          docker image ls -a
+
+      - name: Spin up an OpenMRS Instance
+        run: docker-compose up -d
+        working-directory: e2e_test_support_files
+
+      - name: Checkout to the Repo's Tag
+        uses: actions/checkout@v4
+        with:
+          repository: openmrs/openmrs-esm-form-builder
+          ref: refs/tags/v${{ needs.build.outputs.form_builder_version }}
+          path: e2e_repo
+
+      - name: Copy test environment variables
+        run: cp example.env .env
+        working-directory: e2e_repo
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+        working-directory: e2e_repo
+
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+        working-directory: e2e_repo
+
+      - name: Wait for the OpenMRS instance to start
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+
+      - name: Run E2E tests
+        run: yarn playwright test
+        working-directory: e2e_repo
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: report-form-builder
+          path: e2e_repo/playwright-report/
+          retention-days: 30
+
+  run-esm-core-e2e-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Docker Images
+        uses: actions/download-artifact@v3
+        with:
+          name: e2e_release_env_images
+          path: /tmp
+
+      - name: Load Docker Images
+        run: |
+          tar xzvf /tmp/e2e_release_env_images.tar.gz
+          docker load --input e2e_release_env_images.tar
+          docker image ls -a
+
+      - name: Spin up an OpenMRS Instance
+        run: docker-compose up -d
+        working-directory: e2e_test_support_files
+
+      - name: Checkout to the Repo's Tag
+        uses: actions/checkout@v4
+        with:
+          repository: openmrs/openmrs-esm-core
+          ref: refs/tags/v${{ needs.build.outputs.esm_core_version }}
+          path: e2e_repo
+
+      - name: Copy test environment variables
+        run: cp example.env .env
+        working-directory: e2e_repo
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+        working-directory: e2e_repo
+
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+        working-directory: e2e_repo
+
+      - name: Wait for the OpenMRS instance to start
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+
+      - name: Run E2E tests
+        run: yarn playwright test
+        working-directory: e2e_repo
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: report-esm-core
+          path: e2e_repo/playwright-report/
+          retention-days: 30
+
+  run-cohort-builder-e2e-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Docker Images
+        uses: actions/download-artifact@v3
+        with:
+          name: e2e_release_env_images
+          path: /tmp
+
+      - name: Load Docker Images
+        run: |
+          tar xzvf /tmp/e2e_release_env_images.tar.gz
+          docker load --input e2e_release_env_images.tar
+          docker image ls -a
+
+      - name: Spin up an OpenMRS Instance
+        run: docker-compose up -d
+        working-directory: e2e_test_support_files
+
+      - name: Checkout to the Repo's Tag
+        uses: actions/checkout@v4
+        with:
+          repository: openmrs/openmrs-esm-cohortbuilder
+          ref: refs/tags/v${{ needs.build.outputs.cohort_builder_version }}
+          path: e2e_repo
+
+      - name: Copy test environment variables
+        run: cp example.env .env
+        working-directory: e2e_repo
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+        working-directory: e2e_repo
+
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+        working-directory: e2e_repo
+
+      - name: Wait for the OpenMRS instance to start
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+
+      - name: Run E2E tests
+        run: yarn playwright test
+        working-directory: e2e_repo
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: report-cohort-builder
+          path: e2e_repo/playwright-report/
+          retention-days: 30
