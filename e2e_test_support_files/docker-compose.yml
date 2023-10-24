@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  gateway:
+    image: gateway
+    restart: "unless-stopped"
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "8080:80"
+
+  frontend:
+    image: frontend
+    restart: "unless-stopped"
+    depends_on:
+      - backend
+
+  backend:
+    image: backend
+    restart: "unless-stopped"
+
+  db:
+    image: db
+    restart: "unless-stopped"
+
