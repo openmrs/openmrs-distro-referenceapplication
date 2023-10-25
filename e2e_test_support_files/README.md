@@ -59,6 +59,8 @@ mono-repos). These jobs are structured similarly and are listed below:
 In each "End-to-End Test Job," the workflow first checks out the repository associated with a specific OpenMRS
 component. It then downloads Docker images from a previous "build" job, loads these images, and starts an OpenMRS instance.
 
+### Why Check Out to the Tags?
+
 The workflow checks out a specific tagged version of the component's repository, the tag is imported from the previous "
 build" job. This is necessary because the goal is to perform end-to-end tests on the codebase that corresponds to a
 particular release version, rather than the code at the head of the repository.
