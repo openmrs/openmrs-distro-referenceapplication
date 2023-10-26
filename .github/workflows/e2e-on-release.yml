@@ -51,15 +51,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create Temporary Directory to Download Docker Images
+        id: tempdir
+        run: echo "tmpdir=$(mktemp -d)" >> "$GITHUB_OUTPUT"
+
       - name: Download Docker Images
         uses: actions/download-artifact@v3
         with:
           name: e2e_release_env_images
-          path: /tmp
+          path: ${{ steps.tempdir.outputs.tmpdir }}
 
       - name: Load Docker Images
         run: |
-          tar xzvf /tmp/e2e_release_env_images.tar.gz
+          gzip -d ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar.gz
           docker load --input e2e_release_env_images.tar
           docker image ls -a
 
@@ -108,11 +112,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create Temporary Directory to Download Docker Images
+        id: tempdir
+        run: echo "tmpdir=$(mktemp -d)" >> "$GITHUB_OUTPUT"
+
       - name: Download Docker Images
         uses: actions/download-artifact@v3
         with:
           name: e2e_release_env_images
-          path: /tmp
+          path: ${{ steps.tempdir.outputs.tmpdir }}
 
       - name: Load Docker Images
         run: |
@@ -169,7 +177,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: e2e_release_env_images
-          path: /tmp
+          path: ${{ steps.tempdir.outputs.tmpdir }}
 
       - name: Load Docker Images
         run: |
@@ -226,7 +234,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: e2e_release_env_images
-          path: /tmp
+          path: ${{ steps.tempdir.outputs.tmpdir }}
 
       - name: Load Docker Images
         run: |
@@ -283,7 +291,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: e2e_release_env_images
-          path: /tmp
+          path: ${{ steps.tempdir.outputs.tmpdir }}
 
       - name: Load Docker Images
         run: |

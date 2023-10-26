@@ -6,7 +6,7 @@ get_repository_tag() {
   local repo_name="$2"
   local app="$3"
   local value
-  value=$(grep "\"$app\":" "$file" | awk -F'"' '{print $4}')
+  value=$(awk -F'"' "/${app/\//\/}/ {print \$4}" "$file")
   echo "$repo_name=$value"
 }
 
