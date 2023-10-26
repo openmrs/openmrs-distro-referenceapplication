@@ -21,9 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: Checkout to the release commit
-        run: |
-          release_commit_sha=$(git log --oneline | awk 'NR==3 {print $1}')
-          git checkout $release_commit_sha
+        run: git checkout $(git log --grep="^(release)" --format="%H" | head -1)
 
       - name: Extract version numbers from the spa-build-config.json file
         id: versions
@@ -33,7 +31,7 @@ jobs:
         run: docker-compose -f e2e_test_support_files/docker-compose-build.yml up -d
 
       - name: Wait for the backend to start
-        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/openmrs/login.htm)" != "200" ]]; do sleep 10; done
 
       - name: Commit and export Containers
         run: sh e2e_test_support_files/commit_and_export_images.sh
@@ -64,7 +62,7 @@ jobs:
       - name: Load Docker Images
         run: |
           gzip -d ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar.gz
-          docker load --input e2e_release_env_images.tar
+          docker load --input ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
@@ -124,8 +122,8 @@ jobs:
 
       - name: Load Docker Images
         run: |
-          tar xzvf /tmp/e2e_release_env_images.tar.gz
-          docker load --input e2e_release_env_images.tar
+          gzip -d ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar.gz
+          docker load --input ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
@@ -173,6 +171,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create Temporary Directory to Download Docker Images
+        id: tempdir
+        run: echo "tmpdir=$(mktemp -d)" >> "$GITHUB_OUTPUT"
+
       - name: Download Docker Images
         uses: actions/download-artifact@v3
         with:
@@ -181,8 +183,8 @@ jobs:
 
       - name: Load Docker Images
         run: |
-          tar xzvf /tmp/e2e_release_env_images.tar.gz
-          docker load --input e2e_release_env_images.tar
+          gzip -d ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar.gz
+          docker load --input ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
@@ -230,6 +232,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create Temporary Directory to Download Docker Images
+        id: tempdir
+        run: echo "tmpdir=$(mktemp -d)" >> "$GITHUB_OUTPUT"
+
       - name: Download Docker Images
         uses: actions/download-artifact@v3
         with:
@@ -238,8 +244,8 @@ jobs:
 
       - name: Load Docker Images
         run: |
-          tar xzvf /tmp/e2e_release_env_images.tar.gz
-          docker load --input e2e_release_env_images.tar
+          gzip -d ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar.gz
+          docker load --input ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
@@ -287,6 +293,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create Temporary Directory to Download Docker Images
+        id: tempdir
+        run: echo "tmpdir=$(mktemp -d)" >> "$GITHUB_OUTPUT"
+
       - name: Download Docker Images
         uses: actions/download-artifact@v3
         with:
@@ -295,8 +305,8 @@ jobs:
 
       - name: Load Docker Images
         run: |
-          tar xzvf /tmp/e2e_release_env_images.tar.gz
-          docker load --input e2e_release_env_images.tar
+          gzip -d ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar.gz
+          docker load --input ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
