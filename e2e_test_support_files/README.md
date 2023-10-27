@@ -30,9 +30,6 @@ is to ensure that the workflow checks out to the specific release commit associa
 necessary because the pull request contain both release commits and revert commits, and the goal is to specifically
 target the release commit for further processing.
 
-By checking out to the specific release commit, it ensures that the subsequent steps of the workflow are based on the
-state of the code associated with the release, and not on the revert commit present in the pull request.
-
 ## End-to-End Test Jobs
 
 The workflow includes several end-to-end test jobs, each corresponding to a specific components of O3 (frontend
