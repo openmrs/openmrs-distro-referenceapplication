@@ -23,24 +23,12 @@ The reason for the step:
 
 ```yaml
 - name: Checkout to the release commit
-  run: |
-  release_commit_sha=$(git log --oneline | awk 'NR==3 {print $1}')
-  git checkout $release_commit_sha
+  run: git checkout $(git log --grep="^(release)" --format="%H" | head -1)
 ```
 
 is to ensure that the workflow checks out to the specific release commit associated with the pull request. This is
 necessary because the pull request contain both release commits and revert commits, and the goal is to specifically
 target the release commit for further processing.
-
-Here's an explanation of what this step does:
-
-1. It uses `git log --oneline` to retrieve a list of recent commits in the repository.
-2. The `awk 'NR==3 {print $1}'` part is used to extract the SHA hash of the third most recent commit, which is the
-   release commit we want to target. This is done by specifying `NR==3`, which means selecting the third line (commit)
-   in the log.
-   The reason to use the 3rd commit instead of 2nd is that a GitHub Action workflow operates within a context where
-   there's an additional merge commit on the head of the pull request.
-3. Finally, the workflow checks out to this release commit by using git checkout $release_commit_sha.
 
 By checking out to the specific release commit, it ensures that the subsequent steps of the workflow are based on the
 state of the code associated with the release, and not on the revert commit present in the pull request.
