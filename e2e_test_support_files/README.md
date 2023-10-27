@@ -23,7 +23,7 @@ The reason for the step:
 
 ```yaml
 - name: Checkout to the release commit
-  run: git checkout $(git log --grep="^(release)" --format="%H" | head -1)
+  run: git checkout 'HEAD^{/\(release\)}'
 ```
 
 is to ensure that the workflow checks out to the specific release commit associated with the pull request. This is
