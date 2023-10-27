@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: Checkout to the release commit
-        run: git checkout $(git log --grep="^(release)" --format="%H" | head -1)
+        run: git checkout 'HEAD^{/\(release\)}'
 
       - name: Extract version numbers from the spa-build-config.json file
         id: versions
