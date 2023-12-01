@@ -49,4 +49,4 @@ component. It then downloads Docker images from a previous "build" job, loads th
 The workflow checks out a specific tagged version of the component's repository, the tag is imported from the previous "
 build" job. This is necessary because the goal is to perform end-to-end tests on the codebase that corresponds to a
 particular release version, rather than the code at the head of the repository. In case of using pre-releases, it checkouts
-to the main branch as we don't have a tag for pre-releases.
+to the main branch as we don't create tags for pre-releases.
