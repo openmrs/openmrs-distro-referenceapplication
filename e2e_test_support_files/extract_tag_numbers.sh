@@ -5,9 +5,16 @@ get_repository_tag() {
   local file="$1"
   local repo_name="$2"
   local app="$3"
-  local value
-  value=$(awk -F'"' -v app="$app" '$0 ~ app {print $4}' "$file")
-  echo "$repo_name=$value"
+
+  local version=$(awk -F'"' -v app="$app" '$0 ~ app {print $4}' "$file")
+  local ref="refs/tags/v$version"
+
+  # Check if the version number contains "pre" and modify the ref to main branch
+  if [[ $version == *"pre"* ]]; then
+    ref="main"
+  fi
+
+  echo "$repo_name=$ref"
 }
 
 file_path="frontend/spa-build-config.json"
