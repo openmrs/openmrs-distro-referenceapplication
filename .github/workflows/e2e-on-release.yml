@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.event.pull_request.title, '(release)') }}
     outputs:
-      patient_management_version: ${{steps.versions.outputs.patient_management}}
-      patient_chart_version: ${{steps.versions.outputs.patient_chart}}
-      esm_core_version: ${{steps.versions.outputs.esm_core}}
-      form_builder_version: ${{steps.versions.outputs.form_builder}}
-      cohort_builder_version: ${{steps.versions.outputs.cohort_builder}}
+      patient_management_ref: ${{steps.refs.outputs.patient_management}}
+      patient_chart_ref: ${{steps.refs.outputs.patient_chart}}
+      esm_core_ref: ${{steps.refs.outputs.esm_core}}
+      form_builder_ref: ${{steps.refs.outputs.form_builder}}
+      cohort_builder_ref: ${{steps.refs.outputs.cohort_builder}}
 
     steps:
       - uses: actions/checkout@v4
@@ -24,8 +24,8 @@ jobs:
         run: git checkout 'HEAD^{/\(release\)}'
 
       - name: Extract version numbers from the spa-build-config.json file
-        id: versions
-        run: sh e2e_test_support_files/extract_tag_numbers.sh
+        id: refs
+        run: bash e2e_test_support_files/extract_tag_numbers.sh
 
       - name: Build and Run Containers
         run: docker-compose -f e2e_test_support_files/docker-compose-build.yml up -d
@@ -73,7 +73,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-patient-management
-          ref: refs/tags/v${{ needs.build.outputs.patient_management_version }}
+          ref: ${{ needs.build.outputs.patient_management_ref }}
           path: e2e_repo
 
       - name: Copy test environment variables
@@ -134,7 +134,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-patient-chart
-          ref: refs/tags/v${{ needs.build.outputs.patient_chart_version }}
+          ref: ${{ needs.build.outputs.patient_chart_ref }}
           path: e2e_repo
 
       - name: Copy test environment variables
@@ -195,7 +195,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-form-builder
-          ref: refs/tags/v${{ needs.build.outputs.form_builder_version }}
+          ref: ${{ needs.build.outputs.form_builder_ref }}
           path: e2e_repo
 
       - name: Copy test environment variables
@@ -256,7 +256,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-core
-          ref: refs/tags/v${{ needs.build.outputs.esm_core_version }}
+          ref: ${{ needs.build.outputs.esm_core_ref }}
           path: e2e_repo
 
       - name: Copy test environment variables
@@ -317,7 +317,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-cohortbuilder
-          ref: refs/tags/v${{ needs.build.outputs.cohort_builder_version }}
+          ref: ${{ needs.build.outputs.cohort_builder_ref }}
           path: e2e_repo
 
       - name: Copy test environment variables
