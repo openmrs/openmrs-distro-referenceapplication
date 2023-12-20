@@ -12,7 +12,7 @@ COPY pom.xml ./
 COPY distro ./distro/
 
 # Build the distro, but only deploy from the amd64 build
-RUN --mount=type=secret,id=m2settings,target=/root/.m2/settings.xml if [ "$MVN_ARGS" != "deploy" ] -o [ "$(arch)" = "x84_64" ]; then mvn $MVN_ARGS_SETTINGS $MVN_ARGS; else mvn $MVN_ARGS_SETTINGS install; fi
+RUN --mount=type=secret,id=m2settings,target=/root/.m2/settings.xml if [[ "$MVN_ARGS" != "deploy" || "$(arch)" = "x84_64" ]]; then mvn $MVN_ARGS_SETTINGS $MVN_ARGS; else mvn $MVN_ARGS_SETTINGS install; fi
 
 RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs.war /openmrs/distribution/openmrs_core/
 
