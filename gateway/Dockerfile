@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.3
-FROM nginx:1.25-alpine
+FROM --platform=$BUILDPLATFORM nginx:1.25-alpine
 
 ENV FRAME_ANCESTORS ""
 

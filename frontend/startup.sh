@@ -1,6 +1,32 @@
 #!/bin/sh
 set -e
 
+rebuild_frontend() {
+  npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-build-config.json --target ./spa
+  npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
+  # we exit 0 below so that build failures do not stop the image
+  if [ ! -f ./spa/index.html ]; then echo 'Rebuild failed. Please check the logs above for details. This may have happened because of an update to a library that OpenMRS depends on.' >&2; popd; exit 0; fi
+  shasum -a 512 spa-build-config.json > spa-build-config.json.sha512sum
+
+  rm -rf /usr/share/nginx/html/*
+  cp -r spa/* /usr/share/nginx/html
+}
+
+if [ -d "/openmrs" ]; then
+  if [ -f "/openmrs/spa-build-config.json" ]; then
+    if [ -f "/openmrs/spa-build-config.json.sha512sum" ]; then
+      cd "/openmrs"
+      shasum -a 512 -c /openmrs/spa-build-config.json.sha512sum > /dev/null || {
+        echo "Checksum mismatch. Rebuilding frontend..."
+        rebuild_frontend
+      }
+    else
+      echo "Checksum file not found. Rebuilding frontend..."
+      rebuild_frontend
+    fi
+  fi
+fi
+
 # if we are using the $IMPORTMAP_URL environment variable, we have to make this useful,
 # so we change "importmap.json" into "$IMPORTMAP_URL" allowing it to be changed by envsubst
 if [ -n "${IMPORTMAP_URL}" ]; then
