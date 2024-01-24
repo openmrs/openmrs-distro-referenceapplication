@@ -1,4 +1,7 @@
 # syntax=docker/dockerfile:1.3
+#--------------------------------------------
+# Dev Stage - Assembles and Builds Frontend
+#--------------------------------------------
 FROM --platform=$BUILDPLATFORM node:18-alpine as dev
 
 ARG APP_SHELL_VERSION=next
@@ -14,11 +17,14 @@ RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifes
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
 RUN if [ ! -f ./spa/index.html ]; then echo 'Build failed. Please check the logs above for details. This may have happened because of an update to a library that OpenMRS depends on.'; exit 1; fi
 
+#--------------------------------------------
+# Runtime Stage - Published Image
+#--------------------------------------------
 FROM nginx:1.25-alpine
 
 RUN apk update && \
     apk upgrade && \
-    # add more utils for sponge to support our startup script
+    # add more utils for sponge and envsubst
     apk add --no-cache moreutils
 
 # clear any default files installed by nginx

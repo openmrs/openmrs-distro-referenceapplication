@@ -28,10 +28,6 @@
     </developer>
   </developers>
 
-  <modules>
-    <module>distro</module>
-  </modules>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -216,4 +212,19 @@
       <url>https://mavenrepo.openmrs.org/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
+
+  <profiles>
+    <profile>
+      <id>distro</id>
+      <modules>
+        <module>distro</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>frontend</id>
+      <modules>
+        <module>frontend</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>

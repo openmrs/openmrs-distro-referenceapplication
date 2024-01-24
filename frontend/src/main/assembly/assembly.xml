@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly
+  xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/2.1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://maven.apache.org/plugins/maven-assembly-plugin/assembly/2.1.1
+      https://maven.apache.org/xsd/assembly-2.1.1.xsd"
+>
+  <id>zip-distro-dir</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <fileSets>
+    <fileSet>
+      <directory>${project.basedir}/src/main/resources</directory>
+      <outputDirectory>..</outputDirectory>
+      <excludes>
+        <exclude>.gitkeep</exclude>
+      </excludes>
+    </fileSet>
+  </fileSets>
+</assembly>
