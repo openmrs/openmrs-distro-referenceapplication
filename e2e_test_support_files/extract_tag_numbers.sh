@@ -17,7 +17,7 @@ get_repository_tag() {
   echo "$repo_name=$ref"
 }
 
-file_path="frontend/spa-build-config.json"
+file_path="frontend/spa-assemble-config.json"
 
 # Call the function for each Repository with the app as the second argument
 get_repository_tag "$file_path" "patient_management" "@openmrs/esm-patient-registration-app" >> "$GITHUB_OUTPUT"

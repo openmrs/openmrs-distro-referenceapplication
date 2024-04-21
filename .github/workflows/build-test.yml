@@ -22,4 +22,4 @@ jobs:
           cache: 'maven'
 
       - name: Build and Test
-        run: mvn --batch-mode --update-snapshots --activate-profiles validator clean package
+        run: mvn --batch-mode --update-snapshots --activate-profiles distro,validator clean package

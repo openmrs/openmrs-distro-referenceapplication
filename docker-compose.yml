@@ -16,7 +16,7 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS:
+      SPA_CONFIG_URLS: /openmrs/spa/config-core_demo.json
       SPA_DEFAULT_LOCALE:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
@@ -45,7 +45,7 @@ services:
 
   # MariaDB
   db:
-    image: mariadb:10.8.2
+    image: mariadb:10.11.7
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
     healthcheck:
