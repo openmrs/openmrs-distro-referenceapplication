@@ -1,0 +1,130 @@
+{
+    "name": "component_crypto-v1.1",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Cryptococcal prevention",
+            "sections": [
+                {
+                    "label": "Cryptococcal Secondary Prevention",
+                    "questions": [
+                        {
+                            "label": "Cryptococcus Tx:",
+                            "id": "cryptCurrent",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a899e516-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a899e516-1350-11df-a1f1-0026b9348838')",
+                            "questionOptions": {
+                                "concept": "a899e516-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    },
+                                    {
+                                        "concept": "a8971e12-1350-11df-a1f1-0026b9348838",
+                                        "label": "Fluconazole 400mg"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Cryptococcal Treatment Plan",
+                    "questions": [
+                        {
+                            "label": "Crag test:",
+                            "id": "cragTest",
+                            "questionOptions": {
+                                "concept": "7243bed9-0bc7-4702-af28-a06ab1981e19",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a89c3d8e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Poor sample quality"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(cragTest) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(cragTest)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Cryptococcal treatment plan",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a89c2790-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89b7908-1350-11df-a1f1-0026b9348838",
+                                        "label": "Continue"
+                                    },
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    },
+                                    {
+                                        "concept": "a89b77aa-1350-11df-a1f1-0026b9348838",
+                                        "label": "Start"
+                                    },
+                                    {
+                                        "concept": "a89b7d36-1350-11df-a1f1-0026b9348838",
+                                        "label": "Stop"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(cryptCurrent) && !isEmpty(myValue) && !arrayContains(['a899e0ac-1350-11df-a1f1-0026b9348838','a89b77aa-1350-11df-a1f1-0026b9348838'],myValue)&&(cryptCurrent==='a899e0ac-1350-11df-a1f1-0026b9348838')",
+                                    "message": "Patient marked as not on Cryptococcus Treatment. Therefore plan can only be none or start."
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(cryptCurrent) && cryptCurrent === 'a8971e12-1350-11df-a1f1-0026b9348838' && !isEmpty(myValue) && arrayContains(['a89b77aa-1350-11df-a1f1-0026b9348838','a899e0ac-1350-11df-a1f1-0026b9348838'], myValue)",
+                                    "message": "Patient marked as on crypto in history section. Therefore plan can only be continue regimen and stop."
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(cragTest) && !isEmpty(myValue) && !arrayContains(['a89b77aa-1350-11df-a1f1-0026b9348838','a89b7908-1350-11df-a1f1-0026b9348838'],myValue)&&(cragTest==='a896f3a6-1350-11df-a1f1-0026b9348838')",
+                                    "message": "Crag test is positive. Therefore patient should be on crypto."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.1",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

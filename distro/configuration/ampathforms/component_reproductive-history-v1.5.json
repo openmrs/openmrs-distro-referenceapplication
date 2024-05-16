@@ -1,0 +1,691 @@
+{
+    "name": "component_reproductive-history-v1.5",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Reproductive History",
+            "sections": [
+                {
+                    "label": "Reproductive History",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "How many pregnancies have you had?",
+                            "type": "obs",
+                            "id": "noPregnancy",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a8aaf59a-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a8aaf59a-1350-11df-a1f1-0026b9348838')",
+                            "questionOptions": {
+                                "concept": "a8aaf59a-1350-11df-a1f1-0026b9348838",
+                                "rendering": "number",
+                                "max": "50",
+                                "min": "0"
+                            },
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F'"
+                            }
+                        },
+                        {
+                            "label": "How many pregnancies have you delivered (more than 24 weeks)?",
+                            "type": "obs",
+                            "id": "noDelivery",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a899a920-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a899a920-1350-11df-a1f1-0026b9348838')",
+                            "questionOptions": {
+                                "concept": "a899a920-1350-11df-a1f1-0026b9348838",
+                                "rendering": "number",
+                                "min": "0",
+                                "max": "50"
+                            },
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F'"
+                            }
+                        },
+                        {
+                            "label": "Reproductive age status:",
+                            "id": "menStatus",
+                            "required": "true",
+                            "questionOptions": {
+                                "concept": "a8a185d2-1350-11df-a1f1-0026b9348838",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Menstruating",
+                                        "concept": "a8ad2b4e-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "Postmenopausal",
+                                        "concept": "5cc1c1a7-dfcc-47dc-ad73-c386c188fad8"
+                                    },
+                                    {
+                                        "label": "Amenorrhea",
+                                        "concept": "a8a18514-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F'"
+                            }
+                        },
+                        {
+                            "label": "LMP:",
+                            "id": "lmpDate1",
+                            "questionOptions": {
+                                "concept": "a89ff758-1350-11df-a1f1-0026b9348838",
+                                "rendering": "date"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "date"
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(pattype1) && pattype1 === '375e6d4a-ba94-41ac-8ac3-5a56015c4d92'",
+                                    "message": "Patient is antenatal. Please provide LMP."
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(menStatus) && menStatus === 'a8ad2b4e-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Patient is menstruating. Please provide LMP."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": " sex !== 'F' || menStatus !== 'a8ad2b4e-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "Is the patient pregnant?",
+                            "id": "pregnant",
+                            "questionOptions": {
+                                "concept": "6b4f1d00-0a27-41dd-a299-fb7dc730819c",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && moment(encDate).diff(moment(lmpDate1), 'days') >= 35",
+                                    "message": "Last LMP is greater than 35 days. Please indicate patient's pregnancy status."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F' || menStatus === '5cc1c1a7-dfcc-47dc-ad73-c386c188fad8' || visitTypeUuid === 'b1a978ca-9315-4ba2-ac2b-84efb9a68c5c'"
+                            }
+                        },
+                        {
+                            "label": "EDD:",
+                            "id": "delDate",
+                            "required": "true",
+                            "questionOptions": {
+                                "concept": "a8aaddbc-1350-11df-a1f1-0026b9348838",
+                                "rendering": "date",
+                                "calculate": {
+                                    "calculateExpression": "moment(lmpDate1).isValid() ? moment(lmpDate1).add(280, 'days').toDate():''"
+                                }
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "(new moment(lmpDate1)).isAfter((new moment(myValue)), 'day') || (new moment(lmpDate1)).isSame((new moment(myValue)), 'day')",
+                                    "message": "EDD should be greater than the encounter date."
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(pregnant) && pregnant === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Patient is pregnant. Please provide EDD."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "pregnant !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "Reason patient not pregnant?",
+                            "id": "reasonNotPreg",
+                            "questionOptions": {
+                                "concept": "f701166d-9820-420d-b0bc-c98ad4747dec",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "5bafcbc0-e499-4741-85e3-52e93f68f08c",
+                                        "label": "Pregnancy not suspected"
+                                    },
+                                    {
+                                        "concept": "6cb93e09-cd9a-4333-994a-9cd65dfa8c12",
+                                        "label": "Pregnancy test is negative"
+                                    },
+                                    {
+                                        "concept": "c662737e-d529-4b49-9ad3-2d72eeb56b45",
+                                        "label": "Using hormonal contraceptive"
+                                    },
+                                    {
+                                        "concept": "3bca6c9c-333c-433e-ac07-7e44e0501b49",
+                                        "label": "postpartum < 6 weeks"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(pregnant) && pregnant === 'a899b42e-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Patient is not pregnant. Please provide reasons."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "pregnant !== 'a899b42e-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "Actual date of delivery:",
+                            "id": "actualDelDate",
+                            "questionOptions": {
+                                "concept": "a8aae050-1350-11df-a1f1-0026b9348838",
+                                "rendering": "date"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "!arrayContains (['0b1b6194-d2d5-4e4b-9f7c-c3b778ccc354','53954785-4d53-4012-8f30-1c37fa870906','0d4512f1-47b5-44e6-8035-feec9be25b4b','161f3383-65d8-4c19-9554-52ee5c3d43ff'],visitTypeUuid )"
+                            }
+                        },
+                        {
+                            "label": "Gestation in weeks:",
+                            "id": "gestationWeeks",
+                            "questionOptions": {
+                                "concept": "0670d3d9-950c-4836-b147-0dc8e6b013aa",
+                                "rendering": "number"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "pregnant !== 'a899b35c-1350-11df-a1f1-0026b9348838' || !arrayContains(['02e3ce61-fa24-445e-a1f0-6e3299142966','53b856ad-21ef-4745-9acd-81aca01bba31','55c74fa8-c810-4b37-a918-14a851bba6f3','44032888-08e1-4900-b9dd-7d236d79276c'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Pregnancy outcome:",
+                            "id": "pregOutcome",
+                            "questionOptions": {
+                                "concept": "a8aff7e8-1350-11df-a1f1-0026b9348838",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "a890a1b8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Abortion/Miscarriage/Terminated"
+                                    },
+                                    {
+                                        "concept": "e8074110-b989-45e3-b89c-d6092d1a2fd7",
+                                        "label": "Live birth (Preterm)"
+                                    },
+                                    {
+                                        "concept": "bdde6796-fc68-4a84-b569-56cbeb7e5101",
+                                        "label": "Live birth (Term)"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "!arrayContains (['0b1b6194-d2d5-4e4b-9f7c-c3b778ccc354','53954785-4d53-4012-8f30-1c37fa870906','0d4512f1-47b5-44e6-8035-feec9be25b4b','161f3383-65d8-4c19-9554-52ee5c3d43ff'],visitTypeUuid)"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Family Planning Profile",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Is the client using condoms?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a8a00090-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a8a00090-1350-11df-a1f1-0026b9348838')",
+                            "id": "condomUse",
+                            "questionOptions": {
+                                "concept": "a8a00090-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "arrayContains(['02e3ce61-fa24-445e-a1f0-6e3299142966','53b856ad-21ef-4745-9acd-81aca01bba31','55c74fa8-c810-4b37-a918-14a851bba6f3','44032888-08e1-4900-b9dd-7d236d79276c'], visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "type": "obsGroup",
+                            "label": "Family planning, detailed",
+                            "questionOptions": {
+                                "concept": "767e8060-5272-4927-ab78-97534a4499ef",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Select modern contraception method:",
+                                    "required": "true",
+                                    "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('767e8060-5272-4927-ab78-97534a4499ef.a894b1cc-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('767e8060-5272-4927-ab78-97534a4499ef.a894b1cc-1350-11df-a1f1-0026b9348838')",
+                                    "id": "fpMethod",
+                                    "questionOptions": {
+                                        "concept": "a894b1cc-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                                "label": "None"
+                                            },
+                                            {
+                                                "concept": "a8a713f8-1350-11df-a1f1-0026b9348838",
+                                                "label": "Bilateral tubal ligation"
+                                            },
+                                            {
+                                                "concept": "a123d949-31f3-4abf-98e3-8504e17ebc00",
+                                                "label": "3-year implant"
+                                            },
+                                            {
+                                                "concept": "feb48308-a56f-4754-8e8f-8c1698e570cb",
+                                                "label": "5-year implant"
+                                            },
+                                            {
+                                                "concept": "f8c66a32-3660-4233-ae51-d3a4a1eac44e",
+                                                "label": "IUCD copper"
+                                            },
+                                            {
+                                                "concept": "236dba53-1062-46b4-8067-ec8711897dbf",
+                                                "label": "IUCD hormonal"
+                                            },
+                                            {
+                                                "concept": "a8988b44-1350-11df-a1f1-0026b9348838",
+                                                "label": "Injectables (Depo)"
+                                            },
+                                            {
+                                                "concept": "a8aff1b2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Combined hormone oral contraceptive pills"
+                                            },
+                                            {
+                                                "concept": "a8afeb54-1350-11df-a1f1-0026b9348838",
+                                                "label": "Projestin only pills"
+                                            },
+                                            {
+                                                "concept": "eaa5796d-0b1c-478b-8c9d-d23cf4c3bddc",
+                                                "label": "Vasectomy"
+                                            },
+                                            {
+                                                "concept": "4a740e33-fee5-4a2b-b679-1904722e3d9e",
+                                                "label": "Lactational amenohhrea method"
+                                            },
+                                            {
+                                                "concept": "a8a71588-1350-11df-a1f1-0026b9348838",
+                                                "label": "Diaphram/Cervical cap"
+                                            },
+                                            {
+                                                "concept": "b75702a6-908d-491b-9399-6495712c81cc",
+                                                "label": "Emergency contraceptive pills"
+                                            },
+                                            {
+                                                "concept": "a8aff284-1350-11df-a1f1-0026b9348838",
+                                                "label": "Periodic abstinence"
+                                            },
+                                            {
+                                                "concept": "856a7f0d-8359-4316-97c1-2d37813414f0",
+                                                "label": "Undecided"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "sex !== 'F' || menStatus === '5cc1c1a7-dfcc-47dc-ad73-c386c188fad8' || arrayContains(['02e3ce61-fa24-445e-a1f0-6e3299142966','53b856ad-21ef-4745-9acd-81aca01bba31','55c74fa8-c810-4b37-a918-14a851bba6f3','44032888-08e1-4900-b9dd-7d236d79276c'], visitTypeUuid)"
+                                    }
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Approximate start date (If FP is 3-year implant/5-year implant/Injectables/Vasectomy/IUCD Copper/IUCD Hormonal/Bilateral tubal ligation)",
+                                    "id": "appStartDate",
+                                    "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('767e8060-5272-4927-ab78-97534a4499ef.a89ae092-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('767e8060-5272-4927-ab78-97534a4499ef.a89ae092-1350-11df-a1f1-0026b9348838')",
+                                    "questionOptions": {
+                                        "concept": "a89ae092-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "date"
+                                    },
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "(new moment(encDate)).isBefore((new moment(myValue)), 'day') || (new moment(encDate)).isSame((new moment(myValue)), 'day')",
+                                            "message": "Start date should be before the encounter date."
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "isEmpty(myValue) && !(isEmpty(fpMethod) || !arrayContainsAny(fpMethod,['a123d949-31f3-4abf-98e3-8504e17ebc00','feb48308-a56f-4754-8e8f-8c1698e570cb','eaa5796d-0b1c-478b-8c9d-d23cf4c3bddc','a8988b44-1350-11df-a1f1-0026b9348838','a8a713f8-1350-11df-a1f1-0026b9348838','f8c66a32-3660-4233-ae51-d3a4a1eac44e','236dba53-1062-46b4-8067-ec8711897dbf']))",
+                                            "message": "Start date is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(fpMethod) || arrayContains(['a899e0ac-1350-11df-a1f1-0026b9348838','a897dbd6-1350-11df-a1f1-0026b9348838', '4a740e33-fee5-4a2b-b679-1904722e3d9e','a8a71588-1350-11df-a1f1-0026b9348838','b75702a6-908d-491b-9399-6495712c81cc','a8aff284-1350-11df-a1f1-0026b9348838','856a7f0d-8359-4316-97c1-2d37813414f0'],fpMethod) && visitTypeUuid !== 'b1a978ca-9315-4ba2-ac2b-84efb9a68c5c'"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Does the client wish to become pregnant in less than a year?",
+                            "id": "pregInaYear",
+                            "questionOptions": {
+                                "concept": "3ffd9c53-2638-4db2-8c2d-5f025c2a1bfb",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F'  || fpMethod !== 'a899e0ac-1350-11df-a1f1-0026b9348838'|| menStatus ==='5cc1c1a7-dfcc-47dc-ad73-c386c188fad8'"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Family Planning Plan",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Dispense condom today?",
+                            "id": "condomDispensed",
+                            "questionOptions": {
+                                "concept": "a8b034d8-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "arrayContains(['02e3ce61-fa24-445e-a1f0-6e3299142966','53b856ad-21ef-4745-9acd-81aca01bba31','55c74fa8-c810-4b37-a918-14a851bba6f3','44032888-08e1-4900-b9dd-7d236d79276c'], visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Continue modern contraception method?",
+                            "id": "contCurrentFP",
+                            "questionOptions": {
+                                "concept": "9bd08995-617e-407a-bf5d-79f29fbdb289",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(fpMethod) && isEmpty(myValue) && arrayContains(['a8a713f8-1350-11df-a1f1-0026b9348838', 'a123d949-31f3-4abf-98e3-8504e17ebc00', 'feb48308-a56f-4754-8e8f-8c1698e570cb', 'f8c66a32-3660-4233-ae51-d3a4a1eac44e', '236dba53-1062-46b4-8067-ec8711897dbf', 'a8988b44-1350-11df-a1f1-0026b9348838', 'a897dbd6-1350-11df-a1f1-0026b9348838', 'eaa5796d-0b1c-478b-8c9d-d23cf4c3bddc'], fpMethod)",
+                                    "message": "Based on modern contraception method selected, you must answer this question."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F' || menStatus === '5cc1c1a7-dfcc-47dc-ad73-c386c188fad8'|| fpMethod === 'a899e0ac-1350-11df-a1f1-0026b9348838' || arrayContains(['02e3ce61-fa24-445e-a1f0-6e3299142966','53b856ad-21ef-4745-9acd-81aca01bba31','44032888-08e1-4900-b9dd-7d236d79276c','55c74fa8-c810-4b37-a918-14a851bba6f3'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Does patient wish to start modern contraception method?",
+                            "id": "famPlanningPlan",
+                            "questionOptions": {
+                                "concept": "d1d7056f-42ed-4948-b04f-ef6146c789be",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(contCurrentFP) && contCurrentFP !== 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Patient does not wish to continue with modern contraception method. Please indicate if they wish to start."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "isEmpty(contCurrentFP) && fpMethod !== 'a899e0ac-1350-11df-a1f1-0026b9348838' || contCurrentFP === 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "Are you planning to concieve in the next 3 months?",
+                            "id": "pregInaYear",
+                            "questionOptions": {
+                                "concept": "ae026f08-86d4-4f63-aa71-9ac5d2f964f3",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(famPlanningPlan) && famPlanningPlan !== 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Patient does not wish to start modern contraception method. Please indicate if they plan to conceive."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "famPlanningPlan !== 'a899b42e-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "Reason not on family planning",
+                            "id": "reasonNoFP",
+                            "questionOptions": {
+                                "concept": "88ad5975-4762-4108-a967-072f12f91b0b",
+                                "answers": [
+                                    {
+                                        "concept": "9c1066e2-74f6-47ec-8873-0507434c4d25",
+                                        "label": "Wants to get pregnant"
+                                    },
+                                    {
+                                        "concept": "2d6f977e-3b3f-4ea9-82ee-fde1fb4bdf56",
+                                        "label": "Not sexually active now/Infrequent sex"
+                                    },
+                                    {
+                                        "concept": "2ae62639-4703-41dc-be8e-afe50640238b",
+                                        "label": "Fear of side effects/health risks"
+                                    },
+                                    {
+                                        "concept": "81eeb6d6-627c-4c40-8dc2-bd8343b50f7a",
+                                        "label": "Opposition/rejection from the male partner/other relatives"
+                                    },
+                                    {
+                                        "concept": "3a60fe6f-a116-41ce-9daf-1340085bc02d",
+                                        "label": "Complications of previous method(s) used"
+                                    },
+                                    {
+                                        "concept": "a8a18514-1350-11df-a1f1-0026b9348838",
+                                        "label": "Postpartum amenorrhea"
+                                    },
+                                    {
+                                        "concept": "a8a18208-1350-11df-a1f1-0026b9348838",
+                                        "label": "Breasfeeding"
+                                    },
+                                    {
+                                        "concept": "accda087-1043-46cd-9b97-7d94364ac271",
+                                        "label": "Wants to wait untill the first baby is born"
+                                    },
+                                    {
+                                        "concept": "fb82f3b4-bcec-4cd2-a0a4-545b02d28a4d",
+                                        "label": "Wants to wait untill the desired number of children are born"
+                                    },
+                                    {
+                                        "concept": "84ff12bd-41b6-4ed0-9f82-6f421983f713",
+                                        "label": "Lack of knowledge"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(pregInaYear) && pregInaYear !== 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Please indicate reason not on family planning."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "pregInaYear !== 'a899b42e-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "Complications caused by family planning method used:",
+                            "id": "complication",
+                            "questionOptions": {
+                                "concept": "fd98547e-7db1-4ba7-9299-b51d2dc22f3f",
+                                "rendering": "textarea",
+                                "rows": 5
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "reasonNoFP !== '3a60fe6f-a116-41ce-9daf-1340085bc02d'"
+                            }
+                        },
+                        {
+                            "label": "If yes, modern contraception method chosen:",
+                            "id": "famPlanChosen",
+                            "questionOptions": {
+                                "concept": "2d55cabe-a778-40a3-9b85-613889037a11",
+                                "answers": [
+                                    {
+                                        "concept": "a8a713f8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Bilateral tubal ligation"
+                                    },
+                                    {
+                                        "concept": "a123d949-31f3-4abf-98e3-8504e17ebc00",
+                                        "label": "3-year implant"
+                                    },
+                                    {
+                                        "concept": "feb48308-a56f-4754-8e8f-8c1698e570cb",
+                                        "label": "5-year implant"
+                                    },
+                                    {
+                                        "concept": "f8c66a32-3660-4233-ae51-d3a4a1eac44e",
+                                        "label": "IUCD copper"
+                                    },
+                                    {
+                                        "concept": "236dba53-1062-46b4-8067-ec8711897dbf",
+                                        "label": "IUCD hormonal"
+                                    },
+                                    {
+                                        "concept": "a8988b44-1350-11df-a1f1-0026b9348838",
+                                        "label": "Injectables (Depo)"
+                                    },
+                                    {
+                                        "concept": "a8aff1b2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Combined hormone oral contraceptive pills"
+                                    },
+                                    {
+                                        "concept": "a8afeb54-1350-11df-a1f1-0026b9348838",
+                                        "label": "Projestin only pills"
+                                    },
+                                    {
+                                        "concept": "eaa5796d-0b1c-478b-8c9d-d23cf4c3bddc",
+                                        "label": "Vasectomy"
+                                    },
+                                    {
+                                        "concept": "4a740e33-fee5-4a2b-b679-1904722e3d9e",
+                                        "label": "Lactational amenohhrea method"
+                                    },
+                                    {
+                                        "concept": "a8a71588-1350-11df-a1f1-0026b9348838",
+                                        "label": "Diaphram/Cervical cap"
+                                    },
+                                    {
+                                        "concept": "b75702a6-908d-491b-9399-6495712c81cc",
+                                        "label": "Emergency contraceptive pills"
+                                    },
+                                    {
+                                        "concept": "a8aff284-1350-11df-a1f1-0026b9348838",
+                                        "label": "Periodic abstinence"
+                                    },
+                                    {
+                                        "concept": "856a7f0d-8359-4316-97c1-2d37813414f0",
+                                        "label": "Undecided"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(famPlanningPlan) && famPlanningPlan === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Patient wishes to start modern contraception method. Please choose method."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "famPlanningPlan!== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.5",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

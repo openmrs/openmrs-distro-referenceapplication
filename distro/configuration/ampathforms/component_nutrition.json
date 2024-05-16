@@ -1,0 +1,574 @@
+{
+    "name": "component_nutrition",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Nutrition",
+            "sections": [
+                {
+                    "label": "Nutrition Meals",
+                    "questions": [
+                        {
+                            "label": "How often do you miss meals for an entire day?",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a89ce388-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899d120-1350-11df-a1f1-0026b9348838",
+                                        "label": "Never"
+                                    },
+                                    {
+                                        "concept": "a899d7f6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Monthly"
+                                    },
+                                    {
+                                        "concept": "a899d8d2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Weekly"
+                                    },
+                                    {
+                                        "concept": "65831439-8ba0-4c64-ab62-1f7b7f548fb7",
+                                        "label": "Few times per week"
+                                    },
+                                    {
+                                        "concept": "a8a05dc4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Daily"
+                                    }
+                                ],
+                                "rendering": "select"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Nutrition Assessment and Diagnosis",
+                    "questions": [
+                        {
+                            "label": "Patient type:",
+                            "id": "patientType",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a89ff9a6-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "ab202fa8-ad2b-487d-83f8-991f8fa109a1",
+                                        "label": "New"
+                                    },
+                                    {
+                                        "concept": "a8a4812e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Return"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Patient category:",
+                            "id": "patientCat",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a89eea66-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89ee8ea-1350-11df-a1f1-0026b9348838",
+                                        "label": "Adult"
+                                    },
+                                    {
+                                        "concept": "a89d109c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Pregnant and postpatrum"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Patient has edema:",
+                            "id": "edema",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "8a0a32df-754e-41a0-b5ae-82f260e37ea1",
+                                "answers": [
+                                    {
+                                        "concept": "8b715fed-97f6-4e38-8f6a-c167a42f8923",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Nutrition status:",
+                            "id": "nutritionStatus",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "ac5f7974-3a71-4867-af59-0c30d68ce9d8",
+                                "answers": [
+                                    {
+                                        "concept": "a899e7b4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Normal"
+                                    },
+                                    {
+                                        "concept": "1505faef-c8aa-422c-b356-da065b88ec9c",
+                                        "label": "Overweight"
+                                    },
+                                    {
+                                        "concept": "2a60e784-1314-4454-91ba-7ea4cc2c3b15",
+                                        "label": "Obese"
+                                    },
+                                    {
+                                        "concept": "0306539c-f24f-49f5-b059-b646adbec47c",
+                                        "label": "Severe acute malnutrition"
+                                    },
+                                    {
+                                        "concept": "f0dd06d5-6174-447f-9a9c-f8635b4a6a6d",
+                                        "label": "Moderate  acute malnutrition"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "For SAM/MAM clients:",
+                            "id": "samMamclients",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "ac5f7974-3a71-4867-af59-0c30d68ce9d8",
+                                "answers": [
+                                    {
+                                        "concept": "ab202fa8-ad2b-487d-83f8-991f8fa109a1",
+                                        "label": "Initial visit"
+                                    },
+                                    {
+                                        "concept": "c7ff1c01-f9bf-4199-b46f-28f4c502802e",
+                                        "label": "Readmission"
+                                    },
+                                    {
+                                        "concept": "672fb9c6-e457-475b-aa92-b345cf2bf3f5",
+                                        "label": "Relapse"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Co-existing conditions:",
+                            "id": "coexistingConditions",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a899eb24-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899e7b4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Normal"
+                                    },
+                                    {
+                                        "concept": "(a8a8209a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Oral thrush"
+                                    },
+                                    {
+                                        "concept": "a890a96a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Tuberculosis"
+                                    },
+                                    {
+                                        "concept": "a8b00436-1350-11df-a1f1-0026b9348838",
+                                        "label": "Nausea and vomiting"
+                                    },
+                                    {
+                                        "concept": "a890861a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Diarrhea"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Anaemia severity:",
+                            "id": "anaemiaSeverity",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "c4d011c3-c7d3-4d76-afb9-138fd71acac3",
+                                "answers": [
+                                    {
+                                        "concept": "a89eff1a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Severe"
+                                    },
+                                    {
+                                        "concept": "(a89efdee-1350-11df-a1f1-0026b9348838",
+                                        "label": "Moderate"
+                                    },
+                                    {
+                                        "concept": "a89efccc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Mild"
+                                    },
+                                    {
+                                        "concept": "a899e7b4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Normal"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Metabolic disorders:",
+                            "id": "metabolicDisorders",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "2572925d-520c-4480-81dd-f268e8e94284",
+                                "answers": [
+                                    {
+                                        "concept": "a89cee50-1350-11df-a1f1-0026b9348838",
+                                        "label": "Lipodystrophy"
+                                    },
+                                    {
+                                        "concept": "(4b42e125-bfe0-45d2-9175-bf1c7b3e11b7",
+                                        "label": "Dyslipidemia"
+                                    },
+                                    {
+                                        "concept": "266957f4-ec02-4754-a2f6-15449f1ddb03",
+                                        "label": "Type II diabetes"
+                                    },
+                                    {
+                                        "concept": "2653b383-7587-493c-8dd5-df1bc49757b7",
+                                        "label": "Waist circumference male, less than 102cm"
+                                    },
+                                    {
+                                        "concept": "b7f65105-0621-4329-94db-d9e552cd6dd0",
+                                        "label": "Waist circumference male, greater than 102cm"
+                                    },
+                                    {
+                                        "concept": "f2eaaa11-ff2a-4b10-af1b-73bf80e606dc",
+                                        "label": "Waist circumference female, less than 88cm"
+                                    },
+                                    {
+                                        "concept": "5e2cf8f3-796f-4bae-9017-92d6b6c91384",
+                                        "label": "Waist circumference female, greater than 88cm"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    },
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Allergies and intolerance:",
+                            "id": "allergiesIntolerance",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "8084204a-ed5f-4e95-9e82-369c47ea08e5",
+                                "answers": [
+                                    {
+                                        "concept": "cb5007bc-2ca3-46d1-9bcd-1a2cdffc8f0d",
+                                        "label": "Food allergies"
+                                    },
+                                    {
+                                        "concept": "(a898d2f2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Food Intolerance"
+                                    },
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "CD4 Count:",
+                            "id": "cd4Count",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "0ed1d82c-6e5e-4a9a-bca7-ddccf59dc291",
+                                "answers": [
+                                    {
+                                        "concept": "fd5e4ebe-b3ae-48d9-93a8-556173bb5dd9",
+                                        "label": "CD4 count <350"
+                                    },
+                                    {
+                                        "concept": "(e868784e-682e-4c72-be0d-4f1aa489062f",
+                                        "label": "CD4 count >350 <500"
+                                    },
+                                    {
+                                        "concept": "b39f10e0-d5d0-49a1-992b-218364abd958",
+                                        "label": "CD4 >500"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Food secure:",
+                            "id": "foodSecure",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "025143d5-0784-4b5d-a763-704ee016ba43",
+                                "answers": [
+                                    {
+                                        "concept": "8b715fed-97f6-4e38-8f6a-c167a42f8923",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Nutrition Intervention",
+                    "questions": [
+                        {
+                            "label": "Maternal nutrition:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "1362a7cc-1d54-4881-9b33-cf622c07e698",
+                                "answers": [
+                                    {
+                                        "concept": "de932209-ed00-4191-855f-2d3ca4f819fb",
+                                        "label": "Antenatal"
+                                    },
+                                    {
+                                        "concept": "ab8f6fc4-7762-403e-8b2a-98cba34054d5",
+                                        "label": "Postnatal"
+                                    },
+                                    {
+                                        "concept": "a89ad3a4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Not applicable"
+                                    }
+                                ],
+                                "rendering": "select"
+                            }
+                        },
+                        {
+                            "label": "Critical nutrition practices:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "0bb1e169-03b8-4086-8b22-7c97fcc851b3",
+                                "answers": [
+                                    {
+                                        "concept": "2a166025-2ab3-4e05-b0c1-df147815b283",
+                                        "label": "Nutritrion status assesssment"
+                                    },
+                                    {
+                                        "concept": "a89cc934-1350-11df-a1f1-0026b9348838",
+                                        "label": "Dietary/Energy needs"
+                                    },
+                                    {
+                                        "concept": "5089194e-2c8a-4f28-baf6-72d10f0a98a5",
+                                        "label": "Sanitation"
+                                    },
+                                    {
+                                        "concept": "89fc91cc-0901-46c2-ab01-ab79496546a4",
+                                        "label": "Positive living behaviur"
+                                    },
+                                    {
+                                        "concept": "dc32d9b6-02d7-491c-90e1-d5ad598cadf4",
+                                        "label": "Safe drinking water"
+                                    },
+                                    {
+                                        "concept": "d7f24e71-36ce-4766-9348-239a7838ed52",
+                                        "label": "Exercise"
+                                    },
+                                    {
+                                        "concept": "a89adc46-1350-11df-a1f1-0026b9348838",
+                                        "label": "Prompt treatment"
+                                    }
+                                ],
+                                "rendering": "select"
+                            }
+                        },
+                        {
+                            "label": "Therapeutic foods:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "3854c254-89d8-46c9-b671-5226613223d4",
+                                "answers": [
+                                    {
+                                        "concept": "297391f9-a070-4268-9379-a4ca2f8c1721",
+                                        "label": "RUTF"
+                                    },
+                                    {
+                                        "concept": "6d58c121-6176-4107-b3ce-cdbff7361c24",
+                                        "label": "F75"
+                                    },
+                                    {
+                                        "concept": "e9b84640-615b-4f3d-bc4c-6603b69c52cc",
+                                        "label": "F100"
+                                    },
+                                    {
+                                        "concept": "259f2cff-6c9e-4082-b9b3-cd2c1953f3a3",
+                                        "label": "Pre-term fomrulae"
+                                    },
+                                    {
+                                        "concept": "a8a70156-1350-11df-a1f1-0026b93488384",
+                                        "label": "Infant formulae"
+                                    },
+                                    {
+                                        "concept": "f342fab8-23d9-4fb7-8187-a67449cd4813",
+                                        "label": "Resomal"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "select"
+                            }
+                        },
+                        {
+                            "label": "Supplemental foods:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "47c21d71-1ba8-4d50-8898-fc31c4b162a4",
+                                "answers": [
+                                    {
+                                        "concept": "297391f9-a070-4268-9379-a4ca2f8c1721",
+                                        "label": "RUTF"
+                                    },
+                                    {
+                                        "concept": "6d58c121-6176-4107-b3ce-cdbff7361c24",
+                                        "label": "F75"
+                                    },
+                                    {
+                                        "concept": "092412d7-15f7-4f0a-b52f-e16e391f8ba2",
+                                        "label": "Fortified blended flours"
+                                    },
+                                    {
+                                        "concept": "96f88d61-0a7c-4026-8720-fee91b1b4f35",
+                                        "label": "Corn soy blend"
+                                    },
+                                    {
+                                        "concept": "a4cf50d6-4947-486e-9c0e-870dd12e1b5a",
+                                        "label": "Liquid nutrition supplements"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "select"
+                            }
+                        },
+                        {
+                            "label": "Micronutrients",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "54f50b94-6cbe-45df-b9cb-b529eaf1f1b1",
+                                "answers": [
+                                    {
+                                        "concept": "a8f53762-bc6f-4385-bbc8-41aba4294b2d",
+                                        "label": "Vitamin A"
+                                    },
+                                    {
+                                        "concept": "a897cfd8-1350-11df-a1f1-0026b9348838",
+                                        "label": "B6"
+                                    },
+                                    {
+                                        "concept": "a8939418-1350-11df-a1f1-0026b9348838",
+                                        "label": "Folic"
+                                    },
+                                    {
+                                        "concept": "a89541d2-1350-11df-a1f1-0026b93488380",
+                                        "label": "Multi-vitamins"
+                                    },
+                                    {
+                                        "concept": "a8a48ef8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Iron"
+                                    },
+                                    {
+                                        "concept": "c36c2ec2-3f71-40ea-b568-7b19dc9dde1e",
+                                        "label": "Iron folate"
+                                    },
+                                    {
+                                        "concept": "abd5fbcd-2dd2-41d4-92b1-266ec1a1869d",
+                                        "label": "Zinc"
+                                    },
+                                    {
+                                        "concept": "062c84df-f131-40f7-87da-0e8f8fcc7900",
+                                        "label": "Multiple micronutrients"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "select"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Nutrition Outcome",
+                    "questions": [
+                        {
+                            "label": "Refer to patient card status of continuing SAM/MAM clients:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "f3a13593-416b-405f-89e0-9152bd7cce95",
+                                "answers": [
+                                    {
+                                        "concept": "a8a8ea5c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Gaining weight"
+                                    },
+                                    {
+                                        "concept": "a89807f0-1350-11df-a1f1-0026b9348838",
+                                        "label": "loosing weight"
+                                    },
+                                    {
+                                        "concept": "5c76568b-e999-4663-8668-e1b4f7996e0d",
+                                        "label": "Static weight"
+                                    },
+                                    {
+                                        "concept": "a8afe014-1350-11df-a1f1-0026b9348838",
+                                        "label": "Cured"
+                                    },
+                                    {
+                                        "concept": "48155468-0e21-401a-87f5-d037ae0e8db0",
+                                        "label": "Discharged"
+                                    },
+                                    {
+                                        "concept": "a8a08ff6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Refused nutrition support"
+                                    }
+                                ],
+                                "rendering": "select"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "0.01",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

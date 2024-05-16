@@ -1,0 +1,141 @@
+{
+    "name": "component_hpi",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "History presenting illness",
+            "sections": [
+                {
+                    "label": "Current Complaints",
+                    "questions": [
+                        {
+                            "label": "Please tick current complaints:",
+                            "questionOptions": {
+                                "concept": "a8a6ddb6-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a8ad270c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Diarrhea"
+                                    },
+                                    {
+                                        "concept": "a8a0c1b0-1350-11df-a1f1-0026b9348838",
+                                        "label": "Sore throat"
+                                    },
+                                    {
+                                        "concept": "a8a0bf58-1350-11df-a1f1-0026b9348838",
+                                        "label": "Abdominal pain"
+                                    },
+                                    {
+                                        "concept": "a8a0c084-1350-11df-a1f1-0026b9348838",
+                                        "label": "Difficulty in breathing"
+                                    },
+                                    {
+                                        "concept": "a8ad1190-1350-11df-a1f1-0026b9348838",
+                                        "label": "Cough"
+                                    },
+                                    {
+                                        "concept": "245edfef-d05b-48c1-9a72-e4de5d586a33",
+                                        "label": "Sores"
+                                    },
+                                    {
+                                        "concept": "a8a0c408-1350-11df-a1f1-0026b9348838",
+                                        "label": "Fever"
+                                    },
+                                    {
+                                        "concept": "a8a0c2dc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Skin rash"
+                                    },
+                                    {
+                                        "concept": "a8ad2478-1350-11df-a1f1-0026b9348838",
+                                        "label": "Vomiting"
+                                    },
+                                    {
+                                        "concept": "a8a0c534-1350-11df-a1f1-0026b9348838",
+                                        "label": "Ear discharge"
+                                    },
+                                    {
+                                        "concept": "a8a0c656-1350-11df-a1f1-0026b9348838",
+                                        "label": "Swelling"
+                                    },
+                                    {
+                                        "concept": "a8a0c9da-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Chief Complaints",
+                    "questions": [
+                        {
+                            "label": "Chief complaints:",
+                            "questionOptions": {
+                                "concept": "bfc7e39f-d87a-4a33-86ab-090bebd93888",
+                                "answers": [
+                                    {
+                                        "concept": "a8a4cb8e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Feeling well(Asymptomatic)"
+                                    },
+                                    {
+                                        "concept": "a899b5e6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Having symptoms"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Hepatitis B infected:",
+                            "id": "hep_infec",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a89c4bee-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a89c4bee-1350-11df-a1f1-0026b9348838')",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a89c4bee-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "History Presenting Illness, Notes",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "History of presenting illness:",
+                            "type": "obs",
+                            "id": "hpiText",
+                            "questionOptions": {
+                                "concept": "a89ffbf4-1350-11df-a1f1-0026b9348838",
+                                "rendering": "textarea",
+                                "rows": 7
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "0.01",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

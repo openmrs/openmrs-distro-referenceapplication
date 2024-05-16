@@ -1,0 +1,184 @@
+{
+    "name": "component_immunization-v1.0",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Immunization",
+            "sections": [
+                {
+                    "label": "Immunization History",
+                    "questions": [
+                        {
+                            "label": "Immunization history",
+                            "type": "obsGroup",
+                            "questionOptions": {
+                                "concept": "a89c9658-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": " Immunization series not yet completed:",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "concept": "a89c2a24-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a89840bc-1350-11df-a1f1-0026b9348838",
+                                                "label": "BCG"
+                                            },
+                                            {
+                                                "concept": "a897de60-1350-11df-a1f1-0026b9348838",
+                                                "label": "Polio"
+                                            },
+                                            {
+                                                "concept": "96ecae74-0704-475e-ade3-17cd6b080926",
+                                                "label": "Penta"
+                                            },
+                                            {
+                                                "concept": "f60456b4-2797-4f98-8fb5-41830f205427",
+                                                "label": "PCV"
+                                            },
+                                            {
+                                                "concept": "22b92c90-026c-469c-9e63-786ecc1cd2fc",
+                                                "label": "Rotavirus"
+                                            },
+                                            {
+                                                "concept": "a8909844-1350-11df-a1f1-0026b9348838",
+                                                "label": "Measles"
+                                            },
+                                            {
+                                                "concept": "a8a48430-1350-11df-a1f1-0026b9348838",
+                                                "label": "Vitamin A"
+                                            }
+                                        ],
+                                        "rendering": "multiCheckbox"
+                                    },
+                                    "validators": []
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Immunization history confirmed from card:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "507d7df8-2da6-4ace-93b8-4271620f27c5",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ]
+                            },
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Immunization Plan",
+                    "questions": [
+                        {
+                            "label": "Immunization ordered, detailed",
+                            "type": "obsGroup",
+                            "questionOptions": {
+                                "concept": "a8a08588-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": " Immunization orders:",
+                                    "type": "obs",
+                                    "id": "immOrd",
+                                    "questionOptions": {
+                                        "concept": "a898d0a4-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                                "label": "None"
+                                            },
+                                            {
+                                                "concept": "a89840bc-1350-11df-a1f1-0026b9348838",
+                                                "label": "BCG"
+                                            },
+                                            {
+                                                "concept": "a897de60-1350-11df-a1f1-0026b9348838",
+                                                "label": "Polio"
+                                            },
+                                            {
+                                                "concept": "96ecae74-0704-475e-ade3-17cd6b080926",
+                                                "label": "Penta"
+                                            },
+                                            {
+                                                "concept": "f60456b4-2797-4f98-8fb5-41830f205427",
+                                                "label": "PCV"
+                                            },
+                                            {
+                                                "concept": "22b92c90-026c-469c-9e63-786ecc1cd2fc",
+                                                "label": "Rotavirus"
+                                            },
+                                            {
+                                                "concept": "a8909844-1350-11df-a1f1-0026b9348838",
+                                                "label": "Measles"
+                                            },
+                                            {
+                                                "concept": "a8a48430-1350-11df-a1f1-0026b9348838",
+                                                "label": "Vitamin A"
+                                            },
+                                            {
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Other"
+                                            },
+                                            {
+                                                "concept": "a89c1ef8-1350-11df-a1f1-0026b9348838",
+                                                "label": "Completed"
+                                            }
+                                        ],
+                                        "rendering": "multiCheckbox"
+                                    },
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Adult Vaccination",
+                    "questions": [
+                        {
+                            "label": "Immunization history:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "rendering": "multiCheckbox",
+                                "concept": "b29b512f-cd46-41ee-a568-bdaafa0bb874",
+                                "answers": [
+                                    {
+                                        "concept": "a897dd84-1350-11df-a1f1-0026b9348838",
+                                        "label": "Hepatitis B"
+                                    },
+                                    {
+                                        "concept": "a8a70746-1350-11df-a1f1-0026b9348838",
+                                        "label": "Flu"
+                                    },
+                                    {
+                                        "concept": "a890a654-1350-11df-a1f1-0026b9348838",
+                                        "label": "Tetanus booster"
+                                    }
+                                ]
+                            },
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.0",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

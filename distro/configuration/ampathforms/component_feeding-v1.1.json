@@ -1,0 +1,503 @@
+{
+    "name": "component_feeding-v1.1",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Feeding",
+            "sections": [
+                {
+                    "label": "Feeding History",
+                    "questions": [
+                        {
+                            "label": "Current feeding method:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "rendering": "multiCheckbox",
+                                "concept": "a89abee6-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89cca10-1350-11df-a1f1-0026b9348838",
+                                        "label": "Breastfeeding"
+                                    },
+                                    {
+                                        "concept": "a8a70156-1350-11df-a1f1-0026b9348838",
+                                        "label": "Formula"
+                                    },
+                                    {
+                                        "concept": "a89ccba0-1350-11df-a1f1-0026b9348838",
+                                        "label": "Water"
+                                    },
+                                    {
+                                        "concept": "a89cce98-1350-11df-a1f1-0026b9348838",
+                                        "label": "Solid foods"
+                                    },
+                                    {
+                                        "concept": "a898bf56-1350-11df-a1f1-0026b9348838",
+                                        "label": "Cow/Animal Milk"
+                                    },
+                                    {
+                                        "concept": "a89ad1ec-1350-11df-a1f1-0026b9348838",
+                                        "label": "Expressed breast milk"
+                                    },
+                                    {
+                                        "concept": "a89ccad8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other liquids"
+                                    },
+                                    {
+                                        "concept": "a89abfc2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Completely weaned"
+                                    },
+                                    {
+                                        "concept": "a89cc934-1350-11df-a1f1-0026b9348838",
+                                        "label": "On family diet"
+                                    }
+                                ]
+                            },
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "If breastfeeding, mother on ARVS:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a8a0baa8-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    },
+                                    {
+                                        "concept": "a899b50a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Unknown"
+                                    }
+                                ]
+                            },
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Feeding Plan",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Feeding Plan",
+                            "questionOptions": {
+                                "concept": "a8a07d4a-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Feeding plan:",
+                                    "questionOptions": {
+                                        "concept": "a898d16c-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a89cca10-1350-11df-a1f1-0026b9348838",
+                                                "label": "Breastfeeding"
+                                            },
+                                            {
+                                                "concept": "a8a70156-1350-11df-a1f1-0026b9348838",
+                                                "label": "Formula"
+                                            },
+                                            {
+                                                "concept": "a89ccba0-1350-11df-a1f1-0026b9348838",
+                                                "label": "Water"
+                                            },
+                                            {
+                                                "concept": "a89cce98-1350-11df-a1f1-0026b9348838",
+                                                "label": "Solid foods"
+                                            },
+                                            {
+                                                "concept": "a898bf56-1350-11df-a1f1-0026b9348838",
+                                                "label": "Cow/Animal Milk"
+                                            },
+                                            {
+                                                "concept": "a89ad1ec-1350-11df-a1f1-0026b9348838",
+                                                "label": "Expressed breast milk"
+                                            },
+                                            {
+                                                "concept": "a89ccad8-1350-11df-a1f1-0026b9348838",
+                                                "label": "Other liquids"
+                                            },
+                                            {
+                                                "concept": "a89abfc2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Completely weaned"
+                                            },
+                                            {
+                                                "concept": "a89cc934-1350-11df-a1f1-0026b9348838",
+                                                "label": "On family diet"
+                                            }
+                                        ],
+                                        "rendering": "multiCheckbox"
+                                    },
+                                    "type": "obs"
+                                },
+                                {
+                                    "label": "Feeding plan: Other (specify):",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "text"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "obsGroup",
+                            "label": "If this is a change, reason ",
+                            "questionOptions": {
+                                "rendering": "group",
+                                "concept": "a8a08646-1350-11df-a1f1-0026b9348838"
+                            },
+                            "questions": [
+                                {
+                                    "label": "If this is a change, reason: ",
+                                    "id": "changereason",
+                                    "questionOptions": {
+                                        "concept": "a898d234-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a898d478-1350-11df-a1f1-0026b9348838",
+                                                "label": "Age"
+                                            },
+                                            {
+                                                "concept": "a898d3ba-1350-11df-a1f1-0026b9348838",
+                                                "label": "Affordability"
+                                            },
+                                            {
+                                                "concept": "a898d2f2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Reaction"
+                                            },
+                                            {
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Other"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                                    }
+                                },
+                                {
+                                    "label": "Change reason: Other (specify):",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "text"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Feeding History (< 2 years)",
+                    "questions": [
+                        {
+                            "label": "What did the child feed on in the last 24 hours?",
+                            "questionOptions": {
+                                "concept": "a8a36212-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89cca10-1350-11df-a1f1-0026b9348838",
+                                        "label": "Breastfed"
+                                    },
+                                    {
+                                        "concept": "a8a70156-1350-11df-a1f1-0026b9348838",
+                                        "label": "Formula"
+                                    },
+                                    {
+                                        "concept": "a89ccba0-1350-11df-a1f1-0026b9348838",
+                                        "label": "Water"
+                                    },
+                                    {
+                                        "concept": "a89cce98-1350-11df-a1f1-0026b9348838",
+                                        "label": "Solid foods"
+                                    },
+                                    {
+                                        "concept": "a898bf56-1350-11df-a1f1-0026b9348838",
+                                        "label": "Cow/Animal Milk"
+                                    },
+                                    {
+                                        "concept": "a89ad1ec-1350-11df-a1f1-0026b9348838",
+                                        "label": "Expressed breast milk"
+                                    },
+                                    {
+                                        "concept": "a89ccad8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other liquids"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "Mother counseled on feeding techniques, problems and solutions?",
+                            "questionOptions": {
+                                "concept": "a8a36bfe-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "Has the child ever breastfed in the past?",
+                            "id": "pastBreastfed",
+                            "questionOptions": {
+                                "concept": "a8ae93ee-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "If child has breastfed in the past, how long?",
+                            "questionOptions": {
+                                "concept": "a89ff690-1350-11df-a1f1-0026b9348838",
+                                "answers": [],
+                                "rendering": "text"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "pastBreastfed !== 'a899b35c-1350-11df-a1f1-0026b9348838' && visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "Mother's feeding choices for the infant?",
+                            "id": "feedingChoice",
+                            "questionOptions": {
+                                "concept": "a8a362d0-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89cca10-1350-11df-a1f1-0026b9348838",
+                                        "label": "Breastfed"
+                                    },
+                                    {
+                                        "concept": "a8a70156-1350-11df-a1f1-0026b9348838",
+                                        "label": "Formula"
+                                    },
+                                    {
+                                        "concept": "a89ccba0-1350-11df-a1f1-0026b9348838",
+                                        "label": "Water"
+                                    },
+                                    {
+                                        "concept": "a89cce98-1350-11df-a1f1-0026b9348838",
+                                        "label": "Solid foods"
+                                    },
+                                    {
+                                        "concept": "a898bf56-1350-11df-a1f1-0026b9348838",
+                                        "label": "Cow/Animal Milk"
+                                    },
+                                    {
+                                        "concept": "a89ad1ec-1350-11df-a1f1-0026b9348838",
+                                        "label": "Expressed breast milk"
+                                    },
+                                    {
+                                        "concept": "a89ccad8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other liquids"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "If using formula, has mother/caretaker, been counseled on IYCF/milk Preparation?",
+                            "questionOptions": {
+                                "concept": "a8aad38a-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "isEmpty(feedingChoice) || !arrayContains(feedingChoice, 'a8a70156-1350-11df-a1f1-0026b9348838') && visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "If using formula, does the mother/caregiver feel competent in preparing it?",
+                            "questionOptions": {
+                                "concept": "a8a36b36-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "isEmpty(feedingChoice) || !arrayContains(feedingChoice, 'a8a70156-1350-11df-a1f1-0026b9348838') && visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "Has child been completely weaned?",
+                            "id": "weanedCompletely",
+                            "questionOptions": {
+                                "concept": "07357151-493a-4ed2-9ed2-871eba988779",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "If yes, age at complete weaning?",
+                            "questionOptions": {
+                                "concept": "cfefbdb4-3083-4d31-90a2-d0043e384e1e",
+                                "answers": [],
+                                "rendering": "number"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "weanedCompletely !== 'a899b35c-1350-11df-a1f1-0026b9348838' && visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Breastfeeding",
+                    "questions": [
+                        {
+                            "label": "Mother breastfeeding?",
+                            "id": "breFeeding",
+                            "questionOptions": {
+                                "concept": "a8a18208-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "visitTypeUuid !== 'edb7c6aa-fc69-4470-936d-3d484d3708aa'"
+                            }
+                        },
+                        {
+                            "label": "Child breastfeeding?",
+                            "required": "true",
+                            "id": "childBreFeeding",
+                            "questionOptions": {
+                                "concept": "a8aafc70-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": " !arrayContainsAny(['0b1b6194-d2d5-4e4b-9f7c-c3b778ccc354','53954785-4d53-4012-8f30-1c37fa870906','0d4512f1-47b5-44e6-8035-feec9be25b4b','161f3383-65d8-4c19-9554-52ee5c3d43ff'], visitTypeUuid)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.1",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

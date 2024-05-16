@@ -1,0 +1,1133 @@
+{
+    "name": "component_substance-use",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Substance use",
+            "sections": [
+                {
+                    "label": "Substance use",
+                    "questions": [
+                        {
+                            "label": "Do you smoke cigarrates?",
+                            "id": "cigconsumption",
+                            "questionOptions": {
+                                "concept": "a8a188e8-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    },
+                                    {
+                                        "concept": "a89ec3f6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Stopped"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Do you sometimes drink alcohol?",
+                            "id": "alcconsuption",
+                            "questionOptions": {
+                                "concept": "a89ec7ac-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "How often did you take a drink containing alcohol in the last one year?",
+                            "id": "alcconslastyear",
+                            "questionOptions": {
+                                "concept": "a8a77d02-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899d120-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    },
+                                    {
+                                        "concept": "a899d1f2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Monthly or less"
+                                    },
+                                    {
+                                        "concept": "a899d2ce-1350-11df-a1f1-0026b9348838",
+                                        "label": "2 to 4 times a month"
+                                    },
+                                    {
+                                        "concept": "a899d3aa-1350-11df-a1f1-0026b9348838",
+                                        "label": "2 to 3 times a week"
+                                    },
+                                    {
+                                        "concept": "a899d486-1350-11df-a1f1-0026b9348838",
+                                        "label": "4 to 5 times a week"
+                                    },
+                                    {
+                                        "concept": "a899d562-1350-11df-a1f1-0026b9348838",
+                                        "label": "6 or more times a week"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "How many drinks containing alcohol did you have on a typical day when you were drinking in the past year?",
+                            "id": "alcnumlastyear",
+                            "questionOptions": {
+                                "concept": "a8a77dde-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899da8a-1350-11df-a1f1-0026b9348838",
+                                        "label": "0 drinks"
+                                    },
+                                    {
+                                        "concept": "a899db5c-1350-11df-a1f1-0026b9348838",
+                                        "label": "1 to 2 drinks"
+                                    },
+                                    {
+                                        "concept": "a899dc38-1350-11df-a1f1-0026b9348838",
+                                        "label": "3 to 4 drinks"
+                                    },
+                                    {
+                                        "concept": "a899dd14-1350-11df-a1f1-0026b9348838",
+                                        "label": "5 to 6 drinks"
+                                    },
+                                    {
+                                        "concept": "a899ddf0-1350-11df-a1f1-0026b9348838",
+                                        "label": "7 to 9 drinks"
+                                    },
+                                    {
+                                        "concept": "a899decc-1350-11df-a1f1-0026b9348838",
+                                        "label": "10 or more drinks"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "How often did you have six or more drinks on one occasion in the past year?",
+                            "id": "alcconfrequency",
+                            "questionOptions": {
+                                "concept": "a8a77eba-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899d120-1350-11df-a1f1-0026b9348838",
+                                        "label": "Never"
+                                    },
+                                    {
+                                        "concept": "a899d71a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Less than monthly"
+                                    },
+                                    {
+                                        "concept": "a899d7f6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Monthly"
+                                    },
+                                    {
+                                        "concept": "a899d8d2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Weekly"
+                                    },
+                                    {
+                                        "concept": "a899d9ae-1350-11df-a1f1-0026b9348838",
+                                        "label": "Daily or almost daily"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Tobacco Use History",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Tobacco use history",
+                            "questionOptions": {
+                                "concept": "a8b01c78-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Ever used tobacco:",
+                                    "questionOptions": {
+                                        "concept": "2bb6fa33-c812-4d7a-95d6-e6bb874f2929",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Age:",
+                                    "questionOptions": {
+                                        "concept": "7f81f508-2fbe-4226-90db-82ebe46a7fc7",
+                                        "rendering": "number"
+                                    }
+                                },
+                                {
+                                    "label": "Family/parent use:",
+                                    "questionOptions": {
+                                        "concept": "d5cedce2-15c9-492d-864f-e546e9cc1482",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "In the past 6 months:",
+                                    "questionOptions": {
+                                        "concept": "ae6ba1ef-4997-48a5-9f94-9b6c7dfdda3e",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Currently-past month:",
+                                    "questionOptions": {
+                                        "concept": "adda3281-1f64-44d1-8c5c-618942c48534",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Alcohol Use History",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Alcohol use history",
+                            "questionOptions": {
+                                "concept": "a8b01f20-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Ever used alcohol:",
+                                    "questionOptions": {
+                                        "concept": "2bb6fa33-c812-4d7a-95d6-e6bb874f2929",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Age:",
+                                    "questionOptions": {
+                                        "concept": "7f81f508-2fbe-4226-90db-82ebe46a7fc7",
+                                        "rendering": "number"
+                                    }
+                                },
+                                {
+                                    "label": "Family/parent use:",
+                                    "questionOptions": {
+                                        "concept": "d5cedce2-15c9-492d-864f-e546e9cc1482",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "In the past 6 months:",
+                                    "questionOptions": {
+                                        "concept": "ae6ba1ef-4997-48a5-9f94-9b6c7dfdda3e",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Currently-past month:",
+                                    "questionOptions": {
+                                        "concept": "adda3281-1f64-44d1-8c5c-618942c48534",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Petrol Use History",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Petrol use history",
+                            "questionOptions": {
+                                "concept": "e5d05fac-b704-41a1-a399-0b829b53e4ea",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Ever used petrol/glue:",
+                                    "questionOptions": {
+                                        "concept": "2bb6fa33-c812-4d7a-95d6-e6bb874f2929",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Age:",
+                                    "questionOptions": {
+                                        "concept": "7f81f508-2fbe-4226-90db-82ebe46a7fc7",
+                                        "rendering": "number"
+                                    }
+                                },
+                                {
+                                    "label": "Family/parent use:",
+                                    "questionOptions": {
+                                        "concept": "d5cedce2-15c9-492d-864f-e546e9cc1482",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "In the past 6 months:",
+                                    "questionOptions": {
+                                        "concept": "ae6ba1ef-4997-48a5-9f94-9b6c7dfdda3e",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Currently-past month:",
+                                    "questionOptions": {
+                                        "concept": "adda3281-1f64-44d1-8c5c-618942c48534",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Marijuana Use History",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Marijuana use history",
+                            "questionOptions": {
+                                "concept": "a8b01d9a-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Ever used marijuana:",
+                                    "questionOptions": {
+                                        "concept": "2bb6fa33-c812-4d7a-95d6-e6bb874f2929",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Age:",
+                                    "questionOptions": {
+                                        "concept": "7f81f508-2fbe-4226-90db-82ebe46a7fc7",
+                                        "rendering": "number"
+                                    }
+                                },
+                                {
+                                    "label": "Family/parent use:",
+                                    "questionOptions": {
+                                        "concept": "d5cedce2-15c9-492d-864f-e546e9cc1482",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "In the past 6 months:",
+                                    "questionOptions": {
+                                        "concept": "ae6ba1ef-4997-48a5-9f94-9b6c7dfdda3e",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Currently-past month:",
+                                    "questionOptions": {
+                                        "concept": "adda3281-1f64-44d1-8c5c-618942c48534",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "cocaine Use History",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "cocaine use history",
+                            "questionOptions": {
+                                "concept": "9f7b4063-f103-4a7f-a3c9-aedcbe35f1d1",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Ever used cocaine:",
+                                    "questionOptions": {
+                                        "concept": "2bb6fa33-c812-4d7a-95d6-e6bb874f2929",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Age:",
+                                    "questionOptions": {
+                                        "concept": "7f81f508-2fbe-4226-90db-82ebe46a7fc7",
+                                        "rendering": "number"
+                                    }
+                                },
+                                {
+                                    "label": "Family/parent use:",
+                                    "questionOptions": {
+                                        "concept": "d5cedce2-15c9-492d-864f-e546e9cc1482",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "In the past 6 months:",
+                                    "questionOptions": {
+                                        "concept": "ae6ba1ef-4997-48a5-9f94-9b6c7dfdda3e",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Currently-past month:",
+                                    "questionOptions": {
+                                        "concept": "adda3281-1f64-44d1-8c5c-618942c48534",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Heroin Use History",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Heroin use history",
+                            "questionOptions": {
+                                "concept": "019a7dc0-153d-4008-a7dd-100ee43ff836",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Ever used heroin:",
+                                    "questionOptions": {
+                                        "concept": "2bb6fa33-c812-4d7a-95d6-e6bb874f2929",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Age:",
+                                    "questionOptions": {
+                                        "concept": "7f81f508-2fbe-4226-90db-82ebe46a7fc7",
+                                        "rendering": "number"
+                                    }
+                                },
+                                {
+                                    "label": "Family/parent use:",
+                                    "questionOptions": {
+                                        "concept": "d5cedce2-15c9-492d-864f-e546e9cc1482",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "In the past 6 months:",
+                                    "questionOptions": {
+                                        "concept": "ae6ba1ef-4997-48a5-9f94-9b6c7dfdda3e",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Currently-past month:",
+                                    "questionOptions": {
+                                        "concept": "adda3281-1f64-44d1-8c5c-618942c48534",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Other Inhalants",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Other Inhalants",
+                            "questionOptions": {
+                                "concept": "a8b01e62-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Ever used any other inhalant:",
+                                    "questionOptions": {
+                                        "concept": "2bb6fa33-c812-4d7a-95d6-e6bb874f2929",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Age:",
+                                    "questionOptions": {
+                                        "concept": "7f81f508-2fbe-4226-90db-82ebe46a7fc7",
+                                        "rendering": "number"
+                                    }
+                                },
+                                {
+                                    "label": "Family/parent use:",
+                                    "questionOptions": {
+                                        "concept": "d5cedce2-15c9-492d-864f-e546e9cc1482",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "In the past 6 months:",
+                                    "questionOptions": {
+                                        "concept": "ae6ba1ef-4997-48a5-9f94-9b6c7dfdda3e",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Currently-past month:",
+                                    "questionOptions": {
+                                        "concept": "adda3281-1f64-44d1-8c5c-618942c48534",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Other Substance",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Other Substance",
+                            "questionOptions": {
+                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Ever used any other substance:",
+                                    "questionOptions": {
+                                        "concept": "2bb6fa33-c812-4d7a-95d6-e6bb874f2929",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Age:",
+                                    "questionOptions": {
+                                        "concept": "7f81f508-2fbe-4226-90db-82ebe46a7fc7",
+                                        "rendering": "number"
+                                    }
+                                },
+                                {
+                                    "label": "Family/parent use:",
+                                    "questionOptions": {
+                                        "concept": "d5cedce2-15c9-492d-864f-e546e9cc1482",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "In the past 6 months:",
+                                    "questionOptions": {
+                                        "concept": "ae6ba1ef-4997-48a5-9f94-9b6c7dfdda3e",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Currently-past month:",
+                                    "questionOptions": {
+                                        "concept": "adda3281-1f64-44d1-8c5c-618942c48534",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            },
+                                            {
+                                                "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Refused to answer"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Substance Abuse",
+                    "questions": [
+                        {
+                            "label": "Does the patient use any of the following substances?",
+                            "questionOptions": {
+                                "concept": "a8b01fe8-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a8b01c78-1350-11df-a1f1-0026b9348838",
+                                        "label": "Tobacco"
+                                    },
+                                    {
+                                        "concept": "a8b01f20-1350-11df-a1f1-0026b9348838",
+                                        "label": "Alcohol"
+                                    },
+                                    {
+                                        "concept": "e5d05fac-b704-41a1-a399-0b829b53e4ea",
+                                        "label": "Petrol"
+                                    },
+                                    {
+                                        "concept": "a8b01d9a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Marijuana"
+                                    },
+                                    {
+                                        "concept": "9f7b4063-f103-4a7f-a3c9-aedcbe35f1d1",
+                                        "label": "Cocaine"
+                                    },
+                                    {
+                                        "concept": "019a7dc0-153d-4008-a7dd-100ee43ff836",
+                                        "label": "Heroine"
+                                    },
+                                    {
+                                        "concept": "a8b01e62-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other inhalants"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "0.01",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

@@ -1,0 +1,201 @@
+{
+    "name": "component_family-planning-v1.0",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Family Planning",
+            "sections": [
+                {
+                    "label": "Family Planning",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "On family planning:",
+                            "required": "true",
+                            "id": "onFamilyPlanning",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('774961c6-232f-4332-8a9f-f5c55ebe86d0')) ? undefined : HD.getObject('prevEnc').getValue('774961c6-232f-4332-8a9f-f5c55ebe86d0')",
+                            "questionOptions": {
+                                "concept": "774961c6-232f-4332-8a9f-f5c55ebe86d0",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "type": "obsGroup",
+                            "label": "Family planning, detailed",
+                            "questionOptions": {
+                                "concept": "767e8060-5272-4927-ab78-97534a4499ef",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Family planning method:",
+                                    "required": "true",
+                                    "id": "fpMethod",
+                                    "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a894b1cc-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a894b1cc-1350-11df-a1f1-0026b9348838')",
+                                    "questionOptions": {
+                                        "concept": "a894b1cc-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a893516a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Condoms"
+                                            },
+                                            {
+                                                "concept": "a123d949-31f3-4abf-98e3-8504e17ebc00",
+                                                "label": "3-year implant"
+                                            },
+                                            {
+                                                "concept": "feb48308-a56f-4754-8e8f-8c1698e570cb",
+                                                "label": "5-year implant"
+                                            },
+                                            {
+                                                "concept": "eaa5796d-0b1c-478b-8c9d-d23cf4c3bddc",
+                                                "label": "Vasectomy"
+                                            },
+                                            {
+                                                "concept": "a8a71330-1350-11df-a1f1-0026b9348838",
+                                                "label": "Injectables (Depo)"
+                                            },
+                                            {
+                                                "concept": "a8a71650-1350-11df-a1f1-0026b9348838",
+                                                "label": "IUD"
+                                            },
+                                            {
+                                                "concept": "4a740e33-fee5-4a2b-b679-1904722e3d9e",
+                                                "label": "Lactation method"
+                                            },
+                                            {
+                                                "concept": "a897dbd6-1350-11df-a1f1-0026b9348838",
+                                                "label": "OCP"
+                                            },
+                                            {
+                                                "concept": "a8a714c0-1350-11df-a1f1-0026b9348838",
+                                                "label": "Rhythm method"
+                                            },
+                                            {
+                                                "concept": "a8a713f8-1350-11df-a1f1-0026b9348838",
+                                                "label": "Bilateral tubal ligation"
+                                            },
+                                            {
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Other"
+                                            }
+                                        ],
+                                        "rendering": "multiCheckbox"
+                                    },
+                                    "type": "obs",
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "isEmpty(myValue) && onFamilyPlanning === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                            "message": "Patient on family planning. Please provide a method."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "onFamilyPlanning !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "Family planning: Other (specify)",
+                                    "id": "otherfp",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "text"
+                                    },
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(fpMethod) || !arrayContains(fpMethod, 'a8aaf3e2-1350-11df-a1f1-0026b9348838')"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "obs",
+                            "label": "Approximate start date (If FP is 3-year implant/5-year implant/Injectables/Vasectomy/IUD/Bilateral tubal ligation)",
+                            "id": "appStartDate",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a89ae092-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a89ae092-1350-11df-a1f1-0026b9348838')",
+                            "questionOptions": {
+                                "concept": "a89ae092-1350-11df-a1f1-0026b9348838",
+                                "rendering": "date"
+                            },
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "(new moment(encDate)).isBefore((new moment(myValue)), 'day') || (new moment(encDate)).isSame((new moment(myValue)), 'day')",
+                                    "message": "Start date should be before the encounter date."
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !(isEmpty(fpMethod) || !arrayContainsAny(fpMethod,['a123d949-31f3-4abf-98e3-8504e17ebc00','feb48308-a56f-4754-8e8f-8c1698e570cb','eaa5796d-0b1c-478b-8c9d-d23cf4c3bddc','a8a71330-1350-11df-a1f1-0026b9348838','a8a71650-1350-11df-a1f1-0026b9348838','a8a713f8-1350-11df-a1f1-0026b9348838']))",
+                                    "message": "Start date is required."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "isEmpty(fpMethod) || arrayContains(['a8aaf3e2-1350-11df-a1f1-0026b9348838','a8a714c0-1350-11df-a1f1-0026b9348838','a897dbd6-1350-11df-a1f1-0026b9348838','4a740e33-fee5-4a2b-b679-1904722e3d9e','a893516a-1350-11df-a1f1-0026b9348838'],fpMethod)"
+                            }
+                        },
+                        {
+                            "label": "If not on family planning, reason:",
+                            "required": "true",
+                            "id": "reasonNotOnFamilyPlanning",
+                            "questionOptions": {
+                                "concept": "88ad5975-4762-4108-a967-072f12f91b0b",
+                                "answers": [
+                                    {
+                                        "concept": "2d6f977e-3b3f-4ea9-82ee-fde1fb4bdf56",
+                                        "label": "Not sexual active"
+                                    },
+                                    {
+                                        "concept": "a89d109c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Currently pregnant"
+                                    },
+                                    {
+                                        "concept": "37b27c86-cabb-4c82-9166-d67d2271a8a3",
+                                        "label": "Thinks can't get pregnant"
+                                    },
+                                    {
+                                        "concept": "fb82f3b4-bcec-4cd2-a0a4-545b02d28a4d",
+                                        "label": "Wants to get pregnant"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && onFamilyPlanning === 'a899b42e-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Patient on family planning. Please provide a method."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "onFamilyPlanning !== 'a899b42e-1350-11df-a1f1-0026b9348838'"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.0",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

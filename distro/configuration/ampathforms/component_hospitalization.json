@@ -1,0 +1,146 @@
+{
+    "name": "component_hospitalization",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Hospitalization",
+            "sections": [
+                {
+                    "label": "Hospitalization History",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Recent hospitalizations",
+                            "questionOptions": {
+                                "rendering": "group",
+                                "concept": "a8a003a6-1350-11df-a1f1-0026b9348838"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Was the patient hospitalized since last visit?",
+                                    "id": "wasHospitalized",
+                                    "questionOptions": {
+                                        "concept": "a898c56e-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        },
+                        {
+                            "type": "obsGroup",
+                            "label": "If yes reason for hospitalization:",
+                            "questionOptions": {
+                                "concept": "a8a003a6-1350-11df-a1f1-0026b9348838",
+                                "rendering": "repeating"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Reason for hospitalization:",
+                                    "id": "hospReason",
+                                    "questionOptions": {
+                                        "concept": "a8a07a48-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "problem"
+                                    },
+                                    "type": "obs",
+                                    "validators": [
+                                        {
+                                            "type": "conditionalAnswered",
+                                            "message": "Providing diagnosis but didn't answer that patient was hospitalized in question",
+                                            "referenceQuestionId": "wasHospitalized",
+                                            "referenceQuestionAnswers": [
+                                                "a899b35c-1350-11df-a1f1-0026b9348838"
+                                            ]
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "isEmpty(myValue) && !isEmpty(wasHospitalized) && wasHospitalized === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                            "message": "Patient previously marked as hospitalized. Please provide hospitalization reason."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "wasHospitalized !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Past Diagnosis",
+                    "questions": [
+                        {
+                            "label": "Have you ever been diagnosed with these conditions:?",
+                            "id": "pastDiagnosis",
+                            "questionOptions": {
+                                "concept": "b2343ae7-e435-4bc7-9615-74322d5201e4",
+                                "answers": [
+                                    {
+                                        "concept": "7ccac7e4-f399-48b9-b2c7-944b98ec53b1",
+                                        "label": "Sickle Cell"
+                                    },
+                                    {
+                                        "concept": "a893436e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Diabetes"
+                                    },
+                                    {
+                                        "concept": "a877ca58-1350-11df-a1f1-0026b9348838",
+                                        "label": "Asthma"
+                                    },
+                                    {
+                                        "concept": "a890b810-1350-11df-a1f1-0026b9348838",
+                                        "label": "Mental illness"
+                                    },
+                                    {
+                                        "concept": "acdceb9b-4b84-4e9c-bba4-eaf486b3b4b5",
+                                        "label": "Cancer"
+                                    },
+                                    {
+                                        "concept": "a8933270-1350-11df-a1f1-0026b9348838",
+                                        "label": "Epilepsy"
+                                    },
+                                    {
+                                        "concept": "a8936bb4-1350-11df-a1f1-0026b9348838",
+                                        "label": "RHD"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Other(specify):",
+                    "type": "obs",
+                    "questionOptions": {
+                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                        "rendering": "text"
+                    },
+                    "validators": []
+                }
+            ]
+        }
+    ],
+    "version": "0.01",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

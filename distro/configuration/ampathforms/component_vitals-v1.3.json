@@ -1,0 +1,161 @@
+{
+    "name": "component_vitals-v1.3",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Vitals",
+            "sections": [
+                {
+                    "label": "Vital Signs",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "BP systolic:",
+                            "id": "syst",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a65d5a-1350-11df-a1f1-0026b9348838",
+                                "max": "250",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "BP diastolic:",
+                            "id": "dias",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a65e36-1350-11df-a1f1-0026b9348838",
+                                "max": "200",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Pulse (Rate/min):",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a65f12-1350-11df-a1f1-0026b9348838",
+                                "max": "230",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Temp (C):",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a65fee-1350-11df-a1f1-0026b9348838",
+                                "max": "43",
+                                "min": "25"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Weight (Kg):",
+                            "id": "weight",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a660ca-1350-11df-a1f1-0026b9348838",
+                                "max": "250",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Height (Cm):",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a8a6619c-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a8a6619c-1350-11df-a1f1-0026b9348838')",
+                            "id": "height",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a6619c-1350-11df-a1f1-0026b9348838",
+                                "max": "228",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Sp02:",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a66354-1350-11df-a1f1-0026b9348838",
+                                "max": "100",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "BMI (Kg/m2):",
+                            "id": "bmi",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a89c60c0-1350-11df-a1f1-0026b9348838",
+                                "max": "100",
+                                "min": "0",
+                                "calculate": {
+                                    "calculateExpression": "calcBMI(height,weight)"
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "MUAC:",
+                            "id": "muac",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a89c6188-1350-11df-a1f1-0026b9348838",
+                                "max": "450",
+                                "min": "60"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Foetal heart rate:",
+                            "id": "fhr",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a007a2-1350-11df-a1f1-0026b9348838",
+                                "max": "230",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": " !arrayContains(['02e3ce61-fa24-445e-a1f0-6e3299142966', '42de8e7e-24b2-4c16-b62b-137eb2c55ede','53b856ad-21ef-4745-9acd-81aca01bba31'], visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Fundal height:",
+                            "id": "fundalHeight",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a005fe-1350-11df-a1f1-0026b9348838",
+                                "max": "48",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": " !arrayContains(['02e3ce61-fa24-445e-a1f0-6e3299142966', '42de8e7e-24b2-4c16-b62b-137eb2c55ede','53b856ad-21ef-4745-9acd-81aca01bba31'], visitTypeUuid)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.3",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

@@ -1,0 +1,49 @@
+{
+    "name": "component_assessment",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Assessment",
+            "sections": [
+                {
+                    "label": "General comments notes",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Clinical comments, general:",
+                            "type": "obs",
+                            "required": "true",
+                            "id": "assNote",
+                            "questionOptions": {
+                                "concept": "5e4dc798-2cce-4a1a-97e9-bcf22d64b07c",
+                                "rendering": "text"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Clinical Notes",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Please enter the clinical notes below:",
+                            "type": "obs",
+                            "id": "assNote",
+                            "default": "",
+                            "questionOptions": {
+                                "concept": "23f710cc-7f9c-4255-9b6b-c3e240215dba",
+                                "rendering": "textarea",
+                                "rows": 5
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "0.01",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

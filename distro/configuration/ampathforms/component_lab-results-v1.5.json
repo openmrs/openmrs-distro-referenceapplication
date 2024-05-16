@@ -1,0 +1,1629 @@
+{
+    "name": "component_lab-results-v1.5",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Test Results",
+            "sections": [
+                {
+                    "label": "Chemistry Lab Tests",
+                    "questions": [
+                        {
+                            "type": "obs",
+                            "label": "Creatinine mmol/L:",
+                            "id": "creatinine_test",
+                            "questionOptions": {
+                                "concept": "a897e450-1350-11df-a1f1-0026b9348838",
+                                "rendering": "number",
+                                "showDate": "true",
+                                "max": "11050",
+                                "min": "0",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(creatinine_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(creatinine_test)"
+                                    }
+                                }
+                            },
+                            "validators": []
+                        },
+                        {
+                            "type": "obs",
+                            "label": "SGPT(ALT):",
+                            "id": "sgptalt_test",
+                            "questionOptions": {
+                                "concept": "a896ca48-1350-11df-a1f1-0026b9348838",
+                                "rendering": "number",
+                                "max": "3500",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(sgptalt_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(sgptalt_test)"
+                                    }
+                                }
+                            },
+                            "validators": []
+                        },
+                        {
+                            "type": "obs",
+                            "label": "AST:",
+                            "id": "ast_test",
+                            "questionOptions": {
+                                "concept": "a896c8ae-1350-11df-a1f1-0026b9348838",
+                                "rendering": "number",
+                                "max": "3500",
+                                "min": "0",
+                                "showDate": "true"
+                            },
+                            "shownDateOptions": {
+                                "validators": [
+                                    {
+                                        "type": "date"
+                                    },
+                                    {
+                                        "type": "js_expression",
+                                        "failsWhenExpression": "!isEmpty(ast_test) && isEmpty(myValue)",
+                                        "message": "Date is result is required."
+                                    }
+                                ],
+                                "hide": {
+                                    "hideWhenExpression": "isEmpty(ast_test)"
+                                }
+                            }
+                        },
+                        {
+                            "label": "RBS mmol/L:",
+                            "id": "rbs_test",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a898418e-1350-11df-a1f1-0026b9348838",
+                                "answers": [],
+                                "rendering": "number",
+                                "max": "50",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(rbs_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hde": {
+                                        "hideWhenExpression": "isEmpty(rbs_test)"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "label": "FBS mmol/L:",
+                            "id": "fbs_test",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a8b018fe-1350-11df-a1f1-0026b9348838",
+                                "answers": [],
+                                "rendering": "number",
+                                "max": "50",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(fbs_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hde": {
+                                        "hideWhenExpression": "isEmpty(fbs_test)"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "label": "HbA1C %:",
+                            "id": "a1c_test",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a8af7520-1350-11df-a1f1-0026b9348838",
+                                "answers": [],
+                                "rendering": "number",
+                                "max": "20",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(a1c_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hde": {
+                                        "hideWhenExpression": "isEmpty(a1c_test)"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "label": "LDL mmol/L:",
+                            "id": "ldl_test",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a898e74c-1350-11df-a1f1-0026b9348838",
+                                "answers": [],
+                                "rendering": "number",
+                                "max": "75",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(ldl_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hde": {
+                                        "hideWhenExpression": "isEmpty(ldl_test)"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "label": "HDL mmol/L:",
+                            "id": "hdl_test",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a898e602-1350-11df-a1f1-0026b9348838",
+                                "answers": [],
+                                "rendering": "number",
+                                "max": "15",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(hdl_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hde": {
+                                        "hideWhenExpression": "isEmpty(hdl_test)"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "label": "TG mmol/L:",
+                            "id": "tg_test",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a898e8a0-1350-11df-a1f1-0026b9348838",
+                                "answers": [],
+                                "rendering": "number",
+                                "max": "55",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(tg_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hde": {
+                                        "hideWhenExpression": "isEmpty(tg_test)"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "label": "Cholesterol mmol/L:",
+                            "id": "chol_test",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a898e4b8-1350-11df-a1f1-0026b9348838",
+                                "answers": [],
+                                "rendering": "number",
+                                "max": "100",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(chol_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hde": {
+                                        "hideWhenExpression": "isEmpty(chol_test)"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "label": "Microalbumin test, urine mg/L:",
+                            "id": "microAlb_test",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "7129af13-e39a-43b0-9923-6d1de22c9c5e",
+                                "answers": [],
+                                "rendering": "number",
+                                "max": "300",
+                                "min": "30",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(microAlb_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hde": {
+                                        "hideWhenExpression": "isEmpty(microAlb_test)"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "label": "Urea mmol/L:",
+                            "id": "urea_test",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a8982550-1350-11df-a1f1-0026b9348838",
+                                "answers": [],
+                                "rendering": "number",
+                                "max": "330",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(urea_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hde": {
+                                        "hideWhenExpression": "isEmpty(urea_test)"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "CBC",
+                    "questions": [
+                        {
+                            "label": "Hgb g/dL:",
+                            "id": "hgbgdl_test",
+                            "questionOptions": {
+                                "concept": "a8908a16-1350-11df-a1f1-0026b9348838",
+                                "max": "50",
+                                "min": "0",
+                                "showDate": "true",
+                                "rendering": "number",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(hgbgdl_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(hgbgdl_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "WBC/mm3:",
+                            "id": "testWBCmm",
+                            "questionOptions": {
+                                "concept": "a896dea2-1350-11df-a1f1-0026b9348838",
+                                "max": "500",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(testWBCmm) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(testWBCmm)"
+                                    }
+                                },
+                                "rendering": "number"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "type": "obs",
+                            "label": "Platelets:",
+                            "id": "platelets_test",
+                            "questionOptions": {
+                                "concept": "a8970954-1350-11df-a1f1-0026b9348838",
+                                "rendering": "number",
+                                "max": "450000",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(platelets_test) && isEmpty(myValue)",
+                                            "message": "Date result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(platelets_test)"
+                                    }
+                                }
+                            },
+                            "validators": []
+                        },
+                        {
+                            "label": "ALC/ mm3:",
+                            "id": "alcmm_test",
+                            "questionOptions": {
+                                "concept": "a898b20e-1350-11df-a1f1-0026b9348838",
+                                "max": "500",
+                                "min": "0",
+                                "showDate": "true",
+                                "rendering": "number",
+                                "shownDateOptions": {
+                                    "historicalExpression": "HD.getObject('prevEnc').getValue('a8afdb8c-1350-11df-a1f1-0026b9348838.a898b20e-1350-11df-a1f1-0026b9348838')",
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(alcmm_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(alcmm_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "MCV:",
+                            "id": "mcv_test",
+                            "questionOptions": {
+                                "concept": "a898201e-1350-11df-a1f1-0026b9348838",
+                                "max": "500",
+                                "min": "0",
+                                "showDate": "true",
+                                "rendering": "number",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(mcv_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(mcv_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "CD4",
+                    "questions": [
+                        {
+                            "type": "obs",
+                            "id": "cd4_test",
+                            "questionOptions": {
+                                "concept": "a8a8bb18-1350-11df-a1f1-0026b9348838",
+                                "showDate": "true",
+                                "rendering": "number",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(cd4_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(cd4_test)"
+                                    }
+                                }
+                            },
+                            "label": "CD4 Count:",
+                            "validators": []
+                        },
+                        {
+                            "type": "obs",
+                            "label": "CD4 %:",
+                            "id": "cd4percent_test",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "max": "100",
+                                "min": "0",
+                                "showDate": "true",
+                                "concept": "a8970a26-1350-11df-a1f1-0026b9348838",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(cd4percent_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(cd4percent_test)"
+                                    }
+                                }
+                            },
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Viral Load",
+                    "questions": [
+                        {
+                            "type": "obs",
+                            "label": "Viral load:",
+                            "id": "viralLoad_test",
+                            "questionOptions": {
+                                "concept": "a8982474-1350-11df-a1f1-0026b9348838",
+                                "rendering": "number",
+                                "max": "10000000",
+                                "min": "0",
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(viralLoad_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(viralLoad_test)"
+                                    }
+                                }
+                            },
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "HIV Test",
+                    "questions": [
+                        {
+                            "label": "Rapid HIV:",
+                            "type": "obs",
+                            "id": "hivRapid",
+                            "questionOptions": {
+                                "concept": "a8999dfe-1350-11df-a1f1-0026b9348838",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a89a7ae4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Indeterminate"
+                                    },
+                                    {
+                                        "concept": "a89c3d8e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Poor sample quality"
+                                    },
+                                    {
+                                        "concept": "a899b50a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Unknown"
+                                    },
+                                    {
+                                        "concept": "a899ea48-1350-11df-a1f1-0026b9348838",
+                                        "label": "Not done"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(hivRapid) && isEmpty(myValue)",
+                                            "message": "Date result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(hivRapid)"
+                                    }
+                                }
+                            },
+                            "validators": []
+                        },
+                        {
+                            "label": "HIV Long Eliza:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "id": "longEliza",
+                                "concept": "a8999fb6-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a89a7ae4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Indeterminate"
+                                    },
+                                    {
+                                        "concept": "a89c3d8e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Poor sample quality"
+                                    },
+                                    {
+                                        "concept": "a899b50a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Unknown"
+                                    },
+                                    {
+                                        "concept": "a899ea48-1350-11df-a1f1-0026b9348838",
+                                        "label": "Not done"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(longEliza) && isEmpty(myValue)",
+                                            "message": "Date result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(longEliza)"
+                                    }
+                                }
+                            },
+                            "validators": []
+                        },
+                        {
+                            "label": "HIV DNA PCR:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "id": "hivPcr",
+                                "concept": "a898fe80-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a89a7ae4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Indeterminate"
+                                    },
+                                    {
+                                        "concept": "a89c3d8e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Poor sample quality"
+                                    },
+                                    {
+                                        "concept": "a899ea48-1350-11df-a1f1-0026b9348838",
+                                        "label": "Not done"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(hivPcr) && isEmpty(myValue)",
+                                            "message": "Date result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(hivPcr)"
+                                    }
+                                }
+                            },
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "TB Test",
+                    "questions": [
+                        {
+                            "label": "Genexpert test (Upload image of the result):",
+                            "id": "genexpert_test",
+                            "questionOptions": {
+                                "concept": "6fa355eb-9321-4850-884c-12594194862a",
+                                "showDate": "true",
+                                "rendering": "file",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(genexpert_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(genexpert_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Sputum gene xpert MTB:",
+                            "id": "sputumgene_test",
+                            "questionOptions": {
+                                "concept": "741517cf-8bac-4755-b289-8dd2a2df7962",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a89a7ae4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Indeterminate"
+                                    },
+                                    {
+                                        "concept": "a89c3d8e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Poor sample quality"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(sputumgene_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(sputumgene_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Sputum AFB smear:",
+                            "id": "sputumafp_test",
+                            "questionOptions": {
+                                "concept": "a8945d4e-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a8a45ab4-1350-11df-a1f1-0026b9348838",
+                                        "label": "1+"
+                                    },
+                                    {
+                                        "concept": "a8a45bd6-1350-11df-a1f1-0026b9348838",
+                                        "label": "2+"
+                                    },
+                                    {
+                                        "concept": "a8a45ca8-1350-11df-a1f1-0026b9348838",
+                                        "label": "3+"
+                                    },
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a89a7ae4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Indeterminate"
+                                    },
+                                    {
+                                        "concept": "a89c3d8e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Poor sample quality"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(sputumafp_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(sputumafp_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Sputum culture:",
+                            "id": "sputumculture_test",
+                            "questionOptions": {
+                                "concept": "a8a462a2-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a89c3d8e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Poor sample quality"
+                                    },
+                                    {
+                                        "concept": "0b4e9aa1-e470-46d1-9d2d-0d8a475561b9",
+                                        "label": "Mycobacterium tuberculosis"
+                                    },
+                                    {
+                                        "concept": "a01149c4-7f0e-4d27-8f42-dc019e3330ec",
+                                        "label": "Non tuberculosis mycobacteria"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(sputumculture_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(sputumculture_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "TST (Mantoux test):",
+                            "id": "tst_test",
+                            "questionOptions": {
+                                "concept": "a89d278a-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a89d2852-1350-11df-a1f1-0026b9348838",
+                                        "label": "Strongly positive"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(tst_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(tst_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Chest Xray",
+                    "questions": [
+                        {
+                            "label": "CXR code:",
+                            "id": "cxrcode_test",
+                            "questionOptions": {
+                                "concept": "a8908192-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899e7b4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Normal"
+                                    },
+                                    {
+                                        "concept": "a8a6aa3a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Cardiomegaly"
+                                    },
+                                    {
+                                        "concept": "a8ae8c1e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Cavitary"
+                                    },
+                                    {
+                                        "concept": "a8ae8a66-1350-11df-a1f1-0026b9348838",
+                                        "label": "Diffuse abn/non-miliary"
+                                    },
+                                    {
+                                        "concept": "a8ae8980-1350-11df-a1f1-0026b9348838",
+                                        "label": "Infiltrate"
+                                    },
+                                    {
+                                        "concept": "a89a77ce-1350-11df-a1f1-0026b9348838",
+                                        "label": "Miliary"
+                                    },
+                                    {
+                                        "concept": "a89a76fc-1350-11df-a1f1-0026b9348838",
+                                        "label": "PI effusion"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(cxrcode_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(cxrcode_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "VDRL",
+                    "questions": [
+                        {
+                            "label": "VDRL:",
+                            "id": "vdrl_test",
+                            "questionOptions": {
+                                "concept": "a8945678-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a89a7ae4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Indeterminate"
+                                    },
+                                    {
+                                        "concept": "a89c3d8e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Poor sample quality"
+                                    },
+                                    {
+                                        "concept": "a89b3ab0-1350-11df-a1f1-0026b9348838",
+                                        "label": "Reactive"
+                                    },
+                                    {
+                                        "concept": "a89b3b8c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Non reactive"
+                                    },
+                                    {
+                                        "concept": "a899ea48-1350-11df-a1f1-0026b9348838",
+                                        "label": "Not done"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(vdrl_test) && isEmpty(myValue)",
+                                            "message": "Date result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(vdrl_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "ART Drug Sensitivity Test",
+                    "questions": [
+                        {
+                            "label": "ART drug sensitivity test (Upload image of the result):",
+                            "id": "drugSensitivity_test",
+                            "questionOptions": {
+                                "concept": "8ec7c519-502e-46ea-8a98-181ed5a088be",
+                                "showDate": "true",
+                                "rendering": "file",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(drugSensitivity_test) && isEmpty(myValue)",
+                                            "message": "Date is result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(drugSensitivity_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Other CDM Tests",
+                    "questions": [
+                        {
+                            "label": "Monofilament Tests:",
+                            "type": "obsGroup",
+                            "questionOptions": {
+                                "id": "monofilmanet",
+                                "concept": "f6d0f6d5-a5e0-4ce1-9508-69117b59d772",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "10-Gram Monofilament Test, Right Foot:",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "id": "10monorf",
+                                        "concept": "0ff61dc6-affa-4120-93e0-58e4b815317d",
+                                        "max": "5",
+                                        "min": "0",
+                                        "rendering": "number"
+                                    }
+                                },
+                                {
+                                    "label": "10-Gram Monofilament Test, Left Foot:",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "id": "10monorf",
+                                        "concept": "72e27285-ee93-4059-b6aa-1176200de8df",
+                                        "max": "5",
+                                        "min": "0",
+                                        "rendering": "number"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "label": "PDT:",
+                            "id": "pdt_test",
+                            "questionOptions": {
+                                "concept": "a8909f56-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(pdt_test) && isEmpty(myValue)",
+                                            "message": "Date for result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(pdt_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "ECG:",
+                            "id": "ecg_test",
+                            "questionOptions": {
+                                "concept": "a89dda72-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899e7b4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Normal"
+                                    },
+                                    {
+                                        "concept": "a899e890-1350-11df-a1f1-0026b9348838",
+                                        "label": "Abnormal"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(ecg_test) && isEmpty(myValue)",
+                                            "message": "Date for result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(ecg_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Echo:",
+                            "id": "echo_test",
+                            "questionOptions": {
+                                "concept": "a89dd9aa-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899e7b4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Normal"
+                                    },
+                                    {
+                                        "concept": "a899e890-1350-11df-a1f1-0026b9348838",
+                                        "label": "Abnormal"
+                                    },
+                                    {
+                                        "concept": "a89dd504-1350-11df-a1f1-0026b9348838",
+                                        "label": "Cardiac arrythmia"
+                                    },
+                                    {
+                                        "concept": "a89dd694-1350-11df-a1f1-0026b9348838",
+                                        "label": "Left ventricular hypertrophy"
+                                    },
+                                    {
+                                        "concept": "a89dd75c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Right ventricular hypertrophy"
+                                    },
+                                    {
+                                        "concept": "a89dd5cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Atrial fibrillation"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(echo_test) && isEmpty(myValue)",
+                                            "message": "Date for result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(echo_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Urinalysis",
+                    "questions": [
+                        {
+                            "label": "Urinalysis:",
+                            "type": "obsGroup",
+                            "questionOptions": {
+                                "id": "urinalysis",
+                                "concept": "a8a0aa9a-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Pus cells:",
+                                    "id": "puscells_test",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "concept": "a8a0a91e-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "select",
+                                        "answers": [
+                                            {
+                                                "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Negative"
+                                            },
+                                            {
+                                                "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                                "label": "Positive (+)"
+                                            },
+                                            {
+                                                "concept": "a8a18fdc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Strong positive (++)"
+                                            },
+                                            {
+                                                "concept": "a8a1909a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Stronger positive (+++)"
+                                            }
+                                        ]
+                                    },
+                                    "hide": {
+                                        "hideWhenExpression": "visitTypeUuid !== '02e3ce61-fa24-445e-a1f0-6e3299142966'"
+                                    }
+                                },
+                                {
+                                    "label": "Protein:",
+                                    "type": "obs",
+                                    "id": "protein_test",
+                                    "questionOptions": {
+                                        "concept": "a8a47ca6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "select",
+                                        "answers": [
+                                            {
+                                                "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Negative"
+                                            },
+                                            {
+                                                "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                                "label": "Positive (+)"
+                                            },
+                                            {
+                                                "concept": "a8a18fdc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Strong positive (++)"
+                                            },
+                                            {
+                                                "concept": "a8a1909a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Stronger positive (+++)"
+                                            }
+                                        ]
+                                    },
+                                    "hide": {
+                                        "hideWhenExpression": "visitTypeUuid !== '02e3ce61-fa24-445e-a1f0-6e3299142966'"
+                                    }
+                                },
+                                {
+                                    "label": "Leucocytes:",
+                                    "type": "obs",
+                                    "id": "leucocytes_test",
+                                    "questionOptions": {
+                                        "concept": "a8b0f3e6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "select",
+                                        "answers": [
+                                            {
+                                                "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Negative"
+                                            },
+                                            {
+                                                "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                                "label": "Positive (+)"
+                                            },
+                                            {
+                                                "concept": "a8a18fdc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Strong positive (++)"
+                                            },
+                                            {
+                                                "concept": "a8a1909a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Stronger positive (+++)"
+                                            }
+                                        ]
+                                    },
+                                    "hide": {
+                                        "hideWhenExpression": "visitTypeUuid !== '02e3ce61-fa24-445e-a1f0-6e3299142966'"
+                                    }
+                                },
+                                {
+                                    "label": "Ketone:",
+                                    "type": "obs",
+                                    "id": "ketone_test",
+                                    "questionOptions": {
+                                        "concept": "b72fa772-19a9-4386-8185-6491ab97e97e",
+                                        "rendering": "select",
+                                        "answers": [
+                                            {
+                                                "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Negative"
+                                            },
+                                            {
+                                                "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                                "label": "Positive (+)"
+                                            },
+                                            {
+                                                "concept": "a8a18fdc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Strong positive (++)"
+                                            },
+                                            {
+                                                "concept": "a8a1909a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Stronger positive (+++)"
+                                            }
+                                        ]
+                                    },
+                                    "hide": {
+                                        "hideWhenExpression": "visitTypeUuid !== '02e3ce61-fa24-445e-a1f0-6e3299142966'"
+                                    }
+                                },
+                                {
+                                    "label": "Glucose:",
+                                    "id": "sugar_test",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "concept": "a8a47d5a-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "select",
+                                        "answers": [
+                                            {
+                                                "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Negative"
+                                            },
+                                            {
+                                                "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                                "label": "Positive (+)"
+                                            },
+                                            {
+                                                "concept": "a8a18fdc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Strong positive (++)"
+                                            },
+                                            {
+                                                "concept": "a8a1909a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Stronger positive (+++)"
+                                            }
+                                        ]
+                                    },
+                                    "hide": {
+                                        "hideWhenExpression": "visitTypeUuid !== '02e3ce61-fa24-445e-a1f0-6e3299142966'"
+                                    }
+                                },
+                                {
+                                    "label": "Nitrites:",
+                                    "id": "nitrites_test",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "concept": "6ab44394-80a5-40cd-9649-32f1839e94cd",
+                                        "rendering": "select",
+                                        "answers": [
+                                            {
+                                                "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Negative"
+                                            },
+                                            {
+                                                "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                                "label": "Positive (+)"
+                                            },
+                                            {
+                                                "concept": "a8a18fdc-1350-11df-a1f1-0026b9348838",
+                                                "label": "Strong positive (++)"
+                                            },
+                                            {
+                                                "concept": "a8a1909a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Stronger positive (+++)"
+                                            }
+                                        ]
+                                    },
+                                    "hide": {
+                                        "hideWhenExpression": "visitTypeUuid !== '02e3ce61-fa24-445e-a1f0-6e3299142966'"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Lab Results, Notes",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Labs results, notes:",
+                            "type": "obs",
+                            "id": "labresultsText",
+                            "questionOptions": {
+                                "concept": "6f5207f4-6785-433b-943e-c2d03e7d3ea7",
+                                "rendering": "textarea",
+                                "rows": 15
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Serum Creatinine Calculation",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Serum creatinine calculation:",
+                            "type": "obs",
+                            "id": "creatCalc",
+                            "questionOptions": {
+                                "concept": "e04d2326-0b47-4d87-81ee-cb7d30fafc10",
+                                "rendering": "number",
+                                "calculate": {
+                                    "calculateExpression": "gendercreatconstant && sex && age && creatinine_test && weight ?parseFloat((gendercreatconstant*((140-age)/(creatinine_test/88.2))*(weight/72)).toFixed(2)):null"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Blood Grouping",
+                    "questions": [
+                        {
+                            "label": "Blood type:",
+                            "id": "bloodGroup_test",
+                            "questionOptions": {
+                                "concept": "a8945754-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a896e8c0-1350-11df-a1f1-0026b9348838",
+                                        "label": "A positive"
+                                    },
+                                    {
+                                        "concept": "a896ea6e-1350-11df-a1f1-0026b9348838",
+                                        "label": "A negative"
+                                    },
+                                    {
+                                        "concept": "a896ec1c-1350-11df-a1f1-0026b9348838",
+                                        "label": "B positive"
+                                    },
+                                    {
+                                        "concept": "a896edca-1350-11df-a1f1-0026b9348838",
+                                        "label": "B negative"
+                                    },
+                                    {
+                                        "concept": "a896f04a-1350-11df-a1f1-0026b9348838",
+                                        "label": "O positive"
+                                    },
+                                    {
+                                        "concept": "a896f1f8-1350-11df-a1f1-0026b9348838",
+                                        "label": "O negative"
+                                    },
+                                    {
+                                        "concept": "a89b47a8-1350-11df-a1f1-0026b9348838",
+                                        "label": "AB positive"
+                                    },
+                                    {
+                                        "concept": "a89b48de-1350-11df-a1f1-0026b9348838",
+                                        "label": "AB negative"
+                                    },
+                                    {
+                                        "concept": "33bc1cf5-4ae5-49ba-9afd-bcbb9f7b09e5",
+                                        "label": "A"
+                                    },
+                                    {
+                                        "concept": "01e7f790-a8fc-40e9-968f-c9d79924eb6d",
+                                        "label": "B"
+                                    },
+                                    {
+                                        "concept": "0feab44f-6777-4c4b-a3ed-a3502f996fcb",
+                                        "label": "AB"
+                                    },
+                                    {
+                                        "concept": "bf9a31dc-5db4-49c2-aad2-30ec16315b24",
+                                        "label": "O"
+                                    }
+                                ],
+                                "showDate": "true",
+                                "rendering": "select",
+                                "shownDateOptions": {
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        },
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(bloodGroup_test) && isEmpty(myValue)",
+                                            "message": "Date result is required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(bloodGroup_test)"
+                                    }
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Other Lab Tests",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Test result, detailed",
+                            "questionOptions": {
+                                "concept": "a8a00e1e-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "type": "obs",
+                                    "label": "Other test results, specify:",
+                                    "id": "otherTestResult",
+                                    "questionOptions": {
+                                        "concept": "6f5207f4-6785-433b-943e-c2d03e7d3ea7",
+                                        "rendering": "text"
+                                    },
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.5",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

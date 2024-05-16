@@ -1,0 +1,273 @@
+{
+    "name": "component_referral-v1.4",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Referrals",
+            "sections": [
+                {
+                    "label": "Referrals",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Referrals",
+                            "questionOptions": {
+                                "concept": "a8a07c8c-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Referrals made to the patient:",
+                                    "id": "referrals",
+                                    "questionOptions": {
+                                        "concept": "a89c2344-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                                "label": "None"
+                                            },
+                                            {
+                                                "concept": "a89fbb12-1350-11df-a1f1-0026b9348838",
+                                                "label": "OVC"
+                                            },
+                                            {
+                                                "concept": "a8a066ca-1350-11df-a1f1-0026b9348838",
+                                                "label": "ENT"
+                                            },
+                                            {
+                                                "concept": "a8a8b352-1350-11df-a1f1-0026b9348838",
+                                                "label": "Adherence counselling"
+                                            },
+                                            {
+                                                "concept": "a2187952-59e0-449b-895f-5102b7aed49c",
+                                                "label": "Cardiology"
+                                            },
+                                            {
+                                                "concept": "0fa18f9a-95c8-4ab3-81ed-a1bac69063fa",
+                                                "label": "Diabetes"
+                                            },
+                                            {
+                                                "concept": "a89accc4-1350-11df-a1f1-0026b9348838",
+                                                "label": "Disclosure counselling"
+                                            },
+                                            {
+                                                "concept": "057dae68-3d6f-4d79-926c-ed75a0ce7fd5",
+                                                "label": "Hospitalization"
+                                            },
+                                            {
+                                                "concept": "073ea366-834b-49bd-b4db-ce4e6c61bbc3",
+                                                "label": "Oncology"
+                                            },
+                                            {
+                                                "concept": "a8a8b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "Mental health services"
+                                            },
+                                            {
+                                                "concept": "a8a8afd8-1350-11df-a1f1-0026b9348838",
+                                                "label": "Nutritional support"
+                                            },
+                                            {
+                                                "concept": "a89e2df6-1350-11df-a1f1-0026b9348838",
+                                                "label": "Psychosocial support"
+                                            },
+                                            {
+                                                "concept": "a8a8b26c-1350-11df-a1f1-0026b9348838",
+                                                "label": "TB/DOT program"
+                                            },
+                                            {
+                                                "concept": "c65fcd72-1f3f-4450-b93f-90a87ae64d55",
+                                                "label": "Surgery"
+                                            },
+                                            {
+                                                "concept": "0d516ea7-218f-43d4-b5c0-58d126529271",
+                                                "label": "Dermatology"
+                                            },
+                                            {
+                                                "concept": "a89e2d1a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Social work"
+                                            },
+                                            {
+                                                "concept": "7c6f0599-3e3e-4f42-87a2-2ce66f1e96d0",
+                                                "label": "Differentiated care program"
+                                            },
+                                            {
+                                                "concept": "a8a06788-1350-11df-a1f1-0026b9348838",
+                                                "label": "Ophthalmology "
+                                            },
+                                            {
+                                                "concept": "a8a002e8-1350-11df-a1f1-0026b9348838",
+                                                "label": "Reproductive health "
+                                            },
+                                            {
+                                                "concept": "a9431295-9862-405b-b694-534f093ca0ad",
+                                                "label": "MDT Program"
+                                            },
+                                            {
+                                                "concept": "7c941f38-ede1-4a94-938f-6c4083339673",
+                                                "label": "Resistant clinic"
+                                            },
+                                            {
+                                                "concept": "355b199f-c9c7-4e91-831f-2be17d2c67bd",
+                                                "label": "Legal counsel"
+                                            },
+                                            {
+                                                "concept": "5fc2555b-cae1-4bb8-9cd8-e19c2c04fc37",
+                                                "label": "Police department"
+                                            },
+                                            {
+                                                "concept": "5a089407-22df-4242-99d8-0b4d4da56b75",
+                                                "label": "Child protection services"
+                                            },
+                                            {
+                                                "concept": "a8b02e16-1350-11df-a1f1-0026b9348838",
+                                                "label": "Emergency shelter"
+                                            },
+                                            {
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Other"
+                                            }
+                                        ],
+                                        "rendering": "multiCheckbox"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Referrals made to the patient: Other (specify):",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "text"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "referrals !== 'a8aaf3e2-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "label": "If referred for hospitalization, choose location:",
+                            "questionOptions": {
+                                "concept": "a89c2420-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89c25d8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Local health centre/hospital"
+                                    },
+                                    {
+                                        "concept": "a89c24fc-1350-11df-a1f1-0026b9348838",
+                                        "label": "MTRH"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "isEmpty(referrals) || !arrayContains(referrals, '057dae68-3d6f-4d79-926c-ed75a0ce7fd5')"
+                            }
+                        },
+                        {
+                            "label": "Reason  for hospitalization",
+                            "type": "obsGroup",
+                            "questionOptions": {
+                                "concept": "a8a07c8c-1350-11df-a1f1-0026b9348838",
+                                "rendering": "repeating"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Reason for hospitalization:",
+                                    "questionOptions": {
+                                        "concept": "a8a07a48-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "problem"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(referrals) || !arrayContains(referrals, '057dae68-3d6f-4d79-926c-ed75a0ce7fd5')"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Transfer Out",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Transfer care to other centre",
+                            "questionOptions": {
+                                "concept": "a8a170e2-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Transfer care to other centre:",
+                                    "id": "transferOut",
+                                    "questionOptions": {
+                                        "concept": "a89c2e5c-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a89c2f42-1350-11df-a1f1-0026b9348838",
+                                                "label": "AMPATH"
+                                            },
+                                            {
+                                                "concept": "a89c301e-1350-11df-a1f1-0026b9348838",
+                                                "label": "Non-AMPATH"
+                                            },
+                                            {
+                                                "concept": "a8a17d80-1350-11df-a1f1-0026b9348838",
+                                                "label": "MCH"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "personAttribute",
+                                    "label": "Specify name of AMPATH clinic to which patient is being referred:",
+                                    "id": "transfered_out_to_ampath",
+                                    "required": "false",
+                                    "questionOptions": {
+                                        "rendering": "ui-select-extended",
+                                        "attributeType": "8d87236c-c2cc-11de-8d13-0010c6dffd0f"
+                                    },
+                                    "hide": {
+                                        "hideWhenExpression": "transferOut !== 'a89c2f42-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "If Non-AMPATH specify where the patient is being referred:",
+                                    "id": "transfered_out_to_non_ampath",
+                                    "required": "false",
+                                    "default": "",
+                                    "questionOptions": {
+                                        "rendering": "text",
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    "hide": {
+                                        "hideWhenExpression": "transferOut !== 'a89c301e-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.4",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

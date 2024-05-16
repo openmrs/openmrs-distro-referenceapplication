@@ -1,0 +1,131 @@
+{
+    "name": "component_other-medication",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Other medication",
+            "sections": [
+                {
+                    "label": "Other Medications",
+                    "questions": [
+                        {
+                            "label": "Please add any other medications the patient is taking",
+                            "type": "obsGroup",
+                            "questionOptions": {
+                                "concept": "a8a072c8-1350-11df-a1f1-0026b9348838",
+                                "rendering": "repeating"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Other drugs:",
+                                    "questionOptions": {
+                                        "concept": "a8a060c6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "drug"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Additional Medication Orders",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Additional medication orders",
+                            "questionOptions": {
+                                "rendering": "repeating",
+                                "concept": "a8a0654e-1350-11df-a1f1-0026b9348838"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Drug",
+                                    "questionOptions": {
+                                        "concept": "a8a060c6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "drug"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Frequency",
+                                    "questionOptions": {
+                                        "concept": "a8a06184-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "label": "Once a day",
+                                                "concept": "a8a05dc4-1350-11df-a1f1-0026b9348838"
+                                            },
+                                            {
+                                                "label": "Twice a day",
+                                                "concept": "a8a05aea-1350-11df-a1f1-0026b9348838"
+                                            },
+                                            {
+                                                "label": "Three times a day",
+                                                "concept": "a8a05b9e-1350-11df-a1f1-0026b9348838"
+                                            },
+                                            {
+                                                "label": "Four times a day",
+                                                "concept": "a8a05cfc-1350-11df-a1f1-0026b9348838"
+                                            },
+                                            {
+                                                "label": "As needed",
+                                                "concept": "9c1dcb23-dc0c-46b2-a755-875ab6d78fc2"
+                                            },
+                                            {
+                                                "label": "Other",
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "If tabs, number",
+                                    "questionOptions": {
+                                        "concept": "a8a0630a-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "number"
+                                    },
+                                    "type": "obs"
+                                },
+                                {
+                                    "label": "If caps, number",
+                                    "questionOptions": {
+                                        "concept": "ea404923-fe2b-4812-aec5-3be7fbe712f7",
+                                        "rendering": "number"
+                                    },
+                                    "type": "obs"
+                                },
+                                {
+                                    "label": "If mg, number",
+                                    "questionOptions": {
+                                        "concept": "a8a063c8-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "number"
+                                    },
+                                    "type": "obs"
+                                },
+                                {
+                                    "label": "If ml, number",
+                                    "questionOptions": {
+                                        "concept": "a8a08286-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "number"
+                                    },
+                                    "type": "obs"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "0.01",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}
