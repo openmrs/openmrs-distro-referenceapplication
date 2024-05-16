@@ -1,0 +1,137 @@
+{
+    "name": "component_morisky-adherence-score-v1.0",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Morisky Adherence",
+            "sections": [
+                {
+                    "label": "Morisky Adherence",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Do you ever forget to take your medicines? (0=No, 1=Yes)",
+                            "id": "forget",
+                            "questionOptions": {
+                                "concept": "99a99956-90b0-431e-a453-bf8efffeb7d3",
+                                "rendering": "number",
+                                "max": "1",
+                                "min": "0"
+                            },
+                            "type": "obs"
+                        },
+                        {
+                            "label": "Are you sometimes not keen about taking your medications? (0=No, 1=Yes)",
+                            "id": "notKeen",
+                            "questionOptions": {
+                                "concept": "26b3c8c9-20be-4585-98f7-c8b8bf2c9207",
+                                "rendering": "number",
+                                "max": "1",
+                                "min": "0"
+                            },
+                            "type": "obs"
+                        },
+                        {
+                            "label": "Do you stop taking medicine at times when you feel worse? (0=No, 1=Yes)",
+                            "id": "feelWorse",
+                            "questionOptions": {
+                                "concept": "ccffa130-12c6-45e8-a24a-b16c0395abd5",
+                                "rendering": "number",
+                                "max": "1",
+                                "min": "0"
+                            },
+                            "type": "obs"
+                        },
+                        {
+                            "label": "If you feel better, do you sometimes stop taking your medicine? (0=No, 1=Yes)",
+                            "id": "feelBetter",
+                            "questionOptions": {
+                                "concept": "f9eb1023-4cd7-47a7-87cd-b3353824c2c7",
+                                "rendering": "number",
+                                "max": "1",
+                                "min": "0"
+                            },
+                            "type": "obs"
+                        },
+                        {
+                            "label": "Did you forget to take your medicine yesterday? (0=No, 1=Yes)",
+                            "id": "medicineYesterday",
+                            "questionOptions": {
+                                "concept": "2860acd4-2391-4467-9e69-e848d1672f96",
+                                "rendering": "number",
+                                "max": "1",
+                                "min": "0"
+                            },
+                            "type": "obs"
+                        },
+                        {
+                            "label": "Do you sometimes stop taking medicine if you feel like your symptoms are under control? (0=No, 1=Yes)",
+                            "id": "symptomControl",
+                            "questionOptions": {
+                                "concept": "8fcb3ada-2188-4e0a-8c68-18c26fd123b2",
+                                "rendering": "number",
+                                "max": "1",
+                                "min": "0"
+                            },
+                            "type": "obs"
+                        },
+                        {
+                            "label": "Do you ever feel under pressure about sticking to your treatment plan? (0=No, 1=Yes)",
+                            "id": "underPressure",
+                            "questionOptions": {
+                                "concept": "87ba16a0-6f57-4b0b-a76e-753977f1ef7f",
+                                "rendering": "number",
+                                "max": "1",
+                                "min": "0"
+                            },
+                            "type": "obs"
+                        },
+                        {
+                            "label": "How often do you have difficulty remembering to take all your medication? (0=Never/Rarely, 1/4=Once in a while, 1/2=Sometimes, 3/4=Usually,1=All the time)",
+                            "id": "difficultyRemembering",
+                            "questionOptions": {
+                                "concept": "658523c7-77d2-4419-9633-eba789a7d64d",
+                                "rendering": "number",
+                                "max": "1",
+                                "min": "0"
+                            },
+                            "type": "obs"
+                        },
+                        {
+                            "label": "Morisky total score:",
+                            "id": "moriskyScore",
+                            "questionOptions": {
+                                "concept": "857caa4e-b566-4a43-ab78-f911c1a8a727",
+                                "rendering": "number",
+                                "max": "8",
+                                "min": "0",
+                                "calculate": {
+                                    "calculateExpression": "isNaN(parseFloat(difficultyRemembering) + parseFloat(underPressure) + parseFloat(symptomControl)+ parseFloat(medicineYesterday)+ parseFloat(feelBetter)+ parseFloat(feelWorse)+ parseFloat(notKeen)+ parseFloat(forget)) ? undefined: (parseFloat(difficultyRemembering) + parseFloat(underPressure) + parseFloat(symptomControl)+ parseFloat(medicineYesterday)+ parseFloat(feelBetter)+ parseFloat(feelWorse)+ parseFloat(notKeen)+ parseFloat(forget))"
+                                }
+                            },
+                            "type": "obs"
+                        },
+                        {
+                            "label": "Morisky score rating:",
+                            "id": "scoreMo",
+                            "questionOptions": {
+                                "concept": "",
+                                "rendering": "text",
+                                "calculate": {
+                                    "calculateExpression": "parseInt(moriskyScore) === 0 && parseFloat(moriskyScore) <= 0.25 ? 'Good' : parseFloat(moriskyScore) >=0.5 && parseInt(moriskyScore) <= 2 ? 'Inadequate' : parseInt(moriskyScore) >= 3 && parseInt(moriskyScore) <= 8 ? 'Poor' : 'Unknown'"
+                                }
+                            },
+                            "type": "control"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.0",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN",
+    "description": "component_morisky-adherence-score-v1.0"
+}
