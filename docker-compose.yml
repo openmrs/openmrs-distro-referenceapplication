@@ -9,6 +9,10 @@ services:
       - backend
     ports:
       - "80:80"
+  # add these lines for https
+  #      - "443:443"
+  #    volumes:
+  #      - ./nginx:/etc/nginx/conf.d
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
@@ -19,7 +23,7 @@ services:
       SPA_CONFIG_URLS: /openmrs/spa/config-core_demo.json
       SPA_DEFAULT_LOCALE:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/"]
+      test: [ "CMD", "curl", "-f", "http://localhost/" ]
       timeout: 5s
     depends_on:
       - backend
@@ -38,7 +42,7 @@ services:
       OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/openmrs" ]
       timeout: 5s
     volumes:
       - openmrs-data:/openmrs/data
