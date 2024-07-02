@@ -12,9 +12,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
 
       - name: Build and Run Containers
         run: docker-compose -f e2e_test_support_files/docker-compose-build.yml up -d
