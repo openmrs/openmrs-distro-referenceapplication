@@ -15,9 +15,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Extract version numbers from the spa-build-config.json file
-        id: refs
-        run: bash e2e_test_support_files/extract_tag_numbers.sh
 
       - name: Build and Run Containers
         run: docker-compose -f e2e_test_support_files/docker-compose-build.yml up -d
