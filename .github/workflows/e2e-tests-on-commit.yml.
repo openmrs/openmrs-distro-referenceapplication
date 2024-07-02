@@ -61,7 +61,7 @@ jobs:
         run: docker-compose up -d
         working-directory: e2e_test_support_files
 
-      - name: Checkout to the Repo's Head
+      - name: Checkout to the repo's main branch
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-patient-management
