@@ -1,0 +1,186 @@
+{
+  "name": "CD4 Lab Result",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "pages": [
+    {
+      "label": "CD4 Lab Result",
+      "sections": [
+        {
+          "label": "CD4 Lab Result",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Test Result Date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": ""
+              },
+              "id": "testResultDate",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                    }
+                  ]
+                },
+                {
+                  "intent": "CD4_LAB_RESULTS_EMBED",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "CD4 count",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "AMPATH",
+                    "value": "5497"
+                  },
+                  {
+                    "type": "LOINC",
+                    "value": "24467-3"
+                  },
+                  {
+                    "type": "IMO-ProcedureIT",
+                    "value": "923416"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "5497"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "313660005"
+                  },
+                  {
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "CD4 COUNT"
+                  }
+                ]
+              },
+              "id": "cd4Result",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "CD4_LAB_RESULTS_EMBED",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "CD4%",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "730AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "cd%",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "CD4_LAB_RESULTS_EMBED",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "5",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "161011"
+                  }
+                ]
+              },
+              "id": "notes",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                },
+                {
+                  "intent": "CD4_LAB_RESULTS_EMBED",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "availableIntents": [
+    {
+      "intent": "*",
+      "display": "CD4 Lab results"
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "uuid": "a66197de-419a-3223-8691-f70d36b1524b",
+  "referencedForms": [],
+  "encounterType": "96adb28e-e417-43a3-8f7d-682f8af5e912",
+  "encounter": "CD4 Lab results",
+  "allowUnspecifiedAll": true
+}
