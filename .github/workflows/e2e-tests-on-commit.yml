@@ -1,31 +1,17 @@
-name: Run E2E Tests on Release PRs
+name: Run E2E Tests on PRs and Commits
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.event.pull_request.title, '(release)') }}
-    outputs:
-      patient_management_ref: ${{steps.refs.outputs.patient_management}}
-      patient_chart_ref: ${{steps.refs.outputs.patient_chart}}
-      esm_core_ref: ${{steps.refs.outputs.esm_core}}
-      form_builder_ref: ${{steps.refs.outputs.form_builder}}
-      cohort_builder_ref: ${{steps.refs.outputs.cohort_builder}}
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Checkout to the release commit
-        run: git checkout 'HEAD^{/\(release\)}'
-
-      - name: Extract version numbers from the spa-build-config.json file
-        id: refs
-        run: bash e2e_test_support_files/extract_tag_numbers.sh
 
       - name: Build and Run Containers
         run: docker-compose -f e2e_test_support_files/docker-compose-build.yml up -d
@@ -69,11 +55,11 @@ jobs:
         run: docker-compose up -d
         working-directory: e2e_test_support_files
 
-      - name: Checkout to the Repo's Tag
+      - name: Checkout to the repo's main branch
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-patient-management
-          ref: ${{ needs.build.outputs.patient_management_ref }}
+          ref: main
           path: e2e_repo
 
       - name: Copy test environment variables
@@ -130,11 +116,11 @@ jobs:
         run: docker-compose up -d
         working-directory: e2e_test_support_files
 
-      - name: Checkout to the Repo's Tag
+      - name: Checkout to the repo's main branch
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-patient-chart
-          ref: ${{ needs.build.outputs.patient_chart_ref }}
+          ref: main
           path: e2e_repo
 
       - name: Copy test environment variables
@@ -191,11 +177,11 @@ jobs:
         run: docker-compose up -d
         working-directory: e2e_test_support_files
 
-      - name: Checkout to the Repo's Tag
+      - name: Checkout to the repo's main branch
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-form-builder
-          ref: ${{ needs.build.outputs.form_builder_ref }}
+          ref: main
           path: e2e_repo
 
       - name: Copy test environment variables
@@ -252,11 +238,11 @@ jobs:
         run: docker-compose up -d
         working-directory: e2e_test_support_files
 
-      - name: Checkout to the Repo's Tag
+      - name: Checkout to the repo's main branch
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-core
-          ref: ${{ needs.build.outputs.esm_core_ref }}
+          ref: main
           path: e2e_repo
 
       - name: Copy test environment variables
@@ -313,11 +299,11 @@ jobs:
         run: docker-compose up -d
         working-directory: e2e_test_support_files
 
-      - name: Checkout to the Repo's Tag
+      - name: Checkout to the repo's main branch
         uses: actions/checkout@v4
         with:
           repository: openmrs/openmrs-esm-cohortbuilder
-          ref: ${{ needs.build.outputs.cohort_builder_ref }}
+          ref: main
           path: e2e_repo
 
       - name: Copy test environment variables
