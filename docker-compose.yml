@@ -37,6 +37,9 @@ services:
       OMRS_CONFIG_CONNECTION_DATABASE: openmrs
       OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
+      OMRS_EXTRA_AUTHENTICATION_SUPPORT_FORCED_PASSWORD_CHANGE: "true"
+      OMRS_EXTRA_AUTHENTICATION_PASSWORD_CHANGE_URL: /openmrs/spa/change-password
+      OMRS_EXTRA_AUTHENTICATION_PASSWORD_WHITELIST: "*.js,*.css,*.woff,*.woff2,*.json,/openmrs/ws/rest/v1/session,/openmrs/ws/rest/v1/password"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
       timeout: 5s
