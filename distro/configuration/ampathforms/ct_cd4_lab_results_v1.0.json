@@ -14,40 +14,20 @@
             {
               "label": "Test Result Date",
               "type": "obs",
+              "required": false,
+              "id": "testResultDate",
+              "datePickerFormat": "both",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "weeksList": ""
-              },
-              "id": "testResultDate",
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
-                },
-                {
-                  "intent": "CD4_LAB_RESULTS_EMBED",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163724"
                   }
-                }
-              ]
+                ]
+              }
             },
             {
               "label": "CD4 count",
@@ -182,5 +162,6 @@
   "referencedForms": [],
   "encounterType": "96adb28e-e417-43a3-8f7d-682f8af5e912",
   "encounter": "CD4 Lab results",
-  "allowUnspecifiedAll": true
+  "allowUnspecifiedAll": true,
+  "description": "A form used to collect CD4 lab results"
 }

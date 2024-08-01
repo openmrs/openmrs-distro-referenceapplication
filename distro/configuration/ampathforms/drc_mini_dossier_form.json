@@ -1,0 +1,199 @@
+{
+  "name": "DRC Mini Dossier",
+  "pages": [
+    {
+      "label": "Psychosocial Care",
+      "sections": [
+        {
+          "label": "Interventions",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Need an intervention",
+              "type": "obs",
+              "required": true,
+              "id": "needAnIntervention",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "58984584-5183-492b-a265-58e893ca0dd3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type of psychological  intervention",
+              "type": "obs",
+              "required": true,
+              "id": "typeOfPsychologicalIntervention",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "6c3decb9-740f-4b8f-99e5-704fdb33b084",
+                "answers": [
+                  {
+                    "concept": "163316AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Family support"
+                  },
+                  {
+                    "concept": "162186AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Home visit requested by health facility"
+                  },
+                  {
+                    "concept": "6fc6b318-01b3-4322-a661-80b4a408fcfd",
+                    "label": "Legal services"
+                  },
+                  {
+                    "concept": "5484AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Nutritional support"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "079eb3c7-ae85-4d6c-84b0-d015836f810e",
+                    "label": "Patient education"
+                  },
+                  {
+                    "concept": "5490AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Psychosocial counseling"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Prophylaxis IO",
+      "sections": [
+        {
+          "label": "Medicines",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cotrimoxazole start date",
+              "type": "obs",
+              "required": false,
+              "id": "cotrimoxazoleStartDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164361AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "413946009"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "164361"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Cotrimoxazole stop date",
+              "type": "obs",
+              "required": false,
+              "id": "cotrimoxazoleStopDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164361AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "413946009"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "164361"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Reason for stopping Cotrimoxazole",
+              "type": "obs",
+              "required": false,
+              "id": "reasonForStop",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163513"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Fluconazole start date",
+              "type": "obs",
+              "required": false,
+              "id": "fluconazoleStartDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5ac4300a-5e19-45c8-8692-31a57d6d5b8c"
+              },
+              "validators": []
+            },
+            {
+              "label": "Fluconazole stop date",
+              "type": "obs",
+              "required": false,
+              "id": "fluconazoleStopDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "c2d57bcb-02f2-457d-af05-8d759a1457a7"
+              },
+              "validators": []
+            },
+            {
+              "label": "Reason for stopping Fluconazole",
+              "type": "obs",
+              "required": false,
+              "id": "reasonForStoppingFluconazole",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163513"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "7e54cd64-f9c3-11eb-8e6a-57478ce139b0",
+  "referencedForms": [],
+  "uuid": "8909ebad-9245-4624-aaaa-0e6289c0240e",
+  "description": "This form captures info about the client around psychosocial care",
+  "version": "1"
+}

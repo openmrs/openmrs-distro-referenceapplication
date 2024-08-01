@@ -14,39 +14,20 @@
             {
               "label": "Test Result Date",
               "type": "obs",
+              "required": false,
+              "id": "testResultDate",
+              "datePickerFormat": "both",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "163724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "weeksList": ""
-              },
-              "id": "testResultDate",
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
-                },
-                {
-                  "intent": "VIRAL_LOAD_LAB_RESULTS_EMBED",
-                  "required": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163724"
                   }
-                }
-              ]
+                ]
+              }
             },
             {
               "label": "Reason for viral Load",
@@ -385,5 +366,6 @@
   "referencedForms": [],
   "encounterType": "41af1931-184e-45f8-86ca-d42e0db0b8a1",
   "encounter": "Viral Load results",
-  "allowUnspecifiedAll": true
+  "allowUnspecifiedAll": true,
+  "description": "A form used to collect the viral load lab result"
 }
