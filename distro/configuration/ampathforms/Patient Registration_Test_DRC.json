@@ -1,0 +1,191 @@
+{
+  "name": "Patient Registration_Test_DRC",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "pages": [
+    {
+      "label": "Patient info",
+      "sections": [
+        {
+          "label": "Patient details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Marital status",
+              "type": "obs",
+              "required": true,
+              "id": "maritalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH Malawi",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "365581002"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3350"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
+                  },
+                  {
+                    "concept": "135704AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lives alone"
+                  },
+                  {
+                    "concept": "1060AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Living with partner"
+                  },
+                  {
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
+                  },
+                  {
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never married"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Separated"
+                  },
+                  {
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "HIV test date",
+              "type": "obs",
+              "required": false,
+              "id": "hivTestDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "164400"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Hepatitis B screening",
+              "type": "obs",
+              "required": false,
+              "id": "hepatitisBScreening",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6032AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "6805"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "ICD-10-WHO",
+                    "value": "K76.9"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "IMO ProblemIT",
+                    "value": "195033"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "6032"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "6032"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "235856003"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Hepatitis B results",
+              "type": "obs",
+              "required": false,
+              "id": "hepatitisBResults",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "192f67ac-247c-4e1d-966a-4c223e33d38b",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+  "encounter": "Admission",
+  "allowUnspecifiedAll": false,
+  "referencedForms": [],
+  "uuid": "1f11a80b-2fd2-425e-9294-7e4905a56e36",
+  "description": "captures patient data"
+}
