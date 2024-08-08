@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.6.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Run Ansible Playbook
+        run: |
+          ssh -o StrictHostKeyChecking=no mpower@123.200.18.24 "/home/mpower/ansible-virtualenv/bin/ansible-playbook -i /home/mpower/cicd-openmrs-docker/hosts /home/mpower/cicd-openmrs-docker/cicd.yml"
