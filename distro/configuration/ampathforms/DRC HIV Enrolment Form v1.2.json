@@ -117,25 +117,6 @@
               "id": "patientIdentifier"
             },
             {
-              "label": "Other Unique ID",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "162727AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
-                }
-              ],
-              "id": "otherUniquePatientIdentifier"
-            },
-            {
               "label": "Entry Point",
               "type": "obs",
               "questionOptions": {
@@ -442,9 +423,141 @@
           ]
         },
         {
-          "label": "Population Category",
+          "label": "Social Status",
           "isExpanded": "true",
           "questions": [
+            {
+              "label": "Education Level",
+              "type": "obs",
+              "required": false,
+              "id": "educationLevel",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "1688"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1605"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "82589-3"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANC-DAK",
+                    "value": "ANC.B6.DE1"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1712"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "105421008"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "160294AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No formal education"
+                  },
+                  {
+                    "concept": "159785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "College/university/polytechnic"
+                  },
+                  {
+                    "concept": "1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Primary school education"
+                  },
+                  {
+                    "concept": "1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Secondary school education"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Marital Status",
+              "type": "obs",
+              "required": false,
+              "id": "maritalStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "365581002"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3350"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
+                  },
+                  {
+                    "concept": "135704AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lives alone"
+                  },
+                  {
+                    "concept": "1060AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Living with partner"
+                  },
+                  {
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
+                  },
+                  {
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never married"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Separated"
+                  },
+                  {
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
+                  }
+                ]
+              }
+            },
             {
               "label": "Population Category",
               "type": "obs",
@@ -1000,31 +1113,13 @@
             {
               "label": "Date Confirmed HIV Positive",
               "type": "obs",
+              "required": false,
+              "id": "hivDiagnosisDate",
+              "datePickerFormat": "both",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "160554AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
-                }
-              ],
-              "id": "hivDiagnosisDate"
+              }
             },
             {
               "label": "Test Type",
@@ -1102,23 +1197,14 @@
               "id": "diagnosticHivTestType"
             },
             {
-              "label": "Test Location",
+              "label": "HIV Testing Center",
               "type": "obs",
+              "required": false,
+              "id": "diagnosisLocation",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "c4768674-0c26-4353-8a3f-608e7b40ac57"
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
-                }
-              ],
-              "id": "diagnosisLocation"
+              }
             }
           ]
         }
@@ -1140,8 +1226,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Use of Pre Exposure Prophylaxis (PrEP)",
+              "label": "Use of ARVs for Pre Exposure Prophylaxis (PrEP)",
               "type": "obs",
+              "required": false,
+              "id": "previousUseOfPrep",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "5d397775-0155-4033-95dc-edcec98e8190",
@@ -1209,18 +1297,7 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
-                }
-              ],
-              "id": "previousUseOfPrep"
+              }
             },
             {
               "label": "Date Last Used",
@@ -1252,8 +1329,10 @@
               "id": "datePrepLastUsed"
             },
             {
-              "label": "Use of Post exposure prophylaxis (PEP)",
+              "label": "Use of ARVs for Post exposure prophylaxis (PEP)",
               "type": "obs",
+              "required": false,
+              "id": "previousUseOfPep",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "8bfdc328-1970-446c-9d7b-97d62703801b",
@@ -1308,18 +1387,7 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
-                }
-              ],
-              "id": "previousUseOfPep"
+              }
             },
             {
               "label": "Date Last Used",
@@ -1351,8 +1419,10 @@
               "id": "datePepLastUsed"
             },
             {
-              "label": "ARV Use for Management of Hepatitis",
+              "label": "Use of ARVs for Management of Hepatitis",
               "type": "obs",
+              "required": false,
+              "id": "useOfArvsForHepatitis",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "906ed69c-949b-47b5-b469-2205f0da473a",
@@ -1407,18 +1477,7 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
-                }
-              ],
-              "id": "useOfArvs"
+              }
             },
             {
               "label": "Date Last Used",
@@ -1450,8 +1509,10 @@
               "id": "dateHepBLastUsed"
             },
             {
-              "label": "ART Use for Prevention of Mother to Child Transmission of HIV",
+              "label": "Use of ARVs for Prevention of Mother to Child Transmission of HIV",
               "type": "obs",
+              "required": false,
+              "id": "useOfArvsForPMTCT",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "163532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -1506,18 +1567,7 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
-                }
-              ],
-              "id": "previousUseOfArt"
+              }
             },
             {
               "label": "Date Last Used",
@@ -2046,10 +2096,10 @@
       ]
     },
     {
-      "label": "Re-enrollment",
+      "label": "Re-enrolment",
       "sections": [
         {
-          "label": "Re-enrollment Details",
+          "label": "Re-enrolment Details",
           "isExpanded": "true",
           "questions": [
             {
