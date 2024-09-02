@@ -1,0 +1,202 @@
+// main.scss
+@import "variables";
+//@import "global";
+// import more custom files...
+@mixin font($weight, $size) {
+  font-family: var(--font-family);
+  font-style: var(--font-style);
+  font-weight: $weight;
+  // font-size:$size;
+}
+@mixin margintop($margintop) {
+  margin-top: $margintop;
+}
+@mixin marginleft($marginleft) {
+  margin-left: $marginleft;
+}
+@mixin marginright($marginright) {
+  margin-right: $marginright;
+}
+
+.login-header {
+  @include font(700, 2rem);
+  margin-top: 45px;
+  color: var(--color-darkBlue);
+}
+.login-para {
+  @include font(500, 1rem);
+  color: var(--color-gray);
+  margin: auto;
+}
+.language-div {
+  box-sizing: border-box;
+
+  /* Auto layout */
+  @include margintop(0rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px 10px;
+  gap: 0.25rem;
+
+  position: absolute;
+  left: calc(50% - 108px / 2 + 212px);
+
+  background: var(--color-offWhite);
+  /* Divider */
+
+  border: 0.770833px solid rgba(178, 175, 190, 0.2);
+  border-radius: 0.5rem;
+}
+.div {
+  background: var(--color-white);
+}
+.form {
+  @include marginleft(4.375rem);
+  @include marginright(4.375rem);
+}
+.language-dropdown {
+  @include font(400, 1rem);
+  color: var(--color-darkestBlue);
+  background: var(--color-offWhite);
+}
+
+.btn-darkblue {
+  @include margintop(1.0rem);
+  background: var(--color-darkBlue);
+  border-radius: 0.75rem;
+  @include font(700, 1.125rem);
+  color: var(--color-white);
+
+  height: 3.0rem;
+}
+
+.btn-small-darkblue {
+  background: var(--color-darkBlue);
+  border-radius: 0.75rem;
+  @include font(700, 1.125rem);
+  color: var(--color-white);
+  height: 3rem;
+  margin-left: 10px;
+}
+
+.btn-close {
+  width: 4rem;
+  height: 1.688rem;
+  @include font(700, 1.125rem);
+  font-style: var(--font-style);
+  line-height: 150%;
+  border: none;
+  /* Text/Light */
+
+  color: var(--color-gray);
+}
+
+.btn-help {
+  background: var(--color-green);
+  box-shadow: 0px 4px 16px rgba(15, 209, 151, 0.32);
+  border-radius: 80px;
+  color: var(--color-white);
+  @include font(500, 1.125rem);
+  line-height: 215%;
+  width: 44%;
+}
+
+.link-forgot-username {
+  @include font(400, 0.875rem);
+  text-decoration-line: underline;
+  color: var(--color-gray);
+}
+
+.lbl-username {
+  @include font(500, 0.875rem);
+  line-height: 150%;
+  color: var(--color-darkestBlue);
+}
+.error-message {
+  @include font(500, 0.875rem);
+  line-height: 150%;
+  color: var(--color-red);
+}
+.copy-right-text {
+  @include font(400, 0.75rem);
+  line-height: 150%;
+  align-items: center;
+  text-align: center;
+  color: var(--color-white);
+}
+.btn-no-boarder {
+  border: none;
+  background-color: transparent;
+  color: var(--color-darkBlue);
+  @include font(700, 1rem);
+  line-height: 150%;
+}
+
+.btn-otp {
+  padding: 0.75rem 1.5rem;
+  gap: 3rem;
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-offWhite);
+  border: 0.770833px solid rgba(178, 175, 190, 0.2);
+  border-radius: 8px;
+}
+.btn-cross-close {
+  font-family: var(--font-family);
+  font-style: var(--font-style);
+  border: none;
+  color: var(--color-gray);
+  background-color: var(--color-white);
+}
+.label-no-internet {
+  @include font(700, 1.5rem);
+  line-height: 150%;
+  /* identical to box height, or 36px */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* Text/Dark */
+  color: var(--color-darkestBlue);
+}
+.btn-view{
+  @include font(700,1.125rem);
+  color: var(--color-darkBlue);
+  background: #EFE8FF;
+  width: 10.25rem;
+  height: 3rem;
+  border: none;
+  border-radius: 8px;
+}
+
+.text-setup{
+@include font(700,1.125rem);
+line-height: 150%;
+color: var(--color-darkestBlue);
+}
+.text-working-days
+{
+@include font(700,1.125rem);
+color: var(--color-darkBlue);
+align-items: left;
+margin-top: 1rem;
+margin-left: 1rem;
+
+}
+.label-start-date{
+  @include font(500,0.875rem);
+  color: var(--color-darkestBlue);
+  line-height: 150%;
+}
+
+.btn-gray {
+  @include margintop(1.0rem);
+  background: var(--color-gray);
+  border-radius: 0.75rem;
+  @include font(700, 1.125rem);
+  color: var(--color-white);
+
+  height: 3.0rem;
+}
