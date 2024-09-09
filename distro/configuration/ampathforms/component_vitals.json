@@ -1,0 +1,131 @@
+{
+    "name": "component_vitals",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Vitals",
+            "sections": [
+                {
+                    "label": "Vital Signs",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "BP systolic:",
+                            "id": "syst",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a65d5a-1350-11df-a1f1-0026b9348838",
+                                "max": "250",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "BP diastolic:",
+                            "id": "dias",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a65e36-1350-11df-a1f1-0026b9348838",
+                                "max": "200",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Pulse (Rate/min):",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a65f12-1350-11df-a1f1-0026b9348838",
+                                "max": "230",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Temp (C):",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a65fee-1350-11df-a1f1-0026b9348838",
+                                "max": "43",
+                                "min": "25"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Weight (Kg):",
+                            "id": "weight",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a660ca-1350-11df-a1f1-0026b9348838",
+                                "max": "250",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Height (Cm):",
+                            "id": "height",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a6619c-1350-11df-a1f1-0026b9348838",
+                                "max": "228",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Sp02:",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a8a66354-1350-11df-a1f1-0026b9348838",
+                                "max": "100",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "BMI (Kg/m2):",
+                            "id": "bmi",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a89c60c0-1350-11df-a1f1-0026b9348838",
+                                "max": "100",
+                                "min": "0",
+                                "calculate": {
+                                    "calculateExpression": "calcBMI(height,weight)"
+                                }
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "MUAC:",
+                            "id": "muac",
+                            "questionOptions": {
+                                "rendering": "number",
+                                "concept": "a89c6188-1350-11df-a1f1-0026b9348838",
+                                "max": "450",
+                                "min": "60"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "0.01",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN",
+    "description": "component_vitals"
+}

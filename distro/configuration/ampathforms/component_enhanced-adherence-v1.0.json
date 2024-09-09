@@ -1,0 +1,672 @@
+{
+    "name": "component_enhanced-adherence-v1.0",
+    "processor": "EncounterFormProcessor",
+    "uuid": "xxxx",
+    "referencedForms": [],
+    "pages": [
+        {
+            "label": "Enhanced Adherence",
+            "sections": [
+                {
+                    "label": "Enhanced Adherence",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Has a home visit been done?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('fe6800a2-76f1-42a4-a1c8-553e1fec18e9')) ? undefined : HD.getObject('prevEnc').getValue('fe6800a2-76f1-42a4-a1c8-553e1fec18e9')",
+                            "id": "homeVisit",
+                            "questionOptions": {
+                                "concept": "fe6800a2-76f1-42a4-a1c8-553e1fec18e9",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "If yes, number of visits:",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('7458141a-2cb6-4425-8e51-1d4f0a858683')) ? undefined : HD.getObject('prevEnc').getValue('7458141a-2cb6-4425-8e51-1d4f0a858683')",
+                            "id": "noVisits",
+                            "questionOptions": {
+                                "concept": "7458141a-2cb6-4425-8e51-1d4f0a858683",
+                                "answers": [],
+                                "rendering": "number",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(homeVisit) && homeVisit === 'a899b35c-1350-11df-a1f1-0026b9348838' && isEmpty(myValue)",
+                                    "message": "Home visit was done. Please indicate number of visits."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "homeVisit !== 'a899b35c-1350-11df-a1f1-0026b9348838' ||  onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "If yes, what were the findings:",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('743bee17-bb4d-4bf5-bbfe-a58a7cca5a3f')) ? undefined : HD.getObject('prevEnc').getValue('743bee17-bb4d-4bf5-bbfe-a58a7cca5a3f')",
+                            "id": "homeVisitFinindgs",
+                            "questionOptions": {
+                                "concept": "743bee17-bb4d-4bf5-bbfe-a58a7cca5a3f",
+                                "answers": [],
+                                "rendering": "text"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(homeVisit) && homeVisit === 'a899b35c-1350-11df-a1f1-0026b9348838' && isEmpty(myValue)",
+                                    "message": "Home visit was done. Please indicate findings."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "homeVisit !== 'a899b35c-1350-11df-a1f1-0026b9348838' ||  onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "If no, wish to refer to the social worker:",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('6ada1724-aab2-4b78-af41-91498d211ca2')) ? undefined : HD.getObject('prevEnc').getValue('6ada1724-aab2-4b78-af41-91498d211ca2')",
+                            "id": "socialworkRef",
+                            "questionOptions": {
+                                "concept": "6ada1724-aab2-4b78-af41-91498d211ca2",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(homeVisit) && homeVisit === 'a899b42e-1350-11df-a1f1-0026b9348838' && isEmpty(myValue)",
+                                    "message": "Home visit was not done. Please refer client to social work."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "homeVisit !== 'a899b42e-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "What are the support structures in place?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a7958e13-c78c-4085-9fdf-b475d602b2b8')) ? undefined : HD.getObject('prevEnc').getValue('a7958e13-c78c-4085-9fdf-b475d602b2b8')",
+                            "id": "supportStructures",
+                            "questionOptions": {
+                                "concept": "a7958e13-c78c-4085-9fdf-b475d602b2b8",
+                                "answers": [
+                                    {
+                                        "concept": "01b957da-23bb-4862-819d-036364fe3faf",
+                                        "label": "Treatment supporter"
+                                    },
+                                    {
+                                        "concept": "a89e2df6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Support group"
+                                    },
+                                    {
+                                        "concept": "a89cd280-1350-11df-a1f1-0026b9348838",
+                                        "label": "Caregiver"
+                                    },
+                                    {
+                                        "concept": "a8b03bb8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Family"
+                                    },
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Has directly observed treatment (DOT) been done?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('4b3c4263-9f86-4f3c-985b-1a71e2a57495')) ? undefined : HD.getObject('prevEnc').getValue('4b3c4263-9f86-4f3c-985b-1a71e2a57495')",
+                            "id": "priorDotDone",
+                            "questionOptions": {
+                                "concept": "4b3c4263-9f86-4f3c-985b-1a71e2a57495",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Number of directly observed treatment (DOT) done (days):",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('438c22e0-fcb9-4737-b3a6-55cc1f391e0c')) ? undefined : HD.getObject('prevEnc').getValue('438c22e0-fcb9-4737-b3a6-55cc1f391e0c')",
+                            "id": "dotDone",
+                            "questionOptions": {
+                                "concept": "438c22e0-fcb9-4737-b3a6-55cc1f391e0c",
+                                "answers": [],
+                                "rendering": "number",
+                                "min": "0"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(priorDotDone) && priorDotDone === 'a899b35c-1350-11df-a1f1-0026b9348838' && isEmpty(myValue)",
+                                    "message": "DOT was done. Please indicate number of DOTs done."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "priorDotDone !== 'a899b35c-1350-11df-a1f1-0026b9348838' || onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838' || !arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Likely causes of poor adherence: (Choose all that apply)",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a89ebbc2-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a89ebbc2-1350-11df-a1f1-0026b9348838')",
+                            "id": "poorAdherence",
+                            "questionOptions": {
+                                "concept": "a89ebbc2-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89eba46-1350-11df-a1f1-0026b9348838",
+                                        "label": "Stigma"
+                                    },
+                                    {
+                                        "concept": "945f0a33-dd89-4ca4-9eb3-d74128a2adc8",
+                                        "label": "School related stigma"
+                                    },
+                                    {
+                                        "concept": "b858568f-c722-411d-85ca-97d46bc98b3c",
+                                        "label": "Home related stigma"
+                                    },
+                                    {
+                                        "concept": "24ff3f30-b7ff-4464-b1b3-fda5ed5714a3",
+                                        "label": "Improper disclosure to child"
+                                    },
+                                    {
+                                        "concept": "e91a0b75-133d-4aae-81c9-2b4423e48379",
+                                        "label": "Inadequate supervision"
+                                    },
+                                    {
+                                        "concept": "a89d25fa-1350-11df-a1f1-0026b9348838",
+                                        "label": "Child refusing to take drugs"
+                                    },
+                                    {
+                                        "concept": "6a377e01-fa40-4ac2-98a9-0cb09cfbea36",
+                                        "label": "Pill related size"
+                                    },
+                                    {
+                                        "concept": "1c811199-3cc1-4495-8e05-980bebb045ab",
+                                        "label": "Pill taste"
+                                    },
+                                    {
+                                        "concept": "53956fb4-d7d9-438c-addf-c5f67b2a3866",
+                                        "label": "Pill color"
+                                    },
+                                    {
+                                        "concept": "ecafa614-49c5-4eba-84c7-b85b0d9e2c46",
+                                        "label": "Pill burden"
+                                    },
+                                    {
+                                        "concept": "a89ecaa4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Disclosure"
+                                    },
+                                    {
+                                        "concept": "a89eb8c0-1350-11df-a1f1-0026b9348838",
+                                        "label": "Side effects"
+                                    },
+                                    {
+                                        "concept": "a89ced88-1350-11df-a1f1-0026b9348838",
+                                        "label": "Alcohol"
+                                    },
+                                    {
+                                        "concept": "a89ebb04-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other drugs"
+                                    },
+                                    {
+                                        "concept": "a890b810-1350-11df-a1f1-0026b9348838",
+                                        "label": "Mental health issues"
+                                    },
+                                    {
+                                        "concept": "a8935fde-1350-11df-a1f1-0026b9348838",
+                                        "label": "Depression"
+                                    },
+                                    {
+                                        "concept": "abf95bf2-c481-490f-9e9f-84fa2d7b2f8c",
+                                        "label": "Caregiver changes"
+                                    },
+                                    {
+                                        "concept": "a89e3396-1350-11df-a1f1-0026b9348838",
+                                        "label": "Religious beliefs"
+                                    },
+                                    {
+                                        "concept": "b5c3006f-97fd-466f-b4ab-596e23ddc4d9",
+                                        "label": "Inadequate treatment preparation"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'|| !arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "type": "obsGroup",
+                            "label": "Poor adherence",
+                            "questionOptions": {
+                                "concept": "04edb08f-d1fd-43ac-98b1-adc5e7d73ba1",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "If other causes of poor adherence, explain:",
+                                    "id": "otherCausesSpecify",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "answers": [],
+                                        "rendering": "text"
+                                    },
+                                    "type": "obs",
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(poorAdherence) && arrayContainsAny(['a8aaf3e2-1350-11df-a1f1-0026b9348838'], poorAdherence) && isEmpty(myValue)",
+                                            "message": "Other selected as cause of poor adherence. Please indicate the cause."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(poorAdherence) || !arrayContainsAny(['a8aaf3e2-1350-11df-a1f1-0026b9348838'], poorAdherence)"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Is patient enrolled in support group?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('ed1e7a5d-a9f4-4adf-a033-4e895409fafe')) ? undefined : HD.getObject('prevEnc').getValue('ed1e7a5d-a9f4-4adf-a033-4e895409fafe')",
+                            "id": "supportGroupEnroll",
+                            "questionOptions": {
+                                "concept": "ed1e7a5d-a9f4-4adf-a033-4e895409fafe",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "If no, wishes to enroll?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('c796c49d-2e33-40c4-aadd-c5508e733c30')) ? undefined : HD.getObject('prevEnc').getValue('c796c49d-2e33-40c4-aadd-c5508e733c30')",
+                            "id": "wishesToEnroll",
+                            "questionOptions": {
+                                "concept": "c796c49d-2e33-40c4-aadd-c5508e733c30",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(supportGroupEnroll) && supportGroupEnroll === 'a899b42e-1350-11df-a1f1-0026b9348838' && isEmpty(myValue)",
+                                    "message": "Patient is not enrolled in any group. Please indicate if they wish to enroll in any group."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "supportGroupEnroll !== 'a899b42e-1350-11df-a1f1-0026b9348838' || onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "If yes, name of support group:",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('aab3dcc5-f984-45d2-b0c4-7a3ba746951b')) ? undefined : HD.getObject('prevEnc').getValue('aab3dcc5-f984-45d2-b0c4-7a3ba746951b')",
+                            "id": "supportGroupName",
+                            "questionOptions": {
+                                "concept": "aab3dcc5-f984-45d2-b0c4-7a3ba746951b",
+                                "answers": [],
+                                "rendering": "text"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(supportGroupEnroll) && supportGroupEnroll === 'a8aaf3e2-1350-11df-a1f1-0026b9348838' && isEmpty(myValue)",
+                                    "message": "Patient is enrolled in a group. Please indicate name of the group."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "supportGroupEnroll !== 'a8aaf3e2-1350-11df-a1f1-0026b9348838' || onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Has age appropriate disclosure been completed?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('6a40a88b-555e-4d7e-b7ce-db677a02609f')) ? undefined : HD.getObject('prevEnc').getValue('6a40a88b-555e-4d7e-b7ce-db677a02609f')",
+                            "id": "childDisclosure",
+                            "questionOptions": {
+                                "concept": "6a40a88b-555e-4d7e-b7ce-db677a02609f",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "age>=18 || !arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Has a pill count been done?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('067e6d30-4962-46eb-9090-be55478d4afd')) ? undefined : HD.getObject('prevEnc').getValue('067e6d30-4962-46eb-9090-be55478d4afd')",
+                            "id": "pillCountDone",
+                            "questionOptions": {
+                                "concept": "067e6d30-4962-46eb-9090-be55478d4afd",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "If yes, what are the findings:",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('9bf98c27-1821-407f-9c06-5609357f3698')) ? undefined : HD.getObject('prevEnc').getValue('9bf98c27-1821-407f-9c06-5609357f3698')",
+                            "id": "pillCountFindings",
+                            "questionOptions": {
+                                "concept": "9bf98c27-1821-407f-9c06-5609357f3698",
+                                "answers": [
+                                    {
+                                        "concept": "5b1bf823-da30-4e23-a777-0d8ef93a6211",
+                                        "label": "Accurate"
+                                    },
+                                    {
+                                        "concept": "64433aeb-81fb-43a5-be42-3efce1692063",
+                                        "label": "Missed doses"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(pillCountDone) && pillCountDone === 'a899b35c-1350-11df-a1f1-0026b9348838' && isEmpty(myValue)",
+                                    "message": "Pill count done. Indicate the findings."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "pillCountDone !== 'a899b35c-1350-11df-a1f1-0026b9348838' || onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Other possible causes of treatment failure:",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('bc764345-2e57-42f5-aee9-c7d5bd012c97')) ? undefined : HD.getObject('prevEnc').getValue('bc764345-2e57-42f5-aee9-c7d5bd012c97')",
+                            "id": "treatmentFailure",
+                            "questionOptions": {
+                                "concept": "bc764345-2e57-42f5-aee9-c7d5bd012c97",
+                                "answers": [
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    },
+                                    {
+                                        "concept": "4a98eaa4-e5df-4e76-9b58-5191d61666eb",
+                                        "label": "Inadequate dosing/dose adjustments"
+                                    },
+                                    {
+                                        "concept": "01eedbcc-ea21-40cc-b150-fcaca5eef501",
+                                        "label": "Drug-drug interaction"
+                                    },
+                                    {
+                                        "concept": "c6f38251-5b52-489c-854e-ec2d3994a6cd",
+                                        "label": "Drug-food interaction"
+                                    },
+                                    {
+                                        "concept": "cfef32f6-2807-427e-9607-1397e8d7e347",
+                                        "label": "Impaired absorption (such as chronic severe diarrhea)"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "If drug causes treatment failure, indicate drug:",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('1682a920-c93d-4aad-b9cb-4a2b2c41ff1a')) ? undefined : HD.getObject('prevEnc').getValue('1682a920-c93d-4aad-b9cb-4a2b2c41ff1a')",
+                            "id": "drugCausingFailure",
+                            "questionOptions": {
+                                "concept": "1682a920-c93d-4aad-b9cb-4a2b2c41ff1a",
+                                "rendering": "drug"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "treatmentFailure !== '01eedbcc-ea21-40cc-b150-fcaca5eef501' || onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'|| !arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Does this patient have other co morbidities?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a8b010e8-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a8b010e8-1350-11df-a1f1-0026b9348838')",
+                            "id": "coMorbidities",
+                            "questionOptions": {
+                                "concept": "a8b010e8-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a8935f0c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Convulsive disease"
+                                    },
+                                    {
+                                        "concept": "a890b810-1350-11df-a1f1-0026b9348838",
+                                        "label": "Mental health disorders"
+                                    },
+                                    {
+                                        "concept": "a893436e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Diabetes"
+                                    },
+                                    {
+                                        "concept": "a8ad5254-1350-11df-a1f1-0026b9348838",
+                                        "label": "Renal disease"
+                                    },
+                                    {
+                                        "concept": "a8ad516e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Liver disease"
+                                    },
+                                    {
+                                        "concept": "a8986880-1350-11df-a1f1-0026b9348838",
+                                        "label": "Hypertention"
+                                    },
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Has drug resistance test (DRT) been done?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('2ae99396-0e12-463f-8968-1cba7cf24bc0')) ? undefined : HD.getObject('prevEnc').getValue('2ae99396-0e12-463f-8968-1cba7cf24bc0')",
+                            "id": "dstDone",
+                            "questionOptions": {
+                                "concept": "2ae99396-0e12-463f-8968-1cba7cf24bc0",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "If DRT result available, upload image:",
+                            "type": "obs",
+                            "default": "",
+                            "id": "dstImage",
+                            "questionOptions": {
+                                "concept": "8ec7c519-502e-46ea-8a98-181ed5a088be",
+                                "rendering": "file"
+                            },
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(dstDone) && dstDone === 'a899b35c-1350-11df-a1f1-0026b9348838' && isEmpty(myValue)",
+                                    "message": "DST was done.Please upload the image for the results."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "dstDone !== 'a899b35c-1350-11df-a1f1-0026b9348838' || onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "Has an MDT been done?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('946dabee-3079-4dd1-9f84-1a1ab5507a26')) ? undefined : HD.getObject('prevEnc').getValue('946dabee-3079-4dd1-9f84-1a1ab5507a26')",
+                            "id": "mdtDone",
+                            "questionOptions": {
+                                "concept": "946dabee-3079-4dd1-9f84-1a1ab5507a26",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31','161f3383-65d8-4c19-9554-52ee5c3d43ff','44032888-08e1-4900-b9dd-7d236d79276c','1d7cc708-11cd-4c9c-b51d-ca7eecfe7c7e'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "label": "If No, wish to refer?",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('88a8c7d1-95ac-4aa4-8058-df99a3598390')) ? undefined : HD.getObject('prevEnc').getValue('88a8c7d1-95ac-4aa4-8058-df99a3598390')",
+                            "id": "wishRefertoMDT",
+                            "questionOptions": {
+                                "concept": "88a8c7d1-95ac-4aa4-8058-df99a3598390",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "mdtDone !== 'a899b42e-1350-11df-a1f1-0026b9348838' || onArt!== 'a899b35c-1350-11df-a1f1-0026b9348838'||!arrayContains(['6c5d74f4-943f-489a-b1c4-b2accfae92fb','53954785-4d53-4012-8f30-1c37fa870906','53b856ad-21ef-4745-9acd-81aca01bba31'],visitTypeUuid)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.0",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN",
+    "description": "component_enhanced-adherence-v1.0"
+}

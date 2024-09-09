@@ -1,0 +1,395 @@
+{
+    "name": "component_ob-history-1.5",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "OB/Gyn History",
+            "sections": [
+                {
+                    "label": "OB/Gyn History",
+                    "questions": [
+                        {
+                            "label": "Menstruation status:",
+                            "id": "menStatus",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a8a185d2-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a8a185d2-1350-11df-a1f1-0026b9348838')",
+                            "questionOptions": {
+                                "concept": "a8a185d2-1350-11df-a1f1-0026b9348838",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Normal",
+                                        "concept": "a899e7b4-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "Postmenopausal",
+                                        "concept": "5cc1c1a7-dfcc-47dc-ad73-c386c188fad8"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F'"
+                            }
+                        },
+                        {
+                            "label": "LMP:",
+                            "id": "lastPeriod",
+                            "questionInfo": "Record the date for the last menstrual period that the patient had.",
+                            "questionOptions": {
+                                "concept": "a89ff758-1350-11df-a1f1-0026b9348838",
+                                "rendering": "date"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "date"
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F'"
+                            }
+                        },
+                        {
+                            "label": "Pregnancy status:",
+                            "id": "pregStatus",
+                            "questionInfo": "Indicate if the patient is currently pregnant or has had a pregnancy a while back.",
+                            "questionOptions": {
+                                "concept": "6b4f1d00-0a27-41dd-a299-fb7dc730819c",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "a89d109c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Pregnant"
+                                    },
+                                    {
+                                        "concept": "aa9895bc-1971-4926-b7a3-67b5fba1b2d5",
+                                        "label": "Not pregnant"
+                                    },
+                                    {
+                                        "concept": "a890a33e-1350-11df-a1f1-0026b9348838",
+                                        "label": "Recently induced arbotion"
+                                    },
+                                    {
+                                        "concept": "a890a1b8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Recently miscarriage"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F'"
+                            }
+                        },
+                        {
+                            "label": "EDD:",
+                            "id": "deliveryDate",
+                            "questionInfo": "Enter the date that the mother is expected to have baby delivered.",
+                            "questionOptions": {
+                                "concept": "a8aaddbc-1350-11df-a1f1-0026b9348838",
+                                "rendering": "date"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "date",
+                                    "allowFutureDates": "true"
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "(new moment(encDate)).isAfter((new moment(myValue)), 'day') || (new moment(encDate)).isSame((new moment(myValue)), 'day')",
+                                    "message": "EDD should be greater than the encounter date."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F' || pregStatus !== 'a89d109c-1350-11df-a1f1-0026b9348838' "
+                            }
+                        },
+                        {
+                            "label": "Delivered since last visit? (If yes, fill out pMTCT form)",
+                            "id": "lastDelivery",
+                            "questionOptions": {
+                                "concept": "a89a94ca-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F'"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "STI",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Do you have any of the following:",
+                            "required": "true",
+                            "questionOptions": {
+                                "concept": "a8b00562-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a8982b54-1350-11df-a1f1-0026b9348838",
+                                        "label": "Genital ulcers"
+                                    },
+                                    {
+                                        "concept": "a8ad3062-1350-11df-a1f1-0026b9348838",
+                                        "label": "Urethral discharge"
+                                    },
+                                    {
+                                        "concept": "a8ad2eb4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Vaginal discharge"
+                                    },
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "STI partner notification:",
+                            "questionOptions": {
+                                "concept": "7d7e1c44-a0d5-44ca-8481-8569b38c7e9b",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    },
+                                    {
+                                        "concept": "a89ad3a4-1350-11df-a1f1-0026b9348838",
+                                        "label": "N/A"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Adolescent (12-19yrs)",
+                    "questions": [
+                        {
+                            "label": "Adolescent sexually active:",
+                            "id": "sexuallyActive",
+                            "questionOptions": {
+                                "concept": "053ec791-2371-4c87-88a1-86a1abeed90c",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "If yes, using condom?",
+                            "id": "condomUse",
+                            "questionOptions": {
+                                "concept": "a8a00090-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "sexuallyActive !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Cancer Screening",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Cervical cancer screening done:",
+                            "required": "true",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('3086a740-face-4fcd-825b-1e627a66c93a')) ? undefined : HD.getObject('prevEnc').getValue('3086a740-face-4fcd-825b-1e627a66c93a')",
+                            "id": "cervCanScreen",
+                            "questionOptions": {
+                                "concept": "3086a740-face-4fcd-825b-1e627a66c93a",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    },
+                                    {
+                                        "concept": "a89ad3a4-1350-11df-a1f1-0026b9348838",
+                                        "label": "N/A"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F'"
+                            }
+                        },
+                        {
+                            "label": "Cervical cancer screening test result:",
+                            "type": "obs",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('6bad2971-c776-4f0e-ae15-a3fc0cbd7d0f')) ? undefined : HD.getObject('prevEnc').getValue('6bad2971-c776-4f0e-ae15-a3fc0cbd7d0f')",
+                            "id": "caTestResult",
+                            "questionOptions": {
+                                "concept": "6bad2971-c776-4f0e-ae15-a3fc0cbd7d0f",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    }
+                                ]
+                            },
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "sex !== 'F' ||cervCanScreen !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "Cervical cancer result date:",
+                            "type": "obs",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('958b9055-88be-4bf1-9a2c-f209424a03ac')) ? undefined : HD.getObject('prevEnc').getValue('958b9055-88be-4bf1-9a2c-f209424a03ac')",
+                            "default": "",
+                            "id": "cercanDate",
+                            "questionOptions": {
+                                "rendering": "date",
+                                "concept": "958b9055-88be-4bf1-9a2c-f209424a03ac"
+                            },
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(caTestResult) && caTestResult !== 'a89ad3a4-1350-11df-a1f1-0026b9348838' ",
+                                    "message": "Date is result is required."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "isEmpty(caTestResult)"
+                            }
+                        },
+                        {
+                            "label": "If cervical cancer is positive, is patient on treatment?",
+                            "id": "caTreatment",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('3e4943b5-8499-43fb-b254-e1bb1dacfdb7')) ? undefined : HD.getObject('prevEnc').getValue('3e4943b5-8499-43fb-b254-e1bb1dacfdb7')",
+                            "questionOptions": {
+                                "concept": "3e4943b5-8499-43fb-b254-e1bb1dacfdb7",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    },
+                                    {
+                                        "concept": "a89c1ef8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Completed"
+                                    },
+                                    {
+                                        "concept": "a899b50a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Unknown"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "caTestResult !== 'a896f3a6-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "If patient on treatment, indicate below:",
+                            "type": "obs",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('94f54710-6ee0-45cd-ad5f-a990fcb47bc1')) ? undefined : HD.getObject('prevEnc').getValue('94f54710-6ee0-45cd-ad5f-a990fcb47bc1')",
+                            "id": "caTreatmentMode",
+                            "questionOptions": {
+                                "concept": "94f54710-6ee0-45cd-ad5f-a990fcb47bc1",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "dcb72b0b-c1cb-4f32-aa82-e8f7b74cc16e",
+                                        "label": "Cryotherapy"
+                                    },
+                                    {
+                                        "concept": "ca10f28c-586a-427a-8bcc-816f0835ab18",
+                                        "label": "Chemotherapy"
+                                    },
+                                    {
+                                        "concept": "a8a713f8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Hysterectomy"
+                                    },
+                                    {
+                                        "concept": "12afc118-5acd-48c6-89a0-1b6156c33d10",
+                                        "label": "Radiotherapy"
+                                    },
+                                    {
+                                        "concept": "b6fccd82-c622-4c3e-9563-39899e709b3b",
+                                        "label": "Thermo-coagulation/Loop Electrosurgical Excision Procedure"
+                                    }
+                                ]
+                            },
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "caTreatment !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.5",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

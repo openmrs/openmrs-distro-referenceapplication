@@ -1,0 +1,231 @@
+{
+    "name": "component_social-history",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Social History",
+            "sections": [
+                {
+                    "label": "Social History",
+                    "questions": [
+                        {
+                            "label": "Where do you stay?",
+                            "id": "stay",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "cdc577ea-fb94-4e51-86b9-00336560c0e9",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Parent",
+                                        "concept": "a89ebec4-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "Aunt",
+                                        "concept": "a8a17772-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "Uncle",
+                                        "concept": "a898c3e8-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "Grandparent",
+                                        "concept": "a898c32a-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "Siblings",
+                                        "concept": "a898c262-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "Other",
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "label": "Spend days on the street?",
+                            "id": "spendDay",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "5738416d-665d-4955-be8a-dec9339fc0a6",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Yes",
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "No",
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "label": "Spend nights on the street?",
+                            "id": "spendNight",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "fa40fa53-fdd4-4d17-a80e-190b47fab82a",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Yes",
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "No",
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "label": "If identifies with staying on the street, how long have you been involved with the street:",
+                            "id": "streetInvolved",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "1accf04f-99bc-44a4-b466-5f3075c3f15d",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Less than 6 months",
+                                        "concept": "474551e6-9192-4cd8-a472-b12d481b5b6b"
+                                    },
+                                    {
+                                        "label": "6 months to 1 year",
+                                        "concept": "16162207-f6b6-4c1b-b2bd-95efc49242f0"
+                                    },
+                                    {
+                                        "label": "1-2years",
+                                        "concept": "fc9fe6c0-81a5-4cb4-a2a8-ad39fa9fd774"
+                                    },
+                                    {
+                                        "label": "2-5years",
+                                        "concept": "82682acf-8e0d-4c3d-beb8-b2927a428359"
+                                    },
+                                    {
+                                        "label": "Greater than 5 years",
+                                        "concept": "6c3df06c-8bc0-457d-9291-1a3ddca225c4"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "label": "Street involment:",
+                            "type": "obsGroup",
+                            "questionOptions": {
+                                "id": "streetInvolment",
+                                "concept": "1f42592a-5e61-47bc-b8af-1f0b95e008c9",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "If involved with the street, in contact with any of the following",
+                                    "id": "streetContact",
+                                    "questionOptions": {
+                                        "concept": "0ed530ce-5658-45fe-aa57-6e49a7d2d430",
+                                        "rendering": "select",
+                                        "answers": [
+                                            {
+                                                "label": "None",
+                                                "concept": "a899e0ac-1350-11df-a1f1-0026b9348838"
+                                            },
+                                            {
+                                                "label": "Parents",
+                                                "concept": "a89ebec4-1350-11df-a1f1-0026b9348838"
+                                            },
+                                            {
+                                                "label": "GrandParents",
+                                                "concept": "a898c32a-1350-11df-a1f1-0026b9348838"
+                                            },
+                                            {
+                                                "label": "Other relatives",
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838"
+                                            }
+                                        ]
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Other Relatives (specify):",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "text"
+                                    },
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "streetContact  !== 'a8aaf3e2-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "label": "How often are you in contact with your family?",
+                            "id": "familyContact",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "c8c36b3c-f7c8-468a-acc2-b0b2b3d69f79",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Daily",
+                                        "concept": "a8a05dc4-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "Weekly",
+                                        "concept": "a899d8d2-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "At least once every month",
+                                        "concept": "a899d7f6-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "A few times in a year",
+                                        "concept": "ea2cc3f3-dcb1-4502-b7bc-140ec95bb21b"
+                                    },
+                                    {
+                                        "label": "Not at all",
+                                        "concept": "a899d120-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Sexual Health",
+                    "questions": [
+                        {
+                            "label": "Since your last visit have you had sex?",
+                            "id": "sexLastVisit",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "053ec791-2371-4c87-88a1-86a1abeed90c",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Yes",
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "No",
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "0.01",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

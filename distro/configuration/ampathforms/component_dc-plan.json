@@ -1,0 +1,112 @@
+{
+    "name": "component_dc-plan",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "DC Outcome",
+            "sections": [
+                {
+                    "label": "DC Outcome",
+                    "questions": [
+                        {
+                            "label": "Differentiated care plan:",
+                            "required": "true",
+                            "id": "dcCarePlan",
+                            "questionOptions": {
+                                "concept": "59f21b48-ccf9-40b8-9fcb-92bdbf90a4dd",
+                                "answers": [
+                                    {
+                                        "concept": "a8af5018-1350-11df-a1f1-0026b9348838",
+                                        "label": "Continue in DC"
+                                    },
+                                    {
+                                        "concept": "a8af50f4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Exit from DC"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "!arrayContains(['380d79a7-6fb0-41bf-be3d-aa3d25da187c','d4e28d0f-ae28-4eec-8cfc-449b4c5a9f5f'],visitTypeUuid)"
+                            }
+                        },
+                        {
+                            "type": "obsGroup",
+                            "label": "Reason for exit",
+                            "questionOptions": {
+                                "concept": "3665d0ef-3718-47b2-9091-8b685bda412d",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Reason for exit:",
+                                    "id": "dcExit",
+                                    "questionOptions": {
+                                        "concept": "a89e3f94-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "6daff4ce-bce7-41f5-9141-17e694155180",
+                                                "label": "Self transfer out of facility"
+                                            },
+                                            {
+                                                "concept": "a89ce50e-1350-11df-a1f1-0026b9348838",
+                                                "label": "Adherence concerns"
+                                            },
+                                            {
+                                                "concept": "a8ce0d44-8cd4-4eb0-9441-dd27cc328caf",
+                                                "label": "High VL"
+                                            },
+                                            {
+                                                "concept": "a89ac184-1350-11df-a1f1-0026b9348838",
+                                                "label": "New OI/new chronic illness"
+                                            },
+                                            {
+                                                "concept": "a8909e8e-1350-11df-a1f1-0026b9348838",
+                                                "label": "Pregnancy"
+                                            },
+                                            {
+                                                "concept": "5be50fc2-9e50-4d64-8a0c-f08ed7a34bb9",
+                                                "label": "Voluntary request to exit"
+                                            },
+                                            {
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Other"
+                                            }
+                                        ],
+                                        "rendering": "multiCheckbox"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(dcCarePlan) || dcCarePlan !== 'a8af50f4-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "Other specify:",
+                                    "id": "dcOther",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "text"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(dcExit) || !arrayContains(dcExit, 'a8aaf3e2-1350-11df-a1f1-0026b9348838')"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.0",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN",
+    "description": "component_dc-plan"
+}

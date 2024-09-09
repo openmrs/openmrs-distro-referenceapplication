@@ -1,0 +1,85 @@
+{
+    "name": "component_positive-health-dignity-&-prevention-services-v1.2",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "PHDP",
+            "sections": [
+                {
+                    "label": "Positive Health Diginity & Prevention Services",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "PHDP:",
+                            "required": "true",
+                            "questionOptions": {
+                                "concept": "e7819751-a5b0-485d-a2bc-9d4aa69aa1e4",
+                                "answers": [
+                                    {
+                                        "concept": "a8a8b352-1350-11df-a1f1-0026b9348838",
+                                        "label": "Adherence counselling"
+                                    },
+                                    {
+                                        "concept": "b76021d2-38c7-42ff-b2eb-0bd558396ef7",
+                                        "label": "STI screening"
+                                    },
+                                    {
+                                        "concept": "a2c49302-edb4-4baa-8440-2448eafd0ec1",
+                                        "label": "Substance use"
+                                    },
+                                    {
+                                        "concept": "a89accc4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Disclosure to sex partner"
+                                    },
+                                    {
+                                        "concept": "a8a4636a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Partner testing"
+                                    },
+                                    {
+                                        "concept": "f0a280e8-eb88-41a8-837a-f9949ed1b9cd",
+                                        "label": "Condom distribution"
+                                    },
+                                    {
+                                        "concept": "91f43249-73c7-427c-8300-2038fc0d6be8",
+                                        "label": "Needle exchange"
+                                    },
+                                    {
+                                        "concept": "05656545-86be-4605-9527-34fb580534b1",
+                                        "label": "Targeted risk reduction"
+                                    },
+                                    {
+                                        "concept": "a89adc46-1350-11df-a1f1-0026b9348838",
+                                        "label": "Treatment of GBV injuries"
+                                    },
+                                    {
+                                        "concept": "717c50e1-48da-4148-aeee-c49fdd957b64",
+                                        "label": "First line support (LIVES)"
+                                    },
+                                    {
+                                        "concept": "b75702a6-908d-491b-9399-6495712c81cc",
+                                        "label": "Emergency contraceptives"
+                                    },
+                                    {
+                                        "concept": "a89ad3a4-1350-11df-a1f1-0026b9348838",
+                                        "label": "N/A"
+                                    }
+                                ],
+                                "rendering": "multiCheckbox"
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": " !arrayContains(['d164c76c-cc91-4ac2-89e9-ab7c29152ee0','824cf3e6-dd16-4767-ba41-2e04dede349e'], visitType.uuid)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.2",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

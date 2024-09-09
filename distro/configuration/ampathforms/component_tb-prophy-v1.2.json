@@ -1,0 +1,679 @@
+{
+    "name": "component_tb-prophy-v1.2",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "TB Prophylaxis",
+            "sections": [
+                {
+                    "label": "TB Prophylaxis History",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Is the patient on any TB prophylaxis?",
+                            "type": "obs",
+                            "required": "true",
+                            "id": "onTbProphylaxis",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('163784d2-6c55-4ceb-abf0-df8cebb385f1')) ? undefined : HD.getObject('prevEnc').getValue('163784d2-6c55-4ceb-abf0-df8cebb385f1')",
+                            "questionOptions": {
+                                "concept": "163784d2-6c55-4ceb-abf0-df8cebb385f1",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "validators": []
+                        },
+                        {
+                            "label": "If yes select drug",
+                            "type": "obs",
+                            "id": "onTbProphylaxisDrug",
+                            "historicalExpression": "HD.getObject('prevEnc').getValue('a899e35e-1350-11df-a1f1-0026b9348838')",
+                            "questionOptions": {
+                                "concept": "a899e35e-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "162724df-5a66-4ae3-bbf6-5dc6dbba4ebb",
+                                        "label": "Isoniazid 100mg (6H)"
+                                    },
+                                    {
+                                        "concept": "b150ccdc-e7ec-4f99-b592-6f3fa73b3aea",
+                                        "label": "Isoniazid 300mg (6H)"
+                                    },
+                                    {
+                                        "concept": "aeaed1af-5b0d-401e-a32a-e96cf4072ab5",
+                                        "label": "Isoniazid 300mg and Rifapentine 300mg (3HP)"
+                                    },
+                                    {
+                                        "concept": "177635d0-793b-4a66-8324-976c46f795af",
+                                        "label": "Rifampicin 150mg and Isonaizid 75mg (3RH)"
+                                    },
+                                    {
+                                        "concept": "e5e24e6d-e6b0-4c81-8f7b-0e366df29426",
+                                        "label": "Rifampicin 70mg and Isonaizid 50mg (3RH)"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(onTbProphylaxis) && onTbProphylaxis === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Patient  marked as on TB Prophylaxis. Please provide the drug."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "onTbProphylaxis !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "type": "obsGroup",
+                            "label": "TB prophylaxis ever",
+                            "questionOptions": {
+                                "concept": "d86c36dc-c523-42e3-b07d-eb4c3c4fbf99",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "If no, have you ever used the drugs in the past?",
+                                    "type": "obs",
+                                    "id": "pastTbProphylaxisDrug",
+                                    "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('59077bc1-7ef7-4b27-a33b-113e2841bd4f')) ? undefined : HD.getObject('prevEnc').getValue('59077bc1-7ef7-4b27-a33b-113e2841bd4f')",
+                                    "questionOptions": {
+                                        "concept": "59077bc1-7ef7-4b27-a33b-113e2841bd4f",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "onTbProphylaxis !== 'a899b42e-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "Start date of past TB prophylaxis treatment:",
+                                    "id": "pastStartTbProphTreatment",
+                                    "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('67785e82-c2f7-4417-8ada-cc8e85abbfc1')) ? undefined : HD.getObject('prevEnc').getValue('67785e82-c2f7-4417-8ada-cc8e85abbfc1')",
+                                    "questionOptions": {
+                                        "concept": "67785e82-c2f7-4417-8ada-cc8e85abbfc1",
+                                        "rendering": "date"
+                                    },
+                                    "type": "obs",
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "pastTbProphylaxisDrug !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "End date of past TB prophylaxis treatment:",
+                                    "id": "pastEndTbProphTreatment",
+                                    "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('d4f18a59-9bb4-4089-8cd6-1410491569a0')) ? undefined : HD.getObject('prevEnc').getValue('d4f18a59-9bb4-4089-8cd6-1410491569a0')",
+                                    "questionOptions": {
+                                        "concept": "d4f18a59-9bb4-4089-8cd6-1410491569a0",
+                                        "rendering": "date"
+                                    },
+                                    "type": "obs",
+                                    "validators": [
+                                        {
+                                            "type": "date"
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "pastTbProphylaxisDrug !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "label": "TB prophylaxis adherence",
+                            "type": "obsGroup",
+                            "questionOptions": {
+                                "concept": "3a69cfcf-f129-4702-a8dd-d061d2a16b9d",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Patient's adherence on TB prophylaxis:",
+                                    "id": "adherenceOnTbProphy",
+                                    "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('3a69cfcf-f129-4702-a8dd-d061d2a16b9d','ebfdb93a-9292-4245-9a27-0faf49545720')) ? undefined : HD.getObject('prevEnc').getValue('3a69cfcf-f129-4702-a8dd-d061d2a16b9d','ebfdb93a-9292-4245-9a27-0faf49545720')",
+                                    "questionOptions": {
+                                        "concept": "ebfdb93a-9292-4245-9a27-0faf49545720",
+                                        "answers": [
+                                            {
+                                                "concept": "a8b0f882-1350-11df-a1f1-0026b9348838",
+                                                "label": "Good"
+                                            },
+                                            {
+                                                "concept": "a73d20b3-d721-4763-a362-14a0c41a6b5e",
+                                                "label": "Fair"
+                                            },
+                                            {
+                                                "concept": "fdaf8b47-ea14-4d28-80fa-e1da58a30e8b",
+                                                "label": "Poor"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "!isEmpty(onTbProphylaxis) && arrayContains(['a899b35c-1350-11df-a1f1-0026b9348838'], onTbProphylaxis) && isEmpty(myValue)",
+                                            "message": "Patient on TB Prophylaxis. Please provide adherence history."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(onTbProphylaxis)|| onTbProphylaxis !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "Adherence (TB Prophylaxis) reasons for poor/fair:",
+                                    "id": "tbProphylaxisAdherence",
+                                    "questionOptions": {
+                                        "concept": "a89ebbc2-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a89ced88-1350-11df-a1f1-0026b9348838",
+                                                "label": "Alcohol"
+                                            },
+                                            {
+                                                "concept": "a8935fde-1350-11df-a1f1-0026b9348838",
+                                                "label": "Depression"
+                                            },
+                                            {
+                                                "concept": "a89eac04-1350-11df-a1f1-0026b9348838",
+                                                "label": "Felt well"
+                                            },
+                                            {
+                                                "concept": "a89eacc2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Forgot"
+                                            },
+                                            {
+                                                "concept": "7211031b-0685-44bc-a5e9-5a018d0173ea",
+                                                "label": "Gave away"
+                                            },
+                                            {
+                                                "concept": "a8af4cee-1350-11df-a1f1-0026b9348838",
+                                                "label": "Lost/Ran out of pills"
+                                            },
+                                            {
+                                                "concept": "ecafa614-49c5-4eba-84c7-b85b0d9e2c46",
+                                                "label": "Pill burden"
+                                            },
+                                            {
+                                                "concept": "a89eb8c0-1350-11df-a1f1-0026b9348838",
+                                                "label": "Side effects"
+                                            },
+                                            {
+                                                "concept": "a89eba46-1350-11df-a1f1-0026b9348838",
+                                                "label": "Stigma"
+                                            },
+                                            {
+                                                "concept": "c0c9eab3-46f6-453c-b29d-dc1c242317c5",
+                                                "label": "Stock out"
+                                            },
+                                            {
+                                                "concept": "a89de2d8-1350-11df-a1f1-0026b9348838",
+                                                "label": "Too ill"
+                                            },
+                                            {
+                                                "concept": "a897fdaa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Travel problems"
+                                            },
+                                            {
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Other"
+                                            }
+                                        ],
+                                        "rendering": "multiCheckbox"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(onTbProphylaxis) || onTbProphylaxis !== 'a899b35c-1350-11df-a1f1-0026b9348838' || !arrayContains(['a73d20b3-d721-4763-a362-14a0c41a6b5e','fdaf8b47-ea14-4d28-80fa-e1da58a30e8b'], adherenceOnTbProphy)"
+                                    }
+                                },
+                                {
+                                    "label": "Adherence (TB Prophylaxis): Other (specify):",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "text"
+                                    },
+                                    "type": "obs",
+                                    "id": "tbProphylaxisOtherAdherence",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(onTbProphylaxis) || onTbProphylaxis !== 'a899b35c-1350-11df-a1f1-0026b9348838' || !arrayContains(['a73d20b3-d721-4763-a362-14a0c41a6b5e','fdaf8b47-ea14-4d28-80fa-e1da58a30e8b'], adherenceOnTbProphy)"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "TB Peds Adherence",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "TB peds adherence:",
+                            "questionOptions": {
+                                "concept": "c2c6690e-89bf-40b3-85b9-9d169f24e60c",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Does caregiver have problems getting child to take the medicines?",
+                                    "id": "difOfCaregiver",
+                                    "questionOptions": {
+                                        "concept": "c679587b-caa6-44a3-99e5-132ae168519e",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "age<14 && !isEmpty(onTbProphylaxis) && arrayContains(['a896cc00-1350-11df-a1f1-0026b9348838'], onTbProphylaxis) && isEmpty(myValue)",
+                                            "message": "Patient on TB Prophylaxis. Please provide adherence history."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(onTbProphylaxis) ||age>14|| onTbProphylaxis === 'a899e0ac-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "Did the child miss at least a dose in the last 7 days?",
+                                    "type": "obs",
+                                    "id": "missADose",
+                                    "questionOptions": {
+                                        "concept": "7384f40d-02d5-4bb4-a0ba-c50101c7e07f",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "age<14 && !isEmpty(onTbProphylaxis) && arrayContains(['a896cc00-1350-11df-a1f1-0026b9348838'], onTbProphylaxis) && isEmpty(myValue)",
+                                            "message": "Patient on TB Prophylaxis. Please provide adherence history."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(onTbProphylaxis) ||age>14|| onTbProphylaxis === 'a899e0ac-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "Did the child receive a dose more than 1 hr late in the last 7 days?",
+                                    "type": "obs",
+                                    "id": "receiveADose",
+                                    "questionOptions": {
+                                        "concept": "a6b15c61-c210-4a24-b0f6-e5eaa12258ab",
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "age<14 && !isEmpty(onTbProphylaxis) && arrayContains(['a896cc00-1350-11df-a1f1-0026b9348838'], onTbProphylaxis) && isEmpty(myValue)",
+                                            "message": "Patient on TB Prophylaxis. Please provide adherence history."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(onTbProphylaxis) ||age>14|| onTbProphylaxis === 'a899e0ac-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "Which of the following are true of the caregiver?",
+                                    "id": "trueOfCaregiver",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "concept": "a89ebbc2-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "129ca662-3e27-4651-b65b-5152785eff84",
+                                                "label": "Forgetting to give medication"
+                                            },
+                                            {
+                                                "concept": "e7302412-bf48-4c8c-ba3c-45d632849112",
+                                                "label": "Not being around to give medication"
+                                            },
+                                            {
+                                                "concept": "11a8e054-d87b-496c-be49-34ae7661da68",
+                                                "label": "Not wanting to give medication around others"
+                                            },
+                                            {
+                                                "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                                "label": "None"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "age<14 && !isEmpty(onTbProphylaxis) && arrayContains(['a896cc00-1350-11df-a1f1-0026b9348838'], onTbProphylaxis) && isEmpty(myValue)",
+                                            "message": "Patient on TB Prophylaxis. Please provide adherence history."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(onTbProphylaxis) ||age>14|| onTbProphylaxis === 'a899e0ac-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "Adherence assessment:",
+                                    "id": "adherenceAss",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "concept": "47c2e943-e6be-48ce-b0fb-3e0730957698",
+                                        "answers": [
+                                            {
+                                                "concept": "5b1bf823-da30-4e23-a777-0d8ef93a6211",
+                                                "label": "Perfect"
+                                            },
+                                            {
+                                                "concept": "a73d20b3-d721-4763-a362-14a0c41a6b5e",
+                                                "label": "Fair"
+                                            },
+                                            {
+                                                "concept": "fdaf8b47-ea14-4d28-80fa-e1da58a30e8b",
+                                                "label": "Poor"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "age<14 && !isEmpty(onTbProphylaxis) && arrayContains(['a896cc00-1350-11df-a1f1-0026b9348838'], onTbProphylaxis) && isEmpty(myValue)",
+                                            "message": "Patient on TB Prophylaxis. Please provide adherence history."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(onTbProphylaxis) ||age>14|| onTbProphylaxis === 'a899e0ac-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "Adherence (TB Prohpylaxis) notes:",
+                                    "isExpanded": "true",
+                                    "id": "tbProphyAdherencenotes",
+                                    "type": "obs",
+                                    "questionOptions": {
+                                        "concept": "d9390b4c-11c5-4005-822e-d72dea27ba7f",
+                                        "rendering": "textarea",
+                                        "rows": 5
+                                    },
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "isEmpty(onTbProphylaxis) ||age>14|| onTbProphylaxis === 'a899e0ac-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "TB Prophylaxis Plan",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "TB prophylaxis plan:",
+                            "required": "true",
+                            "id": "tbpropplan",
+                            "questionOptions": {
+                                "concept": "a89c1cfa-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "Not on TB prophylaxis"
+                                    },
+                                    {
+                                        "concept": "a89b7908-1350-11df-a1f1-0026b9348838",
+                                        "label": "Continue"
+                                    },
+                                    {
+                                        "concept": "a89b77aa-1350-11df-a1f1-0026b9348838",
+                                        "label": "Start"
+                                    },
+                                    {
+                                        "concept": "a8a00220-1350-11df-a1f1-0026b9348838",
+                                        "label": "Restart"
+                                    },
+                                    {
+                                        "concept": "a89b7d36-1350-11df-a1f1-0026b9348838",
+                                        "label": "Stop"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(onTbProphylaxis) && onTbProphylaxis === 'a899b35c-1350-11df-a1f1-0026b9348838' && !isEmpty(myValue) && arrayContains(['a89b77aa-1350-11df-a1f1-0026b9348838','a899e0ac-1350-11df-a1f1-0026b9348838'], myValue)",
+                                    "message": "Patient marked as on TB prophylaxis in History section. Therefore plan can only be continue ,stop"
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(onTbProphylaxis) && onTbProphylaxis === 'a899b42e-1350-11df-a1f1-0026b9348838' && !isEmpty(myValue) && !arrayContains(['a89b77aa-1350-11df-a1f1-0026b9348838','a899e0ac-1350-11df-a1f1-0026b9348838','a8a00220-1350-11df-a1f1-0026b9348838'], myValue)",
+                                    "message": "Patient marked as not on TB prophylaxis in History section. Therefore plan can only be None,Start,Restart"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "obsGroup",
+                            "label": "stopping reason",
+                            "questionOptions": {
+                                "concept": "a8a0780e-1350-11df-a1f1-0026b9348838",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "If stopping, reason:",
+                                    "required": "true",
+                                    "id": "tbpropreasonstop",
+                                    "questionOptions": {
+                                        "concept": "a89c1e12-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a890a96a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Active TB"
+                                            },
+                                            {
+                                                "concept": "a89c1ef8-1350-11df-a1f1-0026b9348838",
+                                                "label": "Completed"
+                                            },
+                                            {
+                                                "concept": "ecafa614-49c5-4eba-84c7-b85b0d9e2c46",
+                                                "label": "Pill burden"
+                                            },
+                                            {
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Other"
+                                            },
+                                            {
+                                                "concept": "a890d1ba-1350-11df-a1f1-0026b9348838",
+                                                "label": "Toxicity"
+                                            },
+                                            {
+                                                "concept": "a89eb744-1350-11df-a1f1-0026b9348838",
+                                                "label": "Lack of drugs"
+                                            },
+                                            {
+                                                "concept": "a89ce50e-1350-11df-a1f1-0026b9348838",
+                                                "label": "Poor adherence"
+                                            },
+                                            {
+                                                "concept": "a89eb8c0-1350-11df-a1f1-0026b9348838",
+                                                "label": "Side effects (Adverse drug reaction)"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "tbpropplan !== 'a89b7d36-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "If toxicity, please provide cause:",
+                                    "id": "toxCause",
+                                    "questionOptions": {
+                                        "concept": "a8a032fe-1350-11df-a1f1-0026b9348838",
+                                        "answers": [
+                                            {
+                                                "concept": "a877c7f6-1350-11df-a1f1-0026b9348838",
+                                                "label": "Anaemia"
+                                            },
+                                            {
+                                                "concept": "a8909060-1350-11df-a1f1-0026b9348838",
+                                                "label": "Hepatitis"
+                                            },
+                                            {
+                                                "concept": "a89d0c0a-1350-11df-a1f1-0026b9348838",
+                                                "label": "IRIS"
+                                            },
+                                            {
+                                                "concept": "a8a01dfa-1350-11df-a1f1-0026b9348838",
+                                                "label": "Lactic Acidosis"
+                                            },
+                                            {
+                                                "concept": "a89cee50-1350-11df-a1f1-0026b9348838",
+                                                "label": "Lipo-dystrophy"
+                                            },
+                                            {
+                                                "concept": "a897fe86-1350-11df-a1f1-0026b9348838",
+                                                "label": "Neuropathy"
+                                            },
+                                            {
+                                                "concept": "a8ad239c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Persistent vomiting"
+                                            },
+                                            {
+                                                "concept": "a895776a-1350-11df-a1f1-0026b9348838",
+                                                "label": "Rash"
+                                            },
+                                            {
+                                                "concept": "a8a16d0e-1350-11df-a1f1-0026b9348838",
+                                                "label": "Steven-Johnson syndrome"
+                                            },
+                                            {
+                                                "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                                "label": "Other"
+                                            }
+                                        ],
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "tbpropreasonstop !== 'a890d1ba-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "If toxicity, please provide cause: Other (specify):",
+                                    "id": "toxcauseOther",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "text"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "toxCause !== 'a8aaf3e2-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "label": "TB prophylaxis regimen started:",
+                            "questionOptions": {
+                                "concept": "a89b83bc-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "162724df-5a66-4ae3-bbf6-5dc6dbba4ebb",
+                                        "label": "Isoniazid 100mg (6H)"
+                                    },
+                                    {
+                                        "concept": "b150ccdc-e7ec-4f99-b592-6f3fa73b3aea",
+                                        "label": "Isoniazid 300mg (6H)"
+                                    },
+                                    {
+                                        "concept": "aeaed1af-5b0d-401e-a32a-e96cf4072ab5",
+                                        "label": "Isoniazid 300mg and Rifapentine 300mg (3HP)"
+                                    },
+                                    {
+                                        "concept": "177635d0-793b-4a66-8324-976c46f795af",
+                                        "label": "Rifampicin 150mg and Isonaizid 75mg (3RH)"
+                                    },
+                                    {
+                                        "concept": "e5e24e6d-e6b0-4c81-8f7b-0e366df29426",
+                                        "label": "Rifampicin 70mg and Isonaizid 50mg (3RH)"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "id": "prophyReg",
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "!arrayContains(['a89b77aa-1350-11df-a1f1-0026b9348838','a8a00220-1350-11df-a1f1-0026b9348838'], tbpropplan)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.2",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

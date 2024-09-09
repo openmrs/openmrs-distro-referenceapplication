@@ -1,0 +1,813 @@
+{
+    "name": "component_preclinic-review-v1.6",
+    "uuid": "xxxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "Pre-clinic Review",
+            "sections": [
+                {
+                    "label": "Pre-clinic Review",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Was this visit scheduled?",
+                            "id": "scheduledVisit",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a89ff9a6-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89b6440-1350-11df-a1f1-0026b9348838",
+                                        "label": "Scheduled visit"
+                                    },
+                                    {
+                                        "concept": "a89ff816-1350-11df-a1f1-0026b9348838",
+                                        "label": "Unscheduled visit early"
+                                    },
+                                    {
+                                        "concept": "a89ff8de-1350-11df-a1f1-0026b9348838",
+                                        "label": "Unscheduled visit late"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "If unscheduled, actual scheduled date",
+                            "id": "actualDate",
+                            "type": "obs",
+                            "required": {
+                                "type": "conditionalRequired",
+                                "message": "Patient visit marked as unscheduled. Please provide the scheduled date.",
+                                "referenceQuestionId": "scheduledVisit",
+                                "referenceQuestionAnswers": [
+                                    "a89ff816-1350-11df-a1f1-0026b9348838",
+                                    "a89ff8de-1350-11df-a1f1-0026b9348838"
+                                ]
+                            },
+                            "questionOptions": {
+                                "rendering": "date",
+                                "concept": "dc1942b2-5e50-4adc-949d-ad6c905f054e"
+                            },
+                            "validators": [
+                                {
+                                    "type": "date",
+                                    "allowFutureDates": "true"
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(scheduledVisit) && arrayContains(['a89ff816-1350-11df-a1f1-0026b9348838','a89ff8de-1350-11df-a1f1-0026b9348838'], scheduledVisit) && isEmpty(myValue)",
+                                    "message": "Patient visit marked as unscheduled. Please provide the scheduled date."
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "!arrayContains(['a89ff816-1350-11df-a1f1-0026b9348838','a89ff8de-1350-11df-a1f1-0026b9348838'], scheduledVisit)"
+                            }
+                        },
+                        {
+                            "label": "Patient covered by NHIF:",
+                            "id": "nhif",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('0b49e3e6-55df-4096-93ca-59edadb74b3f')) ? undefined : HD.getObject('prevEnc').getValue('0b49e3e6-55df-4096-93ca-59edadb74b3f')",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "0b49e3e6-55df-4096-93ca-59edadb74b3f",
+                                "answers": [
+                                    {
+                                        "concept": "8b715fed-97f6-4e38-8f6a-c167a42f8923",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "What is the patient's NHIF status?",
+                            "id": "nhifStatus",
+                            "questionInfo": "Indicate if the patient has been remitting monthly contributions towards the NHIF medical cover.",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "548e6743-67c0-4a6b-bb07-b5f799f63bc1",
+                                "answers": [
+                                    {
+                                        "concept": "b058a9ad-a0e4-4b37-9214-75b8aed1eaa4",
+                                        "label": "Active"
+                                    },
+                                    {
+                                        "concept": "dd373348-1a7f-4625-9e69-9904fa1cc9c7",
+                                        "label": "Inactive"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "nhif !== '8b715fed-97f6-4e38-8f6a-c167a42f8923'"
+                            }
+                        },
+                        {
+                            "label": "What other insurance do you have?",
+                            "id": "healthInsurance",
+                            "questionInfo": "Indicate if the patient has another medical cover.",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a8b02524-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "None"
+                                    },
+                                    {
+                                        "concept": "0bfb0150-949b-4625-98b8-b9d8275bcf44",
+                                        "label": "Employer based health insurance"
+                                    },
+                                    {
+                                        "concept": "6fac74c3-fe25-4170-92a4-3ecb8859152e",
+                                        "label": "Individual private health insurance"
+                                    },
+                                    {
+                                        "concept": "cb0b7a67-961b-485d-8dde-4fa65cec476b",
+                                        "label": "Linda mama services"
+                                    },
+                                    {
+                                        "concept": "21eb8488-76ae-47ce-a542-bb3038ab05de",
+                                        "label": "Zuri health insurance"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "nhif !== 'a899e0ac-1350-11df-a1f1-0026b9348838'"
+                            }
+                        },
+                        {
+                            "label": "Population type:",
+                            "id": "popType",
+                            "required": "true",
+                            "questionInfo": "Indicate the pupulation type.",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "bbc2e048-0db6-4c22-a951-dab66b1243f9",
+                                "answers": [
+                                    {
+                                        "concept": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                                        "label": "General population"
+                                    },
+                                    {
+                                        "concept": "0bfb0150-949b-4625-98b8-b9d8275bcf44",
+                                        "label": "Key population"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Key population:",
+                            "id": "keyPop",
+                            "questionInfo": "Indicate the key population.",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "93aa3f1d-1c39-4196-b5e6-8adc916cd5d6",
+                                "answers": [
+                                    {
+                                        "concept": "e19c35f0-12f0-46c2-94ea-97050f37b811",
+                                        "label": "MSM"
+                                    },
+                                    {
+                                        "concept": "8e31a288-1a91-438b-8c88-768a61ba29ab",
+                                        "label": "FSW"
+                                    },
+                                    {
+                                        "concept": "a890d57a-1350-11df-a1f1-0026b9348838",
+                                        "label": "PWID"
+                                    },
+                                    {
+                                        "concept": "a4d337b6-4029-467f-9b16-629e24d05e15",
+                                        "label": "Transgender"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(popType) && popType === '0bfb0150-949b-4625-98b8-b9d8275bcf44'",
+                                    "message": "Required!"
+                                }
+                            ],
+                            "hide": {
+                                "hideWhenExpression": "popType !== '0bfb0150-949b-4625-98b8-b9d8275bcf44'"
+                            }
+                        },
+                        {
+                            "label": "Child's HIV status:",
+                            "id": "hivStatus",
+                            "required": "true",
+                            "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('a8a76cae-1350-11df-a1f1-0026b9348838')) ? undefined : HD.getObject('prevEnc').getValue('a8a76cae-1350-11df-a1f1-0026b9348838')",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a8a76cae-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a896f3a6-1350-11df-a1f1-0026b9348838",
+                                        "label": "Positive"
+                                    },
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Negative"
+                                    },
+                                    {
+                                        "concept": "a897ff62-1350-11df-a1f1-0026b9348838",
+                                        "label": "HIV exposed"
+                                    },
+                                    {
+                                        "concept": "a899b50a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Unknown"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "!isEmpty(myValue) && myValue!== 'a896f3a6-1350-11df-a1f1-0026b9348838'",
+                                    "message": "This form should only be used for HIV+ patients. Please enroll the patient in the HEI Program and use the HEI forms for exposed patients"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Social History",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Civil status:",
+                            "type": "obs",
+                            "historicalExpression": "HD.getObject('prevEnc').getValue('a899a9f2-1350-11df-a1f1-0026b9348838')",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a899a9f2-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899af10-1350-11df-a1f1-0026b9348838",
+                                        "label": "Cohabitating"
+                                    },
+                                    {
+                                        "concept": "a899ad58-1350-11df-a1f1-0026b9348838",
+                                        "label": "Divorced"
+                                    },
+                                    {
+                                        "concept": "a8aa76b0-1350-11df-a1f1-0026b9348838",
+                                        "label": "Married monogamous"
+                                    },
+                                    {
+                                        "concept": "a8b03712-1350-11df-a1f1-0026b9348838",
+                                        "label": "Married polygamous"
+                                    },
+                                    {
+                                        "concept": "a899aba0-1350-11df-a1f1-0026b9348838",
+                                        "label": "Separated"
+                                    },
+                                    {
+                                        "concept": "a899ac7c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Single"
+                                    },
+                                    {
+                                        "concept": "a899ae34-1350-11df-a1f1-0026b9348838",
+                                        "label": "Widowed"
+                                    }
+                                ]
+                            },
+                            "validators": []
+                        },
+                        {
+                            "label": "Discordant couple:",
+                            "required": "true",
+                            "questionOptions": {
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    },
+                                    {
+                                        "concept": "a899b50a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Unknown"
+                                    },
+                                    {
+                                        "concept": "a89ad3a4-1350-11df-a1f1-0026b9348838",
+                                        "label": "N/A"
+                                    }
+                                ],
+                                "concept": "a8af49d8-1350-11df-a1f1-0026b9348838",
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Partner Notification Service",
+                    "questions": [
+                        {
+                            "type": "obsGroup",
+                            "label": "Partner notification",
+                            "id": "pns",
+                            "questionOptions": {
+                                "concept": "8767734c-0f98-4084-b960-6453f8679600",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Sexual partner tested?",
+                                    "id": "sexPartnerTested",
+                                    "questionOptions": {
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            }
+                                        ],
+                                        "concept": "a8a4636a-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Do you have a new sexual partner?",
+                                    "id": "newSexPartner",
+                                    "questionOptions": {
+                                        "answers": [
+                                            {
+                                                "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                                "label": "Yes"
+                                            },
+                                            {
+                                                "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                                "label": "No"
+                                            }
+                                        ],
+                                        "concept": "79f74b25-3f97-4367-a57d-7571bba1d7b4",
+                                        "rendering": "select"
+                                    },
+                                    "type": "obs",
+                                    "validators": []
+                                },
+                                {
+                                    "label": "Name of new sexual partner:",
+                                    "id": "nameSexPartner",
+                                    "questionOptions": {
+                                        "answers": [],
+                                        "concept": "dcb0f31c-d070-4f03-8e6e-5d07367e1500",
+                                        "rendering": "text"
+                                    },
+                                    "type": "obs",
+                                    "validators": [],
+                                    "hide": {
+                                        "hideWhenExpression": "newSexPartner !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Prevention With Positives",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Prevention with positives: At risk population:",
+                            "required": "true",
+                            "historicalExpression": "HD.getObject('prevEnc').getValue('93aa3f1d-1c39-4196-b5e6-8adc916cd5d6')",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "93aa3f1d-1c39-4196-b5e6-8adc916cd5d6",
+                                "answers": [
+                                    {
+                                        "concept": "5da55301-e28e-4fdf-8b64-02622dedc8b0",
+                                        "label": "Client of sex worker"
+                                    },
+                                    {
+                                        "concept": "a89ff438-1350-11df-a1f1-0026b9348838",
+                                        "label": "Commercial sex worker"
+                                    },
+                                    {
+                                        "concept": "a8af49d8-1350-11df-a1f1-0026b9348838",
+                                        "label": "Discordant couple"
+                                    },
+                                    {
+                                        "concept": "a890d57a-1350-11df-a1f1-0026b9348838",
+                                        "label": "IV drug use"
+                                    },
+                                    {
+                                        "concept": "e19c35f0-12f0-46c2-94ea-97050f37b811",
+                                        "label": "MSM"
+                                    },
+                                    {
+                                        "concept": "a89ad3a4-1350-11df-a1f1-0026b9348838",
+                                        "label": "N/A"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        },
+                        {
+                            "label": "Prevention with positives: PWP services:",
+                            "id": "pwpServices",
+                            "required": "true",
+                            "historicalExpression": "HD.getObject('prevEnc').getValue('9ce5dbf0-a141-4ad8-8c9d-cd2bf84fe72b')",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "9ce5dbf0-a141-4ad8-8c9d-cd2bf84fe72b",
+                                "answers": [
+                                    {
+                                        "concept": "f0a280e8-eb88-41a8-837a-f9949ed1b9cd",
+                                        "label": "Condom promotion/provision"
+                                    },
+                                    {
+                                        "concept": "bf51f71e-937c-4da5-ae07-654acf59f5bb",
+                                        "label": "Couple counseling"
+                                    },
+                                    {
+                                        "concept": "91f43249-73c7-427c-8300-2038fc0d6be8",
+                                        "label": "Needle exchange"
+                                    },
+                                    {
+                                        "concept": "05656545-86be-4605-9527-34fb580534b1",
+                                        "label": "Targeted risk reduction"
+                                    },
+                                    {
+                                        "concept": "a89ad3a4-1350-11df-a1f1-0026b9348838",
+                                        "label": "N/A"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                },
+                {
+                    "label": "Enrollment History",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Is this patient transfering to AMPATH for care?",
+                            "required": "true",
+                            "id": "transferInControl",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "f5e96501-deed-4c0a-9dce-116107b4d0d9",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "validators": []
+                            }
+                        },
+                        {
+                            "type": "obsGroup",
+                            "label": "Transfer in, detailed",
+                            "questionOptions": {
+                                "concept": "0f8b7f4e-1656-46b7-bc93-d1fe4f193f5d",
+                                "rendering": "group"
+                            },
+                            "questions": [
+                                {
+                                    "label": "Transfer in from other centre:",
+                                    "id": "transferIn",
+                                    "questionOptions": {
+                                        "rendering": "select",
+                                        "concept": "35ed8aad-d6fa-429e-961a-c877e1ad4953",
+                                        "answers": [
+                                            {
+                                                "concept": "a89c2f42-1350-11df-a1f1-0026b9348838",
+                                                "label": "AMPATH"
+                                            },
+                                            {
+                                                "concept": "a89c301e-1350-11df-a1f1-0026b9348838",
+                                                "label": "Non-AMPATH"
+                                            }
+                                        ]
+                                    },
+                                    "type": "obs",
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "isEmpty(myValue) && !isEmpty(transferInControl) && transferInControl === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                            "message": "Required!"
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "transferInControl !== 'a899b35c-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "type": "personAttribute",
+                                    "label": "If transfer in from other AMPATH clinic (specify):",
+                                    "id": "transfered_in_to_ampath",
+                                    "required": "false",
+                                    "default": "",
+                                    "questionOptions": {
+                                        "rendering": "ui-select-extended",
+                                        "attributeType": "7ef225db-94db-4e40-9dd8-fb121d9dc370"
+                                    },
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "isEmpty(myValue) && !isEmpty(transferIn) && transferIn === 'a89c2f42-1350-11df-a1f1-0026b9348838'",
+                                            "message": "Required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "transferIn !== 'a89c2f42-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "type": "obs",
+                                    "label": "If non-AMPATH, specify:",
+                                    "id": "nonAmpathSpecify",
+                                    "questionOptions": {
+                                        "concept": "a8a06fc6-1350-11df-a1f1-0026b9348838",
+                                        "rendering": "text"
+                                    },
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "isEmpty(myValue) && !isEmpty(transferIn) && transferIn === 'a89c301e-1350-11df-a1f1-0026b9348838'",
+                                            "message": "Required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "transferIn !== 'a89c301e-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                },
+                                {
+                                    "label": "County from which the patient is transfering:",
+                                    "id": "transferCounty",
+                                    "questionOptions": {
+                                        "concept": "489403cb-9d25-4d12-826b-1017b7da73e0",
+                                        "rendering": "text"
+                                    },
+                                    "type": "obs",
+                                    "validators": [
+                                        {
+                                            "type": "js_expression",
+                                            "failsWhenExpression": "isEmpty(myValue) && !isEmpty(transferIn) && transferIn === 'a89c301e-1350-11df-a1f1-0026b9348838'",
+                                            "message": "Required."
+                                        }
+                                    ],
+                                    "hide": {
+                                        "hideWhenExpression": "transferIn !== 'a89c301e-1350-11df-a1f1-0026b9348838'"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Is your area of residence within the AMPATH catchment area?",
+                            "id": "ampathCatchment",
+                            "questionOptions": {
+                                "concept": "65c5071a-0cf8-49d4-99d1-5f7da6ef6503",
+                                "answers": [
+                                    {
+                                        "concept": "a899b50a-1350-11df-a1f1-0026b9348838",
+                                        "label": "Unknown"
+                                    },
+                                    {
+                                        "concept": "5066b630-842b-4105-a66d-74f8aa50aacb",
+                                        "label": "In AMPATH catchment area"
+                                    },
+                                    {
+                                        "concept": "83df5f26-f97a-4cda-9c05-d0bdc6e4ebee",
+                                        "label": "Out of AMPATH catchment area"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(transferInControl) && transferInControl === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Required!"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Point of HIV testing:",
+                            "id": "pointTesting",
+                            "questionOptions": {
+                                "concept": "a8a17e48-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89fbedc-1350-11df-a1f1-0026b9348838",
+                                        "label": "pMTCT"
+                                    },
+                                    {
+                                        "concept": "1219f85c-31dd-4212-92ac-77926fa5ba03",
+                                        "label": "HTS"
+                                    },
+                                    {
+                                        "concept": "a8a17b3c-1350-11df-a1f1-0026b9348838",
+                                        "label": "VCT"
+                                    },
+                                    {
+                                        "concept": "f6dd6114-a212-4187-b76c-5b6fd8a9e7ba",
+                                        "label": "PHCT"
+                                    },
+                                    {
+                                        "concept": "a8a359a2-1350-11df-a1f1-0026b9348838",
+                                        "label": "DTC/PITC"
+                                    },
+                                    {
+                                        "concept": "a890a96a-1350-11df-a1f1-0026b9348838",
+                                        "label": "TB clinic"
+                                    },
+                                    {
+                                        "concept": "ff3243bf-05f6-426d-aa49-969034962e45",
+                                        "label": "Adult inpatient"
+                                    },
+                                    {
+                                        "concept": "3e5ad07b-2ced-4925-8264-cc4d8d1438d4",
+                                        "label": "Pediatric inpatient"
+                                    },
+                                    {
+                                        "concept": "a8a17d80-1350-11df-a1f1-0026b9348838",
+                                        "label": "MCH"
+                                    },
+                                    {
+                                        "concept": "a8a09ac8-1350-11df-a1f1-0026b9348838",
+                                        "label": "OPD"
+                                    },
+                                    {
+                                        "concept": "a8934292-1350-11df-a1f1-0026b9348838",
+                                        "label": "STI"
+                                    },
+                                    {
+                                        "concept": "3ddd3de4-dbf1-4ae9-8caf-aca6383bfd5e",
+                                        "label": "OSCAR"
+                                    },
+                                    {
+                                        "concept": "7d2c77f9-091b-41d7-8608-aff8985fd708",
+                                        "label": "Tumaini"
+                                    },
+                                    {
+                                        "concept": "a8a3899a-1350-11df-a1f1-0026b9348838",
+                                        "label": "CCC"
+                                    },
+                                    {
+                                        "concept": "3e69faed-e56f-4ff1-8831-922224d6ae6b",
+                                        "label": "Self test"
+                                    },
+                                    {
+                                        "concept": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(transferInControl) && transferInControl === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Required!"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Date confirmed HIV positive:",
+                            "id": "dateConfHivPos",
+                            "questionOptions": {
+                                "concept": "6d557eec-82f7-4840-a865-a02ac69d93a5",
+                                "rendering": "date"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(transferInControl) && transferInControl === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Required!"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Date enrolled in HIV care:",
+                            "id": "enrolDate",
+                            "questionOptions": {
+                                "concept": "edda0fe9-73ba-4dbe-8739-dd8d0a8f1700",
+                                "rendering": "date"
+                            },
+                            "type": "obs",
+                            "validators": [
+                                {
+                                    "type": "date",
+                                    "allowFutureDates": "false"
+                                },
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(transferInControl) && transferInControl === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Required!"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "WHO stage at enrollment:",
+                            "id": "whoStageEnrol",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "1ea9d6ba-2084-4bc0-97a6-46fe677d40e5",
+                                "answers": [
+                                    {
+                                        "label": "1",
+                                        "concept": "a89b33d0-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "2",
+                                        "concept": "a89b34ac-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "3",
+                                        "concept": "a89b3588-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "4",
+                                        "concept": "a89b3664-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && !isEmpty(transferInControl) && transferInControl === 'a899b35c-1350-11df-a1f1-0026b9348838'",
+                                    "message": "Required!"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Person Collecting Medication",
+                    "questions": [
+                        {
+                            "label": "Visited by:",
+                            "id": "vistBy",
+                            "questionInfo": "Record the person that came for the clinic today, whether it is the patient or the treatment supporter.",
+                            "questionOptions": {
+                                "rendering": "select",
+                                "concept": "a89cd410-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a898c6f4-1350-11df-a1f1-0026b9348838",
+                                        "label": "Self"
+                                    },
+                                    {
+                                        "concept": "01b957da-23bb-4862-819d-036364fe3faf",
+                                        "label": "Treatment supporter"
+                                    }
+                                ]
+                            },
+                            "type": "obs",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.6",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

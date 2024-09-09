@@ -1,0 +1,163 @@
+{
+    "name": "component_who-staging",
+    "uuid": "xxxx",
+    "processor": "EncounterFormProcessor",
+    "pages": [
+        {
+            "label": "WHO staging",
+            "sections": [
+                {
+                    "label": "Ped Staging",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Ped WHO stage",
+                            "type": "obs",
+                            "id": "pedWhoStage",
+                            "questionOptions": {
+                                "concept": "a89b3740-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "label": "1",
+                                        "concept": "a89b33d0-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "2",
+                                        "concept": "a89b34ac-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "3",
+                                        "concept": "a89b3588-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "4",
+                                        "concept": "a89b3664-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && arrayContains (['18faa058-4eea-4339-a959-84b3e5cb30be', '03f5b165-c577-4e1e-b7ae-acfc3ba18ebf'], visitTypeUuid)",
+                                    "message": "Required."
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Criteria",
+                            "id": "criteria",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a89b2976-1350-11df-a1f1-0026b9348838",
+                                "rendering": "select-concept-answers"
+                            }
+                        },
+                        {
+                            "label": " New WHO staging:",
+                            "type": "obs",
+                            "required": "true",
+                            "questionOptions": {
+                                "concept": "a8a084ca-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838",
+                                        "label": "Yes"
+                                    },
+                                    {
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838",
+                                        "label": "No"
+                                    }
+                                ],
+                                "rendering": "select"
+                            }
+                        },
+                        {
+                            "label": " Not applicable:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a8a0cd5e-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a896d2cc-1350-11df-a1f1-0026b9348838",
+                                        "label": "Discontinued from HIV follow up, HIV negative (child to be seen 6 monthly till 5 yrs)"
+                                    },
+                                    {
+                                        "concept": "a897ff62-1350-11df-a1f1-0026b9348838",
+                                        "label": "HIV exposed, status indeterminate "
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "validators": [],
+                            "hide": {
+                                "hideWhenExpression": "!arrayContains(['edb7c6aa-fc69-4470-936d-3d484d3708aa','824cf3e6-dd16-4767-ba41-2e04dede349e'], visitType.uuid)"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "label": "Adult WHO Staging",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "If you are assigning a new WHO stage to patient today, select new WHO stage:",
+                            "type": "obs",
+                            "id": "adultWhoStage",
+                            "questionOptions": {
+                                "concept": "a8a8331e-1350-11df-a1f1-0026b9348838",
+                                "answers": [
+                                    {
+                                        "concept": "a89b2606-1350-11df-a1f1-0026b9348838",
+                                        "label": "1"
+                                    },
+                                    {
+                                        "concept": "a89b26d8-1350-11df-a1f1-0026b9348838",
+                                        "label": "2"
+                                    },
+                                    {
+                                        "concept": "a89b27be-1350-11df-a1f1-0026b9348838",
+                                        "label": "3"
+                                    },
+                                    {
+                                        "concept": "a89b289a-1350-11df-a1f1-0026b9348838",
+                                        "label": "4"
+                                    }
+                                ],
+                                "rendering": "select"
+                            },
+                            "validators": [
+                                {
+                                    "type": "js_expression",
+                                    "failsWhenExpression": "isEmpty(myValue) && arrayContains (['33d13ffb-5f0e-427e-ab80-637491fb6526'], visitTypeUuid)",
+                                    "message": "Required."
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Select criteria for new WHO stage:",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "a8ae88a4-1350-11df-a1f1-0026b9348838",
+                                "rendering": "select-concept-answers"
+                            },
+                            "required": {
+                                "type": "conditionalRequired",
+                                "message": "Patient marked as receiving new WHO stage. Please select stage.",
+                                "referenceQuestionId": "adultWhoStage",
+                                "referenceQuestionAnswers": [
+                                    "a89b2606-1350-11df-a1f1-0026b9348838, a89b26d8-1350-11df-a1f1-0026b9348838, a89b27be-1350-11df-a1f1-0026b9348838, a89b289a-1350-11df-a1f1-0026b9348838"
+                                ]
+                            },
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "0.01",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}

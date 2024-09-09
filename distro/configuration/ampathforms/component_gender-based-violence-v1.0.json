@@ -1,0 +1,122 @@
+{
+    "name": "component_gender-based-violence-v1.0",
+    "processor": "EncounterFormProcessor",
+    "uuid": "xxxx",
+    "pages": [
+        {
+            "label": "Gender Based Violence Screening",
+            "sections": [
+                {
+                    "label": "GBV Screening",
+                    "isExpanded": "true",
+                    "questions": [
+                        {
+                            "label": "Within the past 3 months, have you been hit, slapped, kicked or physically hurt by someone in any way?",
+                            "required": "true",
+                            "id": "physical",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "8fca5b8a-0674-49e5-8111-003db067ee22",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Yes",
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "No",
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "label": "Are you in a relationship with a person who physically hit you?",
+                            "required": "true",
+                            "id": "domestic",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "4045cb6c-793c-4784-bea5-6e2b7bfd8467",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Yes",
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "No",
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "label": "Are you in a relationship with a person who threatens, frightens or insults you or treats you badly?",
+                            "required": "true",
+                            "id": "emotional",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "374a34e2-71a0-4221-b59e-8d50721330ee",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Yes",
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "No",
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "label": "Are you in relationship with a person who forces you to participate in sexual activities that make you feel uncomfortable?",
+                            "required": "true",
+                            "id": "sexual",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "920709bc-dde6-4d21-863e-851e63c084e4",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Yes",
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "No",
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "label": "Have you ever experienced any of the above with someone you do not have a relationship with?",
+                            "required": "true",
+                            "id": "nonfamily",
+                            "type": "obs",
+                            "questionOptions": {
+                                "concept": "588b29de-2200-4dc5-ba38-9992771aa535",
+                                "rendering": "select",
+                                "answers": [
+                                    {
+                                        "label": "Yes",
+                                        "concept": "a899b35c-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "label": "No",
+                                        "concept": "a899b42e-1350-11df-a1f1-0026b9348838"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1.0",
+    "published": true,
+    "retired": false,
+    "encounter": "ACTGADULTRETURN"
+}
