@@ -28,7 +28,7 @@ jobs:
         run: bash e2e_test_support_files/extract_tag_numbers.sh
 
       - name: Build and Run Containers
-        run: docker-compose -f e2e_test_support_files/docker-compose-build.yml up -d
+        run: docker compose -f e2e_test_support_files/docker-compose-build.yml up -d
 
       - name: Wait for the backend to start
         run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/openmrs/login.htm)" != "200" ]]; do sleep 10; done
@@ -66,7 +66,7 @@ jobs:
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
-        run: docker-compose up -d
+        run: docker compose up -d
         working-directory: e2e_test_support_files
 
       - name: Checkout to the Repo's Tag
@@ -127,7 +127,7 @@ jobs:
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
-        run: docker-compose up -d
+        run: docker compose up -d
         working-directory: e2e_test_support_files
 
       - name: Checkout to the Repo's Tag
@@ -188,7 +188,7 @@ jobs:
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
-        run: docker-compose up -d
+        run: docker compose up -d
         working-directory: e2e_test_support_files
 
       - name: Checkout to the Repo's Tag
@@ -249,7 +249,7 @@ jobs:
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
-        run: docker-compose up -d
+        run: docker compose up -d
         working-directory: e2e_test_support_files
 
       - name: Checkout to the Repo's Tag
@@ -310,7 +310,7 @@ jobs:
           docker image ls -a
 
       - name: Spin up an OpenMRS Instance
-        run: docker-compose up -d
+        run: docker compose up -d
         working-directory: e2e_test_support_files
 
       - name: Checkout to the Repo's Tag
