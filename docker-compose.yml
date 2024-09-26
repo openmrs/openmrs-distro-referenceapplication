@@ -17,7 +17,7 @@ services:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
       SPA_CONFIG_URLS: /openmrs/spa/config-core_demo.json
-      SPA_DEFAULT_LOCALE:
+      SPA_DEFAULT_LOCALE: fr
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
       timeout: 5s
@@ -49,7 +49,7 @@ services:
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci"
     healthcheck:
-      test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
+      test: 'mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute "SHOW DATABASES;"'
       interval: 3s
       timeout: 1s
       retries: 5
