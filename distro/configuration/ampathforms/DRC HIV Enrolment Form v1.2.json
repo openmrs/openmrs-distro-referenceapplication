@@ -673,6 +673,8 @@
             {
               "label": "Priority Population Type",
               "type": "obs",
+              "required": false,
+              "id": "priorityPopulationType",
               "questionOptions": {
                 "rendering": "select",
                 "concept": "2bf14240-b2b2-42b2-8cf3-b5f8a0cb7764",
@@ -684,117 +686,39 @@
                 ],
                 "answers": [
                   {
-                    "concept": "678f3144-302f-493e-ba22-7ec60a84732a",
-                    "label": "Adolescent Girls & Young Women",
-                    "conceptMappings": [
-                      {
-                        "type": "OHTSTemp",
-                        "value": "AGYW"
-                      }
-                    ]
-                  },
-                  {
                     "concept": "160580AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Client of sex worker",
-                    "conceptMappings": []
+                    "label": "Client of sex worker"
                   },
                   {
                     "concept": "def00c73-f6d5-42fb-bcec-0b192b5be22d",
-                    "label": "Fisher Folk",
-                    "conceptMappings": [
-                      {
-                        "type": "OHTSTemp",
-                        "value": "Fisherfolk"
-                      }
-                    ]
+                    "label": "Fisher Folk"
                   },
                   {
                     "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Long distance truck driver",
-                    "conceptMappings": [
-                      {
-                        "type": "CIEL",
-                        "value": "162198"
-                      },
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "87447002"
-                      }
-                    ]
+                    "label": "Long distance truck driver"
                   },
                   {
                     "concept": "63ea75cb-205f-4e7b-9ede-5f9b8a4dda9f",
-                    "label": "Migrant Workers",
-                    "conceptMappings": [
-                      {
-                        "type": "OHTSTemp",
-                        "value": "MigrantWorkers"
-                      }
-                    ]
+                    "label": "Migrant Workers"
                   },
                   {
                     "concept": "166514AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Non-intravenous drug user",
-                    "conceptMappings": []
+                    "label": "Non-intravenous drug user"
                   },
                   {
                     "concept": "164100AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Refugee",
-                    "conceptMappings": []
+                    "label": "Refugee"
                   },
                   {
                     "concept": "b282bb08-62a7-42c2-9bea-8751c267d13e",
-                    "label": "Uniformed Forces",
-                    "conceptMappings": [
-                      {
-                        "type": "OHTSTemp",
-                        "value": "UniformedForces"
-                      }
-                    ]
+                    "label": "Uniformed Forces"
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Other",
-                    "conceptMappings": [
-                      {
-                        "type": "PIH-Malawi",
-                        "value": "6408"
-                      },
-                      {
-                        "type": "SNOMED-MVP",
-                        "value": "56221000105001"
-                      },
-                      {
-                        "type": "CIEL",
-                        "value": "5622"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "5622"
-                      },
-                      {
-                        "type": "org.openmrs.module.mdrtb",
-                        "value": "OTHER"
-                      },
-                      {
-                        "type": "PIH",
-                        "value": "5622"
-                      }
-                    ]
+                    "label": "Other"
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "clientPopulationCategory !== '167143AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
-                }
-              ],
-              "id": "priorityPopulationType"
+              }
             }
           ]
         }
