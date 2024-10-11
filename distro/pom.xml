@@ -49,6 +49,9 @@
     <ordertemplates.version>1.0.2</ordertemplates.version>
     <patientflags.version>3.0.7</patientflags.version>
     <o3forms.version>2.3.0</o3forms.version>
+    <emrapi.version>2.1.0-SNAPSHOT</emrapi.version>
+    <event.version>2.10.0</event.version>
+    <bedmanagement.version>6.0.0</bedmanagement.version>
   </properties>
 
   <dependencies>
@@ -197,6 +200,24 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>o3forms-omod</artifactId>
       <version>${o3forms.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>emrapi-omod</artifactId>
+      <version>${emrapi.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs</groupId>
+      <artifactId>event-omod</artifactId>
+      <version>${event.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>bedmanagement-omod</artifactId>
+      <version>${bedmanagement.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
