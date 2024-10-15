@@ -30,32 +30,26 @@
             {
               "label": "Date of Disclosure",
               "type": "obs",
+              "required": false,
+              "id": "disclosureDate",
+              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "85fbdcc8-8dbc-40a9-b85f-5d1bfe1ab63d",
-                "weeksList": ""
-              },
-              "id": "disclosureDate",
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
+                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160753"
                   },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
-                }
-              ]
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "439771001"
+                  }
+                ],
+                "answers": []
+              }
             },
             {
               "label": "Stage of disclosure",
@@ -170,5 +164,6 @@
   "referencedForms": [],
   "encounterType": "390c2f21-c1c4-4246-94ca-a026157cd1db",
   "encounter": "Peads Disclosure Form",
-  "allowUnspecifiedAll": true
+  "allowUnspecifiedAll": true,
+  "description": "Form for Peads disclosure"
 }
