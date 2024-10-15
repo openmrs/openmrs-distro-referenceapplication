@@ -27,32 +27,14 @@
           "questions": [
             {
               "label": "Visit Date",
-              "type": "obs",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "visitDate",
+              "datePickerFormat": "both",
               "questionOptions": {
-                "rendering": "date",
-                "concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "rendering": "date"
               },
-              "id": "dateOfVisit",
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "ture",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('dateOfFirstVisit')"
-                    }
-                  ]
-                }
-              ]
+              "validators": []
             },
             {
               "label": "Receiving Facility",
@@ -299,5 +281,6 @@
   "referencedForms": [],
   "encounterType": "3044916a-7e5f-478b-9091-803233f27f91",
   "encounter": "Transfer Out",
-  "allowUnspecifiedAll": true
+  "allowUnspecifiedAll": true,
+  "description": "A form to collect the transfer out details"
 }

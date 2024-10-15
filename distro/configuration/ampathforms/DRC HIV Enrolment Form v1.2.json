@@ -24,6 +24,8 @@
             {
               "label": "What do you want to do?",
               "type": "obs",
+              "required": true,
+              "id": "clientDescription",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "83e40f2c-c316-43e6-a12e-20a338100281",
@@ -49,18 +51,7 @@
                     "conceptMappings": []
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "false",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
-                }
-              ],
-              "id": "clientDescription"
+              }
             },
             {
               "label": "Enrolment Date",
@@ -69,24 +60,14 @@
                 "rendering": "date",
                 "concept": "160555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "behaviours": [
+              "validators": [
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "myValue > today()"
-                    }
-                  ]
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue > today()"
                 }
               ],
               "id": "hivEnrolmentDate"
@@ -98,20 +79,10 @@
                 "rendering": "text",
                 "concept": "162576AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "behaviours": [
+              "validators": [
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": [
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isEmpty(patientIdentifier)"
-                    }
-                  ]
+                  "type": "js_expression",
+                  "failsWhenExpression": "isEmpty(patientIdentifier)"
                 }
               ],
               "id": "patientIdentifier"
@@ -383,16 +354,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
-                }
-              ],
               "id": "enrollmentMethod"
             },
             {
@@ -412,7 +373,6 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true",
                   "hide": {
                     "hideWhenExpression": "!includes('enrollmentMethod','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
@@ -661,7 +621,6 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true",
                   "hide": {
                     "hideWhenExpression": "clientPopulationCategory !== '166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -673,10 +632,8 @@
             {
               "label": "Priority Population Type",
               "type": "obs",
-              "required": false,
-              "id": "priorityPopulationType",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "radio",
                 "concept": "2bf14240-b2b2-42b2-8cf3-b5f8a0cb7764",
                 "conceptMappings": [
                   {
@@ -718,7 +675,17 @@
                     "label": "Other"
                   }
                 ]
-              }
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "clientPopulationCategory !== '167143AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                }
+              ],
+              "id": "priorityPopulationType"
             }
           ]
         }
@@ -741,11 +708,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
+                  "unspecified": "true"
                 }
               ],
               "id": "locationTransferedFrom"
@@ -760,11 +723,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
+                  "unspecified": "true"
                 }
               ],
               "id": "artStartDate"
@@ -951,11 +910,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
+                  "unspecified": "true"
                 }
               ],
               "id": "patientIdentifier"
@@ -987,11 +942,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
+                  "unspecified": "true"
                 }
               ],
               "id": "transferInDoc"
@@ -1006,11 +957,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
+                  "unspecified": "true"
                 }
               ],
               "id": "dateOfFirstVisit"
@@ -1111,11 +1058,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  }
+                  "unspecified": "true"
                 }
               ],
               "id": "diagnosticHivTestType"
@@ -1323,7 +1266,6 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true",
                   "hide": {
                     "hideWhenExpression": "isEmpty(previousUseOfPep) || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -1413,10 +1355,9 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true",
                   "hide": {
-                    "hideWhenExpression": "isEmpty(useOfArvs) || useOfArvs !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": [
                     {
@@ -1503,10 +1444,9 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true",
                   "hide": {
-                    "hideWhenExpression": "isEmpty(previousUseOfArt) || previousUseOfArt !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                    "hideWhenExpression": "isEmpty(useOfArvsForPMTCT) || useOfArvsForPMTCT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   },
                   "validators": [
                     {
@@ -1570,12 +1510,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false",
-                    "validators": []
-                  }
+                  "unspecified": "true"
                 }
               ],
               "id": "nrtisDrugsUsed"
@@ -1634,12 +1569,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
               ],
               "id": "nnrtisDrugsUsed"
@@ -1686,12 +1616,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
               ],
               "id": "proteaseInhibitors"
@@ -1755,12 +1680,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
               ],
               "id": "otherArvDrugClasses"
@@ -1770,7 +1690,7 @@
             {
               "intent": "*",
               "hide": {
-                "hideWhenExpression": "isEmpty(previousUseOfArt) || isEmpty(previousUseOfPep) || isEmpty(useOfArvs) || previousUseOfArt !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || useOfArvs !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || isEmpty(previousUseOfPep) || isEmpty(previousUseOfPrep) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]
@@ -1831,12 +1751,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
               ],
               "id": "hasTreatmentSupporter"
@@ -1851,12 +1766,10 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true",
                   "hide": {
                     "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  },
-                  "validators": []
+                  }
                 }
               ],
               "id": "treatmentSupporter"
@@ -1997,12 +1910,10 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true",
                   "hide": {
                     "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  },
-                  "validators": []
+                  }
                 }
               ],
               "id": "relationToTreatmentSupporter"
@@ -2036,12 +1947,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "false",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": []
+                  "unspecified": "false"
                 }
               ],
               "id": "Reenrolment"
@@ -2057,12 +1963,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
               ],
               "id": "ReasonReenrolment"
