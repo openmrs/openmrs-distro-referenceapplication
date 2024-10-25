@@ -25,21 +25,21 @@
          we do so here so that we can utilise Maven to track updates, etc. -->
     <fhir2.version>2.3.0-SNAPSHOT</fhir2.version>
     <authentication.version>1.0.0</authentication.version>
-    <openmrs.version>2.6.7</openmrs.version>
+    <openmrs.version>2.6.9</openmrs.version>
     <initializer.version>2.8.0-SNAPSHOT</initializer.version>
     <webservices.rest.version>2.45.0-SNAPSHOT</webservices.rest.version>
-    <addresshierarchy.version>2.17.0</addresshierarchy.version>
-    <idgen.version>4.10.0</idgen.version>
-    <legacyui.version>1.16.0</legacyui.version>
+    <addresshierarchy.version>2.19.0</addresshierarchy.version>
+    <idgen.version>4.12.0</idgen.version>
+    <legacyui.version>1.18.0</legacyui.version>
     <metadatamapping.version>1.6.0</metadatamapping.version>
     <metadatasharing.version>1.9.0</metadatasharing.version>
-    <openconceptlab.version>2.3.0</openconceptlab.version>
-    <attachments.version>3.2.0</attachments.version>
+    <openconceptlab.version>2.4.0</openconceptlab.version>
+    <attachments.version>3.4.0</attachments.version>
     <referencedemodata.version>2.4.0</referencedemodata.version>
     <queue.version>2.4.0</queue.version>
     <appointments.version>2.0.0-20240305.062514-14</appointments.version>
     <teleconsultation.version>2.0.0-20230831.113926-1</teleconsultation.version>
-    <cohort.version>3.7.1</cohort.version>
+    <cohort.version>3.7.2</cohort.version>
     <reporting.version>1.26.0</reporting.version>
     <reportingrest.version>1.14.0</reportingrest.version>
     <!-- the next three are required for reporting -->
@@ -47,11 +47,14 @@
     <htmlwidgets.version>1.11.0</htmlwidgets.version>
     <serialization-xstream.version>0.2.16</serialization-xstream.version>
     <ordertemplates.version>1.0.2</ordertemplates.version>
-    <patientflags.version>3.0.7</patientflags.version>
+    <patientflags.version>3.0.8</patientflags.version>
     <o3forms.version>2.3.0</o3forms.version>
     <emrapi.version>2.1.0-SNAPSHOT</emrapi.version>
     <event.version>2.10.0</event.version>
     <bedmanagement.version>6.0.0</bedmanagement.version>
+    <!-- Stock Management and Billing -->
+    <stockmanagement.version>2.0.2-SNAPSHOT</stockmanagement.version>
+    <billing.version>1.2.0-SNAPSHOT</billing.version>
   </properties>
 
   <dependencies>
@@ -218,6 +221,18 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>bedmanagement-omod</artifactId>
       <version>${bedmanagement.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>stockmanagement-omod</artifactId>
+      <version>${stockmanagement.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>billing-omod</artifactId>
+      <version>${billing.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
