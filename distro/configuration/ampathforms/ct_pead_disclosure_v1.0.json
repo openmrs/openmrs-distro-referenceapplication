@@ -3,6 +3,7 @@
   "version": "1",
   "published": true,
   "retired": false,
+  "description": "age-appropriate disclosure counselling for children and adolescents",
   "pages": [
     {
       "label": "Stage of Disclosure",
@@ -30,26 +31,32 @@
             {
               "label": "Date of Disclosure",
               "type": "obs",
-              "required": false,
-              "id": "disclosureDate",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "conceptMappings": [
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "160753"
+                "weeksList": ""
+              },
+              "id": "disclosureDate",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
                   },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "SNOMED-CT",
-                    "value": "439771001"
-                  }
-                ],
-                "answers": []
-              }
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "label": "Stage of disclosure",
@@ -164,6 +171,5 @@
   "referencedForms": [],
   "encounterType": "390c2f21-c1c4-4246-94ca-a026157cd1db",
   "encounter": "Peads Disclosure Form",
-  "allowUnspecifiedAll": true,
-  "description": "Form for Peads disclosure"
+  "allowUnspecifiedAll": true
 }

@@ -1,8 +1,9 @@
 {
   "name": "ART Therapy Form",
-  "version": "1",
+  "version": "1.1",
   "published": true,
   "retired": false,
+  "description": "start ART, substitute an ART line, switch an ART regimen, to stop ART or to restart ART",
   "pages": [
     {
       "label": "Introduction",
@@ -26,7 +27,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "7557d77c-172b-4673-9335-67a38657dd01",
+                "concept": "1255AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "conceptMappings": [
                   {
                     "type": "AMPATH",
@@ -107,7 +108,7 @@
                     ]
                   },
                   {
-                    "concept": "3e69cb60-2943-410f-83d4-b359ae83fefd",
+                    "concept": "162904AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Restart ART therapy",
                     "conceptMappings": []
                   }
@@ -244,7 +245,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "dfbe256e-30ba-4033-837a-2e8477f2e7cd",
+                "concept": "164432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "f827ed18-f816-4cd0-b77c-28a0209c96c0",
@@ -807,7 +808,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "dfbe256e-30ba-4033-837a-2e8477f2e7cd",
+                "concept": "164432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "f827ed18-f816-4cd0-b77c-28a0209c96c0",
@@ -1530,7 +1531,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "dfbe256e-30ba-4033-837a-2e8477f2e7cd",
+                "concept": "164432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "f827ed18-f816-4cd0-b77c-28a0209c96c0",
@@ -2100,7 +2101,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "dfbe256e-30ba-4033-837a-2e8477f2e7cd",
+                "concept": "164432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "f827ed18-f816-4cd0-b77c-28a0209c96c0",
@@ -2510,7 +2511,7 @@
         {
           "intent": "*",
           "hide": {
-            "hideWhenExpression": "isEmpty(therapyPlan) || therapyPlan !== '3e69cb60-2943-410f-83d4-b359ae83fefd'"
+            "hideWhenExpression": "isEmpty(therapyPlan) || therapyPlan !== ' 162904AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
           }
         }
       ]
@@ -2519,11 +2520,11 @@
       "label": "Notes",
       "sections": [
         {
-          "label": "",
+          "label": "Clinical Notes",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "",
+              "label": "Notes",
               "type": "obs",
               "questionOptions": {
                 "rendering": "textarea",

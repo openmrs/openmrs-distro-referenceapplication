@@ -1,8 +1,9 @@
 {
   "name": "Contact Tracing Form",
-  "version": "1",
+  "version": "1.1",
   "published": true,
   "retired": false,
+  "description": "Trace a contact of an index client (Child/Sex partner/Someone who they shared a needle with)",
   "pages": [
     {
       "label": "Introduction",
@@ -33,58 +34,56 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Contact date",
-              "type": "obs",
+              "label": "Encounter & Datetime",
+              "type": "encounterDatetime",
               "questionOptions": {
-                "rendering": "date",
-                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "conceptMappings": [
-                  {
-                    "type": "CIEL",
-                    "value": "160753"
-                  },
-                  {
-                    "type": "CIEL",
-                    "value": "160753"
-                  },
-                  {
-                    "type": "SNOMED-CT",
-                    "value": "439771001"
-                  },
-                  {
-                    "type": "SNOMED-CT",
-                    "value": "439771001"
-                  }
-                ]
+                "rendering": "datetime"
               },
-              "id": "contactDate",
-              "behaviours": [
+              "required": "true",
+              "default": "",
+              "id": "encDate",
+              "validators": [
                 {
-                  "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
+                  "type": "date"
                 }
-              ]
+              ],
+              "questionInfo": "Date the encounter took place"
+            },
+            {
+              "type": "encounterProvider",
+              "label": "Encounter Provider:",
+              "id": "provider",
+              "required": "true",
+              "default": "",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            },
+            {
+              "type": "encounterRole",
+              "label": "Role:",
+              "id": "role",
+              "required": "false",
+              "default": "",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            },
+            {
+              "type": "encounterLocation",
+              "label": "Encounter Location",
+              "id": "location",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
             },
             {
               "label": "Contact Method",
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c",
+                "concept": "166456AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "166457AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -176,7 +175,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "911d08b4-b523-46e4-8b65-e6924e95d015",
+                "concept": "160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -312,20 +311,20 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "36a3e671-9d60-4109-b41f-046f44f4b389",
+                "concept": "167011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "concept": "83f1c235-de6f-4141-8d8d-73a917b781de",
+                    "concept": "164167AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Contact came for HTS",
                     "conceptMappings": []
                   },
                   {
-                    "concept": "56f6a5a4-7ef9-4af3-a250-26b3894e711b",
+                    "concept": "159381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Contact will test elsewhere",
                     "conceptMappings": []
                   },
                   {
-                    "concept": "e7a0e18e-56e2-49da-b518-673f13c7bfba",
+                    "concept": "167156AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Refused Test",
                     "conceptMappings": []
                   },
@@ -345,15 +344,15 @@
                   }
                 ]
               },
+              "hide": {
+                "hideWhenExpression": "!includes('patientContacted','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              },
               "id": "outcomePatient",
               "behaviours": [
                 {
                   "intent": "*",
                   "required": "true",
                   "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('patientContacted','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                  },
                   "validators": []
                 }
               ]
@@ -369,7 +368,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "24c9e221-bc34-4a41-8a2e-ffb7331890e1",
+                "concept": "159422AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -487,15 +486,15 @@
                   }
                 ]
               },
+              "hide": {
+                "hideWhenExpression": "!includes('outcomePatient','159381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              },
               "id": "contactBooked",
               "behaviours": [
                 {
                   "intent": "*",
                   "required": "true",
                   "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('outcomePatient','56f6a5a4-7ef9-4af3-a250-26b3894e711b')"
-                  },
                   "validators": []
                 }
               ]
@@ -505,8 +504,11 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "04dcb442-384c-41b5-9f0e-2fe24b977cb2",
+                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "weeksList": ""
+              },
+              "hide": {
+                "hideWhenExpression": "!includes('outcomePatient','159381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               },
               "id": "dateBooked",
               "behaviours": [
@@ -514,9 +516,6 @@
                   "intent": "*",
                   "required": "true",
                   "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('outcomePatient','56f6a5a4-7ef9-4af3-a250-26b3894e711b')"
-                  },
                   "validators": [
                     {
                       "type": "date",
@@ -659,15 +658,15 @@
                   }
                 ]
               },
+              "hide": {
+                "hideWhenExpression": "!includes('outcomePatient','164167AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              },
               "id": "contactHIVTesting",
               "behaviours": [
                 {
                   "intent": "*",
                   "required": "true",
                   "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('outcomePatient','83f1c235-de6f-4141-8d8d-73a917b781de')"
-                  },
                   "validators": []
                 }
               ]
@@ -851,15 +850,15 @@
                   }
                 ]
               },
+              "hide": {
+                "hideWhenExpression": "!includes('outcomePatient','164167AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              },
               "id": "contactHIVStatus",
               "behaviours": [
                 {
                   "intent": "*",
                   "required": "true",
                   "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('outcomePatient','83f1c235-de6f-4141-8d8d-73a917b781de')"
-                  },
                   "validators": []
                 }
               ]
@@ -871,7 +870,7 @@
               "required": "false",
               "unspecified": "false",
               "hide": {
-                "hideWhenExpression": "!includes('outcomePatient','56f6a5a4-7ef9-4af3-a250-26b3894e711b') || outcomePatient !== '83f1c235-de6f-4141-8d8d-73a917b781de' "
+                "hideWhenExpression": "!includes('outcomePatient','159381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || outcomePatient !== '164167AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
               },
               "validators": []
             }
@@ -891,7 +890,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "eeba884c-67fc-4f03-be2e-8dd3eb64ae10",
+                "concept": "160721AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -989,7 +988,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "a51f1923-80ff-422a-8c22-5d6fb39bcf67",
+                "concept": "160433AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "161557AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -1016,17 +1015,17 @@
                     ]
                   },
                   {
-                    "concept": "3e25107e-4973-4cab-9892-ed030b90f6dd",
+                    "concept": "159381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Will test elsewhere",
                     "conceptMappings": []
                   },
                   {
-                    "concept": "34a71cb0-5663-4e48-84f2-7150f26f4398",
+                    "concept": "160636AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Contact is far from this facility",
                     "conceptMappings": []
                   },
                   {
-                    "concept": "4d1fbba8-478c-4876-abee-bffe6ee060f7",
+                    "concept": "167156AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Contact unwilling to come",
                     "conceptMappings": []
                   },
