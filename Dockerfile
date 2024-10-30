@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ### Dev Stage
-FROM openmrs/openmrs-core:dev-amazoncorretto-11 AS dev
+FROM openmrs/openmrs-core:dev-amazoncorretto-11 as dev
 WORKDIR /openmrs_distro
 
 ARG MVN_ARGS_SETTINGS="-s /usr/share/maven/ref/settings-docker.xml -U -P distro"
