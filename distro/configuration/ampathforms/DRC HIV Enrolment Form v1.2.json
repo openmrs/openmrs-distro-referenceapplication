@@ -75,17 +75,24 @@
             {
               "label": "Unique ID",
               "type": "obs",
+              "required": true,
+              "id": "patientIdentifier",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "162576AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": [
-                {
-                  "type": "js_expression",
-                  "failsWhenExpression": "isEmpty(patientIdentifier)"
-                }
-              ],
-              "id": "patientIdentifier"
+                "concept": "162576AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED-CT",
+                    "value": "422549004"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "162576"
+                  }
+                ]
+              }
             },
             {
               "label": "Entry Point",
@@ -370,13 +377,13 @@
                 ]
               },
               "id": "otherEntryPoint",
+              "hide": {
+                "hideWhenExpression": "enrollmentMethod !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('enrollmentMethod','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                  }
+                  "unspecified": "true"
                 }
               ]
             }
@@ -444,8 +451,7 @@
                     "label": "Secondary school education"
                   }
                 ]
-              },
-              "validators": []
+              }
             },
             {
               "label": "Marital Status",
@@ -621,12 +627,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "clientPopulationCategory !== '166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "clientPopulationCategory !== '166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "keyPopulationType"
             },
             {
@@ -679,12 +685,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "clientPopulationCategory !== '167143AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "clientPopulationCategory !== '167143AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "priorityPopulationType"
             }
           ]
@@ -913,7 +919,7 @@
                   "unspecified": "true"
                 }
               ],
-              "id": "patientIdentifier"
+              "id": "currentArtRegiment"
             },
             {
               "label": "Transfer Documents",
@@ -972,7 +978,10 @@
             "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
           }
         }
-      ]
+      ],
+      "hide": {
+        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+      }
     },
     {
       "label": "HIV Diagnosis",
@@ -1083,7 +1092,10 @@
             "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
           }
         }
-      ]
+      ],
+      "hide": {
+        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+      }
     },
     {
       "label": "Previous ARV/HAART Use",
@@ -1169,6 +1181,7 @@
             {
               "label": "Date Last Used",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "5af829e9-2427-4ed7-bb55-de4381610364"
@@ -1176,21 +1189,20 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(previousUseOfPrep) || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
+                  "unspecified": "true"
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(previousUseOfPrep) || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                 }
               ],
               "id": "datePrepLastUsed"
@@ -1259,6 +1271,7 @@
             {
               "label": "Date Last Used",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "fbe937b6-a4ad-4ce5-9c43-002222fbabfb"
@@ -1266,22 +1279,22 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(previousUseOfPep) || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
+                  "unspecified": "true"
                 }
               ],
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(previousUseOfPep) || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "datePepLastUsed"
             },
             {
@@ -1348,6 +1361,7 @@
             {
               "label": "Date Last Used",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "6a6cbda5-b155-4144-9ff9-ec3d1d1cd509"
@@ -1355,22 +1369,22 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
+                  "unspecified": "true"
                 }
               ],
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "dateHepBLastUsed"
             },
             {
@@ -1437,6 +1451,7 @@
             {
               "label": "Date Last Used",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "163782AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -1444,22 +1459,22 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(useOfArvsForPMTCT) || useOfArvsForPMTCT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
+                  "unspecified": "true"
                 }
               ],
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(useOfArvsForPMTCT) || useOfArvsForPMTCT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "datePmtctLastUsed"
             }
           ]
@@ -1690,10 +1705,13 @@
             {
               "intent": "*",
               "hide": {
-                "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || isEmpty(previousUseOfPep) || isEmpty(previousUseOfPrep) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || isEmpty(previousUseOfPep) || isEmpty(previousUseOfPrep) || isEmpty(useOfArvsForPMTCT) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || useOfArvsForPMTCT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
-          ]
+          ],
+          "hide": {
+            "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || isEmpty(previousUseOfPep) || isEmpty(previousUseOfPrep) || isEmpty(useOfArvsForPMTCT) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || useOfArvsForPMTCT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+          }
         }
       ],
       "behaviours": [
@@ -1703,7 +1721,10 @@
             "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
           }
         }
-      ]
+      ],
+      "hide": {
+        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+      }
     },
     {
       "label": "Treatment Supporter",
@@ -1759,6 +1780,7 @@
             {
               "label": "Treatment Supporter Name",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "text",
                 "concept": "160638AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -1766,17 +1788,18 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "treatmentSupporter"
             },
             {
               "label": "Treatment Supporter Phone Number",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "text",
                 "concept": "160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -1784,14 +1807,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "treatmentSupporterPhoneNumber"
             },
             {
@@ -1910,25 +1931,20 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "relationToTreatmentSupporter"
             }
           ]
         }
       ],
-      "behaviours": [
-        {
-          "intent": "*",
-          "hide": {
-            "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-          }
-        }
-      ]
+      "hide": {
+        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+      }
     },
     {
       "label": "Re-enrolment",
@@ -1978,7 +1994,10 @@
             "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
           }
         }
-      ]
+      ],
+      "hide": {
+        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+      }
     },
     {
       "label": "Notes",
