@@ -19,8 +19,7 @@
               "datePickerFormat": "both",
               "questionOptions": {
                 "rendering": "datetime"
-              },
-              "validators": []
+              }
             },
             {
               "label": "Scheduled visit",
@@ -68,6 +67,7 @@
             {
               "label": "Visit type",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "8a9809e9-8a0b-4e0e-b1f6-80b0cbbe361b",
@@ -105,7 +105,6 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true"
                 }
               ],
@@ -146,9 +145,9 @@
               "label": "Presenting complaints",
               "type": "obs",
               "required": false,
-              "id": "presentingComplaint",
+              "id": "presentingComplaintsList",
               "questionOptions": {
-                "rendering": "checkbox",
+                "rendering": "checkbox-searchable",
                 "concept": "f2ff2d1c-25e6-4143-9000-89633a932c2f",
                 "answers": [
                   {
@@ -640,6 +639,9 @@
                     "conceptMappings": []
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "presentingComplaints !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3' "
               }
             },
             {
@@ -649,14 +651,9 @@
                 "rendering": "textarea",
                 "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "presentingComplaints !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "presentingComplaints !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
+              },
               "id": "presentingComplaintNotes"
             },
             {
@@ -1135,12 +1132,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "menstruationStatus === '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "menstruationStatus === '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "pregnancyIntention"
             },
             {
@@ -1293,12 +1290,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "menstruationStatus === '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "menstruationStatus === '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "OnFamilyPlanning"
             },
             {
@@ -1967,12 +1964,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "OnFamilyPlanning === '160652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "OnFamilyPlanning === '160652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "familyPlanningMethod"
             },
             {
@@ -2039,12 +2036,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "OnFamilyPlanning !== '160652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "OnFamilyPlanning !== '160652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "reasonNotOnFP"
             }
           ],
@@ -2107,6 +2104,7 @@
             {
               "label": "Gestational age (weeks)",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -2114,18 +2112,18 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "menstruationStatus !== '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "menstruationStatus !== '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "gestationInWeeks"
             },
             {
               "label": "Antenatal profile done",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "975f11e5-7471-4e57-bba7-d3ee358ef7ea",
@@ -2168,13 +2166,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "menstruationStatus !== '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "menstruationStatus !== '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "antenatalProfileDone"
             }
           ],
@@ -2248,6 +2245,7 @@
             {
               "label": "Cervical cancer screening method",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "checkbox",
                 "concept": "53ff5cd0-0f37-4190-87b1-9eb439a15e94",
@@ -2348,13 +2346,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "screenedForCervicalCancer !== '165619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "screenedForCervicalCancer !== '165619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "methodCervicalCancerScreen"
             }
           ]
@@ -2532,7 +2529,6 @@
           "behaviours": [
             {
               "intent": "*",
-              "required": "true",
               "unspecified": "true",
               "hide": {
                 "hideWhenExpression": "screenedForCervicalCancer !== '165619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -2552,6 +2548,7 @@
             {
               "label": "Currently on treatment for tuberculosis",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "159798AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2693,18 +2690,18 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "currentTPT === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "currentTPT === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "onTBRx"
             },
             {
               "label": "Currently on tuberculosis prophylaxis treatment (TPT)",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "166449AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2846,18 +2843,18 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "currentTPT"
             },
             {
               "label": "Previously completed Tuberculosis preventive treatment",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "166463AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2995,7 +2992,6 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true"
                 }
               ],
@@ -3119,13 +3115,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "patientScreenedForTB"
             },
             {
@@ -3220,13 +3215,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "false",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || patientScreenedForTB !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || patientScreenedForTB !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "tbICFAdult"
             },
             {
@@ -3325,13 +3319,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "false",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || patientScreenedForTB !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || patientScreenedForTB !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "tbICFPeads"
             },
             {
@@ -3436,13 +3429,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "false",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || patientScreenedForTB !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || patientScreenedForTB !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "tbScreeningOutcome"
             }
           ],
@@ -3736,12 +3728,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "evaluateForTPT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "evaluateForTPT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
+              },
               "id": "tptProphylaxisPlan"
             },
             {
@@ -3786,12 +3778,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "tptProphylaxisPlan !== '1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "tptProphylaxisPlan !== '1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "currentTPTRegimen"
             },
             {
@@ -3892,12 +3884,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "tptProphylaxisPlan !== '1257AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "tptProphylaxisPlan !== '1257AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
+              },
               "id": "tptAdherence"
             },
             {
@@ -4045,12 +4037,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "tptProphylaxisPlan !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "tptProphylaxisPlan !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "reasonTptStopped"
             }
           ],
@@ -4070,6 +4062,7 @@
             {
               "label": "Tuberculosis treatment plan",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "1268AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -4200,14 +4193,13 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "onTBRx === '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
-              "id": "patientScreenedForTB"
+              "hide": {
+                "hideWhenExpression": "onTBRx === '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "id": "patientScreenedForTBTreatment"
             },
             {
               "label": "Tuberculosis drug treatment start date",
@@ -4394,12 +4386,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "tbScreeningOutcome === '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "tbScreeningOutcome === '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "presumptiveTB"
             },
             {
@@ -4434,14 +4426,9 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "tbScreeningOutcome === '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "tbScreeningOutcome === '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "tbNotes"
             }
           ],
@@ -5194,12 +5181,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('genExam', '135488AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "!includes('genExam', '135488AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              },
               "id": "lymphadenopathy"
             }
           ]
@@ -5301,14 +5288,9 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "hEENTROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "hEENTROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "otherHEENTExaminationFinding"
             },
             {
@@ -5404,14 +5386,9 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "respiratoryROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "respiratoryROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "otherRespiratoryFinding"
             },
             {
@@ -5503,14 +5480,9 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "cardiovascularROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "cardiovascularROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "otherCardiovascularExaminationFinding"
             },
             {
@@ -5606,14 +5578,9 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "AbdominalROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "AbdominalROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "otherAbdominalExaminationFinding"
             },
             {
@@ -5705,14 +5672,9 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "cnsROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "cnsROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "otherCNSExaminationFinding"
             },
             {
@@ -5804,14 +5766,9 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "musculoskeletalSROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "musculoskeletalSROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "otherMusculoskeletalExaminationFinding"
             },
             {
@@ -5903,14 +5860,9 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "genitourinaryROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "genitourinaryROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "otherGenitoUrinaryExaminationFinding"
             }
           ]
@@ -6265,12 +6217,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "screeningSTI !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "screeningSTI !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "sTIOutcome"
             }
           ]
@@ -6282,6 +6234,7 @@
             {
               "label": "Current WHO HIV stage",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "5356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -6627,8 +6580,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "required": "true"
+                  "unspecified": "true"
                 }
               ],
               "id": "wHOStage"
@@ -6642,6 +6594,7 @@
             {
               "label": "Nutritional status ",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "c481f80d-7553-41ab-94ca-efddb8ab294c",
@@ -6783,8 +6736,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "required": "true"
+                  "unspecified": "true"
                 }
               ],
               "id": "nutritionalStatus"
@@ -6929,12 +6881,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "nutritionalStatus === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalStatus === '1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "nutritionalStatus === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalStatus === '1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "nutritionalInterventions"
             },
             {
@@ -7123,12 +7075,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "nutritionalStatus === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalStatus === '1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalInterventions !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "nutritionalStatus === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalStatus === '1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalInterventions !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "nutritionalSupport"
             },
             {
@@ -7163,6 +7115,7 @@
             {
               "label": "New/Active opportunistic infection",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "c52ecf45-bd6c-43ed-861b-9a2714878729",
@@ -7298,7 +7251,6 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true"
                 }
               ],
@@ -7531,12 +7483,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "hasOIs !== '131768AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "hasOIs !== '131768AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "typeOI"
             }
           ]
@@ -7831,12 +7783,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "pcpProphylaxis !== '1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "pcpProphylaxis !== '1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "pcpRegimen"
             },
             {
@@ -7937,12 +7889,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "pcpProphylaxis !== '1257AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && pcpProphylaxis !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "pcpProphylaxis !== '1257AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && pcpProphylaxis !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "pcpRegimenAdherence"
             },
             {
@@ -8064,12 +8016,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "pcpProphylaxis !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "pcpProphylaxis !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "pcpStop"
             }
           ]
@@ -8720,12 +8672,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "artAdherenceAssessment === '159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || artAdherenceAssessment === '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "artAdherenceAssessment === '159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || artAdherenceAssessment === '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "id": "reasonForPoorAdherenceToHaart"
             }
           ]
@@ -8739,7 +8691,9 @@
               "required": false,
               "id": "labsAndDrugOrders",
               "questionOptions": {
-                "rendering": "workspace-launcher"
+                "rendering": "workspace-launcher",
+                "buttonLabel": "Add Lab Orders",
+                "workspaceName": "add-lab-order"
               }
             },
             {
@@ -9216,12 +9170,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "referralsOrdered === '488b58ff-64f5-4f8a-8979-fa79940b1594'"
-                  }
+                  "unspecified": "true"
                 }
               ],
+              "hide": {
+                "hideWhenExpression": "referralsOrdered !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
+              },
               "id": "refferedFor"
             },
             {
@@ -9232,14 +9186,9 @@
                 "concept": "164359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rows": ""
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "referralsOrdered === '488b58ff-64f5-4f8a-8979-fa79940b1594'"
-                  }
-                }
-              ],
+              "hide": {
+                "hideWhenExpression": "referralsOrdered === '488b58ff-64f5-4f8a-8979-fa79940b1594'"
+              },
               "id": "referralNotes"
             }
           ]

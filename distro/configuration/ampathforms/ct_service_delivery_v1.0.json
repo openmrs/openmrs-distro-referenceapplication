@@ -30,86 +30,85 @@
             {
               "label": "Date enrolled to DSD",
               "type": "obs",
+              "required": true,
+              "id": "dateEnrolledToDSD",
+              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "weeksList": "",
                 "conceptMappings": [
                   {
-                    "type": "SNOMED-CT",
-                    "value": "439771001"
-                  },
-                  {
+                    "relationship": "SAME-AS",
                     "type": "CIEL",
                     "value": "160753"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "439771001"
                   }
                 ]
               },
-              "id": "dateEnrolledToDSD",
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
+                  "unspecified": "true"
+                }
+              ],
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                 }
               ]
             },
             {
               "label": "Date disenrolled from DSD",
               "type": "obs",
+              "required": true,
+              "id": "dateDisenrolledDSD",
+              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "weeksList": "",
                 "conceptMappings": [
                   {
-                    "type": "SNOMED-CT",
-                    "value": "439771001"
-                  },
-                  {
+                    "relationship": "SAME-AS",
                     "type": "CIEL",
                     "value": "160753"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "439771001"
                   }
                 ]
               },
-              "id": "dateDisenrolledDSD",
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('dsdService','b5ddaf2e-dae3-4e4d-81ca-6cead3d59973')"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
+                  "unspecified": "true"
+                }
+              ],
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                 }
               ]
             },
             {
               "label": "Reason for disenrolling from DSD",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "text",
                 "concept": "163513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -118,11 +117,7 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
                   "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('dsdService','b5ddaf2e-dae3-4e4d-81ca-6cead3d59973')"
-                  },
                   "validators": []
                 }
               ]
@@ -186,12 +181,7 @@
           "behaviours": [
             {
               "intent": "*",
-              "required": "true",
-              "unspecified": "true",
-              "hide": {
-                "hideWhenExpression": "!includes('dsdService','9cca15ce-db78-4a39-be0d-aae19e089ec1')"
-              },
-              "validators": []
+              "unspecified": "true"
             }
           ]
         },

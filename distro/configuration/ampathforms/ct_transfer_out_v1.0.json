@@ -28,6 +28,7 @@
             {
               "label": "Receiving Facility",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "text",
                 "concept": "162724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -36,18 +37,14 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
               ]
             },
             {
               "label": "Transfer-Out Date (Date transfer-out takes effect)",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "160649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -63,21 +60,17 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "true"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('dateOfFirstVisit')"
-                    }
-                  ]
+                  "unspecified": "true"
+                }
+              ],
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "true"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('dateOfFirstVisit')"
                 }
               ]
             }
@@ -91,6 +84,7 @@
             {
               "label": "Transfer-out Verified",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "797e0073-1f3f-46b1-8b1a-8cdad134d2b3",
@@ -175,18 +169,14 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
               ]
             },
             {
               "label": "Date verification done",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -211,24 +201,23 @@
                 ]
               },
               "id": "verificationDate",
+              "hide": {
+                "hideWhenExpression": "isTransferOutVerified !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "!includes('isTransferOutVerified','1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                    }
-                  ]
+                  "unspecified": "true"
+                }
+              ],
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
                 }
               ]
             }

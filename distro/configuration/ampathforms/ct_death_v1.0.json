@@ -31,6 +31,7 @@
             {
               "label": "Date of death",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "1543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -54,27 +55,24 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "false",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    },
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "myValue > today() || myValue < useFieldValue('dateOfFirstVisit') || myValue <= '159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                    }
-                  ]
+                  "unspecified": "false"
+                }
+              ],
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue > today() || myValue < useFieldValue('dateOfFirstVisit') || myValue <= '159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                 }
               ]
             },
             {
               "label": "Cause of Death",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "1599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -327,24 +325,14 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "false",
-                  "hide": {
-                    "hideWhenExpression": "false"
-                  },
-                  "validators": []
+                  "unspecified": "false"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "label": "Specific Cause of Death",
-          "isExpanded": "true",
-          "questions": [
+            },
             {
               "label": "HIV disease resulting in other malignant neoplasms",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "select",
                 "concept": "efd206db-ed68-4ac3-8916-da524f029643",
@@ -493,18 +481,17 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(Deathreason) || Deathreason !=='159988AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(Deathreason) || Deathreason !=='159988AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
+              }
             },
             {
               "label": "HIV disease resulting in infectious & parasitic diseases",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "select",
                 "concept": "1c06de20-fbc0-4d42-a638-f273e5db2146",
@@ -681,18 +668,17 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(Deathreason) || Deathreason !=='160159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "Deathreason !=='160159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
+              }
             },
             {
               "label": "Other diseases or conditions leading to death",
               "type": "obs",
+              "required": true,
               "questionOptions": {
                 "rendering": "select",
                 "concept": "162574AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -734,14 +720,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "required": "true",
-                  "unspecified": "true",
-                  "hide": {
-                    "hideWhenExpression": "isEmpty(Deathreason) || Deathreason !=='160160AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
-                  },
-                  "validators": []
+                  "unspecified": "true"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "Deathreason !=='160160AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
+              }
             }
           ]
         },
