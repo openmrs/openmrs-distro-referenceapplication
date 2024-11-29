@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   gateway:
-    image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
+    image: degoke/openmrs-gateway
     restart: "unless-stopped"
     depends_on:
       - frontend
@@ -11,12 +11,12 @@ services:
       - "80:80"
 
   frontend:
-    image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
+    image: degoke/openmrs-frontend
     restart: "unless-stopped"
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS: /openmrs/spa/config-core_demo.json
+      SPA_CONFIG_URLS: /openmrs/spa/config-core.json
       SPA_DEFAULT_LOCALE:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
@@ -25,7 +25,7 @@ services:
       - backend
 
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
+    image: degoke/openmrs-backend
     restart: "unless-stopped"
     depends_on:
       - db
