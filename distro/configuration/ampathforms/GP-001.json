@@ -1,0 +1,828 @@
+{
+  "name": "GP-001",
+  "pages": [
+    {
+      "label": "Inscription au programme VIH",
+      "sections": [
+        {
+          "label": "Détails de la visite",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Lieu de rencontre",
+              "type": "encounterLocation",
+              "required": false,
+              "id": "lieu_rencontre",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            },
+            {
+              "label": "Date de rencontre",
+              "type": "encounterDatetime",
+              "required": true,
+              "id": "EncounterDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date"
+              }
+            },
+            {
+              "label": "Prestataire",
+              "type": "encounterProvider",
+              "required": false,
+              "id": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            },
+            {
+              "label": "Rôle du prestataire",
+              "type": "encounterRole",
+              "required": false,
+              "id": "EncounterRole",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vitalités et biométrie",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "required": false,
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "25",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  }
+                ]
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "temperature < 25 || temperature > 43",
+                  "errorMessage": "Temperature must be between 25°C and 43°C."
+                }
+              ]
+            },
+            {
+              "label": "Tension artérielle systolique",
+              "type": "obs",
+              "required": false,
+              "id": "systol",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "90",
+                "max": "180",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5085"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5085"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "271649006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5085"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Tension artérielle Diastolique",
+              "type": "obs",
+              "required": false,
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "60",
+                "max": "120",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5086"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5086"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "35094-2"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5086"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "271650006"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Impulsion",
+              "type": "obs",
+              "required": false,
+              "id": "impulsion",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "60",
+                "max": "230",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "78564009"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5087"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5087"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5087"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Fréquence respiratoire",
+              "type": "obs",
+              "required": false,
+              "id": "freq_respiratoire",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "8",
+                "max": "999",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "86290005"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5242"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5242"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5242"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "required": false,
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "90",
+                "max": "100",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5092"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5092"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "431314004"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Poids",
+              "type": "obs",
+              "required": false,
+              "id": "poids",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5089"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5089"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5089"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Taille",
+              "type": "obs",
+              "required": false,
+              "id": "taille",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5090"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5090"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5090"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "IMC",
+              "type": "control",
+              "required": false,
+              "id": "imc",
+              "questionOptions": {
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "calcBMI(taille, poids)"
+                }
+              },
+              "validators": []
+            },
+            {
+              "label": "BSA",
+              "type": "control",
+              "required": false,
+              "id": "bsa",
+              "questionOptions": {
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "calcBSA(taille, poids)"
+                }
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Détails socio-démographique",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Etat matrimonial",
+              "type": "obs",
+              "required": false,
+              "id": "etat_matrimonial",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "365581002"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3350"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
+                  },
+                  {
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
+                  },
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
+                  },
+                  {
+                    "concept": "135704AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lives alone"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Niveau d'études",
+              "type": "obs",
+              "required": false,
+              "id": "niveau_etude",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "1688"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1605"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "82589-3"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANC-DAK",
+                    "value": "ANC.B6.DE1"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1712"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "105421008"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Statut fumeur",
+              "type": "obs",
+              "required": false,
+              "id": "statut_fumeur",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1492AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Oui",
+                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3"
+                  },
+                  {
+                    "label": "Non",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Inconnu"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Durée tabagisme",
+              "type": "control",
+              "required": false,
+              "id": "duree_tabagisme",
+              "hide": {
+                "hideWhenExpression": "statut_fumeur !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
+              },
+              "questionOptions": {
+                "rendering": "number"
+              }
+            },
+            {
+              "label": "Quantité de tabac quotien",
+              "type": "control",
+              "required": false,
+              "id": "quantite_tabac",
+              "hide": {
+                "hideWhenExpression": "statut_fumeur !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
+              },
+              "questionOptions": {
+                "rendering": "number"
+              }
+            },
+            {
+              "label": "Catégorie de la population",
+              "type": "obs",
+              "required": false,
+              "id": "categorie_population",
+              "hide": {
+                "hideWhenExpression": "age < 15"
+              },
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "746737c0-4201-4d7f-b580-816e36dc425a",
+                "conceptMappings": [
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "CIEL",
+                    "value": "166432"
+                  }
+                ],
+                "answers": []
+              }
+            },
+            {
+              "label": "Type population clé",
+              "type": "obs",
+              "required": false,
+              "id": "type_population",
+              "hide": {
+                "hideWhenExpression": "categorie_population !== '166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d3d4ae96-8c8a-43db-a9dc-dac951f5dcb3",
+                "conceptMappings": [
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "CIEL",
+                    "value": "166431"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Détails sur le diagnostic du VIH",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date de test VIH",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date_test",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": []
+            },
+            {
+              "label": "Date du diagnostic VIH",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "date_diagnostic",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": []
+            },
+            {
+              "label": "Type de test VIH",
+              "type": "obs",
+              "required": false,
+              "id": "type_test",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ca4953af-9ad4-4514-b54a-6832acd7cae9",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "162087"
+                  }
+                ],
+                "answers": []
+              }
+            },
+            {
+              "label": "Résultat du test VIH",
+              "type": "obs",
+              "required": false,
+              "id": "resultat_test",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "192f67ac-247c-4e1d-966a-4c223e33d38b"
+              }
+            },
+            {
+              "label": "ID unique",
+              "type": "patientIdentifier",
+              "required": false,
+              "id": "id_unique",
+              "minLength": "10",
+              "maxLength": "10",
+              "questionOptions": {
+                "rendering": "text",
+                "identifierType": "05a29f94-c0ed-11e2-94be-8c13b969e334"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!/^[A-Z, a-z, 0-9]*$/.test(id_unique)",
+                  "errorMessage": "L'identifiant unique doit comporter 10 chiffres"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Détails obstétriques",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Parité",
+              "type": "obs",
+              "required": false,
+              "id": "parite",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "1053"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1053"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANC-DAK",
+                    "value": "ANC.B6.DE32"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "11977-6"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "364325004"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1053"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Enceinte",
+              "type": "obs",
+              "required": false,
+              "id": "enceinte",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5272"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "11449-6"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "1755"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "44"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5272"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "77386006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5272"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date dernières règles",
+              "type": "control",
+              "required": false,
+              "id": "date_derniere_regle",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "hide": {
+                "hideWhenExpression": "enceinte !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Date prévue d'accouchement",
+              "type": "control",
+              "required": false,
+              "id": "date_prevu_accouchement",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "calculate": {
+                  "calculateExpression": "calcEDD(date_derniere_regle)"
+                }
+              },
+              "hide": {
+                "hideWhenExpression": "enceinte !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Présentation des plaintes",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "concept": "a8a072c8-1350-11df-a1f1-0026b9348838",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Libellé de la plainte",
+                  "type": "control",
+                  "required": false,
+                  "id": "libelle_plainte",
+                  "questionOptions": {
+                    "rendering": "text"
+                  }
+                },
+                {
+                  "label": "Début de la plainte",
+                  "type": "control",
+                  "required": false,
+                  "id": "debut_plainte",
+                  "datePickerFormat": "calendar",
+                  "questionOptions": {
+                    "rendering": "date"
+                  }
+                },
+                {
+                  "label": "Durée de la plainte",
+                  "type": "control",
+                  "required": false,
+                  "id": "duree_plainte",
+                  "questionOptions": {
+                    "rendering": "text"
+                  },
+                  "validators": []
+                }
+              ],
+              "id": "questions_plainte"
+            }
+          ]
+        },
+        {
+          "label": "Diagnostic",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Rendu du problème",
+              "type": "control",
+              "required": false,
+              "id": "rendu_probleme",
+              "questionOptions": {
+                "rendering": "textarea",
+                "rows": 5
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Enquêtes",
+      "sections": [
+        {
+          "label": "Tests de laboratoire",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Demande de test",
+              "type": "testOrder",
+              "required": false,
+              "id": "demande_test",
+              "questionOptions": {
+                "rendering": "workspace-launcher",
+                "buttonLabel": "+ Test labo demandé",
+                "workspace-name": "order-basket"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "dd528487-82a5-4082-9c72-ed246bd49591",
+  "referencedForms": [],
+  "uuid": "5569d356-ec72-4025-8947-e1e1a05578e3",
+  "description": "Un formulaire pour collecter les données du patient dans le centre de Santé",
+  "version": "1.0"
+}

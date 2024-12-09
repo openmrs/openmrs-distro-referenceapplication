@@ -1,0 +1,1057 @@
+{
+  "name": "TF",
+  "pages": [
+    {
+      "label": "Socio Demographics",
+      "sections": [
+        {
+          "label": "Visit Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Encounter Location",
+              "type": "encounterLocation",
+              "required": false,
+              "id": "encounterLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              },
+              "validators": []
+            },
+            {
+              "label": "Encounter Provider",
+              "type": "encounterProvider",
+              "required": false,
+              "id": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              },
+              "validators": []
+            },
+            {
+              "label": "Encounter Date",
+              "type": "encounterDatetime",
+              "required": true,
+              "id": "encounterDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false",
+                  "errorMessage": "Future dates not allowed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "HIV Diagnosis Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIV test date",
+              "type": "obs",
+              "required": false,
+              "id": "hivTestDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "usePreviousValue": true,
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "164400"
+                  }
+                ]
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": false,
+                  "errorMessage": "Future dates not allowed"
+                }
+              ]
+            },
+            {
+              "label": "HIV diagnosis date",
+              "type": "obs",
+              "required": false,
+              "id": "hivDiagnosisDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "159948AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "usePreviousValue": false,
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "159948"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "432213005"
+                  }
+                ]
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": false,
+                  "errorMessage": "Future dates not allowed"
+                },
+                {
+                  "type": "custom",
+                  "failsWhenExpression": "hivDiagnosisDate > hivTestDate",
+                  "errorMessage": "HIV Diagnosis Date must be on or after the HIV Test Date"
+                }
+              ]
+            },
+            {
+              "label": "HIV test type",
+              "type": "obs",
+              "required": false,
+              "id": "hivTestType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "611190b4-2b83-42c5-bbb1-8d99bfaec9ed",
+                "answers": [
+                  {
+                    "concept": "c1cc178c-390c-4194-b286-f9c57e0f313d",
+                    "label": "ELISA blood test"
+                  },
+                  {
+                    "concept": "7149a26d-c0a7-42c4-86ae-099616830831",
+                    "label": "Rapid blood test"
+                  },
+                  {
+                    "concept": "efe34fae-de1e-4430-86ac-3198d0fb4a70",
+                    "label": "Respiratory PCR"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV test result",
+              "type": "obs",
+              "required": false,
+              "id": "hivTestResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "192f67ac-247c-4e1d-966a-4c223e33d38b",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Patient Socio Demographic Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Marital status",
+              "type": "obs",
+              "required": false,
+              "id": "maritalStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1054"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "365581002"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3350"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
+                  },
+                  {
+                    "concept": "135704AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lives alone"
+                  },
+                  {
+                    "concept": "1060AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Living with partner"
+                  },
+                  {
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
+                  },
+                  {
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never married"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Separated"
+                  },
+                  {
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Education level",
+              "type": "obs",
+              "required": false,
+              "id": "educationLevel",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "1688"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1605"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "82589-3"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANC-DAK",
+                    "value": "ANC.B6.DE1"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1712"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "105421008"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "159785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "College/university/polytechnic"
+                  },
+                  {
+                    "concept": "163122AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Junior high school education"
+                  },
+                  {
+                    "concept": "160294AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No formal education"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "164212AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not in school"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Primary school education"
+                  },
+                  {
+                    "concept": "160289AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Preschool education level"
+                  },
+                  {
+                    "concept": "160290AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Primary school education incomplete"
+                  },
+                  {
+                    "concept": "164211AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Private school"
+                  },
+                  {
+                    "concept": "164210AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Public school"
+                  },
+                  {
+                    "concept": "1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Secondary school education"
+                  },
+                  {
+                    "concept": "160291AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Secondary school education incomplete"
+                  },
+                  {
+                    "concept": "163123AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Senior high school education"
+                  },
+                  {
+                    "concept": "160293AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Special education received"
+                  },
+                  {
+                    "concept": "160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tertiary education complete"
+                  },
+                  {
+                    "concept": "160298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tertiary education incomplete"
+                  },
+                  {
+                    "concept": "160300AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Undergraduate education complete"
+                  },
+                  {
+                    "concept": "160299AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Undergraduate education incomplete"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Smoking status",
+              "type": "obs",
+              "required": false,
+              "id": "smokingStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "152722AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "152722"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "3BT",
+                    "value": "10096379"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "IMO-ProblemIT",
+                    "value": "603399"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "1551"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ICD-10-WHO",
+                    "value": "F17.1"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "77176002"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ICPC2",
+                    "value": "A23"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "ICD-11-WHO",
+                    "value": "QE13"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "2239"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "3339"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Daily smoking quantity",
+              "type": "obs",
+              "required": false,
+              "id": "dailySmokingQuantity",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1546AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "AMPATH",
+                    "value": "2069"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1546"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "smokingStatus!=='1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "validators": []
+            },
+            {
+              "label": "Population type",
+              "type": "obs",
+              "required": false,
+              "id": "populationType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "746737c0-4201-4d7f-b580-816e36dc425a",
+                "conceptMappings": [
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "CIEL",
+                    "value": "166432"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "166430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "General population"
+                  },
+                  {
+                    "concept": "167143AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Priority Population"
+                  },
+                  {
+                    "concept": "166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Target population"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Obstetric Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Parity",
+              "type": "obs",
+              "required": false,
+              "id": "parity",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "1053"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1053"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANC-DAK",
+                    "value": "ANC.B6.DE32"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "11977-6"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "364325004"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1053"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Pregnant",
+              "type": "obs",
+              "required": false,
+              "id": "pregnant",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5272"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "11449-6"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "1755"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "44"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5272"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED-CT",
+                    "value": "77386006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5272"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Date of last menstrual period (LMP)",
+              "type": "obs",
+              "required": false,
+              "id": "dateOfLastMenstrualPeriod",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "8665-2"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1836"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANC-DAK",
+                    "value": "ANC.B6.DE14"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1427"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "21840007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANC-DAK",
+                    "value": "ANC.B6.DE19"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "968"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "968"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "pregnant!=='1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "validators": []
+            },
+            {
+              "label": "Expected date of delivery (EDD)",
+              "type": "obs",
+              "required": false,
+              "id": "expectedDateOfDelivery",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "161714006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "11779-6"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5596"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5596"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANC-DAK",
+                    "value": "ANC.B6.DE22"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1854"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "pregnant!=='1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "calculate": {
+                "calculateExpression": "calcEDD(dateOfLastMenstrualPeriod)"
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Patient Vitals",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "required": false,
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Systolic Blood Pressure",
+              "type": "obs",
+              "required": false,
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "271649006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5085"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5085"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5085"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Diastolic Blood Pressure",
+              "type": "obs",
+              "required": false,
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "271650006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "35094-2"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5086"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5086"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5086"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Pulse",
+              "type": "obs",
+              "required": false,
+              "id": "pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5087"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5087"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5087"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "78564009"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Date of birth",
+              "type": "obs",
+              "required": false,
+              "id": "dateOfBirth",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160753"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED-CT",
+                    "value": "439771001"
+                  }
+                ],
+                "answers": []
+              }
+            },
+            {
+              "label": "Calculated age",
+              "type": "control",
+              "required": false,
+              "id": "calculatedAge",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "calculate": {
+                "calculateExpression": "calcAgeBasedOnDate('160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Patient Vitals and Biometrics",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Respiration rate",
+              "type": "obs",
+              "required": false,
+              "id": "respirationRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5242"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5242"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "86290005"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5242"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Blood oxygen saturation",
+              "type": "obs",
+              "required": false,
+              "id": "bloodOxygenSaturation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5092"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "431314004"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5092"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "required": false,
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5089"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5089"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5089"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "required": false,
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5090"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5090"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5090"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "BMI",
+              "type": "control",
+              "required": false,
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "calcBMI(height,weight)"
+                }
+              },
+              "validators": []
+            },
+            {
+              "label": "BSA",
+              "type": "control",
+              "required": false,
+              "id": "bsa",
+              "questionOptions": {
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "calcBSA(height,weight)"
+                }
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+  "referencedForms": [],
+  "uuid": "d193eb25-15d4-4dc5-b55b-4dd0e363fd10",
+  "description": "A form for collecting obstetric information",
+  "version": "1.0"
+}

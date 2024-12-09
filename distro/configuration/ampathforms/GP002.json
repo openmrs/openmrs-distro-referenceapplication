@@ -1,0 +1,587 @@
+{
+  "name": "GP002",
+  "pages": [
+    {
+      "label": "HIV Enrolment",
+      "sections": [
+        {
+          "label": "Visit Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Encounter Location",
+              "type": "control",
+              "required": false,
+              "id": "Lieu de la rencontre",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Encounter Date",
+              "type": "encounterDatetime",
+              "required": true,
+              "id": "DateDeRencontre",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": false,
+                  "errorMessage": "Les dates futures ne sont pas autorisées"
+                }
+              ]
+            },
+            {
+              "label": "Encounter Provider",
+              "type": "control",
+              "required": false,
+              "id": "FournisseurDe Rencontres",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Encounter Role",
+              "type": "control",
+              "required": false,
+              "id": "RoleDeRencontre",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Vitals and Biometrics",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "required": false,
+              "id": "temperature",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "temperature < 25 || temperature > 43",
+                  "errorMessage": "Temperature must be between 25°C and 43°C."
+                }
+              ],
+              "questionOptions": {
+                "rendering": "number",
+                "min": "25",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Systolic Blood Pressure",
+              "type": "obs",
+              "required": false,
+              "id": "SystolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "120",
+                "max": "139",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  }
+                ]
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "SystolicBloodPressure < 120 || SystolicBloodPressure > 139",
+                  "errorMessage": "Temperature must be between 25°C and 43°C."
+                }
+              ]
+            },
+            {
+              "label": "Diastolic Blood Pressure",
+              "type": "obs",
+              "required": false,
+              "id": "DiastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "80",
+                "max": "89",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse",
+              "type": "obs",
+              "required": false,
+              "id": "Pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "100",
+                "max": "400",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "78564009"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5087"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5087"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5087"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiration rate",
+              "type": "obs",
+              "required": false,
+              "id": "Respirationrate",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "86290005"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5242"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5242"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5242"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "SPO2",
+              "type": "control",
+              "required": false,
+              "id": "SPO2",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "100",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "431314004"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5092"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5042"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Weight",
+              "type": "control",
+              "required": false,
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Height",
+              "type": "control",
+              "required": false,
+              "id": "height",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "BMI ",
+              "type": "control",
+              "required": false,
+              "id": "BMI ",
+              "questionOptions": {
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "calcBMI(height,weight)"
+                }
+              },
+              "validators": []
+            },
+            {
+              "label": "BSA",
+              "type": "control",
+              "required": false,
+              "id": "BSA",
+              "questionOptions": {
+                "rendering": "text",
+                "calculate": {
+                  "calculateExpression": "calcBSA(height,weight)"
+                }
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Socio-Demographic Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Marital Status",
+              "type": "control",
+              "required": false,
+              "id": "Marital Status",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Education Level",
+              "type": "control",
+              "required": false,
+              "id": "EducationLevel",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Smoking Status",
+              "type": "control",
+              "required": false,
+              "id": "Smoking Status",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Duration of Smoking",
+              "type": "control",
+              "required": false,
+              "id": "Duration of Smoking",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Daily Smoking Quantity",
+              "type": "control",
+              "required": false,
+              "id": "Daily Smoking Quantity",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Population Category",
+              "type": "control",
+              "required": false,
+              "id": "Population Category",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Key Population Type",
+              "type": "control",
+              "required": false,
+              "id": "Key Population Type",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "HIV Diagnosis Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIV  Test date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "hivTestDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date"
+              }
+            },
+            {
+              "label": "HIV diagnosis date",
+              "type": "encounterDatetime",
+              "required": false,
+              "id": "hivDiagnosisDate",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "new Date(hivDiagnosisDate) < new Date(hivTestDate)",
+                  "errorMessage": "HIV Diagnosis Date must be later than the HIV Test Date."
+                }
+              ]
+            },
+            {
+              "label": "HIV test type",
+              "type": "control",
+              "required": false,
+              "id": "HIV test type",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "HIV test result",
+              "type": "control",
+              "required": false,
+              "id": "HIV test result",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Unique ID",
+              "type": "control",
+              "required": false,
+              "id": "Unique ID",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Obstetric Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Parity",
+              "type": "control",
+              "required": false,
+              "id": "Parity",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Pregnant",
+              "type": "control",
+              "required": false,
+              "id": "Pregnant",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Date of last menstrual period (LMP)",
+              "type": "control",
+              "required": false,
+              "id": "Date of last menstrual period (LMP)",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Expected date of delivery (EDD)",
+              "type": "control",
+              "required": false,
+              "id": "Expected date of delivery (EDD)",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Presenting Complaints",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "concept": "a8a072c8-1350-11df-a1f1-0026b9348838",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Complaint",
+                  "type": "control",
+                  "required": false,
+                  "id": "libelle_plainte",
+                  "questionOptions": {
+                    "rendering": "text"
+                  }
+                },
+                {
+                  "label": "Onset",
+                  "type": "control",
+                  "required": false,
+                  "id": "debut_plainte",
+                  "datePickerFormat": "calendar",
+                  "questionOptions": {
+                    "rendering": "date"
+                  }
+                },
+                {
+                  "label": "Duration",
+                  "type": "control",
+                  "required": false,
+                  "id": "duree_plainte",
+                  "questionOptions": {
+                    "rendering": "text"
+                  },
+                  "validators": []
+                }
+              ],
+              "id": "questions_plainte"
+            }
+          ]
+        },
+        {
+          "label": "Diagnostic",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Rendu du problème",
+              "type": "control",
+              "required": false,
+              "id": "rendu_probleme",
+              "questionOptions": {
+                "rendering": "textarea",
+                "rows": 5
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Enquêtes",
+      "sections": [
+        {
+          "label": "Laboratory Tests",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Lanch test",
+              "type": "testOrder",
+              "required": false,
+              "id": "demande_test",
+              "questionOptions": {
+                "rendering": "workspace-launcher",
+                "buttonLabel": "+ Lab tests ordered",
+                "workspace-name": "order-basket"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+  "referencedForms": [],
+  "uuid": "4cd1f928-ebed-401f-aa19-ce00c2d2b387",
+  "description": "Formulaire de collecte",
+  "version": "1.2"
+}
