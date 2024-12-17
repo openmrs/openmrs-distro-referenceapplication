@@ -1,6 +1,6 @@
 {
-  "name": "DRC HIV Enrolment Form v1.2",
-  "version": "1.2",
+  "name": "Service Enrolment Form",
+  "version": "1",
   "published": true,
   "retired": false,
   "pages": [
@@ -18,41 +18,20 @@
               },
               "id": "fooMarkdown",
               "value": [
-                "**Use this form to:** Enrol or Re-enrol a client into HIV Care"
+                "**Use this form to:** Enrolment/Re-enrol a client for HIV Care"
               ]
-            },
-            {
-              "label": "What do you want to do?",
-              "type": "obs",
-              "required": true,
-              "id": "clientDescription",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "83e40f2c-c316-43e6-a12e-20a338100281",
-                "answers": [
-                  {
-                    "concept": "164144AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Enrol a new client",
-                    "conceptMappings": []
-                  },
-                  {
-                    "concept": "160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Transfer in a client",
-                    "conceptMappings": []
-                  },
-                  {
-                    "concept": "163532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Enrol a Mother into PMTCT program",
-                    "conceptMappings": []
-                  },
-                  {
-                    "concept": "159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Re-enrol a client",
-                    "conceptMappings": []
-                  }
-                ]
-              }
-            },
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Client Profile",
+      "sections": [
+        {
+          "label": "Client Details",
+          "isExpanded": "true",
+          "questions": [
             {
               "label": "Enrolment Date",
               "type": "obs",
@@ -60,14 +39,24 @@
                 "rendering": "date",
                 "concept": "160555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "validators": [
+              "behaviours": [
                 {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                },
-                {
-                  "type": "js_expression",
-                  "failsWhenExpression": "myValue > today()"
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('hivDiagnosisDate')"
+                    }
+                  ]
                 }
               ],
               "id": "hivEnrolmentDate"
@@ -75,24 +64,225 @@
             {
               "label": "Unique ID",
               "type": "obs",
-              "required": true,
-              "id": "patientIdentifier",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "162576AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "conceptMappings": [
+                "concept": "162576AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isEmpty(patientIdentifier)"
+                    }
+                  ]
+                }
+              ],
+              "id": "patientIdentifier"
+            },
+            {
+              "label": "Other Unique ID",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162727AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ],
+              "id": "otherUniquePatientIdentifier"
+            },
+            {
+              "label": "Patient Type at Enrolment",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "83e40f2c-c316-43e6-a12e-20a338100281",
+                "answers": [
                   {
-                    "relationship": "NARROWER-THAN",
-                    "type": "SNOMED-CT",
-                    "value": "422549004"
+                    "concept": "163532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mother enrolled in PMTCT program",
+                    "conceptMappings": []
                   },
                   {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "162576"
+                    "concept": "159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Re-enrol",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Transfer in",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "164144AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "New client",
+                    "conceptMappings": []
                   }
                 ]
-              }
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ],
+              "id": "clientDescription"
+            },
+            {
+              "label": "Population Category",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "166432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Key population",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "385436007"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "166430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "General population",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "385436007"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ],
+              "id": "clientPopulationCategory"
+            },
+            {
+              "label": "Key/Priority Population Type",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "d3d4ae96-8c8a-43db-a9dc-dac951f5dcb3",
+                "answers": [
+                  {
+                    "concept": "63ea75cb-205f-4e7b-9ede-5f9b8a4dda9f",
+                    "label": "Migrant Workers",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "b282bb08-62a7-42c2-9bea-8751c267d13e",
+                    "label": "Uniformed Forces",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "22b202fc-67de-4af9-8c88-46e22559d4b2",
+                    "label": "Transgender Persons",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "678f3144-302f-493e-ba22-7ec60a84732a",
+                    "label": "Adolescent Girls & Young Women",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "def00c73-f6d5-42fb-bcec-0b192b5be22d",
+                    "label": "Fisher Folk",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "8da9bf92-22f6-40be-b468-1ad08de7d457",
+                    "label": "Prisoners",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "dc1058ea-4edd-4780-aeaa-a474f7f3a437",
+                    "label": "Refugees",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "160578AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male who has sex with men",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "266974005"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "160579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sex worker",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "53713009"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Long distance truck driver",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "87447002"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "c038bff0-8e33-408c-b51f-7fb6448d2f6c",
+                    "label": "People Who Inject Drugs",
+                    "conceptMappings": []
+                  },
+                  {
+                    "concept": "365371fd-0106-4a53-abc4-575e3d65d372",
+                    "label": "People With Disability",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(clientPopulationCategory) || clientPopulationCategory !== '166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": []
+                }
+              ],
+              "id": "keyPopulationType"
             },
             {
               "label": "Entry Point",
@@ -361,6 +551,16 @@
                   }
                 ]
               },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ],
               "id": "enrollmentMethod"
             },
             {
@@ -377,321 +577,16 @@
                 ]
               },
               "id": "otherEntryPoint",
-              "hide": {
-                "hideWhenExpression": "enrollmentMethod !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "!includes('enrollmentMethod','5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                  }
                 }
               ]
-            }
-          ]
-        },
-        {
-          "label": "Social Status",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Education Level",
-              "type": "obs",
-              "required": false,
-              "id": "educationLevel",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "conceptMappings": [
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "PIH",
-                    "value": "1688"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "AMPATH",
-                    "value": "1605"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "LOINC",
-                    "value": "82589-3"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "ANC-DAK",
-                    "value": "ANC.B6.DE1"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "1712"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "SNOMED-CT",
-                    "value": "105421008"
-                  }
-                ],
-                "answers": [
-                  {
-                    "concept": "160294AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No formal education"
-                  },
-                  {
-                    "concept": "159785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "College/university/polytechnic"
-                  },
-                  {
-                    "concept": "1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Primary school education"
-                  },
-                  {
-                    "concept": "1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Secondary school education"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Marital Status",
-              "type": "obs",
-              "required": false,
-              "id": "maritalStatus",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "1054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "conceptMappings": [
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "PIH-Malawi",
-                    "value": "1054"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "1054"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "AMPATH",
-                    "value": "1054"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "SNOMED-CT",
-                    "value": "365581002"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "PIH",
-                    "value": "3350"
-                  }
-                ],
-                "answers": [
-                  {
-                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Divorced"
-                  },
-                  {
-                    "concept": "135704AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Lives alone"
-                  },
-                  {
-                    "concept": "1060AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Living with partner"
-                  },
-                  {
-                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Married"
-                  },
-                  {
-                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Never married"
-                  },
-                  {
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Other"
-                  },
-                  {
-                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Separated"
-                  },
-                  {
-                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Widowed"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Population Category",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "746737c0-4201-4d7f-b580-816e36dc425a",
-                "conceptMappings": [
-                  {
-                    "type": "CIEL",
-                    "value": "166432"
-                  }
-                ],
-                "answers": [
-                  {
-                    "concept": "166430AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "General population",
-                    "conceptMappings": [
-                      {
-                        "type": "CIEL",
-                        "value": "166430"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Key population",
-                    "conceptMappings": [
-                      {
-                        "type": "CIEL",
-                        "value": "166431"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "167143AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Priority population",
-                    "conceptMappings": []
-                  }
-                ]
-              },
-              "id": "clientPopulationCategory"
-            },
-            {
-              "label": "Key Population Type",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "d3d4ae96-8c8a-43db-a9dc-dac951f5dcb3",
-                "answers": [
-                  {
-                    "concept": "157351AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Intravenous drug user",
-                    "conceptMappings": []
-                  },
-                  {
-                    "concept": "160578AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Male who has sex with men",
-                    "conceptMappings": [
-                      {
-                        "type": "CIEL",
-                        "value": "160578"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "8da9bf92-22f6-40be-b468-1ad08de7d457",
-                    "label": "Prisoners",
-                    "conceptMappings": [
-                      {
-                        "type": "OHTSTemp",
-                        "value": "Prisoners"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "160579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Sex worker",
-                    "conceptMappings": [
-                      {
-                        "type": "CIEL",
-                        "value": "160579"
-                      },
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "53713009"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "22b202fc-67de-4af9-8c88-46e22559d4b2",
-                    "label": "Transgender Persons",
-                    "conceptMappings": [
-                      {
-                        "type": "OHTSTemp",
-                        "value": "Transgender"
-                      }
-                    ]
-                  }
-                ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "clientPopulationCategory !== '166431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
-              "id": "keyPopulationType"
-            },
-            {
-              "label": "Priority Population Type",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "2bf14240-b2b2-42b2-8cf3-b5f8a0cb7764",
-                "conceptMappings": [
-                  {
-                    "type": "CIEL",
-                    "value": "167143"
-                  }
-                ],
-                "answers": [
-                  {
-                    "concept": "160580AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Client of sex worker"
-                  },
-                  {
-                    "concept": "def00c73-f6d5-42fb-bcec-0b192b5be22d",
-                    "label": "Fisher Folk"
-                  },
-                  {
-                    "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Long distance truck driver"
-                  },
-                  {
-                    "concept": "63ea75cb-205f-4e7b-9ede-5f9b8a4dda9f",
-                    "label": "Migrant Workers"
-                  },
-                  {
-                    "concept": "166514AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Non-intravenous drug user"
-                  },
-                  {
-                    "concept": "164100AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Refugee"
-                  },
-                  {
-                    "concept": "b282bb08-62a7-42c2-9bea-8751c267d13e",
-                    "label": "Uniformed Forces"
-                  },
-                  {
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Other"
-                  }
-                ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "clientPopulationCategory !== '167143AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
-              "id": "priorityPopulationType"
             }
           ]
         }
@@ -714,7 +609,11 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
                 }
               ],
               "id": "locationTransferedFrom"
@@ -729,7 +628,11 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
                 }
               ],
               "id": "artStartDate"
@@ -916,10 +819,14 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
                 }
               ],
-              "id": "currentArtRegiment"
+              "id": "currentArtRegimen"
             },
             {
               "label": "Transfer Documents",
@@ -930,7 +837,7 @@
                 "answers": [
                   {
                     "concept": "163532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Mother enrolled in prevention of maternal to child transmission (PMTCT) program",
+                    "label": "Mother enrolled in PMTCT",
                     "conceptMappings": []
                   },
                   {
@@ -948,7 +855,11 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
                 }
               ],
               "id": "transferInDoc"
@@ -963,7 +874,21 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false",
+                    "validators": [
+                      {
+                        "type": "date",
+                        "allowFutureDates": "false"
+                      },
+                      {
+                        "type": "js_expression",
+                        "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('hivDiagnosisDate')"
+                      }
+                    ]
+                  }
                 }
               ],
               "id": "dateOfFirstVisit"
@@ -978,10 +903,7 @@
             "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
           }
         }
-      ],
-      "hide": {
-        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-      }
+      ]
     },
     {
       "label": "HIV Diagnosis",
@@ -993,13 +915,31 @@
             {
               "label": "Date Confirmed HIV Positive",
               "type": "obs",
-              "required": false,
-              "id": "hivDiagnosisDate",
-              "datePickerFormat": "both",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "160554AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue < useFieldValue('dateOfFirstVisit')"
+                    }
+                  ]
+                }
+              ],
+              "id": "hivDiagnosisDate"
             },
             {
               "label": "Test Type",
@@ -1011,54 +951,151 @@
                   {
                     "concept": "163722AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Rapid test for HIV",
-                    "conceptMappings": [
-                      {
-                        "type": "CIEL",
-                        "value": "163722"
-                      },
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "165813002"
-                      }
-                    ]
+                    "conceptMappings": []
                   },
                   {
                     "concept": "844AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "HIV DNA polymerase chain reaction",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ],
+              "id": "diagnosticHivTestType"
+            },
+            {
+              "label": "Test Location",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "161549AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other",
                     "conceptMappings": [
                       {
-                        "type": "CIEL",
-                        "value": "844"
+                        "type": "PIH-Malawi",
+                        "value": "6408"
                       },
                       {
-                        "type": "SNOMED-CT",
-                        "value": "399256002"
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "OTHER"
+                      },
+                      {
+                        "type": "SNOMED-MVP",
+                        "value": "56221000105001"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "5622"
                       },
                       {
                         "type": "AMPATH",
-                        "value": "844"
+                        "value": "5622"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "74964007"
                       }
                     ]
                   },
                   {
-                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Unknown",
+                    "concept": "159671AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Provincial hospital",
                     "conceptMappings": [
                       {
-                        "type": "CIEL",
-                        "value": "1067"
+                        "type": "SNOMED-MVP",
+                        "value": "1596711000105007"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "22232009"
                       },
                       {
                         "type": "AMPATH",
-                        "value": "1067"
+                        "value": "6438"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "159670AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "sub-district hospital",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "6439"
                       },
                       {
-                        "type": "SNOMED CT",
-                        "value": "CT: 261665006"
+                        "type": "SNOMED-CT",
+                        "value": "22232009"
                       },
                       {
-                        "type": "PIH",
-                        "value": "1067"
+                        "type": "SNOMED-MVP",
+                        "value": "1596701000105009"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1274AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moi teaching and referral hospital",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "1274"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "405608006"
+                      },
+                      {
+                        "type": "SNOMED-MVP",
+                        "value": "12741000105009"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "159662AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "district hospital",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "6437"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "22232009"
+                      },
+                      {
+                        "type": "SNOMED-MVP",
+                        "value": "1596621000105007"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Health center hospital",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-MVP",
+                        "value": "12751000105006"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "22232009"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1275"
                       }
                     ]
                   }
@@ -1067,20 +1104,14 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
                 }
               ],
-              "id": "diagnosticHivTestType"
-            },
-            {
-              "label": "HIV Testing Center",
-              "type": "obs",
-              "required": false,
-              "id": "diagnosisLocation",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "c4768674-0c26-4353-8a3f-608e7b40ac57"
-              }
+              "id": "diagnosisLocation"
             }
           ]
         }
@@ -1089,13 +1120,10 @@
         {
           "intent": "*",
           "hide": {
-            "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+            "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
           }
         }
-      ],
-      "hide": {
-        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-      }
+      ]
     },
     {
       "label": "Previous ARV/HAART Use",
@@ -1105,10 +1133,8 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Use of ARVs for Pre Exposure Prophylaxis (PrEP)",
+              "label": "Use of Pre Exposure Prophylaxis (PrEP)",
               "type": "obs",
-              "required": false,
-              "id": "previousUseOfPrep",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "5d397775-0155-4033-95dc-edcec98e8190",
@@ -1136,22 +1162,9 @@
                     ]
                   },
                   {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
                     "label": "No",
-                    "conceptMappings": [
-                      {
-                        "type": "AMPATH",
-                        "value": "1066"
-                      },
-                      {
-                        "type": "SNOMED CT",
-                        "value": "373067005"
-                      },
-                      {
-                        "type": "PIH",
-                        "value": "1067"
-                      }
-                    ]
+                    "conceptMappings": []
                   },
                   {
                     "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -1176,12 +1189,22 @@
                     ]
                   }
                 ]
-              }
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ],
+              "id": "previousUseOfPrep"
             },
             {
               "label": "Date Last Used",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "5af829e9-2427-4ed7-bb55-de4381610364"
@@ -1189,29 +1212,28 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "isEmpty(previousUseOfPrep) || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                },
-                {
-                  "type": "js_expression",
-                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(previousUseOfPrep) || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                    }
+                  ]
                 }
               ],
               "id": "datePrepLastUsed"
             },
             {
-              "label": "Use of ARVs for Post exposure prophylaxis (PEP)",
+              "label": "Use of Post exposure prophylaxis (PEP)",
               "type": "obs",
-              "required": false,
-              "id": "previousUseOfPep",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "8bfdc328-1970-446c-9d7b-97d62703801b",
@@ -1266,12 +1288,22 @@
                     ]
                   }
                 ]
-              }
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ],
+              "id": "previousUseOfPep"
             },
             {
               "label": "Date Last Used",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "fbe937b6-a4ad-4ce5-9c43-002222fbabfb"
@@ -1279,29 +1311,28 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(previousUseOfPep) || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                    }
+                  ]
                 }
               ],
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                },
-                {
-                  "type": "js_expression",
-                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "isEmpty(previousUseOfPep) || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "datePepLastUsed"
             },
             {
-              "label": "Use of ARVs for Management of Hepatitis",
+              "label": "ARV Use for Management of Hepatitis",
               "type": "obs",
-              "required": false,
-              "id": "useOfArvsForHepatitis",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "906ed69c-949b-47b5-b469-2205f0da473a",
@@ -1356,12 +1387,22 @@
                     ]
                   }
                 ]
-              }
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ],
+              "id": "useOfArvs"
             },
             {
               "label": "Date Last Used",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "6a6cbda5-b155-4144-9ff9-ec3d1d1cd509"
@@ -1369,29 +1410,28 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(useOfArvs) || useOfArvs !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                    }
+                  ]
                 }
               ],
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                },
-                {
-                  "type": "js_expression",
-                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "dateHepBLastUsed"
             },
             {
-              "label": "Use of ARVs for Prevention of Mother to Child Transmission of HIV",
+              "label": "ART Use for Prevention of Mother to Child Transmission of HIV",
               "type": "obs",
-              "required": false,
-              "id": "useOfArvsForPMTCT",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "163532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -1446,12 +1486,22 @@
                     ]
                   }
                 ]
-              }
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  }
+                }
+              ],
+              "id": "previousUseOfArt"
             },
             {
               "label": "Date Last Used",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "date",
                 "concept": "163782AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -1459,29 +1509,30 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(previousUseOfArt) || previousUseOfArt !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    },
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
+                    }
+                  ]
                 }
               ],
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                },
-                {
-                  "type": "js_expression",
-                  "failsWhenExpression": "isDateBefore(myValue, '1980-01-01') || myValue >= today()"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "isEmpty(useOfArvsForPMTCT) || useOfArvsForPMTCT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "datePmtctLastUsed"
             }
           ]
         },
         {
           "label": "Previous ARV/HAART Drugs",
-          "isExpanded": "false",
+          "isExpanded": "true",
           "questions": [
             {
               "label": "Nucleoside Reverse Transcriptase Inhibitors (NRTIS)",
@@ -1525,7 +1576,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false",
+                    "validators": []
+                  }
                 }
               ],
               "id": "nrtisDrugsUsed"
@@ -1584,7 +1640,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
                 }
               ],
               "id": "nnrtisDrugsUsed"
@@ -1631,7 +1692,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
                 }
               ],
               "id": "proteaseInhibitors"
@@ -1695,7 +1761,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
                 }
               ],
               "id": "otherArvDrugClasses"
@@ -1705,26 +1776,20 @@
             {
               "intent": "*",
               "hide": {
-                "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || isEmpty(previousUseOfPep) || isEmpty(previousUseOfPrep) || isEmpty(useOfArvsForPMTCT) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || useOfArvsForPMTCT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && previousUseOfArt !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && useOfArvs !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
-          ],
-          "hide": {
-            "hideWhenExpression": "isEmpty(useOfArvsForHepatitis) || isEmpty(previousUseOfPep) || isEmpty(previousUseOfPrep) || isEmpty(useOfArvsForPMTCT) || useOfArvsForHepatitis !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousUseOfPrep !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || useOfArvsForPMTCT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-          }
+          ]
         }
       ],
       "behaviours": [
         {
           "intent": "*",
           "hide": {
-            "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+            "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
           }
         }
-      ],
-      "hide": {
-        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-      }
+      ]
     },
     {
       "label": "Treatment Supporter",
@@ -1772,7 +1837,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
                 }
               ],
               "id": "hasTreatmentSupporter"
@@ -1780,7 +1850,6 @@
             {
               "label": "Treatment Supporter Name",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "text",
                 "concept": "160638AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -1788,18 +1857,19 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": []
                 }
               ],
-              "hide": {
-                "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "treatmentSupporter"
             },
             {
               "label": "Treatment Supporter Phone Number",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "text",
                 "concept": "160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -1807,12 +1877,14 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": []
                 }
               ],
-              "hide": {
-                "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "treatmentSupporterPhoneNumber"
             },
             {
@@ -1931,26 +2003,33 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "validators": []
                 }
               ],
-              "hide": {
-                "hideWhenExpression": "isEmpty(hasTreatmentSupporter) || hasTreatmentSupporter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "relationToTreatmentSupporter"
             }
           ]
         }
       ],
-      "hide": {
-        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription === '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-      }
+      "behaviours": [
+        {
+          "intent": "*",
+          "hide": {
+            "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+          }
+        }
+      ]
     },
     {
-      "label": "Re-enrolment",
+      "label": "Re-enrollment",
       "sections": [
         {
-          "label": "Re-enrolment Details",
+          "label": "Re-enrollment Details",
           "isExpanded": "true",
           "questions": [
             {
@@ -1963,7 +2042,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "false"
+                  "required": "true",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
                 }
               ],
               "id": "Reenrolment"
@@ -1979,7 +2063,12 @@
               "behaviours": [
                 {
                   "intent": "*",
-                  "unspecified": "true"
+                  "required": "true",
+                  "unspecified": "true",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
                 }
               ],
               "id": "ReasonReenrolment"
@@ -1994,29 +2083,26 @@
             "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
           }
         }
-      ],
-      "hide": {
-        "hideWhenExpression": "isEmpty(clientDescription) || clientDescription !== '159833AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-      }
+      ]
     },
     {
       "label": "Notes",
       "sections": [
         {
-          "label": "",
+          "label": "Enrollment notes",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "",
+              "label": "General notes",
               "type": "obs",
               "questionOptions": {
                 "rendering": "textarea",
-                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "165095AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rows": "",
                 "conceptMappings": [
                   {
-                    "type": "CIEL",
-                    "value": "160632"
+                    "type": "AMPATH",
+                    "value": "1915"
                   },
                   {
                     "type": "AMPATH",
@@ -2027,12 +2113,23 @@
                     "value": "48767-8"
                   },
                   {
-                    "type": "AMPATH",
-                    "value": "1915"
+                    "type": "CIEL",
+                    "value": "160632"
                   }
                 ]
               },
-              "id": "addNotes"
+              "id": "generalNotes",
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "false",
+                  "unspecified": "false",
+                  "hide": {
+                    "hideWhenExpression": "false"
+                  },
+                  "validators": []
+                }
+              ]
             }
           ]
         }
@@ -2046,10 +2143,9 @@
     }
   ],
   "processor": "EncounterFormProcessor",
-  "uuid": "bd1f4e38-61a8-45b5-ae59-6806c855e882",
+  "uuid": "8f713e0e-94a0-3c57-9024-69520933802a",
   "referencedForms": [],
   "encounterType": "7e54cd64-f9c3-11eb-8e6a-57478ce139b0",
   "encounter": "Care and Treatment Service Enrolment",
-  "allowUnspecifiedAll": false,
-  "description": "HIV information"
+  "allowUnspecifiedAll": true
 }

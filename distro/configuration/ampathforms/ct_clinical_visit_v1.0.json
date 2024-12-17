@@ -1,6 +1,6 @@
 {
-  "name": "DRC Clinical Visit Form v2.2",
-  "version": "2.2",
+  "name": "POC Clinical Visit Form",
+  "version": "1",
   "published": true,
   "retired": false,
   "pages": [
@@ -13,13 +13,24 @@
           "questions": [
             {
               "label": "Encounter date",
-              "type": "encounterDatetime",
-              "required": false,
-              "id": "encounterDate",
-              "datePickerFormat": "both",
+              "type": "obs",
               "questionOptions": {
-                "rendering": "datetime"
-              }
+                "rendering": "date",
+                "concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                },
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                }
+              ],
+              "id": "dateOfEncounter"
             },
             {
               "label": "Scheduled visit",
@@ -30,7 +41,7 @@
                 "answers": [
                   {
                     "label": "Yes",
-                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3"
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   {
                     "label": "No",
@@ -59,6 +70,12 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                },
+                {
+                  "intent": "*",
+                  "required": "true",
                   "unspecified": "true"
                 }
               ],
@@ -67,7 +84,6 @@
             {
               "label": "Visit type",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "8a9809e9-8a0b-4e0e-b1f6-80b0cbbe361b",
@@ -105,6 +121,12 @@
               "behaviours": [
                 {
                   "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                },
+                {
+                  "intent": "*",
+                  "required": "true",
                   "unspecified": "true"
                 }
               ],
@@ -118,36 +140,33 @@
       "label": "Presenting Complaints",
       "sections": [
         {
-          "label": "Known illnesses or history of  disease",
+          "label": "History of Presenting Complaints",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Any presenting complaints?",
+              "label": "Any complaints?",
               "type": "obs",
-              "required": false,
-              "id": "presentingComplaints",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "1154AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "label": "Yes",
-                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3"
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   {
                     "label": "No",
                     "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594"
                   }
                 ]
-              }
+              },
+              "id": "presentingComplaints"
             },
             {
-              "label": "Presenting complaints",
+              "label": "Chief complaints",
               "type": "obs",
-              "required": false,
-              "id": "presentingComplaintsList",
               "questionOptions": {
-                "rendering": "checkbox-searchable",
+                "rendering": "checkbox",
                 "concept": "f2ff2d1c-25e6-4143-9000-89633a932c2f",
                 "answers": [
                   {
@@ -640,9 +659,7 @@
                   }
                 ]
               },
-              "hide": {
-                "hideWhenExpression": "presentingComplaints !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3' "
-              }
+              "id": "cheifComplaint"
             },
             {
               "label": "Presenting Complaints Notes",
@@ -651,299 +668,528 @@
                 "rendering": "textarea",
                 "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "hide": {
-                "hideWhenExpression": "presentingComplaints !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
-              },
               "id": "presentingComplaintNotes"
-            },
-            {
-              "label": "Conditions List",
-              "required": false,
-              "id": "conditonsWorkspaceLauncher",
-              "questionOptions": {
-                "rendering": "workspace-launcher",
-                "buttonLabel": "+ Conditions",
-                "workspaceName": "conditions-form-workspace"
-              }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "label": "Past Medical History",
+      "sections": [
         {
-          "label": "Allergies & Adverse Drug Reactions ",
+          "label": "Chronic Conditions",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Allergies",
-              "required": false,
-              "id": "allergiesWorkspaceLauncher",
-              "questionOptions": {
-                "rendering": "workspace-launcher",
-                "buttonLabel": "+ Allergies",
-                "workspaceName": "patient-allergy-form-workspace"
-              }
-            },
-            {
-              "label": "Patient reports adverse drug reaction(s)? ",
-              "type": "obs",
-              "id": "adverseReactions",
-              "required": "false",
-              "questionOptions": {
-                "concept": "162871AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "radio",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  },
-                  {
-                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Unknown"
-                  }
-                ]
-              },
-              "hide": {
-                "hideWhenExpression": ""
-              },
-              "historicalExpression": "_.isEmpty(HD.getObject('prevEnc').getValue('162871AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) ? undefined : HD.getObject('prevEnc').getValue('162871AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-            },
-            {
-              "label": "Adverse drug reaction(s)",
+              "id": "patientConditionsGroup",
+              "label": "Patient Conditions",
               "type": "obsGroup",
               "questionOptions": {
                 "rendering": "repeating",
-                "concept": "162867AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "id": "adrs",
-              "hide": {
-                "hideWhenExpression": "adverseReactions !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "concept": "8acba1d1-67cc-422c-961e-86d6b47bc45b"
               },
               "questions": [
                 {
-                  "label": "Medicine Causing Reaction",
+                  "label": "Condition",
                   "type": "obs",
-                  "id": "adrMed",
                   "questionOptions": {
-                    "concept": "1193AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "rendering": "drug"
-                  }
-                },
-                {
-                  "label": "Reaction",
-                  "type": "obs",
-                  "id": "adrReaction",
-                  "questionOptions": {
-                    "concept": "160646AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "rendering": "select",
-                    "answers": [
-                      {
-                        "concept": "148888AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Anaphylaxis"
-                      },
-                      {
-                        "concept": "148787AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Angioedema"
-                      },
-                      {
-                        "concept": "121629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Anaemia"
-                      },
-                      {
-                        "concept": "120148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Arrhythmia"
-                      },
-                      {
-                        "concept": "108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Bronchospasm"
-                      },
-                      {
-                        "concept": "143264AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Cough"
-                      },
-                      {
-                        "concept": "142412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Diarrhea"
-                      },
-                      {
-                        "concept": "118773AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Dystonia"
-                      },
-                      {
-                        "concept": "137162AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Flu-Like Syndrome"
-                      },
-                      {
-                        "concept": "140039AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Flushing"
-                      },
-                      {
-                        "concept": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Fever"
-                      },
-                      {
-                        "concept": "159581AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "GI upset"
-                      },
-                      {
-                        "concept": "5978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Nausea"
-                      },
-                      {
-                        "concept": "117399AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Hypertension"
-                      },
-                      {
-                        "concept": "111061AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Hives"
-                      },
-                      {
-                        "concept": "139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Headache"
-                      },
-                      {
-                        "concept": "159098AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Hepatotoxicity"
-                      },
-                      {
-                        "concept": "138111AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Hyperuricemia"
-                      },
-                      {
-                        "concept": "879AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Itching"
-                      },
-                      {
-                        "concept": "121677AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Mental status change"
-                      },
-                      {
-                        "concept": "159347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Musculoskeletal pain"
-                      },
-                      {
-                        "concept": "114736AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Optic Neuritis"
-                      },
-                      {
-                        "concept": "141600AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Shortness of breath"
-                      },
-                      {
-                        "concept": "512AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Rash"
-                      },
-                      {
-                        "concept": "113180AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Tendon Rupture"
-                      },
-                      {
-                        "concept": "123074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Visual Disturbances"
-                      },
-                      {
-                        "concept": "122983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Vomiting"
-                      },
-                      {
-                        "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Unknown"
-                      },
-                      {
-                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Other"
-                      }
-                    ]
-                  }
-                },
-                {
-                  "label": "Severity",
-                  "type": "obs",
-                  "id": "adrSeverity",
-                  "questionOptions": {
-                    "concept": "162760AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "rendering": "select",
-                    "answers": [
-                      {
-                        "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Not graded"
-                      },
-                      {
-                        "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Mild"
-                      },
-                      {
-                        "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Moderate"
-                      },
-                      {
-                        "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Severe"
-                      },
-                      {
-                        "concept": "162819AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Life threatening"
-                      }
-                    ]
-                  }
-                },
-                {
-                  "label": "Date of Onset",
-                  "type": "obs",
-                  "id": "dateOnsetAdverse",
-                  "questionOptions": {
-                    "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "rendering": "date"
+                    "rendering": "text",
+                    "concept": ""
                   },
-                  "validators": [
+                  "behaviours": [
                     {
-                      "type": "date",
-                      "allowFutureDates": "false"
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true"
+                    },
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true"
                     }
-                  ]
-                },
-                {
-                  "label": "Action taken",
-                  "type": "obs",
-                  "id": "actIonTaken",
-                  "questionOptions": {
-                    "concept": "1255AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "rendering": "select",
-                    "answers": [
-                      {
-                        "concept": "1257AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Continue drug"
-                      },
-                      {
-                        "concept": "981AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Dose adjusted"
-                      },
-                      {
-                        "concept": "1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Discontinued"
-                      },
-                      {
-                        "concept": "1259AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Substitution"
-                      }
-                    ]
-                  }
+                  ],
+                  "id": "condition"
                 }
               ]
             }
           ]
         },
         {
-          "label": "new section",
+          "label": "Allergies",
           "isExpanded": "true",
-          "questions": []
+          "questions": [
+            {
+              "id": "patientAllergyGroup",
+              "label": "Patient Allergies",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "8acba1d1-67cc-422c-961e-86d6b47bc45b"
+              },
+              "questions": [
+                {
+                  "label": "Allergen",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "7f91dd90-f0db-4970-91c7-90091329c755",
+                    "answers": [
+                      {
+                        "concept": "152952AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Environmental Allergies",
+                        "conceptMappings": [
+                          {
+                            "type": "SNOMED-CT",
+                            "value": "426232007"
+                          },
+                          {
+                            "type": "IMO-ProblemIT",
+                            "value": "602827"
+                          }
+                        ]
+                      },
+                      {
+                        "concept": "141760AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Drug Allergy",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "139994AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Food Allergy",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "id": "allergen",
+                  "questions": []
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "another section",
+          "label": "Adverse Drug Reaction",
           "isExpanded": "true",
-          "questions": []
+          "questions": [
+            {
+              "id": "patientDrugReactionGroup",
+              "label": "Patient Drug Reactions",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "8acba1d1-67cc-422c-961e-86d6b47bc45b"
+              },
+              "questions": [
+                {
+                  "label": "What type of drug caused the reaction?",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "162871AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "363787002"
+                      }
+                    ],
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes",
+                        "conceptMappings": [
+                          {
+                            "type": "CIEL",
+                            "value": "1065"
+                          },
+                          {
+                            "type": "AMPATH",
+                            "value": "1065"
+                          },
+                          {
+                            "type": "PIH",
+                            "value": "1065"
+                          },
+                          {
+                            "type": "SNOMED CT",
+                            "value": "CT: 373066001"
+                          }
+                        ]
+                      },
+                      {
+                        "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                        "label": "No",
+                        "conceptMappings": []
+                      },
+                      {
+                        "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Unknown",
+                        "conceptMappings": [
+                          {
+                            "type": "CIEL",
+                            "value": "1067"
+                          },
+                          {
+                            "type": "AMPATH",
+                            "value": "1067"
+                          },
+                          {
+                            "type": "SNOMED CT",
+                            "value": "CT: 261665006"
+                          },
+                          {
+                            "type": "PIH",
+                            "value": "1067"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "id": "adrDrug"
+                },
+                {
+                  "label": "What was the severity of Adverse Drug Reaction?",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "162760AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": [
+                      {
+                        "type": "SNOMED-US",
+                        "value": "446401000124104"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "405162009"
+                      }
+                    ],
+                    "answers": [
+                      {
+                        "concept": "162819AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Fatal",
+                        "conceptMappings": [
+                          {
+                            "type": "SNOMED-CT",
+                            "value": "399166001"
+                          }
+                        ]
+                      },
+                      {
+                        "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Moderate",
+                        "conceptMappings": [
+                          {
+                            "type": "PIH",
+                            "value": "1900"
+                          },
+                          {
+                            "type": "SNOMED-CT",
+                            "value": "6736007"
+                          },
+                          {
+                            "type": "PIH",
+                            "value": "1907"
+                          },
+                          {
+                            "type": "AMPATH",
+                            "value": "1744"
+                          }
+                        ]
+                      },
+                      {
+                        "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Mild",
+                        "conceptMappings": [
+                          {
+                            "type": "SNOMED-CT",
+                            "value": "255604002"
+                          },
+                          {
+                            "type": "AMPATH",
+                            "value": "1743"
+                          },
+                          {
+                            "type": "PIH",
+                            "value": "1901"
+                          }
+                        ]
+                      },
+                      {
+                        "concept": "162693AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Life threatening severity",
+                        "conceptMappings": [
+                          {
+                            "type": "SNOMED-CT",
+                            "value": "442452003"
+                          }
+                        ]
+                      },
+                      {
+                        "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Severe",
+                        "conceptMappings": [
+                          {
+                            "type": "PIH",
+                            "value": "1903"
+                          },
+                          {
+                            "type": "AMPATH",
+                            "value": "1745"
+                          },
+                          {
+                            "type": "SNOMED-CT",
+                            "value": "24484000"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "id": "severityADR"
+                },
+                {
+                  "label": "What type of reaction did the patient have?",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": ""
+                  },
+                  "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true"
+                    },
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true"
+                    }
+                  ],
+                  "id": "typeOfReactionADR"
+                },
+                {
+                  "label": "What action was taken due to the adverse drug reaction?",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": ""
+                  },
+                  "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true"
+                    },
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true"
+                    }
+                  ],
+                  "id": "actionTakenADR"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Immunizations",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "vaccinesGroup",
+              "label": "Vaccines given",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "8acba1d1-67cc-422c-961e-86d6b47bc45b"
+              },
+              "questions": [
+                {
+                  "label": "What vaccines were given during this visit?",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": ""
+                  },
+                  "behaviours": [
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true"
+                    },
+                    {
+                      "intent": "*",
+                      "required": "true",
+                      "unspecified": "true"
+                    }
+                  ],
+                  "id": "vaccinesGiven"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Hospitalization History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "History of hospitalization (since last visit)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "163403AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "32485007"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "163403"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 373066001"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "373066001"
+                      },
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "1065"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1065"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No",
+                    "conceptMappings": [
+                      {
+                        "type": "PIH",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "373067005"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "PIH-Malawi",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1066"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "373067005"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1066"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown",
+                    "conceptMappings": [
+                      {
+                        "type": "AMPATH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "261665006"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "org.openmrs.module.mdrtb",
+                        "value": "UNKNOWN"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "PIH",
+                        "value": "1067"
+                      },
+                      {
+                        "type": "SNOMED CT",
+                        "value": "CT: 261665006"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "id": "hospitalization"
+            },
+            {
+              "label": "Reason for hospitalization",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "162879AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "",
+                "conceptMappings": [
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "410665000"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "162879"
+                  }
+                ]
+              },
+              "id": "hospitalizationReason"
+            }
+          ]
         }
       ]
     },
@@ -1045,25 +1291,17 @@
             {
               "label": "LMP",
               "type": "obs",
-              "required": false,
-              "id": "lastMonthlyPeriod",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "166079AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "conceptMappings": [
                   {
-                    "relationship": "SAME-AS",
-                    "type": "SNOMED CT",
+                    "type": "SNOMED-CT",
                     "value": "248993009"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "166079"
                   }
                 ]
-              }
+              },
+              "id": "lastMonthlyPeriod"
             },
             {
               "label": "Intend to conceive in the next three months?",
@@ -1101,7 +1339,7 @@
                     ]
                   },
                   {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
                     "label": "No",
                     "conceptMappings": []
                   },
@@ -1128,15 +1366,6 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "menstruationStatus === '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "pregnancyIntention"
             },
@@ -1184,7 +1413,7 @@
                     ]
                   },
                   {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
                     "label": "No",
                     "conceptMappings": []
                   },
@@ -1212,12 +1441,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
               "id": "isBreastFeeding"
             }
           ]
@@ -1286,15 +1509,6 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "menstruationStatus === '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "OnFamilyPlanning"
             },
@@ -1961,15 +2175,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "OnFamilyPlanning === '160652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "familyPlanningMethod"
             },
             {
@@ -2033,24 +2238,7 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "OnFamilyPlanning !== '160652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "reasonNotOnFP"
-            }
-          ],
-          "behaviours": [
-            {
-              "intent": "*",
-              "hide": {
-                "hideWhenExpression": "menstruationStatus === '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
             }
           ]
         },
@@ -2061,69 +2249,66 @@
             {
               "label": "EDD",
               "type": "obs",
-              "required": false,
-              "id": "expectedDateOfDelivery",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "conceptMappings": [
                   {
-                    "relationship": "SAME-AS",
-                    "type": "SNOMED CT",
-                    "value": "161714006"
-                  },
-                  {
-                    "relationship": "SAME-AS",
                     "type": "LOINC",
                     "value": "11779-6"
                   },
                   {
-                    "relationship": "SAME-AS",
                     "type": "AMPATH",
                     "value": "5596"
                   },
                   {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "5596"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "ANCDAK",
-                    "value": "ANC.B6.DE22"
-                  },
-                  {
-                    "relationship": "SAME-AS",
                     "type": "AMPATH",
                     "value": "1854"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "366322004"
                   }
                 ]
-              }
-            },
-            {
-              "label": "Gestational age (weeks)",
-              "type": "obs",
-              "required": true,
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "1438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "behaviours": [
                 {
                   "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                },
+                {
+                  "intent": "*",
+                  "required": "true",
                   "unspecified": "true"
                 }
               ],
-              "hide": {
-                "hideWhenExpression": "menstruationStatus !== '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              "id": "expectedDateOfDelivery"
+            },
+            {
+              "label": "Gestational age (weeks)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": ""
               },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                },
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                }
+              ],
               "id": "gestationInWeeks"
             },
             {
               "label": "Antenatal profile done",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "975f11e5-7471-4e57-bba7-d3ee358ef7ea",
@@ -2157,30 +2342,13 @@
                     ]
                   },
                   {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
                     "label": "No",
                     "conceptMappings": []
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "menstruationStatus !== '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "antenatalProfileDone"
-            }
-          ],
-          "behaviours": [
-            {
-              "intent": "*",
-              "hide": {
-                "hideWhenExpression": "menstruationStatus !== '1434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
             }
           ]
         },
@@ -2222,30 +2390,21 @@
             {
               "label": "Date last screened for cervical cancer",
               "type": "obs",
-              "required": false,
-              "id": "dateScreenedforCervicalCancer",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "165429AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "conceptMappings": [
                   {
-                    "relationship": "NARROWER-THAN",
-                    "type": "SNOMED CT",
+                    "type": "SNOMED-CT",
                     "value": "364713004"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "165429"
                   }
                 ]
-              }
+              },
+              "id": "dateScreenedforCervicalCancer"
             },
             {
               "label": "Cervical cancer screening method",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "checkbox",
                 "concept": "53ff5cd0-0f37-4190-87b1-9eb439a15e94",
@@ -2342,15 +2501,6 @@
                     "conceptMappings": []
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "screenedForCervicalCancer !== '165619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "methodCervicalCancerScreen"
             }
@@ -2525,15 +2675,6 @@
               },
               "id": "treatmentCervicalCancer"
             }
-          ],
-          "behaviours": [
-            {
-              "intent": "*",
-              "unspecified": "true",
-              "hide": {
-                "hideWhenExpression": "screenedForCervicalCancer !== '165619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
-            }
           ]
         }
       ]
@@ -2548,7 +2689,6 @@
             {
               "label": "Currently on treatment for tuberculosis",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "159798AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2687,21 +2827,11 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "currentTPT === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "onTBRx"
             },
             {
               "label": "Currently on tuberculosis prophylaxis treatment (TPT)",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "166449AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2840,21 +2970,11 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "currentTPT"
             },
             {
               "label": "Previously completed Tuberculosis preventive treatment",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "166463AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2989,12 +3109,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
               "id": "previousTPT"
             }
           ]
@@ -3029,6 +3143,11 @@
                 ],
                 "answers": [
                   {
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "label": "No",
+                    "conceptMappings": []
+                  },
+                  {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Yes",
                     "conceptMappings": [
@@ -3047,44 +3166,6 @@
                       {
                         "type": "AMPATH",
                         "value": "1065"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No",
-                    "conceptMappings": [
-                      {
-                        "type": "PIH",
-                        "value": "1066"
-                      },
-                      {
-                        "type": "PIH-Malawi",
-                        "value": "1066"
-                      },
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "373067005"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "1066"
-                      },
-                      {
-                        "type": "PIH-Malawi",
-                        "value": "1066"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "1066"
-                      },
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "373067005"
-                      },
-                      {
-                        "type": "PIH",
-                        "value": "1066"
                       }
                     ]
                   },
@@ -3111,15 +3192,6 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "patientScreenedForTB"
             },
@@ -3180,46 +3252,11 @@
                     ]
                   },
                   {
-                    "concept": "1858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "b52ffe16-b482-4f61-9bb9-9787320beef5",
                     "label": "Weight Loss (Abnormal weight loss)",
                     "conceptMappings": []
-                  },
-                  {
-                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "None",
-                    "conceptMappings": [
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "260413007"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "1107"
-                      },
-                      {
-                        "type": "CIEL",
-                        "value": "1107"
-                      },
-                      {
-                        "type": "PIH",
-                        "value": "1107"
-                      },
-                      {
-                        "type": "PIH-Malawi",
-                        "value": "1107"
-                      }
-                    ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || patientScreenedForTB !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "tbICFAdult"
             },
@@ -3287,43 +3324,8 @@
                         "value": "2573"
                       }
                     ]
-                  },
-                  {
-                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "None",
-                    "conceptMappings": [
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "260413007"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "1107"
-                      },
-                      {
-                        "type": "CIEL",
-                        "value": "1107"
-                      },
-                      {
-                        "type": "PIH",
-                        "value": "1107"
-                      },
-                      {
-                        "type": "PIH-Malawi",
-                        "value": "1107"
-                      }
-                    ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || patientScreenedForTB !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "tbICFPeads"
             },
@@ -3426,24 +3428,7 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || patientScreenedForTB !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "tbScreeningOutcome"
-            }
-          ],
-          "behaviours": [
-            {
-              "intent": "*",
-              "hide": {
-                "hideWhenExpression": "onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
             }
           ]
         },
@@ -3725,15 +3710,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "evaluateForTPT !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
-              },
               "id": "tptProphylaxisPlan"
             },
             {
@@ -3754,7 +3730,7 @@
                     "conceptMappings": []
                   },
                   {
-                    "concept": "1fd4b164-1374-4bd5-aadb-94d1d071a282",
+                    "concept": "bbdf46fb-f941-4075-a2ae-985163accce1",
                     "label": "3HR Isoniazid+Rifampicin prophylaxis",
                     "conceptMappings": []
                   },
@@ -3775,34 +3751,16 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "tptProphylaxisPlan !== '1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "currentTPTRegimen"
             },
             {
               "label": "Date tuberculosis prophylaxis started",
               "type": "obs",
-              "required": false,
-              "id": "dateTPTStart",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "162320AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "conceptMappings": [
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "162320"
-                  }
-                ]
-              }
+                "concept": "162320AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "dateTPTStart"
             },
             {
               "label": "Tuberculosis Preventive Treatement adherence ",
@@ -3881,34 +3839,23 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "tptProphylaxisPlan !== '1257AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' "
-              },
               "id": "tptAdherence"
             },
             {
               "label": "Date tuberculosis prophylaxis ended",
               "type": "obs",
-              "required": false,
-              "id": "dateTptEnded",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "163284AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
                 "conceptMappings": [
                   {
-                    "relationship": "SAME-AS",
                     "type": "CIEL",
                     "value": "163284"
                   }
                 ]
-              }
+              },
+              "id": "dateTptEnded"
             },
             {
               "label": "Reason tuberculosis prophylaxis stopped",
@@ -4034,24 +3981,23 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "tptProphylaxisPlan !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "reasonTptStopped"
-            }
-          ],
-          "behaviours": [
+            },
             {
-              "intent": "*",
-              "hide": {
-                "hideWhenExpression": "tbScreeningOutcome !== '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
+              "label": "Date tuberculosis prophylaxis ended",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "163284AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
+                "conceptMappings": [
+                  {
+                    "type": "CIEL",
+                    "value": "163284"
+                  }
+                ]
+              },
+              "id": "dateTptEnded"
             }
           ]
         },
@@ -4060,220 +4006,48 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Tuberculosis treatment plan",
-              "type": "obs",
-              "required": true,
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "1268AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "conceptMappings": [],
-                "answers": [
-                  {
-                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "None",
-                    "conceptMappings": [
-                      {
-                        "type": "PIH",
-                        "value": "1107"
-                      },
-                      {
-                        "type": "PIH-Malawi",
-                        "value": "1107"
-                      },
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "260413007"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "1107"
-                      },
-                      {
-                        "type": "CIEL",
-                        "value": "1107"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Start drugs",
-                    "conceptMappings": [
-                      {
-                        "type": "PIH",
-                        "value": "1256"
-                      },
-                      {
-                        "type": "SNOMED-MVP",
-                        "value": "12561000105002"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "1256"
-                      },
-                      {
-                        "type": "CIEL",
-                        "value": "1256"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "1257AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Continue regimen",
-                    "conceptMappings": [
-                      {
-                        "type": "PIH",
-                        "value": "1257"
-                      },
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "266714009"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "1257"
-                      },
-                      {
-                        "type": "CIEL",
-                        "value": "1257"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "1259AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Change regimen",
-                    "conceptMappings": [
-                      {
-                        "type": "AMPATH",
-                        "value": "1259"
-                      },
-                      {
-                        "type": "CIEL",
-                        "value": "1259"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "981AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Dosing Change",
-                    "conceptMappings": [
-                      {
-                        "type": "PIH",
-                        "value": "1258"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "981"
-                      },
-                      {
-                        "type": "CIEL",
-                        "value": "981"
-                      }
-                    ]
-                  },
-                  {
-                    "concept": "1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Stop all",
-                    "conceptMappings": [
-                      {
-                        "type": "AMPATH",
-                        "value": "1260"
-                      },
-                      {
-                        "type": "PIH",
-                        "value": "1260"
-                      },
-                      {
-                        "type": "CIEL",
-                        "value": "1260"
-                      }
-                    ]
-                  }
-                ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "onTBRx === '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
-              "id": "patientScreenedForTBTreatment"
-            },
-            {
               "label": "Tuberculosis drug treatment start date",
               "type": "obs",
-              "required": false,
-              "id": "tbRxStartDate",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "1113AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
                 "conceptMappings": [
                   {
-                    "relationship": "NARROWER-THAN",
-                    "type": "SNOMED CT",
-                    "value": "413946009"
+                    "type": "PIH",
+                    "value": "1113"
                   },
                   {
-                    "relationship": "SAME-AS",
-                    "type": "SNOMED MVP",
-                    "value": "11131000105005"
-                  },
-                  {
-                    "relationship": "SAME-AS",
                     "type": "AMPATH",
                     "value": "1113"
                   },
                   {
-                    "relationship": "SAME-AS",
-                    "type": "PIH",
+                    "type": "SNOMED-MVP",
+                    "value": "11131000105005"
+                  },
+                  {
+                    "type": "SNOMED-CT",
+                    "value": "413946009"
+                  },
+                  {
+                    "type": "SNOMED-MVP",
+                    "value": "11131000105005"
+                  },
+                  {
+                    "type": "CIEL",
+                    "value": "1113"
+                  },
+                  {
+                    "type": "AMPATH",
                     "value": "1113"
                   },
                   {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
+                    "type": "PIH",
                     "value": "1113"
                   }
                 ]
-              }
-            },
-            {
-              "label": "Tuberculosis treatment end date",
-              "type": "obs",
-              "required": false,
-              "id": "tbRxEndDate",
-              "datePickerFormat": "calendar",
-              "questionOptions": {
-                "rendering": "date",
-                "concept": "159431AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "conceptMappings": [
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "PIH",
-                    "value": "2597"
-                  },
-                  {
-                    "relationship": "NARROWER-THAN",
-                    "type": "SNOMED CT",
-                    "value": "413947000"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "159431"
-                  }
-                ]
-              }
-            }
-          ],
-          "behaviours": [
-            {
-              "intent": "*",
-              "hide": {
-                "hideWhenExpression": "onTBRx !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
+              },
+              "id": "tbRxStartDate"
             }
           ]
         },
@@ -4383,15 +4157,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "tbScreeningOutcome === '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "presumptiveTB"
             },
             {
@@ -4426,18 +4191,7 @@
                   }
                 ]
               },
-              "hide": {
-                "hideWhenExpression": "tbScreeningOutcome === '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || onTBRx === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "tbNotes"
-            }
-          ],
-          "behaviours": [
-            {
-              "intent": "*",
-              "hide": {
-                "hideWhenExpression": "tbScreeningOutcome !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
             }
           ]
         }
@@ -4656,6 +4410,48 @@
                       {
                         "type": "IMO-ProblemIT",
                         "value": "26010"
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "588AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clubbing",
+                    "conceptMappings": [
+                      {
+                        "type": "ICD-10-WHO",
+                        "value": "R68.3"
+                      },
+                      {
+                        "type": "IMO-ProblemIT",
+                        "value": "30112267"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "367004"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "588"
+                      },
+                      {
+                        "type": "AMPATH",
+                        "value": "588"
+                      },
+                      {
+                        "type": "SNOMED-CT",
+                        "value": "367004"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "588"
+                      },
+                      {
+                        "type": "CIEL",
+                        "value": "588"
+                      },
+                      {
+                        "type": "IMO-ProblemIT",
+                        "value": "30112267"
                       }
                     ]
                   },
@@ -5178,15 +4974,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "!includes('genExam', '135488AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-              },
               "id": "lymphadenopathy"
             }
           ]
@@ -5288,9 +5075,6 @@
                   }
                 ]
               },
-              "hide": {
-                "hideWhenExpression": "hEENTROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "otherHEENTExaminationFinding"
             },
             {
@@ -5386,9 +5170,6 @@
                   }
                 ]
               },
-              "hide": {
-                "hideWhenExpression": "respiratoryROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "otherRespiratoryFinding"
             },
             {
@@ -5479,9 +5260,6 @@
                     "value": "271910006"
                   }
                 ]
-              },
-              "hide": {
-                "hideWhenExpression": "cardiovascularROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "otherCardiovascularExaminationFinding"
             },
@@ -5578,9 +5356,6 @@
                   }
                 ]
               },
-              "hide": {
-                "hideWhenExpression": "AbdominalROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "otherAbdominalExaminationFinding"
             },
             {
@@ -5671,9 +5446,6 @@
                     "value": "271888005"
                   }
                 ]
-              },
-              "hide": {
-                "hideWhenExpression": "cnsROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "otherCNSExaminationFinding"
             },
@@ -5766,9 +5538,6 @@
                   }
                 ]
               },
-              "hide": {
-                "hideWhenExpression": "musculoskeletalSROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "otherMusculoskeletalExaminationFinding"
             },
             {
@@ -5859,9 +5628,6 @@
                     "value": "118238000"
                   }
                 ]
-              },
-              "hide": {
-                "hideWhenExpression": "genitourinaryROS === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "otherGenitoUrinaryExaminationFinding"
             }
@@ -6007,10 +5773,10 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "166664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "c4f81292-61a3-4561-a4ae-78be7d16d928",
                 "answers": [
                   {
-                    "concept": "864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "118990AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Genital Sore",
                     "conceptMappings": [
                       {
@@ -6112,7 +5878,7 @@
                     ]
                   },
                   {
-                    "concept": "123529AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "c795654c-bcd8-4074-9fc7-e5f762e58f36",
                     "label": "Urethral Discharge",
                     "conceptMappings": []
                   },
@@ -6214,15 +5980,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "screeningSTI !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "sTIOutcome"
             }
           ]
@@ -6234,7 +5991,6 @@
             {
               "label": "Current WHO HIV stage",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "5356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -6577,12 +6333,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
               "id": "wHOStage"
             }
           ]
@@ -6594,7 +6344,6 @@
             {
               "label": "Nutritional status ",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "c481f80d-7553-41ab-94ca-efddb8ab294c",
@@ -6733,13 +6482,7 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "id": "nutritionalStatus"
+              "id": "nutritionalStatus "
             },
             {
               "label": "Nutritional interventions provided",
@@ -6878,15 +6621,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "nutritionalStatus === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalStatus === '1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "nutritionalInterventions"
             },
             {
@@ -6991,36 +6725,6 @@
                     ]
                   },
                   {
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Other (specify)",
-                    "conceptMappings": [
-                      {
-                        "type": "PIH-Malawi",
-                        "value": "6408"
-                      },
-                      {
-                        "type": "org.openmrs.module.mdrtb",
-                        "value": "OTHER"
-                      },
-                      {
-                        "type": "SNOMED-MVP",
-                        "value": "56221000105001"
-                      },
-                      {
-                        "type": "PIH",
-                        "value": "5622"
-                      },
-                      {
-                        "type": "AMPATH",
-                        "value": "5622"
-                      },
-                      {
-                        "type": "SNOMED-CT",
-                        "value": "74964007"
-                      }
-                    ]
-                  },
-                  {
                     "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "None",
                     "conceptMappings": [
@@ -7072,15 +6776,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "nutritionalStatus === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalStatus === '1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || nutritionalInterventions !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "nutritionalSupport"
             },
             {
@@ -7088,17 +6783,9 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "textarea",
-                "concept": "163189AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "Nutritional plan (text)",
                 "rows": ""
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "hide": {
-                    "hideWhenExpression": "!includes(nutritionalSupport, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
-                  }
-                }
-              ],
               "id": "nutritionalPlan"
             }
           ]
@@ -7115,7 +6802,6 @@
             {
               "label": "New/Active opportunistic infection",
               "type": "obs",
-              "required": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "c52ecf45-bd6c-43ed-861b-9a2714878729",
@@ -7248,12 +6934,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
               "id": "hasOIs"
             },
             {
@@ -7480,15 +7160,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "hasOIs !== '131768AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "typeOI"
             }
           ]
@@ -7695,25 +7366,22 @@
             {
               "label": "PCP prophylaxis start date",
               "type": "obs",
-              "required": false,
-              "id": "pcpStartDate",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "164361AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "weeksList": "",
                 "conceptMappings": [
                   {
-                    "relationship": "NARROWER-THAN",
-                    "type": "SNOMED CT",
+                    "type": "SNOMED-CT",
                     "value": "413946009"
                   },
                   {
-                    "relationship": "SAME-AS",
                     "type": "CIEL",
                     "value": "164361"
                   }
                 ]
-              }
+              },
+              "id": "pcpStartDate"
             },
             {
               "label": "PCP prophylaxis regimen",
@@ -7779,15 +7447,6 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "pcpProphylaxis !== '1256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "pcpRegimen"
             },
@@ -7885,15 +7544,6 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "pcpProphylaxis !== '1257AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && pcpProphylaxis !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "pcpRegimenAdherence"
             },
@@ -8012,15 +7662,6 @@
                     ]
                   }
                 ]
-              },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "pcpProphylaxis !== '1260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "id": "pcpStop"
             }
@@ -8210,39 +7851,38 @@
             {
               "label": "Fluconazole start date",
               "type": "obs",
-              "required": false,
-              "id": "cryptoProphylaxisStart",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "5ac4300a-5e19-45c8-8692-31a57d6d5b8c",
+                "weeksList": "",
                 "conceptMappings": [
                   {
                     "type": "OCT",
                     "value": "FluconazoleStartDate"
                   }
                 ]
-              }
+              },
+              "id": "cryptoProphylaxisStart"
             },
             {
               "label": "Fluconazole stop date",
               "type": "obs",
-              "required": false,
-              "id": "cryptoProphylaxisStop",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "c2d57bcb-02f2-457d-af05-8d759a1457a7",
+                "weeksList": "",
                 "conceptMappings": [
                   {
                     "type": "OCT",
                     "value": "FluconazoleStopDate"
                   }
                 ]
-              }
+              },
+              "id": "cryptoProphylaxisStop"
             }
           ]
         },
+
         {
           "label": "ART Adherence",
           "isExpanded": "true",
@@ -8669,15 +8309,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "artAdherenceAssessment === '159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || artAdherenceAssessment === '1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              },
               "id": "reasonForPoorAdherenceToHaart"
             }
           ]
@@ -8686,16 +8317,6 @@
           "label": "Clinical Management Plan",
           "isExpanded": "true",
           "questions": [
-            {
-              "label": "Labs and Drugs Orders",
-              "required": false,
-              "id": "labsAndDrugOrders",
-              "questionOptions": {
-                "rendering": "workspace-launcher",
-                "buttonLabel": "Add Lab Orders",
-                "workspaceName": "add-lab-order"
-              }
-            },
             {
               "label": "Clinical Notes",
               "type": "obs",
@@ -8767,11 +8388,11 @@
                 "answers": [
                   {
                     "label": "Yes",
-                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3"
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   {
                     "label": "No",
-                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594"
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
               },
@@ -9167,15 +8788,6 @@
                   }
                 ]
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "referralsOrdered !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
-              },
               "id": "refferedFor"
             },
             {
@@ -9185,9 +8797,6 @@
                 "rendering": "textarea",
                 "concept": "164359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rows": ""
-              },
-              "hide": {
-                "hideWhenExpression": "referralsOrdered === '488b58ff-64f5-4f8a-8979-fa79940b1594'"
               },
               "id": "referralNotes"
             }
@@ -9200,68 +8809,60 @@
             {
               "label": "Next Appointment Date",
               "type": "obs",
-              "required": false,
-              "id": "nextAppointmentDate",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "conceptMappings": [
                   {
-                    "relationship": "SAME-AS",
                     "type": "AMPATH",
                     "value": "5096"
                   },
                   {
-                    "relationship": "SAME-AS",
-                    "type": "SNOMED MVP",
+                    "type": "SNOMED-MVP",
                     "value": "50961000105000"
                   },
                   {
-                    "relationship": "SAME-AS",
                     "type": "org.openmrs.module.mdrtb",
                     "value": "RETURN VISIT DATE"
                   },
                   {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
+                    "type": "PIH-Malawi",
                     "value": "5096"
                   },
                   {
-                    "relationship": "SAME-AS",
-                    "type": "PIH Malawi",
-                    "value": "5096"
-                  },
-                  {
-                    "relationship": "NARROWER-THAN",
-                    "type": "SNOMED CT",
+                    "type": "SNOMED-CT",
                     "value": "406543005"
                   }
                 ]
-              }
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                },
+                {
+                  "intent": "*",
+                  "required": "true",
+                  "unspecified": "true"
+                }
+              ],
+              "id": "nextAppointmentDate"
             },
             {
               "label": "Date medication refill is due",
               "type": "obs",
-              "required": false,
-              "id": "drugRefillDate",
-              "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "162549AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "conceptMappings": [
                   {
-                    "relationship": "NARROWER-THAN",
-                    "type": "SNOMED CT",
+                    "type": "SNOMED-CT",
                     "value": "364713004"
-                  },
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "162549"
                   }
                 ]
-              }
+              },
+              "id": "drugRefillDate"
             },
             {
               "label": "Attending clinician's name",
@@ -9270,17 +8871,43 @@
                 "rendering": "text",
                 "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "behaviours": [
-                {
-                  "intent": "*",
-                  "unspecified": "true"
-                }
-              ],
               "id": "attendingClinicianName"
             }
           ]
         }
       ]
+    },
+    {
+      "label": "Lab results - CD4",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "CD4 Lab Result",
+        "package": "hiv",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "CD4_LAB_RESULTS_EMBED",
+            "readonly": "false"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Lab results - Viral Load",
+      "sections": [],
+      "isSubform": "true",
+      "subform": {
+        "name": "Viral Load Lab Result",
+        "package": "hiv",
+        "behaviours": [
+          {
+            "intent": "*",
+            "subform_intent": "VIRAL_LOAD_LAB_RESULTS_EMBED",
+            "readonly": "false"
+          }
+        ]
+      }
     }
   ],
   "availableIntents": [
@@ -9290,10 +8917,9 @@
     }
   ],
   "processor": "EncounterFormProcessor",
-  "uuid": "4232f8bd-42c9-498d-8d40-b65f4f1446e8",
+  "uuid": "59c204d4-baea-393a-bdbd-ac4d5f01a7f5",
   "referencedForms": [],
   "encounterType": "cb0a65a7-0587-477e-89b9-cf2fd144f1d4",
   "encounter": "Clinical Visit",
-  "allowUnspecifiedAll": true,
-  "description": "DRC POC Clinical Visit Form v2 revised - embedded forms removed "
+  "allowUnspecifiedAll": true
 }

@@ -788,42 +788,77 @@
               "label": "Stade clinique du patient",
               "type": "obs",
               "required": true,
-              "id": "stade_clinic",
+              "id": "stadeClinic",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "153b1513-4c90-4a72-9de4-65895eabd901",
+                "concept": "5356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "conceptMappings": [
                   {
-                    "relationship": "NARROWER-THAN",
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "1480"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH-Malawi",
+                    "value": "7562"
+                  },
+                  {
+                    "relationship": "SAME-AS",
                     "type": "SNOMED CT",
-                    "value": "363787002"
+                    "value": "385354005"
                   },
                   {
                     "relationship": "SAME-AS",
                     "type": "CIEL",
-                    "value": "169422"
+                    "value": "5356"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5356"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "45233-4"
                   }
                 ],
                 "answers": [
                   {
-                    "concept": "3ac694b2-df54-4b8c-9b45-439f0a9efc7d",
-                    "label": "Full HIV disclosure, stage 1"
+                    "concept": "1220AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "WHO stage 1 peds"
                   },
                   {
-                    "concept": "384dab1e-6d65-465b-9c7a-d9be9d088686",
-                    "label": "Full HIV disclosure, stage 2"
+                    "concept": "1204AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "WHO stage 1 adult"
                   },
                   {
-                    "concept": "7a9c374f-4728-4ed8-9c85-f5b5b5b7e364",
-                    "label": "Full HIV disclosure, stage 3"
+                    "concept": "1205AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "WHO stage 2 adult"
                   },
                   {
-                    "concept": "35a41383-a33a-4be5-93fc-038170776558",
-                    "label": "Full HIV disclosure, stage 4"
+                    "concept": "1221AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "WHO stage 2 peds"
+                  },
+                  {
+                    "concept": "1206AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "WHO stage 3 adult"
+                  },
+                  {
+                    "concept": "1222AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "WHO stage 3 peds"
+                  },
+                  {
+                    "concept": "1207AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "WHO stage 4 adult"
+                  },
+                  {
+                    "concept": "1223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "WHO stage 4 peds"
                   }
                 ]
-              },
-              "validators": []
+              }
             }
           ]
         }
