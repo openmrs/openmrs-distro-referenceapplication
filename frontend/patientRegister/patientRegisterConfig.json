@@ -1,0 +1,53 @@
+{
+  "@openmrs/esm-patient-registration-app": {
+    "sections": [
+      "demographics",
+      "contact",
+      "relationships",
+      "otros"
+    ],
+    "sectionDefinitions": [
+      {
+        "id": "otros",
+        "name": "Otros Datos",
+        "fields": [
+          "religion",
+          "ethnic",
+          "civilstatus"
+        ]
+      }
+    ],
+    "fieldDefinitions": [
+      {
+        "id": "religion",
+        "name": "Religion",
+        "type": "person attribute",
+        "uuid": "77bbb234-2312-4644-99d0-fa894d438817",
+        "answerConceptSetUuid": "162929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "validation": {
+          "matches": ""
+        }
+      },
+      {
+        "id": "civilstatus",
+        "name": "Estado Civil",
+        "type": "person attribute",
+        "uuid": "8d871f2a-c2cc-11de-8d13-0010c6dffd0f",
+        "answerConceptSetUuid": "1054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "validation": {
+          "matches": ""
+        }
+      },
+      {
+        "id": "ethnic",
+        "name": "Etnia",
+        "type": "person attribute",
+        "uuid": "b91cafd6-2156-4cba-81e3-e6227d109a28",
+        "answerConceptSetUuid": "163153AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "validation": {
+          "matches": ""
+        }
+      }
+    ]
+  }
+}
