@@ -28,8 +28,7 @@ services:
     image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
     restart: "unless-stopped"
     depends_on:
-      db-replic:
-        condition: service_healthy
+      - db-replic
     environment:
       OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
@@ -63,7 +62,7 @@ services:
       - "3307:3306" # 3307 for host
     volumes:
       - db-data:/var/lib/mysql
-      - ./db-configs/init-master.sh:/docker-entrypoint-initdb.d/init-master.sh
+      - ./db-config/init-master.sh:/docker-entrypoint-initdb.d/init-master-sql.sql
 
   # MariaDB Replic
   db-replic:
@@ -86,7 +85,7 @@ services:
       - "3308:3306" # 3308 for host
     volumes:
       - db-data-r:/var/lib/mysql
-      - ./db-configs/init-slave.sh:/docker-entrypoint-initdb.d/init-slave.sh
+      - ./db-config/init-slave.sh:/docker-entrypoint-initdb.d/init-slave-sql.sql
 
 volumes:
   openmrs-data: ~
