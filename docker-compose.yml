@@ -33,7 +33,7 @@ services:
       OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
       OMRS_CONFIG_CREATE_TABLES: "true"
-      OMRS_CONFIG_CONNECTION_SERVER: db
+      OMRS_CONFIG_CONNECTION_SERVER: db-master
       OMRS_CONFIG_CONNECTION_DATABASE: openmrs
       OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
@@ -59,7 +59,7 @@ services:
       MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data-m:/var/lib/mysql
 
   # MariaDB Replic
   db-replic:
@@ -77,8 +77,9 @@ services:
       MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data-r:/var/lib/mysql
 
 volumes:
   openmrs-data: ~
-  db-data: ~
+  db-data-m: ~
+  db-data-r: ~
