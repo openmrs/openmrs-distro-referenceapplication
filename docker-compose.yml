@@ -33,7 +33,7 @@ services:
       OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
       OMRS_CONFIG_CREATE_TABLES: "true"
-      OMRS_CONFIG_CONNECTION_SERVER: db-master
+      OMRS_CONFIG_CONNECTION_SERVER: db
       OMRS_CONFIG_CONNECTION_DATABASE: openmrs
       OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
@@ -44,10 +44,10 @@ services:
       - openmrs-data:/openmrs/data
 
   # MariaDB master
-  db-master:
+  db:
     image: mariadb:10.11.7
     restart: "unless-stopped"
-    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci"
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --gtid-mode=on  --enforce-gtid-consistency=on"
     healthcheck:
       test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
       interval: 3s
@@ -58,14 +58,16 @@ services:
       MYSQL_USER: ${OMRS_DB_USER:-openmrs}
       MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+    ports:
+      - "3307:3306" # 3307 for host
     volumes:
-      - db-data-m:/var/lib/mysql
+      - db-data:/var/lib/mysql
 
   # MariaDB Replic
   db-replic:
     image: mariadb:10.11.7
     restart: "unless-stopped"
-    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci"
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --server-id=2 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --log-slave-updates=1 --gtid-mode=on --enforce-gtid-consistency=on --read-only=1"
     healthcheck:
       test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
       interval: 3s
@@ -76,10 +78,14 @@ services:
       MYSQL_USER: ${OMRS_DB_USER:-openmrs}
       MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+    depends_on:
+      - db
+    ports:
+      - "3308:3306" # 3308 for host
     volumes:
       - db-data-r:/var/lib/mysql
 
 volumes:
   openmrs-data: ~
-  db-data-m: ~
+  db-data: ~
   db-data-r: ~
