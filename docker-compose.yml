@@ -62,7 +62,7 @@ services:
       - "3307:3306" # 3307 for host
     volumes:
       - db-data:/var/lib/mysql
-      - ./db-config/init-master.sh:/docker-entrypoint-initdb.d/init-master.sh
+      - ./db-config/init-master-sql.sql:/docker-entrypoint-initdb.d/init-master-sql.sql
 
   # MariaDB Replic
   db-replic:
@@ -85,7 +85,7 @@ services:
       - "3308:3306" # 3308 for host
     volumes:
       - db-data-r:/var/lib/mysql
-      - ./db-config/init-slave.sh:/docker-entrypoint-initdb.d/init-slave.sh
+      - ./db-config/init-slave-sql.sql:/docker-entrypoint-initdb.d/init-slave-sql.sql
 
 volumes:
   openmrs-data: ~
