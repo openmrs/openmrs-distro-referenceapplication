@@ -45,6 +45,7 @@ services:
 
   # MariaDB master
   db:
+    container_name: db-master
     image: mariadb:10.11.7
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1"
@@ -61,31 +62,28 @@ services:
     ports:
       - "3307:3306" # 3307 for host
     volumes:
-      - db-data:/var/lib/mysql
       - ./db-config/init-master-sql.sql:/docker-entrypoint-initdb.d/init-master-sql.sql
+      - db-data:/var/lib/mysql
 
   # MariaDB Replic
   db-replic:
+    container_name: db-replic
     image: mariadb:10.11.7
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=2 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --read-only=1"
-    healthcheck:
-      test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
-      interval: 3s
-      timeout: 1s
-      retries: 5
     environment:
       MYSQL_DATABASE: openmrs
-      MYSQL_USER: ${OMRS_DB_USER:-openmrs}
-      MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
+      MYSQL_USER: openmrs_r
+      MYSQL_PASSWORD: openmrs_r
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
     depends_on:
       - db
     ports:
       - "3308:3306" # 3308 for host
     volumes:
-      - db-data-r:/var/lib/mysql
       - ./db-config/init-slave-sql.sql:/docker-entrypoint-initdb.d/init-slave-sql.sql
+      - db-data-r:/var/lib/mysql
+      
 
 volumes:
   openmrs-data: ~
