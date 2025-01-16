@@ -12,7 +12,6 @@ mysql -uroot -p "${MYSQL_ROOT_PASSWORD:-openmrs}" <<-EOSQL
     MASTER_HOST='db',
     MASTER_USER='openmrs_repl',
     MASTER_PASSWORD='openmrs_repl',
-    MASTER_AUTO_POSITION=1;
-  
+    MASTER_PORT=3306;  
   START SLAVE;
 EOSQL
