@@ -17,12 +17,9 @@ RUN --mount=type=secret,id=m2settings,target=/usr/share/maven/ref/settings-docke
 RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
 
 RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs-distro.properties /openmrs/distribution/
-RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_modules /openmrs/distribution/openmrs_modules
-RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_owas /openmrs/distribution/openmrs_owas
-
-# Copy configuration from the distro and content packages
-RUN cp -R /openmrs_distro/distro/configuration /openmrs/distribution/openmrs_config
-RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_config/* /openmrs/distribution/openmrs_config
+RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_modules /openmrs/distribution/openmrs_modules/
+RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_owas /openmrs/distribution/openmrs_owas/
+RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_config /openmrs/distribution/openmrs_config/
 
 # Clean up after copying needed artifacts
 RUN mvn $MVN_ARGS_SETTINGS clean

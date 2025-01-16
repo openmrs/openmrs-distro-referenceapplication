@@ -285,7 +285,7 @@
             <phase>package</phase>
             <configuration>
               <target>
-                <copy todir="${project.build.directory}/openmrs_config">
+                <copy todir="${project.build.directory}/sdk-distro/web/openmrs_config">
                   <fileset dir="${project.basedir}/configuration"/>
                 </copy>
               </target>
@@ -333,6 +333,9 @@
                 <goals>
                   <goal>validate-configurations</goal>
                 </goals>
+                <configuration>
+                  <sourceDir>${project.build.directory}/sdk-distro/web/openmrs_config</sourceDir>
+                </configuration>
               </execution>
             </executions>
           </plugin>
