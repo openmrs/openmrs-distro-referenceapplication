@@ -71,6 +71,11 @@ services:
     image: mariadb:10.11.7
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=2 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --read-only=1"
+    #healthcheck:
+    #  test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
+    #  interval: 3s
+    #  timeout: 1s
+    #  retries: 5
     environment:
       MYSQL_DATABASE: openmrs
       MYSQL_USER: openmrs_r
