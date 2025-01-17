@@ -1,0 +1,1254 @@
+{
+  "name": "Formularios de gestantes para la primera visita",
+  "pages": [
+    {
+      "label": "Filiacion y Antecendentes",
+      "sections": [
+        {
+          "label": "Antecedentes Obstetricos",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Gestaciones",
+              "type": "obs",
+              "required": false,
+              "id": "gestaciones",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "20",
+                "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "161732006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5624"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "11996-6"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE24"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "1755"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5624"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Abortos",
+              "type": "obs",
+              "required": false,
+              "id": "abortos",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "10",
+                "concept": "1823AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "252113007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "11612-9"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH Malawi",
+                    "value": "7942"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1823"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "7021"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE25"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Partos",
+              "type": "obs",
+              "required": false,
+              "id": "partos",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "20",
+                "concept": "162557AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "conceptMappings": [
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "11640-0"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "162557"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "289205009"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Vaginales",
+              "type": "obs",
+              "required": false,
+              "id": "vaginales",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "20",
+                "concept": "160659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "conceptMappings": [
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "364324000"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160659"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Cesareas",
+              "type": "obs",
+              "required": false,
+              "id": "cesaReas",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "20",
+                "concept": "160081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160081"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "252115000"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE33"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "68497-7"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "7011"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Nacidos vivos",
+              "type": "obs",
+              "required": false,
+              "id": "nacidosVivos",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "20",
+                "concept": "160601AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "248991006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160601"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE26"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "11636-8"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Nacidos muertos",
+              "type": "obs",
+              "required": false,
+              "id": "nacidosMuertos",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "20",
+                "concept": "160077AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE31"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "57062-2"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160077"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "252112002"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Antecedentes Familiares y Personales",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Antecedentes Personales",
+              "type": "obs",
+              "required": false,
+              "id": "antecedentesPersonales",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "597ce233-c793-47f8-b3e3-f4e2dad0ac8a",
+                "answers": [
+                  {
+                    "concept": "113398AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Aborto habitual/recurrente"
+                  },
+                  {
+                    "concept": "144661AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Coca"
+                  },
+                  {
+                    "concept": "158313AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Enfermedades Infecciosas"
+                  },
+                  {
+                    "concept": "138579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Alcoholismo"
+                  },
+                  {
+                    "concept": "166426AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Retencion Placenta"
+                  },
+                  {
+                    "concept": "151292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Alergia a medicamentos"
+                  },
+                  {
+                    "concept": "139212AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Asma Bronquial"
+                  },
+                  {
+                    "concept": "163390AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Enfermedades Congenitas"
+                  },
+                  {
+                    "concept": "160655AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Eclampsia"
+                  },
+                  {
+                    "concept": "156639AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hipertension Arterial"
+                  },
+                  {
+                    "concept": "1625AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Epilepsia"
+                  },
+                  {
+                    "concept": "158308AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Infertilidad"
+                  },
+                  {
+                    "concept": "151286AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Neoplasia"
+                  },
+                  {
+                    "concept": "139071AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cardiopatia"
+                  },
+                  {
+                    "concept": "159084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tabaco"
+                  },
+                  {
+                    "concept": "151703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hemorragia Postparto"
+                  },
+                  {
+                    "concept": "1389AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "TBC Pulmonar"
+                  },
+                  {
+                    "concept": "129249AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Preeclampsia"
+                  },
+                  {
+                    "concept": "1860AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Prematuridad"
+                  },
+                  {
+                    "concept": "149197AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VIH/SIDA"
+                  },
+                  {
+                    "concept": "113602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Parto Prolongado"
+                  },
+                  {
+                    "concept": "134337AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Transtornos Mentales"
+                  },
+                  {
+                    "concept": "167244AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Violencia"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ninguno"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Otros"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Antecedentes Familiares",
+              "type": "obs",
+              "required": false,
+              "id": "antecedentesFamiliares",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "2befbe13-5835-4820-aaf6-df05a080ad2f",
+                "answers": [
+                  {
+                    "concept": "121689AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Alergia"
+                  },
+                  {
+                    "concept": "151524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Enfermedades Congenitas"
+                  },
+                  {
+                    "concept": "140228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diabetes"
+                  },
+                  {
+                    "concept": "152487AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Embarazos Multiples"
+                  },
+                  {
+                    "concept": "152450AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Epilepsia"
+                  },
+                  {
+                    "concept": "151927AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hipertension Arterial"
+                  },
+                  {
+                    "concept": "152636AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hipotiroidismo"
+                  },
+                  {
+                    "concept": "152460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "TBC Pulmonar"
+                  },
+                  {
+                    "concept": "138193AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Enfermedad hipertensiva en el embarazo"
+                  },
+                  {
+                    "concept": "115327AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Neoplasia"
+                  },
+                  {
+                    "concept": "116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Malaria"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ninguna"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Otros"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Gestacion Anterior",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Fecha de la gestacion anterior",
+              "type": "obs",
+              "required": false,
+              "id": "fechaDeLaGestacioNAnterior",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "160602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160602"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "127362006"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Periodo intergenesico adecuado",
+              "type": "obs",
+              "required": false,
+              "id": "periodoIntergeneSicoAdecuado",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c90068d8-027b-455d-b902-a7bbc64d6213",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Si"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Terminacion",
+              "type": "obs",
+              "required": false,
+              "id": "terminacioN",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "5ca1b5c6-3979-4f3b-a213-f618a26ca01f",
+                "answers": [
+                  {
+                    "concept": "1170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Parto vaginal"
+                  },
+                  {
+                    "concept": "1171AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cesarea"
+                  },
+                  {
+                    "concept": "f023529d-16d9-470a-8b6b-92dbb27b7315",
+                    "label": "Aborto"
+                  },
+                  {
+                    "concept": "46AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ectopico"
+                  },
+                  {
+                    "concept": "a239d25f-2f18-4557-857b-fdbc7170f324",
+                    "label": "Aborto molar"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not aplica"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Tipo de aborto",
+              "type": "obs",
+              "required": false,
+              "id": "tipoDeAborto",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "f3a6dc81-c86e-4293-8e21-644be5cad62e",
+                "answers": [
+                  {
+                    "concept": "d9a05222-921a-45c8-a7f4-db09421af161",
+                    "label": "Incompleto"
+                  },
+                  {
+                    "concept": "671ce8da-1a10-495f-b8a4-7407fb59490f",
+                    "label": "Completo"
+                  },
+                  {
+                    "concept": "56ad76b6-1057-43a2-9fab-3ccb1f7682f0",
+                    "label": "Frustro/Retenido"
+                  },
+                  {
+                    "concept": "fd34abe8-6dbe-4ff5-bc34-1936cbccb064",
+                    "label": "Septico"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No aplica"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Captada",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Captada",
+              "type": "obs",
+              "required": false,
+              "id": "captada",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5dcaf4d1-6533-4de0-9320-db535a6eb745",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Si"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Referida por agente comunitario",
+              "type": "obs",
+              "required": false,
+              "id": "referidaPorAgenteComunitario",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1759AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED MVP",
+                    "value": "17591000105006"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "185361006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1759"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Si"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Vacunas Previas",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Rubeola",
+              "type": "obs",
+              "required": false,
+              "id": "rubeola",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "17098679-8c13-43f8-9d5d-9e414650099a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Si"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Hepatitis B",
+              "type": "obs",
+              "required": false,
+              "id": "hepatitisB",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ce48e078-a9bc-4db6-ae36-b8c2dcb9b092",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Si"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Papiloma Virus",
+              "type": "obs",
+              "required": false,
+              "id": "papilomaVirus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9fb78a87-5cc7-4b18-ba8d-c7f4037b9b4a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Si"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Fiebre Amarilla",
+              "type": "obs",
+              "required": false,
+              "id": "fiebreAmarilla",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6fe1d8fa-20c5-4e59-a44a-ca8dacb08220",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Si"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Datos Basales del Embarazo Actual",
+      "sections": [
+        {
+          "label": "Fecha Ultima Menstruacion",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "FUM",
+              "type": "obs",
+              "required": false,
+              "id": "fum",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "8665-2"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1836"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE14"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1427"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "21840007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE19"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH Malawi",
+                    "value": "968"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "968"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Duda",
+              "type": "obs",
+              "required": false,
+              "id": "duda",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "60633937-2ef0-4b86-b2df-698670980915",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sí"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Ecografia obstetrica",
+              "type": "obs",
+              "required": false,
+              "id": "ecografiaObstetrica",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45a1c13e-de62-4fbd-b2fd-55bb388466e0",
+                "answers": [
+                  {
+                    "concept": "1438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Duración de la gestación"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No aplicable"
+                  }
+                ],
+                "showDate": true
+              }
+            },
+            {
+              "label": "Fecha probable de parto",
+              "type": "obs",
+              "required": false,
+              "id": "fechaProbableDeParto",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "161714006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "11779-6"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5596"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5596"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE22"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1854"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Antitetanica",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "N° Dosis previa",
+              "type": "obs",
+              "required": false,
+              "id": "nDosisPrevia",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "3",
+                "concept": "b33ca80f-dc89-466b-8836-ecf3aa0da779",
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "1ra Dosis Antitetanica",
+              "type": "obs",
+              "required": false,
+              "id": "1raDosisAntitetaNica",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "6943490f-6d4a-4a4b-a10b-fbc302c5167c",
+                "answers": [
+                  {
+                    "concept": "5f9e5859-5c39-4b6a-b8e3-a8b682205023",
+                    "label": "Sin dosis"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No aplicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "1ra Dosis Antitetanica (mes de gestación)",
+              "type": "obs",
+              "required": false,
+              "id": "1raDosisAntitetaNica(MesDeGestacioN)",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "1",
+                "max": "9",
+                "concept": "6943490f-6d4a-4a4b-a10b-fbc302c5167c",
+                "answers": [
+                  {
+                    "concept": "efde71b6-d5c5-4f3d-8683-8677d1a48e1d",
+                    "label": "Mes de gestación"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "2da Dosis Antitetanica",
+              "type": "obs",
+              "required": false,
+              "id": "2daDosisAntitetanica",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bb4648be-dcce-4f12-b266-a0906b711658",
+                "answers": [
+                  {
+                    "concept": "5f9e5859-5c39-4b6a-b8e3-a8b682205023",
+                    "label": "Sin dosis"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No aplicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "2da Dosis Antitetanica (mes de gestación)",
+              "type": "obs",
+              "required": false,
+              "id": "2daDosisAntitetanica(MesDeGestacióN)",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "1",
+                "max": "9",
+                "concept": "bb4648be-dcce-4f12-b266-a0906b711658",
+                "answers": [
+                  {
+                    "concept": "efde71b6-d5c5-4f3d-8683-8677d1a48e1d",
+                    "label": "Mes de gestación"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Tipo de Sangre",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Tipo de Sangre",
+              "type": "obs",
+              "required": false,
+              "id": "tipoDeSangre",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160706AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160706"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "365636006"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "692AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "A Negativo"
+                  },
+                  {
+                    "concept": "690AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "A Positivo"
+                  },
+                  {
+                    "concept": "1231AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ab negativo"
+                  },
+                  {
+                    "concept": "1230AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ab positivo"
+                  },
+                  {
+                    "concept": "696AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "B Negativo"
+                  },
+                  {
+                    "concept": "694AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "B Positivo"
+                  },
+                  {
+                    "concept": "701AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "O Negativo"
+                  },
+                  {
+                    "concept": "699AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "O Positivo"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Violencia/genero",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ficha de Tamizaje",
+              "type": "obs",
+              "required": false,
+              "id": "fichaDeTamizaje",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c119eef0-f3ec-42e2-886e-8bf9cc922a40",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sí"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Violencia",
+              "type": "obs",
+              "required": false,
+              "id": "violencia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "141814AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "ICD-10-WHO",
+                    "value": "T74.1"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "IMO ProblemIT",
+                    "value": "72325"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "141814"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "404189009"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sí"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Examen Físico",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Clinico",
+              "type": "obs",
+              "required": false,
+              "id": "cliNico",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "271907004"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163042"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Mamas",
+              "type": "obs",
+              "required": false,
+              "id": "mamas",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162825AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "10193-1"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "162825"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "271886009"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Cuello Uterino",
+              "type": "obs",
+              "required": false,
+              "id": "cuelloUterino",
+              "questionOptions": {
+                "rendering": "text"
+              },
+              "validators": []
+            },
+            {
+              "label": "Pelvis",
+              "type": "obs",
+              "required": false,
+              "id": "pelvis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "165372AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE79"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "165372"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "f30d6ac0-dcbc-47aa-a9f4-3751f2347c84",
+                    "label": "Sin examen"
+                  },
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "0d533056-fab4-499d-b4d9-0e9056e1f595",
+                    "label": "Pathological"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Odontologico",
+              "type": "obs",
+              "required": false,
+              "id": "odontologico",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160628AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160628"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "309657003"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+  "referencedForms": [],
+  "uuid": "de6454d6-a731-4d45-8655-034a73cd0ceb",
+  "description": "Registro de antecedentes de prueba 2",
+  "version": "1.0.1"
+}
