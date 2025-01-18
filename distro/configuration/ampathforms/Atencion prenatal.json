@@ -1,0 +1,327 @@
+{
+  "name": "Atencion prenatal",
+  "pages": [
+    {
+      "label": "Atencion prenatal",
+      "sections": [
+        {
+          "label": "Atención",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Edad gestacional (semanas)",
+              "type": "obs",
+              "required": false,
+              "id": "edadGestacional(Semanas)",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "1",
+                "max": "20",
+                "concept": "1438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE17"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED MVP",
+                    "value": "14381000105006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "11884-4"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1775"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "57036006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1279"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "1279"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1438"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Altura uterina",
+              "type": "obs",
+              "required": false,
+              "id": "alturaUterina",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1439AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "249016007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1439"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE105"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "11881-0"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH Malawi",
+                    "value": "7835"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1855"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B6.DE21"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Situacion (L/T/NA)",
+              "type": "obs",
+              "required": false,
+              "id": "situacion(L/T/Na)",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "162089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "364746005"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "162089"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "162088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Longitudinal lie"
+                  },
+                  {
+                    "concept": "124261AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "posición transversa del feto"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No aplicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Presentacion (C/P/NA)",
+              "type": "obs",
+              "required": false,
+              "id": "presentacion(C/P/Na)",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160090"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "271692001"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH Malawi",
+                    "value": "7433"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Presentación cefálica normal"
+                  },
+                  {
+                    "concept": "146922AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "presentación pélvica"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No aplicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Posicion (O/I/NA)",
+              "type": "obs",
+              "required": false,
+              "id": "posicion(O/I/Na)",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "163749AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163749"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "5141AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Derecha"
+                  },
+                  {
+                    "concept": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Izquierda"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No aplicable"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Frecuencia Cardiaca Fetal (por min.)",
+              "type": "obs",
+              "required": false,
+              "id": "frecuenciaCardiacaFetal(PorMin./Na)",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "55283-6"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH Malawi",
+                    "value": "7979"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1857"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE108"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "249043002"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1440"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE107"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Movimiento fetal",
+              "type": "obs",
+              "required": false,
+              "id": "movimientoFetal",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "162107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "162107"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "32279003"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "113377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "movimientos fetales disminuidos"
+                  },
+                  {
+                    "concept": "162108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Movimientos fetales, presentes"
+                  },
+                  {
+                    "concept": "162090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Al examen: feto muy activo"
+                  },
+                  {
+                    "concept": "1452AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No se observan movimientos fetales"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No aplicable"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "0e8230ce-bd1d-43f5-a863-cf44344fa4b0",
+  "referencedForms": [],
+  "uuid": "61aee893-2223-4eeb-9d64-a7b9629e5467",
+  "description": "Recopila los datos indespensables que se toman en cada control prenatal",
+  "version": "1.0.0"
+}
