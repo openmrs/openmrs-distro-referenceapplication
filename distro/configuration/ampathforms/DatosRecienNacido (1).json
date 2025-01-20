@@ -1,0 +1,1208 @@
+{
+  "name": "DatosRecienNacido",
+  "pages": [
+    {
+      "label": "Página 1",
+      "sections": [
+        {
+          "label": "Padres",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Nombre del Padre",
+              "type": "obs",
+              "required": true,
+              "id": "nombreDelPadre",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Direccion",
+              "type": "obs",
+              "required": true,
+              "id": "direccion",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162725AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "162725"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "397635003"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Analisis del Bebe",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Hematocrito",
+              "type": "obs",
+              "required": true,
+              "id": "hematocrito",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "31",
+                "max": "68",
+                "concept": "1015AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1015"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "1015"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "IMO ProcedureIT",
+                    "value": "2464"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "365616005"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "IMO ProcedureIT",
+                    "value": "935674"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "20570-8"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Hemoglobina",
+              "type": "obs",
+              "required": true,
+              "id": "hemoglobina",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "11",
+                "max": "24",
+                "concept": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "IMO ProcedureIT",
+                    "value": "930136"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "38082009"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH Malawi",
+                    "value": "7982"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "21"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "21"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "301"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "441689006"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "648"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "718-7"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Glucosa",
+              "type": "obs",
+              "required": true,
+              "id": "glucosa",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "70",
+                "max": "199",
+                "concept": "163593AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "27353-2"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163593"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Fecha de Nacimiento",
+              "type": "obs",
+              "required": true,
+              "id": "fechaDeNacimiento",
+              "datePickerFormat": "calendar",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "166575AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "184099003"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166575"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Apgar 1\"",
+              "type": "obs",
+              "required": true,
+              "id": "apgar1",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "10",
+                "concept": "159603AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "AMPATH",
+                    "value": "6430"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "159603"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "169895004"
+                  }
+                ],
+                "disallowDecimals": true
+              },
+              "validators": []
+            },
+            {
+              "label": "Apgar 5\"",
+              "type": "obs",
+              "required": true,
+              "id": "apgar5",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "10",
+                "concept": "159604AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "169909004"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "159604"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "AMPATH",
+                    "value": "6431"
+                  }
+                ],
+                "answers": []
+              }
+            },
+            {
+              "label": "Apgar 10\"",
+              "type": "obs",
+              "required": true,
+              "id": "apgar10",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "max": "10",
+                "concept": "159605AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "AMPATH",
+                    "value": "6432"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "169922007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "159605"
+                  }
+                ],
+                "answers": []
+              }
+            },
+            {
+              "label": "Peso de Nacimiento (kg)",
+              "type": "obs",
+              "required": true,
+              "id": "pesoDeNacimiento",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "0",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5089"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH Malawi",
+                    "value": "5089"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE3"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "3141-9"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "27113001"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5089"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "WEIGHT"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5089"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Talla de Nacimiento (cm)",
+              "type": "obs",
+              "required": true,
+              "id": "tallaDeNacimiento",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "1",
+                "max": "100",
+                "concept": "1503AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1503"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "169886007"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Perimetro Cefalico",
+              "type": "obs",
+              "required": true,
+              "id": "perimetroCefalico",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "1",
+                "max": "100",
+                "concept": "163555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163555"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "169876006"
+                  }
+                ],
+                "answers": []
+              }
+            },
+            {
+              "label": "Perimetro Toracico",
+              "type": "obs",
+              "required": true,
+              "id": "perimetroToracico",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "1",
+                "max": "100",
+                "concept": "163081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "284472007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163081"
+                  }
+                ],
+                "answers": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Monitoreo de Funciones vitales y Balance",
+      "sections": [
+        {
+          "label": "Día 1",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Presion Mañana (mm Hg)",
+              "type": "obs",
+              "required": false,
+              "id": "presionDia1M",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "60",
+                "max": "150",
+                "concept": "166524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166524"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "250768007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3991"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temperatura Mañana (°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperaturaDia1M",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE34"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "8310-5"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TEMPERATURE"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "386725007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE35"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Presion Tarde (mm Hg)",
+              "type": "obs",
+              "required": false,
+              "id": "presionDia1T",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "60",
+                "max": "150",
+                "concept": "166524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166524"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "250768007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3991"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temperatura Tarde (°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperaturaDia1T",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE34"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "8310-5"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TEMPERATURE"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "386725007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE35"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Presion Noche (mm Hg)",
+              "type": "obs",
+              "required": false,
+              "id": "presionDia1N",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "60",
+                "max": "150",
+                "concept": "166524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166524"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "250768007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3991"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temperatura Noche (°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperaturaDia1N",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE34"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "8310-5"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TEMPERATURE"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "386725007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE35"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Día 2",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Presion Mañana (mm Hg)",
+              "type": "obs",
+              "required": false,
+              "id": "presionDia2M",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "60",
+                "max": "150",
+                "concept": "166524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166524"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "250768007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3991"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temperatura Mañana (°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperaturaDia2M",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE34"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "8310-5"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TEMPERATURE"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "386725007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE35"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Presion Tarde (mm Hg)",
+              "type": "obs",
+              "required": false,
+              "id": "presionDia2T",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "60",
+                "max": "150",
+                "concept": "166524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166524"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "250768007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3991"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temperatura Tarde (°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperaturaDia2T",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE34"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "8310-5"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TEMPERATURE"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "386725007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE35"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Presion Noche (mm Hg)",
+              "type": "obs",
+              "required": false,
+              "id": "presionDia2N",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "60",
+                "max": "150",
+                "concept": "166524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166524"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "250768007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3991"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temperatura Noche (°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperaturaDia2N",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE34"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "8310-5"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TEMPERATURE"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "386725007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE35"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Día 3",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Presion Mañana (mm Hg)",
+              "type": "obs",
+              "required": false,
+              "id": "presionDia3M",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "166524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166524"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "250768007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3991"
+                  }
+                ],
+                "answers": []
+              }
+            },
+            {
+              "label": "Temperatura Mañana (°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperaturaDia3M",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE34"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "8310-5"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TEMPERATURE"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "386725007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE35"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Presion Tarde (mm Hg)",
+              "type": "obs",
+              "required": false,
+              "id": "presionDia3T",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "166524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166524"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "250768007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3991"
+                  }
+                ],
+                "answers": []
+              }
+            },
+            {
+              "label": "Temperatura Tarde(°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperaturaDia3T",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE34"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "8310-5"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TEMPERATURE"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "386725007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE35"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Presion Noche (mm Hg)",
+              "type": "obs",
+              "required": false,
+              "id": "presionDia3N",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "166524AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "166524"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "250768007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "3991"
+                  }
+                ],
+                "answers": []
+              }
+            },
+            {
+              "label": "Temperatura Noche (°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperaturaDia3N",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "34",
+                "max": "43",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE34"
+                  },
+                  {
+                    "relationship": "BROADER-THAN",
+                    "type": "LOINC",
+                    "value": "8310-5"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "org.openmrs.module.mdrtb",
+                    "value": "TEMPERATURE"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "386725007"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "5088"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "ANCDAK",
+                    "value": "ANC.B8.DE35"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "5088"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+  "referencedForms": [],
+  "uuid": "dd7bc196-3f57-4b5a-9cc3-ab03fba15a2b",
+  "description": "Página 1",
+  "version": "1.6"
+}
