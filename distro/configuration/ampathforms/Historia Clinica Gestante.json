@@ -1,0 +1,183 @@
+{
+  "name": "Historia Clinica Gestante",
+  "pages": [
+    {
+      "label": "Historia Clinica Gestante",
+      "sections": [
+        {
+          "label": "Entrega y evaluacion de resultados de bateria",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Examen de orina",
+              "type": "obs",
+              "required": false,
+              "id": "examenDeOrina",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "160735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "160735"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "167316004"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Anormal"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "RPR",
+              "type": "obs",
+              "required": false,
+              "id": "rpr",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1619"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "19869000"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "PIH",
+                    "value": "1478"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "AMPATH",
+                    "value": "299"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "IMO ProcedureIT",
+                    "value": "923450"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positivo"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negativo"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Prueba rapida VIH",
+              "type": "obs",
+              "required": false,
+              "id": "pruebaRapidaVih",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "163722AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "163722"
+                  },
+                  {
+                    "relationship": "NARROWER-THAN",
+                    "type": "SNOMED CT",
+                    "value": "165813002"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "LOINC",
+                    "value": "73905-2"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positivo"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negativo"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Hb, Hto, factor Rh, Glucosa",
+              "type": "obs",
+              "required": false,
+              "id": "hb,Hto,FactorRh,Glucosa",
+              "questionOptions": {
+                "rendering": "radio"
+              }
+            },
+            {
+              "label": "Consejeria post test VIH",
+              "type": "obs",
+              "required": false,
+              "id": "consejeriaPostTestVih",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1914AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "1914"
+                  },
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "SNOMED CT",
+                    "value": "313077009"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Si"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "0e8230ce-bd1d-43f5-a863-cf44344fa4b0",
+  "referencedForms": [],
+  "uuid": "be92c02a-494f-4513-807e-8292f67e6ed7",
+  "description": "La Historia Clinica de la Gestante es un documento medico que recopila toda la informacion relacionada con el estado de salud de una mujer durante el embarazo.",
+  "version": "1.0.0"
+}
