@@ -78,6 +78,8 @@ server {
 
   location = /openmrs/spa {
     return 301 /openmrs/spa/;
+
+    
   }
 
   location /openmrs/spa/ {
@@ -87,6 +89,20 @@ server {
 
   location /openmrs {
     proxy_pass http://backend;
+    # Add CORS headers
+    add_header Access-Control-Allow-Origin "*"; # Replace * with specific domains if needed
+    add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+    add_header Access-Control-Allow-Headers "Origin, Authorization, Content-Type, Accept";
+
+    # Handle preflight OPTIONS requests
+    if ($request_method = 'OPTIONS') {
+      add_header Access-Control-Allow-Origin "*";
+      add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+      add_header Access-Control-Allow-Headers "Origin, Authorization, Content-Type, Accept";
+      add_header Content-Length 0;
+      add_header Content-Type text/plain;
+      return 204;
+    }
   }
 
   location = / {
