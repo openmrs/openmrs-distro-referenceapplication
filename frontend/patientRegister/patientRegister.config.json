@@ -1,20 +1,11 @@
 {
   "@openmrs/esm-patient-registration-app": {
-    "sections": [
-      "demographics",
-      "contact",
-      "relationships",
-      "otros"
-    ],
+    "sections": ["demographics", "contact", "relationships", "otros"],
     "sectionDefinitions": [
       {
         "id": "otros",
         "name": "Otros Datos",
-        "fields": [
-          "religion",
-          "ethnic",
-          "civilstatus"
-        ]
+        "fields": ["religion", "ethnic", "civilstatus"]
       }
     ],
     "fieldDefinitions": [
@@ -49,5 +40,18 @@
         }
       }
     ]
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "extensionSlots": {
+      "top-nav-actions-slot": {
+        "configure": {
+          "add-patient-action": {
+            "displayConditions": {
+              "privileges": ["o3: Register Patient"]
+            }
+          }
+        }
+      }
+    }
   }
 }
