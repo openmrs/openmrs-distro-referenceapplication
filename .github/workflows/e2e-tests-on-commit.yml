@@ -12,6 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Sync configuration
+        run: ./sync_config.sh
 
       - name: Build and Run Containers
         run: docker compose -f e2e_test_support_files/docker-compose-build.yml up -d

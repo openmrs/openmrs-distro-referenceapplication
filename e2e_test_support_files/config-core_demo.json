@@ -1,0 +1,52 @@
+{
+  "@openmrs/esm-patient-chart-app": {
+    "restrictByVisitLocationTag": true,
+    "showUpcomingAppointments": true,
+    "extensionSlots": {
+      "action-menu-patient-chart-items-slot": {
+        "order": ["order-basket-action-menu"]
+      }
+    }
+  },
+  "@openmrs/esm-ward-app": {
+    "extensionSlots": {
+      "action-menu-ward-patient-items-slot": {
+        "add": ["order-basket-action-menu"]
+      }
+    }
+  },
+  "@openmrs/esm-service-queues-app": {
+    "priorityConfigs": [
+      {
+        "conceptUuid": "04f6f7e0-e3cb-4e13-a133-4479f759574e",
+        "tagClassName": "tag",
+        "tagType": "red"
+      }
+    ],
+    "statusConfigs": [
+      {
+        "conceptUuid": "51ae5e4d-b72b-4912-bf31-a17efb690aeb",
+        "iconComponent": "InProgress"
+      },
+      {
+        "conceptUuid": "ca7494ae-437f-4fd0-8aae-b88b9a2ba47d",
+        "iconComponent": "Group"
+      },
+      {
+        "conceptUuid": "b559fb77-4e1e-4285-b9b7-1d03e0ba983f",
+        "iconComponent": "Group"
+      }
+    ],
+    "concepts": {
+      "defaultPriorityConceptUuid": "f4620bfa-3625-4883-bd3f-84c2cce14470",
+      "emergencyPriorityConceptUuid": "04f6f7e0-e3cb-4e13-a133-4479f759574e",
+      "defaultStatusConceptUuid": "51ae5e4d-b72b-4912-bf31-a17efb690aeb",
+      "defaultTransitionStatus": "ca7494ae-437f-4fd0-8aae-b88b9a2ba47d"
+    },
+    "visitQueueNumberAttributeUuid": "",
+    "defaultFacilityUrl": ""
+  },
+  "@openmrs/esm-styleguide": {
+    "Brand color #1": "#005d5d"
+  }
+}
