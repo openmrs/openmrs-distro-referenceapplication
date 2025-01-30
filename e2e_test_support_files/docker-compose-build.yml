@@ -20,7 +20,7 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS:
+      SPA_CONFIG_URLS:/frontend/config-core_demo.json
       SPA_DEFAULT_LOCALE:
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost/" ]
