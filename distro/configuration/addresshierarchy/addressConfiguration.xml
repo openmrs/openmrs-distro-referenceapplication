@@ -1,45 +1,51 @@
 <addressConfiguration>
-  <wipe>true</wipe>
   <addressComponents>
     <addressComponent>
       <field>COUNTRY</field>
       <nameMapping>Location.country</nameMapping>
       <sizeMapping>40</sizeMapping>
+      <elementDefault>addresshierarchy.peru</elementDefault>
+      <requiredInHierarchy>true</requiredInHierarchy>
+    </addressComponent>
+    <addressComponent>
+      <field>ADDRESS_1</field>
+      <nameMapping>Location.address1</nameMapping>
+      <sizeMapping>40</sizeMapping>
       <requiredInHierarchy>true</requiredInHierarchy>
     </addressComponent>
     <addressComponent>
       <field>STATE_PROVINCE</field>
-      <nameMapping>Location.province</nameMapping>
+      <nameMapping>Location.stateProvince</nameMapping>
       <sizeMapping>40</sizeMapping>
       <requiredInHierarchy>true</requiredInHierarchy>
     </addressComponent>
     <addressComponent>
       <field>COUNTY_DISTRICT</field>
-      <nameMapping>Location.district</nameMapping>
-      <sizeMapping>40</sizeMapping>
-      <requiredInHierarchy>true</requiredInHierarchy>
-    </addressComponent>
-    <addressComponent>
-      <field>ADDRESS_1</field>
-      <nameMapping>impl.commune</nameMapping>
+      <nameMapping>Location.countyDistrict</nameMapping>
       <sizeMapping>40</sizeMapping>
       <requiredInHierarchy>true</requiredInHierarchy>
     </addressComponent>
     <addressComponent>
       <field>CITY_VILLAGE</field>
-      <nameMapping>Location.village</nameMapping>
+      <nameMapping>Location.cityVillage</nameMapping>
       <sizeMapping>40</sizeMapping>
-      <requiredInHierarchy>true</requiredInHierarchy>
+      <requiredInHierarchy>false</requiredInHierarchy>
+    </addressComponent>
+    <addressComponent>
+      <field>ADDRESS_2</field>
+      <nameMapping>Location.address2</nameMapping>
+      <sizeMapping>100</sizeMapping>
+      <requiredInHierarchy>false</requiredInHierarchy>
     </addressComponent>
   </addressComponents>
   <lineByLineFormat>
-    <string>cityVillage, address1</string>
-    <string>countyDistrict, stateProvince</string>
+    <string>countyDistrict, address2</string>
+    <string>stateProvince, address1</string>
     <string>country</string>
   </lineByLineFormat>
   <addressHierarchyFile>
     <filename>addresshierarchy.csv</filename>
     <entryDelimiter>,</entryDelimiter>
-    <identifierDelimiter>%</identifierDelimiter>
+    <identifierDelimiter>^</identifierDelimiter>
   </addressHierarchyFile>
 </addressConfiguration>
