@@ -1,5 +1,9 @@
 Uuid,Void/Retire,Name,Description,Required,Format,Format description,Validator,Location behavior,Uniqueness behavior
 05a29f94-c0ed-11e2-94be-8c13b969e334,,OpenMRS ID,"OpenMRS patient identifier, with check-digit",TRUE,,,org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator,NOT_USED,UNIQUE
-22348099-3873-459e-a32e-d93b17eda533,,Legacy ID,Identifier type to record optional previous identifers ,FALSE,,,,NOT_USED,
-b4143563-16cd-4439-b288-f83d61670fc8,,ID Card,ID Card,FALSE,,,,NOT_USED,UNIQUE
-a71403f3-8584-4289-ab41-2b4e5570bd45,,SSN,Social Security Number,FALSE,[A-Z]{1}-[0-9]{7},"Identifier should be 1 letter, followed by a dash and 7 numerical characters. Eg, A-0010902",,NOT_USED,UNIQUE
+05a29f94-c0ed-11e2-94be-8c13b969e334,,DNI,"Documento Nacional de Identidad peruano, obligatorio para ciudadanos peruanos.",TRUE,\d{8},"8 dígitos numéricos. Ej: 12345678",,NOT_USED,UNIQUE
+22348099-3873-459e-a32e-d93b17eda533,,Carné de Extranjería,"Documento oficial de identificación para extranjeros residentes en Perú.",FALSE,[A-Z0-9]{9},"9 caracteres alfanuméricos. Ej: E12345678",,NOT_USED,UNIQUE
+b4143563-16cd-4439-b288-f83d61670fc8,,Pasaporte,"Documento de viaje para ciudadanos peruanos y extranjeros.",FALSE,[A-Z0-9]{9},"9 caracteres alfanuméricos. Ej: PA1234567",,NOT_USED,UNIQUE
+a71403f3-8584-4289-ab41-2b4e5570bd45,,CUI (Código Único de Identificación),"Identificador único asignado a recién nacidos en el RENIEC.",FALSE,\d{10},"10 dígitos numéricos. Ej: 1234567890",,NOT_USED,UNIQUE
+d4b0f569-27e3-40c4-8bae-f4049abfb4ed,,Cédula Diplomática,"Documento de identidad para personal diplomático acreditado en Perú.",FALSE,[A-Z0-9]{8},"8 caracteres alfanuméricos. Ej: CD123456",,NOT_USED,UNIQUE
+e66e9fe0-7d51-4801-a550-5d462ad1c944,,Permiso Temporal de Permanencia (PTP),"Identificador otorgado a extranjeros con permiso temporal en Perú.",FALSE,[A-Z0-9]{9},"9 caracteres alfanuméricos. Ej: PTP123456",,NOT_USED,UNIQUE
+f7d0a8c3-9e2f-4b5b-abc1-5d8e3c9b7a6d,,CNV (Certificado de Nacido Vivo),"Documento temporal que certifica el nacimiento de un recién nacido antes de su inscripción en RENIEC.",FALSE,[A-Z0-9]{12},"12 caracteres alfanuméricos. Ej: CNV2023123456",,NOT_USED,UNIQUE
