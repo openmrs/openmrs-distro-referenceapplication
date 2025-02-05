@@ -278,6 +278,26 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-openmrs-configuration</id>
+            <phase>package</phase>
+            <configuration>
+              <target>
+                <copy todir="${project.build.directory}/sdk-distro/web/openmrs_config">
+                  <fileset dir="${project.basedir}/configuration"/>
+                </copy>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
