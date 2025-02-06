@@ -1,0 +1,5 @@
+Uuid,Void/Retire,Name,Description,Required,Format,Format description,Validator,Location behavior,Uniqueness behavior
+05a29f94-c0ed-11e2-94be-8c13b969e334,,OpenMRS ID,"OpenMRS patient identifier, with check-digit",TRUE,,,org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator,NOT_USED,UNIQUE
+22348099-3873-459e-a32e-d93b17eda533,,Legacy ID,Identifier type to record optional previous identifers ,FALSE,,,,NOT_USED,
+b4143563-16cd-4439-b288-f83d61670fc8,,ID Card,ID Card,FALSE,,,,NOT_USED,UNIQUE
+a71403f3-8584-4289-ab41-2b4e5570bd45,,SSN,Social Security Number,FALSE,[A-Z]{1}-[0-9]{7},"Identifier should be 1 letter, followed by a dash and 7 numerical characters. Eg, A-0010902",,NOT_USED,UNIQUE
