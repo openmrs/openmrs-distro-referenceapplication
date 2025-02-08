@@ -9,17 +9,6 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Peso habitual antes del embarazo",
-              "type": "obs",
-              "required": false,
-              "id": "pesoHabitualAntesDelEmbarazo",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5cacede4-c947-4092-9df4-24287a7f13ae"
-              },
-              "validators": []
-            },
-            {
               "label": "Talla",
               "type": "obs",
               "required": false,
@@ -27,8 +16,39 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "d37c8f1a-4a7d-4066-835f-253c80ad3fc7",
-                "disallowDecimals": true
+                "disallowDecimals": false
               },
+              "hideSteppers": true,
+              "validators": []
+            },
+            {
+              "label": "Peso habitual antes del embarazo",
+              "type": "obs",
+              "required": false,
+              "id": "peso",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "91c70c08-52c2-4c80-ad97-9181714bfafe",
+                "disallowDecimals": false
+              },
+              "hideSteppers": true,
+              "validators": []
+            },
+            {
+              "label": "IMC pregestacional",
+              "type": "obs",
+              "required": false,
+              "id": "IMCPregestacional",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "disallowDecimals": false,
+                "calculate": {
+                  "calculateExpression": "calcBMI(talla,peso)"
+                }
+              },
+              "editable": false,
+              "hideSteppers": true,
               "validators": []
             }
           ]
@@ -138,42 +158,32 @@
               }
             },
             {
-              "label": "Fecha probable de parto",
+              "label": "Edad gestacional actual FUM",
+              "type": "obs",
+              "required": false,
+              "id": "edadGestacionalFUM",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "fa067988-a6b6-4c0b-8a35-0eeb6564f613",
+                "calculate": {
+                  "calculateExpression": "calcTimeDifference(fum, 'w')"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fecha probable de parto FUM",
               "type": "obs",
               "required": false,
               "id": "fechaProbableDeParto",
               "datePickerFormat": "calendar",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "calculate": {
+                  "calculateExpression": "calcEDD(fum)"
+                }
               }
-            }
-          ]
-        },
-        {
-          "label": "Fuma/Drogas",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Fuma",
-              "type": "obs",
-              "required": false,
-              "id": "fuma",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "315b74d1-79a5-4201-95d4-3bef7487817f"
-              },
-              "validators": []
-            },
-            {
-              "label": "Drogas",
-              "type": "obs",
-              "required": false,
-              "id": "drogas",
-              "questionOptions": {
-                "rendering": "radio"
-              },
-              "validators": []
             }
           ]
         }
@@ -196,6 +206,7 @@
                 "min": "0",
                 "max": "3",
                 "concept": "58970d9f-7bd1-484b-92f0-b5f4d85103f9",
+                "step": 1,
                 "answers": []
               }
             },
@@ -203,22 +214,22 @@
               "label": "1ra Dosis Antitetánica",
               "type": "obs",
               "required": false,
-              "id": "1raDosisAntitetáNica",
+              "id": "primeraDosisAntitetáNica",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "a92deb61-2eca-47cf-8532-94d13ab28536",
                 "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sí"
+                  },
                   {
                     "concept": "0d1a8d55-b431-472f-8d18-ebe38f307c0f",
                     "label": "Sin dosis"
                   },
                   {
                     "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Not applicable"
-                  },
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Sí"
+                    "label": "No Aplica"
                   }
                 ]
               }
@@ -232,30 +243,35 @@
                 "rendering": "number",
                 "min": "1",
                 "max": "9",
-                "concept": "858e5bd6-eb06-4cd5-9f0d-8a8b2edcb23d",
+                "step": 1,
+                "concept": "72a9c171-0f45-4757-862c-7553db5e9548",
                 "answers": []
+              },
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "primeraDosisAntitetáNica !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
               "label": "2da Dosis Antitetánica",
               "type": "obs",
               "required": false,
-              "id": "2daDosisAntitetáNica",
+              "id": "segundaDosisAntitetáNica",
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "0948db74-0691-450b-906e-44ba0358847a",
                 "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sí"
+                  },
                   {
                     "concept": "0d1a8d55-b431-472f-8d18-ebe38f307c0f",
                     "label": "Sin dosis"
                   },
                   {
                     "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Not applicable"
-                  },
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Sí"
+                    "label": "No aplica"
                   }
                 ]
               }
@@ -269,8 +285,52 @@
                 "rendering": "number",
                 "min": "1",
                 "max": "9",
-                "concept": "858e5bd6-eb06-4cd5-9f0d-8a8b2edcb23d",
+                "step": 1,
+                "concept": "a69dccb1-6f7a-40cb-b841-7cefe276a10b",
                 "answers": []
+              },
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "segundaDosisAntitetáNica !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "id": "influenza",
+              "label": "Influenza",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fcfb9d34-bb24-491a-9aca-d648acd43c9e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sí"
+                  },
+                  {
+                    "concept": "0d1a8d55-b431-472f-8d18-ebe38f307c0f",
+                    "label": "Sin dosis"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No aplica"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "dosisInfluenza(MesDeGestacióN)",
+              "label": "Dosis Influenza (mes de gestación)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "min": "1",
+                "max": "9",
+                "step": 1,
+                "concept": "858e5bd6-eb06-4cd5-9f0d-8a8b2edcb23d"
+              },
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "influenza !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]
@@ -312,6 +372,38 @@
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "d50d1015-1def-4bd8-8268-59d1e97e33d3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sí"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": []
+            },
+            {
+              "label": "Fuma (N° Cigarros/día)",
+              "type": "obs",
+              "required": false,
+              "id": "fuma",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "315b74d1-79a5-4201-95d4-3bef7487817f"
+              },
+              "validators": []
+            },
+            {
+              "label": "Drogas",
+              "type": "obs",
+              "required": false,
+              "id": "drogas",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1846e918-d5ca-4cce-b64e-afce809ed7c1",
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -420,7 +512,7 @@
                 "concept": "f2f18910-6d94-4a69-a0e6-0cff763f66b3",
                 "answers": [
                   {
-                    "concept": "f30d6ac0-dcbc-47aa-a9f4-3751f2347c84",
+                    "concept": "59a2a3f9-e7d9-44bc-a4bd-d7462d850192",
                     "label": "Sin examen"
                   },
                   {
@@ -490,6 +582,31 @@
                 ]
               },
               "validators": []
+            },
+            {
+              "id": "fechaDeHospitalizacióN",
+              "label": "Fecha de hospitalización",
+              "datePickerFormat": "calendar",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "921c4803-3583-446c-a10f-942ca77d4c35"
+              },
+              "hide": {
+                "hideWhenExpression": "hospitalizacióN !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "id": "diagnóSticoDeHospitalizacióN",
+              "label": "Diagnóstico",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c093c0ec-d1fd-406f-8c65-eeb079665853"
+              },
+              "hide": {
+                "hideWhenExpression": "hospitalizacióN !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             }
           ]
         }
@@ -508,9 +625,45 @@
               "required": false,
               "id": "emergencia",
               "questionOptions": {
-                "rendering": "radio"
+                "rendering": "radio",
+                "concept": "c1055ebe-b480-4b2c-a911-cd198e345ee2",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sí"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               },
               "validators": []
+            },
+            {
+              "id": "fechaDeEmergencia",
+              "label": "Fecha de emergencia",
+              "datePickerFormat": "calendar",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "e066b18b-e816-4ad9-a2e7-4a12b8425df3"
+              },
+              "hide": {
+                "hideWhenExpression": "emergencia !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "id": "diagnóSticoDeEmergencia",
+              "label": "Diagnóstico",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c093c0ec-d1fd-406f-8c65-eeb079665853"
+              },
+              "hide": {
+                "hideWhenExpression": "emergencia !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             }
           ]
         }
@@ -520,7 +673,7 @@
   "processor": "EncounterFormProcessor",
   "encounterType": "58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba",
   "referencedForms": [],
-  "uuid": "9e269644-ef50-4c0e-8aca-0bf9666d0329",
+  "uuid": "22c594ee-3b82-48a0-a9e0-61b4d7613788",
   "description": "Registro de datos generales del embarazo actual",
   "version": "1.0.0"
 }
