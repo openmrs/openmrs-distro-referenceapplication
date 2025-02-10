@@ -90,6 +90,21 @@ jobs:
           path: e2e_repo/playwright-report/
           retention-days: 30
 
+      - name: 📝 Capture Server Logs
+        if: always()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          dest: "./logs"
+
+      - name: 📤 Upload Logs as Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: server-logs-patient-management
+          path: "./logs"
+          retention-days: 2
+          overwrite: true
+
   run-patient-chart-e2e-tests:
     runs-on: ubuntu-latest
     needs: build
@@ -150,6 +165,21 @@ jobs:
           name: report-patient-chart
           path: e2e_repo/playwright-report/
           retention-days: 30
+
+      - name: 📝 Capture Server Logs
+        if: always()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          dest: "./logs"
+
+      - name: 📤 Upload Logs as Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: server-logs-patient-chart
+          path: "./logs"
+          retention-days: 2
+          overwrite: true
 
   run-form-builder-e2e-tests:
     runs-on: ubuntu-latest
@@ -212,6 +242,21 @@ jobs:
           path: e2e_repo/playwright-report/
           retention-days: 30
 
+      - name: 📝 Capture Server Logs
+        if: always()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          dest: "./logs"
+
+      - name: 📤 Upload Logs as Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: server-logs-form-builder
+          path: "./logs"
+          retention-days: 2
+          overwrite: true
+
   run-esm-core-e2e-tests:
     runs-on: ubuntu-latest
     needs: build
@@ -273,6 +318,21 @@ jobs:
           path: e2e_repo/playwright-report/
           retention-days: 30
 
+      - name: 📝 Capture Server Logs
+        if: always()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          dest: "./logs"
+
+      - name: 📤 Upload Logs as Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: server-logs-esm-core
+          path: "./logs"
+          retention-days: 2
+          overwrite: true
+
   run-cohort-builder-e2e-tests:
     runs-on: ubuntu-latest
     needs: build
@@ -333,3 +393,18 @@ jobs:
           name: report-cohort-builder
           path: e2e_repo/playwright-report/
           retention-days: 30
+
+      - name: 📝 Capture Server Logs
+        if: always()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          dest: "./logs"
+
+      - name: 📤 Upload Logs as Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: server-logs-cohort-builder
+          path: "./logs"
+          retention-days: 2
+          overwrite: true
