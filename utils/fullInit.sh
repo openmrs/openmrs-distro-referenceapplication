@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the directory containing the docker-compose.yml file
-COMPOSE_DIR="."
+COMPOSE_DIR="../"
 
 # Navigate to the directory containing the docker-compose.yml file
 cd "$COMPOSE_DIR" || { echo "Directory $COMPOSE_DIR not found"; exit 1; }
