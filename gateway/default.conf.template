@@ -89,6 +89,7 @@ server {
 
   location /openmrs {
     proxy_pass http://backend;
+    
     # Add CORS headers
     add_header Access-Control-Allow-Origin "*"; # Replace * with specific domains if needed
     add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
