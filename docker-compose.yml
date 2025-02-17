@@ -1,5 +1,6 @@
 services:
   gateway:
+    container_name: peruHCE-gateway
     image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
     restart: "unless-stopped"
     depends_on:
@@ -9,6 +10,7 @@ services:
       - "80:80"
 
   frontend:
+    container_name: peruHCE-frontend
     image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
     restart: "unless-stopped"
     environment:
@@ -25,6 +27,7 @@ services:
       - openmrs-frontend:/usr/share/nginx/html/
 
   backend:
+    container_name: peruHCE-backend
     image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
     restart: "unless-stopped"
     depends_on:
@@ -45,7 +48,7 @@ services:
 
   # MariaDB master
   db:
-    container_name: db-master
+    container_name: peruHCE-db-master
     image: mariadb:10.11.7
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1"
@@ -67,7 +70,7 @@ services:
 
   # MariaDB Replic
   db-replic:
-    container_name: db-replic
+    container_name: peruHCE-db-replic
     image: mariadb:10.11.7
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=2 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --read-only=1"
