@@ -1,6 +1,6 @@
 Uuid,Void/Retire,Name,Description,Required,Format,Format description,Validator,Location behavior,Uniqueness behavior
 05a29f94-c0ed-11e2-94be-8c13b969e335,,OpenMRS ID,"OpenMRS patient identifier, with check-digit",TRUE,,,org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator,NOT_USED,UNIQUE
-05a29f94-c0ed-11e2-94be-8c13b969e334,,DNI,"Documento Nacional de Identidad peruano, obligatorio para ciudadanos peruanos.",TRUE,\d{8},"8 dígitos numéricos. Ej: 12345678",,NOT_USED,UNIQUE
+05a29f94-c0ed-11e2-94be-8c13b969e334,,DNI,"Documento Nacional de Identidad peruano, obligatorio para ciudadanos peruanos.",TRUE,[0-9]{8},"8 dígitos numéricos. Ej: 12345678",,NOT_USED,UNIQUE
 22348099-3873-459e-a32e-d93b17eda533,,Carné de Extranjería,"Documento oficial de identificación para extranjeros residentes en Perú.",FALSE,[A-Z0-9]{9},"9 caracteres alfanuméricos. Ej: E12345678",,NOT_USED,UNIQUE
 b4143563-16cd-4439-b288-f83d61670fc8,,Pasaporte,"Documento de viaje para ciudadanos peruanos y extranjeros.",FALSE,[A-Z0-9]{9},"9 caracteres alfanuméricos. Ej: PA1234567",,NOT_USED,UNIQUE
 a71403f3-8584-4289-ab41-2b4e5570bd45,,CUI (Código Único de Identificación),"Identificador único asignado a recién nacidos en el RENIEC.",FALSE,\d{10},"10 dígitos numéricos. Ej: 1234567890",,NOT_USED,UNIQUE
