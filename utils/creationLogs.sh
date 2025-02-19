@@ -20,7 +20,7 @@ echo "✅ Logs captured in '$LOG_FILE' until '$SEARCH_TEXT' was found."
 #!/bin/bash
 
 # Configuration
-CONTAINER_NAME="my-app-container"  # Set your container name
+CONTAINER_NAME="peruHCE-backend"  # Set your container name
 LOG_FILE="logs.txt"
 SEARCH_TEXT="STOP_LOGGING_HERE"  # Text that triggers stopping
 
