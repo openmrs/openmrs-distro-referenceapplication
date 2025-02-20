@@ -7,10 +7,10 @@ KEY_SIZE=2048
 SERGVER_IP=192.168.1.xxxx
 
 # Updating and check last version of openssl
-RUN apt-get update && apt-get install -y openssl
+apt-get update && apt-get install -y openssl
 
 # Creating directory to save certificate
-RUN mkdir -p ssl
+mkdir -p ssl
 
 # Generate private key
 echo "Generating private key and crt with prefix: ${CERT_NAME} ..."
