@@ -1,0 +1,70 @@
+{
+  "name": "HOSP-004-EVOLUCIÓN MÉDICA",
+  "pages": [
+    {
+      "label": "Evolución Médica",
+      "sections": [
+        {
+          "label": "Evolución médica",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "b71c10a3-bfb2-480f-a2e9-93e2feabb8e3"
+              },
+              "id": "evolucionMedica",
+              "label": "Evolución médica",
+              "question":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "d6c11be0-b3b2-4969-bba3-e020dcf382eb"
+                  },
+                  "id": "fechaYHora",
+                  "label": "Fecha y hora",
+                  "datePickerFormat": "both"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "textarea",
+                    "concept": "b71c10a3-bfb2-480f-a2e9-93e2feabb8e3"
+                  },
+                  "id": "dias_estadia",
+                  "label": "Descripción de Evolución médica"
+                }
+              ]
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "104b6741-cf34-4805-875c-f475748092b3"
+              },
+              "id": "numeroCama",
+              "label": "N° Cama"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e718baa-ecf5-4a8a-9bcd-75986ef855a0"
+              },
+              "id": "servicio",
+              "label": "Servicio"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
+  "referencedForms": [],
+  "uuid": "a7759c56-a340-4834-afaf-cbfbbf206cbb",
+  "description": "Evolución médica realizada durante el tiempo de hospitalización.",
+  "version": "1.0.0"
+}

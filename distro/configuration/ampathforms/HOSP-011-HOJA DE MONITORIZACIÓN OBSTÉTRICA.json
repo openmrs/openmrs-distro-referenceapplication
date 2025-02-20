@@ -1,0 +1,193 @@
+{
+  "name": "HOSP-011-HOJA DE MONITORIZACIÓN OBSTÉTRICA",
+  "pages": [
+    {
+      "label": "Hoja de Monitorización Obstétrica",
+      "sections": [
+        {
+          "label": "Evolución médica",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c093c0ec-d1fd-406f-8c65-eeb079665853"
+              },
+              "id": "diagnostico",
+              "label": "Diagnóstico"
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeting",
+                "concept": "44426693-0529-4e37-8efe-8ec5b2cbb290"
+              },
+              "id": "monitorizacionObstetrica",
+              "label": "Monitorización Obstétrica",
+              "question":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "time",
+                    "concept": "d6c11be0-b3b2-4969-bba3-e020dcf382eb"
+                  },
+                  "id": "hora",
+                  "label": "Hora",
+                  "datePickerFormat": "timer"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "b85c0651-0464-4d79-96ca-ab084019f05c"
+                  },
+                  "hideSteppers": true,
+                  "id": "presionDiastolica",
+                  "label": "Presión diastólica"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "992dc702-80dc-4a16-a28b-2f7600bc4210"
+                  },
+                  "hideSteppers": true,
+                  "id": "presionSistolica",
+                  "label": "Presión sistólica"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "e176c99d-e73a-4c28-b632-f2ae0f6ce55b"
+                  },
+                  "hideSteppers": true,
+                  "id": "pulso",
+                  "label": "Pulso"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "89c9c0bf-e746-4f8d-8d04-b2d2ad9826eb"
+                  },
+                  "hideSteppers": true,
+                  "id": "temperatura",
+                  "label": "Temperatura"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "aeecf295-048b-4c40-a6a0-c3a7db169466"
+                  },
+                  "hideSteppers": true,
+                  "id": "frecuenciaRespiratoria",
+                  "label": "Frecuencia Respiratoria"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "e204d05c-f4f2-4935-88a2-c6ebcded999f"
+                  },
+                  "hideSteppers": true,
+                  "id": "diuresis",
+                  "label": "Diuresis"
+                },
+                {
+                  "type": "obsGroup",
+                  "questionOptions": {
+                    "rendering": "group",
+                    "concept": "d546e902-3868-4fc8-a855-91228ab97d2b"
+                  },
+                  "id": "dinamicaUterina",
+                  "label": "Dinámica Uterina",
+                  "question": [
+                    {
+                      "type": "obs",
+                      "questionOptions": {
+                        "rendering": "text",
+                        "concept": "20eb9478-2ab2-48bd-8dca-3b563b0c7c47"
+                      },
+                      "id": "frecuencia",
+                      "label": "F (Frecuencia)"
+                    },
+                    {
+                      "type": "obs",
+                      "questionOptions": {
+                        "rendering": "select",
+                        "concept": "c2390c86-4ee7-453a-a21b-f7b30bc65317",
+                        "answers":[
+                          {
+                            "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "label": "Leve"
+                          },
+                          {
+                            "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "label": "Moderado"
+                          },
+                          {
+                            "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "label": "Fuerte"
+                          }
+                        ]
+                      },
+                      "id": "intensidad",
+                      "label": "I (Intensidad)"
+                    },
+                    {
+                      "type": "obs",
+                      "questionOptions": {
+                        "rendering": "number",
+                        "concept": "9641ed77-354a-4a10-b16e-85b8f934031d"
+                      },
+                      "hideSteppers": true,
+                      "id": "duración",
+                      "label": "D (Duración)"
+                    }
+                  ]
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "b1fb2d14-92ec-4fda-90e5-40f3227c9c65"
+                  },
+                  "hideSteppers": true,
+                  "id": "frecuenciaCardiacaFetal",
+                  "label": "FCF"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "9e77be6d-6659-4cf3-bb27-8956ce6dcb67"
+                  },
+                  "id": "muerteFetal",
+                  "label": "MF"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "f947a4ad-3d8d-4516-8e6b-67b3dca4e227"
+                  },
+                  "id": "observaciones",
+                  "label": "Observaciones"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
+  "referencedForms": [],
+  "uuid": "a7759c56-a340-4834-afaf-cbfbbf206cbb",
+  "description": "Hoja de Monitorización Obstétrica realizada durante el tiempo de hospitalización.",
+  "version": "1.0.0"
+}

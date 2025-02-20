@@ -1,0 +1,366 @@
+{
+  "name": "HOSP-002-HISTORIA CLÍNICA OBSTÉTRICA",
+  "pages": [
+    {
+      "label": "1. Filación Paciente",
+      "sections": [
+        {
+          "label": "Filiación Paciente",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a432b5b7-ef2d-43af-82fb-c2357da505f4"
+              },
+              "id": "fechaDeIngreso",
+              "label": "Fecha de ingreso",
+              "datePickerFormat": "calendar"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "time",
+                "concept": "ff13aee5-dfa0-48b0-8966-0aaacdbff931"
+              },
+              "id": "horaDeIngreso",
+              "label": "Hora de ingreso",
+              "datePickerFormat": "timer"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "76cdbe4d-d325-475a-90ec-3a77c8a48a38",
+                "answers":[
+                  {
+                    "concept": "00044800-eb0c-4557-9eb7-c6adc99f7c92",
+                    "label": "Emergencia"
+                  },
+                  {
+                    "concept": "f1929bbb-9e02-4a65-979a-ddd6056192b5",
+                    "label": "Consultorio Externo"
+                  }
+                ]
+              },
+              "id": "procedencia",
+              "label": "Procedente"
+            }
+          ]
+        },
+        {
+          "label": "I. Anamnesis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7bb8eefc-929b-441b-80ba-80e0b18b504f"
+              },
+              "id": "anamnesis",
+              "label": "Anamnesis"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "2. Motivo de Ingreso",
+      "sections": [
+        {
+          "label": "Motivo de Ingreso",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "6664cb70-d3e7-4d31-8ab4-3cab799f1f39"
+              },
+              "id": "enfermedadGroup",
+              "label": "Enfermedad",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "577876b1-0b6e-4c57-b4c3-7af969a1d501"
+                  },
+                  "id": "tiempoEnfermedad",
+                  "label": "Tiempo de enfermedad"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "34e03399-cb72-484b-85b8-616ef19919c1"
+                  },
+                  "id": "formaInicio",
+                  "label": "Forma de inicio"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "e7d98188-16ba-4ef3-aed9-e891680bacf9"
+                  },
+                  "id": "curso",
+                  "label": "Curso"
+                }
+              ]
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2eed3ae0-0a0f-4280-af03-9ca293948893"
+              },
+              "id": "signosSintomasPrincipales",
+              "label": "Signos y síntomas principales"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "392aba5c-5f5a-46f1-9506-5869c0e1bd31"
+              },
+              "id": "relatoCronologicoEnfermedad",
+              "label": "Relato cronológico de la enfermedad"
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "9011adf4-2b9f-4ecb-a44c-cb5642e4e015"
+              },
+              "id": "funcionesBiologicasGroup",
+              "label": "Funciones Biológicas",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "94bda707-1b44-4bff-97e0-428fbfaf87a0"
+                  },
+                  "id": "apetito",
+                  "label": "Apetito"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "62e2227c-5bb1-4601-9692-306195ad535d"
+                  },
+                  "id": "sed",
+                  "label": "Sed"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c6dd0863-1ee6-4f78-8ffd-bf2f3e492d1e"
+                  },
+                  "id": "sueños",
+                  "label": "Sueños"
+                }
+              ]
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e952f0c3-d65f-4a24-ba65-331eb6c7b2e7"
+              },
+              "id": "orina",
+              "label": "Orina"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6a7218ea-1227-4f34-b924-5b65ab2956f3"
+              },
+              "id": "deposiciones",
+              "label": "Deposiciones"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "61884ff3-9461-49d4-92b4-749b223db6c1"
+              },
+              "id": "variacionesPeso",
+              "label": "Variaciones de peso"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "3. Antecedentes Familiares",
+      "sections": [
+        {
+          "label": "Antecedentes Familiares",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6a8fd860-e741-4880-aeef-14ad23c4a05e"
+              },
+              "id": "antecedentesFamiliares",
+              "label": "Antecedentes Familiares"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "4. Antecedentes Personales",
+      "sections": [
+        {
+          "label": "Antecedentes Personales",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "68cf307b-bfb1-4f7a-8079-bb057b234dab"
+              },
+              "id": "antecedentesPersonales",
+              "label": "Antecedentes Personales"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "5. Antecedentes Gineco-Obstétricos",
+      "sections": [
+        {
+          "label": "Antecedentes Gineco-Obstétricos",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "step": 1,
+                "concept": "7cb83888-3bf2-4b28-8b66-827b2ba85bc2"
+              },
+              "id": "menarquia",
+              "label": "Menarquía"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "14e85e4f-c185-4e28-acbe-0e17807c0f81"
+              },
+              "id": "ritmoCiclo",
+              "label": "Ritmo Ciclo"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "step": 1,
+                "concept": "ccc3e911-7255-4c8e-83e1-badf0966db12"
+              },
+              "id": "primeraRelacionSexual",
+              "label": "1° Relación Sexual"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "step": 1,
+                "concept": "19f3709d-ad4c-4e69-8766-788984c101bf"
+              },
+              "id": "numeroParejasSexuales",
+              "label": "N° Parejas Sexuales"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "step": 1,
+                "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "fup",
+              "label": "FUP"
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "ed3443fe-b7d4-4e68-882f-d6a6901408c7"
+              },
+              "id": "formulaObstetrica",
+              "label": "F.O (Fórmula Obstétrica)",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "ae27daee-d2f3-4df3-8e07-eff75c81872e"
+                  },
+                  "id": "numeroGestaciones",
+                  "label": "Número de gestaciones"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "8795c05b-f286-4d70-a1e6-69172e676f05"
+                  },
+                  "id": "paridad",
+                  "label": "Paridad"
+                }
+              ]
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "dee42f1a-657e-4ab3-8a0a-b012500edea6"
+              },
+              "id": "mayorPonderadoFetal",
+              "label": "Mayor ponderado fetal"
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "e98689eb-20ec-49b5-8815-934244622c89"
+              },
+              "id": "embarazosAnteriores",
+              "label": "Embarazos anteriores",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "e98689eb-20ec-49b5-8815-934244622c89"
+                  },
+                  "id": "gestacion",
+                  "label": "Gestación"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
+  "referencedForms": [],
+  "uuid": "c6428a2b-1c6c-4ec6-ac6b-372d41c3c45d",
+  "description": "Historia clínica obstétrica en hospitalización",
+  "version": "1.0.0"
+}
