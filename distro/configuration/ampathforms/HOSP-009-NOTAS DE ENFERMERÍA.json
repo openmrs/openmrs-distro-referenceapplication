@@ -1,0 +1,61 @@
+{
+  "name": "HOSP-009-NOTAS DE ENFERMERÍA",
+  "pages": [
+    {
+      "label": "Notas de Enfermería",
+      "sections": [
+        {
+          "label": "Notas de Enfermería",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "7007e24c-9907-4422-86b2-b187283749a4"
+              },
+              "id": "notasEnfermeriaGroup",
+              "label": "Notas de enfermería",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "d6c11be0-b3b2-4969-bba3-e020dcf382eb"
+                  },
+                  "id": "fechaYHora",
+                  "label": "Fecha y hora",
+                  "datePickerFormat": "both"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "textarea",
+                    "concept": "7007e24c-9907-4422-86b2-b187283749a4"
+                  },
+                  "id": "notasEnfermeria",
+                  "label": "Nota de enfermería"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "84a9cc40-b229-4760-bb3f-abeaf95c2439"
+                  },
+                  "id": "firma",
+                  "label": "Firma"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
+  "referencedForms": [],
+  "uuid": "e73c902d-d556-4cf1-bb56-44cdc3ba5ce2",
+  "description": "Notas de enfermeria durante el tiempo de hospitalización.",
+  "version": "1.0.0"
+}
