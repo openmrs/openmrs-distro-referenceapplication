@@ -1,0 +1,53 @@
+<addressConfiguration>
+  <addressComponents>
+    <addressComponent>
+      <field>COUNTRY</field>
+      <nameMapping>País</nameMapping>
+      <sizeMapping>40</sizeMapping>
+      <elementDefault>PERU</elementDefault>
+      <requiredInHierarchy>true</requiredInHierarchy>
+    </addressComponent>
+    <addressComponent>
+      <field>ADDRESS_1</field>
+      <nameMapping>Región</nameMapping>
+      <sizeMapping>40</sizeMapping>
+      <elementDefault>LORETO</elementDefault>
+      <requiredInHierarchy>true</requiredInHierarchy>
+    </addressComponent>
+    <addressComponent>
+      <field>STATE_PROVINCE</field>
+      <nameMapping>Provincia</nameMapping>
+      <sizeMapping>40</sizeMapping>
+      <elementDefault>MAYNAS</elementDefault>
+      <requiredInHierarchy>true</requiredInHierarchy>
+    </addressComponent>
+    <addressComponent>
+      <field>COUNTY_DISTRICT</field>
+      <nameMapping>Distrito</nameMapping>
+      <sizeMapping>40</sizeMapping>
+      <requiredInHierarchy>true</requiredInHierarchy>
+    </addressComponent>
+    <addressComponent>
+      <field>CITY_VILLAGE</field>
+      <nameMapping>Centro Poblado</nameMapping>
+      <sizeMapping>40</sizeMapping>
+      <requiredInHierarchy>false</requiredInHierarchy>
+    </addressComponent>
+    <addressComponent>
+      <field>ADDRESS_2</field>
+      <nameMapping>Dirección</nameMapping>
+      <sizeMapping>100</sizeMapping>
+      <requiredInHierarchy>false</requiredInHierarchy>
+    </addressComponent>
+  </addressComponents>
+  <lineByLineFormat>
+    <string>countyDistrict, address2</string>
+    <string>stateProvince, address1</string>
+    <string>country</string>
+  </lineByLineFormat>
+  <addressHierarchyFile>
+    <filename>addresshierarchy.csv</filename>
+    <entryDelimiter>,</entryDelimiter>
+    <identifierDelimiter>%</identifierDelimiter>
+  </addressHierarchyFile>
+</addressConfiguration>
