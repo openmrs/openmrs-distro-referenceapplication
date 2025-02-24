@@ -22,7 +22,7 @@ CONTAINER_NAME="$DB_CONTAINER_ID"  # Replace with your container name or ID
 if [[ $(date +%d) % 3 -eq 0 ]]; then
     # Full backup every 3 days
     echo "Performing full backup..."
-    docker exec $CONTAINER_NAME mysqldump -u root -p${MYSQL_ROOT_R_PASSWORD:-openmrs_r} --all-databases > $FULL_BACKUP_FILE
+    docker exec $CONTAINER_NAME mariabackup --user root -p${MYSQL_ROOT_R_PASSWORD:-openmrs_r} --all-databases > $FULL_BACKUP_FILE
 else
     # Incremental backup every 3 hours
     echo "Performing incremental backup..."
