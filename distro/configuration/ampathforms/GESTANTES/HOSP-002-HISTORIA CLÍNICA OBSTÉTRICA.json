@@ -9,43 +9,54 @@
           "isExpanded": "true",
           "questions": [
             {
-              "type": "obs",
+              "type": "obsGroup",
               "questionOptions": {
-                "rendering": "date",
-                "concept": "a432b5b7-ef2d-43af-82fb-c2357da505f4"
+                "rendering": "group",
+                "concept": "d18507ca-8084-4ae6-bb4d-506d15a94e13"
               },
-              "id": "fechaDeIngreso",
-              "label": "Fecha de ingreso",
-              "datePickerFormat": "calendar"
-            },
-            {
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "datetime",
-                "concept": "ff13aee5-dfa0-48b0-8966-0aaacdbff931"
-              },
-              "id": "horaDeIngreso",
-              "label": "Hora de ingreso",
-              "datePickerFormat": "timer"
-            },
-            {
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "76cdbe4d-d325-475a-90ec-3a77c8a48a38",
-                "answers":[
-                  {
-                    "concept": "00044800-eb0c-4557-9eb7-c6adc99f7c92",
-                    "label": "Emergencia"
+              "id": "hospitalizacionGroup",
+              "label": "Hospitalización",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "a432b5b7-ef2d-43af-82fb-c2357da505f4"
                   },
-                  {
-                    "concept": "f1929bbb-9e02-4a65-979a-ddd6056192b5",
-                    "label": "Consultorio Externo"
-                  }
-                ]
-              },
-              "id": "procedencia",
-              "label": "Procedente"
+                  "id": "fechaDeIngreso",
+                  "label": "Fecha de ingreso",
+                  "datePickerFormat": "calendar"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "ff13aee5-dfa0-48b0-8966-0aaacdbff931"
+                  },
+                  "id": "horaDeIngreso",
+                  "label": "Hora de ingreso",
+                  "datePickerFormat": "timer"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "76cdbe4d-d325-475a-90ec-3a77c8a48a38",
+                    "answers":[
+                      {
+                        "concept": "00044800-eb0c-4557-9eb7-c6adc99f7c92",
+                        "label": "Emergencia"
+                      },
+                      {
+                        "concept": "f1929bbb-9e02-4a65-979a-ddd6056192b5",
+                        "label": "Consultorio Externo"
+                      }
+                    ]
+                  },
+                  "id": "procedencia",
+                  "label": "Procedente"
+                }
+              ]
             }
           ]
         },
@@ -54,13 +65,24 @@
           "isExpanded": "true",
           "questions": [
             {
-              "type": "obs",
+              "type": "obsGroup",
               "questionOptions": {
-                "rendering": "textarea",
+                "rendering": "group",
                 "concept": "7bb8eefc-929b-441b-80ba-80e0b18b504f"
               },
-              "id": "anamnesis",
-              "label": "Anamnesis"
+              "id": "anamnesisGroup",
+              "label": "Anamnesis",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "textarea",
+                    "concept": "7bb8eefc-929b-441b-80ba-80e0b18b504f"
+                  },
+                  "id": "anamnesis",
+                  "label": "Anamnesis"
+                }
+              ]
             }
           ]
         }
@@ -595,7 +617,7 @@
   "processor": "EncounterFormProcessor",
   "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
   "referencedForms": [],
-  "uuid": "c6428a2b-1c6c-4ec6-ac6b-372d41c3c45d",
+  "uuid": "",
   "description": "Historia clínica obstétrica en hospitalización",
   "version": "1.0.0"
 }

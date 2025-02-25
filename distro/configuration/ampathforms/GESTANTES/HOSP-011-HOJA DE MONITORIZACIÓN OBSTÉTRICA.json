@@ -103,60 +103,49 @@
                   "label": "Diuresis"
                 },
                 {
-                  "type": "obsGroup",
+                  "type": "obs",
                   "questionOptions": {
-                    "rendering": "group",
-                    "concept": "d546e902-3868-4fc8-a855-91228ab97d2b"
+                    "rendering": "text",
+                    "concept": "20eb9478-2ab2-48bd-8dca-3b563b0c7c47"
                   },
-                  "id": "dinamicaUterina",
-                  "label": "Dinámica Uterina",
-                  "questions": [
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "text",
-                        "concept": "20eb9478-2ab2-48bd-8dca-3b563b0c7c47"
+                  "questionInfo": "Número de contracciones en un período de tiempo",
+                  "id": "frecuencia",
+                  "label": "F (Frecuencia)"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "ba6099d8-f7ce-41de-b9ec-6e8b42252911",
+                    "answers":[
+                      {
+                        "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Leve"
                       },
-                      "questionInfo": "Número de contracciones en un período de tiempo",
-                      "id": "frecuencia",
-                      "label": "F (Frecuencia)"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "select",
-                        "concept": "ba6099d8-f7ce-41de-b9ec-6e8b42252911",
-                        "answers":[
-                          {
-                            "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Leve"
-                          },
-                          {
-                            "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Moderado"
-                          },
-                          {
-                            "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Fuerte"
-                          }
-                        ]
+                      {
+                        "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Moderado"
                       },
-                      "questionInfo": "Fuerza de cada contracción",
-                      "id": "intensidad",
-                      "label": "I (Intensidad)"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "number",
-                        "concept": "9641ed77-354a-4a10-b16e-85b8f934031d"
-                      },
-                      "hideSteppers": true,
-                      "questionInfo": "Tiempo que dura cada contracción",
-                      "id": "duración",
-                      "label": "D (Duración)"
-                    }
-                  ]
+                      {
+                        "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Fuerte"
+                      }
+                    ]
+                  },
+                  "questionInfo": "Fuerza de cada contracción",
+                  "id": "intensidad",
+                  "label": "I (Intensidad)"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "9641ed77-354a-4a10-b16e-85b8f934031d"
+                  },
+                  "hideSteppers": true,
+                  "questionInfo": "Tiempo que dura cada contracción",
+                  "id": "duración",
+                  "label": "D (Duración)"
                 },
                 {
                   "type": "obs",
@@ -198,7 +187,7 @@
   "processor": "EncounterFormProcessor",
   "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
   "referencedForms": [],
-  "uuid": "67f588f5-d477-44b7-9775-61fafef479b0",
+  "uuid": "",
   "description": "Hoja de Monitorización Obstétrica realizada durante el tiempo de hospitalización.",
   "version": "1.0.0"
 }
