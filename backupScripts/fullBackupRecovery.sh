@@ -11,6 +11,20 @@ ls -1t "$BACKUP_DIR"/*.tar.gz
 echo -e "\nDo you want to use the most recent backup? (yes/no)"
 read -r USE_LATEST
 
+if [ "$USE_LATEST" == "yes" ]; then
+    BACKUP_FILE=$(ls -1t "$BACKUP_DIR"/*.tar.gz | head -n 1)
+    echo "Using most recent backup: $BACKUP_FILE"
+else
+    echo "Enter the backup file name (with .tar.gz extension):"
+    read -r BACKUP_FILE
+    BACKUP_FILE="$BACKUP_DIR/$BACKUP_FILE"
+
+    if [ ! -f "$BACKUP_FILE" ]; then
+        echo "Error: Backup file not found!"
+        exit 1
+    fi
+fi
+
 echo "Starting restoration of MariaDB Master from backup..."
 
 # Create the directorie in case doesnt exist
