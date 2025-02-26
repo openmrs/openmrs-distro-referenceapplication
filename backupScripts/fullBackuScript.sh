@@ -10,7 +10,12 @@ TEMP_BACKUP_PATH="/backup"              # Inside the container
 
 echo "Starting MariaDB replic backup..."
 
+# Create the directorie in case doesnt exist
+echo "Creating backup directory in slave container..."
+docker exec --user root $CONTAINER_NAME mkdir -p "$TEMP_BACKUP_PATH"
+
 # Clean the backup directorie in the replica container
+echo "Erasing backup directory in replica container..."
 docker exec --user root $CONTAINER_NAME rm -rf "$TEMP_BACKUP_PATH"
 
 # Run physical backup inside the MariaDB container
