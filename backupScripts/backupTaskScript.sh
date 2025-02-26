@@ -1,30 +1,37 @@
 #!/bin/bash
 
-# You need to set previously these variables:
-#   BACKUP_DATA :       Location of the mariaDb backups
-#   DB_CONTAINER_ID :   Id of the docker container of the database to backup
+# Configuration
+CONTAINER_NAME="peruHCE-db-Hreplic"     # Change to your MariaDB container name
+BACKUP_DIR="/home/dev-user/peruHCE-fullBackups"             # Change to your desired backup storage location
+MAX_BACKUPS=10                          # Maximum number of backups to keep
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+BACKUP_NAME="peruHCE_backup_$TIMESTAMP"
+TEMP_BACKUP_PATH="/backup"              # Inside the container
 
+echo "Starting MariaDB replic backup..."
 
-# Define backup directories
-BACKUP_DIR="$BACKUP_DATA"  # Replace with the actual backup directory path
-FULL_BACKUP_DIR="$BACKUP_DIR/full"
-INCREMENTAL_BACKUP_DIR="$BACKUP_DIR/incremental"
+# 1️⃣ Run physical backup inside the MariaDB container
+docker exec --user root $CONTAINER_NAME mariadb-backup --user=root --password=${OMRS_DB_R_PASSWORD:-openmrs_r} --backup --target-dir=$TEMP_BACKUP_PATH
 
-# Get current date and time
-DATE=$(date +"%Y-%m-%d_%H-%M-%S")
-FULL_BACKUP_FILE="$FULL_BACKUP_DIR/full_backup_$DATE.sql"
-INCREMENTAL_BACKUP_FILE="$INCREMENTAL_BACKUP_DIR/incremental_backup_$DATE.sql"
+# 2️⃣ Copy the backup to the host
+docker cp "$CONTAINER_NAME:$TEMP_BACKUP_PATH" "$BACKUP_DIR/$BACKUP_NAME"
 
-# Docker container name or ID for MariaDB
-CONTAINER_NAME="$DB_CONTAINER_ID"  # Replace with your container name or ID
+# 3️⃣ Zip the backup
+cd "$BACKUP_DIR" || exit
+tar -czf "$BACKUP_NAME.tar.gz" "$BACKUP_NAME"
 
-# Check if it's time for a full backup or incremental backup
-if [[ $(date +%d) % 3 -eq 0 ]]; then
-    # Full backup every 3 days
-    echo "Performing full backup..."
-    docker exec $CONTAINER_NAME mariabackup --user root -p${MYSQL_ROOT_R_PASSWORD:-openmrs_r} --all-databases > $FULL_BACKUP_FILE
-else
-    # Incremental backup every 3 hours
-    echo "Performing incremental backup..."
-    docker exec $CONTAINER_NAME mysqldump -u root -p${MYSQL_ROOT_R_PASSWORD:-openmrs_r} --all-databases --single-transaction --flush-logs > $INCREMENTAL_BACKUP_FILE
+# 4️⃣ Remove the uncompressed backup directory
+rm -rf "$BACKUP_NAME"
+
+echo "Backup created: $BACKUP_DIR/$BACKUP_NAME.tar.gz"
+
+# 5️⃣ Rotate old backups: Keep only the latest $MAX_BACKUPS backups
+BACKUP_COUNT=$(ls -1 "$BACKUP_DIR"/*.tar.gz 2>/dev/null | wc -l)
+
+if [ "$BACKUP_COUNT" -gt "$MAX_BACKUPS" ]; then
+    OLDEST_BACKUP=$(ls -1t "$BACKUP_DIR"/*.tar.gz | tail -1)
+    echo "Removing oldest backup: $OLDEST_BACKUP"
+    rm -f "$OLDEST_BACKUP"
 fi
+
+echo "Backup process completed!"
