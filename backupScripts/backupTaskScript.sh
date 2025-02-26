@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-CONTAINER_NAME="peruHCE-db-Hreplic"     # Change to your MariaDB container name
+CONTAINER_NAME="peruHCE-db-replic"     # Change to your MariaDB container name
 BACKUP_DIR="/home/dev-user/peruHCE-fullBackups"             # Change to your desired backup storage location
 MAX_BACKUPS=10                          # Maximum number of backups to keep
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
