@@ -19,7 +19,7 @@ echo "Erasing backup directory in replica container..."
 docker exec --user root $CONTAINER_NAME rm -rf "$TEMP_BACKUP_PATH"
 
 # Run physical backup inside the MariaDB container
-docker exec --user root $CONTAINER_NAME mariadb-backup --user=root --password=${OMRS_DB_R_PASSWORD:-openmrs_r} --backup --target-dir=$TEMP_BACKUP_PATH
+docker exec --user root $CONTAINER_NAME mariadb-backup --slave-info --safe-slave-backup --user=root --password=${OMRS_DB_R_PASSWORD:-openmrs_r} --backup --target-dir=$TEMP_BACKUP_PATH
 
 # Copy the backup to the host
 docker cp "$CONTAINER_NAME:$TEMP_BACKUP_PATH" "$BACKUP_DIR/$BACKUP_NAME"

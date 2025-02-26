@@ -3,7 +3,8 @@
 # Configuration
 MASTER_CONTAINER="peruHCE-db-master"                    # Change this to your MariaDB master container name
 BACKUP_DIR="/home/dev-user/peruHCE-fullBackups"         # Change this to where your backup is stored on the host
-CONTAINER_BACKUP_PATH="/backup"                         # Temporary backup location inside the container
+CONTAINER_BACKUP_PATH="/backup"   
+TEMP_BACKUP_PATH="/backup"                              # Temporary backup location inside the container
 
 echo "Available backup files:"
 ls -1t "$BACKUP_DIR"/*.tar.gz
@@ -25,11 +26,22 @@ else
     fi
 fi
 
-echo "Starting restoration of MariaDB Master from backup..."
-
 # Create the directorie in case doesnt exist
 echo "Creating backup directory in master container..."
 docker exec --user root $CONTAINER_NAME mkdir -p "$TEMP_BACKUP_PATH"
+
+# Copy that zipped bback to the master container
+echo "Copying compressed backup to backup directory in master container..."
+docker cp "$BACKUP_DIR/$BACKUP_FILE" "$MASTER_CONTAINER:$CONTAINER_BACKUP_PATH"
+
+# Extract the backup
+echo "Extracting backup..."
+tar -xzf "$BACKUP_FILE" -C "$BACKUP_DIR"
+EXTRACTED_BACKUP_DIR=$(basename "$BACKUP_FILE" .tar.gz)
+
+echo "Starting restoration of MariaDB Master from backup..."
+
+
 
 # Clean the backup directorie in the replica container
 echo "Erasing backup directory in master container..."
