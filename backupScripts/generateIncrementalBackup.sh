@@ -27,7 +27,7 @@ FILENAME=$(basename "$LASTEST_FULL_BACKUP" .tar.gz)
 
 # Check if no files were found
 if [ -z "$LASTEST_FULL_BACKUP" ]; then
-    echo "No backup files found in $FULL_BACKUP_DIR . Exiting." xº
+    echo "No backup files found in $FULL_BACKUP_DIR . Exiting."
     exit 1  # Exit with a non-zero status to indicate failure
 fi
 
