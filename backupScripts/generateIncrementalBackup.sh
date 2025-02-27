@@ -5,8 +5,8 @@ exec > >(tee -a incBackup_log.txt) 2>&1
 
 # Configuration
 CONTAINER_NAME="peruHCE-db-replic"                         # Change to your MariaDB container name
-FULL_BACKUP_DIR="/home/coach/increBackups"
-BACKUP_DIR="/home/coach/fullBackup"         # Change to your desired backup storage location, make sure its exists
+FULL_BACKUP_DIR="/home/coach/fullBackup"
+BACKUP_DIR="/home/coach/increBackup"         # Change to your desired backup storage location, make sure its exists
 MAX_BACKUPS=10                                          # Maximum number of backups to keep
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_NAME="$TIMESTAMP"
