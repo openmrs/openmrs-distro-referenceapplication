@@ -4,8 +4,8 @@
 exec > >(tee -a fullBackup_log.txt) 2>&1
 
 # Configuration
-CONTAINER_NAME="test-db-master"                         # Change to your MariaDB container name
-BACKUP_DIR="/home/dev-user/peruHCE-fullBackups"         # Change to your desired backup storage location
+CONTAINER_NAME="peruHCE-db-replic"                         # Change to your MariaDB container name
+BACKUP_DIR="/home/somewhere/fullBackup"         # Change to your desired backup storage location
 MAX_BACKUPS=15                                          # Maximum number of backups to keep
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_NAME="peruHCE_backup_$TIMESTAMP"
@@ -24,7 +24,7 @@ echo "Erasing backup directory in replica container..."
 docker exec --user root $CONTAINER_NAME rm -rf $TEMP_BACKUP_PATH/
 
 # Run physical backup inside the MariaDB container
-docker exec --user root $CONTAINER_NAME mariadb-backup --slave-info --safe-slave-backup --user=root --password=${OMRS_DB_R_PASSWORD:-openmrs} --backup --target-dir=$TEMP_BACKUP_PATH
+docker exec --user root $CONTAINER_NAME mariadb-backup --slave-info --safe-slave-backup --user=root --password=${OMRS_DB_R_PASSWORD:-openmrs_r} --backup --target-dir=$TEMP_BACKUP_PATH
 
 # Copy the backup to the host
 mkdir -p temp
