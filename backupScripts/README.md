@@ -1,3 +1,5 @@
+docker exec -it peruHCE-db-replic bash
+
 
 mariabackup --backup --target-dir=/backup --user=root --password='yourpassword'
 
