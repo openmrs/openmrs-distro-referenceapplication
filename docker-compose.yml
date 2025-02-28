@@ -67,6 +67,7 @@ services:
     volumes:
       - ./db-config/init-master-sql.sql:/docker-entrypoint-initdb.d/init-master-sql.sql
       - db-data:/var/lib/mysql
+      - db-backup:/backup
 
   # MariaDB Replic
   db-replic:
@@ -91,11 +92,14 @@ services:
     volumes:
       - ./db-config/init-slave-sql.sql:/docker-entrypoint-initdb.d/init-slave-sql.sql
       - db-data-r:/var/lib/mysql
+      - db-backup-r:/backup
       
 
 volumes:
   openmrs-frontend: ~
   openmrs-data: ~
   db-data: ~
-  db-data-r: ~
+  db-backup: ~
+  db-data-r: ~  
+  db-backup-r: ~
   gateway-data: ~
