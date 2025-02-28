@@ -1,0 +1,144 @@
+{
+  "name": "OBST-006-PUERPERIO INMEDIATO",
+  "pages": [
+    {
+      "label": "Puerperio Inmediato",
+      "sections": [
+        {
+          "label": "Puerperio Inmediato",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "b035566c-5677-4581-acc5-069042c62a43"
+              },
+              "id": "controlPuerperio",
+              "label": "Control Puerperio",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "b1c5577c-8cd9-4994-aa4c-da7eb1ed8adf"
+                  },
+                  "datePickerFormat": "both",
+                  "id": "fecha/hora",
+                  "label": "Fecha/hora"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "89c9c0bf-e746-4f8d-8d04-b2d2ad9826eb"
+                  },
+                  "hideSteppers": true,
+                  "id": "temperatura",
+                  "label": "Temperatura"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "e176c99d-e73a-4c28-b632-f2ae0f6ce55b"
+                  },
+                  "hideSteppers": true,
+                  "id": "pulso",
+                  "label": "Pulso"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "992dc702-80dc-4a16-a28b-2f7600bc4210"
+                  },
+                  "hideSteppers": true,
+                  "id": "presionSistolica",
+                  "label": "Presión sistólica"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "b85c0651-0464-4d79-96ca-ab084019f05c"
+                  },
+                  "hideSteppers": true,
+                  "id": "presionDiastolica",
+                  "label": "Presión diastólica"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "ccae6e1b-9997-4d62-824a-e9214bf0695d"
+                  },
+                  "questionInfo": "Evaluación del proceso de contracción del útero para regresar a su tamaño normal.",
+                  "id": "involucionUterina",
+                  "label": "Involución Uterina"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "c2549a7f-dad7-463f-b28c-c9b9604dbea2",
+                    "answers": [
+                      {
+                        "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Leve"
+                      },
+                      {
+                        "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Moderado"
+                      },
+                      {
+                        "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Severo"
+                      }
+                    ]
+                  },
+                  "id": "caracteristicaLoquios",
+                  "label": "Característica Loquios (Sangre)"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e6b52f83-2a0d-4730-81f5-6e3913ddff4c",
+                    "answers": [
+                      {
+                        "concept": "e6d7fead-56ce-4c43-a2af-ad933493e7b5",
+                        "label": "Abdominal"
+                      },
+                      {
+                        "concept": "08ce5e71-4f2d-4686-9ed6-1feb8e74dd16",
+                        "label": "Periné"
+                      }
+                    ]
+                  },
+                  "id": "heridaOperatoria",
+                  "label": "Herida Operatoria"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "f947a4ad-3d8d-4516-8e6b-67b3dca4e227"
+                  },
+                  "id": "observacionesPuerperio",
+                  "label": "Observaciones"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba",
+  "referencedForms": [],
+  "uuid": "",
+  "description": "Formulario para el registro del puerperio inmediato",
+  "version": "1.0.0"
+}

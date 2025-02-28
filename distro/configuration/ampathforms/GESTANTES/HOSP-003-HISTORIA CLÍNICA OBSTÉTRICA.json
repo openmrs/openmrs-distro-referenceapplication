@@ -228,7 +228,7 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "5cacede4-c947-4092-9df4-24287a7f13ae"
+                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "pesoActual",
@@ -238,7 +238,7 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "d37c8f1a-4a7d-4066-835f-253c80ad3fc7"
+                    "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "talla",
@@ -256,33 +256,33 @@
               "label": "Funciones Vitales",
               "questions":[
                 {
+                  "id": "presionSistoLica",
+                  "label": "Presión sistólica (mmHg)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "b85c0651-0464-4d79-96ca-ab084019f05c"
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
-                  "hideSteppers": true,
-                  "id": "presionDiastolica",
-                  "label": "Presión diastólica"
+                  "hideSteppers": true
+                },
+                {
+                  "id": "presionDiastoLica",
+                  "label": "Presión diastólica (mmHg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "hideSteppers": true
                 },
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "992dc702-80dc-4a16-a28b-2f7600bc4210"
-                  },
-                  "hideSteppers": true,
-                  "id": "presionSistolica",
-                  "label": "Presión sistólica"
-                },
-                {
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "number",
-                    "disallowDecimals": true,
-                    "concept": "e176c99d-e73a-4c28-b632-f2ae0f6ce55b"
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "frecuenciaCardiaca",
@@ -293,7 +293,7 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "89c9c0bf-e746-4f8d-8d04-b2d2ad9826eb"
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "temperatura",
@@ -304,7 +304,7 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "4dc51434-3f62-483c-b4db-441eae51f0a3"
+                    "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "saturacion",
@@ -396,144 +396,6 @@
                   "label": "Abdomen"
                 },
                 {
-                  "type": "obsGroup",
-                  "questionOptions": {
-                    "rendering": "group",
-                    "concept": "a7f247f7-5a22-4af1-9254-eb8c83169ce1"
-                  },
-                  "id": "aparatoUrinarioGroup",
-                  "label": "Aparato Urinario",
-                  "questions":[
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "text",
-                        "concept": "a7f247f7-5a22-4af1-9254-eb8c83169ce1"
-                      },
-                      "id": "aparatoUrinario",
-                      "label": "Aparato Urinario"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "checkbox",
-                        "concept": "4068bc02-11ae-4a14-803d-656325bd3477",
-                        "answers":[
-                          {
-                            "concept": "37a86155-b34e-4be0-bfd4-86c393628de8",
-                            "label": "PPL"
-                          },
-                          {
-                            "concept": "c54d1fd7-e539-4301-ac9b-c66aaec269f1",
-                            "label": "PRU"
-                          }
-                        ]
-                      },
-                      "id": "pplPru",
-                      "label": "PPL y PRU"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "37a86155-b34e-4be0-bfd4-86c393628de8",
-                        "answers":[
-                          {
-                            "concept": "37a86155-b34e-4be0-bfd4-86c393628de8",
-                            "label": "PPL"
-                          }
-                        ]
-                      },
-                      "id": "puñoPercusionLumbar",
-                      "label": "PPL"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "c54d1fd7-e539-4301-ac9b-c66aaec269f1",
-                        "answers":[
-                          {
-                            "concept": "c54d1fd7-e539-4301-ac9b-c66aaec269f1",
-                            "label": "PRU"
-                          }
-                        ]
-                      },
-                      "id": "puntosRenoUreterales",
-                      "label": "PRU"
-                    }
-                  ]
-                },
-                {
-                  "type": "obsGroup",
-                  "questionOptions": {
-                    "rendering": "group",
-                    "concept": "479e125e-e5be-4538-8c4e-ed6fd9c8d515"
-                  },
-                  "id": "aparatoLocomotorExtremidadesGroup",
-                  "label": "Aparato Locomotor y Extremidades",
-                  "questions":[
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "text",
-                        "concept": "479e125e-e5be-4538-8c4e-ed6fd9c8d515"
-                      },
-                      "id": "aparatoLocomotorExtremidades",
-                      "label": "Aparato Locomotor y Extremidades"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "checkbox",
-                        "concept": "4068bc02-11ae-4a14-803d-656325bd3477",
-                        "answers":[
-                          {
-                            "concept": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Edema"
-                          },
-                          {
-                            "concept": "8e1b7181-5f8d-4f63-bd5e-e08aa9ee1425",
-                            "label": "ROT"
-                          }
-                        ]
-                      },
-                      "id": "edemaROT",
-                      "label": "Edema y ROT"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "checkbox",
-                        "concept": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "answers":[
-                          {
-                            "concept": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Edema"
-                          }
-                        ]
-                      },
-                      "id": "edema",
-                      "label": "Edema"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "8e1b7181-5f8d-4f63-bd5e-e08aa9ee1425",
-                        "answers":[
-                          {
-                            "concept": "8e1b7181-5f8d-4f63-bd5e-e08aa9ee1425",
-                            "label": "ROT"
-                          }
-                        ]
-                      },
-                      "id": "rot",
-                      "label": "ROT"
-                    }
-                  ]
-                },
-                {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "text",
@@ -541,6 +403,84 @@
                   },
                   "id": "neurologico",
                   "label": "Neurológico"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "a7f247f7-5a22-4af1-9254-eb8c83169ce1"
+              },
+              "id": "aparatoUrinarioGroup",
+              "label": "Aparato Urinario",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "a7f247f7-5a22-4af1-9254-eb8c83169ce1"
+                  },
+                  "id": "aparatoUrinario",
+                  "label": "Aparato Urinario"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "4068bc02-11ae-4a14-803d-656325bd3477",
+                    "answers":[
+                      {
+                        "concept": "37a86155-b34e-4be0-bfd4-86c393628de8",
+                        "label": "PPL"
+                      },
+                      {
+                        "concept": "c54d1fd7-e539-4301-ac9b-c66aaec269f1",
+                        "label": "PRU"
+                      }
+                    ]
+                  },
+                  "id": "pplPru",
+                  "label": "PPL y PRU"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "479e125e-e5be-4538-8c4e-ed6fd9c8d515"
+              },
+              "id": "aparatoLocomotorExtremidadesGroup",
+              "label": "Aparato Locomotor y Extremidades",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "479e125e-e5be-4538-8c4e-ed6fd9c8d515"
+                  },
+                  "id": "aparatoLocomotorExtremidades",
+                  "label": "Aparato Locomotor y Extremidades"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "4068bc02-11ae-4a14-803d-656325bd3477",
+                    "answers":[
+                      {
+                        "concept": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Edema"
+                      },
+                      {
+                        "concept": "8e1b7181-5f8d-4f63-bd5e-e08aa9ee1425",
+                        "label": "ROT"
+                      }
+                    ]
+                  },
+                  "id": "edemaROT",
+                  "label": "Edema y ROT"
                 }
               ]
             }
@@ -918,7 +858,7 @@
   "processor": "EncounterFormProcessor",
   "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
   "referencedForms": [],
-  "uuid": "a7759c56-a340-4834-afaf-cbfbbf206cbb",
+  "uuid": "",
   "description": "Historia Clínica Obstétrica realizada durante el tiempo de hospitalización.",
   "version": "1.0.0"
 }

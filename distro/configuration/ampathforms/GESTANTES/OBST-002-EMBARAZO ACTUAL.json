@@ -1,0 +1,750 @@
+{
+  "name": "OBST-002-EMBARAZO ACTUAL",
+  "pages": [
+    {
+      "label": "Datos Generales del Embarazo Actual",
+      "sections": [
+        {
+          "label": "Datos Generales del Embarazo Actual",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "21431d07-109d-4e19-92e2-0a40f3eede72"
+              },
+              "id": "datosGeneralesEmbarazoActual",
+              "label": "Datos generales del Embarazo Actual",
+              "questions":[
+                {
+                  "label": "Talla",
+                  "type": "obs",
+                  "required": false,
+                  "id": "talla",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "disallowDecimals": false
+                  },
+                  "hideSteppers": true,
+                  "validators": []
+                },
+                {
+                  "label": "Peso habitual antes del embarazo",
+                  "type": "obs",
+                  "required": false,
+                  "id": "peso",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "91c70c08-52c2-4c80-ad97-9181714bfafe",
+                    "disallowDecimals": true
+                  },
+                  "hideSteppers": true,
+                  "validators": []
+                },
+                {
+                  "label": "IMC pregestacional",
+                  "type": "obs",
+                  "required": false,
+                  "id": "IMCPregestacional",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "disallowDecimals": false,
+                    "calculate": {
+                      "calculateExpression": "calcBMI(talla,peso)"
+                    }
+                  },
+                  "editable": false,
+                  "hideSteppers": true,
+                  "validators": []
+                },
+                {
+                  "label": "Captada",
+                  "type": "obs",
+                  "required": false,
+                  "id": "captada",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "df4f047e-8668-4fa6-b371-8184f0e8813f",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Referida",
+                  "type": "obs",
+                  "required": false,
+                  "id": "referida",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "12d52f4a-2ed9-4f3d-9b59-555364c633ee",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Fecha Última Menstruación",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "id": "fumGroup",
+              "label": "FUM",
+              "questions":[
+                {
+                  "label": "FUM",
+                  "type": "obs",
+                  "required": false,
+                  "id": "fum",
+                  "datePickerFormat": "calendar",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Duda",
+                  "type": "obs",
+                  "required": false,
+                  "id": "duda",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "ba4ec6b5-352f-425c-ae8f-fa8538022695",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Ecografía obstétrica",
+                  "type": "obs",
+                  "required": false,
+                  "id": "ecografíAObstéTrica",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "d95b40d4-c72b-4a40-bc8e-a44f25fe81bb",
+                    "answers": [
+                      {
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Normal"
+                      },
+                      {
+                        "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Anormal"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Edad gestacional actual FUM",
+                  "type": "obs",
+                  "required": false,
+                  "id": "edadGestacionalFUM",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "fa067988-a6b6-4c0b-8a35-0eeb6564f613",
+                    "calculate": {
+                      "calculateExpression": "calcTimeDifference(fum, 'w')"
+                    }
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Fecha probable de parto FUM",
+                  "type": "obs",
+                  "required": false,
+                  "id": "fechaProbableDeParto",
+                  "datePickerFormat": "calendar",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "calculate": {
+                      "calculateExpression": "calcEDD(fum)"
+                    }
+                  }
+                }   
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Antitetánica",
+      "sections": [
+        {
+          "label": "Antitetánica",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "2dea5543-a686-4240-b4ea-3ec6a143c467"
+              },
+              "id": "antitetanicaGroup",
+              "label": "Antitetánica",
+              "questions":[
+                {
+                  "label": "N° Dosis previa",
+                  "type": "obs",
+                  "required": false,
+                  "id": "nDosisPrevia",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "min": "0",
+                    "max": "3",
+                    "concept": "58970d9f-7bd1-484b-92f0-b5f4d85103f9",
+                    "step": 1,
+                    "answers": []
+                  }
+                },
+                {
+                  "label": "1ra Dosis Antitetánica",
+                  "type": "obs",
+                  "required": false,
+                  "id": "primeraDosisAntitetáNica",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "a92deb61-2eca-47cf-8532-94d13ab28536",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "0d1a8d55-b431-472f-8d18-ebe38f307c0f",
+                        "label": "Sin dosis"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No Aplica"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "1ra Dosis Antitetánica (mes de gestación)",
+                  "type": "obs",
+                  "required": false,
+                  "id": "1raDosisAntitetaNica(MesDeGestacioN)",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "min": "1",
+                    "max": "9",
+                    "step": 1,
+                    "concept": "72a9c171-0f45-4757-862c-7553db5e9548",
+                    "answers": []
+                  },
+                  "hideSteppers": true,
+                  "hide": {
+                    "hideWhenExpression": "primeraDosisAntitetáNica !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                },
+                {
+                  "label": "2da Dosis Antitetánica",
+                  "type": "obs",
+                  "required": false,
+                  "id": "segundaDosisAntitetáNica",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "0948db74-0691-450b-906e-44ba0358847a",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "0d1a8d55-b431-472f-8d18-ebe38f307c0f",
+                        "label": "Sin dosis"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "2da Dosis Antitetánica (mes de gestación)",
+                  "type": "obs",
+                  "required": false,
+                  "id": "2daDosisAntitetanica(MesDeGestacióN)",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "min": "1",
+                    "max": "9",
+                    "step": 1,
+                    "concept": "a69dccb1-6f7a-40cb-b841-7cefe276a10b",
+                    "answers": []
+                  },
+                  "hideSteppers": true,
+                  "hide": {
+                    "hideWhenExpression": "segundaDosisAntitetáNica !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                },
+                {
+                  "id": "influenza",
+                  "label": "Influenza",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "fcfb9d34-bb24-491a-9aca-d648acd43c9e",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "0d1a8d55-b431-472f-8d18-ebe38f307c0f",
+                        "label": "Sin dosis"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "dosisInfluenza(MesDeGestacióN)",
+                  "label": "Dosis Influenza (mes de gestación)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "min": "1",
+                    "max": "9",
+                    "step": 1,
+                    "concept": "858e5bd6-eb06-4cd5-9f0d-8a8b2edcb23d"
+                  },
+                  "hideSteppers": true,
+                  "hide": {
+                    "hideWhenExpression": "influenza !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Violencia/género",
+      "sections": [
+        {
+          "label": "Violencia/genero",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "807812d4-72e1-45ec-b9fb-594ddacd87e3"
+              },
+              "id": "violenciaGeneroGroup",
+              "label": "Violencia/género",
+              "questions":[
+                {
+                  "label": "Ficha de Tamizaje",
+                  "type": "obs",
+                  "required": false,
+                  "id": "fichaDeTamizaje",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "e6586f9f-61c4-4693-842d-24a28ca8cd25",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Violencia",
+                  "type": "obs",
+                  "required": false,
+                  "id": "violencia",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "d50d1015-1def-4bd8-8268-59d1e97e33d3",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Fuma (N° Cigarros/día)",
+                  "type": "obs",
+                  "required": false,
+                  "id": "fuma",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "315b74d1-79a5-4201-95d4-3bef7487817f"
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Drogas",
+                  "type": "obs",
+                  "required": false,
+                  "id": "drogas",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "1846e918-d5ca-4cce-b64e-afce809ed7c1",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "validators": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Examen físico",
+      "sections": [
+        {
+          "label": "Examen Físico",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "ff556e5e-1075-4a65-8fe1-d02301306768"
+              },
+              "id": "examenFisicoGroup",
+              "label": "Examen Físico",
+              "questions":[
+                {
+                  "label": "Clínico",
+                  "type": "obs",
+                  "required": false,
+                  "id": "cliNico",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "dfe7614a-0461-4fd6-af6b-80f990516aa2",
+                    "answers": [
+                      {
+                        "concept": "59a2a3f9-e7d9-44bc-a4bd-d7462d850192",
+                        "label": "Sin Examen"
+                      },
+                      {
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Normal"
+                      },
+                      {
+                        "concept": "d02f20c2-e0ed-45b2-ada0-cc4306747cc7",
+                        "label": "Patológico"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Mamas",
+                  "type": "obs",
+                  "required": false,
+                  "id": "mamas",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "de7363ce-617a-4854-bba8-737dd876d249",
+                    "answers": [
+                      {
+                        "concept": "59a2a3f9-e7d9-44bc-a4bd-d7462d850192",
+                        "label": "Sin Examen"
+                      },
+                      {
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Normal"
+                      },
+                      {
+                        "concept": "d02f20c2-e0ed-45b2-ada0-cc4306747cc7",
+                        "label": "Patológico"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Cuello Uterino",
+                  "type": "obs",
+                  "required": false,
+                  "id": "cuelloUterino",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "99bb73de-f3ec-41d8-bbd4-61ea43843cbf",
+                    "answers": [
+                      {
+                        "concept": "59a2a3f9-e7d9-44bc-a4bd-d7462d850192",
+                        "label": "Sin Examen"
+                      },
+                      {
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Normal"
+                      },
+                      {
+                        "concept": "d02f20c2-e0ed-45b2-ada0-cc4306747cc7",
+                        "label": "Patológico"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Pelvis",
+                  "type": "obs",
+                  "required": false,
+                  "id": "pelvis",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "f2f18910-6d94-4a69-a0e6-0cff763f66b3",
+                    "answers": [
+                      {
+                        "concept": "59a2a3f9-e7d9-44bc-a4bd-d7462d850192",
+                        "label": "Sin examen"
+                      },
+                      {
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Normal"
+                      },
+                      {
+                        "concept": "0d533056-fab4-499d-b4d9-0e9056e1f595",
+                        "label": "Patológico"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "label": "Odontológico",
+                  "type": "obs",
+                  "required": false,
+                  "id": "odontologico",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "7248f937-4106-4adf-b8da-197a219b1029",
+                    "answers": [
+                      {
+                        "concept": "59a2a3f9-e7d9-44bc-a4bd-d7462d850192",
+                        "label": "Sin Examen"
+                      },
+                      {
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Normal"
+                      },
+                      {
+                        "concept": "d02f20c2-e0ed-45b2-ada0-cc4306747cc7",
+                        "label": "Patológico"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Hospitalización",
+      "sections": [
+        {
+          "label": "Hospitalización",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "d18507ca-8084-4ae6-bb4d-506d15a94e13"
+              },
+              "id": "hospitalizacionGroup",
+              "label": "Hospitalización",
+              "questions":[
+                {
+                  "label": "Hospitalización",
+                  "type": "obs",
+                  "required": false,
+                  "id": "hospitalizacióN",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "d18507ca-8084-4ae6-bb4d-506d15a94e13",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "id": "fechaDeHospitalizacióN",
+                  "label": "Fecha de hospitalización",
+                  "datePickerFormat": "calendar",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "921c4803-3583-446c-a10f-942ca77d4c35"
+                  },
+                  "hide": {
+                    "hideWhenExpression": "hospitalizacióN !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                },
+                {
+                  "id": "diagnóSticoDeHospitalizacióN",
+                  "label": "Diagnóstico",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c093c0ec-d1fd-406f-8c65-eeb079665853"
+                  },
+                  "hide": {
+                    "hideWhenExpression": "hospitalizacióN !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                }   
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Emergencia",
+      "sections": [
+        {
+          "label": "Emergencia",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "00044800-eb0c-4557-9eb7-c6adc99f7c92"
+              },
+              "id": "emergenciaGroup",
+              "label": "Emergencia",
+              "questions":[
+                {
+                  "label": "Emergencia",
+                  "type": "obs",
+                  "required": false,
+                  "id": "emergencia",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "c1055ebe-b480-4b2c-a911-cd198e345ee2",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "validators": []
+                },
+                {
+                  "id": "fechaDeEmergencia",
+                  "label": "Fecha de emergencia",
+                  "datePickerFormat": "calendar",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "e066b18b-e816-4ad9-a2e7-4a12b8425df3"
+                  },
+                  "hide": {
+                    "hideWhenExpression": "emergencia !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                },
+                {
+                  "id": "diagnóSticoDeEmergencia",
+                  "label": "Diagnóstico",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c093c0ec-d1fd-406f-8c65-eeb079665853"
+                  },
+                  "hide": {
+                    "hideWhenExpression": "emergencia !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba",
+  "referencedForms": [],
+  "uuid": "",
+  "description": "Registro de datos generales del embarazo actual",
+  "version": "1.0.0"
+}
