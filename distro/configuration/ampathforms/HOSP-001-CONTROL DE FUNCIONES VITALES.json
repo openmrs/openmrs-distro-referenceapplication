@@ -1,6 +1,5 @@
 {
   "name": "HOSP-001-CONTROL DE FUNCIONES VITALES",
-  "encounter": "Nota de Evolución de Hospitalización",
   "pages": [
     {
       "label": "Control de Funciones Vitales",
@@ -28,6 +27,15 @@
               "id": "horaDeIngreso",
               "label": "Hora de ingreso",
               "datePickerFormat": "timer"
+            },
+            {
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "responsable",
+              "label": "Responsable"
             },
             {
               "type": "obsGroup",
@@ -77,35 +85,31 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "89c9c0bf-e746-4f8d-8d04-b2d2ad9826eb"
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true
                 },
                 {
+                  "id": "frecuenciaCardiaca",
                   "label": "Frecuencia Cardiaca",
                   "type": "obs",
-                  "required": false,
-                  "id": "frecuenciaCardiaca",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "e176c99d-e73a-4c28-b632-f2ae0f6ce55b",
-                    "disallowDecimals": true
+                    "disallowDecimals": true,
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
-                  "hideSteppers": true,
-                  "validators": []
+                  "hideSteppers": true
                 },
                 {
+                  "id": "frecuenciaRespiratoria",
                   "label": "Frecuencia Respiratoria",
                   "type": "obs",
-                  "required": false,
-                  "id": "frecuenciaRespiratoria",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "aeecf295-048b-4c40-a6a0-c3a7db169466",
-                    "disallowDecimals": true
+                    "disallowDecimals": true,
+                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
-                  "hideSteppers": true,
-                  "validators": []
+                  "hideSteppers": true
                 },
                 {
                   "id": "presióNSistóLica",
@@ -114,7 +118,7 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "3e28b29a-512b-4429-b07f-b8e7aeb1af01"
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true
                 },
@@ -125,7 +129,7 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "b85c0651-0464-4d79-96ca-ab084019f05c"
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true
                 },
@@ -148,15 +152,15 @@
                   "label": "EV. Rec / 24h"
                 },
                 {
+                  "id": "peso",
+                  "label": "Peso (Kg)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "5cacede4-c947-4092-9df4-24287a7f13ae"
+                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
-                  "hideSteppers": true,
-                  "id": "peso",
-                  "label": "Peso"
+                  "hideSteppers": true
                 }
               ]
             }
@@ -168,7 +172,7 @@
   "processor": "EncounterFormProcessor",
   "encounterType": "8r9s0t1u-8234-5678-9101-abcdefghij18",
   "referencedForms": [],
-  "uuid": "3d23e38f-19dc-41cd-aa53-b36e0dd78bf1",
+  "uuid": "",
   "description": "Este formulario se utiliza para el registro de las funciones vitales de los pacientes hospitalizados. Incluye mediciones periódicas de temperatura, presión arterial, frecuencia cardíaca, frecuencia respiratoria y saturación de oxígeno, permitiendo un monitoreo continuo del estado clínico del paciente. ",
   "version": "1.0.0"
 }
