@@ -16,29 +16,33 @@
               },
               "id": "datosGeneralesEmbarazoActual",
               "label": "Datos generales del Embarazo Actual",
-              "questions":[
+              "questions": [
                 {
-                  "label": "Talla",
+                  "label": "Talla (cm)",
                   "type": "obs",
                   "required": false,
                   "id": "talla",
                   "questionOptions": {
                     "rendering": "number",
                     "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "disallowDecimals": false
+                    "disallowDecimals": false,
+                    "min": "10",
+                    "max": "271"
                   },
                   "hideSteppers": true,
                   "validators": []
                 },
                 {
-                  "label": "Peso habitual antes del embarazo",
+                  "label": "Peso habitual antes del embarazo (Kg)",
                   "type": "obs",
                   "required": false,
                   "id": "peso",
                   "questionOptions": {
                     "rendering": "number",
                     "concept": "91c70c08-52c2-4c80-ad97-9181714bfafe",
-                    "disallowDecimals": true
+                    "disallowDecimals": true,
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true,
                   "validators": []
@@ -50,11 +54,13 @@
                   "id": "IMCPregestacional",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "5b877648-ae50-4d45-ad36-0196042baa1a",
                     "disallowDecimals": false,
                     "calculate": {
                       "calculateExpression": "calcBMI(talla,peso)"
-                    }
+                    },
+                    "min": "10",
+                    "max": "100"
                   },
                   "editable": false,
                   "hideSteppers": true,
@@ -118,7 +124,7 @@
               },
               "id": "fumGroup",
               "label": "FUM",
-              "questions":[
+              "questions": [
                 {
                   "label": "FUM",
                   "type": "obs",
@@ -172,16 +178,19 @@
                   }
                 },
                 {
-                  "label": "Edad gestacional actual FUM",
+                  "label": "Edad gestacional actual FUM (semanas)",
                   "type": "obs",
                   "required": false,
                   "id": "edadGestacionalFUM",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "concept": "fa067988-a6b6-4c0b-8a35-0eeb6564f613",
                     "calculate": {
                       "calculateExpression": "calcTimeDifference(fum, 'w')"
-                    }
+                    },
+                    "min": "0",
+                    "max": "42"
                   },
                   "hideSteppers": true
                 },
@@ -198,7 +207,7 @@
                       "calculateExpression": "calcEDD(fum)"
                     }
                   }
-                }   
+                }
               ]
             }
           ]
@@ -220,7 +229,7 @@
               },
               "id": "antitetanicaGroup",
               "label": "Antitetánica",
-              "questions":[
+              "questions": [
                 {
                   "label": "N° Dosis previa",
                   "type": "obs",
@@ -228,8 +237,9 @@
                   "id": "nDosisPrevia",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "min": "0",
-                    "max": "3",
+                    "max": "5",
                     "concept": "58970d9f-7bd1-484b-92f0-b5f4d85103f9",
                     "step": 1,
                     "answers": []
@@ -266,6 +276,7 @@
                   "id": "1raDosisAntitetaNica(MesDeGestacioN)",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "min": "1",
                     "max": "9",
                     "step": 1,
@@ -308,6 +319,7 @@
                   "id": "2daDosisAntitetanica(MesDeGestacióN)",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "min": "1",
                     "max": "9",
                     "step": 1,
@@ -348,6 +360,7 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "min": "1",
                     "max": "9",
                     "step": 1,
@@ -379,7 +392,7 @@
               },
               "id": "violenciaGeneroGroup",
               "label": "Violencia/género",
-              "questions":[
+              "questions": [
                 {
                   "label": "Ficha de Tamizaje",
                   "type": "obs",
@@ -428,7 +441,11 @@
                   "id": "fuma",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "315b74d1-79a5-4201-95d4-3bef7487817f"
+                    "step": 1,
+                    "disallowDecimals": true,
+                    "concept": "315b74d1-79a5-4201-95d4-3bef7487817f",
+                    "min": "0",
+                    "max": "200"
                   },
                   "validators": []
                 },
@@ -474,7 +491,7 @@
               },
               "id": "examenFisicoGroup",
               "label": "Examen Físico",
-              "questions":[
+              "questions": [
                 {
                   "label": "Clínico",
                   "type": "obs",
@@ -619,7 +636,7 @@
               },
               "id": "hospitalizacionGroup",
               "label": "Hospitalización",
-              "questions":[
+              "questions": [
                 {
                   "label": "Hospitalización",
                   "type": "obs",
@@ -665,7 +682,7 @@
                   "hide": {
                     "hideWhenExpression": "hospitalizacióN !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
-                }   
+                }
               ]
             }
           ]
@@ -687,7 +704,7 @@
               },
               "id": "emergenciaGroup",
               "label": "Emergencia",
-              "questions":[
+              "questions": [
                 {
                   "label": "Emergencia",
                   "type": "obs",
@@ -735,6 +752,26 @@
                   }
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Responsable",
+      "sections": [
+        {
+          "label": "Responsable",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "resposable",
+              "label": "Responsable"
             }
           ]
         }

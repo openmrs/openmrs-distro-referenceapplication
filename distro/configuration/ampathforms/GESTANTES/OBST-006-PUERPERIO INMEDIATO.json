@@ -16,7 +16,7 @@
               },
               "id": "controlPuerperio",
               "label": "Control Puerperio",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -31,17 +31,23 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "89c9c0bf-e746-4f8d-8d04-b2d2ad9826eb"
+                    "disallowDecimals": false,
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "47"
                   },
                   "hideSteppers": true,
                   "id": "temperatura",
-                  "label": "Temperatura"
+                  "label": "Temperatura (°C)"
                 },
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "e176c99d-e73a-4c28-b632-f2ae0f6ce55b"
+                    "disallowDecimals": true,
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "230"
                   },
                   "hideSteppers": true,
                   "id": "pulso",
@@ -51,7 +57,10 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "992dc702-80dc-4a16-a28b-2f7600bc4210"
+                    "disallowDecimals": true,
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true,
                   "id": "presionSistolica",
@@ -61,11 +70,14 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "b85c0651-0464-4d79-96ca-ab084019f05c"
+                    "disallowDecimals": true,
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "150"
                   },
                   "hideSteppers": true,
                   "id": "presionDiastolica",
-                  "label": "Presión diastólica"
+                  "label": "Presión diastólica (mmHg)"
                 },
                 {
                   "type": "obs",
@@ -129,6 +141,26 @@
                   "label": "Observaciones"
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Responsable",
+      "sections": [
+        {
+          "label": "Responsable",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "resposable",
+              "label": "Responsable"
             }
           ]
         }

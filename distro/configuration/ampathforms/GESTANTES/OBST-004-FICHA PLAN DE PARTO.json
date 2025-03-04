@@ -16,7 +16,7 @@
               },
               "id": "primeraConsultaGroup",
               "label": "1ra. Consulta",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -52,38 +52,38 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "select",
-                    "concept": "300AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "3f6056ed-17e9-4b3b-98a7-18dc431a7e99",
                     "answers": [
                       {
-                        "concept": "692AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "e77ffae6-940a-4541-b74f-170d262b1dff",
                         "label": "A Negativo"
                       },
                       {
-                        "concept": "690AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "3118917e-3f47-45b5-9e96-7dfe5ff1f8a2",
                         "label": "A Positivo"
                       },
                       {
-                        "concept": "1231AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "66ae5a01-49fb-4a8d-8863-706ad9a180c9",
                         "label": "Ab negative"
                       },
                       {
-                        "concept": "1230AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "0f8d8f64-5b46-41f3-817e-5f25a86f12f0",
                         "label": "Ab positive"
                       },
                       {
-                        "concept": "696AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "e8516cd4-76d1-4c8a-b33a-dc67072d32cd",
                         "label": "B Negativo"
                       },
                       {
-                        "concept": "694AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "887f052f-8460-41a4-84dd-dd2d83129621",
                         "label": "B Positivo"
                       },
                       {
-                        "concept": "701AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "390ba5f3-43bd-4bf5-9220-b1fca4324cad",
                         "label": "O Negativo"
                       },
                       {
-                        "concept": "699AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "769b083c-79a9-411e-bbd5-91f61ee008b3",
                         "label": "O Positivo"
                       }
                     ]
@@ -109,14 +109,6 @@
                   },
                   "id": "nombreDelResponsableDeCpn/VisitaDimiciliaria",
                   "label": "Nombre del responsable de CPN/visita dimiciliaria"
-                },
-                {
-                  "type": "encounterLocation",
-                  "questionOptions": {
-                    "rendering": "ui-select-extended"
-                  },
-                  "id": "establecimientoDeSalud",
-                  "label": "Establecimiento de Salud"
                 },
                 {
                   "type": "obs",
@@ -314,7 +306,10 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "af30930b-adaf-49ec-8f13-dc8045db6622"
+                    "disallowDecimals": true,
+                    "concept": "af30930b-adaf-49ec-8f13-dc8045db6622",
+                    "min": "0",
+                    "max": "100"
                   },
                   "hideSteppers": true,
                   "id": "horasEnLlegarACasa",
@@ -324,7 +319,10 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "2cf4b870-b2f4-4447-9167-92d97cdf8f88"
+                    "disallowDecimals": true,
+                    "concept": "2cf4b870-b2f4-4447-9167-92d97cdf8f88",
+                    "min": "0",
+                    "max": "100"
                   },
                   "hideSteppers": true,
                   "id": "horasEnLlegarAlEstablecimiento",
@@ -334,7 +332,11 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "e47d0d75-f85a-46ce-8378-b9a4b66706a7"
+                    "disallowDecimals": true,
+                    "step": 1,
+                    "concept": "e47d0d75-f85a-46ce-8378-b9a4b66706a7",
+                    "min": "0",
+                    "max": "200"
                   },
                   "id": "costo",
                   "label": "Costo"
@@ -398,6 +400,34 @@
                   "label": "Tipo de Ayuda"
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Responsable",
+      "sections": [
+        {
+          "label": "Responsable",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "resposable",
+              "label": "Responsable"
+            },
+            {
+              "type": "encounterLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              },
+              "id": "establecimientoDeSalud",
+              "label": "Establecimiento de Salud"
             }
           ]
         }

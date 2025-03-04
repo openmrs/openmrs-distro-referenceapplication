@@ -16,7 +16,7 @@
               },
               "id": "atencionPrenatalGroup",
               "label": "Atención prenatal",
-              "questions":[
+              "questions": [
                 {
                   "label": "N° Atención prenatal",
                   "type": "obs",
@@ -81,7 +81,8 @@
                   "id": "edadGestacional(Semanas)",
                   "questionOptions": {
                     "rendering": "number",
-                    "min": "1",
+                    "disallowDecimals": false,
+                    "min": "0",
                     "max": "42",
                     "step": 1,
                     "concept": "1e35f0dd-3bbb-4b45-96fd-2fc590c1b385"
@@ -94,7 +95,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true
                 },
@@ -105,7 +108,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "98a61b6b-15d3-4064-893c-96e4d8e90bbd"
+                    "concept": "98a61b6b-15d3-4064-893c-96e4d8e90bbd",
+                    "min": "0",
+                    "max": "50"
                   },
                   "hideSteppers": true
                 },
@@ -116,10 +121,12 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "5b877648-ae50-4d45-ad36-0196042baa1a",
                     "calculate": {
                       "calculateExpression": "calcBMI(talla,pesoMadre(Kg))"
-                    }
+                    },
+                    "min": "10",
+                    "max": "100"
                   },
                   "hideSteppers": true
                 },
@@ -130,7 +137,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "47"
                   },
                   "hideSteppers": true
                 },
@@ -141,7 +150,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true
                 },
@@ -152,7 +163,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "150"
                   },
                   "hideSteppers": true
                 },
@@ -163,7 +176,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "230"
                   },
                   "hideSteppers": true
                 },
@@ -174,7 +189,10 @@
                   "id": "alturaUterina",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "4bcdcee3-54c2-4368-a5cf-733e9c25fe50"
+                    "disallowDecimals": false,
+                    "concept": "4bcdcee3-54c2-4368-a5cf-733e9c25fe50",
+                    "min": "0",
+                    "max": "42"
                   },
                   "validators": [],
                   "hideSteppers": true
@@ -398,6 +416,8 @@
                     "rendering": "number",
                     "concept": "15d48477-1095-4822-8283-a83ffe350e25",
                     "step": 1,
+                    "min": "0",
+                    "max": "42",
                     "disallowDecimals": true
                   },
                   "hideSteppers": true,
@@ -501,23 +521,6 @@
                   }
                 }
               ]
-            },
-            {
-              "id": "responsableAtencióN",
-              "label": "Responsable atención",
-              "type": "encounterProvider",
-              "questionOptions": {
-                "rendering": "ui-select-extended",
-                "isSearchable": true
-              }
-            },
-            {
-              "type": "encounterLocation",
-              "questionOptions": {
-                "rendering": "select"
-              },
-              "id": "establecimientoDeLaAtencióN",
-              "label": "Establecimiento de la atención"
             }
           ]
         }
@@ -538,7 +541,7 @@
               },
               "id": "evaluaciónFetoGroup",
               "label": "Evaluación del Feto",
-              "questions":[
+              "questions": [
                 {
                   "label": "Frecuencia Cardiaca Fetal (lat/min)",
                   "type": "obs",
@@ -547,7 +550,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "concept": "b1fb2d14-92ec-4fda-90e5-40f3227c9c65",
-                    "disallowDecimals": true
+                    "disallowDecimals": true,
+                    "min": "40",
+                    "max": "250"
                   },
                   "hideSteppers": true,
                   "validators": []
@@ -601,10 +606,10 @@
                   }
                 },
                 {
-                  "label": "Posición (O/I/NA)",
+                  "label": "Posición (D/I/NA)",
                   "type": "obs",
                   "required": false,
-                  "id": "posicion(O/I/Na)",
+                  "id": "posicion(D/I/Na)",
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "7cf115cb-da62-4a09-8f38-5e2cc726cacb",
@@ -658,6 +663,34 @@
                   "validators": []
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Responsable",
+      "sections": [
+        {
+          "label": "Responsable",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "responsableAtencióN",
+              "label": "Responsable atención",
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "type": "encounterLocation",
+              "questionOptions": {
+                "rendering": "select"
+              },
+              "id": "establecimientoDeLaAtencióN",
+              "label": "Establecimiento de la atención"
             }
           ]
         }

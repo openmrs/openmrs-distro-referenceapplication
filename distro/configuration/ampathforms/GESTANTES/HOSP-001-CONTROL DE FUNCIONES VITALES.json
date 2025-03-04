@@ -11,22 +11,12 @@
             {
               "type": "obs",
               "questionOptions": {
-                "rendering": "date",
+                "rendering": "datetime",
                 "concept": "a432b5b7-ef2d-43af-82fb-c2357da505f4"
               },
-              "id": "fechaDeIngreso",
-              "label": "Fecha de ingreso",
-              "datePickerFormat": "calendar"
-            },
-            {
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "datetime",
-                "concept": "ff13aee5-dfa0-48b0-8966-0aaacdbff931"
-              },
-              "id": "horaDeIngreso",
-              "label": "Hora de ingreso",
-              "datePickerFormat": "timer"
+              "id": "fechaHoraDeIngreso",
+              "label": "Fecha y Hora de Ingreso",
+              "datePickerFormat": "both"
             },
             {
               "type": "encounterProvider",
@@ -85,7 +75,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "47"
                   },
                   "hideSteppers": true
                 },
@@ -96,7 +88,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "230"
                   },
                   "hideSteppers": true
                 },
@@ -107,7 +101,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "99"
                   },
                   "hideSteppers": true
                 },
@@ -118,7 +114,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true
                 },
@@ -129,7 +127,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "150"
                   },
                   "hideSteppers": true
                 },
@@ -158,7 +158,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true
                 }

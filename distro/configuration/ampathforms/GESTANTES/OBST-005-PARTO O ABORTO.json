@@ -16,7 +16,7 @@
               },
               "id": "hcmpGroup",
               "label": "HCMP",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -50,13 +50,13 @@
               },
               "id": "productoConcepcionGroup",
               "label": "Producto de la Concepción",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "radio",
                     "concept": "4dca8468-3c23-48b4-9595-1080bde6452a",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "90e1cc32-a1be-4e98-b2f4-53a77a9eb291",
                         "label": "Hijo Único"
@@ -85,7 +85,7 @@
                   "id": "ordenEmbarazoMultiple",
                   "label": "Orden",
                   "hide": {
-                      "hideWhenExpression": "productoConcepcion !== 'e2432fca-6b25-4c91-86e9-dfbba84482c5'"
+                    "hideWhenExpression": "productoConcepcion !== 'e2432fca-6b25-4c91-86e9-dfbba84482c5'"
                   }
                 }
               ]
@@ -136,7 +136,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "5bb8f8e0-7cd0-4b67-bdef-be81de4effe1",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Sí"
@@ -164,7 +164,7 @@
               },
               "id": "funcionesVitalesGroup",
               "label": "Funciones Vitales",
-              "questions":[
+              "questions": [
                 {
                   "id": "pulsoMaterno",
                   "label": "Pulso materno (min)",
@@ -172,7 +172,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "230"
                   },
                   "hideSteppers": true
                 },
@@ -183,7 +185,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true
                 },
@@ -194,7 +198,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "150"
                   },
                   "hideSteppers": true
                 },
@@ -206,7 +212,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "99"
                   },
                   "hideSteppers": true
                 },
@@ -217,7 +225,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "47"
                   },
                   "hideSteppers": true
                 },
@@ -228,7 +238,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true
                 },
@@ -255,7 +267,7 @@
               },
               "id": "evaluacionFetoGroup",
               "label": "Evaluación del Feto",
-              "questions":[
+              "questions": [
                 {
                   "label": "Situación",
                   "type": "obs",
@@ -343,7 +355,10 @@
                   "id": "alturaUterina",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "4bcdcee3-54c2-4368-a5cf-733e9c25fe50"
+                    "disallowDecimals": false,
+                    "concept": "4bcdcee3-54c2-4368-a5cf-733e9c25fe50",
+                    "min": "0",
+                    "max": "42"
                   },
                   "hideSteppers": true
                 },
@@ -355,7 +370,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "concept": "b1fb2d14-92ec-4fda-90e5-40f3227c9c65",
-                    "disallowDecimals": true
+                    "disallowDecimals": true,
+                    "min": "40",
+                    "max": "250"
                   },
                   "hideSteppers": true
                 }
@@ -369,13 +386,13 @@
               },
               "id": "evolucionTrabajoPartoGroup",
               "label": "Evolución del Trabajo de Parto",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "2cfc0e9d-c1df-41e6-a223-82875dc9f99d",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "26c9c10f-a66f-4b83-9c42-0404b20d6afc",
                         "label": "Espontáneo"
@@ -393,7 +410,10 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "edc3bfa6-649c-4c61-9fc4-bf898c833e2b"
+                    "disallowDecimals": true,
+                    "concept": "edc3bfa6-649c-4c61-9fc4-bf898c833e2b",
+                    "min": "0",
+                    "max": "10"
                   },
                   "hideSteppers": true,
                   "questionInfo": "Apertura del cuello uterino medida en centímetros",
@@ -405,7 +425,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "6166f7ff-a125-4aed-ada4-5d49f7e7098a",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "b75ab987-9013-4a46-b271-231a96719f75",
                         "label": "Claro"
@@ -473,13 +493,13 @@
               },
               "id": "signosSintomasAlertaGroup",
               "label": "Signos y Síntomas de Alerta",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "checkbox",
                     "concept": "b3536fdb-f149-4d69-97ff-70762e8015d1",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "64881f17-b44c-4578-b9a5-df7b5e3cd3bd",
                         "label": "Anasarca"
@@ -546,13 +566,13 @@
               },
               "id": "corticoidesAntenatalesGroup",
               "label": "Corticoides Antenatales",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "d13aa37d-ed62-485f-8426-f6556693d29c",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Completo"
@@ -580,7 +600,9 @@
                     "rendering": "number",
                     "disallowDecimals": true,
                     "step": 1,
-                    "concept": "02161296-7b08-473f-a454-3314781d79e4"
+                    "concept": "02161296-7b08-473f-a454-3314781d79e4",
+                    "min": "22",
+                    "max": "36"
                   },
                   "hideSteppers": true,
                   "id": "semanaInicio",
@@ -607,7 +629,7 @@
               },
               "id": "fechaHoraTerminacionGroup",
               "label": "Fecha y Hora de Terminación",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -628,13 +650,13 @@
               },
               "id": "terminacionPartoGroup",
               "label": "Terminación del Parto",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "648098df-d25a-4305-a318-c828e18b8e86",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "863c4d23-fda8-4e48-b4f5-6222ce05cf70",
                         "label": "Aborto"
@@ -661,7 +683,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "31c9f5d6-58d2-4bfd-9c77-8f25655e4191",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "05747540-c045-4bb1-9788-79f543a65d8c",
                         "label": "Horizontal"
@@ -684,7 +706,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "e6241b6a-f337-4c00-88de-7587d7b5ee00",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Sí"
@@ -707,7 +729,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "0f6f15ac-4cbe-4b31-8fd4-fafbd30aa33a",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Sí"
@@ -726,7 +748,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "6c80c485-edc9-4fd4-85d3-af445aeb43b6",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Normal"
@@ -753,7 +775,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "0f556e7a-ff6c-47b1-84db-0b042101f6c6",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "c0bd5819-02ec-4c57-94b1-23fe47af8a30",
                         "label": "No hubo"
@@ -780,7 +802,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "6de4fba1-3bfa-4e57-9695-1d37a885ecaf",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Sí"
@@ -803,7 +825,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "9e418e29-6a41-4f55-bf74-5531fc8b1d83",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "",
                         "label": "No hubo"
@@ -838,7 +860,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "b7ab46e7-7dfa-4ee4-b00d-161e165370e6",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "161636AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "label": "Activo"
@@ -861,7 +883,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "ee00490c-9481-4e4a-a098-d8dc481bc94b",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "d7fadc6e-7300-4588-9f60-bec27cb3cc9c",
                         "label": "Completa"
@@ -884,7 +906,7 @@
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "2b028982-e207-492f-9001-c851c674203d",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "1166bc75-db95-4226-ba42-14b6686c0455",
                         "label": "Precoz"
@@ -923,13 +945,13 @@
               },
               "id": "tipoProcedimientoGroup",
               "label": "Tipo de Procedimiento",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "12f3c4d9-a91b-4fc9-9131-5d5611dd3432",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "cdbf8c56-a064-4664-96d4-0a23c9560475",
                         "label": "Corporal"
@@ -965,7 +987,7 @@
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "096c5e6e-410a-4593-9f59-545813642c33",
-                "answers":[
+                "answers": [
                   {
                     "concept": "096c5e6e-410a-4593-9f59-545813642c33",
                     "label": "Sin medicación"
@@ -983,7 +1005,7 @@
               },
               "id": "medicacionPartoGroup",
               "label": "Medicación",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -1003,7 +1025,7 @@
               },
               "id": "medicamentosPartoGroup",
               "label": "Medicamentos",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -1034,13 +1056,13 @@
               },
               "id": "indicacionPartoOperatorioGroup",
               "label": "Indicación Principal Parto Operatorio",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "radio",
                     "concept": "c0bd5819-02ec-4c57-94b1-23fe47af8a30",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "c0bd5819-02ec-4c57-94b1-23fe47af8a30",
                         "label": "No hubo"
@@ -1080,13 +1102,13 @@
               },
               "id": "nivelAtencionGroup",
               "label": "Nivel Atención",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "checkbox",
                     "concept": "1c7f61d9-74f7-4f93-bb97-f245252311bb",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "0779bd52-6e69-4a45-a5ab-577c4f406793",
                         "label": "FONP"
@@ -1126,13 +1148,13 @@
               },
               "id": "partoAtendidoPorGroup",
               "label": "Parto",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "checkbox",
                     "concept": "c6567881-4659-4624-8adf-ba0c15cbc4c6",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "6753099c-fe33-48a4-804a-d8a130c00549",
                         "label": "Médico"
@@ -1206,13 +1228,13 @@
               },
               "id": "neonatoGroup",
               "label": "Neonato",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "checkbox",
                     "concept": "e5e538ba-c5a9-485e-bc49-7190f3e2700e",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "6753099c-fe33-48a4-804a-d8a130c00549",
                         "label": "Médico"
@@ -1277,6 +1299,26 @@
                   "label": "Firma y Sello"
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Responsable",
+      "sections": [
+        {
+          "label": "Responsable",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "resposable",
+              "label": "Responsable"
             }
           ]
         }
