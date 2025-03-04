@@ -1,5 +1,5 @@
 {
-  "name": "HOSP-002-HISTORIA CLÍNICA OBSTÉTRICA",
+  "name": "HOSP-002-HISTORIA CLÍNICA OBSTÉTRICA - PARTO",
   "pages": [
     {
       "label": "1. Filación Paciente",
@@ -16,33 +16,23 @@
               },
               "id": "hospitalizacionGroup",
               "label": "Hospitalización",
-              "questions":[
-                {
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "a432b5b7-ef2d-43af-82fb-c2357da505f4"
-                  },
-                  "id": "fechaDeIngreso",
-                  "label": "Fecha de ingreso",
-                  "datePickerFormat": "calendar"
-                },
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "datetime",
-                    "concept": "ff13aee5-dfa0-48b0-8966-0aaacdbff931"
+                    "concept": "a432b5b7-ef2d-43af-82fb-c2357da505f4"
                   },
-                  "id": "horaDeIngreso",
-                  "label": "Hora de ingreso",
-                  "datePickerFormat": "timer"
+                  "id": "fechaHoraDeIngreso",
+                  "label": "Fecha y Hora de Ingreso",
+                  "datePickerFormat": "both"
                 },
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "radio",
                     "concept": "76cdbe4d-d325-475a-90ec-3a77c8a48a38",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "00044800-eb0c-4557-9eb7-c6adc99f7c92",
                         "label": "Emergencia"
@@ -72,12 +62,13 @@
               },
               "id": "anamnesisGroup",
               "label": "Anamnesis",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "textarea",
-                    "concept": "7bb8eefc-929b-441b-80ba-80e0b18b504f"
+                    "concept": "7bb8eefc-929b-441b-80ba-80e0b18b504f",
+                    "rows": 3
                   },
                   "id": "anamnesis",
                   "label": "Anamnesis"
@@ -144,7 +135,8 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "textarea",
-                    "concept": "392aba5c-5f5a-46f1-9506-5869c0e1bd31"
+                    "concept": "392aba5c-5f5a-46f1-9506-5869c0e1bd31",
+                    "rows": 5
                   },
                   "id": "relatoCronologicoEnfermedad",
                   "label": "Relato cronológico de la enfermedad"
@@ -235,7 +227,7 @@
               },
               "id": "antecedentesFamiliaresGroup",
               "label": "Antecedentes Familiares",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "inlineMultiCheckbox": true,
@@ -330,7 +322,7 @@
               },
               "id": "antecedentesPersonalesGroup",
               "label": "Antecedentes Personales",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "inlineMultiCheckbox": true,
@@ -485,13 +477,16 @@
               },
               "id": "antecedentesGinecoObstetricosGroup",
               "label": "Antecedentes Gineco-Obstétricos",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "step": 1,
-                    "concept": "7cb83888-3bf2-4b28-8b66-827b2ba85bc2"
+                    "concept": "7cb83888-3bf2-4b28-8b66-827b2ba85bc2",
+                    "min": "8",
+                    "max": "20"
                   },
                   "hideSteppers": true,
                   "questionInfo": "Edad en que la paciente tuvo su primera menstruación",
@@ -504,7 +499,7 @@
                     "rendering": "text",
                     "concept": "14e85e4f-c185-4e28-acbe-0e17807c0f81"
                   },
-                  "questionInfo": "Regularidad y duración del ciclo menstrual", 
+                  "questionInfo": "Regularidad y duración del ciclo menstrual",
                   "id": "ritmoCiclo",
                   "label": "Ritmo Ciclo"
                 },
@@ -512,8 +507,11 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "step": 1,
-                    "concept": "ccc3e911-7255-4c8e-83e1-badf0966db12"
+                    "concept": "ccc3e911-7255-4c8e-83e1-badf0966db12",
+                    "min": "0",
+                    "max": "100"
                   },
                   "hideSteppers": true,
                   "questionInfo": "Edad en la que la paciente inició su vida sexual",
@@ -524,8 +522,11 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "step": 1,
-                    "concept": "19f3709d-ad4c-4e69-8766-788984c101bf"
+                    "concept": "19f3709d-ad4c-4e69-8766-788984c101bf",
+                    "min": "0",
+                    "max": "100"
                   },
                   "id": "numeroParejasSexuales",
                   "label": "N° Parejas Sexuales"
@@ -559,7 +560,9 @@
                     "rendering": "number",
                     "step": 1,
                     "disallowDecimals": true,
-                    "concept": "ae27daee-d2f3-4df3-8e07-eff75c81872e"
+                    "concept": "ae27daee-d2f3-4df3-8e07-eff75c81872e",
+                    "min": "0",
+                    "max": "20"
                   },
                   "id": "numeroGestaciones",
                   "label": "G (Número de gestaciones)"
@@ -570,7 +573,9 @@
                     "rendering": "number",
                     "step": 1,
                     "disallowDecimals": true,
-                    "concept": "8795c05b-f286-4d70-a1e6-69172e676f05"
+                    "concept": "8795c05b-f286-4d70-a1e6-69172e676f05",
+                    "min": "0",
+                    "max": "20"
                   },
                   "questionInfo": "Número de partos",
                   "id": "paridad",
@@ -581,11 +586,13 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "dee42f1a-657e-4ab3-8a0a-b012500edea6"
+                    "concept": "dee42f1a-657e-4ab3-8a0a-b012500edea6",
+                    "min": "1000",
+                    "max": "6000"
                   },
                   "hideSteppers": true,
                   "id": "mayorPonderadoFetal",
-                  "label": "Mayor ponderado fetal"
+                  "label": "Mayor ponderado fetal (gr.)"
                 }
               ]
             },
