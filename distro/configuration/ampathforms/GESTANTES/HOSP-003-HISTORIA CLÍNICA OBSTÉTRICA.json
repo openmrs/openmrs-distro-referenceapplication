@@ -1,5 +1,5 @@
 {
-  "name": "HOSP-003-HISTORIA CLÍNICA OBSTÉTRICA",
+  "name": "HOSP-003-HISTORIA CLÍNICA OBSTÉTRICA - PARTO",
   "pages": [
     {
       "label": "1. Embarazo Actual",
@@ -35,11 +35,14 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1e35f0dd-3bbb-4b45-96fd-2fc590c1b385"
+                "disallowDecimals": false,
+                "concept": "1e35f0dd-3bbb-4b45-96fd-2fc590c1b385",
+                "min": "0",
+                "max": "42"
               },
               "hideSteppers": true,
               "id": "edadGestacional",
-              "label": "Edad Gestacional"
+              "label": "Edad Gestacional (semanas)"
             },
             {
               "type": "obs",
@@ -96,7 +99,7 @@
               },
               "id": "controladaGroup",
               "label": "Controlada",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -138,7 +141,7 @@
               },
               "id": "vacunaAntitetanicaGroup",
               "label": "Vacuna Antitetánica",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -163,7 +166,10 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "95531a50-d352-49cb-a87a-3e2fba4bdc8f"
+                    "concept": "95531a50-d352-49cb-a87a-3e2fba4bdc8f",
+                    "step": 1,
+                    "min": "0",
+                    "max": "5"
                   },
                   "questionInfo": "Cantidad de dosis administradas",
                   "id": "dosis",
@@ -179,7 +185,7 @@
               },
               "id": "evolucionesPorTrimestre",
               "label": "Evoluciones por Trimestre",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -223,26 +229,30 @@
               },
               "id": "antropometria",
               "label": "Antropometría",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "5cacede4-c947-4092-9df4-24287a7f13ae"
+                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true,
                   "id": "pesoActual",
-                  "label": "Peso actual"
+                  "label": "Peso actual (Kg)"
                 },
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "d37c8f1a-4a7d-4066-835f-253c80ad3fc7"
+                    "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "10",
+                    "max": "272"
                   },
                   "hideSteppers": true,
                   "id": "talla",
-                  "label": "Talla"
+                  "label": "Talla (cm)"
                 }
               ]
             },
@@ -254,35 +264,41 @@
               },
               "id": "funcionesVitales",
               "label": "Funciones Vitales",
-              "questions":[
+              "questions": [
                 {
+                  "id": "presionSistoLica",
+                  "label": "Presión sistólica (mmHg)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "b85c0651-0464-4d79-96ca-ab084019f05c"
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
-                  "hideSteppers": true,
-                  "id": "presionDiastolica",
-                  "label": "Presión diastólica"
+                  "hideSteppers": true
+                },
+                {
+                  "id": "presionDiastoLica",
+                  "label": "Presión diastólica (mmHg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "150"
+                  },
+                  "hideSteppers": true
                 },
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "992dc702-80dc-4a16-a28b-2f7600bc4210"
-                  },
-                  "hideSteppers": true,
-                  "id": "presionSistolica",
-                  "label": "Presión sistólica"
-                },
-                {
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "number",
-                    "disallowDecimals": true,
-                    "concept": "e176c99d-e73a-4c28-b632-f2ae0f6ce55b"
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "230"
                   },
                   "hideSteppers": true,
                   "id": "frecuenciaCardiaca",
@@ -293,7 +309,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "89c9c0bf-e746-4f8d-8d04-b2d2ad9826eb"
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "37"
                   },
                   "hideSteppers": true,
                   "id": "temperatura",
@@ -304,7 +322,9 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "4dc51434-3f62-483c-b4db-441eae51f0a3"
+                    "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "100"
                   },
                   "hideSteppers": true,
                   "id": "saturacion",
@@ -331,7 +351,7 @@
               },
               "id": "examenClinicoGeneralGroup",
               "label": "Examen Clínico General",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -396,144 +416,6 @@
                   "label": "Abdomen"
                 },
                 {
-                  "type": "obsGroup",
-                  "questionOptions": {
-                    "rendering": "group",
-                    "concept": "a7f247f7-5a22-4af1-9254-eb8c83169ce1"
-                  },
-                  "id": "aparatoUrinarioGroup",
-                  "label": "Aparato Urinario",
-                  "questions":[
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "text",
-                        "concept": "a7f247f7-5a22-4af1-9254-eb8c83169ce1"
-                      },
-                      "id": "aparatoUrinario",
-                      "label": "Aparato Urinario"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "checkbox",
-                        "concept": "4068bc02-11ae-4a14-803d-656325bd3477",
-                        "answers":[
-                          {
-                            "concept": "37a86155-b34e-4be0-bfd4-86c393628de8",
-                            "label": "PPL"
-                          },
-                          {
-                            "concept": "c54d1fd7-e539-4301-ac9b-c66aaec269f1",
-                            "label": "PRU"
-                          }
-                        ]
-                      },
-                      "id": "pplPru",
-                      "label": "PPL y PRU"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "37a86155-b34e-4be0-bfd4-86c393628de8",
-                        "answers":[
-                          {
-                            "concept": "37a86155-b34e-4be0-bfd4-86c393628de8",
-                            "label": "PPL"
-                          }
-                        ]
-                      },
-                      "id": "puñoPercusionLumbar",
-                      "label": "PPL"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "c54d1fd7-e539-4301-ac9b-c66aaec269f1",
-                        "answers":[
-                          {
-                            "concept": "c54d1fd7-e539-4301-ac9b-c66aaec269f1",
-                            "label": "PRU"
-                          }
-                        ]
-                      },
-                      "id": "puntosRenoUreterales",
-                      "label": "PRU"
-                    }
-                  ]
-                },
-                {
-                  "type": "obsGroup",
-                  "questionOptions": {
-                    "rendering": "group",
-                    "concept": "479e125e-e5be-4538-8c4e-ed6fd9c8d515"
-                  },
-                  "id": "aparatoLocomotorExtremidadesGroup",
-                  "label": "Aparato Locomotor y Extremidades",
-                  "questions":[
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "text",
-                        "concept": "479e125e-e5be-4538-8c4e-ed6fd9c8d515"
-                      },
-                      "id": "aparatoLocomotorExtremidades",
-                      "label": "Aparato Locomotor y Extremidades"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "checkbox",
-                        "concept": "4068bc02-11ae-4a14-803d-656325bd3477",
-                        "answers":[
-                          {
-                            "concept": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Edema"
-                          },
-                          {
-                            "concept": "8e1b7181-5f8d-4f63-bd5e-e08aa9ee1425",
-                            "label": "ROT"
-                          }
-                        ]
-                      },
-                      "id": "edemaROT",
-                      "label": "Edema y ROT"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "checkbox",
-                        "concept": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "answers":[
-                          {
-                            "concept": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Edema"
-                          }
-                        ]
-                      },
-                      "id": "edema",
-                      "label": "Edema"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "8e1b7181-5f8d-4f63-bd5e-e08aa9ee1425",
-                        "answers":[
-                          {
-                            "concept": "8e1b7181-5f8d-4f63-bd5e-e08aa9ee1425",
-                            "label": "ROT"
-                          }
-                        ]
-                      },
-                      "id": "rot",
-                      "label": "ROT"
-                    }
-                  ]
-                },
-                {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "text",
@@ -541,6 +423,84 @@
                   },
                   "id": "neurologico",
                   "label": "Neurológico"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "a7f247f7-5a22-4af1-9254-eb8c83169ce1"
+              },
+              "id": "aparatoUrinarioGroup",
+              "label": "Aparato Urinario",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "a7f247f7-5a22-4af1-9254-eb8c83169ce1"
+                  },
+                  "id": "aparatoUrinario",
+                  "label": "Aparato Urinario"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "4068bc02-11ae-4a14-803d-656325bd3477",
+                    "answers": [
+                      {
+                        "concept": "37a86155-b34e-4be0-bfd4-86c393628de8",
+                        "label": "PPL"
+                      },
+                      {
+                        "concept": "c54d1fd7-e539-4301-ac9b-c66aaec269f1",
+                        "label": "PRU"
+                      }
+                    ]
+                  },
+                  "id": "pplPru",
+                  "label": "PPL y PRU"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "479e125e-e5be-4538-8c4e-ed6fd9c8d515"
+              },
+              "id": "aparatoLocomotorExtremidadesGroup",
+              "label": "Aparato Locomotor y Extremidades",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "479e125e-e5be-4538-8c4e-ed6fd9c8d515"
+                  },
+                  "id": "aparatoLocomotorExtremidades",
+                  "label": "Aparato Locomotor y Extremidades"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "4068bc02-11ae-4a14-803d-656325bd3477",
+                    "answers": [
+                      {
+                        "concept": "460AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Edema"
+                      },
+                      {
+                        "concept": "8e1b7181-5f8d-4f63-bd5e-e08aa9ee1425",
+                        "label": "ROT"
+                      }
+                    ]
+                  },
+                  "id": "edemaROT",
+                  "label": "Edema y ROT"
                 }
               ]
             }
@@ -563,13 +523,13 @@
               },
               "id": "mamasGroup",
               "label": "Mamas",
-              "questions":[
+              "questions": [
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "radio",
                     "concept": "de7363ce-617a-4854-bba8-737dd876d249",
-                    "answers":[
+                    "answers": [
                       {
                         "concept": "f1c115fe-f21c-418a-946c-420010317c4f",
                         "label": "Blandas"
@@ -645,7 +605,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
-                "disallowDecimals": true,	
+                "disallowDecimals": true,
                 "concept": "b1fb2d14-92ec-4fda-90e5-40f3227c9c65"
               },
               "hideSteppers": true,
@@ -918,7 +878,7 @@
   "processor": "EncounterFormProcessor",
   "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
   "referencedForms": [],
-  "uuid": "a7759c56-a340-4834-afaf-cbfbbf206cbb",
+  "uuid": "",
   "description": "Historia Clínica Obstétrica realizada durante el tiempo de hospitalización.",
   "version": "1.0.0"
 }

@@ -1,22 +1,22 @@
 {
-  "name": "HOSP-005-EVOLUCIÓN OBSTÉTRICA",
+  "name": "HOSP-004-EVOLUCIÓN MÉDICA",
   "pages": [
     {
-      "label": "Evolución Obstétrica",
+      "label": "Evolución Médica",
       "sections": [
         {
-          "label": "Evolución Obstétrica",
+          "label": "Evolución médica",
           "isExpanded": "true",
           "questions": [
             {
               "type": "obsGroup",
               "questionOptions": {
                 "rendering": "repeating",
-                "concept": "dfdc2f61-dfd1-438f-91ff-629e9a1bb614"
+                "concept": "b71c10a3-bfb2-480f-a2e9-93e2feabb8e3"
               },
-              "id": "evolucionObstetrica",
-              "label": "Evolución obstétrica",
-              "questions": [
+              "id": "evolucionMedica",
+              "label": "Evolución médica",
+              "questions":[
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -31,10 +31,10 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "textarea",
-                    "concept": "dfdc2f61-dfd1-438f-91ff-629e9a1bb614"
+                    "concept": "b71c10a3-bfb2-480f-a2e9-93e2feabb8e3"
                   },
-                  "id": "observaciones",
-                  "label": "Observaciones"
+                  "id": "dias_estadia",
+                  "label": "Descripción de Evolución médica"
                 },
                 {
                   "type": "obs",
@@ -42,8 +42,8 @@
                     "rendering": "text",
                     "concept": "84a9cc40-b229-4760-bb3f-abeaf95c2439"
                   },
-                  "id": "firmaProfesional",
-                  "label": "Firma del profesional"
+                  "id": "firmaSello",
+                  "label": "Firma y Sello"
                 }
               ]
             },
@@ -57,6 +57,15 @@
               "hideSteppers": true,
               "id": "numeroCama",
               "label": "N° Cama"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e718baa-ecf5-4a8a-9bcd-75986ef855a0"
+              },
+              "id": "servicio",
+              "label": "Servicio"
             }
           ]
         }
@@ -66,7 +75,7 @@
   "processor": "EncounterFormProcessor",
   "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
   "referencedForms": [],
-  "uuid": "980230d8-5ef3-4cb4-92a6-8d741f093b73",
-  "description": "Evolución obstétrica realizada durante el tiempo de hospitalización.",
+  "uuid": "",
+  "description": "Evolución médica realizada durante el tiempo de hospitalización.",
   "version": "1.0.0"
 }

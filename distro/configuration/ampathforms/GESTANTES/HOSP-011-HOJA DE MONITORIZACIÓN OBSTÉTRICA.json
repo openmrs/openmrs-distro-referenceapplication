@@ -1,5 +1,5 @@
 {
-  "name": "HOSP-011-HOJA DE MONITORIZACIÓN OBSTÉTRICA",
+  "name": "HOSP-011-HOJA DE MONITORIZACIÓN OBSTÉTRICA - PARTO",
   "pages": [
     {
       "label": "Hoja de Monitorización Obstétrica",
@@ -37,33 +37,33 @@
                   "datePickerFormat": "timer"
                 },
                 {
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "number",
-                    "disallowDecimals": true,
-                    "concept": "b85c0651-0464-4d79-96ca-ab084019f05c"
-                  },
-                  "hideSteppers": true,
-                  "id": "presionDiastolica",
-                  "label": "Presión diastólica"
-                },
-                {
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "number",
-                    "disallowDecimals": true,
-                    "concept": "992dc702-80dc-4a16-a28b-2f7600bc4210"
-                  },
-                  "hideSteppers": true,
                   "id": "presionSistolica",
-                  "label": "Presión sistólica"
+                  "label": "Presión sistólica (mmHg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "presionDiastolica",
+                  "label": "Presión diastólica (mmHg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  "hideSteppers": true
                 },
                 {
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "e176c99d-e73a-4c28-b632-f2ae0f6ce55b"
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "pulso",
@@ -74,7 +74,7 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": false,
-                    "concept": "89c9c0bf-e746-4f8d-8d04-b2d2ad9826eb"
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "temperatura",
@@ -85,7 +85,7 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "aeecf295-048b-4c40-a6a0-c3a7db169466"
+                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "frecuenciaRespiratoria",
@@ -103,60 +103,49 @@
                   "label": "Diuresis"
                 },
                 {
-                  "type": "obsGroup",
+                  "type": "obs",
                   "questionOptions": {
-                    "rendering": "group",
-                    "concept": "d546e902-3868-4fc8-a855-91228ab97d2b"
+                    "rendering": "text",
+                    "concept": "20eb9478-2ab2-48bd-8dca-3b563b0c7c47"
                   },
-                  "id": "dinamicaUterina",
-                  "label": "Dinámica Uterina",
-                  "questions": [
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "text",
-                        "concept": "20eb9478-2ab2-48bd-8dca-3b563b0c7c47"
+                  "questionInfo": "Número de contracciones en un período de tiempo",
+                  "id": "frecuencia",
+                  "label": "F (Frecuencia)"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "ba6099d8-f7ce-41de-b9ec-6e8b42252911",
+                    "answers":[
+                      {
+                        "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Leve"
                       },
-                      "questionInfo": "Número de contracciones en un período de tiempo",
-                      "id": "frecuencia",
-                      "label": "F (Frecuencia)"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "select",
-                        "concept": "ba6099d8-f7ce-41de-b9ec-6e8b42252911",
-                        "answers":[
-                          {
-                            "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Leve"
-                          },
-                          {
-                            "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Moderado"
-                          },
-                          {
-                            "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                            "label": "Fuerte"
-                          }
-                        ]
+                      {
+                        "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Moderado"
                       },
-                      "questionInfo": "Fuerza de cada contracción",
-                      "id": "intensidad",
-                      "label": "I (Intensidad)"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "number",
-                        "concept": "9641ed77-354a-4a10-b16e-85b8f934031d"
-                      },
-                      "hideSteppers": true,
-                      "questionInfo": "Tiempo que dura cada contracción",
-                      "id": "duración",
-                      "label": "D (Duración)"
-                    }
-                  ]
+                      {
+                        "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Fuerte"
+                      }
+                    ]
+                  },
+                  "questionInfo": "Fuerza de cada contracción",
+                  "id": "intensidad",
+                  "label": "I (Intensidad)"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "9641ed77-354a-4a10-b16e-85b8f934031d"
+                  },
+                  "hideSteppers": true,
+                  "questionInfo": "Tiempo que dura cada contracción",
+                  "id": "duración",
+                  "label": "D (Duración)"
                 },
                 {
                   "type": "obs",
@@ -198,7 +187,7 @@
   "processor": "EncounterFormProcessor",
   "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
   "referencedForms": [],
-  "uuid": "67f588f5-d477-44b7-9775-61fafef479b0",
+  "uuid": "",
   "description": "Hoja de Monitorización Obstétrica realizada durante el tiempo de hospitalización.",
   "version": "1.0.0"
 }

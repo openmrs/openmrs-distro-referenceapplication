@@ -1,5 +1,5 @@
 {
-  "name": "HOSP-007-RESUMEN DE PARTO",
+  "name": "HOSP-007-RESUMEN DE PARTO - POSTPARTO",
   "pages": [
     {
       "label": "Resumen de Parto",
@@ -244,178 +244,178 @@
                   "hide": {
                     "hideWhenExpression": "parto !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
-                },
-                {
-                  "type": "obsGroup",
-                  "questionOptions": {
-                    "rendering": "group",
-                    "concept": "c6567881-4659-4624-8adf-ba0c15cbc4c6"
-                  },
-                  "id": "partoGroup",
-                  "label": "Parto",
-                  "questions":[
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "datetime",
-                        "concept": "924f5d2e-7f51-4999-ac0d-87e9db969efb"
-                      },
-                      "id": "fechaHoraParto",
-                      "label": "Fecha y hora de parto",
-                      "datePickerFormat": "both"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "4dca8468-3c23-48b4-9595-1080bde6452a",
-                        "answers":[
-                          {
-                            "concept": "90e1cc32-a1be-4e98-b2f4-53a77a9eb291",
-                            "label": "Sencillo"
-                          },
-                          {
-                            "concept": "e2432fca-6b25-4c91-86e9-dfbba84482c5",
-                            "label": "Múltiple"
-                          }
-                        ]
-                      },
-                      "id": "productoConcepcion",
-                      "label": "Producto de la Concepción"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "648098df-d25a-4305-a318-c828e18b8e86",
-                        "answers":[
-                          {
-                            "concept": "4837b13d-6e15-4bd7-80ac-c3eac4054e6c",
-                            "label": "Espontáneo"
-                          },
-                          {
-                            "concept": "cfd5b70e-270f-4002-ada6-adc1d21c7187",
-                            "label": "Inducido"
-                          },
-                          {
-                            "concept": "2844ec0e-5627-415e-9edf-452f577525ab",
-                            "label": "Instrumentado"
-                          }
-                        ]
-                      },
-                      "id": "Terminación",
-                      "label": "Terminación"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "6de4fba1-3bfa-4e57-9695-1d37a885ecaf",
-                        "answers":[
-                          {
-                            "concept": "8192dd71-79a3-49b5-8a20-91fc407a7435",
-                            "label": "M (Mediana)"
-                          },
-                          {
-                            "concept": "023c3f9c-b01e-47d0-a421-fec35c9a494b",
-                            "label": "MLD (Medio Lateral Derecha)"
-                          },
-                          {
-                            "concept": "3d5a182e-ac1a-40be-a77a-222ccfdc8f88",
-                            "label": "MLI (Medio Lateral Izquierdo)"
-                          }
-                        ]
-                      },
-                      "id": "episiotomia",
-                      "label": "Episiotomía"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "radio",
-                        "concept": "9e418e29-6a41-4f55-bf74-5531fc8b1d83",
-                        "answers":[
-                          {
-                            "concept": "4b6278eb-9b8b-42a6-8a76-bb6926b92970",
-                            "label": "I"
-                          },
-                          {
-                            "concept": "7c9ca92f-8a52-4a3a-8ead-1447ca92e2a0",
-                            "label": "II"
-                          },
-                          {
-                            "concept": "5f7e8739-6b4b-4337-aeda-0eeb8fdafbaf",
-                            "label": "III"
-                          },
-                          {
-                            "concept": "fe17f502-0d09-43f7-9696-a66afceb2deb",
-                            "label": "IV"
-                          }
-                        ]
-                      },
-                      "id": "desgarro",
-                      "label": "Desgarro"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "select",
-                        "concept": "94b860b3-d619-4ffc-a984-45982d5d8aa0",
-                        "answers":[
-                          {
-                            "concept": "867aeb21-f762-41d3-9df8-5d7cda71225c",
-                            "label": "Vacuum extractor"
-                          },
-                          {
-                            "concept": "a5cce2f6-4a58-49a7-bb25-1596149c030a",
-                            "label": "Fórceps"
-                          }
-                        ]
-                      },
-                      "id": "instrumentosUtilizados",
-                      "label": "Instrumentos utilizados"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "select",
-                        "concept": "899e0cc8-5f6a-4334-b51d-c559f71ea550",
-                        "answers":[
-                          {
-                            "concept": "a9dfc6ac-e189-4661-ab27-bc42e8330c1a",
-                            "label": "Cesárea"
-                          },
-                          {
-                            "concept": "cc7e35f1-23c4-4310-9a84-8d3a2c839b48",
-                            "label": "Extracción Pedálica"
-                          }
-                        ]
-                      },
-                      "id": "TipoParto",
-                      "label": "Tipo de Parto"
-                    },
-                    {
-                      "type": "obs",
-                      "questionOptions": {
-                        "rendering": "select",
-                        "concept": "f9968900-847b-408a-ac9a-a40c9bc2ddf9",
-                        "answers":[
-                          {
-                            "concept": "a0800ab4-91eb-4fe9-b156-e856ccc82530",
-                            "label": "Analgésia"
-                          },
-                          {
-                            "concept": "c47f4bc1-a59b-49aa-9268-5b8743660c37",
-                            "label": "Anestesia"
-                          }
-                        ]
-                      },
-                      "id": "manejoDolor",
-                      "label": "Manejo del Dolor"
-                    }
-                  ] 
                 }
               ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "c6567881-4659-4624-8adf-ba0c15cbc4c6"
+              },
+              "id": "partoGroup",
+              "label": "Parto",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "924f5d2e-7f51-4999-ac0d-87e9db969efb"
+                  },
+                  "id": "fechaHoraParto",
+                  "label": "Fecha y hora de parto",
+                  "datePickerFormat": "both"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "4dca8468-3c23-48b4-9595-1080bde6452a",
+                    "answers":[
+                      {
+                        "concept": "90e1cc32-a1be-4e98-b2f4-53a77a9eb291",
+                        "label": "Sencillo"
+                      },
+                      {
+                        "concept": "e2432fca-6b25-4c91-86e9-dfbba84482c5",
+                        "label": "Múltiple"
+                      }
+                    ]
+                  },
+                  "id": "productoConcepcion",
+                  "label": "Producto de la Concepción"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "648098df-d25a-4305-a318-c828e18b8e86",
+                    "answers":[
+                      {
+                        "concept": "4837b13d-6e15-4bd7-80ac-c3eac4054e6c",
+                        "label": "Espontáneo"
+                      },
+                      {
+                        "concept": "cfd5b70e-270f-4002-ada6-adc1d21c7187",
+                        "label": "Inducido"
+                      },
+                      {
+                        "concept": "2844ec0e-5627-415e-9edf-452f577525ab",
+                        "label": "Instrumentado"
+                      }
+                    ]
+                  },
+                  "id": "Terminación",
+                  "label": "Terminación"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "6de4fba1-3bfa-4e57-9695-1d37a885ecaf",
+                    "answers":[
+                      {
+                        "concept": "8192dd71-79a3-49b5-8a20-91fc407a7435",
+                        "label": "M (Mediana)"
+                      },
+                      {
+                        "concept": "023c3f9c-b01e-47d0-a421-fec35c9a494b",
+                        "label": "MLD (Medio Lateral Derecha)"
+                      },
+                      {
+                        "concept": "3d5a182e-ac1a-40be-a77a-222ccfdc8f88",
+                        "label": "MLI (Medio Lateral Izquierdo)"
+                      }
+                    ]
+                  },
+                  "id": "episiotomia",
+                  "label": "Episiotomía"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "9e418e29-6a41-4f55-bf74-5531fc8b1d83",
+                    "answers":[
+                      {
+                        "concept": "4b6278eb-9b8b-42a6-8a76-bb6926b92970",
+                        "label": "I"
+                      },
+                      {
+                        "concept": "7c9ca92f-8a52-4a3a-8ead-1447ca92e2a0",
+                        "label": "II"
+                      },
+                      {
+                        "concept": "5f7e8739-6b4b-4337-aeda-0eeb8fdafbaf",
+                        "label": "III"
+                      },
+                      {
+                        "concept": "fe17f502-0d09-43f7-9696-a66afceb2deb",
+                        "label": "IV"
+                      }
+                    ]
+                  },
+                  "id": "desgarro",
+                  "label": "Desgarro"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "94b860b3-d619-4ffc-a984-45982d5d8aa0",
+                    "answers":[
+                      {
+                        "concept": "867aeb21-f762-41d3-9df8-5d7cda71225c",
+                        "label": "Vacuum extractor"
+                      },
+                      {
+                        "concept": "a5cce2f6-4a58-49a7-bb25-1596149c030a",
+                        "label": "Fórceps"
+                      }
+                    ]
+                  },
+                  "id": "instrumentosUtilizados",
+                  "label": "Instrumentos utilizados"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "899e0cc8-5f6a-4334-b51d-c559f71ea550",
+                    "answers":[
+                      {
+                        "concept": "a9dfc6ac-e189-4661-ab27-bc42e8330c1a",
+                        "label": "Cesárea"
+                      },
+                      {
+                        "concept": "cc7e35f1-23c4-4310-9a84-8d3a2c839b48",
+                        "label": "Extracción Pedálica"
+                      }
+                    ]
+                  },
+                  "id": "TipoParto",
+                  "label": "Tipo de Parto"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "f9968900-847b-408a-ac9a-a40c9bc2ddf9",
+                    "answers":[
+                      {
+                        "concept": "a0800ab4-91eb-4fe9-b156-e856ccc82530",
+                        "label": "Analgésia"
+                      },
+                      {
+                        "concept": "c47f4bc1-a59b-49aa-9268-5b8743660c37",
+                        "label": "Anestesia"
+                      }
+                    ]
+                  },
+                  "id": "manejoDolor",
+                  "label": "Manejo del Dolor"
+                }
+              ] 
             }
           ]
         },
@@ -807,35 +807,46 @@
           "isExpanded": "true",
           "questions":[
             {
-              "type": "obs",
+              "type": "obsGroup",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "de9148ac-2f2f-43d2-a259-4af3d4263168",
-                "answers":[
-                  {
-                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Normal"
+                "rendering": "group",
+                "concept": "de9148ac-2f2f-43d2-a259-4af3d4263168"
+              },
+              "id": "puerperioGroup",
+              "label": "Puerperio",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "b035566c-5677-4581-acc5-069042c62a43",
+                    "answers":[
+                      {
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Normal"
+                      },
+                      {
+                        "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Anormal"
+                      }
+                    ]
                   },
-                  {
-                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Anormal"
+                  "id": "puerperio",
+                  "label": "Puerperio"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "a3b55a52-203b-41cc-ae12-adc839b2e8b9"
+                  },
+                  "id": "especificarPuerperio",
+                  "label": "Especificar",
+                  "hide": {
+                    "hideWhenExpression": "puerperio !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
                   }
-                ]
-              },
-              "id": "puerperio",
-              "label": "Puerperio"
-            },
-            {
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "a3b55a52-203b-41cc-ae12-adc839b2e8b9"
-              },
-              "id": "especificarPuerperio",
-              "label": "Especificar",
-              "hide": {
-                "hideWhenExpression": "puerperio !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
+                }
+              ]
             },
             {
               "type": "obsGroup",
@@ -850,7 +861,7 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "radio",
-                    "concept": "",
+                    "concept": "fa264962-2ae5-4861-843d-b467c4e0a09e",
                     "answers": [
                       {
                         "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -879,7 +890,7 @@
             {
               "type": "obsGroup",
               "questionOptions": {
-                "rendering": "group",
+                "rendering": "repeating",
                 "concept": "b035566c-5677-4581-acc5-069042c62a43"
               },
               "id": "controlPuerperio",
@@ -888,9 +899,10 @@
                 {
                   "type": "obs",
                   "questionOptions": {
-                    "rendering": "time",
-                    "concept": "2c67cd3d-407c-4f4d-bdf7-0f32b42ccfb4"
+                    "rendering": "datetime",
+                    "concept": "b1c5577c-8cd9-4994-aa4c-da7eb1ed8adf"
                   },
+                  "datePickerFormat": "both",
                   "id": "fecha/hora",
                   "label": "Fecha/hora"
                 },
@@ -898,7 +910,7 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "e176c99d-e73a-4c28-b632-f2ae0f6ce55b"
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "pulso",
@@ -908,31 +920,33 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "89c9c0bf-e746-4f8d-8d04-b2d2ad9826eb"
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   "hideSteppers": true,
                   "id": "temperatura",
                   "label": "Temperatura"
                 },
                 {
+                  "id": "presionSistoLica",
+                  "label": "Presión sistólica (mmHg)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "b85c0651-0464-4d79-96ca-ab084019f05c"
+                    "disallowDecimals": true,
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
-                  "hideSteppers": true,
-                  "id": "presionDiastolica",
-                  "label": "Presión diastólica"
+                  "hideSteppers": true
                 },
                 {
+                  "id": "presionDiastoLica",
+                  "label": "Presión diastólica (mmHg)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "992dc702-80dc-4a16-a28b-2f7600bc4210"
+                    "disallowDecimals": true,
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
-                  "hideSteppers": true,
-                  "id": "presionSistolica",
-                  "label": "Presión sistólica"
+                  "hideSteppers": true
                 },
                 {
                   "type": "obs",
@@ -940,6 +954,7 @@
                     "rendering": "text",
                     "concept": "ccae6e1b-9997-4d62-824a-e9214bf0695d"
                   },
+                  "questionInfo": "Evaluación del proceso de contracción del útero para regresar a su tamaño normal.",
                   "id": "involucionUterina",
                   "label": "Involución Uterina"
                 },
@@ -947,8 +962,11 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
+                    "step": 1,
+                    "disallowDecimals": true,
                     "concept": "eded35f2-aba5-497a-9f55-90634511a282"
                   },
+                  "hideSteppers": true,
                   "id": "liquidos",
                   "label": "Líquidos"
                 },
@@ -962,12 +980,12 @@
                   "label": "Observaciones"
                 },
                 {
-                  "type": "encounterProvider",
+                  "type": "obs",
                   "questionOptions": {
-                    "rendering": "ui-select-extended",
-                    "isSearchable": true
+                    "rendering": "text",
+                    "concept": "84a9cc40-b229-4760-bb3f-abeaf95c2439"
                   },
-                  "id": "examinador",
+                  "id": "examinadorFirmaSello",
                   "label": "Examinador"
                 }
               ]
@@ -996,11 +1014,12 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "f86f2272-e34d-4d04-9659-f7d86ecfb357"
+                    "disallowDecimals": true,
+                    "concept": "ced4bfb4-9f53-45a1-a182-67032c52d80e"
                   },
                   "hideSteppers": true,
                   "id": "horaPrimerPeriodo",
-                  "label": "Hrs (horas) y M (minutos)"
+                  "label": "1er. Periodo: Hrs (horas) y M (minutos)"
                 }
               ]
             },
@@ -1017,11 +1036,12 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "f86f2272-e34d-4d04-9659-f7d86ecfb357"
+                    "disallowDecimals": true,
+                    "concept": "ced4bfb4-9f53-45a1-a182-67032c52d80e"
                   },
                   "hideSteppers": true,
                   "id": "horaSegundoPeriodo",
-                  "label": "Hrs (horas) y M (minutos)"
+                  "label": "2do. Periodo: Hrs (horas) y M (minutos)"
                 }
               ]
             },
@@ -1038,13 +1058,23 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "hideSteppers": true,
-                    "concept": "f86f2272-e34d-4d04-9659-f7d86ecfb357"
+                    "disallowDecimals": true,
+                    "concept": "ced4bfb4-9f53-45a1-a182-67032c52d80e"
                   },
+                  "hideSteppers": true,
                   "id": "horaTercerPeriodo",
-                  "label": "Hrs (horas) y M (minutos)"
+                  "label": "3er. Periodo: Hrs (horas) y M (minutos)"
                 }
               ]
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "84a9cc40-b229-4760-bb3f-abeaf95c2439"
+              },
+              "id": "firmaSelloMedicoDuracionParto",
+              "label": "Firma y Sello Médico"
             }
           ]
         }
@@ -1058,50 +1088,70 @@
           "isExpanded": "true",
           "questions":[
             {
-              "type": "obs",
+              "type": "obsGroup",
               "questionOptions": {
-                "rendering": "datetime",
-                "concept": "8b54ff0d-6dde-47ce-ab92-5a8e41a729e8"
+                "rendering": "group",
+                "concept": "29ad8b05-91aa-4621-b452-16c979dd2b72"
               },
-              "id": "fechaHoraEgreso",
-              "label": "Fecha y hora de Egreso",
-              "datePickerFormat": "both"
-            },
-            {
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "ff7f078a-ac27-44f6-a104-d1b8f8a6c9b5",
-                "answers": [
-                  {
-                    "concept": "6dbbb2fa-643d-4963-9c8a-d267ac618feb",
-                    "label": "Puerperio"
+              "id": "egresoCO",
+              "label": "Egreso de C.O. (Centro Obstétrico)",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "8b54ff0d-6dde-47ce-ab92-5a8e41a729e8"
                   },
-                  {
-                    "concept": "3bced993-6de2-4fbd-b248-ceb2fb812a6f",
-                    "label": "A.R.O. (Atención de Riesgo Obstétrico)"
+                  "id": "fechaHoraEgreso",
+                  "label": "Fecha y hora de Egreso",
+                  "datePickerFormat": "both"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "ff7f078a-ac27-44f6-a104-d1b8f8a6c9b5",
+                    "answers": [
+                      {
+                        "concept": "6dbbb2fa-643d-4963-9c8a-d267ac618feb",
+                        "label": "Puerperio"
+                      },
+                      {
+                        "concept": "3bced993-6de2-4fbd-b248-ceb2fb812a6f",
+                        "label": "A.R.O. (Atención de Riesgo Obstétrico)"
+                      },
+                      {
+                        "concept": "9e7d6cf5-7e1e-4b80-9402-2b37badff309",
+                        "label": "S. Legrados (Sala de Legrados)"
+                      },
+                      {
+                        "concept": "a05fb0ff-9e72-4cad-8c41-63605348dc8b",
+                        "label": "UCI (Unidad de Cuidados Intensivos)"
+                      }
+                    ]
                   },
-                  {
-                    "concept": "9e7d6cf5-7e1e-4b80-9402-2b37badff309",
-                    "label": "S. Legrados (Sala de Legrados)"
+                  "id": "destino",
+                  "label": "Destino"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "f947a4ad-3d8d-4516-8e6b-67b3dca4e227"
                   },
-                  {
-                    "concept": "a05fb0ff-9e72-4cad-8c41-63605348dc8b",
-                    "label": "UCI (Unidad de Cuidados Intensivos)"
-                  }
-                ]
-              },
-              "id": "destino",
-              "label": "Destino"
-            },
-            {
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "f947a4ad-3d8d-4516-8e6b-67b3dca4e227"
-              },
-              "id": "observacionesEgreso",
-              "label": "Observaciones"
+                  "id": "observacionesEgreso",
+                  "label": "Observaciones"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "84a9cc40-b229-4760-bb3f-abeaf95c2439"
+                  },
+                  "id": "firmaSelloMedicoEgresoCO",
+                  "label": "Firma y Sello Médico"
+                }
+              ]
             }
           ]
         }
@@ -1241,12 +1291,65 @@
           ]
         }
       ]
+    },
+    {
+      "label": "Diagnóstico del Parto",
+      "sections":[
+        {
+          "label": "Diagnóstico del Parto",
+          "isExpanded": "true",
+          "questions":[
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "9d6a29b2-1cd6-4097-8750-623774d79c40"
+              },
+              "id": "diagnosticoPartoGroup",
+              "label": "Diagnóstico del Parto",
+              "questions":[
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "9d6a29b2-1cd6-4097-8750-623774d79c40",
+                    "answers":[
+                      {
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Normal"
+                      },
+                      {
+                        "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Anormal"
+                      }
+                    ]
+                  },
+                  "id": "diagnosticoParto",
+                  "label": "Diagnóstico del Parto"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c093c0ec-d1fd-406f-8c65-eeb079665853"
+                  },
+                  "id": "especificarDiagnosticoParto",
+                  "label": "Especificar",
+                  "hide": {
+                    "hideWhenExpression": "diagnosticoParto !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "processor": "EncounterFormProcessor",
   "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
   "referencedForms": [],
-  "uuid": "b0d7546d-4edf-49aa-b944-9b73c8f38b6a",
+  "uuid": "",
   "description": "Resumen de Parto realizado por el obstetra",
   "version": "1.0.0"
 }
