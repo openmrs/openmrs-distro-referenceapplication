@@ -24,7 +24,7 @@ fi
 
 # Build and start the Docker Compose stack
 echo "Building and starting the Docker Compose stack..."
-sudo docker compose up -d --build
+sudo docker compose up -d --build --env-file enviromentVariables.env
 
 # Check if the stack started successfully
 if [ $? -eq 0 ]; then
