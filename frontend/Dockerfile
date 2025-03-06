@@ -40,6 +40,6 @@ COPY config-core_demo.json /usr/share/nginx/html
 
 # copy assets
 COPY ./resources/logo_tmp.png /usr/share/nginx/html
-COPY ./resources/favicon.ico /usr/share/nginx/html
+COPY ./resources/favicon.svg /usr/share/nginx/html
 
 CMD ["/usr/local/bin/startup.sh"]
