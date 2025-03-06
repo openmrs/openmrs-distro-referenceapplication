@@ -28,6 +28,10 @@ upstream backend {
   server backend:8080 max_fails=0;
 }
 
+upstream portainer {
+  server portainer:9443 max_fails=0;
+}
+
 server {
   listen       80;
 
