@@ -71,6 +71,7 @@ services:
       MYSQL_USER: ${OMRS_DB_USER:-openmrs}
       MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+      TZ: "America/Lima"
     ports:
       - "3307:3306" # 3307 for host
     volumes:
@@ -94,6 +95,7 @@ services:
       MYSQL_USER: ${OMRS_DB_R_USER:-openmrs_r}
       MYSQL_PASSWORD: ${OMRS_DB_R_PASSWORD:-openmrs_r}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_R_PASSWORD:-openmrs_r}
+      TZ: "America/Lima"
     depends_on:
       - db
     ports:
