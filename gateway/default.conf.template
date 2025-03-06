@@ -28,9 +28,6 @@ upstream backend {
   server backend:8080 max_fails=0;
 }
 
-upstream portainer {
-  server portainer:9443 max_fails=0;
-}
 
 server {
   listen       80;
@@ -80,16 +77,6 @@ server {
   # all redirects are relative to the gateway
   absolute_redirect off;
 
-  location = /d-portainer {
-    return 301 /d-portainer/;
-    
-  }
-
-  location /d-portainer/ {
-    proxy_pass http://portainer/;
-    proxy_redirect http://$host/ /portainer/;
-  }
-
   location = /openmrs/spa {
     return 301 /openmrs/spa/;
     
@@ -122,4 +109,17 @@ server {
   location = / {
     return 301 /openmrs/spa/;
   }
+}
+
+server {
+    listen 443 ;
+
+    location /portainer {
+        proxy_pass https://portainer:9443;  # Use internal container name
+        proxy_ssl_verify off;  # Disable SSL verification (Portainer already uses SSL)
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
 }
