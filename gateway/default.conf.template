@@ -76,9 +76,18 @@ server {
   # all redirects are relative to the gateway
   absolute_redirect off;
 
+  location = /d-portainer {
+    return 301 /d-portainer/;
+    
+  }
+
+  location /d-portainer/ {
+    proxy_pass http://portainer/;
+    proxy_redirect http://$host/ /portainer/;
+  }
+
   location = /openmrs/spa {
     return 301 /openmrs/spa/;
-
     
   }
 
