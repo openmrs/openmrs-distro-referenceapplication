@@ -1,4 +1,13 @@
 services:
+  portainer:
+    container_name: peruHCE-portainer
+    image: portainer/portainer-ce:lts
+    restart: "unless-stopped"
+    ports:
+      - "9443:9443"  # Portainer Web UI
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
   gateway:
     container_name: peruHCE-gateway
     image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
@@ -103,3 +112,4 @@ volumes:
   db-data-r: ~  
   db-backup-r: ~
   gateway-data: ~
+  portainer-data: ~
