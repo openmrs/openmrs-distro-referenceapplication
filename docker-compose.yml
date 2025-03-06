@@ -61,7 +61,7 @@ services:
     container_name: peruHCE-db-master
     image: mariadb:10.11.7
     restart: "unless-stopped"
-    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1"
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --default-time-zone='-05:00'"
     healthcheck:
       test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
       interval: 3s
@@ -72,7 +72,6 @@ services:
       MYSQL_USER: ${OMRS_DB_USER:-openmrs}
       MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
-      TZ: America/Lima
     ports:
       - "3307:3306" # 3307 for host
     volumes:
@@ -85,7 +84,7 @@ services:
     container_name: peruHCE-db-replic
     image: mariadb:10.11.7
     restart: "unless-stopped"
-    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=2 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --read-only=1"
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=2 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --read-only=1 --default-time-zone='-05:00'"
     healthcheck:
       test: "mysql --user=${OMRS_DB_R_USER:-openmrs_r} --password=${OMRS_DB_R_PASSWORD:-openmrs_r} --execute \"SHOW DATABASES;\""
       interval: 3s
@@ -96,7 +95,6 @@ services:
       MYSQL_USER: ${OMRS_DB_R_USER:-openmrs_r}
       MYSQL_PASSWORD: ${OMRS_DB_R_PASSWORD:-openmrs_r}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_R_PASSWORD:-openmrs_r}
-      TZ: America/Lima
     depends_on:
       - db
     ports:
