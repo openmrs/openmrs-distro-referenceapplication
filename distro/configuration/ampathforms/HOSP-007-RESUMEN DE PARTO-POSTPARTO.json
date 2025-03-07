@@ -1,5 +1,5 @@
 {
-  "name": "HOSP-007-RESUMEN DE PARTO - POSTPARTO",
+  "name": "HOSP-007-RESUMEN DE PARTO-POSTPARTO",
   "pages": [
     {
       "label": "Resumen de Parto",
@@ -907,44 +907,54 @@
                   "label": "Fecha/hora"
                 },
                 {
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "number",
-                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  "hideSteppers": true,
                   "id": "pulso",
-                  "label": "Pulso"
-                },
-                {
+                  "label": "Pulso (latidos/min)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
-                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "disallowDecimals": true,
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "230"
                   },
-                  "hideSteppers": true,
-                  "id": "temperatura",
-                  "label": "Temperatura"
+                  "hideSteppers": true
                 },
                 {
-                  "id": "presionSistoLica",
+                  "id": "temperatura",
+                  "label": "Temperatura (°C)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": false,
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "47"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "presióNSistóLica",
                   "label": "Presión sistólica (mmHg)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
                   },
                   "hideSteppers": true
                 },
                 {
-                  "id": "presionDiastoLica",
+                  "id": "presióNDiastóLica",
                   "label": "Presión diastólica (mmHg)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "150"
                   },
                   "hideSteppers": true
                 },
@@ -964,7 +974,9 @@
                     "rendering": "number",
                     "step": 1,
                     "disallowDecimals": true,
-                    "concept": "eded35f2-aba5-497a-9f55-90634511a282"
+                    "concept": "eded35f2-aba5-497a-9f55-90634511a282",
+                    "min": "0",
+                    "max": "200"
                   },
                   "hideSteppers": true,
                   "id": "liquidos",
@@ -1348,6 +1360,7 @@
   ],
   "processor": "EncounterFormProcessor",
   "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
+  "encounter": "Hospitalización",
   "published": true,
   "retired": false,
   "referencedForms": [],
