@@ -78,9 +78,11 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "min": "0",
                     "step": 1,
-                    "concept": "a7129c35-da36-4d0b-9de7-df12e04d8821"
+                    "concept": "a7129c35-da36-4d0b-9de7-df12e04d8821",
+                    "max": "10"
                   },
                   "id": "ordenEmbarazoMultiple",
                   "label": "Orden",
@@ -146,7 +148,7 @@
                         "label": "No"
                       },
                       {
-                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "41bff726-d5a3-4213-ae62-fbe2ba0f6446",
                         "label": "No aplica"
                       }
                     ]
@@ -167,7 +169,7 @@
               "questions": [
                 {
                   "id": "pulsoMaterno",
-                  "label": "Pulso materno (min)",
+                  "label": "Pulso materno (latidos/min)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
@@ -363,7 +365,7 @@
                   "hideSteppers": true
                 },
                 {
-                  "label": "Frecuencia Cardiaca Fetal",
+                  "label": "Frecuencia Cardiaca Fetal (latidos/min)",
                   "type": "obs",
                   "required": false,
                   "id": "frecuenciaCardiacaFetal",
@@ -509,7 +511,7 @@
                         "label": "Hemorragia Vaginal"
                       },
                       {
-                        "concept": "123070AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "8852ad2d-94da-4d51-b4e9-3a69db844867",
                         "label": "Escotomas"
                       },
                       {
@@ -521,7 +523,7 @@
                         "label": "Dolor Hipocondrio Derecho"
                       },
                       {
-                        "concept": "840AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "8c4cbd95-650d-492b-9897-49379a619521",
                         "label": "Hematuria"
                       },
                       {
@@ -529,7 +531,7 @@
                         "label": "Hipotensión Ortostática"
                       },
                       {
-                        "concept": "136443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "b21d2745-60c5-4b88-80f4-2432753c7ec3",
                         "label": "Ictericia"
                       },
                       {
@@ -574,7 +576,7 @@
                     "concept": "d13aa37d-ed62-485f-8426-f6556693d29c",
                     "answers": [
                       {
-                        "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "598a8d66-2e39-4fe2-94a4-768cba5544ce",
                         "label": "Completo"
                       },
                       {
@@ -586,7 +588,7 @@
                         "label": "No recibe"
                       },
                       {
-                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "41bff726-d5a3-4213-ae62-fbe2ba0f6446",
                         "label": "No aplica"
                       }
                     ]
@@ -693,7 +695,7 @@
                         "label": "Vertical"
                       },
                       {
-                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "41bff726-d5a3-4213-ae62-fbe2ba0f6446",
                         "label": "No aplica"
                       }
                     ]
@@ -716,7 +718,7 @@
                         "label": "No"
                       },
                       {
-                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "41bff726-d5a3-4213-ae62-fbe2ba0f6446",
                         "label": "No aplica"
                       }
                     ]
@@ -762,7 +764,7 @@
                         "label": "Precipitado"
                       },
                       {
-                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "41bff726-d5a3-4213-ae62-fbe2ba0f6446",
                         "label": "No aplica"
                       }
                     ]
@@ -812,7 +814,7 @@
                         "label": "No"
                       },
                       {
-                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "41bff726-d5a3-4213-ae62-fbe2ba0f6446",
                         "label": "No aplica"
                       }
                     ]
@@ -847,7 +849,7 @@
                         "label": "IV"
                       },
                       {
-                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "41bff726-d5a3-4213-ae62-fbe2ba0f6446",
                         "label": "No aplica"
                       }
                     ]
@@ -862,7 +864,7 @@
                     "concept": "b7ab46e7-7dfa-4ee4-b00d-161e165370e6",
                     "answers": [
                       {
-                        "concept": "161636AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "2a02edb2-ac4e-4c6a-b72c-383b019ed6b5",
                         "label": "Activo"
                       },
                       {
@@ -961,7 +963,7 @@
                         "label": "Segmentada"
                       },
                       {
-                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "41bff726-d5a3-4213-ae62-fbe2ba0f6446",
                         "label": "No aplica"
                       }
                     ]
@@ -1299,26 +1301,6 @@
                   "label": "Firma y Sello"
                 }
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "label": "Responsable",
-      "sections": [
-        {
-          "label": "Responsable",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "type": "encounterProvider",
-              "questionOptions": {
-                "rendering": "ui-select-extended",
-                "isSearchable": true
-              },
-              "id": "resposable",
-              "label": "Responsable"
             }
           ]
         }
