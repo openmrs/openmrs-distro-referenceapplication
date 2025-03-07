@@ -11,7 +11,7 @@
             {
               "type": "obsGroup",
               "questionOptions": {
-                "rendering": "repeating",
+                "rendering": "group",
                 "concept": "b71c10a3-bfb2-480f-a2e9-93e2feabb8e3"
               },
               "id": "evolucionMedica",
@@ -31,9 +31,10 @@
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "textarea",
+                    "rows": 4,
                     "concept": "b71c10a3-bfb2-480f-a2e9-93e2feabb8e3"
                   },
-                  "id": "dias_estadia",
+                  "id": "descripcionEvolucionMedica",
                   "label": "Descripción de Evolución médica"
                 },
                 {
@@ -52,6 +53,8 @@
               "questionOptions": {
                 "rendering": "number",
                 "disallowDecimals": true,
+                "min": "0",						  
+                "max": "100",
                 "concept": "104b6741-cf34-4805-875c-f475748092b3"
               },
               "hideSteppers": true,
@@ -74,6 +77,7 @@
   ],
   "processor": "EncounterFormProcessor",
   "encounterType": "4d5e6f7g-4234-5678-9101-abcdefghij04",
+  "encounter": "Hospitalización",
   "published": true,
   "retired": false,
   "referencedForms": [],
