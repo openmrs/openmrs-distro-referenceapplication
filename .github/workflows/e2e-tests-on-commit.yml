@@ -33,8 +33,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        repo: [openmrs/openmrs-esm-patient-management,openmrs/openmrs-esm-patient-chart,openmrs/openmrs-esm-form-builder,openmrs/openmrs-esm-core]
-        test_name: [patient-management,patient-chart,form-builder,esm-core]
+        repo: [openmrs-esm-patient-management,openmrs-esm-patient-chart,openmrs-esm-form-builder,openmrs-esm-core]
   
     steps:
       - uses: actions/checkout@v4
@@ -62,7 +61,7 @@ jobs:
       - name: Checkout to the repo's main branch
         uses: actions/checkout@v4
         with:
-          repository: ${{ matrix.repo }}
+          repository: openmrs/${{ matrix.repo }}
           ref: main
           path: e2e_repo
 
@@ -90,7 +89,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: report-${{ matrix.test_name }}
+          name: report-${{ matrix.repo }}
           path: e2e_repo/playwright-report/
           retention-days: 30
 
@@ -104,7 +103,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: server-logs-${{ matrix.test_name }}
+          name: server-logs-${{ matrix.repo }}
           path: "./logs"
           retention-days: 2
           overwrite: true
