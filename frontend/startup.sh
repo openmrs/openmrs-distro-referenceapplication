@@ -46,7 +46,7 @@ else
   sed -i -e 's/"$SPA_CONFIG_URLS"/$SPA_CONFIG_URLS/' "/usr/share/nginx/html/index.html"
 fi
 
-SPA_DEFAULT_LOCALE=${SPA_DEFAULT_LOCALE:-en_GB}
+SPA_DEFAULT_LOCALE=${SPA_DEFAULT_LOCALE:-es}
 
 # Substitute environment variables in the html file
 # This allows us to override parts of the compiled file at runtime
