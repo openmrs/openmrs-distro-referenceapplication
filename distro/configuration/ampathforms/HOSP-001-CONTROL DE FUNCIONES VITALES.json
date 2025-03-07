@@ -1,0 +1,182 @@
+{
+  "name": "HOSP-001-CONTROL DE FUNCIONES VITALES",
+  "pages": [
+    {
+      "label": "Control de Funciones Vitales",
+      "sections": [
+        {
+          "label": "Control de Funciones Vitales",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "a432b5b7-ef2d-43af-82fb-c2357da505f4"
+              },
+              "id": "fechaHoraDeIngreso",
+              "label": "Fecha y Hora de Ingreso",
+              "datePickerFormat": "both"
+            },
+            {
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "responsable",
+              "label": "Responsable"
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "f9da2267-ecf1-4fc7-89bb-7616dd2ca027"
+              },
+              "id": "dias_estadia_group",
+              "label": "Días Estadía",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "f63cf305-c1ff-49c9-b6e1-3cf43c54c516"
+                  },
+                  "id": "dias_estadia",
+                  "label": "Fecha del día de estadía"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "3dcbcc03-c843-443c-a405-e968f20cac40",
+                    "answers": [
+                      {
+                        "concept": "40f4d322-2d46-4095-abed-c37399e6a43c",
+                        "label": "Mañana"
+                      },
+                      {
+                        "concept": "4b01e1f0-7bc3-4184-b473-b62943960a74",
+                        "label": "Tarde"
+                      },
+                      {
+                        "concept": "75cb1210-3c03-4e9c-ad61-a793f3b9fa76",
+                        "label": "Noche"
+                      }
+                    ]
+                  },
+                  "id": "turno",
+                  "label": "Turno"
+                },
+                {
+                  "id": "temperatura",
+                  "label": "Temperatura (°C)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": false,
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "47"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "frecuenciaCardiaca",
+                  "label": "Frecuencia Cardiaca",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "230"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "frecuenciaRespiratoria",
+                  "label": "Frecuencia Respiratoria",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "99"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "presióNSistóLica",
+                  "label": "Presión sistólica (mmHg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "presióNDiastóLica",
+                  "label": "Presión diastólica (mmHg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "150"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c31dfd9f-700a-4140-a4d3-ea0a96f4eacc"
+                  },
+                  "id": "orina24h",
+                  "label": "Orina / 24h"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "756cfd26-48b3-4db3-b3a9-f7b3ec5b6361"
+                  },
+                  "id": "evRec24h",
+                  "label": "EV. Rec / 24h"
+                },
+                {
+                  "id": "peso",
+                  "label": "Peso (Kg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": false,
+                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
+                  },
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "8r9s0t1u-8234-5678-9101-abcdefghij18",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "uuid": "",
+  "description": "Este formulario se utiliza para el registro de las funciones vitales de los pacientes hospitalizados. Incluye mediciones periódicas de temperatura, presión arterial, frecuencia cardíaca, frecuencia respiratoria y saturación de oxígeno, permitiendo un monitoreo continuo del estado clínico del paciente. ",
+  "version": "1.0.0"
+}

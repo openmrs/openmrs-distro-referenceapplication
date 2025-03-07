@@ -1,0 +1,138 @@
+{
+  "name": "OBST-008-REINGRESO MATERNO",
+  "pages": [
+    {
+      "label": "Reingreso Materno",
+      "sections": [
+        {
+          "label": "Reingreso Materno",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "f1458c5f-9f0b-4924-8d87-e9d0653f7e31"
+              },
+              "id": "reingresoMaternoGroup",
+              "label": "Reingreso Materno",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "f1458c5f-9f0b-4924-8d87-e9d0653f7e31",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "id": "reingreso",
+                  "label": "Reingreso"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "3bae24a7-cc89-45b8-822e-ed31ece8358a"
+                  },
+                  "id": "fechaHoraReingreso",
+                  "label": "Fecha y hora de Reingreso",
+                  "datePickerFormat": "both"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "4e34ac02-a7a1-4438-b3d0-83f3d67f51f8"
+                  },
+                  "id": "diagnosticoReingreso",
+                  "label": "Diagnóstico de Reingreso"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "8b54ff0d-6dde-47ce-ab92-5a8e41a729e8"
+                  },
+                  "id": "fechaHoraEgreso",
+                  "label": "Fecha y hora de Egreso",
+                  "datePickerFormat": "both"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "96758d0d-bb08-4ab3-a0ad-cefb271ec0c2",
+                    "answers": [
+                      {
+                        "concept": "ffb79ff9-5379-45ae-b7db-ced8246e7653",
+                        "label": "Sano"
+                      },
+                      {
+                        "concept": "3286788b-aa1e-43e4-bff0-dc816174dafa",
+                        "label": "Traslado"
+                      },
+                      {
+                        "concept": "8f1e06ba-15bf-4090-83e9-7fab23df1054",
+                        "label": "Con Patología"
+                      },
+                      {
+                        "concept": "41575d86-ce6d-4ddf-b9a0-8949add81c77",
+                        "label": "Fallece"
+                      }
+                    ]
+                  },
+                  "id": "egreso",
+                  "label": "Egreso"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "7173395c-94d6-4c4e-abd6-bb651cf3c8a1"
+                  },
+                  "id": "diagnosticoFallecimiento",
+                  "label": "Diagnóstico de Fallecimiento"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c039c1d9-0f94-4d6f-ab6e-7fb274d46adf"
+                  },
+                  "id": "diagnosticoTraslado",
+                  "label": "Diagnóstico de Traslado"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "e1b19fd7-d1dc-4036-8c42-3307b069c853"
+                  },
+                  "id": "establecimientoTraslado",
+                  "label": "Establecimiento de Traslado"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba",
+  "encounter": "Control Prenatal",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "uuid": "",
+  "description": "Formulario para el registro del reingreso materno",
+  "version": "1.0.0"
+}

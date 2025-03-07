@@ -1,0 +1,1337 @@
+{
+  "name": "OBST-005-PARTO O ABORTO",
+  "pages": [
+    {
+      "label": "Estado",
+      "sections": [
+        {
+          "label": "Estado",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "e8ae9241-68c9-46d6-9821-0bcdb791e656"
+              },
+              "id": "hcmpGroup",
+              "label": "HCMP",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e8ae9241-68c9-46d6-9821-0bcdb791e656",
+                    "answers": [
+                      {
+                        "concept": "5c4ebec7-d5e2-4a24-9a4c-1369e26f0f6d",
+                        "label": "Atención Prenatal"
+                      },
+                      {
+                        "concept": "863c4d23-fda8-4e48-b4f5-6222ce05cf70",
+                        "label": "Aborto"
+                      },
+                      {
+                        "concept": "c6567881-4659-4624-8adf-ba0c15cbc4c6",
+                        "label": "Parto"
+                      }
+                    ]
+                  },
+                  "id": "historiaClinicaMaternoPerinatal",
+                  "label": "HCMP"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "4dca8468-3c23-48b4-9595-1080bde6452a"
+              },
+              "id": "productoConcepcionGroup",
+              "label": "Producto de la Concepción",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "4dca8468-3c23-48b4-9595-1080bde6452a",
+                    "answers": [
+                      {
+                        "concept": "90e1cc32-a1be-4e98-b2f4-53a77a9eb291",
+                        "label": "Hijo Único"
+                      },
+                      {
+                        "concept": "e2432fca-6b25-4c91-86e9-dfbba84482c5",
+                        "label": "Embarazo Múltiple"
+                      },
+                      {
+                        "concept": "863c4d23-fda8-4e48-b4f5-6222ce05cf70",
+                        "label": "Aborto"
+                      }
+                    ]
+                  },
+                  "id": "productoConcepcion",
+                  "label": "Producto de la Concepción"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "min": "0",
+                    "step": 1,
+                    "concept": "a7129c35-da36-4d0b-9de7-df12e04d8821"
+                  },
+                  "id": "ordenEmbarazoMultiple",
+                  "label": "Orden",
+                  "hide": {
+                    "hideWhenExpression": "productoConcepcion !== 'e2432fca-6b25-4c91-86e9-dfbba84482c5'"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Ingreso al Establecimiento por Parto",
+      "sections": [
+        {
+          "label": "Ingreso al Establecimiento por Parto",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "56fdb8b4-4f2a-45f6-b720-7b76786c1ad1"
+              },
+              "id": "fechaHoraIngresoGroup",
+              "label": "Fecha y Hora de Ingreso al Establecimiento",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "56fdb8b4-4f2a-45f6-b720-7b76786c1ad1"
+                  },
+                  "id": "fechaHoraIngreso",
+                  "label": "Fecha y Hora de Ingreso al Establecimiento",
+                  "datePickerFormat": "both"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "5bb8f8e0-7cd0-4b67-bdef-be81de4effe1"
+              },
+              "id": "referenciaIngresoGroup",
+              "label": "Referencia al Ingreso",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "5bb8f8e0-7cd0-4b67-bdef-be81de4effe1",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  },
+                  "id": "referenciaIngreso",
+                  "label": "Referencia al Ingreso"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "3d7124e8-57e3-49c3-8ba6-eac083708dcc"
+              },
+              "id": "funcionesVitalesGroup",
+              "label": "Funciones Vitales",
+              "questions": [
+                {
+                  "id": "pulsoMaterno",
+                  "label": "Pulso materno (min)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "230"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "presióNSistóLica",
+                  "label": "Presión sistólica (mmHg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "presióNDiastóLica",
+                  "label": "Presión diastólica (mmHg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "150"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Frecuencia Respiratoria",
+                  "type": "obs",
+                  "required": false,
+                  "id": "frecuenciaRespiratoria",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "99"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "temperatura",
+                  "label": "Temperatura (°C)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": false,
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "47"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "id": "pesoMadre(Kg)",
+                  "label": "Peso Madre (Kg)",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": false,
+                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "250"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Edad gestacional (semanas)",
+                  "type": "obs",
+                  "required": false,
+                  "id": "edadGestacional(Semanas)",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "min": "1",
+                    "max": "42",
+                    "step": 1,
+                    "concept": "1e35f0dd-3bbb-4b45-96fd-2fc590c1b385"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "4c481ae7-5629-4c99-9334-566fad97ae22"
+              },
+              "id": "evaluacionFetoGroup",
+              "label": "Evaluación del Feto",
+              "questions": [
+                {
+                  "label": "Situación",
+                  "type": "obs",
+                  "required": false,
+                  "id": "situacion",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "6a3d594b-c4f6-4066-b304-aa5229102e1f",
+                    "answers": [
+                      {
+                        "concept": "72b7fd7e-fc9b-4536-a718-e4b426be6d31",
+                        "label": "Longitudinal"
+                      },
+                      {
+                        "concept": "9fb4bbbd-f929-4e4b-93b2-39cc8dd009d6",
+                        "label": "Transversa"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Presentación",
+                  "type": "obs",
+                  "required": false,
+                  "id": "presentacion",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "b966aaa2-260c-4092-8a80-14337f877019",
+                    "answers": [
+                      {
+                        "concept": "ab9ac83e-cce5-40f0-a1dd-d077da1c74b8",
+                        "label": "Cefálica"
+                      },
+                      {
+                        "concept": "7c7ee3a2-cde2-4589-8014-5c491de75b00",
+                        "label": "Pélvica"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Posición",
+                  "type": "obs",
+                  "required": false,
+                  "id": "posicion",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "7cf115cb-da62-4a09-8f38-5e2cc726cacb",
+                    "answers": [
+                      {
+                        "concept": "6ca245a5-0c22-4964-974f-1529b040028c",
+                        "label": "Derecha"
+                      },
+                      {
+                        "concept": "3a816478-abd9-41bc-88b5-f7e530f1e1eb",
+                        "label": "Izquierda"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "c6db2d8a-d00c-4567-b637-1a896aa4ef26",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "questionInfo": "Se indica si el tamaño del feto es adecuado para pasar por la pelvis",
+                  "id": "tamañoFetalAcorde",
+                  "label": "Tamaño Fetal Acorde"
+                },
+                {
+                  "label": "Altura uterina (cm)",
+                  "type": "obs",
+                  "required": false,
+                  "id": "alturaUterina",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": false,
+                    "concept": "4bcdcee3-54c2-4368-a5cf-733e9c25fe50",
+                    "min": "0",
+                    "max": "42"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Frecuencia Cardiaca Fetal",
+                  "type": "obs",
+                  "required": false,
+                  "id": "frecuenciaCardiacaFetal",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "b1fb2d14-92ec-4fda-90e5-40f3227c9c65",
+                    "disallowDecimals": true,
+                    "min": "40",
+                    "max": "250"
+                  },
+                  "hideSteppers": true
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "2d7b7ddc-8af4-4b70-a0f5-d9909fcd7573"
+              },
+              "id": "evolucionTrabajoPartoGroup",
+              "label": "Evolución del Trabajo de Parto",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "2cfc0e9d-c1df-41e6-a223-82875dc9f99d",
+                    "answers": [
+                      {
+                        "concept": "26c9c10f-a66f-4b83-9c42-0404b20d6afc",
+                        "label": "Espontáneo"
+                      },
+                      {
+                        "concept": "b2cc4efb-dd50-4bcd-943e-f35c04a04541",
+                        "label": "Inducido"
+                      }
+                    ]
+                  },
+                  "id": "inicio",
+                  "label": "Inicio"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "edc3bfa6-649c-4c61-9fc4-bf898c833e2b",
+                    "min": "0",
+                    "max": "10"
+                  },
+                  "hideSteppers": true,
+                  "questionInfo": "Apertura del cuello uterino medida en centímetros",
+                  "id": "dilatacion",
+                  "label": "Dilatación"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "6166f7ff-a125-4aed-ada4-5d49f7e7098a",
+                    "answers": [
+                      {
+                        "concept": "b75ab987-9013-4a46-b271-231a96719f75",
+                        "label": "Claro"
+                      },
+                      {
+                        "concept": "87713075-41c4-4b22-a660-f21e34ad4a13",
+                        "label": "Verde Claro"
+                      },
+                      {
+                        "concept": "bed1da26-6b67-44d2-affc-dfe79dd5aa31",
+                        "label": "Verde Oscuro"
+                      }
+                    ]
+                  },
+                  "id": "liquidoAmniotico",
+                  "label": "Liquido Amniótico"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "0eb6b0b9-331c-4a49-b9e3-84ce4cffb524",
+                    "answers": [
+                      {
+                        "concept": "087a658f-a254-41d2-8a89-1fff4795f933",
+                        "label": "Integras"
+                      },
+                      {
+                        "concept": "1a58b0b8-ee5a-4ab8-9356-414274409398",
+                        "label": "Rotas"
+                      }
+                    ]
+                  },
+                  "id": "membranasEstado",
+                  "label": "Membranas"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "0c4bf846-1b2a-4495-87b6-6e24a2eadb8b"
+                  },
+                  "id": "FechaHoraRuptura",
+                  "label": "Fecha y Hora de Ruptura",
+                  "datePickerFormat": "both"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Signos y Síntomas de Alerta",
+      "sections": [
+        {
+          "label": "Signos y Síntomas de Alerta",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "b3536fdb-f149-4d69-97ff-70762e8015d1"
+              },
+              "id": "signosSintomasAlertaGroup",
+              "label": "Signos y Síntomas de Alerta",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "b3536fdb-f149-4d69-97ff-70762e8015d1",
+                    "answers": [
+                      {
+                        "concept": "64881f17-b44c-4578-b9a5-df7b5e3cd3bd",
+                        "label": "Anasarca"
+                      },
+                      {
+                        "concept": "9dd51c15-7463-45f0-8bbe-f942fea59802",
+                        "label": "Hemorragia Vaginal"
+                      },
+                      {
+                        "concept": "123070AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Escotomas"
+                      },
+                      {
+                        "concept": "31ba6744-17c7-4ae3-989a-1d039855cf0a",
+                        "label": "Epigastralgia"
+                      },
+                      {
+                        "concept": "31bc05f5-2238-417a-afba-88530b222058",
+                        "label": "Dolor Hipocondrio Derecho"
+                      },
+                      {
+                        "concept": "840AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Hematuria"
+                      },
+                      {
+                        "concept": "f3103298-4f84-4f05-b838-2f571d59c1f9",
+                        "label": "Hipotensión Ortostática"
+                      },
+                      {
+                        "concept": "136443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Ictericia"
+                      },
+                      {
+                        "concept": "9de4bbca-30c8-4c26-8fd4-0ec8431676c1",
+                        "label": "Petequias"
+                      },
+                      {
+                        "concept": "94a6893e-b25c-43b7-b15d-c79ac4ba4617",
+                        "label": "Proteinuria"
+                      }
+                    ]
+                  },
+                  "id": "signosSintomasAlerta",
+                  "label": "Signos y Síntomas de Alerta"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Corticoides Antenatales",
+      "sections": [
+        {
+          "label": "Corticoides Antenatales (28-34sem)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "d13aa37d-ed62-485f-8426-f6556693d29c"
+              },
+              "id": "corticoidesAntenatalesGroup",
+              "label": "Corticoides Antenatales",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "d13aa37d-ed62-485f-8426-f6556693d29c",
+                    "answers": [
+                      {
+                        "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Completo"
+                      },
+                      {
+                        "concept": "d1513f39-771a-44bc-9fa1-fd55c3434615",
+                        "label": "Incompleto"
+                      },
+                      {
+                        "concept": "112dc075-83d4-40ff-9e85-3fa7695eaa33",
+                        "label": "No recibe"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  },
+                  "id": "corticoidesAntenatales",
+                  "label": "Corticoides Antenatales"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "step": 1,
+                    "concept": "02161296-7b08-473f-a454-3314781d79e4",
+                    "min": "22",
+                    "max": "36"
+                  },
+                  "hideSteppers": true,
+                  "id": "semanaInicio",
+                  "label": "Semana de Inicio"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Terminación",
+      "sections": [
+        {
+          "label": "Terminación",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "43bdd458-565e-4093-90ce-c3fbfbee1bfe"
+              },
+              "id": "fechaHoraTerminacionGroup",
+              "label": "Fecha y Hora de Terminación",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "43bdd458-565e-4093-90ce-c3fbfbee1bfe"
+                  },
+                  "id": "fechaHoraTerminacion",
+                  "label": "Fecha y Hora de Terminación",
+                  "datePickerFormat": "both"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "648098df-d25a-4305-a318-c828e18b8e86"
+              },
+              "id": "terminacionPartoGroup",
+              "label": "Terminación del Parto",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "648098df-d25a-4305-a318-c828e18b8e86",
+                    "answers": [
+                      {
+                        "concept": "863c4d23-fda8-4e48-b4f5-6222ce05cf70",
+                        "label": "Aborto"
+                      },
+                      {
+                        "concept": "4837b13d-6e15-4bd7-80ac-c3eac4054e6c",
+                        "label": "Parto Espontáneo"
+                      },
+                      {
+                        "concept": "51d4bbea-003c-4d31-bbda-52dafdf3a75c",
+                        "label": "Cesárea Electiva"
+                      },
+                      {
+                        "concept": "90000f52-fdb3-4343-8f96-441865f026bc",
+                        "label": "Cesárea Emergencia"
+                      }
+                    ]
+                  },
+                  "id": "terminacion",
+                  "label": "Terminación"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "31c9f5d6-58d2-4bfd-9c77-8f25655e4191",
+                    "answers": [
+                      {
+                        "concept": "05747540-c045-4bb1-9788-79f543a65d8c",
+                        "label": "Horizontal"
+                      },
+                      {
+                        "concept": "ee8de100-facf-44e3-baf3-73c004a06e10",
+                        "label": "Vertical"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  },
+                  "id": "posicionGestantes",
+                  "label": "Posición de Gestante"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e6241b6a-f337-4c00-88de-7587d7b5ee00",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  },
+                  "id": "partograma",
+                  "label": "Partograma"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "0f6f15ac-4cbe-4b31-8fd4-fafbd30aa33a",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "id": "partoAcompañante",
+                  "label": "Parto con Acompañante"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "6c80c485-edc9-4fd4-85d3-af445aeb43b6",
+                    "answers": [
+                      {
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Normal"
+                      },
+                      {
+                        "concept": "c27bbef2-4b28-4932-b17a-b1869f56PERU",
+                        "label": "Prolongado"
+                      },
+                      {
+                        "concept": "267260eb-5ea5-4e04-ac45-c41264d3PERU",
+                        "label": "Precipitado"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  },
+                  "id": "duracion",
+                  "label": "Duración"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "0f556e7a-ff6c-47b1-84db-0b042101f6c6",
+                    "answers": [
+                      {
+                        "concept": "c0bd5819-02ec-4c57-94b1-23fe47af8a30",
+                        "label": "No hubo"
+                      },
+                      {
+                        "concept": "c3d89679-5a29-4762-adb8-9a79f1991db6",
+                        "label": "Durante Embarazo"
+                      },
+                      {
+                        "concept": "0b01113a-e775-4cad-8bf5-e16ee146282e",
+                        "label": "Durante Parto"
+                      },
+                      {
+                        "concept": "9442a5c7-4081-4060-916b-35f03f74683c",
+                        "label": "Momento Desconocido"
+                      }
+                    ]
+                  },
+                  "id": "muerteIntrauterina",
+                  "label": "Muerte Intrauterina"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "6de4fba1-3bfa-4e57-9695-1d37a885ecaf",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Sí"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  },
+                  "id": "episiotomia",
+                  "label": "Episiotomía"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "9e418e29-6a41-4f55-bf74-5531fc8b1d83",
+                    "answers": [
+                      {
+                        "concept": "",
+                        "label": "No hubo"
+                      },
+                      {
+                        "concept": "4b6278eb-9b8b-42a6-8a76-bb6926b92970",
+                        "label": "I"
+                      },
+                      {
+                        "concept": "7c9ca92f-8a52-4a3a-8ead-1447ca92e2a0",
+                        "label": "II"
+                      },
+                      {
+                        "concept": "5f7e8739-6b4b-4337-aeda-0eeb8fdafbaf",
+                        "label": "III"
+                      },
+                      {
+                        "concept": "fe17f502-0d09-43f7-9696-a66afceb2deb",
+                        "label": "IV"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  },
+                  "id": "desagarros",
+                  "label": "Desagarros"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "b7ab46e7-7dfa-4ee4-b00d-161e165370e6",
+                    "answers": [
+                      {
+                        "concept": "161636AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Activo"
+                      },
+                      {
+                        "concept": "f2fdf3bf-1dcb-4230-b607-4ed08f9b594d",
+                        "label": "Espontáneo"
+                      },
+                      {
+                        "concept": "c04174e3-9f64-4b0f-a82e-c0b6e5e78b31",
+                        "label": "Manual"
+                      }
+                    ]
+                  },
+                  "id": "alumbramiento",
+                  "label": "Alumbramiento"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "ee00490c-9481-4e4a-a098-d8dc481bc94b",
+                    "answers": [
+                      {
+                        "concept": "d7fadc6e-7300-4588-9f60-bec27cb3cc9c",
+                        "label": "Completa"
+                      },
+                      {
+                        "concept": "c78fc932-61ae-4ad7-ad25-cd7d38b26d66",
+                        "label": "Incompleta"
+                      },
+                      {
+                        "concept": "59a609c1-7298-44a1-ab6b-22fdf213ccc1",
+                        "label": "Retenida"
+                      }
+                    ]
+                  },
+                  "id": "placenta",
+                  "label": "Placenta"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "2b028982-e207-492f-9001-c851c674203d",
+                    "answers": [
+                      {
+                        "concept": "1166bc75-db95-4226-ba42-14b6686c0455",
+                        "label": "Precoz"
+                      },
+                      {
+                        "concept": "58d1c759-6cf1-4e42-bf12-17feb11716bd",
+                        "label": "Temprana"
+                      },
+                      {
+                        "concept": "eadf9956-6491-4126-808d-28b713f039bd",
+                        "label": "Tardía"
+                      }
+                    ]
+                  },
+                  "id": "ligaduraCordon",
+                  "label": "Ligadura de Cordón"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Tipo de Procedimiento",
+      "sections": [
+        {
+          "label": "Tipo de Procedimiento",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "467f4fae-fbbf-4f63-9163-01b54514f1d5"
+              },
+              "id": "tipoProcedimientoGroup",
+              "label": "Tipo de Procedimiento",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "12f3c4d9-a91b-4fc9-9131-5d5611dd3432",
+                    "answers": [
+                      {
+                        "concept": "cdbf8c56-a064-4664-96d4-0a23c9560475",
+                        "label": "Corporal"
+                      },
+                      {
+                        "concept": "2c2741bf-e1c9-4178-ae0d-27ae7e162fc2",
+                        "label": "Segmentada"
+                      },
+                      {
+                        "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No aplica"
+                      }
+                    ]
+                  },
+                  "id": "tipoProcedimientoCesarea",
+                  "label": "Cesárea"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Medicación en Parto",
+      "sections": [
+        {
+          "label": "Medicación en Parto",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "096c5e6e-410a-4593-9f59-545813642c33",
+                "answers": [
+                  {
+                    "concept": "096c5e6e-410a-4593-9f59-545813642c33",
+                    "label": "Sin medicación"
+                  }
+                ]
+              },
+              "id": "sinMedicacion",
+              "label": "Sin medicación"
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "3ab5f91d-1ac4-40e9-b9a7-2e98b657d46b"
+              },
+              "id": "medicacionPartoGroup",
+              "label": "Medicación",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "3ab5f91d-1ac4-40e9-b9a7-2e98b657d46b"
+                  },
+                  "id": "medicacion",
+                  "label": "Medicación"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "72f0a143-8e60-4ce6-bcd8-33a1ac0e149e"
+              },
+              "id": "medicamentosPartoGroup",
+              "label": "Medicamentos",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "72f0a143-8e60-4ce6-bcd8-33a1ac0e149e"
+                  },
+                  "id": "medicamentos",
+                  "label": "Medicamentos"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Indicación Principal Parto Operatorio",
+      "sections": [
+        {
+          "label": "Indicación Principal Parto Operatorio",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "5aebf764-e3d3-4710-a1cf-89b093411fbe"
+              },
+              "id": "indicacionPartoOperatorioGroup",
+              "label": "Indicación Principal Parto Operatorio",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "c0bd5819-02ec-4c57-94b1-23fe47af8a30",
+                    "answers": [
+                      {
+                        "concept": "c0bd5819-02ec-4c57-94b1-23fe47af8a30",
+                        "label": "No hubo"
+                      }
+                    ]
+                  },
+                  "id": "noHuboIndicacionPartoOperatorio",
+                  "label": "No hubo"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "5aebf764-e3d3-4710-a1cf-89b093411fbe"
+                  },
+                  "id": "indicacionPartoOperatorio",
+                  "label": "Indicación Principal Parto Operatorio"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Atención",
+      "sections": [
+        {
+          "label": "Atención",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "1c7f61d9-74f7-4f93-bb97-f245252311bb"
+              },
+              "id": "nivelAtencionGroup",
+              "label": "Nivel Atención",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "1c7f61d9-74f7-4f93-bb97-f245252311bb",
+                    "answers": [
+                      {
+                        "concept": "0779bd52-6e69-4a45-a5ab-577c4f406793",
+                        "label": "FONP"
+                      },
+                      {
+                        "concept": "dd33a3de-afcd-402c-a930-8f79de009b2e",
+                        "label": "FONB"
+                      },
+                      {
+                        "concept": "32a4f583-824f-4f2d-8100-c1a83d7f15d9",
+                        "label": "FONE"
+                      },
+                      {
+                        "concept": "9330fd64-b186-428e-97f6-2c2a30cfefea",
+                        "label": "FONI"
+                      },
+                      {
+                        "concept": "25c246e1-00fa-4faf-83a7-0930d6978f9b",
+                        "label": "Domiciliario"
+                      },
+                      {
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Otro"
+                      }
+                    ]
+                  },
+                  "id": "nivelAtencion",
+                  "label": "Nivel"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "c6567881-4659-4624-8adf-ba0c15cbc4c6"
+              },
+              "id": "partoAtendidoPorGroup",
+              "label": "Parto",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "c6567881-4659-4624-8adf-ba0c15cbc4c6",
+                    "answers": [
+                      {
+                        "concept": "6753099c-fe33-48a4-804a-d8a130c00549",
+                        "label": "Médico"
+                      },
+                      {
+                        "concept": "8fda9373-2c4f-4eb7-b71e-23ffafc39c66",
+                        "label": "Residente Médico"
+                      },
+                      {
+                        "concept": "07022c43-0593-4ecf-8ab2-2f13d8ee5118",
+                        "label": "Obstetriz"
+                      },
+                      {
+                        "concept": "0061df9a-dbe1-43e3-9ed6-063c0da1faa7",
+                        "label": "Interno"
+                      },
+                      {
+                        "concept": "2e6e4a8a-39e7-48fe-a6d0-353c14d51e14",
+                        "label": "Enfermera"
+                      },
+                      {
+                        "concept": "965de3d4-7742-47bf-96af-29fbfd448db2",
+                        "label": "Técnico de Enfermería"
+                      },
+                      {
+                        "concept": "83139c83-3bbf-41cd-b45f-c054b838851b",
+                        "label": "Estudiante"
+                      },
+                      {
+                        "concept": "4603fea4-9e0f-4fa5-ba2f-e531619d372d",
+                        "label": "Empírica o partera"
+                      },
+                      {
+                        "concept": "ceaaec9f-b581-4a66-af7d-17d1c69da2a0",
+                        "label": "Familiar"
+                      },
+                      {
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Otro"
+                      }
+                    ]
+                  },
+                  "id": "partoAtendidoPor",
+                  "label": "Parto"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "a3aee577-37a3-405b-b267-3f733122f7af"
+                  },
+                  "id": "responsableAtencionMaterna",
+                  "label": "Responsable Atención Materna (Nombre)"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "84a9cc40-b229-4760-bb3f-abeaf95c2439"
+                  },
+                  "id": "firmaSelloResponsableAtencionMaterna",
+                  "label": "Firma y Sello"
+                }
+              ]
+            },
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "e5e538ba-c5a9-485e-bc49-7190f3e2700e"
+              },
+              "id": "neonatoGroup",
+              "label": "Neonato",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "e5e538ba-c5a9-485e-bc49-7190f3e2700e",
+                    "answers": [
+                      {
+                        "concept": "6753099c-fe33-48a4-804a-d8a130c00549",
+                        "label": "Médico"
+                      },
+                      {
+                        "concept": "8fda9373-2c4f-4eb7-b71e-23ffafc39c66",
+                        "label": "Residente Médico"
+                      },
+                      {
+                        "concept": "07022c43-0593-4ecf-8ab2-2f13d8ee5118",
+                        "label": "Obstetriz"
+                      },
+                      {
+                        "concept": "0061df9a-dbe1-43e3-9ed6-063c0da1faa7",
+                        "label": "Interno"
+                      },
+                      {
+                        "concept": "2e6e4a8a-39e7-48fe-a6d0-353c14d51e14",
+                        "label": "Enfermera"
+                      },
+                      {
+                        "concept": "965de3d4-7742-47bf-96af-29fbfd448db2",
+                        "label": "Técnico de Enfermería"
+                      },
+                      {
+                        "concept": "83139c83-3bbf-41cd-b45f-c054b838851b",
+                        "label": "Estudiante"
+                      },
+                      {
+                        "concept": "4603fea4-9e0f-4fa5-ba2f-e531619d372d",
+                        "label": "Empírica o partera"
+                      },
+                      {
+                        "concept": "ceaaec9f-b581-4a66-af7d-17d1c69da2a0",
+                        "label": "Familiar"
+                      },
+                      {
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Otro"
+                      }
+                    ]
+                  },
+                  "id": "neonatoAtendidoPor",
+                  "label": "Neonato"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "2c7c94cf-e722-4224-9e92-1f2ebd9d610a"
+                  },
+                  "id": "responsableAtencionNeonata",
+                  "label": "Responsable Atención Neonata (Nombre)"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "84a9cc40-b229-4760-bb3f-abeaf95c2439"
+                  },
+                  "id": "firmaSelloResponsableAtencionNeonata",
+                  "label": "Firma y Sello"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Responsable",
+      "sections": [
+        {
+          "label": "Responsable",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "resposable",
+              "label": "Responsable"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba",
+  "encounter": "Control Prenatal",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "uuid": "",
+  "description": "Formulario para el registro del parto o aborto",
+  "version": "1.0.0"
+}
