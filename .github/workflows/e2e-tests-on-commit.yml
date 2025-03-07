@@ -33,7 +33,11 @@ jobs:
     needs: build
     strategy:
       matrix:
-        repo: [openmrs-esm-patient-management,openmrs-esm-patient-chart,openmrs-esm-form-builder,openmrs-esm-core]
+        repo: 
+          - openmrs-esm-patient-management
+          - openmrs-esm-patient-chart
+          - openmrs-esm-form-builder
+          - openmrs-esm-core
   
     steps:
       - uses: actions/checkout@v4
