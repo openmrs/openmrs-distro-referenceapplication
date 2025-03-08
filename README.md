@@ -56,6 +56,6 @@ To help us keep track of things, we ask that you suffix any files you add with e
 those that should be part of the core package. For example, a form named `test_form.json` would become
 `test_core-core_demo.json`.
 
-Frontend configuration can be found in `frontend/config-core_demo.json`.
+Frontend configuration can be found in `frontend/config-core.json`.
 
 Thanks!
