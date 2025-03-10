@@ -106,20 +106,23 @@ server {
     }
   }
 
+  location = /pihole {
+    return 301 /pihole/;
+    
+  }
+  
+  location /pihole/ {
+    proxy_pass http://pihole/admin;
+    proxy_redirect http://$host/ /pihole/admin/;
+  }
+
   location = / {
     return 301 /openmrs/spa/;
   }
+
+  
 }
 
-server {
-    listen 443 ;
 
-    location /portainer {
-        proxy_pass https://portainer:9443;  # Use internal container name
-        proxy_ssl_verify off;  # Disable SSL verification (Portainer already uses SSL)
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto https;
-    }
-}
+
+
