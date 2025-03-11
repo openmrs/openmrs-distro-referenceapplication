@@ -4,7 +4,7 @@ import base64
 from datetime import datetime
 
 # 📌 Configuración de la API de OpenMRS
-BASE_PATH = "http://hii1sc-qlty.inf.pucp.edu.pe"
+BASE_PATH = "http://hii1sc-dev.inf.pucp.edu.pe"
 END_URL = "/openmrs/ws/rest/v1/providerattributetype"
 OPENMRS_URL = BASE_PATH + END_URL
 

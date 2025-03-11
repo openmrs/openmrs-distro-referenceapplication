@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import re  # Para expresiones regulares
 import pandas as pd
 import requests
 import base64
@@ -7,14 +7,16 @@ import json
 from datetime import datetime
 
 # 📌 Configuración de OpenMRS
-BASE_URL = "http://hii1sc-qlty.inf.pucp.edu.pe"
+BASE_URL = "http://hii1sc-dev.inf.pucp.edu.pe"
 USER_API = "/openmrs/ws/rest/v1/user"
 PROVIDER_API = "/openmrs/ws/rest/v1/provider"
 ROLE_API = "/openmrs/ws/rest/v1/role"
+PROVIDER_ATTRIBUTE_API = "/openmrs/ws/rest/v1/providerattributetype?q=&v=full"
 
 OPENMRS_USER_URL = BASE_URL + USER_API
 OPENMRS_PROVIDER_URL = BASE_URL + PROVIDER_API
 OPENMRS_ROLE_URL = BASE_URL + ROLE_API
+OPENMRS_PROVIDER_ATTRIBUTE_URL = BASE_URL + PROVIDER_ATTRIBUTE_API
 
 USERNAME = "admin"
 PASSWORD = "Admin123"
@@ -34,6 +36,55 @@ def get_auth_headers():
         "Authorization": f"Basic {encoded_credentials}",
         "Content-Type": "application/json; charset=utf-8"
     }
+
+def get_provider_attributes_1():
+    try:
+        # Configurar la solicitud con autenticación utilizando la función de autorización
+        headers = get_auth_headers()
+        response = requests.get(OPENMRS_PROVIDER_ATTRIBUTE_URL, headers=headers)
+        
+        # Verificar si la respuesta es exitosa
+        if response.status_code == 200:
+            data = response.json()
+            
+            # Extraer solo los campos uuid y name
+            filtered_data = [
+                {"uuid": item["uuid"], "name": item["name"]} for item in data.get("results", [])
+            ]
+            
+            return json.dumps(filtered_data, indent=4, ensure_ascii=False)
+        else:
+            return json.dumps({"error": f"Error en la solicitud: {response.status_code}"}, indent=4)
+    except Exception as e:
+        return json.dumps({"error": str(e)}, indent=4)
+
+def get_provider_attributes():
+    try:
+        # Configurar la solicitud con autenticación utilizando la función de autorización
+        headers = get_auth_headers()
+        response = requests.get(OPENMRS_PROVIDER_ATTRIBUTE_URL, headers=headers)  # Se corrigió la variable URL
+        
+        # Verificar si la respuesta es exitosa
+        if response.status_code == 200:
+            data = response.json()
+            
+            # Convertir la lista en un diccionario {nombre: uuid}
+            attribute_dict = {item["name"]: item["uuid"] for item in data.get("results", [])}
+
+            return attribute_dict  # Se devuelve un diccionario en lugar de JSON en formato de texto
+        
+        else:
+            print(f"❌ Error en la solicitud: {response.status_code} - {response.text}")
+            return {}  # Retorna un diccionario vacío en caso de error
+    except requests.exceptions.RequestException as req_err:
+        print(f"❌ Error en la solicitud: {str(req_err)}")
+        return {}
+    except json.JSONDecodeError:
+        print("❌ No se pudo decodificar la respuesta JSON")
+        return {}
+    except Exception as e:
+        print(f"❌ Error inesperado: {str(e)}")
+        return {}
 
 # 📌 Función para limpiar caracteres no compatibles con LATIN-1
 def clean_text(text):
@@ -153,27 +204,44 @@ def register_user(user_data, roles_json, row_index):
         return {"row_index": row_index, "status": "Error", "message": f"Faltan datos: {', '.join(missing_fields)}", "rol_usado": "Datos incompletos"}
 
     # 📌 Obtener el UUID del rol desde roles_json
-    rol_name = user_data.get("role_name", "").strip()
+    roles_name = user_data.get("role_name", "").strip()  # Extrae el valor y elimina espacios extra
     rol_description = user_data.get("role_description", "")
-    rol_uuid = None
-    rol_mensaje = "No asignado"
 
-    if rol_name:
-        # 🔍 Buscar el rol en la lista de roles obtenida de OpenMRS
-        rol_uuid = next((role["uuid"] for role in roles_json["roles"] if role["name"] == rol_name), None)
+    # Inicializar lista para almacenar UUIDs de roles
+    roles_list = []
 
-        if rol_uuid:
-            rol_mensaje = f"Usado: {rol_name}"
-        else:
-            print(f"⚠️ El rol '{rol_name}' no existe en OpenMRS. Creándolo...")
-            rol_uuid = create_role(rol_name, rol_description)
+    # Convertir la cadena en una lista separada por comas
+    lista_roles = [role.strip() for role in re.split(r',\s*(?![^()]*\))', roles_name) if role.strip()]
+
+    for nombre_rol in lista_roles:
+        if nombre_rol:
+            # 🔍 Buscar el rol en la lista de roles obtenida de OpenMRS
+            rol_uuid = next((role["uuid"] for role in roles_json.get("roles", []) if role["name"] == nombre_rol), None)
+
             if rol_uuid:
-                roles_json["roles"].append({"uuid": rol_uuid, "name": rol_name})  # Agregar nuevo rol al JSON de roles
-                rol_mensaje = f"Creado: {rol_name}"
+                rol_mensaje = f"Usado: {nombre_rol}"
             else:
-                rol_mensaje = f"Error creando: {rol_name}"
+                print(f"⚠️ El rol '{nombre_rol}' no existe en OpenMRS. Creándolo...")
 
-    roles_list = [{"uuid": rol_uuid}] if rol_uuid else []
+                # 📌 Crear el rol y extraer el UUID si se creó correctamente
+                nuevo_rol = create_role(nombre_rol, rol_description, [], [])
+                rol_uuid = nuevo_rol.get("uuid") if nuevo_rol else None
+
+                if rol_uuid:
+                    if "roles" not in roles_json:
+                        roles_json["roles"] = []  # Inicializa la lista si no existe
+
+                    # Agregar nuevo rol a la lista de roles en roles_json
+                    roles_json["roles"].append({"uuid": rol_uuid, "name": nombre_rol})
+                    rol_mensaje = f"Creado: {nombre_rol}"
+                else:
+                    rol_mensaje = f"❌ Error creando: {nombre_rol}"
+
+            # 📌 Agregar el UUID a la lista de roles si se encontró o creó
+            if rol_uuid:
+                roles_list.append({"uuid": rol_uuid})
+
+            print(f"📌 {rol_mensaje}")
 
     # 📌 Construcción del JSON para la solicitud
     payload = {
@@ -184,9 +252,8 @@ def register_user(user_data, roles_json, row_index):
             "gender": user_data["gender"],
             "birthdate": str(user_data["birthdate"]),
         },
-        "roles": roles_list
+        "roles": roles_list  # 🔹 Ahora contiene TODOS los UUIDs de roles encontrados o creados
     }
-
     # 📌 Mostrar el JSON que se enviará antes de hacer la solicitud
     #print("\n📌 JSON ENVIADO A OPENMRS (CREAR/ACTUALIZAR USUARIO):")
     #print(json.dumps(payload, indent=4))
@@ -228,6 +295,9 @@ def register_user(user_data, roles_json, row_index):
             print(f"Error procesando la respuesta de error de OpenMRS: {parse_error}")
 
         return {"row_index": row_index, "status": "Error", "message": f"Error en la solicitud: {str(e)}", "rol_usado": "Error general"}
+
+
+ATTRIBUTE_MAPPING = get_provider_attributes()
 
 # 📌 Registrar el Provider asociado al usuario
 def register_provider(person_uuid, user_data, row_index=0):
@@ -327,6 +397,8 @@ LOG_FILE = "usuarios_providers_log.xlsx"
 # 📌 Ejecutar el proceso
 def main():
     process_users_from_excel(EXCEL_FILE, LOG_FILE)
+
+    #print(get_provider_attributes())
 
 if __name__ == "__main__":
     main()
