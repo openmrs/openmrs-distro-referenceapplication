@@ -1,0 +1,46 @@
+[Unit]
+Description=Docker Compose App
+After=network.target docker.service
+Requires=docker.service
+
+# Change WorkingDirectory
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/u.hsc.qlty/peruHCE-distro-referenceapplication
+
+# Verificar si el puerto 80 está en uso y detener el proceso que lo ocupa
+ExecStartPre=/bin/bash -c '\
+  if lsof -i :80 >/dev/null; then \
+    echo "Puerto 80 en uso. Deteniendo proceso..." | systemd-cat -t docker-compose-app; \
+    PID=$(lsof -ti :80); \
+    kill -15 $PID; \
+    sleep 3; \
+    if lsof -i :80 >/dev/null; then \
+      echo "El proceso sigue activo. Forzando cierre..." | systemd-cat -t docker-compose-app; \
+      kill -9 $PID; \
+      sleep 2; \
+    fi; \
+  fi'
+
+# Verificar nuevamente si el puerto está libre, si no, abortar
+ExecStartPre=/bin/bash -c '\
+  if lsof -i :80 >/dev/null; then \
+    echo "Error: El puerto 80 sigue ocupado. Abortando inicio de Docker Compose." | systemd-cat -t docker-compose-app; \
+    exit 1; \
+  fi'
+
+# Iniciar los contenedores con Docker Compose
+ExecStart=/usr/bin/docker compose up -d
+
+# Detener los contenedores cuando el servicio se detenga
+ExecStop=/usr/bin/docker compose down
+
+# Reintentar si falla
+Restart=on-failure
+RestartSec=5
+
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
