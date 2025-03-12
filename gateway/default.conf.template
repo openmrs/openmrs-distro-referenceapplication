@@ -106,16 +106,6 @@ server {
     }
   }
 
-  location = /pihole {
-    return 301 /pihole/;
-    
-  }
-  
-  location /pihole/ {
-    proxy_pass http://pihole/admin;
-    proxy_redirect http://$host/ /pihole/admin/;
-  }
-
   location = / {
     return 301 /openmrs/spa/;
   }

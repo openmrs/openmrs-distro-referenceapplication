@@ -109,6 +109,7 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:2025.03.0
+    restart: "unless-stopped"    
     ports:
       # DNS Ports
       - "53:53/tcp"
@@ -125,8 +126,9 @@ services:
     # Volumes store your data between container upgrades
     volumes:
       # For persisting Pi-hole's databases and common configuration file
-      - './etc-pihole:/etc/pihole'
-    restart: unless-stopped
+      - pihole-data:/etc/pihole
+      #- './etc-dnsmasq.d:/etc/dnsmasq.d
+    
 
 volumes:
   openmrs-frontend: ~
@@ -137,3 +139,4 @@ volumes:
   db-backup-r: ~
   gateway-data: ~
   portainer-data: ~
+  pihole-data: ~
