@@ -28,6 +28,10 @@ upstream backend {
   server backend:8080 max_fails=0;
 }
 
+upstream portainer {
+  server portainer:9000 max_fails=0;
+}
+
 
 server {
   listen       80;
@@ -104,6 +108,10 @@ server {
       add_header Content-Type text/plain;
       return 204;
     }
+  }
+
+  location /portainer {
+    proxy_pass http://portainer/;
   }
 
   location = / {
