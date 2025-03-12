@@ -614,14 +614,37 @@
               "label": "FCF"
             },
             {
+              "label": "Movimiento fetal",
               "type": "obs",
+              "required": false,
+              "id": "movimientoFetal",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "9e77be6d-6659-4cf3-bb27-8956ce6dcb67"
+                "rendering": "select",
+                "concept": "4f7db321-59bf-483c-adfd-96a96eb6c5c1",
+                "answers": [
+                  {
+                    "concept": "bb605143-991d-4125-94a9-fa63c46e2026",
+                    "label": "Movimientos fetales disminuidos"
+                  },
+                  {
+                    "concept": "73c654a6-e865-41cf-ac8c-c2db3acf6324",
+                    "label": "Movimientos fetales presentes"
+                  },
+                  {
+                    "concept": "9fe64bdc-93e3-44ea-912e-6f86160880b5",
+                    "label": "Movimientos fetales muy activo"
+                  },
+                  {
+                    "concept": "b9d247e4-e5f8-445a-9d3a-6ab5ac876ca5",
+                    "label": "Sin movimientos fetales"
+                  },
+                  {
+                    "concept": "41bff726-d5a3-4213-ae62-fbe2ba0f6446",
+                    "label": "No aplica"
+                  }
+                ]
               },
-              "questionInfo": "Muerte fetal",
-              "id": "muerteFetal",
-              "label": "MF"
+              "validators": []
             },
             {
               "type": "obs",
