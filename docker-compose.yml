@@ -4,7 +4,8 @@ services:
     image: portainer/portainer-ce:lts
     restart: "unless-stopped"
     ports:
-      - "9443:9443"  # Portainer Web UI
+      - "9443:9443"  # HTTPS Portainer Web UI
+      - "9000:9000"  # HTTP Portainer Web UI
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer-data:/data
