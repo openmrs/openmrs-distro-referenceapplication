@@ -106,8 +106,8 @@ services:
       - db-backup-r:/backup
   
   # DNS Server
-  pihole:
-    container_name: pihole
+  dns:
+    container_name: peruHCE-dns
     image: pihole/pihole:2025.03.0
     restart: "unless-stopped"    
     ports:
