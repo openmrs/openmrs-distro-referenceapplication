@@ -1,0 +1,149 @@
+{
+  "name": "OBST-004-FICHA PLAN DE PARTO-SEGUNDA CONSULTA",
+  "pages": [
+    {
+      "label": "2da. Consulta: Domicilio",
+      "sections": [
+        {
+          "label": "2da.  Consulta",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "label": "Transporte",
+              "id": "transporte_group",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "830ecf86-edd6-41dd-9211-7785a930e995"
+              },
+              "questions": [
+                {
+                  "label": "Transporte",
+                  "id": "transporte_question",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "830ecf86-edd6-41dd-9211-7785a930e995",
+                    "answers": [
+                      {
+                        "concept": "b30165d0-172f-4cff-a721-d8a3b20ac711",
+                        "label": "Carro"
+                      },
+                      {
+                        "concept": "c7ac2f13-f8fa-4eca-aa90-33bf0743e8d2",
+                        "label": "Pk Pk"
+                      },
+                      {
+                        "concept": "a8be95cf-fe3f-482e-90de-74da37cde0c6",
+                        "label": "Camilla"
+                      },
+                      {
+                        "concept": "0e2a84ef-5ee5-4368-a19f-7d9c048e5574",
+                        "label": "Canoa"
+                      },
+                      {
+                        "concept": "e3499e8a-0246-4e54-84c0-d071bef15a47",
+                        "label": "Mototaxi"
+                      },
+                      {
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Otro"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "concept": "15bc0ad1-c65d-4aa4-99af-bd694c71738e",
+                    "rendering": "text"
+                  },
+                  "hide": {
+                    "hideWhenExpression": "transporte_question !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  },
+                  "id": "especificarTransporte",
+                  "label": "Especificar (transporte)"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "2b9868e5-7c5c-4749-bcff-2edce5cecee4"
+                  },
+                  "id": "quienPertenece",
+                  "label": "¿A quiénes pertenece?"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "6b932878-454e-4065-8e01-771fd5c5094e"
+                  },
+                  "id": "dóNdeSeEncuentra",
+                  "label": "¿Dónde se encuentra?"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "af30930b-adaf-49ec-8f13-dc8045db6622",
+                    "min": "0",
+                    "max": "100"
+                  },
+                  "hideSteppers": true,
+                  "id": "horasEnLlegarACasa",
+                  "label": "Horas en llegar a casa"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "concept": "2cf4b870-b2f4-4447-9167-92d97cdf8f88",
+                    "min": "0",
+                    "max": "100"
+                  },
+                  "hideSteppers": true,
+                  "id": "horasEnLlegarAlEstablecimiento",
+                  "label": "Horas en llegar al establecimiento"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "disallowDecimals": true,
+                    "step": 1,
+                    "concept": "e47d0d75-f85a-46ce-8378-b9a4b66706a7",
+                    "min": "0",
+                    "max": "200"
+                  },
+                  "id": "costo",
+                  "label": "Costo"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "8a65caa1-5dda-4d81-9de7-0d14defba631"
+                  },
+                  "id": "informacióNAdicional",
+                  "label": "Información adicional"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba",
+  "encounter": "Control Prenatal",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "uuid": "ceb2676b-70e5-4fa6-944a-6fb1957ba1b6",
+  "description": "Formulario para el registro del plan de parto",
+  "version": "1.0.0"
+}

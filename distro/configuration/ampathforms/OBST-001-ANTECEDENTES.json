@@ -258,10 +258,11 @@
                   "id": "gestaciones",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
                     "min": "0",
                     "max": "20",
                     "concept": "ae27daee-d2f3-4df3-8e07-eff75c81872e",
-                    "step": "1"
+                    "step": 1
                   },
                   "validators": []
                 },
@@ -275,7 +276,7 @@
                     "min": "0",
                     "max": "10",
                     "concept": "dbfad4ff-1b0c-4823-b80a-3864e1d81e94",
-                    "step": "1",
+                    "step": 1,
                     "disallowDecimals": true
                   },
                   "hide": {
@@ -293,7 +294,7 @@
                     "min": "0",
                     "max": "20",
                     "concept": "8795c05b-f286-4d70-a1e6-69172e676f05",
-                    "step": "1",
+                    "step": 1,
                     "disallowDecimals": true
                   },
                   "hide": {
@@ -311,7 +312,7 @@
                     "min": "0",
                     "max": "20",
                     "concept": "985732d6-157e-49aa-9d28-556696c5c4fe",
-                    "step": "1",
+                    "step": 1,
                     "disallowDecimals": true
                   },
                   "hide": {
@@ -326,6 +327,8 @@
                   "id": "cesaReas",
                   "questionOptions": {
                     "rendering": "number",
+                    "disallowDecimals": true,
+                    "step": 1,
                     "min": "0",
                     "max": "20",
                     "concept": "78b32019-9881-4f5a-9c85-c9f954e53f9f"
@@ -344,7 +347,7 @@
                     "min": "0",
                     "max": "20",
                     "concept": "45465ea4-2e1b-474b-b0f9-4f4bc676fbf5",
-                    "step": "1",
+                    "step": 1,
                     "disallowDecimals": true
                   },
                   "hide": {
@@ -362,7 +365,7 @@
                     "min": "0",
                     "max": "20",
                     "concept": "4dc3ee54-ba0c-49e7-b907-02aa727372f4",
-                    "step": "1",
+                    "step": 1,
                     "disallowDecimals": true
                   },
                   "hide": {
@@ -380,7 +383,7 @@
                     "min": "0",
                     "max": "20",
                     "concept": "5c8e69b1-d048-400a-bb6c-2df83a16387c",
-                    "step": "1",
+                    "step": 1,
                     "disallowDecimals": true
                   },
                   "hide": {
@@ -398,7 +401,7 @@
                     "min": "0",
                     "max": "20",
                     "concept": "382ca587-c452-481f-8c76-45e2702cd7f2",
-                    "step": "1",
+                    "step": 1,
                     "disallowDecimals": true
                   },
                   "hide": {
@@ -416,7 +419,7 @@
                     "min": "0",
                     "max": "20",
                     "concept": "b3d7aba6-5a45-4260-8ffd-8fac9174fc85",
-                    "step": "1",
+                    "step": 1,
                     "disallowDecimals": true
                   },
                   "hide": {
@@ -431,10 +434,13 @@
                   "id": "RNDeMayorPeso",
                   "questionOptions": {
                     "rendering": "number",
-                    "min": "0",
+                    "min": "1000",
+                    "max": "6000",
+                    "step": 1,
                     "concept": "dee42f1a-657e-4ab3-8a0a-b012500edea6",
                     "disallowDecimals": true
                   },
+                  "hideSteppers": true,
                   "hide": {
                     "hideWhenExpression": "isEmpty(partos) || partos <= '0'"
                   },
