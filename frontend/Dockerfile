@@ -12,13 +12,13 @@ WORKDIR /app
 COPY spa-assemble-config.json .
 COPY spa-build-config.json .
 COPY custom_modules/esm-patient-registration-app.tgz .
-COPY custom_modules/openmrs-esm-member-list-app-1.0.0.tgz .
+COPY custom_modules/esm-member-list-app.tgz .
 COPY custom_modules/esm-form-engine-app-1.0.0.tgz .
-COPY custom_modules/esm-member-profile.app-1.0.0.tgz .
+COPY custom_modules/esm-member-profile-app.tgz .
 COPY custom_modules/esm-home-app.tgz .
 COPY custom_modules/esm-primary-navigation-app.tgz .
 COPY custom_modules/esm-login-app.tgz .
-COPY custom_modules/esm-video-call-app.tgz .
+# COPY custom_modules/esm-video-call-app.tgz .
 
 ARG CACHE_BUST
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-assemble-config.json --target ./spa
