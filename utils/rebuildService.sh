@@ -87,7 +87,11 @@ docker compose stop "$service_name"
 
 # Find the volume(s) associated with the service
 echo "Checking for volumes associated with '$service_name'..."
-container_id=$(docker ps -q --filter name="$service_name")
+
+container_id=$(docker ps -a -q --filter name="$service_name")
+
+echo "Container '$container_id'..."
+
 if [ -n "$container_id" ]; then
     volumes=$(docker inspect --format '{{ range .Mounts }}{{ .Name }} {{ end }}' "$container_id" | xargs)
 fi
