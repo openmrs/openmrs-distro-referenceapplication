@@ -38,8 +38,22 @@ else
     echo "Rebuilding '$service_name' WITHOUT cache..."
 fi
 
+# Stop the service (but do not remove volumes)
+docker compose stop "$service_name"
+
+# Find the volume(s) associated with the service
+volumes=$(docker inspect --format '{{ range .Mounts }}{{ if eq .Name "'$service_name'" }}{{ .Name }}{{ end }}{{ end }}' $(docker ps -q --filter name="$service_name"))
+
+# If there are volumes, remove them
+if [ -n "$volumes" ]; then
+    echo "Removing volume(s) associated with the service '$service_name': $volumes"
+    docker volume rm $volumes
+else
+    echo "No volumes found associated with the service '$service_name'."
+fi
+
 # Rebuild and restart the selected service
 docker compose build $build_option "$service_name"
 docker compose up -d --no-deps "$service_name"
 
-echo "SUCCESS: Service '$service_name' rebuilt and restarted successfully!"
+echo "SUCCESS: Service '$service_name' rebuilt, restarted, and volume removed successfully (if it existed)!"
