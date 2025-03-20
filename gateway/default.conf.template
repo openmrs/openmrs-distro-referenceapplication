@@ -28,11 +28,6 @@ upstream backend {
   server backend:8080 max_fails=0;
 }
 
-upstream portainer {
-  server portainer:9000 max_fails=0;
-}
-
-
 server {
   listen       80;
 
@@ -110,15 +105,100 @@ server {
     }
   }
 
-  location /portainer {
-    proxy_pass http://portainer/;
+  location = / {
+    return 301 /openmrs/spa/;
+  }
+}
+
+server {
+  listen 443 ssl;
+  server_name 127.0.0.1 192.168.0.200 localhost sihsalus.hsc openmrs.sihsalus.hsc;
+
+  # SSL configuration
+  ssl_certificate     /etc/nginx/ssl/sihsalus-certificate.crt;
+  ssl_certificate_key /etc/nginx/ssl/sihsalus-certificate.key;
+
+  # Recommended security settings
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_ciphers HIGH:!aNULL:!MD5;
+
+  add_header X-XSS-Protection "1; mode=block";
+  add_header Content-Security-Policy $csp_header;
+  add_header X-Content-Type-Options nosniff;
+
+  proxy_set_header      HOST $host;
+  proxy_set_header      X-Forwarded-Proto $forwarded_proto;
+  proxy_set_header      X-Real-IP $forwarded_ip;
+  proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
+  # if serving this via HTTPS, the following is recommended
+  #proxy_cookie_flags      $var_proxy_cookie_flags;
+  proxy_http_version    1.1;
+  
+  gzip on;
+  gzip_vary on;
+  # 1 KiB
+  gzip_min_length 1024;
+  gzip_proxied any;
+  gzip_http_version 1.0;
+  gzip_types  font/eot
+              font/otf
+              font/ttf
+              image/svg+xml
+              text/css
+              text/html
+              text/javascript
+              text/plain
+              text/xml
+              application/atom+xml
+              application/geo+json
+              application/importmap+json
+              application/javascript
+              application/x-javascript
+              application/json
+              application/ld+json
+              application/fhir+json
+              application/fhir+xml
+              application/manifest+json
+              application/rdf+xml
+              application/rss+xml
+              application/xhtml+xml
+              application/xml;
+
+  # all redirects are relative to the gateway
+  absolute_redirect off;
+
+  location = /openmrs/spa {
+    return 301 /openmrs/spa/;
+    
+  }
+
+  location /openmrs/spa/ {
+    proxy_pass http://frontend/;
+    proxy_redirect http://$host/ /openmrs/spa/;
+  }
+
+  location /openmrs {
+    proxy_pass http://backend;
+    
+    # Add CORS headers
+    add_header Access-Control-Allow-Origin "*"; # Replace * with specific domains if needed
+    add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+    add_header Access-Control-Allow-Headers "Origin, Authorization, Content-Type, Accept";
+
+    # Handle preflight OPTIONS requests
+    if ($request_method = 'OPTIONS') {
+      add_header Access-Control-Allow-Origin "*";
+      add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
+      add_header Access-Control-Allow-Headers "Origin, Authorization, Content-Type, Accept";
+      add_header Content-Length 0;
+      add_header Content-Type text/plain;
+      return 204;
+    }
   }
 
   location = / {
     return 301 /openmrs/spa/;
   }
-
-  
 }
 
 
