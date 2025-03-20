@@ -17,7 +17,7 @@ mkdir -p ../gateway/ssl
 
 # Generate private key
 echo "Generating private key and crt with prefix: ${CERT_NAME} ..."
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ../gateway/ssl/${CERT_NAME}.key -out ../gateway/ssl/${CERT_NAME}.crt -subj "/C=PE/ST=Loreto/L=Maynas/O=Centro de Salud Santa Clotilde/OU=sihsalus/CN=peruHCE-server" -addext "subjectAltName = DNS:localhost, DNS:sihsalus.hsc, DNS:openmrs.sihsalus.hsc, IP:127.0.0.1, IP:${SERVER_IP}"  # Replace with your LAN IP
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ../gateway/ssl/${CERT_NAME}.key -out ../gateway/ssl/${CERT_NAME}.crt -subj "/C=PE/ST=Loreto/L=Maynas/O=Centro de Salud Santa Clotilde/OU=sihsalus/CN=sihsalus-hsc-server" -addext "subjectAltName = DNS:localhost, DNS:sihsalus.hsc, DNS:openmrs.sihsalus.hsc, IP:127.0.0.1, IP:${SERVER_IP}"  # Replace with your LAN IP
 
 echo "Certificate generated successfully:"
 
