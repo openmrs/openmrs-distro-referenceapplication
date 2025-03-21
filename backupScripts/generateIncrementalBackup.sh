@@ -5,8 +5,8 @@ exec > >(tee -a incBackup_log.txt) 2>&1
 
 # Configuration
 CONTAINER_NAME="peruHCE-db-replic"                         # Change to your MariaDB container name
-FULL_BACKUP_DIR="/home/coach/fullBackup"
-BACKUP_DIR="/home/coach/increBackup"         # Change to your desired backup storage location, make sure its exists
+FULL_BACKUP_DIR="/home/${USER}/fullBackup"
+BACKUP_DIR="/home/${USER}/increBackup"         # Change to your desired backup storage location, make sure its exists
 MAX_BACKUPS=10                                          # Maximum number of backups to keep
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_NAME="$TIMESTAMP"
@@ -16,6 +16,9 @@ TEMP_BACKUP_PATH="/backup/inc"                          # Inside the container
 echo ""
 echo "-----------------------------------------------------"
 echo "Starting peruHCE MariaDB replic INCREMENTAL backup in $TIMESTAMP ..."
+
+#Create directorie in user
+mkdir -p "$BACKUP_DIR"
 
 # Create the directorie in case doesnt exist
 echo "Creating backup directory in slave container..."

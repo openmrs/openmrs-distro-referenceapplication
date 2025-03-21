@@ -63,6 +63,7 @@ services:
     image: mariadb:10.11.7
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1"
+    #command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin"
     healthcheck:
       test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
       interval: 3s
@@ -115,9 +116,9 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       # Default HTTP Port
-      - "81:80/tcp"
+      #- "81:80/tcp"
       # Default HTTPs Port. FTL will generate a self-signed certificate
-      #- "443:443/tcp"
+      - "444:443/tcp"
     environment:
       # Set the appropriate timezone for your location (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones), e.g:
       TZ: 'America/Lima'
@@ -127,7 +128,7 @@ services:
     volumes:
       # For persisting Pi-hole's databases and common configuration file
       - pihole-data:/etc/pihole
-      #- './etc-dnsmasq.d:/etc/dnsmasq.d
+      - pihole-dnsmaq:/etc/dnsmasq.d
     
 
 volumes:
@@ -140,3 +141,4 @@ volumes:
   gateway-data: ~
   portainer-data: ~
   pihole-data: ~
+  pihole-dnsmaq: ~
