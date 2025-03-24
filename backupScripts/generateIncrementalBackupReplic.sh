@@ -4,9 +4,9 @@
 exec > >(tee -a incBackup_log.txt) 2>&1
 
 # Configuration
-CONTAINER_NAME="peruHCE-db-master"                      # Change to your MariaDB container name
+CONTAINER_NAME="peruHCE-db-replic"                         # Change to your MariaDB container name
 FULL_BACKUP_DIR="/home/${USER}/fullBackup"
-BACKUP_DIR="/home/${USER}/increBackup"                  # Change to your desired backup storage location, make sure its exists
+BACKUP_DIR="/home/${USER}/increBackup"         # Change to your desired backup storage location, make sure its exists
 MAX_BACKUPS=10                                          # Maximum number of backups to keep
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_NAME="$TIMESTAMP"
@@ -15,7 +15,7 @@ TEMP_BACKUP_PATH="/backup/inc"                          # Inside the container
 
 echo ""
 echo "-----------------------------------------------------"
-echo "Starting peruHCE MariaDB INCREMENTAL backup in $TIMESTAMP ..."
+echo "Starting peruHCE MariaDB replic INCREMENTAL backup in $TIMESTAMP ..."
 
 #Create directorie in user
 mkdir -p "$BACKUP_DIR"
@@ -42,7 +42,7 @@ echo "Erasing backup directory in replica container..."
 docker exec --user root $CONTAINER_NAME rm -rf $TEMP_BACKUP_PATH/
 
 # Run physical backup inside the MariaDB container
-docker exec --user root $CONTAINER_NAME mariadb-backup --user=root --password=${OMRS_DB_R_PASSWORD:-openmrs_r} --backup --target-dir=$TEMP_BACKUP_PATH --incremental-basedir=$TEMP_FULL_BACKUP_PATH
+docker exec --user root $CONTAINER_NAME mariadb-backup --slave-info --safe-slave-backup --user=root --password=${OMRS_DB_R_PASSWORD:-openmrs_r} --backup --target-dir=$TEMP_BACKUP_PATH --incremental-basedir=$TEMP_FULL_BACKUP_PATH
 
 # Copy the backup to the host
 mkdir -p temp
