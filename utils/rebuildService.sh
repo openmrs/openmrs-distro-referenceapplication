@@ -84,6 +84,7 @@ fi
 # Stop the service
 echo "Stopping service '$service_name'..."
 docker compose stop "$service_name"
+docker compose rm "$service_name"
 
 # Find the volume(s) associated with the service
 echo "Checking for volumes associated with '$service_name'..."

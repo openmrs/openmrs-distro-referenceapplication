@@ -19,6 +19,7 @@ servicesIndications = [
     {
         "service":          "portainer",
         "name":             "peruHCE-portainer",
+        "dependantOn":      None,
         "deleteVolumes":    "yes",
         "volumesToDelete":  [
             { "name": "portainer-data" },
@@ -27,6 +28,7 @@ servicesIndications = [
     {
         "service":          "dns",
         "name":             "peruHCE-dns",
+        "dependantOn":      None,
         "deleteVolumes":    "true",
         "volumesToDelete":  [
             { "name": "pihole-data" },
@@ -36,11 +38,13 @@ servicesIndications = [
     {
         "service":          "gateway",
         "name":             "peruHCE-gateway",
+        "dependantOn":      None,
         "deleteVolumes":    "false"
     },
     {
         "service":          "frontend",
         "name":          "peruHCE-frontend",
+        "dependantOn":      None,
         "deleteVolumes":    "true",
         "volumesToDelete":  [
             { "name": "opemrs-frontend" },
@@ -93,6 +97,10 @@ if not os.path.isfile(DOCKER_FILE):
 # List service to rebuild, back and database should be one
 print()
 print("LISTA DE SERVICIOS DISPONIBLES:")
-for index, indication in servicesIndications:
-    print(f"{index+1:02d} {indication['name']}" )
+for index, indication in enumerate(servicesIndications) :
+    #if( indication['servicedocker compose build <service_name>']  )
+    print(f"{index+1:02d} Service: {indication['service']:15s} Name: {indication['name']}" )
+print()
+user_input = input("\nEnter the service you want to rebuild from scratch: ")
+print(user_input)
 
