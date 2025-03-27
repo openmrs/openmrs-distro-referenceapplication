@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,7 +6,9 @@
 
     <changeSet id="increase-name-varchar-20250325" author="lalo">
         <comment>Aumenta la longitud del campo name en concept_name de 255 a 500</comment>
-        <modifyDataType tableName="concept_name" columnName="name" newDataType="varchar(1024)" />
+        <sql>
+            ALTER TABLE concept_name MODIFY COLUMN name VARCHAR(1024);
+        </sql>
     </changeSet>
 
 </databaseChangeLog>
