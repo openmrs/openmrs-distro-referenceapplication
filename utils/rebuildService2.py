@@ -101,9 +101,23 @@ if not os.path.isfile(DOCKER_FILE):
 print()
 print("LISTA DE SERVICIOS DISPONIBLES:")
 for index, indication in enumerate(servicesIndications) :
-    #if( indication['servicedocker compose build <service_name>']  )
-    print(f"{index+1:02d} Service: {indication['service']:15s} Name: {indication['name']}" )
-print()
-user_input = input("\nEnter the service you want to rebuild from scratch: ")
-print(user_input)
-
+    print(f"{index+1:02d} Servicio: {indication['service']:15s} Nombre: {indication['name']}" )
+user_input = input("\nIngresa el numero o nombre del servicio a reconstruir: ")
+# Check type of input
+if user_input.isdigit():
+    # Check if input number is okay
+    if not ( int(user_input) <= len(list(enumerate(servicesIndications))) and int(user_input) > 0 ):
+        print("Numero ingresado incorrecto")
+        exit(1)
+    else:
+        # Get service name by number
+        serviceToRebuild = list(servicesIndications)[int(user_input) - 1]['service']
+else:
+    # Check if input service name is okay
+    if not ( any( user_input in serviceInfo['service'] for serviceInfo in list(servicesIndications) ) ):
+        print("Nombre de servicio ingresado incorrecto")
+        exit(1)
+    else:
+        # Get service name by name
+        serviceToRebuild = user_input
+print(serviceToRebuild)
