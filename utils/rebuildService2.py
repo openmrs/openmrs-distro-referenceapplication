@@ -53,6 +53,7 @@ servicesIndications = [
     {
         "service":          "backend",
         "name":          "peruHCE-backend",
+        "dependantOn":      "db",
         "deleteVolumes":    "true",
         "volumesToDelete":  [
             { "name": "opemrs-data" },
@@ -61,6 +62,7 @@ servicesIndications = [
     {
         "service":          "db",
         "name":          "peruHCE-db-master",
+        "dependantOn":      "db-replic",
         "deleteVolumes":    "true",
         "volumesToDelete":  [
             { "name": "db-data" },
@@ -70,10 +72,11 @@ servicesIndications = [
     {
         "service":          "db-replic",
         "name":             "peruHCE-db-replic",
+        "dependantOn":      "db",
         "deleteVolumes":    "true",
         "volumesToDelete":  [
-            { "name": "db-data" },
-            { "name": "db-backup" }
+            { "name": "db-data-r" },
+            { "name": "db-backup-r" }
         ]
     }
 ]
