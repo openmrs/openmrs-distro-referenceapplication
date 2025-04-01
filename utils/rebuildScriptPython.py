@@ -8,6 +8,7 @@ from pathlib import Path
 # Variables:
 COMPOSE_DIR = ".."                     # Define the directory containing the docker-compose.yml file
 DOCKER_FILE = "docker-compose.yml"      #File of docker compose
+VOLUME_PREFIX = "peruhce-distro-referenceapplication_"
 
 # ANSI Colors
 GREEN =     "\033[0;32m"
@@ -43,7 +44,7 @@ servicesIndications = [
     },
     {
         "service":          "frontend",
-        "name":          "peruHCE-frontend",
+        "name":             "peruHCE-frontend",
         "dependantOn":      None,
         "deleteVolumes":    True,
         "volumesToDelete":  [
@@ -52,11 +53,11 @@ servicesIndications = [
     },
     {
         "service":          "backend",
-        "name":          "peruHCE-backend",
+        "name":             "peruHCE-backend",
         "dependantOn":      "db",
         "deleteVolumes":    True,
         "volumesToDelete":  [
-            { "name": "opemrs-data" },
+            { "name": "openmrs-data" },
         ]
     },
     {
@@ -152,134 +153,156 @@ if( serviceToRebuild == "backend" ):
 
 # Extra question if user wants to use cache:
 cacheRebuild = None
-if( serviceToRebuild == "backend" ):
-    user_input = input("Desea reconstruir el servicio de backend y reiniciar la base de datos? (si/no) ")
-    if(user_input in ["si","s","SI","yes","YES","y"]):
-        cacheRebuild = True
-    if(user_input in ["no","n","NO"]):
-        cacheRebuild = False
-    # Invalid answer
-    if(cacheRebuild == None):
-        print("Respuesta inválida.")
-        exit(1)
+user_input = input("Desea reconstruir el servicio usando cache? (si/no) ")
+if(user_input in ["si","s","SI","yes","YES","y"]):
+    cacheRebuild = True
+if(user_input in ["no","n","NO"]):
+    cacheRebuild = False
+# Invalid answer
+if(cacheRebuild == None):
+    print("Respuesta inválida.")
+    exit(1)
 
 #######################################
 # Rebuild process with selected service
 print()
 
-# Extra step if backendRebuild with databases was selected
-if serviceToRebuild == "backend" and backendRebuild == True:
-    # Stop and erase both databases
-    databases = ["db-replic", "db "]
-    for dbService in databases:
-        dbInfo = next((service for service in servicesIndications if service["service"] == dbService), None)
-        if dbInfo == None:
-            print("Error al reconstruir backend con bases de datos: Servicio " + dbService + " no encontrado.")
-            exit(1)
-        print("Deteniendo y borrando contenedor de ",dbInfo["service"])
-        eraseDbService = ["docker", "compose", "rm", "-s", "-v", dbInfo["service"]]
-        # Print the output
-        print(result.stdout)
-        if result.returncode != 0:
-            print("STDERR:", result.stderr)
-            exit(1)
-        for volumeToErase in serviceInfo["volumesToDelete"]:
-            eraseVolumeCommand = ["docker", "compose", "rm", volumeToErase["name"]]
-            print("Borrando volumen: ", volumeToErase["name"])
-            print("Executing command:", " ".join(eraseVolumeCommand))
-            # Erase volume
-            result = subprocess.run(eraseVolumeCommand, capture_output=True, text=True, shell=True)
-            # Print the output
-            print(result.stdout)
-            if result.returncode != 0:
-                print("STDERR:", result.stderr)
-                exit(1)
-        # Build db service
-        buildContainerCommand = ["docker", "compose", "build", dbService]
-        if cacheRebuild == False:
-            buildContainerCommand.append("--no-cache")
-        print("Construyendo contenedor de ",dbService)
-        print("Executing command:", " ".join(buildContainerCommand))
-        result = subprocess.run(buildContainerCommand, capture_output=True, text=True, shell=True)
-        # Print the output
-        print(result.stdout)
-        if result.returncode != 0:
-            print("STDERR:", result.stderr)
-            exit(1)
+print("##########################################################")
+print("Reconstrucción de " + serviceToRebuild + " iniciada.")
+print("##########################################################")
+print()
 
-        # Up db service
-        upContainerCommand = ["docker", "compose", "up", "--no-deps", dbService]
-        print("Construyendo contenedor de ",dbService)
-        print("Executing command:", " ".join(upContainerCommand))
-        result = subprocess.run(upContainerCommand, capture_output=True, text=True, shell=True)
-        # Print the output
-        print(result.stdout)
-        if result.returncode != 0:
-            print("STDERR:", result.stderr)
-            exit(1)
 
-# Stop and erase container of service and anonymius volumes
-eraseContainerCommand = ["docker", "compose", "rm", "-s", "-v", serviceToRebuild]
-print("Deteniendo y borrando contenedor de ",serviceToRebuild)
+# Stop and erase container of service and anonymous volumes
+eraseContainerCommand = ["docker", "compose", "rm", "-s", "-v","-f", serviceToRebuild]
+print("Deteniendo y borrando contenedor de",serviceToRebuild)
 print("Executing command:", " ".join(eraseContainerCommand))
 try:
-    result = subprocess.run(eraseContainerCommand, capture_output=True, text=True, shell=True)
+    result = subprocess.check_output(eraseContainerCommand, text=True)
     # Print the output
-    print(result.stdout)
-    if result.returncode != 0:
-        print("STDERR:", result.stderr)
-        exit(1)
-except subprocess.TimeoutExpired:
-    print("Error: Tiempo expirado de espera.")
+    print(result)
+except subprocess.CalledProcessError as e:
+    print(f"Command failed: {e}")
     exit(1)
 
+
+print()
 # Erase not anonymous volumes
 serviceInfo = next((service for service in servicesIndications if service["service"] == serviceToRebuild), None)
 if(serviceInfo == None):
     print("Error al borrar volumenes: Servicio no encontrado.")
     exit(1)
 if serviceInfo["deleteVolumes"] == True:
-    print(serviceInfo["volumesToDelete"])
+    #print(serviceInfo["volumesToDelete"])
     for volumeToErase in serviceInfo["volumesToDelete"]:
-        eraseVolumeCommand = ["docker", "compose", "rm", volumeToErase["name"]]
+        eraseVolumeCommand = ["docker", "volume", "rm", VOLUME_PREFIX + volumeToErase["name"]]
         print("Borrando volumen: ", volumeToErase["name"])
         print("Executing command:", " ".join(eraseVolumeCommand))
-
         # Erase volume
-        result = subprocess.run(eraseVolumeCommand, capture_output=True, text=True, shell=True)
-        # Print the output
-        print(result.stdout)
-        if result.returncode != 0:
-            print("STDERR:", result.stderr)
+        try:
+            result = subprocess.check_output(eraseVolumeCommand, text=True)
+            # Print the output
+            print(result)
+        except subprocess.CalledProcessError as e:
+            print(f"Command failed: {e}")
             exit(1)
 else:
     print("No volumes to erase")
 
+# Extra step if backendRebuild with databases was selected
+if serviceToRebuild == "backend" and backendRebuild == True:
+
+    # Stop and erase both databases
+    databases = ["db", "db-replic"]
+    for dbService in databases:
+        
+        dbInfo = next((service for service in servicesIndications if service["service"] == dbService), None)
+        if dbInfo == None:
+            print("Error al reconstruir backend con bases de datos: Servicio " + dbService + " no encontrado.")
+            exit(1)
+        print("Deteniendo y borrando contenedor de",dbInfo["service"])
+        eraseDbService = ["docker", "compose", "rm", "-s", "-v","-f", dbInfo["service"]]
+        try:
+            result = subprocess.check_output(eraseDbService, text=True)
+            # Print the output
+            print(result)
+        except subprocess.CalledProcessError as e:
+            print(f"Command failed: {e}")
+            exit(1)
+        
+        # To fix
+        for volumeToErase in dbInfo["volumesToDelete"]:
+            
+            eraseVolumeCommand = ["docker", "volume", "rm", VOLUME_PREFIX+volumeToErase["name"]]
+            print("Borrando volumen: ", volumeToErase["name"])
+            print("Executing command:", " ".join(eraseVolumeCommand))
+            # Erase volume
+            try:
+                result = subprocess.check_output(eraseVolumeCommand, text=True)
+                # Print the output
+                print(result)
+            except subprocess.CalledProcessError as e:
+                print(f"Command failed: {e}")
+                exit(1)
+        
+        # Build db service
+        buildContainerCommand = ["docker", "compose", "build", dbService]
+        if cacheRebuild == False:
+            buildContainerCommand.append("--no-cache")
+        print("Construyendo contenedor de ",dbService)
+        print("Executing command:", " ".join(buildContainerCommand))
+        try:
+            result = subprocess.check_output(buildContainerCommand, text=True)
+            # Print the output
+            print(result)
+        except subprocess.CalledProcessError as e:
+            print(f"Command failed: {e}")
+            exit(1)
+
+        # Up db service
+        upContainerCommand = ["docker", "compose", "up", "--no-deps","-d", dbService]
+        print("Construyendo contenedor de ",dbService)
+        print("Executing command:", " ".join(upContainerCommand))
+        try:
+            result = subprocess.check_output(upContainerCommand, text=True)
+            # Print the output
+            print(result)
+        except subprocess.CalledProcessError as e:
+            print(f"Command failed: {e}")
+            exit(1)
+
+
+print()
 # Build service
 buildContainerCommand = ["docker", "compose", "build", serviceToRebuild]
 if cacheRebuild == False:
     buildContainerCommand.append("--no-cache")
-print("Construyendo contenedor de ",serviceToRebuild)
+print("Construyendo contenedor de " +serviceToRebuild + (" usando cache" if cacheRebuild else ""))
 print("Executing command:", " ".join(buildContainerCommand))
-result = subprocess.run(buildContainerCommand, capture_output=True, text=True, shell=True)
-# Print the output
-print(result.stdout)
-if result.returncode != 0:
-    print("STDERR:", result.stderr)
+try:
+    result = subprocess.check_output(buildContainerCommand, text=True)
+    # Print the output
+    print(result)
+except subprocess.CalledProcessError as e:
+    print(f"Command failed: {e}")
     exit(1)
 
+
+
 # Up service
-upContainerCommand = ["docker", "compose", "up", "--no-deps", serviceToRebuild]
+upContainerCommand = ["docker", "compose", "up","-d", "--no-deps",serviceToRebuild]
 print("Construyendo contenedor de ",serviceToRebuild)
 print("Executing command:", " ".join(upContainerCommand))
-result = subprocess.run(upContainerCommand, capture_output=True, text=True, shell=True)
-# Print the output
-print(result.stdout)
-if result.returncode != 0:
-    print("STDERR:", result.stderr)
+try:
+    result = subprocess.check_output(upContainerCommand, text=True)
+    # Print the output
+    print(result)
+except subprocess.CalledProcessError as e:
+    print(f"Command failed: {e}")
     exit(1)
 
 # End of flow
 print("##########################################################")
 print("Servicio " + serviceToRebuild + " reconstruido.")
 print("##########################################################")
+
