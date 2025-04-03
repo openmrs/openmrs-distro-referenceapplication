@@ -50,11 +50,11 @@ docker cp "$CONTAINER_NAME:$TEMP_BACKUP_PATH" "$BACKUP_DIR/temp"
 
 # Zip the backup
 cd "$BACKUP_DIR" || exit
-tar -czf "$BACKUP_DIR/${FILENAME}__${BACKUP_NAME}.tar.gz" "temp/"
+tar -czf "$BACKUP_DIR/${FILENAME}_${BACKUP_NAME}.tar.gz" "temp/"
 rm -rf temp
 
 # Notice full backup created
-echo "Backup created: ${FILENAME}__${BACKUP_NAME}.tar.gz"
+echo "Backup created: ${FILENAME}_${BACKUP_NAME}.tar.gz"
 
 # Rotate old backups: Keep only the latest $MAX_BACKUPS backups
 BACKUP_COUNT=$(ls -1 "${BACKUP_DIR}"/*.tar.gz 2>/dev/null | wc -l)
