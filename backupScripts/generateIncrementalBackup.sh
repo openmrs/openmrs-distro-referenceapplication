@@ -5,8 +5,8 @@ exec > >(tee -a incBackup_log.txt) 2>&1
 
 # Configuration
 CONTAINER_NAME="peruHCE-db-master"                      # Change to your MariaDB container name
-FULL_BACKUP_DIR="/home/${USER}/fullBackup"
-BACKUP_DIR="/home/${USER}/increBackup"                  # Change to your desired backup storage location, make sure its exists
+FULL_BACKUP_DIR="/home/${USER}/peruHCE-fullBackups"
+BACKUP_DIR="/home/${USER}/peruHCE-incrBackups"          # Change to your desired backup storage location, make sure its exists
 MAX_BACKUPS=10                                          # Maximum number of backups to keep
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_NAME="$TIMESTAMP"
@@ -50,7 +50,7 @@ docker cp "$CONTAINER_NAME:$TEMP_BACKUP_PATH" "$BACKUP_DIR/temp"
 
 # Zip the backup
 cd "$BACKUP_DIR" || exit
-tar -czf "$BACKUP_DIR/${FILENAME}_${BACKUP_NAME}.tar.gz" "temp/"
+tar -czf "$BACKUP_DIR/${FILENAME}_${BACKUP_NAME}.tar.gz" -C "temp/"
 rm -rf temp
 
 # Notice full backup created
