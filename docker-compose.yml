@@ -62,8 +62,8 @@ services:
     container_name: peruHCE-db-master
     image: mariadb:10.11.7
     restart: "unless-stopped"
-    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1"
-    #command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin"
+    command: "mysqld --character-set-server=utf8mb3 --collation-server=utf8mb3_general_ci --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1"
+    #command: "mysqld --character-set-server=utf8mb3 --collation-server=utf8mb3_general_ci"
     healthcheck:
       test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
       interval: 3s
@@ -86,7 +86,7 @@ services:
     container_name: peruHCE-db-replic
     image: mariadb:10.11.7
     restart: "unless-stopped"
-    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --server-id=2 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --read-only=1"
+    command: "mysqld --character-set-server=utf8mb3 --collation-server=utf8mb3_general_ci --server-id=2 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --read-only=1"
     healthcheck:
       test: "mysql --user=${OMRS_DB_R_USER:-openmrs_r} --password=${OMRS_DB_R_PASSWORD:-openmrs_r} --execute \"SHOW DATABASES;\""
       interval: 3s

@@ -23,11 +23,17 @@ DB_USER="root"                                          # Change this to your da
 DB_NAME="my_database"                           # Change this to your database name
 DB_PASSWORD="password"  # Change this to your database password
 
+# Go to docker compose directory
+cd ..
+
 # Stop the backend container
+docker compose stop backend
 
 # Stop database container
+docker compose stop db
+docker compose stop db-replic
 
-# Erase volume container
+# Erase volume container of db
 
 #Create temporal directory
 mkdir -p "$TEMP_BACKUP_PATH"
