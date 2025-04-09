@@ -94,17 +94,35 @@ mkdir -p ${TEMP_BACKUP_PATH}
 # Unzip full backup in tempral directory
 tar -xzvf ${full_path} -C "${TEMP_BACKUP_PATH}" > /dev/null
 
-# Copy unzipped full backup to container
+# Copy unzipped full backup to container with dummy container
 docker create --name dummy_container -v ${NAME_PREFIX}db-backup:/backup --user root mariadb:10.11.7
-ls -l
-echo "docker cp $PWD/tmpFull/. dummy_container:${TEMP_FULL_BACKUP_PATH}"
 docker cp $PWD/tmpFull/. dummy_container:${TEMP_FULL_BACKUP_PATH}
-docker rm dummy_container
+
+# Set backup to use with dummy container
+docker exec ${CONTAINER_NAME} mariadb-backup --backup --target-dir=/backup/full --user=root --password=${OMRS_DB_USER:-openmrs}
+
+# Stop the dummy container and erase temporal volumes 
+docker rm -v dummy_container 
+
+# Free var/lib/mysql dir in db master
+docker run --rm -v ${NAME_PREFIX}db-data:/var/lib/mysql busybox sh -c "rm -rf /var/lib/mysql/*"
+
+# Execute dummy container to fill var/lib/mysql 
+docker run --rm --name mariadb-dummy -v ${NAME_PREFIX}:/var/lib/mysql -v ${NAME_PREFIX}db-backup:/backup --user root mariadb:10.11.7 mariadb-backup --copy-back --target-dir=/backup/full
 
 # Erase temporal folder 
 rm -rf tempFull/
 
+# Resume docker compose stack
+docker compose up -d
+
+
 exit 1
+
+
+
+
+
 
 # Set directory of full backup
 docker exec $CONTAINER_NAME mariadb-backup --prepare --target-dir=/backup/full
