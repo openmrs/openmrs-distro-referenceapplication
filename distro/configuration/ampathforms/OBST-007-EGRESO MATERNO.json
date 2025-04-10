@@ -16,7 +16,7 @@
               },
               "id": "egresoMaternoGroup",
               "label": "Egreso Materno",
-              "questions": [
+              "questions":[
                 {
                   "type": "obs",
                   "questionOptions": {
@@ -133,6 +133,36 @@
                   "label": "Anticonceptivos"
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Responsable",
+      "sections": [
+        {
+          "label": "Responsable",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "responsableAtencióN",
+              "label": "Responsable atención",
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "type": "encounterRole",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "rolDelResponsable",
+              "required": true,
+              "label": "Rol del responsable"
             }
           ]
         }

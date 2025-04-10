@@ -975,7 +975,7 @@
                   "label": "Frecuencia Cardiaca Fetal (latidos/min)",
                   "type": "obs",
                   "required": false,
-                  "id": "frecuenciaCardiacaFetal(PorMin./Na)",
+                  "id": "frecuenciaCardiacaFetal",
                   "questionOptions": {
                     "rendering": "number",
                     "concept": "b1fb2d14-92ec-4fda-90e5-40f3227c9c65",
@@ -1292,6 +1292,25 @@
                 "rendering": "date",
                 "concept": "efc8d765-bcf8-490c-9483-04dc803fdce6"
               }
+            },
+            {
+              "id": "responsableAtencióN",
+              "label": "Responsable atención",
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "type": "encounterRole",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "rolDelResponsable",
+              "required": true,
+              "label": "Rol del responsable"
             },
             {
               "type": "obs",

@@ -20,7 +20,7 @@
                 {
                   "label": "Antecedentes Familiares",
                   "type": "obs",
-                  "required": false,
+                  "required": true,
                   "id": "antecedentesFamiliares",
                   "questionOptions": {
                     "rendering": "checkbox",
@@ -82,7 +82,8 @@
                   },
                   "validators": []
                 }
-              ]
+              ],
+              "required": true
             }
           ]
         }
@@ -107,7 +108,7 @@
                 {
                   "label": "Antecedentes Personales",
                   "type": "obs",
-                  "required": false,
+                  "required": true,
                   "id": "antecedentesPersonales",
                   "questionOptions": {
                     "rendering": "checkbox",
@@ -146,7 +147,7 @@
                         "label": "Cirugía Pélvica-uterina"
                       },
                       {
-                        "concept": "6a210831-f803-4754-96a1-13e5e62760e2",
+                        "concept": "4fb183d6-783c-44bc-82a7-6f56392e4ca2",
                         "label": "Diabetes"
                       },
                       {
@@ -174,7 +175,7 @@
                         "label": "Hipertensión Arterial"
                       },
                       {
-                        "concept": "a8c0e875-19ea-4afa-8c51-93933392f4f6",
+                        "concept": "17991574-6182-4243-958c-74b124aecdb4",
                         "label": "Coca"
                       },
                       {
@@ -206,7 +207,7 @@
                         "label": "Retención de Placenta"
                       },
                       {
-                        "concept": "ed111a10-4bf9-4411-90c9-284aac6aa6fd",
+                        "concept": "44083fc8-a856-4f8c-9f86-521ece1558f6",
                         "label": "Tabaco"
                       },
                       {
@@ -229,7 +230,8 @@
                   },
                   "validators": []
                 }
-              ]
+              ],
+              "required": true
             }
           ]
         }
@@ -346,7 +348,7 @@
                     "rendering": "number",
                     "min": "0",
                     "max": "20",
-                    "concept": "45465ea4-2e1b-474b-b0f9-4f4bc676fbf5",
+                    "concept": "b553ce85-94e2-4755-b106-3befef127133",
                     "step": 1,
                     "disallowDecimals": true
                   },
@@ -700,6 +702,37 @@
                   }
                 }
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Responsable",
+      "sections": [
+        {
+          "label": "Responsable",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "responsableAtencióN",
+              "label": "Responsable atención",
+              "type": "encounterProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "required": true
+            },
+            {
+              "type": "encounterRole",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "rolDelResponsable",
+              "required": true,
+              "label": "Rol del responsable"
             }
           ]
         }
