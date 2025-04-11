@@ -69,7 +69,7 @@
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Otro no codificado"
+                    "label": "Otros"
                   }
                 ]
               },
@@ -83,7 +83,10 @@
                 "concept": "d29ccdb7-b8ab-4d29-8a58-751300875df4"
               },
               "id": "otrosParaFontanela",
-              "label": "Otros para fontanela"
+              "label": "Otros para fontanela",
+              "hide": {
+                "hideWhenExpression": "isEmpty(fontanela) || fontanela !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             },
             {
               "type": "obs",
@@ -700,5 +703,5 @@
   "referencedForms": [],
   "uuid": "4d8f35e8-338b-4b87-8556-c6a93b8966cf",
   "description": "Pagina 6",
-  "version": "1.3"
+  "version": "1.4"
 }
