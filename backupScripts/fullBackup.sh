@@ -110,8 +110,7 @@ docker compose stop db
 
 # Free var/lib/mysql dir in db master
 echo -e "\nFree var/lib/mysql dir in db master"
-docker run --rm -v ${NAME_PREFIX}db-data:/var/lib/mysql busybox sh -c "rm -rf /var/lib/mysql/**"
-
+docker run --rm -v ${NAME_PREFIX}db-data:/var/lib/mysql busybox sh -c "rm -rf /var/lib/mysql/* /var/lib/mysql/.*"
 
 # Execute dummy container to fill var/lib/mysql 
 echo -e "\nRestore with backup"
