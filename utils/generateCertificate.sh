@@ -13,7 +13,7 @@ sudo apt update && sudo apt install -y openssl
 sudo rm -rf ../gateway/ssl
 
 # Creating directory to save certificates
-sudo mkdir -p ../gateway/ssl 
+mkdir -p ../gateway/ssl 
 
 # Generate private key
 echo "Generating private key and crt with prefix: ${CERT_NAME} ..."
