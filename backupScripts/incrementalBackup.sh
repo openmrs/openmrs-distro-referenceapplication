@@ -126,8 +126,16 @@ rm -rf tempFull/
 echo -e "\nResume docker compose stack"
 docker compose up -d
 
+# Get db master info
+docker exec -it $CONTAINER_NAME mariadb -uroot -p -e "SHOW MASTER STATUS"
+
 # Synchronize replic db container
 echo -e "\nTo synchronize replic database container ..."
+
+# Stop db replic container
+docker compose db-replic stop
+
+# Execeute 
 
 exit 1
 
