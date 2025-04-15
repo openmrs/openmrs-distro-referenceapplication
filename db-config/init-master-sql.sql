@@ -1,5 +1,8 @@
-CREATE USER 'openmrs_repl'@'%' IDENTIFIED BY 'openmrs_repl';
-GRANT REPLICATION SLAVE ON *.* TO 'openmrs_repl'@'%';
-GRANT BINLOG MONITOR ON *.* TO 'openmrs_repl'@'%';
+CREATE USER '${OMRS_DB_REPL_USER:-openmrs_repl}'@'%' IDENTIFIED BY '${OMRS_DB_REPL_PASSWORD:-openmrs_repl}';
+GRANT RELOAD ON *.* TO '${OMRS_DB_REPL_USER:-openmrs_repl}'@'%';
+GRANT LOCK TABLES ON *.* TO '${OMRS_DB_REPL_USER:-openmrs_repl}'@'%';
+GRANT PROCESS ON *.* TO '${OMRS_DB_REPL_USER:-openmrs_repl}'@'%';
+GRANT REPLICATION SLAVE ADMIN ON *.* TO '${OMRS_DB_REPL_USER:-openmrs_repl}'@'%';
+GRANT BINLOG MONITOR ON *.* TO '${OMRS_DB_REPL_USER:-openmrs_repl}'@'%';
 FLUSH PRIVILEGES;
 SHOW MASTER STATUS
