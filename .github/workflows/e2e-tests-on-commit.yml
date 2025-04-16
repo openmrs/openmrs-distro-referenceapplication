@@ -15,7 +15,13 @@ jobs:
       - name: Generate SSL Certificate
         run: bash utils/generateCertificate.sh
 
-      - name: Build and Run Containers
+      - name: Verify SSL Certificates
+        run: |
+          ls -l ssl/
+          test -f ssl/sihsalus-certificate.crt || { echo "Error: sihsalus-certificate.crt not found"; exit 1; }
+          test -f ssl/sihsalus-certificate.key || { echo "Error: sihsalus-certificate.key not found"; exit 1; }
+
+      - name: Build and Run Containers for E2E Tests
         run: docker compose -f e2e_test_support_files/docker-compose-build.yml up -d
 
       - name: Wait for the backend to start
