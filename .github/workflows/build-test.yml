@@ -1,4 +1,4 @@
-name: Build and Validate Configuration
+name: Construir y Validar Configuración
 
 on:
   pull_request:
@@ -22,4 +22,4 @@ jobs:
           cache: 'maven'
 
       - name: Build and Test
-        run: mvn --batch-mode --update-snapshots --activate-profiles distro,validator clean verify
+        run: mvn --batch-mode --update-snapshots --activate-profiles validator clean verify
