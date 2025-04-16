@@ -20,6 +20,7 @@ get_repository_tag() {
 file_path="frontend/spa-assemble-config.json"
 
 # Call the function for each Repository with the app as the second argument
+# Needs to be updated
 get_repository_tag "$file_path" "patient_management" "@openmrs/esm-patient-registration-app" >> "$GITHUB_OUTPUT"
 get_repository_tag "$file_path" "patient_chart" "@openmrs/esm-patient-chart-app" >> "$GITHUB_OUTPUT"
 get_repository_tag "$file_path" "esm_core" "@openmrs/esm-login-app" >> "$GITHUB_OUTPUT"
