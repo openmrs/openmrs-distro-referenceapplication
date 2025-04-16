@@ -11,7 +11,7 @@ SSL_DIR="../gateway/ssl"
 
 # Updating and checking for OpenSSL
 echo "[INFO] Updating packages and installing openssl..."
-apt update && apt install -y openssl
+sudo apt update && sudo apt install -y openssl
 command -v openssl >/dev/null 2>&1 || { echo "[ERROR] OpenSSL is not installed or not found in PATH"; exit 1; }
 
 # Erase previous certificates
