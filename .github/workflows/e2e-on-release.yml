@@ -28,9 +28,9 @@ jobs:
 
       - name: Verify SSL Certificates
         run: |
-          ls -l ../gateway/ssl/
-          test -f ../gateway/ssl/sihsalus-certificate.crt || { echo "Error: sihsalus-certificate.crt not found"; exit 1; }
-          test -f ../gateway/ssl/sihsalus-certificate.key || { echo "Error: sihsalus-certificate.key not found"; exit 1; }
+          ls -l gateway/ssl/
+          test -f gateway/ssl/sihsalus-certificate.crt || { echo "Error: sihsalus-certificate.crt not found"; exit 1; }
+          test -f gateway/ssl/sihsalus-certificate.key || { echo "Error: sihsalus-certificate.key not found"; exit 1; }
 
       - name: Extract version numbers from the spa-build-config.json file
         id: refs
