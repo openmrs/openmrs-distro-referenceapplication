@@ -7,7 +7,7 @@ CERT_NAME="sihsalus-certificate"
 DAYS_VALID=365
 KEY_SIZE=2048
 SERVER_IP=192.168.0.200
-SSL_DIR="../gateway/ssl"
+SSL_DIR="./gateway/ssl"
 
 # Updating and checking for OpenSSL
 echo "[INFO] Updating packages and installing openssl..."
