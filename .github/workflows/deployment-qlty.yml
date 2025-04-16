@@ -1,0 +1,39 @@
+name: Daily Docker Cleanup and Redeploy for QLTY Server
+
+on:
+  workflow_dispatch: # Esto habilita la ejecución manual
+
+jobs:
+  cleanup-and-redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up SSH keys for QLTY Server
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY_QLTY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H hii1sc-qlty.inf.pucp.edu.pe >> ~/.ssh/known_hosts
+
+      - name: Connect to Server 2 via SSH and run cleanup tasks
+        run: |
+          ssh -i ~/.ssh/id_rsa u.hsc.qlty@hii1sc-qlty.inf.pucp.edu.pe << 'EOF'
+
+            cd ~/peruHCE-distro-referenceapplication
+
+            docker compose down --volumes --remove-orphans
+
+            docker rmi -f $(docker images -q)
+
+            docker volume prune -f
+
+            docker builder prune -a --force
+
+            git pull origin deploy
+
+            docker compose up -d --build
+          EOF
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_QLTY }} # La clave privada SSH debe ser almacenada como secret en GitHub
