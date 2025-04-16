@@ -3,6 +3,7 @@ name: Daily Docker Cleanup and Redeploy
 on:
   schedule:
     - cron: "0 3 * * *" # Esto ejecutará el pipeline a las 3 AM todos los días
+  workflow_dispatch: # Agrega esto para permitir ejecución manual
 
 jobs:
   cleanup-and-redeploy:
