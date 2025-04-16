@@ -2,8 +2,8 @@ name: Daily Docker Cleanup and Redeploy
 
 on:
   schedule:
-    - cron: "0 3 * * *" # Esto ejecutará el pipeline a las 3 AM todos los días
-  workflow_dispatch: # Agrega esto para permitir ejecución manual
+    - cron: "0 3 * * *" # Runs at 3 AM daily
+  workflow_dispatch:
 
 jobs:
   cleanup-and-redeploy:
@@ -21,21 +21,34 @@ jobs:
 
       - name: Connect to server via SSH and run cleanup tasks
         run: |
-          ssh -i ~/.ssh/id_rsa u.hsc.dev@hii1sc-dev.inf.pucp.edu.pe << 'EOF'
+          ssh -i ~/.ssh/id_rsa -o ServerAliveInterval=60 -o ServerAliveCountMax=3 u.hsc.dev@hii1sc-dev.inf.pucp.edu.pe << 'EOF'
+            set -e  # Exit on any error
 
             cd ~/peruHCE-distro-referenceapplication
 
+            echo "Checking disk space..."
+            df -h
+
+            echo "Checking memory..."
+            free -m
+
+            echo "Stopping and removing containers..."
             docker compose down --volumes --remove-orphans
 
-            docker rmi -f $(docker images -q)
+            echo "Removing Docker images..."
+            docker rmi -f $(docker images -q) || true
 
+            echo "Pruning Docker volumes..."
             docker volume prune -f
 
+            echo "Pruning Docker builder cache..."
             docker builder prune -a --force
 
+            echo "Pulling latest code..."
             git pull origin deploy
 
+            echo "Building and starting containers..."
             docker compose up -d --build
           EOF
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_DEV }} # La clave privada SSH debe ser almacenada como secret en GitHub
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
