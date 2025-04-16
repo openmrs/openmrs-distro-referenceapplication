@@ -6,11 +6,14 @@ on:
   pull_request:
     branches: [main]
 
-jobs:  
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Generate SSL Certificate
+        run: bash utils/generateCertificate.sh
 
       - name: Build and Run Containers
         run: docker compose -f e2e_test_support_files/docker-compose-build.yml up -d
@@ -33,12 +36,12 @@ jobs:
     needs: build
     strategy:
       matrix:
-        repo: 
+        repo:
           - openmrs-esm-patient-management
           - openmrs-esm-patient-chart
           - openmrs-esm-form-builder
           - openmrs-esm-core
-  
+
     steps:
       - uses: actions/checkout@v4
 
@@ -65,7 +68,7 @@ jobs:
       - name: Checkout to the repo's main branch
         uses: actions/checkout@v4
         with:
-          repository: openmrs/${{ matrix.repo }}
+          repository: PROYECTO-SANTACLOTILDE/${{ matrix.repo }}
           ref: main
           path: e2e_repo
 
