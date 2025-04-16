@@ -1,7 +1,9 @@
 name: Daily Docker Cleanup and Redeploy for QLTY Server
 
 on:
-  workflow_dispatch: # Esto habilita la ejecución manual
+  schedule:
+    - cron: "0 3 * * *" # Added cron for daily execution
+  workflow_dispatch:
 
 jobs:
   cleanup-and-redeploy:
@@ -17,23 +19,57 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H hii1sc-qlty.inf.pucp.edu.pe >> ~/.ssh/known_hosts
 
-      - name: Connect to Server 2 via SSH and run cleanup tasks
+      - name: Connect to QLTY Server via SSH and run cleanup tasks
         run: |
-          ssh -i ~/.ssh/id_rsa u.hsc.qlty@hii1sc-qlty.inf.pucp.edu.pe << 'EOF'
+          ssh -i ~/.ssh/id_rsa -o ServerAliveInterval=30 -o ServerAliveCountMax=10 -o TCPKeepAlive=yes u.hsc.qlty@hii1sc-qlty.inf.pucp.edu.pe << 'EOF'
+            set -e  # Exit on any error
 
             cd ~/peruHCE-distro-referenceapplication
 
+            echo "Checking disk space..."
+            df -h
+
+            echo "Checking memory..."
+            free -m
+
+            echo "Checking Docker version..."
+            docker --version
+
+            echo "Checking for processes using port 80..."
+            sudo netstat -tulnp | grep :80 || echo "No process found on port 80"
+            sudo lsof -i :80 || echo "No process found on port 80"
+
+            echo "Stopping and removing containers..."
             docker compose down --volumes --remove-orphans
+            docker ps -q | xargs -r docker stop
+            docker ps -a -q | xargs -r docker rm
 
-            docker rmi -f $(docker images -q)
+            echo "Removing Docker images..."
+            docker rmi -f $(docker images -q) || true
 
+            echo "Pruning Docker volumes..."
             docker volume prune -f
 
+            echo "Pruning Docker builder cache..."
             docker builder prune -a --force
 
+            echo "Pruning Docker networks..."
+            docker network prune -f
+
+            echo "Ensuring port 80 is free..."
+            sudo fuser -k 80/tcp || true
+
+            echo "Pulling latest code..."
             git pull origin deploy
 
+            echo "Verifying spa-assemble-config.json..."
+            ls -l spa-assemble-config.json || echo "Warning: spa-assemble-config.json not found"
+
+            echo "Listing Docker Compose file..."
+            ls -l docker-compose.yml
+
+            echo "Building and starting containers..."
             docker compose up -d --build
           EOF
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_QLTY }} # La clave privada SSH debe ser almacenada como secret en GitHub
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_QLTY }}
