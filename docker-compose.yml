@@ -74,10 +74,15 @@ services:
       MYSQL_USER: ${OMRS_DB_USER:-openmrs}
       MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+      OMRS_DB_REPL_USER: ${OMRS_DB_REPL_USER:-openmrs_repl}
+      OMRS_DB_REPL_PASSWORD: ${OMRS_DB_REPL_PASSWORD:-openmrs_repl}
+      OMRS_DB_BACKUP_USER: ${OMRS_DB_BACKUP_USER:-openmrs_b}
+      OMRS_DB_BACKUP_PASSWORD: ${OMRS_DB_BACKUP_PASSWORD:-openmrs_b}
+
     ports:
       - "3307:3306" # 3307 for host
     volumes:
-      - ./db-config/init-master-sql.sql:/docker-entrypoint-initdb.d/init-master-sql.sql
+      - ./db-config/init-master.sh:/docker-entrypoint-initdb.d/init-master.sh
       - db-data:/var/lib/mysql
       - db-backup:/backup
 
@@ -88,21 +93,22 @@ services:
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb3 --collation-server=utf8mb3_general_ci --server-id=2 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1 --read-only=1"
     healthcheck:
-      test: "mysql --user=${OMRS_DB_R_USER:-openmrs_r} --password=${OMRS_DB_R_PASSWORD:-openmrs_r} --execute \"SHOW DATABASES;\""
+      test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
       interval: 3s
       timeout: 1s
       retries: 5
     environment:
-      MYSQL_DATABASE: openmrs
-      MYSQL_USER: ${OMRS_DB_R_USER:-openmrs_r}
-      MYSQL_PASSWORD: ${OMRS_DB_R_PASSWORD:-openmrs_r}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_R_PASSWORD:-openmrs_r}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+      OMRS_DB_REPL_USER: ${OMRS_DB_REPL_USER:-openmrs_repl}
+      OMRS_DB_REPL_PASSWORD: ${OMRS_DB_REPL_PASSWORD:-openmrs_repl}
+      OMRS_DB_BACKUP_USER: ${OMRS_DB_BACKUP_USER:-openmrs_b}
+      OMRS_DB_BACKUP_PASSWORD: ${OMRS_DB_BACKUP_PASSWORD:-openmrs_b}
     depends_on:
       - db
     ports:
       - "3308:3306" # 3308 for host
     volumes:
-      - ./db-config/init-slave-sql.sql:/docker-entrypoint-initdb.d/init-slave-sql.sql
+      - ./db-config/init-slave.sh:/docker-entrypoint-initdb.d/init-slave.sh
       - db-data-r:/var/lib/mysql
       - db-backup-r:/backup
   

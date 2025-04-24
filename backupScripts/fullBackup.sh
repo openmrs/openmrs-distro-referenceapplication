@@ -127,7 +127,7 @@ docker compose up -d
 
 # Synchronize replic db container
 echo -e "\nTo synchronize replic database container ..."
-#docker exec -i $CONTAINER_NAME sh -c "read FILE POS < <(mysql -u root -p${MYSQL_ROOT_PASSWORD:-openmrs} -N -e 'SHOW MASTER STATUS;' | awk '{print \$1, \$2}'); echo \"FILE=\$FILE POS=\$POS\""
+docker exec $CONTAINER_NAME mariadb -u root -popenmrs_r -e "SHOW MASTER STATUS\G" 
 exit 1
 
 
