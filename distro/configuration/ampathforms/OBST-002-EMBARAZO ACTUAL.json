@@ -139,7 +139,7 @@
                     {
                       "type": "date",
                       "allowFutureDates": "false",
-                      "message": "El FUM no puede ser una fecha posterior a hoy"
+                      "message": "El FUM no puede ser una fecha futura"
                     }
                   ]
                 },
@@ -177,7 +177,7 @@
                         "label": "Normal"
                       },
                       {
-                        "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "522ddb92-8615-4a7a-8833-0429d06c9828",
                         "label": "Anormal"
                       }
                     ]
@@ -196,7 +196,8 @@
                       "calculateExpression": "calcTimeDifference(fum, 'w')"
                     },
                     "min": "0",
-                    "max": "42"
+                    "max": "42",
+                    "step": 1
                   },
                   "hideSteppers": true
                 },
@@ -217,7 +218,7 @@
                     {
                       "type": "js_expression",
                       "failsWhenExpression": "isDateBefore(myValue, today())",
-                      "message": "La fecha probable de parto no puede ser anterior a hoy"
+                      "message": "La fecha probable de parto no puede ser una fecha pasada"
                     }
                   ]
                 }
@@ -682,7 +683,14 @@
                   },
                   "hide": {
                     "hideWhenExpression": "hospitalizacióN !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false",
+                      "message": "La fecha de hospitalización no puede ser una fecha futura"
+                    }
+                  ]
                 },
                 {
                   "id": "diagnóSticoDeHospitalizacióN",
@@ -750,7 +758,14 @@
                   },
                   "hide": {
                     "hideWhenExpression": "emergencia !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-                  }
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false",
+                      "message": "La fecha de emergencia no puede ser una fecha futura"
+                    }
+                  ]
                 },
                 {
                   "id": "diagnóSticoDeEmergencia",

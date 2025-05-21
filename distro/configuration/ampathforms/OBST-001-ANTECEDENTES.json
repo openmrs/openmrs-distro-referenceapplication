@@ -27,10 +27,6 @@
                     "concept": "6a8fd860-e741-4880-aeef-14ad23c4a05e",
                     "answers": [
                       {
-                        "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Ninguna"
-                      },
-                      {
                         "concept": "ddb167d7-890c-4580-aea4-44503c71e8f3",
                         "label": "Alergias"
                       },
@@ -114,10 +110,6 @@
                     "rendering": "checkbox",
                     "concept": "68cf307b-bfb1-4f7a-8079-bb057b234dab",
                     "answers": [
-                      {
-                        "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "label": "Ninguno"
-                      },
                       {
                         "concept": "de885a20-8101-49ab-bc2a-dc21de42b0d0",
                         "label": "Aborto habitual/recurrente"
@@ -479,7 +471,14 @@
                   "questionOptions": {
                     "rendering": "date",
                     "concept": "aaa4f138-f363-4a11-86b2-d3575b1d891c"
-                  }
+                  },
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false",
+                      "message": "No puede ser una fecha futura"
+                    }
+                  ]
                 },
                 {
                   "label": "Periodo intergenésico adecuado",

@@ -104,7 +104,8 @@
                     "disallowDecimals": true,
                     "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "min": "0",
-                    "max": "250"
+                    "max": "250",
+                    "step": 1
                   },
                   "hideSteppers": true
                 },
@@ -117,7 +118,8 @@
                     "disallowDecimals": true,
                     "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "min": "0",
-                    "max": "150"
+                    "max": "150",
+                    "step": 1
                   },
                   "hideSteppers": true
                 },
@@ -130,7 +132,8 @@
                     "disallowDecimals": true,
                     "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "min": "0",
-                    "max": "230"
+                    "max": "230",
+                    "step": 1
                   },
                   "hideSteppers": true
                 },
@@ -163,7 +166,7 @@
                         "label": "Leve"
                       },
                       {
-                        "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "001d0ad1-9aec-4969-ab35-b3ca3da82924",
                         "label": "Moderado"
                       },
                       {
@@ -196,7 +199,7 @@
                         "label": "Leve"
                       },
                       {
-                        "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "concept": "001d0ad1-9aec-4969-ab35-b3ca3da82924",
                         "label": "Moderado"
                       },
                       {
@@ -268,7 +271,10 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "03a4f101-bf46-4923-97a1-759d926dee00"
+                    "concept": "03a4f101-bf46-4923-97a1-759d926dee00",
+                    "min": "0",
+                    "max": "100",
+                    "step": 1
                   },
                   "hideSteppers": true
                 },
@@ -279,7 +285,10 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "15df7b2b-ad43-410e-9edb-d1f40320faf4"
+                    "concept": "15df7b2b-ad43-410e-9edb-d1f40320faf4",
+                    "min": "0",
+                    "max": "100",
+                    "step": 1
                   },
                   "hideSteppers": true
                 },
@@ -290,7 +299,10 @@
                   "questionOptions": {
                     "rendering": "number",
                     "disallowDecimals": true,
-                    "concept": "7418c3a3-4c2a-4943-91db-ae2b561d6ded"
+                    "concept": "7418c3a3-4c2a-4943-91db-ae2b561d6ded",
+                    "min": "0",
+                    "max": "100",
+                    "step": 1
                   },
                   "hideSteppers": true
                 },
@@ -420,7 +432,14 @@
                   "questionOptions": {
                     "rendering": "date",
                     "concept": "efc8d765-bcf8-490c-9483-04dc803fdce6"
-                  }
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "isDateBefore(myValue, today())",
+                      "message": "La próxima cita no puede ser una fecha pasada"
+                    }
+                  ]
                 },
                 {
                   "id": "visitaDomiciliaria",
@@ -504,7 +523,8 @@
                     "concept": "b1fb2d14-92ec-4fda-90e5-40f3227c9c65",
                     "disallowDecimals": true,
                     "min": "40",
-                    "max": "250"
+                    "max": "250",
+                    "step": 1
                   },
                   "hideSteppers": true,
                   "validators": []
