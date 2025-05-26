@@ -139,7 +139,7 @@ services:
 
   fua-generator:
     container_name: peruHCE-fua-generator
-    imagen: marcelius733/fua-generator:dev-0.1.0
+    image: marcelius733/fua-generator:dev-0.1.0
     ports:
       - "3333:3000"
     enviroment:
@@ -152,7 +152,7 @@ services:
 
   fua-generator-db:
     container_name: peruHCE-fua-generator-db
-    imagen: postgres:15
+    image: postgres:15
     ports:
       - "5433:5432"
     enviroment:
