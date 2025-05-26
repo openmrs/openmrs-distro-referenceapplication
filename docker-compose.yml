@@ -158,7 +158,7 @@ services:
     environment:
       POSTGRES_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
       POSTGRES_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
-      POSTGRES_DB_NAME: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
+      POSTGRES_DB: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
     volumes:
       - db-fua-generator:/var/lib/postgresql/data
 
