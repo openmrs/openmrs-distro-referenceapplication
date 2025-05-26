@@ -142,7 +142,7 @@ services:
     image: marcelius733/fua-generator:dev-0.1.0
     ports:
       - "3333:3000"
-    enviroment:
+    environment:
       DB_USER: ${PERUHCE_GEN_DB_USER:-fua-generator}
       DB_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fua-generator}
       DB_NAME: ${PERUHCE_FUA_GEN_DB:-fua-generator}
@@ -155,7 +155,7 @@ services:
     image: postgres:15
     ports:
       - "5433:5432"
-    enviroment:
+    environment:
       POSTGRES_USER: ${PERUHCE_FUA_GEN_DB_USER:-fua-generator}
       POSTGRES_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fua-generator}
       POSTGRES_DB_NAME: ${PERUHCE_FUA_GEN_DB:-fua-generator}
