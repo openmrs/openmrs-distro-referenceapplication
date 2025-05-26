@@ -1,0 +1,74 @@
+{
+  "name": "Prescripción de medicamentos",
+  "pages": [
+    {
+      "label": "Prescripción de medicamentos",
+      "sections": [
+        {
+          "label": "Prescripción de medicamentos",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "dfdc2f61-dfd1-438f-91ff-629e9a1bb614"
+              },
+              "id": "ordenMedicamentos",
+              "label": "Órden de medicamentos",
+              "questions": [
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "d6c11be0-b3b2-4969-bba3-e020dcf382eb"
+                  },
+                  "id": "fechaYHora",
+                  "label": "Fecha y hora",
+                  "datePickerFormat": "both"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "textarea",
+                    "concept": "dfdc2f61-dfd1-438f-91ff-629e9a1bb614"
+                  },
+                  "id": "observaciones",
+                  "label": "Observaciones"
+                },
+                {
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "84a9cc40-b229-4760-bb3f-abeaf95c2439"
+                  },
+                  "id": "firmaProfesional",
+                  "label": "Firma del profesional"
+                }
+              ]
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "workspace-launcher",
+                "buttonLabel": "Añadir medicamentos",
+                "workspaceName": "add-drug-order"
+              },
+              "id": "workspaceLauncher",
+              "label": "Prescripción de medicamentos"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba",
+  "encounter": "Control Prenatal",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "uuid": "",
+  "description": " Workspace launcher Prueba",
+  "version": "1.0.0"
+}
