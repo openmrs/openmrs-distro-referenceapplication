@@ -139,26 +139,28 @@ services:
 
   fua-generator:
     container_name: peruHCE-fua-generator
-    imagen: marcelius733/fua-generator:dev-0.1.0
+    image: marcelius733/fua-generator:dev-0.1.1
     ports:
       - "3333:3000"
-    enviroment:
-      DB_USER: ${PERUHCE_GEN_DB_USER:-fua-generator}
-      DB_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fua-generator}
-      DB_NAME: ${PERUHCE_FUA_GEN_DB:-fua-generator}
-      TOKEN: ${PERUHCE_FUA_GEN_TOKEN:-fua-generator}
+    environment:
+      DB_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
+      DB_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
+      DB_NAME: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
+      DB_HOST: 'fua-generator-db'
+      DB_PORT: '5432'
+      TOKEN: ${PERUHCE_FUA_GEN_TOKEN:-fuagenerator}
     depends_on:
       - fua-generator-db
 
   fua-generator-db:
     container_name: peruHCE-fua-generator-db
-    imagen: postgres:15
+    image: postgres:15
     ports:
       - "5433:5432"
-    enviroment:
-      POSTGRES_USER: ${PERUHCE_FUA_GEN_DB_USER:-fua-generator}
-      POSTGRES_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fua-generator}
-      POSTGRES_DB_NAME: ${PERUHCE_FUA_GEN_DB:-fua-generator}
+    environment:
+      POSTGRES_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
+      POSTGRES_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
+      POSTGRES_DB: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
     volumes:
       - db-fua-generator:/var/lib/postgresql/data
 
