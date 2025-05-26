@@ -28,6 +28,10 @@ upstream backend {
   server backend:8080 max_fails=0;
 }
 
+upstream fua-generator {
+  server fua-generator:3333 max_fails=0;
+}
+
 server {
   listen       80;
 
@@ -195,6 +199,18 @@ server {
       return 204;
     }
   }
+
+    location = /services/fua-generator {
+    return 301 /services/fua-generator/;
+    
+  }
+
+  location /services/fua-generator/ {
+    proxy_pass http://fua-generator/;
+    proxy_redirect http://$host/ /services/fua-generator/;
+  }
+
+
 
   location = / {
     return 301 /openmrs/spa/;
