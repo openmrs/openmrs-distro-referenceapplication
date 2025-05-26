@@ -147,7 +147,7 @@ services:
       DB_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
       DB_NAME: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
       DB_HOST: fua-generator-db
-      DB_PORT: ${PERUHCE_FUA_GEN_DB_PORT:-5433}
+      DB_PORT: 5432
       TOKEN: ${PERUHCE_FUA_GEN_TOKEN:-fuagenerator}
     depends_on:
       - fua-generator-db
