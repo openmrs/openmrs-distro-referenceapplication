@@ -108,6 +108,16 @@ server {
       return 204;
     }
   }
+  
+  location = /services/fua-generator {
+    return 301 /services/fua-generator/;
+    
+  }
+
+  location /services/fua-generator/ {
+    proxy_pass http://fua-generator/;
+    proxy_redirect http://$host/ /services/fua-generator/;
+  }
 
   location = / {
     return 301 /openmrs/spa/;
@@ -200,7 +210,7 @@ server {
     }
   }
 
-    location = /services/fua-generator {
+  location = /services/fua-generator {
     return 301 /services/fua-generator/;
     
   }
