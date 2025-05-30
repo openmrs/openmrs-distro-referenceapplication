@@ -1,0 +1,141 @@
+{
+  "name": "(CRED) Embarazo y Parto",
+  "pages": [
+    {
+      "label": "EMBARAZO Y PARTO",
+      "sections": [
+        {
+          "label": "EMBARAZO",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ae27daee-d2f3-4df3-8e07-eff75c81872e",
+                "step": 1,
+                "min": "1",
+                "max": "20"
+              },
+              "id": "numeroEmbarazos",
+              "label": "Nº de embarazo (Gravida)(*)"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9156b8d5-e5d3-4c2b-b8fc-1faafeda8f6c",
+                "step": 1,
+                "min": "0",
+                "max": "20"
+              },
+              "id": "numeroAtencionesPrenatales",
+              "label": "Nº de atenciones prenatales"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "52a2755e-7510-473e-96d9-4875d7435f8d"
+              },
+              "id": "lugarAtencionesPrenatales",
+              "label": "Lugar de atenciones prenatales"
+            }
+          ]
+        },
+        {
+          "label": "PARTO",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "899e0cc8-5f6a-4334-b51d-c559f71ea550",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Espontáneo"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Instrumentado"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cesárea"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Otro"
+                  }
+                ]
+              },
+              "id": "condicionParto",
+              "label": "Condición del parto"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b4c79dec-245b-4d9f-ae52-2db757c4561a",
+                "answers": [
+                  {
+                    "concept": "1588AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Establecimiento de salud"
+                  },
+                  {
+                    "concept": "1536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Domicilio"
+                  }
+                ]
+              },
+              "id": "partoLugar",
+              "label": "Parto lugar"
+            },
+            {
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cff0f194-0a8c-4f2c-bbe4-35b356b23d24",
+                "answers": [
+                  {
+                    "concept": "1560AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Familiar"
+                  },
+                  {
+                    "concept": "1574AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Agente comunitario de salud"
+                  },
+                  {
+                    "concept": "1577AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Personal técnico"
+                  },
+                  {
+                    "concept": "1578AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Profesional de salud"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Otro"
+                  }
+                ]
+              },
+              "id": "atendidoPor",
+              "label": "Atendido por"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "encounterType": "a99e704f-46f6-4461-937d-606481fb0fc3",
+  "encounter": "Registro de Antecedentes Perinatales",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "uuid": "891f468b-a725-46c0-b7f1-d74654539f35",
+  "description": "Formulario para registro de datos del embarazo y parto",
+  "version": "1.0"
+}
