@@ -2,10 +2,12 @@ services:
   portainer:
     container_name: peruHCE-portainer
     image: portainer/portainer-ce:lts
+    command: -H unix:///var/run/docker.sock --http-enabled --base-url=/portainer
     restart: "unless-stopped"
     ports:
       - "9443:9443"  # HTTPS Portainer Web UI
       - "9000:9000"  # HTTP Portainer Web UI
+      - "8000:8000"  # Necessary for other reason
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer-data:/data
@@ -19,6 +21,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
 
   frontend:
     container_name: peruHCE-frontend
@@ -130,6 +134,7 @@ services:
       TZ: 'America/Lima'
       # Set a password to access the web interface. Not setting one will result in a random password being assigned
       FTLCONF_webserver_api_password: ${DNS_PASSWORD:-openmrs}
+      FTLCONF_dns_listeningMode: 'all'
     # Volumes store your data between container upgrades
     volumes:
       # For persisting Pi-hole's databases and common configuration file
