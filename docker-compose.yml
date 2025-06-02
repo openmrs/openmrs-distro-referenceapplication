@@ -1,14 +1,33 @@
 version: "3.7"
 
 services:
+  certbot:
+    image: certbot/certbot:v4.0.0
+    depends_on:
+      - gateway
+    command: >-
+      certonly --reinstall --webroot --webroot-path=/var/www/certbot
+             --email ${EMAIL:-test@openmrs.org} --agree-tos --no-eff-email
+             -d ${WEB_DOMAIN:-example.com}
+    volumes:
+      - ./certbot/scripts:/certbot/scripts
+      - letsencrypt-data:/etc/letsencrypt
+      - certbot-data:/var/www/certbot
+
   gateway:
     image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
     restart: "unless-stopped"
     depends_on:
       - frontend
       - backend
+    environment:
+      WEB_DOMAIN: ${WEB_DOMAIN:-example.com}  # Set your domain here
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - letsencrypt-data:/etc/letsencrypt:ro
+      - certbot-data:/var/www/certbot
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
@@ -64,3 +83,5 @@ services:
 volumes:
   openmrs-data: ~
   db-data: ~
+  letsencrypt-data: ~
+  certbot-data: ~ 
