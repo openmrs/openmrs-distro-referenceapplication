@@ -179,6 +179,7 @@
     }
   },
   "@openmrs/esm-patient-tests-app": {
+    "showReferenceNumberField": false,
     "resultsViewerConcepts": [
       {
         "conceptUuid": "24305e8e-f3dc-4ac6-bf87-e4f11f3b970e",
@@ -200,7 +201,7 @@
         "conceptUuid": "241eb982-1fdd-4183-a2b5-763f5ce2d528",
         "defaultOpen": false
       },
-       {
+      {
         "conceptUuid": "1bcb541a-55e8-4c5d-83fb-d121a9d54d9d",
         "defaultOpen": false
       }
@@ -210,6 +211,31 @@
         "020e5471-8750-44f6-82dd-af6d8eb63544"
       ]
     }
+  },
+  "@openmrs/esm-patient-orders-app": {
+    "orderEncounterType": "39da3525-afe4-45ff-8977-c53b7b359158",
+    "showPrintButton": true,
+    "showReferenceNumberField": false,
+    "orderTypes": [
+      {
+        "orderTypeUuid": "f9c5d0b8-8b5a-11e5-8e9b-12345678a01a",
+        "label": "Orden de Radiología",
+        "icon": "User--x-ray",
+        "orderableConceptSets": []
+      },
+      {
+        "orderTypeUuid": "e1f95924-697a-11e3-bd76-0800271c1b75",
+        "label": "Orden de Inmunización",
+        "icon": "Syringe",
+        "orderableConceptSets": []
+      },
+      {
+        "orderTypeUuid": "f3c2e4b6-8b5a-11e5-8e9b-12345678901b",
+        "label": "Orden de Interconsulta",
+        "icon": "User--follow",
+        "orderableConceptSets": []
+      }
+    ]
   },
   "@openmrs/esm-login-app": {
     "logo": {
@@ -225,7 +251,6 @@
   },
   "@openmrs/esm-patient-medications-app": {
     "daysDurationUnit": {
-      "uuid": "1072AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "display": "Días"
     }
   },
