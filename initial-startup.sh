@@ -6,7 +6,7 @@
 #
 #	Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
 #	graphic logo is a trademark of OpenMRS Inc.
-
+COMPOSE_BAKE=true
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 RSA_KEY_SIZE=4096

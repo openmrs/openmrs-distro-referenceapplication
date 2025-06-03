@@ -9,7 +9,8 @@
 
 if [ -d "${DATA_PATH}/conf" ]; then
 	while true; do
-		read -p "Existing configuration data found for ${WEB_DOMAIN}. Continue and replace existing certificate? (y/n) [default: 'n']: " DECISION
+    	echo "Existing configuration data found for ${WEB_DOMAIN}. "
+		read -p "Continue and replace existing certificate? (y/n) [default: 'n']: " DECISION
 		DECISION=${DECISION:-n}
 		case ${DECISION} in
 		[Yy]*)
