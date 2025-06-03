@@ -34,7 +34,7 @@ while true; do
 	esac
 done
 
-DOCKER_FILE_ARG="--file \"docker-compose.yml\""
+DOCKER_FILE_ARG="--file docker-compose.yml"
 BUILD_ARG=""
 if [ ${STAGING} != "0" ]; then
 	while true; do
