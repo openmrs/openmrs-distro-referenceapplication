@@ -16,7 +16,7 @@ read -p "Enter Email [default: '']: " EMAIL
 EMAIL=${EMAIL:-}
 
 CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN}"
-docker compose run --name certgen --rm --no-deps --build \
+docker compose --progress=quiet run --name certgen --rm --no-deps --build \
 	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAIN=${WEB_DOMAIN} \
 	--env DATA_PATH=${DATA_PATH} --env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh " certbot

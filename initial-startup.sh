@@ -57,11 +57,7 @@ if [ ${STAGING} != "0" ]; then
 fi
 
 CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN}"
-echo "docker compose ${DOCKER_FILE_ARG} run ${BUILD_ARG} --name certgen --rm --no-deps \
-	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAIN=${WEB_DOMAIN} \
-	--env DATA_PATH=${DATA_PATH} --env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
-	--entrypoint \"/certbot/scripts/initial-startup-create-dirs-files.sh \" certbot"
-docker compose ${DOCKER_FILE_ARG} run ${BUILD_ARG} --name certgen --rm --no-deps \
+docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --name certgen --rm --no-deps \
 	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAIN=${WEB_DOMAIN} \
 	--env DATA_PATH=${DATA_PATH} --env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh " certbot
@@ -69,15 +65,15 @@ echo
 echo "Successfully created temporary self-signed certs"
 
 echo "### Starting gateway ..."
-docker compose ${DOCKER_FILE_ARG} up ${BUILD_ARG} --force-recreate -d gateway
+docker compose ${DOCKER_FILE_ARG} --progress=quiet up ${BUILD_ARG} --force-recreate -d gateway
 echo
 
 echo "### Deleting dummy certificate for ${WEB_DOMAIN} ..."
-docker compose ${DOCKER_FILE_ARG} run ${BUILD_ARG} --rm --no-deps --entrypoint "
+docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --no-deps --entrypoint "
   rm -Rf /etc/letsencrypt/live/${WEB_DOMAIN}" certbot
-docker compose ${DOCKER_FILE_ARG} run ${BUILD_ARG} --rm --no-deps --entrypoint "
+docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --no-deps --entrypoint "
   rm -Rf /etc/letsencrypt/archive/${WEB_DOMAIN}" certbot
-docker compose ${DOCKER_FILE_ARG} run ${BUILD_ARG} --rm --no-deps --entrypoint "
+docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --no-deps --entrypoint "
   rm -Rf /etc/letsencrypt/renewal/${WEB_DOMAIN}.conf" certbot
 echo "Removed dummy certificate for ${WEB_DOMAIN}"
 echo
@@ -94,7 +90,7 @@ esac
 # Enable staging mode if needed
 if [ ${STAGING} != "0" ]; then STAGING_ARG="--staging"; else STAGING_ARG=""; fi
 
-docker compose ${DOCKER_FILE_ARG} run ${BUILD_ARG} --rm --entrypoint "\
+docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --entrypoint "\
   certbot certonly --webroot -w /var/www/certbot \
     ${STAGING_ARG} \
     ${EMAIL_ARG} \
@@ -105,7 +101,7 @@ docker compose ${DOCKER_FILE_ARG} run ${BUILD_ARG} --rm --entrypoint "\
 echo
 
 echo "### Reloading nginx ..."
-docker compose ${DOCKER_FILE_ARG} exec gateway nginx -s reload
+docker compose ${DOCKER_FILE_ARG} --progress=quiet exec gateway nginx -s reload
 echo
 
 echo "### Adding cron job for certificate renewal ..."
