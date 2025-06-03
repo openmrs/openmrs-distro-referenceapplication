@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 #	This Source Code Form is subject to the terms of the Mozilla Public License,
 #	v. 2.0. If a copy of the MPL was not distributed with this file, You can
 #	obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
@@ -9,10 +9,12 @@
 
 if [ -d "${DATA_PATH}/conf" ]; then
 	while true; do
-    	echo "Existing configuration data found for ${WEB_DOMAIN}. "
-		read -p "Continue and replace existing certificate? (y/n) [default: 'n']: " DECISION
-		DECISION=${DECISION:-n}
-		case ${DECISION} in
+		echo "Existing configuration data found for ${WEB_DOMAIN}. "
+		if [ -z "${OVERWRITE_CERTS_CONFIRM}"]; then
+			read -p "Continue and replace existing certificate? (y/n) [default: 'n']: " OVERWRITE_CERTS_CONFIRM
+		fi
+		OVERWRITE_CERTS_CONFIRM=${OVERWRITE_CERTS_CONFIRM:-n}
+		case ${OVERWRITE_CERTS_CONFIRM} in
 		[Yy]*)
 			echo "replacing existing certificate ..."
 			break
@@ -21,7 +23,10 @@ if [ -d "${DATA_PATH}/conf" ]; then
 			echo "exiting certificate generation..."
 			exit 1
 			;;
-		*) echo "Please answer y or n." ;;
+		*)
+			echo "Please answer y or n."
+			OVERWRITE_CERTS_CONFIRM=""
+			;;
 		esac
 	done
 fi

@@ -8,16 +8,62 @@
 #	graphic logo is a trademark of OpenMRS Inc.
 COMPOSE_BAKE=true
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-
 RSA_KEY_SIZE=4096
 DAYS=1
 DATA_PATH="/var/www/certbot"
-read -p "Enter Domain [default: 'example.com']: " WEB_DOMAIN
-WEB_DOMAIN=${WEB_DOMAIN:-example.com}
-read -p "Enter Email [default: '']: " EMAIL
-EMAIL=${EMAIL:-}
+WEB_DOMAIN=""
+EMAIL=""
+PRODUCTION_CONFIRM=""
+LOCAL_BUILD_CONFIRM=""
+OVERWRITE_CERTS_CONFIRM=""
+while getopts ":s:d:e:p:l:o:" opt; do
+	case $opt in
+	s)
+		RSA_KEY_SIZE="${OPTARG}"
+		;;
+	d)
+		WEB_DOMAIN="${OPTARG}"
+		;;
+	e)
+		EMAIL="${OPTARG}"
+		;;
+	p)
+		PRODUCTION_CONFIRM="${OPTARG}"
+		;;
+	l)
+		LOCAL_BUILD_CONFIRM="${OPTARG}"
+		;;
+	o)
+		OVERWRITE_CERTS_CONFIRM="${OPTARG}"
+		;;
+	\?)
+		echo "Invalid option -${OPTARG}" >&2
+		exit 1
+		;;
+	esac
+
+	case ${OPTARG} in
+	-*)
+		echo "Option $opt needs a valid argument"
+		exit 1
+		;;
+	esac
+done
+
+if [ -z "${WEB_DOMAIN}" ]; then
+	read -p "Enter Domain [default: 'example.com']: " WEB_DOMAIN
+	WEB_DOMAIN=${WEB_DOMAIN:-example.com}
+fi
+
+if [ -z "${EMAIL}" ]; then
+	read -p "Enter Email [default: '']: " EMAIL
+	EMAIL=${EMAIL:-}
+fi
+
 while true; do
-	read -p "Is this a production environment? (y/n) [default: 'n']: " PRODUCTION_CONFIRM
+	if [ -z "${PRODUCTION_CONFIRM}"]; then
+		read -p "Is this a production environment? (y/n) [default: 'n']: " PRODUCTION_CONFIRM
+	fi
 	PRODUCTION_CONFIRM=${PRODUCTION_CONFIRM:-n}
 	case ${PRODUCTION_CONFIRM} in
 	[Yy]*)
@@ -30,7 +76,10 @@ while true; do
 		STAGING=1
 		break
 		;;
-	*) echo "Please answer y or n." ;;
+	*)
+		echo "Please answer y or n."
+		PRODUCTION_CONFIRM=""
+		;;
 	esac
 done
 
@@ -38,7 +87,9 @@ DOCKER_FILE_ARG="--file docker-compose.yml"
 BUILD_ARG=""
 if [ ${STAGING} != "0" ]; then
 	while true; do
-		read -p "Would you like to build local images? (y/n) [default: 'n']: " LOCAL_BUILD_CONFIRM
+		if [ -z "${LOCAL_BUILD_CONFIRM}"]; then
+			read -p "Would you like to build local images? (y/n) [default: 'n']: " LOCAL_BUILD_CONFIRM
+		fi
 		LOCAL_BUILD_CONFIRM=${LOCAL_BUILD_CONFIRM:-n}
 		case ${LOCAL_BUILD_CONFIRM} in
 		[Yy]*)
@@ -51,7 +102,10 @@ if [ ${STAGING} != "0" ]; then
 			echo "will pull official images"
 			break
 			;;
-		*) echo "Please answer y or n." ;;
+		*)
+			echo "Please answer y or n."
+			LOCAL_BUILD_CONFIRM=""
+			;;
 		esac
 	done
 fi
@@ -59,8 +113,10 @@ fi
 CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN}"
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --name certgen --rm --no-deps \
 	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAIN=${WEB_DOMAIN} \
-	--env DATA_PATH=${DATA_PATH} --env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
-	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh " certbot
+	--env DATA_PATH=${DATA_PATH} --env OVERWRITE_CERTS_CONFIRM=${OVERWRITE_CERTS_CONFIRM} \
+	--env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
+	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh" \
+	certbot
 echo
 echo "Successfully created temporary self-signed certs"
 
