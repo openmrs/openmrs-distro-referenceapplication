@@ -10,14 +10,26 @@
 RSA_KEY_SIZE=4096
 DAYS=90
 DATA_PATH="/var/www/certbot"
+
 read -p "Enter Domain [default: 'localhost']: " WEB_DOMAIN
-WEB_DOMAIN=${WEB_DOMAIN:-localhost}
+WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-localhost}
+WEB_DOMAINS=(${WEB_DOMAIN_COMMON_NAME})
+while [ -n "${WEB_DOMAIN}" ]; do
+	read -p "Enter Alternate Domain [default: exit loop]: " WEB_DOMAIN
+	if [ -n "${WEB_DOMAIN}" ]; then
+		WEB_DOMAINS+=(${WEB_DOMAIN})
+	fi
+done
 read -p "Enter Email [default: '']: " EMAIL
 EMAIL=${EMAIL:-}
 
-CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN}"
+CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN_COMMON_NAME}"
 docker compose --progress=quiet run --name certgen --rm --no-deps --build \
-	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAIN=${WEB_DOMAIN} \
+	--env WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN_COMMON_NAME} \
+	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=$(IFS=':'; echo "${WEB_DOMAINS[*]}"; unset IFS;) \
 	--env DATA_PATH=${DATA_PATH} --env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh " certbot
 echo "Successfully created self-signed certs"
+
+echo "Bringing up all containers ..."
+docker compose up -d --build --always-recreate-deps

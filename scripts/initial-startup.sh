@@ -6,16 +6,36 @@
 #
 #	Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
 #	graphic logo is a trademark of OpenMRS Inc.
+
+usage() {
+cat << EOF
+Usage: $0 [-s size] ([-d domain])* [-e email] [-p prod_confirm] [-l local_build_confirm] [-o overwrite_certs_confirm] [-c cron_job_confirm]
+Options:
+	-h      Show this help message	
+    -s      size of the RSA key to generate; takes in 1 argument (default: 4096)
+	-d      Domain to generate certificate for; can be specified multiple times (default: 'example.com')	
+	-e      Email address for Let's Encrypt registration; takes in 1 argument (default: '')
+	-p      Production confirmation; takes in 1 argument (default: 'n')
+	-l      Local build confirmation; takes in 1 argument (default: 'n')
+	-o      Overwrite existing certificates confirmation; takes in 1 argument (default: 'n')
+	-c      Cron job confirmation for auto-renewal; takes in 1 argument (default: 'y')
+Example:
+	$0 -s 4096 -d example.com 
+EOF
+}
+
+
 COMPOSE_BAKE=true
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 RSA_KEY_SIZE=4096
 DAYS=1
 DATA_PATH="/var/www/certbot"
-WEB_DOMAIN=""
+WEB_DOMAINS=()
 EMAIL=""
 PRODUCTION_CONFIRM=""
 LOCAL_BUILD_CONFIRM=""
 OVERWRITE_CERTS_CONFIRM=""
+CRON_JOB_CONFIRM=""
 WEB_DOMAIN_SET=false
 EMAIL_SET=false
 while getopts ":s:d:e:p:l:o:" opt; do
@@ -24,7 +44,7 @@ while getopts ":s:d:e:p:l:o:" opt; do
 		RSA_KEY_SIZE="${OPTARG}"
 		;;
 	d)
-		WEB_DOMAIN="${OPTARG}"
+		WEB_DOMAINS+=("${OPTARG}")
 		WEB_DOMAIN_SET=true
 		;;
 	e)
@@ -40,6 +60,13 @@ while getopts ":s:d:e:p:l:o:" opt; do
 	o)
 		OVERWRITE_CERTS_CONFIRM="${OPTARG}"
 		;;
+	c)
+		CRON_JOB_CONFIRM="${OPTARG}"
+		;;
+	h)
+		usage
+		exit 0
+		;;
 	\?)
 		echo "Invalid option -${OPTARG}" >&2
 		exit 1
@@ -53,13 +80,22 @@ while getopts ":s:d:e:p:l:o:" opt; do
 		;;
 	esac
 done
+shift "$((OPTIND-1))"
 
 if [ "${WEB_DOMAIN_SET}" = false ]; then
-	if [ -z "${WEB_DOMAIN}" ]; then
+	if [ -z "${WEB_DOMAINS[@]}" ]; then
 		read -p "Enter Domain [default: 'example.com']: " WEB_DOMAIN
-		WEB_DOMAIN=${WEB_DOMAIN:-example.com}
+		WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-example.com}
+		WEB_DOMAINS=(${WEB_DOMAIN_COMMON_NAME})
 		WEB_DOMAIN_SET=true
 	fi
+	while [ -n "${WEB_DOMAIN}" ]; do
+		read -p "Enter Alternate Domain [default: exit loop]: " WEB_DOMAIN
+		if [ -n "${WEB_DOMAIN}" ]; then
+			WEB_DOMAINS+=(${WEB_DOMAIN})
+		fi
+	done
+	
 fi
 
 
@@ -120,10 +156,9 @@ if [ ${STAGING} != "0" ]; then
 		esac
 	done
 fi
-
-CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN}"
+CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN_COMMON_NAME}"
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --name certgen --rm --no-deps \
-	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAIN=${WEB_DOMAIN} \
+	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=$(IFS=:; echo "${WEB_DOMAINS[*]}") \
 	--env DATA_PATH=${DATA_PATH} --env OVERWRITE_CERTS_CONFIRM=${OVERWRITE_CERTS_CONFIRM} \
 	--env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh" \
@@ -135,18 +170,21 @@ echo "### Starting gateway ..."
 docker compose ${DOCKER_FILE_ARG} --progress=quiet up ${BUILD_ARG} --force-recreate -d gateway
 echo
 
-echo "### Deleting dummy certificate for ${WEB_DOMAIN} ..."
+echo "### Deleting dummy certificate for ${WEB_DOMAIN_COMMON_NAME} ..."
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --no-deps --entrypoint "
-  rm -Rf /etc/letsencrypt/live/${WEB_DOMAIN}" certbot
+  rm -Rf /etc/letsencrypt/live/${WEB_DOMAIN_COMMON_NAME}" certbot
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --no-deps --entrypoint "
-  rm -Rf /etc/letsencrypt/archive/${WEB_DOMAIN}" certbot
+  rm -Rf /etc/letsencrypt/archive/${WEB_DOMAIN_COMMON_NAME}" certbot
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --no-deps --entrypoint "
-  rm -Rf /etc/letsencrypt/renewal/${WEB_DOMAIN}.conf" certbot
-echo "Removed dummy certificate for ${WEB_DOMAIN}"
+  rm -Rf /etc/letsencrypt/renewal/${WEB_DOMAIN_COMMON_NAME}.conf" certbot
+echo "Removed dummy certificate for ${WEB_DOMAIN_COMMON_NAME}"
 echo
 
-echo "### Requesting Let's Encrypt certificate for ${WEB_DOMAIN} ..."
-DOMAIN_ARGS="-d ${WEB_DOMAIN}"
+echo "### Requesting Let's Encrypt certificate for ${WEB_DOMAIN_COMMON_NAME} ..."
+DOMAIN_ARGS=""
+for WEB_DOMAIN in "${WEB_DOMAINS[@]}"; do
+	DOMAIN_ARGS+="-d ${WEB_DOMAIN} "
+done
 
 # Select appropriate email arg
 case "${EMAIL}" in
@@ -168,13 +206,30 @@ docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --entry
     --agree-tos" certbot
 echo
 
+while true; do
+	if [ -z "${CRON_JOB_CONFIRM}"]; then
+		read -p "Would you like to schedule auto-cert-renewal? (y/n) [default: 'n']: " CRON_JOB_CONFIRM
+	fi
+	CRON_JOB_CONFIRM=${CRON_JOB_CONFIRM:-n}
+	case ${CRON_JOB_CONFIRM} in
+	[Yy]*)
+		echo "### Adding cron job for certificate renewal ..."
+		crontab -l | grep -q "${SCRIPT_DIR}/certbot/scripts/renew_certs.sh" && echo 'crontab task already exists' ||
+			(	crontab -l 2>/dev/null || true
+				echo "0 0 * * * ${SCRIPT_DIR}/certbot/scripts/renew_certs.sh ${STAGING_ARG} ${EMAIL_ARG} ${DOMAIN_ARGS} --rsa-key-size ${RSA_KEY_SIZE}"
+			) | crontab - 
+		break
+		;;
+	[Nn]*)
+		break
+		;;
+	*)
+		echo "Please answer y or n."
+		CRON_JOB_CONFIRM=""
+		;;
+	esac
+done
+
 echo "### Reloading nginx ..."
 docker compose ${DOCKER_FILE_ARG} --progress=quiet exec gateway nginx -s reload
 echo
-
-echo "### Adding cron job for certificate renewal ..."
-crontab -l | grep -q "${SCRIPT_DIR}/certbot/scripts/renew_certs.sh" && echo 'crontab task already exists' ||
-	(
-		crontab -l 2>/dev/null || true
-		echo "0 0 * * * ${SCRIPT_DIR}/certbot/scripts/renew_certs.sh ${STAGING_ARG} ${EMAIL_ARG} ${DOMAIN_ARGS} --rsa-key-size ${RSA_KEY_SIZE}"
-	) | crontab -
