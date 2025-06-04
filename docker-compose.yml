@@ -2,7 +2,7 @@
 
 services:
   certbot:
-    image: certbot/certbot:v4.0.0
+    image: openmrs/openmrs-reference-application-3-certbot:${TAG:-qa}
     depends_on:
       - gateway
     command: >-
@@ -10,7 +10,6 @@ services:
              --email ${EMAIL:-test@openmrs.org} --agree-tos --no-eff-email
              -d ${WEB_DOMAIN:-example.com}
     volumes:
-      - ./certbot/scripts:/certbot/scripts
       - letsencrypt-data:/etc/letsencrypt
       - certbot-data:/var/www/certbot
 
