@@ -16,6 +16,8 @@ EMAIL=""
 PRODUCTION_CONFIRM=""
 LOCAL_BUILD_CONFIRM=""
 OVERWRITE_CERTS_CONFIRM=""
+WEB_DOMAIN_SET=false
+EMAIL_SET=false
 while getopts ":s:d:e:p:l:o:" opt; do
 	case $opt in
 	s)
@@ -23,9 +25,11 @@ while getopts ":s:d:e:p:l:o:" opt; do
 		;;
 	d)
 		WEB_DOMAIN="${OPTARG}"
+		WEB_DOMAIN_SET=true
 		;;
 	e)
 		EMAIL="${OPTARG}"
+		EMAIL_SET=true
 		;;
 	p)
 		PRODUCTION_CONFIRM="${OPTARG}"
@@ -50,14 +54,21 @@ while getopts ":s:d:e:p:l:o:" opt; do
 	esac
 done
 
-if [ -z "${WEB_DOMAIN}" ]; then
-	read -p "Enter Domain [default: 'example.com']: " WEB_DOMAIN
-	WEB_DOMAIN=${WEB_DOMAIN:-example.com}
+if [ "${WEB_DOMAIN_SET}" = false ]; then
+	if [ -z "${WEB_DOMAIN}" ]; then
+		read -p "Enter Domain [default: 'example.com']: " WEB_DOMAIN
+		WEB_DOMAIN=${WEB_DOMAIN:-example.com}
+		WEB_DOMAIN_SET=true
+	fi
 fi
 
-if [ -z "${EMAIL}" ]; then
-	read -p "Enter Email [default: '']: " EMAIL
-	EMAIL=${EMAIL:-}
+
+if [ "${EMAIL_SET}" = false ]; then
+	if [ -z "${EMAIL}" ]; then
+		read -p "Enter Email [default: '']: " EMAIL
+		EMAIL=${EMAIL:-}
+		EMAIL_SET=true
+	fi
 fi
 
 while true; do
@@ -140,6 +151,7 @@ DOMAIN_ARGS="-d ${WEB_DOMAIN}"
 # Select appropriate email arg
 case "${EMAIL}" in
 "") EMAIL_ARG="--register-unsafely-without-email" ;;
+" ") EMAIL_ARG="--register-unsafely-without-email" ;;
 *) EMAIL_ARG="--email ${EMAIL}" ;;
 esac
 
