@@ -30,7 +30,7 @@ The local environment setup generates self signed certificates that must be acce
 ### Package the distribution and run the app
 
 ```
-docker compose down && docker compose up --build -d
+docker compose up --build -d
 ```
 
 ## Overview
