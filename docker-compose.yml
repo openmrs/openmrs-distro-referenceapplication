@@ -4,7 +4,7 @@ services:
   certbot:
     image: openmrs/openmrs-reference-application-3-certbot:${TAG:-qa}
     environment:
-      WEB_DOMAINS: ${WEB_DOMAINS:-example.com:www.example.com}  # Set your domains here, first entry will be common name
+      WEB_DOMAINS: ${WEB_DOMAINS:-localhost,127.0.0.1}  # Set your domains here, first entry will be common name
       DATA_PATH: ${DATA_PATH:-/var/www/certbot}  # Set the path for certbot data
       CERT_PATH: ${CERT_PATH:-/etc/letsencrypt}  # Set the path for certificates
       RSA_KEY_SIZE: ${RSA_KEY_SIZE:-4096}  # Set the RSA key size for the certificate
@@ -20,7 +20,7 @@ services:
       - frontend
       - backend
     environment:
-      WEB_DOMAIN_COMMON_NAME: ${WEB_DOMAIN_COMMON_NAME:-example.com}  # Set your domain here
+      WEB_DOMAIN_COMMON_NAME: ${WEB_DOMAIN_COMMON_NAME:-localhost}  # Set your domain here
     ports:
       - "80:80"
       - "443:443"

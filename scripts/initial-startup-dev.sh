@@ -24,9 +24,13 @@ read -p "Enter Email [default: '']: " EMAIL
 EMAIL=${EMAIL:-}
 
 CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN_COMMON_NAME}"
+OLD_IFS="$IFS"
+IFS=","
+WEB_DOMAINS_AS_STRING=${WEB_DOMAINS[*]}
+IFS=${OLD_IFS}
 docker compose --progress=quiet run --name certgen --rm --no-deps --build \
 	--env WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN_COMMON_NAME} \
-	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=$(IFS=':'; echo "${WEB_DOMAINS[*]}"; unset IFS;) \
+	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=${WEB_DOMAINS_AS_STRING} \
 	--env DATA_PATH=${DATA_PATH} --env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh " certbot
 echo "Successfully created self-signed certs"

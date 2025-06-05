@@ -15,16 +15,15 @@ if [ -z "${WEB_DOMAINS}" ]; then
 	exit 1
 fi
 OLD_IFS="$IFS"
-IFS=":"
+IFS=","
 set -- ${WEB_DOMAINS}
 IFS=${OLD_IFS}
-i=0
+DNS_NUM=0
+IP_NUM=0
 for WEB_DOMAIN in "$@"; do
-	i=$((i + 1))
 	if [ "${FIRST_LOOP}" = true ]; then
 		FIRST_LOOP=false
 		WEB_DOMAIN_COMMON_NAME="${WEB_DOMAIN}"
-
 		echo "[req]" >> sslconfig.conf
 		echo "distinguished_name=req_distinguished_name" >> sslconfig.conf
 		echo "x509_extensions = v3_ca" >> sslconfig.conf
@@ -33,7 +32,13 @@ for WEB_DOMAIN in "$@"; do
 		echo "[v3_ca]" >> sslconfig.conf
 		echo "subjectAltName=@alternate_names" >> sslconfig.conf
 		echo "[alternate_names]" >> sslconfig.conf
-		echo "DNS.${i} = ${WEB_DOMAIN}" >> sslconfig.conf
+		if expr "X$WEB_DOMAIN" : 'X[.0-9]' >/dev/null; then
+			echo "IP.${IP_NUM} = ${WEB_DOMAIN}" >> sslconfig.conf
+			IP_NUM=$((IP_NUM + 1))
+		else 
+			echo "DNS.${DNS_NUM} = ${WEB_DOMAIN}" >> sslconfig.conf
+			DNS_NUM=$((DNS_NUM + 1))
+		fi
 		SUBJECT_ALT_NAME_ARG="-config sslconfig.conf"
 		# SUBJECT_ALT_NAME_ARG="-addext \"subjectAltName = DNS:${WEB_DOMAIN}"
 	else

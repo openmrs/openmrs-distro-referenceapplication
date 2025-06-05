@@ -13,7 +13,7 @@ Usage: $0 [-s size] ([-d domain])* [-e email] [-p prod_confirm] [-l local_build_
 Options:
 	-h      Show this help message	
     -s      size of the RSA key to generate; takes in 1 argument (default: 4096)
-	-d      Domain to generate certificate for; can be specified multiple times (default: 'example.com')	
+	-d      Domain to generate certificate for; can be specified multiple times (default: 'localhost')	
 	-e      Email address for Let's Encrypt registration; takes in 1 argument (default: '')
 	-p      Production confirmation; takes in 1 argument (default: 'n')
 	-l      Local build confirmation; takes in 1 argument (default: 'n')
@@ -32,7 +32,7 @@ RSA_KEY_SIZE="${RSA_KEY_SIZE:-4096}"
 DATA_PATH="/var/www/certbot"
 WEB_DOMAINS=("${WEB_DOMAINS:-}")
 OLD_IFS="$IFS"
-IFS=":"
+IFS=","
 set -- ${WEB_DOMAINS}
 IFS=${OLD_IFS}
 i=0
@@ -92,8 +92,8 @@ shift "$((OPTIND-1))"
 
 WEB_DOMAIN=""
 if [ -z "${WEB_DOMAINS[@]}" ]; then
-	read -p "Enter Domain [default: 'example.com']: " WEB_DOMAIN
-	WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-example.com}
+	read -p "Enter Domain [default: 'localhost']: " WEB_DOMAIN
+	WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-localhost}
 	WEB_DOMAINS=(${WEB_DOMAIN_COMMON_NAME})
 	WEB_DOMAIN_SET=true
 fi
@@ -161,13 +161,18 @@ if [ ${STAGING} != "0" ]; then
 	done
 fi
 CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN_COMMON_NAME}"
+OLD_IFS="$IFS"
+IFS=","
+WEB_DOMAINS_AS_STRING=${WEB_DOMAINS[*]}
+IFS=${OLD_IFS}
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --name certgen --rm --no-deps \
-	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=$(IFS=:; echo "${WEB_DOMAINS[*]}") \
+	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=${WEB_DOMAINS_AS_STRING} \
 	--env DATA_PATH=${DATA_PATH} --env OVERWRITE_CERTS_CONFIRM=${OVERWRITE_CERTS_CONFIRM} \
 	--env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh" \
 	certbot
 echo
+IFS=${OLD_IFS}
 echo "Successfully created temporary self-signed certs"
 
 echo "### Starting gateway ..."
