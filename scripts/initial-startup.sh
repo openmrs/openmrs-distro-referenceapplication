@@ -13,12 +13,12 @@ Usage: $0 [-s size] ([-d domain])* [-e email] [-p prod_confirm] [-l local_build_
 Options:
 	-h      Show this help message	
     -s      size of the RSA key to generate; takes in 1 argument (default: 4096)
-	-d      Domain to generate certificate for; can be specified multiple times (default: 'localhost')	
-	-e      Email address for Let's Encrypt registration; takes in 1 argument (default: '')
-	-p      Production confirmation; takes in 1 argument (default: 'n')
-	-l      Local build confirmation; takes in 1 argument (default: 'n')
-	-o      Overwrite existing certificates confirmation; takes in 1 argument (default: 'n')
-	-c      Cron job confirmation for auto-renewal; takes in 1 argument (default: 'y')
+	-d      Domain to generate certificate for; can be specified multiple times (default: ask)	
+	-e      Email address for Let's Encrypt registration; takes in 1 argument (default: ask)
+	-p      Production confirmation; takes in 1 argument (y/n) [default: ask]
+	-l      Local build confirmation; takes in 1 argument (y/n) [default: ask]
+	-o      Overwrite existing certificates confirmation; takes in 1 argument (y/n) [default: ask]
+	-c      Cron job confirmation for auto-renewal; takes in 1 argument (y/n) [default: ask]
 Example:
 	$0 -s 4096 -d example.com 
 EOF
