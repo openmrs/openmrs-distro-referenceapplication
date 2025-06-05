@@ -32,7 +32,7 @@ for WEB_DOMAIN in "$@"; do
 		echo "[v3_ca]" >> sslconfig.conf
 		echo "subjectAltName=@alternate_names" >> sslconfig.conf
 		echo "[alternate_names]" >> sslconfig.conf
-		if expr "X$WEB_DOMAIN" : 'X[.0-9]' >/dev/null; then
+		if expr "X$WEB_DOMAIN" : 'X[.0-9]+' >/dev/null; then
 			echo "IP.${IP_NUM} = ${WEB_DOMAIN}" >> sslconfig.conf
 			IP_NUM=$((IP_NUM + 1))
 		else 
