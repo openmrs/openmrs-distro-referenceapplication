@@ -27,29 +27,37 @@ EOF
 
 COMPOSE_BAKE=true
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-RSA_KEY_SIZE=4096
-DAYS=1
+
+RSA_KEY_SIZE="${RSA_KEY_SIZE:-4096}"
 DATA_PATH="/var/www/certbot"
-WEB_DOMAINS=()
-EMAIL=""
+WEB_DOMAINS=("${WEB_DOMAINS:-}")
+OLD_IFS="$IFS"
+IFS=":"
+set -- ${WEB_DOMAINS}
+IFS=${OLD_IFS}
+i=0
+for WEB_DOMAIN in "$@"; do
+	WEB_DOMAINS+=(${WEB_DOMAIN})
+done
+WEB_DOMAIN_PARAM_OVERRIDE_OCCURRED=false
 PRODUCTION_CONFIRM=""
 LOCAL_BUILD_CONFIRM=""
 OVERWRITE_CERTS_CONFIRM=""
 CRON_JOB_CONFIRM=""
-WEB_DOMAIN_SET=false
-EMAIL_SET=false
-while getopts ":s:d:e:p:l:o:" opt; do
+while getopts ":s:d:e:p:l:o:c:" opt; do
 	case $opt in
 	s)
 		RSA_KEY_SIZE="${OPTARG}"
 		;;
 	d)
+		if [ "${WEB_DOMAIN_PARAM_OVERRIDE_OCCURRED}" = false ]; then
+			WEB_DOMAINS=()  # Reset the array if this is the first domain argument
+			WEB_DOMAIN_PARAM_OVERRIDE=true
+		fi
 		WEB_DOMAINS+=("${OPTARG}")
-		WEB_DOMAIN_SET=true
 		;;
 	e)
 		EMAIL="${OPTARG}"
-		EMAIL_SET=true
 		;;
 	p)
 		PRODUCTION_CONFIRM="${OPTARG}"
@@ -82,29 +90,25 @@ while getopts ":s:d:e:p:l:o:" opt; do
 done
 shift "$((OPTIND-1))"
 
-if [ "${WEB_DOMAIN_SET}" = false ]; then
-	if [ -z "${WEB_DOMAINS[@]}" ]; then
-		read -p "Enter Domain [default: 'example.com']: " WEB_DOMAIN
-		WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-example.com}
-		WEB_DOMAINS=(${WEB_DOMAIN_COMMON_NAME})
-		WEB_DOMAIN_SET=true
-	fi
-	while [ -n "${WEB_DOMAIN}" ]; do
-		read -p "Enter Alternate Domain [default: exit loop]: " WEB_DOMAIN
-		if [ -n "${WEB_DOMAIN}" ]; then
-			WEB_DOMAINS+=(${WEB_DOMAIN})
-		fi
-	done
-	
+WEB_DOMAIN=""
+if [ -z "${WEB_DOMAINS[@]}" ]; then
+	read -p "Enter Domain [default: 'example.com']: " WEB_DOMAIN
+	WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-example.com}
+	WEB_DOMAINS=(${WEB_DOMAIN_COMMON_NAME})
+	WEB_DOMAIN_SET=true
 fi
-
-
-if [ "${EMAIL_SET}" = false ]; then
-	if [ -z "${EMAIL}" ]; then
-		read -p "Enter Email [default: '']: " EMAIL
-		EMAIL=${EMAIL:-}
-		EMAIL_SET=true
+while [ -n "${WEB_DOMAIN}" ]; do
+	read -p "Enter Alternate Domain [default: exit loop]: " WEB_DOMAIN
+	if [ -n "${WEB_DOMAIN}" ]; then
+		WEB_DOMAINS+=(${WEB_DOMAIN})
 	fi
+done
+
+if [ -v EMAIL ]; then
+	echo "Using contact email: ${EMAIL}"
+else 
+	read -p "Enter Email [default: '']: " EMAIL
+	EMAIL=${EMAIL:-}
 fi
 
 while true; do
@@ -160,7 +164,7 @@ CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN_COMMON_NAME}"
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --name certgen --rm --no-deps \
 	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=$(IFS=:; echo "${WEB_DOMAINS[*]}") \
 	--env DATA_PATH=${DATA_PATH} --env OVERWRITE_CERTS_CONFIRM=${OVERWRITE_CERTS_CONFIRM} \
-	--env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
+	--env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh" \
 	certbot
 echo
