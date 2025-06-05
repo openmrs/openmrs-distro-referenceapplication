@@ -79,11 +79,11 @@ if [ ! -e "${DATA_PATH}/conf/options-ssl-nginx.conf" ] || [ ! -e "${DATA_PATH}/c
 	echo
 fi
 mkdir -p "${DATA_PATH}/conf/live/${WEB_DOMAIN_COMMON_NAME}"
-mkdir -p "${CERT_PATH}"
+mkdir -p "${CERT_PATH}/live/${WEB_DOMAIN_COMMON_NAME}"
 
 echo "### Creating dummy certificate for ${WEB_DOMAIN_COMMON_NAME} ..."
 openssl req -x509 -nodes -newkey rsa:${RSA_KEY_SIZE} -days ${DAYS} \
-	-keyout "${CERT_PATH}/privkey.pem" \
-	-out "${CERT_PATH}/fullchain.pem" \
+	-keyout "${CERT_PATH}/live/${WEB_DOMAIN_COMMON_NAME}/privkey.pem" \
+	-out "${CERT_PATH}/live/${WEB_DOMAIN_COMMON_NAME}/fullchain.pem" \
 	-subj "/CN=${WEB_DOMAIN_COMMON_NAME}" \
 	${SUBJECT_ALT_NAME_ARG} 

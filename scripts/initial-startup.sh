@@ -160,7 +160,7 @@ if [ ${STAGING} != "0" ]; then
 		esac
 	done
 fi
-CERT_PATH="/etc/letsencrypt/live/${WEB_DOMAIN_COMMON_NAME}"
+CERT_PATH="/etc/letsencrypt"
 OLD_IFS="$IFS"
 IFS=","
 WEB_DOMAINS_AS_STRING=${WEB_DOMAINS[*]}

@@ -14,5 +14,5 @@ if [ -d "${DATA_PATH}/conf" ]; then
 else
 	# If the directory does not exist, we run the initial startup script
 	echo "Running initial startup script..."
-	./initial-startup-create-dirs-files.sh 
+	/certbot/scripts/initial-startup-create-dirs-files.sh 
 fi
