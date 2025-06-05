@@ -6,7 +6,7 @@
 #
 #	Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
 #	graphic logo is a trademark of OpenMRS Inc.
-DAYS=1 #number of days that temp cert is valid for
+TEMP_CERT_DAYS=1 #number of days that temp cert is valid for
 
 if [ -d "${DATA_PATH}/conf" ]; then
 	# If the directory exists, we assume that the initial setup has already been done

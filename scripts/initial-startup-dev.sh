@@ -8,7 +8,7 @@
 #	graphic logo is a trademark of OpenMRS Inc.
 
 RSA_KEY_SIZE=4096
-DAYS=90
+TEMP_CERT_DAYS=90
 DATA_PATH="/var/www/certbot"
 
 read -p "Enter Domain [default: 'localhost']: " WEB_DOMAIN
@@ -31,7 +31,7 @@ IFS=${OLD_IFS}
 docker compose --progress=quiet run --name certgen --rm --no-deps --build \
 	--env WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN_COMMON_NAME} \
 	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=${WEB_DOMAINS_AS_STRING} \
-	--env DATA_PATH=${DATA_PATH} --env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env DAYS=${DAYS} \
+	--env DATA_PATH=${DATA_PATH} --env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env TEMP_CERT_DAYS=${TEMP_CERT_DAYS} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh " certbot
 echo "Successfully created self-signed certs"
 

@@ -8,7 +8,7 @@
 #	graphic logo is a trademark of OpenMRS Inc.
 
 SUBJECT_ALT_NAME_ARG=""
-DAYS="${DAYS:-1}" # number of days that temp cert is valid for
+TEMP_CERT_DAYS="${TEMP_CERT_DAYS:-1}" # number of days that temp cert is valid for
 FIRST_LOOP=true
 if [ -z "${WEB_DOMAINS}" ]; then
 	echo "No web domain provided. Please set WEB_DOMAINS environment variable."
@@ -82,7 +82,7 @@ mkdir -p "${DATA_PATH}/conf/live/${WEB_DOMAIN_COMMON_NAME}"
 mkdir -p "${CERT_PATH}/live/${WEB_DOMAIN_COMMON_NAME}"
 
 echo "### Creating dummy certificate for ${WEB_DOMAIN_COMMON_NAME} ..."
-openssl req -x509 -nodes -newkey rsa:${RSA_KEY_SIZE} -days ${DAYS} \
+openssl req -x509 -nodes -newkey rsa:${RSA_KEY_SIZE} -days ${TEMP_CERT_DAYS} \
 	-keyout "${CERT_PATH}/live/${WEB_DOMAIN_COMMON_NAME}/privkey.pem" \
 	-out "${CERT_PATH}/live/${WEB_DOMAIN_COMMON_NAME}/fullchain.pem" \
 	-subj "/CN=${WEB_DOMAIN_COMMON_NAME}" \
