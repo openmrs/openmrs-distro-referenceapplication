@@ -7,10 +7,32 @@
 #	Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
 #	graphic logo is a trademark of OpenMRS Inc.
 DAYS=1 #number of days that temp cert is valid for
+
 if [ -d "${DATA_PATH}/conf" ]; then
 	# If the directory exists, we assume that the initial setup has already been done
 	echo "Initial setup already done. Skipping initial startup script."
-	certbot $@
+	# Select appropriate email arg
+	case "${EMAIL}" in
+	"") EMAIL_ARG="--register-unsafely-without-email" ;;
+	" ") EMAIL_ARG="--register-unsafely-without-email" ;;
+	*) EMAIL_ARG="--email ${EMAIL}" ;;
+	esac
+
+	OLD_IFS="$IFS"
+	IFS=","
+	set -- ${WEB_DOMAINS}
+	IFS=${OLD_IFS}
+	DOMAIN_ARGS=""
+	for WEB_DOMAIN in "$@"; do
+		DOMAIN_ARGS+="-d ${WEB_DOMAIN} "
+	done
+	
+	certbot certonly --keep-until-expiring \
+	--webroot -w ${DATA_PATH}  \
+	${EMAIL_ARG} ${DOMAIN_ARGS} --rsa-key-size ${RSA_KEY_SIZE}
+    "$@" \
+    --agree-tos \
+    --no-eff-email
 else
 	# If the directory does not exist, we run the initial startup script
 	echo "Running initial startup script..."

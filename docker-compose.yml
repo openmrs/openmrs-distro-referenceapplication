@@ -3,6 +3,7 @@
 services:
   certbot:
     image: openmrs/openmrs-reference-application-3-certbot:${TAG:-qa}
+    command: ["--staging"]
     environment:
       WEB_DOMAINS: ${WEB_DOMAINS:-localhost,127.0.0.1}  # Set your domains here, first entry will be common name
       DATA_PATH: ${DATA_PATH:-/var/www/certbot}  # Set the path for certbot data

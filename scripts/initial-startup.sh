@@ -206,7 +206,7 @@ esac
 if [ ${STAGING} != "0" ]; then STAGING_ARG="--staging"; else STAGING_ARG=""; fi
 
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --entrypoint "\
-  certbot certonly --webroot -w /var/www/certbot \
+  certbot certonly --webroot -w ${DATA_PATH} \
     ${STAGING_ARG} \
     ${EMAIL_ARG} \
     ${DOMAIN_ARGS} \
@@ -225,7 +225,7 @@ while true; do
 		echo "### Adding cron job for certificate renewal ..."
 		crontab -l | grep -q "${SCRIPT_DIR}/certbot/scripts/renew_certs.sh" && echo 'crontab task already exists' ||
 			(	crontab -l 2>/dev/null || true
-				echo "0 0 * * * ${SCRIPT_DIR}/certbot/scripts/renew_certs.sh ${STAGING_ARG} ${EMAIL_ARG} ${DOMAIN_ARGS} --rsa-key-size ${RSA_KEY_SIZE}"
+				echo "0 0 * * * ${SCRIPT_DIR}/certbot/scripts/renew_certs.sh --webroot -w ${DATA_PATH} ${STAGING_ARG} ${EMAIL_ARG} ${DOMAIN_ARGS} --rsa-key-size ${RSA_KEY_SIZE}"
 			) | crontab - 
 		break
 		;;
