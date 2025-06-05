@@ -8,27 +8,27 @@
 #	graphic logo is a trademark of OpenMRS Inc.
 
 SUBJECT_ALT_NAME_ARG=""
-TEMP_CERT_DAYS="${TEMP_CERT_DAYS:-1}" # number of days that temp cert is valid for
+CERT_TEMP_CERT_DAYS="${CERT_TEMP_CERT_DAYS:-1}" # number of days that temp cert is valid for
 FIRST_LOOP=true
-if [ -z "${WEB_DOMAINS}" ]; then
-	echo "No web domain provided. Please set WEB_DOMAINS environment variable."
+if [ -z "${CERT_WEB_DOMAINS}" ]; then
+	echo "No web domain provided. Please set CERT_WEB_DOMAINS environment variable."
 	exit 1
 fi
 OLD_IFS="$IFS"
 IFS=","
-set -- ${WEB_DOMAINS}
+set -- ${CERT_WEB_DOMAINS}
 IFS=${OLD_IFS}
 DNS_NUM=0
 IP_NUM=0
 for WEB_DOMAIN in "$@"; do
 	if [ "${FIRST_LOOP}" = true ]; then
 		FIRST_LOOP=false
-		WEB_DOMAIN_COMMON_NAME="${WEB_DOMAIN}"
+		CERT_WEB_DOMAIN_COMMON_NAME="${WEB_DOMAIN}"
 		echo "[req]" >> sslconfig.conf
 		echo "distinguished_name=req_distinguished_name" >> sslconfig.conf
 		echo "x509_extensions = v3_ca" >> sslconfig.conf
 		echo "[req_distinguished_name]" >> sslconfig.conf
-		echo "CN = ${WEB_DOMAIN_COMMON_NAME}" >> sslconfig.conf
+		echo "CN = ${CERT_WEB_DOMAIN_COMMON_NAME}" >> sslconfig.conf
 		echo "[v3_ca]" >> sslconfig.conf
 		echo "subjectAltName=@alternate_names" >> sslconfig.conf
 		echo "[alternate_names]" >> sslconfig.conf
@@ -48,9 +48,9 @@ for WEB_DOMAIN in "$@"; do
 done
 # SUBJECT_ALT_NAME_ARG="${SUBJECT_ALT_NAME_ARG}\""
 
-if [ -d "${DATA_PATH}/conf" ]; then
+if [ -d "${CERTBOT_DATA_PATH}/conf" ]; then
 	while true; do
-		echo "Existing configuration data found for ${WEB_DOMAIN_COMMON_NAME}. "
+		echo "Existing configuration data found for ${CERT_WEB_DOMAIN_COMMON_NAME}. "
 		if [ -z "${OVERWRITE_CERTS_CONFIRM}"]; then
 			read -p "Continue and replace existing certificate? (y/n) [default: 'n']: " OVERWRITE_CERTS_CONFIRM
 		fi
@@ -71,19 +71,19 @@ if [ -d "${DATA_PATH}/conf" ]; then
 		esac
 	done
 fi
-if [ ! -e "${DATA_PATH}/conf/options-ssl-nginx.conf" ] || [ ! -e "${DATA_PATH}/conf/ssl-dhparams.pem" ]; then
+if [ ! -e "${CERTBOT_DATA_PATH}/conf/options-ssl-nginx.conf" ] || [ ! -e "${CERTBOT_DATA_PATH}/conf/ssl-dhparams.pem" ]; then
 	echo "### Downloading recommended TLS parameters ..."
-	mkdir -p "${DATA_PATH}/conf"
-	curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf >"${DATA_PATH}/conf/options-ssl-nginx.conf"
-	curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem >"${DATA_PATH}/conf/ssl-dhparams.pem"
+	mkdir -p "${CERTBOT_DATA_PATH}/conf"
+	curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf >"${CERTBOT_DATA_PATH}/conf/options-ssl-nginx.conf"
+	curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem >"${CERTBOT_DATA_PATH}/conf/ssl-dhparams.pem"
 	echo
 fi
-mkdir -p "${DATA_PATH}/conf/live/${WEB_DOMAIN_COMMON_NAME}"
-mkdir -p "${CERT_PATH}/live/${WEB_DOMAIN_COMMON_NAME}"
+mkdir -p "${CERTBOT_DATA_PATH}/conf/live/${CERT_WEB_DOMAIN_COMMON_NAME}"
+mkdir -p "${CERT_ROOT_PATH}/live/${CERT_WEB_DOMAIN_COMMON_NAME}"
 
-echo "### Creating dummy certificate for ${WEB_DOMAIN_COMMON_NAME} ..."
-openssl req -x509 -nodes -newkey rsa:${RSA_KEY_SIZE} -days ${TEMP_CERT_DAYS} \
-	-keyout "${CERT_PATH}/live/${WEB_DOMAIN_COMMON_NAME}/privkey.pem" \
-	-out "${CERT_PATH}/live/${WEB_DOMAIN_COMMON_NAME}/fullchain.pem" \
-	-subj "/CN=${WEB_DOMAIN_COMMON_NAME}" \
+echo "### Creating dummy certificate for ${CERT_WEB_DOMAIN_COMMON_NAME} ..."
+openssl req -x509 -nodes -newkey rsa:${CERT_RSA_KEY_SIZE} -days ${CERT_TEMP_CERT_DAYS} \
+	-keyout "${CERT_ROOT_PATH}/live/${CERT_WEB_DOMAIN_COMMON_NAME}/privkey.pem" \
+	-out "${CERT_ROOT_PATH}/live/${CERT_WEB_DOMAIN_COMMON_NAME}/fullchain.pem" \
+	-subj "/CN=${CERT_WEB_DOMAIN_COMMON_NAME}" \
 	${SUBJECT_ALT_NAME_ARG} 

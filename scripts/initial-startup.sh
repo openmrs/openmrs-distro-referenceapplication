@@ -28,16 +28,16 @@ EOF
 COMPOSE_BAKE=true
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
-RSA_KEY_SIZE="${RSA_KEY_SIZE:-4096}"
-DATA_PATH="/var/www/certbot"
-WEB_DOMAINS=("${WEB_DOMAINS:-}")
+CERT_RSA_KEY_SIZE="${CERT_RSA_KEY_SIZE:-4096}"
+CERTBOT_DATA_PATH="/var/www/certbot"
+CERT_WEB_DOMAINS=("${CERT_WEB_DOMAINS:-}")
 OLD_IFS="$IFS"
 IFS=","
-set -- ${WEB_DOMAINS}
+set -- ${CERT_WEB_DOMAINS}
 IFS=${OLD_IFS}
 i=0
 for WEB_DOMAIN in "$@"; do
-	WEB_DOMAINS+=(${WEB_DOMAIN})
+	CERT_WEB_DOMAINS+=(${WEB_DOMAIN})
 done
 WEB_DOMAIN_PARAM_OVERRIDE_OCCURRED=false
 PRODUCTION_CONFIRM=""
@@ -47,17 +47,17 @@ CRON_JOB_CONFIRM=""
 while getopts ":s:d:e:p:l:o:c:" opt; do
 	case $opt in
 	s)
-		RSA_KEY_SIZE="${OPTARG}"
+		CERT_RSA_KEY_SIZE="${OPTARG}"
 		;;
 	d)
 		if [ "${WEB_DOMAIN_PARAM_OVERRIDE_OCCURRED}" = false ]; then
-			WEB_DOMAINS=()  # Reset the array if this is the first domain argument
+			CERT_WEB_DOMAINS=()  # Reset the array if this is the first domain argument
 			WEB_DOMAIN_PARAM_OVERRIDE=true
 		fi
-		WEB_DOMAINS+=("${OPTARG}")
+		CERT_WEB_DOMAINS+=("${OPTARG}")
 		;;
 	e)
-		EMAIL="${OPTARG}"
+		CERT_CONTACT_EMAIL="${OPTARG}"
 		;;
 	p)
 		PRODUCTION_CONFIRM="${OPTARG}"
@@ -91,24 +91,24 @@ done
 shift "$((OPTIND-1))"
 
 WEB_DOMAIN=""
-if [ -z "${WEB_DOMAINS[@]}" ]; then
+if [ -z "${CERT_WEB_DOMAINS[@]}" ]; then
 	read -p "Enter Domain [default: 'localhost']: " WEB_DOMAIN
-	WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-localhost}
-	WEB_DOMAINS=(${WEB_DOMAIN_COMMON_NAME})
+	CERT_WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-localhost}
+	CERT_WEB_DOMAINS=(${CERT_WEB_DOMAIN_COMMON_NAME})
 	WEB_DOMAIN_SET=true
 fi
 while [ -n "${WEB_DOMAIN}" ]; do
 	read -p "Enter Alternate Domain [default: exit loop]: " WEB_DOMAIN
 	if [ -n "${WEB_DOMAIN}" ]; then
-		WEB_DOMAINS+=(${WEB_DOMAIN})
+		CERT_WEB_DOMAINS+=(${WEB_DOMAIN})
 	fi
 done
 
-if [ -v EMAIL ]; then
-	echo "Using contact email: ${EMAIL}"
+if [ -v CERT_CONTACT_EMAIL ]; then
+	echo "Using contact email: ${CERT_CONTACT_EMAIL}"
 else 
-	read -p "Enter Email [default: '']: " EMAIL
-	EMAIL=${EMAIL:-}
+	read -p "Enter Email [default: '']: " CERT_CONTACT_EMAIL
+	CERT_CONTACT_EMAIL=${CERT_CONTACT_EMAIL:-}
 fi
 
 while true; do
@@ -160,15 +160,15 @@ if [ ${STAGING} != "0" ]; then
 		esac
 	done
 fi
-CERT_PATH="/etc/letsencrypt"
+CERT_ROOT_PATH="/etc/letsencrypt"
 OLD_IFS="$IFS"
 IFS=","
-WEB_DOMAINS_AS_STRING=${WEB_DOMAINS[*]}
+WEB_DOMAINS_AS_STRING=${CERT_WEB_DOMAINS[*]}
 IFS=${OLD_IFS}
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --name certgen --rm --no-deps \
-	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=${WEB_DOMAINS_AS_STRING} \
-	--env DATA_PATH=${DATA_PATH} --env OVERWRITE_CERTS_CONFIRM=${OVERWRITE_CERTS_CONFIRM} \
-	--env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} \
+	--env CERT_RSA_KEY_SIZE=${CERT_RSA_KEY_SIZE} --env CERT_WEB_DOMAINS=${WEB_DOMAINS_AS_STRING} \
+	--env CERTBOT_DATA_PATH=${CERTBOT_DATA_PATH} --env OVERWRITE_CERTS_CONFIRM=${OVERWRITE_CERTS_CONFIRM} \
+	--env CERT_CONTACT_EMAIL=${CERT_CONTACT_EMAIL} --env CERT_ROOT_PATH=${CERT_ROOT_PATH} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh" \
 	certbot
 echo
@@ -179,38 +179,38 @@ echo "### Starting gateway ..."
 docker compose ${DOCKER_FILE_ARG} --progress=quiet up ${BUILD_ARG} --force-recreate -d gateway
 echo
 
-echo "### Deleting dummy certificate for ${WEB_DOMAIN_COMMON_NAME} ..."
+echo "### Deleting dummy certificate for ${CERT_WEB_DOMAIN_COMMON_NAME} ..."
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --no-deps --entrypoint "
-  rm -Rf /etc/letsencrypt/live/${WEB_DOMAIN_COMMON_NAME}" certbot
+  rm -Rf /etc/letsencrypt/live/${CERT_WEB_DOMAIN_COMMON_NAME}" certbot
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --no-deps --entrypoint "
-  rm -Rf /etc/letsencrypt/archive/${WEB_DOMAIN_COMMON_NAME}" certbot
+  rm -Rf /etc/letsencrypt/archive/${CERT_WEB_DOMAIN_COMMON_NAME}" certbot
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --no-deps --entrypoint "
-  rm -Rf /etc/letsencrypt/renewal/${WEB_DOMAIN_COMMON_NAME}.conf" certbot
-echo "Removed dummy certificate for ${WEB_DOMAIN_COMMON_NAME}"
+  rm -Rf /etc/letsencrypt/renewal/${CERT_WEB_DOMAIN_COMMON_NAME}.conf" certbot
+echo "Removed dummy certificate for ${CERT_WEB_DOMAIN_COMMON_NAME}"
 echo
 
-echo "### Requesting Let's Encrypt certificate for ${WEB_DOMAIN_COMMON_NAME} ..."
+echo "### Requesting Let's Encrypt certificate for ${CERT_WEB_DOMAIN_COMMON_NAME} ..."
 DOMAIN_ARGS=""
-for WEB_DOMAIN in "${WEB_DOMAINS[@]}"; do
+for WEB_DOMAIN in "${CERT_WEB_DOMAINS[@]}"; do
 	DOMAIN_ARGS+="-d ${WEB_DOMAIN} "
 done
 
 # Select appropriate email arg
-case "${EMAIL}" in
+case "${CERT_CONTACT_EMAIL}" in
 "") EMAIL_ARG="--register-unsafely-without-email" ;;
 " ") EMAIL_ARG="--register-unsafely-without-email" ;;
-*) EMAIL_ARG="--email ${EMAIL}" ;;
+*) EMAIL_ARG="--email ${CERT_CONTACT_EMAIL}" ;;
 esac
 
 # Enable staging mode if needed
 if [ ${STAGING} != "0" ]; then STAGING_ARG="--staging"; else STAGING_ARG=""; fi
 
 docker compose ${DOCKER_FILE_ARG} --progress=quiet run ${BUILD_ARG} --rm --entrypoint "\
-  certbot certonly --webroot -w ${DATA_PATH} \
+  certbot certonly --webroot -w ${CERTBOT_DATA_PATH} \
     ${STAGING_ARG} \
     ${EMAIL_ARG} \
     ${DOMAIN_ARGS} \
-    --rsa-key-size ${RSA_KEY_SIZE} \
+    --rsa-key-size ${CERT_RSA_KEY_SIZE} \
     --no-eff-email \
     --agree-tos" certbot
 echo
@@ -225,7 +225,7 @@ while true; do
 		echo "### Adding cron job for certificate renewal ..."
 		crontab -l | grep -q "${SCRIPT_DIR}/certbot/scripts/renew_certs.sh" && echo 'crontab task already exists' ||
 			(	crontab -l 2>/dev/null || true
-				echo "0 0 * * * ${SCRIPT_DIR}/certbot/scripts/renew_certs.sh --webroot -w ${DATA_PATH} ${STAGING_ARG} ${EMAIL_ARG} ${DOMAIN_ARGS} --rsa-key-size ${RSA_KEY_SIZE}"
+				echo "0 0 * * * ${SCRIPT_DIR}/certbot/scripts/renew_certs.sh --webroot -w ${CERTBOT_DATA_PATH} ${STAGING_ARG} ${EMAIL_ARG} ${DOMAIN_ARGS} --rsa-key-size ${CERT_RSA_KEY_SIZE}"
 			) | crontab - 
 		break
 		;;

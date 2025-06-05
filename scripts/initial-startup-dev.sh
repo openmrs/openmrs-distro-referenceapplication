@@ -7,31 +7,32 @@
 #	Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
 #	graphic logo is a trademark of OpenMRS Inc.
 
-RSA_KEY_SIZE=4096
-TEMP_CERT_DAYS=90
-DATA_PATH="/var/www/certbot"
+CERT_RSA_KEY_SIZE=4096
+CERT_TEMP_CERT_DAYS=90
+CERTBOT_DATA_PATH="/var/www/certbot"
 
 read -p "Enter Domain [default: 'localhost']: " WEB_DOMAIN
-WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-localhost}
-WEB_DOMAINS=(${WEB_DOMAIN_COMMON_NAME})
+CERT_WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN:-localhost}
+CERT_WEB_DOMAINS=(${CERT_WEB_DOMAIN_COMMON_NAME})
 while [ -n "${WEB_DOMAIN}" ]; do
 	read -p "Enter Alternate Domain [default: exit loop]: " WEB_DOMAIN
 	if [ -n "${WEB_DOMAIN}" ]; then
-		WEB_DOMAINS+=(${WEB_DOMAIN})
+		CERT_WEB_DOMAINS+=(${WEB_DOMAIN})
 	fi
 done
-read -p "Enter Email [default: '']: " EMAIL
-EMAIL=${EMAIL:-}
+read -p "Enter Email [default: '']: " CERT_CONTACT_EMAIL
+CERT_CONTACT_EMAIL=${CERT_CONTACT_EMAIL:-}
 
-CERT_PATH="/etc/letsencrypt"
+CERT_ROOT_PATH="/etc/letsencrypt"
 OLD_IFS="$IFS"
 IFS=","
-WEB_DOMAINS_AS_STRING=${WEB_DOMAINS[*]}
+WEB_DOMAINS_AS_STRING=${CERT_WEB_DOMAINS[*]}
 IFS=${OLD_IFS}
 docker compose --progress=quiet run --name certgen --rm --no-deps --build \
-	--env WEB_DOMAIN_COMMON_NAME=${WEB_DOMAIN_COMMON_NAME} \
-	--env RSA_KEY_SIZE=${RSA_KEY_SIZE} --env WEB_DOMAINS=${WEB_DOMAINS_AS_STRING} \
-	--env DATA_PATH=${DATA_PATH} --env EMAIL=${EMAIL} --env CERT_PATH=${CERT_PATH} --env TEMP_CERT_DAYS=${TEMP_CERT_DAYS} \
+	--env CERT_WEB_DOMAIN_COMMON_NAME=${CERT_WEB_DOMAIN_COMMON_NAME} \
+	--env CERT_RSA_KEY_SIZE=${CERT_RSA_KEY_SIZE} --env CERT_WEB_DOMAINS=${WEB_DOMAINS_AS_STRING} \
+	--env CERTBOT_DATA_PATH=${CERTBOT_DATA_PATH} --env CERT_CONTACT_EMAIL=${CERT_CONTACT_EMAIL} \
+	--env CERT_ROOT_PATH=${CERT_ROOT_PATH} --env CERT_TEMP_CERT_DAYS=${CERT_TEMP_CERT_DAYS} \
 	--entrypoint "/certbot/scripts/initial-startup-create-dirs-files.sh " certbot
 echo "Successfully created self-signed certs"
 

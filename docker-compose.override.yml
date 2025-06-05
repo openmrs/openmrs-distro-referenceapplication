@@ -4,6 +4,7 @@ services:
   certbot:
     build:
       context: ./certbot
+    command: ["--staging"]
 
   gateway:
     build:
