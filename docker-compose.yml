@@ -56,8 +56,10 @@ services:
       OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
       OMRS_OCL_TOKEN: ${OPENMRS_OCL_TOKEN:-openmrs}
-      GHP_USERNAME: ${GHP_USERNAME}
-      GHP_PASSWORD: ${GHP_USERNAME}
+    build:
+      args:
+        GHP_USERNAME: ${GHP_USERNAME}
+        GHP_PASSWORD: ${GHP_PASSWORD}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
       timeout: 5s
