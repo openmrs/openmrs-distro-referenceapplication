@@ -7,6 +7,8 @@ WORKDIR /openmrs_distro
 # Adding Git HUb Maven Package credentials
 COPY credentials/settings.xml ./settings.xml
 
+RUN echo "===== settings.xml BEFORE next command =====" && cat ./settings.xml
+
 ARG MVN_ARGS_SETTINGS="-s settings.xml -gs /usr/share/maven/ref/settings-docker.xml -U -P distro"
 ARG MVN_ARGS="install"
 
