@@ -4,7 +4,14 @@
 FROM openmrs/openmrs-core:${TAG_CORE:-2.7.3-dev} AS dev
 WORKDIR /openmrs_distro
 
-ARG MVN_ARGS_SETTINGS="-s /usr/share/maven/ref/settings-docker.xml -U -P distro"
+# Setting credentials for Git Hub Maven Package
+ARG GHP_USERNAME
+ARG GHP_PASSWORD
+
+# Adding Git Hub Maven Package credentials
+COPY credentials/settings.xml.template /root/.m2/settings.xml
+
+ARG MVN_ARGS_SETTINGS="-s /root/.m2/settings.xml -gs /usr/share/maven/ref/settings-docker.xml -U -P distro"
 ARG MVN_ARGS="install"
 
 # Copy build files

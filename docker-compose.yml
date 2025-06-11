@@ -2,10 +2,12 @@ services:
   portainer:
     container_name: peruHCE-portainer
     image: portainer/portainer-ce:lts
+    command: -H unix:///var/run/docker.sock --http-enabled --base-url=/portainer
     restart: "unless-stopped"
     ports:
       - "9443:9443"  # HTTPS Portainer Web UI
       - "9000:9000"  # HTTP Portainer Web UI
+      - "8000:8000"  # Necessary for other reason
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer-data:/data
@@ -19,6 +21,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
 
   frontend:
     container_name: peruHCE-frontend
@@ -43,6 +47,7 @@ services:
     restart: "unless-stopped"
     depends_on:
       - db-replic
+    #env_file: "enviromentVariables.env"
     environment:
       OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
@@ -51,6 +56,11 @@ services:
       OMRS_CONFIG_CONNECTION_DATABASE: openmrs
       OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
+      OMRS_OCL_TOKEN: ${OMRS_OCL_TOKEN:-openmrs}
+    build:
+      args:
+        GHP_USERNAME: ${GHP_USERNAME}
+        GHP_PASSWORD: ${GHP_PASSWORD}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
       timeout: 5s
@@ -69,6 +79,7 @@ services:
       interval: 3s
       timeout: 1s
       retries: 5
+    #env_file: "enviromentVariables.env"
     environment:
       MYSQL_DATABASE: openmrs
       MYSQL_USER: ${OMRS_DB_USER:-openmrs}
@@ -97,6 +108,7 @@ services:
       interval: 3s
       timeout: 1s
       retries: 5
+    #env_file: "enviromentVariables.env"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
       OMRS_DB_REPL_USER: ${OMRS_DB_REPL_USER:-openmrs_repl}
@@ -125,11 +137,13 @@ services:
       - "81:80/tcp"
       # Default HTTPs Port. FTL will generate a self-signed certificate
       - "444:443/tcp"
+    #env_file: "enviromentVariables.env"
     environment:
       # Set the appropriate timezone for your location (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones), e.g:
       TZ: 'America/Lima'
       # Set a password to access the web interface. Not setting one will result in a random password being assigned
       FTLCONF_webserver_api_password: ${DNS_PASSWORD:-openmrs}
+      FTLCONF_dns_listeningMode: 'all'
     # Volumes store your data between container upgrades
     volumes:
       # For persisting Pi-hole's databases and common configuration file
@@ -142,6 +156,7 @@ services:
     image: marcelius733/fua-generator:dev-0.1.1
     ports:
       - "3333:3000"
+    #env_file: "enviromentVariables.env"
     environment:
       DB_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
       DB_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
@@ -157,6 +172,7 @@ services:
     image: postgres:15
     ports:
       - "5433:5432"
+    #env_file: "enviromentVariables.env"
     environment:
       POSTGRES_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
       POSTGRES_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
