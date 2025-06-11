@@ -5,9 +5,9 @@ FROM openmrs/openmrs-core:${TAG_CORE:-2.7.3-dev} AS dev
 WORKDIR /openmrs_distro
 
 # Adding Git HUb Maven Package credentials
-COPY credentials/settings.xml /usr/share/maven/ref/settings-docker.xml
+COPY credentials/settings.xml ./settings.xml
 
-ARG MVN_ARGS_SETTINGS="-s /usr/share/maven/ref/settings-docker.xml -U -P distro"
+ARG MVN_ARGS_SETTINGS="-s settings.xml -gs /usr/share/maven/ref/settings-docker.xml -U -P distro"
 ARG MVN_ARGS="install"
 
 # Copy build files
