@@ -37,4 +37,5 @@ docker compose --progress=quiet run --name certgen --rm --no-deps --build \
 echo "Successfully created self-signed certs"
 
 echo "Bringing up all containers ..."
-docker compose up -d --build --always-recreate-deps
+docker compose up -d --build 
+docker compose --progress=quiet exec gateway nginx -s reload
