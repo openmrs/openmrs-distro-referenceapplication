@@ -32,18 +32,19 @@ for WEB_DOMAIN in "$@"; do
 		echo "[v3_ca]" >> sslconfig.conf
 		echo "subjectAltName=@alternate_names" >> sslconfig.conf
 		echo "[alternate_names]" >> sslconfig.conf
-		if expr "X$WEB_DOMAIN" : 'X[.0-9]+' >/dev/null; then
-			echo "IP.${IP_NUM} = ${WEB_DOMAIN}" >> sslconfig.conf
-			IP_NUM=$((IP_NUM + 1))
-		else 
-			echo "DNS.${DNS_NUM} = ${WEB_DOMAIN}" >> sslconfig.conf
-			DNS_NUM=$((DNS_NUM + 1))
-		fi
 		SUBJECT_ALT_NAME_ARG="-config sslconfig.conf"
+		echo "Adding primary domain ${CERT_WEB_DOMAIN_COMMON_NAME} to certificate ..."
 		# SUBJECT_ALT_NAME_ARG="-addext \"subjectAltName = DNS:${WEB_DOMAIN}"
-	else
-		echo "DNS.${i} = ${WEB_DOMAIN}" >> sslconfig.conf
+	else	
+		echo "Adding alternate domain ${WEB_DOMAIN} to certificate ..."
 		# SUBJECT_ALT_NAME_ARG="${SUBJECT_ALT_NAME_ARG}, DNS:${WEB_DOMAIN}"
+	fi
+	if expr "X$WEB_DOMAIN" : 'X[.0-9]+' >/dev/null; then
+		echo "IP.${IP_NUM} = ${WEB_DOMAIN}" >> sslconfig.conf
+		IP_NUM=$((IP_NUM + 1))
+	else 
+		echo "DNS.${DNS_NUM} = ${WEB_DOMAIN}" >> sslconfig.conf
+		DNS_NUM=$((DNS_NUM + 1))
 	fi
 done
 # SUBJECT_ALT_NAME_ARG="${SUBJECT_ALT_NAME_ARG}\""
