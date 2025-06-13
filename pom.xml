@@ -37,7 +37,6 @@
 		<idgenVersion>4.15.0-SNAPSHOT</idgenVersion>
 		<emrapiVersion>2.4.0-SNAPSHOT</emrapiVersion>
 		<referenceapplicationVersion>2.14.0-SNAPSHOT</referenceapplicationVersion>
-		<providermanagementVersion>2.17.0-SNAPSHOT</providermanagementVersion>
 		<uilibraryVersion>2.0.8-SNAPSHOT</uilibraryVersion>
 		<calculationVersion>1.3.1-SNAPSHOT</calculationVersion>
 		<serialization.xstreamVersion>0.2.17-SNAPSHOT</serialization.xstreamVersion>
@@ -254,12 +253,6 @@
                 <version>${emrapiVersion}</version>
 				<scope>provided</scope>
             </dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>providermanagement-api</artifactId>
-				<version>${providermanagementVersion}</version>
-				<scope>provided</scope>
-			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>uilibrary-api</artifactId>
@@ -494,13 +487,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>providermanagement-api</artifactId>
-				<version>${providermanagementVersion}</version>
-				<classifier>tests</classifier>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
 				<artifactId>uilibrary-api</artifactId>
 				<version>${uilibraryVersion}</version>
 				<classifier>tests</classifier>
@@ -708,12 +694,6 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>emrapi-omod</artifactId>
 				<version>${emrapiVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>providermanagement-omod</artifactId>
-				<version>${providermanagementVersion}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
