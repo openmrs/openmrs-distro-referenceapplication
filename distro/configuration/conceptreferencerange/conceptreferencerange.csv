@@ -1,2 +1,109 @@
 Uuid,Concept Numeric uuid,Absolute low,Critical low,Normal low,Normal high,Critical high,Absolute high,Criteria
-bc059100-4ace-4af5-afbf-2da7f3a34acf,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,-100.5,-85.7,-50.3,45.1,78,98.8, $patient.getAge() > 3
+189a0af4-515b-443f-89c4-840543ff5945,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,60,65,70,100,105,110,$patient.getAgeInWeeks() < 6
+f0f10f1e-5a22-4f9f-bf2b-1068733b14c9,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,70,75,84,106,110,115,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+a8c47244-3c25-4e9e-8ca4-44823bc75818,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,75,80,98,106,110,115,$patient.getAge() >= 1 && $patient.getAge() < 2
+b5484d45-7e98-4bd9-85e9-68d20a87e06c,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,80,85,99,112,115,120,$patient.getAge() >= 2 && $patient.getAge() < 6
+06eac7ee-325f-4513-8eaa-78e3d0b1b79e,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,85,90,104,124,130,135,$patient.getAge() >= 6 && $patient.getAge() < 13
+7f04017e-554e-4030-b5c2-9e9faf9e324e,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,95,118,132,135,140,$patient.getAge() >= 13 && $patient.getAge() < 16
+15e55d98-325a-494e-92d3-774a9a6c3203,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,95,110,140,145,150,$patient.getAge() >= 16 && $patient.getAge() < 18
+3757097f-564d-41e7-a19f-d04c063ee93b,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,100,105,110,139,145,150,$patient.getAge() >= 18 && $patient.getAge() < 60
+964adff7-7f53-45a1-8dc2-96e6191b480a,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,105,110,110,145,150,155,$patient.getAge() >= 60
+c9a5c541-0988-4eba-86fd-9d21286289b6,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,85,90,90,120,130,135,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 14"
+5268df58-89f1-4075-b4b8-ec6c63999d95,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,85,90,90,130,135,140,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 14 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 28"
+dd655794-4f11-4fef-9746-66e3dd95eb30,5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,95,95,135,140,145,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 28 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 42"
+3088ccd3-4bd7-40f0-be42-b3adc9f4da27,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,45,50,50,68,75,80,$patient.getAgeInWeeks() < 6
+36c4d4bf-21c5-4756-81bb-4d8a69be7932,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,50,55,56,70,75,80,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+1d65b694-7775-45bb-ac2b-7df4c9741a77,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,50,55,58,70,75,80,$patient.getAge() >= 1 && $patient.getAge() < 2
+ba73b1b0-a3cd-45f1-aea7-04244cafca73,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,55,60,64,70,75,80,$patient.getAge() >= 2 && $patient.getAge() < 6
+d21ae1fe-c2b4-4550-8476-36c8c00ed941,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,60,64,64,86,90,95,$patient.getAge() >= 6 && $patient.getAge() < 13
+3f68f963-8157-462c-ae21-76194b4bef04,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,65,68,70,82,85,90,$patient.getAge() >= 13 && $patient.getAge() < 16
+e441d565-6755-4470-9f13-dfbcffff957d,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,65,68,70,90,95,100,$patient.getAge() >= 16 && $patient.getAge() < 18
+01818314-0773-40d7-b97f-9bd01385e41f,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,60,65,70,89,95,100,$patient.getAge() >= 18 && $patient.getAge() < 60
+bbc21209-bf18-484c-af6f-0cd49b26e990,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,60,65,70,90,95,100,$patient.getAge() >= 60
+20546614-0af2-4645-8c3b-194edff969ed,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,55,58,60,80,85,90,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 14"
+3c0be589-0ac4-4006-9787-192f19abd823,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,55,60,60,85,90,95,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 14 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 28"
+19d7386a-8077-4d22-8f39-a43ab1808f7d,5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,60,65,65,85,90,95,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 28 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 42"
+a10aa1fa-32a2-4e00-9c1f-5163ac7e845e,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,37,38,40,45,47,48,$patient.getAgeInWeeks() < 6
+db63c071-c85f-42ac-be0a-3845e3d319be,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,17,18,20,30,32,33,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+09429a5f-5e77-4a91-9221-1617e7c34d17,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,17,18,20,30,32,33,$patient.getAge() >= 1 && $patient.getAge() < 2
+88f10e9b-4ef6-4f66-a785-e995ad9aaf95,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,17,18,20,30,32,33,$patient.getAge() >= 2 && $patient.getAge() < 6
+3df10ee7-71ea-41c0-ad1e-8c75e133c2f9,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,9,10,12,20,22,23,$patient.getAge() >= 6 && $patient.getAge() < 13
+4898db71-1019-4fd1-933e-7ef19617b060,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,9,10,12,20,22,23,$patient.getAge() >= 13 && $patient.getAge() < 16
+8b014803-80e0-42ac-a8c8-905296a34b0f,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,9,10,12,20,22,23,$patient.getAge() >= 16 && $patient.getAge() < 18
+4b5fe974-2265-43b0-842a-a76334f7e799,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,9,10,12,20,22,23,$patient.getAge() >= 18 && $patient.getAge() < 60
+a49f0b0c-5823-468e-9ab2-c0a651a7b596,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,9,10,12,22,24,25,$patient.getAge() >= 60
+58717f88-d404-470c-86df-e26d91187ea0,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,9,10,12,20,22,23,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 14"
+f7de2ddf-128b-47b8-a57b-e3a7c95fb6af,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,9,10,12,20,22,23,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 14 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 28"
+5f7bc5ea-dbea-4af0-8fb2-aa8bc65304ae,5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,9,10,12,20,22,23,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 28 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 42"
+9948fdc3-d2e2-4255-a8af-21f5ee36711b,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,105,115,120,140,150,160,$patient.getAgeInWeeks() < 6
+1c8db1c2-8759-489e-b037-9553313f94d4,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,85,95,100,130,140,150,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+80d69342-948a-4d93-bd7d-449ba7e99616,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,85,95,100,120,130,140,$patient.getAge() >= 1 && $patient.getAge() < 2
+339d08f6-06f0-4855-b50d-fec9f44d51ed,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,65,75,80,120,130,140,$patient.getAge() >= 2 && $patient.getAge() < 6
+e0ec290b-8fa0-4620-a977-07ba50f099dc,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,65,75,80,100,110,120,$patient.getAge() >= 6 && $patient.getAge() < 13
+df394903-03af-4d71-85f7-43ae65e5df46,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,55,65,70,80,90,100,$patient.getAge() >= 13 && $patient.getAge() < 16
+402c3ed9-1f19-4a1a-9920-f4fdc15448de,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,45,55,60,80,90,100,$patient.getAge() >= 16 && $patient.getAge() < 18
+a05fb1de-e54c-490d-91fc-3af76d45208e,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,45,55,60,100,110,120,$patient.getAge() >= 18 && $patient.getAge() < 60
+96a46e06-d214-43a0-ae2a-e451b40914e8,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,45,55,60,90,100,110,$patient.getAge() >= 60
+f22541c7-1d97-492b-b9b1-2153014f5fa3,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,55,65,70,90,100,110,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 14"
+19aef4a4-dd90-402d-aaeb-0a215e45e478,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,60,70,75,95,105,115,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 14 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 28"
+efe71d14-b44c-4279-9e3e-ba427d8422f9,5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,65,75,80,100,110,120,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 28 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 42"
+46809854-5978-4a16-bf0d-f83a1b59f7ee,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,37,37.5,38,38,38.4,38.8,$patient.getAgeInWeeks() < 6
+347ae514-bfe3-40d4-a3ef-5618ecc3d93b,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,36.5,37,37.5,37.8,38.2,38.6,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+24a2a528-cc58-4e58-8653-ffc5aed7886a,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,36.5,37,37.5,37.8,38.2,38.6,$patient.getAge() >= 1 && $patient.getAge() < 2
+763bcbd0-01d4-4511-900d-f21f4a25c7fb,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,36.5,37,37.5,37.8,38.2,38.6,$patient.getAge() >= 2 && $patient.getAge() < 6
+e13b2d55-ab9f-4b3d-a149-19278d695afe,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,36,36.5,37,37.5,37.9,38.3,$patient.getAge() >= 6 && $patient.getAge() < 13
+914ed8fd-a74c-40ca-9fc3-bafc61cc3cb5,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,36,36.5,37,37,37.4,37.8,$patient.getAge() >= 13 && $patient.getAge() < 16
+d2f94906-5a2d-479d-bcd8-931d3d0ba5d6,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,35.2,35.7,36.2,37.2,37.6,38,$patient.getAge() >= 16 && $patient.getAge() < 18
+b58bc4b8-ecfb-4b8d-847c-f7449c881855,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,35.5,36,36.5,37.2,37.6,38,$patient.getAge() >= 18 && $patient.getAge() < 60
+4f9a8008-f8ee-4313-83fc-768b84bbb7b0,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,35,35.5,36,37,37.4,37.8,$patient.getAge() >= 60
+b2d37168-a09d-478d-a552-74331a4c4a21,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,35.5,36,36.5,37.4,37.8,38.2,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 14"
+75821f07-5a3e-4842-a499-ca7a5dc56bf6,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,35.5,36,36.5,37.4,37.8,38.2,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 14 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 28"
+496bf94c-1229-4fc2-8153-a5dac6f1c10a,5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,35.5,36,36.5,37.4,37.8,38.2,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 28 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 42"
+94c53d3f-894f-4f95-b68a-88d7e6c72376,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,89,92,94,100,101,102,$patient.getAgeInWeeks() < 6
+c609716b-a957-4ae6-befe-2b73b68bb807,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+9f862e10-ea42-4d40-8f2b-72f0837b989f,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,$patient.getAge() >= 1 && $patient.getAge() < 2
+8d4080aa-cbd7-4c24-8add-60730cee31ac,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,$patient.getAge() >= 2 && $patient.getAge() < 6
+05b61a70-f2b6-4c94-9c0b-a66805d5efd0,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,$patient.getAge() >= 6 && $patient.getAge() < 13
+82e7d818-a78a-421d-9471-c705d9bc143a,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,$patient.getAge() >= 13 && $patient.getAge() < 16
+272b4f1f-05dc-46c6-92e5-86a579e2f178,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,$patient.getAge() >= 16 && $patient.getAge() < 18
+eb2e5199-ac46-4569-ba73-e6562f9d6a75,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,$patient.getAge() >= 18 && $patient.getAge() < 60
+00c6bfbb-182c-40a0-89e9-824f3eddf087,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,89,92,94,100,101,102,$patient.getAge() >= 60
+22bf0815-258c-48ee-8ac4-0fde70705a2c,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 14"
+4dfc3d89-b963-45d0-bb57-d20c0c9c6cdf,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 14 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 28"
+8b501d13-7a3f-443e-99e6-00c84b3aa3b3,5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,90,93,95,100,101,102,"$fn.getLatestObs(""abaf7d91-e9cb-4569-ab65-2b2ab8226a2c"").getValueBoolean() == true && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() >= 28 && $fn.getLatestObs(""0f053bc0-1cc4-4114-a08e-f31d18012e0b"").getValueNumeric() < 42"
+434dd9be-15dc-43a1-bb9e-670ee72f8769,1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,7,9,10,13,14,16,$patient.getAgeInWeeks() < 6
+3d4ed77b-2581-41b3-9196-b900edceb8b0,1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,9,11,12,14,15,17,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+7b0d7741-1492-4e25-9211-2b3038290004,1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,10,12,13,15,16,18,$patient.getAge() >= 1 && $patient.getAge() < 2
+dce3cd9c-fe16-4900-ae77-9277529be031,1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,10,12,13,16,17,19,$patient.getAge() >= 2 && $patient.getAge() < 6
+c3c0be2b-49b3-4c7d-b4f0-84d22bdfa3d0,1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,11,13,14,17,19,20,$patient.getAge() >= 6 && $patient.getAge() < 13
+7bf6074c-4259-4c78-bd7e-b035c3285e4e,1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,11,13,14,18,19,21,$patient.getAge() >= 13 && $patient.getAge() < 16
+7ac684a7-dd7d-4b90-b4fa-afeb9727c3ea,1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,19,21,22,28,29,31,$patient.getAge() >= 16 && $patient.getAge() < 18
+b8e8376e-d0c2-4dc8-9f4a-6795ae3a01fe,5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1.5,1.5,3.5,4.5,6.5,9.5,$patient.getAgeInWeeks() < 6
+2ecbd1e0-2890-41c7-b467-ff154a7b5e26,5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,2.5,2.5,4.5,10,12,15,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+e103ee0f-d6ed-4062-aef6-959eee5e1123,5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,4,7,9,12,14,17,$patient.getAge() >= 1 && $patient.getAge() < 2
+efa63098-8eb5-4b45-a93f-086d5a9b5c38,5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,7,10,12,20,22,25,$patient.getAge() >= 2 && $patient.getAge() < 6
+4f7b9752-10d0-449e-8269-ff03faefb8d5,5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,15,18,20,35,37,40,$patient.getAge() >= 6 && $patient.getAge() < 13
+fdfc6598-0bd3-4b5d-b596-8a3667fc9330,5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,30,33,35,55,57,60,$patient.getAge() >= 13 && $patient.getAge() < 16
+9fc81922-2ab4-4015-af5f-1b769a81b102,5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,45,48,50,80,82,85,$patient.getAge() >= 16 && $patient.getAge() < 18
+1e8c2097-8c12-4326-8618-566dc22afcdd,5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,44,47,49,54,56,59,$patient.getAgeInWeeks() < 6
+6f73fa71-9c28-45f1-abda-d19aa878dd6a,5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,53,56,58,76,78,81,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+c5624243-f637-434d-b496-82fec6075e53,5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,71,74,76,85,87,90,$patient.getAge() >= 1 && $patient.getAge() < 2
+9886f268-4dfd-4d3b-a2a6-24722b1b1b59,5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,80,83,85,110,112,115,$patient.getAge() >= 2 && $patient.getAge() < 6
+5108bad1-0db1-47b8-bc5a-3173d935d466,5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,105,108,110,145,147,150,$patient.getAge() >= 6 && $patient.getAge() < 13
+1bddeced-a848-4df9-bd1e-d3c15bf982e8,5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,140,143,145,160,162,165,$patient.getAge() >= 13 && $patient.getAge() < 16
+1f15a88a-fda4-4d51-a095-cb4f21d9e2fa,5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,155,158,160,180,182,185,$patient.getAge() >= 16 && $patient.getAge() < 18
+4ca84a60-ecf0-4d83-9d7f-e668fbc33b34,c4d39248-c896-433a-bc69-e24d04b7f0e5,31,33,34,38,39,41,$patient.getAgeInWeeks() < 6
+fbff6085-bf48-4f3e-8523-4735c952adef,c4d39248-c896-433a-bc69-e24d04b7f0e5,39,41,42,46,47,49,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+9abe5a84-1216-4e7f-b73b-ab3baf95e9dd,c4d39248-c896-433a-bc69-e24d04b7f0e5,44,46,47,49,50,52,$patient.getAge() >= 1 && $patient.getAge() < 2
+752c2f71-ee06-41be-ab15-d4464503e6cf,c4d39248-c896-433a-bc69-e24d04b7f0e5,45,47,48,51,52,54,$patient.getAge() >= 2 && $patient.getAge() < 6
+a2987d82-c105-4615-adef-169cfbeb78db,c4d39248-c896-433a-bc69-e24d04b7f0e5,47,49,50,54,55,57,$patient.getAge() >= 6 && $patient.getAge() < 13
+a2e31012-93d0-423c-9c4a-3702e4b2f23e,c4d39248-c896-433a-bc69-e24d04b7f0e5,51,53,54,56,57,59,$patient.getAge() >= 13 && $patient.getAge() < 16
+32b158da-7bc2-4c20-8a4f-f9095dfe3e67,c4d39248-c896-433a-bc69-e24d04b7f0e5,51,53,54,56,57,59,$patient.getAge() >= 16 && $patient.getAge() < 18
+ebd886b6-7202-4583-b4f6-afbf424ec24b,911eb398-e7de-4270-af63-e4c615ec22a9,27,29,30,34,35,37,$patient.getAgeInWeeks() < 6
+a36b6e97-e01f-48c6-884e-6bd76485580d,911eb398-e7de-4270-af63-e4c615ec22a9,39,41,42,45,46,48,$patient.getAgeInWeeks() >= 6 && $patient.getAge() < 1
+47c8956d-5c68-46d7-b204-60022925f80e,911eb398-e7de-4270-af63-e4c615ec22a9,42,44,45,47,48,50,$patient.getAge() >= 1 && $patient.getAge() < 2
+9c97f79d-f8f2-4f81-bf74-15aa29d6ba09,911eb398-e7de-4270-af63-e4c615ec22a9,43,45,46,50,51,53,$patient.getAge() >= 2 && $patient.getAge() < 6
+71fcbf85-59b6-485b-b8fe-bf4854296c69,911eb398-e7de-4270-af63-e4c615ec22a9,45,47,48,52,53,55,$patient.getAge() >= 6 && $patient.getAge() < 13
+82beb5a7-de7e-498e-aabf-a306b892ef4c,911eb398-e7de-4270-af63-e4c615ec22a9,47,49,50,54,55,57,$patient.getAge() >= 13 && $patient.getAge() < 16
+30796f2b-ee1e-4c66-b17d-8f9f10a58f15,911eb398-e7de-4270-af63-e4c615ec22a9,51,53,54,56,57,59,"$patient.getAge() >= 16 && $patient.getAge() < 18 && $patient.getGender().equals(""F"")"
+2677a3ed-9fd9-4bd7-9fba-0b46f41a2816,911eb398-e7de-4270-af63-e4c615ec22a9,53,55,56,58,59,61,"$patient.getAge() >= 16 && $patient.getAge() < 18 && $patient.getGender().equals(""M"")"
