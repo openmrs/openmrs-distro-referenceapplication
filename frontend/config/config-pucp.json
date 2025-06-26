@@ -1,0 +1,68 @@
+{
+    "@pucp-gidis-hiisc/esm-patient-registration-app": {
+        "sections": [
+            "demographics",
+            "contact",
+            "insurance",
+            "relationships",
+            "address"
+        ],
+        "sectionDefinitions": [
+            {
+                "id": "demographics",
+                "name": "Basic Info",
+                "fields": [
+                    "id",
+                    "name",
+                    "gender",
+                    "dob",
+                    "civilStatus",
+                    "etnia",
+                    "religion",
+                    "gradoInstruccion"
+                ]
+            }
+        ],
+        "fieldDefinitions": [
+            {
+                "id": "etnia",
+                "name": "Etnia",
+                "type": "person attribute",
+                "uuid": "8d871386-c2cc-11de-8d13-0010c6dffd0f",
+                "answerConceptSetUuid": "70482c1e-181e-416d-a0c4-a93919f9f2ef",
+                "validation": {
+                    "matches": ""
+                }
+            },
+            {
+                "id": "religion",
+                "name": "Religion",
+                "type": "person attribute",
+                "uuid": "77bbb234-2312-4644-99d0-fa894d438817",
+                "answerConceptSetUuid": "6de6d87e-5af8-41d9-98d2-b660fabf25d9",
+                "validation": {
+                    "matches": ""
+                }
+            },
+            {
+                "id": "gradoInstruccion",
+                "name": "Grado de Instrucción",
+                "type": "person attribute",
+                "uuid": "8d87236c-c2cc-11de-8d13-0010c6dffd0f",
+                "answerConceptSetUuid": "2d790984-f088-4d68-984d-efab9db8c889",
+                "validation": {
+                    "matches": ""
+                }
+            }
+        ]
+    },
+    "@pucp-gidis-hiisc/esm-sihsalus-app": {
+        "extensionSlots": {
+            "neonatal-vitals-slot": {
+                "add": [
+                    "vitals-overview-widget"
+                ]
+            }
+        }
+    }
+}

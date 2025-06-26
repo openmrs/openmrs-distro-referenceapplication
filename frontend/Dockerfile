@@ -36,7 +36,8 @@ RUN chmod +x /usr/local/bin/startup.sh
 COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=dev /app/spa /usr/share/nginx/html
-COPY config-core.json /usr/share/nginx/html
+COPY config/config-openmrs.json /usr/share/nginx/html
+COPY config/config-pucp.json /usr/share/nginx/html
 
 # copy assets
 COPY ./resources/* /usr/share/nginx/html
