@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   gateway:
-    image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
+    image: gamshan/openmrs-reference-application-3-gateway:${TAG:-qa}
     restart: "unless-stopped"
     depends_on:
       - frontend
@@ -11,7 +11,7 @@ services:
       - "80:80"
 
   frontend:
-    image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
+    image: gamshan/openmrs-reference-application-3-frontend:${TAG:-digipath}
     restart: "unless-stopped"
     environment:
       SPA_PATH: /openmrs/spa
@@ -25,7 +25,7 @@ services:
       - backend
 
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
+    image: gamshan/openmrs-reference-application-3-backend:${TAG:-qa}
     restart: "unless-stopped"
     depends_on:
       - db
@@ -60,6 +60,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
     volumes:
       - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
 
 volumes:
   openmrs-data: ~

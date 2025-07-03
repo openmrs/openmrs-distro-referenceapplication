@@ -48,5 +48,48 @@
   },
   "@openmrs/esm-styleguide": {
     "Brand color #1": "#005d5d"
+  },
+  "@openmrs/esm-patient-registration-app": {
+    "fieldDefinitions": [
+      {
+        "id": "otherPhone",
+        "type": "person attribute",
+        "uuid": "b1eb94a8-bb8b-432e-a9a1-35be03226f8b",
+        "label": "Other phone number",
+        "validation": {
+          "matches": "^0([0-9](?:(?:[0-9][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$"
+        }
+      },{
+        "gender": [
+          {
+            "id": "male",
+            "value": "male",
+            "label": "Male"
+          },
+          {
+            "id": "female",
+            "value": "female",
+            "label": "Female"
+          },
+          {
+            "id": "other",
+            "value": "other",
+            "label": "Other"
+          }
+        ]
+      }
+    ],
+    "sectionDefinitions": [
+      {
+        "id": "contact",
+        "name": "Contact Details",
+        "fields": [
+          "phone",
+          "otherPhone",
+          "address",
+          "gender"
+        ]
+      }
+    ]
   }
 }

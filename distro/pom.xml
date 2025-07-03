@@ -54,6 +54,13 @@
     <!-- Stock Management and Billing -->
     <stockmanagement.version>2.0.3</stockmanagement.version>
     <billing.version>1.3.0</billing.version>
+
+    <!-- Dependencies for Digipath module -->
+    <appframework.version>2.18.0</appframework.version>
+    <uiframework.version>3.25.0</uiframework.version>
+    <uicommons.version>2.26.0</uicommons.version>
+    <appui.version>1.18.0</appui.version>
+
     <!-- Content Packages -->
     <reference-content.version>1.3.0-SNAPSHOT</reference-content.version>
     <reference-demo-content.version>1.5.0-SNAPSHOT</reference-demo-content.version>
@@ -229,6 +236,30 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>billing-omod</artifactId>
       <version>${billing.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>appframework-omod</artifactId>
+      <version>${appframework.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>uiframework-omod</artifactId>
+      <version>${uiframework.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>uicommons-omod</artifactId>
+      <version>${uicommons.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>appui-omod</artifactId>
+      <version>${appui.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
