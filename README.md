@@ -70,13 +70,17 @@ Navigate to the module directory:
 
 ## Step 2: Build the Module
 To generate the production-ready files:
-```yarn build```
+```
+yarn build
+```
 
 This will create a /dist directory inside the module.
 
 ## Step 3: Create the NPM Package
 Package the module as a .tgz file:
-```npm pack```
+```
+npm pack
+```
 This will generate a file named:  `openmrs-esm-patient-digipath-app-<version>.tgz`
 
 ## Step 4: Move the Package
@@ -87,14 +91,18 @@ Before building the frontend, make the following changes to integrate the custom
 
 1. Modify `frontend/Dockerfile`
    Add the following line to copy the `.tgz` file:
-   ```COPY openmrs-esm-patient-digipath-app-<version>.tgz .```
+```
+COPY openmrs-esm-patient-digipath-app-<version>.tgz .
+```
 
 2. Update `frontend/spa-assemble-config.json`
       Include the custom module in the `frontendModules` section:
-      `"frontendModules": {
-               ...
-              "@openmrs/esm-patient-digipaths-app": "file:openmrs-esm-patient-digipath-app-<version>.tgz"
-        }`
+```
+"frontendModules": {
+       ...
+      "@openmrs/esm-patient-digipaths-app": "file:openmrs-esm-patient-digipath-app-<version>.tgz"
+}
+```
 ## Final Note
    After completing the above steps, proceed with the usual frontend build process. This will include the custom module in the OpenMRS frontend application.
    Thanks!
