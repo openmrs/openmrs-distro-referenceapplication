@@ -40,6 +40,7 @@ mono-repos). These jobs are structured similarly and are listed below:
 * `run-form-builder-e2e-tests`
 * `run-esm-core-e2e-tests`
 * `run-cohort-builder-e2e-tests`
+* `run-dispensing-app-e2e-tests`
 
 In each "End-to-End Test Job," the workflow first checks out the repository associated with a specific OpenMRS
 component. It then downloads Docker images from a previous "build" job, loads these images, and starts an OpenMRS instance.
