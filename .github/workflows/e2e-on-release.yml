@@ -14,6 +14,7 @@ jobs:
       esm_core_ref: ${{steps.refs.outputs.esm_core}}
       form_builder_ref: ${{steps.refs.outputs.form_builder}}
       cohort_builder_ref: ${{steps.refs.outputs.cohort_builder}}
+      dispensing_ref: ${{steps.refs.outputs.dispensing}}
 
     steps:
       - uses: actions/checkout@v4
@@ -345,5 +346,66 @@ jobs:
         if: always()
         with:
           name: report-cohort-builder
+          path: e2e_repo/playwright-report/
+          retention-days: 30
+  
+  run-dispensing-app-e2e-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create Temporary Directory to Download Docker Images
+        id: tempdir
+        run: echo "tmpdir=$(mktemp -d)" >> "$GITHUB_OUTPUT"
+
+      - name: Download Docker Images
+        uses: actions/download-artifact@v4
+        with:
+          name: e2e_release_env_images
+          path: ${{ steps.tempdir.outputs.tmpdir }}
+
+      - name: Load Docker Images
+        run: |
+          gzip -d ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar.gz
+          docker load --input ${{ steps.tempdir.outputs.tmpdir }}/e2e_release_env_images.tar
+          docker image ls -a
+
+      - name: Spin up an OpenMRS Instance
+        run: docker compose up -d
+        working-directory: e2e_test_support_files
+
+      - name: Checkout to the Repo's Tag
+        uses: actions/checkout@v4
+        with:
+          repository: openmrs/openmrs-esm-dispensing-app
+          ref: ${{ needs.build.outputs.dispensing_ref }}
+          path: e2e_repo
+
+      - name: Copy test environment variables
+        run: cp example.env .env
+        working-directory: e2e_repo
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+        working-directory: e2e_repo
+
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+        working-directory: e2e_repo
+
+      - name: Wait for the OpenMRS instance to start
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+
+      - name: Run E2E tests
+        run: yarn playwright test
+        working-directory: e2e_repo
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: report-dispensing-app
           path: e2e_repo/playwright-report/
           retention-days: 30
