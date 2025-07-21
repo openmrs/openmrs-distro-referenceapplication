@@ -12,9 +12,9 @@ WORKDIR /app
 COPY spa-assemble-config.json .
 COPY spa-build-config.json .
 
-COPY openmrs-esm-form-builder-app-2.8.0-patch-4.tgz .
-COPY openmrs-esm-form-engine-app-9.2.2-patch-4.tgz .
-COPY openmrs-esm-patient-digipaths-app-0.0.1.tgz .
+COPY openmrs-esm-form-builder-app-3.1.0-patch-1.tgz .
+COPY openmrs-esm-form-engine-app-10.2.0-patch-1.tgz .
+COPY openmrs-esm-patient-digipaths-app-0.0.2.tgz .
 
 ARG CACHE_BUST
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-assemble-config.json --target ./spa
