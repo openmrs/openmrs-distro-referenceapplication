@@ -1,4 +1,30 @@
 services:
+  keycloak:
+    build:
+      context: ./keycloak
+      dockerfile: Dockerfile
+      args:
+        KEYCLOAK_VERSION:   ${KEYCLOAK_VERSION}
+    env_file:
+      - ./.env
+    ports:
+      - "${KEYCLOAK_PORT}:8081" # Default Keycloak Port (deberia ser el 8081)
+    volumes:
+      - ./keycloak/themes:/opt/keycloak/themes:ro
+    depends_on:
+      - keycloak-db
+
+  keycloak-db:
+    image: postgres:15
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_DB:       ${KC_DB_DATABASE}
+      POSTGRES_USER:     ${KC_DB_USERNAME}
+      POSTGRES_PASSWORD: ${KC_DB_PASSWORD}
+    volumes:
+      - keycloak-data:/var/lib/postgresql/data
+
   portainer:
     container_name: peruHCE-portainer
     image: portainer/portainer-ce:lts
@@ -49,8 +75,10 @@ services:
       - "8080:8080"
     depends_on:
       - db-replic
+      - keycloak
     #env_file: "enviromentVariables.env"
     environment:
+      ENABLE_SSO: "true" # Enable Single Sign-On (colocar como variable de entorno? si lo queremos hacer flexible tambien habria que hacerlo en el frontend)
       OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
       OMRS_CONFIG_CREATE_TABLES: "true"
@@ -68,6 +96,7 @@ services:
       timeout: 5s
     volumes:
       - openmrs-data:/openmrs/data
+      - ./keycloak/oauth2.properties:/openmrs/app/data/oauth2.properties:ro
 
   # MariaDB master
   db:
@@ -183,6 +212,7 @@ services:
       - db-fua-generator:/var/lib/postgresql/data
 
 volumes:
+  keycloak-data:
   openmrs-frontend: ~
   openmrs-data: ~
   db-data: ~
