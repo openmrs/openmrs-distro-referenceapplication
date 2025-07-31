@@ -155,6 +155,11 @@
         "logo": {
             "src": "${openmrsSpaBase}/login-logo.svg",
             "alt": "Logo"
+        },
+        "provider": {
+            "type": "oauth2",
+            "loginUrl": "/openmrs/oauth2login",
+            "logoutUrl": "/openmrs/oauth2logout"
         }
     },
     "@openmrs/esm-primary-navigation-app": {
@@ -207,8 +212,8 @@
             ]
         }
     },
-    "@openmrs/esm-patient-allergies-app":{
-        "concepts":{
+    "@openmrs/esm-patient-allergies-app": {
+        "concepts": {
             "drugAllergenUuid": "b864c337-64b1-4125-a4b2-f80b14d9a9b1",
             "environmentalAllergenUuid": "da133de2-1778-46c4-9511-8611fa748002",
             "foodAllergenUuid": "e85eb507-376b-4cc6-acf1-dec870ba421c",
