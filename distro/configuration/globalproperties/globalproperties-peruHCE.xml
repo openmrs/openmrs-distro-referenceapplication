@@ -86,6 +86,83 @@
             <value>10</value>
         </globalProperty>
 
+        <!-- Internationalization Configuration -->
+        <globalProperty>
+            <property>locale.allowed.list</property>
+            <value>en, es</value>
+        </globalProperty>
 
+        <globalProperty>
+            <property>default_locale</property>
+            <value>es</value>
+        </globalProperty>
+
+        <!-- Billing Configuration -->
+        <globalProperty>
+            <property>cashier.systemReceiptNumberGenerator</property>
+            <value>org.openmrs.module.cashier.api.SequentialReceiptNumberGenerator</value>
+            <description>The fully qualified class name of the component responsible for generating
+                sequential receipt numbers within the cashier system. This class contains functions
+                and methods tailored to efficiently generate unique receipt numbers in sequential
+                order.</description>
+        </globalProperty>
+
+        <!-- Drug Order Properties -->
+        <globalProperty>
+            <property>order.drugDosingUnitsConceptUuid</property>
+            <value>162384AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</value>
+        </globalProperty>
+
+        <globalProperty>
+            <property>order.drugRoutesConceptUuid</property>
+            <value>162394AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</value>
+        </globalProperty>
+
+        <globalProperty>
+            <property>order.drugDispensingUnitsConceptUuid</property>
+            <value>162402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</value>
+        </globalProperty>
+
+        <globalProperty>
+            <property>order.durationUnitsConceptUuid</property>
+            <value>1732AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</value>
+        </globalProperty>
+
+        <!-- ESM Fast Data Entry Configuration -->
+        <globalProperty>
+            <property>@openmrs/esm-fast-data-entry-app.groupSessionVisitTypeUuid</property>
+            <value>123e4567-e89b-12d3-a456-426614174000</value>
+            <description>UUID of the visit type used by Fast Data Entry to create visits when in
+                'group sessions' entry workflow</description>
+        </globalProperty>
+
+        <!-- FHIR Configuration -->
+        <globalProperty>
+            <property>fhir2.administeringEncounterRoleUuid</property>
+            <value>a0b03050-c99b-11e0-9572-0800200c9a66</value>
+        </globalProperty>
+
+        <!-- OAuth2 SSO Configuration -->
+        <!-- NECESARIAS -->
+        <globalProperty>
+            <property>oauth2login.loginWithOAuth2</property>
+            <value>true</value>
+        </globalProperty>
+
+        <globalProperty>
+            <property>oauth2login.redirectUriAfterLogin</property>
+            <value>/openmrs/spa</value>
+        </globalProperty>
+
+        <!-- RECOMENDADAS para personal médico -->
+        <globalProperty>
+            <property>oauth2login.defaultRoles</property>
+            <value>Provider</value>
+        </globalProperty>
+
+        <globalProperty>
+            <property>oauth2login.createProviderAccount</property>
+            <value>true</value>
+        </globalProperty>
     </globalProperties>
 </config>
