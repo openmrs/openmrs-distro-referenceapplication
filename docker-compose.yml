@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   gateway:
-    image: gamshan/openmrs-reference-application-3-gateway:${TAG:-qa}
+    image: gamshan/openmrs-reference-application-3-gateway:${TAG:-0.0.4}
     restart: "unless-stopped"
     depends_on:
       - frontend
@@ -12,7 +12,7 @@ services:
 
   frontend:
     platform: linux/amd64
-    image: gamshan/openmrs-reference-application-3-frontend:${TAG:-digidev}
+    image: gamshan/openmrs-reference-application-3-frontend:${TAG:-0.0.4}
     restart: "unless-stopped"
     environment:
       SPA_PATH: /openmrs/spa
@@ -24,6 +24,8 @@ services:
       timeout: 5s
     depends_on:
       - backend
+    ports:
+      - "8080:80"
 
   backend:
     platform: linux/amd64
