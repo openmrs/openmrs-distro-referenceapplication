@@ -96,7 +96,7 @@ services:
       timeout: 5s
     volumes:
       - openmrs-data:/openmrs/data
-      - ./keycloak/oauth2.properties:/openmrs/app/data/oauth2.properties:ro
+      - ./keycloak/oauth2.properties:/openmrs/data/oauth2.properties:ro
 
   # MariaDB master
   db:
