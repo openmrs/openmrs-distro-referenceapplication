@@ -8,7 +8,7 @@ services:
     env_file:
       - ./.env
     ports:
-      - "${KEYCLOAK_PORT}:8081" # Default Keycloak Port (deberia ser el 8081)
+      - "${KEYCLOAK_PORT}:8080" #Si algo se cae es este cambio
     volumes:
       - ./keycloak/themes:/opt/keycloak/themes:ro
     depends_on:
@@ -57,7 +57,7 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json
+      SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json,/openmrs/spa/oauth2.json
       SPA_DEFAULT_LOCALE: es
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]

@@ -38,6 +38,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=dev /app/spa /usr/share/nginx/html
 COPY config/config-openmrs.json /usr/share/nginx/html
 COPY config/config-pucp.json /usr/share/nginx/html
+COPY oauth2.json /usr/share/nginx/html
 
 # copy assets
 COPY ./resources/* /usr/share/nginx/html
