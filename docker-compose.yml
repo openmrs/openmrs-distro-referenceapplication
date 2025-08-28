@@ -14,6 +14,8 @@ services:
     platform: linux/amd64
     image: gamshan/openmrs-reference-application-3-frontend:${TAG:-digidev}
     restart: "unless-stopped"
+    ports:
+      - "8080:80"
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
@@ -26,7 +28,6 @@ services:
       - backend
 
   backend:
-    platform: linux/amd64
     image: gamshan/openmrs-reference-application-3-backend:${TAG:-0.0.3}
     restart: "unless-stopped"
     depends_on:
@@ -62,8 +63,6 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
     volumes:
       - db-data:/var/lib/mysql
-    ports:
-      - "3306:3306"
 
 volumes:
   openmrs-data: ~
