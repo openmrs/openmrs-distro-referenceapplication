@@ -4,7 +4,7 @@ services:
       context: ./keycloak
       dockerfile: Dockerfile
       args:
-        KEYCLOAK_VERSION:   ${KEYCLOAK_VERSION}
+        KEYCLOAK_VERSION: ${KEYCLOAK_VERSION}
     env_file:
       - ./.env
     ports:
@@ -19,8 +19,8 @@ services:
     env_file:
       - ./.env
     environment:
-      POSTGRES_DB:       ${KC_DB_DATABASE}
-      POSTGRES_USER:     ${KC_DB_USERNAME}
+      POSTGRES_DB: ${KC_DB_DATABASE}
+      POSTGRES_USER: ${KC_DB_USERNAME}
       POSTGRES_PASSWORD: ${KC_DB_PASSWORD}
     volumes:
       - keycloak-data:/var/lib/postgresql/data
@@ -31,9 +31,9 @@ services:
     command: -H unix:///var/run/docker.sock --http-enabled --base-url=/portainer
     restart: "unless-stopped"
     ports:
-      - "9443:9443"  # HTTPS Portainer Web UI
-      - "9000:9000"  # HTTP Portainer Web UI
-      - "8000:8000"  # Necessary for other reason
+      - "9443:9443" # HTTPS Portainer Web UI
+      - "9000:9000" # HTTP Portainer Web UI
+      - "8000:8000" # Necessary for other reason
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer-data:/data
@@ -60,7 +60,7 @@ services:
       SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json,/openmrs/spa/oauth2.json
       SPA_DEFAULT_LOCALE: es
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/"]
+      test: [ "CMD", "curl", "-f", "http://localhost/" ]
       timeout: 5s
     depends_on:
       - backend
@@ -75,8 +75,8 @@ services:
       - "8080:8080"
     depends_on:
       - db-replic
-      - keycloak
-    #env_file: "enviromentVariables.env"
+      #- keycloak
+      #env_file: "enviromentVariables.env"
     environment:
       ENABLE_SSO: "true" # Enable Single Sign-On (colocar como variable de entorno? si lo queremos hacer flexible tambien habria que hacerlo en el frontend)
       OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
@@ -92,13 +92,13 @@ services:
         GHP_USERNAME: ${GHP_USERNAME}
         GHP_PASSWORD: ${GHP_PASSWORD}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/openmrs" ]
       timeout: 5s
     volumes:
       - openmrs-data:/openmrs/data
-      - ./keycloak/oauth2.properties:/openmrs/data/oauth2.properties:ro
+      #- ./keycloak/oauth2.properties:/openmrs/data/oauth2.properties:ro
 
-  # MariaDB master
+      # MariaDB master
   db:
     container_name: peruHCE-db-master
     image: mariadb:10.11.7
@@ -154,12 +154,12 @@ services:
       - ./db-config/init-slave.sh:/docker-entrypoint-initdb.d/init-slave.sh
       - db-data-r:/var/lib/mysql
       - db-backup-r:/backup
-  
+
   # DNS Server
   dns:
     container_name: peruHCE-dns
     image: pihole/pihole:2025.03.0
-    restart: "unless-stopped"    
+    restart: "unless-stopped"
     ports:
       # DNS Ports
       - "53:53/tcp"
@@ -180,7 +180,6 @@ services:
       # For persisting Pi-hole's databases and common configuration file
       - pihole-data:/etc/pihole
       - pihole-dnsmaq:/etc/dnsmasq.d
-
 
   fua-generator:
     container_name: peruHCE-fua-generator
@@ -217,7 +216,7 @@ volumes:
   openmrs-data: ~
   db-data: ~
   db-backup: ~
-  db-data-r: ~  
+  db-data-r: ~
   db-backup-r: ~
   db-fua-generator: ~
   gateway-data: ~
