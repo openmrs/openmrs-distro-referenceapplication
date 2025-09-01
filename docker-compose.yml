@@ -1,29 +1,29 @@
 services:
-  keycloak:
-    build:
-      context: ./keycloak
-      dockerfile: Dockerfile
-      args:
-        KEYCLOAK_VERSION: ${KEYCLOAK_VERSION}
-    env_file:
-      - ./.env
-    ports:
-      - "${KEYCLOAK_PORT}:8080" #Si algo se cae es este cambio
-    volumes:
-      - ./keycloak/themes:/opt/keycloak/themes:ro
-    depends_on:
-      - keycloak-db
+  # keycloak:
+  #   build:
+  #     context: ./keycloak
+  #     dockerfile: Dockerfile
+  #     args:
+  #       KEYCLOAK_VERSION: ${KEYCLOAK_VERSION}
+  #   env_file:
+  #     - ./.env
+  #   ports:
+  #     - "${KEYCLOAK_PORT}:8080" #Si algo se cae es este cambio
+  #   volumes:
+  #     - ./keycloak/themes:/opt/keycloak/themes:ro
+  #   depends_on:
+  #     - keycloak-db
 
-  keycloak-db:
-    image: postgres:15
-    env_file:
-      - ./.env
-    environment:
-      POSTGRES_DB: ${KC_DB_DATABASE}
-      POSTGRES_USER: ${KC_DB_USERNAME}
-      POSTGRES_PASSWORD: ${KC_DB_PASSWORD}
-    volumes:
-      - keycloak-data:/var/lib/postgresql/data
+  # keycloak-db:
+  #   image: postgres:15
+  #   env_file:
+  #     - ./.env
+  #   environment:
+  #     POSTGRES_DB: ${KC_DB_DATABASE}
+  #     POSTGRES_USER: ${KC_DB_USERNAME}
+  #     POSTGRES_PASSWORD: ${KC_DB_PASSWORD}
+  #   volumes:
+  #     - keycloak-data:/var/lib/postgresql/data
 
   portainer:
     container_name: peruHCE-portainer
@@ -211,7 +211,7 @@ services:
       - db-fua-generator:/var/lib/postgresql/data
 
 volumes:
-  keycloak-data:
+  # keycloak-data:
   openmrs-frontend: ~
   openmrs-data: ~
   db-data: ~
