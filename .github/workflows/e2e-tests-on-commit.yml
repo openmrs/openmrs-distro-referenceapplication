@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
 
-jobs:
+jobs:  
   build:
     runs-on: ubuntu-latest
     steps:
@@ -42,9 +42,13 @@ jobs:
     needs: build
     strategy:
       matrix:
-        repo:
-          - esm-sihsalus-app
-
+        repo: 
+          - openmrs-esm-patient-management
+          - openmrs-esm-patient-chart
+          - openmrs-esm-form-builder
+          - openmrs-esm-core
+          - openmrs-esm-dispensing-app
+  
     steps:
       - uses: actions/checkout@v4
 

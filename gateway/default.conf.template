@@ -93,6 +93,7 @@ server {
   }
 
   location /openmrs {
+    proxy_read_timeout 300s;
     proxy_pass http://backend;
     
     # Add CORS headers
