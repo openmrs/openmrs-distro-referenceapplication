@@ -12,6 +12,65 @@
     "extensionSlots": {
       "action-menu-ward-patient-items-slot": {
         "add": ["order-basket-action-menu"]
+      },
+
+      "patient-chart-dashboard-slot": {
+        "add": [
+          "nav-group#clinicalView"
+        ],
+        "configure": {
+          "nav-group#clinicalView": {
+            "title": "Clinical View",
+            "slotName": "Clinical-View",
+            "isExpanded": true,
+            "slot": "clinical-summary-slot"
+          }
+        }
+      },
+      "Clinical-View": {
+        "add": [
+          "nav-group#diabetes",
+          "nav-group#hypertension"
+        ],
+        "configure": {
+          "nav-group#diabetes": {
+            "title": "Diabetes",
+            "slotName": "Diabetes-Menu",
+            "isExpanded": true
+          },
+          "nav-group#hypertension": {
+            "title": "Hypertension",
+            "slotName": "Hypertension-Menu",
+            "isExpanded": false
+          }
+        }
+      },
+      "Diabetes-Menu": {
+        "add": [
+          "dashboard#diabetes-allergies",
+          "dashboard#diabetes-medication",
+          "dashboard#diabetes-labtest"
+        ],
+        "configure": {
+          "dashboard#diabetes-allergies": {
+            "title": "Allergies",
+            "path": "Allergies",
+            "slot": "patient-chart-allergies-dashboard-slot",
+            "component": "allergiesDashboardLink"
+          },
+          "dashboard#diabetes-medication": {
+            "title": "Medication",
+            "path": "Medications",
+            "slot": "patient-chart-dashboard-slot",
+            "component": "medicationsDashboardLink"
+          },
+          "dashboard#diabetes-labtest": {
+            "title": "Lab Test",
+            "path": "Results",
+            "slot": "patient-chart-test-results-dashboard-slot",
+            "component": "testResultsDashboardLink"
+          }
+        }
       }
     }
   },
