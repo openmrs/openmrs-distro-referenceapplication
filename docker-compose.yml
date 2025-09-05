@@ -57,7 +57,7 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json,/openmrs/spa/oauth2.json
+      SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json #,/openmrs/spa/oauth2.json
       SPA_DEFAULT_LOCALE: es
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost/" ]
