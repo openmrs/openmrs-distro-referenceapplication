@@ -15,7 +15,7 @@ RUN mvn $MVN_ARGS_SETTINGS $MVN_ARGS
 
 ### Run Stage
 # Replace 'nightly' with the exact version of openmrs-core built for production (if available)
-FROM openmrs/openmrs-core:nightly-amazoncorretto-11
+FROM openmrs/openmrs-core:2.8.x-amazoncorretto-21
 
 # Do not copy the war if using the correct openmrs-core image version
 COPY --from=dev /app/package/target/distro/web/openmrs.war /openmrs/distribution/openmrs_core/
