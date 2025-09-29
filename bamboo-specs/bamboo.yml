@@ -78,6 +78,32 @@ Build and push:
           variable: docker.image.id
           variableScope: RESULT
         description: Save docker image ID
+  artifacts:
+    - name: referenceapplication-addons
+      location: package/target
+      pattern: '*.zip'
+      shared: true
+      required: false
+    - name: ' referenceapplication-war'
+      location: package/target/bundled-distro/web
+      pattern: '*.war'
+      shared: true
+      required: false
+    - name: ' referenceapplication-properties'
+      location: package/target/distro/web
+      pattern: openmrs-distro.properties
+      shared: true
+      required: false
+    - name: referenceapplication-docker
+      location: package/target/bundled-distro/web
+      pattern: '**/*'
+      shared: true
+      required: false
+    - name: referenceapplication-readme
+      location: package/target/classes
+      pattern: readme.txt
+      shared: true
+      required: false
   artifact-subscriptions: []
 Deploy to qa-refapp:
   key: DTMTS
