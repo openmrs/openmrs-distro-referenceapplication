@@ -153,32 +153,6 @@ Release to maven:
         argument: release-scripts/release-prepare-perform.sh -r "${bamboo.maven.release.version}" -d "${bamboo.maven.development.version}"
         envrionment: JAVA_HOME=${bamboo.capability.system.jdk.openjdk-8-jdk} MAVEN_HOME=${bamboo.capability.system.builder.mvn3.Maven 3}
         description: Release prepare perform
-  artifacts:
-    - name: referenceapplication-addons
-      location: package/target
-      pattern: '*.zip'
-      shared: true
-      required: false
-    - name: ' referenceapplication-war'
-      location: package/target/bundled-distro/web
-      pattern: '*.war'
-      shared: true
-      required: false
-    - name: ' referenceapplication-properties'
-      location: package/target/distro/web
-      pattern: openmrs-distro.properties
-      shared: true
-      required: false
-    - name: referenceapplication-docker
-      location: package/target/bundled-distro/web
-      pattern: '**/*'
-      shared: true
-      required: false
-    - name: referenceapplication-readme
-      location: package/target/classes
-      pattern: readme.txt
-      shared: true
-      required: false
   artifact-subscriptions: []
 Set variables:
   key: SV
