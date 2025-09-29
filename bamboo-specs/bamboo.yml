@@ -129,27 +129,27 @@ Release to maven:
         description: Release prepare perform
   artifacts:
     - name: referenceapplication-addons
-      location: target/checkout/package/target
+      location: package/target
       pattern: '*.zip'
       shared: true
       required: false
     - name: ' referenceapplication-war'
-      location: target/checkout/package/target/bundled-distro/web
+      location: package/target/bundled-distro/web
       pattern: '*.war'
       shared: true
       required: false
     - name: ' referenceapplication-properties'
-      location: target/checkout/package/target/distro/web
+      location: package/target/distro/web
       pattern: openmrs-distro.properties
       shared: true
       required: false
     - name: referenceapplication-docker
-      location: target/checkout/package/target/bundled-distro/web
+      location: package/target/bundled-distro/web
       pattern: '**/*'
       shared: true
       required: false
     - name: referenceapplication-readme
-      location: target/checkout/package/target/classes
+      location: package/target/classes
       pattern: readme.txt
       shared: true
       required: false
