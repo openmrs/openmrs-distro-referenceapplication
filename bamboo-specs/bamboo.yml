@@ -80,27 +80,27 @@ Build and push:
         description: Save docker image ID
   artifacts:
     - name: referenceapplication-addons
-      location: package/target
+      location: target/checkout/package/target
       pattern: '*.zip'
       shared: true
       required: false
     - name: ' referenceapplication-war'
-      location: package/target/bundled-distro/web
+      location: target/checkout/package/target/bundled-distro/web
       pattern: '*.war'
       shared: true
       required: false
     - name: ' referenceapplication-properties'
-      location: package/target/distro/web
+      location: target/checkout/package/target/distro/web
       pattern: openmrs-distro.properties
       shared: true
       required: false
     - name: referenceapplication-docker
-      location: package/target/bundled-distro/web
+      location: target/checkout/package/target/bundled-distro/web
       pattern: '**/*'
       shared: true
       required: false
     - name: referenceapplication-readme
-      location: package/target/classes
+      location: target/checkout/package/target/classes
       pattern: readme.txt
       shared: true
       required: false
