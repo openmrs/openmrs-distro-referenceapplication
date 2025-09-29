@@ -58,7 +58,7 @@ Build and push:
             
             docker buildx build --push --platform ${bamboo.docker.image.platforms} --target dev -t ${DEV_IMAGE} .
             
-            docker run --rm -w="/app" -v /home/bamboo-agent/.m2:/.m2 ${DEV_IMAGE} mvn deploy --settings /.m2/settings.xml
+            docker run --rm -w="/app" -v /home/bamboo-agent/.m2:/.m2 ${DEV_IMAGE} -v ${bamboo.build.working.directory}:${bamboo.build.working.directory} mvn deploy --settings /.m2/settings.xml
             
             echo "Building production image"
             
@@ -80,27 +80,27 @@ Build and push:
         description: Save docker image ID
   artifacts:
     - name: referenceapplication-addons
-      location: target/checkout/package/target
+      location: package/target
       pattern: '*.zip'
       shared: true
       required: false
     - name: ' referenceapplication-war'
-      location: target/checkout/package/target/bundled-distro/web
+      location: package/target/bundled-distro/web
       pattern: '*.war'
       shared: true
       required: false
     - name: ' referenceapplication-properties'
-      location: target/checkout/package/target/distro/web
+      location: package/target/distro/web
       pattern: openmrs-distro.properties
       shared: true
       required: false
     - name: referenceapplication-docker
-      location: target/checkout/package/target/bundled-distro/web
+      location: package/target/bundled-distro/web
       pattern: '**/*'
       shared: true
       required: false
     - name: referenceapplication-readme
-      location: target/checkout/package/target/classes
+      location: package/target/classes
       pattern: readme.txt
       shared: true
       required: false
