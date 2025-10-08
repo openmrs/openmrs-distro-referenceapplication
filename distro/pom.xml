@@ -281,6 +281,30 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>remove-referenceapplication-demo-folder</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <echo message="Removing unwanted referenceapplication-demo folder from build output..." />
+                <delete dir="${project.build.directory}/sdk-distro/web/referenceapplication-demo" 
+                        includeemptydirs="true" 
+                        failonerror="false" 
+                        verbose="true" />
+                <echo message="Successfully removed referenceapplication-demo folder (if it existed)" />
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
