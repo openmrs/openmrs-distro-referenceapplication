@@ -116,6 +116,48 @@ docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
 
 Staging certificates won't be trusted by browsers but allow you to verify the setup works correctly.
 
+### Manual certificate renewal
+
+While certificates renew automatically in production mode, you can manually force renewal if needed.
+
+**If the certbot container is running** (prod mode):
+
+```bash
+# Force renewal
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml exec certbot \
+  certbot renew --force-renewal --webroot -w /var/www/certbot
+
+# Reload nginx to pick up new certificates
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml exec gateway \
+  nginx -s reload
+```
+
+**If certbot container has stopped or for one-off renewal**:
+
+```bash
+# Run certbot in one-off mode (override entrypoint to run certbot directly)
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm \
+  --entrypoint certbot certbot \
+  renew --force-renewal --webroot -w /var/www/certbot
+
+# Reload nginx
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml exec gateway \
+  nginx -s reload
+```
+
+**Check certificate expiration**:
+
+```bash
+# If certbot container is running
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml exec certbot \
+  certbot certificates
+
+# If certbot container is stopped
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm \
+  --entrypoint certbot certbot \
+  certificates
+```
+
 ### Environment variables reference
 
 | Variable | Default | Description |

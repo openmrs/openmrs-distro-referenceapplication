@@ -32,7 +32,8 @@ if [ -f "${CERT_ROOT_PATH}/live/${CERT_WEB_DOMAIN_COMMON_NAME}/fullchain.pem" ];
         echo "Starting certificate renewal daemon..."
         trap exit TERM
         while :; do
-            certbot renew --webroot -w ${CERTBOT_DATA_PATH}
+            certbot renew --webroot -w ${CERTBOT_DATA_PATH} \
+                --deploy-hook "docker compose exec gateway nginx -s reload"
             sleep 12h &
             wait $!
         done
@@ -185,7 +186,8 @@ else
     echo "Starting certificate renewal daemon..."
     trap exit TERM
     while :; do
-        certbot renew --webroot -w ${CERTBOT_DATA_PATH}
+        certbot renew --webroot -w ${CERTBOT_DATA_PATH} \
+            --deploy-hook "docker compose exec gateway nginx -s reload"
         sleep 12h &
         wait $!
     done
