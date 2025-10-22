@@ -5,47 +5,66 @@ https://dev3.openmrs.org and https://o3.openmrs.org.
 
 ## Quick start
 
-### Run the initial startup script
-
-Local environment:
+### Package the distribution and prepare the run
 
 ```
-sudo ./scripts/initial-startup-dev.sh
+docker compose build
 ```
 
-Cloud environment:
+### Run the app
 
 ```
+docker compose up
+```
+
+The new OpenMRS UI is accessible at http://localhost/openmrs/spa
+
+OpenMRS Legacy UI is accessible at http://localhost/openmrs
+
+### Run the app with SSL enabled
+
+To run with SSL/HTTPS support using Let's Encrypt certificates:
+
+1. First, generate SSL certificates using the setup script:
+
+```bash
 sudo ./scripts/initial-startup.sh
 ```
 
-The new OpenMRS UI is accessible at https://localhost/openmrs/spa
+The script will interactively prompt you for:
+- Domain name(s) for the certificate
+- Email address for Let's Encrypt notifications
+- Whether to use production or staging certificates
+- Whether to set up automatic certificate renewal via cron
 
-OpenMRS Legacy UI is accessible at https://localhost/openmrs
-
-The local environment setup generates self signed certificates that must be accepted in your browser
-
-## Redeploy any local changes
-
-### Package the distribution and run the app
+2. Start the application with SSL enabled:
 
 ```
-docker compose up --build -d
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
 ```
+
+The application will be accessible at:
+- HTTPS: https://your-domain.com/openmrs/spa
+- HTTP (redirects to HTTPS): http://your-domain.com/openmrs/spa
+
+**Note**: For local development with self-signed certificates, use `./scripts/initial-startup-dev.sh` instead. You will need to accept the self-signed certificate in your browser.
 
 ## Overview
 
-This distribution consists of five images:
+This distribution consists of four images:
 
-- db - This is just the standard MariaDB image supplied to use as a database
-- backend - This image is the OpenMRS backend. It is built from the main Dockerfile included in the root of the project and
+- **db** - This is just the standard MariaDB image supplied to use as a database
+- **backend** - This image is the OpenMRS backend. It is built from the main Dockerfile included in the root of the project and
   based on the core OpenMRS Docker file. Additional contents for this image are drawn from the `distro` sub-directory which
   includes a full Initializer configuration for the reference application intended as a starting point.
-- frontend - This image is a simple nginx container that embeds the 3.x frontend, including the modules described in the
-  `frontend/spa-build-config.json` file.
-- gateway - This image is an even simpler nginx reverse proxy that sits in front of the `backend` and `frontend` containers
+- **frontend** - This image is a simple nginx container that embeds the 3.x frontend, including the modules described in the
+  `frontend/spa-assemble-config.json` file.
+- **gateway** - This image is an nginx reverse proxy that sits in front of the `backend` and `frontend` containers
   and provides a common interface to both. This helps mitigate CORS issues.
-- certgen - This image is used for generating and updating certificates
+
+When running with SSL enabled (using `docker-compose.ssl.yml`), an additional service is included:
+
+- **certbot** - This image is used for generating and renewing Let's Encrypt SSL certificates
 
 ## Contributing to the configuration
 

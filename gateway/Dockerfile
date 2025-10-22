@@ -4,4 +4,11 @@ FROM nginx:1.25-alpine
 ENV FRAME_ANCESTORS ""
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY default.conf.template /etc/nginx/templates/
+COPY default.conf.template /etc/nginx/conf-templates/
+COPY default-ssl.conf.template /etc/nginx/conf-templates/
+COPY docker-entrypoint.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

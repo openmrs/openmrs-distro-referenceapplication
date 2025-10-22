@@ -1,32 +1,14 @@
-# version: "3.7"
+version: "3.7"
 
 services:
-  certbot:
-    image: openmrs/openmrs-reference-application-3-certbot:${TAG:-qa}
-    environment:
-      CERT_WEB_DOMAINS: ${CERT_WEB_DOMAINS:-localhost,127.0.0.1}  # Set your domains here, first entry will be common name
-      CERTBOT_DATA_PATH: ${CERTBOT_DATA_PATH:-/var/www/certbot}  # Set the path for certbot data
-      CERT_ROOT_PATH: ${CERT_ROOT_PATH:-/etc/letsencrypt}  # Set the path for certificates
-      CERT_RSA_KEY_SIZE: ${CERT_RSA_KEY_SIZE:-4096}  # Set the RSA key size for the certificate
-      CERT_CONTACT_EMAIL: ${CERT_CONTACT_EMAIL:-}  # Set your email for Let's Encrypt notifications
-    volumes:
-      - letsencrypt-data:/etc/letsencrypt
-      - certbot-data:/var/www/certbot
-
   gateway:
     image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
     restart: "unless-stopped"
     depends_on:
       - frontend
       - backend
-    environment:
-      CERT_WEB_DOMAIN_COMMON_NAME: ${CERT_WEB_DOMAIN_COMMON_NAME:-localhost}  # Set your domain here
     ports:
       - "80:80"
-      - "443:443"
-    volumes:
-      - letsencrypt-data:/etc/letsencrypt:ro
-      - certbot-data:/var/www/certbot
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
@@ -82,5 +64,3 @@ services:
 volumes:
   openmrs-data: ~
   db-data: ~
-  letsencrypt-data: ~
-  certbot-data: ~ 
