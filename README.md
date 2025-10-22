@@ -11,22 +11,15 @@ https://dev3.openmrs.org and https://o3.openmrs.org.
 docker compose up
 ```
 
-This uses pre-built images from Docker Hub - no building required.
-
-The OpenMRS 3.x UI is accessible at http://localhost/openmrs/spa
-
-OpenMRS Legacy UI is accessible at http://localhost/openmrs
-
-### Build from source (for developers)
-
-If you're developing or need to build custom images:
+or to enable SSL,
 
 ```bash
-docker compose build
-docker compose up
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
 ```
 
-The `docker-compose.override.yml` file (automatically merged when present) contains build directives. End users running pre-built images don't need this file.
+The OpenMRS 3.x UI is accessible at http://localhost/openmrs/spa or https://localhost/openmrs/spa
+
+OpenMRS Legacy UI is accessible at http://localhost/openmrs or https://lcoalhost/openmrs
 
 ### Production deployment with SSL
 
@@ -74,7 +67,6 @@ This will:
 - Automatically generate self-signed certificates for `localhost` and `127.0.0.1`
 - Configure nginx to use HTTPS on port 443
 - Redirect HTTP (port 80) to HTTPS
-- **No internet connection required**
 
 The application will be accessible at:
 - https://localhost/openmrs/spa
