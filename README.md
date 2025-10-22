@@ -5,21 +5,28 @@ https://dev3.openmrs.org and https://o3.openmrs.org.
 
 ## Quick start
 
-### Build the distribution
-
-```bash
-docker compose build
-```
-
-### Run the app
+### Run the app (using pre-built images)
 
 ```bash
 docker compose up
 ```
 
+This uses pre-built images from Docker Hub - no building required.
+
 The OpenMRS 3.x UI is accessible at http://localhost/openmrs/spa
 
 OpenMRS Legacy UI is accessible at http://localhost/openmrs
+
+### Build from source (for developers)
+
+If you're developing or need to build custom images:
+
+```bash
+docker compose build
+docker compose up
+```
+
+The `docker-compose.override.yml` file (automatically merged when present) contains build directives. End users running pre-built images don't need this file.
 
 ### Production deployment with SSL
 
