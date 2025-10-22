@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+# Create templates directory if it doesn't exist
+mkdir -p /etc/nginx/templates
+
 # Determine which nginx config to use based on SSL environment variable
 if [ -n "${CERT_WEB_DOMAIN_COMMON_NAME}" ]; then
     echo "SSL enabled: Using SSL nginx configuration"

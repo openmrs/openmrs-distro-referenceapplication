@@ -2,6 +2,7 @@ version: "3.7"
 
 services:
   certbot:
+    build: ./certbot
     image: openmrs/openmrs-reference-application-3-certbot:${TAG:-qa}
     environment:
       SSL_MODE: ${SSL_MODE:-dev}  # "dev" for self-signed certificates, "prod" for Let's Encrypt
@@ -17,6 +18,7 @@ services:
       - certbot-data:/var/www/certbot
 
   gateway:
+    build: ./gateway
     environment:
       CERT_WEB_DOMAIN_COMMON_NAME: ${CERT_WEB_DOMAIN_COMMON_NAME:-localhost}
     ports:
