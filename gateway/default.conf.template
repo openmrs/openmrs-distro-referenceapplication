@@ -70,13 +70,8 @@ server {
   # all redirects are relative to the gateway
   absolute_redirect off;
 
-  location = /openmrs/spa {
-    return 301 /openmrs/spa/;
-  }
-
   location /openmrs/spa/ {
     proxy_pass http://frontend/;
-    proxy_redirect http://$host/ /openmrs/spa/;
   }
 
   location /openmrs {
@@ -84,7 +79,15 @@ server {
     proxy_pass http://backend;
   }
 
+  location = /openmrs/spa/ {
+    return 301 /openmrs/spa/home;
+  }
+
+  location = /openmrs/spa {
+    return 301 /openmrs/spa/home;
+  }
+
   location = / {
-    return 301 /openmrs/spa/;
+    return 301 /openmrs/spa/home;
   }
 }
