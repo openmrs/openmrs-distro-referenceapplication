@@ -5,49 +5,34 @@ https://dev3.openmrs.org and https://o3.openmrs.org.
 
 ## Quick start
 
-### Package the distribution and prepare the run
+### Build the distribution
 
-```
+```bash
 docker compose build
 ```
 
 ### Run the app
 
-```
+```bash
 docker compose up
 ```
 
-The new OpenMRS UI is accessible at http://localhost/openmrs/spa
+The OpenMRS 3.x UI is accessible at http://localhost/openmrs/spa
 
 OpenMRS Legacy UI is accessible at http://localhost/openmrs
 
-### Run the app with SSL enabled
+### Production deployment with SSL
 
-To run with SSL/HTTPS support using Let's Encrypt certificates:
-
-1. First, generate SSL certificates using the setup script:
+For production deployments with HTTPS/SSL certificates:
 
 ```bash
-sudo ./scripts/initial-startup.sh
-```
-
-The script will interactively prompt you for:
-- Domain name(s) for the certificate
-- Email address for Let's Encrypt notifications
-- Whether to use production or staging certificates
-- Whether to set up automatic certificate renewal via cron
-
-2. Start the application with SSL enabled:
-
-```
+SSL_MODE=prod \
+CERT_WEB_DOMAINS=your-domain.com \
+CERT_CONTACT_EMAIL=admin@your-domain.com \
 docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
 ```
 
-The application will be accessible at:
-- HTTPS: https://your-domain.com/openmrs/spa
-- HTTP (redirects to HTTPS): http://your-domain.com/openmrs/spa
-
-**Note**: For local development with self-signed certificates, use `./scripts/initial-startup-dev.sh` instead. You will need to accept the self-signed certificate in your browser.
+See the [SSL/HTTPS Configuration](#sslhttps-configuration) section for detailed setup instructions.
 
 ## Overview
 
@@ -64,7 +49,83 @@ This distribution consists of four images:
 
 When running with SSL enabled (using `docker-compose.ssl.yml`), an additional service is included:
 
-- **certbot** - This image is used for generating and renewing Let's Encrypt SSL certificates
+- **certbot** - This image is used for generating and renewing SSL certificates (Let's Encrypt or self-signed)
+
+## SSL/HTTPS Configuration
+
+The application can be run with SSL/HTTPS support for both development and production environments.
+
+### Development mode (self-signed certificates)
+
+For local development with HTTPS, simply run with the SSL compose file:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+```
+
+This will:
+- Automatically generate self-signed certificates for `localhost` and `127.0.0.1`
+- Configure nginx to use HTTPS on port 443
+- Redirect HTTP (port 80) to HTTPS
+- **No internet connection required**
+
+The application will be accessible at:
+- https://localhost/openmrs/spa
+- https://127.0.0.1/openmrs/spa
+
+**Note**: Your browser will show a security warning for self-signed certificates. This is expected - click "Advanced" and proceed to the site.
+
+### Production mode (Let's Encrypt)
+
+For production deployments with valid SSL certificates from Let's Encrypt:
+
+```bash
+SSL_MODE=prod \
+CERT_WEB_DOMAINS=example.com \
+CERT_CONTACT_EMAIL=admin@example.com \
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+```
+
+**Configuration options**:
+
+- `SSL_MODE=prod` - Use Let's Encrypt certificates (required)
+- `CERT_WEB_DOMAINS` - Your domain name(s), comma-separated (e.g., `example.com,www.example.com`)
+- `CERT_CONTACT_EMAIL` - Email for Let's Encrypt notifications
+- `SSL_STAGING=true` - (Optional) Use Let's Encrypt staging environment for testing
+
+**The certbot container will**:
+1. Create a temporary certificate to allow nginx to start
+2. Wait for nginx to be ready
+3. Request a real Let's Encrypt certificate via ACME HTTP-01 challenge
+4. Reload nginx with the real certificate
+5. Run a renewal daemon that checks for renewal every 12 hours
+
+**Important**: Ensure your domain's DNS is correctly configured to point to your server before starting, as Let's Encrypt needs to verify domain ownership via HTTP.
+
+### Testing with Let's Encrypt staging
+
+To test the SSL setup without hitting Let's Encrypt rate limits:
+
+```bash
+SSL_MODE=prod \
+SSL_STAGING=true \
+CERT_WEB_DOMAINS=example.com \
+CERT_CONTACT_EMAIL=admin@example.com \
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+```
+
+Staging certificates won't be trusted by browsers but allow you to verify the setup works correctly.
+
+### Environment variables reference
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `SSL_MODE` | `dev` | `dev` for self-signed certificates, `prod` for Let's Encrypt |
+| `SSL_STAGING` | `false` | Use Let's Encrypt staging environment (set to `true` for testing) |
+| `CERT_WEB_DOMAINS` | `localhost,127.0.0.1` | Comma-separated list of domain names |
+| `CERT_WEB_DOMAIN_COMMON_NAME` | (first domain) | Override the primary domain name |
+| `CERT_CONTACT_EMAIL` | (empty) | Email for Let's Encrypt notifications (required in prod mode) |
+| `CERT_RSA_KEY_SIZE` | `4096` | RSA key size for certificates |
 
 ## Contributing to the configuration
 
