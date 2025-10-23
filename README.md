@@ -19,7 +19,7 @@ docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
 
 The OpenMRS 3.x UI is accessible at http://localhost/openmrs/spa or https://localhost/openmrs/spa
 
-OpenMRS Legacy UI is accessible at http://localhost/openmrs or https://lcoalhost/openmrs
+OpenMRS Legacy UI is accessible at http://localhost/openmrs or https://localhost/openmrs
 
 ### Production deployment with SSL
 
