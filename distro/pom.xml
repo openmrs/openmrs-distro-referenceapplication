@@ -279,7 +279,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
+            <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
         <version>3.1.0</version>
@@ -292,12 +292,16 @@
             </goals>
             <configuration>
               <target>
-                <echo message="Removing unwanted referenceapplication-demo folder from build output..." />
+                <echo message="Removing unwanted referenceapplication-demo folders from build output..." />
                 <delete dir="${project.build.directory}/sdk-distro/web/referenceapplication-demo" 
                         includeemptydirs="true" 
                         failonerror="false" 
                         verbose="true" />
-                <echo message="Successfully removed referenceapplication-demo folder (if it existed)" />
+                <delete dir="${project.build.directory}/sdk-distro/web/openmrs_spa/referenceapplication-demo" 
+                        includeemptydirs="true" 
+                        failonerror="false" 
+                        verbose="true" />
+                <echo message="Successfully removed referenceapplication-demo folders (if they existed)" />
               </target>
             </configuration>
           </execution>
