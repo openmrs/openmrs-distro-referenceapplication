@@ -10,6 +10,7 @@ ARG MVN_ARGS="install"
 # Copy build files
 COPY pom.xml ./
 COPY distro ./distro/
+COPY modules ./modules/
 
 ARG CACHE_BUST
 # Build the distro, but only deploy from the amd64 build
@@ -19,6 +20,7 @@ RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs_core/openmrs.war /op
 
 RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs-distro.properties /openmrs/distribution/
 RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_modules /openmrs/distribution/openmrs_modules/
+RUN cp -R /openmrs_distro/modules /openmrs/distribution/openmrs_modules/
 RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_owas /openmrs/distribution/openmrs_owas/
 RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_config /openmrs/distribution/openmrs_config/
 
