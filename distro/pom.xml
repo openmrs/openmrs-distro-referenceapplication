@@ -56,6 +56,7 @@
     <billing.version>1.3.3-SNAPSHOT</billing.version>
     <!-- Content Packages -->
     <reference-content.version>1.5.0-SNAPSHOT</reference-content.version>
+    <amrs-content.version>1.0.0-SNAPSHOT</amrs-content.version>
 <htmlformentry.version>6.1.0</htmlformentry.version>
     <reference-demo-content.version>1.7.0-SNAPSHOT</reference-demo-content.version>
   </properties>
@@ -67,6 +68,13 @@
       <version>${openmrs.version}</version>
       <type>war</type>
       <scope>provided</scope>
+    </dependency>
+
+    <!-- AMRS Content dependency -->
+    <dependency>
+      <groupId>org.openmrs.content</groupId>
+      <artifactId>amrs</artifactId>
+      <version>${amrs-content.version}</version>
     </dependency>
 
     <!-- Module dependencies -->
