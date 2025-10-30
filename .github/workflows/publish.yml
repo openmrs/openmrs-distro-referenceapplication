@@ -44,16 +44,33 @@ jobs:
           java-version: '8'
           cache: 'maven'
 
-      - name: Create Maven settings
+      - name: Create clean Maven settings
         if: matrix.image.name == 'backend'
-        uses: s4u/maven-settings-action@v3.1.0
-        with:
-          servers: |
-            [{
-                "id": "github",
-                "username": "${{ github.actor }}",
-                "password": "${{ secrets.GITHUB_TOKEN }}"
-            }]
+        run: |
+          # Remove any existing settings file to start fresh
+          rm -rf ~/.m2/settings.xml
+          mkdir -p ~/.m2
+          
+          # Create a clean settings file with only our GitHub server
+          cat > ~/.m2/settings.xml << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                                        http://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <servers>
+              <server>
+                <id>github</id>
+                <username>GITHUB_ACTOR_PLACEHOLDER</username>
+                <password>GITHUB_TOKEN_PLACEHOLDER</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+          
+          # Replace placeholders with actual values
+          sed -i "s/GITHUB_ACTOR_PLACEHOLDER/${{ github.actor }}/g" ~/.m2/settings.xml
+          sed -i "s/GITHUB_TOKEN_PLACEHOLDER/${{ secrets.GITHUB_TOKEN }}/g" ~/.m2/settings.xml
 
       - name: Copy Maven settings for Docker
         if: matrix.image.name == 'backend'
