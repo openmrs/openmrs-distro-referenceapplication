@@ -85,6 +85,37 @@ jobs:
             type=ref,event=tag
             type=raw,value=latest,enable={{is_default_branch}}
 
+      - name: Debug Maven settings before Docker build
+        if: matrix.image.name == 'backend'
+        run: |
+          echo "=== Checking settings file before Docker build ==="
+          echo "Settings file path: ${{ github.workspace }}/.m2/settings.xml"
+          if [ -f "${{ github.workspace }}/.m2/settings.xml" ]; then
+            echo "✅ Settings file exists"
+            echo "File size: $(stat -c%s ${{ github.workspace }}/.m2/settings.xml) bytes"
+            echo "File permissions: $(ls -la ${{ github.workspace }}/.m2/settings.xml)"
+            echo ""
+            echo "=== Settings file content ==="
+            cat ${{ github.workspace }}/.m2/settings.xml
+            echo ""
+            echo "=== End of settings file ==="
+            echo ""
+            echo "=== First 50 characters (with escape sequences) ==="
+            head -c 50 ${{ github.workspace }}/.m2/settings.xml | od -c
+            echo ""
+            echo "=== XML validation ==="
+            if command -v xmllint &> /dev/null; then
+              xmllint --noout ${{ github.workspace }}/.m2/settings.xml && echo "✅ XML is valid" || echo "❌ XML is invalid"
+            else
+              echo "xmllint not available for validation"
+            fi
+          else
+            echo "❌ Settings file does not exist!"
+            echo "Contents of .m2 directory:"
+            ls -la ${{ github.workspace }}/.m2/ || echo "No .m2 directory found"
+          fi
+          echo "=== End debug info ==="
+
       - name: Build and push Docker image
         id: build
         uses: docker/build-push-action@v5
