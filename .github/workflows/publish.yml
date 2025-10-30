@@ -45,6 +45,17 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
 
+      - name: Copy Maven settings for Docker
+        if: matrix.image.name == 'backend'
+        run: |
+          mkdir -p ${{ github.workspace }}/.m2
+          cp ~/.m2/settings.xml ${{ github.workspace }}/.m2/settings.xml
+          echo "Maven settings file content:"
+          cat ${{ github.workspace }}/.m2/settings.xml
+        env:
+          MAVEN_USERNAME: ${{ github.actor }}
+          MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Log in to Container Registry
         uses: docker/login-action@v3
         with:
@@ -83,9 +94,6 @@ jobs:
           build-args: |
             CACHE_BUST=${{ github.sha }}
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-        env:
-          MAVEN_USERNAME: ${{ github.actor }}
-          MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
