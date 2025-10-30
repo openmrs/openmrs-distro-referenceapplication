@@ -1,10 +1,8 @@
 # version: "3.7"
-
+secrets:
+  m2settings:
+    file: ~/.m2/settings.xml
 services:
-  certbot:
-    build:
-      context: ./certbot
-
   gateway:
     build:
       context: ./gateway

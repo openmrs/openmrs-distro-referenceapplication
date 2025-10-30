@@ -29,21 +29,71 @@ services:
     build:
       context: .
     restart: "unless-stopped"
-    # depends_on:
-    #   - db
+    # CORRECTED: depends_on must be a list of service names or a list of maps with condition.
+    # The 'es' dependency block was moved and fixed.
+#    depends_on:
+#      es:
+#        condition: service_healthy
     environment:
-      OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
-      OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
-      OMRS_CONFIG_CREATE_TABLES: "true"
-      OMRS_CONFIG_CONNECTION_SERVER: db
-      OMRS_CONFIG_CONNECTION_DATABASE: openmrs
-      OMRS_CONFIG_CONNECTION_USERNAME: ${OMRS_DB_USER:-openmrs}
+      OMRS_CONFIG_MODULE_WEB_ADMIN: ${OMRS_CONFIG_MODULE_WEB_ADMIN:-true}
+      OMRS_CONFIG_AUTO_UPDATE_DATABASE: ${OMRS_CONFIG_AUTO_UPDATE_DATABASE:-true}
+      OMRS_ADMIN_USER_PASSWORD: ${OMRS_ADMIN_USER_PASSWORD:-openmrs}
+      OMRS_CONFIG_CREATE_TABLES: ${OMRS_CONFIG_CREATE_TABLES:-true}
+      OMRS_CONFIG_CONNECTION_SERVER: ${OMRS_CONFIG_CONNECTION_SERVER:-localhost}
+      OMRS_CONFIG_CONNECTION_DATABASE: ${OMRS_CONFIG_CONNECTION_DATABASE:-amrs}
+      
+      # These lines already used defaults, so they remain the same
+      OMRS_CONFIG_CONNECTION_USERNAME: ${OMRS_DB_USER:-openmrs_user}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
+      OMRS_SEARCH: ${OMRS_SEARCH:-elasticsearch}
+
+      # Converted the rest
+      # Note the quotes added for the DB_EXTRA_ARGS to handle the '&'
+      OMRS_DB_EXTRA_ARGS: "${OMRS_DB_EXTRA_ARGS:-&zeroDateTimeBehavior=convertToNull}"
+      LUCENE_MATCH_TYPE: ${LUCENE_MATCH_TYPE:-START}
+      DOCUMENT_MAX_SIZE_MB: ${DOCUMENT_MAX_SIZE_MB:-7}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
       timeout: 5s
     volumes:
       - openmrs-data:/openmrs/data
 
+  # CORRECTED: 'es' is now a sibling service to 'backend', 'frontend', and 'gateway'.
+  es:
+    image: elasticsearch:8.17.2
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    restart: "always"
+    command: >
+      /bin/sh -c "./bin/elasticsearch-plugin list | grep -q analysis-phonetic
+      || ./bin/elasticsearch-plugin install analysis-phonetic;
+      /usr/local/bin/docker-entrypoint.sh"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s http://localhost:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+
 volumes:
   openmrs-data: ~
+  es-data: ~

@@ -36,6 +36,7 @@ server {
   proxy_set_header      X-Real-IP $forwarded_ip;
   proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
   proxy_http_version    1.1;
+  proxy_set_header Referer $http_referer;
 
   gzip on;
   gzip_vary on;
@@ -69,7 +70,7 @@ server {
 
   # all redirects are relative to the gateway
   absolute_redirect off;
-
+  client_max_body_size 100M;
   location /openmrs/spa/ {
     proxy_pass http://frontend/;
   }
