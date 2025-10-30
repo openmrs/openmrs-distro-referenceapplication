@@ -51,26 +51,22 @@ jobs:
           rm -rf ~/.m2/settings.xml
           mkdir -p ~/.m2
           
-          # Create a clean settings file with only our GitHub server
-          cat > ~/.m2/settings.xml << 'EOF'
-          <?xml version="1.0" encoding="UTF-8"?>
-          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                                        http://maven.apache.org/xsd/settings-1.0.0.xsd">
-            <servers>
-              <server>
-                <id>github</id>
-                <username>GITHUB_ACTOR_PLACEHOLDER</username>
-                <password>GITHUB_TOKEN_PLACEHOLDER</password>
-              </server>
-            </servers>
-          </settings>
-          EOF
+          # Create a clean settings file using printf to avoid any encoding issues
+          printf '<?xml version="1.0" encoding="UTF-8"?>\n' > ~/.m2/settings.xml
+          printf '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"\n' >> ~/.m2/settings.xml
+          printf '          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n' >> ~/.m2/settings.xml
+          printf '          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0\n' >> ~/.m2/settings.xml
+          printf '                              http://maven.apache.org/xsd/settings-1.0.0.xsd">\n' >> ~/.m2/settings.xml
+          printf '  <servers>\n' >> ~/.m2/settings.xml
+          printf '    <server>\n' >> ~/.m2/settings.xml
+          printf '      <id>github</id>\n' >> ~/.m2/settings.xml
+          printf '      <username>%s</username>\n' '${{ github.actor }}' >> ~/.m2/settings.xml
+          printf '      <password>%s</password>\n' '${{ secrets.GITHUB_TOKEN }}' >> ~/.m2/settings.xml
+          printf '    </server>\n' >> ~/.m2/settings.xml
+          printf '  </servers>\n' >> ~/.m2/settings.xml
+          printf '</settings>\n' >> ~/.m2/settings.xml
           
-          # Replace placeholders with actual values
-          sed -i "s/GITHUB_ACTOR_PLACEHOLDER/${{ github.actor }}/g" ~/.m2/settings.xml
-          sed -i "s/GITHUB_TOKEN_PLACEHOLDER/${{ secrets.GITHUB_TOKEN }}/g" ~/.m2/settings.xml
+          echo "Created settings file with printf method"
 
       - name: Copy Maven settings for Docker
         if: matrix.image.name == 'backend'
@@ -132,6 +128,21 @@ jobs:
             ls -la ${{ github.workspace }}/.m2/ || echo "No .m2 directory found"
           fi
           echo "=== End debug info ==="
+
+      - name: Test Docker build with internal settings
+        if: matrix.image.name == 'backend'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.test
+          push: false
+          platforms: linux/amd64
+          build-args: |
+            MVN_ARGS=validate
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          target: dev
+          outputs: type=cacheonly
 
       - name: Build and push Docker image
         id: build
