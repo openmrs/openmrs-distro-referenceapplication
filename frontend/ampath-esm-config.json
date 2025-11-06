@@ -1,0 +1,581 @@
+{
+    "@openmrs/esm-patient-registration-app": {
+        "defaultPatientIdentifierTypes": [],
+        "sections": [
+            "demographics",
+            "contact",
+            "custom",
+            "relationships",
+            "nextOfKin"
+        ],
+        "sectionDefinitions": [
+            {
+                "id": "custom",
+                "name": "Demographics",
+                "fields": [
+                    "maritalStatus",
+                    "occupation",
+                    "education",
+                    "religion"
+                ]
+            },
+            {
+                "id": "contact",
+                "name": "Contact Details",
+                "fields": [
+                    "address",
+                    "phone",
+                    "alternatePhone",
+                    "address.address1",
+                    "email",
+                    "address.country",
+                    "address.address10",
+                    "address.cityVillage",
+                    "address.address3",
+                    "address.address8",
+                    "address.longitude",
+                    "address.latitude"
+                ]
+            },
+            {
+                "id": "nextOfKin",
+                "name": "Next of Kin Details",
+                "fields": [
+                    "nextOfKinName",
+                    "nextOfkinRelationship",
+                    "nextOfkinPhone",
+                    "nextOfKinAddress"
+                ]
+            }
+        ],
+        "fieldDefinitions": [
+            {
+                "id": "alternatePhone",
+                "type": "person attribute",
+                "uuid": "c725f524-c14a-4468-ac19-4a0e6661c930",
+                "label": "Alternate phone number",
+                "validation": {
+                    "matches": "^0([0-9](?:(?:[0-9][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$"
+                }
+            },
+            {
+                "id": "address.address1",
+                "type": "address",
+                "label": "Postal Address"
+            },
+            {
+                "id": "email",
+                "type": "person attribute",
+                "uuid": "2f65dbcb-3e58-45a3-8be7-fd1dc9aa0faa",
+                "label": "Email address",
+                "validation": {
+                    "matches": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+                }
+            },
+            {
+                "id": "religion",
+                "type": "person attribute",
+                "uuid": "4ae16101-cfba-4c08-9c9c-d848e6f609aa",
+                "label": "Religion",
+                "validation": {
+                    "required": false
+                },
+                "customConceptAnswers": [
+                    {
+                        "label": "CATHOLIC",
+                        "uuid": "0f8569b7-800c-4f6a-be1f-b8e052fc96cf"
+                    },
+                    {
+                        "label": "PROTESTANT",
+                        "uuid": "4aec262f-08a5-4ed9-9c0d-39fa1a9bd81b"
+                    },
+                    {
+                        "label": "MUSLIM",
+                        "uuid": "a0c91995-926e-421d-a5fe-44fdab3dfb27"
+                    },
+                    {
+                        "label": "TRADITIONALIST",
+                        "uuid": "975f809d-fa55-4b8a-9086-9d63e68728b1"
+                    },
+                    {
+                        "label": "HINDU",
+                        "uuid": "d6601939-e81e-412e-ae36-373efd7f32fe"
+                    },
+                    {
+                        "label": "BUDDHIST",
+                        "uuid": "f3ee48c2-3792-40ed-a400-aa5016784e9c"
+                    },
+                    {
+                        "label": "NONE",
+                        "uuid": "a899e0ac-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "OTHER NON-CODED",
+                        "uuid": "a8aaf3e2-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "JUDAISM",
+                        "uuid": "7fdd98ca-68d4-450e-a28e-a9298e6c54e9"
+                    },
+                    {
+                        "label": "ATHEISM",
+                        "uuid": "563b356e-b156-4426-9e65-448a5c8d4440"
+                    }
+                ]
+            },
+            {
+                "id": "address.country",
+                "type": "address",
+                "label": "Country of Origin",
+                "validation": {
+                    "required": false
+                }
+            },
+            {
+                "id": "address.address10",
+                "type": "address",
+                "label": "County of Origin",
+                "validation": {
+                    "required": false
+                }
+            },
+            {
+                "id": "address.cityVillage",
+                "type": "address",
+                "label": "Village",
+                "validation": {
+                    "required": false
+                }
+            },
+            {
+                "id": "address.address3",
+                "type": "address",
+                "label": "Landmark",
+                "validation": {
+                    "required": false
+                }
+            },
+             {
+                "id": "address.address8",
+                "type": "address",
+                "label": "Address",
+                "validation": {
+                    "required": false
+                }
+            },
+            {
+                "id": "address.longitude",
+                "type": "address",
+                "label": "Longitute",
+                "validation": {
+                    "required": false
+                }
+            },
+            {
+                "id": "address.latitude",
+                "type": "address",
+                "label": "Latitude",
+                "validation": {
+                    "required": false
+                }
+            },
+            {
+                "id": "maritalStatus",
+                "type": "person attribute",
+                "uuid": "8d871f2a-c2cc-11de-8d13-0010c6dffd0f",
+                "label": "Marital status",
+                "validation": {
+                    "required": false
+                },
+                "customConceptAnswers": [
+                    {
+                        "uuid": "a899aba0-1350-11df-a1f1-0026b9348838",
+                        "label": "SEPARATED"
+                    },
+                    {
+                        "uuid": "a899ac7c-1350-11df-a1f1-0026b9348838",
+                        "label": "SINGLE"
+                    },
+                    {
+                        "uuid": "a899ad58-1350-11df-a1f1-0026b9348838",
+                        "label": "DIVORCED"
+                    },
+                    {
+                        "uuid": "a899ae34-1350-11df-a1f1-0026b9348838",
+                        "label": "WIDOWED"
+                    },
+                    {
+                        "uuid": "a899af10-1350-11df-a1f1-0026b9348838",
+                        "label": "LIVING WITH PARTNER"
+                    },
+                    {
+                        "uuid": "a8aa76b0-1350-11df-a1f1-0026b9348838",
+                        "label": "MARRIED"
+                    },
+                    {
+                        "uuid": "a8aaf07c-1350-11df-a1f1-0026b9348838",
+                        "label": "FRIEND"
+                    },
+                    {
+                        "uuid": "a89ad3a4-1350-11df-a1f1-0026b9348838",
+                        "label": "NOT APPLICABLE"
+                    },
+                    {
+                        "uuid": "a8b03712-1350-11df-a1f1-0026b9348838",
+                        "label": "POLYGAMOUS"
+                    },
+                    {
+                        "uuid": "a89ebd3e-1350-11df-a1f1-0026b9348838",
+                        "label": "PARTNER"
+                    },
+                    {
+                        "uuid": "7831f002-331d-4f07-bf91-6bb65cd31050",
+                        "label": "CASUAL SEXUAL PARTNER"
+                    },
+                    {
+                        "uuid": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                        "label": "OTHER NON-CODED"
+                    }
+                ]
+            },
+            {
+                "id": "occupation",
+                "type": "person attribute",
+                "label": "Occupation",
+                "uuid": "9e86409f-9c20-42d0-aeb3-f29a4ca0a7a0",
+                "validation": {
+                    "required": false
+                },
+                "customConceptAnswers": [
+                    {
+                        "label": "TEACHER",
+                        "uuid": "a8a09d0c-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "CASUAL WORKER",
+                        "uuid": "a8a09b90-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "HOUSEWIFE",
+                        "uuid": "a8a09dca-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "POLICE OFFICER",
+                        "uuid": "a8a09e92-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "OTHER NON-CODED",
+                        "uuid": "a8aaf3e2-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "FARMER",
+                        "uuid": "a8a09c4e-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "UNEMPLOYED",
+                        "uuid": "a8a09f50-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "NOT APPLICABLE",
+                        "uuid": "a89ad3a4-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "SEX WORKER",
+                        "uuid": "a89ff438-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "HEALTH CARE PROVIDER",
+                        "uuid": "a8aaf158-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "SELF EMPLOYMENT",
+                        "uuid": "a8b03294-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "TRUCK DRIVER",
+                        "uuid": "5ebb18d6-8fab-43bc-898f-6428dcc24c1e"
+                    },
+                    {
+                        "label": "FISHING",
+                        "uuid": "0ac89086-4751-4db8-96c5-cd62152d66ad"
+                    },
+                    {
+                        "label": "FORMAL EMPLOYMENT",
+                        "uuid": "49c8583d-baa0-4b80-a719-8c5609129c15"
+                    },
+                    {
+                        "label": "CIVIL SERVANT",
+                        "uuid": "529a8c73-617d-4aee-ac0c-5c22f38f4265"
+                    },
+                    {
+                        "label": "CONSULTANT",
+                        "uuid": "a8a8c96e-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "CLINICIAN",
+                        "uuid": "a89d1c68-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "NURSE",
+                        "uuid": "a8b02f92-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "STUDENT",
+                        "uuid": "05b4c838-a185-4bb0-8c33-71f80ea7c4cf"
+                    },
+                    {
+                        "label": "LABORATORY TECHNOLOGIST",
+                        "uuid": "e77a5de0-22d7-424e-978d-d3464d4170aa"
+                    },
+                    {
+                        "label": "CLEANER",
+                        "uuid": "3164799f-637a-45e7-82cf-19954710d0e8"
+                    },
+                    {
+                        "label": "VOLUNTARY TESTING AND COUNSELING CENTER COUNSELOR",
+                        "uuid": "45de16c7-9f55-42c0-86ce-36ed6192842b"
+                    },
+                    {
+                        "label": "OTHER HEALTH WORKER",
+                        "uuid": "7764a54b-3e5d-4c8a-b64b-4ed21ba217b0"
+                    },
+                    {
+                        "label": "EMPLOYED",
+                        "uuid": "a89ec338-1350-11df-a1f1-0026b9348838"
+                    },
+                    {
+                        "label": "MINER",
+                        "uuid": "27aec389-175b-4c56-b992-8c48d4257467"
+                    },
+                    {
+                        "label": "INDUSTRIAL WORKER",
+                        "uuid": "d3610d6c-eb9c-43a0-8828-2d875c4ccc5c"
+                    },
+                    {
+                        "label": "MECHANIC",
+                        "uuid": "42ba6ccd-81d5-436b-b244-b49fde95277e"
+                    },
+                    {
+                        "label": "BODA-BODA",
+                        "uuid": "16281ca7-8cb2-4d80-851c-0485f3d55aaa"
+                    },
+                    {
+                        "label": "HAWKER",
+                        "uuid": "e37dcb06-07f5-49d4-8383-c8dea87e05c5"
+                    },
+                    {
+                        "label": "BUS CONDUCTOR",
+                        "uuid": "202bc5f1-f337-4246-bed5-4030f114e7a0"
+                    },
+                    {
+                        "label": "HERDSMAN",
+                        "uuid": "76cc0ab6-81e3-4040-b57f-fcf118b6173d"
+                    },
+                    {
+                        "label": "HOUSEKEEPER",
+                        "uuid": "193211aa-9dbb-4602-a567-1b1b67f5827b"
+                    }
+                ]
+            },
+            {
+                "id": "education",
+                "type": "person attribute",
+                "uuid": "352b0d51-63c6-47d0-a295-156bebee4fd5",
+                "label": "Highest Level of Education",
+                "validation": {
+                    "required": true
+                },
+                "customConceptAnswers": [
+                    {
+                        "uuid": "a899e0ac-1350-11df-a1f1-0026b9348838",
+                        "label": "NONE"
+                    },
+                    {
+                        "uuid": "a8afe910-1350-11df-a1f1-0026b9348838",
+                        "label": "PRIMARY SCHOOL"
+                    },
+                    {
+                        "uuid": "a8afe9d8-1350-11df-a1f1-0026b9348838",
+                        "label": "SECONDARY SCHOOL"
+                    },
+                    {
+                        "uuid": "a8afea96-1350-11df-a1f1-0026b9348838",
+                        "label": "COLLEGE"
+                    },
+                    {
+                        "uuid": "a89e4728-1350-11df-a1f1-0026b9348838",
+                        "label": "UNIVERSITY"
+                    },
+                    {
+                        "uuid": "a8aaf3e2-1350-11df-a1f1-0026b9348838",
+                        "label": "OTHER"
+                    }
+                ]
+            },
+            {
+                "id": "nextOfKinName",
+                "type": "person attribute",
+                "uuid": "72a75bec-1359-11df-a1f1-0026b9348838",
+                "label": "Name"
+            },
+            {
+                "id": "nextOfkinRelationship",
+                "type": "person attribute",
+                "uuid": "5730994e-c267-426b-87b6-c152b606973d",
+                "label": "Relationship",
+                "validation": {
+                    "required": false
+                },
+                "customConceptAnswers": [
+                        {
+                            "uuid": "7878d348-1359-11df-a1f1-0026b9348838",
+                            "label": "Parent/Child"
+                        },
+                        {
+                            "uuid": "7878d898-1359-11df-a1f1-0026b9348838",
+                            "label": "Doctor/Patient"
+                        },
+                        {
+                            "uuid": "7878dc30-1359-11df-a1f1-0026b9348838",
+                            "label": "Sibling/Sibling"
+                        },
+                        {
+                            "uuid": "7878dd3e-1359-11df-a1f1-0026b9348838",
+                            "label": "Aunt/Uncle/Niece/Nephew"
+                        },
+                        {
+                            "uuid": "7878de42-1359-11df-a1f1-0026b9348838",
+                            "label": "Caretaker/Patient"
+                        },
+                        {
+                            "uuid": "7878df3c-1359-11df-a1f1-0026b9348838",
+                            "label": "Spouse/Spouse"
+                        },
+                        {
+                            "uuid": "7878e040-1359-11df-a1f1-0026b9348838",
+                            "label": "Child-in-law/Parent-in-law"
+                        },
+                        {
+                            "uuid": "7878e144-1359-11df-a1f1-0026b9348838",
+                            "label": "Grandchild/Grandparent"
+                        },
+                        {
+                            "uuid": "7878e23e-1359-11df-a1f1-0026b9348838",
+                            "label": "Co-wife/Co-wife"
+                        },
+                        {
+                            "uuid": "7878e338-1359-11df-a1f1-0026b9348838",
+                            "label": "Cousin/Cousin"
+                        },
+                        {
+                            "uuid": "7878e432-1359-11df-a1f1-0026b9348838",
+                            "label": "Stepchild/Stepparent"
+                        },
+                        {
+                            "uuid": "7878e52c-1359-11df-a1f1-0026b9348838",
+                            "label": "Foster Child/Foster Parent"
+                        },
+                        {
+                            "uuid": "7878e626-1359-11df-a1f1-0026b9348838",
+                            "label": "Friend/Friend"
+                        },
+                        {
+                            "uuid": "7878e720-1359-11df-a1f1-0026b9348838",
+                            "label": "Employee/Employer"
+                        },
+                        {
+                            "uuid": "7878e81a-1359-11df-a1f1-0026b9348838",
+                            "label": "Tenant/Renter/Landlord"
+                        },
+                        {
+                            "uuid": "7878e914-1359-11df-a1f1-0026b9348838",
+                            "label": "Household Member/Head of Household"
+                        },
+                        {
+                            "uuid": "7878ea18-1359-11df-a1f1-0026b9348838",
+                            "label": "Sexual Partner/Sexual Partner"
+                        },
+                        {
+                            "uuid": "01bc0cf5-d428-427f-be13-305eb9cad7ba",
+                            "label": "Guardian/Child"
+                        },
+                        {
+                            "uuid": "7a755398-daed-4e64-8efd-b187c661caab",
+                            "label": "Nurse/Patient"
+                        },
+                        {
+                            "uuid": "af78531e-98ab-41da-be3a-6a871ecbf8c0",
+                            "label": "Other non-coded/Other non-coded"
+                        },
+                        {
+                            "uuid": "b31657ef-4784-4e22-96df-d864651aa715",
+                            "label": "Peer/Patient"
+                        }
+                    ]
+            },
+            {
+                "id": "nextOfkinPhone",
+                "type": "person attribute",
+                "uuid": "a657a4f1-9c0f-444b-a1fd-445bb91dd12d",
+                "label": "Phone Number",
+                "validation": {
+                    "matches": "^0([0-9](?:(?:[0-9][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$"
+                }
+            },
+            {
+                "id": "nextOfKinAddress",
+                "type": "person attribute",
+                "uuid": "f38bd1be-c54c-4863-8497-3670292881eb",
+                "label": "Residence"
+            }
+        ],
+        "registrationObs": {
+            "encounterTypeUuid": "de1f9d67-b73e-4e1b-90d0-036166fc6995",
+            "registrationFormUuid": "add7abdc-59d1-11e8-9c2d-fa7ae01bbebc"
+        },
+        "fieldConfigurations": {
+            "name": {
+                "displayCapturePhoto": false,
+                "allowUnidentifiedPatients": false
+            },
+            "dateOfBirth": {
+                "useEstimatedDateOfBirth": {
+                    "enabled": true,
+                    "dayOfMonth": 15,
+                    "month": 5
+                }
+            },
+            "gender": [
+                {
+                    "value": "male",
+                    "label": "Male"
+                },
+                {
+                    "value": "female",
+                    "label": "Female"
+                }
+            ],
+            "address": {
+                "useAddressHierarchy": {
+                    "useAddressHierarchyLabel": {
+                        "countyDistrict": "County",
+                        "address4": "Ward",
+                        "stateProvince": "Sub county"
+                    },
+                    "searchAddressByLevel": true
+                }
+            },
+            "phone": {
+                "personAttributeUuid": "72a759a8-1359-11df-a1f1-0026b9348838",
+                "validation": {
+                    "required": false,
+                    "matches": "^0([0-9](?:(?:[0-9][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$"
+                }
+            },
+            "causeOfDeath": {
+                "conceptUuid": "a8af9910-1350-11df-a1f1-0026b9348838",
+                "required": false
+            }
+        }
+    }
+}
