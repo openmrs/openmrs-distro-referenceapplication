@@ -1,195 +1,151 @@
-# OpenMRS 3.0 Reference Application
+# Augen Auf - OpenMRS 3 Deployment
 
-This project holds the build configuration for the OpenMRS 3.0 reference application, found on
-https://dev3.openmrs.org and https://o3.openmrs.org.
-
-## Quick start
-
-### Run the app (using pre-built images)
-
-```bash
-docker compose up
-```
-
-or to enable SSL,
-
-```bash
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
-```
-
-The OpenMRS 3.x UI is accessible at http://localhost/openmrs/spa or https://localhost/openmrs/spa
-
-OpenMRS Legacy UI is accessible at http://localhost/openmrs or https://localhost/openmrs
-
-### Production deployment with SSL
-
-For production deployments with HTTPS/SSL certificates:
-
-```bash
-SSL_MODE=prod \
-CERT_WEB_DOMAINS=your-domain.com \
-CERT_CONTACT_EMAIL=admin@your-domain.com \
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
-```
-
-See the [SSL/HTTPS Configuration](#sslhttps-configuration) section for detailed setup instructions.
+Custom OpenMRS 3 distribution for the Augen Auf volunteer project, providing eye care management for doctors in Guatemala.
 
 ## Overview
 
-This distribution consists of four images:
+This deployment is based on the OpenMRS 3 Reference Application but has been customized with:
+- Removal of demo data and content
+- Custom configuration for ophthalmology workflows using the Initializer module
+- Custom forms for registration, triage, eye examination, refraction, therapy, pre-surgery, and surgery
+- Custom queues, locations, and encounter types specific to eye care
 
-- **db** - This is just the standard MariaDB image supplied to use as a database
-- **backend** - This image is the OpenMRS backend. It is built from the main Dockerfile included in the root of the project and
-  based on the core OpenMRS Docker file. Additional contents for this image are drawn from the `distro` sub-directory which
-  includes a full Initializer configuration for the reference application intended as a starting point.
-- **frontend** - This image is a simple nginx container that embeds the 3.x frontend, including the modules described in the
-  `frontend/spa-assemble-config.json` file.
-- **gateway** - This image is an nginx reverse proxy that sits in front of the `backend` and `frontend` containers
-  and provides a common interface to both. This helps mitigate CORS issues.
+## Quick Start
 
-When running with SSL enabled (using `docker-compose.ssl.yml`), an additional service is included:
+### Prerequisites
+- Podman (or Docker) installed
+- Podman Compose plugin
 
-- **certbot** - This image is used for generating and renewing SSL certificates (Let's Encrypt or self-signed)
+### Build and Start
 
-## SSL/HTTPS Configuration
-
-The application can be run with SSL/HTTPS support for both development and production environments.
-
-### Development mode (self-signed certificates)
-
-For local development with HTTPS, simply run with the SSL compose file:
+Use the provided script to build and start the entire stack:
 
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+./build-and-start.sh
 ```
 
 This will:
-- Automatically generate self-signed certificates for `localhost` and `127.0.0.1`
-- Configure nginx to use HTTPS on port 443
-- Redirect HTTP (port 80) to HTTPS
+- Build the custom backend with your Initializer configuration
+- Build the frontend
+- Start all services (gateway, frontend, backend, database)
 
-The application will be accessible at:
-- https://localhost/openmrs/spa
-- https://127.0.0.1/openmrs/spa
+The application will be available at: **http://localhost**
 
-**Note**: Your browser will show a security warning for self-signed certificates. This is expected - click "Advanced" and proceed to the site.
+### Clean Up
 
-### Production mode (Let's Encrypt)
-
-For production deployments with valid SSL certificates from Let's Encrypt:
+To completely remove containers, volumes, and images for a fresh start:
 
 ```bash
-SSL_MODE=prod \
-CERT_WEB_DOMAINS=example.com \
-CERT_CONTACT_EMAIL=admin@example.com \
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+./cleanup.sh
 ```
 
-**Configuration options**:
+**Warning:** This removes all data including the database. Use with caution.
 
-- `SSL_MODE=prod` - Use Let's Encrypt certificates (required)
-- `CERT_WEB_DOMAINS` - Your domain name(s), comma-separated (e.g., `example.com,www.example.com`)
-- `CERT_CONTACT_EMAIL` - Email for Let's Encrypt notifications
-- `SSL_STAGING=true` - (Optional) Use Let's Encrypt staging environment for testing
+## Custom Configuration
 
-**The certbot container will**:
-1. Create a temporary certificate to allow nginx to start
-2. Wait for nginx to be ready
-3. Request a real Let's Encrypt certificate via ACME HTTP-01 challenge
-4. Reload nginx with the real certificate
-5. Run a renewal daemon that checks for renewal every 12 hours
+All custom configuration is managed through the **Initializer module** and located in `distro/configuration/`.
+This includes custom forms for eye care workflows (registration, triage, eye examination, refraction, therapy, pre-surgery, surgery), concepts, queues, locations, and encounter types.
 
-**Important**: Ensure your domain's DNS is correctly configured to point to your server before starting, as Let's Encrypt needs to verify domain ownership via HTTP.
+For details on configuration structure and available options, see the [Initializer documentation](https://github.com/mekomsolutions/openmrs-module-initializer/blob/master/README.md) and [demo content](https://github.com/openmrs/openmrs-content-referenceapplication-demo).
 
-### Testing with Let's Encrypt staging
+The list of included modules can be found in `distro/distro.properties`.
+Note that the demo data module (`referencedemodata`) has been disabled.
 
-To test the SSL setup without hitting Let's Encrypt rate limits:
+## Making Changes
 
+### Modifying Configuration
+
+1. Edit files in `distro/configuration/` directory
+2. Rebuild and restart using `./cleanup.sh && ./build-and-start.sh`
+3. The Initializer module will automatically load your changes on startup
+
+### Adding New Forms
+
+1. Create a new JSON file in `distro/configuration/ampathforms/`
+2. Follow the structure of existing forms
+3. Reference concepts defined in `distro/configuration/concepts/`
+4. Rebuild and restart
+
+### Adding Modules
+
+1. Edit `distro/distro.properties`
+2. Add the module with format: `omod.modulename=${modulename.version}`
+3. Define the version in `distro/pom.xml`
+4. Rebuild and restart
+
+## Architecture
+
+The deployment consists of four services:
+
+- **Gateway** (Nginx) - Routes requests to frontend and backend
+- **Frontend** - OpenMRS 3.x SPA (Single Page Application)
+- **Backend** - OpenMRS server with custom modules and configuration
+- **Database** - MariaDB 10.11.7 with UTF-8 support
+
+## Docker Compose Files
+
+- **docker-compose.build.yml** - Development deployment that builds images locally
+
+## Environment Variables
+
+You can customize the deployment using these environment variables:
+
+- `TAG` - Image tag to use (default: `qa`)
+- `OMRS_DB_USER` - Database username (default: `openmrs`)
+- `OMRS_DB_PASSWORD` - Database password (default: `openmrs`)
+- `MYSQL_ROOT_PASSWORD` - MySQL root password (default: `openmrs`)
+
+## Development Workflow
+
+1. Make changes to configuration files in `distro/configuration/`
+2. Run `./cleanup.sh` to remove existing containers and data
+3. Run `./build-and-start.sh` to rebuild and start with new configuration
+4. Test your changes at http://localhost
+5. Commit changes to the `augen-auf` branch
+
+## Troubleshooting
+
+### View logs
 ```bash
-SSL_MODE=prod \
-SSL_STAGING=true \
-CERT_WEB_DOMAINS=example.com \
-CERT_CONTACT_EMAIL=admin@example.com \
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+podman compose logs -f [service-name]
 ```
 
-Staging certificates won't be trusted by browsers but allow you to verify the setup works correctly.
-
-### Manual certificate renewal
-
-While certificates renew automatically in production mode, you can manually force renewal if needed.
-
-**If the certbot container is running** (prod mode):
-
+### Access backend container
 ```bash
-# Force renewal
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml exec certbot \
-  certbot renew --force-renewal --webroot -w /var/www/certbot
-
-# Reload nginx to pick up new certificates
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml exec gateway \
-  nginx -s reload
+podman exec -it openmrs-distro-referenceapplication-backend-1 /bin/bash
 ```
 
-**If certbot container has stopped or for one-off renewal**:
-
+### Check database
 ```bash
-# Run certbot in one-off mode (override entrypoint to run certbot directly)
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm \
-  --entrypoint certbot certbot \
-  renew --force-renewal --webroot -w /var/www/certbot
-
-# Reload nginx
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml exec gateway \
-  nginx -s reload
+podman exec -it openmrs-distro-referenceapplication-db-1 mysql -u openmrs -popenmrs openmrs
 ```
 
-**Check certificate expiration**:
+### Initializer not loading configuration
+- Check backend logs for errors: `podman compose logs backend`
+- Verify file formats (CSV files must have proper headers, JSON must be valid)
+- Ensure file names follow Initializer conventions
 
-```bash
-# If certbot container is running
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml exec certbot \
-  certbot certificates
+## Resources
 
-# If certbot container is stopped
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm \
-  --entrypoint certbot certbot \
-  certificates
-```
+### OpenMRS 3 Reference Application
+- Repository: https://github.com/openmrs/openmrs-distro-referenceapplication
+- Documentation: https://wiki.openmrs.org/display/projects/3.x+Distro
 
-### Environment variables reference
+### Initializer Module
+- Repository: https://github.com/mekomsolutions/openmrs-module-initializer
+- Documentation: https://github.com/mekomsolutions/openmrs-module-initializer/blob/master/README.md
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `SSL_MODE` | `dev` | `dev` for self-signed certificates, `prod` for Let's Encrypt |
-| `SSL_STAGING` | `false` | Use Let's Encrypt staging environment (set to `true` for testing) |
-| `CERT_WEB_DOMAINS` | `localhost,127.0.0.1` | Comma-separated list of domain names |
-| `CERT_WEB_DOMAIN_COMMON_NAME` | (first domain) | Override the primary domain name |
-| `CERT_CONTACT_EMAIL` | (empty) | Email for Let's Encrypt notifications (required in prod mode) |
-| `CERT_RSA_KEY_SIZE` | `4096` | RSA key size for certificates |
+### OpenMRS Documentation
+- OpenMRS Wiki: https://wiki.openmrs.org
+- REST API Documentation: https://rest.openmrs.org
+- Talk Forum: https://talk.openmrs.org
 
-## Contributing to the configuration
+## License
 
-This project uses the [Initializer](https://github.com/mekomsolutions/openmrs-module-initializer) module
-to configure metadata for this project. The Initializer configuration can be found in the configuration
-subfolder of the distro folder. Any files added to this will be automatically included as part of the
-metadata for the RefApp.
+This distribution is based on OpenMRS, which is licensed under the Mozilla Public License 2.0.
 
-Eventually, we would like to split this metadata into two packages:
+## Support
 
-- `openmrs-core`, which will contain all the metadata necessary to run OpenMRS
-- `openmrs-demo`, which will include all of the sample data we use to run the RefApp
+For questions or issues specific to Augen Auf configuration, contact the team.
 
-The `openmrs-core` package will eventually be a standard part of the distribution, with the `openmrs-demo`
-provided as an optional add-on. Most data in this configuration _should_ be regarded as demo data. We
-anticipate that implementation-specific metadata will replace data in the `openmrs-demo` package,
-though they may use that metadata as a starting point for that customization.
-
-To help us keep track of things, we ask that you suffix any files you add with either
-`-core_demo` for files that should be part of the demo package and `-core_data` for
-those that should be part of the core package. For example, a form named `test_form.json` would become
-`test_core-core_demo.json`.
-
-Frontend configuration can be found in `frontend/config-core_demo.json`.
-
-Thanks!
+For OpenMRS platform issues, visit https://talk.openmrs.org
