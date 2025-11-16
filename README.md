@@ -43,6 +43,8 @@ To completely remove containers, volumes, and images for a fresh start:
 
 ## Custom Configuration
 
+It builds upon the minimal [Reference application configuration](https://github.com/openmrs/openmrs-distro-referenceapplication).
+
 All custom configuration is managed through the **Initializer module** and located in `distro/configuration/`.
 This includes custom forms for eye care workflows (registration, triage, eye examination, refraction, therapy, pre-surgery, surgery), concepts, queues, locations, and encounter types.
 
