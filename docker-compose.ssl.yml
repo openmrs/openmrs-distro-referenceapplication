@@ -1,0 +1,29 @@
+services:
+  certbot:
+    image: openmrs/openmrs-reference-application-3-certbot:${TAG:-qa}
+    environment:
+      SSL_MODE: ${SSL_MODE:-dev}  # "dev" for self-signed certificates, "prod" for Let's Encrypt
+      SSL_STAGING: ${SSL_STAGING:-false}  # Set to "true" to use Let's Encrypt staging environment (for testing)
+      CERT_WEB_DOMAINS: ${CERT_WEB_DOMAINS:-localhost,127.0.0.1}  # Comma-separated list of domains, first is primary
+      CERT_WEB_DOMAIN_COMMON_NAME: ${CERT_WEB_DOMAIN_COMMON_NAME:-}  # Override primary domain (optional)
+      CERT_CONTACT_EMAIL: ${CERT_CONTACT_EMAIL:-}  # Email for Let's Encrypt notifications (required for prod mode)
+      CERT_RSA_KEY_SIZE: ${CERT_RSA_KEY_SIZE:-4096}  # RSA key size for certificates
+      CERTBOT_DATA_PATH: /var/www/certbot
+      CERT_ROOT_PATH: /etc/letsencrypt
+    volumes:
+      - letsencrypt-data:/etc/letsencrypt
+      - certbot-data:/var/www/certbot
+
+  gateway:
+    environment:
+      CERT_WEB_DOMAIN_COMMON_NAME: ${CERT_WEB_DOMAIN_COMMON_NAME:-localhost}
+    ports:
+      - "443:443"
+    volumes:
+      - letsencrypt-data:/etc/letsencrypt:ro
+      - certbot-data:/var/www/certbot
+
+volumes:
+  letsencrypt-data: ~
+  certbot-data: ~
+

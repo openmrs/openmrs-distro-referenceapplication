@@ -1,9 +1,4 @@
 {
-  "@openmrs/esm-app-shell": {
-    "Enabled feature flags": [
-      "patient-flags"
-    ]
-  },
   "@openmrs/esm-patient-chart-app": {
     "restrictByVisitLocationTag": true,
     "showUpcomingAppointments": true,
@@ -17,76 +12,10 @@
     "extensionSlots": {
       "action-menu-ward-patient-items-slot": {
         "add": ["order-basket-action-menu"]
-      },
-
-      "patient-chart-dashboard-slot": {
-        "add": [
-          "nav-group#clinicalView"
-        ],
-        "configure": {
-          "nav-group#clinicalView": {
-            "title": "Clinical View",
-            "slotName": "Clinical-View",
-            "isExpanded": true,
-            "slot": "clinical-summary-slot"
-          }
-        }
-      },
-      "Clinical-View": {
-        "add": [
-          "nav-group#diabetes",
-          "nav-group#hypertension"
-        ],
-        "configure": {
-          "nav-group#diabetes": {
-            "title": "Diabetes",
-            "slotName": "Diabetes-Menu",
-            "isExpanded": true
-          },
-          "nav-group#hypertension": {
-            "title": "Hypertension",
-            "slotName": "Hypertension-Menu",
-            "isExpanded": false
-          }
-        }
-      },
-      "Diabetes-Menu": {
-        "add": [
-          "dashboard#diabetes-allergies",
-          "dashboard#diabetes-medication",
-          "dashboard#diabetes-labtest"
-        ],
-        "configure": {
-          "dashboard#diabetes-allergies": {
-            "title": "Allergies",
-            "path": "Allergies",
-            "slot": "patient-chart-allergies-dashboard-slot",
-            "component": "allergiesDashboardLink"
-          },
-          "dashboard#diabetes-medication": {
-            "title": "Medication",
-            "path": "Medications",
-            "slot": "patient-chart-dashboard-slot",
-            "component": "medicationsDashboardLink"
-          },
-          "dashboard#diabetes-labtest": {
-            "title": "Lab Test",
-            "path": "Results",
-            "slot": "patient-chart-test-results-dashboard-slot",
-            "component": "testResultsDashboardLink"
-          }
-        }
       }
     }
   },
   "@openmrs/esm-service-queues-app": {
-    "priorityConfigs": [
-      {
-        "conceptUuid": "04f6f7e0-e3cb-4e13-a133-4479f759574e",
-        "tagClassName": "tag",
-        "tagType": "red"
-      }
-    ],
     "statusConfigs": [
       {
         "conceptUuid": "51ae5e4d-b72b-4912-bf31-a17efb690aeb",
@@ -114,184 +43,19 @@
     "Brand color #1": "#005d5d"
   },
   "@openmrs/esm-patient-registration-app": {
-    "fieldDefinitions": [
-      {
-        "id": "Health Center",
-        "label": "Health Center",
-        "type": "person attribute",
-        "uuid": "8d87236c-c2cc-11de-8d13-0010c6dffd0f"
-      },
-      {
-        "id": "Other phone number",
-        "type": "person attribute",
-        "uuid": "8ddaef1e-8052-4109-b375-7ffb20d52599",
-        "label": "Other phone number"
-      },
-      {
-        "id": "Registration No",
-        "type": "person attribute",
-        "label": "Registration No",
-        "uuid": "246b8706-3d7e-4db0-94ff-9282cdc9d987"
-      },
-      {
-        "id": "Date",
-        "type": "person attribute",
-        "label": "Date",
-        "uuid": "0c60c90f-c428-4503-89b6-8a3b379e3d3d"
-      },
-      {
-        "id": "Hospital Name",
-        "type": "person attribute",
-        "uuid": "77c7eb4b-a1a2-4bf3-a0d2-3f3e238079ac",
-        "label": "Hospital Name",
-        "widget": {
-          "type": "select",
-          "options": [
-            {
-              "label": "DSHW",
-              "value": "DSHW"
-            }
-          ]
+    "fieldConfigurations": {
+      "gender": [
+        {
+          "id": "female",
+          "value": "female",
+          "label": "Female"
         }
-      },
-      {
-        "id": "Hospital type",
-        "type": "person attribute",
-        "label": "Hospital type",
-        "uuid": "b227a9c1-fee1-45d7-8185-bdaeddbc68c4"
-      },
-      {
-        "id": "NIC",
-        "type": "person attribute",
-        "label": "NIC",
-        "uuid": "3593c721-cbb2-4c57-b02e-1c8f0f803bc6"
-      },
-      {
-        "id": "Age",
-        "uuid": "fd760c2f-edc5-46ad-9585-8efbd7973437",
-        "type": "person attribute",
-        "label": "Age"
-      },
-      {
-        "id": "GN Division",
-        "type": "person attribute",
-        "uuid": "6a784457-f8ee-4f12-b18b-cf28d3fd0a7a",
-        "label": "GN Division"
-      },
-      {
-        "id": "GN Division Area",
-        "type": "person attribute",
-        "uuid": "16b87705-5c57-40fb-b990-7ead2a84fc0e",
-        "label": "GN Division Area"
-      },
-      {
-        "id": "MOH Area",
-        "type": "person attribute",
-        "uuid": "9c7db512-45d5-40b3-a11a-db9faded424a",
-        "label": "MOH Area"
-      },
-      {
-        "id": "Nationality",
-        "type": "person attribute",
-        "uuid": "b26d07f7-14ad-4035-a0e1-9c0accd1653c",
-        "label": "Nationality"
-      },
-      {
-        "id": "Ethnicity",
-        "uuid": "c3809e9a-1962-40cc-b745-f082d074c1da",
-        "type": "person attribute",
-        "label": "Ethnicity"
-      },
-      {
-        "id": "Civil Status",
-        "uuid": "8d871f2a-c2cc-11de-8d13-0010c6dffd0f",
-        "type": "person attribute",
-        "label": "Civil Status"
-      },
-      {
-        "id": "Education Level",
-        "uuid": "151e11f2-c8ed-44f7-a3d0-f82dd1db66d3",
-        "type": "person attribute",
-        "label": "Education Level"
-      },
-      {
-        "id": "Occupation",
-        "uuid": "1b905035-32e6-4702-88b0-428905e883ae",
-        "type": "person attribute",
-        "label": "Occupation"
-      },
-      {
-        "id": "Gravida",
-        "uuid": "56893642-13ed-408b-ad83-baa2638cec71",
-        "type": "person attribute",
-        "label": "Gravida"
-      },
-      {
-        "id": "Parity",
-        "uuid": "1aad99af-6361-4ec1-b259-7c4b799b959a",
-        "type": "person attribute",
-        "label": "Parity"
-      },
-      {
-        "id": "Children",
-        "uuid": "3e200ee7-39d6-413c-b503-9d459fea35f2",
-        "type": "person attribute",
-        "label": "Children"
-      },
-      {
-        "id": "No of miscarriages",
-        "uuid": "7ce06baf-e667-4657-85d3-5ac2a1b749d7",
-        "type": "person attribute",
-        "label": "No of miscarriages"
-      },
-      {
-        "id": "POA at registration",
-        "uuid": "3a4b90f0-5df0-48b7-ba41-e2948d60b6a5",
-        "type": "person attribute",
-        "label": "POA at registration"
-      }
-    ],
-    "sections": [
-      "demographics",
-      "contact",
-      "relationships",
-      "extraInfo",
-      "GPC"
-    ],
-    "sectionDefinitions": [
-      {
-        "id": "extraInfo",
-        "name": "Extra info",
-        "fields": [
-          "Health Center",
-          "Other phone number",
-          "Registration No",
-          "Date",
-          "Hospital Name",
-          "Hospital type",
-          "NIC",
-          "Age",
-          "GN Division",
-          "GN Division Area",
-          "MOH Area",
-          "Nationality",
-          "Ethnicity",
-          "Civil Status",
-          "Education Level",
-          "Occupation"
-        ]
-      },
-      {
-        "id": "GPC",
-        "name": "GPC",
-        "fields": [
-          "Gravida",
-          "Parity",
-          "Children",
-          "No of miscarriages",
-          "POA at registration"
-        ]
-      }
+      ]
+    }
+  },
+  "@openmrs/esm-app-shell": {
+    "Enabled feature flags": [
+      "patient-flags"
     ]
   }
 }

@@ -1,6 +1,10 @@
-version: "3.7"
+# version: "3.7"
 
 services:
+  certbot:
+    build:
+      context: ./certbot
+
   gateway:
     build:
       context: ./gateway
