@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define a function to extract and output a dependency value
 get_repository_tag() {

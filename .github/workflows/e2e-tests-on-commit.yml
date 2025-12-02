@@ -19,7 +19,8 @@ jobs:
         run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/openmrs/login.htm)" != "200" ]]; do sleep 10; done
 
       - name: Commit and export Containers
-        run: sh ./tests/e2e/commit_and_export_images.sh
+        run: bash ./tests/e2e/commit_and_export_images.sh
+        shell: bash
 
       - name: Verify artifact was created
         run: |
