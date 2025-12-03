@@ -1,0 +1,344 @@
+{
+    "@openmrs/esm-patient-chart-app": {
+        "extensionSlots": {
+            "general-opd-triage-dashboard-slot": {
+                "add": [
+                    "encounter-list"
+                ],
+                "configure": {
+                    "encounter-list": {
+                        "tabDefinitions": [
+                            {
+                                "tabName": "transfer",
+                                "hasFilter": true,
+                                "headerTitle": "partnerNotification",
+                                "displayText": "partnerNotification",
+                                "encounterType": "4dd0ee63-805f-43e9-833c-6386ba97fdc1",
+                                "columns": [
+                                    {
+                                        "id": "contactDate",
+                                        "isDate": true,
+                                        "title": "contactDateTitle",
+                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "name",
+                                        "title": "nameTitle",
+                                        "concept": "166102AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "relationship",
+                                        "title": "relationshipTitle",
+                                        "concept": "1061AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "hivStatus",
+                                        "title": "status",
+                                        "concept": "1436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                        "type": "hivStatus",
+                                        "statusColorMappings": {
+                                            "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": "red",
+                                            "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": "gray",
+                                            "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": "purple"
+                                        }
+                                    },
+                                    {
+                                        "id": "actions",
+                                        "title": "actionsTitle",
+                                        "actionOptions": [
+                                            {
+                                                "formName": "Partner Notification Form",
+                                                "package": "hiv-care-treatment",
+                                                "label": "viewDetails",
+                                                "mode": "view"
+                                            },
+                                            {
+                                                "formName": "Partner Notification Form",
+                                                "package": "hiv-care-treatment",
+                                                "label": "editForm",
+                                                "mode": "edit"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "launchOptions": {
+                                    "displayText": "add"
+                                },
+                                "formList": [
+                                    {
+                                        "uuid": "cffe0e55-472f-35ff-97ba-a467cf49a4bc"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabName": "vitals",
+                                "hasFilter": false,
+                                "headerTitle": "contactTracing",
+                                "displayText": "contactTracing",
+                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
+                                "columns": [
+                                    {
+                                        "id": "contactDate",
+                                        "isDate": true,
+                                        "title": "contactDateTitle",
+                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "contactMethod",
+                                        "title": "contactMethodTitle",
+                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
+                                    },
+                                    {
+                                        "id": "relationship",
+                                        "title": "relationshipTitle",
+                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "actions",
+                                        "title": "actionsTitle",
+                                        "actionOptions": [
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "viewDetails",
+                                                "mode": "view"
+                                            },
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "editForm",
+                                                "mode": "edit"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "launchOptions": {
+                                    "displayText": "add"
+                                },
+                                "formList": [
+                                    {
+                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabName": "tbScreening",
+                                "hasFilter": false,
+                                "headerTitle": "contactTracing",
+                                "displayText": "contactTracing",
+                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
+                                "columns": [
+                                    {
+                                        "id": "contactDate",
+                                        "isDate": true,
+                                        "title": "contactDateTitle",
+                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "contactMethod",
+                                        "title": "contactMethodTitle",
+                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
+                                    },
+                                    {
+                                        "id": "relationship",
+                                        "title": "relationshipTitle",
+                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "actions",
+                                        "title": "actionsTitle",
+                                        "actionOptions": [
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "viewDetails",
+                                                "mode": "view"
+                                            },
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "editForm",
+                                                "mode": "edit"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "launchOptions": {
+                                    "displayText": "add"
+                                },
+                                "formList": [
+                                    {
+                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabName": "cadex",
+                                "hasFilter": false,
+                                "headerTitle": "contactTracing",
+                                "displayText": "contactTracing",
+                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
+                                "columns": [
+                                    {
+                                        "id": "contactDate",
+                                        "isDate": true,
+                                        "title": "contactDateTitle",
+                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "contactMethod",
+                                        "title": "contactMethodTitle",
+                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
+                                    },
+                                    {
+                                        "id": "relationship",
+                                        "title": "relationshipTitle",
+                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "actions",
+                                        "title": "actionsTitle",
+                                        "actionOptions": [
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "viewDetails",
+                                                "mode": "view"
+                                            },
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "editForm",
+                                                "mode": "edit"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "launchOptions": {
+                                    "displayText": "add"
+                                },
+                                "formList": [
+                                    {
+                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabName": "Order",
+                                "hasFilter": false,
+                                "headerTitle": "contactTracing",
+                                "displayText": "contactTracing",
+                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
+                                "columns": [
+                                    {
+                                        "id": "contactDate",
+                                        "isDate": true,
+                                        "title": "contactDateTitle",
+                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "contactMethod",
+                                        "title": "contactMethodTitle",
+                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
+                                    },
+                                    {
+                                        "id": "relationship",
+                                        "title": "relationshipTitle",
+                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "actions",
+                                        "title": "actionsTitle",
+                                        "actionOptions": [
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "viewDetails",
+                                                "mode": "view"
+                                            },
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "editForm",
+                                                "mode": "edit"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "launchOptions": {
+                                    "displayText": "add"
+                                },
+                                "formList": [
+                                    {
+                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabName": "Admission",
+                                "hasFilter": false,
+                                "headerTitle": "contactTracing",
+                                "displayText": "contactTracing",
+                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
+                                "columns": [
+                                    {
+                                        "id": "contactDate",
+                                        "isDate": true,
+                                        "title": "contactDateTitle",
+                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "contactMethod",
+                                        "title": "contactMethodTitle",
+                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
+                                    },
+                                    {
+                                        "id": "relationship",
+                                        "title": "relationshipTitle",
+                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    },
+                                    {
+                                        "id": "actions",
+                                        "title": "actionsTitle",
+                                        "actionOptions": [
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "viewDetails",
+                                                "mode": "view"
+                                            },
+                                            {
+                                                "formName": "DRC Case Contact Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "editForm",
+                                                "mode": "edit"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "launchOptions": {
+                                    "displayText": "add"
+                                },
+                                "formList": [
+                                    {
+                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Translation overrides": {
+                            "en": {
+                                "transfer": "Transfer",
+                                "vitals": "Vitals",
+                                "tbScreening": "TB Screening",
+                                "cadex": "CADEx",
+                                "Order": "Order",
+                                "Admission": "Admission"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

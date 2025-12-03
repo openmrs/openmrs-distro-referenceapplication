@@ -1,3 +1,7 @@
+secrets:
+  m2settings:
+    file: ~/.m2/settings.xml
+
 services:
   gateway:
     image: ghcr.io/ampath/o3-amrs-gateway:${TAG:-latest}
@@ -16,8 +20,8 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS: /openmrs/spa/config-core_demo.json
-      SPA_DEFAULT_LOCALE:
+      SPA_CONFIG_URLS: /openmrs/spa/openmrs-config.json
+      SPA_DEFAULT_LOCALE: en
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
       timeout: 5s
@@ -28,6 +32,8 @@ services:
     image: ghcr.io/ampath/o3-amrs-backend:${TAG:-latest}
     build:
       context: .
+      secrets:
+        - m2settings
     restart: "unless-stopped"
     # CORRECTED: depends_on must be a list of service names or a list of maps with condition.
     # The 'es' dependency block was moved and fixed.

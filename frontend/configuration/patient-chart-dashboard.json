@@ -1,0 +1,58 @@
+{
+    "@openmrs/esm-patient-chart-app": {
+        "extensionSlots": {
+            "patient-chart-dashboard-slot": {
+                "add": [
+                    "nav-group#GeneralMedicine"
+                ],
+                "order": [
+                    "nav-group#GeneralMedicine"
+                ],
+                "configure": {
+                    "nav-group#GeneralMedicine": {
+                        "title": "generalMedicine",
+                        "slotName": "general-medicine-group-slot",
+                        "isExpanded": true,
+                        "Translation overrides": {
+                            "en": {
+                                "generalMedicine": "General Medicine"
+                            }
+                        }
+                    }
+                }
+            },
+            "general-medicine-group-slot": {
+                "add": [
+                    "dashboard#general-opd-triage",
+                    "dashboard#general-opd-consultation"
+                ],
+                "order": [
+                    "dashboard#general-opd-triage",
+                    "dashboard#general-opd-consultation"
+                ],
+                "configure": {
+                    "dashboard#general-opd-triage": {
+                        "title": "generalOpdTriage",
+                        "path": "general-opd-triage",
+                        "slot": "general-opd-triage-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "generalOpdTriage": "Triage"
+                            }
+                        }
+                    },
+                    "dashboard#general-opd-consultation": {
+                        "title": "generalOpdConsultation",
+                        "path": "general-opd-consultation",
+                        "slot": "general-opd-consultation-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "generalOpdConsultation": "Consultation"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
