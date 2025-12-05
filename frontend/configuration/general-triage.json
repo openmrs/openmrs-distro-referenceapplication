@@ -9,102 +9,75 @@
                     "encounter-list": {
                         "tabDefinitions": [
                             {
-                                "tabName": "transfer",
-                                "hasFilter": true,
-                                "headerTitle": "partnerNotification",
-                                "displayText": "partnerNotification",
-                                "encounterType": "4dd0ee63-805f-43e9-833c-6386ba97fdc1",
-                                "columns": [
-                                    {
-                                        "id": "contactDate",
-                                        "isDate": true,
-                                        "title": "contactDateTitle",
-                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    },
-                                    {
-                                        "id": "name",
-                                        "title": "nameTitle",
-                                        "concept": "166102AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    },
-                                    {
-                                        "id": "relationship",
-                                        "title": "relationshipTitle",
-                                        "concept": "1061AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    },
-                                    {
-                                        "id": "hivStatus",
-                                        "title": "status",
-                                        "concept": "1436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                        "type": "hivStatus",
-                                        "statusColorMappings": {
-                                            "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": "red",
-                                            "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": "gray",
-                                            "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": "purple"
-                                        }
-                                    },
-                                    {
-                                        "id": "actions",
-                                        "title": "actionsTitle",
-                                        "actionOptions": [
-                                            {
-                                                "formName": "Partner Notification Form",
-                                                "package": "hiv-care-treatment",
-                                                "label": "viewDetails",
-                                                "mode": "view"
-                                            },
-                                            {
-                                                "formName": "Partner Notification Form",
-                                                "package": "hiv-care-treatment",
-                                                "label": "editForm",
-                                                "mode": "edit"
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "launchOptions": {
-                                    "displayText": "add"
-                                },
-                                "formList": [
-                                    {
-                                        "uuid": "cffe0e55-472f-35ff-97ba-a467cf49a4bc"
-                                    }
-                                ]
-                            },
-                            {
                                 "tabName": "vitals",
                                 "hasFilter": false,
-                                "headerTitle": "contactTracing",
-                                "displayText": "contactTracing",
-                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
+                                "headerTitle": "vitals",
+                                "displayText": "vitals",
+                                "encounterType": "8a43b09b-2d9f-487c-a1c3-d6bf220671a7",
                                 "columns": [
                                     {
-                                        "id": "contactDate",
+                                        "id": "temperature",
                                         "isDate": true,
-                                        "title": "contactDateTitle",
-                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                        "title": "temperatureTitle",
+                                        "concept": "a8a65fee-1350-11df-a1f1-0026b9348838"
                                     },
                                     {
-                                        "id": "contactMethod",
-                                        "title": "contactMethodTitle",
-                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
+                                        "id": "pulse",
+                                        "title": "pulseTitle",
+                                        "concept": "a8a65f12-1350-11df-a1f1-0026b9348838"
                                     },
                                     {
-                                        "id": "relationship",
-                                        "title": "relationshipTitle",
-                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                        "id": "systolicBloodPressure",
+                                        "title": "systolicBloodPressureTitle",
+                                        "concept": "a8a65d5a-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "diastolicBloodPressure",
+                                        "title": "diastolicBloodPressureTitle",
+                                        "concept": "a8a65e36-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "oxygenSaturation",
+                                        "title": "oxygenSaturationTitle",
+                                        "concept": "a8a66354-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "respiratoryRate",
+                                        "title": "respiratoryRateTitle",
+                                        "concept": "a8a6f71a-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "muac",
+                                        "title": "muacTitle",
+                                        "concept": "a89c6188-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "weight",
+                                        "title": "weightTitle",
+                                        "concept": "a8a660ca-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "height",
+                                        "title": "heightTitle",
+                                        "concept": "a8a6619c-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "bmi",
+                                        "title": "bmiTitle",
+                                        "concept": "a89c60c0-1350-11df-a1f1-0026b9348838"
                                     },
                                     {
                                         "id": "actions",
                                         "title": "actionsTitle",
                                         "actionOptions": [
                                             {
-                                                "formName": "DRC Case Contact Form v1.1",
+                                                "formName": "AMPATH POC Vitals Form v1.0",
                                                 "package": "hiv-care-treatment",
                                                 "label": "viewDetails",
                                                 "mode": "view"
                                             },
                                             {
-                                                "formName": "DRC Case Contact Form v1.1",
+                                                "formName": "AMPATH POC Vitals Form v1.0",
                                                 "package": "hiv-care-treatment",
                                                 "label": "editForm",
                                                 "mode": "edit"
@@ -117,45 +90,69 @@
                                 },
                                 "formList": [
                                     {
-                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
+                                        "uuid": "b7784499-62c1-4a3d-a5ec-e00de49097d6"
                                     }
                                 ]
                             },
                             {
                                 "tabName": "tbScreening",
                                 "hasFilter": false,
-                                "headerTitle": "contactTracing",
-                                "displayText": "contactTracing",
-                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
+                                "headerTitle": "tbScreening",
+                                "displayText": "tbScreening",
+                                "encounterType": "e47b6229-cfb8-446f-a51c-194a28e465d5",
                                 "columns": [
                                     {
-                                        "id": "contactDate",
-                                        "isDate": true,
-                                        "title": "contactDateTitle",
-                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                        "id": "fever",
+                                        "title": "feverTitle",
+                                        "concept": "d7adae14-c386-49cc-8f7c-765d8ceec566"
                                     },
                                     {
-                                        "id": "contactMethod",
-                                        "title": "contactMethodTitle",
-                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
+                                        "id": "cough",
+                                        "title": "coughTitle",
+                                        "concept": "a8afc8b8-1350-11df-a1f1-0026b9348838"
                                     },
                                     {
-                                        "id": "relationship",
-                                        "title": "relationshipTitle",
-                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                        "id": "unintendedWeightLoss",
+                                        "title": "unintendedWeightLossTitle",
+                                        "concept": "a89807f0-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "drenchingNightSweats",
+                                        "title": "drenchingNightSweatsTitle",
+                                        "concept": "e1862fef-68ed-4df4-90dd-a00152f719aa"
+                                    },
+                                    {
+                                        "id": "chestPain",
+                                        "title": "chestPainTitle",
+                                        "concept": "a892e4b4-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "breathlessness",
+                                        "title": "breathlessnessTitle",
+                                        "concept": "a8ad1276-1350-11df-a1f1-0026b9348838"
+                                    },
+                                    {
+                                        "id": "newExposureToHouseholdContactWithTB",
+                                        "title": "newExposureToHouseholdContactWithTBTitle",
+                                        "concept": "3f57aafc-7162-41da-a51b-6a804cb6f5e8"
+                                    },
+                                    {
+                                        "id": "bmiLessThan18",
+                                        "title": "bmiLessThan18Title",
+                                        "concept": "a89cd730-1350-11df-a1f1-0026b9348838"
                                     },
                                     {
                                         "id": "actions",
                                         "title": "actionsTitle",
                                         "actionOptions": [
                                             {
-                                                "formName": "DRC Case Contact Form v1.1",
+                                                "formName": "AMPATH POC TB Screening Form v1.0",
                                                 "package": "hiv-care-treatment",
                                                 "label": "viewDetails",
                                                 "mode": "view"
                                             },
                                             {
-                                                "formName": "DRC Case Contact Form v1.1",
+                                                "formName": "AMPATH POC TB Screening Form v1.0",
                                                 "package": "hiv-care-treatment",
                                                 "label": "editForm",
                                                 "mode": "edit"
@@ -168,45 +165,34 @@
                                 },
                                 "formList": [
                                     {
-                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
+                                        "uuid": "f3570718-f149-449d-8244-a797f1b9a9b4"
                                     }
                                 ]
                             },
                             {
                                 "tabName": "cadex",
                                 "hasFilter": false,
-                                "headerTitle": "contactTracing",
-                                "displayText": "contactTracing",
-                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
+                                "headerTitle": "cadex",
+                                "displayText": "cadex",
+                                "encounterType": "64e0f9f4-5f25-4098-bbca-ba8db6ce1696",
                                 "columns": [
                                     {
-                                        "id": "contactDate",
-                                        "isDate": true,
-                                        "title": "contactDateTitle",
-                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    },
-                                    {
-                                        "id": "contactMethod",
-                                        "title": "contactMethodTitle",
-                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
-                                    },
-                                    {
-                                        "id": "relationship",
-                                        "title": "relationshipTitle",
-                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                        "id": "notes",
+                                        "title": "notesTitle",
+                                        "concept": "23f710cc-7f9c-4255-9b6b-c3e240215dba"
                                     },
                                     {
                                         "id": "actions",
                                         "title": "actionsTitle",
                                         "actionOptions": [
                                             {
-                                                "formName": "DRC Case Contact Form v1.1",
+                                                "formName": "AMPATH POC Cardex Form v1.0",
                                                 "package": "hiv-care-treatment",
                                                 "label": "viewDetails",
                                                 "mode": "view"
                                             },
                                             {
-                                                "formName": "DRC Case Contact Form v1.1",
+                                                "formName": "AMPATH POC Cardex Form v1.0",
                                                 "package": "hiv-care-treatment",
                                                 "label": "editForm",
                                                 "mode": "edit"
@@ -219,121 +205,16 @@
                                 },
                                 "formList": [
                                     {
-                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
-                                    }
-                                ]
-                            },
-                            {
-                                "tabName": "Order",
-                                "hasFilter": false,
-                                "headerTitle": "contactTracing",
-                                "displayText": "contactTracing",
-                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
-                                "columns": [
-                                    {
-                                        "id": "contactDate",
-                                        "isDate": true,
-                                        "title": "contactDateTitle",
-                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    },
-                                    {
-                                        "id": "contactMethod",
-                                        "title": "contactMethodTitle",
-                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
-                                    },
-                                    {
-                                        "id": "relationship",
-                                        "title": "relationshipTitle",
-                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    },
-                                    {
-                                        "id": "actions",
-                                        "title": "actionsTitle",
-                                        "actionOptions": [
-                                            {
-                                                "formName": "DRC Case Contact Form v1.1",
-                                                "package": "hiv-care-treatment",
-                                                "label": "viewDetails",
-                                                "mode": "view"
-                                            },
-                                            {
-                                                "formName": "DRC Case Contact Form v1.1",
-                                                "package": "hiv-care-treatment",
-                                                "label": "editForm",
-                                                "mode": "edit"
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "launchOptions": {
-                                    "displayText": "add"
-                                },
-                                "formList": [
-                                    {
-                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
-                                    }
-                                ]
-                            },
-                            {
-                                "tabName": "Admission",
-                                "hasFilter": false,
-                                "headerTitle": "contactTracing",
-                                "displayText": "contactTracing",
-                                "encounterType": "570e9e42-4306-41dc-9bf8-634bbc70a524",
-                                "columns": [
-                                    {
-                                        "id": "contactDate",
-                                        "isDate": true,
-                                        "title": "contactDateTitle",
-                                        "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    },
-                                    {
-                                        "id": "contactMethod",
-                                        "title": "contactMethodTitle",
-                                        "concept": "59c023dd-eed2-4b11-8c34-b88e9439db3c"
-                                    },
-                                    {
-                                        "id": "relationship",
-                                        "title": "relationshipTitle",
-                                        "concept": "160640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    },
-                                    {
-                                        "id": "actions",
-                                        "title": "actionsTitle",
-                                        "actionOptions": [
-                                            {
-                                                "formName": "DRC Case Contact Form v1.1",
-                                                "package": "hiv-care-treatment",
-                                                "label": "viewDetails",
-                                                "mode": "view"
-                                            },
-                                            {
-                                                "formName": "DRC Case Contact Form v1.1",
-                                                "package": "hiv-care-treatment",
-                                                "label": "editForm",
-                                                "mode": "edit"
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "launchOptions": {
-                                    "displayText": "add"
-                                },
-                                "formList": [
-                                    {
-                                        "uuid": "4c7b0655-6a2a-3582-823c-1ec754558364"
+                                        "uuid": "0ca1c7db-2399-4571-9dee-d9670e0ca8b5"
                                     }
                                 ]
                             }
                         ],
                         "Translation overrides": {
                             "en": {
-                                "transfer": "Transfer",
                                 "vitals": "Vitals",
                                 "tbScreening": "TB Screening",
-                                "cadex": "CADEx",
-                                "Order": "Order",
-                                "Admission": "Admission"
+                                "cadex": "CADEx"
                             }
                         }
                     }
