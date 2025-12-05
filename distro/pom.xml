@@ -310,6 +310,30 @@
 
   <profiles>
     <profile>
+      <id>no-demo</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openmrs.maven.plugins</groupId>
+            <artifactId>openmrs-sdk-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>openmrs-sdk:build-distro</id>
+                <goals>
+                  <goal>build-distro</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                  <distro>${project.build.directory}/distro-no-demo.properties</distro>
+                  <dir>${project.build.directory}/sdk-distro</dir>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
       <id>validator</id>
       <build>
         <plugins>
