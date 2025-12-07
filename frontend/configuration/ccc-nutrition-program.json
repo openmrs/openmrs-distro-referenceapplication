@@ -1,0 +1,67 @@
+{
+    "@openmrs/esm-patient-chart-app": {
+        "extensionSlots": {
+            "ccc-nutrition-program-dashboard-slot": {
+                "add": [
+                    "encounter-list"
+                ],
+                "configure": {
+                    "encounter-list": {
+                        "tabDefinitions": [
+                            {
+                                "tabName": "ampathPocNutritionEncounterForm",
+                                "hasFilter": false,
+                                "headerTitle": "ampathPocNutritionEncounterForm",
+                                "displayText": "ampathPocNutritionEncounterForm",
+                                "encounterType": "3cd9dd0a-a5d1-4482-9f45-a0fea4f5e556",
+                                "columns": [
+                                    {
+                                        "id": "actions",
+                                        "title": "actionsTitle",
+                                        "actionOptions": [
+                                            {
+                                                "formName": "AMPATH POC Nutrition Encounter Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "viewDetails",
+                                                "mode": "view"
+                                            },
+                                            {
+                                                "formName": "AMPATH POC Nutrition Encounter Form v1.1",
+                                                "package": "hiv-care-treatment",
+                                                "label": "editForm",
+                                                "mode": "edit"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "launchOptions": {
+                                    "displayText": "add"
+                                },
+                                "formList": [
+                                    {
+                                        "uuid": "00d1f904-45a8-4c0e-b664-4823deee9d65"
+                                    }
+                                ]
+                            }
+                        ],
+                        "Translation overrides": {
+                            "en": {
+                                "contactDateTitle": "Contact Date",
+                                "nameTitle": "Name",
+                                "relationshipTitle": "Relationship",
+                                "status": "Status",
+                                "contactMethodTitle": "Contact Method",
+                                "actionsTitle": "Actions",
+                                "viewDetails": "View Details",
+                                "editForm": "Edit Form",
+                                "add": "Add",
+                                "notesTitle": "Notes",
+                                "ampathPocNutritionEncounterForm": "Nutrition Encounter"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

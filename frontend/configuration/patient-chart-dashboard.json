@@ -3,10 +3,12 @@
         "extensionSlots": {
             "patient-chart-dashboard-slot": {
                 "add": [
-                    "nav-group#GeneralMedicine"
+                    "nav-group#GeneralMedicine",
+                    "nav-group#CCC"
                 ],
                 "order": [
-                    "nav-group#GeneralMedicine"
+                    "nav-group#GeneralMedicine",
+                    "nav-group#CCC"
                 ],
                 "configure": {
                     "nav-group#GeneralMedicine": {
@@ -16,6 +18,16 @@
                         "Translation overrides": {
                             "en": {
                                 "generalMedicine": "General Medicine"
+                            }
+                        }
+                    },
+                    "nav-group#CCC": {
+                        "title": "ccc",
+                        "slotName": "ccc-group-slot",
+                        "isExpanded": true,
+                        "Translation overrides": {
+                            "en": {
+                                "ccc": "CCC"
                             }
                         }
                     }
@@ -48,6 +60,206 @@
                         "Translation overrides": {
                             "en": {
                                 "generalOpdConsultation": "Consultation"
+                            }
+                        }
+                    }
+                }
+            },
+            "ccc-group-slot": {
+                "add": [
+                    "dashboard#ccc-prep-program",
+                    "dashboard#ccc-dtg-pharmaco-vigilance",
+                    "dashboard#ccc-differentiated-service-delivery",
+                    "dashboard#ccc-hei-program",
+                    "dashboard#ccc-hiv-retention-program",
+                    "dashboard#ccc-hiv-transit-program",
+                    "dashboard#ccc-hts-program",
+                    "dashboard#ccc-nutrition-program",
+                    "dashboard#ccc-otz-program",
+                    "dashboard#ccc-ovc-program",
+                    "dashboard#ccc-pep-program",
+                    "dashboard#ccc-pmtct",
+                    "dashboard#ccc-pharmacy-program",
+                    "dashboard#ccc-resistance-clinic-program",
+                    "dashboard#ccc-standard-program",
+                    "dashboard#ccc-viremia"
+                ],
+                "order": [
+                    "dashboard#ccc-prep-program",
+                    "dashboard#ccc-dtg-pharmaco-vigilance",
+                    "dashboard#ccc-differentiated-service-delivery",
+                    "dashboard#ccc-hei-program",
+                    "dashboard#ccc-hiv-retention-program",
+                    "dashboard#ccc-hiv-transit-program",
+                    "dashboard#ccc-hts-program",
+                    "dashboard#ccc-nutrition-program",
+                    "dashboard#ccc-otz-program",
+                    "dashboard#ccc-ovc-program",
+                    "dashboard#ccc-pep-program",
+                    "dashboard#ccc-pmtct",
+                    "dashboard#ccc-pharmacy-program",
+                    "dashboard#ccc-resistance-clinic-program",
+                    "dashboard#ccc-standard-program",
+                    "dashboard#ccc-viremia"
+                ],
+                "configure": {
+                    "dashboard#ccc-prep-program": {
+                        "title": "prepProgram",
+                        "path": "ccc-prep-program",
+                        "slot": "ccc-prep-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "prepProgram": "PrEP Program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-dtg-pharmaco-vigilance": {
+                        "title": "dtgPharmacoVigilance",
+                        "path": "ccc-dtg-pharmaco-vigilance",
+                        "slot": "ccc-dtg-pharmaco-vigilance-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "dtgPharmacoVigilance": "DTG Pharmaco-vigilance"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-differentiated-service-delivery": {
+                        "title": "differentiatedServiceDelivery",
+                        "path": "ccc-differentiated-service-delivery",
+                        "slot": "ccc-differentiated-service-delivery-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "differentiatedServiceDelivery": "Differentiated service Delivery"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-hei-program": {
+                        "title": "heiProgram",
+                        "path": "ccc-hei-program",
+                        "slot": "ccc-hei-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "heiProgram": "HEI Program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-hiv-retention-program": {
+                        "title": "hivRetentionProgram",
+                        "path": "ccc-hiv-retention-program",
+                        "slot": "ccc-hiv-retention-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "hivRetentionProgram": "HIV Retention program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-hiv-transit-program": {
+                        "title": "hivTransitProgram",
+                        "path": "ccc-hiv-transit-program",
+                        "slot": "ccc-hiv-transit-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "hivTransitProgram": "HIV Transit program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-hts-program": {
+                        "title": "htsProgram",
+                        "path": "ccc-hts-program",
+                        "slot": "ccc-hts-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "htsProgram": "HTS Program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-nutrition-program": {
+                        "title": "nutritionProgram",
+                        "path": "ccc-nutrition-program",
+                        "slot": "ccc-nutrition-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "nutritionProgram": "Nutrition Program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-otz-program": {
+                        "title": "otzProgram",
+                        "path": "ccc-otz-program",
+                        "slot": "ccc-otz-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "otzProgram": "OTZ Program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-ovc-program": {
+                        "title": "ovcProgram",
+                        "path": "ccc-ovc-program",
+                        "slot": "ccc-ovc-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "ovcProgram": "OVC Program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-pep-program": {
+                        "title": "pepProgram",
+                        "path": "ccc-pep-program",
+                        "slot": "ccc-pep-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "pepProgram": "PEP Program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-pmtct": {
+                        "title": "pmtct",
+                        "path": "ccc-pmtct",
+                        "slot": "ccc-pmtct-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "pmtct": "PMTCT"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-pharmacy-program": {
+                        "title": "pharmacyProgram",
+                        "path": "ccc-pharmacy-program",
+                        "slot": "ccc-pharmacy-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "pharmacyProgram": "Pharmacy Program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-resistance-clinic-program": {
+                        "title": "resistanceClinicProgram",
+                        "path": "ccc-resistance-clinic-program",
+                        "slot": "ccc-resistance-clinic-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "resistanceClinicProgram": "Resistance clinic program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-standard-program": {
+                        "title": "standardProgram",
+                        "path": "ccc-standard-program",
+                        "slot": "ccc-standard-program-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "standardProgram": "Standard Program"
+                            }
+                        }
+                    },
+                    "dashboard#ccc-viremia": {
+                        "title": "viremia",
+                        "path": "ccc-viremia",
+                        "slot": "ccc-viremia-dashboard-slot",
+                        "Translation overrides": {
+                            "en": {
+                                "viremia": "Viremia"
                             }
                         }
                     }
