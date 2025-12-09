@@ -17,7 +17,7 @@ RUN mkdir -p configuration
 COPY ./configuration/*.json configuration
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-assemble-config.json --config-file configuration/*.json --target ./spa
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
-RUN if [ ! -f ./spa/index.html ]; then echo 'Build failed. Please check the logs above for details. This may have happened because of an update to a library that OpenMRS depends on.'; exit 1; fi
+RUN if [ ! -f ./spa/index.html ]; then echo 'Build failed. Please check the logs above for details. This may have happened because of an update to a library that OpenMRS depends on.'; ls -al ./spa; exit 1; fi
 
 #--------------------------------------------
 # Runtime Stage - Published Image
@@ -38,6 +38,7 @@ RUN chmod +x /usr/local/bin/startup.sh
 COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=dev /app/spa /usr/share/nginx/html
+COPY *.json /usr/share/nginx/html
 COPY ./assets /usr/share/nginx/html
 
 CMD ["/usr/local/bin/startup.sh"]

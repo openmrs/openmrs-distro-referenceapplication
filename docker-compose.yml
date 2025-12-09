@@ -35,6 +35,7 @@ services:
       secrets:
         - m2settings
     restart: "unless-stopped"
+
     # CORRECTED: depends_on must be a list of service names or a list of maps with condition.
     # The 'es' dependency block was moved and fixed.
 #    depends_on:
@@ -45,11 +46,11 @@ services:
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: ${OMRS_CONFIG_AUTO_UPDATE_DATABASE:-true}
       OMRS_ADMIN_USER_PASSWORD: ${OMRS_ADMIN_USER_PASSWORD:-openmrs}
       OMRS_CONFIG_CREATE_TABLES: ${OMRS_CONFIG_CREATE_TABLES:-true}
-      OMRS_CONFIG_CONNECTION_SERVER: ${OMRS_CONFIG_CONNECTION_SERVER:-localhost}
+      OMRS_CONFIG_CONNECTION_SERVER: ${OMRS_CONFIG_CONNECTION_SERVER:-db}
       OMRS_CONFIG_CONNECTION_DATABASE: ${OMRS_CONFIG_CONNECTION_DATABASE:-amrs}
       
       # These lines already used defaults, so they remain the same
-      OMRS_CONFIG_CONNECTION_USERNAME: ${OMRS_DB_USER:-openmrs_user}
+      OMRS_CONFIG_CONNECTION_USERNAME: ${OMRS_DB_USER:-openmrs}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
       OMRS_SEARCH: ${OMRS_SEARCH:-elasticsearch}
 

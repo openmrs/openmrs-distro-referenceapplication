@@ -1,40 +1,59 @@
 # syntax=docker/dockerfile:1
 
-### Dev Stage
-FROM openmrs/openmrs-core:2.8.x-dev-amazoncorretto-21 AS dev
+ARG BUILD_TYPE="distro"
+
+### Shared Base
+# This layer is the base development layer for both the base distro and the sites
+FROM openmrs/openmrs-core:2.7.x-dev-amazoncorretto-17 AS base
 WORKDIR /openmrs_distro
 
-ARG MVN_ARGS_SETTINGS="-s /usr/share/maven/ref/settings-docker.xml -U -P distro"
+### Base Distro Dev Layer
+# This layer just builds the base distribution used by all sites
+FROM base AS distro_dev
+
+ARG MVN_PROJECT="distro"
+ARG MVN_ARGS_SETTINGS="-s /usr/share/maven/ref/settings-docker.xml -U -P $MVN_PROJECT"
 ARG MVN_ARGS="install"
 
-# Copy build files
 COPY pom.xml ./
-COPY distro ./distro/
-COPY modules/*.omod ./modules/
+COPY distro distro
 
-ARG CACHE_BUST
-# Build the distro, but only deploy from the amd64 build
 RUN --mount=type=secret,id=m2settings,target=/usr/share/maven/ref/settings-docker.xml if [[ "$MVN_ARGS" != "deploy" || "$(arch)" = "x86_64" ]]; then mvn $MVN_ARGS_SETTINGS $MVN_ARGS; else mvn $MVN_ARGS_SETTINGS install; fi
 
-RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
+RUN cp ./distro/target/sdk-distro/web/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
+RUN cp ./distro/target/sdk-distro/web/openmrs-distro.properties /openmrs/distribution/
+RUN cp -R ./distro/target/sdk-distro/web/openmrs_modules /openmrs/distribution/openmrs_modules/
+RUN cp -R ./distro/target/sdk-distro/web/openmrs_owas /openmrs/distribution/openmrs_owas/
+RUN cp -R ./distro/target/sdk-distro/web/openmrs_config /openmrs/distribution/openmrs_config/
 
-RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs-distro.properties /openmrs/distribution/
-RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_modules /openmrs/distribution/openmrs_modules/
-RUN cp -R /openmrs_distro/modules/*.omod /openmrs/distribution/openmrs_modules/
-RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_owas /openmrs/distribution/openmrs_owas/
-RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_config /openmrs/distribution/openmrs_config/
+### Site Dev Layer
+# This layer builds a site-specific distribution
+FROM base AS site_dev
 
-# Clean up after copying needed artifacts
-RUN mvn $MVN_ARGS_SETTINGS clean
+ARG MVN_PROJECT="distro"
+ARG MVN_ARGS_SETTINGS="-s /usr/share/maven/ref/settings-docker.xml -U -P $MVN_PROJECT"
+ARG MVN_ARGS="install"
+
+COPY pom.xml .
+COPY sites/$MVN_PROJECT sites/$MVN_PROJECT
+
+RUN --mount=type=secret,id=m2settings,target=/usr/share/maven/ref/settings-docker.xml if [[ "$MVN_ARGS" != "deploy" || "$(arch)" = "x86_64" ]]; then mvn $MVN_ARGS_SETTINGS $MVN_ARGS; else mvn $MVN_ARGS_SETTINGS install; fi
+
+RUN cp ./sites/$MVN_PROJECT/target/sdk-distro/web/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
+RUN cp ./sites/$MVN_PROJECT/target/sdk-distro/web/openmrs-distro.properties /openmrs/distribution/
+RUN cp -R ./sites/$MVN_PROJECT/target/sdk-distro/web/openmrs_modules /openmrs/distribution/openmrs_modules/
+RUN cp -R ./sites/$MVN_PROJECT/target/sdk-distro/web/openmrs_owas /openmrs/distribution/openmrs_owas/
+RUN cp -R ./sites/$MVN_PROJECT/target/sdk-distro/web/openmrs_config /openmrs/distribution/openmrs_config/
+
+### Unified Dev Stage
+# This selects the correct dev stage for this build based on the BUILD_TYPE
+FROM ${BUILD_TYPE}_dev AS dev
 
 ### Run Stage
-# Replace '2.7.x' with the exact version of openmrs-core built for production (if available)
-FROM openmrs/openmrs-core:2.7.7-amazoncorretto-17
+FROM openmrs/openmrs-core:2.7.x-amazoncorretto-17
 
-# Do not copy the war if using the correct openmrs-core image version
-#COPY --from=dev /openmrs/distribution/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
-
+COPY --from=dev /openmrs/distribution/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
 COPY --from=dev /openmrs/distribution/openmrs-distro.properties /openmrs/distribution/
 COPY --from=dev /openmrs/distribution/openmrs_modules /openmrs/distribution/openmrs_modules
 COPY --from=dev /openmrs/distribution/openmrs_owas /openmrs/distribution/openmrs_owas
-COPY --from=dev  /openmrs/distribution/openmrs_config /openmrs/distribution/openmrs_config
+COPY --from=dev /openmrs/distribution/openmrs_config /openmrs/distribution/openmrs_config
