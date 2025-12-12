@@ -1,4 +1,12 @@
 # syntax=docker/dockerfile:1.3
+
+#--------------------------------------------
+# Downlaod Stage - Download Augen Auf frontend
+#--------------------------------------------
+FROM --platform=$BUILDPLATFORM alpine/curl:latest as curl
+
+RUN curl -L -o /augen-auf-openmrs.tgz https://github.com/ednet-dev/augen-auf-openmrs/releases/download/latest/augen-auf-openmrs.tgz
+
 #--------------------------------------------
 # Dev Stage - Assembles and Builds Frontend
 #--------------------------------------------
@@ -11,6 +19,7 @@ WORKDIR /app
 
 COPY spa-assemble-config.json .
 COPY spa-build-config.json .
+COPY --from=curl /augen-auf-openmrs.tgz /augen-auf-openmrs.tgz
 
 ARG CACHE_BUST
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-assemble-config.json --target ./spa
