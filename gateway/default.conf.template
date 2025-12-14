@@ -84,6 +84,12 @@ server {
     proxy_pass http://frontend/;
   }
 
+  location /amrs {
+    proxy_read_timeout 300s;
+    rewrite ^/amrs(.*)$ /openmrs$1 break;
+    proxy_pass http://backend;
+  }
+
   location /openmrs {
     proxy_read_timeout 300s;
     proxy_pass http://backend;
