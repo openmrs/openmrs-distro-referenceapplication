@@ -107,6 +107,24 @@ server {
     proxy_redirect http://$host/ /openmrs/spa/;
   }
 
+  location /amrs {
+    proxy_read_timeout 300s;
+    rewrite ^/amrs(.*)$ /openmrs$1 break;
+    proxy_pass http://backend;
+    # Rewrite redirects from backend that use /openmrs back to /amrs
+    proxy_redirect /openmrs /amrs;
+    proxy_redirect /openmrs/ /amrs/;
+    proxy_redirect http://$host/openmrs /amrs;
+    proxy_redirect http://$host/openmrs/ /amrs/;
+    proxy_redirect https://$host/openmrs /amrs;
+    proxy_redirect https://$host/openmrs/ /amrs/;
+    proxy_redirect http://backend:8080/openmrs /amrs;
+    proxy_redirect http://backend:8080/openmrs/ /amrs/;
+    # Handle redirects with any host/port combination
+    proxy_redirect ~^https?://[^/]+/openmrs(/.*)?$ /amrs$1;
+    proxy_redirect default;
+  }
+
   location /openmrs {
     proxy_pass http://backend;
   }
