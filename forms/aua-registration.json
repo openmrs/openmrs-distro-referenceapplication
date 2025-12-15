@@ -1,0 +1,93 @@
+{
+  "name": "AUA Registration",
+  "description": "Clinical intake - General health and complaints",
+  "processor": "EncounterFormProcessor",
+  "version": "1.0",
+  "uuid": "a1b2c3d4-1001-4000-8000-000000000001",
+  "encounterType": "e4c30030-3002-4fdd-9f6a-222222222222",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Registration / Registro / Registrierung",
+      "sections": [
+        {
+          "label": "General Health / Enfermedades Generales / Allgemeine Gesundheit",
+          "isExpanded": true,
+          "questions": [
+            {
+              "id": "general-diseases",
+              "label": "General diseases / Enfermedades generales / Allgemeine Erkrankungen",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "23c6d03e-e535-4421-a686-3e247813e398"
+              }
+            },
+            {
+              "id": "medication",
+              "label": "Medication / Medicación / Medikamente",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1efb9131-f95d-4f9f-8ab9-fb6ad4acd947"
+              }
+            },
+            {
+              "id": "last-eye-exam",
+              "label": "Last eye exam (years) / Último examen de la vista (años) / Letzte Augenuntersuchung (Jahre)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "52234465-dea6-4b04-b350-abc8f35443a4"
+              }
+            },
+            {
+              "id": "wears-glasses",
+              "label": "Glasses / Gafas / Brille",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a412a599-55f8-463d-a861-596c96bd6c6d",
+                "answers": [
+                  {
+                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                    "label": "Yes / Sí / Ja"
+                  },
+                  {
+                    "concept": "488b58ff-64f5-4f8a-8f0e-c8235c12c3b2",
+                    "label": "No / No / Nein"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "glasses-since",
+              "label": "Since (years) / Desde (años) / Seit (Jahre)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6ff05e8a-7821-4469-bfb4-4af5ab892a02"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Complaints / Quejas / Beschwerden",
+          "isExpanded": true,
+          "questions": [
+            {
+              "id": "other-complaints",
+              "label": "Other complaints / Otras quejas / Sonstige Beschwerden",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "21ba0ef0-5b97-4c0e-9e41-a877bf37fe30",
+                "rows": 3
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
