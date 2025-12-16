@@ -1,0 +1,307 @@
+{
+  "name": "AUA Pre-Surgery",
+  "description": "Pre-surgery assessment - Cataract evaluation and surgical planning",
+  "version": "1.0",
+  "published": true,
+  "retired": false,
+  "encounter": "Pre-Surgery Evaluation",
+  "encounterType": "e4c30030-3006-4fdd-9f6a-666666666666",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "uuid": "sms-aua-pre-surgery-form-0005",
+  "pages": [
+    {
+      "label": "Cataract Assessment",
+      "sections": [
+        {
+          "label": "Right Eye (OD) - Visual Acuity",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "bcva-od",
+              "label": "BCVA (Best Corrected Visual Acuity)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5293150c-4fd4-4e27-a78f-26286cd93535"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Right Eye (OD) - Cataract Type",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "cataract-incipiens-od",
+              "label": "Incipiens",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "d22bcc3d-ccac-4fcb-b37b-0a20c8d8e804",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-corticalis-nuclearis-od",
+              "label": "Corticalis et nuclearis",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "f3482301-8fc2-40f0-b6e8-553790bdd44b",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-subcapsularis-post-od",
+              "label": "Subcapsularis posterior",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "bd40e7ca-811c-4f37-85a4-ecb322f840f7",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-polaris-posterior-od",
+              "label": "Polaris posterior",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "f6027e0d-b53c-496a-ab5c-b1db2e5fe9c9",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-brunescens-od",
+              "label": "Brunescens",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "6beb762a-da59-4652-8782-90a58408a258",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-matura-od",
+              "label": "Matura",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "7f60298a-a5c2-4646-a297-fb1b4542df99",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-intumescens-od",
+              "label": "Intumescens",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "847ee736-0690-4722-a8d9-2adb089d30c9",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "presurgery-pseudophakia-od",
+              "label": "Pseudophakia",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "02594842-dcb9-4565-9477-ecebfb32a990",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Right Eye (OD) - Pterygium",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "pterygium-astigmatism-od",
+              "label": "Pterygium-induced astigmatism",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "63460134-0822-404a-b8af-aa3f30f324f0",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "pterygium-length-od",
+              "label": "Length from limbus (mm)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b9b01c4c-0b3b-4ad8-bb23-7c7988c355fb"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Left Eye (OS) - Visual Acuity",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "bcva-os",
+              "label": "BCVA (Best Corrected Visual Acuity)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a7901c3b-098c-457b-8325-c5c62dd290c7"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Left Eye (OS) - Cataract Type",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "cataract-incipiens-os",
+              "label": "Incipiens",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "74e2b4a4-d60f-4cd3-aee0-25e669d6a27f",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-corticalis-nuclearis-os",
+              "label": "Corticalis et nuclearis",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "8bdd608a-e790-4893-bf58-66feb3b9dfdc",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-subcapsularis-post-os",
+              "label": "Subcapsularis posterior",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "4b3ab888-b690-4ce6-be54-5fb4d5fab62c",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-polaris-posterior-os",
+              "label": "Polaris posterior",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "ef993ca7-f1ff-4b55-bc79-bfab0097047e",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-brunescens-os",
+              "label": "Brunescens",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "addb7647-d800-4b82-92e3-26f9973b6703",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-matura-os",
+              "label": "Matura",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "77d7f8e8-aeea-49fe-853a-d46b7be1b682",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "cataract-intumescens-os",
+              "label": "Intumescens",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "99e12851-63c9-4ec1-8a3c-f0b2cd4afdf0",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "presurgery-pseudophakia-os",
+              "label": "Pseudophakia",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "828cc0f2-42f4-4084-a53b-4020c29d0f5c",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Left Eye (OS) - Pterygium",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "pterygium-astigmatism-os",
+              "label": "Pterygium-induced astigmatism",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "e3aecf2f-a093-4258-b6c9-4303cb204d68",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "pterygium-length-os",
+              "label": "Length from limbus (mm)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b04c0c1d-97cb-416e-9954-9d9d100bbf25"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

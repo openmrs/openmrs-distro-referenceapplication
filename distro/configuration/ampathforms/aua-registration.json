@@ -1,0 +1,364 @@
+{
+  "name": "AUA Registration",
+  "description": "Patient registration - General health and complaints intake",
+  "version": "1.0",
+  "published": true,
+  "retired": false,
+  "encounter": "Check-in Encounter",
+  "encounterType": "e4c30030-3002-4fdd-9f6a-222222222222",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "uuid": "sms-aua-registration-form-0001",
+  "pages": [
+    {
+      "label": "General Health",
+      "sections": [
+        {
+          "label": "Medical History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "general-diseases",
+              "label": "General diseases",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "23c6d03e-e535-4421-a686-3e247813e398",
+                "rows": 3
+              }
+            },
+            {
+              "id": "medication",
+              "label": "Medication",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1efb9131-f95d-4f9f-8ab9-fb6ad4acd947",
+                "rows": 3
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vision History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "last-eye-exam",
+              "label": "Last eye exam",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "52234465-dea6-4b04-b350-abc8f35443a4"
+              }
+            },
+            {
+              "id": "wears-glasses",
+              "label": "Wears glasses",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "a412a599-55f8-463d-a861-596c96bd6c6d",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "glasses-since",
+              "label": "Glasses since",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "6ff05e8a-7821-4469-bfb4-4af5ab892a02"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Complaints",
+      "sections": [
+        {
+          "label": "Right Eye (OD) Complaints",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "near-vision-blur-od",
+              "label": "Near vision blur",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "a2f5534d-2054-438d-933d-0d49f1288e51",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "distance-vision-blur-od",
+              "label": "Distance vision blur",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "9b00a8a3-467d-4a91-a532-be4caa672ab4",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "irritation-od",
+              "label": "Irritation / foreign-body sensation",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "f03cc9ab-f38e-4ca9-a239-e0e04895588a",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "floaters-od",
+              "label": "Floaters",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "faf9544f-6e81-4e8d-84c1-777202c11350",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "flashes-od",
+              "label": "Light flashes",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "34d5843b-968b-4439-a4ae-0aa5c0900767",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "dry-eye-od",
+              "label": "Dry eye (Sicca)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "a48f9dd3-293f-4d41-bcde-7aad6c6974cd",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "pain-od",
+              "label": "Pain",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "ffbbd0d4-c3a4-4e92-93dc-6a6c70638adb",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "tearing-od",
+              "label": "Tearing",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "ffea6526-bae4-4e0c-b35b-962f6cf33eb6",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "redness-od",
+              "label": "Redness",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "349a2400-c493-451d-8814-bc1a53bc3bdd",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "label": "Left Eye (OS) Complaints",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "near-vision-blur-os",
+              "label": "Near vision blur",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "2a920c5c-31c6-4acd-b805-69bd2dd58fa7",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "distance-vision-blur-os",
+              "label": "Distance vision blur",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "ddac7f87-2853-4f65-9b6a-4639b1a69243",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "irritation-os",
+              "label": "Irritation / foreign-body sensation",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "64939337-b6d6-49b5-b938-f088b527db53",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "floaters-os",
+              "label": "Floaters",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "4bdb77da-90d1-4034-9e59-dcc23d847c16",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "flashes-os",
+              "label": "Light flashes",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "3651946e-a426-4f72-b87b-4a6f15f0fbe7",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "dry-eye-os",
+              "label": "Dry eye (Sicca)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "54ae8727-d0d5-4c50-bd59-1b8879e76362",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "pain-os",
+              "label": "Pain",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "b6e5220a-8b4f-47f5-80eb-2a942b278e3b",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "tearing-os",
+              "label": "Tearing",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "e052bab3-6c10-40bd-bee9-ad1429ded8c2",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "redness-os",
+              "label": "Redness",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "e6303a57-a037-4bb8-b648-76fbc5be540d",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "label": "General Complaints",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "headache",
+              "label": "Headache",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "2cf5bebb-22d5-448c-a010-65148fb13610",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "id": "other-complaints",
+              "label": "Other complaints",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "21ba0ef0-5b97-4c0e-9e41-a877bf37fe30",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
