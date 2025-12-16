@@ -1,0 +1,107 @@
+{
+  "name": "AUA Therapy",
+  "description": "Therapy decisions and prescriptions",
+  "version": "1.0",
+  "published": true,
+  "retired": false,
+  "encounter": "Visit Note",
+  "encounterType": "e4c30030-3005-4fdd-9f6a-555555555555",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "uuid": "sms-aua-therapy-form-0004",
+  "pages": [
+    {
+      "label": "Therapy",
+      "sections": [
+        {
+          "label": "Glasses",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "glasses-gifted-od",
+              "label": "Glasses gifted (OD)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "482e023f-2f2b-4c1a-897b-6180c989a9a4",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "glasses-gifted-os",
+              "label": "Glasses gifted (OS)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "231f45ce-3942-403c-9198-d7f5d7a12c44",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "glasses-prescription",
+              "label": "Prescription glasses",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "37a6d331-902a-4688-8123-4ca37762c853",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Medication",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "eye-drops-od",
+              "label": "Eye drops therapy (OD)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b44709ce-2a25-4ac4-87d2-b4c611a3c9bf",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            },
+            {
+              "id": "eye-drops-os",
+              "label": "Eye drops therapy (OS)",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "a2a87870-594a-461f-891e-7bf276391bef",
+                "answers": [
+                  { "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "label": "Yes" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Surgery Recommendation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "id": "operation-recommended",
+              "label": "Operation (OP) recommended",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "fdde07dd-ec3d-496a-9a56-6e4b2e2c28a2",
+                "rows": 3
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
