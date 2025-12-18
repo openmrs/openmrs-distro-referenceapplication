@@ -59,6 +59,7 @@ services:
       OMRS_DB_EXTRA_ARGS: "${OMRS_DB_EXTRA_ARGS:-&zeroDateTimeBehavior=convertToNull}"
       LUCENE_MATCH_TYPE: ${LUCENE_MATCH_TYPE:-START}
       DOCUMENT_MAX_SIZE_MB: ${DOCUMENT_MAX_SIZE_MB:-7}
+      TZ: Africa/Nairobi
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
       timeout: 5s
