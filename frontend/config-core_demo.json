@@ -5,6 +5,12 @@
     "extensionSlots": {
       "action-menu-patient-chart-items-slot": {
         "order": ["order-basket-action-menu"]
+      }, 
+      "patient-info-slot": {
+        "remove": [],
+        "add": [
+          "obs-by-encounter-widget"
+        ]
       }
     }
   },
@@ -41,6 +47,25 @@
   },
   "@openmrs/esm-styleguide": {
     "Brand color #1": "#005d5d"
+  },
+  "@openmrs/esm-patient-registration-app": {
+    "fieldConfigurations": {
+      "gender": [
+        {
+          "value": "male",
+          "label": "Male"
+        },
+        {
+          "value": "female",
+          "label": "Female"
+        }
+      ]
+    },
+    "sections": [
+      "demographics",
+      "contact"
+    ],
+    "sectionDefinitions": []
   },
   "@augen-auf/openmrs-esm-augen-auf": {
     "stages": {
