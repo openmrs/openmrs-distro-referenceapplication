@@ -68,31 +68,62 @@
     "sectionDefinitions": []
   },
   "@augen-auf/openmrs-esm-augen-auf": {
-    "stages": {
-      "registration": {
-        "queueUuid": "310b9d28-737d-45d2-8b6a-f059aac6cea8",
-        "formUuid": "AUA Registration"
-      },
-      "refraction": {
+    "stages": [
+      {
+        "id": "refraction",
+        "label": {
+          "en": "Refraction",
+          "de": "Refraktion",
+          "es": "Refracción"
+        },
+        "enabled": true,
         "queueUuid": "cbb6ec0c-c6c7-4e31-a6a6-3c447a29d95b",
         "formUuid": "AUA Refraction"
       },
-      "eyeExam": {
+      {
+        "id": "eye-exam",
+        "label": {
+          "en": "Eye Exam",
+          "de": "Augenuntersuchung",
+          "es": "Examen Ocular"
+        },
+        "enabled": true,
         "queueUuid": "3eab5184-aa9d-4ef6-8072-d219cd4fbcbf",
         "formUuid": "AUA Eye Exam"
       },
-      "therapy": {
+      {
+        "id": "therapy",
+        "label": {
+          "en": "Therapy",
+          "de": "Therapie",
+          "es": "Terapia"
+        },
+        "enabled": true,
         "queueUuid": "59006885-9096-407d-9428-efbbe6e5c8f3",
         "formUuid": "AUA Therapy"
       },
-      "preSurgery": {
+      {
+        "id": "pre-surgery",
+        "label": {
+          "en": "Pre-Surgery",
+          "de": "Vor-Operation",
+          "es": "Prequirúrgico"
+        },
+        "enabled": true,
         "queueUuid": "c72ccad1-bec7-4e73-8d03-4a43edb20213",
         "formUuid": "AUA Pre-Surgery"
       },
-      "surgery": {
+      {
+        "id": "surgery",
+        "label": {
+          "en": "Surgery",
+          "de": "Operation",
+          "es": "Cirugía"
+        },
+        "enabled": true,
         "queueUuid": "d79dc984-a00d-4fdb-ab81-88b0d4a51ca5",
         "formUuid": "AUA Surgery"
       }
-    }
+    ]
   }
 }
