@@ -2,7 +2,7 @@
   "@openmrs/esm-patient-chart-app": {
     "restrictByVisitLocationTag": true,
     "showUpcomingAppointments": true,
-   "extensionSlots": {
+    "extensionSlots": {
       "action-menu-patient-chart-items-slot": {
         "order": [
           "order-basket-action-menu"
@@ -49,7 +49,6 @@
     "Brand color #3": "#0055a5"
   },
   "@openmrs/esm-login-app": {
-    
     "logo": {
       "src": "${openmrsSpaBase}/ampath-logo.svg",
       "alt": "Logo"
@@ -66,7 +65,7 @@
       "link": "${openmrsSpaBase}/home/registry"
     }
   },
-   "@openmrs/esm-patient-medications-app": {
+  "@openmrs/esm-patient-medications-app": {
     "drugOrderTypeUUID": "53eb466e-1359-11df-a1f1-0026b9348838"
   },
   "@openmrs/esm-patient-tests-app": {
@@ -79,7 +78,14 @@
         "conceptUuid": "a8982474-1350-11df-a1f1-0026b9348838",
         "defaultOpen": false
       }
-    ]
+    ],
+    "orders": {
+      "labOrderTypeUuid": "53eb4768-1359-11df-a1f1-0026b9348838",
+      "labOrderableConcepts": [
+        "a89c694e-1350-11df-a1f1-0026b9348838"
+      ]
+    },
+    "showReferenceNumberField": false
   },
   "@openmrs/esm-patient-vitals-app": {
     "concepts": {
@@ -94,5 +100,8 @@
       "midUpperArmCircumferenceUuid": "a89c6188-1350-11df-a1f1-0026b9348838",
       "systolicBloodPressureUuid": "a8a65d5a-1350-11df-a1f1-0026b9348838"
     }
+  },
+  "@openmrs/esm-patient-orders-app": {
+    "orderEncounterType": "d8e0f981-62e0-4c2a-b3ca-890c51afc350"
   }
 }
