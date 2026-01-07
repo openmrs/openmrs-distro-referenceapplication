@@ -49,6 +49,7 @@
     <patientflags.version>3.0.8</patientflags.version>
     <o3forms.version>2.3.0</o3forms.version>
     <emrapi.version>2.3.0</emrapi.version>
+    <morgue.version>1.0.0-SNAPSHOT</morgue.version>
     <event.version>3.0.0</event.version>
     <bedmanagement.version>6.2.0-SNAPSHOT</bedmanagement.version>
     <!-- Stock Management and Billing -->
@@ -57,7 +58,7 @@
     <!-- Content Packages -->
     <reference-content.version>1.5.0-SNAPSHOT</reference-content.version>
     <amrs-content.version>1.0.0-SNAPSHOT</amrs-content.version>
-<htmlformentry.version>6.1.0</htmlformentry.version>
+    <htmlformentry.version>6.1.0</htmlformentry.version>
     <reference-demo-content.version>1.7.0-SNAPSHOT</reference-demo-content.version>
   </properties>
 
@@ -201,6 +202,12 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>emrapi-omod</artifactId>
       <version>${emrapi.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>morgue-omod</artifactId>
+      <version>${morgue.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

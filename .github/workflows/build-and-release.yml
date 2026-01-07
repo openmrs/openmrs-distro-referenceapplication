@@ -64,6 +64,11 @@ jobs:
                   "id": "github",
                   "username": "${{ github.actor }}",
                   "password": "${{ secrets.GITHUB_TOKEN }}"
+              },
+              {
+                  "id": "github-ampath-morgue",
+                  "username": "${{ github.actor }}",
+                  "password": "${{ secrets.GITHUB_TOKEN }}"
               }]
 
       - name: Build and push gateway image
