@@ -58,6 +58,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
     volumes:
       - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
 
 volumes:
   openmrs-data: ~
