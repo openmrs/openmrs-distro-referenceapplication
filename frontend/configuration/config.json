@@ -11,13 +11,18 @@
     }
   },
   "@openmrs/esm-ward-app": {
-    "extensionSlots": {
-      "action-menu-patient-chart-items-slot": {
-        "order": [
-          "order-basket-action-menu"
-        ]
-      }
-    }
+        "extensionSlots": {
+            "action-menu-ward-patient-items-slot": {
+                "add": [
+                    "order-basket-action-menu"
+                ]
+            }
+        },
+       "Translation overrides": {
+          "en": {
+             "wards": "Admissions"
+           }
+        }
   },
   "@openmrs/esm-service-queues-app": {
     "statusConfigs": [
