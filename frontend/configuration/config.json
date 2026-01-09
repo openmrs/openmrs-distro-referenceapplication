@@ -11,18 +11,34 @@
     }
   },
   "@openmrs/esm-ward-app": {
-        "extensionSlots": {
-            "action-menu-ward-patient-items-slot": {
-                "add": [
-                    "order-basket-action-menu"
-                ]
-            }
-        },
-       "Translation overrides": {
-          "en": {
-             "wards": "Admissions"
-           }
+    "extensionSlots": {
+      "action-menu-ward-patient-items-slot": {
+        "add": [
+          "order-basket-action-menu"
+        ]
+      }
+    },
+    "Translation overrides": {
+      "en": {
+        "wards": "Admissions"
+      }
+    },
+    "patientCardElements": {
+      "pendingItems": [
+        {
+          "id": "pending-items",
+          "orders": {
+            "orderTypes": [
+              {
+                "label": "Labs",
+                "uuid": "53eb4768-1359-11df-a1f1-0026b9348838"
+              }
+            ]
+          },
+          "showPendingItems": true
         }
+      ]
+    }
   },
   "@openmrs/esm-service-queues-app": {
     "statusConfigs": [
@@ -121,7 +137,17 @@
     }
   },
   "@openmrs/esm-patient-orders-app": {
-    "orderEncounterType": "d8e0f981-62e0-4c2a-b3ca-890c51afc350"
+    "orderEncounterType": "d8e0f981-62e0-4c2a-b3ca-890c51afc350",
+    "orderTypes": [
+      {
+        "orderTypeUuid": "ff4485a4-f071-4423-aeb2-db6efce52b83",
+        "orderableConceptSets": [
+          "2da5d80b-8494-45dc-902e-571618d36033"
+        ],
+        "label": "Radiology and Procedure Orders",
+        "icon": "defaultOpen"
+      }
+    ]
   },
   "@openmrs/esm-home-app": {
     "extensionSlots": {
