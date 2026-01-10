@@ -4,7 +4,7 @@
 #--------------------------------------------
 FROM --platform=$BUILDPLATFORM node:22-alpine as dev
 
-ARG APP_SHELL_VERSION=8.0.0
+ARG APP_SHELL_VERSION=next
 
 RUN mkdir -p /app
 WORKDIR /app
