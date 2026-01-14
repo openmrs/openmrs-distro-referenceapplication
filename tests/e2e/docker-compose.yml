@@ -1,6 +1,6 @@
 services:
   gateway:
-    image: gateway
+    image: e2e/gateway:latest
     restart: "unless-stopped"
     depends_on:
       - frontend
@@ -9,16 +9,16 @@ services:
       - "8080:80"
 
   frontend:
-    image: frontend
+    image: e2e/frontend:latest
     restart: "unless-stopped"
     depends_on:
       - backend
 
   backend:
-    image: backend
+    image: e2e/backend:latest
     restart: "unless-stopped"
 
   db:
-    image: db
+    image: e2e/db:latest
     restart: "unless-stopped"
 
