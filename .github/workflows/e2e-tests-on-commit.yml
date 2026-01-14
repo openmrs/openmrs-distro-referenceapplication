@@ -10,6 +10,7 @@ on:
 jobs:  
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
@@ -47,6 +48,7 @@ jobs:
   run-e2e-tests:
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
