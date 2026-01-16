@@ -115,6 +115,58 @@ docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
 
 Staging certificates won't be trusted by browsers but allow you to verify the setup works correctly.
 
+### Certificate profiles
+
+Let's Encrypt offers different certificate profiles with varying validity periods:
+
+| Profile | Validity | Use Case |
+|---------|----------|----------|
+| `classic` | 90 days (default) | Standard certificates |
+| `tlsserver` | 45 days | Shorter validity for improved security |
+| `shortlived` | 6 days | Required for IP address certificates |
+
+To request a specific profile, use the `CERT_PROFILE` environment variable:
+
+```bash
+# Request 45-day certificates
+SSL_MODE=prod \
+CERT_PROFILE=tlsserver \
+CERT_WEB_DOMAINS=example.com \
+CERT_CONTACT_EMAIL=admin@example.com \
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+```
+
+**Note**: Let's Encrypt is transitioning all certificates to 45-day validity by 2028. Using the `tlsserver` profile allows you to opt-in to shorter certificates now.
+
+### IP address certificates
+
+Let's Encrypt now supports issuing certificates for publicly-addressable IP addresses. These certificates must use the `shortlived` profile (6-day validity).
+
+```bash
+# Certificate for an IP address (shortlived profile auto-selected)
+SSL_MODE=prod \
+CERT_WEB_DOMAINS=203.0.113.50 \
+CERT_CONTACT_EMAIL=admin@example.com \
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+```
+
+**Important notes for IP address certificates**:
+- The IP address must be publicly addressable (not private IPs like 192.168.x.x or 10.x.x.x)
+- The `shortlived` profile is automatically selected when an IP address is detected
+- Certificates are valid for approximately 6 days and renew automatically
+- IPv6 addresses are also supported
+
+You can also mix domain names and IP addresses:
+
+```bash
+SSL_MODE=prod \
+CERT_WEB_DOMAINS=example.com,203.0.113.50 \
+CERT_CONTACT_EMAIL=admin@example.com \
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+```
+
+When any IP address is included, the shortlived profile is required and will be automatically enforced.
+
 ### Manual certificate renewal
 
 While certificates renew automatically in production mode, you can manually force renewal if needed.
@@ -163,10 +215,11 @@ docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm \
 |----------|---------|-------------|
 | `SSL_MODE` | `dev` | `dev` for self-signed certificates, `prod` for Let's Encrypt |
 | `SSL_STAGING` | `false` | Use Let's Encrypt staging environment (set to `true` for testing) |
-| `CERT_WEB_DOMAINS` | `localhost,127.0.0.1` | Comma-separated list of domain names |
+| `CERT_WEB_DOMAINS` | `localhost,127.0.0.1` | Comma-separated list of domain names or IP addresses |
 | `CERT_WEB_DOMAIN_COMMON_NAME` | (first domain) | Override the primary domain name |
 | `CERT_CONTACT_EMAIL` | (empty) | Email for Let's Encrypt notifications (required in prod mode) |
 | `CERT_RSA_KEY_SIZE` | `4096` | RSA key size for certificates |
+| `CERT_PROFILE` | (empty) | Certificate profile: `classic` (90 days), `tlsserver` (45 days), or `shortlived` (6 days). Auto-set to `shortlived` for IP addresses |
 
 ## Contributing to the configuration
 
