@@ -8,6 +8,7 @@ services:
       CERT_WEB_DOMAIN_COMMON_NAME: ${CERT_WEB_DOMAIN_COMMON_NAME:-}  # Override primary domain (optional)
       CERT_CONTACT_EMAIL: ${CERT_CONTACT_EMAIL:-}  # Email for Let's Encrypt notifications (required for prod mode)
       CERT_RSA_KEY_SIZE: ${CERT_RSA_KEY_SIZE:-4096}  # RSA key size for certificates
+      CERT_PROFILE: ${CERT_PROFILE:-}  # Certificate profile: classic, tlsserver, or shortlived (required for IP addresses)
       CERTBOT_DATA_PATH: /var/www/certbot
       CERT_ROOT_PATH: /etc/letsencrypt
     volumes:
