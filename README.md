@@ -168,6 +168,14 @@ docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm \
 | `CERT_CONTACT_EMAIL` | (empty) | Email for Let's Encrypt notifications (required in prod mode) |
 | `CERT_RSA_KEY_SIZE` | `4096` | RSA key size for certificates |
 
+## 🚀 Quick Start with GitHub Codespaces
+
+1. Click the **Code** button on GitHub and select **Create codespace on main**.
+2. Wait for the environment to build. The application will start automatically.
+3. When prompted, click **Open in Browser** for Port 80.
+4. **Logs:** To see the progress, run `docker compose logs -f backend`.
+5. **Login:** User: `admin` | Pass: `Admin123`
+
 ## Contributing to the configuration
 
 This project uses the [Initializer](https://github.com/mekomsolutions/openmrs-module-initializer) module
