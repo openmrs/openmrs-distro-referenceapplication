@@ -51,6 +51,7 @@ FROM ${BUILD_TYPE}_dev AS dev
 
 ### Run Stage
 FROM openmrs/openmrs-core:2.7.x-amazoncorretto-17
+ENV TZ=Africa/Nairobi
 
 COPY --from=dev /openmrs/distribution/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
 COPY --from=dev /openmrs/distribution/openmrs-distro.properties /openmrs/distribution/

@@ -28,7 +28,9 @@ RUN apk update && \
     apk upgrade && \
     # add more utils for sponge and envsubst
     apk add --no-cache moreutils
-
+RUN apk add --no-cache tzdata
+ENV TZ=Africa/Nairobi
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # clear any default files installed by nginx
 RUN rm -rf /usr/share/nginx/html/*
 

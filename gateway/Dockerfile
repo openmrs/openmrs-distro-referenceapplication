@@ -11,5 +11,9 @@ COPY watch-certs.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh /usr/local/bin/watch-certs.sh
 
+RUN apk add --no-cache tzdata
+ENV TZ=Africa/Nairobi
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
