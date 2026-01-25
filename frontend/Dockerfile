@@ -37,5 +37,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=dev /app/spa /usr/share/nginx/html
 COPY config-core_demo.json /usr/share/nginx/html
+COPY ./src/main/resources/* /usr/share/nginx/html
 
 CMD ["/usr/local/bin/startup.sh"]
