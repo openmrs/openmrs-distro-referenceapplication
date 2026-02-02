@@ -1,7 +1,7 @@
 services:
   gateway:
     build:
-      context: ../gateway
+      context: ../../gateway
     container_name: gateway
     restart: "unless-stopped"
     depends_on:
@@ -12,7 +12,7 @@ services:
 
   frontend:
     build:
-      context: ../frontend
+      context: ../../frontend
     container_name: frontend
     restart: "unless-stopped"
     environment:
@@ -28,7 +28,7 @@ services:
 
   backend:
     build:
-      context: ../
+      context: ../../
     container_name: backend
     depends_on:
       - db
