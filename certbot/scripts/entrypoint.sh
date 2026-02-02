@@ -26,6 +26,7 @@ SSL_MODE=${SSL_MODE:-dev}
 CERT_TEMP_CERT_DAYS=${CERT_TEMP_CERT_DAYS:-90}
 CERT_NGINX_STARTUP_WAIT=${CERT_NGINX_STARTUP_WAIT:-10}
 CERT_RENEWAL_INTERVAL=${CERT_RENEWAL_INTERVAL:-12h}
+CERT_PROFILE=${CERT_PROFILE:-}
 
 # Parse domain list
 OLD_IFS="$IFS"
@@ -36,8 +37,38 @@ IFS=${OLD_IFS}
 FIRST_DOMAIN="$1"
 CERT_WEB_DOMAIN_COMMON_NAME="${CERT_WEB_DOMAIN_COMMON_NAME:-$FIRST_DOMAIN}"
 
+# Detect if any domain is an IP address (for Let's Encrypt IP certificate support)
+# Let's Encrypt requires IP address certificates to use the shortlived profile
+HAS_IP_ADDRESS=false
+for DOMAIN in "$@"; do
+    # Match IPv4 addresses (e.g., 192.168.1.1) or IPv6 addresses (containing colons)
+    if echo "$DOMAIN" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' || echo "$DOMAIN" | grep -q ':'; then
+        HAS_IP_ADDRESS=true
+        break
+    fi
+done
+
+# Auto-enforce shortlived profile for IP addresses in production mode
+if [ "$HAS_IP_ADDRESS" = "true" ] && [ "${SSL_MODE}" = "prod" ]; then
+    if [ -z "${CERT_PROFILE}" ]; then
+        log_info "IP address detected in domains. Auto-selecting 'shortlived' profile (required by Let's Encrypt)."
+        CERT_PROFILE="shortlived"
+    elif [ "${CERT_PROFILE}" != "shortlived" ]; then
+        log_error "IP address detected but CERT_PROFILE is set to '${CERT_PROFILE}'."
+        log_error "Let's Encrypt requires IP address certificates to use the 'shortlived' profile."
+        exit 1
+    fi
+fi
+
 log_info "SSL Mode: ${SSL_MODE}"
 log_info "Primary domain: ${CERT_WEB_DOMAIN_COMMON_NAME}"
+if [ -n "${CERT_PROFILE}" ]; then
+    log_info "Certificate profile: ${CERT_PROFILE}"
+    if [ "${CERT_PROFILE}" = "shortlived" ]; then
+        log_info "Short-lived certificates (6 days) require frequent renewal checks."
+        log_info "Current renewal interval: ${CERT_RENEWAL_INTERVAL}"
+    fi
+fi
 
 # Check if certificates already exist
 if [ -f "${CERT_ROOT_PATH}/live/${CERT_WEB_DOMAIN_COMMON_NAME}/fullchain.pem" ]; then
@@ -190,11 +221,19 @@ else
         STAGING_ARG="--staging"
     fi
 
+    # Set certificate profile if specified (e.g., shortlived for 6-day certs, tlsserver for 45-day certs)
+    PROFILE_ARG=""
+    if [ -n "${CERT_PROFILE}" ]; then
+        log_info "Requesting certificate with profile: ${CERT_PROFILE}"
+        PROFILE_ARG="--preferred-profile ${CERT_PROFILE}"
+    fi
+
     # Request certificate
     certbot certonly --webroot -w "${CERTBOT_DATA_PATH}" \
         ${STAGING_ARG} \
         ${EMAIL_ARG} \
         ${DOMAIN_ARGS} \
+        ${PROFILE_ARG} \
         --rsa-key-size "${CERT_RSA_KEY_SIZE}" \
         --agree-tos \
         --no-eff-email

@@ -5,10 +5,12 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch: 
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
@@ -42,7 +44,9 @@ jobs:
   run-e2e-tests:
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         repo:
           - openmrs-esm-patient-management
@@ -121,5 +125,5 @@ jobs:
         with:
           name: server-logs-${{ matrix.repo }}
           path: "./logs"
-          retention-days: 2
+          retention-days: 30
           overwrite: true

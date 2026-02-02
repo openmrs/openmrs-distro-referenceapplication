@@ -23,37 +23,38 @@
 
     <!-- track module versions
          we do so here so that we can utilise Maven to track updates, etc. -->
-    <openmrs.version>2.8.1</openmrs.version>
-    <initializer.version>2.9.0</initializer.version>
-    <fhir2.version>2.8.0-SNAPSHOT</fhir2.version>
-    <webservices.rest.version>3.0.0-SNAPSHOT</webservices.rest.version>
+    <openmrs.version>2.8.3</openmrs.version>
+    <initializer.version>2.11.0-SNAPSHOT</initializer.version>
+    <fhir2.version>3.0.0-SNAPSHOT</fhir2.version>
+    <webservices.rest.version>3.1.0-SNAPSHOT</webservices.rest.version>
     <addresshierarchy.version>2.21.0</addresshierarchy.version>
+    <patientdocuments.version>1.0.0-SNAPSHOT</patientdocuments.version>
     <idgen.version>4.14.0</idgen.version>
-    <legacyui.version>1.23.0</legacyui.version>
-    <metadatamapping.version>1.6.0</metadatamapping.version>
-    <openconceptlab.version>2.4.0</openconceptlab.version>
-    <attachments.version>3.7.0</attachments.version>
-    <referencedemodata.version>2.5.0</referencedemodata.version>
-    <queue.version>2.9.0</queue.version>
+    <legacyui.version>2.0.0-SNAPSHOT</legacyui.version>
+    <metadatamapping.version>2.0.0-SNAPSHOT</metadatamapping.version>
+    <openconceptlab.version>2.6.0-SNAPSHOT</openconceptlab.version>
+    <attachments.version>4.0.0-SNAPSHOT</attachments.version>
+    <referencedemodata.version>2.6.1-SNAPSHOT</referencedemodata.version>
+    <queue.version>3.0.0-SNAPSHOT</queue.version>
     <appointments.version>2.1.0-20250318.070530-1</appointments.version>
     <teleconsultation.version>2.1.0-20250318.154145-1</teleconsultation.version>
     <cohort.version>3.7.3</cohort.version>
-    <authentication.version>2.0.0-SNAPSHOT</authentication.version>
-    <reporting.version>1.28.0</reporting.version>
+    <authentication.version>2.2.0-SNAPSHOT</authentication.version>
+    <reporting.version>2.1.0-SNAPSHOT</reporting.version>
     <reportingrest.version>1.15.0</reportingrest.version>
     <!-- the next three are required for reporting -->
     <calculation.version>1.3.0</calculation.version>
-    <htmlwidgets.version>1.12.0-SNAPSHOT</htmlwidgets.version>
-    <serialization-xstream.version>0.2.16</serialization-xstream.version>
+    <htmlwidgets.version>2.0.1</htmlwidgets.version>
+    <serialization-xstream.version>0.4.0-SNAPSHOT</serialization-xstream.version>
     <ordertemplates.version>1.0.2</ordertemplates.version>
     <patientflags.version>3.0.8</patientflags.version>
     <o3forms.version>2.3.0</o3forms.version>
-    <emrapi.version>2.3.0</emrapi.version>
-    <event.version>3.0.0</event.version>
+    <emrapi.version>3.2.1</emrapi.version>
+    <event.version>4.0.0-SNAPSHOT</event.version>
     <bedmanagement.version>6.2.0-SNAPSHOT</bedmanagement.version>
     <!-- Stock Management and Billing -->
     <stockmanagement.version>3.0.0-SNAPSHOT</stockmanagement.version>
-    <billing.version>1.3.3-SNAPSHOT</billing.version>
+    <billing.version>2.0.0-SNAPSHOT</billing.version>
     <!-- Content Packages -->
     <reference-content.version>1.5.0-SNAPSHOT</reference-content.version>
     <reference-demo-content.version>1.7.0-SNAPSHOT</reference-demo-content.version>
@@ -109,6 +110,12 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>addresshierarchy-omod</artifactId>
       <version>${addresshierarchy.version}</version>
+      <scope>provided</scope>
+    </dependency>
+      <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>patientdocuments-omod</artifactId>
+      <version>${patientdocuments.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -254,6 +261,7 @@
                   <directory>${project.basedir}</directory>
                   <includes>
                     <include>distro.properties</include>
+                    <include>distro-no-demo.properties</include>
                   </includes>
                   <filtering>true</filtering>
                 </resource>
@@ -302,6 +310,30 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>no-demo</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openmrs.maven.plugins</groupId>
+            <artifactId>openmrs-sdk-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>openmrs-sdk:build-distro</id>
+                <goals>
+                  <goal>build-distro</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                  <distro>${project.build.directory}/distro-no-demo.properties</distro>
+                  <dir>${project.build.directory}/sdk-distro</dir>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>validator</id>
       <build>
