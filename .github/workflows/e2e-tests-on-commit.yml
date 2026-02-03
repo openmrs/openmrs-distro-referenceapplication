@@ -40,6 +40,20 @@ jobs:
           path: e2e_release_env_images.tar.gz
           retention-days: 1
           if-no-files-found: error
+          
+      - name: 📝 Capture Server Logs
+        if: failure()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          dest: "./logs"
+
+      - name: 📤 Upload Logs as Artifact
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: server-logs-build-backend
+          path: "./logs"
+          overwrite: true
 
   run-e2e-tests:
     runs-on: ubuntu-latest
@@ -107,23 +121,22 @@ jobs:
 
       - name: Upload Report
         uses: actions/upload-artifact@v4
-        if: always()
+        if: failure()
         with:
           name: report-${{ matrix.repo }}
           path: e2e_repo/playwright-report/
           retention-days: 30
 
       - name: 📝 Capture Server Logs
-        if: always()
+        if: failure()
         uses: jwalton/gh-docker-logs@v2
         with:
           dest: "./logs"
 
       - name: 📤 Upload Logs as Artifact
         uses: actions/upload-artifact@v4
-        if: always()
+        if: failure()
         with:
           name: server-logs-${{ matrix.repo }}
           path: "./logs"
-          retention-days: 30
           overwrite: true
