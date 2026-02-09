@@ -1,0 +1,24 @@
+services:
+  gateway:
+    image: e2e/gateway:latest
+    restart: "unless-stopped"
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "8080:80"
+
+  frontend:
+    image: e2e/frontend:latest
+    restart: "unless-stopped"
+    depends_on:
+      - backend
+
+  backend:
+    image: e2e/backend:latest
+    restart: "unless-stopped"
+
+  db:
+    image: e2e/db:latest
+    restart: "unless-stopped"
+

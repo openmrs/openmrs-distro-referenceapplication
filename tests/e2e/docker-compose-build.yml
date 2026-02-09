@@ -1,8 +1,35 @@
-# This docker compose file is used to create a backend environment without volumes.
-
 services:
+  gateway:
+    build:
+      context: ../../gateway
+    container_name: gateway
+    restart: "unless-stopped"
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "80:80"
+
+  frontend:
+    build:
+      context: ../../frontend
+    container_name: frontend
+    restart: "unless-stopped"
+    environment:
+      SPA_PATH: /openmrs/spa
+      API_URL: /openmrs
+      SPA_CONFIG_URLS:
+      SPA_DEFAULT_LOCALE:
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost/" ]
+      timeout: 5s
+    depends_on:
+      - backend
+
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-nightly}
+    build:
+      context: ../../
+    container_name: backend
     depends_on:
       - db
     environment:
@@ -14,17 +41,17 @@ services:
       OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/openmrs" ]
       timeout: 5s
-    ports:
-      - 8080:8080
 
   # MariaDB
   db:
     image: mariadb:10.8.2
+    container_name: db
     command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --datadir=/openmrs-db"
     environment:
       MYSQL_DATABASE: openmrs
       MYSQL_USER: ${OPENMRS_DB_USER:-openmrs}
       MYSQL_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+
