@@ -17,7 +17,8 @@ services:
 
   gateway:
     environment:
-      CERT_WEB_DOMAIN_COMMON_NAME: ${CERT_WEB_DOMAIN_COMMON_NAME:-localhost}
+      CERT_WEB_DOMAINS: ${CERT_WEB_DOMAINS:-localhost,127.0.0.1}
+      CERT_WEB_DOMAIN_COMMON_NAME: ${CERT_WEB_DOMAIN_COMMON_NAME:-}
     ports:
       - "443:443"
     volumes:

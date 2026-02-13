@@ -88,8 +88,9 @@ docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
 **Configuration options**:
 
 - `SSL_MODE=prod` - Use Let's Encrypt certificates (required)
-- `CERT_WEB_DOMAINS` - Your domain name(s), comma-separated (e.g., `example.com,www.example.com`)
+- `CERT_WEB_DOMAINS` - Your domain name(s), comma-separated (e.g., `example.com,www.example.com`). The first domain is used as the primary domain for certificate paths and the nginx `server_name` directive.
 - `CERT_CONTACT_EMAIL` - Email for Let's Encrypt notifications
+- `CERT_WEB_DOMAIN_COMMON_NAME` - (Optional) Override the primary domain. By default, this is derived from the first domain in `CERT_WEB_DOMAINS`. You only need to set this if you want the certificate's common name to differ from the first domain.
 - `SSL_STAGING=true` - (Optional) Use Let's Encrypt staging environment for testing
 
 **The certbot container will**:
@@ -209,6 +210,21 @@ docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm \
   certificates
 ```
 
+### Regenerating certificates
+
+If you need to start fresh with certificates (e.g., after changing domains), delete the letsencrypt volume and restart:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml down
+
+# Remove only this project's letsencrypt volume
+docker volume rm "$(docker compose config | awk '/^name:/{print $2}')_letsencrypt-data"
+
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up
+```
+
+The certbot entrypoint skips certificate generation when it finds existing certificates for the configured domain. Removing the volume forces it to go through the full setup process again.
+
 ### Environment variables reference
 
 | Variable | Default | Description |
@@ -216,7 +232,7 @@ docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm \
 | `SSL_MODE` | `dev` | `dev` for self-signed certificates, `prod` for Let's Encrypt |
 | `SSL_STAGING` | `false` | Use Let's Encrypt staging environment (set to `true` for testing) |
 | `CERT_WEB_DOMAINS` | `localhost,127.0.0.1` | Comma-separated list of domain names or IP addresses |
-| `CERT_WEB_DOMAIN_COMMON_NAME` | (first domain) | Override the primary domain name |
+| `CERT_WEB_DOMAIN_COMMON_NAME` | first domain from `CERT_WEB_DOMAINS` | Override the primary domain used for certificate paths and nginx `server_name`. Most users should not set this. |
 | `CERT_CONTACT_EMAIL` | (empty) | Email for Let's Encrypt notifications (required in prod mode) |
 | `CERT_RSA_KEY_SIZE` | `4096` | RSA key size for certificates |
 | `CERT_PROFILE` | (empty) | Certificate profile: `classic` (90 days), `tlsserver` (45 days), or `shortlived` (6 days). Auto-set to `shortlived` for IP addresses |

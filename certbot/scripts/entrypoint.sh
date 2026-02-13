@@ -183,6 +183,10 @@ else
     log_info "Dummy certificate created. Waiting ${CERT_NGINX_STARTUP_WAIT}s for nginx to start..."
     sleep "${CERT_NGINX_STARTUP_WAIT}"
 
+    # Create the ACME challenge directory so nginx can serve it during the health check
+    mkdir -p "${CERTBOT_DATA_PATH}/.well-known/acme-challenge"
+    echo "ok" > "${CERTBOT_DATA_PATH}/.well-known/acme-challenge/index.html"
+
     # Wait for nginx to be ready
     until wget --spider -q http://gateway/.well-known/acme-challenge/ 2>/dev/null; do
         log_info "Waiting for nginx gateway to be ready..."
