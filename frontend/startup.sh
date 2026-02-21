@@ -58,4 +58,12 @@ if [ -f "/usr/share/nginx/html/service-worker.js" ]; then
   envsubst '${IMPORTMAP_URL} ${SPA_PATH} ${API_URL}' < "/usr/share/nginx/html/service-worker.js" | sponge "/usr/share/nginx/html/service-worker.js"
 fi
 
+for manifest in /usr/share/nginx/html/manifest.*.json; do
+  break;
+done
+
+if [ -f "$manifest" ]; then
+  envsubst '${IMPORTMAP_URL} ${SPA_PATH} ${API_URL}' < "$manifest" | sponge "$manifest"
+fi
+
 exec nginx -g "daemon off;"
