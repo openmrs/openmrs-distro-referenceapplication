@@ -234,7 +234,7 @@ The certbot entrypoint skips certificate generation when it finds existing certi
 
 The service can run with Grafana for monitoring logs. You can run it with:
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.grafana.yml up
+docker compose -f docker-compose.yml -f docker-compose.grafana.yml up
 ```
 Grafana will be available at http://localhost:3000. Use admin as username and see docker-compose.grafana.yml for the initial password.
 
