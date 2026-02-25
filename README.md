@@ -236,9 +236,9 @@ The service can run with Grafana for monitoring logs. You can run it with:
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.grafana.yml up
 ```
-Grafana will be available at http://localhost:3000. Use admin as username and see docker-compose.grafana.yml for the initial password.
+Grafana will be available at http://localhost/grafana. Use admin as username and see docker-compose.grafana.yml for the initial password.
 
-If you would like to use grafana in your distro, you just need to copy over `monitoring` and `docker-compose.grafana.yml`.
+If you would like to use grafana in your distro, you just need to copy over `docker-compose.grafana.yml`.
 
 ### Environment variables reference
 

@@ -9,46 +9,55 @@ version: "3.7"
 #    graphic logo is a trademark of OpenMRS Inc.
 
 services:
-    loki-init:
-        image: alpine:3.23
-        user: "0"
-        command: chown -R 10001:10001 /loki/data
+    monitoring-init:
+        image: openmrs/openmrs-reference-application-3-monitoring-init:${TAG:-qa}
+        build: ./monitoring
         volumes:
             - loki-data:/loki/data
+            - loki-config:/etc/loki
+            - alloy-config:/etc/alloy
+            - grafana-provisioning:/etc/grafana/provisioning
 
     loki:
         image: grafana/loki:3.6
         volumes:
-            - ./monitoring/loki-config.yaml:/etc/loki/local-config.yaml
+            - loki-config:/etc/loki
             - loki-data:/loki/data
         command: -config.file=/etc/loki/local-config.yaml
         depends_on:
-            loki-init:
+            monitoring-init:
                 condition: service_completed_successfully
 
     alloy:
         image: grafana/alloy:v1.13.1
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-            - ./monitoring/config.alloy:/etc/alloy/config.alloy
+            - alloy-config:/etc/alloy
         command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+        depends_on:
+            monitoring-init:
+                condition: service_completed_successfully
 
     grafana:
         image: grafana/grafana:12.3
-        ports:
-            - "3000:3000"
         environment:
             GF_LOG_LEVEL: warn
             GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-Admin123}
             GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /etc/grafana/provisioning/dashboards/json/logs-dashboard.json
+            GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+            GF_SERVER_SERVE_FROM_SUB_PATH: "true"
         volumes:
-            - ./monitoring/grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
-            - ./monitoring/grafana-dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
-            - ./monitoring/dashboards:/etc/grafana/provisioning/dashboards/json
+            - grafana-provisioning:/etc/grafana/provisioning
             - grafana-data:/var/lib/grafana
         depends_on:
-            - loki
+            loki:
+                condition: service_started
+            monitoring-init:
+                condition: service_completed_successfully
 
 volumes:
     grafana-data:
     loki-data:
+    loki-config:
+    alloy-config:
+    grafana-provisioning:

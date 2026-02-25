@@ -23,6 +23,10 @@ upstream backend {
   server backend:8080 max_fails=0;
 }
 
+upstream grafana {
+  server grafana:3000 max_fails=0;
+}
+
 server {
   listen [::]:80;
   listen 80;
@@ -109,6 +113,10 @@ server {
 
   location /openmrs {
     proxy_pass http://backend;
+  }
+
+  location /grafana {
+    proxy_pass http://grafana;
   }
 
   location = / {
