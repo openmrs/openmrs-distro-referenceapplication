@@ -23,10 +23,6 @@ upstream backend {
   server backend:8080 max_fails=0;
 }
 
-upstream grafana {
-  server grafana:3000 max_fails=0;
-}
-
 server {
   listen [::]:80;
   listen       80;
@@ -84,8 +80,10 @@ server {
   }
 
   location /grafana {
+    resolver 127.0.0.11 valid=30s ipv6=off;
+    set $grafana http://grafana:3000;
     proxy_read_timeout 300s;
-    proxy_pass http://grafana;
+    proxy_pass $grafana;
   }
 
   location = /openmrs/spa/ {
