@@ -22,12 +22,4 @@ mkdir -p /etc/grafana/provisioning/dashboards/json
 cp /monitoring/grafana-dashboards.yaml /etc/grafana/provisioning/dashboards/dashboards.yaml
 cp /monitoring/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
 
-echo "Copying Prometheus config..."
-mkdir -p /etc/prometheus
-cp /monitoring/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
-
-echo "Copying Blackbox config..."
-mkdir -p /config
-cp /monitoring/blackbox.yml /config/blackbox.yml
-
 echo "Configuration initialization complete."

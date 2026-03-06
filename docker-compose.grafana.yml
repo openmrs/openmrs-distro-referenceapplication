@@ -15,9 +15,7 @@ services:
         volumes:
             - loki-data:/loki/data
             - loki-config:/etc/loki
-            - prometheus-config:/etc/prometheus
             - alloy-config:/etc/alloy
-            - blackbox-config:/config
             - grafana-provisioning:/etc/grafana/provisioning
 
     loki:
@@ -40,28 +38,6 @@ services:
             monitoring-init:
                 condition: service_completed_successfully
 
-    prometheus:
-        image: prom/prometheus:v3.9.0
-        container_name: prometheus
-        ports:
-            - "9090:9090"
-        volumes:
-            - prometheus-config:/etc/prometheus
-            - prometheus_data:/prometheus
-        depends_on:
-            monitoring-init:
-                condition: service_completed_successfully
-
-    blackbox:
-        image: prom/blackbox-exporter:v0.28.0
-        container_name: blackbox
-        command: --config.file=/config/blackbox.yml
-        volumes:
-            - blackbox-config:/config
-        depends_on:
-            monitoring-init:
-                condition: service_completed_successfully
-
     grafana:
         image: grafana/grafana:12.3
         environment:
@@ -79,15 +55,8 @@ services:
             monitoring-init:
                 condition: service_completed_successfully
 
-networks:
-    monitoring:
-        name: openmrs-distro-referenceapplication_monitoring
-
 volumes:
     grafana-data:
-    prometheus_data:
-    prometheus-config:
-    blackbox-config:
     loki-data:
     loki-config:
     alloy-config:
