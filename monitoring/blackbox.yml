@@ -1,0 +1,8 @@
+modules:
+  http_2xx_ignore_ssl:
+    prober: http
+    http:
+      valid_status_codes: [200]
+      # Ignore SSL exceptions
+      tls_config:
+        insecure_skip_verify: true
