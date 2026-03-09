@@ -46,6 +46,7 @@ services:
     image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
     build:
       context: .
+      dockerfile: backend/Dockerfile
       args:
         GHP_USERNAME: ${GHP_USERNAME}
         GHP_PASSWORD: ${GHP_PASSWORD}

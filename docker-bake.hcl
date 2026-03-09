@@ -34,7 +34,7 @@ group "all" {
 
 target "backend" {
   context    = "."
-  dockerfile = "Dockerfile"
+  dockerfile = "backend/Dockerfile"
   tags       = ["openmrs/openmrs-reference-application-3-backend:${TAG}"]
   args = {
     GHP_USERNAME = GHP_USERNAME

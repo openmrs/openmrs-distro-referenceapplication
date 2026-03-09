@@ -94,6 +94,12 @@ Cada profile requiere sus variables en `.env`. Ver `.env.template` para la lista
 docker-compose.yml              # Entry point (include + profiles + volumes + networks)
 docker-compose-no-volumes.yml   # CI/testing (standalone)
 docker-bake.hcl                 # Build definitions
+backend/                        # Backend (Dockerfile, pom.xml, credentials, config)
+gateway/                        # Nginx gateway
+frontend/                       # SPA frontend
+certbot/                        # SSL certificates
+keycloak/                       # Keycloak auth
+imaging/                        # OHIF config
 compose/
   core.yml                      # gateway, frontend, backend, db
   fua.yml                       # profile: fua
@@ -189,7 +195,7 @@ GHP_USERNAME=<tu_usuario_github>
 GHP_PASSWORD=<tu_token_github_con_read:packages>
 ```
 
-Estas se pasan como **build args** al Dockerfile, que las exporta como variables de entorno para que Maven las use en `distro/credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
+Estas se pasan como **build args** al Dockerfile, que las exporta como variables de entorno para que Maven las use en `backend/credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
 
 > **Nota:** Este proyecto NO usa Docker secrets. Las credenciales se manejan mediante variables de entorno en el archivo `.env`.
 
