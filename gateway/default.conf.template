@@ -28,11 +28,6 @@ upstream backend {
   server backend:8080 max_fails=0;
 }
 
-upstream fua-generator {
-  server fua-generator:3000 max_fails=3 fail_timeout=10s;
-  keepalive 16;
-}
-
 ${FUA_CONFIG}
 
 server {
@@ -110,39 +105,5 @@ server {
     return 301 /openmrs/spa/home;
   }
 
-  location = /services/fua-generator {
-    return 301 /services/fua-generator/;
-  }
-
-  location /services/fua-generator/ {
-    # Headers CORS - Permitir peticiones desde el frontend
-    add_header 'Access-Control-Allow-Origin' '$http_origin' always;
-    add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
-    add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
-    add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
-
-    # Manejar preflight requests (OPTIONS)
-    if ($request_method = 'OPTIONS') {
-      add_header 'Access-Control-Allow-Origin' '$http_origin';
-      add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
-      add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization';
-      add_header 'Access-Control-Max-Age' 1728000;
-      add_header 'Content-Type' 'text/plain; charset=utf-8';
-      add_header 'Content-Length' 0;
-      return 204;
-    }
-
-    proxy_pass http://fua-generator/;
-    proxy_redirect http://$host/ /services/fua-generator/;
-
-    # Si el upstream falla, devolver 503 con mensaje personalizado
-    error_page 502 503 504 = @fua_unavailable;
-  }
-
-  # Location para manejar cuando fua-generator no está disponible
-  location @fua_unavailable {
-    add_header Content-Type application/json always;
-    return 503 '{"error": "FUA Generator service is temporarily unavailable", "status": 503}';
-  }
 }
 
