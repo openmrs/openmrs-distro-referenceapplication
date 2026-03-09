@@ -189,7 +189,7 @@ GHP_USERNAME=<tu_usuario_github>
 GHP_PASSWORD=<tu_token_github_con_read:packages>
 ```
 
-Estas se pasan como **build args** al Dockerfile, que las exporta como variables de entorno para que Maven las use en `credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
+Estas se pasan como **build args** al Dockerfile, que las exporta como variables de entorno para que Maven las use en `distro/credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
 
 > **Nota:** Este proyecto NO usa Docker secrets. Las credenciales se manejan mediante variables de entorno en el archivo `.env`.
 

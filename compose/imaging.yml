@@ -10,7 +10,7 @@ services:
     ports:
       - "3000:80"
     volumes:
-      - ./ohif/app-config.js:/usr/share/nginx/html/app-config.js:ro
+      - ./imaging/app-config.js:/usr/share/nginx/html/app-config.js:ro
     depends_on:
       - orthanc
     healthcheck:

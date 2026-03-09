@@ -16,7 +16,7 @@ ARG MVN_ARGS_SETTINGS="-s /root/.m2/settings.xml -U -P distro"
 ARG MVN_ARGS="install"
 
 # Copy build files
-COPY credentials/settings.xml.template /root/.m2/settings.xml
+COPY distro/credentials/settings.xml.template /root/.m2/settings.xml
 COPY pom.xml ./
 COPY distro/pom.xml ./distro/
 
