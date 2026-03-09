@@ -67,19 +67,19 @@ echo -e "${BLUE}================================${NC}"
 if [ "$EXTERNAL_MODE" != "external" ]; then
     # Test 1: Check if containers are running
     print_test "Checking if containers are running..."
-    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps 2>/dev/null | grep -q "gateway.*Up"; then
+    if docker compose -f docker-compose.yml -f compose/ssl.yml ps 2>/dev/null | grep -q "gateway.*Up"; then
         print_success "Gateway container is running"
     else
         print_failure "Gateway container is not running"
     fi
 
-    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps 2>/dev/null | grep -q "backend.*Up"; then
+    if docker compose -f docker-compose.yml -f compose/ssl.yml ps 2>/dev/null | grep -q "backend.*Up"; then
         print_success "Backend container is running"
     else
         print_failure "Backend container is not running"
     fi
 
-    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps 2>/dev/null | grep -q "frontend.*Up"; then
+    if docker compose -f docker-compose.yml -f compose/ssl.yml ps 2>/dev/null | grep -q "frontend.*Up"; then
         print_success "Frontend container is running"
     else
         print_failure "Frontend container is not running"
@@ -101,7 +101,7 @@ if [ "$EXTERNAL_MODE" != "external" ]; then
 
     # Test 3: Check certbot container completed successfully
     print_test "Checking certbot container status..."
-    CERTBOT_STATUS=$(docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps -a certbot 2>/dev/null | grep certbot 2>/dev/null)
+    CERTBOT_STATUS=$(docker compose -f docker-compose.yml -f compose/ssl.yml ps -a certbot 2>/dev/null | grep certbot 2>/dev/null)
     if echo "$CERTBOT_STATUS" | grep -q "Exited (0)"; then
         print_success "Certbot container completed successfully"
     else
@@ -121,13 +121,13 @@ if [ "$EXTERNAL_MODE" != "external" ]; then
 
     # Test 5: Verify nginx is listening on correct ports
     print_test "Checking nginx ports..."
-    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps gateway 2>/dev/null | grep -q "443"; then
+    if docker compose -f docker-compose.yml -f compose/ssl.yml ps gateway 2>/dev/null | grep -q "443"; then
         print_success "Nginx listening on port 443 (HTTPS)"
     else
         print_failure "Nginx not listening on port 443"
     fi
 
-    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps gateway 2>/dev/null | grep -q "80"; then
+    if docker compose -f docker-compose.yml -f compose/ssl.yml ps gateway 2>/dev/null | grep -q "80"; then
         print_success "Nginx listening on port 80 (HTTP)"
     else
         print_failure "Nginx not listening on port 80"

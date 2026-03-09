@@ -56,8 +56,8 @@ CERT_WEB_DOMAINS=192.168.10.5,localhost,127.0.0.1
 ```
 
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml build
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
+docker compose -f docker-compose.yml -f compose/ssl.yml build
+docker compose -f docker-compose.yml -f compose/ssl.yml up -d
 
 # https://192.168.10.5/openmrs/spa
 ```

@@ -29,7 +29,7 @@ Test the SSL setup with self-signed certificates for localhost:
 
 ```bash
 # 1. Start the services with SSL
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
+docker compose -f docker-compose.yml -f compose/ssl.yml up -d
 
 # 2. Run the test script
 ./tests/ssl/test-ssl.sh
@@ -59,10 +59,10 @@ export CERT_WEB_DOMAINS=sihsalus.example.com
 export CERT_CONTACT_EMAIL=admin@example.com
 
 # 2. Start the services
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
+docker compose -f docker-compose.yml -f compose/ssl.yml up -d
 
 # 3. Check certbot logs for any issues
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml logs certbot
+docker compose -f docker-compose.yml -f compose/ssl.yml logs certbot
 
 # 4. Run the production test script
 ./tests/ssl/test-ssl-prod.sh sihsalus.example.com
@@ -87,7 +87,7 @@ Once staging tests pass, switch to production Let's Encrypt:
 
 ```bash
 # 1. Clean up staging certificates
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml down -v
+docker compose -f docker-compose.yml -f compose/ssl.yml down -v
 
 # 2. Use production Let's Encrypt
 export SSL_MODE=prod
@@ -96,7 +96,7 @@ export CERT_WEB_DOMAINS=sihsalus.example.com,www.sihsalus.example.com
 export CERT_CONTACT_EMAIL=admin@example.com
 
 # 3. Start the services
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
+docker compose -f docker-compose.yml -f compose/ssl.yml up -d
 
 # 4. Verify with test script
 ./tests/ssl/test-ssl-prod.sh sihsalus.example.com
@@ -165,7 +165,7 @@ nc -zv yourdomain.com 443
 
 **Check certbot logs:**
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml logs certbot
+docker compose -f docker-compose.yml -f compose/ssl.yml logs certbot
 ```
 
 **Common issues:**
@@ -203,12 +203,12 @@ docker compose logs gateway
 
 **Manual renewal test:**
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm certbot renew --dry-run
+docker compose -f docker-compose.yml -f compose/ssl.yml run --rm certbot renew --dry-run
 ```
 
 **Force renewal:**
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm certbot renew --force-renewal
+docker compose -f docker-compose.yml -f compose/ssl.yml run --rm certbot renew --force-renewal
 ```
 
 ## Let's Encrypt Rate Limits

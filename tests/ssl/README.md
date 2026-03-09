@@ -13,7 +13,7 @@ This directory contains scripts and documentation for testing SSL/HTTPS configur
 ### Local Testing (Development)
 ```bash
 # Start services with SSL
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
+docker compose -f docker-compose.yml -f compose/ssl.yml up -d
 
 # Run tests
 ./tests/ssl/test-ssl.sh
