@@ -22,9 +22,9 @@ window.config = {
       configuration: {
         friendlyName: "PeruHCE Orthanc",
         name: "orthanc",
-        wadoUriRoot: "http://hii1sc-dev.inf.pucp.edu.pe:8043/wado",
-        qidoRoot: "http://hii1sc-dev.inf.pucp.edu.pe:8043/dicom-web",
-        wadoRoot: "http://hii1sc-dev.inf.pucp.edu.pe:8043/dicom-web",
+        wadoUriRoot: "/wado",
+        qidoRoot: "/dicom-web",
+        wadoRoot: "/dicom-web",
         qidoSupportsIncludeField: false,
         supportsReject: false,
         imageRendering: "wadors",
