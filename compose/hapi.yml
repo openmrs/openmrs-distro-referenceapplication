@@ -1,0 +1,36 @@
+# HAPI FHIR Server (Interoperabilidad MINSA Peru)
+# Profile: hapi
+
+services:
+  hapi-fhir:
+    container_name: peruHCE-hapi-fhir
+    image: johanamador/hapi-fhir-minsa-peru:latest
+    restart: "unless-stopped"
+    profiles: [ hapi ]
+    ports:
+      - "8085:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://hapi-postgres:5432/${HAPI_DB_NAME:-hapi}
+      SPRING_DATASOURCE_USERNAME: ${HAPI_DB_USER:-hapi}
+      SPRING_DATASOURCE_PASSWORD: ${HAPI_DB_PASSWORD}
+    depends_on:
+      hapi-postgres:
+        condition: service_healthy
+
+  hapi-postgres:
+    container_name: peruHCE-hapi-postgres
+    image: postgres:15
+    restart: "unless-stopped"
+    profiles: [ hapi ]
+    environment:
+      POSTGRES_DB: ${HAPI_DB_NAME:-hapi}
+      POSTGRES_USER: ${HAPI_DB_USER:-hapi}
+      POSTGRES_PASSWORD: ${HAPI_DB_PASSWORD}
+    volumes:
+      - hapi_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${HAPI_DB_USER:-hapi} -d ${HAPI_DB_NAME:-hapi}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s

@@ -1,41 +1,58 @@
-// Minimal Grafana Alloy configuration (fixed syntax)
+// Grafana Alloy configuration for PeruHCE
+// Based on upstream OpenMRS with SIHSALUS customizations
 
 logging {
-  level = "info"
-  format = "logfmt"
+  level = "warn"
 }
 
-loki.write "default" {
-  endpoint {
-    url = "http://loki:3100/loki/api/v1/push"
-    batch_wait = "1s"
-    batch_size = "1MB"
-  }
-}
-
-discovery.docker "containers" {
+discovery.docker "linux" {
   host = "unix:///var/run/docker.sock"
-  refresh_interval = "5s"
+}
+
+discovery.relabel "docker_logs" {
+  targets = discovery.docker.linux.targets
+
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    regex         = "/(.*)"
+    target_label  = "container_name"
+  }
+
+  rule {
+    action       = "replace"
+    replacement  = "docker"
+    target_label = "job"
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_compose_service"]
+    target_label  = "service_name"
+  }
 }
 
 loki.source.docker "docker_logs" {
-  host = "unix:///var/run/docker.sock"
-  targets = discovery.docker.containers.targets
-
-  forward_to = [loki.process.docker_pipeline.receiver]
-
-  labels = {
-    job = "docker",
-  }
+  host       = "unix:///var/run/docker.sock"
+  targets    = discovery.relabel.docker_logs.output
+  forward_to = [loki.process.docker_process.receiver]
 }
 
-loki.process "docker_pipeline" {
-  forward_to = [loki.write.default.receiver]
+loki.process "docker_process" {
+  forward_to = [loki.write.local.receiver]
 
-  stage.docker {}
+  // Drop noisy Loki internal logs
+  stage.drop {
+    expression = ".*(msg=\\\"(error notifying scheduler about finished query|error processing requests from scheduler|error health checking|error notifying frontend about finished query|error getting ingester clients)\\\"|msg=\\\"write operation failed\\\" details=\\\"entry too far behind).*"
+  }
 
+  // Join multiline logs (Java stack traces)
+  stage.multiline {
+    firstline = "^(?i)((\\d{4}-\\d{2}-\\d{2}|\\d{2}-[a-z]{3}-\\d{4})|(trace|debug|info|warning|warn|error|fatal|panic|note))"
+    max_wait_time = "3s"
+  }
+
+  // Extract log level
   stage.regex {
-    expression = "(?P<level>ERROR|WARN|INFO|DEBUG|TRACE)"
+    expression = "(?i)(?P<level>trace|debug|info|warning|warn|error|fatal|panic|note)"
   }
 
   stage.labels {
@@ -44,10 +61,39 @@ loki.process "docker_pipeline" {
     }
   }
 
+  // Normalize log levels
+  stage.match {
+    selector = "{level=~\"(?i)warn(ing)?\"}"
+    stage.static_labels {
+      values = { level = "warn" }
+    }
+  }
+
+  stage.match {
+    selector = "{level=~\"(?i)(info|note)\"}"
+    stage.static_labels {
+      values = { level = "info" }
+    }
+  }
+
+  stage.match {
+    selector = "{level=~\"(?i)(error|fatal|panic)\"}"
+    stage.static_labels {
+      values = { level = "error" }
+    }
+  }
+
+  // SIHSALUS-specific labels
   stage.static_labels {
     values = {
       environment = "production",
       application = "peruhce",
     }
+  }
+}
+
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
   }
 }

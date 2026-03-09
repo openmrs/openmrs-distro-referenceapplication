@@ -1,7 +1,7 @@
 services:
   gateway:
     build:
-      context: ../gateway
+      context: ../../gateway
     container_name: gateway
     restart: "unless-stopped"
     depends_on:
@@ -12,7 +12,7 @@ services:
 
   frontend:
     build:
-      context: ../frontend
+      context: ../../frontend
     container_name: frontend
     restart: "unless-stopped"
     environment:
@@ -28,11 +28,10 @@ services:
 
   backend:
     build:
-      context: ../
+      context: ../../
     container_name: backend
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     environment:
       OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
@@ -55,10 +54,3 @@ services:
       MYSQL_USER: ${OPENMRS_DB_USER:-openmrs}
       MYSQL_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
-    healthcheck:
-      test: [ "CMD-SHELL", "mysql --user=${OPENMRS_DB_USER:-openmrs} --password=${OPENMRS_DB_PASSWORD:-openmrs} --execute 'SHOW DATABASES;'" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-

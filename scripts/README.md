@@ -69,7 +69,7 @@ Cada script de backup mantiene solo los últimos 5 archivos de log (por ejemplo,
 
 Los scripts están referenciados en:
 - `docker-compose.yml` - Para entornos de desarrollo
-- `docker-compose-prod.yml` - Para entornos de producción
+- `compose/ssl.yml` - Para entornos con SSL/HTTPS
 - `frontend/Dockerfile` - Para la construcción del contenedor frontend
 
 ## Migración

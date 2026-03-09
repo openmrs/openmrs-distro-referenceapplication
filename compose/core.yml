@@ -1,0 +1,97 @@
+# Core services: gateway, frontend, backend, db
+
+services:
+  gateway:
+    container_name: peruHCE-gateway
+    build:
+      context: ./gateway
+    restart: "unless-stopped"
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "80:80"
+    environment:
+      FRAME_ANCESTORS: ${FRAME_ANCESTORS:-}
+      FUA_CONFIG: ${FUA_CONFIG:-}
+      FUA_LOCATIONS: ${FUA_LOCATIONS:-}
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  frontend:
+    container_name: peruHCE-frontend
+    build:
+      context: ./frontend
+    restart: "unless-stopped"
+    environment:
+      SPA_PATH: /openmrs/spa
+      API_URL: /openmrs
+      SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json,
+      SPA_DEFAULT_LOCALE: es
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost/" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      - backend
+
+  backend:
+    container_name: peruHCE-backend
+    image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
+    build:
+      context: .
+      args:
+        GHP_USERNAME: ${GHP_USERNAME}
+        GHP_PASSWORD: ${GHP_PASSWORD}
+    restart: "unless-stopped"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
+      OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
+      OMRS_CONFIG_CREATE_TABLES: "true"
+      OMRS_CONFIG_CONNECTION_SERVER: db
+      OMRS_CONFIG_CONNECTION_DATABASE: openmrs
+      OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
+      OMRS_CONFIG_CONNECTION_PASSWORD: ${MYSQL_OPENMRS_PASSWORD}
+      OMRS_OCL_TOKEN: ${OMRS_OCL_TOKEN}
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/openmrs/health/started" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 1800s
+    volumes:
+      - openmrs-data:/openmrs/data
+
+  db:
+    container_name: peruHCE-db-master
+    image: mariadb:10.11.7
+    restart: "unless-stopped"
+    command: "mariadbd --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1"
+    healthcheck:
+      test: [ "CMD-SHELL", "mariadb --user=${OMRS_DB_USER:-openmrs} --password=${MYSQL_OPENMRS_PASSWORD} --execute 'SHOW DATABASES;'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    environment:
+      MYSQL_DATABASE: openmrs
+      MYSQL_USER: ${OMRS_DB_USER:-openmrs}
+      MYSQL_PASSWORD: ${MYSQL_OPENMRS_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      OMRS_DB_REPL_USER: ${OMRS_DB_REPL_USER:-openmrs_repl}
+      OMRS_DB_REPL_PASSWORD: ${OMRS_DB_REPL_PASSWORD}
+      OMRS_DB_BACKUP_USER: ${OMRS_DB_BACKUP_USER:-openmrs_backup}
+      OMRS_DB_BACKUP_PASSWORD: ${OMRS_DB_BACKUP_PASSWORD}
+    volumes:
+      - ./scripts/database/db_init_master.sh:/docker-entrypoint-initdb.d/db_init_master.sh
+      - db-data:/var/lib/mysql
+      - db-backup:/backup

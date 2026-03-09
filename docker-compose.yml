@@ -1,181 +1,96 @@
-services:
-  gateway:
-    container_name: peruHCE-gateway
-    #image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
-    build:
-      context: ./gateway
-    restart: "unless-stopped"
-    depends_on:
-      - frontend
-      - backend
-    ports:
-      - "80:80"
-    environment:
-      FRAME_ANCESTORS: ${FRAME_ANCESTORS:-}
-      FUA_CONFIG: ${FUA_CONFIG:-}
-      FUA_LOCATIONS: ${FUA_LOCATIONS:-}
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost/" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
+# ===========================================
+# peruHCE - DOCKER COMPOSE
+# ===========================================
+#
+# USAGE:
+#   docker compose up -d                                        # Core (gateway, frontend, backend, db)
+#   docker compose --profile fua up -d                          # + FUA Generator
+#   docker compose --profile hapi up -d                         # + HAPI FHIR Server
+#   docker compose --profile imaging up -d                      # + Medical Imaging (OHIF/Orthanc)
+#   docker compose --profile keycloak up -d                     # + Keycloak Auth
+#   docker compose --profile monitoring up -d                   # + Observability (Grafana/Prometheus/Loki)
+#   docker compose --profile fua --profile hapi up -d           # Combine profiles
+#
+# SSL/HTTPS (override adicional):
+#   docker compose -f docker-compose.yml -f compose/ssl.yml up -d
+#
+# BUILD (con Docker Bake):
+#   docker buildx bake                    # Build core images (backend, gateway, frontend)
+#   docker buildx bake all                # Build all targets (+ keycloak, certbot)
+#
+# CI/TESTING (sin volumenes):
+#   docker compose -f docker-compose-no-volumes.yml up -d
 
-  frontend:
-    container_name: peruHCE-frontend
-    #image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
-    build:
-      context: ./frontend
-    restart: "unless-stopped"
-    environment:
-      SPA_PATH: /openmrs/spa
-      API_URL: /openmrs
-      SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json,
-      SPA_DEFAULT_LOCALE: es
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost/" ]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
-    depends_on:
-      - backend
+include:
+  - path: compose/core.yml
+    project_directory: .
+  - path: compose/fua.yml
+    project_directory: .
+  - path: compose/hapi.yml
+    project_directory: .
+  - path: compose/imaging.yml
+    project_directory: .
+  - path: compose/keycloak.yml
+    project_directory: .
+  - path: compose/monitoring.yml
+    project_directory: .
 
-  backend:
-    container_name: peruHCE-backend
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
-    restart: "unless-stopped"
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
-      OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
-      OMRS_CONFIG_CREATE_TABLES: "true"
-      OMRS_CONFIG_CONNECTION_SERVER: db
-      OMRS_CONFIG_CONNECTION_DATABASE: openmrs
-      OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
-      OMRS_CONFIG_CONNECTION_PASSWORD: ${MYSQL_OPENMRS_PASSWORD}
-      OMRS_OCL_TOKEN: ${OMRS_OCL_TOKEN}
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/openmrs/health/started" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 1800s
-    volumes:
-      - openmrs-data:/openmrs/data
-    build:
-      context: .
-      args:
-        GHP_USERNAME: ${GHP_USERNAME}
-        GHP_PASSWORD: ${GHP_PASSWORD}
-
-  db:
-    container_name: peruHCE-db-master
-    image: mariadb:10.11.7
-    restart: "unless-stopped"
-    command: "mariadbd --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1"
-    healthcheck:
-      test: [ "CMD-SHELL", "mariadb --user=${OMRS_DB_USER:-openmrs} --password=${MYSQL_OPENMRS_PASSWORD} --execute 'SHOW DATABASES;'" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-    environment:
-      MYSQL_DATABASE: openmrs
-      MYSQL_USER: ${OMRS_DB_USER:-openmrs}
-      MYSQL_PASSWORD: ${MYSQL_OPENMRS_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      OMRS_DB_REPL_USER: ${OMRS_DB_REPL_USER:-openmrs_repl}
-      OMRS_DB_REPL_PASSWORD: ${OMRS_DB_REPL_PASSWORD}
-      OMRS_DB_BACKUP_USER: ${OMRS_DB_BACKUP_USER:-openmrs_backup}
-      OMRS_DB_BACKUP_PASSWORD: ${OMRS_DB_BACKUP_PASSWORD}
-    # ports:
-    #   - "3307:3306" # Only expose for debugging; not for production
-    volumes:
-      - ./scripts/database/db_init_master.sh:/docker-entrypoint-initdb.d/db_init_master.sh
-      - db-data:/var/lib/mysql
-      - db-backup:/backup
-
-  fua-generator:
-    container_name: peruHCE-fua-generator
-    image: marcelius733/fua-generator:dev-0.1.6
-    # ports:
-    #   - "3333:3000" # Only expose for debugging; not for production
-    #env_file: "enviromentVariables.env"
-    environment:
-      DB_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
-      DB_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
-      DB_NAME: ${PERUHCE_FUA_GEN_DB:-fuagenerator}      
-      TOKEN: ${PERUHCE_FUA_GEN_TOKEN:-fuagenerator}
-      DB_HOST: 'fua-generator-db'
-      DB_PORT: '5432'
-    depends_on:
-      - fua-generator-db
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:3000/" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
-
-  fua-generator-db:
-    container_name: peruHCE-fua-generator-db
-    image: postgres:17
-    # ports:
-    #   - "5433:5432" # Only expose for debugging; not for production
-    environment:
-      POSTGRES_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
-      POSTGRES_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
-      POSTGRES_DB: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
-    volumes:
-      - db-fua-generator:/var/lib/postgresql/data
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator} -d ${PERUHCE_FUA_GEN_DB:-fuagenerator}" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-
-  hapi-fhir:
-    image: johanamador/hapi-fhir-minsa-peru:latest
-    container_name: peruHCE-hapi-fhir
-    restart: unless-stopped
-    ports:
-      - "8085:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://hapi-postgres:5432/hapi
-      - SPRING_DATASOURCE_USERNAME=hapi
-      - SPRING_DATASOURCE_PASSWORD=hapi
-    depends_on:
-      - hapi-postgres
-    networks:
-      default:
-        aliases:
-          - hapi-fhir-server
-      peruHCE-net:
-
-  hapi-postgres:
-    image: postgres:15
-    container_name: peruHCE-hapi-postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: hapi
-      POSTGRES_USER: hapi
-      POSTGRES_PASSWORD: hapi
-    volumes:
-      - hapi_pgdata:/var/lib/postgresql/data
-    networks:
-      - default
-      - peruHCE-net
 volumes:
-  openmrs-data: ~
-  db-data: ~
-  db-backup: ~
-  db-fua-generator: ~
-  hapi_pgdata: ~
+  # Core
+  openmrs-data:
+  db-data:
+  db-backup:
+  # FUA (profile: fua)
+  db-fua-generator:
+  # HAPI FHIR (profile: hapi)
+  hapi_pgdata:
+  # Imaging (profile: imaging)
+  orthanc-data:
+    name: peruHCE-orthanc-data
+  # Keycloak (profile: keycloak)
+  keycloak-data:
+    name: peruHCE-keycloak-data
+  # Monitoring (profile: monitoring)
+  prometheus-data:
+    name: peruHCE-prometheus-data
+  loki-data:
+    name: peruHCE-loki-data
+  alloy-data:
+    name: peruHCE-alloy-data
+  grafana-data:
+    name: peruHCE-grafana-data
 
 networks:
-  peruHCE-net:
+  # Red principal - servicios core
+  default:
     driver: bridge
+  # Red de servicios auxiliares (FUA, inter-service)
+  services-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.27.0.0/24
+  # Red medica - DICOM/Orthanc/OHIF
+  dicom-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.24.0.0/24
+  # Red de autenticacion - Keycloak
+  auth-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/24
+  # Red de monitoreo - Prometheus, Loki, Grafana
+  monitoring-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/24
+  # Red de gestion - Grafana admin
+  management-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.26.0.0/24

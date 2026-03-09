@@ -15,6 +15,8 @@
 ## Tabla de Contenidos
 
 - [Inicio Rápido](#inicio-rápido)
+- [Profiles](#profiles)
+- [Docker Bake (Build)](#docker-bake-build)
 - [Configuración SSL/HTTPS](#configuración-sslhttps)
 - [Credenciales de GitHub Packages](#credenciales-de-github-packages)
 - [Políticas de Seguridad](#políticas-de-seguridad-cifrado-de-backups-y-retención-de-logs)
@@ -25,29 +27,110 @@
 
 ### 1. Configurar variables de entorno
 
-Crear un archivo `.env` en la raíz del proyecto con las siguientes variables obligatorias:
+```bash
+cp .env.template .env
+# Editar .env con tus valores
+```
+
+Variables obligatorias en `.env`:
 
 ```env
-# Credenciales de GitHub Packages (obligatorio para construir el backend)
+# GitHub Packages (obligatorio para build)
 GHP_USERNAME=<tu_usuario_github>
 GHP_PASSWORD=<tu_token_github_con_read:packages>
 
-# Token de OCL para importar conceptos médicos
+# Base de datos OpenMRS
+MYSQL_OPENMRS_PASSWORD=<password_seguro>
+MYSQL_ROOT_PASSWORD=<password_seguro>
+
+# Token OCL para importar conceptos médicos
 OMRS_OCL_TOKEN=<tu_token_de_ocl>
 ```
 
 ### 2. Construir e iniciar
 
-#### Sin SSL (desarrollo local)
-
 ```bash
-docker compose build
+# Core (gateway, frontend, backend, db)
 docker compose up -d
 
 # http://localhost/openmrs/spa
 ```
 
-#### Con SSL (producción / red hospitalaria)
+## Profiles
+
+La infraestructura se organiza en **profiles** opcionales. Solo los servicios core (gateway, frontend, backend, db) se inician por defecto.
+
+```bash
+# Core solamente
+docker compose up -d
+
+# Core + FUA Generator
+docker compose --profile fua up -d
+
+# Core + HAPI FHIR
+docker compose --profile hapi up -d
+
+# Core + Medical Imaging (OHIF/Orthanc)
+docker compose --profile imaging up -d
+
+# Core + Keycloak Auth
+docker compose --profile keycloak up -d
+
+# Core + Observabilidad (Grafana/Prometheus/Loki)
+docker compose --profile monitoring up -d
+
+# Combinar profiles
+docker compose --profile fua --profile hapi --profile monitoring up -d
+
+# Core + SSL/HTTPS (override especial)
+docker compose -f docker-compose.yml -f compose/ssl.yml up -d
+```
+
+Cada profile requiere sus variables en `.env`. Ver `.env.template` para la lista completa.
+
+### Estructura de archivos
+
+```
+docker-compose.yml              # Entry point (include + profiles + volumes + networks)
+docker-compose-no-volumes.yml   # CI/testing (standalone)
+docker-bake.hcl                 # Build definitions
+compose/
+  core.yml                      # gateway, frontend, backend, db
+  fua.yml                       # profile: fua
+  hapi.yml                      # profile: hapi
+  imaging.yml                   # profile: imaging
+  keycloak.yml                  # profile: keycloak
+  monitoring.yml                # profile: monitoring
+  ssl.yml                       # override con -f (modifica gateway)
+```
+
+## Docker Bake (Build)
+
+Para construir imágenes se puede usar `docker buildx bake`, que paraleliza y cachea builds:
+
+```bash
+# Build core (backend, gateway, frontend) en paralelo
+docker buildx bake
+
+# Build un target específico
+docker buildx bake backend
+
+# Build todos (+ keycloak, certbot)
+docker buildx bake all
+
+# Dry-run (ver config sin ejecutar)
+docker buildx bake --print
+```
+
+Alternativamente, `docker compose build` sigue funcionando.
+
+## Configuración SSL/HTTPS
+
+SIHSALUS genera certificados SSL auto-firmados, pensados para redes hospitalarias internas sin acceso a internet.
+
+No se requiere un dominio público ni una autoridad certificadora externa. El sistema genera su propio certificado al iniciar por primera vez.
+
+### Iniciar con SSL
 
 Agregar las variables SSL al `.env`:
 
@@ -57,17 +140,11 @@ CERT_WEB_DOMAINS=192.168.10.5,localhost,127.0.0.1
 ```
 
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml build
-docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
+docker compose -f docker-compose.yml -f compose/ssl.yml build
+docker compose -f docker-compose.yml -f compose/ssl.yml up -d
 
 # https://192.168.10.5/openmrs/spa
 ```
-
-## Configuración SSL/HTTPS
-
-SIHSALUS genera certificados SSL auto-firmados, pensados para redes hospitalarias internas sin acceso a internet.
-
-No se requiere un dominio público ni una autoridad certificadora externa. El sistema genera su propio certificado al iniciar por primera vez.
 
 ### Variables SSL en `.env`
 
