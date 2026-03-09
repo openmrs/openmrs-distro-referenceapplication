@@ -181,6 +181,24 @@ docker compose stop db 2>/dev/null || docker stop "$CONTAINER_NAME" 2>/dev/null 
 # Esperar a que el contenedor se detenga
 sleep 2
 
+# --- Snapshot del volumen actual (safety net) ---
+
+SNAPSHOT_VOLUME="${DB_VOLUME}-pre-restore"
+echo "[INFO] Creando snapshot del volumen actual en '$SNAPSHOT_VOLUME'..."
+
+# Eliminar snapshot anterior si existe
+docker volume rm "$SNAPSHOT_VOLUME" 2>/dev/null || true
+
+# Copiar volumen actual a snapshot
+docker volume create "$SNAPSHOT_VOLUME" >/dev/null
+docker run --rm \
+    -v "$DB_VOLUME:/source:ro" \
+    -v "$SNAPSHOT_VOLUME:/dest" \
+    busybox sh -c "cp -a /source/. /dest/"
+
+echo -e "${GREEN}[OK] Snapshot creado. En caso de fallo, restaurar con:${NC}"
+echo -e "  docker run --rm -v $SNAPSHOT_VOLUME:/source:ro -v $DB_VOLUME:/dest busybox sh -c 'rm -rf /dest/* /dest/.* 2>/dev/null; cp -a /source/. /dest/'"
+
 # --- Limpiar volumen de datos ---
 
 echo "[INFO] Limpiando volumen de datos actual..."
@@ -193,13 +211,26 @@ echo -e "${GREEN}[OK] Volumen limpiado${NC}"
 # --- Restaurar ---
 
 echo "[INFO] Restaurando backup (mariadb-backup --copy-back)..."
-docker run --rm \
+if ! docker run --rm \
     --name peruHCE-db-restore \
     -v "$DB_VOLUME:/var/lib/mysql" \
     -v "$backup_data_dir:/backup/full:ro" \
     --user root \
     "$MARIADB_IMAGE" \
-    mariadb-backup --copy-back --target-dir=/backup/full
+    mariadb-backup --copy-back --target-dir=/backup/full; then
+
+    echo -e "${RED}[ERROR] Fallo en copy-back. Restaurando snapshot anterior...${NC}"
+    docker run --rm \
+        -v "$DB_VOLUME:/var/lib/mysql" \
+        busybox sh -c "rm -rf /var/lib/mysql/* /var/lib/mysql/.*" 2>/dev/null || true
+    docker run --rm \
+        -v "$SNAPSHOT_VOLUME:/source:ro" \
+        -v "$DB_VOLUME:/dest" \
+        busybox sh -c "cp -a /source/. /dest/"
+    echo -e "${YELLOW}[INFO] Snapshot restaurado. Reiniciando con datos anteriores...${NC}"
+    docker compose up -d
+    exit 1
+fi
 
 echo -e "${GREEN}[OK] Datos restaurados${NC}"
 
@@ -207,6 +238,10 @@ echo -e "${GREEN}[OK] Datos restaurados${NC}"
 
 echo "[INFO] Reiniciando servicios..."
 docker compose up -d
+
+# Limpiar snapshot despues de exito
+echo "[INFO] Eliminando snapshot (restore exitoso)..."
+docker volume rm "$SNAPSHOT_VOLUME" 2>/dev/null || true
 
 echo ""
 echo -e "${GREEN}============================================${NC}"
