@@ -12,9 +12,9 @@ services:
     profiles: [ fua ]
     environment:
       DB_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
-      DB_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
+      DB_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD}
       DB_NAME: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
-      TOKEN: ${PERUHCE_FUA_GEN_TOKEN:-fuagenerator}
+      TOKEN: ${PERUHCE_FUA_GEN_TOKEN}
       DB_HOST: "fua-generator-db"
       DB_PORT: "5432"
     depends_on:
@@ -37,7 +37,7 @@ services:
     profiles: [ fua ]
     environment:
       POSTGRES_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
-      POSTGRES_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD:-fuagenerator}
+      POSTGRES_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD}
       POSTGRES_DB: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
     volumes:
       - db-fua-generator:/var/lib/postgresql/data
