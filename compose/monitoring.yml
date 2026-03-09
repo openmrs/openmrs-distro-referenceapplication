@@ -1,17 +1,12 @@
-# Docker Compose file for Monitoring Stack (Grafana, Prometheus, Loki, Alloy)
-# Usage: docker compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d
-#
-# Provides observability for peruHCE:
-# - Grafana: Visualization dashboards
-# - Prometheus: Metrics collection
-# - Loki: Log aggregation
-# - Alloy: Telemetry agent
+# Monitoring Stack (Grafana, Prometheus, Loki, Alloy)
+# Profile: monitoring
 
 services:
   grafana:
     container_name: peruHCE-grafana
     image: grafana/grafana:12.3
     restart: "unless-stopped"
+    profiles: [ monitoring ]
     ports:
       - "127.0.0.1:3001:3000"
     environment:
@@ -43,6 +38,7 @@ services:
     container_name: peruHCE-prometheus
     image: prom/prometheus:v3.2.1
     restart: "unless-stopped"
+    profiles: [ monitoring ]
     ports:
       - "127.0.0.1:9090:9090"
     command:
@@ -68,6 +64,7 @@ services:
   loki-init:
     container_name: peruHCE-loki-init
     image: alpine:3.23
+    profiles: [ monitoring ]
     user: "0"
     command: chown -R 10001:10001 /loki
     volumes:
@@ -79,6 +76,7 @@ services:
     container_name: peruHCE-loki
     image: grafana/loki:3.6
     restart: "unless-stopped"
+    profiles: [ monitoring ]
     ports:
       - "127.0.0.1:3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
@@ -101,6 +99,7 @@ services:
     container_name: peruHCE-alloy
     image: grafana/alloy:v1.13.1
     restart: "unless-stopped"
+    profiles: [ monitoring ]
     ports:
       - "127.0.0.1:12345:12345"
     volumes:
@@ -114,7 +113,7 @@ services:
       - --server.http.listen-addr=0.0.0.0:12345
       - --storage.path=/var/lib/alloy
     healthcheck:
-      test: ["CMD-SHELL", "pgrep alloy > /dev/null || exit 1"]
+      test: [ "CMD-SHELL", "pgrep alloy > /dev/null || exit 1" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -125,33 +124,3 @@ services:
     networks:
       - monitoring-network
       - default
-
-volumes:
-  prometheus-data:
-    name: peruHCE-prometheus-data
-  loki-data:
-    name: peruHCE-loki-data
-  alloy-data:
-    name: peruHCE-alloy-data
-  grafana-data:
-    name: peruHCE-grafana-data
-
-networks:
-  # Red de monitoreo - Prometheus, Loki, Grafana
-  monitoring-network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.25.0.0/24
-
-  # Red de gestión - Para Grafana acceda a Portainer
-  management-network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.26.0.0/24
-
-  # Red de aplicación - Para scraping de métricas y recolección de logs
-  # Usando la red por defecto del proyecto (se crea automáticamente)
-  default:
-    name: peruhce-distro-referenceapplication_default

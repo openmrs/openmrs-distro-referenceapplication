@@ -1,9 +1,5 @@
-# Docker Compose file for Keycloak OIDC/OAuth2 Authentication
-# Usage: docker compose -f docker-compose.yml -f docker-compose.keycloak.yml up -d
-#
-# Provides centralized authentication for peruHCE using Keycloak
-# - Keycloak: Identity and Access Management
-# - PostgreSQL: Database for Keycloak
+# Keycloak OIDC/OAuth2 Authentication
+# Profile: keycloak
 
 services:
   keycloak:
@@ -12,6 +8,7 @@ services:
       context: ./keycloak
       dockerfile: Dockerfile
     restart: "unless-stopped"
+    profiles: [ keycloak ]
     env_file:
       - ./.env
     environment:
@@ -35,15 +32,17 @@ services:
       retries: 3
       start_period: 60s
     depends_on:
-      - keycloak-db
+      keycloak-db:
+        condition: service_healthy
     networks:
       - auth-network
-      - backend-network
+      - default
 
   keycloak-db:
     container_name: peruHCE-keycloak-db
     image: postgres:17
     restart: "unless-stopped"
+    profiles: [ keycloak ]
     env_file:
       - ./.env
     environment:
@@ -62,20 +61,3 @@ services:
       start_period: 30s
     networks:
       - auth-network
-
-volumes:
-  keycloak-data:
-    name: peruHCE-keycloak-data
-
-networks:
-  # Red de autenticación - Keycloak y SSO
-  auth-network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.23.0.0/24
-
-  # Red de aplicación - Para integración con backend
-  backend-network:
-    external: true
-    name: peruHCE_backend-network
