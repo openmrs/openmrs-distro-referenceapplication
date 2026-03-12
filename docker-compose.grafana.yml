@@ -79,10 +79,6 @@ services:
             monitoring-init:
                 condition: service_completed_successfully
 
-networks:
-    monitoring:
-        name: openmrs-distro-referenceapplication_monitoring
-
 volumes:
     grafana-data:
     prometheus_data:
