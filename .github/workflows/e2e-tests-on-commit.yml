@@ -78,7 +78,7 @@ jobs:
         run: echo "tmpdir=$(mktemp -d)" >> "$GITHUB_OUTPUT"
 
       - name: Download Docker Images
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: e2e_release_env_images
           path: ${{ steps.tempdir.outputs.tmpdir }}
