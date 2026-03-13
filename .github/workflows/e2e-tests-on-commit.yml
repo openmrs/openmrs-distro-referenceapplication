@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build and Run Containers
         run: docker compose -f ./tests/e2e/docker-compose-build.yml up -d
@@ -71,7 +71,7 @@ jobs:
           - openmrs-esm-billing-app
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Create Temporary Directory to Download Docker Images
         id: tempdir
@@ -94,7 +94,7 @@ jobs:
         working-directory: ./tests/e2e/
 
       - name: Checkout to the repo's main branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: openmrs/${{ matrix.repo }}
           ref: main
