@@ -20,20 +20,6 @@ COPY backend/credentials/settings.xml.template /root/.m2/settings.xml
 COPY pom.xml ./
 COPY backend/pom.xml ./backend/
 
-# Install locally-built sihsalusinterop artifacts into Maven cache
-COPY backend/sihsalusinterop-1.0.3.pom /tmp/sihsalus/
-COPY backend/sihsalusinterop-api-1.0.3.jar /tmp/sihsalus/
-COPY backend/sihsalusinterop-1.0.3.omod /tmp/sihsalus/
-RUN --mount=type=cache,target=/root/.m2/repository \
-    mvn install:install-file -Dfile=/tmp/sihsalus/sihsalusinterop-1.0.3.pom \
-      -DgroupId=org.openmrs.module -DartifactId=sihsalusinterop -Dversion=1.0.3 -Dpackaging=pom -B && \
-    mvn install:install-file -Dfile=/tmp/sihsalus/sihsalusinterop-api-1.0.3.jar \
-      -DgroupId=org.openmrs.module -DartifactId=sihsalusinterop-api -Dversion=1.0.3 -Dpackaging=jar -B && \
-    cp /tmp/sihsalus/sihsalusinterop-1.0.3.omod /tmp/sihsalus/sihsalusinterop-omod-1.0.3.jar && \
-    mvn install:install-file -Dfile=/tmp/sihsalus/sihsalusinterop-omod-1.0.3.jar \
-      -DgroupId=org.openmrs.module -DartifactId=sihsalusinterop-omod -Dversion=1.0.3 -Dpackaging=jar -B && \
-    rm -rf /tmp/sihsalus
-
 # Pre-download dependencies (cached layer)
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn $MVN_ARGS_SETTINGS dependency:resolve -B || true
