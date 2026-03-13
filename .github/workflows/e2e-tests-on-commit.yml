@@ -34,7 +34,7 @@ jobs:
           fi
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: e2e_release_env_images
           path: e2e_release_env_images.tar.gz
@@ -48,7 +48,7 @@ jobs:
           dest: "./logs"
 
       - name: 📤 Upload Logs as Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: server-logs-build-backend
@@ -121,7 +121,7 @@ jobs:
         working-directory: e2e_repo
 
       - name: Upload Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: report-${{ matrix.repo }}
@@ -135,7 +135,7 @@ jobs:
           dest: "./logs"
 
       - name: 📤 Upload Logs as Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: server-logs-${{ matrix.repo }}
