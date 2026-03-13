@@ -1,4 +1,5 @@
-# SIHSALUS
+# SIH Salus
+
 
 ![OpenMRS 3.x](https://img.shields.io/badge/OpenMRS-3.6.0-f26522?style=flat-square)
 ![Docker](https://img.shields.io/badge/Docker-compose-2496ED?style=flat-square&logo=docker&logoColor=white)
@@ -6,7 +7,7 @@
 ![Nginx](https://img.shields.io/badge/Nginx-SSL-009639?style=flat-square&logo=nginx&logoColor=white)
 ![License](https://img.shields.io/badge/MPL_2.0-brightgreen?style=flat-square&label=License)
 
-> Distribución OpenMRS 3.x para establecimientos de salud del Perú.
+> SIH Salus es una distribución OpenMRS 3.x para establecimientos de salud del Perú.
 > Certificados SSL auto-firmados, despliegue offline, backups cifrados.
 
 ---
