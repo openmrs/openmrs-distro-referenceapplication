@@ -17,7 +17,7 @@ jobs:
       dispensing_ref: ${{steps.refs.outputs.dispensing}}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Create Temporary Directory to Download Docker Images
         id: tempdir
@@ -81,7 +81,7 @@ jobs:
         working-directory: ./tests/e2e/
 
       - name: Checkout to the Repo's Tag
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: openmrs/openmrs-esm-patient-management
           ref: ${{ needs.build.outputs.patient_management_ref }}
@@ -119,7 +119,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Create Temporary Directory to Download Docker Images
         id: tempdir
@@ -142,7 +142,7 @@ jobs:
         working-directory: ./tests/e2e/
 
       - name: Checkout to the Repo's Tag
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: openmrs/openmrs-esm-patient-chart
           ref: ${{ needs.build.outputs.patient_chart_ref }}
@@ -180,7 +180,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Create Temporary Directory to Download Docker Images
         id: tempdir
@@ -203,7 +203,7 @@ jobs:
         working-directory: ./tests/e2e/
 
       - name: Checkout to the Repo's Tag
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: openmrs/openmrs-esm-form-builder
           ref: ${{ needs.build.outputs.form_builder_ref }}
@@ -241,7 +241,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Create Temporary Directory to Download Docker Images
         id: tempdir
@@ -264,7 +264,7 @@ jobs:
         working-directory: ./tests/e2e/
 
       - name: Checkout to the Repo's Tag
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: openmrs/openmrs-esm-core
           ref: ${{ needs.build.outputs.esm_core_ref }}
@@ -302,7 +302,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Create Temporary Directory to Download Docker Images
         id: tempdir
@@ -325,7 +325,7 @@ jobs:
         working-directory: ./tests/e2e/
 
       - name: Checkout to the Repo's Tag
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: openmrs/openmrs-esm-cohortbuilder
           ref: ${{ needs.build.outputs.cohort_builder_ref }}
@@ -363,7 +363,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Create Temporary Directory to Download Docker Images
         id: tempdir
@@ -386,7 +386,7 @@ jobs:
         working-directory: ./tests/e2e/
 
       - name: Checkout to the Repo's Tag
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: openmrs/openmrs-esm-dispensing-app
           ref: ${{ needs.build.outputs.dispensing_ref }}
