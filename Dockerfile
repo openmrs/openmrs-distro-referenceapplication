@@ -15,7 +15,7 @@ ARG CACHE_BUST
 # Build the distro, but only deploy from the amd64 build
 RUN --mount=type=secret,id=m2settings,target=/usr/share/maven/ref/settings-docker.xml \
     if [ "$(arch)" != "x86_64" ]; then MVN_ARGS="$MVN_ARGS -Dmaven.deploy.skip=true"; fi && \
-    mvn $MVN_COMMAND
+    mvn $MVN_ARGS $MVN_COMMAND
 
 RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
 
@@ -25,7 +25,7 @@ RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_owas /openmrs/dis
 RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_config /openmrs/distribution/openmrs_config/
 
 # Clean up after copying needed artifacts
-RUN mvn $MVN_ARGS_SETTINGS clean
+RUN mvn $MVN_ARGS clean
 
 ### Run Stage
 # Replace '2.7.x' with the exact version of openmrs-core built for production (if available)
