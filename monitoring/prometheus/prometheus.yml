@@ -9,9 +9,8 @@ scrape_configs:
     static_configs:
       - targets:
           - "http://gateway:80/"
-          - "http://gateway:80/openmrs/spa/login"
+          - "http://gateway:80/openmrs"
           - "http://gateway:80/openmrs/ws/rest/v1/session"
-          - "http://backend:8080/openmrs"
     relabel_configs:
       - source_labels: [ __address__ ]
         target_label: __param_target
