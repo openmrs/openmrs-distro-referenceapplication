@@ -15,9 +15,9 @@ on:
         required: false
         default: 'nightly'
       docker_image_tag_version:
-        description: 'Docker image version tag (e.g., 3.6.x)'
+        description: 'Docker image version tag (e.g., 3.7.x)'
         required: false
-        default: '3.6.x'
+        default: '3.7.x'
       docker_image_tag_env:
         description: 'Docker image environment tag (e.g., dev3)'
         required: false
@@ -47,9 +47,25 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Create Maven settings.xml
-        run: echo "$MAVEN_SETTINGS_XML" > /tmp/maven-settings.xml
-        env:
-          MAVEN_SETTINGS_XML: ${{ secrets.MAVEN_SETTINGS_XML }}
+        run: |
+          cat > /tmp/maven-settings.xml << 'EOF'
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <servers>
+              <server>
+                <id>openmrs-repo-releases</id>
+                <username>${env.MAVEN_REPO_USERNAME}</username>
+                <password>${env.MAVEN_REPO_API_KEY}</password>
+              </server>
+              <server>
+                <id>openmrs-repo-snapshots</id>
+                <username>${env.MAVEN_REPO_USERNAME}</username>
+                <password>${env.MAVEN_REPO_API_KEY}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
@@ -83,9 +99,25 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Create Maven settings.xml
-        run: echo "$MAVEN_SETTINGS_XML" > /tmp/maven-settings.xml
-        env:
-          MAVEN_SETTINGS_XML: ${{ secrets.MAVEN_SETTINGS_XML }}
+        run: |
+          cat > /tmp/maven-settings.xml << 'EOF'
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <servers>
+              <server>
+                <id>openmrs-repo-releases</id>
+                <username>${env.MAVEN_REPO_USERNAME}</username>
+                <password>${env.MAVEN_REPO_API_KEY}</password>
+              </server>
+              <server>
+                <id>openmrs-repo-snapshots</id>
+                <username>${env.MAVEN_REPO_USERNAME}</username>
+                <password>${env.MAVEN_REPO_API_KEY}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
 
       - name: Build and push Docker image (no demo content)
         uses: docker/build-push-action@v7
