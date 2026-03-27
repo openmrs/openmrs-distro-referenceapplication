@@ -79,7 +79,7 @@ jobs:
           build-args: |
             MVN_COMMAND=deploy
             CACHE_BUST=${{ github.run_id }}
-          secrets: |
+          secret-files: |
             m2settings=/tmp/maven-settings.xml
           tags: |
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}
@@ -134,7 +134,7 @@ jobs:
           build-args: |
             MVN_COMMAND=-Pno-demo install
             CACHE_BUST=${{ github.run_id }}
-          secrets: |
+          secret-files: |
             m2settings=/tmp/maven-settings.xml
           tags: |
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}-no-demo
