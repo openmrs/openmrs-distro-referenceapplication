@@ -26,7 +26,7 @@ on:
 env:
   IMAGE: openmrs/openmrs-reference-application-3-backend
   DOCKER_IMAGE_TAG: ${{ github.event.inputs.docker_image_tag || 'nightly' }}
-  DOCKER_IMAGE_TAG_VERSION: ${{ github.event.inputs.docker_image_tag_version || '3.6.x' }}
+  DOCKER_IMAGE_TAG_VERSION: ${{ github.event.inputs.docker_image_tag_version || '3.7.x' }}
   DOCKER_IMAGE_TAG_ENV: ${{ github.event.inputs.docker_image_tag_env || 'dev3' }}
   DOCKER_IMAGE_PLATFORMS: linux/amd64,linux/arm64
 
@@ -48,24 +48,27 @@ jobs:
 
       - name: Create Maven settings.xml
         run: |
-          cat > /tmp/maven-settings.xml << 'EOF'
+          cat > /tmp/maven-settings.xml << EOF
           <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
             <servers>
               <server>
                 <id>openmrs-repo-releases</id>
-                <username>${env.MAVEN_REPO_USERNAME}</username>
-                <password>${env.MAVEN_REPO_API_KEY}</password>
+                <username>${MAVEN_REPO_USERNAME}</username>
+                <password>${MAVEN_REPO_API_KEY}</password>
               </server>
               <server>
                 <id>openmrs-repo-snapshots</id>
-                <username>${env.MAVEN_REPO_USERNAME}</username>
-                <password>${env.MAVEN_REPO_API_KEY}</password>
+                <username>${MAVEN_REPO_USERNAME}</username>
+                <password>${MAVEN_REPO_API_KEY}</password>
               </server>
             </servers>
           </settings>
           EOF
+        env:
+          MAVEN_REPO_USERNAME: ${{ secrets.MAVEN_REPO_USERNAME }}
+          MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
@@ -100,24 +103,27 @@ jobs:
 
       - name: Create Maven settings.xml
         run: |
-          cat > /tmp/maven-settings.xml << 'EOF'
+          cat > /tmp/maven-settings.xml << EOF
           <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
             <servers>
               <server>
                 <id>openmrs-repo-releases</id>
-                <username>${env.MAVEN_REPO_USERNAME}</username>
-                <password>${env.MAVEN_REPO_API_KEY}</password>
+                <username>${MAVEN_REPO_USERNAME}</username>
+                <password>${MAVEN_REPO_API_KEY}</password>
               </server>
               <server>
                 <id>openmrs-repo-snapshots</id>
-                <username>${env.MAVEN_REPO_USERNAME}</username>
-                <password>${env.MAVEN_REPO_API_KEY}</password>
+                <username>${MAVEN_REPO_USERNAME}</username>
+                <password>${MAVEN_REPO_API_KEY}</password>
               </server>
             </servers>
           </settings>
           EOF
+        env:
+          MAVEN_REPO_USERNAME: ${{ secrets.MAVEN_REPO_USERNAME }}
+          MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
 
       - name: Build and push Docker image (no demo content)
         uses: docker/build-push-action@v7
