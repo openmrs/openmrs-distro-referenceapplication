@@ -23,7 +23,7 @@ on:
 env:
   IMAGE: openmrs/openmrs-reference-application-3-gateway
   DOCKER_IMAGE_TAG: ${{ github.event.inputs.docker_image_tag || 'nightly' }}
-  DOCKER_IMAGE_TAG_VERSION: ${{ github.event.inputs.docker_image_tag_version || '3.6.x' }}
+  DOCKER_IMAGE_TAG_VERSION: ${{ github.event.inputs.docker_image_tag_version || '3.7.x' }}
   DOCKER_IMAGE_TAG_ENV: ${{ github.event.inputs.docker_image_tag_env || 'dev3' }}
   DOCKER_IMAGE_PLATFORMS: linux/amd64,linux/arm64
 
