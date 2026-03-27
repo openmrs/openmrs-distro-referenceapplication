@@ -35,7 +35,7 @@ jobs:
     name: Build and Publish the Backend Image
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v4
@@ -90,7 +90,7 @@ jobs:
     name: Build and Publish the Backend Image Without Demo Content
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v4
