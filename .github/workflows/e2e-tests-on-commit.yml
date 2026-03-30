@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build and Run Containers
         run: docker compose -f ./tests/e2e/docker-compose-build.yml up -d
@@ -34,7 +34,7 @@ jobs:
           fi
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: e2e_release_env_images
           path: e2e_release_env_images.tar.gz
@@ -48,7 +48,7 @@ jobs:
           dest: "./logs"
 
       - name: 📤 Upload Logs as Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: server-logs-build-backend
@@ -71,14 +71,14 @@ jobs:
           - openmrs-esm-billing-app
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Create Temporary Directory to Download Docker Images
         id: tempdir
         run: echo "tmpdir=$(mktemp -d)" >> "$GITHUB_OUTPUT"
 
       - name: Download Docker Images
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: e2e_release_env_images
           path: ${{ steps.tempdir.outputs.tmpdir }}
@@ -94,7 +94,7 @@ jobs:
         working-directory: ./tests/e2e/
 
       - name: Checkout to the repo's main branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: openmrs/${{ matrix.repo }}
           ref: main
@@ -121,7 +121,7 @@ jobs:
         working-directory: e2e_repo
 
       - name: Upload Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: report-${{ matrix.repo }}
@@ -135,7 +135,7 @@ jobs:
           dest: "./logs"
 
       - name: 📤 Upload Logs as Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: server-logs-${{ matrix.repo }}
