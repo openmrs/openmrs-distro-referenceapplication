@@ -1,0 +1,31 @@
+name: Deploy to Dev3
+
+on:
+  workflow_run:
+    workflows:
+      - Build Backend
+      - Build Certbot
+      - Build Frontend
+      - Build Gateway
+      - Build Monitoring-init
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Dev3
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.DEV3_SSH_PRIVATE_KEY }}
+
+      - name: Deploy to dev3
+        run: |
+          ssh -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
+              bamboo@dev3-orig.openmrs.org \
+              sudo deploy-compose emr-3-dev
