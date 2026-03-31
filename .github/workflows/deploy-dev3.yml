@@ -14,18 +14,13 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Dev3
+    name: Trigger Deploy to Dev3
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.10.0
+      - name: Trigger Bamboo Deploy
+        uses: fjogeleit/http-request-action@v1
         with:
-          ssh-private-key: ${{ secrets.DEV3_SSH_PRIVATE_KEY }}
-
-      - name: Deploy to dev3
-        run: |
-          ssh -o StrictHostKeyChecking=no \
-              -o UserKnownHostsFile=/dev/null \
-              bamboo@dev3-orig.openmrs.org \
-              sudo deploy-compose emr-3-dev
+          url: https://ci.openmrs.org/rest/api/latest/queue/O3-DD3
+          method: "POST"
+          customHeaders: '{ "Authorization": "Bearer ${{ secrets.BAMBOO_TOKEN }}" }'
