@@ -1,0 +1,26 @@
+name: Deploy to Dev3
+
+on:
+  workflow_run:
+    workflows:
+      - Build Backend
+      - Build Certbot
+      - Build Frontend
+      - Build Gateway
+      - Build Monitoring-init
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Trigger Deploy to Dev3
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Trigger Bamboo Deploy
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: https://ci.openmrs.org/rest/api/latest/queue/O3-DD3
+          method: "POST"
+          customHeaders: '{ "Authorization": "Bearer ${{ secrets.BAMBOO_TOKEN }}" }'
