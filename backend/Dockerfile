@@ -12,19 +12,19 @@ ARG GHP_PASSWORD
 # Export as environment variables so Maven can use them in settings.xml
 ENV GHP_USERNAME=${GHP_USERNAME}
 ENV GHP_PASSWORD=${GHP_PASSWORD}
-ARG MVN_ARGS_SETTINGS="-s /root/.m2/settings.xml -U -P distro"
+ARG MVN_ARGS_SETTINGS="-s /root/.m2/settings.xml -U -P backend"
 ARG MVN_ARGS="install"
 
 # Copy build files
-COPY credentials/settings.xml.template /root/.m2/settings.xml
+COPY backend/credentials/settings.xml.template /root/.m2/settings.xml
 COPY pom.xml ./
-COPY distro/pom.xml ./distro/
+COPY backend/pom.xml ./backend/
 
 # Pre-download dependencies (cached layer)
 RUN --mount=type=cache,target=/root/.m2/repository \
     mvn $MVN_ARGS_SETTINGS dependency:resolve -B || true
 
-COPY distro ./distro/
+COPY backend ./backend/
 
 # Build the distro, but only deploy from the amd64 build
 RUN --mount=type=cache,target=/root/.m2/repository \
@@ -34,12 +34,12 @@ RUN --mount=type=cache,target=/root/.m2/repository \
     mvn $MVN_ARGS_SETTINGS install; \
     fi
 
-RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
+RUN cp /openmrs_distro/backend/target/sdk-distro/web/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
 
-RUN cp /openmrs_distro/distro/target/sdk-distro/web/openmrs-distro.properties /openmrs/distribution/
-RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_modules /openmrs/distribution/openmrs_modules/
-RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_owas /openmrs/distribution/openmrs_owas/
-RUN cp -R /openmrs_distro/distro/target/sdk-distro/web/openmrs_config /openmrs/distribution/openmrs_config/
+RUN cp /openmrs_distro/backend/target/sdk-distro/web/openmrs-distro.properties /openmrs/distribution/
+RUN cp -R /openmrs_distro/backend/target/sdk-distro/web/openmrs_modules /openmrs/distribution/openmrs_modules/
+RUN cp -R /openmrs_distro/backend/target/sdk-distro/web/openmrs_owas /openmrs/distribution/openmrs_owas/
+RUN cp -R /openmrs_distro/backend/target/sdk-distro/web/openmrs_config /openmrs/distribution/openmrs_config/
 
 
 ### Run Stage

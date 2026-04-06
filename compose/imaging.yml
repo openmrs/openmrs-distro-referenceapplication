@@ -10,7 +10,7 @@ services:
     ports:
       - "3000:80"
     volumes:
-      - ./ohif/app-config.js:/usr/share/nginx/html/app-config.js:ro
+      - ./imaging/app-config.js:/usr/share/nginx/html/app-config.js:ro
     depends_on:
       - orthanc
     healthcheck:
@@ -36,7 +36,7 @@ services:
         {
           "Name": "PeruHCE Orthanc",
           "HttpServer": {
-            "ExternalRoot": "http://localhost:8043"
+            "ExternalRoot": "/"
           },
           "RemoteAccessAllowed": true,
           "AuthenticationEnabled": false,

@@ -19,6 +19,7 @@
 - [Docker Bake (Build)](#docker-bake-build)
 - [Configuración SSL/HTTPS](#configuración-sslhttps)
 - [Credenciales de GitHub Packages](#credenciales-de-github-packages)
+- [Backup y Restore](#backup-y-restore)
 - [Políticas de Seguridad](#políticas-de-seguridad-cifrado-de-backups-y-retención-de-logs)
 
 ---
@@ -94,6 +95,12 @@ Cada profile requiere sus variables en `.env`. Ver `.env.template` para la lista
 docker-compose.yml              # Entry point (include + profiles + volumes + networks)
 docker-compose-no-volumes.yml   # CI/testing (standalone)
 docker-bake.hcl                 # Build definitions
+backend/                        # Backend (Dockerfile, pom.xml, credentials, config)
+gateway/                        # Nginx gateway
+frontend/                       # SPA frontend
+certbot/                        # SSL certificates
+keycloak/                       # Keycloak auth
+imaging/                        # OHIF config
 compose/
   core.yml                      # gateway, frontend, backend, db
   fua.yml                       # profile: fua
@@ -189,9 +196,46 @@ GHP_USERNAME=<tu_usuario_github>
 GHP_PASSWORD=<tu_token_github_con_read:packages>
 ```
 
-Estas se pasan como **build args** al Dockerfile, que las exporta como variables de entorno para que Maven las use en `credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
+Estas se pasan como **build args** al Dockerfile, que las exporta como variables de entorno para que Maven las use en `backend/credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
 
 > **Nota:** Este proyecto NO usa Docker secrets. Las credenciales se manejan mediante variables de entorno en el archivo `.env`.
+
+## Backup y Restore
+
+Los scripts se encuentran en `scripts/backup/`. Hay dos métodos:
+
+### Dump SQL (en caliente, sin downtime)
+
+```bash
+# Backup - DB sigue corriendo, sin interrupciones
+./scripts/backup/backup_dump.sh
+
+# Restore - solo detiene el backend, DB sigue corriendo
+./scripts/backup/restore_dump.sh
+```
+
+### Backup binario (en frío, más rápido)
+
+```bash
+# Backup con mariadb-backup
+./scripts/backup/backup_full.sh
+
+# Restore - detiene DB, crea snapshot de seguridad, restaura
+./scripts/backup/restore_full.sh
+
+# Especificar archivo directamente
+./scripts/backup/restore_full.sh --file ~/peruHCE-fullBackups/backup_2026-03-01.tar.gz.enc
+```
+
+| | Dump SQL (caliente) | Binario (frío) |
+|---|---|---|
+| Downtime | No (solo backend) | Sí (detiene DB) |
+| Velocidad | Más lento | Rápido |
+| Formato | `.sql.gz` | `.tar.gz` (mariadb-backup) |
+| Cifrado | Opcional (AES-256) | Obligatorio (AES-256) |
+| Idempotente | Sí | Sí (snapshot pre-restore) |
+
+> Los backups cifrados requieren la variable `BACKUP_ENCRYPTION_PASSWORD`.
 
 ## Políticas de Seguridad: Cifrado de Backups y Retención de Logs
 

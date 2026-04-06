@@ -56,12 +56,12 @@
     <bedmanagement.version>7.2.0</bedmanagement.version>
     <!-- Stock Management and Billing -->
     <stockmanagement.version>3.0.0</stockmanagement.version>
-    <billing.version>2.2.0</billing.version>
+    <billing.version>1.3.2</billing.version>
     <fua.version>1.0.47</fua.version>
-    <sihsalus-interop.version>1.0.2</sihsalus-interop.version>
+    <!-- <sihsalus-interop.version>1.0.3</sihsalus-interop.version> -->
 
     <!-- Content Packages TOOO CREAR O SCRIPT QUE DETECTE EL MAIN EL CONTENT PACKAGE Y ACTUALICE ESTA VERSION -->
-    <sihsalus-content.version>1.8.9</sihsalus-content.version>
+    <sihsalus-content.version>1.8.10</sihsalus-content.version>
   </properties>
 
   <dependencies>
@@ -78,12 +78,15 @@
       <version>${fua.version}</version>
       <scope>provided</scope>
     </dependency>
+    
+    <!--
     <dependency>
       <groupId>org.openmrs.module</groupId>
       <artifactId>sihsalusinterop-omod</artifactId>
       <version>${sihsalus-interop.version}</version>
       <scope>provided</scope>
     </dependency>
+    -->
 
     <!-- Module dependencies -->
     <dependency>
@@ -248,7 +251,6 @@
       <version>${billing.version}</version>
       <scope>provided</scope>
     </dependency>
-
 
   </dependencies>
 
