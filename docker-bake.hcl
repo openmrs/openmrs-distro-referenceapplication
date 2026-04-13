@@ -23,11 +23,11 @@ variable "GHP_PASSWORD" {
 // ---- Groups ----
 
 group "default" {
-  targets = ["backend", "gateway", "frontend"]
+  targets = ["backend", "gateway"]
 }
 
 group "all" {
-  targets = ["backend", "gateway", "frontend", "keycloak", "certbot"]
+  targets = ["backend", "gateway", "keycloak", "certbot"]
 }
 
 // ---- Core Targets ----
@@ -46,13 +46,6 @@ target "gateway" {
   context    = "./gateway"
   dockerfile = "Dockerfile"
   tags       = ["peruhce-gateway:latest"]
-}
-
-// Slim nginx — SPA content comes from ghcr.io/sihsalus/sihsalus-esm (init container)
-target "frontend" {
-  context    = "./frontend"
-  dockerfile = "Dockerfile"
-  tags       = ["peruhce-frontend:latest"]
 }
 
 // ---- Optional Targets ----

@@ -27,24 +27,23 @@ services:
     image: ghcr.io/sihsalus/sihsalus-esm:${FRONTEND_TAG:-latest}
     environment:
       SPA_OUTPUT_DIR: /spa
+      SPA_PATH: /openmrs/spa
+      API_URL: /openmrs
+      SPA_CONFIG_URLS: /openmrs/spa/frontend.json
+      SPA_DEFAULT_LOCALE: es
     volumes:
       - spa-data:/spa
     restart: "no"
 
   frontend:
     container_name: peruHCE-frontend
-    build:
-      context: ./frontend
+    image: nginx:1.28-alpine
     restart: "unless-stopped"
-    environment:
-      SPA_PATH: /openmrs/spa
-      API_URL: /openmrs
-      SPA_CONFIG_URLS: /openmrs/spa/frontend.json
-      SPA_DEFAULT_LOCALE: es
     volumes:
-      - spa-data:/usr/share/nginx/html
+      - spa-data:/usr/share/nginx/html:ro
+      - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost/" ]
+      test: [ "CMD", "wget", "-q", "--spider", "http://localhost/" ]
       interval: 30s
       timeout: 5s
       retries: 3
