@@ -22,6 +22,15 @@ services:
       retries: 3
       start_period: 30s
 
+  frontend-init:
+    container_name: peruHCE-frontend-init
+    image: ghcr.io/sihsalus/sihsalus-esm:${FRONTEND_TAG:-latest}
+    environment:
+      SPA_OUTPUT_DIR: /spa
+    volumes:
+      - spa-data:/spa
+    restart: "no"
+
   frontend:
     container_name: peruHCE-frontend
     build:
@@ -30,8 +39,10 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json,
+      SPA_CONFIG_URLS: /openmrs/spa/frontend.json
       SPA_DEFAULT_LOCALE: es
+    volumes:
+      - spa-data:/usr/share/nginx/html
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost/" ]
       interval: 30s
@@ -39,7 +50,10 @@ services:
       retries: 3
       start_period: 15s
     depends_on:
-      - backend
+      frontend-init:
+        condition: service_completed_successfully
+      backend:
+        condition: service_started
 
   backend:
     container_name: peruHCE-backend

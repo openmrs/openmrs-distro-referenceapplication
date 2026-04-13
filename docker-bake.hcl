@@ -48,6 +48,7 @@ target "gateway" {
   tags       = ["peruhce-gateway:latest"]
 }
 
+// Slim nginx — SPA content comes from ghcr.io/sihsalus/sihsalus-esm (init container)
 target "frontend" {
   context    = "./frontend"
   dockerfile = "Dockerfile"
