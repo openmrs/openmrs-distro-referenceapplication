@@ -7,12 +7,16 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Build and Run Containers
         run: docker compose -f ./tests/e2e/docker-compose-build.yml up -d
@@ -34,7 +38,7 @@ jobs:
           fi
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: e2e_release_env_images
           path: e2e_release_env_images.tar.gz
@@ -43,12 +47,12 @@ jobs:
 
       - name: 📝 Capture Server Logs
         if: failure()
-        uses: jwalton/gh-docker-logs@v2
+        uses: jwalton/gh-docker-logs@2741064ab9d7af54b0b1ffb6076cf64c16f0220e # v2.2.2
         with:
           dest: "./logs"
 
       - name: 📤 Upload Logs as Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
         with:
           name: server-logs-build-backend
@@ -71,14 +75,14 @@ jobs:
           - openmrs-esm-billing-app
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Create Temporary Directory to Download Docker Images
         id: tempdir
         run: echo "tmpdir=$(mktemp -d)" >> "$GITHUB_OUTPUT"
 
       - name: Download Docker Images
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: e2e_release_env_images
           path: ${{ steps.tempdir.outputs.tmpdir }}
@@ -94,7 +98,7 @@ jobs:
         working-directory: ./tests/e2e/
 
       - name: Checkout to the repo's main branch
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: openmrs/${{ matrix.repo }}
           ref: main
@@ -105,7 +109,6 @@ jobs:
         working-directory: e2e_repo
 
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
         working-directory: e2e_repo
 
@@ -121,7 +124,7 @@ jobs:
         working-directory: e2e_repo
 
       - name: Upload Report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
         with:
           name: report-${{ matrix.repo }}
@@ -130,12 +133,12 @@ jobs:
 
       - name: 📝 Capture Server Logs
         if: failure()
-        uses: jwalton/gh-docker-logs@v2
+        uses: jwalton/gh-docker-logs@2741064ab9d7af54b0b1ffb6076cf64c16f0220e # v2.2.2
         with:
           dest: "./logs"
 
       - name: 📤 Upload Logs as Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
         with:
           name: server-logs-${{ matrix.repo }}

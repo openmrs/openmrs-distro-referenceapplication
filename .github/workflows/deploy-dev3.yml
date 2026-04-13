@@ -12,15 +12,24 @@ on:
     types: [completed]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy:
-    name: Trigger Deploy to Dev3
+    name: Deploy to Dev3
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.repository_owner == 'openmrs' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success') }}
     steps:
-      - name: Trigger Bamboo Deploy
-        uses: fjogeleit/http-request-action@v2
-        with:
-          url: https://ci.openmrs.org/rest/api/latest/queue/O3-DD3
-          method: "POST"
-          customHeaders: '{ "Authorization": "Bearer ${{ secrets.BAMBOO_TOKEN }}" }'
+      - name: Deploy via scoped SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -t ed25519 ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=yes \
+            deploy@${{ secrets.SERVER_HOST }} \
+            "/opt/deploy.sh emr-3-dev --no-health-check"
