@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
     paths:
+      - '.github/workflows/build-backend.yml'
       - 'Dockerfile'
-      - 'docker-compose.yml'
       - 'pom.xml'
       - 'distro/**'
   workflow_dispatch:
