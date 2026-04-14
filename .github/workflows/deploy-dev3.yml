@@ -21,6 +21,9 @@ jobs:
     name: Deploy to Dev3
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'openmrs' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success') }}
+    environment:
+      name: dev3
+      url: https://dev3.openmrs.org/openmrs/spa
     steps:
       - name: Deploy via scoped SSH
         run: |
