@@ -25,13 +25,13 @@
     <!-- webservices.rest 4.x requires openmrs-core 3.0.0+ -->
     <rule groupId="org.openmrs.module" artifactId="webservices.rest-omod">
       <ignoreVersions>
-        <ignoreVersion type="regex">[4-9]\..*</ignoreVersion>
+        <ignoreVersion type="regex">([4-9]|[1-9]\d+)\..*</ignoreVersion>
       </ignoreVersions>
     </rule>
     <!-- LegacyUI 3.x requires openmrs-core 3.0.0+ -->
     <rule groupId="org.openmrs.module" artifactId="legacyui-omod">
       <ignoreVersions>
-        <ignoreVersion type="regex">[3-9]\..*</ignoreVersion>
+        <ignoreVersion type="regex">([3-9]|[1-9]\d+)\..*</ignoreVersion>
       </ignoreVersions>
     </rule>
   </rules>
