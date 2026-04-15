@@ -35,4 +35,4 @@ jobs:
           ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes \
             deploy@${{ secrets.SERVER_HOST }} \
-            "/opt/deploy.sh emr-3-dev --no-health-check"
+            "deploy emr-3-dev --no-health-check"
