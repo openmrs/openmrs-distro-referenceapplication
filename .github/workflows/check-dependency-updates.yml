@@ -1,0 +1,78 @@
+name: Check for Dependency Updates
+
+on:
+  schedule:
+    - cron: '0 3,6,9,12,15,18,21 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Check for dependency updates
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'openmrs' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          token: ${{ secrets.OMRS_BOT_GH_TOKEN }}
+
+      - name: Setup Java
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Check for release updates
+        id: releases
+        run: |
+          mvn -f distro/pom.xml versions:update-properties \
+            -DgenerateBackupPoms=false \
+            "-Dmaven.version.rules=file:///$PWD/distro/version-rules.xml"
+
+          if git diff --quiet distro/pom.xml; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push release updates
+        if: steps.releases.outputs.changed == 'true'
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add distro/pom.xml
+          git commit -m "Update dependency versions"
+          git push
+
+      # Always resolve SNAPSHOTs so the cache stays current — even when
+      # release updates were committed (which changes the dependency list).
+      - name: Resolve SNAPSHOT dependencies
+        id: resolve
+        run: |
+          mvn -f distro/pom.xml dependency:resolve dependency:list \
+            -U \
+            -DexcludeTransitive=true \
+            -DincludeScope=provided \
+            -DoutputFile="$PWD/resolved-deps.txt" \
+            -q
+
+          HASH=$(sha256sum resolved-deps.txt | cut -d' ' -f1)
+          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
+
+      - name: Check for cached SNAPSHOT fingerprint
+        id: cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: resolved-deps.txt
+          key: snapshot-deps-${{ steps.resolve.outputs.hash }}
+
+      # Only trigger a build for SNAPSHOT changes when no release updates
+      # were committed (release commits already trigger a build via push).
+      - name: Trigger backend build for SNAPSHOT updates
+        if: steps.releases.outputs.changed != 'true' && steps.cache.outputs.cache-hit != 'true'
+        run: gh workflow run build-backend.yml
+        env:
+          GH_TOKEN: ${{ secrets.OMRS_BOT_GH_TOKEN }}
