@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          token: ${{ secrets.OMRS_BOT_GH_TOKEN }}
 
       - name: Setup Java
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
@@ -75,4 +75,4 @@ jobs:
         if: steps.releases.outputs.changed != 'true' && steps.cache.outputs.cache-hit != 'true'
         run: gh workflow run build-backend.yml
         env:
-          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.OMRS_BOT_GH_TOKEN }}
