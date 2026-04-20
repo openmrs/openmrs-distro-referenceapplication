@@ -17,7 +17,7 @@ services:
       OMRS_CONFIG_CONNECTION_SERVER: db
       OMRS_CONFIG_CONNECTION_DATABASE: openmrs
       OMRS_CONFIG_CONNECTION_USERNAME: ${OPENMRS_DB_USER:-openmrs}
-      OMRS_CONFIG_CONNECTION_PASSWORD: ${MYSQL_OPENMRS_PASSWORD}
+      OMRS_CONFIG_CONNECTION_PASSWORD: ${MYSQL_OPENMRS_PASSWORD:-openmrs}
       OMRS_OCL_TOKEN: ${OMRS_OCL_TOKEN}
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/openmrs" ]
@@ -31,10 +31,10 @@ services:
     environment:
       MYSQL_DATABASE: openmrs
       MYSQL_USER: ${OPENMRS_DB_USER:-openmrs}
-      MYSQL_PASSWORD: ${MYSQL_OPENMRS_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_OPENMRS_PASSWORD:-openmrs}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
     healthcheck:
-      test: [ "CMD-SHELL", "mysql --user=${OPENMRS_DB_USER:-openmrs} --password=${MYSQL_OPENMRS_PASSWORD} --execute 'SHOW DATABASES;'" ]
+      test: [ "CMD-SHELL", "mysql --user=${OPENMRS_DB_USER:-openmrs} --password=${MYSQL_OPENMRS_PASSWORD:-openmrs} --execute 'SHOW DATABASES;'" ]
       interval: 10s
       timeout: 5s
       retries: 5
