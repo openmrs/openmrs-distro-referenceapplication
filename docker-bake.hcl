@@ -62,10 +62,13 @@ target "gateway" {
 
 target "frontend-init" {
   inherits   = ["_base"]
-  context    = "../sihsalus-esm"
+  context    = "./frontend"
   dockerfile = "Dockerfile"
-  target     = "init"
   tags       = ["${REGISTRY}peruhce-frontend-init:${TAG}"]
+  args = {
+    GHP_TOKEN    = GHP_PASSWORD
+    FRONTEND_TAG = TAG
+  }
 }
 
 // ---- Optional Targets ----
