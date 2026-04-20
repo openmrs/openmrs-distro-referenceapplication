@@ -10,7 +10,7 @@ services:
       frontend-init:
         condition: service_completed_successfully
       backend:
-        condition: service_started
+        condition: service_healthy
     ports:
       - "80:80"
     volumes:
@@ -20,7 +20,7 @@ services:
       FUA_CONFIG: ${FUA_CONFIG:-}
       FUA_LOCATIONS: ${FUA_LOCATIONS:-}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost/" ]
+      test: [ "CMD", "wget", "-q", "-O", "/dev/null", "http://localhost/" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -55,7 +55,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
+      OMRS_CONFIG_MODULE_WEB_ADMIN: "false"
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
       OMRS_CONFIG_CREATE_TABLES: "true"
       OMRS_CONFIG_CONNECTION_SERVER: db
