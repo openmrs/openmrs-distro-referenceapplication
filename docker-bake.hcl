@@ -47,10 +47,7 @@ target "backend" {
   context    = "."
   dockerfile = "backend/Dockerfile"
   tags       = ["${REGISTRY}openmrs/openmrs-reference-application-3-backend:${TAG}"]
-  args = {
-    GHP_USERNAME = GHP_USERNAME
-    GHP_PASSWORD = GHP_PASSWORD
-  }
+  secret     = ["id=GHP_USERNAME,env=GHP_USERNAME", "id=GHP_PASSWORD,env=GHP_PASSWORD"]
 }
 
 target "gateway" {
@@ -65,10 +62,8 @@ target "frontend-init" {
   context    = "./frontend"
   dockerfile = "Dockerfile"
   tags       = ["${REGISTRY}peruhce-frontend-init:${TAG}"]
-  args = {
-    GHP_TOKEN    = GHP_PASSWORD
-    FRONTEND_TAG = TAG
-  }
+  args   = { FRONTEND_TAG = TAG }
+  secret = ["id=GHP_TOKEN,env=GHP_PASSWORD"]
 }
 
 // ---- Optional Targets ----

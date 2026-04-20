@@ -11,15 +11,15 @@
 #   packages/apps/
 #   packages/tooling/scripts/assemble-importmap.js
 
-FROM node:24-alpine AS init
+FROM node:24-alpine3.22 AS init
 WORKDIR /app
 
-ARG GHP_TOKEN
 ARG FRONTEND_TAG
 
-RUN apk add --no-cache curl && \
+RUN --mount=type=secret,id=GHP_TOKEN \
+    apk add --no-cache curl && \
     curl -fsSL \
-      -H "Authorization: Bearer ${GHP_TOKEN}" \
+      -H "Authorization: Bearer $(cat /run/secrets/GHP_TOKEN)" \
       "https://github.com/sihsalus/sihsalus-esm/releases/download/${FRONTEND_TAG}/frontend-dist.tar.gz" \
       | tar -xz && \
     apk del curl
