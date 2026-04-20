@@ -29,12 +29,10 @@ services:
       dockerfile: Dockerfile
     volumes:
       - spa-data:/spa
-      - ./frontend/config/config-openmrs.json:/app/config/config-openmrs.json:ro
-      - ./frontend/config/config-pucp.json:/app/config/config-pucp.json:ro
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json,/openmrs/spa/frontend.json
+      SPA_CONFIG_URLS: /openmrs/spa/frontend.json
       SPA_DEFAULT_LOCALE: es
       SPA_OUTPUT_DIR: /spa
     restart: "no"
