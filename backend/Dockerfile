@@ -43,9 +43,7 @@ RUN cp -R /openmrs_distro/backend/target/sdk-distro/web/openmrs_config /openmrs/
 
 
 ### Run Stage
-# Replace 'nightly' with the exact version of openmrs-core built for production (if available)
-#FROM openmrs/openmrs-core:${TAG_CORE:-2.7.3}
-FROM openmrs/openmrs-core:2.8.x-dev-amazoncorretto-21
+FROM openmrs/openmrs-core:2.8.5-amazoncorretto-21
 
 # Do not copy the war if using the correct openmrs-core image version
 COPY --from=dev /openmrs/distribution/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
