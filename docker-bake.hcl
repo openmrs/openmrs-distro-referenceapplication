@@ -23,11 +23,11 @@ variable "GHP_PASSWORD" {
 // ---- Groups ----
 
 group "default" {
-  targets = ["backend", "gateway", "frontend"]
+  targets = ["backend", "gateway", "frontend-init", "frontend"]
 }
 
 group "all" {
-  targets = ["backend", "gateway", "frontend", "keycloak", "certbot"]
+  targets = ["backend", "gateway", "frontend-init", "frontend", "keycloak", "certbot"]
 }
 
 // ---- Core Targets ----
@@ -46,6 +46,12 @@ target "gateway" {
   context    = "./gateway"
   dockerfile = "Dockerfile"
   tags       = ["peruhce-gateway:latest"]
+}
+
+target "frontend-init" {
+  context    = "../sihsalus-esm"
+  dockerfile = "Dockerfile"
+  tags       = ["peruhce-frontend-init:latest"]
 }
 
 target "frontend" {
