@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1.3
-FROM nginx:1.25-alpine
+FROM nginx:stable-alpine
 
-# Install curl for health checks and certificate monitoring
-RUN apk --no-cache add curl
+# Patch all Alpine packages to eliminate known CVEs in the base image
+RUN apk upgrade --no-cache && \
+    apk add --no-cache curl
 
 # Set default environment variables
 ENV FRAME_ANCESTORS="https://dyaku.minsa.gob.pe/fhir" \
