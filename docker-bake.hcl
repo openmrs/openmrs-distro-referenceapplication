@@ -3,7 +3,7 @@
 // ===========================================
 //
 // USAGE:
-//   docker buildx bake                 # Build core (backend, gateway, frontend)
+//   docker buildx bake                 # Build core (backend, gateway, frontend-init)
 //   docker buildx bake all             # Build all targets
 //   docker buildx bake backend         # Build single target
 //   docker buildx bake --print         # Show resolved build config (dry-run)
@@ -23,11 +23,11 @@ variable "GHP_PASSWORD" {
 // ---- Groups ----
 
 group "default" {
-  targets = ["backend", "gateway", "frontend-init", "frontend"]
+  targets = ["backend", "gateway", "frontend-init"]
 }
 
 group "all" {
-  targets = ["backend", "gateway", "frontend-init", "frontend", "keycloak", "certbot"]
+  targets = ["backend", "gateway", "frontend-init", "keycloak", "certbot"]
 }
 
 // ---- Core Targets ----
@@ -52,12 +52,6 @@ target "frontend-init" {
   context    = "../sihsalus-esm"
   dockerfile = "Dockerfile"
   tags       = ["peruhce-frontend-init:latest"]
-}
-
-target "frontend" {
-  context    = "./frontend"
-  dockerfile = "Dockerfile"
-  tags       = ["peruhce-frontend:latest"]
 }
 
 // ---- Optional Targets ----

@@ -1,4 +1,4 @@
-# Core services: gateway, frontend, backend, db
+# Core services: gateway, frontend-init, backend, db
 
 services:
   gateway:
@@ -7,10 +7,14 @@ services:
       context: ./gateway
     restart: "unless-stopped"
     depends_on:
-      - frontend
-      - backend
+      frontend-init:
+        condition: service_completed_successfully
+      backend:
+        condition: service_started
     ports:
       - "80:80"
+    volumes:
+      - spa-data:/spa:ro
     environment:
       FRAME_ANCESTORS: ${FRAME_ANCESTORS:-}
       FUA_CONFIG: ${FUA_CONFIG:-}
@@ -36,25 +40,6 @@ services:
       SPA_DEFAULT_LOCALE: es
       SPA_OUTPUT_DIR: /spa
     restart: "no"
-
-  frontend:
-    container_name: peruHCE-frontend
-    build:
-      context: ./frontend
-    volumes:
-      - spa-data:/usr/share/nginx/html
-    restart: "unless-stopped"
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost/" ]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
-    depends_on:
-      frontend-init:
-        condition: service_completed_successfully
-      backend:
-        condition: service_started
 
   backend:
     container_name: peruHCE-backend

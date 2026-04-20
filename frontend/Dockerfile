@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 # Serves the SPA assembled by the sihsalus-esm init container (spa-data volume).
-FROM nginx:1.25-alpine
+FROM nginxinc/nginx-unprivileged:1.27-alpine
 
 RUN rm -rf /usr/share/nginx/html/*
 

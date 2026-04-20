@@ -14,11 +14,6 @@ map $http_x_real_ip $forwarded_ip {
   default $remote_addr;
 }
 
-upstream frontend {
-  # always assume the frontend will be available
-  server frontend max_fails=0;
-}
-
 upstream backend {
   server backend:8080 max_fails=0;
 }
@@ -107,9 +102,25 @@ server {
   # All redirects are relative to the gateway
   absolute_redirect off;
 
-  # OpenMRS SPA
+  # SPA files served directly from the spa-data volume
   location /openmrs/spa/ {
-    proxy_pass http://frontend/;
+    alias /spa/;
+
+    location = /openmrs/spa/service-worker.js {
+      alias /spa/service-worker.js;
+      expires -1;
+      add_header Cache-Control "no-store, no-cache, must-revalidate";
+      add_header X-Content-Type-Options nosniff;
+    }
+
+    location ~* ^/openmrs/spa/.+\.(js|css)$ {
+      expires 1y;
+      add_header Cache-Control "public, immutable";
+      try_files $uri =404;
+    }
+
+    try_files $uri /openmrs/spa/index.html;
+    add_header Cache-Control "no-cache, must-revalidate";
   }
 
   # OpenMRS Backend
