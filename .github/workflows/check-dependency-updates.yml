@@ -38,8 +38,37 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Commit and push release updates
-        if: steps.releases.outputs.changed == 'true'
+      # Second pass scoped to properties that are already -SNAPSHOT, so
+      # allowSnapshots=true cannot promote a release property to a SNAPSHOT.
+      - name: Check for SNAPSHOT property updates
+        id: snapshots
+        run: |
+          SNAPSHOT_PROPS=$(sed -n '/<properties>/,/<\/properties>/p' distro/pom.xml \
+            | grep -oE '<[a-zA-Z0-9._-]+>[^<]*-SNAPSHOT<' \
+            | sed -E 's|<([^>]+)>.*|\1|' \
+            | paste -sd, -)
+
+          if [ -z "$SNAPSHOT_PROPS" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Scoping SNAPSHOT bump to: $SNAPSHOT_PROPS"
+
+          mvn -f distro/pom.xml versions:update-properties \
+            -DgenerateBackupPoms=false \
+            -DallowSnapshots=true \
+            "-DincludeProperties=$SNAPSHOT_PROPS" \
+            "-Dmaven.version.rules=file:///$PWD/distro/version-rules.xml"
+
+          if git diff --quiet distro/pom.xml; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push dependency updates
+        if: steps.releases.outputs.changed == 'true' || steps.snapshots.outputs.changed == 'true'
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
@@ -69,10 +98,10 @@ jobs:
           path: resolved-deps.txt
           key: snapshot-deps-${{ steps.resolve.outputs.hash }}
 
-      # Only trigger a build for SNAPSHOT changes when no release updates
-      # were committed (release commits already trigger a build via push).
+      # Only trigger a build for remote SNAPSHOT content changes when no
+      # pom updates were committed (a commit already triggers a build via push).
       - name: Trigger backend build for SNAPSHOT updates
-        if: steps.releases.outputs.changed != 'true' && steps.cache.outputs.cache-hit != 'true'
+        if: steps.releases.outputs.changed != 'true' && steps.snapshots.outputs.changed != 'true' && steps.cache.outputs.cache-hit != 'true'
         run: gh workflow run build-backend.yml
         env:
           GH_TOKEN: ${{ secrets.OMRS_BOT_GH_TOKEN }}
