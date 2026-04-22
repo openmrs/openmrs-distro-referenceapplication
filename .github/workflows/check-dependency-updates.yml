@@ -44,7 +44,7 @@ jobs:
         id: snapshots
         run: |
           SNAPSHOT_PROPS=$(sed -n '/<properties>/,/<\/properties>/p' distro/pom.xml \
-            | grep -oE '<[a-zA-Z0-9._-]+>[^<]*-SNAPSHOT<' \
+            | { grep -oE '<[a-zA-Z0-9._-]+>[^<]*-SNAPSHOT<' || true; } \
             | sed -E 's|<([^>]+)>.*|\1|' \
             | paste -sd, -)
 
