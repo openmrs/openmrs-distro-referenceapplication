@@ -145,3 +145,58 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}-no-demo
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_VERSION }}-no-demo
+
+  build-nightly-with-data:
+    name: Build and Publish Nightly With Data Images
+    needs: build-and-publish
+    if: github.repository_owner == 'openmrs' && (github.event.inputs.docker_image_tag || 'nightly') == 'nightly'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Pull nightly images
+        run: docker-compose -f docker-compose-no-volumes.yml pull
+
+      - name: Start backend and database
+        run: docker-compose -f docker-compose-no-volumes.yml up -d
+
+      - name: Wait for OpenMRS to be ready
+        run: |
+          i=300
+          while [[ $i -gt 0 ]]; do
+            status=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/openmrs/login.htm)
+            if [[ $status == 200 ]]; then
+              echo "OpenMRS is up"
+              break
+            fi
+            echo "Waiting for the backend to be up (${i} attempts remaining)..."
+            let i=i-1
+            sleep 10
+          done
+          if [[ $i -eq 0 ]]; then
+            echo "Timed out waiting for OpenMRS to start"
+            docker-compose -f docker-compose-no-volumes.yml logs
+            exit 1
+          fi
+
+      - name: Commit containers
+        run: |
+          backend_container_id=$(docker ps --filter ancestor=openmrs/openmrs-reference-application-3-backend:nightly --format '{{.ID}}')
+          db_container_id=$(docker ps --filter ancestor=mariadb:10.8.2 --format '{{.ID}}')
+          docker commit $backend_container_id openmrs/openmrs-reference-application-3-backend:nightly-with-data
+          docker commit $db_container_id openmrs/openmrs-reference-application-3-db:nightly-with-data
+
+      - name: Push images
+        run: |
+          docker push openmrs/openmrs-reference-application-3-backend:nightly-with-data
+          docker push openmrs/openmrs-reference-application-3-db:nightly-with-data
+
+      - name: Cleanup
+        if: always()
+        run: docker-compose -f docker-compose-no-volumes.yml down -v
