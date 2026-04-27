@@ -148,6 +148,7 @@ jobs:
 
   build-nightly-with-data:
     name: Build and Publish Nightly With Data Images
+    needs: build-and-publish
     if: github.repository_owner == 'openmrs' && (github.event.inputs.docker_image_tag || 'nightly') == 'nightly'
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -180,7 +181,3 @@ jobs:
         run: |
           docker push openmrs/openmrs-reference-application-3-backend:nightly-with-data
           docker push openmrs/openmrs-reference-application-3-db:nightly-with-data
-
-      - name: Cleanup
-        if: always()
-        run: docker-compose -f docker-compose-no-volumes.yml down -v
