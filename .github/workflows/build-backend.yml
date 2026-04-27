@@ -163,7 +163,7 @@ jobs:
         run: docker compose -f docker-compose-no-volumes.yml pull
 
       - name: Start backend and database
-        run: docker-compose -f docker-compose-no-volumes.yml up -d
+        run: docker compose -f docker-compose-no-volumes.yml up -d
 
       - name: Wait for OpenMRS to be ready
         run: |
