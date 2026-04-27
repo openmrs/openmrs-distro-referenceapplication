@@ -11,6 +11,11 @@ on:
     branches: [main]
     types: [completed]
   workflow_dispatch:
+    inputs:
+      reset:
+        description: 'Fully resets the Dev3 instance'
+        type: boolean
+        default: false
 
 concurrency:
   group: ${{ github.workflow }}
@@ -26,6 +31,8 @@ jobs:
       url: https://dev3.openmrs.org/openmrs/spa
     steps:
       - name: Deploy via scoped SSH
+        env:
+          DEPLOY_COMMAND: ${{ inputs.reset && 'deploy emr-3-dev --destroy-volumes --no-health-check' || 'deploy emr-3-dev --no-health-check' }}
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
@@ -35,4 +42,26 @@ jobs:
           ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes \
             deploy@${{ secrets.SERVER_HOST }} \
-            "deploy emr-3-dev --no-health-check"
+            "$DEPLOY_COMMAND"
+
+  deploy-sec3:
+    name: Deploy to Sec3
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'openmrs' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success') }}
+    environment:
+      name: sec3
+      url: https://sec3.openmrs.org/openmrs/spa
+    steps:
+      - name: Deploy via scoped SSH
+        env:
+          DEPLOY_COMMAND: 'deploy emr-3-dev --no-health-check'
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -t ed25519 sec3.openmrs.org >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=yes \
+            deploy@sec3.openmrs.org \
+            "$DEPLOY_COMMAND"
