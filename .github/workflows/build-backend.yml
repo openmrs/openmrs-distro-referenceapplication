@@ -148,7 +148,6 @@ jobs:
 
   build-nightly-with-data:
     name: Build and Publish Nightly With Data Images
-    needs: build-and-publish
     if: github.repository_owner == 'openmrs' && (github.event.inputs.docker_image_tag || 'nightly') == 'nightly'
     runs-on: ubuntu-latest
     steps:
