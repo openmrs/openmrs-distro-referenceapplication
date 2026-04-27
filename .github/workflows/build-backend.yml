@@ -95,7 +95,6 @@ jobs:
     name: Build and Publish the Backend Image Without Demo Content
     if: github.repository_owner == 'openmrs'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
@@ -151,6 +150,7 @@ jobs:
     name: Build and Publish Nightly With Data Images
     if: github.repository_owner == 'openmrs' && (github.event.inputs.docker_image_tag || 'nightly') == 'nightly'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
@@ -167,7 +167,7 @@ jobs:
         run: docker compose -f docker-compose-no-volumes.yml up -d
 
       - name: Wait for OpenMRS to be ready
-        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/openmrs:8080/login.htm)" != "200" ]]; do sleep 10; done
 
       - name: Commit containers
         run: |
