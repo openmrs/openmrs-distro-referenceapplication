@@ -160,7 +160,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Pull nightly images
-        run: docker-compose -f docker-compose-no-volumes.yml pull
+        run: docker compose -f docker-compose-no-volumes.yml pull
 
       - name: Start backend and database
         run: docker-compose -f docker-compose-no-volumes.yml up -d
