@@ -78,6 +78,12 @@ jobs:
           
           docker rm $CONTAINER_ID
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - name: Create Maven settings.xml
         run: |
           mkdir -p "$HOME/.m2"
@@ -100,12 +106,6 @@ jobs:
         env:
           MAVEN_REPO_USERNAME: ${{ secrets.MAVEN_REPO_USERNAME }}
           MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
 
       - name: Deploy frontend artifact
         run: mvn deploy -Pfrontend -pl frontend -s $HOME/.m2/settings.xml -B
