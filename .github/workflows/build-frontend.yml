@@ -73,9 +73,7 @@ jobs:
         run: |
           IMAGE="${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}"
           CONTAINER_ID=$(docker create $IMAGE)
-          
           docker cp $CONTAINER_ID:/usr/share/nginx/html/spa-assemble-config.json ./frontend/src/main/resources/spa-assemble-config.json
-          
           docker rm $CONTAINER_ID
 
       - name: Set up Java
