@@ -108,4 +108,4 @@ jobs:
           java-version: '17'
 
       - name: Deploy frontend artifact
-        run: mvn deploy -Pfrontend -B
+        run: mvn deploy -Pfrontend -pl frontend -am -s $HOME/.m2/settings.xml -B
