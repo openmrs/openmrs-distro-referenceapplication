@@ -1,22 +1,12 @@
 map $request_uri $csp_header {
-  default "default-src 'self' 'unsafe-inline' 'unsafe-eval' localhost localhost:*; connect-src 'self' localhost localhost:* https://dyaku.minsa.gob.pe; base-uri 'self'; font-src 'self'; img-src 'self' data:; frame-ancestors 'self' ${FRAME_ANCESTORS};";
+  default "default-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://dyaku.minsa.gob.pe; base-uri 'self'; font-src 'self'; img-src 'self' data:; frame-ancestors 'self' ${FRAME_ANCESTORS};";
   "~^/openmrs/(?:admin|dictionary|module|patientDashboard.form)/" "default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; base-uri 'self'; font-src 'self'; frame-ancestors 'self';";
   "~^/openmrs/owa" "default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; base-uri 'self'; font-src 'self' data:; img-src 'self' data:; frame-ancestors 'self';";
-}
-
-map $http_x_forwarded_proto $forwarded_proto {
-  "~.*" $http_x_forwarded_proto;
-  default    $scheme;
 }
 
 map $http_x_real_ip $forwarded_ip {
   "~.*"  $http_x_real_ip;
   default $remote_addr;
-}
-
-upstream frontend {
-  # always assume the frontend will be available
-  server frontend max_fails=0;
 }
 
 upstream backend {
@@ -60,7 +50,6 @@ server {
   # Enhanced security headers
   add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
   add_header X-Frame-Options "SAMEORIGIN" always;
-  add_header X-XSS-Protection "1; mode=block" always;
   add_header X-Content-Type-Options "nosniff" always;
   add_header Content-Security-Policy $csp_header always;
   add_header Referrer-Policy "strict-origin-when-cross-origin" always;
@@ -107,9 +96,36 @@ server {
   # All redirects are relative to the gateway
   absolute_redirect off;
 
-  # OpenMRS SPA
+  # SPA files served directly from the spa-data volume
+  # NOTE: each nested location repeats security headers because nginx drops
+  # parent add_header directives the moment a child defines its own.
   location /openmrs/spa/ {
-    proxy_pass http://frontend/;
+    alias /spa/;
+
+    location = /openmrs/spa/service-worker.js {
+      alias /spa/service-worker.js;
+      expires -1;
+      add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Cache-Control "no-store, no-cache, must-revalidate" always;
+    }
+
+    location ~* ^/openmrs/spa/.+\.(js|css)$ {
+      expires 1y;
+      add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Cache-Control "public, immutable" always;
+      try_files $uri =404;
+    }
+
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Content-Security-Policy $csp_header always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
+    add_header Cache-Control "no-cache, must-revalidate" always;
+    try_files $uri /openmrs/spa/index.html;
   }
 
   # OpenMRS Backend
@@ -124,23 +140,6 @@ server {
   }
 
   location /services/fua-generator/ {
-    # Headers CORS - Permitir peticiones desde el frontend
-    add_header 'Access-Control-Allow-Origin' '*' always;
-    add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
-    add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
-    add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
-
-    # Manejar preflight requests (OPTIONS)
-    if ($request_method = 'OPTIONS') {
-      add_header 'Access-Control-Allow-Origin' '*';
-      add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
-      add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization';
-      add_header 'Access-Control-Max-Age' 1728000;
-      add_header 'Content-Type' 'text/plain; charset=utf-8';
-      add_header 'Content-Length' 0;
-      return 204;
-    }
-
     set $fua_upstream http://fua-generator:3000;
     proxy_pass $fua_upstream/;
     proxy_redirect http://$host/ /services/fua-generator/;
@@ -151,64 +150,9 @@ server {
 
   # Location para manejar cuando fua-generator no está disponible
   location @fua_unavailable {
-    add_header Content-Type application/json always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    add_header Content-Type "application/json" always;
     return 503 '{"error": "FUA Generator service is temporarily unavailable", "status": 503}';
-  }
-
-  # Portainer (optional - resolves at runtime)
-  location /portainer {
-    return 301 /portainer/;
-  }
-
-  location /portainer/ {
-    set $portainer_upstream http://portainer:9000;
-    proxy_pass $portainer_upstream/;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto https;
-
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-  }
-
-  # Pi-hole DNS Admin (optional - resolves at runtime)
-  location /dns {
-    return 301 /dns/;
-  }
-
-  location /dns/ {
-    set $dns_upstream http://dns:80;
-    proxy_pass $dns_upstream/admin/;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_hide_header X-Frame-Options;
-    proxy_set_header X-Frame-Options "SAMEORIGIN";
-    proxy_read_timeout 90;
-  }
-
-  location /admin/ {
-    set $dns_admin_upstream http://dns:80;
-    proxy_pass $dns_admin_upstream/admin/;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_hide_header X-Frame-Options;
-    proxy_set_header X-Frame-Options "SAMEORIGIN";
-    proxy_read_timeout 90;
-  }
-
-  location /api/ {
-    set $dns_api_upstream http://dns:80;
-    proxy_pass $dns_api_upstream/api/;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_hide_header X-Frame-Options;
-    proxy_set_header X-Frame-Options "SAMEORIGIN";
-    proxy_read_timeout 90;
   }
 
   # Root redirects to home page
