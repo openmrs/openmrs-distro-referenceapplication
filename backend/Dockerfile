@@ -47,8 +47,6 @@ RUN cp -R /openmrs_distro/backend/target/sdk-distro/web/openmrs_config /openmrs/
 #FROM openmrs/openmrs-core:${TAG_CORE:-2.7.3}
 FROM openmrs/openmrs-core:2.8.x-dev-amazoncorretto-21
 
-RUN mkdir -p /openmrs/data
-
 # Do not copy the war if using the correct openmrs-core image version
 COPY --from=dev /openmrs/distribution/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
 
@@ -56,3 +54,5 @@ COPY --from=dev /openmrs/distribution/openmrs-distro.properties /openmrs/distrib
 COPY --from=dev /openmrs/distribution/openmrs_modules /openmrs/distribution/openmrs_modules
 COPY --from=dev /openmrs/distribution/openmrs_owas /openmrs/distribution/openmrs_owas
 COPY --from=dev  /openmrs/distribution/openmrs_config /openmrs/distribution/openmrs_config
+
+RUN mkdir -p /openmrs/data

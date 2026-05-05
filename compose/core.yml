@@ -10,13 +10,13 @@ services:
       - frontend
       - backend
     ports:
-      - "80:80"
+      - "${GATEWAY_HTTP_PORT:-80}:80"
     environment:
       FRAME_ANCESTORS: ${FRAME_ANCESTORS:-}
       FUA_CONFIG: ${FUA_CONFIG:-}
       FUA_LOCATIONS: ${FUA_LOCATIONS:-}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost/" ]
+      test: [ "CMD", "curl", "-f", "http://127.0.0.1/openmrs/spa/importmap.json" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -24,16 +24,10 @@ services:
 
   frontend:
     container_name: peruHCE-frontend
-    build:
-      context: ./frontend
+    image: ${FRONTEND_IMAGE:-ghcr.io/sihsalus/sihsalus-esm-spa:main}
     restart: "unless-stopped"
-    environment:
-      SPA_PATH: /openmrs/spa
-      API_URL: /openmrs
-      SPA_CONFIG_URLS: /openmrs/spa/config-openmrs.json,/openmrs/spa/config-pucp.json,
-      SPA_DEFAULT_LOCALE: es
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost/" ]
+      test: [ "CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/openmrs/spa/importmap.json || exit 1" ]
       interval: 30s
       timeout: 5s
       retries: 3
