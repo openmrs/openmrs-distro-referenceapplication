@@ -5,13 +5,6 @@
 FROM openmrs/openmrs-core:2.8.x-dev-amazoncorretto-21 AS dev
 WORKDIR /openmrs_distro
 
-# Setting credentials for Git Hub Maven Package
-ARG GHP_USERNAME
-ARG GHP_PASSWORD
-
-# Export as environment variables so Maven can use them in settings.xml
-ENV GHP_USERNAME=${GHP_USERNAME}
-ENV GHP_PASSWORD=${GHP_PASSWORD}
 ARG MVN_ARGS_SETTINGS="-s /root/.m2/settings.xml -U -P backend"
 ARG MVN_ARGS="install"
 
@@ -22,12 +15,20 @@ COPY backend/pom.xml ./backend/
 
 # Pre-download dependencies (cached layer)
 RUN --mount=type=cache,target=/root/.m2/repository \
+    --mount=type=secret,id=GHP_USERNAME \
+    --mount=type=secret,id=GHP_PASSWORD \
+    GHP_USERNAME=$(cat /run/secrets/GHP_USERNAME) \
+    GHP_PASSWORD=$(cat /run/secrets/GHP_PASSWORD) \
     mvn $MVN_ARGS_SETTINGS dependency:resolve -B || true
 
 COPY backend ./backend/
 
 # Build the distro, but only deploy from the amd64 build
 RUN --mount=type=cache,target=/root/.m2/repository \
+    --mount=type=secret,id=GHP_USERNAME \
+    --mount=type=secret,id=GHP_PASSWORD \
+    GHP_USERNAME=$(cat /run/secrets/GHP_USERNAME) \
+    GHP_PASSWORD=$(cat /run/secrets/GHP_PASSWORD) \
     if [[ "$MVN_ARGS" != "deploy" || "$(arch)" = "x86_64" ]]; then \
     mvn $MVN_ARGS_SETTINGS $MVN_ARGS; \
     else \
@@ -43,9 +44,7 @@ RUN cp -R /openmrs_distro/backend/target/sdk-distro/web/openmrs_config /openmrs/
 
 
 ### Run Stage
-# Replace 'nightly' with the exact version of openmrs-core built for production (if available)
-#FROM openmrs/openmrs-core:${TAG_CORE:-2.7.3}
-FROM openmrs/openmrs-core:2.8.x-dev-amazoncorretto-21
+FROM openmrs/openmrs-core:2.8.5-amazoncorretto-21
 
 # Do not copy the war if using the correct openmrs-core image version
 COPY --from=dev /openmrs/distribution/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
