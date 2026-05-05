@@ -31,6 +31,7 @@ services:
     build:
       context: ../sihsalus-esm
       dockerfile: Dockerfile
+      target: secure-init
     volumes:
       - spa-data:/spa
     environment:
@@ -47,9 +48,9 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-      args:
-        GHP_USERNAME: ${GHP_USERNAME}
-        GHP_PASSWORD: ${GHP_PASSWORD}
+      secrets:
+        - GHP_USERNAME
+        - GHP_PASSWORD
     restart: "unless-stopped"
     depends_on:
       db:
@@ -96,3 +97,9 @@ services:
       - ./scripts/database/db_init_master.sh:/docker-entrypoint-initdb.d/db_init_master.sh
       - db-data:/var/lib/mysql
       - db-backup:/backup
+
+secrets:
+  GHP_USERNAME:
+    environment: GHP_USERNAME
+  GHP_PASSWORD:
+    environment: GHP_PASSWORD

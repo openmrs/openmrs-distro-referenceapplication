@@ -29,11 +29,7 @@ RUN --mount=type=cache,target=/root/.m2/repository \
     --mount=type=secret,id=GHP_PASSWORD \
     GHP_USERNAME=$(cat /run/secrets/GHP_USERNAME) \
     GHP_PASSWORD=$(cat /run/secrets/GHP_PASSWORD) \
-    if [[ "$MVN_ARGS" != "deploy" || "$(arch)" = "x86_64" ]]; then \
-    mvn $MVN_ARGS_SETTINGS $MVN_ARGS; \
-    else \
-    mvn $MVN_ARGS_SETTINGS install; \
-    fi
+    mvn $MVN_ARGS_SETTINGS $MVN_ARGS
 
 RUN cp /openmrs_distro/backend/target/sdk-distro/web/openmrs_core/openmrs.war /openmrs/distribution/openmrs_core/
 

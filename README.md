@@ -196,9 +196,9 @@ GHP_USERNAME=<tu_usuario_github>
 GHP_PASSWORD=<tu_token_github_con_read:packages>
 ```
 
-Estas se pasan como **build args** al Dockerfile, que las exporta como variables de entorno para que Maven las use en `backend/credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
+Estas se exponen al build del backend para que Maven las use en `backend/credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
 
-> **Nota:** Este proyecto NO usa Docker secrets. Las credenciales se manejan mediante variables de entorno en el archivo `.env`.
+> **Nota:** el backend descarga módulos desde GitHub Packages durante el build. Si tus OMODs están en GitHub Actions artifacts, Maven no puede consumirlos directamente; deben estar publicados como paquetes. El token debe tener acceso a `read:packages` y, si el paquete es privado, también acceso al repositorio correspondiente.
 
 ## Backup y Restore
 
