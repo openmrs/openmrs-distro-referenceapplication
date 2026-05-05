@@ -74,32 +74,13 @@ server {
   # all redirects are relative to the gateway
   absolute_redirect off;
 
-  # SPA files served directly from the spa-data volume
-  # NOTE: each nested location repeats security headers because nginx drops
-  # parent add_header directives the moment a child defines its own.
+  location ~ ^/openmrs/spa/[^.]*$ {
+    rewrite ^ /openmrs/spa/index.html break;
+    proxy_pass http://frontend;
+  }
+
   location /openmrs/spa/ {
-    alias /spa/;
-
-    location = /openmrs/spa/service-worker.js {
-      alias /spa/service-worker.js;
-      expires -1;
-      add_header X-Content-Type-Options "nosniff" always;
-      add_header Cache-Control "no-store, no-cache, must-revalidate" always;
-    }
-
-    location ~* ^/openmrs/spa/.+\.(js|css)$ {
-      expires 1y;
-      add_header X-Content-Type-Options "nosniff" always;
-      add_header Cache-Control "public, immutable" always;
-      try_files $uri =404;
-    }
-
-    add_header X-Frame-Options "SAMEORIGIN" always;
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header Content-Security-Policy $csp_header always;
-    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-    add_header Cache-Control "no-cache, must-revalidate" always;
-    try_files $uri /openmrs/spa/index.html;
+    proxy_pass http://frontend;
   }
 
   location /openmrs {

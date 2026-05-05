@@ -53,3 +53,5 @@ COPY --from=dev /openmrs/distribution/openmrs-distro.properties /openmrs/distrib
 COPY --from=dev /openmrs/distribution/openmrs_modules /openmrs/distribution/openmrs_modules
 COPY --from=dev /openmrs/distribution/openmrs_owas /openmrs/distribution/openmrs_owas
 COPY --from=dev  /openmrs/distribution/openmrs_config /openmrs/distribution/openmrs_config
+
+RUN mkdir -p /openmrs/data
