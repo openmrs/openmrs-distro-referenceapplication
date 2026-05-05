@@ -108,6 +108,11 @@ server {
   absolute_redirect off;
 
   # OpenMRS SPA
+  location ~ ^/openmrs/spa/[^.]*$ {
+    rewrite ^ /openmrs/spa/index.html break;
+    proxy_pass http://frontend;
+  }
+
   location /openmrs/spa/ {
     proxy_pass http://frontend;
   }
