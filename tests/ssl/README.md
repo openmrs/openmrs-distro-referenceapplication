@@ -1,6 +1,6 @@
 # SSL Testing
 
-This directory contains scripts and documentation for testing SSL/HTTPS configuration in the SIHSALUS (PeruHCE) distribution.
+This directory contains scripts and documentation for testing SSL/HTTPS configuration in the OpenMRS Reference Application distribution.
 
 ## Files
 
@@ -13,7 +13,7 @@ This directory contains scripts and documentation for testing SSL/HTTPS configur
 ### Local Testing (Development)
 ```bash
 # Start services with SSL
-docker compose -f docker-compose.yml -f compose/ssl.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
 
 # Run tests
 ./tests/ssl/test-ssl.sh
@@ -32,7 +32,7 @@ docker compose -f docker-compose.yml -f compose/ssl.yml up -d
 
 See [SSL-TESTING.md](./SSL-TESTING.md) for complete documentation including:
 - Configuration options
-- Three-phase testing approach (staging -> external -> production)
+- Three-phase testing approach (staging → external → production)
 - Troubleshooting guide
 - Security best practices
 - Certificate management

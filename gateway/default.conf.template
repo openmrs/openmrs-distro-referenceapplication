@@ -19,6 +19,11 @@ map $forwarded_proto $var_proxy_cookie_flags {
   default "off";
 }
 
+upstream frontend {
+  # always assume the frontend will be available
+  server frontend max_fails=0;
+}
+
 upstream backend {
   server backend:8080 max_fails=0;
 }
@@ -26,6 +31,7 @@ upstream backend {
 ${FUA_CONFIG}
 
 server {
+  listen [::]:80;
   listen       80;
   server_name localhost;
 
@@ -90,7 +96,15 @@ server {
 
   ${FUA_LOCATIONS}
 
+  location /grafana {
+    resolver 127.0.0.11 valid=30s ipv6=off;
+    set $grafana http://grafana:3000;
+    proxy_read_timeout 300s;
+    proxy_pass $grafana;
+  }
+
   # Root redirects to home page
+
   location = /openmrs/spa/ {
     return 301 /openmrs/spa/home;
   }

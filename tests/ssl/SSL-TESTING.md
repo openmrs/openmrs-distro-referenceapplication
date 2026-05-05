@@ -1,6 +1,6 @@
 # SSL Testing Guide
 
-This guide explains how to test the SSL/HTTPS configuration for the SIHSALUS (PeruHCE) distribution.
+This guide explains how to test the SSL/HTTPS configuration for the OpenMRS Reference Application distribution.
 
 ## Overview
 
@@ -29,7 +29,7 @@ Test the SSL setup with self-signed certificates for localhost:
 
 ```bash
 # 1. Start the services with SSL
-docker compose -f docker-compose.yml -f compose/ssl.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
 
 # 2. Run the test script
 ./tests/ssl/test-ssl.sh
@@ -55,17 +55,17 @@ The script will verify:
 # 1. Set up environment variables
 export SSL_MODE=prod
 export SSL_STAGING=true
-export CERT_WEB_DOMAINS=sihsalus.example.com
-export CERT_CONTACT_EMAIL=admin@example.com
+export CERT_WEB_DOMAINS=test.yourdomain.com
+export CERT_CONTACT_EMAIL=admin@yourdomain.com
 
 # 2. Start the services
-docker compose -f docker-compose.yml -f compose/ssl.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
 
 # 3. Check certbot logs for any issues
-docker compose -f docker-compose.yml -f compose/ssl.yml logs certbot
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml logs certbot
 
 # 4. Run the production test script
-./tests/ssl/test-ssl-prod.sh sihsalus.example.com
+./tests/ssl/test-ssl-prod.sh test.yourdomain.com
 ```
 
 **Important:** Staging certificates will show warnings in browsers because they're issued by "Fake LE Intermediate X1". This is expected and normal for staging.
@@ -76,7 +76,7 @@ Run the test script in "external" mode from a different machine:
 
 ```bash
 # From a different server or your local machine
-./tests/ssl/test-ssl-prod.sh sihsalus.example.com external
+./tests/ssl/test-ssl-prod.sh test.yourdomain.com external
 ```
 
 The `external` flag skips Docker-specific tests and only validates the HTTPS endpoints.
@@ -87,19 +87,19 @@ Once staging tests pass, switch to production Let's Encrypt:
 
 ```bash
 # 1. Clean up staging certificates
-docker compose -f docker-compose.yml -f compose/ssl.yml down -v
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml down -v
 
 # 2. Use production Let's Encrypt
 export SSL_MODE=prod
 export SSL_STAGING=false  # or omit this variable
-export CERT_WEB_DOMAINS=sihsalus.example.com,www.sihsalus.example.com
-export CERT_CONTACT_EMAIL=admin@example.com
+export CERT_WEB_DOMAINS=yourdomain.com,www.yourdomain.com
+export CERT_CONTACT_EMAIL=admin@yourdomain.com
 
 # 3. Start the services
-docker compose -f docker-compose.yml -f compose/ssl.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml up -d
 
 # 4. Verify with test script
-./tests/ssl/test-ssl-prod.sh sihsalus.example.com
+./tests/ssl/test-ssl-prod.sh yourdomain.com
 ```
 
 ## Environment Variables Reference
@@ -114,6 +114,30 @@ docker compose -f docker-compose.yml -f compose/ssl.yml up -d
 | `CERT_WEB_DOMAIN_COMMON_NAME` | Domain string | First domain in list | Override primary domain (CN) |
 | `CERT_CONTACT_EMAIL` | Email address | (empty) | Email for Let's Encrypt notifications (required for prod) |
 | `CERT_RSA_KEY_SIZE` | Number | `4096` | RSA key size for certificates |
+
+### Example Configurations
+
+#### Single Domain (Production)
+```bash
+export SSL_MODE=prod
+export CERT_WEB_DOMAINS=openmrs.example.com
+export CERT_CONTACT_EMAIL=admin@example.com
+```
+
+#### Multiple Domains (Production)
+```bash
+export SSL_MODE=prod
+export CERT_WEB_DOMAINS=openmrs.example.com,www.openmrs.example.com,demo.openmrs.example.com
+export CERT_CONTACT_EMAIL=admin@example.com
+```
+
+#### Testing with Staging
+```bash
+export SSL_MODE=prod
+export SSL_STAGING=true
+export CERT_WEB_DOMAINS=test.example.com
+export CERT_CONTACT_EMAIL=admin@example.com
+```
 
 ## Test Script Details
 
@@ -147,6 +171,46 @@ Additional tests compared to development script:
 - **OCSP stapling**: Tests certificate revocation checking
 - **Response time**: Measures performance
 
+## Comprehensive Testing Checklist
+
+### 1. Automated Tests
+- [ ] Run `./tests/ssl/test-ssl.sh` for local setup
+- [ ] Run `./tests/ssl/test-ssl-prod.sh <domain>` for production
+- [ ] Run `./tests/ssl/test-ssl-prod.sh <domain> external` from remote host
+- [ ] Verify all tests pass
+
+### 2. Manual Browser Testing
+- [ ] Visit `https://yourdomain.com/openmrs/spa` in Chrome
+- [ ] Visit in Firefox
+- [ ] Visit in Safari
+- [ ] Check certificate details (click padlock icon)
+- [ ] Verify no certificate warnings
+- [ ] Test HTTP redirects to HTTPS
+
+### 3. SSL Analysis Tools
+- [ ] Run SSL Labs test: https://www.ssllabs.com/ssltest/analyze.html?d=yourdomain.com
+  - Target grade: A or A+
+- [ ] Check certificate transparency: https://crt.sh/?q=yourdomain.com
+- [ ] Test with SSL Checker: https://www.sslshopper.com/ssl-checker.html
+
+### 4. Security Validation
+- [ ] Verify HSTS header is present (31536000 seconds)
+- [ ] Check Content-Security-Policy header
+- [ ] Verify no mixed content warnings
+- [ ] Test with Mozilla Observatory: https://observatory.mozilla.org/
+
+### 5. Certificate Management
+- [ ] Verify certificate expiry date (90 days for Let's Encrypt)
+- [ ] Check certbot container completed successfully
+- [ ] Verify certificate watcher process is running
+- [ ] Test certificate renewal (if near expiry)
+
+### 6. Performance Testing
+- [ ] Measure response times
+- [ ] Verify HTTP/2 is enabled
+- [ ] Check OCSP stapling is working
+- [ ] Test from multiple geographic locations
+
 ## Troubleshooting
 
 ### Certbot Fails to Issue Certificate
@@ -165,7 +229,7 @@ nc -zv yourdomain.com 443
 
 **Check certbot logs:**
 ```bash
-docker compose -f docker-compose.yml -f compose/ssl.yml logs certbot
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml logs certbot
 ```
 
 **Common issues:**
@@ -178,12 +242,12 @@ docker compose -f docker-compose.yml -f compose/ssl.yml logs certbot
 
 **Check certificate files:**
 ```bash
-docker exec peruHCE-gateway ls -la /etc/letsencrypt/live/yourdomain.com/
+docker exec openmrs-distro-referenceapplication-gateway-1 ls -la /etc/letsencrypt/live/yourdomain.com/
 ```
 
 **Verify nginx configuration:**
 ```bash
-docker exec peruHCE-gateway nginx -t
+docker exec openmrs-distro-referenceapplication-gateway-1 nginx -t
 ```
 
 **Check nginx logs:**
@@ -203,12 +267,12 @@ docker compose logs gateway
 
 **Manual renewal test:**
 ```bash
-docker compose -f docker-compose.yml -f compose/ssl.yml run --rm certbot renew --dry-run
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm certbot renew --dry-run
 ```
 
 **Force renewal:**
 ```bash
-docker compose -f docker-compose.yml -f compose/ssl.yml run --rm certbot renew --force-renewal
+docker compose -f docker-compose.yml -f docker-compose.ssl.yml run --rm certbot renew --force-renewal
 ```
 
 ## Let's Encrypt Rate Limits
@@ -222,6 +286,24 @@ Be aware of these limits when testing:
 
 **Always test with staging first** to avoid hitting these limits.
 
+## Certificate Renewal
+
+Let's Encrypt certificates expire after 90 days. The certbot service automatically attempts renewal.
+
+**Renewal schedule:**
+- Certbot runs twice daily
+- Certificates are renewed when they have 30 days or less remaining
+- Nginx automatically reloads when certificates are updated
+
+**Monitor certificate expiry:**
+```bash
+# Check expiry date
+echo | openssl s_client -servername yourdomain.com -connect yourdomain.com:443 2>/dev/null | openssl x509 -noout -enddate
+
+# Calculate days remaining
+./tests/ssl/test-ssl-prod.sh yourdomain.com | grep "valid for"
+```
+
 ## Security Best Practices
 
 1. **Use strong RSA key size**: Default 4096 bits (configurable via `CERT_RSA_KEY_SIZE`)
@@ -231,3 +313,11 @@ Be aware of these limits when testing:
 5. **Test regularly**: Run `tests/ssl/test-ssl-prod.sh` weekly or after any configuration changes
 6. **Monitor certificate transparency logs**: Subscribe to notifications at https://crt.sh
 7. **Set up expiry alerts**: Configure monitoring to alert 30 days before expiry
+
+## Additional Resources
+
+- [Let's Encrypt Documentation](https://letsencrypt.org/docs/)
+- [Certbot Documentation](https://eff-certbot.readthedocs.io/)
+- [Mozilla SSL Configuration Generator](https://ssl-config.mozilla.org/)
+- [SSL Labs Best Practices](https://github.com/ssllabs/research/wiki/SSL-and-TLS-Deployment-Best-Practices)
+- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)
