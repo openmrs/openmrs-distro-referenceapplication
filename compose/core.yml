@@ -28,10 +28,7 @@ services:
 
   frontend-init:
     container_name: peruHCE-frontend-init
-    build:
-      context: ../sihsalus-frontend
-      dockerfile: Dockerfile
-      target: secure-init
+    image: ghcr.io/sihsalus/sihsalus-frontend:${FRONTEND_TAG:-latest}
     user: "0"
     volumes:
       - spa-data:/spa
