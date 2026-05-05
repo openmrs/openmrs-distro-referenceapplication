@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.3
-FROM nginx:stable-alpine
+FROM nginx:1.28-alpine
 
 # Patch all Alpine packages to eliminate known CVEs in the base image,
 # set up directories and permissions in a single layer.
@@ -14,14 +14,13 @@ ENV FRAME_ANCESTORS="https://dyaku.minsa.gob.pe/fhir" \
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy both config templates — entrypoint selects which one to use
-COPY default.conf.template /etc/nginx/conf-templates/default.conf.template
-COPY default-ssl.conf.template /etc/nginx/conf-templates/default-ssl.conf.template
+COPY default.conf.template /etc/nginx/conf-templates/
+COPY default-ssl.conf.template /etc/nginx/conf-templates/
 
 # Copy scripts
-COPY watch-certs.sh /usr/local/bin/watch-certs.sh
-COPY docker-entrypoint.sh /usr/local/bin/custom-entrypoint.sh
-RUN chmod +x /usr/local/bin/watch-certs.sh /usr/local/bin/custom-entrypoint.sh
+COPY docker-entrypoint.sh /usr/local/bin/
+COPY watch-certs.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh /usr/local/bin/watch-certs.sh
 
-# Use custom entrypoint that wraps the nginx entrypoint
-ENTRYPOINT ["/usr/local/bin/custom-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]

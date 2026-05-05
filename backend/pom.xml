@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.openmrs</groupId>
     <artifactId>distro-emr</artifactId>
-    <version>3.6.0</version>
+    <version>3.7.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>distro-emr-configuration</artifactId>
@@ -27,8 +27,8 @@
          we do so here so that we can utilise Maven to track updates, etc. -->
     <openmrs.version>2.8.6</openmrs.version>
     <initializer.version>2.11.0</initializer.version>
-    <fhir2.version>3.0.0</fhir2.version>
-    <webservices.rest.version>3.3.0</webservices.rest.version>
+    <fhir2.version>4.0.0-SNAPSHOT</fhir2.version>
+    <webservices.rest.version>3.4.0-SNAPSHOT</webservices.rest.version>
     <addresshierarchy.version>2.21.0</addresshierarchy.version>
     <patientdocuments.version>1.1.0-SNAPSHOT</patientdocuments.version>
     <idgen.version>5.0.4</idgen.version>
@@ -59,9 +59,10 @@
     <billing.version>2.2.0</billing.version>
     <fua.version>1.0.47</fua.version>
     <!-- <sihsalus-interop.version>1.0.3</sihsalus-interop.version> -->
-
-    <!-- Content Packages TOOO CREAR O SCRIPT QUE DETECTE EL MAIN EL CONTENT PACKAGE Y ACTUALICE ESTA VERSION -->
+    <!-- Content Packages -->
     <sihsalus-content.version>1.8.20</sihsalus-content.version>
+    <reference-content.version>1.4.0</reference-content.version>
+    <reference-demo-content.version>1.8.0-SNAPSHOT</reference-demo-content.version>
   </properties>
 
   <dependencies>
@@ -129,6 +130,12 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>addresshierarchy-omod</artifactId>
       <version>${addresshierarchy.version}</version>
+      <scope>provided</scope>
+    </dependency>
+      <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>patientdocuments-omod</artifactId>
+      <version>${patientdocuments.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

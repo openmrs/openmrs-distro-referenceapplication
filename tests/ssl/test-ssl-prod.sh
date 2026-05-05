@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Production SSL Testing Script for PeruHCE
-# Adapted from upstream OpenMRS with peruHCE container names
+# Production SSL Testing Script
 # Usage: ./test-ssl-prod.sh <domain> [external]
 # - domain: The domain to test (required)
 # - external: Add "external" flag to skip Docker-specific tests (optional)
@@ -9,8 +8,8 @@
 # Check if domain parameter is provided
 if [ -z "$1" ]; then
     echo "Usage: $0 <domain> [external]"
-    echo "Example: $0 sihsalus.example.com"
-    echo "Example: $0 sihsalus.example.com external  # For testing from external host"
+    echo "Example: $0 test.example.com"
+    echo "Example: $0 test.example.com external  # For testing from external host"
     exit 1
 fi
 
@@ -54,7 +53,7 @@ print_info() {
 }
 
 echo -e "${BLUE}================================${NC}"
-echo -e "${BLUE}Production SSL Test Suite - PeruHCE${NC}"
+echo -e "${BLUE}Production SSL Test Suite${NC}"
 echo -e "${BLUE}Domain: $DOMAIN${NC}"
 if [ "$EXTERNAL_MODE" = "external" ]; then
     echo -e "${BLUE}Mode: External (Docker tests skipped)${NC}"
@@ -67,19 +66,19 @@ echo -e "${BLUE}================================${NC}"
 if [ "$EXTERNAL_MODE" != "external" ]; then
     # Test 1: Check if containers are running
     print_test "Checking if containers are running..."
-    if docker compose -f docker-compose.yml -f compose/ssl.yml ps 2>/dev/null | grep -q "gateway.*Up"; then
+    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps 2>/dev/null | grep -q "gateway.*Up"; then
         print_success "Gateway container is running"
     else
         print_failure "Gateway container is not running"
     fi
 
-    if docker compose -f docker-compose.yml -f compose/ssl.yml ps 2>/dev/null | grep -q "backend.*Up"; then
+    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps 2>/dev/null | grep -q "backend.*Up"; then
         print_success "Backend container is running"
     else
         print_failure "Backend container is not running"
     fi
 
-    if docker compose -f docker-compose.yml -f compose/ssl.yml ps 2>/dev/null | grep -q "frontend.*Up"; then
+    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps 2>/dev/null | grep -q "frontend.*Up"; then
         print_success "Frontend container is running"
     else
         print_failure "Frontend container is not running"
@@ -87,13 +86,13 @@ if [ "$EXTERNAL_MODE" != "external" ]; then
 
     # Test 2: Check certificate files exist
     print_test "Checking certificate files in container..."
-    if docker exec peruHCE-gateway test -f /etc/letsencrypt/live/$DOMAIN/fullchain.pem 2>/dev/null; then
+    if docker exec openmrs-distro-referenceapplication-gateway-1 test -f /etc/letsencrypt/live/$DOMAIN/fullchain.pem 2>/dev/null; then
         print_success "Certificate file exists: fullchain.pem"
     else
         print_failure "Certificate file missing: fullchain.pem"
     fi
 
-    if docker exec peruHCE-gateway test -f /etc/letsencrypt/live/$DOMAIN/privkey.pem 2>/dev/null; then
+    if docker exec openmrs-distro-referenceapplication-gateway-1 test -f /etc/letsencrypt/live/$DOMAIN/privkey.pem 2>/dev/null; then
         print_success "Certificate file exists: privkey.pem"
     else
         print_failure "Certificate file missing: privkey.pem"
@@ -101,7 +100,7 @@ if [ "$EXTERNAL_MODE" != "external" ]; then
 
     # Test 3: Check certbot container completed successfully
     print_test "Checking certbot container status..."
-    CERTBOT_STATUS=$(docker compose -f docker-compose.yml -f compose/ssl.yml ps -a certbot 2>/dev/null | grep certbot 2>/dev/null)
+    CERTBOT_STATUS=$(docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps -a certbot 2>/dev/null | grep certbot 2>/dev/null)
     if echo "$CERTBOT_STATUS" | grep -q "Exited (0)"; then
         print_success "Certbot container completed successfully"
     else
@@ -111,9 +110,9 @@ if [ "$EXTERNAL_MODE" != "external" ]; then
 
     # Test 4: Check certificate watcher process
     print_test "Checking certificate watcher process..."
-    if docker exec peruHCE-gateway ps aux 2>/dev/null | grep -q "watch-certs.sh"; then
+    if docker exec openmrs-distro-referenceapplication-gateway-1 ps aux 2>/dev/null | grep -q "watch-certs.sh"; then
         print_success "Certificate watcher process is running"
-        WATCHER_PID=$(docker exec peruHCE-gateway ps aux 2>/dev/null | grep "watch-certs.sh" | grep -v grep | awk '{print $1}')
+        WATCHER_PID=$(docker exec openmrs-distro-referenceapplication-gateway-1 ps aux 2>/dev/null | grep "watch-certs.sh" | grep -v grep | awk '{print $1}')
         print_info "Process ID: $WATCHER_PID"
     else
         print_failure "Certificate watcher process is not running"
@@ -121,13 +120,13 @@ if [ "$EXTERNAL_MODE" != "external" ]; then
 
     # Test 5: Verify nginx is listening on correct ports
     print_test "Checking nginx ports..."
-    if docker compose -f docker-compose.yml -f compose/ssl.yml ps gateway 2>/dev/null | grep -q "443"; then
+    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps gateway 2>/dev/null | grep -q "443"; then
         print_success "Nginx listening on port 443 (HTTPS)"
     else
         print_failure "Nginx not listening on port 443"
     fi
 
-    if docker compose -f docker-compose.yml -f compose/ssl.yml ps gateway 2>/dev/null | grep -q "80"; then
+    if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps gateway 2>/dev/null | grep -q "80"; then
         print_success "Nginx listening on port 80 (HTTP)"
     else
         print_failure "Nginx not listening on port 80"
@@ -240,7 +239,7 @@ else
         else
             print_info "Certificate issuer: $ISSUER"
             if echo "$ISSUER" | grep -qi "Staging"; then
-                print_info "Warning: This appears to be a Let's Encrypt STAGING certificate"
+                print_info "⚠️  Warning: This appears to be a Let's Encrypt STAGING certificate"
             fi
         fi
 
@@ -266,7 +265,7 @@ else
             if [ $DAYS_UNTIL_EXPIRY -lt 0 ]; then
                 print_failure "Certificate has EXPIRED"
             elif [ $DAYS_UNTIL_EXPIRY -lt 30 ]; then
-                print_info "Warning: Certificate expires in $DAYS_UNTIL_EXPIRY days (renewal recommended)"
+                print_info "⚠️  Warning: Certificate expires in $DAYS_UNTIL_EXPIRY days (renewal recommended)"
             else
                 print_info "Certificate valid for $DAYS_UNTIL_EXPIRY more days"
             fi
@@ -350,7 +349,7 @@ if [ $? -eq 0 ]; then
     if [ -n "$RESPONSE_TIME_MS" ]; then
         RESPONSE_TIME_INT=$(echo "$RESPONSE_TIME_MS" | cut -d. -f1)
         if [ "$RESPONSE_TIME_INT" -gt 3000 ]; then
-            print_info "Warning: Response time is slow (>3s)"
+            print_info "⚠️  Warning: Response time is slow (>3s)"
         fi
     fi
 else
