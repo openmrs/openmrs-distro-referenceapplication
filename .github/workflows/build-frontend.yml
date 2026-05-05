@@ -61,3 +61,49 @@ jobs:
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_VERSION }}
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_ENV }}
+
+  extract-and-deploy:
+    name: Extract config and Deploy to Maven
+    runs-on: ubuntu-latest
+    needs: build-and-publish
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Extract spa-assemble-config.json
+        run: |
+          IMAGE="${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}"
+          CONTAINER_ID=$(docker create $IMAGE)
+          docker cp $CONTAINER_ID:/usr/share/nginx/html/spa-assemble-config.json ./frontend/src/main/resources/spa-assemble-config.json
+          docker rm $CONTAINER_ID
+
+      - name: Set up Java
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Create Maven settings.xml
+        run: |
+          mkdir -p "$HOME/.m2"
+          cat > "$HOME/.m2/settings.xml" << EOF
+          <settings>
+            <servers>
+              <server>
+                <id>openmrs-repo-releases</id>
+                <username>${MAVEN_REPO_USERNAME}</username>
+                <password>${MAVEN_REPO_API_KEY}</password>
+              </server>
+              <server>
+                <id>openmrs-repo-snapshots</id>
+                <username>${MAVEN_REPO_USERNAME}</username>
+                <password>${MAVEN_REPO_API_KEY}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+        env:
+          MAVEN_REPO_USERNAME: ${{ secrets.MAVEN_REPO_USERNAME }}
+          MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
+
+      - name: Deploy frontend artifact
+        run: mvn deploy -Pfrontend -pl frontend -s $HOME/.m2/settings.xml -B
