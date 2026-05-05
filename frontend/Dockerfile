@@ -1,10 +1,10 @@
 # frontend/Dockerfile
 #
-# Init container: downloads a pre-built frontend release from sihsalus-esm,
+# Init container: downloads a pre-built frontend release from sihsalus-frontend,
 # then assembles the SPA into SPA_OUTPUT_DIR at deployment time.
 #
 # Required release asset at:
-#   https://github.com/sihsalus/sihsalus-esm/releases/download/<TAG>/frontend-dist.tar.gz
+#   https://github.com/sihsalus/sihsalus-frontend/releases/download/<TAG>/frontend-dist.tar.gz
 #
 # Tarball must contain (same layout as the build output):
 #   node_modules/
@@ -20,7 +20,7 @@ RUN --mount=type=secret,id=GHP_TOKEN \
     apk add --no-cache curl && \
     curl -fsSL \
       -H "Authorization: Bearer $(cat /run/secrets/GHP_TOKEN)" \
-      "https://github.com/sihsalus/sihsalus-esm/releases/download/${FRONTEND_TAG}/frontend-dist.tar.gz" \
+      "https://github.com/sihsalus/sihsalus-frontend/releases/download/${FRONTEND_TAG}/frontend-dist.tar.gz" \
       | tar -xz && \
     apk del curl
 
