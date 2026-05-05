@@ -32,6 +32,7 @@ services:
       context: ../sihsalus-esm
       dockerfile: Dockerfile
       target: secure-init
+    user: "0"
     volumes:
       - spa-data:/spa
     environment:
