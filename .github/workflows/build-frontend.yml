@@ -67,10 +67,9 @@ jobs:
           IMAGE="${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}"
           CONTAINER_ID=$(docker create $IMAGE)
           docker cp $CONTAINER_ID:/usr/share/nginx/html/spa-assemble-config.json ./spa-assemble-config.json
-          docker rm $CONTAINER_ID
 
       - name: Upload spa-assemble-config.json as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: spa-assemble-config
           path: ./spa-assemble-config.json
