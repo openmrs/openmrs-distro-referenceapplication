@@ -65,7 +65,6 @@ jobs:
       - name: Extract spa-assemble-config.json
         run: |
           IMAGE="${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}"
-          docker pull $IMAGE
           CONTAINER_ID=$(docker create $IMAGE)
           docker cp $CONTAINER_ID:/usr/share/nginx/html/spa-assemble-config.json ./spa-assemble-config.json
           docker rm $CONTAINER_ID
@@ -75,6 +74,7 @@ jobs:
         with:
           name: spa-assemble-config
           path: ./spa-assemble-config.json
+          retention-days: 1
 
   extract-and-deploy:
     name: Extract config and Deploy to Maven
