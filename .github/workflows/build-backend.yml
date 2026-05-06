@@ -55,3 +55,11 @@ jobs:
             GHP_PASSWORD=${{ secrets.GHP_PASSWORD }}
           cache-from: type=gha,scope=backend
           cache-to: type=gha,scope=backend,mode=max
+
+      - name: Make package public
+        run: |
+          curl -s -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.GHP_PASSWORD }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/orgs/sihsalus/packages/container/sihsalus-backend" \
+            -d '{"visibility":"public"}'

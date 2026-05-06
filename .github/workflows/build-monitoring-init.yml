@@ -47,3 +47,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           cache-from: type=gha,scope=monitoring
           cache-to: type=gha,scope=monitoring,mode=max
+
+      - name: Make package public
+        run: |
+          curl -s -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.GHP_PASSWORD }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/orgs/sihsalus/packages/container/sihsalus-monitoring" \
+            -d '{"visibility":"public"}'
