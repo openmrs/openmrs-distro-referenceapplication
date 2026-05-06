@@ -29,14 +29,6 @@ services:
   frontend-init:
     container_name: peruHCE-frontend-init
     image: ghcr.io/sihsalus/sihsalus-frontend:${FRONTEND_TAG:-latest}
-    build:
-      context: .
-      dockerfile: frontend/Dockerfile
-      args:
-        FRONTEND_TAG: ${FRONTEND_TAG:-latest}
-      secrets:
-        - GHP_TOKEN
-    pull_policy: missing
     user: "0"
     volumes:
       - spa-data:/spa
@@ -108,6 +100,4 @@ secrets:
   GHP_USERNAME:
     environment: GHP_USERNAME
   GHP_PASSWORD:
-    environment: GHP_PASSWORD
-  GHP_TOKEN:
     environment: GHP_PASSWORD
