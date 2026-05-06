@@ -14,7 +14,7 @@
 FROM node:24-alpine3.22 AS init
 WORKDIR /app
 
-ARG FRONTEND_TAG
+ARG FRONTEND_TAG=latest
 
 RUN --mount=type=secret,id=GHP_TOKEN \
     apk add --no-cache curl && \
