@@ -1,5 +1,5 @@
 // ===========================================
-// peruHCE - Docker Bake Build Definitions
+// sihsalus - Docker Bake Build Definitions
 // ===========================================
 //
 // USAGE:
@@ -54,14 +54,14 @@ target "gateway" {
   inherits   = ["_base"]
   context    = "./gateway"
   dockerfile = "Dockerfile"
-  tags       = ["${REGISTRY}peruhce-gateway:${TAG}"]
+  tags       = ["${REGISTRY}sihsalus-gateway:${TAG}"]
 }
 
 target "frontend-init" {
   inherits   = ["_base"]
   context    = "./frontend"
   dockerfile = "Dockerfile"
-  tags       = ["${REGISTRY}peruhce-frontend-init:${TAG}"]
+  tags       = ["${REGISTRY}sihsalus-frontend-init:${TAG}"]
   args   = { FRONTEND_TAG = TAG }
   secret = ["id=GHP_TOKEN,env=GHP_PASSWORD"]
 }
@@ -72,12 +72,12 @@ target "keycloak" {
   inherits   = ["_base"]
   context    = "./keycloak"
   dockerfile = "Dockerfile"
-  tags       = ["${REGISTRY}peruhce-keycloak:${TAG}"]
+  tags       = ["${REGISTRY}sihsalus-keycloak:${TAG}"]
 }
 
 target "certbot" {
   inherits   = ["_base"]
   context    = "./certbot"
   dockerfile = "Dockerfile"
-  tags       = ["${REGISTRY}peruhce-certbot:${TAG}"]
+  tags       = ["${REGISTRY}sihsalus-certbot:${TAG}"]
 }

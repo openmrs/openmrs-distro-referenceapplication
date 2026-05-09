@@ -1,6 +1,6 @@
-# peruHCE Utils
+# sihsalus Utils
 
-This is a directory to save util scrips to several task or activities regarding peruHCE distribution.
+This is a directory to save util scrips to several task or activities regarding sihsalus distribution.
 
 It have listed:
 

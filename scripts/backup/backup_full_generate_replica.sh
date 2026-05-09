@@ -26,16 +26,16 @@ if [ -f /run/secrets/BACKUP_ENCRYPTION_PASSWORD ]; then
 fi
 
 # Configuration
-CONTAINER_NAME="peruHCE-db-replic"                      # Change to your MariaDB container name
-BACKUP_DIR="/home/${USER}/peruHCE-fullBackups"          # Change to your desired backup storage location
+CONTAINER_NAME="sihsalus-db-replic"                      # Change to your MariaDB container name
+BACKUP_DIR="/home/${USER}/sihsalus-fullBackups"          # Change to your desired backup storage location
 MAX_BACKUPS=15                                          # Maximum number of backups to keep
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-BACKUP_NAME="peruHCE_backup_$TIMESTAMP"
+BACKUP_NAME="sihsalus_backup_$TIMESTAMP"
 TEMP_BACKUP_PATH="/backup/full"                         # Inside the container
 
 echo ""
 echo "-----------------------------------------------------"
-echo "Starting peruHCE MariaDB replic FULL backup in $TIMESTAMP ..."
+echo "Starting sihsalus MariaDB replic FULL backup in $TIMESTAMP ..."
 
 #Create directorie in user
 mkdir -p "$BACKUP_DIR"

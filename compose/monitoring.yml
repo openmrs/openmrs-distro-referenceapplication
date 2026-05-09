@@ -3,7 +3,7 @@
 
 services:
   grafana:
-    container_name: peruHCE-grafana
+    container_name: sihsalus-grafana
     image: grafana/grafana:12.3
     restart: "unless-stopped"
     profiles: [ monitoring ]
@@ -35,7 +35,7 @@ services:
       - management-network
 
   prometheus:
-    container_name: peruHCE-prometheus
+    container_name: sihsalus-prometheus
     image: prom/prometheus:v3.2.1
     restart: "unless-stopped"
     profiles: [ monitoring ]
@@ -62,7 +62,7 @@ services:
       - default
 
   loki-init:
-    container_name: peruHCE-loki-init
+    container_name: sihsalus-loki-init
     image: alpine:3.23
     profiles: [ monitoring ]
     user: "0"
@@ -73,7 +73,7 @@ services:
       - monitoring-network
 
   loki:
-    container_name: peruHCE-loki
+    container_name: sihsalus-loki
     image: grafana/loki:3.6
     restart: "unless-stopped"
     profiles: [ monitoring ]
@@ -96,7 +96,7 @@ services:
       - monitoring-network
 
   alloy:
-    container_name: peruHCE-alloy
+    container_name: sihsalus-alloy
     image: grafana/alloy:v1.13.1
     restart: "unless-stopped"
     profiles: [ monitoring ]

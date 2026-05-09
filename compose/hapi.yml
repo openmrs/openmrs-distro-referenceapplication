@@ -3,7 +3,7 @@
 
 services:
   hapi-fhir:
-    container_name: peruHCE-hapi-fhir
+    container_name: sihsalus-hapi-fhir
     image: johanamador/hapi-fhir-minsa-peru:latest
     restart: "unless-stopped"
     profiles: [ hapi ]
@@ -18,7 +18,7 @@ services:
         condition: service_healthy
 
   hapi-postgres:
-    container_name: peruHCE-hapi-postgres
+    container_name: sihsalus-hapi-postgres
     image: postgres:15
     restart: "unless-stopped"
     profiles: [ hapi ]

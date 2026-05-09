@@ -2,7 +2,7 @@
 
 services:
   gateway:
-    container_name: peruHCE-gateway
+    container_name: sihsalus-gateway
     build:
       context: ./gateway
     restart: "unless-stopped"
@@ -27,7 +27,7 @@ services:
       start_period: 30s
 
   frontend-init:
-    container_name: peruHCE-frontend-init
+    container_name: sihsalus-frontend-init
     image: ghcr.io/sihsalus/sihsalus-frontend:${FRONTEND_TAG:-latest}
     user: "0"
     volumes:
@@ -41,7 +41,7 @@ services:
     restart: "no"
 
   backend:
-    container_name: peruHCE-backend
+    container_name: sihsalus-backend
     image: ghcr.io/sihsalus/sihsalus-backend:${BACKEND_TAG:-latest}
     build:
       context: .
@@ -72,7 +72,7 @@ services:
       - openmrs-data:/openmrs/data
 
   db:
-    container_name: peruHCE-db-master
+    container_name: sihsalus-db-master
     image: mariadb:10.11.7
     restart: "unless-stopped"
     command: "mariadbd --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --server-id=1 --log-bin=mysql-bin --binlog-format=ROW --sync-binlog=1 --log-slave-updates=1"

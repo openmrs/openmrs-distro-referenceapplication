@@ -20,7 +20,7 @@ window.config = {
       namespace: "@ohif/extension-default.dataSourcesModule.dicomweb",
       sourceName: "dicomweb",
       configuration: {
-        friendlyName: "PeruHCE Orthanc",
+        friendlyName: "SIHSALUS Orthanc",
         name: "orthanc",
         wadoUriRoot: "/wado",
         qidoRoot: "/dicom-web",

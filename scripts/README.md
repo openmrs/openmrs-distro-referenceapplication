@@ -1,6 +1,6 @@
 # Scripts Directory
 
-Este directorio centraliza todos los scripts utilizados en el proyecto peruHCE Distribution.
+Este directorio centraliza todos los scripts utilizados en el proyecto sihsalus Distribution.
 
 ## Estructura
 

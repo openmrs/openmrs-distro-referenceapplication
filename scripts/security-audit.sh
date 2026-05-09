@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script de auditoría de seguridad para peruHCE
+# Script de auditoría de seguridad para sihsalus
 # Verifica configuraciones de seguridad y reporta vulnerabilidades
 
 set -e
@@ -15,7 +15,7 @@ ISSUES_FOUND=0
 WARNINGS_FOUND=0
 
 echo -e "${BLUE}========================================${NC}"
-echo -e "${BLUE}peruHCE - Auditoría de Seguridad${NC}"
+echo -e "${BLUE}sihsalus - Auditoría de Seguridad${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo ""
 
@@ -40,7 +40,7 @@ echo "1. Verificando puertos expuestos públicamente..."
 echo "------------------------------------------------"
 
 # Verificar Portainer
-PORTAINER_PORTS=$(docker port peruHCE-portainer 2>/dev/null | grep -v "127.0.0.1" | grep -E "9000|9443|8000" || true)
+PORTAINER_PORTS=$(docker port sihsalus-portainer 2>/dev/null | grep -v "127.0.0.1" | grep -E "9000|9443|8000" || true)
 if [ -n "$PORTAINER_PORTS" ]; then
     report_issue "Portainer expone puertos públicamente:"
     echo "$PORTAINER_PORTS" | while read line; do
@@ -54,7 +54,7 @@ else
 fi
 
 # Verificar Grafana
-GRAFANA_PORTS=$(docker port peruHCE-grafana 2>/dev/null | grep -v "127.0.0.1" | grep "3001" || true)
+GRAFANA_PORTS=$(docker port sihsalus-grafana 2>/dev/null | grep -v "127.0.0.1" | grep "3001" || true)
 if [ -n "$GRAFANA_PORTS" ]; then
     report_warning "Grafana expone puerto 3001 públicamente"
     echo "  → Recomendación: Acceder solo a través del gateway o VPN"
@@ -63,7 +63,7 @@ else
 fi
 
 # Verificar Prometheus
-PROMETHEUS_PORTS=$(docker port peruHCE-prometheus 2>/dev/null | grep -v "127.0.0.1" | grep "9090" || true)
+PROMETHEUS_PORTS=$(docker port sihsalus-prometheus 2>/dev/null | grep -v "127.0.0.1" | grep "9090" || true)
 if [ -n "$PROMETHEUS_PORTS" ]; then
     report_warning "Prometheus expone puerto 9090 públicamente"
     echo "  → Recomendación: Solo para uso interno, no exponer a internet"
@@ -151,7 +151,7 @@ echo "5. Verificando configuración de redes..."
 echo "-----------------------------------------"
 
 # Verificar que database-network sea internal
-DB_NETWORK_INTERNAL=$(docker network inspect peruhce-distro-referenceapplication_database-network --format '{{.Internal}}' 2>/dev/null || echo "false")
+DB_NETWORK_INTERNAL=$(docker network inspect sihsalus-distro-referenceapplication_database-network --format '{{.Internal}}' 2>/dev/null || echo "false")
 if [ "$DB_NETWORK_INTERNAL" = "true" ]; then
     report_ok "Red database-network está configurada como internal"
 else
@@ -162,7 +162,7 @@ else
 fi
 
 # Verificar que management-network no esté expuesta
-MGMT_CONTAINERS=$(docker network inspect peruhce-distro-referenceapplication_management-network --format '{{range .Containers}}{{.Name}} {{end}}' 2>/dev/null || true)
+MGMT_CONTAINERS=$(docker network inspect sihsalus-distro-referenceapplication_management-network --format '{{range .Containers}}{{.Name}} {{end}}' 2>/dev/null || true)
 if [ -n "$MGMT_CONTAINERS" ]; then
     echo "Contenedores en management-network: $MGMT_CONTAINERS"
     # Verificar que no expongan puertos públicos
@@ -240,9 +240,9 @@ echo "9. Verificando logs de acceso sospechoso..."
 echo "--------------------------------------------"
 
 # Verificar intentos de login fallidos en Portainer
-if docker logs peruHCE-portainer 2>&1 | grep -i "failed\|unauthorized\|forbidden" | tail -5 | grep -q .; then
+if docker logs sihsalus-portainer 2>&1 | grep -i "failed\|unauthorized\|forbidden" | tail -5 | grep -q .; then
     report_warning "Se encontraron intentos de acceso fallidos recientes en Portainer"
-    docker logs peruHCE-portainer 2>&1 | grep -i "failed\|unauthorized\|forbidden" | tail -3
+    docker logs sihsalus-portainer 2>&1 | grep -i "failed\|unauthorized\|forbidden" | tail -3
 else
     report_ok "No se encontraron intentos de acceso fallidos recientes"
 fi

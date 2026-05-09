@@ -11,14 +11,14 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuración
-SERVER="${1:-${PERUHCE_SERVER}}"
+SERVER="${1:-${SIHSALUS_SERVER}}"
 
 if [ -z "$SERVER" ]; then
     echo -e "${YELLOW}Uso:${NC}"
     echo "  $0 usuario@servidor"
     echo ""
     echo -e "${YELLOW}O configurar variable de entorno:${NC}"
-    echo "  export PERUHCE_SERVER=usuario@servidor"
+    echo "  export SIHSALUS_SERVER=usuario@servidor"
     echo "  $0"
     echo ""
     echo -e "${YELLOW}Ejemplo:${NC}"

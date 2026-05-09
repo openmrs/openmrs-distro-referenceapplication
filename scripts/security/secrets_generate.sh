@@ -7,7 +7,7 @@
 set -e
 
 echo "========================================="
-echo "PeruHCE Security Setup"
+echo "SIHSALUS Security Setup"
 echo "Generando contraseñas seguras..."
 echo "========================================="
 echo ""
@@ -94,10 +94,10 @@ HOSPITAL_GATEWAY=192.168.1.1
 HOSPITAL_NETWORK=192.168.1.0/24
 
 # FUA Generator
-PERUHCE_FUA_GEN_DB_USER=fuagenerator
-PERUHCE_FUA_GEN_DB_PASSWORD_FILE=/run/secrets/fua_db_password
-PERUHCE_FUA_GEN_DB=fuagenerator
-PERUHCE_FUA_GEN_TOKEN_FILE=/run/secrets/fua_token
+SIHSALUS_FUA_GEN_DB_USER=fuagenerator
+SIHSALUS_FUA_GEN_DB_PASSWORD_FILE=/run/secrets/fua_db_password
+SIHSALUS_FUA_GEN_DB=fuagenerator
+SIHSALUS_FUA_GEN_TOKEN_FILE=/run/secrets/fua_token
 EOF
 
 echo "✅ Plantilla .env.production creada"

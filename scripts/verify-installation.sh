@@ -1,10 +1,10 @@
 #!/bin/bash
-# Script de verificación post-instalación para peruHCE
+# Script de verificación post-instalación para sihsalus
 
 set -e
 
 echo "========================================"
-echo "peruHCE - Verificación de Instalación"
+echo "sihsalus - Verificación de Instalación"
 echo "========================================"
 echo ""
 
@@ -47,13 +47,13 @@ echo "1. Verificando contenedores críticos..."
 echo "----------------------------------------"
 
 critical_containers=(
-    "peruHCE-db-master"
-    "peruHCE-db-replic"
-    "peruHCE-backend"
-    "peruHCE-frontend"
-    "peruHCE-gateway"
-    "peruHCE-keycloak"
-    "peruHCE-keycloak-db"
+    "sihsalus-db-master"
+    "sihsalus-db-replic"
+    "sihsalus-backend"
+    "sihsalus-frontend"
+    "sihsalus-gateway"
+    "sihsalus-keycloak"
+    "sihsalus-keycloak-db"
 )
 
 all_ok=true
@@ -79,8 +79,8 @@ else
 fi
 
 # Verificar conexión desde el backend
-if docker exec peruHCE-backend test -f /openmrs/openmrs-server.properties 2>/dev/null; then
-    backend_password=$(docker exec peruHCE-backend grep "connection.password=" /openmrs/openmrs-server.properties | cut -d'=' -f2)
+if docker exec sihsalus-backend test -f /openmrs/openmrs-server.properties 2>/dev/null; then
+    backend_password=$(docker exec sihsalus-backend grep "connection.password=" /openmrs/openmrs-server.properties | cut -d'=' -f2)
     if [ "$backend_password" = "openmrs" ]; then
         echo -e "${GREEN}✓${NC} Configuración del backend correcta"
     else
@@ -92,11 +92,11 @@ else
 fi
 
 # Verificar usuario en MySQL
-if docker exec peruHCE-db-master mysql -uroot -p$(cat secrets/mysql_root_password.txt) -e "SELECT User, Host FROM mysql.user WHERE User='openmrs';" 2>/dev/null | grep -q openmrs; then
+if docker exec sihsalus-db-master mysql -uroot -p$(cat secrets/mysql_root_password.txt) -e "SELECT User, Host FROM mysql.user WHERE User='openmrs';" 2>/dev/null | grep -q openmrs; then
     echo -e "${GREEN}✓${NC} Usuario 'openmrs' existe en MySQL"
 
     # Verificar que puede conectar con la contraseña
-    if docker exec peruHCE-db-master mysql -uopenmrs -popenmrs -e "SELECT 1;" >/dev/null 2>&1; then
+    if docker exec sihsalus-db-master mysql -uopenmrs -popenmrs -e "SELECT 1;" >/dev/null 2>&1; then
         echo -e "${GREEN}✓${NC} Usuario 'openmrs' puede conectarse a MySQL"
     else
         echo -e "${RED}✗${NC} Usuario 'openmrs' NO puede conectarse (verificar contraseña)"
@@ -133,12 +133,12 @@ echo ""
 
 echo "4. Verificando logs recientes de errores..."
 echo "--------------------------------------------"
-error_count=$(docker logs peruHCE-backend --tail 100 2>&1 | grep -i "error\|exception\|failed" | grep -v "WARN" | wc -l)
+error_count=$(docker logs sihsalus-backend --tail 100 2>&1 | grep -i "error\|exception\|failed" | grep -v "WARN" | wc -l)
 if [ $error_count -eq 0 ]; then
     echo -e "${GREEN}✓${NC} No se encontraron errores recientes en el backend"
 else
     echo -e "${YELLOW}⚠${NC} Se encontraron ${error_count} líneas con errores en el backend"
-    echo "  Ejecuta: docker logs peruHCE-backend --tail 100"
+    echo "  Ejecuta: docker logs sihsalus-backend --tail 100"
 fi
 echo ""
 

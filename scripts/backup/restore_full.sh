@@ -3,7 +3,7 @@
 # Script: restore_full.sh
 # Descripcion: Restaura la base de datos MariaDB desde un backup completo.
 # Uso: ./restore_full.sh [--container NOMBRE] [--dir DIRECTORIO] [--file ARCHIVO]
-# Autor: Equipo PeruHCE
+# Autor: Equipo SIHSALUS
 # ------------------------------------------------------------------------------
 
 set -euo pipefail
@@ -15,14 +15,14 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Configuracion por defecto
-CONTAINER_NAME="${CONTAINER_NAME:-peruHCE-db-master}"
-BACKUP_DIR="${BACKUP_DIR:-/home/${USER}/peruHCE-fullBackups}"
+CONTAINER_NAME="${CONTAINER_NAME:-sihsalus-db-master}"
+BACKUP_DIR="${BACKUP_DIR:-/home/${USER}/sihsalus-fullBackups}"
 BACKUP_FILE=""
 COMPOSE_PROJECT="sihsalus-distro-referenceapplication"
 DB_VOLUME="${COMPOSE_PROJECT}_db-data"
 BACKUP_VOLUME="${COMPOSE_PROJECT}_db-backup"
 MARIADB_IMAGE="mariadb:10.11.7"
-TEMP_DIR="/tmp/peruHCE-restore-$$"
+TEMP_DIR="/tmp/sihsalus-restore-$$"
 
 # Leer credenciales desde Docker secrets si existen
 if [ -f /run/secrets/BACKUP_ENCRYPTION_PASSWORD ]; then
@@ -42,8 +42,8 @@ while [[ $# -gt 0 ]]; do
             echo "Uso: $0 [--container NOMBRE] [--dir DIRECTORIO] [--file ARCHIVO]"
             echo ""
             echo "Opciones:"
-            echo "  --container  Nombre del contenedor DB (default: peruHCE-db-master)"
-            echo "  --dir        Directorio de backups (default: ~/peruHCE-fullBackups)"
+            echo "  --container  Nombre del contenedor DB (default: sihsalus-db-master)"
+            echo "  --dir        Directorio de backups (default: ~/sihsalus-fullBackups)"
             echo "  --file       Archivo de backup especifico (omitir para seleccion interactiva)"
             exit 0;;
         *)
@@ -212,7 +212,7 @@ echo -e "${GREEN}[OK] Volumen limpiado${NC}"
 
 echo "[INFO] Restaurando backup (mariadb-backup --copy-back)..."
 if ! docker run --rm \
-    --name peruHCE-db-restore \
+    --name sihsalus-db-restore \
     -v "$DB_VOLUME:/var/lib/mysql" \
     -v "$backup_data_dir:/backup/full:ro" \
     --user root \

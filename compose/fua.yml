@@ -6,15 +6,15 @@
 
 services:
   fua-generator:
-    container_name: peruHCE-fua-generator
+    container_name: sihsalus-fua-generator
     image: marcelius733/fua-generator:dev-0.1.6
     restart: "unless-stopped"
     profiles: [ fua ]
     environment:
-      DB_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
-      DB_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD}
-      DB_NAME: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
-      TOKEN: ${PERUHCE_FUA_GEN_TOKEN}
+      DB_USER: ${SIHSALUS_FUA_GEN_DB_USER:-fuagenerator}
+      DB_PASSWORD: ${SIHSALUS_FUA_GEN_DB_PASSWORD}
+      DB_NAME: ${SIHSALUS_FUA_GEN_DB:-fuagenerator}
+      TOKEN: ${SIHSALUS_FUA_GEN_TOKEN}
       DB_HOST: "fua-generator-db"
       DB_PORT: "5432"
     depends_on:
@@ -31,18 +31,18 @@ services:
       - services-network
 
   fua-generator-db:
-    container_name: peruHCE-fua-generator-db
+    container_name: sihsalus-fua-generator-db
     image: postgres:17
     restart: "unless-stopped"
     profiles: [ fua ]
     environment:
-      POSTGRES_USER: ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator}
-      POSTGRES_PASSWORD: ${PERUHCE_FUA_GEN_DB_PASSWORD}
-      POSTGRES_DB: ${PERUHCE_FUA_GEN_DB:-fuagenerator}
+      POSTGRES_USER: ${SIHSALUS_FUA_GEN_DB_USER:-fuagenerator}
+      POSTGRES_PASSWORD: ${SIHSALUS_FUA_GEN_DB_PASSWORD}
+      POSTGRES_DB: ${SIHSALUS_FUA_GEN_DB:-fuagenerator}
     volumes:
       - db-fua-generator:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${PERUHCE_FUA_GEN_DB_USER:-fuagenerator} -d ${PERUHCE_FUA_GEN_DB:-fuagenerator}" ]
+      test: [ "CMD-SHELL", "pg_isready -U ${SIHSALUS_FUA_GEN_DB_USER:-fuagenerator} -d ${SIHSALUS_FUA_GEN_DB:-fuagenerator}" ]
       interval: 10s
       timeout: 5s
       retries: 5

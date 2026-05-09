@@ -8,7 +8,7 @@ services:
   certbot:
     profiles:
       - ssl
-    container_name: peruHCE-certbot
+    container_name: sihsalus-certbot
     build:
       context: ./certbot
       dockerfile: Dockerfile
@@ -34,7 +34,7 @@ services:
     build:
       context: ./gateway
       dockerfile: Dockerfile
-    image: peruhce-gateway:latest
+    image: sihsalus-gateway:latest
     ports:
       - "${GATEWAY_HTTPS_PORT:-443}:443"
     environment:
@@ -46,6 +46,6 @@ services:
 
 volumes:
   letsencrypt-data:
-    name: peruHCE-letsencrypt-data
+    name: sihsalus-letsencrypt-data
   certbot-data:
-    name: peruHCE-certbot-data
+    name: sihsalus-certbot-data

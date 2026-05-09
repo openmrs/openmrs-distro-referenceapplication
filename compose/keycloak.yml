@@ -3,7 +3,7 @@
 
 services:
   keycloak:
-    container_name: peruHCE-keycloak
+    container_name: sihsalus-keycloak
     build:
       context: ./keycloak
       dockerfile: Dockerfile
@@ -39,7 +39,7 @@ services:
       - default
 
   keycloak-db:
-    container_name: peruHCE-keycloak-db
+    container_name: sihsalus-keycloak-db
     image: postgres:17
     restart: "unless-stopped"
     profiles: [ keycloak ]
