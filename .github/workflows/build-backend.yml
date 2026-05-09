@@ -45,21 +45,21 @@ jobs:
       - uses: docker/build-push-action@v7
         with:
           context: .
-          dockerfile: backend/Dockerfile
+          file: backend/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64
           secrets: |
-            GHP_USERNAME=${{ secrets.GHP_USERNAME }}
-            GHP_PASSWORD=${{ secrets.GHP_PASSWORD }}
+            GHP_USERNAME=${{ github.actor }}
+            GHP_PASSWORD=${{ secrets.GITHUB_TOKEN }}
           cache-from: type=gha,scope=backend
           cache-to: type=gha,scope=backend,mode=max
 
       - name: Make package public
         run: |
           curl -s -X PATCH \
-            -H "Authorization: Bearer ${{ secrets.GHP_PASSWORD }}" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             "https://api.github.com/orgs/sihsalus/packages/container/sihsalus-backend" \
             -d '{"visibility":"public"}'
