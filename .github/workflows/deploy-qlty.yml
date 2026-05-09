@@ -27,16 +27,16 @@ jobs:
       github.event.workflow_run.conclusion == 'success'
     environment:
       name: qlty
-      url: https://hii1sc-qlty.inf.pucp.edu.pe/openmrs/spa
+      url: http://gidis-hsc-qlty.inf.pucp.edu.pe/openmrs/spa
     steps:
       - name: Deploy via SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY_QLTY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -t ed25519 hii1sc-qlty.inf.pucp.edu.pe >> ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519 gidis-hsc-qlty.inf.pucp.edu.pe >> ~/.ssh/known_hosts
 
           ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes \
-            u.hsc.qlty@hii1sc-qlty.inf.pucp.edu.pe \
+            u.hsc.qlty@gidis-hsc-qlty.inf.pucp.edu.pe \
             "cd /home/u.hsc.qlty/sihsalus && docker compose pull && docker compose up -d"
