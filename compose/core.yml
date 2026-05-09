@@ -42,7 +42,7 @@ services:
 
   backend:
     container_name: peruHCE-backend
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
+    image: ghcr.io/sihsalus/sihsalus-backend:${BACKEND_TAG:-latest}
     build:
       context: .
       dockerfile: backend/Dockerfile
