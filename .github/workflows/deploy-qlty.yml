@@ -32,11 +32,11 @@ jobs:
       - name: Deploy via SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          echo "${{ secrets.SSH_PRIVATE_KEY_QLTY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -t ed25519 ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519 hii1sc-qlty.inf.pucp.edu.pe >> ~/.ssh/known_hosts
 
           ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes \
-            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
+            u.hsc.qlty@hii1sc-qlty.inf.pucp.edu.pe \
             "cd /home/u.hsc.qlty/sihsalus && docker compose pull && docker compose up -d"
