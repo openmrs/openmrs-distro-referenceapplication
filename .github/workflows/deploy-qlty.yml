@@ -39,4 +39,4 @@ jobs:
           ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes \
             u.hsc.qlty@gidis-hsc-qlty.inf.pucp.edu.pe \
-            "cd /home/u.hsc.qlty/sihsalus && git pull --ff-only && docker compose pull && docker compose up -d"
+            "cd /home/u.hsc.qlty/sihsalus && git fetch origin main && git switch main && git pull --ff-only origin main && docker compose pull && docker compose up -d"
