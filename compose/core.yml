@@ -12,7 +12,7 @@ services:
       backend:
         condition: service_healthy
     ports:
-      - "127.0.0.1:8081:80"
+      - "80:80"
     volumes:
       - spa-data:/spa:ro
     environment:
