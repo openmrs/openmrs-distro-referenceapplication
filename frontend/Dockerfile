@@ -16,13 +16,11 @@ WORKDIR /app
 
 ARG FRONTEND_TAG=latest
 
-RUN --mount=type=secret,id=GHP_TOKEN \
-    apk add --no-cache curl && \
-    curl -fsSL \
-      -H "Authorization: Bearer $(cat /run/secrets/GHP_TOKEN)" \
-      "https://github.com/sihsalus/sihsalus-frontend/releases/download/${FRONTEND_TAG}/frontend-dist.tar.gz" \
-      | tar -xz && \
-    apk del curl
+RUN apk add --no-cache curl && \
+  curl -fsSL \
+  "https://github.com/sihsalus/sihsalus-frontend/releases/download/${FRONTEND_TAG}/frontend-dist.tar.gz" \
+  | tar -xz && \
+  apk del curl
 
 COPY config/ ./config/
 COPY assets/ ./assets/

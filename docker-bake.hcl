@@ -12,14 +12,6 @@ variable "TAG" {
   default = "qa"
 }
 
-variable "GHP_USERNAME" {
-  default = ""
-}
-
-variable "GHP_PASSWORD" {
-  default = ""
-}
-
 variable "REGISTRY" {
   default = ""
 }
@@ -47,7 +39,6 @@ target "backend" {
   context    = "."
   dockerfile = "backend/Dockerfile"
   tags       = ["${REGISTRY}openmrs/openmrs-reference-application-3-backend:${TAG}"]
-  secret     = ["id=GHP_USERNAME,env=GHP_USERNAME", "id=GHP_PASSWORD,env=GHP_PASSWORD"]
 }
 
 target "gateway" {
@@ -63,7 +54,6 @@ target "frontend-init" {
   dockerfile = "Dockerfile"
   tags       = ["${REGISTRY}sihsalus-frontend-init:${TAG}"]
   args   = { FRONTEND_TAG = TAG }
-  secret = ["id=GHP_TOKEN,env=GHP_PASSWORD"]
 }
 
 // ---- Optional Targets ----

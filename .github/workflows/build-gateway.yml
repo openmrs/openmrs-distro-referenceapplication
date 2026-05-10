@@ -51,7 +51,7 @@ jobs:
       - name: Make package public
         run: |
           curl -s -X PATCH \
-            -H "Authorization: Bearer ${{ secrets.GHP_PASSWORD }}" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             "https://api.github.com/orgs/sihsalus/packages/container/sihsalus-gateway" \
             -d '{"visibility":"public"}'

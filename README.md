@@ -18,7 +18,6 @@
 - [Profiles](#profiles)
 - [Docker Bake (Build)](#docker-bake-build)
 - [Configuración SSL/HTTPS](#configuración-sslhttps)
-- [Credenciales de GitHub Packages](#credenciales-de-github-packages)
 - [Backup y Restore](#backup-y-restore)
 - [Políticas de Seguridad](#políticas-de-seguridad-cifrado-de-backups-y-retención-de-logs)
 
@@ -36,10 +35,6 @@ cp .env.template .env
 Variables obligatorias en `.env`:
 
 ```env
-# GitHub Packages (obligatorio para build)
-GHP_USERNAME=<tu_usuario_github>
-GHP_PASSWORD=<tu_token_github_con_read:packages>
-
 # Base de datos OpenMRS
 MYSQL_OPENMRS_PASSWORD=<password_seguro>
 MYSQL_ROOT_PASSWORD=<password_seguro>
@@ -185,20 +180,7 @@ Al ser un certificado auto-firmado, los navegadores mostrarán una advertencia d
 2. **Windows**: Importar en "Entidades de certificación raíz de confianza"
 3. **Linux**: Copiar a `/usr/local/share/ca-certificates/` y ejecutar `sudo update-ca-certificates`
 
-## Credenciales de GitHub Packages
 
-El backend necesita credenciales de GitHub para descargar módulos privados desde GitHub Packages durante el build.
-
-Las credenciales se configuran en el archivo `.env`:
-
-```env
-GHP_USERNAME=<tu_usuario_github>
-GHP_PASSWORD=<tu_token_github_con_read:packages>
-```
-
-Estas se exponen al build del backend para que Maven las use en `backend/credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
-
-> **Nota:** el backend descarga módulos desde GitHub Packages durante el build. Si tus OMODs están en GitHub Actions artifacts, Maven no puede consumirlos directamente; deben estar publicados como paquetes. El token debe tener acceso a `read:packages` y, si el paquete es privado, también acceso al repositorio correspondiente.
 
 ## Backup y Restore
 
