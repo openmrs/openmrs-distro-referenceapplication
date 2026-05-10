@@ -50,9 +50,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64
-          secrets: |
-            GHP_USERNAME=${{ github.actor }}
-            GHP_PASSWORD=${{ secrets.GITHUB_TOKEN }}
           cache-from: type=gha,scope=backend
           cache-to: type=gha,scope=backend,mode=max
 

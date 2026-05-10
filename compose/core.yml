@@ -46,9 +46,6 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-      secrets:
-        - GHP_USERNAME
-        - GHP_PASSWORD
     restart: "unless-stopped"
     depends_on:
       db:
@@ -96,8 +93,3 @@ services:
       - db-data:/var/lib/mysql
       - db-backup:/backup
 
-secrets:
-  GHP_USERNAME:
-    environment: GHP_USERNAME
-  GHP_PASSWORD:
-    environment: GHP_PASSWORD
