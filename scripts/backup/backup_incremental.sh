@@ -4,14 +4,14 @@
 # Script: backup_incremental.sh
 # Descripción: Realiza un backup incremental de la base de datos MariaDB del contenedor especificado.
 # Uso: ./backup_incremental.sh [--container NOMBRE] [--dir DIRECTORIO] [--max N]
-# Autor: Equipo PeruHCE
+# Autor: Equipo SIHSALUS
 # Fecha: 2025-10-20
 # ------------------------------------------------------------------------------
 
 set -euo pipefail
 
-CONTAINER_NAME="${CONTAINER_NAME:-peruHCE-db-master}"
-FULL_BACKUP_DIR="${FULL_BACKUP_DIR:-/home/${USER}/peruHCE-fullBackups}"
+CONTAINER_NAME="${CONTAINER_NAME:-sihsalus-db-master}"
+FULL_BACKUP_DIR="${FULL_BACKUP_DIR:-/home/${USER}/sihsalus-fullBackups}"
 MAX_BACKUPS="${MAX_BACKUPS:-10}"
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_NAME="incr_$TIMESTAMP"

@@ -1,5 +1,5 @@
 # ===========================================
-# peruHCE - DOCKER COMPOSE
+# sihsalus - DOCKER COMPOSE
 # ===========================================
 #
 # USAGE:
@@ -12,7 +12,7 @@
 #   docker compose --profile fua --profile hapi up -d           # Combine profiles
 #
 # SSL/HTTPS (override adicional):
-#   docker compose -f docker-compose.yml -f compose/ssl.yml up -d
+#   docker compose -f docker-compose.yml -f compose/ssl.yml --profile ssl up -d
 #
 # BUILD (con Docker Bake):
 #   docker buildx bake                    # Build core images (backend, gateway, frontend)
@@ -41,25 +41,26 @@ volumes:
   openmrs-data:
   db-data:
   db-backup:
+  spa-data:
   # FUA (profile: fua)
   db-fua-generator:
   # HAPI FHIR (profile: hapi)
   hapi_pgdata:
   # Imaging (profile: imaging)
   orthanc-data:
-    name: peruHCE-orthanc-data
+    name: sihsalus-orthanc-data
   # Keycloak (profile: keycloak)
   keycloak-data:
-    name: peruHCE-keycloak-data
+    name: sihsalus-keycloak-data
   # Monitoring (profile: monitoring)
   prometheus-data:
-    name: peruHCE-prometheus-data
+    name: sihsalus-prometheus-data
   loki-data:
-    name: peruHCE-loki-data
+    name: sihsalus-loki-data
   alloy-data:
-    name: peruHCE-alloy-data
+    name: sihsalus-alloy-data
   grafana-data:
-    name: peruHCE-grafana-data
+    name: sihsalus-grafana-data
 
 networks:
   # Red principal - servicios core

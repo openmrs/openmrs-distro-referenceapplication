@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# SSL Testing Script for PeruHCE (Development/Local)
-# Adapted from upstream OpenMRS with peruHCE container names
-
 # Colors for output
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -34,19 +31,19 @@ print_info() {
 
 # Test 1: Check if containers are running
 print_test "Checking if containers are running..."
-if docker compose -f docker-compose.yml -f compose/ssl.yml ps 2>/dev/null | grep -q "gateway.*Up"; then
+if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps 2>/dev/null | grep -q "gateway.*Up"; then
     print_success "Gateway container is running"
 else
     print_failure "Gateway container is not running"
 fi
 
-if docker compose -f docker-compose.yml -f compose/ssl.yml ps 2>/dev/null | grep -q "backend.*Up"; then
+if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps 2>/dev/null | grep -q "backend.*Up"; then
     print_success "Backend container is running"
 else
     print_failure "Backend container is not running"
 fi
 
-if docker compose -f docker-compose.yml -f compose/ssl.yml ps 2>/dev/null | grep -q "frontend.*Up"; then
+if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps 2>/dev/null | grep -q "frontend.*Up"; then
     print_success "Frontend container is running"
 else
     print_failure "Frontend container is not running"
@@ -54,13 +51,13 @@ fi
 
 # Test 2: Check certificate files exist
 print_test "Checking certificate files..."
-if docker exec peruHCE-gateway test -f /etc/letsencrypt/live/localhost/fullchain.pem; then
+if docker exec openmrs-distro-referenceapplication-gateway-1 test -f /etc/letsencrypt/live/localhost/fullchain.pem; then
     print_success "Certificate file exists: fullchain.pem"
 else
     print_failure "Certificate file missing: fullchain.pem"
 fi
 
-if docker exec peruHCE-gateway test -f /etc/letsencrypt/live/localhost/privkey.pem; then
+if docker exec openmrs-distro-referenceapplication-gateway-1 test -f /etc/letsencrypt/live/localhost/privkey.pem; then
     print_success "Certificate file exists: privkey.pem"
 else
     print_failure "Certificate file missing: privkey.pem"
@@ -143,9 +140,9 @@ fi
 
 # Test 10: Check certificate watcher process
 print_test "Checking certificate watcher process..."
-if docker exec peruHCE-gateway ps aux 2>/dev/null | grep -q "watch-certs.sh"; then
+if docker exec openmrs-distro-referenceapplication-gateway-1 ps aux 2>/dev/null | grep -q "watch-certs.sh"; then
     print_success "Certificate watcher process is running"
-    WATCHER_PID=$(docker exec peruHCE-gateway ps aux 2>/dev/null | grep "watch-certs.sh" | grep -v grep | awk '{print $1}')
+    WATCHER_PID=$(docker exec openmrs-distro-referenceapplication-gateway-1 ps aux 2>/dev/null | grep "watch-certs.sh" | grep -v grep | awk '{print $1}')
     print_info "Process ID: $WATCHER_PID"
 else
     print_failure "Certificate watcher process is not running"
@@ -153,13 +150,13 @@ fi
 
 # Test 11: Verify nginx is listening on correct ports
 print_test "Checking nginx ports..."
-if docker compose -f docker-compose.yml -f compose/ssl.yml ps gateway 2>/dev/null | grep -q "443->443"; then
+if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps gateway 2>/dev/null | grep -q "443->443"; then
     print_success "Nginx listening on port 443 (HTTPS)"
 else
     print_failure "Nginx not listening on port 443"
 fi
 
-if docker compose -f docker-compose.yml -f compose/ssl.yml ps gateway 2>/dev/null | grep -q "80->80"; then
+if docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps gateway 2>/dev/null | grep -q "80->80"; then
     print_success "Nginx listening on port 80 (HTTP)"
 else
     print_failure "Nginx not listening on port 80"
@@ -167,7 +164,7 @@ fi
 
 # Test 12: Check certbot container completed successfully
 print_test "Checking certbot container status..."
-CERTBOT_STATUS=$(docker compose -f docker-compose.yml -f compose/ssl.yml ps -a certbot 2>/dev/null | grep certbot 2>/dev/null)
+CERTBOT_STATUS=$(docker compose -f docker-compose.yml -f docker-compose.ssl.yml ps -a certbot 2>/dev/null | grep certbot 2>/dev/null)
 if echo "$CERTBOT_STATUS" | grep -q "Exited (0)"; then
     print_success "Certbot container completed successfully"
 else

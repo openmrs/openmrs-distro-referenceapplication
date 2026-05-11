@@ -4,7 +4,7 @@ done
 # Script: init_full.sh
 # Descripción: Inicializa el entorno completo (producción o desarrollo) usando docker-compose.
 # Uso: ./init_full.sh -m [production|development] [-d DIRECTORIO]
-# Autor: Equipo PeruHCE
+# Autor: Equipo SIHSALUS
 # Fecha: 2025-10-20
 # ------------------------------------------------------------------------------
 

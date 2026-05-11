@@ -18,7 +18,6 @@
 - [Profiles](#profiles)
 - [Docker Bake (Build)](#docker-bake-build)
 - [Configuración SSL/HTTPS](#configuración-sslhttps)
-- [Credenciales de GitHub Packages](#credenciales-de-github-packages)
 - [Backup y Restore](#backup-y-restore)
 - [Políticas de Seguridad](#políticas-de-seguridad-cifrado-de-backups-y-retención-de-logs)
 
@@ -36,10 +35,6 @@ cp .env.template .env
 Variables obligatorias en `.env`:
 
 ```env
-# GitHub Packages (obligatorio para build)
-GHP_USERNAME=<tu_usuario_github>
-GHP_PASSWORD=<tu_token_github_con_read:packages>
-
 # Base de datos OpenMRS
 MYSQL_OPENMRS_PASSWORD=<password_seguro>
 MYSQL_ROOT_PASSWORD=<password_seguro>
@@ -181,24 +176,11 @@ CERT_WEB_DOMAINS=192.168.10.5,192.168.20.5,172.16.0.5,localhost,127.0.0.1
 
 Al ser un certificado auto-firmado, los navegadores mostrarán una advertencia de seguridad la primera vez. Para evitarlo, instalar el certificado en cada equipo cliente:
 
-1. Copiar el archivo `fullchain.pem` del servidor (se encuentra en el volumen Docker `peruHCE-letsencrypt-data`)
+1. Copiar el archivo `fullchain.pem` del servidor (se encuentra en el volumen Docker `sihsalus-letsencrypt-data`)
 2. **Windows**: Importar en "Entidades de certificación raíz de confianza"
 3. **Linux**: Copiar a `/usr/local/share/ca-certificates/` y ejecutar `sudo update-ca-certificates`
 
-## Credenciales de GitHub Packages
 
-El backend necesita credenciales de GitHub para descargar módulos privados desde GitHub Packages durante el build.
-
-Las credenciales se configuran en el archivo `.env`:
-
-```env
-GHP_USERNAME=<tu_usuario_github>
-GHP_PASSWORD=<tu_token_github_con_read:packages>
-```
-
-Estas se pasan como **build args** al Dockerfile, que las exporta como variables de entorno para que Maven las use en `backend/credentials/settings.xml.template` (`${env.GHP_USERNAME}`, `${env.GHP_PASSWORD}`).
-
-> **Nota:** Este proyecto NO usa Docker secrets. Las credenciales se manejan mediante variables de entorno en el archivo `.env`.
 
 ## Backup y Restore
 
@@ -224,7 +206,7 @@ Los scripts se encuentran en `scripts/backup/`. Hay dos métodos:
 ./scripts/backup/restore_full.sh
 
 # Especificar archivo directamente
-./scripts/backup/restore_full.sh --file ~/peruHCE-fullBackups/backup_2026-03-01.tar.gz.enc
+./scripts/backup/restore_full.sh --file ~/sihsalus-fullBackups/backup_2026-03-01.tar.gz.enc
 ```
 
 | | Dump SQL (caliente) | Binario (frío) |

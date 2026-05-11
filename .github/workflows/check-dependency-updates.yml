@@ -1,0 +1,55 @@
+name: Check for Dependency Updates
+
+on:
+  schedule:
+    # Once daily at 06:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Check for dependency updates
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Check for release updates
+        id: releases
+        run: |
+          mvn -f distro/pom.xml versions:update-properties \
+            -DgenerateBackupPoms=false \
+            "-Dmaven.version.rules=file:///$PWD/distro/version-rules.xml"
+
+          if git diff --quiet distro/pom.xml; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push dependency updates
+        if: steps.releases.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add distro/pom.xml
+          git commit -m "chore: update OpenMRS module versions"
+          git push
+
+      - name: Trigger backend build on new versions
+        if: steps.releases.outputs.changed == 'true'
+        run: gh workflow run build-backend.yml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

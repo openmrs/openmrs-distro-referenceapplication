@@ -1,23 +1,15 @@
-# Prometheus Configuration for PeruHCE
+# Prometheus Configuration for SIHSALUS
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
   external_labels:
-    cluster: 'peruhce-production'
+    cluster: 'sihsalus-production'
     environment: 'docker'
-
-# Alertmanager configuration (optional - uncomment if you set up Alertmanager)
-# alerting:
-#   alertmanagers:
-#     - static_configs:
-#         - targets:
-#           - alertmanager:9093
 
 # Load rules once and periodically evaluate them
 rule_files:
   - "/etc/prometheus/alerts/*.yml"
 
-# Scrape configurations
 scrape_configs:
   # Prometheus self-monitoring
   - job_name: 'prometheus'
@@ -26,52 +18,23 @@ scrape_configs:
         labels:
           service: 'prometheus'
 
-  # Docker daemon metrics (if exposed)
-  # - job_name: 'docker'
-  #   static_configs:
-  #     - targets: ['host.docker.internal:9323']
-  #       labels:
-  #         service: 'docker'
-
-  # OpenMRS Backend metrics (JMX exporter - requires configuration)
-  # - job_name: 'openmrs-backend'
-  #   metrics_path: '/openmrs/metrics'
-  #   static_configs:
-  #     - targets: ['backend:8080']
-  #       labels:
-  #         service: 'openmrs-backend'
-  #         application: 'peruhce'
-
-  # MariaDB Exporter (if configured)
-  # - job_name: 'mariadb-master'
-  #   static_configs:
-  #     - targets: ['mariadb-exporter:9104']
-  #       labels:
-  #         service: 'mariadb'
-  #         instance: 'master'
-
-  # - job_name: 'mariadb-replica'
-  #   static_configs:
-  #     - targets: ['mariadb-exporter-replica:9104']
-  #       labels:
-  #         service: 'mariadb'
-  #         instance: 'replica'
-
-  # Keycloak metrics (service not deployed)
-  # - job_name: 'keycloak'
-  #   metrics_path: '/metrics'
-  #   static_configs:
-  #     - targets: ['keycloak:8080']
-  #       labels:
-  #         service: 'keycloak'
-
-  # Orthanc metrics (service not deployed)
-  # - job_name: 'orthanc'
-  #   metrics_path: '/metrics'
-  #   static_configs:
-  #     - targets: ['orthanc:8042']
-  #       labels:
-  #         service: 'orthanc'
+  # Blackbox HTTP endpoint probes
+  - job_name: 'blackbox-http-prod'
+    metrics_path: /probe
+    params:
+      module: [ http_2xx_ignore_ssl ]
+    static_configs:
+      - targets:
+          - "http://gateway:80/"
+          - "http://gateway:80/openmrs"
+          - "http://gateway:80/openmrs/ws/rest/v1/session"
+    relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115
 
   # Grafana metrics
   - job_name: 'grafana'
@@ -86,3 +49,20 @@ scrape_configs:
       - targets: ['loki:3100']
         labels:
           service: 'loki'
+
+  # OpenMRS Backend metrics (JMX exporter - requires configuration)
+  # - job_name: 'openmrs-backend'
+  #   metrics_path: '/openmrs/metrics'
+  #   static_configs:
+  #     - targets: ['backend:8080']
+
+  # MariaDB Exporter (if configured)
+  # - job_name: 'mariadb-master'
+  #   static_configs:
+  #     - targets: ['mariadb-exporter:9104']
+
+  # Keycloak metrics
+  # - job_name: 'keycloak'
+  #   metrics_path: '/metrics'
+  #   static_configs:
+  #     - targets: ['keycloak:8080']

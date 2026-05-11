@@ -1,0 +1,42 @@
+name: Deploy to qlty
+
+on:
+  workflow_run:
+    workflows:
+      - Build Backend
+      - Build Gateway
+      - Build Certbot
+      - Build Monitoring
+    branches: [main]
+    types: [completed]
+  repository_dispatch:
+    types: [frontend-published]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to qlty
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'repository_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    environment:
+      name: qlty
+      url: http://gidis-hsc-qlty.inf.pucp.edu.pe/openmrs/spa
+    steps:
+      - name: Deploy via SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY_QLTY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -t ed25519 gidis-hsc-qlty.inf.pucp.edu.pe >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=yes \
+            u.hsc.qlty@gidis-hsc-qlty.inf.pucp.edu.pe \
+            "cd /home/u.hsc.qlty/sihsalus && git fetch origin main && git switch main && git pull --ff-only origin main && docker compose pull && docker compose up -d"

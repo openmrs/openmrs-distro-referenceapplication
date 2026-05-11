@@ -1,9 +1,9 @@
 // ===========================================
-// peruHCE - Docker Bake Build Definitions
+// sihsalus - Docker Bake Build Definitions
 // ===========================================
 //
 // USAGE:
-//   docker buildx bake                 # Build core (backend, gateway, frontend)
+//   docker buildx bake                 # Build core (backend, gateway)
 //   docker buildx bake all             # Build all targets
 //   docker buildx bake backend         # Build single target
 //   docker buildx bake --print         # Show resolved build config (dry-run)
@@ -12,12 +12,14 @@ variable "TAG" {
   default = "qa"
 }
 
-variable "GHP_USERNAME" {
+variable "REGISTRY" {
   default = ""
 }
 
-variable "GHP_PASSWORD" {
-  default = ""
+// ---- Shared base ----
+
+target "_base" {
+  pull = true
 }
 
 // ---- Groups ----
@@ -33,31 +35,31 @@ group "all" {
 // ---- Core Targets ----
 
 target "backend" {
+  inherits   = ["_base"]
   context    = "."
   dockerfile = "backend/Dockerfile"
-  tags       = ["openmrs/openmrs-reference-application-3-backend:${TAG}"]
-  args = {
-    GHP_USERNAME = GHP_USERNAME
-    GHP_PASSWORD = GHP_PASSWORD
-  }
+  tags       = ["${REGISTRY}openmrs/openmrs-reference-application-3-backend:${TAG}"]
 }
 
 target "gateway" {
+  inherits   = ["_base"]
   context    = "./gateway"
   dockerfile = "Dockerfile"
-  tags       = ["peruhce-gateway:latest"]
+  tags       = ["${REGISTRY}sihsalus-gateway:${TAG}"]
 }
 
 // ---- Optional Targets ----
 
 target "keycloak" {
+  inherits   = ["_base"]
   context    = "./keycloak"
   dockerfile = "Dockerfile"
-  tags       = ["peruhce-keycloak:latest"]
+  tags       = ["${REGISTRY}sihsalus-keycloak:${TAG}"]
 }
 
 target "certbot" {
+  inherits   = ["_base"]
   context    = "./certbot"
   dockerfile = "Dockerfile"
-  tags       = ["peruhce-certbot:latest"]
+  tags       = ["${REGISTRY}sihsalus-certbot:${TAG}"]
 }

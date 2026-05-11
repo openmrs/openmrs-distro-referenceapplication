@@ -8,8 +8,8 @@
 
 set -euo pipefail
 
-CONTAINER_NAME="${CONTAINER_NAME:-peruHCE-db-master}"
-BACKUP_DIR="${BACKUP_DIR:-/home/${USER}/peruHCE-dumps}"
+CONTAINER_NAME="${CONTAINER_NAME:-sihsalus-db-master}"
+BACKUP_DIR="${BACKUP_DIR:-/home/${USER}/sihsalus-dumps}"
 MAX_BACKUPS="${MAX_BACKUPS:-10}"
 DB_NAME="openmrs"
 DB_USER="root"

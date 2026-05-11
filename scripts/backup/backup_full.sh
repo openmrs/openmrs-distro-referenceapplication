@@ -4,7 +4,7 @@
 # Script: backup_full.sh
 # Descripción: Realiza un backup completo de la base de datos MariaDB del contenedor especificado.
 # Uso: ./backup_full.sh [--container NOMBRE] [--dir DIRECTORIO] [--max N]
-# Autor: Equipo PeruHCE
+# Autor: Equipo SIHSALUS
 # Fecha: 2025-10-20
 # ------------------------------------------------------------------------------
 
@@ -12,8 +12,8 @@ set -euo pipefail
 
 
 # Configuración por defecto (pueden ser sobreescritas por argumentos o variables de entorno)
-CONTAINER_NAME="${CONTAINER_NAME:-peruHCE-db-master}"
-FULL_BACKUP_DIR="${FULL_BACKUP_DIR:-/home/${USER}/peruHCE-fullBackups}"
+CONTAINER_NAME="${CONTAINER_NAME:-sihsalus-db-master}"
+FULL_BACKUP_DIR="${FULL_BACKUP_DIR:-/home/${USER}/sihsalus-fullBackups}"
 MAX_BACKUPS="${MAX_BACKUPS:-10}"
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_NAME="backup_$TIMESTAMP"

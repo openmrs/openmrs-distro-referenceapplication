@@ -7,7 +7,7 @@
 #	Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
 #	graphic logo is a trademark of OpenMRS Inc.
 #
-#   Adapted for peruHCE - Self-signed certificate management for internal hospital networks
+#   Adapted for sihsalus - Self-signed certificate management for internal hospital networks
 
 set -e
 
@@ -44,7 +44,7 @@ IFS=${OLD_IFS}
 FIRST_DOMAIN="$1"
 CERT_WEB_DOMAIN_COMMON_NAME="${CERT_WEB_DOMAIN_COMMON_NAME:-$FIRST_DOMAIN}"
 
-log_info "=== peruHCE Certificate Manager ==="
+log_info "=== sihsalus Certificate Manager ==="
 log_info "SSL Mode: ${SSL_MODE}"
 log_info "Primary domain: ${CERT_WEB_DOMAIN_COMMON_NAME}"
 log_info "RSA Key Size: ${CERT_RSA_KEY_SIZE} bits"

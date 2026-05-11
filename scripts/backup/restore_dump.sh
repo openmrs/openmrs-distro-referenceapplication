@@ -13,13 +13,13 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-CONTAINER_NAME="${CONTAINER_NAME:-peruHCE-db-master}"
-BACKUP_DIR="${BACKUP_DIR:-/home/${USER}/peruHCE-dumps}"
+CONTAINER_NAME="${CONTAINER_NAME:-sihsalus-db-master}"
+BACKUP_DIR="${BACKUP_DIR:-/home/${USER}/sihsalus-dumps}"
 BACKUP_FILE=""
 DB_NAME="openmrs"
 DB_USER="root"
 DB_PASSWORD="${MYSQL_ROOT_PASSWORD:-openmrs}"
-TEMP_DIR="/tmp/peruHCE-restore-dump-$$"
+TEMP_DIR="/tmp/sihsalus-restore-dump-$$"
 
 # Leer credenciales desde Docker secrets si existen
 if [ -f /run/secrets/BACKUP_ENCRYPTION_PASSWORD ]; then

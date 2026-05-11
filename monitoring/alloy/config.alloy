@@ -1,4 +1,4 @@
-// Grafana Alloy configuration for PeruHCE
+// Grafana Alloy configuration for SIHSALUS
 // Based on upstream OpenMRS with SIHSALUS customizations
 
 logging {
@@ -87,7 +87,7 @@ loki.process "docker_process" {
   stage.static_labels {
     values = {
       environment = "production",
-      application = "peruhce",
+      application = "sihsalus",
     }
   }
 }

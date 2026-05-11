@@ -3,13 +3,13 @@
 # Script: replica_reset.sh
 # Descripción: Reinicia la replicación de MariaDB/MySQL en el contenedor especificado.
 # Uso: ./replica_reset.sh [--container NOMBRE] [--user USUARIO] [--password PASSWORD]
-# Autor: Equipo PeruHCE
+# Autor: Equipo SIHSALUS
 # Fecha: 2025-10-20
 # ------------------------------------------------------------------------------
 
 set -euo pipefail
 
-CONTAINER_NAME="${CONTAINER_NAME:-peruHCE-db-replic}"
+CONTAINER_NAME="${CONTAINER_NAME:-sihsalus-db-replic}"
 MYSQL_USER="${MYSQL_USER:-openmrs_repl}"
 MYSQL_PASSWORD="${MYSQL_PASSWORD:-openmrs_repl}"
 MYSQL_HOST="${MYSQL_HOST:-db}"

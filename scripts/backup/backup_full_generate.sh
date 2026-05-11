@@ -1,6 +1,6 @@
 echo ""
 echo "-----------------------------------------------------"
-echo "Starting peruHCE MariaDB replic FULL backup in $TIMESTAMP ..."
+echo "Starting sihsalus MariaDB replic FULL backup in $TIMESTAMP ..."
 echo "Creating backup directory in slave container..."
 docker exec --user root $CONTAINER_NAME mkdir -p "$TEMP_BACKUP_PATH"
 echo "Erasing backup directory in replica container..."
@@ -14,17 +14,17 @@ tar -czf "$BACKUP_DIR/$BACKUP_NAME.tar.gz" -C "temp/"
 # Script: backup_full_generate.sh
 # Descripción: Genera un backup completo de la base de datos MariaDB del contenedor especificado.
 # Uso: ./backup_full_generate.sh [--container NOMBRE] [--dir DIRECTORIO] [--max N]
-# Autor: Equipo PeruHCE
+# Autor: Equipo SIHSALUS
 # Fecha: 2025-10-20
 # ------------------------------------------------------------------------------
 
 set -euo pipefail
 
-CONTAINER_NAME="${CONTAINER_NAME:-peruHCE-db-master}"
-BACKUP_DIR="${BACKUP_DIR:-/home/${USER}/peruHCE-fullBackups}"
+CONTAINER_NAME="${CONTAINER_NAME:-sihsalus-db-master}"
+BACKUP_DIR="${BACKUP_DIR:-/home/${USER}/sihsalus-fullBackups}"
 MAX_BACKUPS="${MAX_BACKUPS:-15}"
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-BACKUP_NAME="peruHCE_backup_$TIMESTAMP"
+BACKUP_NAME="sihsalus_backup_$TIMESTAMP"
 TEMP_BACKUP_PATH="/backup/full"
 
  # Leer credenciales sensibles desde Docker secrets si existen

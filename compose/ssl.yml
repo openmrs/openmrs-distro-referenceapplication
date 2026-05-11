@@ -1,12 +1,14 @@
 # SSL/HTTPS Configuration (standalone override)
-# Usage: docker compose -f docker-compose.yml -f compose/ssl.yml up -d
+# Usage: docker compose -f docker-compose.yml -f compose/ssl.yml --profile ssl up -d
 #
 # This file overrides the gateway to add SSL support and adds the certbot service.
 # It is NOT included via `include:` because it modifies the gateway service.
 
 services:
   certbot:
-    container_name: peruHCE-certbot
+    profiles:
+      - ssl
+    container_name: sihsalus-certbot
     build:
       context: ./certbot
       dockerfile: Dockerfile
@@ -27,12 +29,14 @@ services:
       - certbot-data:/var/www/certbot:rw
 
   gateway:
+    depends_on:
+      - certbot
     build:
       context: ./gateway
       dockerfile: Dockerfile
-    image: peruhce-gateway:latest
+    image: sihsalus-gateway:latest
     ports:
-      - "443:443"
+      - "${GATEWAY_HTTPS_PORT:-443}:443"
     environment:
       CERT_WEB_DOMAIN_COMMON_NAME: ${CERT_WEB_DOMAIN_COMMON_NAME:-localhost}
       FRAME_ANCESTORS: ${FRAME_ANCESTORS:-https://dyaku.minsa.gob.pe/fhir}
@@ -42,6 +46,6 @@ services:
 
 volumes:
   letsencrypt-data:
-    name: peruHCE-letsencrypt-data
+    name: sihsalus-letsencrypt-data
   certbot-data:
-    name: peruHCE-certbot-data
+    name: sihsalus-certbot-data
