@@ -56,6 +56,8 @@
     <stockmanagement.version>3.0.0</stockmanagement.version>
     <billing.version>2.3.0-SNAPSHOT</billing.version>
     <tasks.version>1.0.0</tasks.version>
+    <!-- SPA Module -->
+    <spa.version>2.1.0</spa.version>
     <!-- Content Packages -->
     <reference-content.version>1.4.0</reference-content.version>
     <reference-demo-content.version>1.8.0-SNAPSHOT</reference-demo-content.version>
@@ -243,6 +245,12 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>tasks-omod</artifactId>
       <version>${tasks.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>spa-omod</artifactId>
+      <version>${spa.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
