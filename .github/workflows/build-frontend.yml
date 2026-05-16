@@ -62,6 +62,19 @@ jobs:
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_VERSION }}
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_ENV }}
 
+      - name: Extract spa-assemble-config.json
+        run: |
+          IMAGE="${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}"
+          CONTAINER_ID=$(docker create $IMAGE)
+          docker cp $CONTAINER_ID:/usr/share/nginx/html/spa-assemble-config.json ./spa-assemble-config.json
+
+      - name: Upload spa-assemble-config.json as artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: spa-assemble-config
+          path: ./spa-assemble-config.json
+          retention-days: 1
+
   extract-and-deploy:
     name: Extract config and Deploy to Maven
     runs-on: ubuntu-latest
@@ -69,12 +82,11 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Extract spa-assemble-config.json
-        run: |
-          IMAGE="${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}"
-          CONTAINER_ID=$(docker create $IMAGE)
-          docker cp $CONTAINER_ID:/usr/share/nginx/html/spa-assemble-config.json ./frontend/src/main/resources/spa-assemble-config.json
-          docker rm $CONTAINER_ID
+      - name: Download spa-assemble-config.json
+        uses: actions/download-artifact@v4
+        with:
+          name: spa-assemble-config
+          path: ./frontend/src/main/resources/
 
       - name: Set up Java
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
