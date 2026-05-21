@@ -2,38 +2,38 @@ name: Build Frontend
 
 on:
   push:
-    branches: [main]
+    branches: [auditlog]
     paths:
       - '.github/workflows/build-frontend.yml'
       - 'frontend/**'
   workflow_dispatch:
     inputs:
       docker_image_tag:
-        description: 'Docker image tag (e.g., nightly)'
+        description: 'Docker image tag (e.g., nightly-auditlog)'
         required: false
-        default: 'nightly'
+        default: 'nightly-auditlog'
       docker_image_tag_version:
-        description: 'Docker image version tag (e.g., 3.7.x)'
+        description: 'Docker image version tag (e.g., 3.7.x-auditlog)'
         required: false
-        default: '3.7.x'
+        default: '3.7.x-auditlog'
       docker_image_tag_env:
-        description: 'Docker image environment tag (e.g., dev3)'
+        description: 'Docker image environment tag (e.g., audit)'
         required: false
-        default: 'dev3'
+        default: 'audit'
   workflow_call:
     inputs:
       docker_image_tag:
         required: false
         type: string
-        default: 'nightly'
+        default: 'nightly-auditlog'
       docker_image_tag_version:
         required: false
         type: string
-        default: '3.7.x'
+        default: '3.7.x-auditlog'
       docker_image_tag_env:
         required: false
         type: string
-        default: 'dev3'
+        default: 'audit'
       ref:
         required: false
         type: string
@@ -47,16 +47,12 @@ on:
         required: true
       MAVEN_REPO_API_KEY:
         required: true
-  repository_dispatch:
-    types: [frontend-prerelease]
-  schedule:
-    - cron: '0 1,7,13,19 * * *'
 
 env:
   IMAGE: openmrs/openmrs-reference-application-3-frontend
-  DOCKER_IMAGE_TAG: ${{ inputs.docker_image_tag || 'nightly' }}
-  DOCKER_IMAGE_TAG_VERSION: ${{ inputs.docker_image_tag_version || '3.7.x' }}
-  DOCKER_IMAGE_TAG_ENV: ${{ inputs.docker_image_tag_env || 'dev3' }}
+  DOCKER_IMAGE_TAG: ${{ inputs.docker_image_tag || 'nightly-auditlog' }}
+  DOCKER_IMAGE_TAG_VERSION: ${{ inputs.docker_image_tag_version || '3.7.x-auditlog' }}
+  DOCKER_IMAGE_TAG_ENV: ${{ inputs.docker_image_tag_env || 'audit' }}
   DOCKER_IMAGE_PLATFORMS: linux/amd64,linux/arm64
 
 concurrency:
@@ -106,63 +102,3 @@ jobs:
         env:
           DIGEST: ${{ steps.build.outputs.digest }}
         run: cosign sign --yes "${IMAGE}@${DIGEST}"
-
-      - name: Extract spa-assemble-config.json
-        run: |
-          IMAGE="${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}"
-          CONTAINER_ID=$(docker create $IMAGE)
-          docker cp $CONTAINER_ID:/usr/share/nginx/html/spa-assemble-config.json ./spa-assemble-config.json
-
-      - name: Upload spa-assemble-config.json as artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-        with:
-          name: spa-assemble-config
-          path: ./spa-assemble-config.json
-          retention-days: 1
-
-  extract-and-deploy:
-    name: Extract config and Deploy to Maven
-    runs-on: ubuntu-latest
-    needs: build-and-publish
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          ref: ${{ inputs.ref || github.sha }}
-
-      - name: Download spa-assemble-config.json
-        uses: actions/download-artifact@v4
-        with:
-          name: spa-assemble-config
-          path: ./frontend/src/main/resources/
-
-      - name: Set up Java
-        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Create Maven settings.xml
-        run: |
-          mkdir -p "$HOME/.m2"
-          cat > "$HOME/.m2/settings.xml" << EOF
-          <settings>
-            <servers>
-              <server>
-                <id>openmrs-repo-releases</id>
-                <username>${MAVEN_REPO_USERNAME}</username>
-                <password>${MAVEN_REPO_API_KEY}</password>
-              </server>
-              <server>
-                <id>openmrs-repo-snapshots</id>
-                <username>${MAVEN_REPO_USERNAME}</username>
-                <password>${MAVEN_REPO_API_KEY}</password>
-              </server>
-            </servers>
-          </settings>
-          EOF
-        env:
-          MAVEN_REPO_USERNAME: ${{ secrets.MAVEN_REPO_USERNAME }}
-          MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
-
-      - name: Deploy frontend artifact
-        run: mvn deploy -Pfrontend -pl frontend -s $HOME/.m2/settings.xml -B
