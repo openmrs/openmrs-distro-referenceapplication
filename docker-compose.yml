@@ -35,6 +35,8 @@ services:
       OMRS_CONFIG_CONNECTION_DATABASE: openmrs
       OMRS_CONFIG_CONNECTION_USERNAME: ${OMRS_DB_USER:-openmrs}
       OMRS_CONFIG_CONNECTION_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
+      OMRS_EXTRA_HIBERNATE_INTEGRATION_ENVERS_ENABLED: "true"
+      OMRS_EXTRA_HIBERNATE_HBM2DDL_AUTO: "update"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
       timeout: 5s
