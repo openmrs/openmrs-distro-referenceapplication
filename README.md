@@ -47,6 +47,25 @@ This distribution consists of four images:
 - **gateway** - This image is an nginx reverse proxy that sits in front of the `backend` and `frontend` containers
   and provides a common interface to both. This helps mitigate CORS issues.
 
+## Appointment webhook module
+
+This workspace also contains `openmrs-webhook-module`, a Maven-built OpenMRS event-listener module. It subscribes to `Encounter` events through the OpenMRS Event Module and posts signed appointment webhooks to the communication-module backend.
+
+Run its tests with:
+
+```bash
+mvn -pl openmrs-webhook-module test
+```
+
+Required OpenMRS global properties:
+
+| Property | Description |
+|---|---|
+| `openmrswebhook.backendUrl` | Backend endpoint, for example `http://host.docker.internal:5111/api/webhooks/openmrs/appointments` |
+| `openmrswebhook.secret` | Shared HMAC secret, same value as backend `OPENMRS_WEBHOOK_SECRET` |
+| `openmrswebhook.organizationId` | Tenant/organization id sent to the backend |
+| `openmrswebhook.outboxPath` | Optional retry outbox file path |
+
 When running with SSL enabled (using `docker-compose.ssl.yml`), an additional service is included:
 
 - **certbot** - This image is used for generating and renewing SSL certificates (Let's Encrypt or self-signed)

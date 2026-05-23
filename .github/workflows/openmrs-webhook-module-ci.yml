@@ -1,0 +1,28 @@
+name: OpenMRS Webhook Module CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  openmrs-webhook-module:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+
+      - name: Test webhook module
+        run: mvn -pl openmrs-webhook-module test
+
+      - name: Package LU1 distro metadata
+        run: mvn -P distro -DskipTests package
+
+      - name: Secret scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
