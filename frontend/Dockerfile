@@ -20,7 +20,7 @@ RUN if [ ! -f ./spa/index.html ]; then echo 'Build failed. Please check the logs
 #--------------------------------------------
 # Runtime Stage - Published Image
 #--------------------------------------------
-FROM nginx:1.28-alpine
+FROM nginx:1.31-alpine
 
 RUN apk update && \
     apk upgrade && \

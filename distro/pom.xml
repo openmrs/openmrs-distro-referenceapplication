@@ -24,13 +24,13 @@
     <!-- track module versions
          we do so here so that we can utilise Maven to track updates, etc. -->
     <openmrs.version>2.8.6</openmrs.version>
-    <initializer.version>2.11.0</initializer.version>
+    <initializer.version>2.12.0-SNAPSHOT</initializer.version>
     <fhir2.version>4.0.0-SNAPSHOT</fhir2.version>
-    <webservices.rest.version>3.4.0-SNAPSHOT</webservices.rest.version>
+    <webservices.rest.version>3.5.0-SNAPSHOT</webservices.rest.version>
     <addresshierarchy.version>2.21.0</addresshierarchy.version>
     <patientdocuments.version>1.1.0-SNAPSHOT</patientdocuments.version>
     <idgen.version>5.0.4</idgen.version>
-    <legacyui.version>2.0.0</legacyui.version>
+    <legacyui.version>2.1.0</legacyui.version>
     <metadatamapping.version>2.0.0</metadatamapping.version>
     <openconceptlab.version>3.0.0</openconceptlab.version>
     <attachments.version>4.0.0</attachments.version>
@@ -39,7 +39,7 @@
     <appointments.version>2.1.0-20250318.070530-1</appointments.version>
     <teleconsultation.version>2.1.0-20250318.154145-1</teleconsultation.version>
     <cohort.version>3.7.3</cohort.version>
-    <authentication.version>2.2.0</authentication.version>
+    <authentication.version>2.3.0</authentication.version>
     <reporting.version>2.1.0</reporting.version>
     <reportingrest.version>2.0.0</reportingrest.version>
     <!-- the next three are required for reporting -->
@@ -49,12 +49,13 @@
     <ordertemplates.version>2.2.0</ordertemplates.version>
     <patientflags.version>3.0.10</patientflags.version>
     <o3forms.version>2.3.0</o3forms.version>
-    <emrapi.version>3.3.0</emrapi.version>
+    <emrapi.version>3.4.0</emrapi.version>
     <event.version>4.0.0</event.version>
     <bedmanagement.version>7.2.0</bedmanagement.version>
     <!-- Stock Management and Billing -->
     <stockmanagement.version>3.0.0</stockmanagement.version>
-    <billing.version>2.2.0</billing.version>
+    <billing.version>2.3.0-SNAPSHOT</billing.version>
+    <tasks.version>2.1.0-SNAPSHOT</tasks.version>
     <!-- Content Packages -->
     <reference-content.version>1.4.0</reference-content.version>
     <reference-demo-content.version>1.8.0-SNAPSHOT</reference-demo-content.version>
@@ -236,6 +237,12 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>billing-omod</artifactId>
       <version>${billing.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.module</groupId>
+      <artifactId>tasks-omod</artifactId>
+      <version>${tasks.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
