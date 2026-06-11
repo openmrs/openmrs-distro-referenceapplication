@@ -76,7 +76,7 @@ jobs:
           MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
+        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0
         with:
           context: .
           push: true
@@ -132,7 +132,7 @@ jobs:
           MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
 
       - name: Build and push Docker image (no demo content)
-        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
+        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0
         with:
           context: .
           push: true
