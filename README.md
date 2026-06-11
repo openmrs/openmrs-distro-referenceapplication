@@ -252,6 +252,14 @@ If you would like to use grafana in your distro, you just need to copy over `doc
 | `CERT_RSA_KEY_SIZE` | `4096` | RSA key size for certificates |
 | `CERT_PROFILE` | (empty) | Certificate profile: `classic` (90 days), `tlsserver` (45 days), or `shortlived` (6 days). Auto-set to `shortlived` for IP addresses |
 
+## 🚀 Quick Start with GitHub Codespaces
+
+1. Click the **Code** button on GitHub and select **Create codespace on main**.
+2. Wait for the environment to build. The application will start automatically.
+3. When prompted, click **Open in Browser** for Port 80.
+4. **Logs:** To see the progress, run `docker compose logs -f backend`.
+5. **Login:** User: `admin` | Pass: `Admin123`
+
 ## Contributing to the configuration
 
 This project uses the [Initializer](https://github.com/mekomsolutions/openmrs-module-initializer) module
