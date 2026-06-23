@@ -1,0 +1,88 @@
+version: "3.7"
+
+#    This Source Code Form is subject to the terms of the Mozilla Public License,
+#    v. 2.0. If a copy of the MPL was not distributed with this file, You can
+#    obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+#    the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+#    
+#    Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+#    graphic logo is a trademark of OpenMRS Inc.
+
+services:
+    monitoring-init:
+        image: openmrs/openmrs-reference-application-3-monitoring-init:${TAG:-qa}
+        build: ./monitoring
+        volumes:
+            - loki-data:/loki/data
+            - loki-config:/etc/loki
+            - prometheus-config:/etc/prometheus
+            - alloy-config:/etc/alloy
+            - blackbox-config:/config
+            - grafana-provisioning:/etc/grafana/provisioning
+
+    loki:
+        image: grafana/loki:3.6
+        volumes:
+            - loki-config:/etc/loki
+            - loki-data:/loki/data
+        command: -config.file=/etc/loki/local-config.yaml
+        depends_on:
+            monitoring-init:
+                condition: service_completed_successfully
+
+    alloy:
+        image: grafana/alloy:v1.13.1
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - alloy-config:/etc/alloy
+        command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+        depends_on:
+            monitoring-init:
+                condition: service_completed_successfully
+
+    prometheus:
+        image: prom/prometheus:v3.9.0
+        container_name: prometheus
+        volumes:
+            - prometheus-config:/etc/prometheus
+            - prometheus_data:/prometheus
+        depends_on:
+            monitoring-init:
+                condition: service_completed_successfully
+
+    blackbox:
+        image: prom/blackbox-exporter:v0.28.0
+        container_name: blackbox
+        command: --config.file=/config/blackbox.yml --log.level=error --log.prober=error
+        volumes:
+            - blackbox-config:/config
+        depends_on:
+            monitoring-init:
+                condition: service_completed_successfully
+
+    grafana:
+        image: grafana/grafana:12.3
+        environment:
+            GF_LOG_LEVEL: warn
+            GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-Admin123}
+            GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /etc/grafana/provisioning/dashboards/json/logs-dashboard.json
+            GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
+            GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+        volumes:
+            - grafana-provisioning:/etc/grafana/provisioning
+            - grafana-data:/var/lib/grafana
+        depends_on:
+            loki:
+                condition: service_started
+            monitoring-init:
+                condition: service_completed_successfully
+
+volumes:
+    grafana-data:
+    prometheus_data:
+    prometheus-config:
+    blackbox-config:
+    loki-data:
+    loki-config:
+    alloy-config:
+    grafana-provisioning:

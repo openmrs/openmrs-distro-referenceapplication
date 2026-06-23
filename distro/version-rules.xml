@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset comparisonMethod="maven"
+  xmlns="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0
+    https://www.mojohaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd">
+  <rules>
+    <!-- Never auto-update OpenMRS Core -->
+    <rule groupId="org.openmrs.web" artifactId="openmrs-webapp">
+      <ignoreVersions>
+        <ignoreVersion type="regex">.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <!-- Pinned to timestamped snapshots; managed manually -->
+    <rule groupId="org.bahmni.module" artifactId="appointments-omod">
+      <ignoreVersions>
+        <ignoreVersion type="regex">.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="org.bahmni.module" artifactId="teleconsultation-omod">
+      <ignoreVersions>
+        <ignoreVersion type="regex">.*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <!-- webservices.rest 4.x requires openmrs-core 3.0.0+ -->
+    <rule groupId="org.openmrs.module" artifactId="webservices.rest-omod">
+      <ignoreVersions>
+        <ignoreVersion type="regex">([4-9]|[1-9]\d+)\..*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <!-- LegacyUI 3.x requires openmrs-core 3.0.0+ -->
+    <rule groupId="org.openmrs.module" artifactId="legacyui-omod">
+      <ignoreVersions>
+        <ignoreVersion type="regex">([3-9]|[1-9]\d+)\..*</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+  </rules>
+</ruleset>
