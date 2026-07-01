@@ -37,6 +37,9 @@ jobs:
     name: Build and Publish the Certbot Image
     if: github.repository_owner == 'openmrs'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write   # required for cosign keyless signing via OIDC
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
@@ -50,6 +53,7 @@ jobs:
         uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
 
       - name: Build and push Docker image
+        id: build
         uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: ./certbot
@@ -61,3 +65,11 @@ jobs:
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_VERSION }}
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_ENV }}
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159 # v3.9.2
+
+      - name: Sign the image (keyless)
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: cosign sign --yes "${IMAGE}@${DIGEST}"

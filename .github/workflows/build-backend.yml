@@ -39,6 +39,9 @@ jobs:
     name: Build and Publish the Backend Image
     if: github.repository_owner == 'openmrs'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write   # required for cosign keyless signing via OIDC
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
@@ -76,6 +79,7 @@ jobs:
           MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
 
       - name: Build and push Docker image
+        id: build
         uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: .
@@ -91,10 +95,21 @@ jobs:
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_VERSION }}
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_ENV }}
 
+      - name: Install cosign
+        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159 # v3.9.2
+
+      - name: Sign the image (keyless)
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: cosign sign --yes "${IMAGE}@${DIGEST}"
+
   build-and-publish-no-demo:
     name: Build and Publish the Backend Image Without Demo Content
     if: github.repository_owner == 'openmrs'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write   # required for cosign keyless signing via OIDC
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
@@ -132,6 +147,7 @@ jobs:
           MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
 
       - name: Build and push Docker image (no demo content)
+        id: build
         uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: .
@@ -146,12 +162,23 @@ jobs:
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}-no-demo
             ${{ env.IMAGE }}:${{ env.DOCKER_IMAGE_TAG_VERSION }}-no-demo
 
+      - name: Install cosign
+        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159 # v3.9.2
+
+      - name: Sign the image (keyless)
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: cosign sign --yes "${IMAGE}@${DIGEST}"
+
   build-nightly-with-data:
     name: Build and Publish Nightly With Data Images
     needs: build-and-publish
     if: github.repository_owner == 'openmrs' && (github.event.inputs.docker_image_tag || 'nightly') == 'nightly'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: read
+      id-token: write   # required for cosign keyless signing via OIDC
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
@@ -181,3 +208,13 @@ jobs:
         run: |
           docker push openmrs/openmrs-reference-application-3-backend:nightly-with-data
           docker push openmrs/openmrs-reference-application-3-db:nightly-with-data
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159 # v3.9.2
+
+      - name: Sign the images (keyless)
+        run: |
+          backend_digest=$(docker inspect --format='{{index .RepoDigests 0}}' openmrs/openmrs-reference-application-3-backend:nightly-with-data)
+          db_digest=$(docker inspect --format='{{index .RepoDigests 0}}' openmrs/openmrs-reference-application-3-db:nightly-with-data)
+          cosign sign --yes "$backend_digest"
+          cosign sign --yes "$db_digest"
