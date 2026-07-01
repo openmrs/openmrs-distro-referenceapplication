@@ -4,6 +4,7 @@ This project holds the build configuration for the OpenMRS 3.0 reference applica
 https://dev3.openmrs.org and https://o3.openmrs.org.
 
 ## Quick start
+Clone the repository on your local machine then run the app. Make sure you have `docker compose` installed.
 
 ### Run the app (using pre-built images)
 
