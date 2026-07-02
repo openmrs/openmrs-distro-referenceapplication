@@ -1,0 +1,260 @@
+name: 'Release: Cut QA (RC)'
+
+# Replaces the Bamboo "Create initial QA release" (O3-CQR), "Create Updated QA
+# Release" (O3-CUQR) and "Publish QA Release" (O3-PQR) plans.
+#
+# The first run for a version cuts releases/<version> off <base_ref> with a
+# single "(release) Release v<version>-rc.1" commit that pins:
+#   - frontend/spa-assemble-config.json: "next" -> "latest"
+#   - frontend/Dockerfile: APP_SHELL_VERSION next -> <core_version>
+#   - the three project poms -> <version>-rc.1
+# Later runs for the same version add rc.2, rc.3, ... on the existing branch.
+#
+# It then dispatches the existing image build workflows on the release branch,
+# publishing images tagged <version>-rc.N and qa (which test3.openmrs.org runs).
+#
+# This workflow never pushes to main. When a release makes the development
+# version on main stale (minor releases), it opens a version-bump PR instead.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Version being released, e.g. 3.7.1'
+        required: true
+      core_version:
+        description: 'esm-core (app shell) version to pin, e.g. 10.0.0 — see https://github.com/openmrs/openmrs-esm-core/releases'
+        required: true
+      base_ref:
+        description: 'Ref to cut the first RC from (ignored when releases/<version> already exists)'
+        required: false
+        default: 'main'
+      dry_run:
+        description: 'Prepare the release commit but push nothing and build nothing'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+  pull-requests: write
+
+concurrency:
+  group: o3-release
+  cancel-in-progress: false
+
+jobs:
+  cut-rc:
+    name: Cut RC for ${{ inputs.release_version }}
+    if: github.repository_owner == 'openmrs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Validate inputs
+        env:
+          V: ${{ inputs.release_version }}
+          CORE: ${{ inputs.core_version }}
+        run: |
+          set -euo pipefail
+          [[ "$V" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
+            || { echo "::error::release_version must look like 3.7.1 (got: $V)"; exit 1; }
+          [[ "$CORE" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]] \
+            || { echo "::error::core_version must look like 10.0.0 (got: $CORE)"; exit 1; }
+
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Determine release mode and RC number
+        id: setup
+        env:
+          V: ${{ inputs.release_version }}
+          BASE_REF: ${{ inputs.base_ref }}
+        run: |
+          set -euo pipefail
+          git config user.name "openmrs-bot"
+          git config user.email "infrastructure@openmrs.org"
+
+          if git rev-parse -q --verify "refs/tags/$V" >/dev/null; then
+            echo "::error::$V is already released (tag exists)"; exit 1
+          fi
+
+          if git rev-parse -q --verify "origin/releases/$V" >/dev/null; then
+            MODE=update
+            git checkout "releases/$V"
+          else
+            MODE=initial
+            git checkout -b "releases/$V" "origin/$BASE_REF" 2>/dev/null \
+              || git checkout -b "releases/$V" "$BASE_REF"
+          fi
+
+          LAST_RC=$(git tag -l "$V-rc.*" | sed "s/^$V-rc\.//" | grep -E '^[0-9]+$' | sort -n | tail -1 || true)
+          RC_N=$(( ${LAST_RC:-0} + 1 ))
+          RC_TAG="$V-rc.$RC_N"
+
+          OLD_VERSION=$(python3 - <<'EOF'
+          import xml.etree.ElementTree as ET
+          ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
+          print(ET.parse('pom.xml').getroot().find('m:version', ns).text)
+          EOF
+          )
+
+          {
+            echo "mode=$MODE"
+            echo "rc_tag=$RC_TAG"
+            echo "old_version=$OLD_VERSION"
+          } >> "$GITHUB_OUTPUT"
+          echo "Mode: $MODE — cutting $RC_TAG (replacing pom version $OLD_VERSION)"
+
+      - name: Pin frontend versions
+        env:
+          CORE: ${{ inputs.core_version }}
+        run: |
+          set -euo pipefail
+          sed -i 's/"next"/"latest"/g' frontend/spa-assemble-config.json
+          if grep -q '"next"' frontend/spa-assemble-config.json; then
+            echo "::error::frontend/spa-assemble-config.json still contains \"next\" entries after pinning"; exit 1
+          fi
+          sed -i -E "s|^ARG APP_SHELL_VERSION=.*|ARG APP_SHELL_VERSION=${CORE}|" frontend/Dockerfile
+          sed -i -E "s|APP_SHELL_VERSION:-[^}]*|APP_SHELL_VERSION:-${CORE}|g" frontend/Dockerfile
+          grep -q "^ARG APP_SHELL_VERSION=${CORE}$" frontend/Dockerfile \
+            || { echo "::error::failed to pin APP_SHELL_VERSION in frontend/Dockerfile"; exit 1; }
+
+      - name: Set project versions
+        env:
+          OLD: ${{ steps.setup.outputs.old_version }}
+          NEW: ${{ steps.setup.outputs.rc_tag }}
+        run: |
+          set -euo pipefail
+          OLD_ESC=$(printf '%s' "$OLD" | sed 's/[.[\*^$]/\\&/g')
+          for f in pom.xml distro/pom.xml frontend/pom.xml; do
+            n=$(grep -c "<version>$OLD</version>" "$f" || true)
+            if [ "$n" != "1" ]; then
+              echo "::error::$f: expected exactly one occurrence of <version>$OLD</version>, found $n"; exit 1
+            fi
+            sed -i "s|<version>${OLD_ESC}</version>|<version>${NEW}</version>|" "$f"
+          done
+          git diff --stat
+
+      - name: Refuse SNAPSHOT or timestamp-locked module versions
+        run: |
+          set -euo pipefail
+          if grep -nE '(-SNAPSHOT|[0-9]{8}\.[0-9]{6}-[0-9]+)<' distro/pom.xml; then
+            echo "::error::distro/pom.xml references SNAPSHOT or timestamp-locked module versions (shown above). Release those modules and update the pom first — shipping locked snapshots is what broke 3.7.0."
+            exit 1
+          fi
+
+      - name: Create release commit and tag
+        env:
+          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
+        run: |
+          set -euo pipefail
+          git add -A
+          git commit -m "(release) Release v${RC_TAG}"
+          git tag "$RC_TAG"
+          git show --stat HEAD
+
+      - name: 'Dry run: report what would happen'
+        if: inputs.dry_run
+        env:
+          V: ${{ inputs.release_version }}
+          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## :test_tube: Dry run — nothing was pushed or built"
+            echo ""
+            echo "Would push branch \`releases/$V\` and tag \`$RC_TAG\`, then dispatch"
+            echo "build-backend / build-frontend / build-gateway on \`releases/$V\`"
+            echo "with image tags \`$RC_TAG\` and \`qa\`."
+            echo ""
+            echo "### Release commit"
+            echo '```diff'
+            git show HEAD | head -300
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Push release branch and tag
+        if: ${{ !inputs.dry_run }}
+        env:
+          V: ${{ inputs.release_version }}
+          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
+        run: |
+          set -euo pipefail
+          git push origin "releases/$V"
+          git push origin "refs/tags/$RC_TAG"
+
+      - name: Dispatch QA image builds
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          V: ${{ inputs.release_version }}
+          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
+        run: |
+          set -euo pipefail
+          for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
+            gh workflow run "$wf" --repo "$GITHUB_REPOSITORY" --ref "releases/$V" \
+              -f docker_image_tag="$RC_TAG" \
+              -f docker_image_tag_version="$RC_TAG" \
+              -f docker_image_tag_env=qa
+            echo "Dispatched $wf on releases/$V"
+          done
+
+      - name: Open dev-version bump PR on main if needed
+        if: ${{ !inputs.dry_run && steps.setup.outputs.mode == 'initial' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          V: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          git show origin/main:pom.xml > /tmp/main-pom.xml
+          MAIN_DEV=$(python3 - <<'EOF'
+          import xml.etree.ElementTree as ET
+          ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
+          print(ET.parse('/tmp/main-pom.xml').getroot().find('m:version', ns).text)
+          EOF
+          )
+          BASE="${MAIN_DEV%-SNAPSHOT}"
+          if [ "$(printf '%s\n%s\n' "$BASE" "$V" | sort -V | tail -1)" != "$V" ] && [ "$BASE" != "$V" ]; then
+            echo "main development version ($MAIN_DEV) is already ahead of $V — no bump needed."
+            exit 0
+          fi
+          NEXT_DEV=$(echo "$V" | awk -F. '{printf "%d.%d.0-SNAPSHOT", $1, $2 + 1}')
+          BRANCH="release/bump-dev-after-$V"
+          git checkout -B "$BRANCH" origin/main
+          OLD_ESC=$(printf '%s' "$MAIN_DEV" | sed 's/[.[\*^$]/\\&/g')
+          for f in pom.xml distro/pom.xml frontend/pom.xml; do
+            n=$(grep -c "<version>$MAIN_DEV</version>" "$f" || true)
+            if [ "$n" != "1" ]; then
+              echo "::error::$f: expected exactly one occurrence of <version>$MAIN_DEV</version>, found $n"; exit 1
+            fi
+            sed -i "s|<version>${OLD_ESC}</version>|<version>${NEXT_DEV}</version>|" "$f"
+          done
+          git add -A
+          git commit -m "(release-revert) Bump development version to $NEXT_DEV"
+          git push -f origin "$BRANCH"
+          gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" \
+            --title "(release-revert) Bump development version to $NEXT_DEV" \
+            --body "Bumps the development version on main to \`$NEXT_DEV\` now that \`$V\` has entered the release process (see the \`releases/$V\` branch). Opened automatically by the *Release: Cut QA (RC)* workflow."
+
+      - name: Write summary
+        if: ${{ !inputs.dry_run }}
+        env:
+          V: ${{ inputs.release_version }}
+          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
+          MODE: ${{ steps.setup.outputs.mode }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## :rocket: Cut \`$RC_TAG\` (${MODE} release)"
+            echo ""
+            echo "- Branch: [\`releases/$V\`](https://github.com/$GITHUB_REPOSITORY/tree/releases/$V)"
+            echo "- Tag: \`$RC_TAG\`"
+            echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3Areleases%2F$V) — they publish \`openmrs/openmrs-reference-application-3-{backend,frontend,gateway}:$RC_TAG\` and \`:qa\`"
+            echo ""
+            echo "### Next steps"
+            echo "1. Refresh test3.openmrs.org so it picks up the new \`qa\` images (Bamboo *Publish QA Release* deploy step / infrastructure — not yet ported)."
+            echo "2. Run through the [QA checklist](https://om.rs/o3qasheet) on test3."
+            echo "3. Fixes needed? Commit them to \`releases/$V\` and re-run this workflow for the next RC."
+            echo "4. QA passed? Run the *Release: Promote to Production* workflow."
+          } >> "$GITHUB_STEP_SUMMARY"

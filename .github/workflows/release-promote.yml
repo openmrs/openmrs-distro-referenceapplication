@@ -1,0 +1,252 @@
+name: 'Release: Promote to Production'
+
+# Replaces the release-cutting half of the Bamboo "Deploy Reference
+# Application 3.x" deployment project.
+#
+# Takes the latest QA-approved RC on releases/<version> and finalizes it:
+#   - pins frontend/spa-assemble-config.json to the EXACT module versions that
+#     were QA-tested, extracted from the RC frontend image's importmap (unlike
+#     the Bamboo flow, which re-resolved "latest" at promote time and could
+#     silently ship module versions QA never saw)
+#   - sets the project poms to the final version
+#   - commits "(release) Release <version>", tags <version>
+#   - dispatches the image builds, publishing :<version>, :<major.minor.x>
+#     and :demo images (which o3.openmrs.org runs)
+#
+# Refuses to run if commits landed on the release branch after the last RC —
+# cut and QA a new RC first.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Version to finalize, e.g. 3.7.1 (its releases/<version> branch must have a QA-approved RC)'
+        required: true
+      dry_run:
+        description: 'Prepare the final commit but push nothing and build nothing'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: o3-release
+  cancel-in-progress: false
+
+env:
+  BACKEND_IMAGE: openmrs/openmrs-reference-application-3-backend
+  FRONTEND_IMAGE: openmrs/openmrs-reference-application-3-frontend
+  GATEWAY_IMAGE: openmrs/openmrs-reference-application-3-gateway
+
+jobs:
+  promote:
+    name: Promote ${{ inputs.release_version }} to production
+    if: github.repository_owner == 'openmrs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Validate inputs
+        env:
+          V: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          [[ "$V" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
+            || { echo "::error::release_version must look like 3.7.1 (got: $V)"; exit 1; }
+
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Check out release branch and locate the QA-approved RC
+        id: setup
+        env:
+          V: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          git config user.name "openmrs-bot"
+          git config user.email "infrastructure@openmrs.org"
+
+          if git rev-parse -q --verify "refs/tags/$V" >/dev/null; then
+            echo "::error::$V is already released (tag exists)"; exit 1
+          fi
+          git rev-parse -q --verify "origin/releases/$V" >/dev/null \
+            || { echo "::error::branch releases/$V does not exist — run 'Release: Cut QA (RC)' first"; exit 1; }
+          git checkout "releases/$V"
+
+          LAST_RC=$(git tag -l "$V-rc.*" | sed "s/^$V-rc\.//" | grep -E '^[0-9]+$' | sort -n | tail -1 || true)
+          [ -n "$LAST_RC" ] || { echo "::error::no RC tags found for $V — run 'Release: Cut QA (RC)' first"; exit 1; }
+          RC_TAG="$V-rc.$LAST_RC"
+
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse "$RC_TAG^{commit}")" ]; then
+            echo "::error::releases/$V has commits after $RC_TAG — cut a new RC and QA it before promoting"; exit 1
+          fi
+
+          CORE=$(sed -n 's/^ARG APP_SHELL_VERSION=//p' frontend/Dockerfile | head -1)
+          [ -n "$CORE" ] && [ "$CORE" != "next" ] \
+            || { echo "::error::APP_SHELL_VERSION is not pinned on releases/$V"; exit 1; }
+
+          {
+            echo "rc_tag=$RC_TAG"
+            echo "core=$CORE"
+          } >> "$GITHUB_OUTPUT"
+          echo "Promoting $RC_TAG -> $V (app shell $CORE)"
+
+      - name: Verify the QA images exist on Docker Hub
+        env:
+          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
+        run: |
+          set -euo pipefail
+          for repo in "$BACKEND_IMAGE" "$FRONTEND_IMAGE" "$GATEWAY_IMAGE"; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/$repo/tags/$RC_TAG")
+            if [ "$code" != "200" ]; then
+              echo "::error::$repo:$RC_TAG not found on Docker Hub (HTTP $code) — did the QA builds finish?"; exit 1
+            fi
+            echo "$repo:$RC_TAG ✔"
+          done
+
+      - name: Pin frontend modules to the exact QA-tested versions
+        env:
+          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
+          CORE: ${{ steps.setup.outputs.core }}
+        run: |
+          set -euo pipefail
+          docker create --name qa-frontend "$FRONTEND_IMAGE:$RC_TAG"
+          docker cp qa-frontend:/usr/share/nginx/html/importmap.json importmap.json
+          docker rm qa-frontend >/dev/null
+
+          python3 - "$CORE" <<'EOF'
+          import json, re, sys
+
+          with open('importmap.json') as f:
+              imports = json.load(f)['imports']
+
+          resolved = {}
+          for pkg, path in imports.items():
+              m = re.match(r'^\./(.+)-(\d[\w.+-]*)/[^/]+$', path)
+              if not m:
+                  sys.exit(f"Cannot parse importmap entry for {pkg}: {path}")
+              resolved[pkg] = m.group(2)
+
+          with open('frontend/spa-assemble-config.json') as f:
+              cfg = json.load(f)
+
+          missing = []
+          for pkg in cfg['frontendModules']:
+              if pkg in resolved:
+                  cfg['frontendModules'][pkg] = resolved[pkg]
+              else:
+                  missing.append(pkg)
+
+          if missing:
+              sys.exit("Modules in spa-assemble-config.json missing from the QA importmap:\n  "
+                       + "\n  ".join(missing))
+
+          out = {'coreVersion': sys.argv[1]}
+          out.update(cfg)
+          out['coreVersion'] = sys.argv[1]
+
+          with open('frontend/spa-assemble-config.json', 'w') as f:
+              json.dump(out, f, indent=2)
+              f.write('\n')
+
+          print(f"Pinned {len(cfg['frontendModules'])} modules to their QA-tested versions.")
+          EOF
+
+          rm importmap.json
+          git diff --stat -- frontend/spa-assemble-config.json
+
+      - name: Set project versions
+        env:
+          OLD: ${{ steps.setup.outputs.rc_tag }}
+          NEW: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          OLD_ESC=$(printf '%s' "$OLD" | sed 's/[.[\*^$]/\\&/g')
+          for f in pom.xml distro/pom.xml frontend/pom.xml; do
+            n=$(grep -c "<version>$OLD</version>" "$f" || true)
+            if [ "$n" != "1" ]; then
+              echo "::error::$f: expected exactly one occurrence of <version>$OLD</version>, found $n"; exit 1
+            fi
+            sed -i "s|<version>${OLD_ESC}</version>|<version>${NEW}</version>|" "$f"
+          done
+
+      - name: Refuse SNAPSHOT or timestamp-locked module versions
+        run: |
+          set -euo pipefail
+          if grep -nE '(-SNAPSHOT|[0-9]{8}\.[0-9]{6}-[0-9]+)<' distro/pom.xml; then
+            echo "::error::distro/pom.xml references SNAPSHOT or timestamp-locked module versions (shown above)."
+            exit 1
+          fi
+
+      - name: Create release commit and tag
+        env:
+          V: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          git add -A
+          git commit -m "(release) Release $V"
+          git tag "$V"
+          git show --stat HEAD
+
+      - name: 'Dry run: report what would happen'
+        if: inputs.dry_run
+        env:
+          V: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## :test_tube: Dry run — nothing was pushed or built"
+            echo ""
+            echo "Would push \`releases/$V\` and tag \`$V\`, then dispatch the image builds"
+            echo "with tags \`$V\`, \`${V%.*}.x\` and \`demo\`."
+            echo ""
+            echo "### Final release commit"
+            echo '```diff'
+            git show HEAD | head -300
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Push release branch and tag
+        if: ${{ !inputs.dry_run }}
+        env:
+          V: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          git push origin "releases/$V"
+          git push origin "refs/tags/$V"
+
+      - name: Dispatch production image builds
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          V: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
+            gh workflow run "$wf" --repo "$GITHUB_REPOSITORY" --ref "releases/$V" \
+              -f docker_image_tag="$V" \
+              -f docker_image_tag_version="${V%.*}.x" \
+              -f docker_image_tag_env=demo
+            echo "Dispatched $wf on releases/$V"
+          done
+
+      - name: Write summary
+        if: ${{ !inputs.dry_run }}
+        env:
+          V: ${{ inputs.release_version }}
+          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## :tada: Released \`$V\` (from \`$RC_TAG\`)"
+            echo ""
+            echo "- Tag: \`$V\`"
+            echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3Areleases%2F$V) — they publish \`:$V\`, \`:${V%.*}.x\` and \`:demo\` images"
+            echo ""
+            echo "### Next steps"
+            echo "1. Refresh o3.openmrs.org so it picks up the new \`demo\` images (Bamboo deploy step / infrastructure — not yet ported)."
+            echo "2. Verify: \`cosign verify\` the images; check the module versions on o3.openmrs.org."
+            echo "3. Announce the release in #openmrs3 and on OpenMRS Talk."
+          } >> "$GITHUB_STEP_SUMMARY"
