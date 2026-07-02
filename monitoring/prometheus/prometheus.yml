@@ -2,6 +2,20 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets:
+          - "cadvisor:8080"
+    metric_relabel_configs:
+      # Use the compose service name as the clean container name
+      - source_labels: [container_label_com_docker_compose_service]
+        regex: '(.+)'
+        target_label: name
+        replacement: '$1'
+      # Drop all verbose container_label_* dimensions
+      - regex: 'container_label_.*'
+        action: labeldrop
+
   - job_name: 'blackbox-http-prod'
     metrics_path: /probe
     params:
