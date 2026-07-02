@@ -39,7 +39,9 @@ permissions: {}
 # trigger. Per-ref groups make that impossible; the deploy job below has its
 # own group to serialize the actual SSH deploys.
 concurrency:
-  group: deploy-test3-${{ github.event.workflow_run.head_branch || 'manual' }}
+  # ':' cannot appear in a git ref, so the manual-dispatch group can never
+  # collide with a group derived from a branch or tag name.
+  group: deploy-test3-${{ github.event.workflow_run.head_branch || ':manual' }}
   cancel-in-progress: false
 
 jobs:
@@ -90,10 +92,12 @@ jobs:
             for repo in backend frontend gateway; do
               code=""
               for attempt in 1 2 3; do
-                code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/openmrs/openmrs-reference-application-3-$repo/tags/$RC_TAG" || true)
+                code=$(curl -s --max-time 20 -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/openmrs/openmrs-reference-application-3-$repo/tags/$RC_TAG" || true)
                 if [ "$code" = "200" ] || [ "$code" = "404" ]; then break; fi
-                echo "$repo:$RC_TAG — attempt $attempt got HTTP ${code:-000}; retrying"
-                if [ "$attempt" -lt 3 ]; then sleep $(( attempt * 15 )); fi
+                if [ "$attempt" -lt 3 ]; then
+                  echo "$repo:$RC_TAG — attempt $attempt got HTTP ${code:-000}; retrying"
+                  sleep $(( attempt * 15 ))
+                fi
               done
               if [ "$code" = "404" ]; then
                 echo "::notice::$repo:$RC_TAG is not on Docker Hub yet — deferring; the deploy fires when the remaining builds finish (or dispatch this workflow manually)."
@@ -124,7 +128,8 @@ jobs:
     # GitHub keeps the newest pending one — which is correct here, since the
     # newest deploy pulls the newest images.
     concurrency:
-      group: deploy-test3-ssh
+      # '::' keeps this group outside the ref-derived namespace above.
+      group: deploy-test3::ssh
       cancel-in-progress: false
     environment:
       name: test3
