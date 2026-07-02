@@ -73,17 +73,43 @@ review and merge it like any other PR.
 
 ## Not (yet) ported
 
-- **Server container refreshes**: test3.openmrs.org has a workflow
-  (`deploy-test3.yml`) whose automatic runs no-op (and manual runs fail
-  with instructions) until infrastructure provisions the
-  `TEST3_DEPLOY_SSH_KEY` / `TEST3_SERVER_HOST` repo- or org-level
-  secrets. o3.openmrs.org
-  (`demo` images) has **no workflow yet** — its refresh remains entirely
-  with infrastructure, via the
-  [Deploy Reference Application 3.x](https://ci.openmrs.org/deploy/viewDeploymentProjectEnvironments.action?id=222593025)
-  deployment project or `#infrastructure`.
+- **Server container refreshes**: both environments have workflows that
+  activate once infrastructure provisions their secrets (repo- or
+  org-level; environment-scoped secrets are invisible to the gate jobs):
+  - test3.openmrs.org — `deploy-test3.yml`, `TEST3_DEPLOY_SSH_KEY` /
+    `TEST3_SERVER_HOST` (target default `emr-3-test`). Automatic after RC
+    builds; manual dispatch supported.
+  - o3.openmrs.org — `deploy-o3.yml`, `O3_DEPLOY_SSH_KEY` /
+    `O3_SERVER_HOST` (target default `emr-3-demo`). **Manual dispatch
+    only** (production stays human-initiated); verifies the `:demo`
+    Docker Hub digests match the promoted version before deploying.
+    Consider adding required reviewers to the `o3` environment for a
+    second approval gate.
+
+  Until provisioned, the Bamboo fallbacks are
+  [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR) and
+  [Deploy Reference Application 3.x](https://ci.openmrs.org/deploy/viewDeploymentProjectEnvironments.action?id=222593025),
+  or `#infrastructure`.
 - Bamboo remains available as a fallback; these workflows use the same
   branch/tag/commit conventions it did.
+
+## Bamboo decommission checklist
+
+Once the `TEST3_*` and `O3_*` secrets are provisioned and each deploy
+workflow has one successful run, nothing in the release path needs Bamboo.
+To retire:
+
+1. O3-CQR (Create initial QA release) and O3-CUQR (Create Updated QA
+   Release) — replaced by `release-qa.yml`.
+2. O3-PQR (Publish QA Release) — image publishing replaced by the build
+   dispatches in `release-qa.yml`; the test3 deploy by `deploy-test3.yml`.
+3. Deploy Reference Application 3.x — builds replaced by
+   `release-promote.yml`; the o3 deploy by `deploy-o3.yml`.
+4. The Bamboo cron that dispatched Build Frontend several times a day —
+   replaced by the `schedule` trigger in `build-frontend.yml`.
+5. Any legacy tag-watching triggers on this repo (the old "Distribution
+   3.x Releases" project) — confirm with infrastructure nothing still
+   fires on pushed tags.
 
 ## Testing changes to these workflows
 

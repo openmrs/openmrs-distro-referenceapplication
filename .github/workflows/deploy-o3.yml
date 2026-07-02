@@ -1,0 +1,123 @@
+name: 'Release: Deploy to o3 (production)'
+
+# Replaces the server-deployment half of the Bamboo "Deploy Reference
+# Application 3.x" project: refreshes o3.openmrs.org so it runs the :demo
+# images published by a "Release: Promote to Production" run.
+#
+# Manual dispatch ONLY — production deploys stay human-initiated, matching
+# the deliberate promotion click the Bamboo flow had. Infrastructure is
+# encouraged to add required reviewers to the `o3` GitHub environment for a
+# second approval gate; this workflow works with or without one.
+#
+# Before touching the server, the gate verifies that for each of the three
+# images the :<release_version> and :demo Docker Hub digests MATCH — promote
+# publishes both tags from the same build, so a mismatch means the promote
+# builds have not finished (or something else moved the demo tags) and
+# deploying would put the wrong bits on production.
+#
+# Same scoped-SSH pattern and hardening as deploy-test3.yml, with
+# o3-SPECIFIC secret names (O3_DEPLOY_SSH_KEY / O3_SERVER_HOST, repo or org
+# level — environment-scoped secrets are invisible to the gate job, and the
+# dev3 DEPLOY_SSH_KEY/SERVER_HOST names must not be reused). The remote
+# deploy target defaults to `emr-3-demo`; set the O3_DEPLOY_TARGET
+# repository variable if infrastructure uses another name.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Version whose promotion is being deployed, e.g. 3.7.1 — used to verify the :demo tags carry exactly this release'
+        required: true
+      reset:
+        description: 'Fully resets the o3 instance (DESTROYS VOLUMES — demo data is rebuilt from scratch)'
+        type: boolean
+        default: false
+
+# No GITHUB_TOKEN use in either job.
+permissions: {}
+
+concurrency:
+  # ':' cannot appear in a git ref, keeping this outside any ref-derived
+  # namespace other workflows might use.
+  group: deploy-o3::production
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    name: Verify credentials and promoted images
+    if: github.repository_owner == 'openmrs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      go: ${{ steps.decide.outputs.go }}
+    steps:
+      - name: Decide whether to deploy
+        id: decide
+        env:
+          PROVISIONED: ${{ secrets.O3_DEPLOY_SSH_KEY != '' && secrets.O3_SERVER_HOST != '' }}
+          V: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          [[ "$V" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
+            || { echo "::error::release_version must look like 3.7.1 (got: $V)"; exit 1; }
+          if [ "$PROVISIONED" != "true" ]; then
+            MSG="o3 deploy credentials are not provisioned: O3_DEPLOY_SSH_KEY / O3_SERVER_HOST must be REPO- or ORG-level secrets (environment-scoped secrets are invisible to this gate, and the dev3 DEPLOY_SSH_KEY/SERVER_HOST names must not be reused). Refresh o3 via the Bamboo Deploy Reference Application 3.x project or #infrastructure instead."
+            {
+              echo "## :warning: o3 was NOT deployed"
+              echo "$MSG"
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::$MSG"; exit 1
+          fi
+          # Promote publishes :$V and :demo from the same build: their digests
+          # must match per image, or production would get the wrong bits.
+          for repo in backend frontend gateway; do
+            base="https://hub.docker.com/v2/repositories/openmrs/openmrs-reference-application-3-$repo/tags"
+            v_digest=""; demo_digest=""
+            for attempt in 1 2 3; do
+              v_digest=$(curl -s --max-time 20 "$base/$V" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("digest",""))' 2>/dev/null || true)
+              demo_digest=$(curl -s --max-time 20 "$base/demo" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("digest",""))' 2>/dev/null || true)
+              if [ -n "$v_digest" ] && [ -n "$demo_digest" ]; then break; fi
+              if [ "$attempt" -lt 3 ]; then
+                echo "$repo: Docker Hub lookup incomplete (attempt $attempt); retrying"
+                sleep $(( attempt * 15 ))
+              fi
+            done
+            if [ -z "$v_digest" ] || [ -z "$demo_digest" ]; then
+              echo "::error::could not read Docker Hub digests for $repo (:$V or :demo missing, or Hub unavailable) — did the promote image builds finish?"; exit 1
+            fi
+            if [ "$v_digest" != "$demo_digest" ]; then
+              echo "::error::$repo: the :demo tag does not carry release $V ($v_digest vs $demo_digest) — the promote builds have not finished, or another push moved :demo. Not deploying."; exit 1
+            fi
+            echo "$repo: :demo == :$V ✔ ($v_digest)"
+          done
+          echo "go=true" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    name: Deploy release images to o3 (production)
+    needs: gate
+    if: needs.gate.outputs.go == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: o3
+      url: https://o3.openmrs.org/openmrs/spa
+    steps:
+      - name: Deploy via scoped SSH
+        env:
+          DEPLOY_KEY: ${{ secrets.O3_DEPLOY_SSH_KEY }}
+          SERVER_HOST: ${{ secrets.O3_SERVER_HOST }}
+          DEPLOY_TARGET: ${{ vars.O3_DEPLOY_TARGET || 'emr-3-demo' }}
+          RESET_FLAGS: ${{ inputs.reset && ' --destroy-volumes' || '' }}
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_TARGET" =~ ^[A-Za-z0-9][A-Za-z0-9-]*$ ]] \
+            || { echo "::error::O3_DEPLOY_TARGET must be a plain target name (got: $DEPLOY_TARGET)"; exit 1; }
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -t ed25519,ecdsa,rsa "$SERVER_HOST" >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=yes \
+            "deploy@$SERVER_HOST" \
+            "deploy ${DEPLOY_TARGET}${RESET_FLAGS} --no-health-check"
