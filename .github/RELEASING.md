@@ -46,10 +46,12 @@ test3/o3.openmrs.org) are **not** ported — see below.
    rejects re-deployment, cut the next RC instead.
 4. **QA on test3.openmrs.org** once it runs the new `qa` images. The
    **Release: Deploy QA to test3** workflow (`deploy-test3.yml`) refreshes
-   the server — automatically after the RC backend image build completes,
-   or by manual dispatch. It requires infrastructure to provision the
-   `test3` GitHub environment (`DEPLOY_SSH_KEY` / `SERVER_HOST`, like
-   dev3's); until then it no-ops and the fallback is the Bamboo
+   the server — automatically once all three RC image builds have
+   published, or by manual dispatch. It requires infrastructure to
+   provision `TEST3_DEPLOY_SSH_KEY` and `TEST3_SERVER_HOST` secrets
+   (test3-specific names — deliberately not dev3's `DEPLOY_SSH_KEY` /
+   `SERVER_HOST`, which this repo already inherits and which point at the
+   wrong server); until then it no-ops and the fallback is the Bamboo
    [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR) deploy step
    or `#infrastructure`. Then work through the
    [QA checklist](https://om.rs/o3qasheet).
@@ -69,12 +71,12 @@ review and merge it like any other PR.
 ## Not (yet) ported
 
 - **Server container refreshes**: test3.openmrs.org has a workflow
-  (`deploy-test3.yml`) that is a no-op until infrastructure provisions the
-  `test3` environment secrets; o3.openmrs.org (`demo` images) is still
-  refreshed by infrastructure — via the
+  (`deploy-test3.yml`) that no-ops until infrastructure provisions the
+  `TEST3_DEPLOY_SSH_KEY` / `TEST3_SERVER_HOST` secrets. o3.openmrs.org
+  (`demo` images) has **no workflow yet** — its refresh remains entirely
+  with infrastructure, via the
   [Deploy Reference Application 3.x](https://ci.openmrs.org/deploy/viewDeploymentProjectEnvironments.action?id=222593025)
-  deployment project or `#infrastructure`. Both follow the
-  `deploy-dev3.yml` scoped-SSH pattern once keys exist.
+  deployment project or `#infrastructure`.
 - Bamboo remains available as a fallback; these workflows use the same
   branch/tag/commit conventions it did.
 

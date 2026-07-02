@@ -4,17 +4,20 @@ name: 'Release: Deploy QA to test3'
 # (O3-PQR) job: refreshes test3.openmrs.org so it runs the latest :qa images
 # published by a "Release: Cut QA (RC)" run.
 #
-# Triggers automatically when a release-candidate Build Backend run completes
-# (the longest of the three image builds a QA release dispatches — the
-# frontend and gateway images are published well before it), and can also be
-# dispatched manually.
+# Triggers when any of the three image builds completes on a release-candidate
+# tag; the gate only proceeds once ALL three :rc images are on Docker Hub, so
+# the deploy effectively fires on the last build to finish (and a re-dispatched
+# recovery build re-arms it). Manual dispatch skips the completeness check.
 #
-# Uses the same scoped-SSH pattern as deploy-dev3.yml. Until the `test3`
-# GitHub environment is provisioned with DEPLOY_SSH_KEY / SERVER_HOST, runs
-# as a no-op with a notice instead of failing, so it is safe to merge ahead
-# of infrastructure. The remote deploy target defaults to `emr-3-test`
-# (following the emr-3-dev naming); set the TEST3_DEPLOY_TARGET variable on
-# the environment if infrastructure uses a different name.
+# Uses the same scoped-SSH approach as deploy-dev3.yml but with test3-SPECIFIC
+# secret names (TEST3_DEPLOY_SSH_KEY / TEST3_SERVER_HOST, repo or org level):
+# the generic DEPLOY_SSH_KEY / SERVER_HOST names are already provisioned for
+# dev3 and would be inherited here, silently pointing this workflow at the
+# wrong server. Until the TEST3_* secrets exist, automatic runs no-op with a
+# warning (manual runs fail loudly) and no GitHub deployment record is created
+# — the gate job is deliberately not environment-bound. The remote deploy
+# target defaults to `emr-3-test` (following the emr-3-dev naming); set the
+# TEST3_DEPLOY_TARGET repository variable if infrastructure uses another name.
 
 on:
   workflow_dispatch:
@@ -24,7 +27,7 @@ on:
         type: boolean
         default: false
   workflow_run:
-    workflows: ["Build Backend"]
+    workflows: ["Build Backend", "Build Frontend", "Build Gateway"]
     types: [completed]
 
 concurrency:
@@ -32,47 +35,78 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    name: Deploy QA images to test3
+  gate:
+    name: Check credentials and image completeness
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    # Automatic path: only after a successful image build on an RC tag
-    # (tag refs like 3.7.1-rc.2 — never plain branches or final versions,
-    # whose images belong to demo/o3, not test3).
+    timeout-minutes: 5
+    # Automatic path: only successful image builds on RC tag refs (like
+    # 3.7.1-rc.2 — never plain branches, and never final-version tags,
+    # whose images belong to demo/o3 rather than test3).
     if: >-
       github.repository_owner == 'openmrs' &&
       (github.event_name == 'workflow_dispatch' ||
        (github.event.workflow_run.conclusion == 'success' &&
         contains(github.event.workflow_run.head_branch, '-rc.')))
-    environment:
-      name: test3
-      url: https://test3.openmrs.org/openmrs/spa
+    outputs:
+      go: ${{ steps.decide.outputs.go }}
     steps:
-      - name: Check deploy credentials are provisioned
-        id: gate
+      - name: Decide whether to deploy
+        id: decide
         env:
-          PROVISIONED: ${{ secrets.DEPLOY_SSH_KEY != '' && secrets.SERVER_HOST != '' }}
+          PROVISIONED: ${{ secrets.TEST3_DEPLOY_SSH_KEY != '' && secrets.TEST3_SERVER_HOST != '' }}
           EVENT: ${{ github.event_name }}
+          RC_TAG: ${{ github.event.workflow_run.head_branch }}
         run: |
           set -euo pipefail
-          echo "provisioned=$PROVISIONED" >> "$GITHUB_OUTPUT"
+          go=true
           if [ "$PROVISIONED" != "true" ]; then
-            MSG="test3 deploy credentials are not provisioned (DEPLOY_SSH_KEY / SERVER_HOST on the 'test3' environment). Refresh test3 via the Bamboo Publish QA Release deploy step (https://ci.openmrs.org/browse/O3-PQR) or #infrastructure instead."
-            echo "## :warning: test3 was NOT deployed" >> "$GITHUB_STEP_SUMMARY"
-            echo "$MSG" >> "$GITHUB_STEP_SUMMARY"
+            MSG="test3 deploy credentials are not provisioned (TEST3_DEPLOY_SSH_KEY / TEST3_SERVER_HOST secrets — note: NOT the dev3 DEPLOY_SSH_KEY/SERVER_HOST names). Refresh test3 via the Bamboo Publish QA Release deploy step (https://ci.openmrs.org/browse/O3-PQR) or #infrastructure instead."
+            {
+              echo "## :warning: test3 was NOT deployed"
+              echo "$MSG"
+            } >> "$GITHUB_STEP_SUMMARY"
             if [ "$EVENT" = "workflow_dispatch" ]; then
               # An operator explicitly asked for a deploy: a green no-op here
               # would read as "deployed". Fail honestly.
               echo "::error::$MSG"; exit 1
             fi
             echo "::notice::$MSG"
+            go=false
+          elif [ "$EVENT" = "workflow_run" ]; then
+            # Each build's completion triggers this workflow; deploy only once
+            # ALL three RC images are published, i.e. on the last trigger.
+            for repo in backend frontend gateway; do
+              code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/openmrs/openmrs-reference-application-3-$repo/tags/$RC_TAG" || true)
+              if [ "$code" != "200" ]; then
+                echo "::notice::$repo:$RC_TAG is not on Docker Hub yet (HTTP $code) — deferring; the deploy fires when the remaining builds finish (or dispatch this workflow manually)."
+                {
+                  echo "## :hourglass: test3 deploy deferred"
+                  echo "\`$repo:$RC_TAG\` is not published yet — a later build's trigger (or a manual dispatch) completes the deploy."
+                } >> "$GITHUB_STEP_SUMMARY"
+                go=false
+                break
+              fi
+            done
           fi
+          echo "go=$go" >> "$GITHUB_OUTPUT"
 
+  deploy:
+    name: Deploy QA images to test3
+    needs: gate
+    # Skipped (not run) when the gate says no — a skipped job creates no
+    # GitHub deployment record, so the Deployments view never shows a
+    # phantom "deployed to test3".
+    if: needs.gate.outputs.go == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: test3
+      url: https://test3.openmrs.org/openmrs/spa
+    steps:
       - name: Deploy via scoped SSH
-        if: steps.gate.outputs.provisioned == 'true'
         env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_KEY: ${{ secrets.TEST3_DEPLOY_SSH_KEY }}
+          SERVER_HOST: ${{ secrets.TEST3_SERVER_HOST }}
           DEPLOY_TARGET: ${{ vars.TEST3_DEPLOY_TARGET || 'emr-3-test' }}
           RESET_FLAGS: ${{ inputs.reset && ' --destroy-volumes' || '' }}
         run: |
