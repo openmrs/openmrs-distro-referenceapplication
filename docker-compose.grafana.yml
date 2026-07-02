@@ -19,6 +19,7 @@ services:
             - alloy-config:/etc/alloy
             - blackbox-config:/config
             - grafana-provisioning:/etc/grafana/provisioning
+            - jmx-exporter-data:/jmx-exporter-data
 
     loki:
         image: grafana/loki:3.6
@@ -39,16 +40,22 @@ services:
         depends_on:
             monitoring-init:
                 condition: service_completed_successfully
+        ports: ["12345:12345"]
 
     prometheus:
         image: prom/prometheus:v3.9.0
         container_name: prometheus
+        command:
+          - --config.file=/etc/prometheus/prometheus.yml
+          - --storage.tsdb.path=/prometheus
+          - --web.enable-remote-write-receiver
         volumes:
             - prometheus-config:/etc/prometheus
             - prometheus_data:/prometheus
         depends_on:
             monitoring-init:
                 condition: service_completed_successfully
+        ports: ["9090:9090"]
 
     blackbox:
         image: prom/blackbox-exporter:v0.28.0
@@ -77,6 +84,21 @@ services:
             monitoring-init:
                 condition: service_completed_successfully
 
+    backend:
+      environment:
+        OMRS_OTEL_ENABLED: true
+        OTEL_EXPORTER_OTLP_ENDPOINT: http://alloy:4317
+        # Set explicitly: the agent defaults to http/protobuf, which cannot talk
+        # to the gRPC listener on 4317. Use http/protobuf + :4318 instead if your
+        # collector is only reachable over HTTP/1.1.
+        OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+        OTEL_SERVICE_NAME: openmrs-backend
+        OTEL_JMX_TARGET_SYSTEM: tomcat
+        OTEL_METRICS_EXPORTER: otlp
+        OTEL_TRACES_EXPORTER: none
+        OTEL_LOGS_EXPORTER: none
+        OTEL_RESOURCE_ATTRIBUTES: "service.instance.id=openmrs-backend-0,service.namespace=openmrs,deployment.environment.name=dev"
+
 volumes:
     grafana-data:
     prometheus_data:
@@ -86,3 +108,4 @@ volumes:
     loki-config:
     alloy-config:
     grafana-provisioning:
+    jmx-exporter-data:
