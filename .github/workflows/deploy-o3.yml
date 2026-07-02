@@ -47,7 +47,10 @@ jobs:
     name: Verify credentials and promoted images
     if: github.repository_owner == 'openmrs'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # Headroom for the worst case (every fetch stalling to --max-time across
+    # all repos ≈ 8 min) so the crafted ::error message renders instead of a
+    # generic job timeout.
+    timeout-minutes: 10
     outputs:
       go: ${{ steps.decide.outputs.go }}
     steps:
