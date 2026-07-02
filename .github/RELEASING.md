@@ -45,9 +45,18 @@ test3/o3.openmrs.org) are **not** ported — see below.
    the same release version to the Maven repository; if the repository
    rejects re-deployment, cut the next RC instead.
 4. **QA on test3.openmrs.org** once it runs the new `qa` images. The
-   container refresh is not yet ported: trigger it via the Bamboo
-   [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR) deploy step,
-   or ask in `#infrastructure` on the OpenMRS Slack. Then work through the
+   **Release: Deploy QA to test3** workflow (`deploy-test3.yml`) refreshes
+   the server — automatically once all three RC image builds have
+   published, or by manual dispatch. It requires infrastructure to
+   provision `TEST3_DEPLOY_SSH_KEY` and `TEST3_SERVER_HOST` as
+   **repository- or organization-level** secrets (environment-scoped
+   secrets are invisible to the gate job; and the names are deliberately
+   not dev3's `DEPLOY_SSH_KEY` / `SERVER_HOST`, which this repo already
+   inherits and which point at the wrong server). Until then automatic
+   runs no-op with a warning and manual dispatches fail with
+   instructions; the fallback is the Bamboo
+   [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR) deploy step
+   or `#infrastructure`. Then work through the
    [QA checklist](https://om.rs/o3qasheet).
 5. **Run "Release: Promote to Production"** with the `release_version`.
    It pins the frontend to the *exact* module versions QA tested (from the
@@ -64,14 +73,15 @@ review and merge it like any other PR.
 
 ## Not (yet) ported
 
-- **Server container refreshes**: test3.openmrs.org (`qa` images) and
-  o3.openmrs.org (`demo` images) are still refreshed by the OpenMRS
-  infrastructure — via the [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR)
-  deploy step and the
+- **Server container refreshes**: test3.openmrs.org has a workflow
+  (`deploy-test3.yml`) whose automatic runs no-op (and manual runs fail
+  with instructions) until infrastructure provisions the
+  `TEST3_DEPLOY_SSH_KEY` / `TEST3_SERVER_HOST` repo- or org-level
+  secrets. o3.openmrs.org
+  (`demo` images) has **no workflow yet** — its refresh remains entirely
+  with infrastructure, via the
   [Deploy Reference Application 3.x](https://ci.openmrs.org/deploy/viewDeploymentProjectEnvironments.action?id=222593025)
-  deployment project, or by asking in `#infrastructure`. The
-  `deploy-dev3.yml` scoped-SSH pattern can be extended to them once
-  infrastructure provisions deploy keys.
+  deployment project or `#infrastructure`.
 - Bamboo remains available as a fallback; these workflows use the same
   branch/tag/commit conventions it did.
 
