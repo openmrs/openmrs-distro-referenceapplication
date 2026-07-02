@@ -37,12 +37,13 @@ test3/o3.openmrs.org) are **not** ported — see below.
 
    **Recovery:** a re-run after a failure *before the RC tag was pushed*
    resumes safely (completed steps are skipped). After the tag is pushed,
-   re-running cuts the next RC instead — so if only an image-build dispatch
-   failed, dispatch the build workflows directly on `releases/<version>`
-   (the exact commands are printed in the run summary). Note that
-   re-dispatching the backend re-deploys the same release version to the
-   Maven repository; if the repository rejects re-deployment, cut the next
-   RC instead.
+   re-running cuts the next RC instead — so if only an image-build or E2E
+   dispatch failed, dispatch those workflows directly against the RC tag
+   (the exact commands are printed in the run summary; using the tag, not
+   the branch, guarantees the images match the tagged commit even if the
+   branch has moved on). Note that re-dispatching the backend re-deploys
+   the same release version to the Maven repository; if the repository
+   rejects re-deployment, cut the next RC instead.
 4. **QA on test3.openmrs.org** once it runs the new `qa` images. The
    container refresh is not yet ported: trigger it via the Bamboo
    [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR) deploy step,

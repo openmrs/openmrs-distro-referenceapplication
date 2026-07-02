@@ -136,7 +136,9 @@ jobs:
           for repo in "$BACKEND_IMAGE" "$FRONTEND_IMAGE" "$GATEWAY_IMAGE"; do
             found=false
             for attempt in 1 2 3; do
-              code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/$repo/tags/$RC_TAG")
+              # `|| true`: a transport-level curl failure (DNS blip, reset)
+              # must reach the retry below instead of aborting via set -e.
+              code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/$repo/tags/$RC_TAG" || true)
               if [ "$code" = "200" ]; then found=true; break; fi
               # 404 is definitive (promote runs long after the QA builds);
               # only transient errors (429/5xx) are worth retrying.
@@ -289,12 +291,14 @@ jobs:
           V: ${{ inputs.release_version }}
         run: |
           set -euo pipefail
+          # Dispatch on the immutable release tag, not the branch: the :$V
+          # images must be built from exactly the tagged commit.
           for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
-            gh workflow run "$wf" --repo "$GITHUB_REPOSITORY" --ref "releases/$V" \
+            gh workflow run "$wf" --repo "$GITHUB_REPOSITORY" --ref "$V" \
               -f docker_image_tag="$V" \
               -f docker_image_tag_version="$V" \
               -f docker_image_tag_env=demo
-            echo "Dispatched $wf on releases/$V"
+            echo "Dispatched $wf on $V"
           done
 
       - name: Write summary
@@ -311,7 +315,7 @@ jobs:
             echo "## :tada: Released \`$V\` (from \`$RC_TAG\`)"
             echo ""
             echo "- Tag: \`$V\`"
-            echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3Areleases%2F$V) — they publish \`:$V\` and \`:demo\` images"
+            echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3A$V) — they publish \`:$V\` and \`:demo\` images"
             echo ""
             echo "### Next steps"
             echo "1. Refresh o3.openmrs.org so it picks up the new \`demo\` images (Bamboo deploy step / infrastructure — not yet ported)."
@@ -321,10 +325,10 @@ jobs:
             echo '```'
             echo "3. Announce the release in #openmrs3 and on OpenMRS Talk."
             echo ""
-            echo "If an image-build dispatch failed, re-run this workflow (it resumes) or dispatch directly:"
+            echo "If an image-build dispatch failed, re-run this workflow (it resumes) or dispatch directly against the release tag:"
             echo '```'
             for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
-              echo "gh workflow run $wf -R $GITHUB_REPOSITORY --ref releases/$V -f docker_image_tag=$V -f docker_image_tag_version=$V -f docker_image_tag_env=demo"
+              echo "gh workflow run $wf -R $GITHUB_REPOSITORY --ref $V -f docker_image_tag=$V -f docker_image_tag_version=$V -f docker_image_tag_env=demo"
             done
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"

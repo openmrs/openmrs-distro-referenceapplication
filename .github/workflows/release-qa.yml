@@ -217,30 +217,38 @@ jobs:
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}
         run: |
           set -euo pipefail
+          # Dispatch on the immutable RC tag, not the branch: images tagged
+          # :$RC_TAG must be built from exactly that commit even if the branch
+          # moves between the push and the build.
           for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
-            gh workflow run "$wf" --repo "$GITHUB_REPOSITORY" --ref "releases/$V" \
+            gh workflow run "$wf" --repo "$GITHUB_REPOSITORY" --ref "$RC_TAG" \
               -f docker_image_tag="$RC_TAG" \
               -f docker_image_tag_version="$RC_TAG" \
               -f docker_image_tag_env=qa
-            echo "Dispatched $wf on releases/$V"
+            echo "Dispatched $wf on $RC_TAG"
           done
 
-      - name: Dispatch E2E tests on the release branch
+      - name: Dispatch E2E tests on the RC
         if: ${{ !inputs.dry_run }}
         env:
           GH_TOKEN: ${{ github.token }}
-          V: ${{ inputs.release_version }}
+          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
         run: |
           set -euo pipefail
           # The E2E workflow's push trigger is filtered to main (and GITHUB_TOKEN
           # pushes would not fire it anyway), so the RC content would otherwise
           # never get E2E coverage — the old flow got it from the release commit
           # landing on main.
-          gh workflow run e2e-tests-on-commit.yml --repo "$GITHUB_REPOSITORY" --ref "releases/$V"
-          echo "Dispatched e2e-tests-on-commit.yml on releases/$V"
+          gh workflow run e2e-tests-on-commit.yml --repo "$GITHUB_REPOSITORY" --ref "$RC_TAG"
+          echo "Dispatched e2e-tests-on-commit.yml on $RC_TAG"
 
       - name: Open dev-version bump PR on main if needed
-        if: ${{ !inputs.dry_run && steps.setup.outputs.mode == 'initial' }}
+        # Runs on every (non-dry) cut, not just the initial one: the step is
+        # idempotent (exits when main is already ahead; updates the existing
+        # PR branch otherwise), and gating it on initial mode made the bump
+        # unreachable after any partial first-RC failure, since every re-run
+        # re-enters as update mode.
+        if: ${{ !inputs.dry_run }}
         env:
           # Prefer the bot PAT (as check-dependency-updates.yml does) so CI
           # runs on the bump PR — GITHUB_TOKEN-created PRs get no triggers.
@@ -302,7 +310,7 @@ jobs:
             echo ""
             echo "- Branch: [\`releases/$V\`](https://github.com/$GITHUB_REPOSITORY/tree/releases/$V)"
             echo "- Tag: \`$RC_TAG\`"
-            echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3Areleases%2F$V) — they publish \`openmrs/openmrs-reference-application-3-{backend,frontend,gateway}:$RC_TAG\` and \`:qa\`"
+            echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3A$RC_TAG) — they publish \`openmrs/openmrs-reference-application-3-{backend,frontend,gateway}:$RC_TAG\` and \`:qa\`"
             echo ""
             echo "### Next steps"
             echo "1. Refresh test3.openmrs.org so it picks up the new \`qa\` images (Bamboo *Publish QA Release* deploy step / infrastructure — not yet ported)."
@@ -310,11 +318,12 @@ jobs:
             echo "3. Fixes needed? Commit them to \`releases/$V\` and re-run this workflow for the next RC."
             echo "4. QA passed? Run the *Release: Promote to Production* workflow."
             echo ""
-            echo "If an image-build dispatch failed, re-dispatch it directly (re-running this workflow would cut a new RC):"
+            echo "If an image-build or E2E dispatch failed, re-dispatch it directly against the RC tag (re-running this workflow would cut a new RC):"
             echo '```'
             for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
-              echo "gh workflow run $wf -R $GITHUB_REPOSITORY --ref releases/$V -f docker_image_tag=$RC_TAG -f docker_image_tag_version=$RC_TAG -f docker_image_tag_env=qa"
+              echo "gh workflow run $wf -R $GITHUB_REPOSITORY --ref $RC_TAG -f docker_image_tag=$RC_TAG -f docker_image_tag_version=$RC_TAG -f docker_image_tag_env=qa"
             done
+            echo "gh workflow run e2e-tests-on-commit.yml -R $GITHUB_REPOSITORY --ref $RC_TAG"
             echo '```'
             echo "Note: re-dispatching the backend re-deploys the same version to the Maven repository; if the repository rejects re-deployment, cut the next RC instead."
           } >> "$GITHUB_STEP_SUMMARY"
