@@ -8,8 +8,9 @@ Releases are driven by two GitHub Actions workflows (Actions tab → run with
 | Cut an RC + publish QA images | **Release: Cut QA (RC)** (`release-qa.yml`) | O3-CQR, O3-CUQR, O3-PQR (image-publish half) |
 | Finalize + publish production images | **Release: Promote to Production** (`release-promote.yml`) | "Deploy Reference Application 3.x" (build half) |
 
-The *server deployment* halves of those Bamboo jobs (refreshing
-test3/o3.openmrs.org) are **not** ported — see below.
+The *server deployment* halves have their own workflows
+(`deploy-test3.yml`, `deploy-o3.yml`) that activate once infrastructure
+provisions their secrets — see "Not (yet) ported" below.
 
 ## Release runbook
 
@@ -65,7 +66,15 @@ test3/o3.openmrs.org) are **not** ported — see below.
    `:<version>` and `:demo` images. It refuses to promote if commits landed
    on the release branch after the last RC, and re-running it after a partial
    failure resumes safely (including re-dispatching the image builds).
-6. **Announce** the release in `#openmrs3` and on OpenMRS Talk.
+6. **Deploy to production**: dispatch **Release: Deploy to o3
+   (production)** with the `release_version` once the promote image builds
+   finish. It verifies per image that the `:demo` Docker Hub digest equals
+   the `:<version>` digest before SSHing, and fails with instructions until
+   the `O3_DEPLOY_SSH_KEY` / `O3_SERVER_HOST` repo- or org-level secrets
+   are provisioned — until then use the Bamboo
+   [Deploy Reference Application 3.x](https://ci.openmrs.org/deploy/viewDeploymentProjectEnvironments.action?id=222593025)
+   project or `#infrastructure`.
+7. **Announce** the release in `#openmrs3` and on OpenMRS Talk.
 
 `main` is never pushed to by these workflows. When a (minor) release makes the
 development version on main stale, the RC workflow opens a version-bump PR —
@@ -95,9 +104,10 @@ review and merge it like any other PR.
 
 ## Bamboo decommission checklist
 
-Once the `TEST3_*` and `O3_*` secrets are provisioned and each deploy
-workflow has one successful run, nothing in the release path needs Bamboo.
-To retire:
+Items 1–3 and 5 can be retired once the `TEST3_*` and `O3_*` secrets are
+provisioned and each deploy workflow has one successful run; item 4 as soon
+as the schedule trigger is on main (no secrets involved). After that,
+nothing in the release path needs Bamboo. To retire:
 
 1. O3-CQR (Create initial QA release) and O3-CUQR (Create Updated QA
    Release) — replaced by `release-qa.yml`.

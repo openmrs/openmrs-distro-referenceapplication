@@ -318,7 +318,7 @@ jobs:
             echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3A$V) — they publish \`:$V\` and \`:demo\` images"
             echo ""
             echo "### Next steps"
-            echo "1. Refresh o3.openmrs.org: dispatch the *Release: Deploy to o3 (production)* workflow with release_version=$V once the image builds finish (it verifies the :demo digests match :$V before deploying; falls back with instructions until the O3_* secrets are provisioned — Bamboo *Deploy Reference Application 3.x* remains the alternative)."
+            echo "1. Refresh o3.openmrs.org: dispatch the *Release: Deploy to o3 (production)* workflow with release_version=$V once the image builds finish (it verifies the :demo digests match :$V before deploying). Until the O3_* secrets are provisioned it fails with instructions — use Bamboo *Deploy Reference Application 3.x* instead."
             echo "2. Verify the images and the module versions on o3.openmrs.org:"
             echo '```'
             echo "cosign verify openmrs/openmrs-reference-application-3-backend:$V --certificate-identity-regexp 'https://github.com/$GITHUB_REPOSITORY/.*' --certificate-oidc-issuer https://token.actions.githubusercontent.com"

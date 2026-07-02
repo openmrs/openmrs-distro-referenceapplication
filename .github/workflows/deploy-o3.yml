@@ -70,20 +70,34 @@ jobs:
           fi
           # Promote publishes :$V and :demo from the same build: their digests
           # must match per image, or production would get the wrong bits.
+          # The digest field is NULLABLE in the Hub API — a null must fail
+          # closed (isinstance check), never compare equal on both sides.
           for repo in backend frontend gateway; do
             base="https://hub.docker.com/v2/repositories/openmrs/openmrs-reference-application-3-$repo/tags"
             v_digest=""; demo_digest=""
+            body=$(mktemp)
             for attempt in 1 2 3; do
-              v_digest=$(curl -s --max-time 20 "$base/$V" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("digest",""))' 2>/dev/null || true)
-              demo_digest=$(curl -s --max-time 20 "$base/demo" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("digest",""))' 2>/dev/null || true)
+              code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/$V" || true)
+              if [ "$code" = "404" ]; then
+                echo "::error::$repo:$V is not on Docker Hub — did the promote image builds finish?"; exit 1
+              elif [ "$code" = "200" ]; then
+                v_digest=$(python3 -c 'import json,sys; d=json.load(sys.stdin).get("digest"); print(d if isinstance(d,str) else "")' < "$body" 2>/dev/null || true)
+              fi
+              code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/demo" || true)
+              if [ "$code" = "404" ]; then
+                echo "::error::$repo:demo does not exist on Docker Hub — there is no promoted release to compare against."; exit 1
+              elif [ "$code" = "200" ]; then
+                demo_digest=$(python3 -c 'import json,sys; d=json.load(sys.stdin).get("digest"); print(d if isinstance(d,str) else "")' < "$body" 2>/dev/null || true)
+              fi
               if [ -n "$v_digest" ] && [ -n "$demo_digest" ]; then break; fi
               if [ "$attempt" -lt 3 ]; then
-                echo "$repo: Docker Hub lookup incomplete (attempt $attempt); retrying"
+                echo "$repo: Docker Hub lookup incomplete (attempt $attempt, HTTP $code); retrying"
                 sleep $(( attempt * 15 ))
               fi
             done
+            rm -f "$body"
             if [ -z "$v_digest" ] || [ -z "$demo_digest" ]; then
-              echo "::error::could not read Docker Hub digests for $repo (:$V or :demo missing, or Hub unavailable) — did the promote image builds finish?"; exit 1
+              echo "::error::could not read Docker Hub digests for $repo (Hub unavailable or returned null digests) — not deploying on unverified images. Re-run once Docker Hub recovers."; exit 1
             fi
             if [ "$v_digest" != "$demo_digest" ]; then
               echo "::error::$repo: the :demo tag does not carry release $V ($v_digest vs $demo_digest) — the promote builds have not finished, or another push moved :demo. Not deploying."; exit 1
