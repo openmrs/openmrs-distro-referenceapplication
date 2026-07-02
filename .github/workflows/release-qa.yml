@@ -55,12 +55,15 @@ jobs:
         env:
           V: ${{ inputs.release_version }}
           CORE: ${{ inputs.core_version }}
+          BASE_REF: ${{ inputs.base_ref }}
         run: |
           set -euo pipefail
           [[ "$V" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
             || { echo "::error::release_version must look like 3.7.1 (got: $V)"; exit 1; }
           [[ -z "$CORE" || "$CORE" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]] \
             || { echo "::error::core_version must look like 10.0.0 (got: $CORE)"; exit 1; }
+          [[ "$BASE_REF" =~ ^[A-Za-z0-9][A-Za-z0-9._/-]*$ ]] \
+            || { echo "::error::base_ref must be a branch or tag name (got: $BASE_REF)"; exit 1; }
 
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -189,7 +192,7 @@ jobs:
             echo ""
             echo "### Release commit"
             echo '```diff'
-            git show HEAD | head -300
+            git show HEAD | head -300 || true
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
@@ -265,12 +268,16 @@ jobs:
           git add -A
           git commit -m "(release-revert) Bump development version to $NEXT_DEV"
           git push -f origin "$BRANCH"
-          if [ -n "$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --state open --json number --jq '.[].number')" ]; then
-            echo "Bump PR for $BRANCH is already open — updated the branch only."
-          else
-            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" \
+          if ! gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" \
               --title "(release-revert) Bump development version to $NEXT_DEV" \
-              --body "Bumps the development version on main to \`$NEXT_DEV\` now that \`$V\` has entered the release process (see the \`releases/$V\` branch). Opened automatically by the *Release: Cut QA (RC)* workflow."
+              --body "Bumps the development version on main to \`$NEXT_DEV\` now that \`$V\` has entered the release process (see the \`releases/$V\` branch). Opened automatically by the *Release: Cut QA (RC)* workflow. Note: CI does not run automatically on bot-opened PRs — close and reopen this PR to trigger it if desired."; then
+            # Creation fails when the PR already exists (e.g. a re-run); only
+            # fail the step when no open PR is actually there.
+            if gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --state open --json number --jq '.[].number' | grep -q .; then
+              echo "Bump PR for $BRANCH is already open — updated the branch only."
+            else
+              echo "::error::could not open the dev-version bump PR for $BRANCH"; exit 1
+            fi
           fi
 
       - name: Write summary
@@ -293,4 +300,11 @@ jobs:
             echo "2. Run through the [QA checklist](https://om.rs/o3qasheet) on test3."
             echo "3. Fixes needed? Commit them to \`releases/$V\` and re-run this workflow for the next RC."
             echo "4. QA passed? Run the *Release: Promote to Production* workflow."
+            echo ""
+            echo "If an image-build dispatch failed, re-dispatch it directly (re-running this workflow would cut a new RC):"
+            echo '```'
+            for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
+              echo "gh workflow run $wf -R $GITHUB_REPOSITORY --ref releases/$V -f docker_image_tag=$RC_TAG -f docker_image_tag_version=$RC_TAG -f docker_image_tag_env=qa"
+            done
+            echo '```'
           } >> "$GITHUB_STEP_SUMMARY"

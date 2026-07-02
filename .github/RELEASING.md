@@ -30,18 +30,25 @@ Releases are driven by two GitHub Actions workflows (Actions tab → run with
    which publish `:<version>-rc.1` and `:qa` Docker images, plus the E2E test
    workflow against the release branch. Re-running for the same version cuts
    `rc.2`, `rc.3`, … from the release branch (commit fixes to the branch in
-   between). Re-running after a partial failure is safe — completed steps are
-   skipped. If only an image-build dispatch failed, the build workflows can
-   also be dispatched directly on `releases/<version>` with the matching
-   `docker_image_tag`.
+   between).
+
+   **Recovery:** a re-run after a failure *before the RC tag was pushed*
+   resumes safely (completed steps are skipped). After the tag is pushed,
+   re-running cuts the next RC instead — so if only an image-build dispatch
+   failed, dispatch the build workflows directly on `releases/<version>`
+   (the exact commands are printed in the run summary). Note that
+   re-dispatching the backend re-deploys the same release version to the
+   Maven repository; if the repository rejects re-deployment, cut the next
+   RC instead.
 4. **QA on test3.openmrs.org** once it runs the new `qa` images
    (container refresh is not yet ported — see gaps below).
    Work through the [QA checklist](https://om.rs/o3qasheet).
 5. **Run "Release: Promote to Production"** with the `release_version`.
    It pins the frontend to the *exact* module versions QA tested (extracted
    from the RC image's importmap), tags the final version, and publishes
-   `:<version>`, `:<major.minor.x>` and `:demo` images. It refuses to promote
-   if commits landed on the release branch after the last RC.
+   `:<version>` and `:demo` images. It refuses to promote if commits landed
+   on the release branch after the last RC, and re-running it after a partial
+   failure resumes safely (including re-dispatching the image builds).
 6. **Announce** the release in `#openmrs3` and on OpenMRS Talk.
 
 `main` is never pushed to by these workflows. When a (minor) release makes the
@@ -56,3 +63,26 @@ review and merge it like any other PR.
   pattern can be extended to them once infrastructure provisions deploy keys.
 - Bamboo remains available as a fallback; these workflows use the same
   branch/tag/commit conventions it did.
+
+## Known gaps and caveats
+
+- **Backend rebuild at promote is not fully hermetic** (same as the Bamboo
+  flow was): the root pom uses SNAPSHOT versions of the
+  openmrs-sdk/packager Maven plugins and the Docker build starts from
+  floating `openmrs/openmrs-core:2.8.x-*` base images, all re-resolved at
+  build time. Promote soon after QA sign-off to keep that window small; a
+  retag-based promote (shipping the QA-tested image bits unchanged) is the
+  eventual fix. The *frontend module* versions are exact-pinned and immune
+  to this.
+- **E2E signal is advisory**: the dispatched E2E workflow checks out the
+  esm test suites at `main`, so suites may test unreleased (`next`) behavior
+  against the `latest`-pinned RC. This matches the coverage the old
+  push-to-main flow had. Version-matched suites
+  (`tests/e2e/extract_tag_numbers.sh`, used by the retired
+  `e2e-on-release.yml`) are a follow-up.
+- **Old-tag base refs**: cutting a patch from a tag older than the current
+  workflow set runs the *build/E2E workflow files as of that tag* — they may
+  lack dispatch inputs or cosign signing. Cherry-pick the current workflow
+  files onto the release branch first if needed.
+- **CI on the dev-version bump PR** does not start automatically (bot-opened
+  PRs don't trigger workflows) — close and reopen the PR to run it.

@@ -68,9 +68,6 @@ jobs:
           git config user.name "openmrs-bot"
           git config user.email "infrastructure@openmrs.org"
 
-          if git rev-parse -q --verify "refs/tags/$V" >/dev/null; then
-            echo "::error::$V is already released (tag exists)"; exit 1
-          fi
           git rev-parse -q --verify "origin/releases/$V" >/dev/null \
             || { echo "::error::branch releases/$V does not exist — run 'Release: Cut QA (RC)' first"; exit 1; }
           git checkout "releases/$V"
@@ -79,21 +76,42 @@ jobs:
           [ -n "$LAST_RC" ] || { echo "::error::no RC tags found for $V — run 'Release: Cut QA (RC)' first"; exit 1; }
           RC_TAG="$V-rc.$LAST_RC"
 
-          RESUME=false
-          if [ "$(git rev-parse HEAD)" != "$(git rev-parse "$RC_TAG^{commit}")" ]; then
-            # A previous promote run may have pushed the final commit but failed
-            # before tagging: exactly one commit past the RC, poms already final.
-            POM_VERSION=$(python3 - <<'EOF'
+          POM_VERSION=$(python3 - <<'EOF'
           import xml.etree.ElementTree as ET
           ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
           print(ET.parse('pom.xml').getroot().find('m:version', ns).text)
           EOF
           )
+
+          # Distinguish a fresh promote from resuming a partially-failed one.
+          RESUME=false
+          if git rev-parse -q --verify "refs/tags/$V" >/dev/null; then
+            # Tag already exists: only resumable when it is this branch's
+            # finalized head (a previous run failed after the tag push but
+            # before the image dispatches).
+            if [ "$(git rev-parse "$V^{commit}")" = "$(git rev-parse HEAD)" ] && [ "$POM_VERSION" = "$V" ]; then
+              RESUME=true
+              echo "Tag $V already exists at the branch head — resuming to re-dispatch the image builds."
+            else
+              echo "::error::$V is already released (tag exists)"; exit 1
+            fi
+          elif [ "$(git rev-parse HEAD)" != "$(git rev-parse "$RC_TAG^{commit}")" ]; then
+            # A previous promote run may have pushed the final commit but failed
+            # before tagging: exactly one commit past the RC, poms already final.
             if [ "$POM_VERSION" = "$V" ] && [ "$(git rev-parse HEAD~1)" = "$(git rev-parse "$RC_TAG^{commit}")" ]; then
               RESUME=true
               echo "Resuming a previous partial promote run — the final commit is already on the branch."
             else
               echo "::error::releases/$V has commits after $RC_TAG — cut a new RC and QA it before promoting"; exit 1
+            fi
+          fi
+
+          if [ "$RESUME" = "true" ]; then
+            # Never trust a finalized-looking commit blindly: if the frontend is
+            # not exact-pinned, the rebuilt image would resolve module versions
+            # QA never saw (e.g. someone hand-bumped the poms on the branch).
+            if grep -qE '"(latest|next)"' frontend/spa-assemble-config.json; then
+              echo "::error::the head of releases/$V looks finalized but frontend/spa-assemble-config.json is not exact-pinned. This commit was not produced by this workflow — reset the branch to $RC_TAG and re-run."; exit 1
             fi
           fi
 
@@ -114,9 +132,15 @@ jobs:
         run: |
           set -euo pipefail
           for repo in "$BACKEND_IMAGE" "$FRONTEND_IMAGE" "$GATEWAY_IMAGE"; do
-            code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/$repo/tags/$RC_TAG")
-            if [ "$code" != "200" ]; then
-              echo "::error::$repo:$RC_TAG not found on Docker Hub (HTTP $code) — did the QA builds finish?"; exit 1
+            found=false
+            for attempt in 1 2 3; do
+              code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/$repo/tags/$RC_TAG")
+              if [ "$code" = "200" ]; then found=true; break; fi
+              echo "$repo:$RC_TAG — attempt $attempt got HTTP $code; retrying"
+              sleep $(( attempt * 15 ))
+            done
+            if [ "$found" != "true" ]; then
+              echo "::error::$repo:$RC_TAG not found on Docker Hub (last HTTP $code). 404 means the QA builds have not published; 429 means rate-limited — retry later."; exit 1
             fi
             echo "$repo:$RC_TAG ✔"
           done
@@ -218,7 +242,9 @@ jobs:
             git add -A
             git commit -m "(release) Release $V"
           fi
-          git tag "$V"
+          if ! git rev-parse -q --verify "refs/tags/$V" >/dev/null; then
+            git tag "$V"
+          fi
           git show --stat HEAD
 
       - name: 'Dry run: report what would happen'
@@ -231,11 +257,11 @@ jobs:
             echo "## :test_tube: Dry run — nothing was pushed or built"
             echo ""
             echo "Would push \`releases/$V\` and tag \`$V\`, then dispatch the image builds"
-            echo "with tags \`$V\`, \`${V%.*}.x\` and \`demo\`."
+            echo "with tags \`$V\` and \`demo\`."
             echo ""
             echo "### Final release commit"
             echo '```diff'
-            git show HEAD | head -300
+            git show HEAD | head -300 || true
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
@@ -258,7 +284,7 @@ jobs:
           for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
             gh workflow run "$wf" --repo "$GITHUB_REPOSITORY" --ref "releases/$V" \
               -f docker_image_tag="$V" \
-              -f docker_image_tag_version="${V%.*}.x" \
+              -f docker_image_tag_version="$V" \
               -f docker_image_tag_env=demo
             echo "Dispatched $wf on releases/$V"
           done
@@ -274,10 +300,17 @@ jobs:
             echo "## :tada: Released \`$V\` (from \`$RC_TAG\`)"
             echo ""
             echo "- Tag: \`$V\`"
-            echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3Areleases%2F$V) — they publish \`:$V\`, \`:${V%.*}.x\` and \`:demo\` images"
+            echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3Areleases%2F$V) — they publish \`:$V\` and \`:demo\` images"
             echo ""
             echo "### Next steps"
             echo "1. Refresh o3.openmrs.org so it picks up the new \`demo\` images (Bamboo deploy step / infrastructure — not yet ported)."
             echo "2. Verify: \`cosign verify\` the images; check the module versions on o3.openmrs.org."
             echo "3. Announce the release in #openmrs3 and on OpenMRS Talk."
+            echo ""
+            echo "If an image-build dispatch failed, re-run this workflow (it resumes) or dispatch directly:"
+            echo '```'
+            for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
+              echo "gh workflow run $wf -R $GITHUB_REPOSITORY --ref releases/$V -f docker_image_tag=$V -f docker_image_tag_version=$V -f docker_image_tag_env=demo"
+            done
+            echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
