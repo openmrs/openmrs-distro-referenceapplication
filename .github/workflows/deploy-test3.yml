@@ -52,26 +52,39 @@ jobs:
         id: gate
         env:
           PROVISIONED: ${{ secrets.DEPLOY_SSH_KEY != '' && secrets.SERVER_HOST != '' }}
+          EVENT: ${{ github.event_name }}
         run: |
           set -euo pipefail
           echo "provisioned=$PROVISIONED" >> "$GITHUB_OUTPUT"
           if [ "$PROVISIONED" != "true" ]; then
-            echo "::notice::test3 deploy credentials are not provisioned (DEPLOY_SSH_KEY / SERVER_HOST on the 'test3' environment) — skipping. Refresh test3 via the Bamboo Publish QA Release deploy step (https://ci.openmrs.org/browse/O3-PQR) or #infrastructure instead."
+            MSG="test3 deploy credentials are not provisioned (DEPLOY_SSH_KEY / SERVER_HOST on the 'test3' environment). Refresh test3 via the Bamboo Publish QA Release deploy step (https://ci.openmrs.org/browse/O3-PQR) or #infrastructure instead."
+            echo "## :warning: test3 was NOT deployed" >> "$GITHUB_STEP_SUMMARY"
+            echo "$MSG" >> "$GITHUB_STEP_SUMMARY"
+            if [ "$EVENT" = "workflow_dispatch" ]; then
+              # An operator explicitly asked for a deploy: a green no-op here
+              # would read as "deployed". Fail honestly.
+              echo "::error::$MSG"; exit 1
+            fi
+            echo "::notice::$MSG"
           fi
 
       - name: Deploy via scoped SSH
         if: steps.gate.outputs.provisioned == 'true'
         env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
           DEPLOY_TARGET: ${{ vars.TEST3_DEPLOY_TARGET || 'emr-3-test' }}
           RESET_FLAGS: ${{ inputs.reset && ' --destroy-volumes' || '' }}
         run: |
           set -euo pipefail
+          [[ "$DEPLOY_TARGET" =~ ^[A-Za-z0-9][A-Za-z0-9-]*$ ]] \
+            || { echo "::error::TEST3_DEPLOY_TARGET must be a plain target name (got: $DEPLOY_TARGET)"; exit 1; }
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -t ed25519 ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519 "$SERVER_HOST" >> ~/.ssh/known_hosts
 
           ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes \
-            deploy@${{ secrets.SERVER_HOST }} \
+            "deploy@$SERVER_HOST" \
             "deploy ${DEPLOY_TARGET}${RESET_FLAGS} --no-health-check"
