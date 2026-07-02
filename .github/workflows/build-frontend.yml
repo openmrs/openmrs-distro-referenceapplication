@@ -20,6 +20,12 @@ on:
         description: 'Docker image environment tag (e.g., dev3)'
         required: false
         default: 'dev3'
+  schedule:
+    # Rebuild the dev3 frontend regularly so it picks up newly published
+    # "next" ESM versions (replaces the Bamboo cron that dispatched this
+    # workflow several times a day — decommission that cron when this lands).
+    # Scheduled runs use the same defaults as an input-less dispatch.
+    - cron: '0 1,7,13,19 * * *'
 
 env:
   IMAGE: openmrs/openmrs-reference-application-3-frontend

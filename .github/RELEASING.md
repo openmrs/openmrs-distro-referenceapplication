@@ -8,8 +8,9 @@ Releases are driven by two GitHub Actions workflows (Actions tab → run with
 | Cut an RC + publish QA images | **Release: Cut QA (RC)** (`release-qa.yml`) | O3-CQR, O3-CUQR, O3-PQR (image-publish half) |
 | Finalize + publish production images | **Release: Promote to Production** (`release-promote.yml`) | "Deploy Reference Application 3.x" (build half) |
 
-The *server deployment* halves of those Bamboo jobs (refreshing
-test3/o3.openmrs.org) are **not** ported — see below.
+The *server deployment* halves have their own workflows
+(`deploy-test3.yml`, `deploy-o3.yml`) that activate once infrastructure
+provisions their secrets — see "Not (yet) ported" below.
 
 ## Release runbook
 
@@ -65,7 +66,15 @@ test3/o3.openmrs.org) are **not** ported — see below.
    `:<version>` and `:demo` images. It refuses to promote if commits landed
    on the release branch after the last RC, and re-running it after a partial
    failure resumes safely (including re-dispatching the image builds).
-6. **Announce** the release in `#openmrs3` and on OpenMRS Talk.
+6. **Deploy to production**: dispatch **Release: Deploy to o3
+   (production)** with the `release_version` once the promote image builds
+   finish. It verifies per image that the `:demo` Docker Hub digest equals
+   the `:<version>` digest before SSHing, and fails with instructions until
+   the `O3_DEPLOY_SSH_KEY` / `O3_SERVER_HOST` repo- or org-level secrets
+   are provisioned — until then use the Bamboo
+   [Deploy Reference Application 3.x](https://ci.openmrs.org/deploy/viewDeploymentProjectEnvironments.action?id=222593025)
+   project or `#infrastructure`.
+7. **Announce** the release in `#openmrs3` and on OpenMRS Talk.
 
 `main` is never pushed to by these workflows. When a (minor) release makes the
 development version on main stale, the RC workflow opens a version-bump PR —
@@ -73,17 +82,56 @@ review and merge it like any other PR.
 
 ## Not (yet) ported
 
-- **Server container refreshes**: test3.openmrs.org has a workflow
-  (`deploy-test3.yml`) whose automatic runs no-op (and manual runs fail
-  with instructions) until infrastructure provisions the
-  `TEST3_DEPLOY_SSH_KEY` / `TEST3_SERVER_HOST` repo- or org-level
-  secrets. o3.openmrs.org
-  (`demo` images) has **no workflow yet** — its refresh remains entirely
-  with infrastructure, via the
-  [Deploy Reference Application 3.x](https://ci.openmrs.org/deploy/viewDeploymentProjectEnvironments.action?id=222593025)
-  deployment project or `#infrastructure`.
+- **Server container refreshes**: both environments have workflows that
+  activate once infrastructure provisions their secrets (repo- or
+  org-level; environment-scoped secrets are invisible to the gate jobs):
+  - test3.openmrs.org — `deploy-test3.yml`, `TEST3_DEPLOY_SSH_KEY` /
+    `TEST3_SERVER_HOST` (target default `emr-3-test`). Automatic after RC
+    builds; manual dispatch supported.
+  - o3.openmrs.org — `deploy-o3.yml`, `O3_DEPLOY_SSH_KEY` /
+    `O3_SERVER_HOST` (target default `emr-3-demo`). **Manual dispatch
+    only** (production stays human-initiated); verifies the `:demo`
+    Docker Hub digests match the promoted version before deploying.
+    Consider adding required reviewers to the `o3` environment for a
+    second approval gate.
+
+  Until provisioned, the Bamboo fallbacks are
+  [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR) and
+  [Deploy Reference Application 3.x](https://ci.openmrs.org/deploy/viewDeploymentProjectEnvironments.action?id=222593025),
+  or `#infrastructure`.
 - Bamboo remains available as a fallback; these workflows use the same
   branch/tag/commit conventions it did.
+
+## Bamboo decommission checklist
+
+Each item has its own precondition — after all five, nothing in the
+release path needs Bamboo:
+
+- Item 1: retirable now — `release-qa.yml` cut `3.7.1-rc.1` for a real
+  release; its rc.2+ update path (the O3-CUQR half) is exercised by the
+  regression suite, not yet by a production release.
+- Item 2: after `TEST3_*` secrets are provisioned and `deploy-test3.yml`
+  has one successful deploy.
+- Item 3: after `O3_*` secrets are provisioned and `deploy-o3.yml` has one
+  successful deploy.
+- Item 4: as soon as the schedule trigger is on main (scheduled runs use
+  only the pre-existing Docker Hub and Maven credentials every build
+  already uses — nothing new to provision).
+- Item 5: independent — confirm with infrastructure at any time.
+
+To retire:
+
+1. O3-CQR (Create initial QA release) and O3-CUQR (Create Updated QA
+   Release) — replaced by `release-qa.yml`.
+2. O3-PQR (Publish QA Release) — image publishing replaced by the build
+   dispatches in `release-qa.yml`; the test3 deploy by `deploy-test3.yml`.
+3. Deploy Reference Application 3.x — builds replaced by
+   `release-promote.yml`; the o3 deploy by `deploy-o3.yml`.
+4. The Bamboo cron that dispatched Build Frontend several times a day —
+   replaced by the `schedule` trigger in `build-frontend.yml`.
+5. Any legacy tag-watching triggers on this repo (the old "Distribution
+   3.x Releases" project) — confirm with infrastructure nothing still
+   fires on pushed tags.
 
 ## Testing changes to these workflows
 
