@@ -199,6 +199,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Push release branch and tag
+        id: push
         if: ${{ !inputs.dry_run }}
         env:
           V: ${{ inputs.release_version }}
@@ -286,9 +287,10 @@ jobs:
           fi
 
       - name: Write summary
-        # always(): the recovery commands below matter most when a dispatch
-        # step just failed, which would otherwise skip this step.
-        if: ${{ always() && !inputs.dry_run && steps.setup.outputs.rc_tag != '' }}
+        # always() + push succeeded: the recovery commands matter most when a
+        # DISPATCH step just failed (which would otherwise skip this step),
+        # but a run that failed before pushing must not claim an RC was cut.
+        if: ${{ always() && !inputs.dry_run && steps.push.outcome == 'success' }}
         env:
           V: ${{ inputs.release_version }}
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}

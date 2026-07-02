@@ -5,9 +5,9 @@ name: 'Release: Promote to Production'
 #
 # Takes the latest QA-approved RC on releases/<version> and finalizes it:
 #   - pins frontend/spa-assemble-config.json to the EXACT module versions that
-#     were QA-tested, extracted from the RC frontend image's importmap (unlike
-#     the Bamboo flow, which re-resolved "latest" at promote time and could
-#     silently ship module versions QA never saw)
+#     were QA-tested, taken from the resolved-version manifest baked into the
+#     RC frontend image (unlike the Bamboo flow, which re-resolved "latest" at
+#     promote time and could silently ship module versions QA never saw)
 #   - sets the project poms to the final version
 #   - commits "(release) Release <version>", tags <version>
 #   - dispatches the image builds, publishing :<version> and :demo images
@@ -273,6 +273,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Push release branch and tag
+        id: push
         if: ${{ !inputs.dry_run }}
         env:
           V: ${{ inputs.release_version }}
@@ -297,9 +298,10 @@ jobs:
           done
 
       - name: Write summary
-        # always(): the recovery commands below matter most when a dispatch
-        # step just failed, which would otherwise skip this step.
-        if: ${{ always() && !inputs.dry_run && steps.setup.outputs.rc_tag != '' }}
+        # always() + push succeeded: the recovery commands matter most when a
+        # DISPATCH step just failed (which would otherwise skip this step),
+        # but a run that failed before pushing must not claim a release.
+        if: ${{ always() && !inputs.dry_run && steps.push.outcome == 'success' }}
         env:
           V: ${{ inputs.release_version }}
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}
