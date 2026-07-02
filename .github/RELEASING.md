@@ -48,12 +48,13 @@ provisions their secrets — see "Not (yet) ported" below.
 4. **QA on test3.openmrs.org** once it runs the new `qa` images. The
    **Release: Deploy QA to test3** workflow (`deploy-test3.yml`) refreshes
    the server — automatically once all three RC image builds have
-   published, or by manual dispatch. It requires infrastructure to
-   provision `TEST3_DEPLOY_SSH_KEY` and `TEST3_SERVER_HOST` as
-   **repository- or organization-level** secrets (environment-scoped
-   secrets are invisible to the gate job; and the names are deliberately
-   not dev3's `DEPLOY_SSH_KEY` / `SERVER_HOST`, which this repo already
-   inherits and which point at the wrong server). Until then automatic
+   published, or by manual dispatch. The SSH key prefers a
+   `TEST3_DEPLOY_SSH_KEY` secret and falls back to the fleet
+   `DEPLOY_SSH_KEY` (repo- or org-level; environment-scoped secrets are
+   invisible to the gate job); the host is pinned to `test3.openmrs.org`
+   (`TEST3_SERVER_HOST` variable overrides) and never inherits dev3's
+   `SERVER_HOST`, so the fallback can only fail authentication on the
+   right host, never deploy a wrong one. Without a usable key, automatic
    runs no-op with a warning and manual dispatches fail with
    instructions; the fallback is the Bamboo
    [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR) deploy step
@@ -82,11 +83,12 @@ review and merge it like any other PR.
 
 ## Not (yet) ported
 
-- **Server container refreshes**: both environments have workflows that
-  activate once infrastructure provisions their secrets (repo- or
-  org-level; environment-scoped secrets are invisible to the gate jobs):
-  - test3.openmrs.org — `deploy-test3.yml`, `TEST3_DEPLOY_SSH_KEY` /
-    `TEST3_SERVER_HOST` (target default `emr-3-test`). Automatic after RC
+- **Server container refreshes**: both environments have workflows
+  (secrets repo- or org-level; environment-scoped secrets are invisible
+  to the gate jobs):
+  - test3.openmrs.org — `deploy-test3.yml`, key `TEST3_DEPLOY_SSH_KEY`
+    with fleet `DEPLOY_SSH_KEY` fallback, host pinned to
+    test3.openmrs.org (target default `emr-3-test`). Automatic after RC
     builds; manual dispatch supported.
   - o3.openmrs.org — `deploy-o3.yml`, `O3_DEPLOY_SSH_KEY` /
     `O3_SERVER_HOST` (target default `emr-3-demo`). **Manual dispatch

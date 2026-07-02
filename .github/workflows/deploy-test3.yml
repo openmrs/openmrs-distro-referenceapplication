@@ -9,15 +9,18 @@ name: 'Release: Deploy QA to test3'
 # the deploy effectively fires on the last build to finish (and a re-dispatched
 # recovery build re-arms it). Manual dispatch skips the completeness check.
 #
-# Uses the same scoped-SSH approach as deploy-dev3.yml but with test3-SPECIFIC
-# secret names (TEST3_DEPLOY_SSH_KEY / TEST3_SERVER_HOST, repo or org level):
-# the generic DEPLOY_SSH_KEY / SERVER_HOST names are already provisioned for
-# dev3 and would be inherited here, silently pointing this workflow at the
-# wrong server. Until the TEST3_* secrets exist, automatic runs no-op with a
-# warning (manual runs fail loudly) and no GitHub deployment record is created
-# — the gate job is deliberately not environment-bound. The remote deploy
-# target defaults to `emr-3-test` (following the emr-3-dev naming); set the
-# TEST3_DEPLOY_TARGET repository variable if infrastructure uses another name.
+# Uses the same scoped-SSH approach as deploy-dev3.yml. The key prefers a
+# test3-specific TEST3_DEPLOY_SSH_KEY secret and falls back to the fleet
+# DEPLOY_SSH_KEY (already used cross-host for dev3 and sec3); the HOST is
+# pinned to test3.openmrs.org (TEST3_SERVER_HOST variable overrides) and
+# never inherits dev3's SERVER_HOST secret — so a wrong-server deploy is
+# structurally impossible, and an unauthorized key can only fail
+# authentication on the right host. Without any usable key, automatic runs
+# no-op with a warning (manual runs fail loudly) and no GitHub deployment
+# record is created — the gate job is deliberately not environment-bound.
+# The remote deploy target defaults to `emr-3-test` (following the
+# emr-3-dev naming); set the TEST3_DEPLOY_TARGET repository variable if
+# infrastructure uses another name.
 
 on:
   workflow_dispatch:
@@ -63,14 +66,18 @@ jobs:
       - name: Decide whether to deploy
         id: decide
         env:
-          PROVISIONED: ${{ secrets.TEST3_DEPLOY_SSH_KEY != '' && secrets.TEST3_SERVER_HOST != '' }}
+          # Prefer a test3-specific key; fall back to the fleet DEPLOY_SSH_KEY
+          # (already authorized on the dev3 and sec3 hosts). The HOST is never
+          # inherited — it is pinned to test3 below — so the fallback cannot
+          # deploy the wrong server, only fail authentication on the right one.
+          PROVISIONED: ${{ (secrets.TEST3_DEPLOY_SSH_KEY || secrets.DEPLOY_SSH_KEY) != '' }}
           EVENT: ${{ github.event_name }}
           RC_TAG: ${{ github.event.workflow_run.head_branch }}
         run: |
           set -euo pipefail
           go=true
           if [ "$PROVISIONED" != "true" ]; then
-            MSG="test3 deploy credentials are not provisioned: TEST3_DEPLOY_SSH_KEY / TEST3_SERVER_HOST must be REPO- or ORG-level secrets (environment-scoped secrets are invisible to this gate, and the dev3 DEPLOY_SSH_KEY/SERVER_HOST names must not be reused). Refresh test3 via the Bamboo Publish QA Release deploy step (https://ci.openmrs.org/browse/O3-PQR) or #infrastructure instead."
+            MSG="test3 deploy credentials are not available: provision TEST3_DEPLOY_SSH_KEY (repo- or org-level; environment-scoped secrets are invisible to this gate) or the fleet DEPLOY_SSH_KEY. Refresh test3 via the Bamboo Publish QA Release deploy step (https://ci.openmrs.org/browse/O3-PQR) or #infrastructure instead."
             {
               echo "## :warning: test3 was NOT deployed"
               echo "$MSG"
@@ -137,8 +144,9 @@ jobs:
     steps:
       - name: Deploy via scoped SSH
         env:
-          DEPLOY_KEY: ${{ secrets.TEST3_DEPLOY_SSH_KEY }}
-          SERVER_HOST: ${{ secrets.TEST3_SERVER_HOST }}
+          DEPLOY_KEY: ${{ secrets.TEST3_DEPLOY_SSH_KEY || secrets.DEPLOY_SSH_KEY }}
+          # Pinned to test3 — deliberately NOT the dev3 SERVER_HOST secret.
+          SERVER_HOST: ${{ vars.TEST3_SERVER_HOST || 'test3.openmrs.org' }}
           DEPLOY_TARGET: ${{ vars.TEST3_DEPLOY_TARGET || 'emr-3-test' }}
           RESET_FLAGS: ${{ inputs.reset && ' --destroy-volumes' || '' }}
         run: |
