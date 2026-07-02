@@ -72,32 +72,45 @@ jobs:
           # must match per image, or production would get the wrong bits.
           # The digest field is NULLABLE in the Hub API — a null must fail
           # closed (isinstance check), never compare equal on both sides.
+          # Each tag is fetched only until a digest is in hand (a transient
+          # 404/null on a RE-fetch must never discard a verified digest), and
+          # 404s are retried like other transient codes, with the terminal
+          # diagnosis made per tag from its last HTTP code.
+          body=$(mktemp)
+          trap 'rm -f "$body"' EXIT
           for repo in backend frontend gateway; do
             base="https://hub.docker.com/v2/repositories/openmrs/openmrs-reference-application-3-$repo/tags"
-            v_digest=""; demo_digest=""
-            body=$(mktemp)
+            v_digest=""; demo_digest=""; v_code=""; demo_code=""
             for attempt in 1 2 3; do
-              code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/$V" || true)
-              if [ "$code" = "404" ]; then
-                echo "::error::$repo:$V is not on Docker Hub — did the promote image builds finish?"; exit 1
-              elif [ "$code" = "200" ]; then
-                v_digest=$(python3 -c 'import json,sys; d=json.load(sys.stdin).get("digest"); print(d if isinstance(d,str) else "")' < "$body" 2>/dev/null || true)
+              if [ -z "$v_digest" ]; then
+                v_code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/$V" || true)
+                if [ "$v_code" = "200" ]; then
+                  v_digest=$(python3 -c 'import json,sys; d=json.load(sys.stdin).get("digest"); print(d if isinstance(d,str) else "")' < "$body" 2>/dev/null || true)
+                fi
               fi
-              code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/demo" || true)
-              if [ "$code" = "404" ]; then
-                echo "::error::$repo:demo does not exist on Docker Hub — there is no promoted release to compare against."; exit 1
-              elif [ "$code" = "200" ]; then
-                demo_digest=$(python3 -c 'import json,sys; d=json.load(sys.stdin).get("digest"); print(d if isinstance(d,str) else "")' < "$body" 2>/dev/null || true)
+              if [ -z "$demo_digest" ]; then
+                demo_code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/demo" || true)
+                if [ "$demo_code" = "200" ]; then
+                  demo_digest=$(python3 -c 'import json,sys; d=json.load(sys.stdin).get("digest"); print(d if isinstance(d,str) else "")' < "$body" 2>/dev/null || true)
+                fi
               fi
               if [ -n "$v_digest" ] && [ -n "$demo_digest" ]; then break; fi
               if [ "$attempt" -lt 3 ]; then
-                echo "$repo: Docker Hub lookup incomplete (attempt $attempt, HTTP $code); retrying"
+                echo "$repo: lookup incomplete (attempt $attempt; :$V HTTP ${v_code:-000}, :demo HTTP ${demo_code:-000}); retrying"
                 sleep $(( attempt * 15 ))
               fi
             done
-            rm -f "$body"
-            if [ -z "$v_digest" ] || [ -z "$demo_digest" ]; then
-              echo "::error::could not read Docker Hub digests for $repo (Hub unavailable or returned null digests) — not deploying on unverified images. Re-run once Docker Hub recovers."; exit 1
+            if [ -z "$v_digest" ]; then
+              if [ "$v_code" = "404" ]; then
+                echo "::error::$repo:$V is not on Docker Hub — did the promote image builds finish?"; exit 1
+              fi
+              echo "::error::could not read the :$V digest for $repo (HTTP ${v_code:-000} or null digest) — not deploying on unverified images. Re-run once Docker Hub recovers."; exit 1
+            fi
+            if [ -z "$demo_digest" ]; then
+              if [ "$demo_code" = "404" ]; then
+                echo "::error::$repo:demo is not on Docker Hub (the promote may still be publishing, or Hub cache lag) — re-run shortly."; exit 1
+              fi
+              echo "::error::could not read the :demo digest for $repo (HTTP ${demo_code:-000} or null digest) — not deploying on unverified images. Re-run once Docker Hub recovers."; exit 1
             fi
             if [ "$v_digest" != "$demo_digest" ]; then
               echo "::error::$repo: the :demo tag does not carry release $V ($v_digest vs $demo_digest) — the promote builds have not finished, or another push moved :demo. Not deploying."; exit 1

@@ -104,10 +104,20 @@ review and merge it like any other PR.
 
 ## Bamboo decommission checklist
 
-Items 1–3 and 5 can be retired once the `TEST3_*` and `O3_*` secrets are
-provisioned and each deploy workflow has one successful run; item 4 as soon
-as the schedule trigger is on main (no secrets involved). After that,
-nothing in the release path needs Bamboo. To retire:
+Each item has its own precondition — after all five, nothing in the
+release path needs Bamboo:
+
+- Item 1: retirable now (`release-qa.yml` already cut a real release's RCs).
+- Item 2: after `TEST3_*` secrets are provisioned and `deploy-test3.yml`
+  has one successful deploy.
+- Item 3: after `O3_*` secrets are provisioned and `deploy-o3.yml` has one
+  successful deploy.
+- Item 4: as soon as the schedule trigger is on main (it uses the same
+  Docker Hub credentials every build already uses — nothing new to
+  provision).
+- Item 5: independent — confirm with infrastructure at any time.
+
+To retire:
 
 1. O3-CQR (Create initial QA release) and O3-CUQR (Create Updated QA
    Release) — replaced by `release-qa.yml`.
