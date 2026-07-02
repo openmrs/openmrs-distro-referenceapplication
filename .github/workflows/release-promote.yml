@@ -106,6 +106,14 @@ jobs:
             echo "$repo:$RC_TAG ✔"
           done
 
+      - name: Log in to Docker Hub
+        # Anonymous pulls from shared runner IPs routinely hit Docker Hub rate
+        # limits; use the same credentials as the image build workflows.
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
       - name: Pin frontend modules to the exact QA-tested versions
         env:
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}

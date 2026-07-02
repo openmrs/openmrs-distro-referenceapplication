@@ -17,16 +17,23 @@ Releases are driven by two GitHub Actions workflows (Actions tab → run with
    npm dist-tags.
 3. **Run "Release: Cut QA (RC)"** with:
    - `release_version`: e.g. `3.7.1`
-   - `core_version`: the [latest esm-core release](https://github.com/openmrs/openmrs-esm-core/releases), e.g. `10.0.0`
+   - `core_version`: the [latest esm-core release](https://github.com/openmrs/openmrs-esm-core/releases),
+     e.g. `10.0.0`. Required for the first RC; leave empty on later RCs to
+     keep the app shell QA has been testing (pass it again only to deliberately
+     change the shell mid-release).
    - `base_ref`: `main` (default), or a tag like `3.7.0` for a surgical patch release
    - Tip: run once with `dry_run` checked and review the diff in the run summary first.
 
    First run for a version: cuts `releases/<version>` off `base_ref`, commits
    the version pins (`next` → `latest` for frontend modules, the app shell
    version, the poms), tags `<version>-rc.1`, and dispatches the image builds
-   which publish `:<version>-rc.1` and `:qa` Docker images. Re-running for the
-   same version cuts `rc.2`, `rc.3`, … from the release branch (commit fixes
-   to the branch in between).
+   which publish `:<version>-rc.1` and `:qa` Docker images, plus the E2E test
+   workflow against the release branch. Re-running for the same version cuts
+   `rc.2`, `rc.3`, … from the release branch (commit fixes to the branch in
+   between). Re-running after a partial failure is safe — completed steps are
+   skipped. If only an image-build dispatch failed, the build workflows can
+   also be dispatched directly on `releases/<version>` with the matching
+   `docker_image_tag`.
 4. **QA on test3.openmrs.org** once it runs the new `qa` images
    (container refresh is not yet ported — see gaps below).
    Work through the [QA checklist](https://om.rs/o3qasheet).

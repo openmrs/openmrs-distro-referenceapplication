@@ -23,8 +23,9 @@ on:
         description: 'Version being released, e.g. 3.7.1'
         required: true
       core_version:
-        description: 'esm-core (app shell) version to pin, e.g. 10.0.0 — see https://github.com/openmrs/openmrs-esm-core/releases'
-        required: true
+        description: 'esm-core (app shell) version to pin, e.g. 10.0.0 — see https://github.com/openmrs/openmrs-esm-core/releases. Required for the first RC; leave empty on later RCs to keep the version already pinned on the release branch.'
+        required: false
+        default: ''
       base_ref:
         description: 'Ref to cut the first RC from (ignored when releases/<version> already exists)'
         required: false
@@ -58,7 +59,7 @@ jobs:
           set -euo pipefail
           [[ "$V" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] \
             || { echo "::error::release_version must look like 3.7.1 (got: $V)"; exit 1; }
-          [[ "$CORE" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]] \
+          [[ -z "$CORE" || "$CORE" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]] \
             || { echo "::error::core_version must look like 10.0.0 (got: $CORE)"; exit 1; }
 
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -69,6 +70,7 @@ jobs:
         id: setup
         env:
           V: ${{ inputs.release_version }}
+          CORE: ${{ inputs.core_version }}
           BASE_REF: ${{ inputs.base_ref }}
         run: |
           set -euo pipefail
@@ -84,6 +86,9 @@ jobs:
             git checkout "releases/$V"
           else
             MODE=initial
+            if [ -z "$CORE" ]; then
+              echo "::error::core_version is required when cutting the first RC of a version"; exit 1
+            fi
             git checkout -b "releases/$V" "origin/$BASE_REF" 2>/dev/null \
               || git checkout -b "releases/$V" "$BASE_REF"
           fi
@@ -115,10 +120,18 @@ jobs:
           if grep -q '"next"' frontend/spa-assemble-config.json; then
             echo "::error::frontend/spa-assemble-config.json still contains \"next\" entries after pinning"; exit 1
           fi
-          sed -i -E "s|^ARG APP_SHELL_VERSION=.*|ARG APP_SHELL_VERSION=${CORE}|" frontend/Dockerfile
-          sed -i -E "s|APP_SHELL_VERSION:-[^}]*|APP_SHELL_VERSION:-${CORE}|g" frontend/Dockerfile
-          grep -q "^ARG APP_SHELL_VERSION=${CORE}$" frontend/Dockerfile \
-            || { echo "::error::failed to pin APP_SHELL_VERSION in frontend/Dockerfile"; exit 1; }
+          if [ -n "$CORE" ]; then
+            sed -i -E "s|^ARG APP_SHELL_VERSION=.*|ARG APP_SHELL_VERSION=${CORE}|" frontend/Dockerfile
+            sed -i -E "s|APP_SHELL_VERSION:-[^}]*|APP_SHELL_VERSION:-${CORE}|g" frontend/Dockerfile
+            grep -q "^ARG APP_SHELL_VERSION=${CORE}$" frontend/Dockerfile \
+              || { echo "::error::failed to pin APP_SHELL_VERSION in frontend/Dockerfile"; exit 1; }
+          else
+            # core_version omitted (later RC): the branch must already carry a pinned app shell
+            if grep -qE '^ARG APP_SHELL_VERSION=(next)?$' frontend/Dockerfile; then
+              echo "::error::APP_SHELL_VERSION is not pinned on this branch — pass core_version"; exit 1
+            fi
+            echo "Keeping app shell version already pinned on the branch: $(sed -n 's/^ARG APP_SHELL_VERSION=//p' frontend/Dockerfile | head -1)"
+          fi
 
       - name: Set project versions
         env:
@@ -150,7 +163,13 @@ jobs:
         run: |
           set -euo pipefail
           git add -A
-          git commit -m "(release) Release v${RC_TAG}"
+          if git diff --cached --quiet; then
+            # A previous run pushed the release commit but failed before tagging
+            # or dispatching — resume idempotently from the current HEAD.
+            echo "No file changes — resuming a previous partial run; tagging current HEAD."
+          else
+            git commit -m "(release) Release v${RC_TAG}"
+          fi
           git tag "$RC_TAG"
           git show --stat HEAD
 
@@ -200,6 +219,19 @@ jobs:
             echo "Dispatched $wf on releases/$V"
           done
 
+      - name: Dispatch E2E tests on the release branch
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          V: ${{ inputs.release_version }}
+        run: |
+          set -euo pipefail
+          # Pushes made with GITHUB_TOKEN do not fire push-triggered workflows,
+          # so the RC content would otherwise never get E2E coverage (the old
+          # flow got it from the release commit landing on main).
+          gh workflow run e2e-tests-on-commit.yml --repo "$GITHUB_REPOSITORY" --ref "releases/$V"
+          echo "Dispatched e2e-tests-on-commit.yml on releases/$V"
+
       - name: Open dev-version bump PR on main if needed
         if: ${{ !inputs.dry_run && steps.setup.outputs.mode == 'initial' }}
         env:
@@ -233,9 +265,13 @@ jobs:
           git add -A
           git commit -m "(release-revert) Bump development version to $NEXT_DEV"
           git push -f origin "$BRANCH"
-          gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" \
-            --title "(release-revert) Bump development version to $NEXT_DEV" \
-            --body "Bumps the development version on main to \`$NEXT_DEV\` now that \`$V\` has entered the release process (see the \`releases/$V\` branch). Opened automatically by the *Release: Cut QA (RC)* workflow."
+          if [ -n "$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --state open --json number --jq '.[].number')" ]; then
+            echo "Bump PR for $BRANCH is already open — updated the branch only."
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" \
+              --title "(release-revert) Bump development version to $NEXT_DEV" \
+              --body "Bumps the development version on main to \`$NEXT_DEV\` now that \`$V\` has entered the release process (see the \`releases/$V\` branch). Opened automatically by the *Release: Cut QA (RC)* workflow."
+          fi
 
       - name: Write summary
         if: ${{ !inputs.dry_run }}
