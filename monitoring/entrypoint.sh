@@ -20,6 +20,8 @@ cp /monitoring/grafana-datasources.yaml /etc/grafana/provisioning/datasources/da
 
 mkdir -p /etc/grafana/provisioning/dashboards/json
 cp /monitoring/grafana-dashboards.yaml /etc/grafana/provisioning/dashboards/dashboards.yaml
+# Clear stale dashboards so ones removed from source don't linger in the volume
+rm -f /etc/grafana/provisioning/dashboards/json/*.json
 cp /monitoring/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
 
 echo "Copying Prometheus config..."
@@ -29,5 +31,10 @@ cp /monitoring/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
 echo "Copying Blackbox config..."
 mkdir -p /config
 cp /monitoring/blackbox.yml /config/blackbox.yml
+
+echo "Copying jmx exporter..."
+mkdir -p /jmx-exporter-data/
+cp /monitoring/jmx_exporter/jmx_prometheus_javaagent-1.6.0.jar /jmx-exporter-data/jmx_prometheus_javaagent-1.6.0.jar
+cp /monitoring/jmx_exporter/jmx_config.yml /jmx-exporter-data/jmx_config.yml
 
 echo "Configuration initialization complete."

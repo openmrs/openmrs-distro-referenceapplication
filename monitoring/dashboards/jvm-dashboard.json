@@ -1,0 +1,390 @@
+{
+  "title": "Backend JVM",
+  "uid": "openmrs-jvm",
+  "schemaVersion": 39,
+  "version": 1,
+  "time": { "from": "now-1h", "to": "now" },
+  "refresh": "30s",
+  "tags": ["openmrs", "backend", "jvm"],
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "JVM Uptime",
+      "description": "Time since the JVM process started. A reset back to near-zero means the backend restarted or crashed — if unexpected, correlate with the OOM events, error logs and a spike in GC before assuming a clean deploy.",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "time() - process_start_time_seconds{job=\"openmrs-jvm\"}",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "dtdhms",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 60 },
+              { "color": "green", "value": 300 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Heap Used",
+      "description": "Live heap memory in use right now. Green < 1 GiB, amber > 1 GiB, red > 2 GiB (tune to your -Xmx). Compare with the heap max line in 'Heap vs Non-Heap Used' — if this sits near the max and GC can't pull it down, the app is under memory pressure: raise -Xmx or hunt for a leak.",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_memory_used_bytes{job=\"openmrs-jvm\",area=\"heap\"}",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1073741824 },
+              { "color": "red", "value": 2147483648 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Live Threads",
+      "description": "Total live JVM threads. A healthy app plateaus after warm-up. A count that keeps climbing and never falls back points to a thread leak (often an unbounded or misconfigured thread pool) that will eventually exhaust OS limits — investigate the thread dump.",
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_threads_current{job=\"openmrs-jvm\"}",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 300 },
+              { "color": "red", "value": 600 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Classes Loaded",
+      "description": "Classes currently loaded by the JVM. Should rise during startup/module loading then flatten. Continuous growth at steady state signals a classloader leak (common after repeated hot redeploys) and heads toward Metaspace exhaustion — plan a restart and investigate.",
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_classes_currently_loaded{job=\"openmrs-jvm\"}",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "blue", "value": null }]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Heap vs Non-Heap Used",
+      "description": "JVM memory in use split by area. Heap holds application objects (garbage-collected); non-heap holds class metadata, the code cache and thread stacks. The dashed red line is the configured heap max — if heap used repeatedly climbs to it and GC only briefly frees space, the app is memory-starved: raise -Xmx or fix a leak. A healthy heap shows a sawtooth (grows, then drops sharply at each GC).",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_memory_used_bytes{job=\"openmrs-jvm\"}",
+          "legendFormat": "{{area}}"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_memory_max_bytes{job=\"openmrs-jvm\",area=\"heap\"} > 0",
+          "legendFormat": "heap max"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "heap max" },
+            "properties": [
+              { "id": "custom.fillOpacity", "value": 0 },
+              { "id": "custom.lineStyle", "value": { "fill": "dash", "dash": [8, 8] } },
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Memory Pools Used",
+      "description": "Used bytes per JVM memory pool, stacked. 'G1 Eden/Survivor' are short-lived young objects (expected to churn). Watch 'G1 Old Gen': if it stays high right after a GC and trends upward, long-lived objects are accumulating — a likely leak. Steadily growing 'Metaspace' means a classloader leak.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_memory_pool_used_bytes{job=\"openmrs-jvm\"}",
+          "legendFormat": "{{pool}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10, "stacking": { "mode": "normal", "group": "A" } }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "GC Time Rate",
+      "description": "Fraction of wall-clock time spent in each garbage collector (seconds of GC per second; 0.05 = 5%). Brief spikes are normal. Sustained values above ~5–10% mean the app is spending real time paused in GC, which shows up as request latency — a signal to increase heap, fix a leak, or tune the collector.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "rate(jvm_gc_collection_seconds_sum{job=\"openmrs-jvm\"}[5m])",
+          "legendFormat": "{{gc}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "GC Collections Rate",
+      "description": "Garbage-collection cycles per second, per collector. Frequent young-generation collections ('G1 Young Generation') are normal and cheap. A rising rate of old-generation collections ('G1 Old Generation') indicates the heap is filling faster than it can be reclaimed — a strong sign of memory pressure or a leak.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "rate(jvm_gc_collection_seconds_count{job=\"openmrs-jvm\"}[5m])",
+          "legendFormat": "{{gc}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "Threads",
+      "description": "Live threads over time: total ('current') vs background/pool workers ('daemon'). The two should track together and stabilise after warm-up. A 'current' line that keeps climbing without levelling off is a thread leak — capture a thread dump to find which pool is growing.",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_threads_current{job=\"openmrs-jvm\"}",
+          "legendFormat": "current"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_threads_daemon{job=\"openmrs-jvm\"}",
+          "legendFormat": "daemon"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "Process CPU",
+      "description": "CPU consumed by the JVM process as a percentage of a single core (can exceed 100% on multi-core hosts). Sustained values pinned near the ceiling mean the JVM is CPU-bound — check for busy loops, GC thrash (cross-reference 'GC Time Rate'), or the need to scale out.",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "rate(process_cpu_seconds_total{job=\"openmrs-jvm\"}[5m]) * 100",
+          "legendFormat": "CPU %"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "single", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "Open File Descriptors",
+      "description": "Open file descriptors ('open') against the OS limit ('max', dashed red). FDs cover sockets, files and pipes. A steady climb toward the limit means connections or streams aren't being closed — it ends in 'Too many open files' errors and failed requests. Keep well below the limit.",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "process_open_fds{job=\"openmrs-jvm\"}",
+          "legendFormat": "open"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "process_max_fds{job=\"openmrs-jvm\"}",
+          "legendFormat": "max"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 0 }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "max" },
+            "properties": [
+              { "id": "custom.lineStyle", "value": { "fill": "dash", "dash": [8, 8] } },
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    }
+  ]
+}
