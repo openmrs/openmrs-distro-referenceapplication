@@ -79,8 +79,22 @@ jobs:
           [ -n "$LAST_RC" ] || { echo "::error::no RC tags found for $V — run 'Release: Cut QA (RC)' first"; exit 1; }
           RC_TAG="$V-rc.$LAST_RC"
 
+          RESUME=false
           if [ "$(git rev-parse HEAD)" != "$(git rev-parse "$RC_TAG^{commit}")" ]; then
-            echo "::error::releases/$V has commits after $RC_TAG — cut a new RC and QA it before promoting"; exit 1
+            # A previous promote run may have pushed the final commit but failed
+            # before tagging: exactly one commit past the RC, poms already final.
+            POM_VERSION=$(python3 - <<'EOF'
+          import xml.etree.ElementTree as ET
+          ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
+          print(ET.parse('pom.xml').getroot().find('m:version', ns).text)
+          EOF
+          )
+            if [ "$POM_VERSION" = "$V" ] && [ "$(git rev-parse HEAD~1)" = "$(git rev-parse "$RC_TAG^{commit}")" ]; then
+              RESUME=true
+              echo "Resuming a previous partial promote run — the final commit is already on the branch."
+            else
+              echo "::error::releases/$V has commits after $RC_TAG — cut a new RC and QA it before promoting"; exit 1
+            fi
           fi
 
           CORE=$(sed -n 's/^ARG APP_SHELL_VERSION=//p' frontend/Dockerfile | head -1)
@@ -90,8 +104,9 @@ jobs:
           {
             echo "rc_tag=$RC_TAG"
             echo "core=$CORE"
+            echo "resume=$RESUME"
           } >> "$GITHUB_OUTPUT"
-          echo "Promoting $RC_TAG -> $V (app shell $CORE)"
+          echo "Promoting $RC_TAG -> $V (app shell $CORE, resume=$RESUME)"
 
       - name: Verify the QA images exist on Docker Hub
         env:
@@ -107,6 +122,7 @@ jobs:
           done
 
       - name: Log in to Docker Hub
+        if: steps.setup.outputs.resume != 'true'
         # Anonymous pulls from shared runner IPs routinely hit Docker Hub rate
         # limits; use the same credentials as the image build workflows.
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
@@ -115,6 +131,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Pin frontend modules to the exact QA-tested versions
+        if: steps.setup.outputs.resume != 'true'
         env:
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}
           CORE: ${{ steps.setup.outputs.core }}
@@ -166,6 +183,7 @@ jobs:
           git diff --stat -- frontend/spa-assemble-config.json
 
       - name: Set project versions
+        if: steps.setup.outputs.resume != 'true'
         env:
           OLD: ${{ steps.setup.outputs.rc_tag }}
           NEW: ${{ inputs.release_version }}
@@ -191,10 +209,15 @@ jobs:
       - name: Create release commit and tag
         env:
           V: ${{ inputs.release_version }}
+          RESUME: ${{ steps.setup.outputs.resume }}
         run: |
           set -euo pipefail
-          git add -A
-          git commit -m "(release) Release $V"
+          if [ "$RESUME" = "true" ]; then
+            echo "Using the final commit already on the branch."
+          else
+            git add -A
+            git commit -m "(release) Release $V"
+          fi
           git tag "$V"
           git show --stat HEAD
 
