@@ -1,0 +1,77 @@
+name: 'Release: Deploy QA to test3'
+
+# Replaces the server-deployment half of the Bamboo "Publish QA Release"
+# (O3-PQR) job: refreshes test3.openmrs.org so it runs the latest :qa images
+# published by a "Release: Cut QA (RC)" run.
+#
+# Triggers automatically when a release-candidate Build Backend run completes
+# (the longest of the three image builds a QA release dispatches — the
+# frontend and gateway images are published well before it), and can also be
+# dispatched manually.
+#
+# Uses the same scoped-SSH pattern as deploy-dev3.yml. Until the `test3`
+# GitHub environment is provisioned with DEPLOY_SSH_KEY / SERVER_HOST, runs
+# as a no-op with a notice instead of failing, so it is safe to merge ahead
+# of infrastructure. The remote deploy target defaults to `emr-3-test`
+# (following the emr-3-dev naming); set the TEST3_DEPLOY_TARGET variable on
+# the environment if infrastructure uses a different name.
+
+on:
+  workflow_dispatch:
+    inputs:
+      reset:
+        description: 'Fully resets the test3 instance (destroys volumes)'
+        type: boolean
+        default: false
+  workflow_run:
+    workflows: ["Build Backend"]
+    types: [completed]
+
+concurrency:
+  group: deploy-test3
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy QA images to test3
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Automatic path: only after a successful image build on an RC tag
+    # (tag refs like 3.7.1-rc.2 — never plain branches or final versions,
+    # whose images belong to demo/o3, not test3).
+    if: >-
+      github.repository_owner == 'openmrs' &&
+      (github.event_name == 'workflow_dispatch' ||
+       (github.event.workflow_run.conclusion == 'success' &&
+        contains(github.event.workflow_run.head_branch, '-rc.')))
+    environment:
+      name: test3
+      url: https://test3.openmrs.org/openmrs/spa
+    steps:
+      - name: Check deploy credentials are provisioned
+        id: gate
+        env:
+          PROVISIONED: ${{ secrets.DEPLOY_SSH_KEY != '' && secrets.SERVER_HOST != '' }}
+        run: |
+          set -euo pipefail
+          echo "provisioned=$PROVISIONED" >> "$GITHUB_OUTPUT"
+          if [ "$PROVISIONED" != "true" ]; then
+            echo "::notice::test3 deploy credentials are not provisioned (DEPLOY_SSH_KEY / SERVER_HOST on the 'test3' environment) — skipping. Refresh test3 via the Bamboo Publish QA Release deploy step (https://ci.openmrs.org/browse/O3-PQR) or #infrastructure instead."
+          fi
+
+      - name: Deploy via scoped SSH
+        if: steps.gate.outputs.provisioned == 'true'
+        env:
+          DEPLOY_TARGET: ${{ vars.TEST3_DEPLOY_TARGET || 'emr-3-test' }}
+          RESET_FLAGS: ${{ inputs.reset && ' --destroy-volumes' || '' }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -t ed25519 ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=yes \
+            deploy@${{ secrets.SERVER_HOST }} \
+            "deploy ${DEPLOY_TARGET}${RESET_FLAGS} --no-health-check"
