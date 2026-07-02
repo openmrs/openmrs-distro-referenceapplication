@@ -105,7 +105,9 @@ jobs:
 
   build-and-publish-no-demo:
     name: Build and Publish the Backend Image Without Demo Content
-    if: github.repository_owner == 'openmrs'
+    # Skip for release-candidate dispatches: nothing consumes an rc-no-demo
+    # image, and this job repeats the full multi-arch distro build.
+    if: github.repository_owner == 'openmrs' && !contains(github.event.inputs.docker_image_tag || 'nightly', '-rc.')
     runs-on: ubuntu-latest
     permissions:
       contents: read

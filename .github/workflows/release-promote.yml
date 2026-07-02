@@ -95,7 +95,7 @@ jobs:
               RESUME=true
               echo "Tag $V already exists at the branch head — resuming to re-dispatch the image builds."
             else
-              echo "::error::$V is already released (tag exists)"; exit 1
+              echo "::error::$V is already released (tag exists), or the tag no longer matches the head of releases/$V — nothing to promote"; exit 1
             fi
           elif [ "$(git rev-parse HEAD)" != "$(git rev-parse "$RC_TAG^{commit}")" ]; then
             # A previous promote run may have pushed the final commit but failed
@@ -119,7 +119,7 @@ jobs:
 
           CORE=$(sed -n 's/^ARG APP_SHELL_VERSION=//p' frontend/Dockerfile | head -1)
           [ -n "$CORE" ] && [ "$CORE" != "next" ] \
-            || { echo "::error::APP_SHELL_VERSION is not pinned on releases/$V"; exit 1; }
+            || { echo "::error::APP_SHELL_VERSION is not pinned on releases/$V — cut a new RC passing core_version"; exit 1; }
 
           {
             echo "rc_tag=$RC_TAG"
@@ -138,8 +138,11 @@ jobs:
             for attempt in 1 2 3; do
               code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/$repo/tags/$RC_TAG")
               if [ "$code" = "200" ]; then found=true; break; fi
+              # 404 is definitive (promote runs long after the QA builds);
+              # only transient errors (429/5xx) are worth retrying.
+              if [ "$code" = "404" ]; then break; fi
               echo "$repo:$RC_TAG — attempt $attempt got HTTP $code; retrying"
-              sleep $(( attempt * 15 ))
+              if [ "$attempt" -lt 3 ]; then sleep $(( attempt * 15 )); fi
             done
             if [ "$found" != "true" ]; then
               echo "::error::$repo:$RC_TAG not found on Docker Hub (last HTTP $code). 404 means the QA builds have not published; 429 means rate-limited — retry later."; exit 1
@@ -160,52 +163,54 @@ jobs:
         if: steps.setup.outputs.resume != 'true'
         env:
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}
-          CORE: ${{ steps.setup.outputs.core }}
         run: |
           set -euo pipefail
+          # `openmrs assemble --manifest` bakes the resolved version of every
+          # bundled module (and the app shell) into the image — the same file
+          # build-frontend.yml already extracts on every build.
           docker create --name qa-frontend "$FRONTEND_IMAGE:$RC_TAG"
-          docker cp qa-frontend:/usr/share/nginx/html/importmap.json importmap.json
+          docker cp qa-frontend:/usr/share/nginx/html/spa-assemble-config.json qa-manifest.json
           docker rm qa-frontend >/dev/null
 
-          python3 - "$CORE" <<'EOF'
-          import json, re, sys
+          python3 - <<'EOF'
+          import json, sys
 
-          with open('importmap.json') as f:
-              imports = json.load(f)['imports']
+          def fail(msg):
+              print(f"::error::{msg}")
+              sys.exit(1)
 
-          resolved = {}
-          for pkg, path in imports.items():
-              m = re.match(r'^\./(.+)-(\d[\w.+-]*)/[^/]+$', path)
-              if not m:
-                  sys.exit(f"Cannot parse importmap entry for {pkg}: {path}")
-              resolved[pkg] = m.group(2)
+          manifest = json.load(open('qa-manifest.json'))
+          resolved = manifest.get('frontendModules') or {}
+          core = manifest.get('coreVersion')
+          if not core or not resolved:
+              fail("qa-manifest.json lacks coreVersion/frontendModules — was the "
+                   "RC image built with `openmrs assemble --manifest`?")
 
           with open('frontend/spa-assemble-config.json') as f:
               cfg = json.load(f)
 
-          missing = []
-          for pkg in cfg['frontendModules']:
-              if pkg in resolved:
-                  cfg['frontendModules'][pkg] = resolved[pkg]
-              else:
-                  missing.append(pkg)
-
+          missing = [pkg for pkg in cfg['frontendModules'] if pkg not in resolved]
           if missing:
-              sys.exit("Modules in spa-assemble-config.json missing from the QA importmap:\n  "
-                       + "\n  ".join(missing))
+              fail("Modules in spa-assemble-config.json missing from the QA manifest: "
+                   + ", ".join(missing))
 
-          out = {'coreVersion': sys.argv[1]}
+          for pkg in cfg['frontendModules']:
+              cfg['frontendModules'][pkg] = resolved[pkg]
+
+          # coreVersion first for readability; reassign in case cfg already
+          # carried one (dict.update would otherwise win with the old value).
+          out = {'coreVersion': core}
           out.update(cfg)
-          out['coreVersion'] = sys.argv[1]
+          out['coreVersion'] = core
 
           with open('frontend/spa-assemble-config.json', 'w') as f:
               json.dump(out, f, indent=2)
               f.write('\n')
 
-          print(f"Pinned {len(cfg['frontendModules'])} modules to their QA-tested versions.")
+          print(f"Pinned {len(cfg['frontendModules'])} modules to their QA-tested versions (app shell {core}).")
           EOF
 
-          rm importmap.json
+          rm qa-manifest.json
           git diff --stat -- frontend/spa-assemble-config.json
 
       - name: Set project versions
@@ -228,7 +233,7 @@ jobs:
         run: |
           set -euo pipefail
           if grep -nE '(-SNAPSHOT|[0-9]{8}\.[0-9]{6}-[0-9]+)<' distro/pom.xml; then
-            echo "::error::distro/pom.xml references SNAPSHOT or timestamp-locked module versions (shown above)."
+            echo "::error::distro/pom.xml references SNAPSHOT or timestamp-locked module versions (shown above) — fix it on the release branch and cut a new RC."
             exit 1
           fi
 
@@ -292,7 +297,9 @@ jobs:
           done
 
       - name: Write summary
-        if: ${{ !inputs.dry_run }}
+        # always(): the recovery commands below matter most when a dispatch
+        # step just failed, which would otherwise skip this step.
+        if: ${{ always() && !inputs.dry_run && steps.setup.outputs.rc_tag != '' }}
         env:
           V: ${{ inputs.release_version }}
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}
@@ -306,7 +313,10 @@ jobs:
             echo ""
             echo "### Next steps"
             echo "1. Refresh o3.openmrs.org so it picks up the new \`demo\` images (Bamboo deploy step / infrastructure — not yet ported)."
-            echo "2. Verify: \`cosign verify\` the images; check the module versions on o3.openmrs.org."
+            echo "2. Verify the images and the module versions on o3.openmrs.org:"
+            echo '```'
+            echo "cosign verify openmrs/openmrs-reference-application-3-backend:$V --certificate-identity-regexp 'https://github.com/$GITHUB_REPOSITORY/.*' --certificate-oidc-issuer https://token.actions.githubusercontent.com"
+            echo '```'
             echo "3. Announce the release in #openmrs3 and on OpenMRS Talk."
             echo ""
             echo "If an image-build dispatch failed, re-run this workflow (it resumes) or dispatch directly:"

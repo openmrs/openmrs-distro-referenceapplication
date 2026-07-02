@@ -81,7 +81,7 @@ jobs:
           git config user.email "infrastructure@openmrs.org"
 
           if git rev-parse -q --verify "refs/tags/$V" >/dev/null; then
-            echo "::error::$V is already released (tag exists)"; exit 1
+            echo "::error::$V is already released (tag exists) — choose a new release_version"; exit 1
           fi
 
           if git rev-parse -q --verify "origin/releases/$V" >/dev/null; then
@@ -92,8 +92,13 @@ jobs:
             if [ -z "$CORE" ]; then
               echo "::error::core_version is required when cutting the first RC of a version"; exit 1
             fi
-            git checkout -b "releases/$V" "origin/$BASE_REF" 2>/dev/null \
-              || git checkout -b "releases/$V" "$BASE_REF"
+            if git rev-parse -q --verify "origin/$BASE_REF" >/dev/null; then
+              git checkout -b "releases/$V" "origin/$BASE_REF"
+            elif git rev-parse -q --verify "$BASE_REF^{commit}" >/dev/null; then
+              git checkout -b "releases/$V" "$BASE_REF"
+            else
+              echo "::error::base_ref '$BASE_REF' not found (must be a branch or tag)"; exit 1
+            fi
           fi
 
           LAST_RC=$(git tag -l "$V-rc.*" | sed "s/^$V-rc\.//" | grep -E '^[0-9]+$' | sort -n | tail -1 || true)
@@ -120,14 +125,11 @@ jobs:
         run: |
           set -euo pipefail
           sed -i 's/"next"/"latest"/g' frontend/spa-assemble-config.json
-          if grep -q '"next"' frontend/spa-assemble-config.json; then
-            echo "::error::frontend/spa-assemble-config.json still contains \"next\" entries after pinning"; exit 1
-          fi
           if [ -n "$CORE" ]; then
             sed -i -E "s|^ARG APP_SHELL_VERSION=.*|ARG APP_SHELL_VERSION=${CORE}|" frontend/Dockerfile
             sed -i -E "s|APP_SHELL_VERSION:-[^}]*|APP_SHELL_VERSION:-${CORE}|g" frontend/Dockerfile
             grep -q "^ARG APP_SHELL_VERSION=${CORE}$" frontend/Dockerfile \
-              || { echo "::error::failed to pin APP_SHELL_VERSION in frontend/Dockerfile"; exit 1; }
+              || { echo "::error::failed to pin APP_SHELL_VERSION — check that frontend/Dockerfile still declares the 'ARG APP_SHELL_VERSION=' line"; exit 1; }
           else
             # core_version omitted (later RC): the branch must already carry a pinned app shell
             if grep -qE '^ARG APP_SHELL_VERSION=(next)?$' frontend/Dockerfile; then
@@ -229,16 +231,19 @@ jobs:
           V: ${{ inputs.release_version }}
         run: |
           set -euo pipefail
-          # Pushes made with GITHUB_TOKEN do not fire push-triggered workflows,
-          # so the RC content would otherwise never get E2E coverage (the old
-          # flow got it from the release commit landing on main).
+          # The E2E workflow's push trigger is filtered to main (and GITHUB_TOKEN
+          # pushes would not fire it anyway), so the RC content would otherwise
+          # never get E2E coverage — the old flow got it from the release commit
+          # landing on main.
           gh workflow run e2e-tests-on-commit.yml --repo "$GITHUB_REPOSITORY" --ref "releases/$V"
           echo "Dispatched e2e-tests-on-commit.yml on releases/$V"
 
       - name: Open dev-version bump PR on main if needed
         if: ${{ !inputs.dry_run && steps.setup.outputs.mode == 'initial' }}
         env:
-          GH_TOKEN: ${{ github.token }}
+          # Prefer the bot PAT (as check-dependency-updates.yml does) so CI
+          # runs on the bump PR — GITHUB_TOKEN-created PRs get no triggers.
+          GH_TOKEN: ${{ secrets.OMRS_BOT_GH_TOKEN || github.token }}
           V: ${{ inputs.release_version }}
         run: |
           set -euo pipefail
@@ -270,7 +275,7 @@ jobs:
           git push -f origin "$BRANCH"
           if ! gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" \
               --title "(release-revert) Bump development version to $NEXT_DEV" \
-              --body "Bumps the development version on main to \`$NEXT_DEV\` now that \`$V\` has entered the release process (see the \`releases/$V\` branch). Opened automatically by the *Release: Cut QA (RC)* workflow. Note: CI does not run automatically on bot-opened PRs — close and reopen this PR to trigger it if desired."; then
+              --body "Bumps the development version on main to \`$NEXT_DEV\` now that \`$V\` has entered the release process (see the \`releases/$V\` branch). Opened automatically by the *Release: Cut QA (RC)* workflow. If CI checks did not start automatically, close and reopen this PR."; then
             # Creation fails when the PR already exists (e.g. a re-run); only
             # fail the step when no open PR is actually there.
             if gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --state open --json number --jq '.[].number' | grep -q .; then
@@ -281,7 +286,9 @@ jobs:
           fi
 
       - name: Write summary
-        if: ${{ !inputs.dry_run }}
+        # always(): the recovery commands below matter most when a dispatch
+        # step just failed, which would otherwise skip this step.
+        if: ${{ always() && !inputs.dry_run && steps.setup.outputs.rc_tag != '' }}
         env:
           V: ${{ inputs.release_version }}
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}
@@ -307,4 +314,5 @@ jobs:
               echo "gh workflow run $wf -R $GITHUB_REPOSITORY --ref releases/$V -f docker_image_tag=$RC_TAG -f docker_image_tag_version=$RC_TAG -f docker_image_tag_env=qa"
             done
             echo '```'
+            echo "Note: re-dispatching the backend re-deploys the same version to the Maven repository; if the repository rejects re-deployment, cut the next RC instead."
           } >> "$GITHUB_STEP_SUMMARY"

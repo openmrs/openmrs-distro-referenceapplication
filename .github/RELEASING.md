@@ -5,8 +5,11 @@ Releases are driven by two GitHub Actions workflows (Actions tab → run with
 
 | Step | Workflow | Replaces (Bamboo) |
 |---|---|---|
-| Cut an RC + publish QA images | **Release: Cut QA (RC)** (`release-qa.yml`) | O3-CQR, O3-CUQR, O3-PQR |
+| Cut an RC + publish QA images | **Release: Cut QA (RC)** (`release-qa.yml`) | O3-CQR, O3-CUQR, O3-PQR (image-publish half) |
 | Finalize + publish production images | **Release: Promote to Production** (`release-promote.yml`) | "Deploy Reference Application 3.x" (build half) |
+
+The *server deployment* halves of those Bamboo jobs (refreshing
+test3/o3.openmrs.org) are **not** ported — see below.
 
 ## Release runbook
 
@@ -40,12 +43,15 @@ Releases are driven by two GitHub Actions workflows (Actions tab → run with
    re-dispatching the backend re-deploys the same release version to the
    Maven repository; if the repository rejects re-deployment, cut the next
    RC instead.
-4. **QA on test3.openmrs.org** once it runs the new `qa` images
-   (container refresh is not yet ported — see gaps below).
-   Work through the [QA checklist](https://om.rs/o3qasheet).
+4. **QA on test3.openmrs.org** once it runs the new `qa` images. The
+   container refresh is not yet ported: trigger it via the Bamboo
+   [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR) deploy step,
+   or ask in `#infrastructure` on the OpenMRS Slack. Then work through the
+   [QA checklist](https://om.rs/o3qasheet).
 5. **Run "Release: Promote to Production"** with the `release_version`.
-   It pins the frontend to the *exact* module versions QA tested (extracted
-   from the RC image's importmap), tags the final version, and publishes
+   It pins the frontend to the *exact* module versions QA tested (from the
+   resolved-version manifest baked into the RC image by
+   `openmrs assemble --manifest`), tags the final version, and publishes
    `:<version>` and `:demo` images. It refuses to promote if commits landed
    on the release branch after the last RC, and re-running it after a partial
    failure resumes safely (including re-dispatching the image builds).
@@ -59,8 +65,12 @@ review and merge it like any other PR.
 
 - **Server container refreshes**: test3.openmrs.org (`qa` images) and
   o3.openmrs.org (`demo` images) are still refreshed by the OpenMRS
-  infrastructure (Bamboo deploy steps). The `deploy-dev3.yml` scoped-SSH
-  pattern can be extended to them once infrastructure provisions deploy keys.
+  infrastructure — via the [Publish QA Release](https://ci.openmrs.org/browse/O3-PQR)
+  deploy step and the
+  [Deploy Reference Application 3.x](https://ci.openmrs.org/deploy/viewDeploymentProjectEnvironments.action?id=222593025)
+  deployment project, or by asking in `#infrastructure`. The
+  `deploy-dev3.yml` scoped-SSH pattern can be extended to them once
+  infrastructure provisions deploy keys.
 - Bamboo remains available as a fallback; these workflows use the same
   branch/tag/commit conventions it did.
 
@@ -78,11 +88,13 @@ review and merge it like any other PR.
   esm test suites at `main`, so suites may test unreleased (`next`) behavior
   against the `latest`-pinned RC. This matches the coverage the old
   push-to-main flow had. Version-matched suites
-  (`tests/e2e/extract_tag_numbers.sh`, used by the retired
+  (`tests/e2e/extract_tag_numbers.sh`, used by the manually-disabled
   `e2e-on-release.yml`) are a follow-up.
 - **Old-tag base refs**: cutting a patch from a tag older than the current
   workflow set runs the *build/E2E workflow files as of that tag* — they may
   lack dispatch inputs or cosign signing. Cherry-pick the current workflow
   files onto the release branch first if needed.
-- **CI on the dev-version bump PR** does not start automatically (bot-opened
-  PRs don't trigger workflows) — close and reopen the PR to run it.
+- **CI on the dev-version bump PR** starts automatically only when the
+  `OMRS_BOT_GH_TOKEN` secret is available (it normally is — the dependency
+  update workflow uses it too). If checks are missing, close and reopen
+  the PR.
