@@ -10,11 +10,13 @@ name: 'Release: Promote to Production'
 #     silently ship module versions QA never saw)
 #   - sets the project poms to the final version
 #   - commits "(release) Release <version>", tags <version>
-#   - dispatches the image builds, publishing :<version>, :<major.minor.x>
-#     and :demo images (which o3.openmrs.org runs)
+#   - dispatches the image builds, publishing :<version> and :demo images
+#     (which o3.openmrs.org runs)
 #
 # Refuses to run if commits landed on the release branch after the last RC —
-# cut and QA a new RC first.
+# cut and QA a new RC first. Re-running after a partial failure resumes:
+# an already-finalized branch head is verified (exact-pinned frontend) and
+# reused rather than re-created.
 
 on:
   workflow_dispatch:
