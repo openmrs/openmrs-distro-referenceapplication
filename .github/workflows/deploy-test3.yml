@@ -30,8 +30,16 @@ on:
     workflows: ["Build Backend", "Build Frontend", "Build Gateway"]
     types: [completed]
 
+# No GITHUB_TOKEN use in either job.
+permissions: {}
+
+# Group per triggering ref: GitHub keeps only one PENDING run per group and
+# cancels the older pending one, so a shared group would let a main-branch
+# build completion silently cancel the pending run of the deciding RC
+# trigger. Per-ref groups make that impossible; the deploy job below has its
+# own group to serialize the actual SSH deploys.
 concurrency:
-  group: deploy-test3
+  group: deploy-test3-${{ github.event.workflow_run.head_branch || 'manual' }}
   cancel-in-progress: false
 
 jobs:
@@ -60,7 +68,7 @@ jobs:
           set -euo pipefail
           go=true
           if [ "$PROVISIONED" != "true" ]; then
-            MSG="test3 deploy credentials are not provisioned (TEST3_DEPLOY_SSH_KEY / TEST3_SERVER_HOST secrets — note: NOT the dev3 DEPLOY_SSH_KEY/SERVER_HOST names). Refresh test3 via the Bamboo Publish QA Release deploy step (https://ci.openmrs.org/browse/O3-PQR) or #infrastructure instead."
+            MSG="test3 deploy credentials are not provisioned: TEST3_DEPLOY_SSH_KEY / TEST3_SERVER_HOST must be REPO- or ORG-level secrets (environment-scoped secrets are invisible to this gate, and the dev3 DEPLOY_SSH_KEY/SERVER_HOST names must not be reused). Refresh test3 via the Bamboo Publish QA Release deploy step (https://ci.openmrs.org/browse/O3-PQR) or #infrastructure instead."
             {
               echo "## :warning: test3 was NOT deployed"
               echo "$MSG"
@@ -75,16 +83,29 @@ jobs:
           elif [ "$EVENT" = "workflow_run" ]; then
             # Each build's completion triggers this workflow; deploy only once
             # ALL three RC images are published, i.e. on the last trigger.
+            # A 404 is a genuine not-yet-published (defer, green); transport
+            # errors or rate limits must NOT defer — on the final build's
+            # trigger no later trigger is coming, so an indeterminate check
+            # fails red to put a human in the loop.
             for repo in backend frontend gateway; do
-              code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/openmrs/openmrs-reference-application-3-$repo/tags/$RC_TAG" || true)
-              if [ "$code" != "200" ]; then
-                echo "::notice::$repo:$RC_TAG is not on Docker Hub yet (HTTP $code) — deferring; the deploy fires when the remaining builds finish (or dispatch this workflow manually)."
+              code=""
+              for attempt in 1 2 3; do
+                code=$(curl -s -o /dev/null -w '%{http_code}' "https://hub.docker.com/v2/repositories/openmrs/openmrs-reference-application-3-$repo/tags/$RC_TAG" || true)
+                if [ "$code" = "200" ] || [ "$code" = "404" ]; then break; fi
+                echo "$repo:$RC_TAG — attempt $attempt got HTTP ${code:-000}; retrying"
+                if [ "$attempt" -lt 3 ]; then sleep $(( attempt * 15 )); fi
+              done
+              if [ "$code" = "404" ]; then
+                echo "::notice::$repo:$RC_TAG is not on Docker Hub yet — deferring; the deploy fires when the remaining builds finish (or dispatch this workflow manually)."
                 {
                   echo "## :hourglass: test3 deploy deferred"
                   echo "\`$repo:$RC_TAG\` is not published yet — a later build's trigger (or a manual dispatch) completes the deploy."
                 } >> "$GITHUB_STEP_SUMMARY"
                 go=false
                 break
+              elif [ "$code" != "200" ]; then
+                echo "::error::Docker Hub check for $repo:$RC_TAG failed (HTTP ${code:-000}) — cannot tell whether the RC images are complete. Re-run this workflow or dispatch it manually once Docker Hub recovers."
+                exit 1
               fi
             done
           fi
@@ -99,6 +120,12 @@ jobs:
     if: needs.gate.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # Serialize actual SSH deploys across all triggering refs; if two queue,
+    # GitHub keeps the newest pending one — which is correct here, since the
+    # newest deploy pulls the newest images.
+    concurrency:
+      group: deploy-test3-ssh
+      cancel-in-progress: false
     environment:
       name: test3
       url: https://test3.openmrs.org/openmrs/spa
@@ -116,7 +143,7 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -t ed25519 "$SERVER_HOST" >> ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519,ecdsa,rsa "$SERVER_HOST" >> ~/.ssh/known_hosts
 
           ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes \

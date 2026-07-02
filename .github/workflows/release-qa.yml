@@ -313,7 +313,7 @@ jobs:
             echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3A$RC_TAG) — they publish \`openmrs/openmrs-reference-application-3-{backend,frontend,gateway}:$RC_TAG\` and \`:qa\`"
             echo ""
             echo "### Next steps"
-            echo "1. Refresh test3.openmrs.org so it picks up the new \`qa\` images — the *Release: Deploy QA to test3* workflow fires automatically once all three RC image builds have published (or dispatch it manually; it no-ops with instructions until the TEST3_* deploy secrets are provisioned)."
+            echo "1. Refresh test3.openmrs.org so it picks up the new \`qa\` images — the *Release: Deploy QA to test3* workflow fires automatically once all three RC image builds have published (or dispatch it manually). Until the TEST3_* deploy secrets are provisioned, automatic runs no-op and manual dispatches fail with instructions."
             echo "2. Run through the [QA checklist](https://om.rs/o3qasheet) on test3."
             echo "3. Fixes needed? Commit them to \`releases/$V\` and re-run this workflow for the next RC."
             echo "4. QA passed? Run the *Release: Promote to Production* workflow."
