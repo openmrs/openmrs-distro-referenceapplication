@@ -82,21 +82,39 @@ jobs:
             base="https://hub.docker.com/v2/repositories/openmrs/openmrs-reference-application-3-$repo/tags"
             v_digest=""; demo_digest=""; v_code=""; demo_code=""
             for attempt in 1 2 3; do
+              # ': > "$body"' before every fetch and forcing the code to 000
+              # whenever curl itself fails are both load-bearing: curl can
+              # print a 200 from the headers while the body stalls to
+              # --max-time WITHOUT truncating -o output, which would leave
+              # the previous fetch's JSON in the shared body file and let a
+              # stalled :demo fetch "verify" against :$V's own digest.
               if [ -z "$v_digest" ]; then
-                v_code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/$V" || true)
+                : > "$body"
+                v_code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/$V") || v_code=000
                 if [ "$v_code" = "200" ]; then
                   v_digest=$(python3 -c 'import json,sys; d=json.load(sys.stdin).get("digest"); print(d if isinstance(d,str) else "")' < "$body" 2>/dev/null || true)
                 fi
               fi
               if [ -z "$demo_digest" ]; then
-                demo_code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/demo" || true)
+                : > "$body"
+                demo_code=$(curl -s --max-time 20 -o "$body" -w '%{http_code}' "$base/demo") || demo_code=000
                 if [ "$demo_code" = "200" ]; then
                   demo_digest=$(python3 -c 'import json,sys; d=json.load(sys.stdin).get("digest"); print(d if isinstance(d,str) else "")' < "$body" 2>/dev/null || true)
                 fi
               fi
               if [ -n "$v_digest" ] && [ -n "$demo_digest" ]; then break; fi
               if [ "$attempt" -lt 3 ]; then
-                echo "$repo: lookup incomplete (attempt $attempt; :$V HTTP ${v_code:-000}, :demo HTTP ${demo_code:-000}); retrying"
+                v_state="verified"
+                if [ -z "$v_digest" ]; then
+                  v_state="HTTP ${v_code:-000}"
+                  [ "$v_code" = "200" ] && v_state="HTTP 200 (unreadable/null digest)"
+                fi
+                demo_state="verified"
+                if [ -z "$demo_digest" ]; then
+                  demo_state="HTTP ${demo_code:-000}"
+                  [ "$demo_code" = "200" ] && demo_state="HTTP 200 (unreadable/null digest)"
+                fi
+                echo "$repo: lookup incomplete (attempt $attempt; :$V $v_state, :demo $demo_state); retrying"
                 sleep $(( attempt * 15 ))
               fi
             done

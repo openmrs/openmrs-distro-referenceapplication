@@ -107,14 +107,16 @@ review and merge it like any other PR.
 Each item has its own precondition — after all five, nothing in the
 release path needs Bamboo:
 
-- Item 1: retirable now (`release-qa.yml` already cut a real release's RCs).
+- Item 1: retirable now — `release-qa.yml` cut `3.7.1-rc.1` for a real
+  release; its rc.2+ update path (the O3-CUQR half) is exercised by the
+  regression suite, not yet by a production release.
 - Item 2: after `TEST3_*` secrets are provisioned and `deploy-test3.yml`
   has one successful deploy.
 - Item 3: after `O3_*` secrets are provisioned and `deploy-o3.yml` has one
   successful deploy.
-- Item 4: as soon as the schedule trigger is on main (it uses the same
-  Docker Hub credentials every build already uses — nothing new to
-  provision).
+- Item 4: as soon as the schedule trigger is on main (scheduled runs use
+  only the pre-existing Docker Hub and Maven credentials every build
+  already uses — nothing new to provision).
 - Item 5: independent — confirm with infrastructure at any time.
 
 To retire:
