@@ -1,0 +1,33 @@
+name: Release Workflow Tests
+
+# Executes the actual run blocks of the release workflows against an isolated
+# local clone (see tests/release-workflows/run-suite.sh) whenever they — or
+# the suite itself — change. No network, no secrets, no pushes.
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/release-qa.yml'
+      - '.github/workflows/release-promote.yml'
+      - '.github/workflows/release-workflow-tests.yml'
+      - 'tests/release-workflows/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  suite:
+    name: Release workflow state-machine suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          # Full history and tags: the suite derives versions from the poms
+          # and uses the real 3.7.0 tag as a negative fixture.
+          fetch-depth: 0
+
+      - name: Run the suite
+        run: bash tests/release-workflows/run-suite.sh

@@ -75,6 +75,16 @@ review and merge it like any other PR.
 - Bamboo remains available as a fallback; these workflows use the same
   branch/tag/commit conventions it did.
 
+## Testing changes to these workflows
+
+`tests/release-workflows/run-suite.sh` executes the workflows' actual `run:`
+blocks against an isolated local clone — the full release state machine plus
+every guard, including negative fixtures seeded with the real content that
+broke 3.7.0. It runs automatically on PRs touching the release workflows
+(`release-workflow-tests.yml`) and locally on Linux with
+`bash tests/release-workflows/run-suite.sh` (on macOS, run it inside a Linux
+container).
+
 ## Known gaps and caveats
 
 - **Backend rebuild at promote is not fully hermetic** (same as the Bamboo
