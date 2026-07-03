@@ -18,7 +18,7 @@
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "rate(container_cpu_usage_seconds_total{name=\"backend\",cpu=\"total\"}[5m]) * 100",
+          "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{name=\"backend\",cpu=\"total\"}[5m])) * 100",
           "legendFormat": "CPU %"
         }
       ],
@@ -47,19 +47,19 @@
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "container_memory_working_set_bytes{name=\"backend\"}",
+          "expr": "sum by (name) (container_memory_working_set_bytes{name=\"backend\"})",
           "legendFormat": "Working Set"
         },
         {
           "refId": "B",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "container_memory_rss{name=\"backend\"}",
+          "expr": "sum by (name) (container_memory_rss{name=\"backend\"})",
           "legendFormat": "RSS"
         },
         {
           "refId": "C",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "container_memory_cache{name=\"backend\"}",
+          "expr": "sum by (name) (container_memory_cache{name=\"backend\"})",
           "legendFormat": "Cache"
         }
       ],
@@ -86,13 +86,13 @@
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "rate(container_network_receive_bytes_total{name=\"backend\"}[5m])",
+          "expr": "sum by (name) (rate(container_network_receive_bytes_total{name=\"backend\"}[5m]))",
           "legendFormat": "⬇ Receive"
         },
         {
           "refId": "B",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "rate(container_network_transmit_bytes_total{name=\"backend\"}[5m])",
+          "expr": "sum by (name) (rate(container_network_transmit_bytes_total{name=\"backend\"}[5m]))",
           "legendFormat": "⬆ Transmit"
         }
       ],
@@ -119,13 +119,13 @@
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "rate(container_fs_reads_bytes_total{name=\"backend\"}[5m])",
+          "expr": "sum by (name) (rate(container_fs_reads_bytes_total{name=\"backend\"}[5m]))",
           "legendFormat": "Read"
         },
         {
           "refId": "B",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "rate(container_fs_writes_bytes_total{name=\"backend\"}[5m])",
+          "expr": "sum by (name) (rate(container_fs_writes_bytes_total{name=\"backend\"}[5m]))",
           "legendFormat": "Write"
         }
       ],
@@ -152,7 +152,7 @@
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "time() - container_start_time_seconds{name=\"backend\"}",
+          "expr": "time() - max by (name) (container_start_time_seconds{name=\"backend\"})",
           "legendFormat": ""
         }
       ],
@@ -189,7 +189,7 @@
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "container_memory_working_set_bytes{name=\"backend\"}",
+          "expr": "sum by (name) (container_memory_working_set_bytes{name=\"backend\"})",
           "legendFormat": ""
         }
       ],
@@ -227,7 +227,7 @@
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "increase(container_oom_events_total{name=\"backend\"}[24h])",
+          "expr": "sum by (name) (increase(container_oom_events_total{name=\"backend\"}[24h]))",
           "legendFormat": ""
         }
       ],

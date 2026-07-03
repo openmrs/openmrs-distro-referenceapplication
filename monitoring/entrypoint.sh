@@ -32,9 +32,18 @@ echo "Copying Blackbox config..."
 mkdir -p /config
 cp /monitoring/blackbox.yml /config/blackbox.yml
 
-echo "Copying jmx exporter..."
+echo "Setting up jmx exporter..."
+JMX_EXPORTER_VERSION=1.6.0
+JMX_AGENT_JAR="jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar"
+JMX_AGENT_URL="https://github.com/prometheus/jmx_exporter/releases/download/v${JMX_EXPORTER_VERSION}/${JMX_AGENT_JAR}"
 mkdir -p /jmx-exporter-data/
-cp /monitoring/jmx_exporter/jmx_prometheus_javaagent-1.6.0.jar /jmx-exporter-data/jmx_prometheus_javaagent-1.6.0.jar
+# Download the agent jar. Skip if it's already in the volume.
+# Download to a temp file and move on success so a failed download never leaves a broken jar.
+if [ ! -f "/jmx-exporter-data/${JMX_AGENT_JAR}" ]; then
+  echo "Downloading ${JMX_AGENT_JAR}..."
+  wget -q -O "/jmx-exporter-data/${JMX_AGENT_JAR}.tmp" "${JMX_AGENT_URL}"
+  mv "/jmx-exporter-data/${JMX_AGENT_JAR}.tmp" "/jmx-exporter-data/${JMX_AGENT_JAR}"
+fi
 cp /monitoring/jmx_exporter/jmx_config.yml /jmx-exporter-data/jmx_config.yml
 
 echo "Configuration initialization complete."
