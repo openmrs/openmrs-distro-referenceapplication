@@ -1,17 +1,17 @@
 {
-  "title": "Backend Container",
+  "title": "Container Resources",
   "uid": "openmrs-backend",
   "schemaVersion": 39,
   "version": 1,
   "time": { "from": "now-1h", "to": "now" },
   "refresh": "30s",
-  "tags": ["openmrs", "backend", "container"],
+  "tags": ["container"],
   "panels": [
     {
       "id": 1,
       "type": "timeseries",
       "title": "CPU Usage",
-      "description": "Percentage of a single CPU core used",
+      "description": "CPU consumed by the backend container, as a percentage of a single core (100% = one full core; can exceed 100% on multi-core hosts). Watch for sustained highs or a rising baseline. If it sits near the host's core limit during normal use, allocate more CPU or scale out; brief spikes during startup or batch jobs are usually fine. Correlate spikes with slow requests or high load.",
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
@@ -40,7 +40,7 @@
       "id": 2,
       "type": "timeseries",
       "title": "Memory",
-      "description": "Working set = active memory (excludes reclaimable cache). RSS = anonymous memory.",
+      "description": "Backend container memory over time. Working Set = active memory that cannot be reclaimed under pressure (this is what counts toward OOM limits); RSS = anonymous (non-file-backed) memory; Cache = reclaimable page cache. A steadily climbing Working Set that never drops back may indicate a memory leak — investigate or schedule restarts and consider raising the memory limit. Working Set approaching the container limit risks an OOM kill (see the OOM Events panel).",
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
@@ -80,6 +80,7 @@
       "id": 3,
       "type": "timeseries",
       "title": "Network I/O",
+      "description": "Rate of network traffic in/out of the backend container (bytes/sec). Receive is inbound traffic (client requests, DB responses); Transmit is outbound (responses, DB queries). Use this to understand traffic patterns and spot anomalies — an unexpected sustained spike may signal a traffic surge, a runaway client, or bulk data transfer. Flat-zero when the service should be busy can indicate a connectivity or upstream problem.",
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
@@ -113,6 +114,7 @@
       "id": 4,
       "type": "timeseries",
       "title": "Disk I/O",
+      "description": "Rate of bytes read from / written to disk by the backend container (bytes/sec). Decisions: sustained high I/O can bottleneck request latency — correlate with CPU and slow responses. Heavy writes may come from logging or file storage; heavy reads may indicate cache misses or large file access. Persistent saturation suggests moving to faster storage or reducing disk-bound work.",
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
@@ -146,6 +148,7 @@
       "id": 5,
       "type": "stat",
       "title": "Uptime",
+      "description": "Time since the backend container last started. Red for the first minute, yellow up to 5 minutes, green after — reflecting that the app needs time to fully boot. An unexpectedly low value means the container recently restarted or crashed — check the OOM Events panel and container logs to find why. A frequently-resetting uptime signals a crash loop.",
       "gridPos": { "h": 4, "w": 8, "x": 0, "y": 16 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
@@ -183,6 +186,7 @@
       "id": 6,
       "type": "stat",
       "title": "Memory (Working Set)",
+      "description": "Current active (non-reclaimable) memory used by the backend — the value that counts against the container's memory limit. Green below 1 GB, yellow above 1 GB, red above 2 GB. If it stays red near the container limit, raise the limit or investigate a leak (see the Memory timeseries for the trend). Values close to the limit make an OOM kill likely.",
       "gridPos": { "h": 4, "w": 8, "x": 8, "y": 16 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
@@ -220,7 +224,7 @@
       "id": 7,
       "type": "stat",
       "title": "OOM Events (24 h)",
-      "description": "Out-of-memory kills in the last 24 hours. Any value > 0 means the container was killed for exceeding memory.",
+      "description": "Count of out-of-memory kills in the last 24 hours. Green at 0, red at 1 or more. Any value > 0 means the kernel killed the container for exceeding its memory limit. If > 0, raise the container memory limit and/or investigate a memory leak (see the Memory panels), and check Uptime for the resulting restart. Recurring OOM kills point to an under-provisioned limit or a genuine leak that needs a code fix.",
       "gridPos": { "h": 4, "w": 8, "x": 16, "y": 16 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
