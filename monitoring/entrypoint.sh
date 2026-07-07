@@ -25,8 +25,15 @@ rm -f /etc/grafana/provisioning/dashboards/json/*.json
 cp /monitoring/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
 
 echo "Copying Prometheus config..."
-mkdir -p /etc/prometheus
+mkdir -p /etc/prometheus/rules
 cp /monitoring/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
+# Clear stale rule files so ones removed from source don't linger in the volume
+rm -f /etc/prometheus/rules/*.yml
+cp /monitoring/prometheus/alert.rules.yml /etc/prometheus/rules/alert.rules.yml
+
+echo "Copying Alertmanager config..."
+mkdir -p /etc/alertmanager
+cp /monitoring/alertmanager/alertmanager.yml /etc/alertmanager/alertmanager.yml
 
 echo "Copying Blackbox config..."
 mkdir -p /config
