@@ -61,7 +61,7 @@ server {
   # all redirects are relative to the gateway
   absolute_redirect off;
 
-  resolver 127.0.0.11 valid=30s ipv6=off;
+  resolver ${NGINX_LOCAL_RESOLVERS} valid=30s ipv6=off;
 
   location /openmrs/spa/ {
     set $frontend http://frontend;
