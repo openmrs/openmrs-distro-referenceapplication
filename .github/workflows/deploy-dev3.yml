@@ -21,10 +21,13 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   deploy:
     name: Deploy to Dev3
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     if: ${{ github.repository_owner == 'openmrs' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success') }}
     environment:
       name: dev3
@@ -32,21 +35,33 @@ jobs:
     steps:
       - name: Deploy via scoped SSH
         env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
           DEPLOY_COMMAND: ${{ inputs.reset && 'deploy emr-3-dev --destroy-volumes --no-health-check' || 'deploy emr-3-dev --no-health-check' }}
         run: |
+          set -euo pipefail
+          if [ -z "$DEPLOY_KEY" ]; then
+            echo "::error::DEPLOY_SSH_KEY secret is not set — cannot deploy to dev3."
+            exit 1
+          fi
+          if [ -z "$SERVER_HOST" ]; then
+            echo "::error::SERVER_HOST secret is not set — cannot deploy to dev3."
+            exit 1
+          fi
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -t ed25519 ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519 "$SERVER_HOST" >> ~/.ssh/known_hosts
 
           ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes \
-            deploy@${{ secrets.SERVER_HOST }} \
+            "deploy@$SERVER_HOST" \
             "$DEPLOY_COMMAND"
 
   deploy-sec3:
     name: Deploy to Sec3
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     if: ${{ github.repository_owner == 'openmrs' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success') }}
     environment:
       name: sec3
@@ -54,10 +69,16 @@ jobs:
     steps:
       - name: Deploy via scoped SSH
         env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
           DEPLOY_COMMAND: 'deploy emr-3-dev --no-health-check'
         run: |
+          set -euo pipefail
+          if [ -z "$DEPLOY_KEY" ]; then
+            echo "::error::DEPLOY_SSH_KEY secret is not set — cannot deploy to sec3."
+            exit 1
+          fi
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -t ed25519 sec3.openmrs.org >> ~/.ssh/known_hosts
 

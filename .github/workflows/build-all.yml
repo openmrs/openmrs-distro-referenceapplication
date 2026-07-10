@@ -1,0 +1,118 @@
+name: Build all images
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        required: false
+        type: string
+        default: ''
+      docker_image_tag:
+        required: false
+        type: string
+        default: 'nightly'
+      docker_image_tag_version:
+        required: false
+        type: string
+        default: '3.7.x'
+      docker_image_tag_env:
+        required: false
+        type: string
+        default: 'dev3'
+    secrets:
+      DOCKER_HUB_USERNAME:
+        required: true
+      DOCKER_HUB_TOKEN:
+        required: true
+      MAVEN_REPO_USERNAME:
+        required: true
+      MAVEN_REPO_API_KEY:
+        required: true
+
+# Pass the OIDC token permission through to the called builds so cosign keyless
+# signing keeps working across this extra nesting layer.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  # build-all is only ever called from the release chain, so empty inputs mean a
+  # broken caller (e.g. a renamed output resolving to ''). Fail fast rather than
+  # let the leaves fall back to main/nightly and republish un-QA'd content.
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require non-empty ref and image tags
+        env:
+          REF: ${{ inputs.ref }}
+          TAG: ${{ inputs.docker_image_tag }}
+          VERSION: ${{ inputs.docker_image_tag_version }}
+        run: |
+          set -euo pipefail
+          for v in REF TAG VERSION; do
+            [ -n "${!v}" ] || { echo "::error::build-all was called with an empty $v — check the caller's inputs"; exit 1; }
+          done
+
+  backend:
+    needs: validate
+    uses: ./.github/workflows/build-backend.yml
+    with:
+      ref: ${{ inputs.ref }}
+      docker_image_tag: ${{ inputs.docker_image_tag }}
+      docker_image_tag_version: ${{ inputs.docker_image_tag_version }}
+      docker_image_tag_env: ${{ inputs.docker_image_tag_env }}
+    secrets:
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+      MAVEN_REPO_USERNAME: ${{ secrets.MAVEN_REPO_USERNAME }}
+      MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
+
+  frontend:
+    needs: validate
+    uses: ./.github/workflows/build-frontend.yml
+    with:
+      ref: ${{ inputs.ref }}
+      docker_image_tag: ${{ inputs.docker_image_tag }}
+      docker_image_tag_version: ${{ inputs.docker_image_tag_version }}
+      docker_image_tag_env: ${{ inputs.docker_image_tag_env }}
+    secrets:
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+      MAVEN_REPO_USERNAME: ${{ secrets.MAVEN_REPO_USERNAME }}
+      MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
+
+  gateway:
+    needs: validate
+    uses: ./.github/workflows/build-gateway.yml
+    with:
+      ref: ${{ inputs.ref }}
+      docker_image_tag: ${{ inputs.docker_image_tag }}
+      docker_image_tag_version: ${{ inputs.docker_image_tag_version }}
+      docker_image_tag_env: ${{ inputs.docker_image_tag_env }}
+    secrets:
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+  certbot:
+    needs: validate
+    uses: ./.github/workflows/build-certbot.yml
+    with:
+      ref: ${{ inputs.ref }}
+      docker_image_tag: ${{ inputs.docker_image_tag }}
+      docker_image_tag_version: ${{ inputs.docker_image_tag_version }}
+      docker_image_tag_env: ${{ inputs.docker_image_tag_env }}
+    secrets:
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+  monitoring-init:
+    needs: validate
+    uses: ./.github/workflows/build-monitoring-init.yml
+    with:
+      ref: ${{ inputs.ref }}
+      docker_image_tag: ${{ inputs.docker_image_tag }}
+      docker_image_tag_version: ${{ inputs.docker_image_tag_version }}
+      docker_image_tag_env: ${{ inputs.docker_image_tag_env }}
+    secrets:
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}

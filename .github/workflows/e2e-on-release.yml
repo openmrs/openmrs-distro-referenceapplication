@@ -1,17 +1,31 @@
-name: Run E2E Tests on Release PRs
+name: Run E2E Tests on Release Candidate
+
+# Builds the distro from source at a release ref and runs each ESM repo's
+# Playwright suite at the module version pinned into that build.
 
 on:
-  pull_request:
-    branches: [main]
+  workflow_call:
+    inputs:
+      ref:
+        description: 'Ref (RC tag / branch / commit) to build and test'
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Ref (RC tag / branch / commit) to build and test'
+        required: true
+
+permissions:
+  contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ inputs.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.event.pull_request.title, '(release)') }}
     outputs:
       patient_management_ref: ${{steps.refs.outputs.patient_management}}
       patient_chart_ref: ${{steps.refs.outputs.patient_chart}}
@@ -23,20 +37,22 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          fetch-depth: 0
-
-      - name: Checkout to the release commit
-        run: git checkout 'HEAD^{/\(release\)}'
-
-      - name: Extract version numbers from the spa-build-config.json file
-        id: refs
-        run: bash ./tests/e2e/extract_tag_numbers.sh
+          ref: ${{ inputs.ref }}
 
       - name: Build and Run Containers
         run: docker compose -f ./tests/e2e/docker-compose-build.yml up -d
 
       - name: Wait for the backend to start
         run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+
+      # The tree at a release ref pins modules to a floating dist-tag
+      # ("latest"/"next"), so the concrete versions to test against only exist
+      # in the resolved manifest baked into the built frontend image.
+      - name: Resolve pinned module versions from the built frontend image
+        id: refs
+        run: |
+          docker cp frontend:/usr/share/nginx/html/spa-assemble-config.json frontend/spa-assemble-config.json
+          bash ./tests/e2e/extract_tag_numbers.sh
 
       - name: Commit and export Containers
         run: sh ./tests/e2e/commit_and_export_images.sh

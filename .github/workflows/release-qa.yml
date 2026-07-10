@@ -1,20 +1,4 @@
-name: 'Release: Cut QA (RC)'
-
-# Replaces the Bamboo "Create initial QA release" (O3-CQR), "Create Updated QA
-# Release" (O3-CUQR) and "Publish QA Release" (O3-PQR) plans.
-#
-# The first run for a version cuts releases/<version> off <base_ref> with a
-# single "(release) Release v<version>-rc.1" commit that pins:
-#   - frontend/spa-assemble-config.json: "next" -> "latest"
-#   - frontend/Dockerfile: APP_SHELL_VERSION next -> <core_version>
-#   - the three project poms -> <version>-rc.1
-# Later runs for the same version add rc.2, rc.3, ... on the existing branch.
-#
-# It then dispatches the existing image build workflows on the release branch,
-# publishing images tagged <version>-rc.N and qa (which test3.openmrs.org runs).
-#
-# This workflow never pushes to main. When a release makes the development
-# version on main stale (minor releases), it opens a version-bump PR instead.
+name: 'Release: Cut QA Release Candidate'
 
 on:
   workflow_dispatch:
@@ -23,7 +7,7 @@ on:
         description: 'Version being released, e.g. 3.7.1'
         required: true
       core_version:
-        description: 'esm-core (app shell) version to pin, e.g. 10.0.0 — see https://github.com/openmrs/openmrs-esm-core/releases. Required for the first RC; leave empty on later RCs to keep the version already pinned on the release branch.'
+        description: 'esm-core (app shell) version to pin, e.g. 10.0.0. Required for the first RC.'
         required: false
         default: ''
       base_ref:
@@ -50,6 +34,8 @@ jobs:
     if: github.repository_owner == 'openmrs'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    outputs:
+      rc_tag: ${{ steps.setup.outputs.rc_tag }}
     steps:
       - name: Validate inputs
         env:
@@ -68,6 +54,12 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
+
+      - name: Set up Java
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          distribution: temurin
+          java-version: '21'
 
       - name: Determine release mode and RC number
         id: setup
@@ -125,42 +117,39 @@ jobs:
         run: |
           set -euo pipefail
           sed -i 's/"next"/"latest"/g' frontend/spa-assemble-config.json
+          # QA previews test released modules; no unreleased "next" dist-tag may remain.
+          if grep -q '"next"' frontend/spa-assemble-config.json; then
+            echo "::error::frontend/spa-assemble-config.json still references the \"next\" dist-tag after pinning."; exit 1
+          fi
           if [ -n "$CORE" ]; then
             sed -i -E "s|^ARG APP_SHELL_VERSION=.*|ARG APP_SHELL_VERSION=${CORE}|" frontend/Dockerfile
             sed -i -E "s|APP_SHELL_VERSION:-[^}]*|APP_SHELL_VERSION:-${CORE}|g" frontend/Dockerfile
             grep -q "^ARG APP_SHELL_VERSION=${CORE}$" frontend/Dockerfile \
               || { echo "::error::failed to pin APP_SHELL_VERSION — check that frontend/Dockerfile still declares the 'ARG APP_SHELL_VERSION=' line"; exit 1; }
           else
-            # core_version omitted (later RC): the branch must already carry a pinned app shell
-            if grep -qE '^ARG APP_SHELL_VERSION=(next)?$' frontend/Dockerfile; then
-              echo "::error::APP_SHELL_VERSION is not pinned on this branch — pass core_version"; exit 1
+            # core_version omitted (later RC): the branch must already carry a
+            # concrete pinned app shell (reject empty/next/latest/floating forms).
+            PINNED=$(sed -n 's/^ARG APP_SHELL_VERSION=//p' frontend/Dockerfile | head -1)
+            if [[ ! "$PINNED" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]]; then
+              echo "::error::APP_SHELL_VERSION on this branch is not a concrete version (got: '${PINNED}') — pass core_version"; exit 1
             fi
-            echo "Keeping app shell version already pinned on the branch: $(sed -n 's/^ARG APP_SHELL_VERSION=//p' frontend/Dockerfile | head -1)"
+            echo "Keeping app shell version already pinned on the branch: $PINNED"
           fi
 
       - name: Set project versions
         env:
-          OLD: ${{ steps.setup.outputs.old_version }}
           NEW: ${{ steps.setup.outputs.rc_tag }}
         run: |
           set -euo pipefail
-          OLD_ESC=$(printf '%s' "$OLD" | sed 's/[.[\*^$]/\\&/g')
+          mvn -q -B org.codehaus.mojo:versions-maven-plugin:2.21.0:set \
+            -DnewVersion="$NEW" -DgenerateBackupPoms=false -P distro,frontend
+          # Guard the empty-diff resume path below: a silent no-op here would let
+          # a still-dev-versioned HEAD be tagged as the RC.
           for f in pom.xml distro/pom.xml frontend/pom.xml; do
-            n=$(grep -c "<version>$OLD</version>" "$f" || true)
-            if [ "$n" != "1" ]; then
-              echo "::error::$f: expected exactly one occurrence of <version>$OLD</version>, found $n"; exit 1
-            fi
-            sed -i "s|<version>${OLD_ESC}</version>|<version>${NEW}</version>|" "$f"
+            grep -q "<version>${NEW}</version>" "$f" \
+              || { echo "::error::$f is not at $NEW after versions:set"; exit 1; }
           done
           git diff --stat
-
-      - name: Refuse SNAPSHOT or timestamp-locked module versions
-        run: |
-          set -euo pipefail
-          if grep -nE '(-SNAPSHOT|[0-9]{8}\.[0-9]{6}-[0-9]+)<' distro/pom.xml; then
-            echo "::error::distro/pom.xml references SNAPSHOT or timestamp-locked module versions (shown above). Release those modules and update the pom first — shipping locked snapshots is what broke 3.7.0."
-            exit 1
-          fi
 
       - name: Create release commit and tag
         env:
@@ -188,9 +177,8 @@ jobs:
           {
             echo "## :test_tube: Dry run — nothing was pushed or built"
             echo ""
-            echo "Would push branch \`releases/$V\` and tag \`$RC_TAG\`, then dispatch"
-            echo "build-backend / build-frontend / build-gateway on \`releases/$V\`"
-            echo "with image tags \`$RC_TAG\` and \`qa\`."
+            echo "Would push branch \`releases/$V\` and tag \`$RC_TAG\`, then build all"
+            echo "images at \`$RC_TAG\` tagged \`$RC_TAG\` and \`qa\`, and deploy to test3."
             echo ""
             echo "### Release commit"
             echo '```diff'
@@ -209,46 +197,61 @@ jobs:
           git push origin "releases/$V"
           git push origin "refs/tags/$RC_TAG"
 
-      - name: Dispatch QA image builds
-        if: ${{ !inputs.dry_run }}
+      - name: Write summary
+        # always() + push succeeded: report even if a later step failed, but a
+        # run that failed before pushing must not claim an RC was cut.
+        if: ${{ always() && !inputs.dry_run && steps.push.outcome == 'success' }}
         env:
-          GH_TOKEN: ${{ github.token }}
           V: ${{ inputs.release_version }}
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}
+          MODE: ${{ steps.setup.outputs.mode }}
         run: |
           set -euo pipefail
-          # Dispatch on the immutable RC tag, not the branch: images tagged
-          # :$RC_TAG must be built from exactly that commit even if the branch
-          # moves between the push and the build.
-          for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
-            gh workflow run "$wf" --repo "$GITHUB_REPOSITORY" --ref "$RC_TAG" \
-              -f docker_image_tag="$RC_TAG" \
-              -f docker_image_tag_version="$RC_TAG" \
-              -f docker_image_tag_env=qa
-            echo "Dispatched $wf on $RC_TAG"
-          done
+          {
+            echo "## :rocket: Cut \`$RC_TAG\` (${MODE} release)"
+            echo ""
+            echo "- Branch: [\`releases/$V\`](https://github.com/$GITHUB_REPOSITORY/tree/releases/$V)"
+            echo "- Tag: \`$RC_TAG\`"
+            echo "- This run builds the \`$RC_TAG\` and \`qa\` images and deploys them to test3.openmrs.org."
+            echo ""
+            echo "### Next steps"
+            echo "1. Run through the [QA checklist](https://om.rs/o3qasheet) on test3."
+            echo "2. Fixes needed? Commit them to \`releases/$V\` and re-run this workflow for the next RC."
+            echo "3. QA passed? Run the *Release: Promote QA to Prod* workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Dispatch E2E tests on the RC
-        if: ${{ !inputs.dry_run }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
-        run: |
-          set -euo pipefail
-          # The E2E workflow's push trigger is filtered to main (and GITHUB_TOKEN
-          # pushes would not fire it anyway), so the RC content would otherwise
-          # never get E2E coverage — the old flow got it from the release commit
-          # landing on main.
-          gh workflow run e2e-tests-on-commit.yml --repo "$GITHUB_REPOSITORY" --ref "$RC_TAG"
-          echo "Dispatched e2e-tests-on-commit.yml on $RC_TAG"
+  # E2E and the dev-version bump run as their own jobs (needs: cut-rc) so a
+  # failure in either never blocks the RC build/deploy — the RC tag is already
+  # pushed by the time these run. Re-run the failed job to retry.
+  e2e:
+    name: Run release E2E on the RC
+    needs: cut-rc
+    if: ${{ !inputs.dry_run }}
+    permissions:
+      contents: read
+    uses: ./.github/workflows/e2e-on-release.yml
+    with:
+      ref: ${{ needs.cut-rc.outputs.rc_tag }}
+
+  bump-dev-version:
+    name: Open dev-version bump PR on main if needed
+    needs: cut-rc
+    if: ${{ !inputs.dry_run }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Java
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          distribution: temurin
+          java-version: '21'
 
       - name: Open dev-version bump PR on main if needed
-        # Runs on every (non-dry) cut, not just the initial one: the step is
-        # idempotent (exits when main is already ahead; updates the existing
-        # PR branch otherwise), and gating it on initial mode made the bump
-        # unreachable after any partial first-RC failure, since every re-run
-        # re-enters as update mode.
-        if: ${{ !inputs.dry_run }}
+        # Idempotent: exits when main is already ahead; updates the existing PR
+        # branch otherwise.
         env:
           # Prefer the bot PAT (as check-dependency-updates.yml does) so CI
           # runs on the bump PR — GITHUB_TOKEN-created PRs get no triggers.
@@ -256,6 +259,8 @@ jobs:
           V: ${{ inputs.release_version }}
         run: |
           set -euo pipefail
+          git config user.name "openmrs-bot"
+          git config user.email "infrastructure@openmrs.org"
           git show origin/main:pom.xml > /tmp/main-pom.xml
           MAIN_DEV=$(python3 - <<'EOF'
           import xml.etree.ElementTree as ET
@@ -271,20 +276,14 @@ jobs:
           NEXT_DEV=$(echo "$V" | awk -F. '{printf "%d.%d.0-SNAPSHOT", $1, $2 + 1}')
           BRANCH="release/bump-dev-after-$V"
           git checkout -B "$BRANCH" origin/main
-          OLD_ESC=$(printf '%s' "$MAIN_DEV" | sed 's/[.[\*^$]/\\&/g')
-          for f in pom.xml distro/pom.xml frontend/pom.xml; do
-            n=$(grep -c "<version>$MAIN_DEV</version>" "$f" || true)
-            if [ "$n" != "1" ]; then
-              echo "::error::$f: expected exactly one occurrence of <version>$MAIN_DEV</version>, found $n"; exit 1
-            fi
-            sed -i "s|<version>${OLD_ESC}</version>|<version>${NEXT_DEV}</version>|" "$f"
-          done
+          mvn -q -B org.codehaus.mojo:versions-maven-plugin:2.21.0:set \
+            -DnewVersion="$NEXT_DEV" -DgenerateBackupPoms=false -P distro,frontend
           git add -A
           git commit -m "(release-revert) Bump development version to $NEXT_DEV"
           git push -f origin "$BRANCH"
           if ! gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" \
               --title "(release-revert) Bump development version to $NEXT_DEV" \
-              --body "Bumps the development version on main to \`$NEXT_DEV\` now that \`$V\` has entered the release process (see the \`releases/$V\` branch). Opened automatically by the *Release: Cut QA (RC)* workflow. If CI checks did not start automatically, close and reopen this PR."; then
+              --body "Bumps the development version on main to \`$NEXT_DEV\` now that \`$V\` has entered the release process (see the \`releases/$V\` branch). Opened automatically by the *Release: Cut QA Release Candidate* workflow. If CI checks did not start automatically, close and reopen this PR."; then
             # Creation fails when the PR already exists (e.g. a re-run); only
             # fail the step when no open PR is actually there.
             if gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --state open --json number --jq '.[].number' | grep -q .; then
@@ -294,36 +293,28 @@ jobs:
             fi
           fi
 
-      - name: Write summary
-        # always() + push succeeded: the recovery commands matter most when a
-        # DISPATCH step just failed (which would otherwise skip this step),
-        # but a run that failed before pushing must not claim an RC was cut.
-        if: ${{ always() && !inputs.dry_run && steps.push.outcome == 'success' }}
-        env:
-          V: ${{ inputs.release_version }}
-          RC_TAG: ${{ steps.setup.outputs.rc_tag }}
-          MODE: ${{ steps.setup.outputs.mode }}
-        run: |
-          set -euo pipefail
-          {
-            echo "## :rocket: Cut \`$RC_TAG\` (${MODE} release)"
-            echo ""
-            echo "- Branch: [\`releases/$V\`](https://github.com/$GITHUB_REPOSITORY/tree/releases/$V)"
-            echo "- Tag: \`$RC_TAG\`"
-            echo "- Image builds: [watch here](https://github.com/$GITHUB_REPOSITORY/actions?query=branch%3A$RC_TAG) — they publish \`openmrs/openmrs-reference-application-3-{backend,frontend,gateway}:$RC_TAG\` and \`:qa\`"
-            echo ""
-            echo "### Next steps"
-            echo "1. Refresh test3.openmrs.org so it picks up the new \`qa\` images — the *Release: Deploy QA to test3* workflow fires automatically once all three RC image builds have published (or dispatch it manually). Until the TEST3_* deploy secrets are provisioned, automatic runs no-op and manual dispatches fail with instructions."
-            echo "2. Run through the [QA checklist](https://om.rs/o3qasheet) on test3."
-            echo "3. Fixes needed? Commit them to \`releases/$V\` and re-run this workflow for the next RC."
-            echo "4. QA passed? Run the *Release: Promote to Production* workflow."
-            echo ""
-            echo "If an image-build or E2E dispatch failed, re-dispatch it directly against the RC tag (re-running this workflow would cut a new RC):"
-            echo '```'
-            for wf in build-backend.yml build-frontend.yml build-gateway.yml; do
-              echo "gh workflow run $wf -R $GITHUB_REPOSITORY --ref $RC_TAG -f docker_image_tag=$RC_TAG -f docker_image_tag_version=$RC_TAG -f docker_image_tag_env=qa"
-            done
-            echo "gh workflow run e2e-tests-on-commit.yml -R $GITHUB_REPOSITORY --ref $RC_TAG"
-            echo '```'
-            echo "Note: re-dispatching the backend re-deploys the same version to the Maven repository; if the repository rejects re-deployment, cut the next RC instead."
-          } >> "$GITHUB_STEP_SUMMARY"
+  build:
+    needs: cut-rc
+    if: ${{ !inputs.dry_run }}
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/build-all.yml
+    with:
+      ref: ${{ needs.cut-rc.outputs.rc_tag }}
+      docker_image_tag: ${{ needs.cut-rc.outputs.rc_tag }}
+      docker_image_tag_version: ${{ needs.cut-rc.outputs.rc_tag }}
+      docker_image_tag_env: qa
+    secrets:
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+      MAVEN_REPO_USERNAME: ${{ secrets.MAVEN_REPO_USERNAME }}
+      MAVEN_REPO_API_KEY: ${{ secrets.MAVEN_REPO_API_KEY }}
+
+  deploy-test3:
+    needs: build
+    if: ${{ !inputs.dry_run }}
+    uses: ./.github/workflows/deploy-test3.yml
+    with:
+      reset: false
+    secrets: inherit
