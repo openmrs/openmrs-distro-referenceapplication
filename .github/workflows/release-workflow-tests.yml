@@ -36,7 +36,7 @@ jobs:
       # names, expression contexts) that the run-block suite cannot exercise.
       # shellcheck is disabled: the run-block lint noise is out of scope here.
       - name: Lint workflows
-        uses: docker://rhysd/actionlint@sha256:33ffa3f1ad576165ea9c26f726884defdc411fb1fcb9ccc6a117b2f554ba1723 # 1.7.12
+        uses: docker://rhysd/actionlint:1.7.12
         with:
           args: -shellcheck=
 
