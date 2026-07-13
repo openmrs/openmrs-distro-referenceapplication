@@ -17,15 +17,17 @@ on:
     # 1 AM UTC = 4 AM EAT = 6:30 AM IST on Monday
     - cron: '0 1 * * 1'
 
-concurrency:
-  group: deploy-test3
-  cancel-in-progress: false
-
 permissions: {}
 
 jobs:
   deploy:
     name: Deploy QA images to test3
+    # Job-level (not workflow-level) so serialization holds when this workflow
+    # is invoked via workflow_call — a called workflow's own top-level
+    # concurrency does not attach to the caller's run.
+    concurrency:
+      group: deploy-test3
+      cancel-in-progress: false
     if: github.repository == 'openmrs/openmrs-distro-referenceapplication'
     runs-on: ubuntu-latest
     timeout-minutes: 30
