@@ -313,6 +313,7 @@ jobs:
   deploy-test3:
     needs: build
     if: ${{ !inputs.dry_run }}
+    permissions: {}
     uses: ./.github/workflows/deploy-test3.yml
     with:
       reset: false

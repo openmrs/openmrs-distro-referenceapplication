@@ -1,13 +1,13 @@
 # Release & Deploy Runbook
 
 All jobs run under **Actions → Run workflow** (`workflow_dispatch`) unless noted. Every job is
-gated to the `openmrs` org and requires the `DEPLOY_SSH_KEY` / `SERVER_HOST` secrets to be set.
+gated to the `openmrs` org and requires the `DEPLOY_SSH_KEY` secret to be set.
 
 ## Environments
 
 | Env   | Host              | Images tag | How it deploys                                              |
 |-------|-------------------|------------|------------------------------------------------------------|
-| dev3  | dev3.openmrs.org  | `dev`      | Auto on every successful `main` image build; also manual. Also deploys sec3. |
+| dev3  | dev3.openmrs.org  | `dev3`     | Auto on every successful `main` image build; also manual. Also deploys sec3. |
 | test3 | test3.openmrs.org | `qa`       | By *Cut QA Release Candidate*; also manual; weekly reset (Mon 01:00 UTC). |
 | o3    | o3.openmrs.org    | `demo`     | By *Promote QA to Prod*; also manual; nightly reset (01:00 UTC). |
 
@@ -58,6 +58,6 @@ Follow-up:
 
 All take a single `reset` boolean (default `false`); `reset: true` destroys volumes (full wipe).
 
-- **Deploy to Dev3** (`deploy-dev3.yml`) — deploys current `dev` images to dev3 + sec3.
+- **Deploy to Dev3** (`deploy-dev3.yml`) — deploys current `dev3` images to dev3 + sec3.
 - **Deploy QA to test3** (`deploy-test3.yml`) — deploys current `qa` images to test3.
 - **Deploy to O3** (`deploy-o3.yml`) — deploys current `demo` images to o3.

@@ -317,6 +317,7 @@ jobs:
   deploy-o3:
     needs: build
     if: ${{ !inputs.dry_run }}
+    permissions: {}
     uses: ./.github/workflows/deploy-o3.yml
     with:
       reset: false
