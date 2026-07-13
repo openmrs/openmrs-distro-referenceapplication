@@ -6,7 +6,7 @@ get_repository_tag() {
   local repo_name="$2"
   local app="$3"
 
-  local version=$(awk -F'"' -v app="${app}" '$0 ~ app {print $4}' "${file}")
+  local version=$(jq -r --arg app "${app}" '.frontendModules[$app]' "${file}")
   local ref="refs/tags/v$version"
 
   # Check if the version number contains "pre" and modify the ref to main branch
