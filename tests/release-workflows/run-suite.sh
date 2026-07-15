@@ -213,18 +213,29 @@ export CORE=""
 out=$(bash "$STEPS/release-qa--pin-frontend-versions.sh" 2>&1); rc=$?
 [ $rc -ne 0 ] && echo "$out" | grep -q "pass core_version" && ok "X unpinned-shell refusal" || bad "X: rc=$rc $out"
 
-echo "=== XI: qa refuses a -SNAPSHOT module version (guard runs after versions:set) ==="
-# Mirror the workflow order: versions:set first, so distro/pom.xml's own project
-# version is already concrete and only a module dependency can trip the guard.
+echo "=== XI: -SNAPSHOT module-version guard ==="
+# The guard scans distro/pom.xml as text, so exercise its exact discrimination on
+# controlled inputs rather than the ambient pom (which legitimately carries a
+# -SNAPSHOT content dep between releases). Three cases isolate what matters:
+# a clean release pom passes, an immutable timestamp-locked version is allowed
+# (the reason this matches literal -SNAPSHOT, not Maven's broader isSnapshot),
+# and a mutable -SNAPSHOT is refused. That the project version itself is made
+# concrete (by versions:set) before this step runs is covered by test I.
 clone w9
-export NEW="$TV-rc.1"
-bash "$STEPS/release-qa--set-project-versions.sh" >/dev/null || bad "XI set-versions errored"
-bash "$STEPS/release-qa--refuse-snapshot-module-versions.sh" && ok "XI guard clean on concrete versions" || bad "XI guard tripped on a clean pom"
-# Seed a plain -SNAPSHOT module version; timestamp-locked forms stay allowed.
-sed -i -E 's|<fhir2.version>([^<]+)</fhir2.version>|<fhir2.version>\1-SNAPSHOT</fhir2.version>|' distro/pom.xml
-grep -q -- "-SNAPSHOT</fhir2.version>" distro/pom.xml || bad "XI precondition: seed edit failed (fhir2.version property moved?)"
+xi_pom() { printf '%s\n' \
+  '<project><modelVersion>4.0.0</modelVersion><version>3.7.99</version>' \
+  "  <properties><fhir2.version>$1</fhir2.version></properties>" \
+  '</project>' > distro/pom.xml; }
+
+xi_pom "4.2.0"
+bash "$STEPS/release-qa--refuse-snapshot-module-versions.sh" && ok "XI clean release pom passes" || bad "XI tripped on a clean pom"
+
+xi_pom "4.2.0-20240115.123456-3"
+bash "$STEPS/release-qa--refuse-snapshot-module-versions.sh" && ok "XI timestamp-locked version allowed" || bad "XI wrongly tripped on a timestamp-locked version"
+
+xi_pom "4.2.0-SNAPSHOT"
 out=$(bash "$STEPS/release-qa--refuse-snapshot-module-versions.sh" 2>&1); rc=$?
-[ $rc -ne 0 ] && echo "$out" | grep -q "SNAPSHOT module versions" && ok "XI guard trips on -SNAPSHOT module version" || bad "XI: rc=$rc $out"
+[ $rc -ne 0 ] && echo "$out" | grep -q "SNAPSHOT module versions" && ok "XI -SNAPSHOT module version refused" || bad "XI: rc=$rc $out"
 
 echo ""
 echo "Not covered here (needs live Maven repo / Docker Hub / GitHub Actions):"
