@@ -150,6 +150,17 @@ jobs:
           done
           git diff --stat
 
+      - name: Refuse SNAPSHOT module versions
+        # A release must not pin any module to a -SNAPSHOT: those are mutable
+        # and would let the shipped bits drift from what QA tested. (Timestamp-
+        # locked snapshots are immutable and therefore allowed.)
+        run: |
+          set -euo pipefail
+          if grep -nE -e '-SNAPSHOT<' distro/pom.xml; then
+            echo "::error::distro/pom.xml references SNAPSHOT module versions (shown above) — release those modules and pin concrete versions before cutting a release."
+            exit 1
+          fi
+
       - name: Create release commit and tag
         env:
           RC_TAG: ${{ steps.setup.outputs.rc_tag }}

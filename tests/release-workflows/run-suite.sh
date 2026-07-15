@@ -2,7 +2,8 @@
 # Executes the ACTUAL `run:` blocks of release-qa.yml and release-prod.yml
 # against an isolated local clone of this repo, covering the release state
 # machine end to end: initial RC cut, rc.2 update, resume after every partial
-# failure, promote (fresh + both resume states), and the input/branch guards.
+# failure, promote (fresh + both resume states), the input/branch guards, and
+# the -SNAPSHOT module-version guard.
 #
 # Runs on Linux or macOS. Needs git, python3+PyYAML, Maven+JDK, and GNU
 # sed/sort (on macOS: brew install gnu-sed coreutils). Everything happens in a
@@ -211,6 +212,19 @@ grep -q "^ARG APP_SHELL_VERSION=next$" frontend/Dockerfile || bad "X preconditio
 export CORE=""
 out=$(bash "$STEPS/release-qa--pin-frontend-versions.sh" 2>&1); rc=$?
 [ $rc -ne 0 ] && echo "$out" | grep -q "pass core_version" && ok "X unpinned-shell refusal" || bad "X: rc=$rc $out"
+
+echo "=== XI: qa refuses a -SNAPSHOT module version (guard runs after versions:set) ==="
+# Mirror the workflow order: versions:set first, so distro/pom.xml's own project
+# version is already concrete and only a module dependency can trip the guard.
+clone w9
+export NEW="$TV-rc.1"
+bash "$STEPS/release-qa--set-project-versions.sh" >/dev/null || bad "XI set-versions errored"
+bash "$STEPS/release-qa--refuse-snapshot-module-versions.sh" && ok "XI guard clean on concrete versions" || bad "XI guard tripped on a clean pom"
+# Seed a plain -SNAPSHOT module version; timestamp-locked forms stay allowed.
+sed -i -E 's|<fhir2.version>([^<]+)</fhir2.version>|<fhir2.version>\1-SNAPSHOT</fhir2.version>|' distro/pom.xml
+grep -q -- "-SNAPSHOT</fhir2.version>" distro/pom.xml || bad "XI precondition: seed edit failed (fhir2.version property moved?)"
+out=$(bash "$STEPS/release-qa--refuse-snapshot-module-versions.sh" 2>&1); rc=$?
+[ $rc -ne 0 ] && echo "$out" | grep -q "SNAPSHOT module versions" && ok "XI guard trips on -SNAPSHOT module version" || bad "XI: rc=$rc $out"
 
 echo ""
 echo "Not covered here (needs live Maven repo / Docker Hub / GitHub Actions):"
