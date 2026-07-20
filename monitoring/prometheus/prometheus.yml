@@ -36,3 +36,18 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: blackbox:9115
+
+  - job_name: 'blackbox-tcp-db'
+    metrics_path: /probe
+    params:
+      module: [ tcp_connect ]
+    static_configs:
+      - targets:
+          - "db:3306"
+    relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115

@@ -1,24 +1,24 @@
 {
-  "title": "Backend Resources",
-  "uid": "openmrs-backend",
+  "title": "Database Resources",
+  "uid": "openmrs-db",
   "schemaVersion": 39,
   "version": 1,
   "time": { "from": "now-1h", "to": "now" },
   "refresh": "30s",
-  "tags": ["container"],
+  "tags": ["container", "database"],
   "panels": [
     {
       "id": 1,
       "type": "timeseries",
       "title": "CPU Usage",
-      "description": "CPU consumed by the backend container, as a percentage of a single core (100% = one full core; can exceed 100% on multi-core hosts). Watch for sustained highs or a rising baseline. If it sits near the host's core limit during normal use, allocate more CPU or scale out; brief spikes during startup or batch jobs are usually fine. Correlate spikes with slow requests or high load.",
+      "description": "CPU consumed by the MariaDB container, as a percentage of a single core (100% = one full core; can exceed 100% on multi-core hosts). Sustained highs usually mean expensive or unindexed queries, heavy write load, or lock contention. Correlate spikes with slow requests on the backend; if it sits near the host's core limit during normal use, tune queries/indexes or allocate more CPU. Brief spikes during migrations or batch jobs are usually fine.",
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{name=\"backend\",cpu=\"total\"}[5m])) * 100",
+          "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{name=\"db\",cpu=\"total\"}[5m])) * 100",
           "legendFormat": "CPU %"
         }
       ],
@@ -39,26 +39,26 @@
       "id": 2,
       "type": "timeseries",
       "title": "Memory",
-      "description": "Backend container memory over time. Working Set = active memory that cannot be reclaimed under pressure (this is what counts toward OOM limits); RSS = anonymous (non-file-backed) memory; Cache = reclaimable page cache. A steadily climbing Working Set that never drops back may indicate a memory leak — investigate or schedule restarts and consider raising the memory limit. Working Set approaching the container limit risks an OOM kill (see the OOM Events panel).",
+      "description": "MariaDB container memory over time. Working Set = active memory that cannot be reclaimed under pressure (this is what counts toward OOM limits); RSS = anonymous (non-file-backed) memory; Cache = reclaimable page cache. For a database the Working Set is dominated by the InnoDB buffer pool and connection buffers and is expected to plateau near a configured ceiling — a plateau is healthy, a Working Set that climbs without bound may indicate misconfigured buffers or a connection leak. Working Set approaching the container limit risks an OOM kill (see the OOM Events panel).",
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (container_memory_working_set_bytes{name=\"backend\"})",
+          "expr": "sum by (name) (container_memory_working_set_bytes{name=\"db\"})",
           "legendFormat": "Working Set"
         },
         {
           "refId": "B",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (container_memory_rss{name=\"backend\"})",
+          "expr": "sum by (name) (container_memory_rss{name=\"db\"})",
           "legendFormat": "RSS"
         },
         {
           "refId": "C",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (container_memory_cache{name=\"backend\"})",
+          "expr": "sum by (name) (container_memory_cache{name=\"db\"})",
           "legendFormat": "Cache"
         }
       ],
@@ -79,20 +79,20 @@
       "id": 3,
       "type": "timeseries",
       "title": "Network I/O",
-      "description": "Rate of network traffic in/out of the backend container (bytes/sec). Receive is inbound traffic (client requests, DB responses); Transmit is outbound (responses, DB queries). Use this to understand traffic patterns and spot anomalies — an unexpected sustained spike may signal a traffic surge, a runaway client, or bulk data transfer. Flat-zero when the service should be busy can indicate a connectivity or upstream problem.",
+      "description": "Rate of network traffic in/out of the MariaDB container (bytes/sec). Receive is inbound (queries and writes from the backend); Transmit is outbound (result sets returned). Use this to understand query/result patterns and spot anomalies — a sustained transmit spike may signal an unbounded query returning large result sets; flat-zero when the app should be active can indicate the backend lost its DB connection.",
       "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (rate(container_network_receive_bytes_total{name=\"backend\"}[5m]))",
+          "expr": "sum by (name) (rate(container_network_receive_bytes_total{name=\"db\"}[5m]))",
           "legendFormat": "⬇ Receive"
         },
         {
           "refId": "B",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (rate(container_network_transmit_bytes_total{name=\"backend\"}[5m]))",
+          "expr": "sum by (name) (rate(container_network_transmit_bytes_total{name=\"db\"}[5m]))",
           "legendFormat": "⬆ Transmit"
         }
       ],
@@ -113,20 +113,20 @@
       "id": 4,
       "type": "timeseries",
       "title": "Disk I/O",
-      "description": "Rate of bytes read from / written to disk by the backend container (bytes/sec). Decisions: sustained high I/O can bottleneck request latency — correlate with CPU and slow responses. Heavy writes may come from logging or file storage; heavy reads may indicate cache misses or large file access. Persistent saturation suggests moving to faster storage or reducing disk-bound work.",
+      "description": "Rate of bytes read from / written to disk by the MariaDB container (bytes/sec). This is often the most important panel for a database. Sustained reads suggest the working set does not fit in the InnoDB buffer pool (cache misses hitting disk) — consider raising innodb_buffer_pool_size or adding memory. Sustained writes come from commits, the redo log, and flushing; persistent write saturation bottlenecks query latency and points to faster storage or write-reduction. Correlate with CPU and backend request latency.",
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (rate(container_fs_reads_bytes_total{name=\"backend\"}[5m]))",
+          "expr": "sum by (name) (rate(container_fs_reads_bytes_total{name=\"db\"}[5m]))",
           "legendFormat": "Read"
         },
         {
           "refId": "B",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (rate(container_fs_writes_bytes_total{name=\"backend\"}[5m]))",
+          "expr": "sum by (name) (rate(container_fs_writes_bytes_total{name=\"db\"}[5m]))",
           "legendFormat": "Write"
         }
       ],
@@ -147,14 +147,14 @@
       "id": 5,
       "type": "stat",
       "title": "Uptime",
-      "description": "Time since the backend container last started. Red for the first minute, yellow up to 5 minutes, green after — reflecting that the app needs time to fully boot. An unexpectedly low value means the container recently restarted or crashed — check the OOM Events panel and container logs to find why. A frequently-resetting uptime signals a crash loop.",
+      "description": "Time since the MariaDB container last started. Red for the first minute, yellow up to 5 minutes, green after. An unexpectedly low value means the database recently restarted or crashed — every restart drops all connections and clears in-memory caches (cold buffer pool), so expect a temporary spike in disk reads afterward. Check the OOM Events panel and container logs to find why; a frequently-resetting uptime signals a crash loop.",
       "gridPos": { "h": 4, "w": 8, "x": 0, "y": 16 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "time() - max by (name) (container_start_time_seconds{name=\"backend\"})",
+          "expr": "time() - max by (name) (container_start_time_seconds{name=\"db\"})",
           "legendFormat": ""
         }
       ],
@@ -185,14 +185,14 @@
       "id": 6,
       "type": "stat",
       "title": "Memory (Working Set)",
-      "description": "Current active (non-reclaimable) memory used by the backend — the value that counts against the container's memory limit. Green below 1 GB, yellow above 1 GB, red above 2 GB. If it stays red near the container limit, raise the limit or investigate a leak (see the Memory timeseries for the trend). Values close to the limit make an OOM kill likely.",
+      "description": "Current active (non-reclaimable) memory used by MariaDB — the value that counts against the container's memory limit, dominated by the InnoDB buffer pool. Green below 1 GB, yellow above 1 GB, red above 2 GB. Adjust these thresholds to your configured buffer pool size and container limit. If it stays red near the container limit, raise the limit or lower innodb_buffer_pool_size; values close to the limit make an OOM kill likely.",
       "gridPos": { "h": 4, "w": 8, "x": 8, "y": 16 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (container_memory_working_set_bytes{name=\"backend\"})",
+          "expr": "sum by (name) (container_memory_working_set_bytes{name=\"db\"})",
           "legendFormat": ""
         }
       ],
@@ -223,14 +223,14 @@
       "id": 7,
       "type": "stat",
       "title": "OOM Events (24 h)",
-      "description": "Count of out-of-memory kills in the last 24 hours. Green at 0, red at 1 or more. Any value > 0 means the kernel killed the container for exceeding its memory limit. If > 0, raise the container memory limit and/or investigate a memory leak (see the Memory panels), and check Uptime for the resulting restart. Recurring OOM kills point to an under-provisioned limit or a genuine leak that needs a code fix.",
+      "description": "Count of out-of-memory kills in the last 24 hours. Green at 0, red at 1 or more. Any value > 0 means the kernel killed the database for exceeding its memory limit — a hard event that drops all connections and can interrupt in-flight transactions. If > 0, raise the container memory limit and/or lower innodb_buffer_pool_size and per-connection buffers, and check Uptime for the resulting restart. Recurring OOM kills point to an under-provisioned limit or over-configured buffers.",
       "gridPos": { "h": 4, "w": 8, "x": 16, "y": 16 },
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "targets": [
         {
           "refId": "A",
           "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum by (name) (increase(container_oom_events_total{name=\"backend\"}[24h]))",
+          "expr": "sum by (name) (increase(container_oom_events_total{name=\"db\"}[24h]))",
           "legendFormat": ""
         }
       ],
