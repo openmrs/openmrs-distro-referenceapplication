@@ -20,28 +20,53 @@ on:
         description: 'Docker image environment tag (e.g., dev3)'
         required: false
         default: 'dev3'
+  workflow_call:
+    inputs:
+      docker_image_tag:
+        required: false
+        type: string
+        default: 'nightly'
+      docker_image_tag_version:
+        required: false
+        type: string
+        default: '3.7.x'
+      docker_image_tag_env:
+        required: false
+        type: string
+        default: 'dev3'
+      ref:
+        required: false
+        type: string
+        default: ''
+    secrets:
+      DOCKER_HUB_USERNAME:
+        required: true
+      DOCKER_HUB_TOKEN:
+        required: true
 
 env:
   IMAGE: openmrs/openmrs-reference-application-3-gateway
-  DOCKER_IMAGE_TAG: ${{ github.event.inputs.docker_image_tag || 'nightly' }}
-  DOCKER_IMAGE_TAG_VERSION: ${{ github.event.inputs.docker_image_tag_version || '3.7.x' }}
-  DOCKER_IMAGE_TAG_ENV: ${{ github.event.inputs.docker_image_tag_env || 'dev3' }}
+  DOCKER_IMAGE_TAG: ${{ inputs.docker_image_tag || 'nightly' }}
+  DOCKER_IMAGE_TAG_VERSION: ${{ inputs.docker_image_tag_version || '3.7.x' }}
+  DOCKER_IMAGE_TAG_ENV: ${{ inputs.docker_image_tag_env || 'dev3' }}
   DOCKER_IMAGE_PLATFORMS: linux/amd64,linux/arm64
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ inputs.ref || github.ref }}--gateway
   cancel-in-progress: true
 
 jobs:
   build-and-publish:
     name: Build and Publish the Gateway Image
-    if: github.repository_owner == 'openmrs'
+    if: github.repository == 'openmrs/openmrs-distro-referenceapplication'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write   # required for cosign keyless signing via OIDC
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ inputs.ref || github.sha }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0

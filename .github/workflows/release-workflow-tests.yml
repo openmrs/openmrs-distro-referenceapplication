@@ -1,15 +1,18 @@
 name: Release Workflow Tests
 
-# Executes the actual run blocks of the release workflows against an isolated
-# local clone (see tests/release-workflows/run-suite.sh) whenever they — or
-# the suite itself — change. No network, no secrets, no pushes.
+# Runs tests/release-workflows/run-suite.sh, which executes the release
+# workflows' run blocks against an isolated local clone.
 
 on:
   pull_request:
     paths:
       - '.github/workflows/release-qa.yml'
-      - '.github/workflows/release-promote.yml'
+      - '.github/workflows/release-prod.yml'
       - '.github/workflows/release-workflow-tests.yml'
+      - '.github/workflows/build-all.yml'
+      - '.github/workflows/build-*.yml'
+      - '.github/workflows/deploy-*.yml'
+      - '.github/workflows/e2e-on-release.yml'
       - 'tests/release-workflows/**'
   workflow_dispatch:
 
@@ -28,6 +31,14 @@ jobs:
           # Full history and tags: the suite derives versions from the poms
           # and uses the real 3.7.0 tag as a negative fixture.
           fetch-depth: 0
+
+      # Validates the reusable-workflow wiring (uses: targets, input/secret
+      # names, expression contexts) that the run-block suite cannot exercise.
+      # shellcheck is disabled: the run-block lint noise is out of scope here.
+      - name: Lint workflows
+        uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -shellcheck=
 
       - name: Run the suite
         run: bash tests/release-workflows/run-suite.sh

@@ -1,17 +1,32 @@
 #!/bin/bash
-# Executes the ACTUAL `run:` blocks of release-qa.yml and release-promote.yml
+# Executes the ACTUAL `run:` blocks of release-qa.yml and release-prod.yml
 # against an isolated local clone of this repo, covering the release state
 # machine end to end: initial RC cut, rc.2 update, resume after every partial
-# failure, promote (fresh + both resume states), and every guard — including
-# negative cases seeded with the real content that broke the 3.7.0 release.
+# failure, promote (fresh + both resume states), the input/branch guards, and
+# the -SNAPSHOT module-version guard.
 #
-# Runs anywhere with GNU coreutils, git, and python3+PyYAML (GitHub runners
-# and Linux both qualify; on macOS run it inside a Linux container).
-# Everything happens in a throwaway temp dir: no network, no pushes anywhere
-# except a local bare repo created for the run.
+# Runs on Linux or macOS. Needs git, python3+PyYAML, Maven+JDK, and GNU
+# sed/sort (on macOS: brew install gnu-sed coreutils). Everything happens in a
+# throwaway temp dir and pushes only to a local bare repo.
 #
 # Usage: bash tests/release-workflows/run-suite.sh [repo-root]
 set -uo pipefail
+
+# The workflow run blocks (and this suite) assume GNU sed/sort. On macOS put
+# Homebrew's GNU tools first so `sed`/`sort` behave as they do on the runners.
+if [[ "$(uname)" == "Darwin" ]] && command -v brew >/dev/null 2>&1; then
+  brew_prefix="$(brew --prefix)"
+  for pkg in gnu-sed coreutils grep; do
+    gnubin="$brew_prefix/opt/$pkg/libexec/gnubin"
+    [ -d "$gnubin" ] && PATH="$gnubin:$PATH"
+  done
+  export PATH
+fi
+if ! sed --version >/dev/null 2>&1; then
+  echo "ERROR: GNU sed is required (the workflow steps use 'sed -i')." >&2
+  echo "On macOS: brew install gnu-sed coreutils" >&2
+  exit 1
+fi
 
 REPO_ROOT="${1:-$(git rev-parse --show-toplevel)}"
 WORK="$(mktemp -d)"
@@ -34,11 +49,11 @@ mkdir -p "$STEPS"
 python3 - "$REPO_ROOT" "$STEPS" <<'PYEOF'
 import re, sys, yaml
 repo, steps_dir = sys.argv[1], sys.argv[2]
-for wf in ("release-qa", "release-promote"):
+for wf in ("release-qa", "release-prod"):
     with open(f"{repo}/.github/workflows/{wf}.yml") as f:
         doc = yaml.safe_load(f)
     for job in doc["jobs"].values():
-        for i, step in enumerate(job["steps"]):
+        for i, step in enumerate(job.get("steps") or []):
             if "run" not in step:
                 continue
             name = re.sub(r"[^A-Za-z0-9]+", "-", step.get("name", f"step{i}")).lower()
@@ -89,7 +104,6 @@ bash "$STEPS/release-qa--determine-release-mode-and-rc-number.sh" || bad "I setu
 bash "$STEPS/release-qa--pin-frontend-versions.sh" && ok "I pin ran" || bad "I pin errored"
 export OLD="$(outv old_version)" NEW="$(outv rc_tag)"
 bash "$STEPS/release-qa--set-project-versions.sh" >/dev/null && ok "I set-versions ran" || bad "I set-versions errored"
-bash "$STEPS/release-qa--refuse-snapshot-or-timestamp-locked-module-versions.sh" && ok "I snapshot guard clean" || bad "I snapshot guard tripped"
 export RC_TAG="$(outv rc_tag)"
 bash "$STEPS/release-qa--create-release-commit-and-tag.sh" >/dev/null && ok "I commit+tag ran" || bad "I commit+tag errored"
 n=$(git show --stat --format= HEAD | grep -c '|')
@@ -117,29 +131,28 @@ echo "=== III: promote fresh path (docker pin simulated) ==="
 clone w3
 : > "$GITHUB_OUTPUT"
 export V="$TV"
-bash "$STEPS/release-promote--validate-inputs.sh" && ok "III validate" || bad "III validate"
-bash "$STEPS/release-promote--check-out-release-branch-and-locate-the-qa-approved-rc.sh" || bad "III setup errored"
+bash "$STEPS/release-prod--validate-inputs.sh" && ok "III validate" || bad "III validate"
+bash "$STEPS/release-prod--check-out-release-branch-and-locate-the-qa-approved-rc.sh" || bad "III setup errored"
 [ "$(outv rc_tag)" = "$TV-rc.1" ] && [ "$(outv core)" = "10.0.0" ] && [ "$(outv resume)" = "false" ] \
   && ok "III setup: rc located, resume=false" || bad "III outputs: $(cat "$GITHUB_OUTPUT")"
-# stand-in for the docker-based manifest pin step (needs Docker Hub):
+# stand-in for the Maven-artifact manifest pin step (needs the Maven repo):
 sed -i 's/"latest"/"1.0.0"/g' frontend/spa-assemble-config.json
 export OLD="$(outv rc_tag)" NEW="$V"
-bash "$STEPS/release-promote--set-project-versions.sh" && ok "III set final versions" || bad "III set-versions"
-bash "$STEPS/release-promote--refuse-snapshot-or-timestamp-locked-module-versions.sh" && ok "III snapshot guard clean" || bad "III guard tripped"
+bash "$STEPS/release-prod--set-project-versions.sh" && ok "III set final versions" || bad "III set-versions"
 export RESUME="$(outv resume)"
-bash "$STEPS/release-promote--create-release-commit-and-tag.sh" >/dev/null && ok "III final commit+tag" || bad "III commit errored"
+bash "$STEPS/release-prod--create-release-commit-and-tag.sh" >/dev/null && ok "III final commit+tag" || bad "III commit errored"
 git push -q origin "releases/$V"   # simulate: branch pushed, tag push failed
 
 echo "=== IV: promote resume (final commit pushed, tag lost) ==="
 clone w4
 : > "$GITHUB_OUTPUT"
 export V="$TV"
-out=$(bash "$STEPS/release-promote--check-out-release-branch-and-locate-the-qa-approved-rc.sh")
+out=$(bash "$STEPS/release-prod--check-out-release-branch-and-locate-the-qa-approved-rc.sh")
 echo "$out" | grep -q "Resuming a previous partial promote" && ok "IV resume detected" || bad "IV resume not detected"
 [ "$(outv resume)" = "true" ] && ok "IV resume=true output" || bad "IV outputs: $(cat "$GITHUB_OUTPUT")"
 C_FINAL=$(git rev-parse HEAD)
 export RESUME=true
-out=$(bash "$STEPS/release-promote--create-release-commit-and-tag.sh")
+out=$(bash "$STEPS/release-prod--create-release-commit-and-tag.sh")
 echo "$out" | grep -q "Using the final commit already on the branch" && ok "IV no duplicate final commit" || bad "IV commit step: $out"
 [ "$(git rev-parse "$V^{commit}")" = "$C_FINAL" ] && [ "$(git rev-parse HEAD)" = "$C_FINAL" ] && ok "IV tag at existing final commit" || bad "IV tag wrong"
 
@@ -147,7 +160,7 @@ echo "=== V: promote refuses foreign commits past the rc ==="
 git tag -d "$V" >/dev/null
 echo junk >> README.md && git add -A && git commit -qm "someone's commit"
 : > "$GITHUB_OUTPUT"
-out=$(bash "$STEPS/release-promote--check-out-release-branch-and-locate-the-qa-approved-rc.sh" 2>&1); rc=$?
+out=$(bash "$STEPS/release-prod--check-out-release-branch-and-locate-the-qa-approved-rc.sh" 2>&1); rc=$?
 [ $rc -ne 0 ] && echo "$out" | grep -q "commits after" && ok "V moved-past-rc refused" || bad "V: rc=$rc $out"
 
 echo "=== VI: promote resume after tag pushed but dispatch failed ==="
@@ -156,14 +169,14 @@ git tag "$V" && git push -q origin "refs/tags/$V"
 clone w5
 : > "$GITHUB_OUTPUT"
 export V="$TV"
-out=$(bash "$STEPS/release-promote--check-out-release-branch-and-locate-the-qa-approved-rc.sh")
+out=$(bash "$STEPS/release-prod--check-out-release-branch-and-locate-the-qa-approved-rc.sh")
 echo "$out" | grep -q "resuming to re-dispatch" && ok "VI tag-exists resume detected" || bad "VI: $out"
 [ "$(outv resume)" = "true" ] && ok "VI resume=true" || bad "VI outputs: $(cat "$GITHUB_OUTPUT")"
 C_FINAL=$(git rev-parse HEAD)
 export RESUME=true
-bash "$STEPS/release-promote--create-release-commit-and-tag.sh" >/dev/null && ok "VI commit step tolerates existing tag" || bad "VI commit step errored"
+bash "$STEPS/release-prod--create-release-commit-and-tag.sh" >/dev/null && ok "VI commit step tolerates existing tag" || bad "VI commit step errored"
 [ "$(git rev-parse HEAD)" = "$C_FINAL" ] && [ "$(git rev-parse "$V^{commit}")" = "$C_FINAL" ] && ok "VI no new commit, tag unchanged" || bad "VI state changed"
-bash "$STEPS/release-promote--push-release-branch-and-tag.sh" >/dev/null 2>&1 && ok "VI push idempotent with existing remote tag" || bad "VI push errored"
+bash "$STEPS/release-prod--push-release-branch-and-tag.sh" >/dev/null 2>&1 && ok "VI push idempotent with existing remote tag" || bad "VI push errored"
 
 echo "=== VII: promote refuses a hand-finalized commit with unpinned frontend ==="
 clone w6
@@ -179,7 +192,7 @@ git add -A && git commit -qm "manually finalize $TV2" && git push -q origin "rel
 clone w7
 : > "$GITHUB_OUTPUT"
 export V="$TV2"
-out=$(bash "$STEPS/release-promote--check-out-release-branch-and-locate-the-qa-approved-rc.sh" 2>&1); rc=$?
+out=$(bash "$STEPS/release-prod--check-out-release-branch-and-locate-the-qa-approved-rc.sh" 2>&1); rc=$?
 [ $rc -ne 0 ] && echo "$out" | grep -q "not exact-pinned" && ok "VII refused unpinned hand-finalized commit" || bad "VII: rc=$rc $out"
 
 echo "=== VIII: qa refuses an already-released version ==="
@@ -198,24 +211,36 @@ git checkout -q main 2>/dev/null || git checkout -q -b main origin/main
 grep -q "^ARG APP_SHELL_VERSION=next$" frontend/Dockerfile || bad "X precondition: tree unexpectedly pinned"
 export CORE=""
 out=$(bash "$STEPS/release-qa--pin-frontend-versions.sh" 2>&1); rc=$?
-[ $rc -ne 0 ] && echo "$out" | grep -q "not pinned on this branch" && ok "X unpinned-shell refusal" || bad "X: rc=$rc $out"
+[ $rc -ne 0 ] && echo "$out" | grep -q "pass core_version" && ok "X unpinned-shell refusal" || bad "X: rc=$rc $out"
 
-echo "=== XI: snapshot guard trips on the real broken 3.7.0 pom ==="
-# 3.7.0 shipped timestamp-locked snapshots of two modules; the guard exists
-# because of exactly that content, so it is the canonical negative fixture.
-git checkout -q .
-git checkout -q 3.7.0 -- distro/pom.xml
-out=$(bash "$STEPS/release-qa--refuse-snapshot-or-timestamp-locked-module-versions.sh" 2>&1); rc=$?
-[ $rc -ne 0 ] && echo "$out" | grep -q "locked snapshots is what broke 3.7.0" && ok "XI guard trips on real 3.7.0 snapshot versions" || bad "XI: rc=$rc $out"
-git checkout -q HEAD -- distro/pom.xml
+echo "=== XI: -SNAPSHOT module-version guard ==="
+# The guard scans distro/pom.xml as text, so exercise its exact discrimination on
+# controlled inputs rather than the ambient pom (which legitimately carries a
+# -SNAPSHOT content dep between releases). Three cases isolate what matters:
+# a clean release pom passes, an immutable timestamp-locked version is allowed
+# (the reason this matches literal -SNAPSHOT, not Maven's broader isSnapshot),
+# and a mutable -SNAPSHOT is refused. That the project version itself is made
+# concrete (by versions:set) before this step runs is covered by test I.
+clone w9
+xi_pom() { printf '%s\n' \
+  '<project><modelVersion>4.0.0</modelVersion><version>3.7.99</version>' \
+  "  <properties><fhir2.version>$1</fhir2.version></properties>" \
+  '</project>' > distro/pom.xml; }
 
-echo "=== XII: snapshot guard trips on a plain -SNAPSHOT module version ==="
-sed -i -E 's|<fhir2.version>([^<]+)</fhir2.version>|<fhir2.version>\1-SNAPSHOT</fhir2.version>|' distro/pom.xml
-grep -q -- "-SNAPSHOT</fhir2.version>" distro/pom.xml || bad "XII precondition: seed edit failed (fhir2.version property moved?)"
-out=$(bash "$STEPS/release-qa--refuse-snapshot-or-timestamp-locked-module-versions.sh" 2>&1); rc=$?
-[ $rc -ne 0 ] && echo "$out" | grep -q "locked snapshots is what broke 3.7.0" && ok "XII guard trips on -SNAPSHOT module version" || bad "XII: rc=$rc $out"
-git checkout -q HEAD -- distro/pom.xml
+xi_pom "4.2.0"
+bash "$STEPS/release-qa--refuse-snapshot-module-versions.sh" && ok "XI clean release pom passes" || bad "XI tripped on a clean pom"
 
+xi_pom "4.2.0-20240115.123456-3"
+bash "$STEPS/release-qa--refuse-snapshot-module-versions.sh" && ok "XI timestamp-locked version allowed" || bad "XI wrongly tripped on a timestamp-locked version"
+
+xi_pom "4.2.0-SNAPSHOT"
+out=$(bash "$STEPS/release-qa--refuse-snapshot-module-versions.sh" 2>&1); rc=$?
+[ $rc -ne 0 ] && echo "$out" | grep -q "SNAPSHOT module versions" && ok "XI -SNAPSHOT module version refused" || bad "XI: rc=$rc $out"
+
+echo ""
+echo "Not covered here (needs live Maven repo / Docker Hub / GitHub Actions):"
+echo "  - the real frontend pin (mvn unpack of distro-emr-frontend:<rc>:zip); stubbed above"
+echo "  - the reusable build-all / deploy-* wiring (no run: blocks to extract)"
 echo ""
 echo "=== RESULT: $PASS passed, $FAIL failed ==="
 exit $FAIL
