@@ -1,10 +1,6 @@
 global:
   scrape_interval: 15s
 
-# Alerting is handled by Grafana-managed alert rules
-# (see monitoring/grafana/alerting/rules.yaml). Prometheus is a pure
-# scrape/storage backend here and does not evaluate rules itself.
-
 scrape_configs:
   - job_name: 'cadvisor'
     static_configs:
