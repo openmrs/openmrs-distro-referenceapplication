@@ -16,7 +16,6 @@ services:
             - loki-data:/loki/data
             - loki-config:/etc/loki
             - prometheus-config:/etc/prometheus
-            - alertmanager-config:/etc/alertmanager
             - alloy-config:/etc/alloy
             - blackbox-config:/config
             - grafana-provisioning:/etc/grafana/provisioning
@@ -48,21 +47,6 @@ services:
         volumes:
             - prometheus-config:/etc/prometheus
             - prometheus_data:/prometheus
-        depends_on:
-            monitoring-init:
-                condition: service_completed_successfully
-            alertmanager:
-                condition: service_started
-
-    alertmanager:
-        image: prom/alertmanager:v0.28.1
-        container_name: alertmanager
-        command:
-            - --config.file=/etc/alertmanager/alertmanager.yml
-            - --storage.path=/alertmanager
-        volumes:
-            - alertmanager-config:/etc/alertmanager
-            - alertmanager-data:/alertmanager
         depends_on:
             monitoring-init:
                 condition: service_completed_successfully
@@ -126,8 +110,6 @@ volumes:
     grafana-data:
     prometheus_data:
     prometheus-config:
-    alertmanager-config:
-    alertmanager-data:
     blackbox-config:
     loki-data:
     loki-config:

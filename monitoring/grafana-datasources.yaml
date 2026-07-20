@@ -19,10 +19,11 @@ datasources:
 
   - name: Prometheus
     type: prometheus
+    # Stable uid referenced by the Grafana-managed alert rules
+    # (monitoring/grafana/alerting/rules.yaml)
+    uid: prometheus
     access: proxy
     url: http://prometheus:9090
     jsonData:
       httpMethod: POST
       prometheusType: Prometheus
-      # Surface Prometheus-managed alert/recording rules in Grafana's Alerting UI
-      manageAlerts: true

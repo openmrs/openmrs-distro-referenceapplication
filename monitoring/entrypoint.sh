@@ -22,18 +22,16 @@ mkdir -p /etc/grafana/provisioning/dashboards/json
 cp /monitoring/grafana-dashboards.yaml /etc/grafana/provisioning/dashboards/dashboards.yaml
 # Clear stale dashboards so ones removed from source don't linger in the volume
 rm -f /etc/grafana/provisioning/dashboards/json/*.json
-cp /monitoring/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
+cp /monitoring/grafana/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
+
+echo "Copying Grafana alerting rules..."
+mkdir -p /etc/grafana/provisioning/alerting
+# Clear stale rule files so ones removed from source don't linger in the volume
+rm -f /etc/grafana/provisioning/alerting/*.yaml
+cp /monitoring/grafana/alerting/*.yaml /etc/grafana/provisioning/alerting/
 
 echo "Copying Prometheus config..."
-mkdir -p /etc/prometheus/rules
 cp /monitoring/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
-# Clear stale rule files so ones removed from source don't linger in the volume
-rm -f /etc/prometheus/rules/*.yml
-cp /monitoring/prometheus/alert.rules.yml /etc/prometheus/rules/alert.rules.yml
-
-echo "Copying Alertmanager config..."
-mkdir -p /etc/alertmanager
-cp /monitoring/alertmanager/alertmanager.yml /etc/alertmanager/alertmanager.yml
 
 echo "Copying Blackbox config..."
 mkdir -p /config
@@ -51,6 +49,6 @@ if [ ! -f "/jmx-exporter-data/${JMX_AGENT_JAR}" ]; then
   wget -q -O "/jmx-exporter-data/${JMX_AGENT_JAR}.tmp" "${JMX_AGENT_URL}"
   mv "/jmx-exporter-data/${JMX_AGENT_JAR}.tmp" "/jmx-exporter-data/${JMX_AGENT_JAR}"
 fi
-cp /monitoring/jmx_exporter/jmx_config.yml /jmx-exporter-data/jmx_config.yml
+cp /monitoring/jmx_config.yml /jmx-exporter-data/jmx_config.yml
 
 echo "Configuration initialization complete."
