@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json.openmrs.org/routes.schema.json",
+  "backendDependencies": {
+    "labtestreport": ">=1.0.0"
+  },
+  "extensions": [
+    {
+      "name": "lab-test-summary-admin-link",
+      "slot": "system-admin-page-card-link-slot",
+      "component": "labTestSummaryLink"
+    },
+    {
+      "name": "patient-encounter-summary-admin-link",
+      "slot": "system-admin-page-card-link-slot",
+      "component": "patientEncounterSummaryLink"
+    },
+    {
+      "name": "disease-summary-admin-link",
+      "slot": "system-admin-page-card-link-slot",
+      "component": "diseaseSummaryLink"
+    },
+    {
+      "name": "session-attendance-admin-link",
+      "slot": "system-admin-page-card-link-slot",
+      "component": "sessionAttendanceLink"
+    },
+    {
+      "name": "stock-ledger-admin-link",
+      "slot": "system-admin-page-card-link-slot",
+      "component": "stockLedgerLink"
+    }
+  ],
+  "pages": [
+    {
+      "component": "reportsHome",
+      "route": "labtestreport-reports"
+    },
+    {
+      "component": "labTestSummaryReport",
+      "route": "lab-test-summary-report"
+    },
+    {
+      "component": "patientEncounterSummaryReport",
+      "route": "patient-encounter-summary-report"
+    },
+    {
+      "component": "diseaseSummaryReport",
+      "route": "disease-summary-report"
+    },
+    {
+      "component": "sessionAttendanceReport",
+      "route": "session-attendance-report"
+    },
+    {
+      "component": "stockLedgerReport",
+      "route": "stock-ledger-report"
+    }
+  ]
+}

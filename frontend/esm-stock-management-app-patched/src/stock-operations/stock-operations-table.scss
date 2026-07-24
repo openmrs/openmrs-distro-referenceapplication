@@ -1,0 +1,116 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.tileContainer {
+  background-color: $ui-02;
+  border-top: 1px solid $ui-03;
+  padding: layout.$spacing-11 0;
+}
+
+.tile {
+  margin: auto;
+  width: fit-content;
+}
+
+.tileContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  @include type.type-style('heading-compact-02');
+  color: $text-02;
+  margin-bottom: layout.$spacing-03;
+}
+
+.helper {
+  @include type.type-style('body-compact-01');
+  color: $text-02;
+}
+
+.toolbarContent {
+  display: flex;
+  align-items: center;
+  height: layout.$spacing-09;
+  margin-top: layout.$spacing-05;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rowLoadingContainer {
+  text-align: center;
+  padding: layout.$spacing-11 2rem;
+  margin: auto;
+  width: 20%;
+}
+
+.statusContainer {
+  display: flex;
+  margin: 10px;
+  gap: 1rem;
+}
+
+.textHeading {
+  font-weight: bold;
+}
+
+.statusDescriptions {
+  margin-top: 4px;
+
+  .text {
+    margin-right: 4px;
+  }
+}
+
+.actionBtns {
+  display: flex;
+  flex-direction: row;
+  gap: layout.$spacing-03;
+  flex-wrap: wrap;
+  height: fit-content;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.relatedLink {
+  margin-left: layout.$spacing-02;
+  color: colors.$blue-60;
+}
+
+.relatedTransactionHeader {
+  color: colors.$green-50;
+}
+
+.toolbarMenuAction {
+  max-width: none;
+}
+
+.dataTableSkeleton {
+  margin-top: layout.$spacing-09;
+}
+
+.datePicker {
+  margin-bottom: layout.$spacing-05;
+}
+
+.arrowIcon {
+  margin: 0 layout.$spacing-02;
+}
+
+.tableHeader {
+  @include type.type-style('body-02');
+  margin: layout.$spacing-05 0;
+}

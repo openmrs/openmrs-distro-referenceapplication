@@ -1,0 +1,80 @@
+name: 'Open Release PR'
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+        default: minor
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  open-release-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          # Fetch full history so tools that read tags/changelog (if any) work
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: 💾 Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: 📦 Install dependencies if cache miss
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Run release
+        id: release
+        run: |
+          yarn version ${{ inputs.release_type }}
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Run tests on release changes
+        run: yarn verify
+
+      - name: Create PR with release changes
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          # branch name is unique per run
+          branch: "release/v${{ steps.release.outputs.version }}-${{ github.run_id }}"
+          commit-message: "chore(release): v${{ steps.release.outputs.version }}"
+          title: "(chore) Release v${{ steps.release.outputs.version }}"
+          body: |
+            This PR was created automatically via **workflow_dispatch**.
+
+            **Command ran**
+            ```
+            yarn version ${{ inputs.release_type }}
+            ```
+
+            Please review the changes (version bumps, changelog, etc.) and merge. :)
+          labels: |
+            release
+            automated-pr
+          delete-branch: true
+          author: "OpenMRS Bot <infrastructure@openmrs.org>"
+          committer: "OpenMRS Bot <infrastructure@openmrs.org>"
+          token: ${{ secrets.OMRS_BOT_GH_TOKEN || secrets.GITHUB_TOKEN }}

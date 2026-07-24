@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.openmrs.module</groupId>
+	<artifactId>labtestreport</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Lab Test Report Module</name>
+	<description>Parent project for the Lab Test Summary Report module</description>
+
+	<url>http://openmrs.org</url>
+
+	<modules>
+		<module>api</module>
+		<module>omod</module>
+	</modules>
+
+	<!-- keep in sync with distro/pom.xml's openmrs.version, legacyui.version and reporting.version -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<openMRSVersion>2.8.7</openMRSVersion>
+		<legacyuiVersion>2.1.0</legacyuiVersion>
+		<reportingVersion>2.1.0</reportingVersion>
+		<jacksonVersion>2.15.2</jacksonVersion>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.openmrs.api</groupId>
+				<artifactId>openmrs-api</artifactId>
+				<version>${openMRSVersion}</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.web</groupId>
+				<artifactId>openmrs-web</artifactId>
+				<version>${openMRSVersion}</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>legacyui-omod</artifactId>
+				<version>${legacyuiVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>reporting-api</artifactId>
+				<version>${reportingVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- pinned so our own bundled copy stays internally consistent regardless of whatever
+			     version reporting-api (or anything else) pulls in transitively -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jacksonVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jacksonVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jacksonVersion}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>11</source>
+						<target>11</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.openmrs.maven.plugins</groupId>
+					<artifactId>maven-openmrs-plugin</artifactId>
+					<version>1.0.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.3.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>https://mavenrepo.openmrs.org/public</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>https://mavenrepo.openmrs.org/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>

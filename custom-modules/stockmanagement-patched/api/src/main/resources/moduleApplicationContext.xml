@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Beans to add to the current Application context definition -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+  		    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--<context:component-scan base-package="org.openmrs.module.stockmanagement" />-->
+
+
+    <!-- Wraps StockManagementService methods in DB transactions and OpenMRS interceptors,
+    which set audit info like dateCreated, changedBy, etc.-->
+    <bean id="stockmanagement.StockManagementService"
+            class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager">
+            <ref bean="transactionManager" />
+        </property>
+        <property name="target">
+            <bean class="org.openmrs.module.stockmanagement.api.impl.StockManagementServiceImpl">
+                <property name="dao">
+                    <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.dao.StockManagementDao">
+                        <property name="sessionFactory">
+                            <ref bean="dbSessionFactory" />
+                        </property>
+                        <property name="searchSessionFactory" ref="searchSessionFactory"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+        <property name="preInterceptors">
+            <ref bean="serviceInterceptors" />
+        </property>
+        <property name="transactionAttributeSource">
+            <ref bean="transactionAttributeSource" />
+        </property>
+    </bean>
+
+    <!-- Adds StockManagementService to OpenMRS context so it can be accessed
+    calling Context.getService(StockManagementService.class) -->
+    <bean parent="serviceContext">
+        <property name="moduleService">
+            <list>
+                <value>org.openmrs.module.stockmanagement.api.StockManagementService</value>
+                <ref bean="stockmanagement.StockManagementService" />
+            </list>
+        </property>
+    </bean>
+</beans>

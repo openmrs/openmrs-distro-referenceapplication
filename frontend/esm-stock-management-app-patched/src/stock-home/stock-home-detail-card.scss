@@ -1,0 +1,205 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.container {
+  margin: layout.$spacing-07 0;
+}
+
+.emptyStateContainer,
+.loaderContainer {
+  @extend .container;
+}
+
+.tilesContainer {
+  border: 1px solid $ui-03;
+  min-height: 7.875rem;
+  width: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: layout.$spacing-04 0 layout.$spacing-04 layout.$spacing-05;
+  background-color: $ui-02;
+}
+
+.backgroundDataFetchingIndicator {
+  align-items: center;
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: center;
+}
+
+.tableContainer section {
+  position: relative;
+}
+
+.tableContainer a {
+  text-decoration: none;
+}
+
+.pagination {
+  overflow: hidden;
+
+  &:global(.cds--pagination) {
+    border-top: none;
+  }
+}
+
+.hiddenRow {
+  display: none;
+}
+
+.emptyRow {
+  padding: 0 layout.$spacing-05;
+  display: flex;
+  align-items: center;
+}
+
+.visitSummaryContainer {
+  width: 100%;
+  max-width: 768px;
+  margin: layout.$spacing-10 auto;
+}
+
+.expandedActiveVisitRow > td > div {
+  max-height: max-content !important;
+}
+
+.expandedActiveVisitRow td {
+  padding: 0 layout.$spacing-07;
+}
+
+.expandedActiveVisitRow th[colspan] td[colspan] > div:first-child {
+  padding: 0 layout.$spacing-05;
+}
+
+.action {
+  margin-bottom: layout.$spacing-03;
+}
+
+.illo {
+  margin-top: layout.$spacing-05;
+}
+
+.content {
+  @include type.type-style('heading-compact-01');
+  color: $text-02;
+  margin-top: layout.$spacing-05;
+}
+
+.desktopHeading,
+.tabletHeading {
+  text-align: left;
+  text-transform: capitalize;
+  margin-bottom: layout.$spacing-05;
+
+  h4 {
+    @include type.type-style('heading-compact-02');
+    color: $text-02;
+
+    &:after {
+      content: '';
+      display: block;
+      width: layout.$spacing-07;
+      padding-top: 3px;
+      border-bottom: 0.375rem solid;
+      @include brand-03(border-bottom-color);
+    }
+  }
+}
+
+.filterEmptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: layout.$spacing-05;
+  margin: layout.$spacing-09;
+  text-align: center;
+}
+
+.filterEmptyStateTile {
+  margin: auto;
+}
+
+.filterEmptyStateContent {
+  @include type.type-style('heading-compact-02');
+  color: $text-02;
+  margin-bottom: layout.$spacing-03;
+}
+
+.filterEmptyStateHelper {
+  @include type.type-style('body-compact-01');
+  color: $text-02;
+}
+
+.cardContainer {
+  display: flex;
+  padding: layout.$spacing-05;
+  background-color: #ffffff;
+  flex-flow: row wrap;
+  flex-grow: 1;
+  gap: layout.$spacing-05;
+  align-items: stretch;
+}
+
+.cardContainer > * {
+  flex: 1 1 0;
+  height: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  background-color: colors.$gray-10;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.icon {
+  margin-right: 23px;
+}
+
+.colorLineYellow {
+  width: 5px;
+  background-color: colors.$yellow-30;
+  margin-right: 10px;
+}
+
+.colorLineBlue {
+  width: 5px;
+  background-color: colors.$blue-60;
+  margin-right: 10px;
+}
+
+.colorLineOrange {
+  width: 5px;
+  background-color: colors.$orange-40;
+  margin-right: 10px;
+}
+
+.colorLineGreen {
+  width: 5px;
+  background-color: colors.$green-60;
+  margin-right: 10px;
+}
+
+.colorLineRed {
+  width: 5px;
+  background-color: colors.$red-60;
+  margin-right: 10px;
+}
+
+.cardText {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.cardText p {
+  font-size: layout.$spacing-05;
+  color: colors.$gray-70;
+}

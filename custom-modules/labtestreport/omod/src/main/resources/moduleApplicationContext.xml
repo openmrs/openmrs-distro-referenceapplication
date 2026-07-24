@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  include context for annotation mapping -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	        http://www.springframework.org/schema/context
+	        http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<context:component-scan base-package="@MODULE_PACKAGE@" />
+
+	<!-- Configure the Lab Test Report Service -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.labtestreport.LabTestReportService</value>
+				<ref bean="labTestReportService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="labTestReportService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target">
+			<bean class="org.openmrs.module.labtestreport.impl.LabTestReportServiceImpl">
+				<property name="dao">
+					<bean class="org.openmrs.module.labtestreport.db.hibernate.HibernateLabTestReportDAO">
+						<property name="sessionFactory"><ref bean="dbSessionFactory"/></property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<ref bean="serviceInterceptors"/>
+		</property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+
+	<!-- Configure the Patient Encounter Report Service -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.labtestreport.PatientEncounterReportService</value>
+				<ref bean="patientEncounterReportService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="patientEncounterReportService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target">
+			<bean class="org.openmrs.module.labtestreport.impl.PatientEncounterReportServiceImpl">
+				<property name="dao">
+					<bean class="org.openmrs.module.labtestreport.db.hibernate.HibernatePatientEncounterReportDAO">
+						<property name="sessionFactory"><ref bean="dbSessionFactory"/></property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<ref bean="serviceInterceptors"/>
+		</property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+
+	<!-- Configure the Disease Summary Service -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.labtestreport.DiseaseSummaryService</value>
+				<ref bean="diseaseSummaryService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="diseaseSummaryService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target">
+			<bean class="org.openmrs.module.labtestreport.impl.DiseaseSummaryServiceImpl">
+				<property name="dao">
+					<bean class="org.openmrs.module.labtestreport.db.hibernate.HibernateDiseaseSummaryDAO">
+						<property name="sessionFactory"><ref bean="dbSessionFactory"/></property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<ref bean="serviceInterceptors"/>
+		</property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+
+	<!-- Configure the Session Attendance Service -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.labtestreport.SessionAttendanceService</value>
+				<ref bean="sessionAttendanceService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sessionAttendanceService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target">
+			<bean class="org.openmrs.module.labtestreport.impl.SessionAttendanceServiceImpl">
+				<property name="dao">
+					<bean class="org.openmrs.module.labtestreport.db.hibernate.HibernateSessionAttendanceDAO">
+						<property name="sessionFactory"><ref bean="dbSessionFactory"/></property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<ref bean="serviceInterceptors"/>
+		</property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+
+	<!-- Configure the Stock Ledger Service -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.labtestreport.StockLedgerService</value>
+				<ref bean="stockLedgerService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="stockLedgerService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target">
+			<bean class="org.openmrs.module.labtestreport.impl.StockLedgerServiceImpl">
+				<property name="dao">
+					<bean class="org.openmrs.module.labtestreport.db.hibernate.HibernateStockLedgerDAO">
+						<property name="sessionFactory"><ref bean="dbSessionFactory"/></property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<ref bean="serviceInterceptors"/>
+		</property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+
+</beans>

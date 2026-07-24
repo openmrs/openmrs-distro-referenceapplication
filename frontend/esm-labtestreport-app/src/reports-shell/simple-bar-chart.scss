@@ -1,0 +1,51 @@
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  max-height: 32rem;
+  overflow-y: auto;
+  border: 1px solid var(--cds-border-subtle, #e0e0e0);
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 14rem 1fr 3.5rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.barLabel {
+  font-size: 0.875rem;
+  color: var(--cds-text-primary, #161616);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barTrack {
+  background-color: var(--cds-layer-accent, #e0e0e0);
+  border-radius: 2px;
+  height: 1rem;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background-color: var(--cds-support-info, #0f62fe);
+  min-width: 2px;
+  transition: width 0.2s ease;
+}
+
+.barValue {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: right;
+  color: var(--cds-text-primary, #161616);
+}
+
+.emptyState {
+  padding: 2rem;
+  text-align: center;
+  color: var(--cds-text-secondary, #525252);
+}

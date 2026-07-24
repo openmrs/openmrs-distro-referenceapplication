@@ -1,0 +1,101 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.tileContainer {
+  background-color: colors.$white;
+  border: 1px solid $ui-03;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 7.875rem;
+  justify-content: space-between;
+  padding: layout.$spacing-05;
+}
+
+.tileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: layout.$spacing-03;
+}
+
+.headerLabel {
+  @include type.type-style('label-02');
+  color: colors.$gray-70;
+}
+
+.totalsLabel {
+  @include type.type-style('label-01');
+  color: $text-02;
+}
+
+.totalsValue {
+  @include type.type-style('heading-04');
+  color: $ui-05;
+}
+
+.headerLabelContainer {
+  display: flex;
+  align-items: center;
+  height: layout.$spacing-07;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.link {
+  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+  color: $interactive-01;
+
+  svg {
+    margin-left: layout.$spacing-03;
+  }
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.countGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-self: flex-end;
+  column-gap: layout.$spacing-03;
+  align-items: center;
+
+  & > span {
+    font-size: 0.625rem !important;
+    margin: 0;
+  }
+
+  & > p {
+    margin: 0;
+  }
+}
+
+.in6MonthsLabel,
+.belowMinLabel,
+.expiredLabel {
+  color: colors.$red-60;
+}
+
+.in6MonthsValue,
+.belowMinValue,
+.expiredValue {
+  color: colors.$red-60;
+}
+
+.aboveMaxLabel,
+.aboveMaxValue {
+  color: #319227;
+}
+
+.poorQualityLabel,
+.poorQualityValue {
+  color: #faba5f;
+}

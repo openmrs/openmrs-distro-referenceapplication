@@ -9,6 +9,7 @@ ARG MVN_COMMAND="install"
 
 # Copy build files
 COPY pom.xml ./
+COPY custom-modules ./custom-modules/
 COPY distro ./distro/
 
 ARG CACHE_BUST

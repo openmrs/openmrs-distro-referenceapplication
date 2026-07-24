@@ -1,0 +1,32 @@
+@use '@carbon/colors';
+@use '@carbon/type';
+@use '@carbon/layout';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.content {
+  @include type.type-style('heading-compact-02');
+  color: $text-02;
+  margin-bottom: layout.$spacing-03;
+}
+
+.helper {
+  @include type.type-style('body-compact-01');
+  color: $text-02;
+}
+
+.tileContainer {
+  background-color: $ui-02;
+  border-top: 1px solid $ui-03;
+  padding: layout.$spacing-11 0;
+}
+
+.tile {
+  margin: auto;
+  width: fit-content;
+}
+
+.tileContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,0 +1,42 @@
+{
+  "name": "esm-labtestreport-app",
+  "version": "1.0.0",
+  "license": "MPL-2.0",
+  "description": "Interactive Lab Test Summary and Patient Encounter Summary reports for O3",
+  "browser": "dist/esm-labtestreport-app.js",
+  "main": "src/index.ts",
+  "source": true,
+  "scripts": {
+    "start": "openmrs develop",
+    "serve": "rspack serve --mode=development",
+    "build": "rspack --mode production",
+    "typescript": "tsc"
+  },
+  "browserslist": [
+    "extends browserslist-config-openmrs"
+  ],
+  "keywords": [
+    "openmrs",
+    "microfrontends"
+  ],
+  "dependencies": {
+    "@carbon/react": "^1.83.0"
+  },
+  "peerDependencies": {
+    "@openmrs/esm-framework": "*",
+    "react": "18.x",
+    "react-dom": "18.x",
+    "react-router-dom": "6.x",
+    "rxjs": "6.x"
+  },
+  "devDependencies": {
+    "@openmrs/esm-framework": "next",
+    "openmrs": "next",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.14.1",
+    "rxjs": "^6.6.7",
+    "swr": "^2.2.5",
+    "typescript": "^5.0.0"
+  }
+}

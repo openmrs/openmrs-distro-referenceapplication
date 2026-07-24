@@ -1,0 +1,102 @@
+name: E2E Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  TURBO_API: 'http://127.0.0.1:9080'
+  TURBO_TOKEN: 'turbo-token'
+  TURBO_TEAM: ${{ github.repository_owner }}
+
+jobs:
+  run_e2e_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repo
+        uses: actions/checkout@v6
+
+      - name: 📝 Copy test environment variables
+        run: cp example.env .env
+
+      - name: 🛠️ Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: 💾 Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v5
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: 📦 Install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: 🎭 Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(grep '@playwright/test@' yarn.lock | sed -n 's/.*npm:\([^":]*\).*/\1/p' | head -n 1)" >> $GITHUB_ENV
+
+      - name: 💾 Cache Playwright binaries
+        id: playwright-cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: 🎭 Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: 🚀 Setup local cache server for Turborepo
+        uses: felixmosh/turborepo-gh-artifacts@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ env.TURBO_TOKEN }}
+
+      - name: 🏗️ Build apps
+        run: yarn turbo run build --color --concurrency=5
+
+      - name: 🚀 Run dev server
+        run: bash e2e/support/github/run-e2e-docker-env.sh
+
+      - name: ⏳ Wait for OpenMRS instance to start
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+
+      - name: 🧪 Run E2E tests
+        run: yarn test-e2e
+
+      - name: 🛑 Stop dev server
+        if: '!cancelled()'
+        run: docker stop $(docker ps -a -q)
+
+      - name: 📤 Upload report
+        uses: actions/upload-artifact@v7
+        if: '!cancelled()'
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+          overwrite: true
+
+      - name: 📝 Capture Server Logs
+        if: always()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          dest: './logs'
+
+      - name: 📤 Upload Logs as Artifact
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: server-logs
+          path: './logs'
+          retention-days: 2
+          overwrite: true

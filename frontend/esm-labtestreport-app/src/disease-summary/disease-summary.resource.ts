@@ -1,0 +1,52 @@
+import { openmrsFetch } from '@openmrs/esm-framework';
+import useSWR from 'swr';
+
+export interface DiseaseSummaryRow {
+  categoryConceptId: number;
+  category: string;
+  categoryRowSpan: number;
+  diagnosisConceptId: number;
+  diagnosisLabel: string;
+  totalCases: number;
+  counts: Record<string, number>;
+  total: number;
+}
+
+export interface PatientRow {
+  patientId: number;
+  patientUuid: string;
+  givenName: string;
+  familyName: string;
+  identifier: string;
+}
+
+export interface DiseaseDrilldownParams {
+  diagnosisConceptId: number;
+  gender?: string;
+  ageGroup?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+function buildQuery(params: Record<string, string | number | undefined>): string {
+  const search = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      search.set(key, String(value));
+    }
+  });
+  const query = search.toString();
+  return query ? `?${query}` : '';
+}
+
+export function useDiseaseSummaryReport(startDate?: string, endDate?: string) {
+  const url = `/module/labtestreport/api/disease-summary.json${buildQuery({ startDate, endDate })}`;
+  const { data, error, isLoading } = useSWR<{ data: DiseaseSummaryRow[] }, Error>(url, openmrsFetch);
+  return { rows: data?.data ?? [], error, isLoading };
+}
+
+export function useDiseaseDrilldown(params: DiseaseDrilldownParams | null) {
+  const url = params ? `/module/labtestreport/api/disease-drilldown.json${buildQuery({ ...params })}` : null;
+  const { data, error, isLoading } = useSWR<{ data: PatientRow[] }, Error>(url, openmrsFetch);
+  return { patients: data?.data ?? [], error, isLoading };
+}

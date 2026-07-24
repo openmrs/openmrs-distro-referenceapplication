@@ -11,6 +11,16 @@ WORKDIR /app
 
 COPY spa-assemble-config.json .
 COPY spa-build-config.json .
+COPY esm-labtestreport-app ./esm-labtestreport-app/
+COPY esm-stock-management-app-patched ./esm-stock-management-app-patched/
+
+RUN cd esm-labtestreport-app && npm install && npm run build && npm pack --pack-destination /app
+
+RUN corepack enable && \
+    cd esm-stock-management-app-patched && \
+    yarn install && \
+    yarn build && \
+    yarn pack --out /app/esm-stock-management-app-patched.tgz
 
 ARG CACHE_BUST
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-assemble-config.json --target ./spa

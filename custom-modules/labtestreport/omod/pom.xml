@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.openmrs.module</groupId>
+		<artifactId>labtestreport</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>labtestreport-omod</artifactId>
+	<packaging>jar</packaging>
+	<name>Lab Test Report Module OMOD</name>
+	<description>OpenMRS module project for the Lab Test Summary Report module</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.openmrs.api</groupId>
+			<artifactId>openmrs-api</artifactId>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.web</groupId>
+			<artifactId>openmrs-web</artifactId>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>labtestreport-api</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>legacyui-omod</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.parent.artifactId}-${project.parent.version}</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/webapp</directory>
+				<filtering>true</filtering>
+				<targetPath>web/module</targetPath>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.openmrs.maven.plugins</groupId>
+				<artifactId>maven-openmrs-plugin</artifactId>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>init</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>initialize-module</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>pack</id>
+						<phase>package</phase>
+						<goals>
+							<goal>package-module</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<MODULE_ID>${project.parent.artifactId}</MODULE_ID>
+		<MODULE_NAME>${project.parent.name}</MODULE_NAME>
+		<MODULE_VERSION>${project.parent.version}</MODULE_VERSION>
+		<MODULE_PACKAGE>${project.parent.groupId}.${project.parent.artifactId}</MODULE_PACKAGE>
+	</properties>
+
+</project>

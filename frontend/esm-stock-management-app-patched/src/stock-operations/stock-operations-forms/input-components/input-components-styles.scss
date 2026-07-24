@@ -1,0 +1,50 @@
+@use '@carbon/colors';
+@use '@carbon/type';
+@use '@carbon/layout';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+// Patient List Table
+.searchContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.searchContainer > div {
+  align-self: center;
+  justify-self: flex-end;
+}
+
+.searchBox {
+  width: 80%;
+  max-width: 16rem;
+  background-color: $ui-02;
+  border-bottom-color: $ui-03;
+}
+
+.stockItemSearchContainer {
+  position: relative;
+  flex-direction: column;
+  margin-bottom: layout.$spacing-01;
+}
+
+.searchResults {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: white;
+  border: 0px !important;
+  border-radius: 4px;
+  border-bottom: 1px solid colors.$cool-gray-20;
+  padding: 8px;
+  align-items: center;
+  @include type.type-style('label-01');
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: colors.$cool-gray-10;
+    cursor: pointer;
+  }
+}

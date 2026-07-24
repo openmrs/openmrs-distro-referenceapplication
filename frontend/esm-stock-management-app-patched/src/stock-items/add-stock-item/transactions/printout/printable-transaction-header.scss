@@ -1,0 +1,61 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+
+.container {
+  padding: 0 1rem 2rem;
+  border-bottom: 1px solid #ebedf2;
+  margin-bottom: 2rem;
+}
+
+.printableBody {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.printableHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+.img {
+  display: flex;
+  margin-left: auto;
+}
+
+.transactionDetails {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+}
+
+.facilityDetails {
+  display: flex;
+  flex-flow: column wrap;
+  text-align: right;
+}
+
+.heading {
+  font-size: 40px;
+  text-transform: uppercase;
+  margin-bottom: layout.$spacing-05;
+}
+
+.facilityName {
+  @include type.type-style('heading-compact-02');
+  font-weight: bold;
+  color: colors.$green-70;
+}
+
+.itemHeading {
+  @include type.type-style('body-compact-02');
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+  color: colors.$cool-gray-90;
+}
+
+.itemLabel {
+  @include type.type-style('body-compact-02');
+  color: colors.$cool-gray-90;
+}

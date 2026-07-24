@@ -1,0 +1,104 @@
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.headerBtnContainer {
+  background-color: $ui-background;
+  padding: layout.$spacing-05;
+  text-align: right;
+}
+
+.tileContainer {
+  background-color: $ui-02;
+  border-top: 1px solid $ui-03;
+  padding: layout.$spacing-11 0;
+}
+
+.tile {
+  margin: auto;
+  width: fit-content;
+}
+
+.tileContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  @include type.type-style('heading-compact-02');
+  color: $text-02;
+  margin-bottom: 0.5rem;
+}
+
+.helper {
+  @include type.type-style('body-compact-01');
+  color: $text-02;
+}
+
+.separator {
+  @include type.type-style('body-compact-02');
+  color: $text-02;
+  width: 80%;
+  margin: 1.5rem auto;
+  overflow: hidden;
+  text-align: center;
+
+  &::before,
+  &::after {
+    background-color: $text-03;
+    content: '';
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+
+  &::before {
+    right: 0.5rem;
+    margin-left: -50%;
+  }
+
+  &::after {
+    left: 0.5rem;
+    margin-right: -50%;
+  }
+}
+
+.toolbarContent {
+  display: flex;
+  align-items: center;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: layout.$spacing-05;
+}
+
+.dateAlign {
+  padding-top: layout.$spacing-03;
+  height: 100%;
+}
+
+.filtersAlign {
+  margin-bottom: layout.$spacing-03;
+  min-width: auto;
+  width: auto;
+
+  :global(.cds--list-box__menu) {
+    min-width: 15rem;
+    z-index: 1;
+  }
+}
+
+.toolbarAction {
+  max-width: none;
+}
+
+.tableHeader {
+  @include type.type-style('body-02');
+  margin: layout.$spacing-05 0;
+}

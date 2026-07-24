@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json.openmrs.org/routes.schema.json",
+  "backendDependencies": {
+    "fhir2": ">=1.2",
+    "webservices.rest": ">=2.2.0"
+  },
+  "extensions": [
+    {
+      "name": "stock-nav-menu",
+      "slot": "stock-sidebar-slot",
+      "component": "stockNavMenu",
+      "online": true,
+      "offline": true
+    },
+    {
+      "name": "overview-db-link",
+      "slot": "stock-page-dashboard-slot",
+      "component": "stockOverviewLink",
+      "meta": {
+        "name": "overview",
+        "slot": "overview-dashboard-slot",
+        "title": "overview"
+      },
+      "order": 0,
+      "online": true,
+      "offline": true
+    },
+    {
+      "name": "stock-overview-db",
+      "slot": "overview-dashboard-slot",
+      "component": "stockOverview"
+    },
+    {
+      "name": "operations-db-link",
+      "slot": "stock-page-dashboard-slot",
+      "component": "stockOperationsLink",
+      "meta": {
+        "name": "operations",
+        "slot": "operations-dashboard-slot",
+        "title": "operations"
+      },
+      "order": 2,
+      "online": true,
+      "offline": true
+    },
+    {
+      "name": "stock-operations-db",
+      "slot": "operations-dashboard-slot",
+      "component": "stockOperations"
+    },
+    {
+      "name": "items-db-link",
+      "slot": "stock-page-dashboard-slot",
+      "component": "stockItemsLink",
+      "meta": {
+        "name": "items",
+        "slot": "items-dashboard-slot",
+        "title": "items"
+      },
+      "order": 1,
+      "online": true,
+      "offline": true
+    },
+    {
+      "name": "stock-items-db",
+      "slot": "items-dashboard-slot",
+      "component": "stockItems"
+    },
+    {
+      "name": "user-scopes-db-link",
+      "slot": "stock-page-dashboard-slot",
+      "component": "stockUserScopesLink",
+      "meta": {
+        "name": "user-scopes",
+        "slot": "user-scopes-dashboard-slot",
+        "title": "user-scopes"
+      },
+      "order": 3,
+      "online": true,
+      "offline": true
+    },
+    {
+      "name": "stock-user-scopes-db",
+      "slot": "user-scopes-dashboard-slot",
+      "component": "stockUserScopes"
+    },
+    {
+      "name": "sources-db-link",
+      "slot": "stock-page-dashboard-slot",
+      "component": "stockSourcesLink",
+      "meta": {
+        "name": "sources",
+        "slot": "sources-dashboard-slot",
+        "title": "Sources"
+      },
+      "order": 2,
+      "online": true,
+      "offline": true
+    },
+    {
+      "name": "stock-sources-db",
+      "slot": "sources-dashboard-slot",
+      "component": "stockSources"
+    },
+    {
+      "name": "reports-db-link",
+      "slot": "stock-page-dashboard-slot",
+      "component": "stockReportsLink",
+      "meta": {
+        "name": "reports",
+        "slot": "reports-dashboard-slot",
+        "title": "Reports"
+      },
+      "order": 5,
+      "online": true,
+      "offline": true
+    },
+    {
+      "name": "stock-reports-db",
+      "slot": "reports-dashboard-slot",
+      "component": "stockReports"
+    },
+    {
+      "name": "settings-db-link",
+      "slot": "stock-page-dashboard-slot",
+      "component": "stockSettingsLink",
+      "meta": {
+        "name": "settings",
+        "slot": "settings-dashboard-slot",
+        "title": "Settings"
+      },
+      "order": 6,
+      "online": true,
+      "offline": true
+    },
+    {
+      "name": "stock-settings-db",
+      "slot": "settings-dashboard-slot",
+      "component": "stockSettings"
+    },
+    {
+      "name": "stock-management-admin-card-link",
+      "slot": "system-admin-page-card-link-slot",
+      "component": "stockManagementAdminCardLink"
+    },
+    {
+      "name": "stock-management-app-menu-item",
+      "component": "stockManagementAppMenuItem",
+      "slot": "app-menu-item-slot",
+      "meta": {
+        "name": " Stock Management"
+      }
+    },
+    {
+      "name": "delete-packaging-unit-button",
+      "component": "deletePackagingUnitButton"
+    }
+  ],
+  "modals": [
+    {
+      "name": "delete-stock-modal",
+      "component": "deleteStockModal"
+    },
+    {
+      "name": "delete-stock-user-scope-modal",
+      "component": "deleteUserScopeModal"
+    },
+    {
+      "name": "delete-stock-rule-modal",
+      "component": "deleteStockRuleModal"
+    },
+    {
+      "name": "delete-packaging-unit-modal",
+      "component": "deletePackagingUnitModal"
+    },
+    {
+      "name": "expired-stock-modal",
+      "component": "expiredStockModal"
+    },
+    {
+      "name": "import-bulk-stock-items",
+      "component": "importBulkStockItemsModal"
+    },
+    {
+      "name": "receiving-stock-modal",
+      "component": "receivingStockModal"
+    },
+    {
+      "name": "stock-operations-modal",
+      "component": "stockOperationsModal"
+    },
+    {
+      "name": "transactions-print-bincard-preview-modal",
+      "component": "transactionBincardPrintPreviewModal"
+    },
+    {
+      "name": "transactions-print-stockcard-preview-modal",
+      "component": "transactionStockcardPrintPreviewModal"
+    }
+  ],
+  "workspaces": [
+    {
+      "name": "stock-operation-form-workspace",
+      "component": "stockOperationFormWorkspace",
+      "title": "Stock Operation",
+      "type": "form",
+      "canMaximize": true,
+      "width": "extra-wide"
+    },
+    {
+      "name": "stock-item-rules-form-workspace",
+      "component": "stockItemRulesFormWorkspace",
+      "title": "Stock Item Rules",
+      "type": "form"
+    },
+    {
+      "name": "stock-item-form-workspace",
+      "component": "stockItemFormWorkspace",
+      "title": "Stock Items",
+      "type": "form",
+      "canMaximize": true,
+      "width": "extra-wide"
+    },
+    {
+      "name": "stock-sources-form-workspace",
+      "component": "stockSourcesFormWorkspace",
+      "title": "Stock Sources",
+      "type": "form",
+      "canMaximize": true,
+      "width": "extra-wide"
+    },
+    {
+      "name": "stock-location-form-workspace",
+      "component": "stockLocationsFormWorkspace",
+      "title": "Stock Locations",
+      "type": "form",
+      "canMaximize": true,
+      "width": "extra-wide"
+    },
+    {
+      "name": "stock-user-role-scopes-form-workspace",
+      "component": "stockUserScopesFormWorkspace",
+      "title": "User Role Scopes",
+      "type": "form",
+      "canMaximize": true,
+      "width": "extra-wide"
+    },
+    {
+      "name": "stock-reports-form-workspace",
+      "component": "stockReportsFormWorkspace",
+      "title": "Reports",
+      "type": "form",
+      "canMaximize": true,
+      "width": "extra-wide"
+    }
+  ],
+  "pages": [
+    {
+      "component": "root",
+      "route": "stock-management"
+    }
+  ]
+}
