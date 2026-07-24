@@ -1,5 +1,3 @@
-version: "3.7"
-
 #    This Source Code Form is subject to the terms of the Mozilla Public License,
 #    v. 2.0. If a copy of the MPL was not distributed with this file, You can
 #    obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
@@ -43,6 +41,11 @@ services:
     prometheus:
         image: prom/prometheus:v3.9.0
         container_name: prometheus
+        command:
+            - --config.file=/etc/prometheus/prometheus.yml
+            - --storage.tsdb.path=/prometheus
+            - --storage.tsdb.retention.time=15d
+            - --web.enable-lifecycle
         volumes:
             - prometheus-config:/etc/prometheus
             - prometheus_data:/prometheus
@@ -56,6 +59,69 @@ services:
         command: --config.file=/config/blackbox.yml --log.level=error --log.prober=error
         volumes:
             - blackbox-config:/config
+        depends_on:
+            monitoring-init:
+                condition: service_completed_successfully
+
+    # Host-level metrics: CPU, memory, disk, load average, network (deliverable #6)
+    node-exporter:
+        image: prom/node-exporter:v1.9.0
+        container_name: node-exporter
+        pid: host
+        volumes:
+            - /proc:/host/proc:ro
+            - /sys:/host/sys:ro
+            - /:/rootfs:ro
+        command:
+            - --path.procfs=/host/proc
+            - --path.sysfs=/host/sys
+            - --path.rootfs=/rootfs
+            - --collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)
+
+    # Per-container metrics: CPU, memory (+limits), network I/O, disk I/O, restarts, uptime (deliverable #5)
+    #
+    # This host runs Docker with the containerd-snapshotter storage backend
+    # (`docker info` -> driver-type: io.containerd.snapshotter.v1), which does
+    # not have the classic /var/lib/docker/image/overlayfs/layerdb layout
+    # cAdvisor's Docker integration expects - with only the volumes below it
+    # sees host/systemd cgroups but zero actual containers. Talking to
+    # containerd directly (which Docker itself runs on top of here) sidesteps
+    # that entirely. Docker registers its containers under containerd's
+    # "moby" namespace, not cAdvisor's k8s-oriented default ("k8s.io").
+    cadvisor:
+        image: gcr.io/cadvisor/cadvisor:v0.49.1
+        container_name: cadvisor
+        privileged: true
+        devices:
+            - /dev/kmsg
+        volumes:
+            - /:/rootfs:ro
+            - /var/run:/var/run:ro
+            - /sys:/sys:ro
+            - /var/lib/docker/:/var/lib/docker:ro
+            - /run/containerd/containerd.sock:/run/containerd/containerd.sock:ro
+        command:
+            - --docker=
+            - --containerd=/run/containerd/containerd.sock
+            - --containerd-namespace=moby
+
+    # Turns the gateway's built-in nginx stub_status into Prometheus metrics
+    # (request throughput / active connections at the edge - see monitoring/MONITORING.md)
+    nginx-exporter:
+        image: nginx/nginx-prometheus-exporter:1.4.2
+        container_name: nginx-exporter
+        command:
+            - --nginx.scrape-uri=http://gateway:80/nginx_status
+        depends_on:
+            - gateway
+
+    alertmanager:
+        image: prom/alertmanager:v0.28.1
+        container_name: alertmanager
+        volumes:
+            - prometheus-config:/etc/prometheus
+        command:
+            - --config.file=/etc/prometheus/alertmanager.yml
         depends_on:
             monitoring-init:
                 condition: service_completed_successfully

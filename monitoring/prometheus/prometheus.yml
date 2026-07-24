@@ -1,7 +1,56 @@
 global:
   scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - /etc/prometheus/alerts.yml
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
 
 scrape_configs:
+  # Prometheus scraping itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets:
+          - "localhost:9090"
+
+  # Host-level metrics: CPU, memory, disk, load average, network (see docs #6)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets:
+          - "node-exporter:9100"
+
+  # Per-container metrics: CPU, memory (+limits), network I/O, disk I/O,
+  # restarts, uptime for every container on the host (see docs #5).
+  #
+  # This host's Docker uses the containerd-snapshotter storage backend, so
+  # cAdvisor talks to containerd directly (see docker-compose.grafana.yml) and
+  # only gets a raw container ID as "name" - it doesn't see Docker's own
+  # container-name metadata. container_image below derives a readable label
+  # from the "image" field instead (e.g. "gateway" from
+  # ".../openmrs-reference-application-3-gateway:qa").
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets:
+          - "cadvisor:8080"
+    metric_relabel_configs:
+      - source_labels: [ image ]
+        regex: '.*/([^/:]+):[^:]*'
+        target_label: container_image
+        replacement: '$1'
+
+  # Edge request throughput / active connections, derived from nginx stub_status
+  # on the gateway container (see docs #7 - request count / throughput)
+  - job_name: 'nginx-exporter'
+    static_configs:
+      - targets:
+          - "nginx-exporter:9113"
+
+  # Synthetic HTTP probes (existing) - endpoint up/down + probe latency
   - job_name: 'blackbox-http-prod'
     metrics_path: /probe
     params:
@@ -18,3 +67,13 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: blackbox:9115
+
+  # Add a target here for any service that exposes its own /metrics endpoint
+  # (Spring Boot Actuator, express-prom-bundle, etc.) - none of the current
+  # backend/frontend images expose one out of the box. Example:
+  #
+  # - job_name: 'my-service'
+  #   metrics_path: /actuator/prometheus
+  #   static_configs:
+  #     - targets:
+  #         - "my-service:8080"
