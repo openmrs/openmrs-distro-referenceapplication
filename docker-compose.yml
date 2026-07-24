@@ -1,12 +1,24 @@
 services:
   gateway:
     image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
+    build:
+      context: ./gateway
     restart: "unless-stopped"
     depends_on:
       - frontend
       - backend
+      - portainer
+
+  nginx:
+    image: nginx:alpine
+    restart: "unless-stopped"
+    depends_on:
+      - gateway
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
@@ -41,6 +53,15 @@ services:
     volumes:
       - openmrs-data:/openmrs/data
 
+  portainer:
+    image: portainer/portainer-ce:latest
+    restart: "unless-stopped"
+    environment:
+      TRUSTED_ORIGINS: ${CERT_WEB_DOMAINS:-localhost},localhost
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+
   # MariaDB
   db:
     image: mariadb:10.11.7
@@ -56,9 +77,12 @@ services:
       MYSQL_USER: ${OMRS_DB_USER:-openmrs}
       MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+    ports:
+      - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
 
 volumes:
   openmrs-data: ~
   db-data: ~
+  portainer-data: ~

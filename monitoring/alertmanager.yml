@@ -1,0 +1,13 @@
+route:
+  receiver: default
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+
+receivers:
+  # No-op by default so the stack runs standalone. Point this at Slack/email/
+  # PagerDuty/etc. before relying on it - see monitoring/MONITORING.md.
+  - name: default
+    # webhook_configs:
+    #   - url: https://hooks.slack.com/services/REPLACE/ME/WITH_A_REAL_WEBHOOK

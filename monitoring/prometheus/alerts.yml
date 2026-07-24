@@ -1,0 +1,96 @@
+groups:
+  - name: container-resource-alerts
+    rules:
+      - alert: ContainerHighCpuUsage
+        expr: sum by (container_image) (rate(container_cpu_usage_seconds_total{name!=""}[5m])) * 100 > 80
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container {{ $labels.container_image }} CPU usage above 80%"
+          description: >
+            {{ $labels.container_image }} has averaged {{ $value | printf "%.1f" }}% of a CPU
+            core for 3 minutes. None of these services have a --cpus limit set, so this is "% of
+            one core"; see monitoring/MONITORING.md if you want it expressed against
+            container_spec_cpu_quota once limits are added.
+
+      - alert: ContainerHighMemoryUsage
+        # container_spec_memory_limit_bytes is 0 (not cAdvisor's usual "max
+        # int64 = unlimited" sentinel) for containers with no memory limit
+        # via this host's containerd-backed collection path (see
+        # docker-compose.grafana.yml comment on the cadvisor service) -
+        # without the "> 0" guard this divides by zero and fires on every
+        # container, limited or not.
+        expr: >
+          (container_memory_working_set_bytes{name!=""}
+          / container_spec_memory_limit_bytes{name!=""} * 100 > 80)
+          and (container_spec_memory_limit_bytes{name!=""} > 0)
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container {{ $labels.container_image }} memory usage above 80%"
+          description: "{{ $labels.container_image }} is using {{ $value | printf \"%.1f\" }}% of its memory limit for 3 minutes."
+
+      - alert: ContainerRestarted
+        expr: changes(container_start_time_seconds{name!=""}[15m]) > 0
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container {{ $labels.container_image }} restarted"
+          description: "{{ $labels.container_image }} has restarted within the last 15 minutes. cAdvisor does not expose a native restart counter, so this fires on any change to the container's start time."
+
+  - name: host-resource-alerts
+    rules:
+      - alert: HostHighCpuUsage
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Host CPU usage above 80%"
+          description: "Host CPU usage has averaged {{ $value | printf \"%.1f\" }}% for 5 minutes."
+
+      - alert: HostHighMemoryUsage
+        expr: >
+          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Host memory usage above 80%"
+          description: "Host memory usage is at {{ $value | printf \"%.1f\" }}% for 5 minutes."
+
+      - alert: HostHighLoadAverage
+        expr: node_load5 / count without (cpu, mode) (node_cpu_seconds_total{mode="idle"}) > 1.5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Host 5m load average is high"
+          description: "5m load average per core is {{ $value | printf \"%.2f\" }}, sustained for 5 minutes."
+
+  - name: latency-and-availability-alerts
+    rules:
+      - alert: HighResponseTime
+        expr: probe_duration_seconds{job="blackbox-http-prod"} > 1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.instance }} responding slowly"
+          description: "Probe against {{ $labels.instance }} has taken >1s to respond for 2 minutes (current: {{ $value | printf \"%.2f\" }}s)."
+
+      - alert: HighErrorRate
+        expr: probe_success{job="blackbox-http-prod"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} failing health checks"
+          description: >
+            {{ $labels.instance }} has not returned a successful (2xx) response for 2 minutes.
+            This is a coarse proxy for error rate - none of the current services expose a
+            Prometheus request-count-by-status metric. For per-request 5xx/total ratios, use
+            the LogQL query in monitoring/MONITORING.md against the gateway access log in Loki
+            (a Loki ruler alert can be added on top of the same query if needed).
