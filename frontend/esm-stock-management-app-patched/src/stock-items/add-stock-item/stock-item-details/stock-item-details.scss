@@ -1,0 +1,42 @@
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.section {
+  margin: layout.$spacing-03;
+}
+
+.form {
+  display: grid;
+  gap: 1.5rem;
+  padding-top: 1rem;
+}
+
+.formContainer {
+  height: calc(100vh - 100px) !important;
+  overflow: scroll;
+  padding: 0 1rem;
+}
+
+.verticalForm {
+  display: flex;
+  grid-row-gap: 2em;
+  padding-top: layout.$spacing-05;
+  align-content: space-between;
+  flex-direction: column;
+
+  :global(.cds--form-item) {
+    flex: none !important;
+  }
+
+  :global(.cds--label) {
+    color: black;
+    display: inline-block;
+    font-size: var(--cds-label-01-font-size);
+    font-weight: bold;
+    letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+    line-height: layout.$spacing-05;
+    margin-bottom: layout.$spacing-03;
+    vertical-align: baseline;
+  }
+}

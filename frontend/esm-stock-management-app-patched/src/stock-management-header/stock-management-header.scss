@@ -1,0 +1,39 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.header {
+  background-color: $ui-02;
+  border: 1px solid $ui-03;
+  border-left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: layout.$spacing-03;
+}
+
+.right-justified-items {
+  @include type.type-style('body-compact-02');
+  color: colors.$gray-70;
+  margin: layout.$spacing-03;
+}
+
+.middot {
+  margin: 0 layout.$spacing-03;
+}
+
+.date-and-location {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.value {
+  margin-left: layout.$spacing-02;
+}
+
+.view {
+  @include type.type-style('label-01');
+}

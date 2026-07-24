@@ -1,0 +1,41 @@
+<dataset>
+	<concept concept_id="1067" retired="false" datatype_id="3" class_id="20" is_set="false" creator="1" date_created="2004-08-12 00:00:00.0" version="" uuid="1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/>
+	<global_property property="stockmanagement.unknownConceptId" property_value="1067" description="Stock items maximum import size" uuid="0ac8c82c-487c-11ed-9e32-00155d44ac61"/>
+	<global_property property="stockmanagement.enableStockRuleJob" property_value="true" description="Enable stock rule job" uuid="0ac8c82c-487c-11ed-9e32-00155d44ac62"/>
+	<stockmgmt_stock_operation_type stock_operation_type_id="0"  name="Test Adjustment" operation_type="adjustment"
+	                          description="Physical item quantities that do not match the current system quantity."
+	                          has_source="true" source_type="Location"  has_destination="false"   available_when_reserved="true"
+	                          creator="1" date_created="2012-01-01 00:00:00.0" voided="false" uuid="288fd7fe-1374-4f7a-89e6-d5f1ac97d4a5" />
+	<stockmgmt_stock_operation_type stock_operation_type_id="1" name="Test Disposed" operation_type="disposed"
+	                          description="Item stock quantities that have expired and must be removed from circulation."
+	                          has_source="true"  source_type="Location" has_destination="false"   available_when_reserved="true"
+	                          creator="1" date_created="2012-01-01 00:00:00.0" voided="false" uuid="84be0aaf-70cf-4ebb-83e3-088e5d375905" />
+	<stockmgmt_stock_operation_type stock_operation_type_id="2" name="Test Transfer Out" operation_type="transferout"
+	                          description="Items that are distributed to other outside destination."
+	                          has_source="true"  source_type="Location"  has_destination="false" destination_type="Other"   available_when_reserved="false"
+	                          creator="1" date_created="2012-01-01 00:00:00.0" voided="false" uuid="c264f34b-c795-4576-9928-454d1fa20e09" />
+	<stockmgmt_stock_operation_type stock_operation_type_id="3" name="Test Receipt" operation_type="receipt"
+	                          description="Items that are added into the inventory system from an outside provider."
+	                          has_source="false" source_type="Other" destination_type="Location" has_destination="true"   available_when_reserved="false"
+	                          creator="1" date_created="2012-01-01 00:00:00.0" voided="false" uuid="fce0b4fc-9402-424a-aacb-f99599e51a9f" />
+	<stockmgmt_stock_operation_type stock_operation_type_id="4" name="Test Return" operation_type="return"
+	                          description="Items that are returned to the system after a Distribution operation."
+	                          has_source="false" source_type="Location" destination_type="Other" has_destination="true"  available_when_reserved="false"
+	                          creator="1" date_created="2012-01-01 00:00:00.0" voided="false" uuid="128924d7-72ee-414e-ae40-52f1f89d3e7d" />
+	<stockmgmt_stock_operation_type stock_operation_type_id="5" name="Test Stock Issue" operation_type="stockissue"
+	                          description="Items that are transferred between two stockrooms."
+	                          has_source="true" source_type="Location" destination_type="Location" has_destination="true"   available_when_reserved="true"
+	                          creator="1" date_created="2012-01-01 00:00:00.0" voided="false" uuid="db40707f-9175-4199-8df2-a5702f41ec7d" />
+    <stockmgmt_stock_operation_type stock_operation_type_id="6" name="Test_Adjustment _2" operation_type="adjustment"
+                              description="Physical item quantities that do not match the current system quantity."
+                              has_source="true"  source_type="Location"  has_destination="false"   available_when_reserved="true"
+                              creator="1" date_created="2013-01-01 00:00:00.0" voided="false" uuid="288fd7fe-1374-4f7a-89e6-d5f1ac97d4b5" />
+    <stockmgmt_stock_operation_type stock_operation_type_id="7" name="Test_Receipt_2" operation_type="receipt"
+                              description="Items that are added into the inventory system from an outside provider."
+                              has_source="false" source_type="Other" destination_type="Location" has_destination="true"   available_when_reserved="false"
+                              creator="1" date_created="2013-01-01 00:00:00.0" voided="false" uuid="fce0b4fc-9402-424a-aacb-f99599e51a9g" />
+    <stockmgmt_stock_operation_type stock_operation_type_id="8" name="Test_Initial" operation_type="initial"
+                              description="Items that are added into the inventory system for the very first time."
+                              has_source="false" source_type="Location"  has_destination="true"   available_when_reserved="false"
+                              creator="1" date_created="2013-01-01 00:00:00.0" voided="false" uuid="20f3734f-5b1a-490d-8676-1225a9cdddf7" />
+</dataset>

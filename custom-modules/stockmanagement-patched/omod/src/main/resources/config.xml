@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module configVersion="1.2">
+
+    <id>${project.parent.artifactId}</id>
+    <name>${project.parent.name}</name>
+    <version>${project.parent.version}</version>
+    <package>org.openmrs.module.stockmanagement</package>
+    <author>METS Program</author>
+    <description>
+        ${project.parent.description}
+    </description>
+
+    <activator>org.openmrs.module.stockmanagement.StockManagementActivator</activator>
+
+    <require_version>${openmrsPlatformVersion}</require_version>
+
+    <require_modules>
+        <require_module version="${webservicesRestVersion}">
+            org.openmrs.module.webservices.rest
+        </require_module>
+    </require_modules>
+
+    <aware_of_modules>
+        <aware_of_module>org.openmrs.module.legacyui</aware_of_module>
+    </aware_of_modules>
+
+    <privilege>
+        <name>App: stockmanagement.dashboard</name>
+        <description>Able to view stock management application dashboard</description>
+    </privilege>
+    <privilege>
+        <name>App: stockmanagement.stockItems</name>
+        <description>Able to view stock items</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.stockItems.mutate</name>
+        <description>Able to create and update stock items</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.stockItems.dispense.qty</name>
+        <description>Able to view stock item quantities at dispensing locations</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.stockItems.dispense</name>
+        <description>Able to dispense stock items</description>
+    </privilege>
+    <privilege>
+        <name>App: stockmanagement.userRoleScopes</name>
+        <description>Able to view stock management user role scope</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.userRoleScopes.mutate</name>
+        <description>Able to create and update user role scopes</description>
+    </privilege>
+    <privilege>
+        <name>App: stockmanagement.stockoperations</name>
+        <description>Able to view stock operations</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.stockoperations.mutate</name>
+        <description>Able to create and update stock operations</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.stockoperations.approve</name>
+        <description>Able to approve stock operations</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.stockoperations.receiveitems</name>
+        <description>Able to receive dispatched stock items</description>
+    </privilege>
+    <privilege>
+        <name>App: stockmanagement.stockSources</name>
+        <description>Able to view stock sources</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.stockSources.mutate</name>
+        <description>Able to create and update stock sources</description>
+    </privilege>
+    <privilege>
+        <name>App: stockmanagement.stockOperationType</name>
+        <description>Able to view stock operation types</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.party.read</name>
+        <description>Able to read party information</description>
+    </privilege>
+    <privilege>
+        <name>App: stockmanagement.reports</name>
+        <description>Able to view stock reports</description>
+    </privilege>
+    <privilege>
+        <name>Task: stockmanagement.reports.mutate</name>
+        <description>Able to create stock reports</description>
+    </privilege>
+
+    <messages>
+        <lang>en</lang>
+        <file>messages.properties</file>
+    </messages>
+    <messages>
+        <lang>fr</lang>
+        <file>messages_fr.properties</file>
+    </messages>
+    <messages>
+        <lang>es</lang>
+        <file>messages_es.properties</file>
+    </messages>
+
+    <globalProperty>
+        <property>stockmanagement.environment</property>
+        <defaultValue>prod</defaultValue>
+        <description>
+            Allows one to set the environment mode to development so that the SpaHomeController does not cache the
+            index.html
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockItemSearchMaxIntermediateResult</property>
+        <defaultValue>50</defaultValue>
+        <description>
+            Maximum intermediate results to fetch when searching for stock items that are drugs or concepts.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockSourceCodeConceptId</property>
+        <defaultValue>2e1e8049-9cbe-4a2d-b1e5-8a91e5d7d97d</defaultValue>
+        <description>
+            The code concept for stock source types.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockAdjustmentReasonCodeConceptId</property>
+        <defaultValue>3bbfaa44-d5b8-404d-b4c1-2bf49ad8ce25</defaultValue>
+        <description>
+            The code concept for stock adjustment reasons.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.dispensingUnitsConceptId</property>
+        <defaultValue>162402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</defaultValue>
+        <description>
+            The concept for dispensing units.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.packagingUnitsConceptId</property>
+        <defaultValue>bce2b1af-98b1-48a2-98a2-3e4ffb3c79c2</defaultValue>
+        <description>
+            The concept for packaging units.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockItemCategoryConceptId</property>
+        <defaultValue>6d24eb6e-b42f-4706-ab2d-ae4472161f6a</defaultValue>
+        <description>
+            The concept for stock item categories.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.negativeStockBalanceAllowed</property>
+        <defaultValue>false</defaultValue>
+        <description>
+            Setting to allow negative stock balances
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.excessReceivedItemThreshold</property>
+        <defaultValue>10</defaultValue>
+        <description>
+            Percentage limit on the excess items acknowledged as received compared to the issued or returned items.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.unknownConceptId</property>
+        <defaultValue>1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</defaultValue>
+        <description>
+            Concept Id of "Unknown"
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockItemsMaxUploadFileSize</property>
+        <defaultValue>2</defaultValue>
+        <description>
+            Stock items maximum import size
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockOperationPrintDisableBalanceOnHand</property>
+        <defaultValue>false</defaultValue>
+        <description>
+            Disables display of balance on hand value on the prints
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockOperationPrintDisableCosts</property>
+        <defaultValue>false</defaultValue>
+        <description>
+            Disables display of unit cost and total cost on the prints
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.printLogo</property>
+        <defaultValue>moduleResources/stockmanagement/assets/print-logo.svg</defaultValue>
+        <description>
+            Logo on print documents
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.printLogoText</property>
+        <defaultValue>Ministry of Health</defaultValue>
+        <description>
+            Text that appears below the logo on print documents
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.enableStockRuleJob</property>
+        <defaultValue>true</defaultValue>
+        <description>
+            Enable the stock rule job to evaluate stock balances
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.enableStockBatchJob</property>
+        <defaultValue>true</defaultValue>
+        <description>
+            Enable the stock batch job to send notifications when batch numbers are about to expire
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockBatchDefaultExpiryNotificationNoticePeriod</property>
+        <defaultValue>120</defaultValue>
+        <description>
+            The default notice period for stock batch numbers that are expiring. The stock item notice period takes priority.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockRuleJobBatchSize</property>
+        <defaultValue>1000</defaultValue>
+        <description>
+            Number of records fetched from data store per cycle
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.closePrintAfterPrint</property>
+        <defaultValue>true</defaultValue>
+        <description>
+            Close print after printing
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockOperationNotificationEmail</property>
+        <defaultValue></defaultValue>
+        <description>
+            Email address to send notifications when a stock operation is submitted, approved, rejected etc.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.stockOperationNotificationRole</property>
+        <defaultValue>Inventory Manager</defaultValue>
+        <description>
+           Role whose users will be sent alerts and email notifications when a stock operation is submitted, approved, rejected etc.
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.batchJobExpiryInMinutes</property>
+        <defaultValue>10080</defaultValue>
+        <description>
+            Time in minutes when the queued batch job is considered stale
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.reportingRecordsPageSize</property>
+        <defaultValue>1000</defaultValue>
+        <description>
+            Reporting: Records page size
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.applicationRootUrl</property>
+        <defaultValue></defaultValue>
+        <description>
+            The application root url including its context path e.g. https://hospital.gov.co.ug/openmrs
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.reportingCalculationsNoDaysInMonth</property>
+        <defaultValue>30.5</defaultValue>
+        <description>
+            No of days in a month used in reporting calculations e.g. for consumption report
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.allowStockIssueWithoutRequisition</property>
+        <defaultValue>false</defaultValue>
+        <description>
+            Allow stock issue operation without linked requisition stock operation
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.observationDispensingLocationConcept</property>
+        <defaultValue>0ebc62ac-4a43-4bbb-a9af-e4269e0f143f</defaultValue>
+        <description>
+            Observation: dispensing location concept
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.observationDrugConcept</property>
+        <defaultValue>46c5508c-a7fb-456f-989c-c3aee01b72f9</defaultValue>
+        <description>
+            Observation: drug concept
+        </description>
+    </globalProperty>
+
+    <globalProperty>
+        <property>stockmanagement.packagingUnitPackSizePriorityIsBigToSmall</property>
+        <defaultValue>true</defaultValue>
+        <description>
+            Packaging unit priority when default stock operation unit is not set is big to small pack size
+        </description>
+    </globalProperty>
+
+    <!-- /Global Properties -->
+</module>
+

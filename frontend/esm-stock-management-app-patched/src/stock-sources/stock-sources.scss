@@ -1,0 +1,228 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.container {
+  background-color: $ui-01;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: $ui-background;
+}
+
+.headerButtons {
+  display: flex;
+  flex-flow: column;
+}
+
+.heading {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.filterContainer {
+  :global(.cds--dropdown__wrapper--inline) {
+    gap: 0;
+  }
+
+  :global(.cds--list-box__menu-icon) {
+    height: 1rem;
+  }
+
+  :global(.cds--dropdown--inline) :global(.cds--list-box__field) {
+    min-width: 12rem;
+  }
+}
+
+.tooltip :global(.cds--tooltip__trigger.cds--tooltip__trigger--definition) {
+  border-bottom: none;
+}
+
+.tag {
+  margin: 0.25rem 0;
+}
+
+.backgroundDataFetchingIndicator {
+  align-items: center;
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: center;
+}
+
+.search {
+  max-width: 16rem;
+
+  input {
+    background-color: $ui-02 !important;
+  }
+}
+
+.tableContainer {
+  background-color: $ui-01;
+  margin: 0 layout.$spacing-05;
+  padding: 0;
+
+  a {
+    text-decoration: none;
+  }
+
+  th {
+    color: colors.$gray-70;
+  }
+
+  :global(.cds--data-table) {
+    background-color: $ui-03;
+  }
+
+  .toolbarContent {
+    height: layout.$spacing-07;
+    margin-bottom: layout.$spacing-02;
+  }
+}
+
+.emptyRow {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.stockSourcesTable tr:last-of-type {
+  td {
+    border-bottom: none;
+  }
+}
+
+.content {
+  @include type.type-style('heading-compact-02');
+  color: colors.$gray-70;
+  margin-bottom: 0.5rem;
+}
+
+.helper {
+  @include type.type-style('body-compact-01');
+  color: colors.$gray-70;
+}
+
+.separator {
+  @include type.type-style('body-compact-02');
+  color: colors.$gray-70;
+  width: 80%;
+  margin: 1.5rem auto;
+  overflow: hidden;
+  text-align: center;
+
+  &::before,
+  &::after {
+    background-color: $text-03;
+    content: '';
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+
+  &::before {
+    right: 0.5rem;
+    margin-left: -50%;
+  }
+
+  &::after {
+    left: 0.5rem;
+    margin-right: -50%;
+  }
+}
+
+.tileContainer {
+  background-color: $ui-02;
+  border-top: 1px solid $ui-03;
+  padding: layout.$spacing-11 0;
+}
+
+.tile {
+  margin: auto;
+  width: fit-content;
+}
+
+.tileContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menuItem {
+  max-width: none;
+}
+
+.desktopHeading {
+  h4 {
+    @include type.type-style('heading-compact-02');
+    color: colors.$gray-70;
+  }
+}
+
+.tabletHeading {
+  h4 {
+    @include type.type-style('heading-03');
+    color: colors.$gray-70;
+  }
+}
+
+.desktopHeading,
+.tabletHeading {
+  text-align: left;
+  text-transform: capitalize;
+  margin-bottom: layout.$spacing-05;
+
+  h4:after {
+    content: '';
+    display: block;
+    width: 2rem;
+    padding-top: 3px;
+    border-bottom: 0.375rem solid var(--brand-03);
+  }
+}
+
+.statusContainer {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 0.5rem;
+  }
+}
+
+.visitType {
+  @include type.type-style('heading-compact-02');
+}
+
+.headerBtnContainer {
+  background-color: $ui-background;
+  padding: layout.$spacing-05;
+  text-align: right;
+}
+
+.addPatientToListBtn {
+  margin-left: layout.$spacing-05;
+  height: layout.$spacing-09;
+}
+
+.editIcon {
+  color: $interactive-01;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.toolbarMenuAction {
+  max-width: none;
+}
+
+.tableHeader {
+  @include type.type-style('body-02');
+  margin: layout.$spacing-05 0;
+}

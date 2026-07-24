@@ -1,0 +1,87 @@
+[{
+    "id": "stockmanagement.extensions",
+    "description": "stockmanagement.dashboard.description",
+    "extensions": [
+      {
+        "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+        "id": "stockmanagement.homepageLink",
+        "type": "link",
+        "label": "stockmanagement.dashboard.label",
+        "url": "stockmanagement/spa.page",
+        "icon": "icon-book",
+        "requiredPrivilege": "App: stockmanagement.dashboard",
+        "order": 30
+      },
+      {
+        "id": "stockmanagement.userolescopesLink",
+        "extensionPointId": "stockmanagement.dashboard",
+        "type": "link",
+        "label": "stockmanagement.userrolescopes.page",
+        "url": "stockmanagement/spa.page?#/user-role-scopes",
+        "icon": "icon-user",
+        "requiredPrivilege": "App: stockmanagement.userRoleScopes",
+        "order": 30
+      },
+      {
+        "id": "stockmanagement.stockitemslink",
+        "extensionPointId": "stockmanagement.dashboard",
+        "type": "link",
+        "label": "stockmanagement.stockitems.page",
+        "url": "stockmanagement/spa.page?#/stock-items",
+        "icon": "icon-italic",
+        "requiredPrivilege": "App: stockmanagement.stockItems",
+        "order": 10
+      },
+      {
+        "id": "stockmanagement.stockoperationslink",
+        "extensionPointId": "stockmanagement.dashboard",
+        "type": "link",
+        "label": "stockmanagement.stockoperations.page",
+        "url": "stockmanagement/spa.page?#/stock-operations",
+        "icon": "icon-list",
+        "requiredPrivilege": "App: stockmanagement.stockoperations",
+        "order": 10
+      },
+      {
+        "id": "stockmanagement.stocksourcelink",
+        "extensionPointId": "stockmanagement.dashboard",
+        "type": "link",
+        "label": "stockmanagement.stocksources.page",
+        "url": "stockmanagement/spa.page?#/stock-sources",
+        "icon": "icon-flag",
+        "requiredPrivilege": "App: stockmanagement.stockSources",
+        "order": 30
+      },
+      {
+        "id": "stockmanagement.locationslink",
+        "extensionPointId": "stockmanagement.dashboard",
+        "type": "link",
+        "label": "stockmanagement.locations.page",
+        "url": "stockmanagement/spa.page?#/locations",
+        "icon": "icon-building",
+        "requiredPrivilege": "Manage Locations",
+        "order": 40
+      },
+      {
+        "id": "stockmanagement.stockreportslink",
+        "extensionPointId": "stockmanagement.dashboard",
+        "type": "link",
+        "label": "stockmanagement.stockreports.page",
+        "url": "stockmanagement/spa.page?#/stock-reports",
+        "icon": "icon-bar-chart",
+        "requiredPrivilege": "App: stockmanagement.reports",
+        "order": 50
+      },
+      {
+        "id": "stockmanagement.globalsettingslink",
+        "extensionPointId": "stockmanagement.dashboard",
+        "type": "link",
+        "label": "stockmanagement.globalsettings.page",
+        "url": "admin/maintenance/settings.list?show=Stockmanagement",
+        "icon": "icon-cogs",
+        "requiredPrivilege": "Get Global Properties",
+        "order": 100
+      }
+    ]
+  }
+]

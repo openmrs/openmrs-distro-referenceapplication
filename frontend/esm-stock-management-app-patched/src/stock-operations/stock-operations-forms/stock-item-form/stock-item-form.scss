@@ -1,0 +1,42 @@
+@use '@carbon/type';
+@use '@carbon/layout';
+@use '@carbon/colors';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.grid {
+  margin: layout.$spacing-05 layout.$spacing-05;
+  padding: layout.$spacing-05 0 0 0;
+}
+
+.button {
+  height: layout.$spacing-10;
+  display: flex;
+  align-content: flex-start;
+  align-items: baseline;
+  min-width: 50%;
+}
+
+.buttonSet {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.datePickerInput span,
+.datePickerInput div,
+.datePickerInput input,
+.datePickerInput {
+  min-width: 100%;
+}
+
+.title {
+  @include type.type-style('heading-02');
+  padding: layout.$spacing-03;
+}

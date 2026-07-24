@@ -1,0 +1,68 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:testing-library/react"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "react-hooks",
+    "testing-library"
+  ],
+  "root": true,
+  "rules": {
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    // Disabling these rules for now just to keep the diff small. I'll enable them in a future PR that fixes lint issues.
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-require-imports": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    // Use `import type` instead of `import` for type imports https://typescript-eslint.io/blog/consistent-type-imports-and-exports-why-and-how
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "fixStyle": "inline-type-imports"
+      }
+    ],
+    "import/no-duplicates": "error",
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "lodash",
+            "message": "Import specific methods from `lodash`. e.g. `import map from 'lodash/map'`"
+          },
+          {
+            "name": "lodash-es",
+            "importNames": ["default"],
+            "message": "Import specific methods from `lodash-es`. e.g. `import { map } from 'lodash-es'`"
+          },
+          {
+            "name": "carbon-components-react",
+            "message": "Import from `@carbon/react` directly. e.g. `import { Toggle } from '@carbon/react'`"
+          },
+          {
+            "name": "@carbon/icons-react",
+            "message": "Import from `@carbon/react/icons`. e.g. `import { ChevronUp } from '@carbon/react/icons'`"
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["e2e/**/*.spec.ts"],
+      "rules": {
+        "testing-library/prefer-screen-queries": "off"
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+name: Report bundle size
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TURBO_API: 'http://127.0.0.1:9080'
+      TURBO_TOKEN: 'turbo-token'
+      TURBO_TEAM: ${{ github.repository_owner }}
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: 🚀 Setup a local cache server for Turborepo
+        uses: felixmosh/turborepo-gh-artifacts@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ env.TURBO_TOKEN }}
+
+      - name: 📊 Compute bundle size report
+        uses: preactjs/compressed-size-action@v2
+        with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          minimum-change-threshold: 10240 # 10 KB
+          build-script: 'turbo run build --color --concurrency=5'

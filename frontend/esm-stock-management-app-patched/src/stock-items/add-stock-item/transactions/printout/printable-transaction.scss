@@ -1,0 +1,71 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+
+.printableInvoiceContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  margin-top: layout.$spacing-05;
+}
+
+.itemsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  padding: layout.$spacing-05;
+  margin: layout.$spacing-05;
+  font-size: 6px;
+}
+
+.detailsContainer {
+  margin: layout.$spacing-05 0;
+  width: 20%;
+}
+
+.tableContainer {
+  margin-bottom: layout.$spacing-05;
+  font-size: 6px;
+}
+
+.totalContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  margin: layout.$spacing-04;
+}
+
+.itemHeading {
+  @include type.type-style('label-02');
+  font-style: bold;
+  color: colors.$cool-gray-90;
+  margin-bottom: layout.$spacing-01;
+}
+
+.itemValue {
+  @include type.type-style('legal-01');
+  color: colors.$cool-gray-90;
+}
+
+.itemTotal {
+  border-bottom: solid 0.00125rem colors.$cool-gray-10;
+  padding: layout.$spacing-02;
+}
+
+.itemLabel {
+  float: right;
+  @include type.type-style('label-01');
+}
+
+.tableBody {
+  font-size: 8px;
+}
+
+.printButton {
+  padding: layout.$spacing-01;
+  margin: layout.$spacing-01;
+}

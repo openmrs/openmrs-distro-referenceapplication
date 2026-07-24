@@ -1,0 +1,25 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: calc(layout.$layout-07 * 1.25);
+  border: 1px solid colors.$gray-20;
+  margin: layout.$spacing-05;
+  align-items: center;
+  background-color: colors.$white-0;
+
+  & > button {
+    margin-bottom: layout.$layout-03;
+  }
+}
+
+.tableHeader {
+  @include type.type-style('heading-compact-01');
+  color: $text-02;
+}

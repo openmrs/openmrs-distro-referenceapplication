@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module configVersion="1.0">
+
+	<id>@MODULE_ID@</id>
+	<name>@MODULE_NAME@</name>
+	<version>@MODULE_VERSION@</version>
+	<package>@MODULE_PACKAGE@</package>
+	<author>OpenMRS</author>
+	<description>Interactive lab test summary report, broken down by category, test, age group and gender, with drill-down to the patients behind each count</description>
+	<activator>@MODULE_PACKAGE@.LabTestReportActivator</activator>
+
+	<require_version>2.0.0</require_version>
+
+	<require_modules>
+		<require_module version="1.17.0">org.openmrs.module.reporting</require_module>
+	</require_modules>
+
+	<aware_of_modules>
+		<aware_of_module>org.openmrs.module.legacyui</aware_of_module>
+	</aware_of_modules>
+
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>@MODULE_PACKAGE@.extension.html.LabTestReportAdminExt</class>
+	</extension>
+
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+
+</module>
