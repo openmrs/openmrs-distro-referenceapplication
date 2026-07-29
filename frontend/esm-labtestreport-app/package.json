@@ -10,7 +10,8 @@
     "start": "openmrs develop",
     "serve": "rspack serve --mode=development",
     "build": "rspack --mode production",
-    "typescript": "tsc"
+    "typescript": "tsc",
+    "extract-translations": "i18next 'src/**/*.component.tsx' 'src/**/*.tsx' --config ./tools/i18next-parser.config.js"
   },
   "browserslist": [
     "extends browserslist-config-openmrs"
@@ -26,14 +27,18 @@
     "@openmrs/esm-framework": "*",
     "react": "18.x",
     "react-dom": "18.x",
+    "react-i18next": "16.x",
     "react-router-dom": "6.x",
     "rxjs": "6.x"
   },
   "devDependencies": {
     "@openmrs/esm-framework": "next",
+    "i18next": "^25.0.0",
+    "i18next-parser": "^9.3.0",
     "openmrs": "next",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-i18next": "^16.0.0",
     "react-router-dom": "^6.14.1",
     "rxjs": "^6.6.7",
     "swr": "^2.2.5",

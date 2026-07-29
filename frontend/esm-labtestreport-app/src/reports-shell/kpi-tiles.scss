@@ -23,3 +23,24 @@
   color: var(--cds-text-primary, #161616);
   margin: 0;
 }
+
+.kpiCompare {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--cds-text-secondary, #525252);
+  margin: 0.5rem 0 0;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.kpiCompare-up {
+  color: var(--cds-support-success, #24a148);
+}
+
+.kpiCompare-down {
+  color: var(--cds-support-error, #da1e28);
+}

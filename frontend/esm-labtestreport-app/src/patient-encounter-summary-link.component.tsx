@@ -1,14 +1,18 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ClickableTile, Layer } from '@carbon/react';
 import { ArrowRight } from '@carbon/react/icons';
 
 export default function PatientEncounterSummaryLink() {
+  const { t } = useTranslation();
   return (
     <Layer>
       <ClickableTile href={`${window.getOpenmrsSpaBase().slice(0, -1)}/patient-encounter-summary-report`}>
         <div>
-          <div className="heading">Patient Encounter Summary Report</div>
-          <div className="content">Patients by encounter count, click a row to open their chart</div>
+          <div className="heading">{t('patientEncounterSummaryReportTitle', 'Patient Encounter Summary Report')}</div>
+          <div className="content">
+            {t('patientEncounterSummaryReportShortDesc', 'Patients by encounter count, click a row to open their chart')}
+          </div>
         </div>
         <div className="iconWrapper">
           <ArrowRight size={16} />

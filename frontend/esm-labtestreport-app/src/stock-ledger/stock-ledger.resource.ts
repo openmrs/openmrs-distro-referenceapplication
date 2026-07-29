@@ -22,8 +22,8 @@ function buildQuery(params: Record<string, string | number | undefined>): string
   return query ? `?${query}` : '';
 }
 
-export function useStockLedgerReport(startDate?: string, endDate?: string) {
-  const url = `/module/labtestreport/api/stock-ledger.json${buildQuery({ startDate, endDate })}`;
+export function useStockLedgerReport(startDate?: string, endDate?: string, enabled: boolean = true) {
+  const url = enabled ? `/module/labtestreport/api/stock-ledger.json${buildQuery({ startDate, endDate })}` : null;
   const { data, error, isLoading } = useSWR<{ data: Array<StockLedgerRow> }, Error>(url, openmrsFetch);
   return { rows: data?.data ?? [], error, isLoading };
 }

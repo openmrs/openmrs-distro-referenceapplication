@@ -8,9 +8,38 @@
   border: 1px solid var(--cds-border-subtle, #e0e0e0);
 }
 
-.barRow {
+.legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--cds-text-secondary, #525252);
+}
+
+.legendSwatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+}
+
+.legendSwatchCurrent {
+  background-color: var(--cds-support-info, #0f62fe);
+}
+
+.legendSwatchCompare {
+  background-color: var(--cds-support-warning, #8a3ffc);
+}
+
+.barGroup {
   display: grid;
-  grid-template-columns: 14rem 1fr 3.5rem;
+  grid-template-columns: 14rem 1fr;
   align-items: center;
   gap: 0.75rem;
 }
@@ -21,6 +50,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.barTracks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 1fr 3.5rem;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .barTrack {
@@ -35,6 +77,10 @@
   background-color: var(--cds-support-info, #0f62fe);
   min-width: 2px;
   transition: width 0.2s ease;
+}
+
+.barFillCompare {
+  background-color: var(--cds-support-warning, #8a3ffc);
 }
 
 .barValue {

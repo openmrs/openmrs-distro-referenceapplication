@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Tabs, TabList, Tab } from '@carbon/react';
 import { navigate } from '@openmrs/esm-framework';
 import styles from './reports-tabs.scss';
@@ -29,21 +30,22 @@ const TAB_ORDER: ReportsTabKey[] = [
   'stock-ledger',
 ];
 
-const TAB_LABELS: Record<ReportsTabKey, string> = {
-  overview: 'Reports overview',
-  'lab-test-summary': 'Lab Test Summary',
-  'patient-encounter-summary': 'Patient Encounters',
-  'disease-summary': 'Disease Surveillance',
-  'session-attendance': 'Session Attendance',
-  'stock-ledger': 'Stock Ledger',
-};
-
 export default function ReportsTabs({ activeKey }: { activeKey: ReportsTabKey }) {
+  const { t } = useTranslation();
   const selectedIndex = TAB_ORDER.indexOf(activeKey);
+
+  const tabLabels: Record<ReportsTabKey, string> = {
+    overview: t('reportsOverview', 'Reports overview'),
+    'lab-test-summary': t('labTestSummary', 'Lab Test Summary'),
+    'patient-encounter-summary': t('patientEncounters', 'Patient Encounters'),
+    'disease-summary': t('diseaseSurveillance', 'Disease Surveillance'),
+    'session-attendance': t('sessionAttendance', 'Session Attendance'),
+    'stock-ledger': t('stockLedger', 'Stock Ledger'),
+  };
 
   return (
     <div className={styles.tabsWrapper}>
-      <p className={styles.sectionLabel}>Reports</p>
+      <p className={styles.sectionLabel}>{t('reports', 'Reports')}</p>
       <Tabs
         selectedIndex={selectedIndex}
         onChange={({ selectedIndex: index }: { selectedIndex: number }) => {
@@ -51,9 +53,9 @@ export default function ReportsTabs({ activeKey }: { activeKey: ReportsTabKey })
           navigate({ to: `\${openmrsSpaBase}/${TAB_ROUTES[key]}` });
         }}
       >
-        <TabList aria-label="Reports navigation" contained>
+        <TabList aria-label={t('reportsNavigation', 'Reports navigation')} contained>
           {TAB_ORDER.map((key) => (
-            <Tab key={key}>{TAB_LABELS[key]}</Tab>
+            <Tab key={key}>{tabLabels[key]}</Tab>
           ))}
         </TabList>
       </Tabs>

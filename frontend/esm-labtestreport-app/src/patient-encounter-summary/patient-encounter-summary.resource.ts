@@ -11,7 +11,7 @@ export interface PatientEncounterSummaryRow {
   mostRecentEncounterDate: string;
 }
 
-export function usePatientEncounterSummary(startDate?: string, endDate?: string) {
+export function usePatientEncounterSummary(startDate?: string, endDate?: string, enabled: boolean = true) {
   const search = new URLSearchParams();
   if (startDate) {
     search.set('startDate', startDate);
@@ -20,7 +20,7 @@ export function usePatientEncounterSummary(startDate?: string, endDate?: string)
     search.set('endDate', endDate);
   }
   const query = search.toString();
-  const url = `/module/labtestreport/api/encounters.json${query ? `?${query}` : ''}`;
+  const url = enabled ? `/module/labtestreport/api/encounters.json${query ? `?${query}` : ''}` : null;
   const { data, error, isLoading } = useSWR<{ data: PatientEncounterSummaryRow[] }, Error>(url, openmrsFetch);
   return { rows: data?.data ?? [], error, isLoading };
 }

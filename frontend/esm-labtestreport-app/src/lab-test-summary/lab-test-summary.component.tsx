@@ -1,10 +1,16 @@
 import React, { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Modal, InlineLoading, Button, Search, Select, SelectItem, ContentSwitcher, Switch } from '@carbon/react';
 import { ChevronDown, ChevronRight } from '@carbon/react/icons';
 import { navigate } from '@openmrs/esm-framework';
 import ReportsTabs from '../reports-shell/reports-tabs.component';
 import SimpleBarChart from '../reports-shell/simple-bar-chart.component';
 import KpiTiles from '../reports-shell/kpi-tiles.component';
+import MonthCompareControls from '../reports-shell/month-compare-controls.component';
+import ComparisonSummaryTable from '../reports-shell/comparison-summary-table.component';
+import ExportButtons from '../reports-shell/export-buttons.component';
+import { buildKpiExportSheet, buildComparisonExportSheet, type ExportSheet } from '../reports-shell/export-utils';
+import { useMonthComparison } from '../reports-shell/month-compare';
 import pageStyles from '../reports-shell/reports-page.scss';
 import { useSummaryReport, useDrilldown, type DrilldownParams, type SummaryRow } from './lab-test-summary.resource';
 
@@ -38,6 +44,37 @@ interface CategoryGroup {
   columnTotals: Record<string, number>;
 }
 
+function summarize(rows: SummaryRow[], searchText: string, categoryFilter: string) {
+  const search = searchText.trim().toLowerCase();
+  const filteredRows = rows.filter((row) => {
+    if (categoryFilter && row.category !== categoryFilter) {
+      return false;
+    }
+    if (!search) {
+      return true;
+    }
+    return row.category.toLowerCase().includes(search) || row.testLabel.toLowerCase().includes(search);
+  });
+  const groupedRows = groupByCategory(filteredRows);
+  const columnTotals: Record<string, number> = {};
+  AGE_GENDER_COLUMNS.forEach((col) => (columnTotals[`${col.ageGroup}_${col.gender}`] = 0));
+  let totalTests = 0;
+  let grandTotal = 0;
+  filteredRows.forEach((row) => {
+    totalTests += row.totalTests;
+    grandTotal += row.total;
+    AGE_GENDER_COLUMNS.forEach((col) => {
+      const key = `${col.ageGroup}_${col.gender}`;
+      columnTotals[key] += row.counts?.[key] ?? 0;
+    });
+  });
+  const topCategory = groupedRows.reduce<CategoryGroup | null>(
+    (top, group) => (!top || group.totalTests > top.totalTests ? group : top),
+    null,
+  );
+  return { filteredRows, groupedRows, totals: { totalTests, grandTotal, columnTotals }, topCategory };
+}
+
 function groupByCategory(list: SummaryRow[]): CategoryGroup[] {
   const groups: CategoryGroup[] = [];
   let current: CategoryGroup | null = null;
@@ -66,6 +103,7 @@ function groupByCategory(list: SummaryRow[]): CategoryGroup[] {
 }
 
 export default function LabTestSummaryReport() {
+  const { t } = useTranslation();
   const [startDateInput, setStartDateInput] = useState('');
   const [endDateInput, setEndDateInput] = useState('');
   const [appliedDates, setAppliedDates] = useState<{ startDate?: string; endDate?: string }>({});
@@ -74,65 +112,121 @@ export default function LabTestSummaryReport() {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [collapsedCategories, setCollapsedCategories] = useState<Set<number>>(new Set());
   const [viewMode, setViewMode] = useState<'table' | 'graph'>('table');
+  const compare = useMonthComparison();
 
-  const { rows, isLoading } = useSummaryReport(appliedDates.startDate, appliedDates.endDate);
+  const primaryStartDate = compare.enabled ? compare.primary.startDate : appliedDates.startDate;
+  const primaryEndDate = compare.enabled ? compare.primary.endDate : appliedDates.endDate;
+
+  const { rows, isLoading } = useSummaryReport(primaryStartDate, primaryEndDate);
+  const { rows: compareRowsRaw, isLoading: compareLoading } = useSummaryReport(
+    compare.comparison.startDate,
+    compare.comparison.endDate,
+    compare.enabled,
+  );
   const { patients, isLoading: patientsLoading } = useDrilldown(selection);
+  const dataLoading = isLoading || (compare.enabled && compareLoading);
 
   const categories = useMemo(
     () => Array.from(new Set(rows.map((row) => row.category))).sort((a, b) => a.localeCompare(b)),
     [rows],
   );
 
-  const filteredRows = useMemo(() => {
-    const search = searchText.trim().toLowerCase();
-    return rows.filter((row) => {
-      if (categoryFilter && row.category !== categoryFilter) {
-        return false;
-      }
-      if (!search) {
-        return true;
-      }
-      return row.category.toLowerCase().includes(search) || row.testLabel.toLowerCase().includes(search);
-    });
-  }, [rows, searchText, categoryFilter]);
+  const primary = useMemo(() => summarize(rows, searchText, categoryFilter), [rows, searchText, categoryFilter]);
+  const { filteredRows, groupedRows, totals, topCategory } = primary;
 
-  const groupedRows = useMemo(() => groupByCategory(filteredRows), [filteredRows]);
-
-  const totals = useMemo(() => {
-    const columnTotals: Record<string, number> = {};
-    AGE_GENDER_COLUMNS.forEach((col) => (columnTotals[`${col.ageGroup}_${col.gender}`] = 0));
-    let totalTests = 0;
-    let grandTotal = 0;
-    filteredRows.forEach((row) => {
-      totalTests += row.totalTests;
-      grandTotal += row.total;
-      AGE_GENDER_COLUMNS.forEach((col) => {
-        const key = `${col.ageGroup}_${col.gender}`;
-        columnTotals[key] += row.counts?.[key] ?? 0;
-      });
-    });
-    return { totalTests, grandTotal, columnTotals };
-  }, [filteredRows]);
-
-  const chartData = useMemo(
-    () => groupedRows.map((group) => ({ label: group.category, value: group.totalTests })),
-    [groupedRows],
+  const compareSummary = useMemo(
+    () => (compare.enabled ? summarize(compareRowsRaw, searchText, categoryFilter) : null),
+    [compareRowsRaw, searchText, categoryFilter, compare.enabled],
   );
 
-  const topCategory = useMemo(
-    () => groupedRows.reduce<CategoryGroup | null>((top, group) => (!top || group.totalTests > top.totalTests ? group : top), null),
-    [groupedRows],
+  const chartData = useMemo(() => {
+    const compareByCategory = new Map(
+      (compareSummary?.groupedRows ?? []).map((group) => [group.category, group.totalTests]),
+    );
+    return groupedRows.map((group) => ({
+      label: group.category,
+      value: group.totalTests,
+      compareValue: compare.enabled ? compareByCategory.get(group.category) ?? 0 : undefined,
+    }));
+  }, [groupedRows, compareSummary, compare.enabled]);
+
+  const kpiItems = useMemo(() => {
+    const items = [
+      { label: t('totalTests', 'Total Tests'), value: totals.totalTests },
+      { label: t('categories', 'Categories'), value: groupedRows.length },
+      { label: t('labTestsTracked', 'Lab Tests Tracked'), value: filteredRows.length },
+      { label: t('topCategory', 'Top Category'), value: topCategory ? topCategory.category : '—' },
+    ];
+    if (!compare.enabled || !compareSummary) {
+      return items;
+    }
+    const compareValues: Array<React.ReactNode> = [
+      compareSummary.totals.totalTests,
+      compareSummary.groupedRows.length,
+      compareSummary.filteredRows.length,
+      compareSummary.topCategory ? compareSummary.topCategory.category : '—',
+    ];
+    return items.map((item, index) => ({
+      ...item,
+      compareValue: compareValues[index],
+      compareLabel: compare.comparison.label,
+    }));
+  }, [t, totals, groupedRows, filteredRows, topCategory, compare.enabled, compareSummary, compare.comparison.label]);
+
+  const comparisonTableRows = useMemo(() => {
+    if (!compare.enabled || !compareSummary) {
+      return [];
+    }
+    const compareByCategory = new Map(compareSummary.groupedRows.map((group) => [group.category, group.totalTests]));
+    const categoryUnion = new Set([
+      ...groupedRows.map((group) => group.category),
+      ...compareSummary.groupedRows.map((group) => group.category),
+    ]);
+    return Array.from(categoryUnion)
+      .sort((a, b) => a.localeCompare(b))
+      .map((category) => ({
+        label: category,
+        current: groupedRows.find((group) => group.category === category)?.totalTests ?? 0,
+        compare: compareByCategory.get(category) ?? 0,
+      }));
+  }, [groupedRows, compareSummary, compare.enabled]);
+
+  const mainExportSheet = useMemo<ExportSheet>(
+    () => ({
+      name: t('labTestSummary', 'Lab Test Summary'),
+      headers: [
+        t('category', 'Category'),
+        t('labTest', 'Lab Test'),
+        t('totalTests', 'Total Tests'),
+        ...AGE_GENDER_COLUMNS.map((col) => col.label),
+        t('total', 'Total'),
+      ],
+      rows: filteredRows.map((row) => [
+        row.category,
+        row.testLabel,
+        row.totalTests,
+        ...AGE_GENDER_COLUMNS.map((col) => row.counts?.[`${col.ageGroup}_${col.gender}`] ?? 0),
+        row.total,
+      ]),
+    }),
+    [t, filteredRows],
   );
 
-  const kpiItems = useMemo(
-    () => [
-      { label: 'Total Tests', value: totals.totalTests },
-      { label: 'Categories', value: groupedRows.length },
-      { label: 'Lab Tests Tracked', value: filteredRows.length },
-      { label: 'Top Category', value: topCategory ? topCategory.category : '—' },
-    ],
-    [totals, groupedRows, filteredRows, topCategory],
-  );
+  const exportExtraSheets = useMemo<Array<ExportSheet>>(() => {
+    if (!compare.enabled) {
+      return [];
+    }
+    return [
+      buildComparisonExportSheet(
+        comparisonTableRows,
+        t('category', 'Category'),
+        compare.primary.label,
+        compare.comparison.label,
+        t,
+      ),
+      buildKpiExportSheet(kpiItems, t),
+    ];
+  }, [t, compare.enabled, comparisonTableRows, compare.primary.label, compare.comparison.label, kpiItems]);
 
   function toggleCategory(categoryConceptId: number) {
     setCollapsedCategories((prev) => {
@@ -162,8 +256,8 @@ export default function LabTestSummaryReport() {
       testConceptId,
       ageGroup,
       gender,
-      startDate: appliedDates.startDate,
-      endDate: appliedDates.endDate,
+      startDate: primaryStartDate,
+      endDate: primaryEndDate,
       category,
       testLabel,
       ageGroupLabel,
@@ -178,35 +272,62 @@ export default function LabTestSummaryReport() {
     <div>
       <ReportsTabs activeKey="lab-test-summary" />
       <div className={pageStyles.pageBody}>
-        <h2 className={pageStyles.pageHeading}>Lab Test Summary Report</h2>
+        <h2 className={pageStyles.pageHeading}>{t('labTestSummaryReportTitle', 'Lab Test Summary Report')}</h2>
 
-        {!isLoading && <KpiTiles items={kpiItems} />}
+        {!dataLoading && <KpiTiles items={kpiItems} />}
 
-        <div className={pageStyles.filterTile}>
-          <div className={pageStyles.filterField}>
-            <label htmlFor="startDate">Start Date</label>
-            <input
-              id="startDate"
-              type="date"
-              value={startDateInput}
-              onChange={(e) => setStartDateInput(e.target.value)}
+        {!dataLoading && compare.enabled && (
+          <>
+            <h3 className={pageStyles.pageHeading}>
+              {t('categoryComparisonHeading', 'Category comparison: {{primary}} vs {{comparison}}', {
+                primary: compare.primary.label,
+                comparison: compare.comparison.label,
+              })}
+            </h3>
+            <ComparisonSummaryTable
+              rows={comparisonTableRows}
+              rowLabel={t('category', 'Category')}
+              currentLabel={compare.primary.label}
+              compareLabel={compare.comparison.label}
+              emptyMessage={t('noDataForEitherPeriod', 'No data found for either period.')}
             />
+          </>
+        )}
+
+        <MonthCompareControls {...compare} />
+
+        {!compare.enabled && (
+          <div className={pageStyles.filterTile}>
+            <div className={pageStyles.filterField}>
+              <label htmlFor="startDate">{t('startDate', 'Start Date')}</label>
+              <input
+                id="startDate"
+                type="date"
+                value={startDateInput}
+                onChange={(e) => setStartDateInput(e.target.value)}
+              />
+            </div>
+            <div className={pageStyles.filterField}>
+              <label htmlFor="endDate">{t('endDate', 'End Date')}</label>
+              <input
+                id="endDate"
+                type="date"
+                value={endDateInput}
+                onChange={(e) => setEndDateInput(e.target.value)}
+              />
+            </div>
+            <Button size="md" onClick={applyFilter}>
+              {t('filter', 'Filter')}
+            </Button>
           </div>
-          <div className={pageStyles.filterField}>
-            <label htmlFor="endDate">End Date</label>
-            <input id="endDate" type="date" value={endDateInput} onChange={(e) => setEndDateInput(e.target.value)} />
-          </div>
-          <Button size="md" onClick={applyFilter}>
-            Filter
-          </Button>
-        </div>
+        )}
 
         <div className={pageStyles.filterTile}>
           <div className={pageStyles.filterField} style={{ minWidth: '16rem' }}>
             <Search
               size="md"
-              labelText="Search by category or lab test"
-              placeholder="Search by category or lab test..."
+              labelText={t('searchByCategoryOrLabTest', 'Search by category or lab test')}
+              placeholder={t('searchByCategoryOrLabTestPlaceholder', 'Search by category or lab test...')}
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               onClear={() => setSearchText('')}
@@ -215,11 +336,11 @@ export default function LabTestSummaryReport() {
           <div className={pageStyles.filterField} style={{ minWidth: '14rem' }}>
             <Select
               id="categoryFilter"
-              labelText="Category"
+              labelText={t('category', 'Category')}
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
             >
-              <SelectItem value="" text="All categories" />
+              <SelectItem value="" text={t('allCategories', 'All categories')} />
               {categories.map((category) => (
                 <React.Fragment key={category}>
                   <SelectItem value={category} text={category} />
@@ -229,31 +350,38 @@ export default function LabTestSummaryReport() {
           </div>
         </div>
 
+        <ExportButtons
+          filenameBase="lab-test-summary-report"
+          mainSheet={mainExportSheet}
+          extraSheets={exportExtraSheets}
+          disabled={dataLoading}
+        />
+
         <div className={pageStyles.viewSwitcher}>
           <ContentSwitcher
             size="md"
             selectedIndex={viewMode === 'table' ? 0 : 1}
             onChange={({ name }) => setViewMode(name as 'table' | 'graph')}
           >
-            <Switch name="table" text="Table" />
-            <Switch name="graph" text="Graph" />
+            <Switch name="table" text={t('table', 'Table')} />
+            <Switch name="graph" text={t('graph', 'Graph')} />
           </ContentSwitcher>
         </div>
 
-        {isLoading && <InlineLoading description="Loading report..." />}
+        {dataLoading && <InlineLoading description={t('loadingReport', 'Loading report...')} />}
 
-        {!isLoading && viewMode === 'table' && (
+        {!dataLoading && viewMode === 'table' && (
           <div className={pageStyles.tableContainer}>
             <table className={pageStyles.dataTable}>
               <thead>
                 <tr>
                   <th rowSpan={2} className="left">
-                    Category
+                    {t('category', 'Category')}
                   </th>
                   <th rowSpan={2} className="left">
-                    Lab Test
+                    {t('labTest', 'Lab Test')}
                   </th>
-                  <th rowSpan={2}>Total Tests</th>
+                  <th rowSpan={2}>{t('totalTests', 'Total Tests')}</th>
                   <th colSpan={2}>0-4</th>
                   <th colSpan={2}>5-14</th>
                   <th colSpan={2}>15-18</th>
@@ -350,7 +478,7 @@ export default function LabTestSummaryReport() {
                 {groupedRows.length === 0 && (
                   <tr>
                     <td colSpan={16} className={pageStyles.emptyState}>
-                      No data found for this selection.
+                      {t('noDataForSelection', 'No data found for this selection.')}
                     </td>
                   </tr>
                 )}
@@ -359,7 +487,7 @@ export default function LabTestSummaryReport() {
                 <tfoot>
                   <tr>
                     <td className="left" colSpan={2}>
-                      <strong>Totals ({filteredRows.length} tests)</strong>
+                      <strong>{t('totalsTestsCount', 'Totals ({{count}} tests)', { count: filteredRows.length })}</strong>
                     </td>
                     <td>
                       <strong>{totals.totalTests}</strong>
@@ -379,8 +507,13 @@ export default function LabTestSummaryReport() {
           </div>
         )}
 
-        {!isLoading && viewMode === 'graph' && (
-          <SimpleBarChart data={chartData} emptyMessage="No data found for this selection." />
+        {!dataLoading && viewMode === 'graph' && (
+          <SimpleBarChart
+            data={chartData}
+            emptyMessage={t('noDataForSelection', 'No data found for this selection.')}
+            currentLabel={compare.enabled ? compare.primary.label : undefined}
+            compareLabel={compare.enabled ? compare.comparison.label : undefined}
+          />
         )}
       </div>
 
@@ -393,15 +526,17 @@ export default function LabTestSummaryReport() {
           passiveModal
           onRequestClose={() => setSelection(null)}
         >
-          {patientsLoading && <InlineLoading description="Loading patients..." />}
-          {!patientsLoading && patients.length === 0 && <p>No patients found for this selection.</p>}
+          {patientsLoading && <InlineLoading description={t('loadingPatients', 'Loading patients...')} />}
+          {!patientsLoading && patients.length === 0 && (
+            <p>{t('noPatientsForSelection', 'No patients found for this selection.')}</p>
+          )}
           {!patientsLoading && patients.length > 0 && (
             <div className={pageStyles.tableContainer}>
               <table className={pageStyles.dataTable}>
                 <thead>
                   <tr>
-                    <th className="left">Name</th>
-                    <th className="left">Identifier</th>
+                    <th className="left">{t('name', 'Name')}</th>
+                    <th className="left">{t('identifier', 'Identifier')}</th>
                   </tr>
                 </thead>
                 <tbody>

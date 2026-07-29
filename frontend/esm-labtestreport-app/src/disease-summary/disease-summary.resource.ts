@@ -39,8 +39,10 @@ function buildQuery(params: Record<string, string | number | undefined>): string
   return query ? `?${query}` : '';
 }
 
-export function useDiseaseSummaryReport(startDate?: string, endDate?: string) {
-  const url = `/module/labtestreport/api/disease-summary.json${buildQuery({ startDate, endDate })}`;
+export function useDiseaseSummaryReport(startDate?: string, endDate?: string, enabled: boolean = true) {
+  const url = enabled
+    ? `/module/labtestreport/api/disease-summary.json${buildQuery({ startDate, endDate })}`
+    : null;
   const { data, error, isLoading } = useSWR<{ data: DiseaseSummaryRow[] }, Error>(url, openmrsFetch);
   return { rows: data?.data ?? [], error, isLoading };
 }
