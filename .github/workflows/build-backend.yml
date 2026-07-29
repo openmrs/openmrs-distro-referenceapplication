@@ -41,17 +41,15 @@ on:
         type: string
         default: ''
     secrets:
-      DOCKER_HUB_USERNAME:
-        required: true
-      DOCKER_HUB_TOKEN:
-        required: true
       MAVEN_REPO_USERNAME:
         required: true
       MAVEN_REPO_API_KEY:
         required: true
 
 env:
-  IMAGE: openmrs/openmrs-reference-application-3-backend
+  GHCR_USERNAME: hemanth-beehyv
+  IMAGE: ghcr.io/phcc-openmrs/openmrs-reference-application-3-backend
+  DB_IMAGE: ghcr.io/phcc-openmrs/openmrs-reference-application-3-db
   DOCKER_IMAGE_TAG: ${{ inputs.docker_image_tag || 'nightly' }}
   DOCKER_IMAGE_TAG_VERSION: ${{ inputs.docker_image_tag_version || '3.7.x' }}
   DOCKER_IMAGE_TAG_ENV: ${{ inputs.docker_image_tag_env || 'dev3' }}
@@ -68,17 +66,19 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: write
       id-token: write   # required for cosign keyless signing via OIDC
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ inputs.ref || github.sha }}
 
-      - name: Log in to Docker Hub
+      - name: Log in to GHCR
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ env.GHCR_USERNAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
@@ -140,17 +140,19 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: write
       id-token: write   # required for cosign keyless signing via OIDC
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ inputs.ref || github.sha }}
 
-      - name: Log in to Docker Hub
+      - name: Log in to GHCR
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ env.GHCR_USERNAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
@@ -211,17 +213,19 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: read
+      packages: write
       id-token: write   # required for cosign keyless signing via OIDC
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ inputs.ref || github.sha }}
 
-      - name: Log in to Docker Hub
+      - name: Log in to GHCR
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ env.GHCR_USERNAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull nightly images
         run: docker compose -f docker-compose-no-volumes.yml pull
@@ -234,22 +238,22 @@ jobs:
 
       - name: Commit containers
         run: |
-          backend_container_id=$(docker ps --filter ancestor=openmrs/openmrs-reference-application-3-backend:nightly --format '{{.ID}}')
+          backend_container_id=$(docker ps --filter ancestor=${{ env.IMAGE }}:nightly --format '{{.ID}}')
           db_container_id=$(docker ps --filter ancestor=mariadb:10.8.2 --format '{{.ID}}')
-          docker commit $backend_container_id openmrs/openmrs-reference-application-3-backend:nightly-with-data
-          docker commit $db_container_id openmrs/openmrs-reference-application-3-db:nightly-with-data
+          docker commit $backend_container_id ${{ env.IMAGE }}:nightly-with-data
+          docker commit $db_container_id ${{ env.DB_IMAGE }}:nightly-with-data
 
       - name: Push images
         run: |
-          docker push openmrs/openmrs-reference-application-3-backend:nightly-with-data
-          docker push openmrs/openmrs-reference-application-3-db:nightly-with-data
+          docker push ${{ env.IMAGE }}:nightly-with-data
+          docker push ${{ env.DB_IMAGE }}:nightly-with-data
 
       - name: Install cosign
         uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159 # v3.9.2
 
       - name: Sign the images (keyless)
         run: |
-          backend_digest=$(docker inspect --format='{{index .RepoDigests 0}}' openmrs/openmrs-reference-application-3-backend:nightly-with-data)
-          db_digest=$(docker inspect --format='{{index .RepoDigests 0}}' openmrs/openmrs-reference-application-3-db:nightly-with-data)
+          backend_digest=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ env.IMAGE }}:nightly-with-data)
+          db_digest=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ env.DB_IMAGE }}:nightly-with-data)
           cosign sign --yes "$backend_digest"
           cosign sign --yes "$db_digest"
