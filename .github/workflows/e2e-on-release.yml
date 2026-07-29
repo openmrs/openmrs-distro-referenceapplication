@@ -163,7 +163,7 @@ jobs:
       - name: Checkout to the Repo's Tag
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          repository: openmrs/openmrs-esm-patient-chart
+          repository: PHCC-Openmrs/openmrs-esm-patient-chart
           ref: ${{ needs.build.outputs.patient_chart_ref }}
           path: e2e_repo
 
