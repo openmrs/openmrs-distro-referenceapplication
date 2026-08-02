@@ -1,0 +1,71 @@
+{
+  "name": "@openmrs/esm-patient-registration-app",
+  "version": "11.1.0",
+  "description": "Patient registration microfrontend for O3",
+  "browser": "dist/openmrs-esm-patient-registration-app.js",
+  "main": "src/index.ts",
+  "source": true,
+  "license": "MPL-2.0",
+  "homepage": "https://github.com/openmrs/openmrs-esm-patient-management#readme",
+  "scripts": {
+    "start": "openmrs develop",
+    "serve": "rspack serve --mode=development",
+    "debug": "npm run serve",
+    "build": "rspack --mode production",
+    "analyze": "rspack --mode=production --env.analyze=true",
+    "lint": "cross-env eslint src --ext ts,tsx",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest watch",
+    "coverage": "vitest run --coverage --passWithNoTests",
+    "typescript": "tsc",
+    "extract-translations": "i18next 'src/**/*.component.tsx' 'src/**/*.extension.tsx' 'src/**/*modal.tsx' 'src/**/*.workspace.tsx' 'src/index.ts' 'src/patient-registration/validation/patient-registration-validation.ts' --config ../../tools/i18next-parser.config.js"
+  },
+  "browserslist": [
+    "extends browserslist-config-openmrs"
+  ],
+  "keywords": [
+    "openmrs"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openmrs/openmrs-esm-patient-management.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openmrs/openmrs-esm-patient-management/issues"
+  },
+  "dependencies": {
+    "@carbon/react": "1.92.1",
+    "classnames": "^2.3.2",
+    "formik": "^2.1.5",
+    "lodash-es": "^4.17.15",
+    "uuid": "^8.3.2",
+    "yup": "^0.29.1"
+  },
+  "peerDependencies": {
+    "@openmrs/esm-framework": "10.x",
+    "dayjs": "1.x",
+    "react": "18.x",
+    "react-i18next": "16.x",
+    "react-router-dom": "6.x",
+    "swr": "2.x"
+  },
+  "devDependencies": {
+    "@openmrs/esm-framework": "next",
+    "@openmrs/esm-service-queues-app": "11.1.0",
+    "@types/react": "18.3.25",
+    "@types/react-dom": "18.3.7",
+    "@types/webpack-env": "1.18.8",
+    "dayjs": "1.11.13",
+    "openmrs": "next",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-i18next": "16.0.0",
+    "react-router-dom": "6.30.1",
+    "swr": "2.2.5",
+    "typescript": "5.9.3",
+    "vitest": "^4.1.2"
+  }
+}

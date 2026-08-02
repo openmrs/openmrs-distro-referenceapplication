@@ -1,4 +1,24 @@
 {
+  "@openmrs/esm-patient-registration-app": {
+    "fieldConfigurations": {
+      "name": {
+        "allowUnidentifiedPatients": false
+      },
+      "gender": [{ "value": "male" }, { "value": "female" }],
+      "address": {
+        "useAddressHierarchy": {
+          "enabled": false
+        },
+        "selectFields": [
+          {
+            "id": "stateProvince",
+            "options": ["Gaza City", "Deir Al-Balah", "Khan Younis", "Rafah", "North Gaza"]
+          }
+        ],
+        "fieldValidation": [{ "id": "address3", "validateLuhn": true }]
+      }
+    }
+  },
   "@openmrs/esm-patient-chart-app": {
     "restrictByVisitLocationTag": true,
     "showUpcomingAppointments": true,

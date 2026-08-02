@@ -1,0 +1,121 @@
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.fieldRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.subFieldRow {
+  margin-bottom: 0.3125rem;
+}
+
+.label {
+  @include type.type-style('label-01');
+  color: $text-02;
+}
+
+.textID,
+.comboInput {
+  margin-bottom: layout.$spacing-05;
+}
+
+.requiredField {
+  color: $danger;
+}
+
+.input {
+  margin-right: 0.3125rem;
+}
+
+.checkboxField {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 25rem;
+  margin-left: 0.625rem;
+}
+
+.textInput {
+  width: 250px !important;
+  height: 40px !important;
+}
+
+.numberInput {
+  width: 200px !important;
+  height: 40px !important;
+}
+
+.checkboxInput {
+  height: layout.$spacing-06 !important;
+  width: layout.$spacing-06 !important;
+  margin-top: layout.$spacing-03;
+}
+
+.selectInput {
+  width: 150px !important;
+  height: 40px !important;
+}
+
+.dateInput {
+  width: 200px !important;
+  height: 40px !important;
+  font-size: large !important;
+}
+
+.telInput {
+  width: 250px !important;
+  height: 40px !important;
+}
+
+.errorInput {
+  border: 2px solid $danger !important;
+  padding-left: 0.875rem !important;
+}
+
+.errorMessage {
+  color: $danger;
+  align-self: center;
+}
+
+.dummyData {
+  margin: layout.$spacing-03 0;
+}
+
+.IDInput {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.trashCan {
+  color: $danger;
+}
+
+:global(.omrs-breakpoint-lt-desktop) {
+  .IDInput {
+    max-width: unset;
+    width: 100%;
+  }
+}
+
+.dangerLabel01 {
+  @include type.type-style('label-01');
+  color: $danger;
+}
+
+.comboInputEntries {
+  position: relative;
+}
+
+.comboInputItemOption {
+  margin: 0;
+  padding-left: layout.$spacing-05;
+}
+
+.actionButtonContainer {
+  margin-left: layout.$spacing-05;
+}

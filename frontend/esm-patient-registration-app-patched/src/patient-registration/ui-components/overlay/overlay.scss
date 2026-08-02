@@ -1,0 +1,63 @@
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.desktopOverlay {
+  position: fixed;
+  top: layout.$spacing-09;
+  right: 0;
+  height: calc(100vh - layout.$spacing-09);
+  min-width: 27rem;
+  background-color: $ui-02;
+  border-left: 1px solid $text-03;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  z-index: 999;
+}
+
+.tabletOverlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: $ui-02;
+  overflow: hidden;
+  padding-top: layout.$spacing-09;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.tabletOverlayHeader {
+  button {
+    background-color: $brand-01 !important;
+  }
+  .headerContent {
+    color: $ui-02;
+  }
+}
+
+.desktopHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $ui-03;
+  border-bottom: 1px solid $text-03;
+}
+
+.headerContent {
+  @include type.type-style('heading-compact-02');
+  padding: 0 layout.$spacing-05;
+  color: $ui-05;
+}
+
+.closeButton {
+  background-color: $ui-02;
+}
+
+.overlayContent {
+  padding: layout.$spacing-05;
+  overflow-y: auto;
+}

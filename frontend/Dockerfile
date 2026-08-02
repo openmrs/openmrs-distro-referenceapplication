@@ -13,8 +13,11 @@ COPY spa-assemble-config.json .
 COPY spa-build-config.json .
 COPY esm-labtestreport-app ./esm-labtestreport-app/
 COPY esm-stock-management-app-patched ./esm-stock-management-app-patched/
+COPY esm-patient-registration-app-patched ./esm-patient-registration-app-patched/
 
 RUN cd esm-labtestreport-app && npm install && npm run build && npm pack --pack-destination /app
+
+RUN cd esm-patient-registration-app-patched && npm install --legacy-peer-deps && npm run build && npm pack --pack-destination /app
 
 RUN corepack enable && \
     cd esm-stock-management-app-patched && \

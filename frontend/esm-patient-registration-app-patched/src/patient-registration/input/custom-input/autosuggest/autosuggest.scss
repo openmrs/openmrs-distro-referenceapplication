@@ -1,0 +1,62 @@
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+.label01 {
+  @include type.type-style('label-01');
+}
+
+.suggestions {
+  position: relative;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 143px;
+  overflow-y: auto;
+  padding-left: 0;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  background-color: #fff;
+  margin-bottom: 1.25rem;
+  z-index: 99;
+}
+
+.suggestions li {
+  padding: layout.$spacing-05;
+  line-height: 1.29;
+  color: #525252;
+  border-bottom: 1px solid #8d8d8d;
+}
+
+.suggestions li:hover {
+  background-color: #e5e5e5;
+  color: #161616;
+  cursor: pointer;
+}
+
+.suggestions li:not(:last-of-type) {
+  border-bottom: 1px solid #999;
+}
+
+.autocomplete {
+  position: relative;
+}
+
+.autocompleteSearch {
+  width: 100%;
+}
+
+.suggestions a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.invalid input {
+  outline: 2px solid var(--cds-support-error, #da1e28);
+  outline-offset: -2px;
+}
+
+.invalidMsg {
+  color: var(--cds-text-error, #da1e28);
+}
