@@ -29,18 +29,27 @@ RUN corepack enable && \
 # on main.
 ARG PATIENT_MANAGEMENT_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-patient-management.git
 ARG PATIENT_MANAGEMENT_REF=main
-RUN git clone --branch ${PATIENT_MANAGEMENT_REF} --depth 1 ${PATIENT_MANAGEMENT_REPO} openmrs-esm-patient-management && \
+# Bump this (e.g. --build-arg PATIENT_MANAGEMENT_CACHE_BUST=$(date +%s)) to force
+# a fresh clone; otherwise Docker has no way to know the remote branch moved and
+# will happily reuse a stale cached clone.
+ARG PATIENT_MANAGEMENT_CACHE_BUST=0
+RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
+    git clone --branch ${PATIENT_MANAGEMENT_REF} --depth 1 ${PATIENT_MANAGEMENT_REPO} openmrs-esm-patient-management && \
     corepack enable && \
     cd openmrs-esm-patient-management && \
     yarn install && \
     yarn workspace @openmrs/esm-patient-registration-app run build && \
-    (cd packages/esm-patient-registration-app && npm pack --pack-destination /app)
+    yarn workspace @openmrs/esm-patient-list-management-app run build && \
+    (cd packages/esm-patient-registration-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-list-management-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-patient-chart-app from our fork instead of the
 # published "next" package.
 ARG PATIENT_CHART_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-patient-chart.git
 ARG PATIENT_CHART_REF=main
-RUN git clone --branch ${PATIENT_CHART_REF} --depth 1 ${PATIENT_CHART_REPO} openmrs-esm-patient-chart && \
+ARG PATIENT_CHART_CACHE_BUST=0
+RUN echo "cache-bust=${PATIENT_CHART_CACHE_BUST}" && \
+    git clone --branch ${PATIENT_CHART_REF} --depth 1 ${PATIENT_CHART_REPO} openmrs-esm-patient-chart && \
     corepack enable && \
     cd openmrs-esm-patient-chart && \
     yarn install && \
