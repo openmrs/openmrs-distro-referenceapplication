@@ -121,10 +121,22 @@ groups:
                     type: lt
                     params: [1]
 
+  - orgId: 1
+    name: ssl
+    folder: OpenMRS Alerts
+    # TLS certificate expiry moves on the scale of days, not minutes, so this
+    # rule gets its own group with a daily evaluation interval rather than
+    # sharing the 1m interval of the availability group.
+    interval: 24h
+    rules:
       - uid: openmrs-ssl-cert-expiring-soon
         title: SSLCertExpiringSoon
         condition: C
-        for: 1h
+        # No pending period: Grafana effectively rounds `for` up to the next
+        # evaluation, so any non-zero value here would delay firing by a whole
+        # day. A single reading of cert expiry is authoritative — unlike a
+        # health probe, it cannot flap.
+        for: 0m
         labels:
           severity: warning
         annotations:
