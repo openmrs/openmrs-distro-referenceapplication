@@ -38,17 +38,12 @@ mkdir -p /config
 cp /monitoring/blackbox.yml /config/blackbox.yml
 
 echo "Setting up jmx exporter..."
-JMX_EXPORTER_VERSION=1.6.0
-JMX_AGENT_JAR="jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar"
-JMX_AGENT_URL="https://github.com/prometheus/jmx_exporter/releases/download/v${JMX_EXPORTER_VERSION}/${JMX_AGENT_JAR}"
 mkdir -p /jmx-exporter-data/
-# Download the agent jar. Skip if it's already in the volume.
-# Download to a temp file and move on success so a failed download never leaves a broken jar.
-if [ ! -f "/jmx-exporter-data/${JMX_AGENT_JAR}" ]; then
-  echo "Downloading ${JMX_AGENT_JAR}..."
-  wget -q -O "/jmx-exporter-data/${JMX_AGENT_JAR}.tmp" "${JMX_AGENT_URL}"
-  mv "/jmx-exporter-data/${JMX_AGENT_JAR}.tmp" "/jmx-exporter-data/${JMX_AGENT_JAR}"
-fi
+# The agent jar is baked into this image at build time (see Dockerfile); copy it
+# into the shared volume so the backend can load it as a -javaagent.
+# Clear stale jars so an older pinned version doesn't linger in the volume.
+rm -f /jmx-exporter-data/*.jar
+cp /opt/jmx-exporter/*.jar /jmx-exporter-data/
 cp /monitoring/jmx_config.yml /jmx-exporter-data/jmx_config.yml
 
 echo "Configuration initialization complete."

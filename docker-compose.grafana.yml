@@ -79,7 +79,7 @@ services:
                 condition: service_completed_successfully
 
     cadvisor:
-      image: gcr.io/cadvisor/cadvisor:latest
+      image: gcr.io/cadvisor/cadvisor:v0.55.1
       container_name: cadvisor
       privileged: true
       devices:
@@ -100,8 +100,6 @@ services:
         OMRS_JAVA_SERVER_OPTS: "-javaagent:/opt/jmx_exporter/jmx_prometheus_javaagent-1.6.0.jar=9404:/opt/jmx_exporter/jmx_config.yml"
       volumes:
         - jmx-exporter-data:/opt/jmx_exporter:ro
-      ports:
-        - "9404:9404"
       depends_on:
         monitoring-init:
           condition: service_completed_successfully
