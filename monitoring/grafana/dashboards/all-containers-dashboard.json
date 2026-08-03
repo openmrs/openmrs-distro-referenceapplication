@@ -1,0 +1,477 @@
+{
+  "title": "All Container Resources",
+  "uid": "openmrs-all-containers",
+  "schemaVersion": 39,
+  "version": 1,
+  "time": { "from": "now-1h", "to": "now" },
+  "refresh": "30s",
+  "tags": ["container", "overview"],
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "CPU Usage",
+      "description": "CPU consumed by each container (gateway, frontend, backend, db) plus the combined Total, as a percentage of a single core (100% = one full core; can exceed 100% on multi-core hosts). Use the Total to judge how close the whole stack is to saturating the host, and the per-container lines to attribute it. Sustained highs on db usually mean expensive or unindexed queries; on backend, heavy request load or GC pressure; on gateway/frontend they should stay low, so a spike there points at a traffic surge or a proxy misconfiguration. If Total approaches the host's core count during normal use, allocate more CPU or scale out — brief spikes during startup, migrations, or batch jobs are usually fine.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"gateway|frontend|backend|db\",cpu=\"total\"}[5m])) * 100",
+          "legendFormat": "Total"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{name=~\"gateway|frontend|backend|db\",cpu=\"total\"}[5m])) * 100",
+          "legendFormat": "{{name}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byRegexp", "options": "/gateway/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "blue" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/frontend/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/backend/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/db/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/Total/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "text" } },
+              { "id": "custom.lineWidth", "value": 2 },
+              { "id": "custom.fillOpacity", "value": 0 }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Memory (Working Set)",
+      "description": "Working Set memory per container plus the combined Total. Working Set is the active memory that cannot be reclaimed under pressure — this is what counts toward container memory limits and OOM kills. Expect db to plateau near its InnoDB buffer pool ceiling (a plateau is healthy) and backend to plateau near its JVM heap + metaspace; gateway and frontend should stay small and flat. A line that climbs without ever dropping back suggests a leak (backend) or misconfigured buffers / a connection leak (db). Use the Total to size the host: if it approaches available RAM, the kernel will start reclaiming and eventually OOM-kill whichever container crosses its limit (see the OOM Events panel).",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(container_memory_working_set_bytes{name=~\"gateway|frontend|backend|db\"})",
+          "legendFormat": "Total"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (name) (container_memory_working_set_bytes{name=~\"gateway|frontend|backend|db\"})",
+          "legendFormat": "{{name}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byRegexp", "options": "/gateway/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "blue" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/frontend/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/backend/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/db/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/Total/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "text" } },
+              { "id": "custom.lineWidth", "value": 2 },
+              { "id": "custom.fillOpacity", "value": 0 }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Network I/O",
+      "description": "Rate of network traffic in/out of each container (bytes/sec), plus combined Totals. Solid lines are receive (⬇), dashed lines are transmit (⬆). Traffic should flow gateway → frontend/backend → db, so the shapes normally track each other: a receive spike on gateway with no corresponding movement downstream suggests requests are being rejected or served from cache at the edge, while a sustained transmit spike on db may signal an unbounded query returning large result sets. Flat-zero on a container that should be busy usually means it lost connectivity to its upstream (e.g. backend can no longer reach db).",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_network_receive_bytes_total{name=~\"gateway|frontend|backend|db\"}[5m]))",
+          "legendFormat": "⬇ Total"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_network_transmit_bytes_total{name=~\"gateway|frontend|backend|db\"}[5m]))",
+          "legendFormat": "⬆ Total"
+        },
+        {
+          "refId": "C",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (name) (rate(container_network_receive_bytes_total{name=~\"gateway|frontend|backend|db\"}[5m]))",
+          "legendFormat": "⬇ {{name}}"
+        },
+        {
+          "refId": "D",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (name) (rate(container_network_transmit_bytes_total{name=~\"gateway|frontend|backend|db\"}[5m]))",
+          "legendFormat": "⬆ {{name}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "Bps",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 0 }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byRegexp", "options": "/^⬆/" },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": { "fill": "dash", "dash": [10, 10] }
+              }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/gateway/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "blue" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/frontend/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/backend/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/db/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/Total/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "text" } },
+              { "id": "custom.lineWidth", "value": 2 }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Disk I/O",
+      "description": "Rate of bytes read from / written to disk by each container (bytes/sec), plus combined Totals. Solid lines are reads, dashed lines are writes. This is normally dominated by db: sustained reads there suggest the working set does not fit in the InnoDB buffer pool (cache misses hitting disk) — consider raising innodb_buffer_pool_size or adding memory; sustained writes come from commits, the redo log, and flushing. On backend, heavy writes usually mean logging or file storage. Because all containers share the host's disk, a spike on one raises latency for the others — read the Total against what the underlying storage can sustain, then use the per-container lines to find the culprit.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_fs_reads_bytes_total{name=~\"gateway|frontend|backend|db\"}[5m]))",
+          "legendFormat": "Read Total"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_fs_writes_bytes_total{name=~\"gateway|frontend|backend|db\"}[5m]))",
+          "legendFormat": "Write Total"
+        },
+        {
+          "refId": "C",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (name) (rate(container_fs_reads_bytes_total{name=~\"gateway|frontend|backend|db\"}[5m]))",
+          "legendFormat": "Read {{name}}"
+        },
+        {
+          "refId": "D",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (name) (rate(container_fs_writes_bytes_total{name=~\"gateway|frontend|backend|db\"}[5m]))",
+          "legendFormat": "Write {{name}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "Bps",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 0 }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byRegexp", "options": "/^Write/" },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": { "fill": "dash", "dash": [10, 10] }
+              }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/gateway/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "blue" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/frontend/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/backend/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/db/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "purple" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byRegexp", "options": "/Total/" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "text" } },
+              { "id": "custom.lineWidth", "value": 2 }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "Uptime",
+      "description": "Time since each container last started, alongside Min — the uptime of the most recently (re)started container, which is the stack-wide summary that matters (uptimes cannot meaningfully be summed). Red for the first minute, yellow up to 5 minutes, green after, reflecting that services need time to fully boot. An unexpectedly low value means that container recently restarted or crashed: a db restart drops all connections and clears the buffer pool (expect a temporary spike in disk reads), and a backend restart drops in-flight requests. Check the OOM Events panel and container logs to find why; an uptime that keeps resetting signals a crash loop.",
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 16 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "min(time() - max by (name) (container_start_time_seconds{name=~\"gateway|frontend|backend|db\"}))",
+          "legendFormat": "Min",
+          "instant": true
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "time() - max by (name) (container_start_time_seconds{name=~\"gateway|frontend|backend|db\"})",
+          "legendFormat": "{{name}}",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "dtdhms",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 60 },
+              { "color": "green", "value": 300 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "value_and_name",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 6,
+      "type": "stat",
+      "title": "Memory (Working Set)",
+      "description": "Current active (non-reclaimable) memory per container and the combined Total — the values that count against each container's memory limit. Per container: green below 1 GB, yellow above 1 GB, red above 2 GB. For the Total: green below 3 GB, yellow above 3 GB, red above 4 GB. Tune these thresholds to your actual container limits, JVM heap, and innodb_buffer_pool_size. If a container stays red near its limit, raise the limit or reduce its footprint (heap for backend, buffer pool for db); if the Total is red relative to host RAM, the host is over-subscribed and something will be OOM-killed. See the Memory timeseries for whether a value is plateauing (healthy) or still climbing (leak).",
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 16 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(container_memory_working_set_bytes{name=~\"gateway|frontend|backend|db\"})",
+          "legendFormat": "Total",
+          "instant": true
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (name) (container_memory_working_set_bytes{name=~\"gateway|frontend|backend|db\"})",
+          "legendFormat": "{{name}}",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1073741824 },
+              { "color": "red", "value": 2147483648 }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byRegexp", "options": "/Total/" },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "green", "value": null },
+                    { "color": "yellow", "value": 3221225472 },
+                    { "color": "red", "value": 4294967296 }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "background",
+        "graphMode": "area",
+        "textMode": "value_and_name",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 7,
+      "type": "stat",
+      "title": "OOM Events (24 h)",
+      "description": "Out-of-memory kills in the last 24 hours, per container and combined. Green at 0, red at 1 or more. Any value > 0 means the kernel killed that container for exceeding its memory limit — a hard event that drops all connections and can interrupt in-flight requests or transactions. If > 0, raise that container's memory limit and/or lower its footprint (backend: JVM heap; db: innodb_buffer_pool_size and per-connection buffers), then check Uptime for the resulting restart. Recurring kills point to an under-provisioned limit, over-configured buffers, or a genuine leak that needs a code fix.",
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 16 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(increase(container_oom_events_total{name=~\"gateway|frontend|backend|db\"}[24h]))",
+          "legendFormat": "Total",
+          "instant": true
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (name) (increase(container_oom_events_total{name=~\"gateway|frontend|backend|db\"}[24h]))",
+          "legendFormat": "{{name}}",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0,
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "red", "value": 1 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value_and_name",
+        "justifyMode": "auto"
+      }
+    }
+  ]
+}
