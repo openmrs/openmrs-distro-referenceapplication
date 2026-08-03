@@ -89,7 +89,7 @@ services:
         - /sys:/sys:ro
         - /var/lib/docker/:/var/lib/docker:ro
         - /run/containerd/containerd.sock:/run/containerd/containerd.sock:ro
-        - ${HOME}/.docker/run/docker.sock:/var/run/docker.sock:ro
+        - /var/run/docker.sock:/var/run/docker.sock:ro
       command:
         - --docker_only=true
         - --store_container_labels=true
