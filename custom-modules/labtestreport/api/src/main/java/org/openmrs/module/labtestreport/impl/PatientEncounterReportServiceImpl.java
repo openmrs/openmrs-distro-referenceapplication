@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openmrs.api.impl.BaseOpenmrsService;
+import org.openmrs.module.labtestreport.PatientEncounterDetailRow;
 import org.openmrs.module.labtestreport.PatientEncounterReportService;
 import org.openmrs.module.labtestreport.PatientEncounterSummaryRow;
 import org.openmrs.module.labtestreport.db.PatientEncounterReportDAO;
@@ -27,8 +28,26 @@ public class PatientEncounterReportServiceImpl extends BaseOpenmrsService implem
 			row.setGivenName((String) r[2]);
 			row.setFamilyName((String) r[3]);
 			row.setAge(toInteger(r[4]));
-			row.setEncounterCount(toLong(r[5]));
-			row.setMostRecentEncounterDate((Date) r[6]);
+			row.setVisitCount(toLong(r[5]));
+			row.setMostRecentVisitDate((Date) r[6]);
+			rows.add(row);
+		}
+		return rows;
+	}
+
+	@Override
+	public List<PatientEncounterDetailRow> getPatientEncounterDetails(Date startDate, Date endDate) {
+		List<PatientEncounterDetailRow> rows = new ArrayList<>();
+		for (Object[] r : dao.getPatientEncounterDetails(startDate, endDate)) {
+			PatientEncounterDetailRow row = new PatientEncounterDetailRow();
+			row.setPatientId(toInteger(r[0]));
+			row.setPatientUuid((String) r[1]);
+			row.setGivenName((String) r[2]);
+			row.setFamilyName((String) r[3]);
+			row.setVisitId(toInteger(r[4]));
+			row.setVisitDate((Date) r[5]);
+			row.setLocationName((String) r[6]);
+			row.setProviderName((String) r[7]);
 			rows.add(row);
 		}
 		return rows;

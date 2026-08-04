@@ -10,6 +10,7 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.labtestreport.DiseaseSummaryRow;
 import org.openmrs.module.labtestreport.DiseaseSummaryService;
 import org.openmrs.module.labtestreport.LabTestReportService;
+import org.openmrs.module.labtestreport.PatientEncounterDetailRow;
 import org.openmrs.module.labtestreport.PatientEncounterReportService;
 import org.openmrs.module.labtestreport.PatientEncounterSummaryRow;
 import org.openmrs.module.labtestreport.PatientRow;
@@ -86,6 +87,15 @@ public class LabTestReportRestController {
 	        @RequestParam(value = "endDate", required = false) Date endDate) throws JsonProcessingException {
 		List<PatientEncounterSummaryRow> rows = Context.getService(PatientEncounterReportService.class)
 		        .getPatientEncounterSummary(startDate, endDate);
+		return jsonResponse(rows);
+	}
+
+	@RequestMapping(value = "/encounter-details.json", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> encounterDetails(@RequestParam(value = "startDate", required = false) Date startDate,
+	        @RequestParam(value = "endDate", required = false) Date endDate) throws JsonProcessingException {
+		List<PatientEncounterDetailRow> rows = Context.getService(PatientEncounterReportService.class)
+		        .getPatientEncounterDetails(startDate, endDate);
 		return jsonResponse(rows);
 	}
 

@@ -3,9 +3,9 @@ package org.openmrs.module.labtestreport;
 import java.util.Date;
 
 /**
- * One row of the patient encounter summary report: a patient with at least one (non-voided)
- * encounter in the selected date range, their current age, how many encounters they have, and
- * the most recent one's date.
+ * One row of the patient visit summary report: a patient with at least one (non-voided) visit in
+ * the selected date range, their current age, how many visits they have, and the most recent
+ * one's date.
  */
 public class PatientEncounterSummaryRow {
 
@@ -19,9 +19,9 @@ public class PatientEncounterSummaryRow {
 
 	private Integer age;
 
-	private long encounterCount;
+	private long visitCount;
 
-	private Date mostRecentEncounterDate;
+	private Date mostRecentVisitDate;
 
 	public Integer getPatientId() {
 		return patientId;
@@ -63,19 +63,19 @@ public class PatientEncounterSummaryRow {
 		this.age = age;
 	}
 
-	public long getEncounterCount() {
-		return encounterCount;
+	public long getVisitCount() {
+		return visitCount;
 	}
 
-	public void setEncounterCount(long encounterCount) {
-		this.encounterCount = encounterCount;
+	public void setVisitCount(long visitCount) {
+		this.visitCount = visitCount;
 	}
 
-	public Date getMostRecentEncounterDate() {
-		return mostRecentEncounterDate;
+	public Date getMostRecentVisitDate() {
+		return mostRecentVisitDate;
 	}
 
-	public void setMostRecentEncounterDate(Date mostRecentEncounterDate) {
-		this.mostRecentEncounterDate = mostRecentEncounterDate;
+	public void setMostRecentVisitDate(Date mostRecentVisitDate) {
+		this.mostRecentVisitDate = mostRecentVisitDate;
 	}
 }

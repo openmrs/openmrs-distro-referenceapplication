@@ -37,8 +37,8 @@
 			<tr class="${rowStatus.index % 2 == 0 ? 'evenRow' : 'oddRow'}" onclick="window.location.href='${chartUrl}'">
 				<td><a href="${chartUrl}">${row.name}</a></td>
 				<td>${row.age}</td>
-				<td>${row.encounterCount}</td>
-				<td>${row.mostRecentEncounterDate}</td>
+				<td>${row.visitCount}</td>
+				<td>${row.mostRecentVisitDate}</td>
 			</tr>
 		</c:forEach>
 		<c:if test="${empty rows}">
