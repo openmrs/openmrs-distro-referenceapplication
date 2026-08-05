@@ -91,6 +91,11 @@ server {
     deny all;
   }
 
+  location /hooks/ {
+    proxy_pass http://host.docker.internal:9000/hooks/;
+    proxy_set_header Host $host;
+  }
+
   location /portainer/ {
     set $portainer http://portainer:9000;
     rewrite ^/portainer/(.*) /$1 break;

@@ -47,7 +47,7 @@ Key properties:
 |---|---|
 | `hooks.json.example` | Template config for the `webhook` listener — defines the `deploy-distro` hook and its HMAC trigger rule. Copy to `hooks.json` on the VM and fill in the real secret; `hooks.json` is gitignored. |
 | `deploy.sh` | What the webhook actually executes: pulls the new images and rolls the stack over via `docker compose up -d`. |
-| `webhook.service` | systemd unit that runs the `webhook` listener as the `deploy` user. |
+| `webhook.service` | systemd unit that runs the `webhook` listener as the `openmrsdev` user. |
 
 The CI side lives at [`../../.github/workflows/deploy-onprem.yml`](../../.github/workflows/deploy-onprem.yml); the compose override it targets is [`../../docker-compose.prod.yml`](../../docker-compose.prod.yml).
 
@@ -110,8 +110,24 @@ The CI side lives at [`../../.github/workflows/deploy-onprem.yml`](../../.github
    sudo systemctl status webhook   # confirm it's active and listening
    ```
 
-7. **Reverse-proxy `/hooks/deploy-distro` to `127.0.0.1:9000`.** Example nginx
-   `location` block, added to whatever vhost already serves the VM's domain:
+7. **Reverse-proxy `/hooks/deploy-distro` to `127.0.0.1:9000`.** In this repo
+   the public-facing proxy is the `gateway` container (`./nginx` in front of
+   it only does raw TCP passthrough, it can't route by path), so the
+   `location /hooks/` block already lives in
+   [`gateway/default.conf.template`](../../gateway/default.conf.template) and
+   [`gateway/default-ssl.conf.template`](../../gateway/default-ssl.conf.template),
+   proxying to `http://host.docker.internal:9000/hooks/`. `docker-compose.prod.yml`
+   adds the `extra_hosts: host.docker.internal:host-gateway` entry `gateway`
+   needs to reach the host-bound `webhook` process.
+
+   This means the `/hooks/` route only exists once the VM is running a
+   `gateway` image built from this updated template — **do one manual deploy
+   first** (`sudo -u openmrsdev deploy.sh main` after `git pull`, or trigger
+   the `Deploy to Onprem VM` workflow once by hand) before wiring up step 8,
+   otherwise the webhook URL will 404.
+
+   If your reverse proxy is not this repo's `gateway` (e.g. you're fronting
+   with a separate host nginx instead), add the equivalent block there:
    ```nginx
    location /hooks/ {
        proxy_pass http://127.0.0.1:9000/hooks/;
@@ -191,7 +207,7 @@ sudo -u openmrsdev env TAG=main-<good-full-sha> docker compose up -d
 |---|---|
 | CI step "Send signed deploy webhook" fails with a connection error | Reverse proxy isn't forwarding `/hooks/` yet, or `ONPREM_WEBHOOK_URL` is wrong/unreachable. |
 | CI gets a non-2xx HTTP response | `webhook` rejected the signature (secret mismatch between GitHub secret and VM's `hooks.json`), or the hook `id` in the URL doesn't match `hooks.json`. |
-| Webhook call succeeds (200) but nothing changes on the VM | Check `journalctl -u webhook`, then run `deploy.sh` manually (see Testing) to see the actual `docker compose` error — usually a pull auth failure (see step 9) or the `deploy` user isn't in the `docker` group yet (needs re-login/`newgrp`). |
+| Webhook call succeeds (200) but nothing changes on the VM | Check `journalctl -u webhook`, then run `deploy.sh` manually (see Testing) to see the actual `docker compose` error — usually a pull auth failure (see step 9) or the `openmrsdev` user isn't in the `docker` group yet (needs re-login/`newgrp`). |
 | `docker compose pull` fails with `unauthorized` | GHCR packages are private and the VM hasn't logged in — see step 9. |
 | Systemd unit won't start | `sudo journalctl -u webhook -n 50 --no-pager` — usually a bad path in `webhook.service`/`hooks.json`, or the `webhook` binary isn't on `PATH` for the unit's `ExecStart`. |
 
