@@ -49,7 +49,7 @@ Key properties:
 | `deploy.sh` | What the webhook actually executes: pulls the new images and rolls the stack over via `docker compose up -d`. |
 | `webhook.service` | systemd unit that runs the `webhook` listener as the `openmrsdev` user. |
 
-The CI side lives at [`../../.github/workflows/deploy-onprem.yml`](../../.github/workflows/deploy-onprem.yml); the compose override it targets is [`../../docker-compose.prod.yml`](../../docker-compose.prod.yml).
+The CI side lives at [`../../.github/workflows/deploy-onprem.yml`](../../.github/workflows/deploy-onprem.yml); it pushes to `ghcr.io/phcc-openmrs/*`, which [`../../docker-compose.yml`](../../docker-compose.yml) picks up via the `IMAGE_PREFIX` variable (set in `.env` on the VM).
 
 ## Prerequisites
 
@@ -116,9 +116,9 @@ The CI side lives at [`../../.github/workflows/deploy-onprem.yml`](../../.github
    `location /hooks/` block already lives in
    [`gateway/default.conf.template`](../../gateway/default.conf.template) and
    [`gateway/default-ssl.conf.template`](../../gateway/default-ssl.conf.template),
-   proxying to `http://host.docker.internal:9000/hooks/`. `docker-compose.prod.yml`
-   adds the `extra_hosts: host.docker.internal:host-gateway` entry `gateway`
-   needs to reach the host-bound `webhook` process.
+   proxying to `http://host.docker.internal:9000/hooks/`. `docker-compose.yml`'s
+   `gateway` service carries the `extra_hosts: host.docker.internal:host-gateway`
+   entry it needs to reach the host-bound `webhook` process.
 
    This means the `/hooks/` route only exists once the VM is running a
    `gateway` image built from this updated template — **do one manual deploy
@@ -148,12 +148,15 @@ The CI side lives at [`../../.github/workflows/deploy-onprem.yml`](../../.github
    - `docker login ghcr.io` once on the VM as the `openmrsdev` user, using a
      GitHub PAT scoped to `read:packages`.
 
-10. **Set `COMPOSE_FILE` in `.env`** to include `docker-compose.prod.yml` —
-    that's the file that points the stack at the `ghcr.io/phcc-openmrs/*`
-    images this workflow builds, instead of the upstream Docker Hub images
-    the base `docker-compose.yml` defaults to:
+10. **Set `IMAGE_PREFIX` in `.env`** so the stack pulls from GHCR instead of
+    the upstream Docker Hub images `docker-compose.yml` defaults to:
     ```
-    COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml:docker-compose.grafana.yml
+    IMAGE_PREFIX=ghcr.io/phcc-openmrs
+    ```
+    `COMPOSE_FILE` itself doesn't need to change — `docker-compose.yml` and
+    `docker-compose.grafana.yml` are enough:
+    ```
+    COMPOSE_FILE=docker-compose.yml:docker-compose.grafana.yml
     ```
 
 ## Testing it

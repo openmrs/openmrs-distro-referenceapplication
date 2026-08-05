@@ -1,6 +1,6 @@
 services:
   gateway:
-    image: openmrs/openmrs-reference-application-3-gateway:${TAG:-qa}
+    image: ${IMAGE_PREFIX:-openmrs}/openmrs-reference-application-3-gateway:${TAG:-qa}
     build:
       context: ./gateway
     restart: "unless-stopped"
@@ -8,6 +8,10 @@ services:
       - frontend
       - backend
       - portainer
+    extra_hosts:
+      # Lets gateway reach the `webhook` listener bound to 127.0.0.1:9000 on
+      # the host, for the /hooks/ proxy_pass in its nginx config.
+      - "host.docker.internal:host-gateway"
 
   nginx:
     image: nginx:alpine
@@ -21,7 +25,7 @@ services:
       - ./nginx-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
 
   frontend:
-    image: openmrs/openmrs-reference-application-3-frontend:${TAG:-qa}
+    image: ${IMAGE_PREFIX:-openmrs}/openmrs-reference-application-3-frontend:${TAG:-qa}
     build: 
       context: ./frontend
     restart: "unless-stopped"
@@ -37,7 +41,7 @@ services:
       - backend
 
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-qa}
+    image: ${IMAGE_PREFIX:-openmrs}/openmrs-reference-application-3-backend:${TAG:-qa}
     build:
       context: .
     restart: "unless-stopped"
