@@ -5,7 +5,12 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/webhook -hooks /home/openmrsdev/openmrsdev/openmrs-distro-referenceapplication/ops/onprem-webhook/hooks.json -ip 127.0.0.1 -port 9000 -verbose
+
+# Bound to the docker0 bridge gateway (not 127.0.0.1) so the gateway
+# container can reach it via host.docker.internal -> host-gateway. Still not
+# reachable from the public interface: 172.17.0.1 only answers connections
+# arriving over the docker0 bridge (the host itself and its containers).
+ExecStart=/usr/bin/webhook -hooks /home/openmrsdev/openmrsdev/openmrs-distro-referenceapplication/ops/onprem-webhook/hooks.json -ip 172.17.0.1 -port 9000 -verbose
 Restart=on-failure
 RestartSec=5
 User=openmrsdev

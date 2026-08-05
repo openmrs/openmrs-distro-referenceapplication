@@ -1,6 +1,6 @@
 services:
   certbot:
-    image: openmrs/openmrs-reference-application-3-certbot:${TAG:-qa}
+    image: ${IMAGE_PREFIX:-openmrs}/openmrs-reference-application-3-certbot:${TAG:-qa}
     environment:
       SSL_MODE: ${SSL_MODE:-dev}  # "dev" for self-signed certificates, "prod" for Let's Encrypt
       SSL_STAGING: ${SSL_STAGING:-false}  # Set to "true" to use Let's Encrypt staging environment (for testing)

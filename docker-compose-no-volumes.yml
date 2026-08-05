@@ -2,7 +2,7 @@
 
 services:
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:${TAG:-nightly}
+    image: ${IMAGE_PREFIX:-openmrs}/openmrs-reference-application-3-backend:${TAG:-nightly}
     depends_on:
       - db
     environment:
