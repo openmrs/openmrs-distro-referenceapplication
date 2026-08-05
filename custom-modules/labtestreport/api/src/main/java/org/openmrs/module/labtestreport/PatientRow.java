@@ -15,6 +15,12 @@ public class PatientRow {
 
 	private String identifier;
 
+	private String sex;
+
+	private String nationalId;
+
+	private String phoneNumber;
+
 	public Integer getPatientId() {
 		return patientId;
 	}
@@ -53,5 +59,29 @@ public class PatientRow {
 
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getNationalId() {
+		return nationalId;
+	}
+
+	public void setNationalId(String nationalId) {
+		this.nationalId = nationalId;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }

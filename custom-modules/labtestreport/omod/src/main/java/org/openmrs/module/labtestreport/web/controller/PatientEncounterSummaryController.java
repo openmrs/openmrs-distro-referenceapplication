@@ -46,7 +46,8 @@ public class PatientEncounterSummaryController {
 		for (PatientEncounterSummaryRow r : summaryRows) {
 			String name = (r.getGivenName() + " " + r.getFamilyName()).trim();
 			String mostRecent = r.getMostRecentVisitDate() == null ? "" : dateFormat.format(r.getMostRecentVisitDate());
-			rows.add(new Row(r.getPatientUuid(), name, r.getAge(), r.getVisitCount(), mostRecent));
+			rows.add(new Row(r.getPatientUuid(), name, r.getAge(), r.getVisitCount(), mostRecent, r.getSex(),
+			        r.getNationalId(), r.getPhoneNumber()));
 		}
 
 		ModelMap model = new ModelMap();
@@ -68,12 +69,22 @@ public class PatientEncounterSummaryController {
 
 		private final String mostRecentVisitDate;
 
-		public Row(String patientUuid, String name, Integer age, long visitCount, String mostRecentVisitDate) {
+		private final String sex;
+
+		private final String nationalId;
+
+		private final String phoneNumber;
+
+		public Row(String patientUuid, String name, Integer age, long visitCount, String mostRecentVisitDate,
+		        String sex, String nationalId, String phoneNumber) {
 			this.patientUuid = patientUuid;
 			this.name = name;
 			this.age = age;
 			this.visitCount = visitCount;
 			this.mostRecentVisitDate = mostRecentVisitDate;
+			this.sex = sex;
+			this.nationalId = nationalId;
+			this.phoneNumber = phoneNumber;
 		}
 
 		public String getPatientUuid() {
@@ -94,6 +105,18 @@ public class PatientEncounterSummaryController {
 
 		public String getMostRecentVisitDate() {
 			return mostRecentVisitDate;
+		}
+
+		public String getSex() {
+			return sex;
+		}
+
+		public String getNationalId() {
+			return nationalId;
+		}
+
+		public String getPhoneNumber() {
+			return phoneNumber;
 		}
 	}
 }

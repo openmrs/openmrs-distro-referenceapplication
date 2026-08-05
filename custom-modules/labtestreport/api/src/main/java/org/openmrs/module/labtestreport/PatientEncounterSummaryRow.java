@@ -23,6 +23,12 @@ public class PatientEncounterSummaryRow {
 
 	private Date mostRecentVisitDate;
 
+	private String sex;
+
+	private String nationalId;
+
+	private String phoneNumber;
+
 	public Integer getPatientId() {
 		return patientId;
 	}
@@ -77,5 +83,29 @@ public class PatientEncounterSummaryRow {
 
 	public void setMostRecentVisitDate(Date mostRecentVisitDate) {
 		this.mostRecentVisitDate = mostRecentVisitDate;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getNationalId() {
+		return nationalId;
+	}
+
+	public void setNationalId(String nationalId) {
+		this.nationalId = nationalId;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }

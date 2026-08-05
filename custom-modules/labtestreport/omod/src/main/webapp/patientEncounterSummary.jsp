@@ -26,6 +26,9 @@
 	<thead>
 		<tr>
 			<th><spring:message code="labtestreport.patientEncounters.name" /></th>
+			<th><spring:message code="labtestreport.drilldown.sex" /></th>
+			<th><spring:message code="labtestreport.drilldown.nationalId" /></th>
+			<th><spring:message code="labtestreport.drilldown.phoneNumber" /></th>
 			<th><spring:message code="labtestreport.patientEncounters.age" /></th>
 			<th><spring:message code="labtestreport.patientEncounters.encounterCount" /></th>
 			<th><spring:message code="labtestreport.patientEncounters.mostRecentEncounterDate" /></th>
@@ -36,13 +39,16 @@
 			<c:url value="/spa/patient/${row.patientUuid}/chart" var="chartUrl" />
 			<tr class="${rowStatus.index % 2 == 0 ? 'evenRow' : 'oddRow'}" onclick="window.location.href='${chartUrl}'">
 				<td><a href="${chartUrl}">${row.name}</a></td>
+				<td>${row.sex}</td>
+				<td>${row.nationalId}</td>
+				<td>${row.phoneNumber}</td>
 				<td>${row.age}</td>
 				<td>${row.visitCount}</td>
 				<td>${row.mostRecentVisitDate}</td>
 			</tr>
 		</c:forEach>
 		<c:if test="${empty rows}">
-			<tr><td colspan="4"><spring:message code="labtestreport.drilldown.noPatients" /></td></tr>
+			<tr><td colspan="7"><spring:message code="labtestreport.drilldown.noPatients" /></td></tr>
 		</c:if>
 	</tbody>
 </table>

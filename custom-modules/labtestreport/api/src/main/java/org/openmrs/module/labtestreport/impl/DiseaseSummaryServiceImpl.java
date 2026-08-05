@@ -57,6 +57,9 @@ public class DiseaseSummaryServiceImpl extends BaseOpenmrsService implements Dis
 			row.setGivenName((String) r[2]);
 			row.setFamilyName((String) r[3]);
 			row.setIdentifier((String) r[4]);
+			row.setSex((String) r[5]);
+			row.setNationalId((String) r[6]);
+			row.setPhoneNumber((String) r[7]);
 			rows.add(row);
 		}
 		return rows;

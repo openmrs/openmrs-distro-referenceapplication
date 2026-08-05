@@ -596,6 +596,9 @@ export default function DiseaseSummaryReport() {
                   <tr>
                     <th className="left">{t('name', 'Name')}</th>
                     <th className="left">{t('identifier', 'Identifier')}</th>
+                    <th className="left">{t('sex', 'Sex')}</th>
+                    <th className="left">{t('nationalId', 'National ID')}</th>
+                    <th className="left">{t('phoneNumber', 'Phone Number')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -609,6 +612,9 @@ export default function DiseaseSummaryReport() {
                         {patient.givenName} {patient.familyName}
                       </td>
                       <td className="left">{patient.identifier}</td>
+                      <td className="left">{patient.sex}</td>
+                      <td className="left">{patient.nationalId}</td>
+                      <td className="left">{patient.phoneNumber}</td>
                     </tr>
                   ))}
                 </tbody>

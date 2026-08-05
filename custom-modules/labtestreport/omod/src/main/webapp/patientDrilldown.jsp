@@ -19,6 +19,9 @@
 	<tr>
 		<th><spring:message code="labtestreport.drilldown.name" /></th>
 		<th><spring:message code="labtestreport.drilldown.identifier" /></th>
+		<th><spring:message code="labtestreport.drilldown.sex" /></th>
+		<th><spring:message code="labtestreport.drilldown.nationalId" /></th>
+		<th><spring:message code="labtestreport.drilldown.phoneNumber" /></th>
 	</tr>
 	<c:set var="i" value="0" />
 	<c:forEach items="${patients}" var="patient">
@@ -29,11 +32,14 @@
 				</a>
 			</td>
 			<td>${patient.identifier}</td>
+			<td>${patient.sex}</td>
+			<td>${patient.nationalId}</td>
+			<td>${patient.phoneNumber}</td>
 		</tr>
 		<c:set var="i" value="${i + 1}" />
 	</c:forEach>
 	<c:if test="${empty patients}">
-		<tr><td colspan="2"><spring:message code="labtestreport.drilldown.noPatients" /></td></tr>
+		<tr><td colspan="5"><spring:message code="labtestreport.drilldown.noPatients" /></td></tr>
 	</c:if>
 </table>
 

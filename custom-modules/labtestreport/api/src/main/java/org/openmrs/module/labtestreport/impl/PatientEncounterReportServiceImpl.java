@@ -30,6 +30,9 @@ public class PatientEncounterReportServiceImpl extends BaseOpenmrsService implem
 			row.setAge(toInteger(r[4]));
 			row.setVisitCount(toLong(r[5]));
 			row.setMostRecentVisitDate((Date) r[6]);
+			row.setSex((String) r[7]);
+			row.setNationalId((String) r[8]);
+			row.setPhoneNumber((String) r[9]);
 			rows.add(row);
 		}
 		return rows;

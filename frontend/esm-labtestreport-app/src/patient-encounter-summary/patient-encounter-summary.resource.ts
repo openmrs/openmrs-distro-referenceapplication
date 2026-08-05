@@ -9,6 +9,9 @@ export interface PatientEncounterSummaryRow {
   age: number;
   visitCount: number;
   mostRecentVisitDate: string;
+  sex: string;
+  nationalId: string;
+  phoneNumber: string;
 }
 
 export function usePatientEncounterSummary(startDate?: string, endDate?: string, enabled: boolean = true) {

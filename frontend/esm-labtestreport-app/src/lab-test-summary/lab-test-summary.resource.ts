@@ -18,6 +18,9 @@ export interface PatientRow {
   givenName: string;
   familyName: string;
   identifier: string;
+  sex: string;
+  nationalId: string;
+  phoneNumber: string;
 }
 
 export interface DrilldownParams {

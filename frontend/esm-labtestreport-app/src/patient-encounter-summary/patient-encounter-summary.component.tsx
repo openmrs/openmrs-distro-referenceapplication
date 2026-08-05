@@ -232,6 +232,9 @@ export default function PatientEncounterSummaryReport() {
               <thead>
                 <tr>
                   <th className="left">{t('patientName', 'Patient Name')}</th>
+                  <th className="left">{t('sex', 'Sex')}</th>
+                  <th className="left">{t('nationalId', 'National ID')}</th>
+                  <th className="left">{t('phoneNumber', 'Phone Number')}</th>
                   <th>{t('age', 'Age')}</th>
                   <th>{t('numberOfVisits', 'Number of Visits')}</th>
                   <th>{t('mostRecentVisitDate', 'Most Recent Visit Date')}</th>
@@ -247,6 +250,9 @@ export default function PatientEncounterSummaryReport() {
                     <td className="left">
                       {row.givenName} {row.familyName}
                     </td>
+                    <td className="left">{row.sex}</td>
+                    <td className="left">{row.nationalId}</td>
+                    <td className="left">{row.phoneNumber}</td>
                     <td>{row.age}</td>
                     <td>{row.visitCount}</td>
                     <td>{row.mostRecentVisitDate}</td>
@@ -254,7 +260,7 @@ export default function PatientEncounterSummaryReport() {
                 ))}
                 {filteredRows.length === 0 && (
                   <tr>
-                    <td colSpan={4} className={pageStyles.emptyState}>
+                    <td colSpan={7} className={pageStyles.emptyState}>
                       {t('noPatientsForSelection', 'No patients found for this selection.')}
                     </td>
                   </tr>
