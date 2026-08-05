@@ -43,8 +43,12 @@ RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
     (cd packages/esm-patient-registration-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-list-management-app && npm pack --pack-destination /app)
 
-# Build @openmrs/esm-patient-chart-app from our fork instead of the
-# published "next" package.
+# Build @openmrs/esm-patient-chart-app AND @openmrs/esm-patient-programs-app from our
+# fork instead of the published "next" package. esm-patient-chart-app is just the
+# dashboard-shell package -- it does NOT depend on esm-patient-programs-app, so the
+# Services (Programs) widget must be built and packed separately, and
+# spa-assemble-config.json must point @openmrs/esm-patient-programs-app at this tarball
+# (not "next") or none of this has any effect on what's actually served.
 ARG PATIENT_CHART_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-patient-chart.git
 ARG PATIENT_CHART_REF=main
 ARG PATIENT_CHART_CACHE_BUST=0
@@ -54,7 +58,9 @@ RUN echo "cache-bust=${PATIENT_CHART_CACHE_BUST}" && \
     cd openmrs-esm-patient-chart && \
     yarn install && \
     yarn workspace @openmrs/esm-patient-chart-app run build && \
-    (cd packages/esm-patient-chart-app && npm pack --pack-destination /app)
+    yarn workspace @openmrs/esm-patient-programs-app run build && \
+    (cd packages/esm-patient-chart-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-programs-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-login-app from our fork instead of the published "next"
 # package, to remove the "Built with OpenMRS" footer.
