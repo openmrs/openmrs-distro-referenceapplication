@@ -3,7 +3,17 @@ name: Deploy to Onprem VM
 on:
   push:
     branches: [main]
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      service:
+        description: Which service to build and deploy
+        type: choice
+        options:
+          - all
+          - backend
+          - frontend
+          - gateway
+        default: all
 
 concurrency:
   group: deploy-onprem
@@ -18,8 +28,59 @@ permissions:
   packages: write
 
 jobs:
+  changes:
+    name: Detect changed service paths
+    runs-on: ubuntu-latest
+    outputs:
+      backend: ${{ steps.resolve.outputs.backend }}
+      frontend: ${{ steps.resolve.outputs.frontend }}
+      gateway: ${{ steps.resolve.outputs.gateway }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        if: github.event_name != 'workflow_dispatch'
+
+      - name: Filter changed paths
+        id: filter
+        if: github.event_name != 'workflow_dispatch'
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        with:
+          filters: |
+            backend:
+              - 'pom.xml'
+              - 'Dockerfile'
+              - 'custom-modules/**'
+              - 'distro/**'
+            frontend:
+              - 'frontend/**'
+            gateway:
+              - 'gateway/**'
+
+      - name: Resolve which services to build
+        id: resolve
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SELECTED_SERVICE: ${{ inputs.service }}
+          FILTER_BACKEND: ${{ steps.filter.outputs.backend }}
+          FILTER_FRONTEND: ${{ steps.filter.outputs.frontend }}
+          FILTER_GATEWAY: ${{ steps.filter.outputs.gateway }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            for s in backend frontend gateway; do
+              if [ "$SELECTED_SERVICE" = "all" ] || [ "$SELECTED_SERVICE" = "$s" ]; then
+                echo "$s=true" >> "$GITHUB_OUTPUT"
+              else
+                echo "$s=false" >> "$GITHUB_OUTPUT"
+              fi
+            done
+          else
+            echo "backend=$FILTER_BACKEND" >> "$GITHUB_OUTPUT"
+            echo "frontend=$FILTER_FRONTEND" >> "$GITHUB_OUTPUT"
+            echo "gateway=$FILTER_GATEWAY" >> "$GITHUB_OUTPUT"
+          fi
+
   build-and-push:
     name: Build and push images to GHCR
+    needs: changes
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
@@ -43,6 +104,7 @@ jobs:
         uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
 
       - name: Build and push backend
+        if: needs.changes.outputs.backend == 'true'
         uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: .
@@ -52,6 +114,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/openmrs-reference-application-3-backend:${{ steps.tag.outputs.sha_tag }}
 
       - name: Build and push frontend
+        if: needs.changes.outputs.frontend == 'true'
         uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: ./frontend
@@ -63,6 +126,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/openmrs-reference-application-3-frontend:${{ steps.tag.outputs.sha_tag }}
 
       - name: Build and push gateway
+        if: needs.changes.outputs.gateway == 'true'
         uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: ./gateway
