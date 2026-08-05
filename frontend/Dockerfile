@@ -56,6 +56,19 @@ RUN echo "cache-bust=${PATIENT_CHART_CACHE_BUST}" && \
     yarn workspace @openmrs/esm-patient-chart-app run build && \
     (cd packages/esm-patient-chart-app && npm pack --pack-destination /app)
 
+# Build @openmrs/esm-login-app from our fork instead of the published "next"
+# package, to remove the "Built with OpenMRS" footer.
+ARG ESM_CORE_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-core.git
+ARG ESM_CORE_REF=remove-openmrs-footer
+ARG ESM_CORE_CACHE_BUST=0
+RUN echo "cache-bust=${ESM_CORE_CACHE_BUST}" && \
+    git clone --branch ${ESM_CORE_REF} --depth 1 ${ESM_CORE_REPO} openmrs-esm-core && \
+    corepack enable && \
+    cd openmrs-esm-core && \
+    yarn install && \
+    npx turbo run build --filter=...@openmrs/esm-login-app && \
+    (cd packages/apps/esm-login-app && npm pack --pack-destination /app)
+
 ARG CACHE_BUST
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} assemble --manifest --mode config --config spa-assemble-config.json --target ./spa
 RUN npx --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} build --build-config spa-build-config.json --target ./spa
