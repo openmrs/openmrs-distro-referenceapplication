@@ -75,6 +75,8 @@ jobs:
     name: Trigger onprem deploy webhook
     needs: build-and-push
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name == 'main' && 'dev' || github.ref_name }}
     steps:
       - name: Send signed deploy webhook
         env:
