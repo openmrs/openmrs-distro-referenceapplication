@@ -48,9 +48,9 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -t ed25519 bonga.openmrs.org >> ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519 bele.openmrs.org >> ~/.ssh/known_hosts
 
           ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes \
-            deploy@bonga.openmrs.org \
+            deploy@bele.openmrs.org \
             "deploy emr-3-demo${RESET_FLAGS} --no-health-check"
