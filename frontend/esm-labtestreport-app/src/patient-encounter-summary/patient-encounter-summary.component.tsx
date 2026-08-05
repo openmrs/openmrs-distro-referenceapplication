@@ -7,10 +7,14 @@ import SimpleBarChart from '../reports-shell/simple-bar-chart.component';
 import KpiTiles from '../reports-shell/kpi-tiles.component';
 import MonthCompareControls from '../reports-shell/month-compare-controls.component';
 import ExportButtons from '../reports-shell/export-buttons.component';
-import { buildKpiExportSheet, type ExportSheet } from '../reports-shell/export-utils';
+import { buildVisitDetailExportSheet, buildKpiExportSheet, type ExportSheet } from '../reports-shell/export-utils';
 import { useMonthComparison } from '../reports-shell/month-compare';
 import pageStyles from '../reports-shell/reports-page.scss';
-import { usePatientEncounterSummary, type PatientEncounterSummaryRow } from './patient-encounter-summary.resource';
+import {
+  usePatientEncounterDetails,
+  usePatientEncounterSummary,
+  type PatientEncounterSummaryRow,
+} from './patient-encounter-summary.resource';
 
 function summarize(rows: Array<PatientEncounterSummaryRow>, minAge: number | '', maxAge: number | '') {
   const filteredRows = rows.filter((row) => {
@@ -22,12 +26,12 @@ function summarize(rows: Array<PatientEncounterSummaryRow>, minAge: number | '',
     }
     return true;
   });
-  const totalEncounters = filteredRows.reduce((sum, row) => sum + row.encounterCount, 0);
+  const totalVisits = filteredRows.reduce((sum, row) => sum + row.visitCount, 0);
   const mostRecentDate = filteredRows.reduce<string | null>(
-    (latest, row) => (!latest || row.mostRecentEncounterDate > latest ? row.mostRecentEncounterDate : latest),
+    (latest, row) => (!latest || row.mostRecentVisitDate > latest ? row.mostRecentVisitDate : latest),
     null,
   );
-  return { filteredRows, totalEncounters, mostRecentDate };
+  return { filteredRows, totalVisits, mostRecentDate };
 }
 
 export default function PatientEncounterSummaryReport() {
@@ -51,6 +55,11 @@ export default function PatientEncounterSummaryReport() {
   );
   const dataLoading = isLoading || (compare.enabled && compareLoading);
 
+  const { rows: detailRows, isLoading: detailsLoading } = usePatientEncounterDetails(
+    primaryStartDate,
+    primaryEndDate,
+  );
+
   const primary = useMemo(() => summarize(rows, minAge, maxAge), [rows, minAge, maxAge]);
   const { filteredRows } = primary;
 
@@ -63,7 +72,7 @@ export default function PatientEncounterSummaryReport() {
     () =>
       filteredRows.map((row) => ({
         label: `${row.givenName} ${row.familyName}`,
-        value: row.encounterCount,
+        value: row.visitCount,
       })),
     [filteredRows],
   );
@@ -71,21 +80,21 @@ export default function PatientEncounterSummaryReport() {
   const kpiItems = useMemo(() => {
     const items = [
       { label: t('totalPatients', 'Total Patients'), value: filteredRows.length },
-      { label: t('totalEncounters', 'Total Encounters'), value: primary.totalEncounters },
+      { label: t('totalVisits', 'Total Visits'), value: primary.totalVisits },
       {
-        label: t('avgEncountersPerPatient', 'Avg Encounters / Patient'),
-        value: filteredRows.length > 0 ? (primary.totalEncounters / filteredRows.length).toFixed(1) : '0',
+        label: t('avgVisitsPerPatient', 'Avg Visits / Patient'),
+        value: filteredRows.length > 0 ? (primary.totalVisits / filteredRows.length).toFixed(1) : '0',
       },
-      { label: t('mostRecentEncounter', 'Most Recent Encounter'), value: primary.mostRecentDate ?? '—' },
+      { label: t('mostRecentVisit', 'Most Recent Visit'), value: primary.mostRecentDate ?? '—' },
     ];
     if (!compare.enabled || !compareSummary) {
       return items;
     }
     const compareValues: Array<React.ReactNode> = [
       compareSummary.filteredRows.length,
-      compareSummary.totalEncounters,
+      compareSummary.totalVisits,
       compareSummary.filteredRows.length > 0
-        ? (compareSummary.totalEncounters / compareSummary.filteredRows.length).toFixed(1)
+        ? (compareSummary.totalVisits / compareSummary.filteredRows.length).toFixed(1)
         : '0',
       compareSummary.mostRecentDate ?? '—',
     ];
@@ -98,29 +107,33 @@ export default function PatientEncounterSummaryReport() {
 
   const mainExportSheet = useMemo<ExportSheet>(
     () => ({
-      name: t('patientEncounterSummary', 'Patient Encounter Summary'),
+      name: t('patientVisitSummary', 'Patient Visit Summary'),
       headers: [
         t('givenName', 'Given Name'),
         t('familyName', 'Family Name'),
         t('age', 'Age'),
-        t('numberOfEncounters', 'Number of Encounters'),
-        t('mostRecentEncounterDate', 'Most Recent Encounter Date'),
+        t('numberOfVisits', 'Number of Visits'),
+        t('mostRecentVisitDate', 'Most Recent Visit Date'),
       ],
       rows: filteredRows.map((row) => [
         row.givenName,
         row.familyName,
         row.age,
-        row.encounterCount,
-        row.mostRecentEncounterDate,
+        row.visitCount,
+        row.mostRecentVisitDate,
       ]),
     }),
     [t, filteredRows],
   );
 
-  const exportExtraSheets = useMemo<Array<ExportSheet>>(
-    () => (compare.enabled ? [buildKpiExportSheet(kpiItems, t)] : []),
-    [t, compare.enabled, kpiItems],
-  );
+  const exportExtraSheets = useMemo<Array<ExportSheet>>(() => {
+    const filteredPatientIds = new Set(filteredRows.map((row) => row.patientId));
+    const visitDetailSheet = buildVisitDetailExportSheet(
+      detailRows.filter((detail) => filteredPatientIds.has(detail.patientId)),
+      t,
+    );
+    return compare.enabled ? [buildKpiExportSheet(kpiItems, t), visitDetailSheet] : [visitDetailSheet];
+  }, [t, compare.enabled, kpiItems, detailRows, filteredRows]);
 
   function applyFilter() {
     setAppliedDates({ startDate: startDateInput || undefined, endDate: endDateInput || undefined });
@@ -135,7 +148,7 @@ export default function PatientEncounterSummaryReport() {
       <ReportsTabs activeKey="patient-encounter-summary" />
       <div className={pageStyles.pageBody}>
         <h2 className={pageStyles.pageHeading}>
-          {t('patientEncounterSummaryReportTitle', 'Patient Encounter Summary Report')}
+          {t('patientVisitSummaryReportTitle', 'Patient Visit Summary Report')}
         </h2>
 
         {!dataLoading && <KpiTiles items={kpiItems} />}
@@ -194,10 +207,10 @@ export default function PatientEncounterSummaryReport() {
         </div>
 
         <ExportButtons
-          filenameBase="patient-encounter-summary-report"
+          filenameBase="patient-visit-summary-report"
           mainSheet={mainExportSheet}
           extraSheets={exportExtraSheets}
-          disabled={dataLoading}
+          disabled={dataLoading || detailsLoading}
         />
 
         <div className={pageStyles.viewSwitcher}>
@@ -220,8 +233,8 @@ export default function PatientEncounterSummaryReport() {
                 <tr>
                   <th className="left">{t('patientName', 'Patient Name')}</th>
                   <th>{t('age', 'Age')}</th>
-                  <th>{t('numberOfEncounters', 'Number of Encounters')}</th>
-                  <th>{t('mostRecentEncounterDate', 'Most Recent Encounter Date')}</th>
+                  <th>{t('numberOfVisits', 'Number of Visits')}</th>
+                  <th>{t('mostRecentVisitDate', 'Most Recent Visit Date')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -235,8 +248,8 @@ export default function PatientEncounterSummaryReport() {
                       {row.givenName} {row.familyName}
                     </td>
                     <td>{row.age}</td>
-                    <td>{row.encounterCount}</td>
-                    <td>{row.mostRecentEncounterDate}</td>
+                    <td>{row.visitCount}</td>
+                    <td>{row.mostRecentVisitDate}</td>
                   </tr>
                 ))}
                 {filteredRows.length === 0 && (

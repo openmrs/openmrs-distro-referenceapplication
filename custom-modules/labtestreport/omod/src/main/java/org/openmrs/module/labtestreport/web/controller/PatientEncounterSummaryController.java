@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Renders the patient encounter summary report: one row per patient with at least one matching
- * encounter, showing their current age, encounter count and most recent encounter date. Clicking
- * a row goes to that patient's O3 chart.
+ * Renders the patient visit summary report: one row per patient with at least one matching
+ * visit, showing their current age, visit count and most recent visit date. Clicking a row goes
+ * to that patient's O3 chart.
  */
 @Controller
 @RequestMapping("/module/labtestreport/patientEncounters.form")
@@ -45,8 +45,8 @@ public class PatientEncounterSummaryController {
 		List<Row> rows = new ArrayList<>();
 		for (PatientEncounterSummaryRow r : summaryRows) {
 			String name = (r.getGivenName() + " " + r.getFamilyName()).trim();
-			String mostRecent = r.getMostRecentEncounterDate() == null ? "" : dateFormat.format(r.getMostRecentEncounterDate());
-			rows.add(new Row(r.getPatientUuid(), name, r.getAge(), r.getEncounterCount(), mostRecent));
+			String mostRecent = r.getMostRecentVisitDate() == null ? "" : dateFormat.format(r.getMostRecentVisitDate());
+			rows.add(new Row(r.getPatientUuid(), name, r.getAge(), r.getVisitCount(), mostRecent));
 		}
 
 		ModelMap model = new ModelMap();
@@ -64,16 +64,16 @@ public class PatientEncounterSummaryController {
 
 		private final Integer age;
 
-		private final long encounterCount;
+		private final long visitCount;
 
-		private final String mostRecentEncounterDate;
+		private final String mostRecentVisitDate;
 
-		public Row(String patientUuid, String name, Integer age, long encounterCount, String mostRecentEncounterDate) {
+		public Row(String patientUuid, String name, Integer age, long visitCount, String mostRecentVisitDate) {
 			this.patientUuid = patientUuid;
 			this.name = name;
 			this.age = age;
-			this.encounterCount = encounterCount;
-			this.mostRecentEncounterDate = mostRecentEncounterDate;
+			this.visitCount = visitCount;
+			this.mostRecentVisitDate = mostRecentVisitDate;
 		}
 
 		public String getPatientUuid() {
@@ -88,12 +88,12 @@ public class PatientEncounterSummaryController {
 			return age;
 		}
 
-		public long getEncounterCount() {
-			return encounterCount;
+		public long getVisitCount() {
+			return visitCount;
 		}
 
-		public String getMostRecentEncounterDate() {
-			return mostRecentEncounterDate;
+		public String getMostRecentVisitDate() {
+			return mostRecentVisitDate;
 		}
 	}
 }

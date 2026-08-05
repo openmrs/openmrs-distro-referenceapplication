@@ -37,7 +37,7 @@ export default function ReportsTabs({ activeKey }: { activeKey: ReportsTabKey })
   const tabLabels: Record<ReportsTabKey, string> = {
     overview: t('reportsOverview', 'Reports overview'),
     'lab-test-summary': t('labTestSummary', 'Lab Test Summary'),
-    'patient-encounter-summary': t('patientEncounters', 'Patient Encounters'),
+    'patient-encounter-summary': t('patientVisits', 'Patient Visits'),
     'disease-summary': t('diseaseSurveillance', 'Disease Surveillance'),
     'session-attendance': t('sessionAttendance', 'Session Attendance'),
     'stock-ledger': t('stockLedger', 'Stock Ledger'),

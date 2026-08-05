@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import * as XLSX from 'xlsx';
 import type { KpiTileDatum } from './kpi-tiles.component';
 import type { ComparisonSummaryRow } from './comparison-summary-table.component';
 
@@ -35,25 +36,33 @@ export function downloadCsv(filenameBase: string, sheet: ExportSheet) {
   triggerDownload(blob, `${filenameBase}.csv`);
 }
 
-function escapeHtml(value: string | number): string {
-  return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function sheetToHtmlTable(sheet: ExportSheet): string {
-  const headerRow = `<tr>${sheet.headers.map((header) => `<th>${escapeHtml(header)}</th>`).join('')}</tr>`;
-  const bodyRows = sheet.rows
-    .map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join('')}</tr>`)
-    .join('');
-  return `<h3>${escapeHtml(sheet.name)}</h3><table border="1">${headerRow}${bodyRows}</table>`;
+// Excel sheet names can't exceed 31 characters or contain : \ / ? * [ ], and must be unique
+// within the workbook.
+function sanitizeSheetName(name: string, usedNames: Set<string>): string {
+  const stripped = name.replace(/[:\\/?*[\]]/g, '').slice(0, 31) || 'Sheet';
+  let candidate = stripped;
+  let suffix = 2;
+  while (usedNames.has(candidate)) {
+    const suffixText = ` (${suffix})`;
+    candidate = stripped.slice(0, 31 - suffixText.length) + suffixText;
+    suffix++;
+  }
+  usedNames.add(candidate);
+  return candidate;
 }
 
 export function downloadExcel(filenameBase: string, sheets: Array<ExportSheet>) {
-  // Excel opens this legacy HTML-table format natively; no binary spreadsheet library required.
-  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"></head><body>${sheets
-    .map(sheetToHtmlTable)
-    .join('<br/>')}</body></html>`;
-  const blob = new Blob([html], { type: 'application/vnd.ms-excel' });
-  triggerDownload(blob, `${filenameBase}.xls`);
+  const workbook = XLSX.utils.book_new();
+  const usedSheetNames = new Set<string>();
+  for (const sheet of sheets) {
+    const worksheet = XLSX.utils.aoa_to_sheet([sheet.headers, ...sheet.rows]);
+    XLSX.utils.book_append_sheet(workbook, worksheet, sanitizeSheetName(sheet.name, usedSheetNames));
+  }
+  const buffer: ArrayBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  const blob = new Blob([buffer], {
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  });
+  triggerDownload(blob, `${filenameBase}.xlsx`);
 }
 
 export type Translate = (key: string, defaultValue: string, options?: Record<string, unknown>) => string;
@@ -67,6 +76,57 @@ export function buildKpiExportSheet(items: Array<KpiTileDatum>, t: Translate): E
         typeof item.value === 'number' && typeof item.compareValue === 'number' ? item.value - item.compareValue : '';
       return [item.label, toCell(item.value), item.compareValue !== undefined ? toCell(item.compareValue) : '', delta];
     }),
+  };
+}
+
+export interface VisitDetailForExport {
+  patientId: number;
+  givenName: string;
+  familyName: string;
+  visitDate: string;
+  locationName: string;
+  providerName: string;
+}
+
+/**
+ * Wide-format detail sheet: one row per patient, with a Date/Location/Provider column triplet
+ * for each visit, padded with blanks up to the most visits any one patient has.
+ */
+export function buildVisitDetailExportSheet(details: Array<VisitDetailForExport>, t: Translate): ExportSheet {
+  const byPatient = new Map<number, Array<VisitDetailForExport>>();
+  for (const detail of details) {
+    const existing = byPatient.get(detail.patientId);
+    if (existing) {
+      existing.push(detail);
+    } else {
+      byPatient.set(detail.patientId, [detail]);
+    }
+  }
+
+  const maxVisits = Math.max(0, ...Array.from(byPatient.values(), (visits) => visits.length));
+
+  const headers = [t('givenName', 'Given Name'), t('familyName', 'Family Name')];
+  for (let i = 1; i <= maxVisits; i++) {
+    headers.push(
+      t('visitNDate', 'Visit {{n}} Date', { n: i }),
+      t('visitNLocation', 'Visit {{n}} Location', { n: i }),
+      t('visitNProvider', 'Visit {{n}} Provider', { n: i }),
+    );
+  }
+
+  const rows = Array.from(byPatient.values()).map((visits) => {
+    const row: Array<string | number> = [visits[0].givenName, visits[0].familyName];
+    for (let i = 0; i < maxVisits; i++) {
+      const visit = visits[i];
+      row.push(visit?.visitDate ?? '', visit?.locationName ?? '', visit?.providerName ?? '');
+    }
+    return row;
+  });
+
+  return {
+    name: t('visitDetails', 'Visit Details'),
+    headers,
+    rows,
   };
 }
 

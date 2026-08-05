@@ -27,13 +27,13 @@ public class PatientEncounterSummaryReportManager extends BaseReportManager {
 
 	@Override
 	public String getName() {
-		return "Patient Encounter Summary Report";
+		return "Patient Visit Summary Report";
 	}
 
 	@Override
 	public String getDescription() {
-		return "Patients with at least one encounter, showing current age, number of encounters and most recent "
-		        + "encounter date. For clickable rows that jump to each patient's chart, use the report under "
+		return "Patients with at least one visit, showing current age, number of visits and most recent "
+		        + "visit date. For clickable rows that jump to each patient's chart, use the report under "
 		        + "Administration instead.";
 	}
 
@@ -85,7 +85,7 @@ public class PatientEncounterSummaryReportManager extends BaseReportManager {
 	 */
 	private static String buildPreviewSql() {
 		return "SELECT givenName AS `Given Name`, familyName AS `Family Name`, age AS `Age`, "
-		        + "encounterCount AS `Number of Encounters`, mostRecentEncounterDate AS `Most Recent Encounter Date` "
+		        + "visitCount AS `Number of Visits`, mostRecentVisitDate AS `Most Recent Visit Date` "
 		        + "FROM (" + SqlResources.load("patient_encounter_summary.sql") + ") base";
 	}
 }

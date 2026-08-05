@@ -37,12 +37,12 @@ export default function ReportsHome() {
               onClick={() => navigate({ to: '${openmrsSpaBase}/patient-encounter-summary-report' })}
             >
               <div className={styles.tileTitle}>
-                {t('patientEncounterSummaryReportTitle', 'Patient Encounter Summary Report')}
+                {t('patientVisitSummaryReportTitle', 'Patient Visit Summary Report')}
               </div>
               <p className={styles.tileDescription}>
                 {t(
-                  'patientEncounterSummaryReportTileDesc',
-                  'Patients by number of encounters and most recent encounter date. Click a patient to open their chart.',
+                  'patientVisitSummaryReportTileDesc',
+                  'Patients by number of visits and most recent visit date. Click a patient to open their chart.',
                 )}
               </p>
               <ArrowRight size={20} className={styles.tileIcon} />

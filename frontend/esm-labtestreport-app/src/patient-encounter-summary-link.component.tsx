@@ -9,9 +9,9 @@ export default function PatientEncounterSummaryLink() {
     <Layer>
       <ClickableTile href={`${window.getOpenmrsSpaBase().slice(0, -1)}/patient-encounter-summary-report`}>
         <div>
-          <div className="heading">{t('patientEncounterSummaryReportTitle', 'Patient Encounter Summary Report')}</div>
+          <div className="heading">{t('patientVisitSummaryReportTitle', 'Patient Visit Summary Report')}</div>
           <div className="content">
-            {t('patientEncounterSummaryReportShortDesc', 'Patients by encounter count, click a row to open their chart')}
+            {t('patientVisitSummaryReportShortDesc', 'Patients by visit count, click a row to open their chart')}
           </div>
         </div>
         <div className="iconWrapper">
