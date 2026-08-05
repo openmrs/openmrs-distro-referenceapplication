@@ -1,0 +1,108 @@
+name: Deploy to Onprem VM
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-onprem
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAMESPACE: phcc-openmrs
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push:
+    name: Build and push images to GHCR
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Compute image tags
+        id: tag
+        run: |
+          echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          echo "sha_tag=${GITHUB_REF_NAME}-${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
+
+      - name: Build and push backend
+        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/openmrs-reference-application-3-backend:${{ steps.tag.outputs.tag }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/openmrs-reference-application-3-backend:${{ steps.tag.outputs.sha_tag }}
+
+      - name: Build and push frontend
+        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
+        with:
+          context: ./frontend
+          push: true
+          build-args: |
+            CACHE_BUST=${{ github.run_id }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/openmrs-reference-application-3-frontend:${{ steps.tag.outputs.tag }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/openmrs-reference-application-3-frontend:${{ steps.tag.outputs.sha_tag }}
+
+      - name: Build and push gateway
+        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
+        with:
+          context: ./gateway
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/openmrs-reference-application-3-gateway:${{ steps.tag.outputs.tag }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/openmrs-reference-application-3-gateway:${{ steps.tag.outputs.sha_tag }}
+
+  notify-onprem:
+    name: Trigger onprem deploy webhook
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send signed deploy webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.ONPREM_WEBHOOK_URL }}
+          WEBHOOK_SECRET: ${{ secrets.ONPREM_WEBHOOK_SECRET }}
+          TAG: ${{ needs.build-and-push.outputs.tag }}
+        run: |
+          set -euo pipefail
+          if [ -z "$WEBHOOK_URL" ]; then
+            echo "::error::ONPREM_WEBHOOK_URL secret is not set — cannot notify the onprem VM."
+            exit 1
+          fi
+          if [ -z "$WEBHOOK_SECRET" ]; then
+            echo "::error::ONPREM_WEBHOOK_SECRET secret is not set — cannot sign the webhook payload."
+            exit 1
+          fi
+
+          payload=$(printf '{"tag":"%s","sha":"%s","ref":"%s"}' "$TAG" "$GITHUB_SHA" "$GITHUB_REF")
+          signature="sha256=$(printf '%s' "$payload" | openssl dgst -sha256 -hmac "$WEBHOOK_SECRET" | sed 's/^.* //')"
+
+          http_code=$(curl -sS -o /tmp/webhook_response.txt -w '%{http_code}' \
+            -X POST "$WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -H "X-Hub-Signature-256: $signature" \
+            --data "$payload")
+
+          cat /tmp/webhook_response.txt
+          if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
+            echo "::error::Webhook call failed with HTTP $http_code"
+            exit 1
+          fi

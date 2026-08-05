@@ -1,0 +1,15 @@
+[Unit]
+Description=GitHub deploy webhook listener for openmrs-distro-referenceapplication
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/webhook -hooks /home/openmrsdev/openmrsdev/openmrs-distro-referenceapplication/ops/onprem-webhook/hooks.json -ip 127.0.0.1 -port 9000 -verbose
+Restart=on-failure
+RestartSec=5
+User=openmrsdev
+Group=openmrsdev
+
+[Install]
+WantedBy=multi-user.target
