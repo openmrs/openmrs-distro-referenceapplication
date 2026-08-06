@@ -90,6 +90,21 @@ export default function ReportsHome() {
               <ArrowRight size={20} className={styles.tileIcon} />
             </ClickableTile>
           </Column>
+          <Column sm={4} md={4} lg={5}>
+            <ClickableTile
+              className={styles.tile}
+              onClick={() => navigate({ to: '${openmrsSpaBase}/cmam-follow-up-report' })}
+            >
+              <div className={styles.tileTitle}>{t('cmamFollowUpReportTitle', 'CMAM Follow-up Summary Report')}</div>
+              <p className={styles.tileDescription}>
+                {t(
+                  'cmamFollowUpReportTileDesc',
+                  'Children by Current Diagnosis, Child Last Status and Alert Status, with drill-down to the children behind each count.',
+                )}
+              </p>
+              <ArrowRight size={20} className={styles.tileIcon} />
+            </ClickableTile>
+          </Column>
         </Grid>
       </div>
     </div>

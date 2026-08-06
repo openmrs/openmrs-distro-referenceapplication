@@ -34,6 +34,7 @@ public class LabTestReportAdminExt extends AdministrationSectionExt {
 		map.put("module/labtestreport/diseaseSummary.form", "labtestreport.disease.title");
 		map.put("module/labtestreport/sessionAttendance.form", "labtestreport.sessionAttendance.title");
 		map.put("module/labtestreport/stockLedger.form", "labtestreport.stockLedger.title");
+		map.put("module/labtestreport/cmamSummary.form", "labtestreport.cmam.title");
 		return map;
 	}
 }

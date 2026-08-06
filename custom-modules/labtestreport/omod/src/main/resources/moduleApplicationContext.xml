@@ -127,6 +127,35 @@
 		</property>
 	</bean>
 
+	<!-- Configure the CMAM Follow-up Service -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.labtestreport.CmamFollowUpService</value>
+				<ref bean="cmamFollowUpService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="cmamFollowUpService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target">
+			<bean class="org.openmrs.module.labtestreport.impl.CmamFollowUpServiceImpl">
+				<property name="dao">
+					<bean class="org.openmrs.module.labtestreport.db.hibernate.HibernateCmamFollowUpDAO">
+						<property name="sessionFactory"><ref bean="dbSessionFactory"/></property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<ref bean="serviceInterceptors"/>
+		</property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+
 	<!-- Configure the Stock Ledger Service -->
 	<bean parent="serviceContext">
 		<property name="moduleService">

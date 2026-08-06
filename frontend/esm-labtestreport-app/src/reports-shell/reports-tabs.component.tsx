@@ -10,7 +10,8 @@ export type ReportsTabKey =
   | 'patient-encounter-summary'
   | 'disease-summary'
   | 'session-attendance'
-  | 'stock-ledger';
+  | 'stock-ledger'
+  | 'cmam-follow-up';
 
 const TAB_ROUTES: Record<ReportsTabKey, string> = {
   overview: 'labtestreport-reports',
@@ -19,6 +20,7 @@ const TAB_ROUTES: Record<ReportsTabKey, string> = {
   'disease-summary': 'disease-summary-report',
   'session-attendance': 'session-attendance-report',
   'stock-ledger': 'stock-ledger-report',
+  'cmam-follow-up': 'cmam-follow-up-report',
 };
 
 const TAB_ORDER: ReportsTabKey[] = [
@@ -28,6 +30,7 @@ const TAB_ORDER: ReportsTabKey[] = [
   'disease-summary',
   'session-attendance',
   'stock-ledger',
+  'cmam-follow-up',
 ];
 
 export default function ReportsTabs({ activeKey }: { activeKey: ReportsTabKey }) {
@@ -41,6 +44,7 @@ export default function ReportsTabs({ activeKey }: { activeKey: ReportsTabKey })
     'disease-summary': t('diseaseSurveillance', 'Disease Surveillance'),
     'session-attendance': t('sessionAttendance', 'Session Attendance'),
     'stock-ledger': t('stockLedger', 'Stock Ledger'),
+    'cmam-follow-up': t('cmamFollowUp', 'CMAM Follow-up'),
   };
 
   return (
