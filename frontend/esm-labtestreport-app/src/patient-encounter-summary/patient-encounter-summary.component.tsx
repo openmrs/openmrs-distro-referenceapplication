@@ -22,10 +22,10 @@ function summarize(rows: Array<PatientEncounterSummaryRow>, minAge: number | '',
     if (row.visitCount === 0) {
       return false;
     }
-    if (minAge !== '' && row.age < minAge) {
+    if (minAge !== '' && (row.age == null || row.age < minAge)) {
       return false;
     }
-    if (maxAge !== '' && row.age > maxAge) {
+    if (maxAge !== '' && (row.age == null || row.age > maxAge)) {
       return false;
     }
     return true;
@@ -118,6 +118,8 @@ export default function PatientEncounterSummaryReport() {
         t('age', 'Age'),
         t('numberOfVisits', 'Number of Visits'),
         t('mostRecentVisitDate', 'Most Recent Visit Date'),
+        t('location', 'Location'),
+        t('serviceType', 'Service Type'),
       ],
       rows: filteredRows.map((row) => [
         row.givenName,
@@ -125,6 +127,8 @@ export default function PatientEncounterSummaryReport() {
         row.age,
         row.visitCount,
         row.mostRecentVisitDate,
+        row.location ?? '',
+        row.serviceType ?? '',
       ]),
     }),
     [t, filteredRows],
@@ -244,6 +248,8 @@ export default function PatientEncounterSummaryReport() {
                   <th>{t('age', 'Age')}</th>
                   <th>{t('numberOfVisits', 'Number of Visits')}</th>
                   <th>{t('mostRecentVisitDate', 'Most Recent Visit Date')}</th>
+                  <th className="left">{t('location', 'Location')}</th>
+                  <th className="left">{t('serviceType', 'Service Type')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -262,11 +268,13 @@ export default function PatientEncounterSummaryReport() {
                     <td>{row.age}</td>
                     <td>{row.visitCount}</td>
                     <td>{row.mostRecentVisitDate}</td>
+                    <td className="left">{row.location || '--'}</td>
+                    <td className="left">{row.serviceType || '--'}</td>
                   </tr>
                 ))}
                 {filteredRows.length === 0 && (
                   <tr>
-                    <td colSpan={7} className={pageStyles.emptyState}>
+                    <td colSpan={9} className={pageStyles.emptyState}>
                       {t('noPatientsForSelection', 'No patients found for this selection.')}
                     </td>
                   </tr>

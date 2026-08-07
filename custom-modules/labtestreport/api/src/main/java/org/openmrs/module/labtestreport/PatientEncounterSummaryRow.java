@@ -29,6 +29,10 @@ public class PatientEncounterSummaryRow {
 
 	private String phoneNumber;
 
+	private String location;
+
+	private String serviceType;
+
 	public Integer getPatientId() {
 		return patientId;
 	}
@@ -107,5 +111,21 @@ public class PatientEncounterSummaryRow {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
 	}
 }

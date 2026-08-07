@@ -12,6 +12,8 @@ export interface PatientEncounterSummaryRow {
   sex: string;
   nationalId: string;
   phoneNumber: string;
+  location: string;
+  serviceType: string;
 }
 
 export function usePatientEncounterSummary(startDate?: string, endDate?: string, enabled: boolean = true) {

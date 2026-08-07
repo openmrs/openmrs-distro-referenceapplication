@@ -85,7 +85,8 @@ public class PatientEncounterSummaryReportManager extends BaseReportManager {
 	 */
 	private static String buildPreviewSql() {
 		return "SELECT givenName AS `Given Name`, familyName AS `Family Name`, age AS `Age`, "
-		        + "visitCount AS `Number of Visits`, mostRecentVisitDate AS `Most Recent Visit Date` "
+		        + "visitCount AS `Number of Visits`, mostRecentVisitDate AS `Most Recent Visit Date`, "
+		        + "location AS `Location`, serviceType AS `Service Type` "
 		        + "FROM (" + SqlResources.load("patient_encounter_summary.sql") + ") base";
 	}
 }

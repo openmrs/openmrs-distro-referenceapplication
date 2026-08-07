@@ -33,6 +33,8 @@ public class PatientEncounterReportServiceImpl extends BaseOpenmrsService implem
 			row.setSex((String) r[7]);
 			row.setNationalId((String) r[8]);
 			row.setPhoneNumber((String) r[9]);
+			row.setLocation((String) r[10]);
+			row.setServiceType((String) r[11]);
 			rows.add(row);
 		}
 		return rows;
