@@ -23,6 +23,7 @@ import ExportButtons from '../reports-shell/export-buttons.component';
 import { buildKpiExportSheet, buildComparisonExportSheet, type ExportSheet } from '../reports-shell/export-utils';
 import { useMonthComparison } from '../reports-shell/month-compare';
 import pageStyles from '../reports-shell/reports-page.scss';
+import { getTodayDateString, clampToToday } from '../reports-shell/date-utils';
 import {
   useDiseaseSummaryReport,
   useDiseaseDrilldown,
@@ -354,7 +355,8 @@ export default function DiseaseSummaryReport() {
                 id="startDate"
                 type="date"
                 value={startDateInput}
-                onChange={(e) => setStartDateInput(e.target.value)}
+                max={getTodayDateString()}
+                onChange={(e) => setStartDateInput(clampToToday(e.target.value))}
               />
             </div>
             <div className={pageStyles.filterField}>
@@ -363,7 +365,8 @@ export default function DiseaseSummaryReport() {
                 id="endDate"
                 type="date"
                 value={endDateInput}
-                onChange={(e) => setEndDateInput(e.target.value)}
+                max={getTodayDateString()}
+                onChange={(e) => setEndDateInput(clampToToday(e.target.value))}
               />
             </div>
             <Button size="md" onClick={applyFilter}>

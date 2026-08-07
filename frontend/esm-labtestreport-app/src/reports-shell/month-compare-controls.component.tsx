@@ -4,6 +4,7 @@ import { Toggle } from '@carbon/react';
 import pageStyles from './reports-page.scss';
 import styles from './month-compare-controls.scss';
 import type { MonthComparison } from './month-compare';
+import { getCurrentMonthString, clampToCurrentMonth } from './date-utils';
 
 export default function MonthCompareControls({
   enabled,
@@ -38,7 +39,8 @@ export default function MonthCompareControls({
               id="primaryMonth"
               type="month"
               value={primaryMonth}
-              onChange={(e) => setPrimaryMonth(e.target.value)}
+              max={getCurrentMonthString()}
+              onChange={(e) => setPrimaryMonth(clampToCurrentMonth(e.target.value))}
             />
           </div>
           <div className={pageStyles.filterField}>
@@ -49,7 +51,8 @@ export default function MonthCompareControls({
               id="comparisonMonth"
               type="month"
               value={comparisonMonth}
-              onChange={(e) => setComparisonMonth(e.target.value)}
+              max={getCurrentMonthString()}
+              onChange={(e) => setComparisonMonth(clampToCurrentMonth(e.target.value))}
             />
           </div>
         </>

@@ -1,4 +1,18 @@
 {
+  "@openmrs/esm-help-menu-app": {
+    "extensionSlots": {
+      "help-menu-slot": {
+        "remove": ["release-notes", "docs", "contact-us", "tutorials"]
+      }
+    }
+  },
+  "@openmrs/esm-appointments-app": {
+    "extensionSlots": {
+      "homepage-dashboard-slot": {
+        "remove": ["clinical-appointments-dashboard-link"]
+      }
+    }
+  },
   "@openmrs/esm-patient-registration-app": {
     "fieldConfigurations": {
       "name": {
@@ -16,6 +30,19 @@
           }
         ],
         "fieldValidation": [{ "id": "address3", "validateLuhn": true }]
+      },
+      "phone": {
+        "personAttributeUuid": "14d4f066-15f5-102d-96e4-000c29c2a5d7",
+        "validation": {
+          "required": false,
+          "matches": "^[0-9]*$"
+        }
+      }
+    },
+    "Translation overrides": {
+      "en": {
+        "invalidInput": "Phone number should contain numbers only",
+        "attributesLabelText": "Phone Number"
       }
     }
   },
