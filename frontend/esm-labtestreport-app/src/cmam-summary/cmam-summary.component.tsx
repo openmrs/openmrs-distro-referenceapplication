@@ -4,6 +4,7 @@ import { Modal, InlineLoading, Button } from '@carbon/react';
 import { navigate } from '@openmrs/esm-framework';
 import ReportsTabs from '../reports-shell/reports-tabs.component';
 import pageStyles from '../reports-shell/reports-page.scss';
+import { getTodayDateString, clampToToday } from '../reports-shell/date-utils';
 import {
   useCmamSummaryReport,
   useCmamDrilldown,
@@ -110,11 +111,23 @@ export default function CmamSummaryReport() {
         <div className={pageStyles.filterTile}>
           <div className={pageStyles.filterField}>
             <label htmlFor="startDate">{t('startDate', 'Start Date')}</label>
-            <input id="startDate" type="date" value={startDateInput} onChange={(e) => setStartDateInput(e.target.value)} />
+            <input
+              id="startDate"
+              type="date"
+              value={startDateInput}
+              max={getTodayDateString()}
+              onChange={(e) => setStartDateInput(clampToToday(e.target.value))}
+            />
           </div>
           <div className={pageStyles.filterField}>
             <label htmlFor="endDate">{t('endDate', 'End Date')}</label>
-            <input id="endDate" type="date" value={endDateInput} onChange={(e) => setEndDateInput(e.target.value)} />
+            <input
+              id="endDate"
+              type="date"
+              value={endDateInput}
+              max={getTodayDateString()}
+              onChange={(e) => setEndDateInput(clampToToday(e.target.value))}
+            />
           </div>
           <Button size="md" onClick={applyFilter}>
             {t('filter', 'Filter')}
