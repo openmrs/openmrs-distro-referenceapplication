@@ -70,7 +70,10 @@ function buildDayBlocks(rows: Array<StockLedgerRow>, items: Array<LedgerItem>): 
         };
       });
       return { date, cells };
-    });
+    })
+    .filter((block) =>
+      block.cells.some((cell) => cell.actualQty || cell.incomingQty || cell.outgoingQty || cell.remainingQty),
+    );
 }
 
 export default function StockLedgerReport() {

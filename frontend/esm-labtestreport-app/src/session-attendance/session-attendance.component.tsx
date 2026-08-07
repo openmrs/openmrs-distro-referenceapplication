@@ -80,15 +80,19 @@ function buildDayBlocks(rows: Array<SessionAttendanceRow>): Array<DayBlock> {
     const dailyTotal = zeroRow(date, '');
     SESSION_TYPES_IN_ORDER.forEach((type) => {
       const row = typeMap.get(type) ?? zeroRow(date, type);
-      blockRows.push(row);
       dailyTotal.totalAttendees += row.totalAttendees;
       dailyTotal.total += row.total;
       AGE_GENDER_COLUMNS.forEach((col) => {
         const key = `${col.ageGroup}_${col.gender}`;
         dailyTotal.counts[key] = (dailyTotal.counts[key] ?? 0) + (row.counts?.[key] ?? 0);
       });
+      if (row.total !== 0) {
+        blockRows.push(row);
+      }
     });
-    blocks.push({ date, rows: blockRows, dailyTotal });
+    if (blockRows.length > 0) {
+      blocks.push({ date, rows: blockRows, dailyTotal });
+    }
   });
   return blocks.sort((a, b) => a.date.localeCompare(b.date));
 }
@@ -176,6 +180,7 @@ export default function SessionAttendanceReport() {
         t('total', 'Total'),
       ],
       rows: [...rows]
+        .filter((row) => row.total !== 0)
         .sort((a, b) => a.sessionDate.localeCompare(b.sessionDate))
         .map((row) => [
           row.sessionDate,

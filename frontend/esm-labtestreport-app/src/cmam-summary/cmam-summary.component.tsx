@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Modal, InlineLoading, Button } from '@carbon/react';
 import { navigate } from '@openmrs/esm-framework';
 import ReportsTabs from '../reports-shell/reports-tabs.component';
+import ExportButtons from '../reports-shell/export-buttons.component';
+import { type ExportSheet } from '../reports-shell/export-utils';
 import pageStyles from '../reports-shell/reports-page.scss';
 import {
   useCmamSummaryReport,
@@ -43,17 +45,44 @@ export default function CmamSummaryReport() {
       : null,
   );
 
+  const visibleRows = useMemo(() => rows.filter((row) => row.total !== 0), [rows]);
+
   const rowsByDimension = useMemo(() => {
     const grouped: Record<CmamDimension, CmamSummaryRow[]> = {
       currentDiagnosis: [],
       childLastStatus: [],
       alertStatus: [],
     };
-    rows.forEach((row) => {
+    visibleRows.forEach((row) => {
       grouped[row.dimension]?.push(row);
     });
     return grouped;
-  }, [rows]);
+  }, [visibleRows]);
+
+  const dimensionLabels: Record<CmamDimension, string> = {
+    currentDiagnosis: t('currentDiagnosis', 'Current Diagnosis'),
+    childLastStatus: t('childLastStatus', 'Child Last Status'),
+    alertStatus: t('alertStatus', 'Alert Status'),
+  };
+
+  const mainExportSheet = useMemo<ExportSheet>(
+    () => ({
+      name: t('cmamFollowUpReportTitle', 'CMAM Follow-up Summary Report'),
+      headers: [t('dimension', 'Dimension'), t('category', 'Category'), t('numberOfChildren', 'Number of Children')],
+      rows: visibleRows.map((row) => [dimensionLabels[row.dimension] ?? row.dimension, row.category, row.total]),
+    }),
+    [t, visibleRows],
+  );
+
+  const exportExtraSheets = useMemo<Array<ExportSheet>>(
+    () =>
+      (Object.keys(rowsByDimension) as Array<CmamDimension>).map((dimension) => ({
+        name: dimensionLabels[dimension],
+        headers: [t('category', 'Category'), t('numberOfChildren', 'Number of Children')],
+        rows: rowsByDimension[dimension].map((row) => [row.category, row.total]),
+      })),
+    [t, rowsByDimension],
+  );
 
   const applyFilter = () => {
     setAppliedDates({ startDate: startDateInput || undefined, endDate: endDateInput || undefined });
@@ -120,6 +149,13 @@ export default function CmamSummaryReport() {
             {t('filter', 'Filter')}
           </Button>
         </div>
+
+        <ExportButtons
+          filenameBase="cmam-follow-up-report"
+          mainSheet={mainExportSheet}
+          extraSheets={exportExtraSheets}
+          disabled={isLoading}
+        />
 
         {isLoading && <InlineLoading description={t('loadingReport', 'Loading report...')} />}
 

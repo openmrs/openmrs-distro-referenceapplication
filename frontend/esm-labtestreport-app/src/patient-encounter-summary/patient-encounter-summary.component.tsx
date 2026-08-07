@@ -18,6 +18,9 @@ import {
 
 function summarize(rows: Array<PatientEncounterSummaryRow>, minAge: number | '', maxAge: number | '') {
   const filteredRows = rows.filter((row) => {
+    if (row.visitCount === 0) {
+      return false;
+    }
     if (minAge !== '' && row.age < minAge) {
       return false;
     }

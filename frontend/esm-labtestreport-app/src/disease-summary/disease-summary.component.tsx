@@ -63,6 +63,9 @@ interface CategoryGroup {
 function summarize(rows: DiseaseSummaryRow[], searchText: string, categoryFilter: string) {
   const search = searchText.trim().toLowerCase();
   const filteredRows = rows.filter((row) => {
+    if (row.total === 0) {
+      return false;
+    }
     if (categoryFilter && row.category !== categoryFilter) {
       return false;
     }
