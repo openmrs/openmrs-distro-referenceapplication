@@ -24,9 +24,9 @@ RUN corepack enable && \
     yarn build && \
     yarn pack --out /app/esm-stock-management-app-patched.tgz
 
-# Build @openmrs/esm-patient-registration-app from our fork instead of the
-# published "next" package, so registration fixes ship as soon as they land
-# on main.
+# Build @openmrs/esm-patient-registration-app, @openmrs/esm-patient-list-management-app,
+# AND @openmrs/esm-service-queues-app from our fork instead of the published "next"
+# package, so fixes to any of them ship as soon as they land on main.
 ARG PATIENT_MANAGEMENT_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-patient-management.git
 ARG PATIENT_MANAGEMENT_REF=main
 # Bump this (e.g. --build-arg PATIENT_MANAGEMENT_CACHE_BUST=$(date +%s)) to force
@@ -40,8 +40,10 @@ RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
     yarn install && \
     yarn workspace @openmrs/esm-patient-registration-app run build && \
     yarn workspace @openmrs/esm-patient-list-management-app run build && \
+    yarn workspace @openmrs/esm-service-queues-app run build && \
     (cd packages/esm-patient-registration-app && npm pack --pack-destination /app) && \
-    (cd packages/esm-patient-list-management-app && npm pack --pack-destination /app)
+    (cd packages/esm-patient-list-management-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-service-queues-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-patient-chart-app AND @openmrs/esm-patient-programs-app from our
 # fork instead of the published "next" package. esm-patient-chart-app is just the
