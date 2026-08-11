@@ -39,11 +39,14 @@ cp /monitoring/blackbox.yml /config/blackbox.yml
 
 echo "Setting up jmx exporter..."
 mkdir -p /jmx-exporter-data/
-# The agent jar is baked into this image at build time (see Dockerfile); copy it
-# into the shared volume so the backend can load it as a -javaagent.
-# Clear stale jars so an older pinned version doesn't linger in the volume.
+# The agent jar is baked into this image at build time (see Dockerfile); copy it into the
+# shared volume so the backend can load it as a -javaagent. Install it under a stable,
+# unversioned name so the -javaagent path in docker-compose.grafana.yml never has to track
+# JMX_EXPORTER_VERSION — if that path pointed at a jar the volume didn't have, the backend
+# JVM would refuse to start, so a monitoring-only version bump would take the app down.
+# Clear stale jars so a previously pinned version doesn't linger in the volume.
 rm -f /jmx-exporter-data/*.jar
-cp /opt/jmx-exporter/*.jar /jmx-exporter-data/
+cp /opt/jmx-exporter/jmx_prometheus_javaagent-*.jar /jmx-exporter-data/jmx_prometheus_javaagent.jar
 cp /monitoring/jmx_config.yml /jmx-exporter-data/jmx_config.yml
 
 echo "Configuration initialization complete."

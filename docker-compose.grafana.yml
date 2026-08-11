@@ -96,8 +96,19 @@ services:
         - --docker=unix:///var/run/docker.sock
 
     backend:
+      # Inject the JMX exporter agent via JAVA_TOOL_OPTIONS, which the JVM reads itself and
+      # adds to whatever options it is already given. Do NOT use OMRS_JAVA_SERVER_OPTS:
+      # openmrs-core's startup-init.sh reads it as ${OMRS_JAVA_SERVER_OPTS:-<defaults>}, so
+      # setting it here would REPLACE the image's default JVM flags (-Djava.awt.headless=true
+      # and friends) rather than add to them. Staying out of that variable means this overlay
+      # never has to track the backend image's JVM flags, and stays safe to copy into distros
+      # that set them.
+      #
+      # Note that every JVM started in this container inherits JAVA_TOOL_OPTIONS, so JDK CLI
+      # tools would try to bind 9404 a second time and abort. Clear it when using them:
+      #   docker compose exec -e JAVA_TOOL_OPTIONS= backend jcmd -l
       environment:
-        OMRS_JAVA_SERVER_OPTS: "-javaagent:/opt/jmx_exporter/jmx_prometheus_javaagent-1.6.0.jar=9404:/opt/jmx_exporter/jmx_config.yml"
+        JAVA_TOOL_OPTIONS: "-javaagent:/opt/jmx_exporter/jmx_prometheus_javaagent.jar=9404:/opt/jmx_exporter/jmx_config.yml"
       volumes:
         - jmx-exporter-data:/opt/jmx_exporter:ro
       depends_on:
