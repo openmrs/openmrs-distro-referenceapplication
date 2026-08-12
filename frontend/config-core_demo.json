@@ -14,6 +14,28 @@
     }
   },
   "@openmrs/esm-service-queues-app": {
+    "defaultInitialServiceQueue": "Front Desk",
+    "pharmacyQueueName": "Pharmacy",
+    "queueTables": {
+      "columnDefinitions": [
+        {
+          "id": "actions",
+          "columnType": "actions",
+          "config": {
+            "actions": {
+              "buttons": ["move"],
+              "overflowMenu": ["transition", "edit", "remove", "undo"]
+            }
+          }
+        }
+      ],
+      "tableDefinitions": [
+        {
+          "columns": ["patient-name", "queue", "status", "location", "visit-duration", "programs", "actions"],
+          "appliedTo": [{ "queue": "", "status": "" }]
+        }
+      ]
+    },
     "Translation overrides": {
       "en": {
         "programs": "Service-type"
