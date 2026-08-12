@@ -17,7 +17,26 @@ import {
   type PatientEncounterSummaryRow,
 } from './patient-encounter-summary.resource';
 
-function summarize(rows: Array<PatientEncounterSummaryRow>, minAge: number | '', maxAge: number | '') {
+// `location` and `serviceType` are comma-joined lists (a patient can visit more than one
+// location, or be enrolled in more than one program, within the report period).
+function splitCommaList(value: string | null | undefined): Array<string> {
+  return (value ?? '')
+    .split(',')
+    .map((token) => token.trim())
+    .filter(Boolean);
+}
+
+function uniqueSorted(values: Array<string>): Array<string> {
+  return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b));
+}
+
+function summarize(
+  rows: Array<PatientEncounterSummaryRow>,
+  minAge: number | '',
+  maxAge: number | '',
+  location: string,
+  serviceType: string,
+) {
   const filteredRows = rows.filter((row) => {
     if (row.visitCount === 0) {
       return false;
@@ -26,6 +45,12 @@ function summarize(rows: Array<PatientEncounterSummaryRow>, minAge: number | '',
       return false;
     }
     if (maxAge !== '' && (row.age == null || row.age > maxAge)) {
+      return false;
+    }
+    if (location && !splitCommaList(row.location).includes(location)) {
+      return false;
+    }
+    if (serviceType && !splitCommaList(row.serviceType).includes(serviceType)) {
       return false;
     }
     return true;
@@ -45,6 +70,9 @@ export default function PatientEncounterSummaryReport() {
   const [appliedDates, setAppliedDates] = useState<{ startDate?: string; endDate?: string }>({});
   const [minAge, setMinAge] = useState<number | ''>('');
   const [maxAge, setMaxAge] = useState<number | ''>('');
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [selectedServiceType, setSelectedServiceType] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState<'table' | 'graph'>('table');
   const compare = useMonthComparison();
 
@@ -64,13 +92,34 @@ export default function PatientEncounterSummaryReport() {
     primaryEndDate,
   );
 
-  const primary = useMemo(() => summarize(rows, minAge, maxAge), [rows, minAge, maxAge]);
+  const primary = useMemo(
+    () => summarize(rows, minAge, maxAge, selectedLocation, selectedServiceType),
+    [rows, minAge, maxAge, selectedLocation, selectedServiceType],
+  );
   const { filteredRows } = primary;
 
   const compareSummary = useMemo(
-    () => (compare.enabled ? summarize(compareRowsRaw, minAge, maxAge) : null),
-    [compareRowsRaw, minAge, maxAge, compare.enabled],
+    () => (compare.enabled ? summarize(compareRowsRaw, minAge, maxAge, selectedLocation, selectedServiceType) : null),
+    [compareRowsRaw, minAge, maxAge, selectedLocation, selectedServiceType, compare.enabled],
   );
+
+  const locationOptions = useMemo(() => uniqueSorted(rows.flatMap((row) => splitCommaList(row.location))), [rows]);
+  const serviceTypeOptions = useMemo(
+    () => uniqueSorted(rows.flatMap((row) => splitCommaList(row.serviceType))),
+    [rows],
+  );
+
+  const searchedRows = useMemo(() => {
+    const term = searchTerm.trim().toLowerCase();
+    if (!term) {
+      return filteredRows;
+    }
+    return filteredRows.filter((row) =>
+      [row.givenName, row.familyName, row.nationalId, row.phoneNumber, row.location, row.serviceType]
+        .filter(Boolean)
+        .some((field) => field.toLowerCase().includes(term)),
+    );
+  }, [filteredRows, searchTerm]);
 
   const chartData = useMemo(
     () =>
@@ -214,6 +263,46 @@ export default function PatientEncounterSummaryReport() {
               onChange={(_e, { value }) => setMaxAge(value === '' ? '' : Number(value))}
             />
           </div>
+          <div className={pageStyles.filterField}>
+            <label htmlFor="locationFilter">{t('location', 'Location')}</label>
+            <select
+              id="locationFilter"
+              value={selectedLocation}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedLocation(e.target.value)}
+            >
+              <option value="">{t('all', 'All')}</option>
+              {locationOptions.map((location: string) => (
+                <option key={location} value={location}>
+                  {location}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={pageStyles.filterField}>
+            <label htmlFor="serviceTypeFilter">{t('serviceType', 'Service Type')}</label>
+            <select
+              id="serviceTypeFilter"
+              value={selectedServiceType}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedServiceType(e.target.value)}
+            >
+              <option value="">{t('all', 'All')}</option>
+              {serviceTypeOptions.map((serviceType: string) => (
+                <option key={serviceType} value={serviceType}>
+                  {serviceType}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={pageStyles.filterField}>
+            <label htmlFor="searchTerm">{t('search', 'Search')}</label>
+            <input
+              id="searchTerm"
+              type="search"
+              placeholder={t('searchAllColumns', 'Search name, ID, phone, location...')}
+              value={searchTerm}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+            />
+          </div>
         </div>
 
         <ExportButtons
@@ -253,7 +342,7 @@ export default function PatientEncounterSummaryReport() {
                 </tr>
               </thead>
               <tbody>
-                {filteredRows.map((row) => (
+                {searchedRows.map((row) => (
                   <tr
                     key={row.patientId}
                     className={pageStyles.clickableRow}
@@ -272,7 +361,7 @@ export default function PatientEncounterSummaryReport() {
                     <td className="left">{row.serviceType || '--'}</td>
                   </tr>
                 ))}
-                {filteredRows.length === 0 && (
+                {searchedRows.length === 0 && (
                   <tr>
                     <td colSpan={9} className={pageStyles.emptyState}>
                       {t('noPatientsForSelection', 'No patients found for this selection.')}

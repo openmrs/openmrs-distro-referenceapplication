@@ -46,11 +46,12 @@ RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
     (cd packages/esm-service-queues-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-patient-chart-app, @openmrs/esm-patient-programs-app,
-# @openmrs/esm-patient-medications-app, AND @openmrs/esm-patient-orders-app from our
-# fork instead of the published "next" package. esm-patient-chart-app is just the
-# dashboard-shell package -- it does NOT depend on the others, so each widget package
-# must be built and packed separately, and spa-assemble-config.json must point each
-# at its own tarball (not "next") or none of this has any effect on what's actually served.
+# @openmrs/esm-patient-medications-app, @openmrs/esm-patient-orders-app, AND
+# @openmrs/esm-patient-conditions-app from our fork instead of the published "next"
+# package. esm-patient-chart-app is just the dashboard-shell package -- it does NOT
+# depend on the others, so each widget package must be built and packed separately,
+# and spa-assemble-config.json must point each at its own tarball (not "next") or
+# none of this has any effect on what's actually served.
 ARG PATIENT_CHART_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-patient-chart.git
 ARG PATIENT_CHART_REF=main
 ARG PATIENT_CHART_CACHE_BUST=0
@@ -63,10 +64,12 @@ RUN echo "cache-bust=${PATIENT_CHART_CACHE_BUST}" && \
     yarn workspace @openmrs/esm-patient-programs-app run build && \
     yarn workspace @openmrs/esm-patient-medications-app run build && \
     yarn workspace @openmrs/esm-patient-orders-app run build && \
+    yarn workspace @openmrs/esm-patient-conditions-app run build && \
     (cd packages/esm-patient-chart-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-programs-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-medications-app && npm pack --pack-destination /app) && \
-    (cd packages/esm-patient-orders-app && npm pack --pack-destination /app)
+    (cd packages/esm-patient-orders-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-conditions-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-dispensing-app from our fork instead of the published "next"
 # package, so the auto-complete-on-dispense and dispensed-quantity fixes ship.
