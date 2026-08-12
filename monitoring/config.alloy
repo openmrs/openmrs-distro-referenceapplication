@@ -82,25 +82,3 @@ loki.write "local" {
     url = "http://loki:3100/loki/api/v1/push"
   }
 }
-
-// JMX metrics: receive OTLP from jmx_prometheus_javaagent, convert to Prometheus
-// format, and push to Prometheus via remote_write.
-otelcol.receiver.otlp "jmx" {
-  http {
-    endpoint = "0.0.0.0:4318"
-  }
-
-  output {
-    metrics = [otelcol.exporter.prometheus.jmx.input]
-  }
-}
-
-otelcol.exporter.prometheus "jmx" {
-  forward_to = [prometheus.remote_write.default.receiver]
-}
-
-prometheus.remote_write "default" {
-  endpoint {
-    url = "http://prometheus:9090/api/v1/write"
-  }
-}
