@@ -16,10 +16,6 @@ scrape_configs:
       - regex: 'container_label_.*'
         action: labeldrop
 
-  - job_name: 'openmrs-jvm'
-    static_configs:
-      - targets: [ 'backend:9404' ]
-
   - job_name: 'blackbox-http-prod'
     metrics_path: /probe
     params:
