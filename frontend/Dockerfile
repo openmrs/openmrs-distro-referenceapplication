@@ -84,17 +84,22 @@ RUN echo "cache-bust=${DISPENSING_CACHE_BUST}" && \
     yarn build && \
     yarn pack --out /app/esm-dispensing-app.tgz
 
-# Build @openmrs/esm-login-app from our fork instead of the published "next"
-# package, to remove the "Built with OpenMRS" footer.
+# Build @openmrs/esm-login-app, @openmrs/esm-app-shell, AND @openmrs/esm-framework
+# (which re-exports esm-offline) from our fork instead of the published "next"
+# packages. Our fork's main removes the "Built with OpenMRS" footer, clears the
+# service worker cache on logout, and fixes stale-content caching bugs in the
+# app shell's service worker. esm-app-shell and esm-framework are pinned CLI
+# dependencies (not entries in spa-assemble-config.json), so their builds are
+# only packed here -- they get spliced into node_modules below.
 ARG ESM_CORE_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-core.git
-ARG ESM_CORE_REF=remove-openmrs-footer
+ARG ESM_CORE_REF=main
 ARG ESM_CORE_CACHE_BUST=0
 RUN echo "cache-bust=${ESM_CORE_CACHE_BUST}" && \
     git clone --branch ${ESM_CORE_REF} --depth 1 ${ESM_CORE_REPO} openmrs-esm-core && \
     corepack enable && \
     cd openmrs-esm-core && \
     yarn install && \
-    npx turbo run build --filter=...@openmrs/esm-login-app && \
+    npx turbo run build --filter=...@openmrs/esm-login-app --filter=...@openmrs/esm-app-shell --filter=...@openmrs/esm-framework && \
     (cd packages/apps/esm-login-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-styleguide from our fork's sidebar-fix branch instead of
@@ -114,18 +119,29 @@ RUN echo "cache-bust=${ESM_CORE_STYLEGUIDE_CACHE_BUST}" && \
 
 ARG CACHE_BUST
 # Install the openmrs CLI locally (instead of via npx) so we know exactly
-# where it puts its own pinned @openmrs/esm-app-shell + @openmrs/esm-styleguide,
-# and can overwrite the latter with our patched build above before the shell
-# itself gets compiled. The app shell is NOT one of the modules in
-# spa-assemble-config.json -- it's compiled directly by `openmrs build` from
-# its own hard-pinned dependency, so that config has no way to override it;
-# this is the only place that actually takes effect.
+# where it puts its own pinned @openmrs/esm-app-shell, @openmrs/esm-framework,
+# and @openmrs/esm-styleguide, and can overwrite them with our patched builds
+# above before the shell itself gets compiled. None of these three are
+# modules in spa-assemble-config.json -- the app shell is compiled directly
+# by `openmrs build` from its own hard-pinned dependencies, so that config
+# has no way to override them; this is the only place that actually takes
+# effect.
 RUN npm install --no-save --legacy-peer-deps openmrs@${APP_SHELL_VERSION:-next} && \
     STYLEGUIDE_DIR=$(find node_modules -type d -path '*@openmrs/esm-styleguide' | head -n1) && \
     echo "Found esm-styleguide at: ${STYLEGUIDE_DIR}" && \
     test -n "${STYLEGUIDE_DIR}" && \
     rm -rf "${STYLEGUIDE_DIR}/dist" && \
-    cp -r openmrs-esm-core-styleguide/packages/framework/esm-styleguide/dist "${STYLEGUIDE_DIR}/dist"
+    cp -r openmrs-esm-core-styleguide/packages/framework/esm-styleguide/dist "${STYLEGUIDE_DIR}/dist" && \
+    APP_SHELL_DIR=$(find node_modules -type d -path '*@openmrs/esm-app-shell' | head -n1) && \
+    echo "Found esm-app-shell at: ${APP_SHELL_DIR}" && \
+    test -n "${APP_SHELL_DIR}" && \
+    rm -rf "${APP_SHELL_DIR}/dist" && \
+    cp -r openmrs-esm-core/packages/shell/esm-app-shell/dist "${APP_SHELL_DIR}/dist" && \
+    FRAMEWORK_DIR=$(find node_modules -type d -path '*@openmrs/esm-framework' | head -n1) && \
+    echo "Found esm-framework at: ${FRAMEWORK_DIR}" && \
+    test -n "${FRAMEWORK_DIR}" && \
+    rm -rf "${FRAMEWORK_DIR}/dist" && \
+    cp -r openmrs-esm-core/packages/framework/esm-framework/dist "${FRAMEWORK_DIR}/dist"
 RUN node_modules/.bin/openmrs assemble --manifest --mode config --config spa-assemble-config.json --target ./spa
 RUN node_modules/.bin/openmrs build --build-config spa-build-config.json --target ./spa
 RUN if [ ! -f ./spa/index.html ]; then echo 'Build failed. Please check the logs above for details. This may have happened because of an update to a library that OpenMRS depends on.'; exit 1; fi
