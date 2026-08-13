@@ -85,14 +85,14 @@ RUN echo "cache-bust=${DISPENSING_CACHE_BUST}" && \
     yarn pack --out /app/esm-dispensing-app.tgz
 
 # Build @openmrs/esm-login-app, @openmrs/esm-app-shell, AND @openmrs/esm-framework
-# (which re-exports esm-offline) from our fork's cache-issue-fix branch instead of
-# the published "next" packages. That branch removes the "Built with OpenMRS"
-# footer, clears the service worker cache on logout, and fixes stale-content
-# caching bugs in the app shell's service worker. esm-app-shell and esm-framework
-# are pinned CLI dependencies (not entries in spa-assemble-config.json), so their
-# builds are only packed here -- they get spliced into node_modules below.
+# (which re-exports esm-offline) from our fork instead of the published "next"
+# packages. Our fork's main removes the "Built with OpenMRS" footer, clears the
+# service worker cache on logout, and fixes stale-content caching bugs in the
+# app shell's service worker. esm-app-shell and esm-framework are pinned CLI
+# dependencies (not entries in spa-assemble-config.json), so their builds are
+# only packed here -- they get spliced into node_modules below.
 ARG ESM_CORE_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-core.git
-ARG ESM_CORE_REF=cache-issue-fix
+ARG ESM_CORE_REF=main
 ARG ESM_CORE_CACHE_BUST=0
 RUN echo "cache-bust=${ESM_CORE_CACHE_BUST}" && \
     git clone --branch ${ESM_CORE_REF} --depth 1 ${ESM_CORE_REPO} openmrs-esm-core && \
