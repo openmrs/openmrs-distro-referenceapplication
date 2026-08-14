@@ -5,7 +5,9 @@ export function useDrugsHook(searchTerm?: string, filter?: DrugFilterCriteria, e
   const defaultFilters: DrugFilterCriteria = {
     v: ResourceRepresentation.Default,
     q: searchTerm,
-    limit: 20,
+    // High enough to return the full drug dictionary in one page rather than a truncated
+    // first-20 slice - relies on webservices.rest.maxResultsAbsolute being raised to match.
+    limit: 500,
   };
   const drugsFilter: DrugFilterCriteria = filter || defaultFilters;
 

@@ -12,6 +12,7 @@ import { handleMutate } from '../../../utils';
 import { launchAddOrEditStockItemWorkspace } from '../../stock-item.utils';
 import { createStockItemDetailsSchema, type StockItemFormData } from '../../validationSchema';
 import { type StockItemDTO } from '../../../core/api/types/stockItem/StockItem';
+import { type Drug } from '../../../core/api/types/concept/Drug';
 import ConceptsSelector from '../concepts-selector/concepts-selector.component';
 import ControlledNumberInput from '../../../core/components/carbon/controlled-number-input.component';
 import ControlledRadioButtonGroup from '../../../core/components/carbon/controlled-radio-button-group.component';
@@ -33,11 +34,25 @@ const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: Stoc
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
 
-  const { handleSubmit, control, formState, watch } = useForm<StockItemFormData>({
+  const { handleSubmit, control, formState, watch, setValue } = useForm<StockItemFormData>({
     defaultValues: stockItem ?? {},
     mode: 'all',
     resolver: zodResolver(createStockItemDetailsSchema(t)),
   });
+
+  // Common name / Abbreviation are derived from the selected drug or item, not typed by the
+  // user, so they always stay in sync with whatever was actually picked above.
+  const handleDrugChanged = (drug?: Drug | null) => {
+    if (!drug) return;
+    setValue('commonName', drug.name, { shouldValidate: true });
+    setValue('acronym', drug.concept?.shortName?.name ?? drug.name, { shouldValidate: true });
+  };
+
+  const handleConceptChanged = (item?: { display: string } | null) => {
+    if (!item) return;
+    setValue('commonName', item.display, { shouldValidate: true });
+    setValue('acronym', item.display, { shouldValidate: true });
+  };
 
   const { errors } = formState;
   const handleSave: SubmitHandler<StockItemFormData> = async (formValues) => {
@@ -113,6 +128,7 @@ const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: Stoc
             placeholder={t('chooseADrug', 'Choose a drug')}
             initialDrugName={stockItem?.drugName ?? stockItem?.conceptName ?? undefined}
             readOnly={!!stockItem}
+            onDrugChanged={handleDrugChanged}
             invalid={!!errors.drugUuid}
             invalidText={errors.drugUuid && errors?.drugUuid?.message}
           />
@@ -123,6 +139,7 @@ const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: Stoc
             control={control}
             title={t('pleaseSpecify', 'Please specify')}
             placeholder={t('chooseAnItem', 'Choose an item')}
+            onConceptUuidChange={handleConceptChanged}
             invalid={!!errors.drugUuid}
             invalidText={errors.drugUuid && errors?.drugUuid?.message}
           />
@@ -136,6 +153,7 @@ const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: Stoc
           size={'md'}
           value={`${stockItem?.commonName ?? ''}`}
           labelText={t('commonName', 'Common name') + ':'}
+          disabled
           invalid={!!errors.commonName}
           invalidText={errors.commonName && errors?.commonName?.message}
         />
@@ -147,6 +165,7 @@ const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: Stoc
           controllerName="acronym"
           size={'md'}
           labelText={t('abbreviation', 'Abbreviation') + ':'}
+          disabled
           invalid={!!errors.acronym}
           invalidText={errors.acronym && errors?.acronym?.message}
         />

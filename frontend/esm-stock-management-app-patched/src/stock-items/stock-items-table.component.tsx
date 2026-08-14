@@ -63,7 +63,7 @@ const StockItemsTableComponent: React.FC<StockItemsTableProps> = () => {
   } = useStockItemsPages(ResourceRepresentation.Full);
 
   const stockItemUuids = useMemo(() => items?.map((item) => item.uuid) ?? [], [items]);
-  const { quantityByItem } = useStockItemQuantities(stockItemUuids, sessionLocation?.uuid);
+  const { quantityByItem, quantityMetaByItem } = useStockItemQuantities(stockItemUuids, sessionLocation?.uuid);
 
   const handleSearch = (query: string) => {
     setSearchInput(query);
@@ -140,7 +140,19 @@ const StockItemsTableComponent: React.FC<StockItemsTableProps> = () => {
       tradeName: stockItem?.drugUuid ? stockItem?.conceptName : '',
       preferredVendorName: stockItem?.preferredVendorName,
       dispensingUoM: stockItem?.defaultStockOperationsUoMName,
-      quantity: `${(quantityByItem.get(stockItem?.uuid) ?? 0).toLocaleString()} ${stockItem?.dispensingUnitName ?? ''}`,
+      // Inventory is recorded in the packaging unit stock operations use (e.g. Box), not the
+      // dispensing unit (e.g. Strip) - show both when they differ so neither figure is mislabeled.
+      quantity: (() => {
+        const rawQuantity = quantityByItem.get(stockItem?.uuid) ?? 0;
+        const meta = quantityMetaByItem.get(stockItem?.uuid);
+        const packagingUoM = meta?.quantityUoM ?? stockItem?.dispensingUnitName ?? '';
+        const packagingPart = `${rawQuantity.toLocaleString()} ${packagingUoM}`;
+        if (meta && stockItem?.dispensingUnitName && meta.quantityUoM !== stockItem.dispensingUnitName) {
+          const dispensingQuantity = rawQuantity * meta.quantityFactor;
+          return `${packagingPart} (${dispensingQuantity.toLocaleString()} ${stockItem.dispensingUnitName})`;
+        }
+        return packagingPart;
+      })(),
       dispensingUnitName: stockItem?.dispensingUnitName,
       defaultStockOperationsUoMName: stockItem?.defaultStockOperationsUoMName,
       reorderLevel:
@@ -160,7 +172,7 @@ const StockItemsTableComponent: React.FC<StockItemsTableProps> = () => {
         </IconButton>
       ),
     }));
-  }, [items, t, quantityByItem]);
+  }, [items, t, quantityByItem, quantityMetaByItem]);
 
   if (isLoading) {
     return <DataTableSkeleton role="progressbar" />;
