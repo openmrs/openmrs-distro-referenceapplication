@@ -13,6 +13,7 @@ import { launchStockOperationsModal } from '../../stock-operation.utils';
 import { type StockOperationDTO } from '../../../core/api/types/stockOperation/StockOperationDTO';
 import { type StockOperationItemDTO } from '../../../core/api/types/stockOperation/StockOperationItemDTO';
 import { type StockOperationItemDtoSchema } from '../../validation-schema';
+import { buildExternalReference } from '../../external-reference.utils';
 import useOperationTypePermisions from '../hooks/useOperationTypePermisions';
 import styles from '../stock-operation-form.scss';
 
@@ -88,6 +89,16 @@ const StockOperationSubmissionFormStep: React.FC<StockOperationSubmissionFormSte
           // This form never collects a location itself; always send the current UI session's location
           atLocationUuid: sessionLocation?.uuid,
           approvalRequired: approvalRequired ? true : false,
+          // The backend has no dedicated columns for these three - pack them into the one
+          // free-text field it does have (externalReference) instead of sending them raw.
+          externalReference: buildExternalReference({
+            purchaseOrderNo: formData.purchaseOrderNo,
+            purchaseRequestNo: formData.purchaseRequestNo,
+            projectFundCode: formData.projectFundCode,
+          }),
+          purchaseOrderNo: undefined,
+          purchaseRequestNo: undefined,
+          projectFundCode: undefined,
           stockOperationItems: [
             ...formData.stockOperationItems.map((item) => ({
               ...item,
@@ -128,16 +139,19 @@ const StockOperationSubmissionFormStep: React.FC<StockOperationSubmissionFormSte
 
   const handleComplete = useCallback(() => {
     handleSave().then((operation) => {
+      if (!operation) return;
       launchStockOperationsModal('Complete', false, { ...operation, status: 'COMPLETED' });
     });
   }, [handleSave]);
   const handleSubmitForReview = useCallback(() => {
     handleSave().then((operation) => {
+      if (!operation) return;
       launchStockOperationsModal('Submit', false, { ...operation, status: 'SUBMITTED' });
     });
   }, [handleSave]);
   const handleDispatch = useCallback(() => {
     handleSave().then((operation) => {
+      if (!operation) return;
       launchStockOperationsModal('Dispatch', false, { ...operation, status: 'DISPATCHED' });
     });
   }, [handleSave]);

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ErrorState } from '@openmrs/esm-framework';
+import { ErrorState, showModal, useSession } from '@openmrs/esm-framework';
 import { ResourceRepresentation } from '../core/api/api';
 import { useDisposalList } from './useDisposalList';
 import { useStockInventory } from './stock-home-inventory-expiry.resource';
 import { useStockInventoryItems } from './stock-home-inventory-items.resource';
+import { useStockBatchQuantities } from './stock-home-batch-quantities.resource';
 import { type StockOperationFilter } from '../stock-operations/stock-operations.resource';
 import useStockList from './useStockList';
 import MetricsCard from '../core/components/card/metrics-card-component';
@@ -12,15 +13,22 @@ import styles from './stock-home.scss';
 
 const StockManagementMetrics: React.FC = (filter: StockOperationFilter) => {
   const { t } = useTranslation();
+  const { sessionLocation } = useSession();
   const { outOfStockItems, understockedItems, error } = useStockList();
   const { items: expiryItems } = useStockInventory();
   const { items: stockItems } = useStockInventoryItems();
+  const expiryItemUuids = React.useMemo(
+    () => Array.from(new Set(expiryItems.map((batch) => batch.stockItemUuid))),
+    [expiryItems],
+  );
+  const { quantityByBatch } = useStockBatchQuantities(expiryItemUuids);
 
   const currentDate = new Date();
 
   let mergedArray = expiryItems.map((batch) => {
     const matchingItem = stockItems?.find((item) => batch?.stockItemUuid === item.uuid);
-    return { ...batch, ...matchingItem };
+    const batchQuantity = quantityByBatch.get(batch.uuid);
+    return { ...batch, ...matchingItem, quantity: batchQuantity?.quantity ?? 0 };
   });
 
   mergedArray = mergedArray.filter((item) => item.hasExpiration);
@@ -37,6 +45,7 @@ const StockManagementMetrics: React.FC = (filter: StockOperationFilter) => {
   const { items } = useDisposalList({
     v: ResourceRepresentation.Full,
     totalCount: true,
+    locationUuid: sessionLocation?.uuid,
   });
 
   if (error) {
@@ -47,6 +56,28 @@ const StockManagementMetrics: React.FC = (filter: StockOperationFilter) => {
     items && items.filter((item) => item.reasonName === 'Drug not available due to expired medication');
   const poorQualityItems = items && items.filter((item) => item.reasonName === 'Poor Quality');
 
+  const launchOutOfStockModal = () => {
+    const dispose = showModal('out-of-stock-modal', {
+      closeModal: () => dispose(),
+      outOfStockItems,
+      understockedItems,
+    });
+  };
+
+  const launchExpiringStockModal = () => {
+    const dispose = showModal('expired-stock-modal', {
+      closeModal: () => dispose(),
+      expiredStock: filteredData,
+    });
+  };
+
+  const launchDisposedStockModal = () => {
+    const dispose = showModal('disposed-stock-modal', {
+      closeModal: () => dispose(),
+      disposedStock: items,
+    });
+  };
+
   return (
     <div className={styles.cardContainer}>
       <MetricsCard
@@ -56,6 +87,7 @@ const StockManagementMetrics: React.FC = (filter: StockOperationFilter) => {
         headerLabel={t('expiringStock', 'Expiring stock')}
         label={t('expiringStock', 'Expiring stock')}
         value={filteredData?.length || 0}
+        onClick={launchExpiringStockModal}
       />
       <MetricsCard
         label={t('outOfStock', 'Out of stock')}
@@ -65,6 +97,7 @@ const StockManagementMetrics: React.FC = (filter: StockOperationFilter) => {
           itemsAboveMax: [],
         }}
         value={outOfStockItems?.length ?? 0}
+        onClick={launchOutOfStockModal}
       />
       <MetricsCard
         disposedCount={{
@@ -74,6 +107,7 @@ const StockManagementMetrics: React.FC = (filter: StockOperationFilter) => {
         headerLabel={t('disposedStock', 'Disposed stock')}
         label={t('disposedStock', 'Disposed stock')}
         value={items?.length || 0}
+        onClick={launchDisposedStockModal}
       />
     </div>
   );

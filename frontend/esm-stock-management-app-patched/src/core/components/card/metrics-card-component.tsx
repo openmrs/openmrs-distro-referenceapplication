@@ -16,6 +16,7 @@ interface MetricsCardProps {
   count?: { expiry6months: Array<any> };
   outOfStockCount?: { itemsBelowMin: Array<any>; itemsAboveMax: Array<any> };
   disposedCount?: { expired: Array<any>; poorQuality: Array<any> };
+  onClick?: () => void;
 }
 const MetricsCard: React.FC<MetricsCardProps> = ({
   label,
@@ -25,11 +26,24 @@ const MetricsCard: React.FC<MetricsCardProps> = ({
   count,
   outOfStockCount,
   disposedCount,
+  onClick,
 }) => {
   const { t } = useTranslation();
 
   return (
-    <Tile className={styles.tileContainer}>
+    <Tile
+      className={onClick ? `${styles.tileContainer} ${styles.clickableTile}` : styles.tileContainer}
+      onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') onClick();
+            }
+          : undefined
+      }
+    >
       <div className={styles.tileHeader}>
         <div className={styles.headerLabelContainer}>
           <label className={styles.headerLabel}>{headerLabel}</label>

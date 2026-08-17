@@ -52,6 +52,11 @@ export function useStockOperationPages(filter: StockOperationFilter) {
       },
       {
         id: 7,
+        header: t('reference', 'Reference'),
+        key: 'externalReferenceDisplay',
+      },
+      {
+        id: 8,
         key: 'details',
         header: '',
       },

@@ -58,6 +58,16 @@ export const expiredStockModal = getAsyncLifecycle(() => import('./stock-home/ex
   moduleName,
 });
 
+export const outOfStockModal = getAsyncLifecycle(() => import('./stock-home/out-of-stock.modal'), {
+  featureName: 'out-of-stock-modal',
+  moduleName,
+});
+
+export const disposedStockModal = getAsyncLifecycle(() => import('./stock-home/disposed-stock.modal'), {
+  featureName: 'disposed-stock-modal',
+  moduleName,
+});
+
 export const importBulkStockItemsModal = getAsyncLifecycle(
   () => import('./stock-items/add-bulk-stock-item/stock-items-bulk-import.modal'),
   {

@@ -57,3 +57,5 @@ export const sessionAttendanceLink = getAsyncLifecycle(() => import('./session-a
 export const stockLedgerLink = getAsyncLifecycle(() => import('./stock-ledger-link.component'), options);
 
 export const cmamSummaryLink = getAsyncLifecycle(() => import('./cmam-summary-link.component'), options);
+
+export const reportsOverviewLink = getAsyncLifecycle(() => import('./reports-overview-link.component'), options);

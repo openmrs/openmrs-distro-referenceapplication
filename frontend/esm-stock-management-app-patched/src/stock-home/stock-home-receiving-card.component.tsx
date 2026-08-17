@@ -2,17 +2,19 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@carbon/react';
 import { Delivery } from '@carbon/react/icons';
-import { showModal } from '@openmrs/esm-framework';
+import { showModal, useSession } from '@openmrs/esm-framework';
 import { ResourceRepresentation } from '../core/api/api';
 import { useStockReceiving } from './stock-home-receiving.resource';
 import styles from './stock-home-detail-card.scss';
 
 const StockHomeReceivingCard = () => {
   const { t } = useTranslation();
+  const { sessionLocation } = useSession();
 
   const { items, isLoading } = useStockReceiving({
     v: ResourceRepresentation.Full,
     totalCount: true,
+    locationUuid: sessionLocation?.uuid,
   });
 
   if (isLoading) {

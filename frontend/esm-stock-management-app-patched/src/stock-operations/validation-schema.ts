@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { StockOperationStatusTypes } from '../core/api/types/stockOperation/StockOperationStatus';
 import { OperationType } from '../core/api/types/stockOperation/StockOperationType';
+import { buildExternalReference, EXTERNAL_REFERENCE_MAX_LENGTH } from './external-reference.utils';
 
 export const stockItemPackagingUOMDTOSchema = z.object({
   id: z.string().nullish(),
@@ -189,10 +190,30 @@ export const stockOperationItemDtoSchema = z.object({
     }),
   responsiblePersonOther: z.string().nullish(),
   remarks: z.string().nullish(),
+  purchaseOrderNo: z.string().nullish(),
+  purchaseRequestNo: z.string().nullish(),
+  projectFundCode: z.string().nullish(),
   operationTypeUuid: z.string().min(1, 'Operation type required').uuid('Invalid operation type'),
   stockOperationItems: baseStockOperationItemSchema.array().nonempty('You must add atleast one stock item'),
   requisitionStockOperationUuid: z.string().uuid().optional(), // Suplied only for stock issue operation
 });
+
+// Applied on top of any per-operation-type schema below (all of which are built via .omit()/
+// .merge() on stockOperationItemDtoSchema, none of which touch these 3 fields) - kept as a
+// separate wrapper because .refine() returns a ZodEffects that .omit()/.merge() can't operate on.
+const withExternalReferenceLengthCheck = <T extends z.ZodTypeAny>(schema: T) =>
+  schema.refine(
+    (data: { purchaseOrderNo?: string; purchaseRequestNo?: string; projectFundCode?: string }) =>
+      buildExternalReference({
+        purchaseOrderNo: data.purchaseOrderNo,
+        purchaseRequestNo: data.purchaseRequestNo,
+        projectFundCode: data.projectFundCode,
+      }).length <= EXTERNAL_REFERENCE_MAX_LENGTH,
+    {
+      message: `Purchase Order No, Purchase Request No, and Project Fund Code together must fit within ${EXTERNAL_REFERENCE_MAX_LENGTH} characters`,
+      path: ['purchaseOrderNo'],
+    },
+  );
 
 export type StockOperationItemDtoSchema = z.infer<typeof stockOperationItemDtoSchema>;
 
@@ -201,54 +222,62 @@ export type StockOperationFormData = z.infer<typeof stockOperationSchema>;
 export const getStockOperationFormSchema = (operation: OperationType): z.Schema => {
   switch (operation) {
     case OperationType.OPENING_STOCK_OPERATION_TYPE:
-      return stockOperationItemDtoSchema
-        .omit({
-          destinationUuid: true,
-          reasonUuid: true,
-        })
-        .merge(
+      return withExternalReferenceLengthCheck(
+        stockOperationItemDtoSchema
+          .omit({
+            destinationUuid: true,
+            reasonUuid: true,
+          })
+          .merge(
+            z.object({
+              stockOperationItems: getStockOperationItemFormSchema(operation)
+                .array()
+                .nonempty('You must add atleast one stock item'),
+            }),
+          ),
+      );
+    case OperationType.STOCK_TAKE_OPERATION_TYPE:
+    case OperationType.ADJUSTMENT_OPERATION_TYPE:
+    case OperationType.DISPOSED_OPERATION_TYPE:
+      return withExternalReferenceLengthCheck(
+        stockOperationItemDtoSchema.omit({ destinationUuid: true }).merge(
           z.object({
             stockOperationItems: getStockOperationItemFormSchema(operation)
               .array()
               .nonempty('You must add atleast one stock item'),
           }),
-        );
-    case OperationType.STOCK_TAKE_OPERATION_TYPE:
-    case OperationType.ADJUSTMENT_OPERATION_TYPE:
-    case OperationType.DISPOSED_OPERATION_TYPE:
-      return stockOperationItemDtoSchema.omit({ destinationUuid: true }).merge(
-        z.object({
-          stockOperationItems: getStockOperationItemFormSchema(operation)
-            .array()
-            .nonempty('You must add atleast one stock item'),
-        }),
+        ),
       );
     case OperationType.TRANSFER_OUT_OPERATION_TYPE:
     case OperationType.STOCK_ISSUE_OPERATION_TYPE:
-      return stockOperationItemDtoSchema.omit({ reasonUuid: true }).merge(
-        z.object({
-          // Merged to overid initial one with error message having  location instead of destination
-          destinationUuid: z.string({ required_error: 'Destination Required' }).min(1, {
-            message: 'Destination Required',
+      return withExternalReferenceLengthCheck(
+        stockOperationItemDtoSchema.omit({ reasonUuid: true }).merge(
+          z.object({
+            // Merged to overid initial one with error message having  location instead of destination
+            destinationUuid: z.string({ required_error: 'Destination Required' }).min(1, {
+              message: 'Destination Required',
+            }),
+            stockOperationItems: getStockOperationItemFormSchema(operation)
+              .array()
+              .nonempty('You must add atleast one stock item'),
           }),
-          stockOperationItems: getStockOperationItemFormSchema(operation)
-            .array()
-            .nonempty('You must add atleast one stock item'),
-        }),
+        ),
       );
     case OperationType.RETURN_OPERATION_TYPE:
     case OperationType.REQUISITION_OPERATION_TYPE:
     case OperationType.RECEIPT_OPERATION_TYPE:
-      return stockOperationItemDtoSchema.omit({ reasonUuid: true }).merge(
-        z.object({
-          // Merged to overid initial one with error message having location instead of source
-          sourceUuid: z.string({ required_error: 'Source Required' }).min(1, {
-            message: 'Source Required',
+      return withExternalReferenceLengthCheck(
+        stockOperationItemDtoSchema.omit({ reasonUuid: true }).merge(
+          z.object({
+            // Merged to overid initial one with error message having location instead of source
+            sourceUuid: z.string({ required_error: 'Source Required' }).min(1, {
+              message: 'Source Required',
+            }),
+            stockOperationItems: getStockOperationItemFormSchema(operation)
+              .array()
+              .nonempty('You must add atleast one stock item'),
           }),
-          stockOperationItems: getStockOperationItemFormSchema(operation)
-            .array()
-            .nonempty('You must add atleast one stock item'),
-        }),
+        ),
       );
   }
 };

@@ -21,6 +21,7 @@ import {
   getStockOperationItemFormSchema,
   type StockOperationItemDtoSchema,
 } from '../validation-schema';
+import { parseExternalReference } from '../external-reference.utils';
 import useOperationTypePermisions from './hooks/useOperationTypePermisions';
 import BaseOperationDetailsFormStep from './steps/base-operation-details-form-step';
 import ReceivedItems from './steps/received-items.component';
@@ -82,6 +83,7 @@ const StockOperationForm: React.FC<StockOperationFormProps> = ({
         (autoPopulateResponsiblePerson ? defaultLoggedUserUuid : undefined), //Else default login user if configured
       operationDate: stockOperation?.operationDate ? parseDate(String(stockOperation.operationDate)) : today(),
       remarks: stockOperation?.remarks ?? '',
+      ...parseExternalReference(stockOperation?.externalReference),
 
       operationTypeUuid: stockOperation?.operationTypeUuid ?? stockOperationType?.uuid,
       reasonUuid: stockOperation?.reasonUuid ?? '',

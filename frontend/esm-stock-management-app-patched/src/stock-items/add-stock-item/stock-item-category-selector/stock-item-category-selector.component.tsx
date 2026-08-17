@@ -30,7 +30,7 @@ const StockItemCategorySelector = <T,>(props: StockItemCategorySelectorProps<T>)
     isLoading,
   } = useConcept(stockItemCategoryUUID);
 
-  const filteredCategories = props.itemType ? categories?.filter((c) => c.display === props?.itemType) : categories;
+  const filteredCategories = categories;
 
   const {
     field: { onChange, value, ref },

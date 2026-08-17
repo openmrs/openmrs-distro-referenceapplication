@@ -9,7 +9,6 @@ import { getCoreTranslation, restBaseUrl, showSnackbar, useLayoutType } from '@o
 import { createStockItem, updateStockItem } from '../../stock-items.resource';
 import { expirationOptions, radioOptions, StockItemType } from './stock-item-details.resource';
 import { handleMutate } from '../../../utils';
-import { launchAddOrEditStockItemWorkspace } from '../../stock-item.utils';
 import { createStockItemDetailsSchema, type StockItemFormData } from '../../validationSchema';
 import { type StockItemDTO } from '../../../core/api/types/stockItem/StockItem';
 import { type Drug } from '../../../core/api/types/concept/Drug';
@@ -71,14 +70,11 @@ const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: Stoc
         });
         if (!stockItem) {
           onCloseWorkspace?.();
-          // launch edit stock item workspace
-          const item = response.data;
-          item.isDrug = !!item.drugUuid;
-          launchAddOrEditStockItemWorkspace(t, item);
+        } else {
+          handleTabChange(1);
         }
       }
 
-      handleTabChange(1);
       handleMutate(`${restBaseUrl}/stockmanagement/stockitem`);
     } catch (e) {
       // Show notification

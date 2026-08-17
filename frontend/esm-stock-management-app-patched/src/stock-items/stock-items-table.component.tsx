@@ -46,6 +46,7 @@ const StockItemsTableComponent: React.FC<StockItemsTableProps> = () => {
 
   const handleRefresh = () => {
     handleMutate(`${restBaseUrl}/stockmanagement/stockitem`);
+    handleMutate(`${restBaseUrl}/stockmanagement/stockiteminventory`);
   };
 
   const {

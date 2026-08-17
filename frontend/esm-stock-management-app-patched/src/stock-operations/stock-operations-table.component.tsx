@@ -32,6 +32,7 @@ import { formatDisplayDate } from '../core/utils/datetimeUtils';
 import { handleMutate } from '../utils';
 import { ResourceRepresentation } from '../core/api/api';
 import { useStockOperationPages } from './stock-operations-table.resource';
+import { parseExternalReference } from './external-reference.utils';
 import EditStockOperationActionMenu from './edit-stock-operation/edit-stock-operation-action-menu.component';
 import StockOperationTypesSelector from './stock-operation-types-selector/stock-operation-types-selector.component';
 import StockOperationsFilters from './stock-operations-filters.component';
@@ -135,6 +136,18 @@ const StockOperations: React.FC<StockOperationsTableProps> = () => {
             stockOperation?.responsiblePersonFamilyName ?? stockOperation?.responsiblePersonOther ?? ''
           } ${stockOperation?.responsiblePersonGivenName ?? ''}`,
           operationDate: formatDisplayDate(stockOperation?.operationDate),
+          externalReferenceDisplay: (() => {
+            const { purchaseOrderNo, purchaseRequestNo, projectFundCode } = parseExternalReference(
+              stockOperation?.externalReference,
+            );
+            return [
+              purchaseOrderNo && `PO: ${purchaseOrderNo}`,
+              purchaseRequestNo && `PR: ${purchaseRequestNo}`,
+              projectFundCode && `Fund: ${projectFundCode}`,
+            ]
+              .filter(Boolean)
+              .join(' · ');
+          })(),
           actions: <EditStockOperationActionMenu stockOperation={stockOperation} showIcon={true} showprops={false} />,
         };
       }),

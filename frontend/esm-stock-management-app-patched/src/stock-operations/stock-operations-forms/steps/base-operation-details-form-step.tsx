@@ -60,6 +60,9 @@ const BaseOperationDetailsFormStep: FC<BaseOperationDetailsFormStepProps> = ({
       'destinationUuid',
       'reasonUuid',
       'responsiblePersonOther',
+      'purchaseOrderNo',
+      'purchaseRequestNo',
+      'projectFundCode',
     ]);
     if (valid) {
       onNext();
@@ -225,6 +228,57 @@ const BaseOperationDetailsFormStep: FC<BaseOperationDetailsFormStepProps> = ({
           <StockOperationReasonSelector stockOperationType={stockOperationType?.operationType} />
         </Column>
       )}
+      <Column>
+        <Controller
+          control={form.control}
+          name="purchaseOrderNo"
+          render={({ field, fieldState: { error } }) => (
+            <TextInput
+              {...field}
+              value={field.value ?? ''}
+              readOnly={field.disabled}
+              id="purchaseOrderNo"
+              labelText={t('purchaseOrderNo', 'Purchase Order No')}
+              invalid={!!error?.message}
+              invalidText={error?.message}
+            />
+          )}
+        />
+      </Column>
+      <Column>
+        <Controller
+          control={form.control}
+          name="purchaseRequestNo"
+          render={({ field, fieldState: { error } }) => (
+            <TextInput
+              {...field}
+              value={field.value ?? ''}
+              readOnly={field.disabled}
+              id="purchaseRequestNo"
+              labelText={t('purchaseRequestNo', 'Purchase Request No')}
+              invalid={!!error?.message}
+              invalidText={error?.message}
+            />
+          )}
+        />
+      </Column>
+      <Column>
+        <Controller
+          control={form.control}
+          name="projectFundCode"
+          render={({ field, fieldState: { error } }) => (
+            <TextInput
+              {...field}
+              value={field.value ?? ''}
+              readOnly={field.disabled}
+              id="projectFundCode"
+              labelText={t('projectFundCode', 'Project Fund Code')}
+              invalid={!!error?.message}
+              invalidText={error?.message}
+            />
+          )}
+        />
+      </Column>
       <Column>
         <Controller
           control={form.control}

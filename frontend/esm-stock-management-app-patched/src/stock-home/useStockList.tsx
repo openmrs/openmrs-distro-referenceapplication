@@ -7,6 +7,9 @@ interface StockListItem {
   hasExpiration: boolean;
   expiryNotice: number;
   reorderLevel: number | null | undefined;
+  commonName?: string | null;
+  drugName?: string | null;
+  conceptName?: string | null;
 }
 
 const useStockList = () => {
@@ -28,12 +31,18 @@ const useStockList = () => {
     isLoading: quantityLoading,
   } = useStockItemQuantities(stockItemUuids, sessionLocation?.uuid);
 
-  const outOfStockItems = stockItems.filter((item) => (quantityByItem?.get(item.uuid) ?? 0) <= 0);
+  const itemDisplayName = (item: StockListItem) => item.commonName || item.drugName || item.conceptName || item.uuid;
 
-  const understockedItems = stockItems.filter((item) => {
-    const quantity = quantityByItem?.get(item.uuid) ?? 0;
-    return quantity > 0 && !!item.reorderLevel && quantity < item.reorderLevel;
-  });
+  const outOfStockItems = stockItems
+    .filter((item) => (quantityByItem?.get(item.uuid) ?? 0) <= 0)
+    .map((item) => ({ ...item, displayName: itemDisplayName(item), quantity: quantityByItem?.get(item.uuid) ?? 0 }));
+
+  const understockedItems = stockItems
+    .filter((item) => {
+      const quantity = quantityByItem?.get(item.uuid) ?? 0;
+      return quantity > 0 && !!item.reorderLevel && quantity < item.reorderLevel;
+    })
+    .map((item) => ({ ...item, displayName: itemDisplayName(item), quantity: quantityByItem?.get(item.uuid) ?? 0 }));
 
   return {
     stockList: stockItems,

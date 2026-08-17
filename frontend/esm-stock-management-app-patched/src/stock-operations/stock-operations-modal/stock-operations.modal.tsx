@@ -85,6 +85,10 @@ const StockOperationsModal: React.FC<StockOperationsModalProps> = ({ title, requ
         });
         closeModal();
         handleMutate(`${restBaseUrl}/stockmanagement/stockoperation`);
+        // Completing/dispatching an operation is what actually changes quantities on hand,
+        // but nothing else in the app invalidates this endpoint - without it, the Items
+        // table's Quantity column keeps showing stale numbers until a full page reload.
+        handleMutate(`${restBaseUrl}/stockmanagement/stockiteminventory`);
       },
       (err) => {
         setIsApproving(false);

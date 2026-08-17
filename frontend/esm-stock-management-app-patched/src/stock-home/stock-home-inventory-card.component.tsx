@@ -23,10 +23,6 @@ const StockHomeInventoryCard = () => {
     return null;
   }
 
-  if (stockItems?.length === 0) {
-    return <p className={styles.content}>{t('noInventoryAlerts', 'No inventory alerts to display')}</p>;
-  }
-
   const currentDate = new Date();
 
   let mergedArray = expiryItems.map((batch) => {
@@ -56,6 +52,10 @@ const StockHomeInventoryCard = () => {
       expiredStock: expiringSoon,
     });
   };
+
+  if (filteredData.length === 0) {
+    return <p className={styles.content}>{t('noInventoryAlerts', 'No inventory alerts to display')}</p>;
+  }
 
   return (
     <>
