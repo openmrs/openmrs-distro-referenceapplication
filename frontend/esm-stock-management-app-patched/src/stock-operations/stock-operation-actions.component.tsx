@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useSession } from '@openmrs/esm-framework';
 import { type StockOperationDTO } from '../core/api/types/stockOperation/StockOperationDTO';
 import {
   operationFromString,
@@ -24,6 +25,21 @@ type Props = {
 
 const StockoperationActions: React.FC<Props> = ({ stockOperation, stockOperationType }) => {
   const operationTypePermision = useOperationTypePermisions(stockOperationType);
+  const { user } = useSession();
+  // The backend's permission.canApprove doesn't exclude the person who submitted the
+  // operation, so a submitter would otherwise be able to approve their own submission.
+  // There's no submitter uuid on this DTO to compare directly, only given/family name,
+  // so fall back to a name match against the logged-in user's preferred name.
+  const isSubmitter = useMemo(() => {
+    const givenName = user?.person?.preferredName?.givenName?.toLowerCase();
+    const familyName = user?.person?.preferredName?.familyName?.toLowerCase();
+    return (
+      !!givenName &&
+      !!familyName &&
+      givenName === stockOperation.submittedByGivenName?.toLowerCase() &&
+      familyName === stockOperation.submittedByFamilyName?.toLowerCase()
+    );
+  }, [user, stockOperation]);
   const operationType = useMemo(() => {
     return operationFromString(stockOperationType.operationType);
   }, [stockOperationType]);
@@ -39,12 +55,16 @@ const StockoperationActions: React.FC<Props> = ({ stockOperation, stockOperation
           <>
             {!stockOperation.permission?.canEdit && stockOperation.permission?.canApprove && (
               <>
-                {!operationTypePermision.requiresDispatchAcknowledgement && (
-                  <StockOperationApprovalButton operation={stockOperation} />
-                )}
+                {!isSubmitter && (
+                  <>
+                    {!operationTypePermision.requiresDispatchAcknowledgement && (
+                      <StockOperationApprovalButton operation={stockOperation} />
+                    )}
 
-                {operationTypePermision.requiresDispatchAcknowledgement && (
-                  <StockOperationApproveDispatchButton operation={stockOperation} />
+                    {operationTypePermision.requiresDispatchAcknowledgement && (
+                      <StockOperationApproveDispatchButton operation={stockOperation} />
+                    )}
+                  </>
                 )}
 
                 <StockOperationRejectButton operation={stockOperation} />

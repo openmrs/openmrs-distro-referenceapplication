@@ -89,6 +89,10 @@ export const StockOperationTypeCanBeRelatedToRequisition = (operationType: Opera
   return operationType === OperationType.STOCK_ISSUE_OPERATION_TYPE;
 };
 
+export const StockOperationTypeRequiresApproval = (operationType: OperationType) => {
+  return operationType === OperationType.OPENING_STOCK_OPERATION_TYPE;
+};
+
 export const StockOperationTypeRequiresDispatchAcknowledgement = (operationType: OperationType) => {
   return (
     operationType === OperationType.STOCK_ISSUE_OPERATION_TYPE || operationType === OperationType.RETURN_OPERATION_TYPE

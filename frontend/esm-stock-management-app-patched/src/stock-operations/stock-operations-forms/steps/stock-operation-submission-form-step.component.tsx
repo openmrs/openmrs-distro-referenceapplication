@@ -7,7 +7,11 @@ import { restBaseUrl, showSnackbar, useSession } from '@openmrs/esm-framework';
 import { createStockOperation, deleteStockOperationItem, updateStockOperation } from '../../stock-operations.resource';
 import { extractErrorMessagesFromResponse } from '../../../constants';
 import { handleMutate } from '../../../utils';
-import { OperationType, type StockOperationType } from '../../../core/api/types/stockOperation/StockOperationType';
+import {
+  OperationType,
+  StockOperationTypeRequiresApproval,
+  type StockOperationType,
+} from '../../../core/api/types/stockOperation/StockOperationType';
 import { otherUser } from '../../../core/utils/utils';
 import { launchStockOperationsModal } from '../../stock-operation.utils';
 import { type StockOperationDTO } from '../../../core/api/types/stockOperation/StockOperationDTO';
@@ -37,12 +41,22 @@ const StockOperationSubmissionFormStep: React.FC<StockOperationSubmissionFormSte
   const operationTypePermision = useOperationTypePermisions(stockOperationType);
   const editable = useMemo(() => !stockOperation || stockOperation.status === 'NEW', [stockOperation]);
   const form = useFormContext<StockOperationItemDtoSchema>();
-  const [approvalRequired, setApprovalRequired] = useState<boolean | null>(stockOperation?.approvalRequired);
+  const isOpeningStockOperation = useMemo(
+    () => StockOperationTypeRequiresApproval(stockOperationType.operationType as OperationType),
+    [stockOperationType],
+  );
+  const [approvalRequired, setApprovalRequired] = useState<boolean | null>(
+    isOpeningStockOperation ? true : stockOperation?.approvalRequired,
+  );
   const isStockIssueOperation = useMemo(
     () => OperationType.STOCK_ISSUE_OPERATION_TYPE === stockOperationType.operationType,
     [stockOperationType],
   );
   const handleRadioButtonChange = (selectedItem: boolean) => {
+    if (isOpeningStockOperation) {
+      // Opening Stock always requires approval - the choice isn't editable.
+      return;
+    }
     setApprovalRequired(selectedItem);
   };
 
@@ -171,7 +185,7 @@ const StockOperationSubmissionFormStep: React.FC<StockOperationSubmissionFormSte
           name="rbgApprovelRequired"
           legendText={t('doesThisTransactionRequireApproval', 'Does the transaction require approval ?')}
           onChange={(value) => handleRadioButtonChange(value === 'true')}
-          readOnly={!editable}
+          readOnly={!editable || isOpeningStockOperation}
           valueSelected={approvalRequired === true ? 'true' : approvalRequired === false ? 'false' : null}
         >
           <RadioButton value="true" id="rbgApprovelRequired-true" labelText={t('yes', 'Yes')} />
