@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
-import { Button, ButtonSet, FormGroup, InlineLoading, Stack } from '@carbon/react';
+import { Button, ButtonSet, DatePicker, DatePickerInput, FormGroup, InlineLoading, Stack } from '@carbon/react';
 import { Save } from '@carbon/react/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { getCoreTranslation, restBaseUrl, showSnackbar, useLayoutType } from '@openmrs/esm-framework';
+import dayjs from 'dayjs';
 import { createStockItem, updateStockItem } from '../../stock-items.resource';
 import { expirationOptions, radioOptions, StockItemType } from './stock-item-details.resource';
 import { handleMutate } from '../../../utils';
@@ -13,8 +14,8 @@ import { launchAddOrEditStockItemWorkspace } from '../../stock-item.utils';
 import { createStockItemDetailsSchema, type StockItemFormData } from '../../validationSchema';
 import { type StockItemDTO } from '../../../core/api/types/stockItem/StockItem';
 import { type Drug } from '../../../core/api/types/concept/Drug';
+import { DATE_PICKER_CONTROL_FORMAT, DATE_PICKER_FORMAT, formatForDatePicker, today } from '../../../constants';
 import ConceptsSelector from '../concepts-selector/concepts-selector.component';
-import ControlledNumberInput from '../../../core/components/carbon/controlled-number-input.component';
 import ControlledRadioButtonGroup from '../../../core/components/carbon/controlled-radio-button-group.component';
 import ControlledTextInput from '../../../core/components/carbon/controlled-text-input.component';
 import DispensingUnitSelector from '../dispensing-unit-selector/dispensing-unit-selector.component';
@@ -193,19 +194,36 @@ const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: Stoc
           </FormGroup>
 
           {observableHasExpiration && (
-            <FormGroup className="clear-margin-bottom" legendText={t('expirationNotice', 'Expiration Notice (days)')}>
-              <ControlledNumberInput
-                id="expiryNotice"
+            <FormGroup className="clear-margin-bottom" legendText={t('expirationDate', 'Expiration date')}>
+              <Controller
                 name="expiryNotice"
                 control={control}
-                controllerName="expiryNotice"
-                min={0}
-                hideSteppers
-                size="md"
-                allowEmpty
-                label=""
-                invalid={!!errors.expiryNotice}
-                invalidText={errors.expiryNotice && errors?.expiryNotice?.message}
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <DatePicker
+                    datePickerType="single"
+                    minDate={formatForDatePicker(today())}
+                    locale="en"
+                    dateFormat={DATE_PICKER_CONTROL_FORMAT}
+                    value={typeof value === 'number' ? dayjs(today()).add(value, 'day').toDate() : null}
+                    onChange={([selectedDate]) => {
+                      if (!selectedDate) {
+                        onChange(null);
+                        return;
+                      }
+                      const daysUntilExpiry = dayjs(selectedDate).startOf('day').diff(dayjs(today()), 'day');
+                      onChange(daysUntilExpiry);
+                    }}
+                  >
+                    <DatePickerInput
+                      id="expiryNotice"
+                      placeholder={DATE_PICKER_FORMAT}
+                      labelText=""
+                      onBlur={onBlur}
+                      invalid={!!errors.expiryNotice}
+                      invalidText={errors.expiryNotice && errors?.expiryNotice?.message}
+                    />
+                  </DatePicker>
+                )}
               />
             </FormGroup>
           )}
