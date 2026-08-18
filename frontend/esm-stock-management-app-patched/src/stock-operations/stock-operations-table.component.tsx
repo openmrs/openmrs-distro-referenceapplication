@@ -182,11 +182,14 @@ const StockOperations: React.FC<StockOperationsTableProps> = () => {
                 position: 'static',
                 overflow: 'visible',
                 backgroundColor: 'color',
+                height: 'auto',
+                alignItems: 'flex-start',
               }}
             >
               <TableToolbarContent className={styles.toolbarContent}>
                 <TableToolbarSearch
-                  expanded
+                  className={styles.search}
+                  persistent
                   labelText={t('searchStockOperations', 'Search stock operations')}
                   onChange={onInputChange}
                   placeholder={t('searchStockOperations', 'Search stock operations')}
