@@ -34,14 +34,35 @@
 .toolbarContent {
   display: flex;
   align-items: center;
-  height: layout.$spacing-09;
+  flex-wrap: wrap;
+  row-gap: layout.$spacing-03;
+  // Carbon's own .cds--toolbar-content class (applied to this same element) sets a
+  // fixed block-size of 3rem, which clips wrapped rows instead of letting the
+  // toolbar grow — override both the logical and physical properties to win the
+  // cascade regardless of stylesheet order.
+  height: auto !important;
+  block-size: auto !important;
+  min-height: layout.$spacing-09;
+  min-block-size: layout.$spacing-09;
   margin-top: layout.$spacing-05;
+  // The parent .cds--table-toolbar is a flex container with default (stretch)
+  // alignment, so without opting out here it forces this element back down to
+  // the parent's own (unwrapped) height, and the wrapped second row silently
+  // overflows past the bottom of the toolbar instead of pushing the table down.
+  align-self: flex-start !important;
 }
 
 .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: layout.$spacing-03;
+  margin-left: auto;
+}
+
+.search {
+  flex: 0 1 16rem !important;
+  max-width: 16rem;
 }
 
 .filterContainer {
