@@ -38,24 +38,7 @@ describe('StockItemsTableComponent', () => {
           reorderLevel: index * 10,
           reorderLevelUoMName: 'Units',
         })) as StockItemDTO[],
-      pagination: {
-        results: [],
-        totalPages: 3,
-        currentPage: 1,
-        paginated: true,
-        showNextButton: true,
-        showPreviousButton: false,
-        goTo: vi.fn(),
-        goToNext: vi.fn(),
-        goToPrevious: vi.fn(),
-      },
       error: null,
-      totalCount: 25,
-      currentPageSize: 10,
-      setPageSize: vi.fn(),
-      pageSizes: [10, 20, 30],
-      currentPage: 1,
-      setCurrentPage: vi.fn(),
       isDrug: '',
       setDrug: vi.fn(),
       setSearchString: vi.fn(),
@@ -87,26 +70,12 @@ describe('StockItemsTableComponent', () => {
 
   it('displays skeleton loader when isLoading is true', () => {
     mockUseStockItemsPages.mockReturnValue({
-      ...mockUseStockItemsPages,
       isLoading: true,
       items: [],
-      pagination: undefined,
-      totalCount: 0,
-      currentPageSize: 0,
-      currentPage: 0,
-      setCurrentPage: function (value: React.SetStateAction<number>): void {
-        throw new Error('Function not implemented.');
-      },
-      setPageSize: function (value: React.SetStateAction<number>): void {
-        throw new Error('Function not implemented.');
-      },
-      pageSizes: [],
       error: undefined,
       isDrug: '',
-      setDrug: undefined,
-      setSearchString: function (value: any): void {
-        throw new Error('Function not implemented.');
-      },
+      setDrug: vi.fn(),
+      setSearchString: vi.fn(),
     });
 
     render(<StockItemsTableComponent />);
@@ -138,16 +107,29 @@ describe('StockItemsTableComponent', () => {
   });
 
   it('updates pagination when page or page size changes', async () => {
+    // Pagination is now applied client-side over the full items list (see
+    // stock-items-table.resource.ts), so this checks the actual rows rendered
+    // rather than hook setters that no longer exist.
     const user = userEvent.setup();
     render(<StockItemsTableComponent />);
 
+    expect(screen.getByRole('cell', { name: /^test item 0$/i })).toBeInTheDocument();
+    expect(screen.queryByRole('cell', { name: /^test item 10$/i })).not.toBeInTheDocument();
+
     const nextPageButton = screen.getByLabelText(/next page/i);
     await user.click(nextPageButton);
-    expect(mockUseStockItemsPages().setCurrentPage).toHaveBeenCalled();
+
+    await waitFor(() => {
+      expect(screen.queryByRole('cell', { name: /^test item 0$/i })).not.toBeInTheDocument();
+      expect(screen.getByRole('cell', { name: /^test item 10$/i })).toBeInTheDocument();
+    });
 
     const pageSizeSelect = screen.getByLabelText(/items per page/i);
     await user.selectOptions(pageSizeSelect, '20');
-    expect(mockUseStockItemsPages().setPageSize).toHaveBeenCalledWith(20);
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('row').length).toBeGreaterThan(11);
+    });
   });
 
   it('triggers handleRefresh when refresh button is clicked', async () => {

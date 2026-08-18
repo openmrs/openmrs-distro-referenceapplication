@@ -1,58 +1,49 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { usePagination } from '@openmrs/esm-framework';
 import { type StockItemFilter, useStockItems } from './stock-items.resource';
 import { ResourceRepresentation } from '../core/api/api';
 
-export function useStockItemsPages(v?: ResourceRepresentation) {
-  const { t } = useTranslation();
+// Upper bound on how many items we'll fetch client-side so column filters and
+// pagination can operate over the whole matching set instead of just one server
+// page. Kept at the OpenMRS REST module's common default max-results-absolute (100)
+// - asking for more than the server's configured absolute max causes the request to
+// fail outright, which previously showed up as a silent "no items" empty table. A
+// catalog larger than this would need the filters pushed down to the backend query,
+// or the backend's webservices.rest.maxResultsAbsolute setting raised, instead.
+const MAX_FETCH_SIZE = 100;
 
-  const pageSizes = [10, 20, 30, 40, 50];
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentPageSize, setPageSize] = useState(10);
+export function useStockItemsPages(v?: ResourceRepresentation) {
   const [searchString, setSearchString] = useState(null);
 
   // Drug filter type
   const [isDrug, setDrug] = useState('');
 
   const [stockItemFilter, setStockItemFilter] = useState<StockItemFilter>({
-    startIndex: currentPage - 1,
+    startIndex: 0,
     v: v || ResourceRepresentation.Default,
-    limit: currentPageSize,
+    limit: MAX_FETCH_SIZE,
     q: null,
     totalCount: true,
   });
 
   const { items, isLoading, error } = useStockItems(stockItemFilter);
-  const pagination = usePagination(items.results, currentPageSize);
 
   useEffect(() => {
     setStockItemFilter({
-      startIndex: currentPage - 1,
+      startIndex: 0,
       v: ResourceRepresentation.Default,
-      limit: currentPageSize,
+      limit: MAX_FETCH_SIZE,
       q: searchString,
       totalCount: true,
       isDrug: isDrug,
     });
-  }, [searchString, currentPage, currentPageSize, isDrug]);
+  }, [searchString, isDrug]);
 
   return {
-    items: pagination.results,
-    pagination,
-    totalCount: items.totalCount,
-    currentPageSize,
-    currentPage,
-    setCurrentPage,
-    setPageSize,
-    pageSizes,
+    items: items.results,
     isLoading,
     error,
     isDrug,
-    setDrug: (drug: string) => {
-      setCurrentPage(1);
-      setDrug(drug);
-    },
+    setDrug,
     setSearchString,
   };
 }

@@ -190,7 +190,7 @@ export function useStockItem(id: string) {
 }
 
 // deleteStockItems
-export function deleteStockItems(ids: string[]) {
+export function deleteStockItems(ids: string[], reason?: string) {
   let otherIds = ids.reduce((p, c, i) => {
     if (i === 0) return p;
     p += (p.length > 0 ? ',' : '') + encodeURIComponent(c);
@@ -200,7 +200,12 @@ export function deleteStockItems(ids: string[]) {
     otherIds = '?ids=' + otherIds;
   }
 
-  const apiUrl = `${restBaseUrl}/stockmanagement/stockitem/${ids[0]}${otherIds}`;
+  const separator = otherIds.length > 0 ? '&' : '?';
+  // Deliberately no `purge=true` - this should void/retire the item, not hard-delete
+  // it, since a purged item can leave batches/transactions/operations dangling on a
+  // stock item uuid that no longer exists.
+  const reasonParam = reason ? `${separator}reason=${encodeURIComponent(reason)}` : '';
+  const apiUrl = `${restBaseUrl}/stockmanagement/stockitem/${ids[0]}${otherIds}${reasonParam}`;
 
   const abortController = new AbortController();
 

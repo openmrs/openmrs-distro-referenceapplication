@@ -32,6 +32,11 @@ export const deleteStockModal = getAsyncLifecycle(() => import('./stock-sources/
   moduleName,
 });
 
+export const deleteStockItemModal = getAsyncLifecycle(() => import('./stock-items/delete-stock-item.modal'), {
+  featureName: 'delete-stock-item-modal',
+  moduleName,
+});
+
 export const deleteUserScopeModal = getAsyncLifecycle(
   () => import('./stock-user-role-scopes/delete-stock-user-scope.modal'),
   {

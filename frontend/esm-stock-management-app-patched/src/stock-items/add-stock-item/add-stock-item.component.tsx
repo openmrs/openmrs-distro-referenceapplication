@@ -14,7 +14,11 @@ interface AddStockItemProps extends Partial<DefaultWorkspaceProps> {
 const AddEditStockItem: React.FC<AddStockItemProps> = ({ stockItem, closeWorkspace }) => {
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState(0);
-  const isEditing = Boolean(stockItem);
+  // Tracks the item being worked on: starts as the item passed in when editing, and
+  // becomes the newly-created item once Stock Item Details is saved for a new item,
+  // so the Packaging Units tab (which needs a stockItemUuid) unlocks right after.
+  const [currentStockItem, setCurrentStockItem] = useState(stockItem);
+  const isEditing = Boolean(currentStockItem);
 
   const handleTabChange = (index: number) => {
     setSelectedTab(index);
@@ -27,14 +31,22 @@ const AddEditStockItem: React.FC<AddStockItemProps> = ({ stockItem, closeWorkspa
         <StockItemDetails
           key={stockItem?.uuid}
           handleTabChange={handleTabChange}
-          stockItem={stockItem}
+          stockItem={currentStockItem}
           onCloseWorkspace={closeWorkspace}
+          onItemCreated={setCurrentStockItem}
         />
       ),
     },
     {
       name: t('packagingUnits', 'Packaging Units'),
-      component: <PackagingUnits isEditing handleTabChange={handleTabChange} stockItemUuid={stockItem?.uuid} />,
+      component: (
+        <PackagingUnits
+          isEditing
+          handleTabChange={handleTabChange}
+          stockItemUuid={currentStockItem?.uuid}
+          onCloseWorkspace={closeWorkspace}
+        />
+      ),
       disabled: !isEditing,
     },
   ];

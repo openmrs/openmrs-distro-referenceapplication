@@ -32,9 +32,10 @@ interface PackagingUnitsProps {
   onSubmit?: () => void;
   stockItemUuid: string;
   handleTabChange: (index) => void;
+  onCloseWorkspace?: () => void;
 }
 
-const PackagingUnits: React.FC<PackagingUnitsProps> = ({ stockItemUuid, handleTabChange }) => {
+const PackagingUnits: React.FC<PackagingUnitsProps> = ({ stockItemUuid, handleTabChange, onCloseWorkspace }) => {
   const { items, isLoading, setStockItemUuid, mutate } = useStockItemPackageUnitsHook();
 
   const [packagingUnits, setPackagingUnits] = useState<StockItemPackagingUOMDTO[]>(items);
@@ -156,12 +157,16 @@ const PackagingUnits: React.FC<PackagingUnitsProps> = ({ stockItemUuid, handleTa
       mutate();
       handleMutate(`${restBaseUrl}/stockmanagement/stockitem`);
       reset();
-      handleTabChange(0);
+      onCloseWorkspace?.();
     });
   };
   const handleCancelPackagingUnits = () => {
     handleTabChange(0);
   };
+  // A stock item needs at least one packaging unit to be usable, so the save/finish
+  // action stays disabled until one already exists or a valid new row is ready to submit.
+  const hasValidNewUnit = Boolean(newUnit.packagingUomUuid) && newUnit.factor > 0;
+  const canFinish = packagingUnits.length > 0 || hasValidNewUnit;
   const handleNewUnitFactorChange = (value: string | number) => {
     setNewUnit({
       ...newUnit,
@@ -258,6 +263,7 @@ const PackagingUnits: React.FC<PackagingUnitsProps> = ({ stockItemUuid, handleTa
           onClick={handleSavePackageUnits}
           kind="primary"
           renderIcon={Save}
+          disabled={!canFinish}
         >
           {getCoreTranslation('save')}
         </Button>

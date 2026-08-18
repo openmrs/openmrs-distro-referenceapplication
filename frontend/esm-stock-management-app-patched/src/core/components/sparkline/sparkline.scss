@@ -1,0 +1,32 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+
+.sparkline {
+  display: block;
+  overflow: visible;
+}
+
+.sparklineLine {
+  stroke: colors.$gray-60;
+}
+
+.trendFavorable,
+.trendUnfavorable {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  @include type.type-style('label-01');
+
+  svg {
+    fill: currentColor;
+  }
+}
+
+.trendFavorable {
+  color: colors.$green-60;
+}
+
+.trendUnfavorable {
+  color: colors.$red-60;
+}

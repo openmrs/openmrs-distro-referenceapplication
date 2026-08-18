@@ -6,6 +6,8 @@ import { useDisposalList } from './useDisposalList';
 import { useStockInventory } from './stock-home-inventory-expiry.resource';
 import { useStockInventoryItems } from './stock-home-inventory-items.resource';
 import { useStockBatchQuantities } from './stock-home-batch-quantities.resource';
+import { useStockLevelHistory } from './stock-home-level-history.resource';
+import { computeExpiringStockHistory, computeDisposedStockHistory } from './stock-home-metric-history.utils';
 import { type StockOperationFilter } from '../stock-operations/stock-operations.resource';
 import useStockList from './useStockList';
 import MetricsCard from '../core/components/card/metrics-card-component';
@@ -48,6 +50,10 @@ const StockManagementMetrics: React.FC = (filter: StockOperationFilter) => {
     locationUuid: sessionLocation?.uuid,
   });
 
+  const { outOfStockTrend, outOfStockSparkline } = useStockLevelHistory(sessionLocation?.uuid, stockItems ?? []);
+  const expiringStockHistory = React.useMemo(() => computeExpiringStockHistory(mergedArray), [mergedArray]);
+  const disposedStockHistory = React.useMemo(() => computeDisposedStockHistory(items ?? []), [items]);
+
   if (error) {
     return <ErrorState headerTitle={t('errorStockMetric', 'Error fetching stock metrics')} error={error} />;
   }
@@ -88,16 +94,19 @@ const StockManagementMetrics: React.FC = (filter: StockOperationFilter) => {
         label={t('expiringStock', 'Expiring stock')}
         value={filteredData?.length || 0}
         onClick={launchExpiringStockModal}
+        trend={expiringStockHistory.trend}
+        sparklineValues={expiringStockHistory.sparkline}
       />
       <MetricsCard
         label={t('outOfStock', 'Out of stock')}
         headerLabel={t('outOfStock', 'Out of stock')}
         outOfStockCount={{
           itemsBelowMin: understockedItems,
-          itemsAboveMax: [],
         }}
         value={outOfStockItems?.length ?? 0}
         onClick={launchOutOfStockModal}
+        trend={outOfStockTrend}
+        sparklineValues={outOfStockSparkline}
       />
       <MetricsCard
         disposedCount={{
@@ -108,6 +117,8 @@ const StockManagementMetrics: React.FC = (filter: StockOperationFilter) => {
         label={t('disposedStock', 'Disposed stock')}
         value={items?.length || 0}
         onClick={launchDisposedStockModal}
+        trend={disposedStockHistory.trend}
+        sparklineValues={disposedStockHistory.sparkline}
       />
     </div>
   );

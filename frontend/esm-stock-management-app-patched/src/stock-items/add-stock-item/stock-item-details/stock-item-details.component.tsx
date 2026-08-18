@@ -28,9 +28,11 @@ interface StockItemDetailsProps {
   stockItem?: StockItemDTO;
   handleTabChange: (index) => void;
   onCloseWorkspace?: () => void;
+  /** Called with the newly-created item once a brand-new stock item is saved. */
+  onItemCreated?: (stockItem: StockItemDTO) => void;
 }
 
-const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: StockItemDetailsProps) => {
+const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace, onItemCreated }: StockItemDetailsProps) => {
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
 
@@ -70,10 +72,11 @@ const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: Stoc
             : `${t('stockItemAdded', 'Stock item added successfully')}`,
         });
         if (!stockItem) {
-          onCloseWorkspace?.();
-        } else {
-          handleTabChange(1);
+          // A brand-new item still needs at least one packaging unit before it's
+          // usable, so send the user to that tab instead of closing the workspace.
+          onItemCreated?.(response.data);
         }
+        handleTabChange(1);
       }
 
       handleMutate(`${restBaseUrl}/stockmanagement/stockitem`);
@@ -280,6 +283,7 @@ const StockItemDetails = ({ stockItem, handleTabChange, onCloseWorkspace }: Stoc
           onClick={handleSubmit(handleSave)}
           renderIcon={Save}
           type="button"
+          disabled={!formState.isValid || formState.isSubmitting}
         >
           {formState.isSubmitting ? <InlineLoading /> : getCoreTranslation('save')}
         </Button>
