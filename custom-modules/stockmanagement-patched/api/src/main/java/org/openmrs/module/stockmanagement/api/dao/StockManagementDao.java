@@ -544,30 +544,30 @@ public class StockManagementDao extends DaoBase {
                 Map<Integer, List<ConceptNameDTO>> conceptNameDTOs = getConceptNamesByConceptIds(conceptNamesToFetch).stream().collect(Collectors.groupingBy(ConceptNameDTO::getConceptId));
                 for (StockItemDTO stockItemDTO : result.getData()) {
                     if (stockItemDTO.getConceptId() != null && conceptNameDTOs.containsKey(stockItemDTO.getConceptId())) {
-                        stockItemDTO.setConceptName(conceptNameDTOs.get(stockItemDTO.getConceptId()).get(0).getName());
+                        stockItemDTO.setConceptName(getLocalizedConceptName(conceptNameDTOs.get(stockItemDTO.getConceptId())));
                     }
 
                     if (stockItemDTO.getDispensingUnitId() != null && conceptNameDTOs.containsKey(stockItemDTO.getDispensingUnitId())) {
-                        stockItemDTO.setDispensingUnitName(conceptNameDTOs.get(stockItemDTO.getDispensingUnitId()).get(0).getName());
+                        stockItemDTO.setDispensingUnitName(getLocalizedConceptName(conceptNameDTOs.get(stockItemDTO.getDispensingUnitId())));
                     }
 
                     if (stockItemDTO.getPurchasePriceConceptId() != null && conceptNameDTOs.containsKey(stockItemDTO.getPurchasePriceConceptId())) {
-                        stockItemDTO.setPurchasePriceUoMName(conceptNameDTOs.get(stockItemDTO.getPurchasePriceConceptId()).get(0).getName());
+                        stockItemDTO.setPurchasePriceUoMName(getLocalizedConceptName(conceptNameDTOs.get(stockItemDTO.getPurchasePriceConceptId())));
                     }
 
                     if (stockItemDTO.getDispensingUnitPackagingConceptId() != null && conceptNameDTOs.containsKey(stockItemDTO.getDispensingUnitPackagingConceptId())) {
-                        stockItemDTO.setDispensingUnitPackagingUoMName(conceptNameDTOs.get(stockItemDTO.getDispensingUnitPackagingConceptId()).get(0).getName());
+                        stockItemDTO.setDispensingUnitPackagingUoMName(getLocalizedConceptName(conceptNameDTOs.get(stockItemDTO.getDispensingUnitPackagingConceptId())));
                     }
 
                     if (stockItemDTO.getDefaultStockOperationsConceptId() != null && conceptNameDTOs.containsKey(stockItemDTO.getDefaultStockOperationsConceptId())) {
-                        stockItemDTO.setDefaultStockOperationsUoMName(conceptNameDTOs.get(stockItemDTO.getDefaultStockOperationsConceptId()).get(0).getName());
+                        stockItemDTO.setDefaultStockOperationsUoMName(getLocalizedConceptName(conceptNameDTOs.get(stockItemDTO.getDefaultStockOperationsConceptId())));
                     }
 
                     if (stockItemDTO.getReorderLevelConceptId() != null && conceptNameDTOs.containsKey(stockItemDTO.getReorderLevelConceptId())) {
-                        stockItemDTO.setReorderLevelUoMName(conceptNameDTOs.get(stockItemDTO.getReorderLevelConceptId()).get(0).getName());
+                        stockItemDTO.setReorderLevelUoMName(getLocalizedConceptName(conceptNameDTOs.get(stockItemDTO.getReorderLevelConceptId())));
                     }
                     if (stockItemDTO.getCategoryId() != null && conceptNameDTOs.containsKey(stockItemDTO.getCategoryId())) {
-                        stockItemDTO.setCategoryName(conceptNameDTOs.get(stockItemDTO.getCategoryId()).get(0).getName());
+                        stockItemDTO.setCategoryName(getLocalizedConceptName(conceptNameDTOs.get(stockItemDTO.getCategoryId())));
                     }
                 }
             }
@@ -966,6 +966,21 @@ public class StockManagementDao extends DaoBase {
                 .setParameter("cnt", ConceptNameType.FULLY_SPECIFIED);
         query = query.setResultTransformer(new AliasToBeanResultTransformer(ConceptNameDTO.class));
         return query.list();
+    }
+
+	/**
+	 * getConceptNamesByConceptIds returns every locale's name for a concept with no
+	 * defined order, so callers must not blindly take the first entry. This picks the
+	 * name matching the current session locale, falling back to whatever is available.
+	 */
+	private String getLocalizedConceptName(List<ConceptNameDTO> conceptNames) {
+        if (conceptNames == null || conceptNames.isEmpty()) return null;
+        Locale currentLocale = Context.getLocale();
+        return conceptNames.stream()
+                .filter(p -> p.getLocale() != null && p.getLocale().getDisplayName().equals(currentLocale.getDisplayName()))
+                .findFirst()
+                .orElse(conceptNames.get(0))
+                .getName();
     }
 	
 	public List<ConceptNameDTO> getDrugNamesByDrugIds(List<Integer> ids) {
