@@ -29,11 +29,11 @@ RUN corepack enable && \
 # instead of the published "next" package, so fixes to any of them ship as soon as
 # they land on main.
 ARG PATIENT_MANAGEMENT_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-patient-management.git
-ARG PATIENT_MANAGEMENT_REF=gate-bed-appointments-queue
+ARG PATIENT_MANAGEMENT_REF=main
 # Bump this (e.g. --build-arg PATIENT_MANAGEMENT_CACHE_BUST=$(date +%s)) to force
 # a fresh clone; otherwise Docker has no way to know the remote branch moved and
 # will happily reuse a stale cached clone.
-ARG PATIENT_MANAGEMENT_CACHE_BUST=1
+ARG PATIENT_MANAGEMENT_CACHE_BUST=0
 RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
     git clone --branch ${PATIENT_MANAGEMENT_REF} --depth 1 ${PATIENT_MANAGEMENT_REPO} openmrs-esm-patient-management && \
     corepack enable && \
@@ -58,8 +58,8 @@ RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
 # and spa-assemble-config.json must point each at its own tarball (not "next") or
 # none of this has any effect on what's actually served.
 ARG PATIENT_CHART_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-patient-chart.git
-ARG PATIENT_CHART_REF=gate-vitals-record-button
-ARG PATIENT_CHART_CACHE_BUST=2
+ARG PATIENT_CHART_REF=main
+ARG PATIENT_CHART_CACHE_BUST=0
 RUN echo "cache-bust=${PATIENT_CHART_CACHE_BUST}" && \
     git clone --branch ${PATIENT_CHART_REF} --depth 1 ${PATIENT_CHART_REPO} openmrs-esm-patient-chart && \
     corepack enable && \
@@ -115,13 +115,13 @@ RUN echo "cache-bust=${ESM_CORE_CACHE_BUST}" && \
     npx turbo run build --filter=...@openmrs/esm-login-app --filter=...@openmrs/esm-app-shell --filter=...@openmrs/esm-framework && \
     (cd packages/apps/esm-login-app && npm pack --pack-destination /app)
 
-# Build @openmrs/esm-styleguide from our fork's sidebar-fix branch instead of
-# the published version, to fix the redundant/duplicate scrollbar that shows
-# up in form workspaces (workspace header used box-sizing: content-box, so
-# its 1px border wasn't accounted for in --desktop-workspace-window-height,
-# leaving the workspace content 1px taller than its container).
+# Build @openmrs/esm-styleguide from our fork instead of the published version,
+# to fix the redundant/duplicate scrollbar that shows up in form workspaces
+# (workspace header used box-sizing: content-box, so its 1px border wasn't
+# accounted for in --desktop-workspace-window-height, leaving the workspace
+# content 1px taller than its container).
 ARG ESM_CORE_STYLEGUIDE_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-core.git
-ARG ESM_CORE_STYLEGUIDE_REF=sidebar-fix
+ARG ESM_CORE_STYLEGUIDE_REF=main
 ARG ESM_CORE_STYLEGUIDE_CACHE_BUST=0
 RUN echo "cache-bust=${ESM_CORE_STYLEGUIDE_CACHE_BUST}" && \
     git clone --branch ${ESM_CORE_STYLEGUIDE_REF} --depth 1 ${ESM_CORE_STYLEGUIDE_REPO} openmrs-esm-core-styleguide && \
