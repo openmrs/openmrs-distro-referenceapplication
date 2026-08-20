@@ -3,17 +3,22 @@ package org.openmrs.module.labtestreport;
 import java.util.Date;
 
 /**
- * One row of the stock inventory ledger report: a single stock item's activity on a single day
- * it actually had a transaction. {@link #actualQty} (opening balance for the day) is derived as
- * {@code remainingQty - incomingQty + outgoingQty}. Days a given item had no activity at all are
- * not represented here - the web layer densifies this sparse list into a full item x day grid,
- * carrying the last known balance forward across gaps.
+ * One row of the stock inventory ledger report: a single stock item's activity at a single
+ * location on a single day it actually had a transaction. {@link #actualQty} (opening balance for
+ * the day) is derived as {@code remainingQty - incomingQty + outgoingQty}. Days a given
+ * item/location had no activity at all are not represented here - the web layer densifies this
+ * sparse list into a full item x location x day grid, carrying the last known balance forward
+ * across gaps.
  */
 public class StockLedgerRow {
 
 	private Integer stockItemId;
 
 	private String itemName;
+
+	private Integer locationId;
+
+	private String locationName;
 
 	private Date ledgerDate;
 
@@ -39,6 +44,22 @@ public class StockLedgerRow {
 
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
+	}
+
+	public Integer getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(Integer locationId) {
+		this.locationId = locationId;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 	public Date getLedgerDate() {

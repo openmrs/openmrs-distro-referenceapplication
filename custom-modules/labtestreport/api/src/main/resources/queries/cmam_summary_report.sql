@@ -33,13 +33,47 @@ GROUP BY c.concept_id, cn.name
 
 UNION ALL
 
-SELECT 'alertStatus', c.concept_id, cn.name, COUNT(*)
-FROM latest_encounters le
-JOIN obs o ON o.encounter_id = le.encounter_id
-  AND o.concept_id = (SELECT concept_id FROM concept WHERE uuid = '47266119-f616-4e8a-b094-518b4c2d660b')
-  AND o.voided = 0
-JOIN concept c ON c.concept_id = o.value_coded
-JOIN concept_name cn ON cn.concept_id = c.concept_id AND cn.locale = 'en' AND cn.locale_preferred = 1
-GROUP BY c.concept_id, cn.name
+-- Alert Status is computed from the child's actual Appointments-module follow-up appointment
+-- (not the independently recorded, often-stale Alert Status answer, and not the CMAM form's own
+-- "next visit date" field - a doctor schedules the real follow-up as an Appointment): overdue if
+-- that appointment date has passed, due soon if within 7 days, OK otherwise. A child with no
+-- appointment scheduled at all falls into its own bucket - there's no date to compare, so it must
+-- not be silently counted as OK. That bucket has no backing concept, so it's given the sentinel
+-- categoryConceptId -1 (the drilldown query below special-cases it the same way).
+SELECT
+  'alertStatus',
+  COALESCE(
+    (SELECT c.concept_id FROM concept alertQuestion
+       JOIN concept_answer ca ON ca.concept_id = alertQuestion.concept_id
+       JOIN concept c ON c.concept_id = ca.answer_concept
+       JOIN concept_name cn ON cn.concept_id = c.concept_id AND cn.locale = 'en' AND cn.locale_preferred = 1
+     WHERE alertQuestion.uuid = '47266119-f616-4e8a-b094-518b4c2d660b'
+       AND cn.name = computed.computedAlertStatus
+     LIMIT 1),
+    -1
+  ),
+  COALESCE(computed.computedAlertStatus, 'No Follow-up Scheduled'),
+  COUNT(*)
+FROM (
+  SELECT le.patient_id,
+    CASE
+      WHEN nextAppt.nextApptDate IS NULL THEN NULL
+      WHEN DATEDIFF(nextAppt.nextApptDate, CURDATE()) < 0 THEN 'OVERDUE'
+      WHEN DATEDIFF(nextAppt.nextApptDate, CURDATE()) <= 7 THEN 'DUE SOON'
+      ELSE 'OK'
+    END AS computedAlertStatus
+  FROM latest_encounters le
+  LEFT JOIN (
+    SELECT patient_id,
+      COALESCE(
+        MIN(CASE WHEN start_date_time >= CURDATE() THEN start_date_time END),
+        MAX(CASE WHEN start_date_time < CURDATE() THEN start_date_time END)
+      ) AS nextApptDate
+    FROM patient_appointment
+    WHERE voided = 0
+    GROUP BY patient_id
+  ) nextAppt ON nextAppt.patient_id = le.patient_id
+) computed
+GROUP BY computed.computedAlertStatus
 
 ORDER BY dimension, category

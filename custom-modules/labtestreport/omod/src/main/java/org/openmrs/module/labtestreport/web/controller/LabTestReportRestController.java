@@ -21,8 +21,15 @@ import org.openmrs.module.labtestreport.PatientEncounterSummaryRow;
 import org.openmrs.module.labtestreport.PatientRow;
 import org.openmrs.module.labtestreport.SessionAttendanceRow;
 import org.openmrs.module.labtestreport.SessionAttendanceService;
+import org.openmrs.module.labtestreport.StockBatchExpiryRow;
+import org.openmrs.module.labtestreport.StockDaysRemainingRow;
+import org.openmrs.module.labtestreport.StockFlowService;
 import org.openmrs.module.labtestreport.StockLedgerRow;
 import org.openmrs.module.labtestreport.StockLedgerService;
+import org.openmrs.module.labtestreport.StockLocationQtyRow;
+import org.openmrs.module.labtestreport.StockReorderRow;
+import org.openmrs.module.labtestreport.StockStatusService;
+import org.openmrs.module.labtestreport.StockoutFrequencyRow;
 import org.openmrs.module.labtestreport.SummaryRow;
 import org.openmrs.module.labtestreport.web.SummaryRowGrouping;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -149,8 +156,79 @@ public class LabTestReportRestController {
 	@RequestMapping(value = "/stock-ledger.json", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> stockLedger(@RequestParam(value = "startDate", required = false) Date startDate,
-	        @RequestParam(value = "endDate", required = false) Date endDate) throws JsonProcessingException {
-		List<StockLedgerRow> rows = Context.getService(StockLedgerService.class).getLedgerReport(startDate, endDate);
+	        @RequestParam(value = "endDate", required = false) Date endDate,
+	        @RequestParam(value = "locationUuid", required = false) String locationUuid) throws JsonProcessingException {
+		List<StockLedgerRow> rows = Context.getService(StockLedgerService.class).getLedgerReport(startDate, endDate,
+		    locationUuid);
+		return jsonResponse(rows);
+	}
+
+	@RequestMapping(value = "/stock-consumption.json", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> stockConsumption(@RequestParam(value = "startDate", required = false) Date startDate,
+	        @RequestParam(value = "endDate", required = false) Date endDate,
+	        @RequestParam(value = "locationUuid", required = false) String locationUuid) throws JsonProcessingException {
+		List<StockLocationQtyRow> rows = Context.getService(StockFlowService.class).getConsumptionByLocation(startDate,
+		    endDate, locationUuid);
+		return jsonResponse(rows);
+	}
+
+	@RequestMapping(value = "/stock-distribution.json", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> stockDistribution(@RequestParam(value = "startDate", required = false) Date startDate,
+	        @RequestParam(value = "endDate", required = false) Date endDate,
+	        @RequestParam(value = "sourceLocationUuid", required = false) String sourceLocationUuid)
+	        throws JsonProcessingException {
+		List<StockLocationQtyRow> rows = Context.getService(StockFlowService.class).getDistributionFromSource(startDate,
+		    endDate, sourceLocationUuid);
+		return jsonResponse(rows);
+	}
+
+	@RequestMapping(value = "/stock-wastage.json", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> stockWastage(@RequestParam(value = "startDate", required = false) Date startDate,
+	        @RequestParam(value = "endDate", required = false) Date endDate,
+	        @RequestParam(value = "locationUuid", required = false) String locationUuid) throws JsonProcessingException {
+		List<StockLocationQtyRow> rows = Context.getService(StockFlowService.class).getWastageByLocation(startDate,
+		    endDate, locationUuid);
+		return jsonResponse(rows);
+	}
+
+	@RequestMapping(value = "/stock-expiry-risk.json", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> stockExpiryRisk(@RequestParam(value = "daysAhead", required = false) Integer daysAhead,
+	        @RequestParam(value = "locationUuid", required = false) String locationUuid) throws JsonProcessingException {
+		List<StockBatchExpiryRow> rows = Context.getService(StockStatusService.class).getExpiryRisk(daysAhead,
+		    locationUuid);
+		return jsonResponse(rows);
+	}
+
+	@RequestMapping(value = "/stock-days-remaining.json", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> stockDaysRemaining(@RequestParam(value = "startDate", required = false) Date startDate,
+	        @RequestParam(value = "endDate", required = false) Date endDate,
+	        @RequestParam(value = "locationUuid", required = false) String locationUuid) throws JsonProcessingException {
+		List<StockDaysRemainingRow> rows = Context.getService(StockStatusService.class).getDaysOfStockRemaining(startDate,
+		    endDate, locationUuid);
+		return jsonResponse(rows);
+	}
+
+	@RequestMapping(value = "/stock-reorder.json", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> stockReorder(@RequestParam(value = "locationUuid", required = false) String locationUuid)
+	        throws JsonProcessingException {
+		List<StockReorderRow> rows = Context.getService(StockStatusService.class).getReorderStatus(locationUuid);
+		return jsonResponse(rows);
+	}
+
+	@RequestMapping(value = "/stock-stockout-frequency.json", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> stockStockoutFrequency(
+	        @RequestParam(value = "startDate", required = false) Date startDate,
+	        @RequestParam(value = "endDate", required = false) Date endDate,
+	        @RequestParam(value = "locationUuid", required = false) String locationUuid) throws JsonProcessingException {
+		List<StockoutFrequencyRow> rows = Context.getService(StockStatusService.class).getStockoutFrequency(startDate,
+		    endDate, locationUuid);
 		return jsonResponse(rows);
 	}
 

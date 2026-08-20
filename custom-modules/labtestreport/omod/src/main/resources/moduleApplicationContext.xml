@@ -185,4 +185,63 @@
 		</property>
 	</bean>
 
+	<!-- Configure the Stock Flow Service (consumption-by-location and distribution-from-source reports) -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.labtestreport.StockFlowService</value>
+				<ref bean="stockFlowService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="stockFlowService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target">
+			<bean class="org.openmrs.module.labtestreport.impl.StockFlowServiceImpl">
+				<property name="dao">
+					<bean class="org.openmrs.module.labtestreport.db.hibernate.HibernateStockFlowDAO">
+						<property name="sessionFactory"><ref bean="dbSessionFactory"/></property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<ref bean="serviceInterceptors"/>
+		</property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+
+	<!-- Configure the Stock Status Service (expiry-risk, days-of-stock, reorder and stockout-frequency reports) -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.labtestreport.StockStatusService</value>
+				<ref bean="stockStatusService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="stockStatusService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target">
+			<bean class="org.openmrs.module.labtestreport.impl.StockStatusServiceImpl">
+				<property name="dao">
+					<bean class="org.openmrs.module.labtestreport.db.hibernate.HibernateStockStatusDAO">
+						<property name="sessionFactory"><ref bean="dbSessionFactory"/></property>
+					</bean>
+				</property>
+				<property name="stockFlowService"><ref bean="stockFlowService"/></property>
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<ref bean="serviceInterceptors"/>
+		</property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+
 </beans>

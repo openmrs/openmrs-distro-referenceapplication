@@ -22,12 +22,21 @@ SELECT DISTINCT
   pa_phone.value                AS phoneNumber,
   cd.name                      AS currentDiagnosis,
   cls.name                     AS childLastStatus,
-  al.name                      AS alertStatus,
+  CASE
+    WHEN nextAppt.nextApptDate IS NULL THEN 'No Follow-up Scheduled'
+    WHEN DATEDIFF(nextAppt.nextApptDate, CURDATE()) < 0 THEN 'OVERDUE'
+    WHEN DATEDIFF(nextAppt.nextApptDate, CURDATE()) <= 7 THEN 'DUE SOON'
+    ELSE 'OK'
+  END                          AS alertStatus,
   nvd.value_datetime            AS nextVisitDate
 FROM latest_encounters le
-JOIN obs dim ON dim.encounter_id = le.encounter_id
-  AND dim.concept_id = (SELECT concept_id FROM concept WHERE uuid = :dimensionConceptUuid)
-  AND dim.value_coded = :categoryConceptId AND dim.voided = 0
+-- Alert Status is matched against the computed category (see cmam_summary_report.sql) rather
+-- than the raw recorded obs, so this stays consistent with the summary counts above it (matched
+-- in the WHERE clause below via nvd, already joined for the nextVisitDate column). The other two
+-- dimensions still match the literal recorded answer via matchDim.
+LEFT JOIN obs matchDim ON matchDim.encounter_id = le.encounter_id
+  AND matchDim.concept_id = (SELECT concept_id FROM concept WHERE uuid = :dimensionConceptUuid)
+  AND matchDim.value_coded = :categoryConceptId AND matchDim.voided = 0
 JOIN person p   ON p.person_id = le.patient_id
 JOIN patient pt ON pt.patient_id = p.person_id
 LEFT JOIN person_name pn ON pn.person_id = p.person_id AND pn.voided = 0 AND pn.preferred = 1
@@ -44,9 +53,37 @@ LEFT JOIN concept_name cd ON cd.concept_id = ocd.value_coded AND cd.locale = 'en
 LEFT JOIN obs ocls ON ocls.encounter_id = le.encounter_id
   AND ocls.concept_id = (SELECT concept_id FROM concept WHERE uuid = '524fea02-d6e8-47c0-84ee-e7b889f08d4c') AND ocls.voided = 0
 LEFT JOIN concept_name cls ON cls.concept_id = ocls.value_coded AND cls.locale = 'en' AND cls.locale_preferred = 1
-LEFT JOIN obs oal ON oal.encounter_id = le.encounter_id
-  AND oal.concept_id = (SELECT concept_id FROM concept WHERE uuid = '47266119-f616-4e8a-b094-518b4c2d660b') AND oal.voided = 0
-LEFT JOIN concept_name al ON al.concept_id = oal.value_coded AND al.locale = 'en' AND al.locale_preferred = 1
 LEFT JOIN obs nvd ON nvd.encounter_id = le.encounter_id
   AND nvd.concept_id = (SELECT concept_id FROM concept WHERE uuid = 'bff5c735-7f07-44e5-8cd3-13c03a77037f') AND nvd.voided = 0
+LEFT JOIN (
+  SELECT patient_id,
+    COALESCE(
+      MIN(CASE WHEN start_date_time >= CURDATE() THEN start_date_time END),
+      MAX(CASE WHEN start_date_time < CURDATE() THEN start_date_time END)
+    ) AS nextApptDate
+  FROM patient_appointment
+  WHERE voided = 0
+  GROUP BY patient_id
+) nextAppt ON nextAppt.patient_id = le.patient_id
+WHERE
+  (:dimensionConceptUuid <> '47266119-f616-4e8a-b094-518b4c2d660b' AND matchDim.encounter_id IS NOT NULL)
+  OR (
+    :dimensionConceptUuid = '47266119-f616-4e8a-b094-518b4c2d660b'
+    AND (
+      (
+        :categoryConceptId = -1 AND nextAppt.nextApptDate IS NULL
+      )
+      OR (
+        :categoryConceptId <> -1
+        AND nextAppt.nextApptDate IS NOT NULL
+        AND (
+          CASE
+            WHEN DATEDIFF(nextAppt.nextApptDate, CURDATE()) < 0 THEN 'OVERDUE'
+            WHEN DATEDIFF(nextAppt.nextApptDate, CURDATE()) <= 7 THEN 'DUE SOON'
+            ELSE 'OK'
+          END
+        ) = (SELECT name FROM concept_name WHERE concept_id = :categoryConceptId AND locale = 'en' AND locale_preferred = 1)
+      )
+    )
+  )
 ORDER BY familyName, givenName

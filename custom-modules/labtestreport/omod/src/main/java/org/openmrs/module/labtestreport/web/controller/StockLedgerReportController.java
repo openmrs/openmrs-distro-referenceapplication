@@ -40,7 +40,7 @@ public class StockLedgerReportController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showReport(@RequestParam(value = "startDate", required = false) Date startDate,
 	        @RequestParam(value = "endDate", required = false) Date endDate) {
-		List<StockLedgerRow> rows = Context.getService(StockLedgerService.class).getLedgerReport(startDate, endDate);
+		List<StockLedgerRow> rows = Context.getService(StockLedgerService.class).getLedgerReport(startDate, endDate, null);
 		List<StockLedgerItem> items = StockLedgerGrouping.buildItemList(rows);
 		List<StockLedgerDayBlock> dayBlocks = StockLedgerGrouping.buildDayBlocks(rows, items);
 
