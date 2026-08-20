@@ -39,7 +39,41 @@ export const sessionAttendanceReport = getAsyncLifecycle(
   options,
 );
 
+export const stockReportsHome = getAsyncLifecycle(
+  () => import('./stock-reports-home/stock-reports-home.component'),
+  options,
+);
+
 export const stockLedgerReport = getAsyncLifecycle(() => import('./stock-ledger/stock-ledger.component'), options);
+
+export const stockConsumptionReport = getAsyncLifecycle(
+  () => import('./stock-consumption/stock-consumption.component'),
+  options,
+);
+
+export const stockDistributionReport = getAsyncLifecycle(
+  () => import('./stock-distribution/stock-distribution.component'),
+  options,
+);
+
+export const stockWastageReport = getAsyncLifecycle(() => import('./stock-wastage/stock-wastage.component'), options);
+
+export const stockExpiryRiskReport = getAsyncLifecycle(
+  () => import('./stock-expiry-risk/stock-expiry-risk.component'),
+  options,
+);
+
+export const stockDaysRemainingReport = getAsyncLifecycle(
+  () => import('./stock-days-remaining/stock-days-remaining.component'),
+  options,
+);
+
+export const stockReorderReport = getAsyncLifecycle(() => import('./stock-reorder/stock-reorder.component'), options);
+
+export const stockStockoutFrequencyReport = getAsyncLifecycle(
+  () => import('./stock-stockout-frequency/stock-stockout-frequency.component'),
+  options,
+);
 
 export const cmamSummaryReport = getAsyncLifecycle(() => import('./cmam-summary/cmam-summary.component'), options);
 

@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
-import { Modal, InlineLoading, Button, ContentSwitcher, Switch } from '@carbon/react';
+import { Modal, InlineLoading, Button, ContentSwitcher, Select, SelectItem, Switch } from '@carbon/react';
 import { navigate } from '@openmrs/esm-framework';
-import ReportsTabs from '../reports-shell/reports-tabs.component';
+import BackToReportsLink from '../reports-shell/back-to-reports-link.component';
 import SimpleBarChart from '../reports-shell/simple-bar-chart.component';
 import KpiTiles from '../reports-shell/kpi-tiles.component';
 import MonthCompareControls from '../reports-shell/month-compare-controls.component';
@@ -105,19 +105,29 @@ export default function SessionAttendanceReport() {
   const [appliedDates, setAppliedDates] = useState<{ startDate?: string; endDate?: string }>({});
   const [selection, setSelection] = useState<Selection | null>(null);
   const [viewMode, setViewMode] = useState<'table' | 'graph'>('table');
+  const [sessionTypeFilter, setSessionTypeFilter] = useState('');
   const compare = useMonthComparison();
 
   const primaryStartDate = compare.enabled ? compare.primary.startDate : appliedDates.startDate;
   const primaryEndDate = compare.enabled ? compare.primary.endDate : appliedDates.endDate;
 
-  const { rows, isLoading } = useSessionAttendanceReport(primaryStartDate, primaryEndDate);
-  const { rows: compareRows, isLoading: compareLoading } = useSessionAttendanceReport(
+  const { rows: rawRows, isLoading } = useSessionAttendanceReport(primaryStartDate, primaryEndDate);
+  const { rows: compareRawRows, isLoading: compareLoading } = useSessionAttendanceReport(
     compare.comparison.startDate,
     compare.comparison.endDate,
     compare.enabled,
   );
   const { patients, isLoading: patientsLoading } = useSessionAttendanceDrilldown(selection);
   const dataLoading = isLoading || (compare.enabled && compareLoading);
+
+  const rows = useMemo(
+    () => (sessionTypeFilter ? rawRows.filter((row) => row.sessionType === sessionTypeFilter) : rawRows),
+    [rawRows, sessionTypeFilter],
+  );
+  const compareRows = useMemo(
+    () => (sessionTypeFilter ? compareRawRows.filter((row) => row.sessionType === sessionTypeFilter) : compareRawRows),
+    [compareRawRows, sessionTypeFilter],
+  );
 
   const dayBlocks = useMemo(() => buildDayBlocks(rows), [rows]);
 
@@ -231,7 +241,7 @@ export default function SessionAttendanceReport() {
 
   return (
     <div>
-      <ReportsTabs activeKey="session-attendance" />
+      <BackToReportsLink />
       <div className={pageStyles.pageBody}>
         <h2 className={pageStyles.pageHeading}>{t('sessionAttendanceReportTitle', 'Session Attendance Report')}</h2>
 
@@ -284,6 +294,24 @@ export default function SessionAttendanceReport() {
             </Button>
           </div>
         )}
+
+        <div className={pageStyles.filterTile}>
+          <div className={pageStyles.filterField}>
+            <Select
+              id="sessionTypeFilter"
+              labelText={t('sessionType', 'Session Type')}
+              value={sessionTypeFilter}
+              onChange={(e) => setSessionTypeFilter(e.target.value)}
+            >
+              <SelectItem value="" text={t('allSessionTypes', 'All session types')} />
+              {SESSION_TYPES_IN_ORDER.map((type) => (
+                <React.Fragment key={type}>
+                  <SelectItem value={type} text={sessionTypeLabel(t, type)} />
+                </React.Fragment>
+              ))}
+            </Select>
+          </div>
+        </div>
 
         <ExportButtons
           filenameBase="session-attendance-report"

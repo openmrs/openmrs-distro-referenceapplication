@@ -1,16 +1,14 @@
 import { openmrsFetch } from '@openmrs/esm-framework';
 import useSWR from 'swr';
 
-export interface StockLedgerRow {
+export interface StockDaysRemainingRow {
   stockItemId: number;
   itemName: string;
   locationId: number;
   locationName: string | null;
-  ledgerDate: string;
-  actualQty: number;
-  incomingQty: number;
-  outgoingQty: number;
-  remainingQty: number;
+  onHandQty: number;
+  avgDailyConsumption: number;
+  daysRemaining: number | null;
 }
 
 function buildQuery(params: Record<string, string | number | undefined>): string {
@@ -24,15 +22,8 @@ function buildQuery(params: Record<string, string | number | undefined>): string
   return query ? `?${query}` : '';
 }
 
-export function useStockLedgerReport(
-  startDate?: string,
-  endDate?: string,
-  locationUuid?: string,
-  enabled: boolean = true,
-) {
-  const url = enabled
-    ? `/module/labtestreport/api/stock-ledger.json${buildQuery({ startDate, endDate, locationUuid })}`
-    : null;
-  const { data, error, isLoading } = useSWR<{ data: Array<StockLedgerRow> }, Error>(url, openmrsFetch);
+export function useStockDaysRemainingReport(startDate?: string, endDate?: string, locationUuid?: string) {
+  const url = `/module/labtestreport/api/stock-days-remaining.json${buildQuery({ startDate, endDate, locationUuid })}`;
+  const { data, error, isLoading } = useSWR<{ data: Array<StockDaysRemainingRow> }, Error>(url, openmrsFetch);
   return { rows: data?.data ?? [], error, isLoading };
 }

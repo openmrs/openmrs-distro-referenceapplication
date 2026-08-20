@@ -7,11 +7,14 @@ export default function StockLedgerLink() {
   const { t } = useTranslation();
   return (
     <Layer>
-      <ClickableTile href={`${window.getOpenmrsSpaBase().slice(0, -1)}/stock-ledger-report`}>
+      <ClickableTile href={`${window.getOpenmrsSpaBase().slice(0, -1)}/stock-reports-home`}>
         <div>
-          <div className="heading">{t('stockLedgerReportTitle', 'Stock Inventory Ledger Report')}</div>
+          <div className="heading">{t('stockReportsTitle', 'Stock Reports')}</div>
           <div className="content">
-            {t('stockLedgerReportShortDesc', 'Daily opening/incoming/outgoing/closing stock balances per item')}
+            {t(
+              'stockReportsShortDesc',
+              'Inventory ledger, consumption by location, and distribution reports for stock management',
+            )}
           </div>
         </div>
         <div className="iconWrapper">

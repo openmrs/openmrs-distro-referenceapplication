@@ -14,7 +14,7 @@ import {
 } from '@carbon/react';
 import { ChevronDown, ChevronRight } from '@carbon/react/icons';
 import { navigate } from '@openmrs/esm-framework';
-import ReportsTabs from '../reports-shell/reports-tabs.component';
+import BackToReportsLink from '../reports-shell/back-to-reports-link.component';
 import SimpleBarChart from '../reports-shell/simple-bar-chart.component';
 import KpiTiles from '../reports-shell/kpi-tiles.component';
 import MonthCompareControls from '../reports-shell/month-compare-controls.component';
@@ -162,7 +162,7 @@ export default function DiseaseSummaryReport() {
 
   const chartData = useMemo(() => {
     const compareByCategory = new Map(
-      (compareSummary?.groupedRows ?? []).map((group) => [group.category, group.totalCases]),
+      (compareSummary?.groupedRows ?? []).map((group): [string, number] => [group.category, group.totalCases]),
     );
     return groupedRows.map((group) => ({
       label: group.category,
@@ -198,7 +198,9 @@ export default function DiseaseSummaryReport() {
     if (!compare.enabled || !compareSummary) {
       return [];
     }
-    const compareByCategory = new Map(compareSummary.groupedRows.map((group) => [group.category, group.totalCases]));
+    const compareByCategory = new Map(
+      compareSummary.groupedRows.map((group): [string, number] => [group.category, group.totalCases]),
+    );
     const categoryUnion = new Set([
       ...groupedRows.map((group) => group.category),
       ...compareSummary.groupedRows.map((group) => group.category),
@@ -296,7 +298,7 @@ export default function DiseaseSummaryReport() {
 
   return (
     <div>
-      <ReportsTabs activeKey="disease-summary" />
+      <BackToReportsLink />
       <div className={pageStyles.pageBody}>
         <h2 className={pageStyles.pageHeading}>{t('diseaseSummaryReportTitle', 'Disease Surveillance Summary Report')}</h2>
 

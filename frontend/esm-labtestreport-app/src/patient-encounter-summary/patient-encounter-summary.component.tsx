@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { InlineLoading, Button, ContentSwitcher, Switch, NumberInput } from '@carbon/react';
+import { InlineLoading, Button, ContentSwitcher, Search, Switch, NumberInput } from '@carbon/react';
 import { navigate } from '@openmrs/esm-framework';
-import ReportsTabs from '../reports-shell/reports-tabs.component';
+import BackToReportsLink from '../reports-shell/back-to-reports-link.component';
 import SimpleBarChart from '../reports-shell/simple-bar-chart.component';
 import KpiTiles from '../reports-shell/kpi-tiles.component';
 import MonthCompareControls from '../reports-shell/month-compare-controls.component';
 import ExportButtons from '../reports-shell/export-buttons.component';
 import { buildVisitDetailExportSheet, buildKpiExportSheet, type ExportSheet } from '../reports-shell/export-utils';
 import { useMonthComparison } from '../reports-shell/month-compare';
+import SortableHeader from '../reports-shell/sortable-header.component';
+import { useSortableRows } from '../reports-shell/use-sortable-rows';
 import pageStyles from '../reports-shell/reports-page.scss';
 import { getTodayDateString, clampToToday } from '../reports-shell/date-utils';
 import {
@@ -121,6 +123,22 @@ export default function PatientEncounterSummaryReport() {
     );
   }, [filteredRows, searchTerm]);
 
+  const sortAccessors = useMemo(
+    () => ({
+      name: (row: PatientEncounterSummaryRow) => `${row.familyName} ${row.givenName}`,
+      sex: (row: PatientEncounterSummaryRow) => row.sex ?? '',
+      nationalId: (row: PatientEncounterSummaryRow) => row.nationalId ?? '',
+      phoneNumber: (row: PatientEncounterSummaryRow) => row.phoneNumber ?? '',
+      age: (row: PatientEncounterSummaryRow) => row.age,
+      visitCount: (row: PatientEncounterSummaryRow) => row.visitCount,
+      mostRecentVisitDate: (row: PatientEncounterSummaryRow) => row.mostRecentVisitDate,
+      location: (row: PatientEncounterSummaryRow) => row.location ?? '',
+      serviceType: (row: PatientEncounterSummaryRow) => row.serviceType ?? '',
+    }),
+    [],
+  );
+  const { sortedRows, sortKey, direction, toggleSort } = useSortableRows(searchedRows, sortAccessors, null);
+
   const chartData = useMemo(
     () =>
       filteredRows.map((row) => ({
@@ -202,7 +220,7 @@ export default function PatientEncounterSummaryReport() {
 
   return (
     <div>
-      <ReportsTabs activeKey="patient-encounter-summary" />
+      <BackToReportsLink />
       <div className={pageStyles.pageBody}>
         <h2 className={pageStyles.pageHeading}>
           {t('patientVisitSummaryReportTitle', 'Patient Visit Summary Report')}
@@ -293,14 +311,14 @@ export default function PatientEncounterSummaryReport() {
               ))}
             </select>
           </div>
-          <div className={pageStyles.filterField}>
-            <label htmlFor="searchTerm">{t('search', 'Search')}</label>
-            <input
-              id="searchTerm"
-              type="search"
-              placeholder={t('searchAllColumns', 'Search name, ID, phone, location...')}
+          <div className={pageStyles.filterField} style={{ minWidth: '16rem' }}>
+            <Search
+              size="md"
+              labelText={t('search', 'Search')}
+              placeholder={t('searchAllColumnsPlaceholder', 'Search name, ID, phone, location...')}
               value={searchTerm}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onClear={() => setSearchTerm('')}
             />
           </div>
         </div>
@@ -330,19 +348,79 @@ export default function PatientEncounterSummaryReport() {
             <table className={pageStyles.dataTable}>
               <thead>
                 <tr>
-                  <th className="left">{t('patientName', 'Patient Name')}</th>
-                  <th className="left">{t('sex', 'Sex')}</th>
-                  <th className="left">{t('nationalId', 'National ID')}</th>
-                  <th className="left">{t('phoneNumber', 'Phone Number')}</th>
-                  <th>{t('age', 'Age')}</th>
-                  <th>{t('numberOfVisits', 'Number of Visits')}</th>
-                  <th>{t('mostRecentVisitDate', 'Most Recent Visit Date')}</th>
-                  <th className="left">{t('location', 'Location')}</th>
-                  <th className="left">{t('serviceType', 'Service Type')}</th>
+                  <SortableHeader
+                    label={t('patientName', 'Patient Name')}
+                    sortKey="name"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                    className="left"
+                  />
+                  <SortableHeader
+                    label={t('sex', 'Sex')}
+                    sortKey="sex"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                    className="left"
+                  />
+                  <SortableHeader
+                    label={t('nationalId', 'National ID')}
+                    sortKey="nationalId"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                    className="left"
+                  />
+                  <SortableHeader
+                    label={t('phoneNumber', 'Phone Number')}
+                    sortKey="phoneNumber"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                    className="left"
+                  />
+                  <SortableHeader
+                    label={t('age', 'Age')}
+                    sortKey="age"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                  />
+                  <SortableHeader
+                    label={t('numberOfVisits', 'Number of Visits')}
+                    sortKey="visitCount"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                  />
+                  <SortableHeader
+                    label={t('mostRecentVisitDate', 'Most Recent Visit Date')}
+                    sortKey="mostRecentVisitDate"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                  />
+                  <SortableHeader
+                    label={t('location', 'Location')}
+                    sortKey="location"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                    className="left"
+                  />
+                  <SortableHeader
+                    label={t('serviceType', 'Service Type')}
+                    sortKey="serviceType"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                    className="left"
+                  />
                 </tr>
               </thead>
               <tbody>
-                {searchedRows.map((row) => (
+                {sortedRows.map((row) => (
                   <tr
                     key={row.patientId}
                     className={pageStyles.clickableRow}

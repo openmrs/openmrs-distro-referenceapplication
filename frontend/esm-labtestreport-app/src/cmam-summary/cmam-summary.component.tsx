@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, InlineLoading, Button } from '@carbon/react';
 import { navigate } from '@openmrs/esm-framework';
-import ReportsTabs from '../reports-shell/reports-tabs.component';
+import BackToReportsLink from '../reports-shell/back-to-reports-link.component';
 import ExportButtons from '../reports-shell/export-buttons.component';
 import { type ExportSheet } from '../reports-shell/export-utils';
 import pageStyles from '../reports-shell/reports-page.scss';
@@ -23,6 +23,12 @@ interface Selection {
 
 function goToPatientChart(patientUuid: string) {
   navigate({ to: `\${openmrsSpaBase}/patient/${patientUuid}/chart/visits` });
+}
+
+// Alert-status children need a doctor to schedule a follow-up - that's done as an Appointment,
+// not a chart note, so route straight to the patient chart's Appointments tab rather than Visits.
+function goToScheduleFollowUp(patientUuid: string) {
+  navigate({ to: `\${openmrsSpaBase}/patient/${patientUuid}/chart/appointments` });
 }
 
 export default function CmamSummaryReport() {
@@ -133,7 +139,7 @@ export default function CmamSummaryReport() {
 
   return (
     <div>
-      <ReportsTabs activeKey="cmam-follow-up" />
+      <BackToReportsLink />
       <div className={pageStyles.pageBody}>
         <h2 className={pageStyles.pageHeading}>{t('cmamFollowUpReportTitle', 'CMAM Follow-up Summary Report')}</h2>
 
@@ -205,6 +211,9 @@ export default function CmamSummaryReport() {
                       <th className="left">{t('childLastStatus', 'Child Last Status')}</th>
                       <th className="left">{t('alertStatus', 'Alert Status')}</th>
                       <th className="left">{t('nextVisitDate', 'Next Visit Date')}</th>
+                      {selection.dimension === 'alertStatus' && selection.category.trim().toUpperCase() !== 'OK' && (
+                        <th className="left">{t('followUp', 'Follow-up')}</th>
+                      )}
                     </tr>
                   </thead>
                   <tbody>
@@ -225,6 +234,20 @@ export default function CmamSummaryReport() {
                         <td className="left">{patient.childLastStatus}</td>
                         <td className="left">{patient.alertStatus}</td>
                         <td className="left">{patient.nextVisitDate}</td>
+                        {selection.dimension === 'alertStatus' && selection.category.trim().toUpperCase() !== 'OK' && (
+                          <td className="left">
+                            <Button
+                              kind="tertiary"
+                              size="sm"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                goToScheduleFollowUp(patient.patientUuid);
+                              }}
+                            >
+                              {t('scheduleFollowUp', 'Schedule follow-up')}
+                            </Button>
+                          </td>
+                        )}
                       </tr>
                     ))}
                   </tbody>

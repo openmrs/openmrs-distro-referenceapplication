@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Modal, InlineLoading, Button, Search, Select, SelectItem, ContentSwitcher, Switch } from '@carbon/react';
 import { ChevronDown, ChevronRight } from '@carbon/react/icons';
 import { navigate } from '@openmrs/esm-framework';
-import ReportsTabs from '../reports-shell/reports-tabs.component';
+import BackToReportsLink from '../reports-shell/back-to-reports-link.component';
 import SimpleBarChart from '../reports-shell/simple-bar-chart.component';
 import KpiTiles from '../reports-shell/kpi-tiles.component';
 import MonthCompareControls from '../reports-shell/month-compare-controls.component';
@@ -145,7 +145,7 @@ export default function LabTestSummaryReport() {
 
   const chartData = useMemo(() => {
     const compareByCategory = new Map(
-      (compareSummary?.groupedRows ?? []).map((group) => [group.category, group.totalTests]),
+      (compareSummary?.groupedRows ?? []).map((group): [string, number] => [group.category, group.totalTests]),
     );
     return groupedRows.map((group) => ({
       label: group.category,
@@ -181,7 +181,9 @@ export default function LabTestSummaryReport() {
     if (!compare.enabled || !compareSummary) {
       return [];
     }
-    const compareByCategory = new Map(compareSummary.groupedRows.map((group) => [group.category, group.totalTests]));
+    const compareByCategory = new Map(
+      compareSummary.groupedRows.map((group): [string, number] => [group.category, group.totalTests]),
+    );
     const categoryUnion = new Set([
       ...groupedRows.map((group) => group.category),
       ...compareSummary.groupedRows.map((group) => group.category),
@@ -274,7 +276,7 @@ export default function LabTestSummaryReport() {
 
   return (
     <div>
-      <ReportsTabs activeKey="lab-test-summary" />
+      <BackToReportsLink />
       <div className={pageStyles.pageBody}>
         <h2 className={pageStyles.pageHeading}>{t('labTestSummaryReportTitle', 'Lab Test Summary Report')}</h2>
 
