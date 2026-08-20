@@ -43,10 +43,12 @@ RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
     yarn workspace @openmrs/esm-patient-list-management-app run build && \
     yarn workspace @openmrs/esm-service-queues-app run build && \
     yarn workspace @openmrs/esm-appointments-app run build && \
+    yarn workspace @openmrs/esm-bed-management-app run build && \
     (cd packages/esm-patient-registration-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-list-management-app && npm pack --pack-destination /app) && \
     (cd packages/esm-service-queues-app && npm pack --pack-destination /app) && \
-    (cd packages/esm-appointments-app && npm pack --pack-destination /app)
+    (cd packages/esm-appointments-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-bed-management-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-patient-chart-app, @openmrs/esm-patient-programs-app,
 # @openmrs/esm-patient-medications-app, @openmrs/esm-patient-orders-app, AND
@@ -68,11 +70,19 @@ RUN echo "cache-bust=${PATIENT_CHART_CACHE_BUST}" && \
     yarn workspace @openmrs/esm-patient-medications-app run build && \
     yarn workspace @openmrs/esm-patient-orders-app run build && \
     yarn workspace @openmrs/esm-patient-conditions-app run build && \
+    yarn workspace @openmrs/esm-patient-vitals-app run build && \
+    yarn workspace @openmrs/esm-patient-allergies-app run build && \
+    yarn workspace @openmrs/esm-patient-notes-app run build && \
+    yarn workspace @openmrs/esm-patient-immunizations-app run build && \
     (cd packages/esm-patient-chart-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-programs-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-medications-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-orders-app && npm pack --pack-destination /app) && \
-    (cd packages/esm-patient-conditions-app && npm pack --pack-destination /app)
+    (cd packages/esm-patient-conditions-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-vitals-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-allergies-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-notes-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-immunizations-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-dispensing-app from our fork instead of the published "next"
 # package, so the auto-complete-on-dispense and dispensed-quantity fixes ship.
@@ -105,13 +115,13 @@ RUN echo "cache-bust=${ESM_CORE_CACHE_BUST}" && \
     npx turbo run build --filter=...@openmrs/esm-login-app --filter=...@openmrs/esm-app-shell --filter=...@openmrs/esm-framework && \
     (cd packages/apps/esm-login-app && npm pack --pack-destination /app)
 
-# Build @openmrs/esm-styleguide from our fork's sidebar-fix branch instead of
-# the published version, to fix the redundant/duplicate scrollbar that shows
-# up in form workspaces (workspace header used box-sizing: content-box, so
-# its 1px border wasn't accounted for in --desktop-workspace-window-height,
-# leaving the workspace content 1px taller than its container).
+# Build @openmrs/esm-styleguide from our fork instead of the published version,
+# to fix the redundant/duplicate scrollbar that shows up in form workspaces
+# (workspace header used box-sizing: content-box, so its 1px border wasn't
+# accounted for in --desktop-workspace-window-height, leaving the workspace
+# content 1px taller than its container).
 ARG ESM_CORE_STYLEGUIDE_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-core.git
-ARG ESM_CORE_STYLEGUIDE_REF=sidebar-fix
+ARG ESM_CORE_STYLEGUIDE_REF=main
 ARG ESM_CORE_STYLEGUIDE_CACHE_BUST=0
 RUN echo "cache-bust=${ESM_CORE_STYLEGUIDE_CACHE_BUST}" && \
     git clone --branch ${ESM_CORE_STYLEGUIDE_REF} --depth 1 ${ESM_CORE_STYLEGUIDE_REPO} openmrs-esm-core-styleguide && \
