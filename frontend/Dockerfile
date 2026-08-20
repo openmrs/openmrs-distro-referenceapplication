@@ -29,11 +29,11 @@ RUN corepack enable && \
 # instead of the published "next" package, so fixes to any of them ship as soon as
 # they land on main.
 ARG PATIENT_MANAGEMENT_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-patient-management.git
-ARG PATIENT_MANAGEMENT_REF=main
+ARG PATIENT_MANAGEMENT_REF=gate-bed-appointments-queue
 # Bump this (e.g. --build-arg PATIENT_MANAGEMENT_CACHE_BUST=$(date +%s)) to force
 # a fresh clone; otherwise Docker has no way to know the remote branch moved and
 # will happily reuse a stale cached clone.
-ARG PATIENT_MANAGEMENT_CACHE_BUST=0
+ARG PATIENT_MANAGEMENT_CACHE_BUST=1
 RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
     git clone --branch ${PATIENT_MANAGEMENT_REF} --depth 1 ${PATIENT_MANAGEMENT_REPO} openmrs-esm-patient-management && \
     corepack enable && \
@@ -43,10 +43,12 @@ RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
     yarn workspace @openmrs/esm-patient-list-management-app run build && \
     yarn workspace @openmrs/esm-service-queues-app run build && \
     yarn workspace @openmrs/esm-appointments-app run build && \
+    yarn workspace @openmrs/esm-bed-management-app run build && \
     (cd packages/esm-patient-registration-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-list-management-app && npm pack --pack-destination /app) && \
     (cd packages/esm-service-queues-app && npm pack --pack-destination /app) && \
-    (cd packages/esm-appointments-app && npm pack --pack-destination /app)
+    (cd packages/esm-appointments-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-bed-management-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-patient-chart-app, @openmrs/esm-patient-programs-app,
 # @openmrs/esm-patient-medications-app, @openmrs/esm-patient-orders-app, AND
@@ -56,8 +58,8 @@ RUN echo "cache-bust=${PATIENT_MANAGEMENT_CACHE_BUST}" && \
 # and spa-assemble-config.json must point each at its own tarball (not "next") or
 # none of this has any effect on what's actually served.
 ARG PATIENT_CHART_REPO=https://github.com/PHCC-Openmrs/openmrs-esm-patient-chart.git
-ARG PATIENT_CHART_REF=main
-ARG PATIENT_CHART_CACHE_BUST=0
+ARG PATIENT_CHART_REF=gate-vitals-record-button
+ARG PATIENT_CHART_CACHE_BUST=2
 RUN echo "cache-bust=${PATIENT_CHART_CACHE_BUST}" && \
     git clone --branch ${PATIENT_CHART_REF} --depth 1 ${PATIENT_CHART_REPO} openmrs-esm-patient-chart && \
     corepack enable && \
@@ -68,11 +70,19 @@ RUN echo "cache-bust=${PATIENT_CHART_CACHE_BUST}" && \
     yarn workspace @openmrs/esm-patient-medications-app run build && \
     yarn workspace @openmrs/esm-patient-orders-app run build && \
     yarn workspace @openmrs/esm-patient-conditions-app run build && \
+    yarn workspace @openmrs/esm-patient-vitals-app run build && \
+    yarn workspace @openmrs/esm-patient-allergies-app run build && \
+    yarn workspace @openmrs/esm-patient-notes-app run build && \
+    yarn workspace @openmrs/esm-patient-immunizations-app run build && \
     (cd packages/esm-patient-chart-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-programs-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-medications-app && npm pack --pack-destination /app) && \
     (cd packages/esm-patient-orders-app && npm pack --pack-destination /app) && \
-    (cd packages/esm-patient-conditions-app && npm pack --pack-destination /app)
+    (cd packages/esm-patient-conditions-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-vitals-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-allergies-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-notes-app && npm pack --pack-destination /app) && \
+    (cd packages/esm-patient-immunizations-app && npm pack --pack-destination /app)
 
 # Build @openmrs/esm-dispensing-app from our fork instead of the published "next"
 # package, so the auto-complete-on-dispense and dispensed-quantity fixes ship.

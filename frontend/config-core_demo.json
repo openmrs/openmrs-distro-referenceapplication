@@ -1,4 +1,143 @@
 {
+  "@openmrs/esm-home-app": {
+    "extensionSlots": {
+      "homepage-dashboard-slot": {
+        "configure": {
+          "laboratory-dashboard-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'PHCC Lab Technician' || r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges')"
+            }
+          },
+          "patient-lists-dashboard-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'PHCC Lab Technician' || r.display === 'Stock Management Base Role')"
+            }
+          }
+        }
+      }
+    }
+  },
+  "@openmrs/esm-patient-forms-app": {
+    "locationFormsAllowlist": [
+      {
+        "locationUuid": "8a84d48a-bf7e-45ca-b906-7fad48184642",
+        "allowedFormUuids": [
+          "330122a1-3669-4458-8540-f41cfcdbb9ac",
+          "1ae929be-07db-442c-91ed-f2d8cb8c5b74",
+          "7bc28659-2cbf-4432-bb33-a9612432cbdc",
+          "6cb24522-aef4-42a7-a4b8-f3e8b4415416",
+          "585447f0-dfb4-4dcc-98c1-c8ab819acd05",
+          "c1d7432a-f5ec-4769-9aed-ee6b382ad819"
+        ]
+      }
+    ]
+  },
+  "@openmrs/esm-system-admin-app": {
+    "extensionSlots": {
+      "system-admin-page-card-link-slot": {
+        "configure": {
+          "system-administration-cohort-builder-card-link": {
+            "Display conditions": {
+              "expression": "session.user.privileges.some(p => p.display === 'Get Patient Cohorts' || p.display === 'Add Cohorts' || p.display === 'Edit Cohorts')"
+            }
+          },
+          "system-admin-page-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+            }
+          },
+          "reports-overview-admin-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+            }
+          },
+          "admin-service-queues-card-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+            }
+          },
+          "system-administration-form-builder-card-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+            }
+          }
+        }
+      }
+    }
+  },
+  "@openmrs/esm-patient-search-app": {
+    "extensionSlots": {
+      "start-visit-button-slot": {
+        "configure": {
+          "start-visit-button-patient-search": {
+            "Display conditions": {
+              "privileges": ["Add Visits"]
+            }
+          }
+        }
+      },
+      "start-visit-button-slot2": {
+        "configure": {
+          "patient-search-start-visit-button": {
+            "Display conditions": {
+              "privileges": ["Add Visits"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "extensionSlots": {
+      "top-nav-actions-slot": {
+        "configure": {
+          "add-patient-action": {
+            "Display conditions": {
+              "privileges": ["Add Patients"]
+            }
+          },
+          "patient-search-icon": {
+            "Display conditions": {
+              "expression": "['PHCC Clerk', 'Organizational: Registration Clerk', 'Organizational: Nurse', 'Organizational: Doctor', 'Organizational: System Administrator', 'System Developer'].some(role => session.user.roles.some(r => r.display === role))"
+            }
+          }
+        }
+      },
+      "top-nav-app-menu-slot": {
+        "configure": {
+          "app-menu-button": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Stock Management Base Role')"
+            }
+          }
+        }
+      },
+      "app-menu-slot": {
+        "configure": {
+          "dispensing-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || (!session.user.roles.some(r => r.display === 'Stock Management Base Role') && session.user.privileges.some(p => p.display === 'Task: dispensing.create.dispense' || p.display === 'Task: dispensing.edit.dispense' || p.display === 'Task: dispensing.delete.dispense'))"
+            }
+          },
+          "queue-screen-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+            }
+          },
+          "forms-app-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+            }
+          },
+          "system-administration-app-menu-link": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'Organizational: System Administrator' || r.display === 'Stock Management Base Role')"
+            }
+          }
+        }
+      }
+    }
+  },
   "@openmrs/esm-help-menu-app": {
     "extensionSlots": {
       "help-menu-slot": {
@@ -107,7 +246,21 @@
         "order": ["order-basket-action-menu"]
       },
       "patient-chart-dashboard-slot": {
-        "remove": ["attachments-results-summary-dashboard", "growth-chart-dashboard-link", "procedures-summary-dashboard"]
+        "remove": [
+          "attachments-results-summary-dashboard",
+          "growth-chart-dashboard-link",
+          "patient-appointments-summary-dashboard",
+          "procedures-summary-dashboard"
+        ]
+      },
+      "patient-chart-programs-dashboard-slot": {
+        "configure": {
+          "programs-details-widget": {
+            "Display conditions": {
+              "expression": "session.user.privileges.some(p => p.display === 'Add Patient Programs' || p.display === 'Edit Patient Programs')"
+            }
+          }
+        }
       }
     }
   },
@@ -129,6 +282,85 @@
     "Translation overrides": {
       "en": {
         "Conditions": "Diagnoses"
+      }
+    },
+    "extensionSlots": {
+      "patient-actions-slot": {
+        "configure": {
+          "start-visit-button": {
+            "Display conditions": {
+              "privileges": ["Add Visits"]
+            }
+          },
+          "stop-visit-button": {
+            "Display conditions": {
+              "privileges": ["Edit Visits"]
+            }
+          },
+          "mark-alive-button": {
+            "Display conditions": {
+              "privileges": ["Edit Patients"]
+            }
+          },
+          "add-patient-to-patient-list-button": {
+            "Display conditions": {
+              "privileges": ["Edit Cohorts in Cohort Module"]
+            }
+          },
+          "mark-patient-deceased-button": {
+            "Display conditions": {
+              "privileges": ["Edit Patients"]
+            }
+          },
+          "delete-visit-button": {
+            "Display conditions": {
+              "privileges": ["Delete Visits"]
+            }
+          },
+          "delete-patient-button": {
+            "Display conditions": {
+              "privileges": ["Delete Patients"]
+            }
+          },
+          "edit-patient-details-button": {
+            "Display conditions": {
+              "expression": "session.user.privileges.some(p => p.display === 'Add Patients' || p.display === 'Edit Patients')"
+            }
+          }
+        }
+      },
+      "patient-chart": {
+        "configure": {
+          "patient-chart-order-basket": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'Organizational: Doctor' || r.display === 'System Developer')"
+            }
+          },
+          "patient-chart-clinical-forms": {
+            "Display conditions": {
+              "expression": "session.user.roles.some(r => r.display === 'Organizational: Doctor' || r.display === 'System Developer')"
+            }
+          }
+        }
+      },
+      "patient-search-actions-slot": {
+        "configure": {
+          "stop-visit-button-patient-search": {
+            "Display conditions": {
+              "privileges": ["Edit Visits"]
+            }
+          },
+          "edit-patient-details-button": {
+            "Display conditions": {
+              "expression": "session.user.privileges.some(p => p.display === 'Add Patients' || p.display === 'Edit Patients')"
+            }
+          },
+          "delete-visit-button": {
+            "Display conditions": {
+              "privileges": ["Delete Visits"]
+            }
+          }
+        }
       }
     }
   },
