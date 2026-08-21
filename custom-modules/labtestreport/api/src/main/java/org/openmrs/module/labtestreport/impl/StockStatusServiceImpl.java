@@ -46,6 +46,7 @@ public class StockStatusServiceImpl extends BaseOpenmrsService implements StockS
 			row.setExpirationDate((Date) r[5]);
 			row.setRemainingQty(toDouble(r[6]));
 			row.setDaysUntilExpiry(toInteger(r[7]));
+			row.setUnitName((String) r[8]);
 			rows.add(row);
 		}
 		return rows;
@@ -73,6 +74,7 @@ public class StockStatusServiceImpl extends BaseOpenmrsService implements StockS
 			row.setLocationId(locationId);
 			row.setLocationName((String) r[3]);
 			row.setOnHandQty(toDouble(r[4]));
+			row.setUnitName((String) r[5]);
 
 			double totalConsumed = consumedByKey.getOrDefault(rowKey(stockItemId, locationId), 0d);
 			double avgDailyConsumption = totalConsumed / windowDays;
@@ -102,6 +104,7 @@ public class StockStatusServiceImpl extends BaseOpenmrsService implements StockS
 			row.setRuleName((String) r[4]);
 			row.setReorderLevel(toDouble(r[5]));
 			row.setOnHandQty(toDouble(r[6]));
+			row.setUnitName((String) r[7]);
 			rows.add(row);
 		}
 		return rows;

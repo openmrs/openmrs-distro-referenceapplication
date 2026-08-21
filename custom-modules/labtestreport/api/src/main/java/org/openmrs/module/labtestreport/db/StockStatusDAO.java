@@ -12,19 +12,19 @@ import org.openmrs.api.db.DAOException;
 public interface StockStatusDAO {
 
 	/**
-	 * @return one row per batch per location, each an 8-element array matching the column order of
+	 * @return one row per batch per location, each a 9-element array matching the column order of
 	 *         queries/stock_expiry_risk.sql
 	 */
 	List<Object[]> getExpiryRiskRows(Integer daysAhead, String locationUuid) throws DAOException;
 
 	/**
-	 * @return one row per stock item per location, each a 5-element array matching the column
+	 * @return one row per stock item per location, each a 6-element array matching the column
 	 *         order of queries/stock_current_onhand.sql
 	 */
 	List<Object[]> getCurrentOnHandRows(String locationUuid) throws DAOException;
 
 	/**
-	 * @return one row per (item, location) with an enabled reorder rule, each a 7-element array
+	 * @return one row per (item, location) with an enabled reorder rule, each an 8-element array
 	 *         matching the column order of queries/stock_reorder_status.sql
 	 */
 	List<Object[]> getReorderStatusRows(String locationUuid) throws DAOException;

@@ -16,6 +16,8 @@ public class StockDaysRemainingRow {
 
 	private Double daysRemaining;
 
+	private String unitName;
+
 	public Integer getStockItemId() {
 		return stockItemId;
 	}
@@ -74,5 +76,13 @@ public class StockDaysRemainingRow {
 
 	public void setDaysRemaining(Double daysRemaining) {
 		this.daysRemaining = daysRemaining;
+	}
+
+	public String getUnitName() {
+		return unitName;
+	}
+
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
 	}
 }

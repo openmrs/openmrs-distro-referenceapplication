@@ -16,6 +16,8 @@ public class StockReorderRow {
 
 	private double onHandQty;
 
+	private String unitName;
+
 	public Integer getStockItemId() {
 		return stockItemId;
 	}
@@ -70,5 +72,13 @@ public class StockReorderRow {
 
 	public void setOnHandQty(double onHandQty) {
 		this.onHandQty = onHandQty;
+	}
+
+	public String getUnitName() {
+		return unitName;
+	}
+
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
 	}
 }

@@ -7,6 +7,7 @@ import KpiTiles from '../reports-shell/kpi-tiles.component';
 import ExportButtons from '../reports-shell/export-buttons.component';
 import type { ExportSheet } from '../reports-shell/export-utils';
 import { getTodayDateString, clampToToday } from '../reports-shell/date-utils';
+import { formatQuantity } from '../reports-shell/format-quantity';
 import { filterByItemAndSearch, distinctItemNames } from '../reports-shell/row-filter';
 import SortableHeader from '../reports-shell/sortable-header.component';
 import { useSortableRows } from '../reports-shell/use-sortable-rows';
@@ -86,6 +87,7 @@ export default function StockDaysRemainingReport() {
         t('onHandQty', 'On-Hand Qty'),
         t('avgDailyConsumption', 'Avg Daily Consumption'),
         t('daysRemaining', 'Days Remaining'),
+        t('unit', 'Unit'),
       ],
       rows: sortedRows.map((row) => {
         const base = showLocationColumn ? [row.itemName, row.locationName ?? ''] : [row.itemName];
@@ -94,6 +96,7 @@ export default function StockDaysRemainingReport() {
           row.onHandQty,
           Number(row.avgDailyConsumption.toFixed(2)),
           row.daysRemaining === null ? '' : Number(row.daysRemaining.toFixed(1)),
+          row.unitName ?? '',
         ];
       }),
     }),
@@ -252,8 +255,8 @@ export default function StockDaysRemainingReport() {
                   <tr key={`${row.stockItemId}-${row.locationId}`}>
                     <td className="left">{row.itemName}</td>
                     {showLocationColumn && <td className="left">{row.locationName ?? '—'}</td>}
-                    <td>{row.onHandQty}</td>
-                    <td>{row.avgDailyConsumption.toFixed(2)}</td>
+                    <td>{formatQuantity(row.onHandQty, row.unitName)}</td>
+                    <td>{formatQuantity(Number(row.avgDailyConsumption.toFixed(2)), row.unitName)}</td>
                     <td>
                       {row.daysRemaining === null ? (
                         <Tag type="gray" size="sm">

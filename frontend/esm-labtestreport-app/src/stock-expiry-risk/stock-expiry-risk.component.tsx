@@ -6,6 +6,7 @@ import BackToReportsLink from '../reports-shell/back-to-reports-link.component';
 import KpiTiles from '../reports-shell/kpi-tiles.component';
 import ExportButtons from '../reports-shell/export-buttons.component';
 import type { ExportSheet } from '../reports-shell/export-utils';
+import { formatQuantity } from '../reports-shell/format-quantity';
 import { filterByItemAndSearch, distinctItemNames } from '../reports-shell/row-filter';
 import SortableHeader from '../reports-shell/sortable-header.component';
 import { useSortableRows } from '../reports-shell/use-sortable-rows';
@@ -112,6 +113,7 @@ export default function StockExpiryRiskReport() {
         t('expirationDate', 'Expiration Date'),
         t('daysUntilExpiry', 'Days Until Expiry'),
         t('remainingQty', 'Remaining Qty'),
+        t('unit', 'Unit'),
       ],
       rows: rows.map((row) =>
         showLocationColumn
@@ -122,6 +124,7 @@ export default function StockExpiryRiskReport() {
               formatDate(parseDate(row.expirationDate), { mode: 'standard', time: false }),
               row.daysUntilExpiry,
               row.remainingQty,
+              row.unitName ?? '',
             ]
           : [
               row.itemName,
@@ -129,6 +132,7 @@ export default function StockExpiryRiskReport() {
               formatDate(parseDate(row.expirationDate), { mode: 'standard', time: false }),
               row.daysUntilExpiry,
               row.remainingQty,
+              row.unitName ?? '',
             ],
       ),
     }),
@@ -282,7 +286,7 @@ export default function StockExpiryRiskReport() {
                     <td className="left">{row.batchNo}</td>
                     <td className="left">{formatDate(parseDate(row.expirationDate), { mode: 'standard', time: false })}</td>
                     <td>{row.daysUntilExpiry}</td>
-                    <td>{row.remainingQty}</td>
+                    <td>{formatQuantity(row.remainingQty, row.unitName)}</td>
                     <td className="left">{urgencyTag(row.daysUntilExpiry, t)}</td>
                   </tr>
                 ))}

@@ -9,6 +9,7 @@ export interface StockReorderRow {
   ruleName: string;
   reorderLevel: number;
   onHandQty: number;
+  unitName: string | null;
 }
 
 export function useStockReorderReport(locationUuid?: string) {

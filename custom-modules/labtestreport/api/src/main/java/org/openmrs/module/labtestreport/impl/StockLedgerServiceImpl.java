@@ -31,6 +31,7 @@ public class StockLedgerServiceImpl extends BaseOpenmrsService implements StockL
 			row.setOutgoingQty(toDouble(r[6]));
 			row.setRemainingQty(toDouble(r[7]));
 			row.setActualQty(row.getRemainingQty() - row.getIncomingQty() + row.getOutgoingQty());
+			row.setUnitName((String) r[8]);
 			rows.add(row);
 		}
 		return rows;

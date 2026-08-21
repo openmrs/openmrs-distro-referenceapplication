@@ -12,6 +12,7 @@ import { buildKpiExportSheet, buildComparisonExportSheet, type ExportSheet } fro
 import { useMonthComparison } from '../reports-shell/month-compare';
 import { getTodayDateString, clampToToday } from '../reports-shell/date-utils';
 import { filterByItemAndSearch, distinctItemNames } from '../reports-shell/row-filter';
+import { formatQuantity } from '../reports-shell/format-quantity';
 import SortableHeader from '../reports-shell/sortable-header.component';
 import { useSortableRows } from '../reports-shell/use-sortable-rows';
 import pageStyles from '../reports-shell/reports-page.scss';
@@ -121,9 +122,12 @@ export default function StockWastageReport() {
         t('item', 'Item'),
         ...(showLocationInLabel ? [t('location', 'Location')] : []),
         t('quantityDisposed', 'Quantity Disposed'),
+        t('unit', 'Unit'),
       ],
       rows: rows.map((row) =>
-        showLocationInLabel ? [row.itemName, row.locationName ?? '', row.quantity] : [row.itemName, row.quantity],
+        showLocationInLabel
+          ? [row.itemName, row.locationName ?? '', row.quantity, row.unitName ?? '']
+          : [row.itemName, row.quantity, row.unitName ?? ''],
       ),
     }),
     [t, rows, showLocationInLabel],
@@ -304,7 +308,7 @@ export default function StockWastageReport() {
                   <tr key={`${row.stockItemId}-${row.locationId}`}>
                     <td className="left">{row.itemName}</td>
                     {showLocationInLabel && <td className="left">{row.locationName ?? '—'}</td>}
-                    <td>{row.quantity}</td>
+                    <td>{formatQuantity(row.quantity, row.unitName)}</td>
                   </tr>
                 ))}
                 {rows.length === 0 && (

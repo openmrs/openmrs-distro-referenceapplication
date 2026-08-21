@@ -11,6 +11,7 @@ export interface StockLedgerRow {
   incomingQty: number;
   outgoingQty: number;
   remainingQty: number;
+  unitName: string | null;
 }
 
 function buildQuery(params: Record<string, string | number | undefined>): string {

@@ -10,6 +10,7 @@ export interface StockBatchExpiryRow {
   expirationDate: string;
   remainingQty: number;
   daysUntilExpiry: number;
+  unitName: string | null;
 }
 
 function buildQuery(params: Record<string, string | number | undefined>): string {

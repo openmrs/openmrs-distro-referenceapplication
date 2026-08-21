@@ -15,20 +15,20 @@ public interface StockFlowDAO {
 
 	/**
 	 * @return one row per stock item (and per consuming location, when locationUuid is null),
-	 *         each a 5-element array matching the column order of
+	 *         each a 7-element array matching the column order of
 	 *         queries/stock_consumption_by_location.sql
 	 */
 	List<Object[]> getConsumptionRows(Date startDate, Date endDate, String locationUuid) throws DAOException;
 
 	/**
-	 * @return one row per stock item per destination location, each a 5-element array matching
+	 * @return one row per stock item per destination location, each a 7-element array matching
 	 *         the column order of queries/stock_distribution_from_source.sql
 	 */
 	List<Object[]> getDistributionRows(Date startDate, Date endDate, String sourceLocationUuid) throws DAOException;
 
 	/**
 	 * @return one row per stock item (and per location, when locationUuid is null), each a
-	 *         5-element array matching the column order of queries/stock_wastage_by_location.sql
+	 *         7-element array matching the column order of queries/stock_wastage_by_location.sql
 	 */
 	List<Object[]> getWastageRows(Date startDate, Date endDate, String locationUuid) throws DAOException;
 }

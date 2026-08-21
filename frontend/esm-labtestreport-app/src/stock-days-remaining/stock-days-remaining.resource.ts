@@ -9,6 +9,7 @@ export interface StockDaysRemainingRow {
   onHandQty: number;
   avgDailyConsumption: number;
   daysRemaining: number | null;
+  unitName: string | null;
 }
 
 function buildQuery(params: Record<string, string | number | undefined>): string {

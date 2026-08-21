@@ -7,6 +7,9 @@ export interface StockLocationQtyRow {
   locationId: number;
   locationName: string | null;
   quantity: number;
+  unitName: string | null;
+  /** Only populated for the Distribution report - null for Consumption and Wastage. */
+  sourceLocationName: string | null;
 }
 
 function buildQuery(params: Record<string, string | number | undefined>): string {

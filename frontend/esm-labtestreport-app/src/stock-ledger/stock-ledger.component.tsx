@@ -13,6 +13,7 @@ import ExportButtons from '../reports-shell/export-buttons.component';
 import { buildKpiExportSheet, buildComparisonExportSheet, type ExportSheet } from '../reports-shell/export-utils';
 import { useMonthComparison } from '../reports-shell/month-compare';
 import { getTodayDateString, clampToToday } from '../reports-shell/date-utils';
+import { formatQuantity } from '../reports-shell/format-quantity';
 import pageStyles from '../reports-shell/reports-page.scss';
 import { useStockLedgerReport, type StockLedgerRow } from './stock-ledger.resource';
 
@@ -58,6 +59,7 @@ function buildItemList(rows: Array<StockLedgerRow>): Array<LedgerItem> {
 
 function buildDayBlocks(rows: Array<StockLedgerRow>, items: Array<LedgerItem>): Array<DayBlock> {
   const byItemAndDate = new Map<string, Map<string, StockLedgerRow>>();
+  const unitNameByItem = new Map<string, string | null>();
   const allDates = new Set<string>();
   rows.forEach((row) => {
     const key = itemLocationKey(row.stockItemId, row.locationId);
@@ -65,6 +67,7 @@ function buildDayBlocks(rows: Array<StockLedgerRow>, items: Array<LedgerItem>): 
       byItemAndDate.set(key, new Map());
     }
     byItemAndDate.get(key)!.set(row.ledgerDate, row);
+    unitNameByItem.set(key, row.unitName);
     allDates.add(row.ledgerDate);
   });
 
@@ -92,6 +95,7 @@ function buildDayBlocks(rows: Array<StockLedgerRow>, items: Array<LedgerItem>): 
           incomingQty: 0,
           outgoingQty: 0,
           remainingQty: opening,
+          unitName: unitNameByItem.get(item.key) ?? null,
         };
       });
       return { date, cells };
@@ -133,6 +137,7 @@ interface LedgerGroup {
   totalIncoming: number;
   totalOutgoing: number;
   latestRemaining: number;
+  unitName: string | null;
 }
 
 function buildGroupedRows(items: Array<LedgerItem>, flatRows: Array<StockLedgerRow>): Array<LedgerGroup> {
@@ -146,6 +151,7 @@ function buildGroupedRows(items: Array<LedgerItem>, flatRows: Array<StockLedgerR
       totalIncoming: rows.reduce((sum, row) => sum + row.incomingQty, 0),
       totalOutgoing: rows.reduce((sum, row) => sum + row.outgoingQty, 0),
       latestRemaining: rows.length > 0 ? rows[rows.length - 1].remainingQty : 0,
+      unitName: rows.length > 0 ? rows[0].unitName : null,
     };
   });
 }
@@ -292,10 +298,11 @@ export default function StockLedgerReport() {
         t('item', 'Item'),
         ...(showLocationColumn ? [t('location', 'Location')] : []),
         t('date', 'Date'),
-        t('actualQty', 'Actual Qty'),
+        t('openingBalance', 'Opening Balance'),
         t('incoming', 'Incoming'),
         t('outgoing', 'Outgoing'),
-        t('remaining', 'Remaining'),
+        t('balanceOnStock', 'Balance on Stock'),
+        t('unit', 'Unit'),
       ],
       rows: flatRows.map((row) => [
         row.itemName,
@@ -305,6 +312,7 @@ export default function StockLedgerReport() {
         row.incomingQty,
         row.outgoingQty,
         row.remainingQty,
+        row.unitName ?? '',
       ]),
     }),
     [t, flatRows, showLocationColumn],
@@ -471,15 +479,16 @@ export default function StockLedgerReport() {
                   <th className="left">{t('item', 'Item')}</th>
                   {showLocationColumn && <th className="left">{t('location', 'Location')}</th>}
                   <th className="left">{t('date', 'Date')}</th>
-                  <th>{t('actualQty', 'Actual Qty')}</th>
+                  <th>{t('openingBalance', 'Opening Balance')}</th>
                   <th>{t('incoming', 'Incoming')}</th>
                   <th>{t('outgoing', 'Outgoing')}</th>
-                  <th>{t('remaining', 'Remaining')}</th>
+                  <th>{t('balanceOnStock', 'Balance on Stock')}</th>
                 </tr>
               </thead>
               <tbody>
                 {groupedRows.map((group) => {
                   const expanded = expandedGroups.has(group.key);
+                  const unitName = group.unitName;
                   return (
                     <React.Fragment key={group.key}>
                       <tr className={pageStyles.categoryHeaderRow} onClick={() => toggleGroup(group.key)}>
@@ -491,10 +500,10 @@ export default function StockLedgerReport() {
                           </button>
                         </td>
                         <td>{'—'}</td>
-                        <td>{group.totalIncoming}</td>
-                        <td>{group.totalOutgoing}</td>
+                        <td>{formatQuantity(group.totalIncoming, unitName)}</td>
+                        <td>{formatQuantity(group.totalOutgoing, unitName)}</td>
                         <td>
-                          <strong>{group.latestRemaining}</strong>
+                          <strong>{formatQuantity(group.latestRemaining, unitName)}</strong>
                         </td>
                       </tr>
                       {expanded &&
@@ -503,10 +512,10 @@ export default function StockLedgerReport() {
                             <td className="left" />
                             {showLocationColumn && <td className="left" />}
                             <td className="left">{row.ledgerDate}</td>
-                            <td>{row.actualQty}</td>
-                            <td>{row.incomingQty}</td>
-                            <td>{row.outgoingQty}</td>
-                            <td>{row.remainingQty}</td>
+                            <td>{formatQuantity(row.actualQty, row.unitName)}</td>
+                            <td>{formatQuantity(row.incomingQty, row.unitName)}</td>
+                            <td>{formatQuantity(row.outgoingQty, row.unitName)}</td>
+                            <td>{formatQuantity(row.remainingQty, row.unitName)}</td>
                           </tr>
                         ))}
                     </React.Fragment>

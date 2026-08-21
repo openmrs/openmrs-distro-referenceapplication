@@ -19,6 +19,11 @@ public class StockLocationQtyRow {
 
 	private double quantity;
 
+	private String unitName;
+
+	/** Only populated for the Distribution report - null for Consumption and Wastage. */
+	private String sourceLocationName;
+
 	public Integer getStockItemId() {
 		return stockItemId;
 	}
@@ -57,5 +62,21 @@ public class StockLocationQtyRow {
 
 	public void setQuantity(double quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getUnitName() {
+		return unitName;
+	}
+
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
+	}
+
+	public String getSourceLocationName() {
+		return sourceLocationName;
+	}
+
+	public void setSourceLocationName(String sourceLocationName) {
+		this.sourceLocationName = sourceLocationName;
 	}
 }

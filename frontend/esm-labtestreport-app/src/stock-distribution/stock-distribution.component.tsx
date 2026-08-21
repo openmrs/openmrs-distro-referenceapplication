@@ -12,6 +12,7 @@ import { buildKpiExportSheet, buildComparisonExportSheet, type ExportSheet } fro
 import { useMonthComparison } from '../reports-shell/month-compare';
 import { getTodayDateString, clampToToday } from '../reports-shell/date-utils';
 import { filterByItemAndSearch, distinctItemNames } from '../reports-shell/row-filter';
+import { formatQuantity } from '../reports-shell/format-quantity';
 import SortableHeader from '../reports-shell/sortable-header.component';
 import { useSortableRows } from '../reports-shell/use-sortable-rows';
 import pageStyles from '../reports-shell/reports-page.scss';
@@ -123,6 +124,7 @@ export default function StockDistributionReport() {
   const sortAccessors = useMemo(
     () => ({
       item: (row: StockLocationQtyRow) => row.itemName,
+      source: (row: StockLocationQtyRow) => row.sourceLocationName ?? '',
       location: (row: StockLocationQtyRow) => row.locationName ?? '',
       quantity: (row: StockLocationQtyRow) => row.quantity,
     }),
@@ -133,8 +135,20 @@ export default function StockDistributionReport() {
   const mainExportSheet = useMemo<ExportSheet>(
     () => ({
       name: t('stockDistribution', 'Stock Distribution'),
-      headers: [t('item', 'Item'), t('destinationLocation', 'Destination Location'), t('quantitySent', 'Quantity Sent')],
-      rows: rows.map((row) => [row.itemName, row.locationName ?? '', row.quantity]),
+      headers: [
+        t('item', 'Item'),
+        t('sourceLocation', 'Source Location'),
+        t('destinationLocation', 'Destination Location'),
+        t('quantitySent', 'Quantity Sent'),
+        t('unit', 'Unit'),
+      ],
+      rows: rows.map((row) => [
+        row.itemName,
+        row.sourceLocationName ?? '',
+        row.locationName ?? '',
+        row.quantity,
+        row.unitName ?? '',
+      ]),
     }),
     [t, rows],
   );
@@ -291,6 +305,14 @@ export default function StockDistributionReport() {
                     className="left"
                   />
                   <SortableHeader
+                    label={t('sourceLocation', 'Source Location')}
+                    sortKey="source"
+                    activeSortKey={sortKey}
+                    direction={direction}
+                    onSort={toggleSort}
+                    className="left"
+                  />
+                  <SortableHeader
                     label={t('destinationLocation', 'Destination Location')}
                     sortKey="location"
                     activeSortKey={sortKey}
@@ -309,15 +331,16 @@ export default function StockDistributionReport() {
               </thead>
               <tbody>
                 {sortedRows.map((row) => (
-                  <tr key={`${row.stockItemId}-${row.locationId}`}>
+                  <tr key={`${row.stockItemId}-${row.locationId}-${row.sourceLocationName ?? ''}`}>
                     <td className="left">{row.itemName}</td>
+                    <td className="left">{row.sourceLocationName ?? '—'}</td>
                     <td className="left">{row.locationName ?? '—'}</td>
-                    <td>{row.quantity}</td>
+                    <td>{formatQuantity(row.quantity, row.unitName)}</td>
                   </tr>
                 ))}
                 {rows.length === 0 && (
                   <tr>
-                    <td colSpan={3} className={pageStyles.emptyState}>
+                    <td colSpan={4} className={pageStyles.emptyState}>
                       {t('noDataForSelection', 'No data found for this selection.')}
                     </td>
                   </tr>

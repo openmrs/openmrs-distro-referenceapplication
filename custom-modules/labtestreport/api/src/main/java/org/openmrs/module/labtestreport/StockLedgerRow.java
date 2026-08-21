@@ -30,6 +30,8 @@ public class StockLedgerRow {
 
 	private double remainingQty;
 
+	private String unitName;
+
 	public Integer getStockItemId() {
 		return stockItemId;
 	}
@@ -100,5 +102,13 @@ public class StockLedgerRow {
 
 	public void setRemainingQty(double remainingQty) {
 		this.remainingQty = remainingQty;
+	}
+
+	public String getUnitName() {
+		return unitName;
+	}
+
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
 	}
 }

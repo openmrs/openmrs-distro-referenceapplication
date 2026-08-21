@@ -41,6 +41,8 @@ public class StockFlowServiceImpl extends BaseOpenmrsService implements StockFlo
 			row.setLocationId(toInteger(r[2]));
 			row.setLocationName((String) r[3]);
 			row.setQuantity(toDouble(r[4]));
+			row.setUnitName((String) r[5]);
+			row.setSourceLocationName((String) r[6]);
 			rows.add(row);
 		}
 		return rows;

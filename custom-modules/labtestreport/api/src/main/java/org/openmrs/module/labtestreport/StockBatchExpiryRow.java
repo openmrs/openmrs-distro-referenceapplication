@@ -20,6 +20,8 @@ public class StockBatchExpiryRow {
 
 	private Integer daysUntilExpiry;
 
+	private String unitName;
+
 	public Integer getStockItemId() {
 		return stockItemId;
 	}
@@ -82,5 +84,13 @@ public class StockBatchExpiryRow {
 
 	public void setDaysUntilExpiry(Integer daysUntilExpiry) {
 		this.daysUntilExpiry = daysUntilExpiry;
+	}
+
+	public String getUnitName() {
+		return unitName;
+	}
+
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
 	}
 }

@@ -6,6 +6,7 @@ import BackToReportsLink from '../reports-shell/back-to-reports-link.component';
 import KpiTiles from '../reports-shell/kpi-tiles.component';
 import ExportButtons from '../reports-shell/export-buttons.component';
 import type { ExportSheet } from '../reports-shell/export-utils';
+import { formatQuantity } from '../reports-shell/format-quantity';
 import { filterByItemAndSearch, distinctItemNames } from '../reports-shell/row-filter';
 import SortableHeader from '../reports-shell/sortable-header.component';
 import { useSortableRows } from '../reports-shell/use-sortable-rows';
@@ -69,10 +70,11 @@ export default function StockReorderReport() {
         t('reorderLevel', 'Reorder Level'),
         t('onHandQty', 'On-Hand Qty'),
         t('deficit', 'Deficit'),
+        t('unit', 'Unit'),
       ],
       rows: rows.map((row) => {
         const base = showLocationColumn ? [row.itemName, row.locationName ?? ''] : [row.itemName];
-        return [...base, row.reorderLevel, row.onHandQty, row.reorderLevel - row.onHandQty];
+        return [...base, row.reorderLevel, row.onHandQty, row.reorderLevel - row.onHandQty, row.unitName ?? ''];
       }),
     }),
     [t, rows, showLocationColumn],
@@ -203,9 +205,9 @@ export default function StockReorderReport() {
                   <tr key={`${row.stockItemId}-${row.locationId}`}>
                     <td className="left">{row.itemName}</td>
                     {showLocationColumn && <td className="left">{row.locationName ?? '—'}</td>}
-                    <td>{row.reorderLevel}</td>
-                    <td>{row.onHandQty}</td>
-                    <td>{row.reorderLevel - row.onHandQty}</td>
+                    <td>{formatQuantity(row.reorderLevel, row.unitName)}</td>
+                    <td>{formatQuantity(row.onHandQty, row.unitName)}</td>
+                    <td>{formatQuantity(row.reorderLevel - row.onHandQty, row.unitName)}</td>
                     <td className="left">
                       <Tag type={reorderStatus(row.onHandQty) === 'outOfStock' ? 'red' : 'magenta'} size="sm">
                         {reorderStatus(row.onHandQty) === 'outOfStock'
