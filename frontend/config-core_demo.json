@@ -10,7 +10,7 @@
           },
           "patient-lists-dashboard-link": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'PHCC Lab Technician' || r.display === 'Stock Management Base Role')"
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !(session.user.roles.some(r => r.display === 'PHCC Lab Technician') || session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard' || p.display === 'Task: stockmanagement.stockItems.dispense'))"
             }
           }
         }
@@ -43,22 +43,22 @@
           },
           "system-admin-page-link": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard' || p.display === 'Task: stockmanagement.stockItems.dispense')"
             }
           },
           "reports-overview-admin-link": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard' || p.display === 'Task: stockmanagement.stockItems.dispense')"
             }
           },
           "admin-service-queues-card-link": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard' || p.display === 'Task: stockmanagement.stockItems.dispense')"
             }
           },
           "system-administration-form-builder-card-link": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard' || p.display === 'Task: stockmanagement.stockItems.dispense')"
             }
           }
         }
@@ -98,7 +98,7 @@
           },
           "patient-search-icon": {
             "Display conditions": {
-              "expression": "['PHCC Clerk', 'Organizational: Registration Clerk', 'Organizational: Nurse', 'Organizational: Doctor', 'Organizational: System Administrator', 'System Developer'].some(role => session.user.roles.some(r => r.display === role))"
+              "expression": "!session.user.roles.some(r => r.display === 'Inventory Dispensing') && ['PHCC Clerk', 'Organizational: Registration Clerk', 'Organizational: Nurse', 'Organizational: Doctor', 'Organizational: System Administrator', 'PHCC Doctor', 'System Developer'].some(role => session.user.roles.some(r => r.display === role))"
             }
           }
         }
@@ -107,7 +107,7 @@
         "configure": {
           "app-menu-button": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Stock Management Base Role')"
+              "expression": "session.user.roles.some(r => r.display === 'System Developer') || session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard' || p.display === 'Task: stockmanagement.stockItems.dispense')"
             }
           }
         }
@@ -116,22 +116,22 @@
         "configure": {
           "dispensing-link": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || (!session.user.roles.some(r => r.display === 'Stock Management Base Role') && session.user.privileges.some(p => p.display === 'Task: dispensing.create.dispense' || p.display === 'Task: dispensing.edit.dispense' || p.display === 'Task: dispensing.delete.dispense'))"
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || (!session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard') && session.user.privileges.some(p => p.display === 'Task: dispensing.create.dispense' || p.display === 'Task: dispensing.edit.dispense' || p.display === 'Task: dispensing.delete.dispense' || p.display === 'Task: stockmanagement.stockItems.dispense'))"
             }
           },
           "queue-screen-link": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard' || p.display === 'Task: stockmanagement.stockItems.dispense')"
             }
           },
           "forms-app-link": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.roles.some(r => r.display === 'Stock Management Base Role')"
+              "expression": "session.user.roles.some(r => r.display === 'System Developer' || r.display === 'Application: Has Super User Privileges') || !session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard' || p.display === 'Task: stockmanagement.stockItems.dispense')"
             }
           },
           "system-administration-app-menu-link": {
             "Display conditions": {
-              "expression": "session.user.roles.some(r => r.display === 'Organizational: System Administrator' || r.display === 'Stock Management Base Role')"
+              "expression": "session.user.roles.some(r => r.display === 'Organizational: System Administrator') || session.user.privileges.some(p => p.display === 'App: stockmanagement.dashboard')"
             }
           }
         }
