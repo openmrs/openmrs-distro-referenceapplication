@@ -35,6 +35,10 @@
     <openconceptlab.version>3.2.0</openconceptlab.version>
     <attachments.version>4.0.0</attachments.version>
     <referencedemodata.version>2.6.1</referencedemodata.version>
+    <!-- Content Packages -->
+    <reference-content.version>1.4.0</reference-content.version>
+    <reference-demo-content.version>1.9.3-SNAPSHOT</reference-demo-content.version>
+    <reference-showcase-content.version>1.0.0-SNAPSHOT</reference-showcase-content.version>
     <queue.version>3.0.0</queue.version>
     <appointments.version>2.1.0</appointments.version>
     <teleconsultation.version>2.0.0</teleconsultation.version>
@@ -269,6 +273,7 @@
                   <includes>
                     <include>distro.properties</include>
                     <include>distro-no-demo.properties</include>
+                    <include>distro-showcase.properties</include>
                   </includes>
                   <filtering>true</filtering>
                 </resource>
@@ -364,5 +369,32 @@
         </plugins>
       </build>
     </profile>
+<<<<<<< Updated upstream
+=======
+    <profile>
+      <id>showcase</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openmrs.maven.plugins</groupId>
+            <artifactId>openmrs-sdk-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>openmrs-sdk:build-distro</id>
+                <goals>
+                  <goal>build-distro</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                  <distro>${project.build.directory}/distro-showcase.properties</distro>
+                  <dir>${project.build.directory}/sdk-distro</dir>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+>>>>>>> Stashed changes
   </profiles>
 </project>

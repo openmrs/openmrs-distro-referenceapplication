@@ -253,3 +253,44 @@ jobs:
           db_digest=$(docker inspect --format='{{index .RepoDigests 0}}' openmrs/openmrs-reference-application-3-db:nightly-with-data)
           cosign sign --yes "$backend_digest"
           cosign sign --yes "$db_digest"
+  verify-showcase-profile:
+    name: Verify Showcase Profile Coverage
+    if: github.repository == 'openmrs/openmrs-distro-referenceapplication'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build Default Profile
+        working-directory: distro
+        run: mvn clean package
+
+      - name: Assert Default Excludes Showcase Data
+        working-directory: distro
+        run: |
+          if grep -q "referenceapplication-showcase" target/sdk-distro/openmrs-distro.properties; then
+            echo "Error: Showcase package found in default build!" && exit 1
+          fi
+          if grep -q "omod.referencedemodata" target/sdk-distro/openmrs-distro.properties; then
+            echo "Error: referencedemodata found in default build!" && exit 1
+          fi
+
+      - name: Build Showcase Profile
+        working-directory: distro
+        run: mvn clean package -Pshowcase
+
+      - name: Assert Showcase Includes Showcase Data
+        working-directory: distro
+        run: |
+          if ! grep -q "referenceapplication-showcase" target/sdk-distro/openmrs-distro.properties; then
+            echo "Error: Showcase package missing from showcase build!" && exit 1
+          fi
+          if ! grep -q "omod.referencedemodata" target/sdk-distro/openmrs-distro.properties; then
+            echo "Error: referencedemodata missing from showcase build!" && exit 1
+          fi
