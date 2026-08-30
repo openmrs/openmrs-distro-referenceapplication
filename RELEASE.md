@@ -61,3 +61,7 @@ All take a single `reset` boolean (default `false`); `reset: true` destroys volu
 - **Deploy to Dev3** (`deploy-dev3.yml`) — deploys current `dev3` images to dev3 + sec3.
 - **Deploy QA to test3** (`deploy-test3.yml`) — deploys current `qa` images to test3.
 - **Deploy to O3** (`deploy-o3.yml`) — deploys current `demo` images to o3.
+
+## Deprecated Profiles & Images
+
+* **`no-demo`:** The `no-demo` Maven profile and its associated Docker images (`*-no-demo` tags) have been deprecated and entirely removed from the build process. They have been replaced by the new clean, default distro build which provides a stable baseline.
