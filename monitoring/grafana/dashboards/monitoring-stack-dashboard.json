@@ -1,0 +1,264 @@
+{
+  "title": "Monitoring Stack Resources",
+  "uid": "openmrs-monitoring-stack",
+  "schemaVersion": 39,
+  "version": 1,
+  "time": { "from": "now-1h", "to": "now" },
+  "refresh": "30s",
+  "tags": ["container", "monitoring"],
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "CPU Usage",
+      "description": "Total CPU consumed by the monitoring stack — grafana, prometheus, loki, alloy, blackbox, cadvisor and the short-lived monitoring-init — as a percentage of a single core (100% = one full core; can exceed 100% on multi-core hosts). This is overhead: it competes with the application containers for the same host CPU, so the number to watch is whether observability is starting to cost more than the thing it observes. Expect a low, flat baseline with periodic bumps on Prometheus scrape and rule-evaluation intervals and on Loki compaction. A rising baseline usually means retention has grown, cardinality has crept up, or a dashboard/alert query is expensive — raise scrape_interval, drop unused label dimensions, or shorten retention. Spikes on startup are normal.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\",cpu=\"total\"}[5m])) * 100",
+          "legendFormat": "CPU %"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "single", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Memory",
+      "description": "Combined memory of the monitoring stack over time. Working Set = active memory that cannot be reclaimed under pressure (this is what counts toward OOM limits); RSS = anonymous (non-file-backed) memory; Cache = reclaimable page cache. Prometheus and Loki dominate: Prometheus holds recent samples in its head block, so Working Set grows with active series count and drops after each head compaction — a sawtooth is healthy, a staircase that never comes back down means cardinality is growing. Cache is normally large here because both write and re-read TSDB/chunk files on disk; that is reclaimable and not a concern. Working Set approaching the containers' memory limits risks an OOM kill (see the OOM Events panel), which for Prometheus means losing the unflushed head block.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(container_memory_working_set_bytes{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\"})",
+          "legendFormat": "Working Set"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(container_memory_rss{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\"})",
+          "legendFormat": "RSS"
+        },
+        {
+          "refId": "C",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(container_memory_cache{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\"})",
+          "legendFormat": "Cache"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Network I/O",
+      "description": "Rate of network traffic in/out of the monitoring stack (bytes/sec). Receive is inbound — scrape responses pulled from cAdvisor, the JMX exporter and blackbox, plus log pushes from Alloy into Loki and browser requests to Grafana. Transmit is outbound — scrape requests, blackbox probes against the gateway and db, and dashboard/query results back to the browser. Expect a steady sawtooth locked to the 15 s scrape interval. A sustained step up in Receive usually means more series or more log volume; flat-zero when Grafana still renders data means scraping has stopped and you are looking at stale samples — check the Alloy and Prometheus containers.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_network_receive_bytes_total{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\"}[5m]))",
+          "legendFormat": "⬇ Receive"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_network_transmit_bytes_total{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\"}[5m]))",
+          "legendFormat": "⬆ Transmit"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "Bps",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Disk I/O",
+      "description": "Rate of bytes read from / written to disk by the monitoring stack (bytes/sec). Writes come from Prometheus (WAL, then compacted TSDB blocks) and Loki (chunks and index); reads come from serving dashboard queries over older blocks and from background compaction. Because this shares the host's disk with the database, monitoring writes can add latency to db I/O — if Prometheus and MariaDB spike together, that contention is worth breaking up by shortening retention or moving the monitoring volumes to separate storage. A write rate that keeps climbing over days means retention and volume growth are outpacing what was provisioned; check disk headroom before it fills.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_fs_reads_bytes_total{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\"}[5m]))",
+          "legendFormat": "Read"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(rate(container_fs_writes_bytes_total{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\"}[5m]))",
+          "legendFormat": "Write"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "Bps",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "Uptime (min)",
+      "description": "Uptime of the most recently started container in the monitoring stack — the minimum across grafana, prometheus, loki, alloy, blackbox and cadvisor (uptimes cannot meaningfully be summed, so this surfaces the weakest link). Red for the first minute, yellow up to 5 minutes, green after. An unexpectedly low value means one of them just restarted: a Prometheus restart can lose the unflushed head block, an Alloy restart creates a gap in collected logs, and a cAdvisor restart creates a gap in every container metric on this dashboard — so a low value here explains gaps you may be seeing elsewhere. Check the OOM Events panel and container logs; a value that keeps resetting signals a crash loop. Note that monitoring-init is a one-shot container that exits after seeding config, so it is excluded here by design.",
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 16 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "min(time() - max by (name) (container_start_time_seconds{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor\"}))",
+          "legendFormat": "",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "dtdhms",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 60 },
+              { "color": "green", "value": 300 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 6,
+      "type": "stat",
+      "title": "Memory (Working Set)",
+      "description": "Current combined active (non-reclaimable) memory used by the monitoring stack — the total that counts against these containers' memory limits, dominated by Prometheus's head block and Loki. Green below 2 GB, yellow above 2 GB, red above 3 GB. Adjust these thresholds to your host: the useful question is what fraction of RAM you are willing to spend on observability rather than on the application. If it stays red, shorten Prometheus retention, raise scrape_interval, or drop high-cardinality labels; see the Memory timeseries to tell a healthy compaction sawtooth from unbounded growth.",
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 16 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(container_memory_working_set_bytes{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\"})",
+          "legendFormat": "",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 2147483648 },
+              { "color": "red", "value": 3221225472 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 7,
+      "type": "stat",
+      "title": "OOM Events (24 h)",
+      "description": "Total out-of-memory kills across the monitoring stack in the last 24 hours. Green at 0, red at 1 or more. Any value > 0 means the kernel killed one of these containers for exceeding its memory limit — most likely Prometheus or Loki, and it means you have lost observability data for that window, so treat gaps in other dashboards as suspect. If > 0, raise that container's memory limit and reduce its footprint (shorter retention, longer scrape_interval, fewer label dimensions), then check Uptime for the resulting restart. Recurring kills mean the monitoring stack is under-provisioned for the volume of metrics and logs it is being asked to hold.",
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 16 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(increase(container_oom_events_total{name=~\"grafana|prometheus|loki|alloy|blackbox|cadvisor|monitoring-init\"}[24h]))",
+          "legendFormat": "",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0,
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "red", "value": 1 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto"
+      }
+    }
+  ]
+}

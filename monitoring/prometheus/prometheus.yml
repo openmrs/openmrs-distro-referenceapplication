@@ -2,6 +2,24 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets:
+          - "cadvisor:8080"
+    metric_relabel_configs:
+      # Use the compose service name as the clean container name
+      - source_labels: [container_label_com_docker_compose_service]
+        regex: '(.+)'
+        target_label: name
+        replacement: '$1'
+      # Drop all verbose container_label_* dimensions
+      - regex: 'container_label_.*'
+        action: labeldrop
+
+  - job_name: 'openmrs-jvm'
+    static_configs:
+      - targets: [ 'backend:9404' ]
+
   - job_name: 'blackbox-http-prod'
     metrics_path: /probe
     params:
@@ -11,6 +29,21 @@ scrape_configs:
           - "http://gateway:80/"
           - "http://gateway:80/openmrs"
           - "http://gateway:80/openmrs/ws/rest/v1/session"
+    relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115
+
+  - job_name: 'blackbox-tcp-db'
+    metrics_path: /probe
+    params:
+      module: [ tcp_connect ]
+    static_configs:
+      - targets:
+          - "db:3306"
     relabel_configs:
       - source_labels: [ __address__ ]
         target_label: __param_target

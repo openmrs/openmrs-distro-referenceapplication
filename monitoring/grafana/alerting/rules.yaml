@@ -1,0 +1,675 @@
+#
+#  This Source Code Form is subject to the terms of the Mozilla Public License,
+#  v. 2.0. If a copy of the MPL was not distributed with this file, You can
+#  obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+#  the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+#
+#  Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+#  graphic logo is a trademark of OpenMRS Inc.
+
+apiVersion: 1
+
+groups:
+  - orgId: 1
+    name: availability
+    folder: OpenMRS Alerts
+    interval: 1m
+    rules:
+      - uid: openmrs-target-down
+        title: TargetDown
+        condition: C
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Prometheus target {{ $labels.job }} is down"
+          description: "The target {{ $labels.instance }} (job {{ $labels.job }}) has been unreachable for more than 2 minutes."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: up
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: lt
+                    params: [1]
+
+      - uid: openmrs-endpoint-down
+        title: EndpointDown
+        condition: C
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Endpoint {{ $labels.instance }} is failing its health probe"
+          description: "The blackbox HTTP probe for {{ $labels.instance }} has been failing for more than 2 minutes."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              # Scoped to the HTTP job so the db TCP probe (job=blackbox-tcp-db)
+              # is handled by the dedicated DbDown rule instead of this one.
+              expr: probe_success{job="blackbox-http-prod"}
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: lt
+                    params: [1]
+
+  - orgId: 1
+    name: ssl
+    folder: OpenMRS Alerts
+    # TLS certificate expiry moves on the scale of days, not minutes, so this
+    # rule gets its own group with a daily evaluation interval rather than
+    # sharing the 1m interval of the availability group.
+    interval: 24h
+    rules:
+      - uid: openmrs-ssl-cert-expiring-soon
+        title: SSLCertExpiringSoon
+        condition: C
+        # No pending period: Grafana effectively rounds `for` up to the next
+        # evaluation, so any non-zero value here would delay firing by a whole
+        # day. A single reading of cert expiry is authoritative — unlike a
+        # health probe, it cannot flap.
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "TLS certificate for {{ $labels.instance }} expires soon"
+          description: "The TLS certificate for {{ $labels.instance }} expires in {{ $values.B.Value | humanizeDuration }}."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: probe_ssl_earliest_cert_expiry - time()
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: lt
+                    params: [1209600] # 14 * 24 * 3600 seconds
+
+  - orgId: 1
+    name: jvm
+    folder: OpenMRS Alerts
+    interval: 1m
+    rules:
+      - uid: openmrs-jvm-heap-high-usage
+        title: JvmHeapHighUsage
+        condition: C
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "OpenMRS JVM heap usage is high"
+          description: "Heap usage has been above 90% of the configured maximum for more than 5 minutes ({{ $values.B.Value | humanizePercentage }})."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: |
+                sum by (job) (jvm_memory_used_bytes{job="openmrs-jvm",area="heap"})
+                  / sum by (job) (jvm_memory_max_bytes{job="openmrs-jvm",area="heap"})
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [0.9]
+
+      - uid: openmrs-jvm-file-descriptors-high
+        title: JvmFileDescriptorsHigh
+        condition: C
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "OpenMRS backend is running low on file descriptors"
+          description: "Open file descriptors have been above 80% of the limit for more than 5 minutes ({{ $values.B.Value | humanizePercentage }})."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: process_open_fds{job="openmrs-jvm"} / process_max_fds{job="openmrs-jvm"}
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [0.8]
+
+      - uid: openmrs-jvm-backend-restarted
+        title: JvmBackendRestarted
+        condition: C
+        for: 0m
+        labels:
+          severity: info
+        annotations:
+          summary: "OpenMRS backend recently restarted"
+          description: "The OpenMRS backend JVM has been up for less than 5 minutes; it may have restarted or crashed."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: time() - process_start_time_seconds{job="openmrs-jvm"}
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: lt
+                    params: [300]
+
+  - orgId: 1
+    name: containers
+    folder: OpenMRS Alerts
+    interval: 1m
+    rules:
+      - uid: openmrs-container-high-cpu
+        title: ContainerHighCpu
+        condition: C
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container {{ $labels.name }} CPU usage is high"
+          description: "Container {{ $labels.name }} has averaged more than 0.9 CPU cores over the last 5 minutes for more than 10 minutes."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: sum by (name) (rate(container_cpu_usage_seconds_total{name!=""}[5m]))
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [0.9]
+
+      - uid: openmrs-container-oom-killed
+        title: ContainerOOMKilled
+        condition: C
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Container {{ $labels.name }} was OOM killed"
+          description: "Container {{ $labels.name }} experienced an out-of-memory kill event in the last 5 minutes."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: sum by (name) (increase(container_oom_events_total{name!=""}[5m]))
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [0]
+
+  - orgId: 1
+    name: database
+    folder: OpenMRS Alerts
+    interval: 1m
+    rules:
+      - uid: openmrs-db-down
+        title: DbDown
+        condition: C
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "MariaDB is not reachable"
+          description: "The TCP probe to {{ $labels.instance }} has been failing for more than 1 minute; the database is down or not accepting connections on port 3306."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: probe_success{job="blackbox-tcp-db"}
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: lt
+                    params: [1]
+
+      - uid: openmrs-db-restarted
+        title: DbRestarted
+        condition: C
+        for: 0m
+        labels:
+          severity: info
+        annotations:
+          summary: "MariaDB container recently restarted"
+          description: "The db container has been up for less than 5 minutes; it may have restarted or crashed. Expect a temporary spike in disk reads while the InnoDB buffer pool warms up."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: time() - max by (name) (container_start_time_seconds{name="db"})
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: lt
+                    params: [300]
+
+      - uid: openmrs-db-high-memory
+        title: DbHighMemory
+        condition: C
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "MariaDB memory usage is high"
+          description: "The db container's working-set memory has been above 2 GiB for more than 5 minutes. TUNABLE: adjust the threshold to your host, or add a mem_limit to the db service so this can become a percentage-of-limit alert."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: sum by (name) (container_memory_working_set_bytes{name="db"})
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [2147483648] # 2 GiB — TUNABLE
+
+      - uid: openmrs-db-high-disk-io
+        title: DbHighDiskIO
+        condition: C
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "MariaDB disk I/O is high"
+          description: "The db container's combined read+write throughput has been above 50 MB/s for more than 15 minutes. TUNABLE: bursts during backups or large queries are normal; adjust the threshold to your storage. Sustained reads may mean the working set no longer fits the InnoDB buffer pool."
+        noDataState: OK
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: Prometheus
+            model:
+              datasource:
+                type: prometheus
+                uid: Prometheus
+              editorMode: code
+              expr: |
+                sum by (name) (
+                  rate(container_fs_reads_bytes_total{name="db"}[5m])
+                    + rate(container_fs_writes_bytes_total{name="db"}[5m])
+                )
+              instant: true
+              intervalMs: 1000
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              reducer: last
+              refId: B
+              type: reduce
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: B
+              refId: C
+              type: threshold
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [52428800] # 50 MB/s — TUNABLE

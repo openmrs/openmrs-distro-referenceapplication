@@ -20,14 +20,33 @@ cp /monitoring/grafana-datasources.yaml /etc/grafana/provisioning/datasources/da
 
 mkdir -p /etc/grafana/provisioning/dashboards/json
 cp /monitoring/grafana-dashboards.yaml /etc/grafana/provisioning/dashboards/dashboards.yaml
-cp /monitoring/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
+# Clear stale dashboards so ones removed from source don't linger in the volume
+rm -f /etc/grafana/provisioning/dashboards/json/*.json
+cp /monitoring/grafana/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
+
+echo "Copying Grafana alerting rules..."
+mkdir -p /etc/grafana/provisioning/alerting
+# Clear stale rule files so ones removed from source don't linger in the volume
+rm -f /etc/grafana/provisioning/alerting/*.yaml
+cp /monitoring/grafana/alerting/*.yaml /etc/grafana/provisioning/alerting/
 
 echo "Copying Prometheus config..."
-mkdir -p /etc/prometheus
 cp /monitoring/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
 
 echo "Copying Blackbox config..."
 mkdir -p /config
 cp /monitoring/blackbox.yml /config/blackbox.yml
+
+echo "Setting up jmx exporter..."
+mkdir -p /jmx-exporter-data/
+# The agent jar is baked into this image at build time (see Dockerfile); copy it into the
+# shared volume so the backend can load it as a -javaagent. Install it under a stable,
+# unversioned name so the -javaagent path in docker-compose.grafana.yml never has to track
+# JMX_EXPORTER_VERSION — if that path pointed at a jar the volume didn't have, the backend
+# JVM would refuse to start, so a monitoring-only version bump would take the app down.
+# Clear stale jars so a previously pinned version doesn't linger in the volume.
+rm -f /jmx-exporter-data/*.jar
+cp /opt/jmx-exporter/jmx_prometheus_javaagent-*.jar /jmx-exporter-data/jmx_prometheus_javaagent.jar
+cp /monitoring/jmx_config.yml /jmx-exporter-data/jmx_config.yml
 
 echo "Configuration initialization complete."
