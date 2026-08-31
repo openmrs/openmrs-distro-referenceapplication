@@ -39,7 +39,6 @@ services:
         depends_on:
             monitoring-init:
                 condition: service_completed_successfully
-        ports: ["12345:12345"]
 
     prometheus:
         image: prom/prometheus:v3.9.0
@@ -97,7 +96,7 @@ services:
         OTEL_METRICS_EXPORTER: otlp
         OTEL_TRACES_EXPORTER: none
         OTEL_LOGS_EXPORTER: none
-        OTEL_RESOURCE_ATTRIBUTES: "service.instance.id=openmrs-backend-0,service.namespace=openmrs,deployment.environment.name=dev"
+        OTEL_RESOURCE_ATTRIBUTES: "service.namespace=openmrs,deployment.environment.name=dev"
 
 volumes:
     grafana-data:
