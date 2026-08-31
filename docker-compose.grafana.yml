@@ -19,7 +19,6 @@ services:
             - alloy-config:/etc/alloy
             - blackbox-config:/config
             - grafana-provisioning:/etc/grafana/provisioning
-            - jmx-exporter-data:/jmx-exporter-data
 
     loki:
         image: grafana/loki:3.6
@@ -108,4 +107,3 @@ volumes:
     loki-config:
     alloy-config:
     grafana-provisioning:
-    jmx-exporter-data:
