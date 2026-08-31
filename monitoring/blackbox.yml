@@ -6,9 +6,3 @@ modules:
       # Ignore SSL exceptions
       tls_config:
         insecure_skip_verify: true
-
-  # Plain TCP connect probe — confirms a port is open and accepting
-  # connections (used for the MariaDB db:3306 availability check).
-  tcp_connect:
-    prober: tcp
-    timeout: 5s
