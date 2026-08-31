@@ -20,7 +20,9 @@ cp /monitoring/grafana-datasources.yaml /etc/grafana/provisioning/datasources/da
 
 mkdir -p /etc/grafana/provisioning/dashboards/json
 cp /monitoring/grafana-dashboards.yaml /etc/grafana/provisioning/dashboards/dashboards.yaml
-cp /monitoring/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
+# Clear stale dashboards so ones removed from source don't linger in the volume
+rm -f /etc/grafana/provisioning/dashboards/json/*.json
+cp /monitoring/grafana/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
 
 echo "Copying Prometheus config..."
 mkdir -p /etc/prometheus

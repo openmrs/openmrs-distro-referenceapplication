@@ -82,3 +82,22 @@ loki.write "local" {
     url = "http://loki:3100/loki/api/v1/push"
   }
 }
+
+otelcol.receiver.otlp "openmrs" {
+  grpc { endpoint = "0.0.0.0:4317" }
+  http { endpoint = "0.0.0.0:4318" }
+  output { metrics = [otelcol.processor.batch.default.input] }
+}
+
+otelcol.processor.batch "default" {
+  output { metrics = [otelcol.exporter.prometheus.default.input] }
+}
+
+otelcol.exporter.prometheus "default" {
+  forward_to = [prometheus.remote_write.default.receiver]
+}
+
+prometheus.remote_write "default" {
+  endpoint { url = "http://prometheus:9090/api/v1/write" }
+}
+

@@ -1,0 +1,419 @@
+{
+  "title": "JVM Runtime",
+  "uid": "openmrs-jvm",
+  "schemaVersion": 39,
+  "version": 2,
+  "time": { "from": "now-1h", "to": "now" },
+  "refresh": "30s",
+  "tags": ["jvm", "otel"],
+  "description": "OpenMRS backend JVM health, sourced from the OpenTelemetry Java agent over OTLP. Metric and attribute names follow OpenTelemetry semantic conventions, so this dashboard works against any OTLP-compatible backend, not just this stack's Alloy + Prometheus pair.",
+  "templating": {
+    "list": [
+      {
+        "name": "job",
+        "label": "Service",
+        "type": "query",
+        "datasource": { "type": "prometheus", "uid": "Prometheus" },
+        "definition": "label_values(jvm_class_count, job)",
+        "query": { "query": "label_values(jvm_class_count, job)", "refId": "job" },
+        "refresh": 1,
+        "sort": 1,
+        "multi": false,
+        "includeAll": false,
+        "current": { "text": "openmrs/openmrs-backend", "value": "openmrs/openmrs-backend" }
+      },
+      {
+        "name": "instance",
+        "label": "Instance",
+        "type": "query",
+        "datasource": { "type": "prometheus", "uid": "Prometheus" },
+        "definition": "label_values(jvm_class_count{job=\"$job\"}, instance)",
+        "query": { "query": "label_values(jvm_class_count{job=\"$job\"}, instance)", "refId": "instance" },
+        "refresh": 1,
+        "sort": 1,
+        "multi": false,
+        "includeAll": false,
+        "current": { "text": "openmrs-backend-0", "value": "openmrs-backend-0" }
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Heap Used %",
+      "description": "Live heap in use as a percentage of the maximum heap the JVM is allowed to grow to (-Xmx). This is the single most useful top-line number on this dashboard: it is self-scaling, so it stays meaningful without being retuned per deployment. Amber above 75%, red above 90%. If it sits red and 'Heap After Last GC' does not fall back down, the JVM cannot reclaim the space — raise -Xmx or hunt for a leak.",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "100 * sum(jvm_memory_used_bytes{job=\"$job\", instance=\"$instance\", jvm_memory_type=\"heap\"}) / max(jvm_memory_limit_bytes{job=\"$job\", instance=\"$instance\", jvm_memory_type=\"heap\"})",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "decimals": 1,
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 75 },
+              { "color": "red", "value": 90 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Heap Used",
+      "description": "Live heap memory in use right now, summed across all heap pools (G1 Eden, Survivor and Old Gen). Read this alongside 'Heap Used %' — the absolute figure tells you how much memory the container actually needs, which is what you size -Xmx and the container memory limit against.",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(jvm_memory_used_bytes{job=\"$job\", instance=\"$instance\", jvm_memory_type=\"heap\"})",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "blue", "value": null }]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Live Threads",
+      "description": "Total live JVM threads, summed across every thread state. A healthy app plateaus after warm-up. A count that keeps climbing and never falls back points to a thread leak (often an unbounded or misconfigured thread pool) that will eventually exhaust OS limits — check 'Threads by State' to see which state is growing, then capture a thread dump.",
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum(jvm_thread_count{job=\"$job\", instance=\"$instance\"})",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 300 },
+              { "color": "red", "value": 600 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Classes Loaded",
+      "description": "Classes currently loaded by the JVM. Should rise during startup and module loading, then flatten. Continuous growth at steady state signals a classloader leak (common after repeated hot redeploys) and heads toward Metaspace exhaustion — cross-check the Metaspace series in 'Memory Pools Used', then plan a restart and investigate.",
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_class_count{job=\"$job\", instance=\"$instance\"}",
+          "legendFormat": ""
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "blue", "value": null }]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Heap vs Non-Heap Used",
+      "description": "JVM memory in use split by area. Heap holds application objects and is garbage-collected; non-heap holds class metadata, the code cache and compressed class space. The dashed red line is the maximum heap (-Xmx). If heap used repeatedly climbs to it and GC only briefly frees space, the app is memory-starved: raise -Xmx or fix a leak. A healthy heap shows a sawtooth — grows, then drops sharply at each GC.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (jvm_memory_type) (jvm_memory_used_bytes{job=\"$job\", instance=\"$instance\"})",
+          "legendFormat": "{{jvm_memory_type}}"
+        },
+        {
+          "refId": "B",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "max(jvm_memory_limit_bytes{job=\"$job\", instance=\"$instance\", jvm_memory_type=\"heap\"})",
+          "legendFormat": "heap max"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "heap max" },
+            "properties": [
+              { "id": "custom.fillOpacity", "value": 0 },
+              { "id": "custom.lineStyle", "value": { "fill": "dash", "dash": [8, 8] } },
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Memory Pools Used",
+      "description": "Used bytes per JVM memory pool, stacked. 'G1 Eden Space' and 'G1 Survivor Space' hold short-lived young objects and are expected to churn constantly. Watch 'G1 Old Gen': if it stays high immediately after a GC and trends upward, long-lived objects are accumulating — a likely leak. Steadily growing 'Metaspace' means a classloader leak instead.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_memory_used_bytes{job=\"$job\", instance=\"$instance\"}",
+          "legendFormat": "{{jvm_memory_pool_name}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": {
+            "lineWidth": 1,
+            "fillOpacity": 10,
+            "stacking": { "mode": "normal", "group": "A" }
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "GC Time Rate",
+      "description": "Fraction of wall-clock time spent in garbage collection, per collector (seconds of GC per second; 0.05 = 5%). Brief spikes are normal. Sustained values above roughly 5–10% mean the app is spending real time paused in GC, which surfaces as request latency — a signal to increase heap, fix a leak, or tune the collector. Note that 'G1 Concurrent GC' runs alongside the application and is far less costly than a young or full pause.",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "interval": "1m",
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (jvm_gc_name) (rate(jvm_gc_duration_seconds_sum{job=\"$job\", instance=\"$instance\"}[5m]))",
+          "legendFormat": "{{jvm_gc_name}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "GC Collections Rate",
+      "description": "Garbage-collection cycles per second, per collector. Frequent young-generation collections ('G1 Young Generation') are normal and cheap. A rising rate of concurrent or full collections indicates the heap is filling faster than it can be reclaimed — a strong sign of memory pressure or a leak. Read together with 'GC Time Rate': many cheap collections are fine, few expensive ones are not.",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "interval": "1m",
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (jvm_gc_name) (rate(jvm_gc_duration_seconds_count{job=\"$job\", instance=\"$instance\"}[5m]))",
+          "legendFormat": "{{jvm_gc_name}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "Threads by State",
+      "description": "Live threads broken down by JVM thread state, stacked. A large and stable 'timed_waiting' or 'waiting' population is normal — that is idle pool workers parked between jobs. Growth in 'runnable' tracks real load. A total that climbs without ever levelling off is a thread leak; a sudden jump in 'blocked' means threads are contending on a lock and requests will be queueing behind it.",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "sum by (jvm_thread_state) (jvm_thread_count{job=\"$job\", instance=\"$instance\"})",
+          "legendFormat": "{{jvm_thread_state}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0,
+          "custom": {
+            "lineWidth": 1,
+            "fillOpacity": 10,
+            "stacking": { "mode": "normal", "group": "A" }
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "JVM CPU Utilization",
+      "description": "Recent CPU utilisation of the JVM process as reported by the JVM itself, as a fraction of all CPUs available to the container (100% means every core is saturated, not one core). Sustained values near the ceiling mean the JVM is CPU-bound — check for busy loops, GC thrash (cross-reference 'GC Time Rate'), or the need to scale out. Unlike a rate over a CPU-time counter, this needs no window and reacts immediately.",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_cpu_recent_utilization_ratio{job=\"$job\", instance=\"$instance\"}",
+          "legendFormat": "utilization"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 },
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 0.7 },
+              { "color": "red", "value": 0.9 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "single", "sort": "none" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "Heap After Last GC",
+      "description": "Bytes still occupied in each heap pool immediately after the most recent garbage collection — the clearest leak signal on this dashboard. Unlike 'Memory Pools Used', this strips out short-lived garbage, so it shows only what the collector could not reclaim. 'G1 Eden Space' should sit at or near zero. A 'G1 Old Gen' line that trends steadily upward over hours, never returning to its earlier baseline, means live objects are accumulating and the JVM will eventually hit OutOfMemoryError — take a heap dump before restarting.",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 20 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "expr": "jvm_memory_used_after_last_gc_bytes{job=\"$job\", instance=\"$instance\"}",
+          "legendFormat": "{{jvm_memory_pool_name}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": { "lineWidth": 1, "fillOpacity": 10 }
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "displayMode": "list", "placement": "bottom", "calcs": [] }
+      }
+    }
+  ]
+}
