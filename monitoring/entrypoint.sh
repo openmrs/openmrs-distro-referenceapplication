@@ -25,6 +25,7 @@ rm -f /etc/grafana/provisioning/dashboards/json/*.json
 cp /monitoring/grafana/dashboards/*.json /etc/grafana/provisioning/dashboards/json/
 
 echo "Copying Prometheus config..."
+mkdir -p /etc/prometheus
 cp /monitoring/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
 
 echo "Copying Blackbox config..."

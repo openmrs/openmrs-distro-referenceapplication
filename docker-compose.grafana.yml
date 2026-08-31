@@ -54,7 +54,6 @@ services:
         depends_on:
             monitoring-init:
                 condition: service_completed_successfully
-        ports: ["9090:9090"]
 
     blackbox:
         image: prom/blackbox-exporter:v0.28.0
