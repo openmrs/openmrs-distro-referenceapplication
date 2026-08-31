@@ -45,8 +45,10 @@ services:
         image: prom/prometheus:v3.9.0
         container_name: prometheus
         command:
+          # normal Prometheus behaviour
           - --config.file=/etc/prometheus/prometheus.yml
           - --storage.tsdb.path=/prometheus
+          # Alloy forwards OTLP metrics to Prometheus using the remote-write API.
           - --web.enable-remote-write-receiver
         volumes:
             - prometheus-config:/etc/prometheus
