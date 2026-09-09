@@ -1,0 +1,15 @@
+otelcol.receiver.otlp "openmrs" {
+  grpc {
+    endpoint = "0.0.0.0:4317"
+  }
+
+  http {
+    endpoint = "0.0.0.0:4318"
+  }
+
+  output {
+    metrics = [
+      otelcol.processor.batch.external.input,
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+prometheus.scrape "cadvisor" {
+  targets = [
+    {
+      __address__ = "cadvisor:8080",
+    },
+  ]
+
+  job_name        = "cadvisor"
+  scrape_interval = "15s"
+
+  // Experimental in Alloy. Required to preserve Prometheus metric metadata
+  // (e.g. counter/gauge types) when converting cAdvisor metrics to OpenTelemetry.
+  honor_metadata  = true
+
+  forward_to = [
+    prometheus.relabel.cadvisor.receiver,
+  ]
+}
+
+prometheus.relabel "cadvisor" {
+  rule {
+    action        = "keep"
+    source_labels = ["__name__"]
+    regex         = "up|machine_(cpu_cores|memory_bytes)|container_(cpu_usage_seconds_total|cpu_cfs_throttled_seconds_total|memory_working_set_bytes|memory_usage_bytes|memory_rss|memory_cache|spec_memory_limit_bytes|spec_cpu_quota|spec_cpu_period|network_(receive|transmit)_(bytes|errors)_total|fs_(reads|writes)_bytes_total|fs_usage_bytes|fs_limit_bytes|oom_events_total|start_time_seconds|last_seen)"
+  }
+
+  rule {
+    action        = "replace"
+    source_labels = ["container_label_com_docker_compose_service"]
+    regex         = "(.+)"
+    target_label  = "service_name"
+  }
+
+  rule {
+    action = "labeldrop"
+    regex  = "container_label_.*"
+  }
+
+  forward_to = [
+    otelcol.receiver.prometheus.cadvisor.receiver,
+  ]
+}
+
+otelcol.receiver.prometheus "cadvisor" {
+  output {
+    metrics = [
+      otelcol.processor.batch.external.input,
+    ]
+  }
+}

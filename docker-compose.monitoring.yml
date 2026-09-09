@@ -1,0 +1,63 @@
+#    This Source Code Form is subject to the terms of the Mozilla Public License,
+#    v. 2.0. If a copy of the MPL was not distributed with this file, You can
+#    obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+#    the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+#
+#    Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+#    graphic logo is a trademark of OpenMRS Inc.
+
+services:
+  monitoring-init:
+    image: openmrs/openmrs-reference-application-3-monitoring-init:${TAG:-qa}
+    build: ./monitoring
+    environment:
+      MONITORING_MODE: otlp
+      ALLOY_OTLP_ENDPOINT: ${ALLOY_OTLP_ENDPOINT:-}
+      ALLOY_OTLP_PROTOCOL: ${ALLOY_OTLP_PROTOCOL:-grpc}
+      ALLOY_OTLP_INSECURE: ${ALLOY_OTLP_INSECURE:-false}
+    volumes:
+      - alloy-config:/etc/alloy
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.55.1
+    privileged: true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /dev/disk:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+
+  alloy:
+    image: grafana/alloy:v1.13.1
+    environment:
+      ALLOY_OTLP_ENDPOINT: ${ALLOY_OTLP_ENDPOINT:}
+      ALLOY_OTLP_HEADERS: ${ALLOY_OTLP_HEADERS:-}
+      ALLOY_OTLP_INSECURE: ${ALLOY_OTLP_INSECURE:-false}
+    volumes:
+      - alloy-config:/etc/alloy
+    command: >
+      run
+      # Experimental stability is required for honor_metadata, which preserves
+      # Prometheus metric types when converting cAdvisor metrics to OpenTelemetry.
+      --stability.level=experimental
+      --server.http.listen-addr=0.0.0.0:12345
+      --storage.path=/var/lib/alloy/data
+      /etc/alloy
+    depends_on:
+      monitoring-init:
+        condition: service_completed_successfully
+
+  backend:
+    environment:
+      OMRS_OTEL_ENABLED: true
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://alloy:4318
+      OTEL_SERVICE_NAME: openmrs-backend
+      OTEL_METRICS_EXPORTER: otlp
+      OTEL_TRACES_EXPORTER: none
+      OTEL_LOGS_EXPORTER: none
+
+volumes:
+  alloy-config:

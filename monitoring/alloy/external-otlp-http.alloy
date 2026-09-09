@@ -1,0 +1,17 @@
+otelcol.processor.batch "external" {
+  output {
+    metrics = [
+      otelcol.exporter.otlphttp.external.input,
+    ]
+  }
+}
+
+otelcol.exporter.otlphttp "external" {
+  client {
+    endpoint = sys.env("ALLOY_OTLP_ENDPOINT")
+
+    tls {
+      insecure = sys.env("ALLOY_OTLP_INSECURE") == "true"
+    }
+  }
+}
