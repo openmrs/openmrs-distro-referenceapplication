@@ -1,0 +1,152 @@
+{
+  "name": "RHD Interventional Recommendations",
+  "description": "ACT RHD registry \u2014 RHD Interventional Recommendations",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Consultation Visit",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Interventional Recommendations",
+      "sections": [
+        {
+          "label": "Interventional recommendations",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date Recommendation Made",
+              "id": "date_recommendation_made",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "8a9146f7-186c-55b2-a8df-c5ed70d12ac5"
+              },
+              "required": true
+            },
+            {
+              "label": "Type of Intervention",
+              "id": "type_of_intervention_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "891c9214-ad2a-51b9-9007-291406fd2054"
+              },
+              "questions": [
+                {
+                  "label": "Type of Intervention",
+                  "id": "type_of_intervention",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "891c9214-ad2a-51b9-9007-291406fd2054",
+                    "answers": [
+                      {
+                        "label": "Cardiac catheterization",
+                        "concept": "3d32f20c-b4b5-5765-8f80-7b89b8cb3859",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Cardiac surgery",
+                        "concept": "414f1c28-9507-5fc3-8684-dc3fd57a52fb",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Cardiac catheterization type",
+              "id": "cardiac_catheterization_type_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "14015b12-3f8b-535e-9cc6-dc935f4c854f"
+              },
+              "questions": [
+                {
+                  "label": "Cardiac catheterization type",
+                  "id": "cardiac_catheterization_type",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "14015b12-3f8b-535e-9cc6-dc935f4c854f",
+                    "answers": [
+                      {
+                        "label": "Diagnostic catheterization",
+                        "concept": "0339c256-8636-5518-9022-61a4e2b215cd",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Mitral balloon valvuloplasty",
+                        "concept": "af9429ff-1b76-55f3-81ca-a9f775d93fb4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "_specBranching": "If Type of Intervention = Cardiac catheterization"
+                }
+              ]
+            },
+            {
+              "label": "Intervention Complete",
+              "id": "intervention_complete",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "72356252-e2f9-54f6-971e-00afb0def731",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "No",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "If Type of Intervention = Cardiac surgery"
+            },
+            {
+              "label": "Cardiac surgery type",
+              "id": "cardiac_surgery_type",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "24a11c85-8500-5dc7-856c-3432bc88fe55",
+                "answers": [
+                  {
+                    "label": "Mitral valve repair/replacement",
+                    "concept": "7af8595d-407e-5705-bd8a-812735e2f188",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Aortic valve repair/replacement",
+                    "concept": "cd9c582a-71f9-5441-97a8-6d50d7dc15c8",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other non-coded",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "If Type of Intervention = Cardiac surgery"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

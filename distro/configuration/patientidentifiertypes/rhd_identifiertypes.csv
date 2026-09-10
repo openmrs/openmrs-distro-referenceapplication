@@ -1,0 +1,5 @@
+uuid,name,description,required,uniqueness behavior,location behavior,format,format description,void/retire
+240f85fa-46e1-540e-9234-2796c623f7ea,RHD ID,Primary RHD registry identifier; replaces patient_base_id,true,UNIQUE,NOT_USED,^rhd[0-9]{5}$,rhd followed by 5 digits e.g. rhd00001,false
+810bfaee-85de-5a81-b79c-954774076594,External Patient ID,Identifier assigned by an external system,false,UNIQUE,NOT_USED,,,false
+060a2595-da89-5509-8cf4-645a8e50ad8a,Alternate ID,Secondary or legacy identifier for the patient,false,NON_UNIQUE,NOT_USED,,,false
+fdd6f720-743b-57fc-915a-87c0f571097b,National ID,National identification number,false,UNIQUE,NOT_USED,,,false

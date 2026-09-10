@@ -1,0 +1,91 @@
+{
+  "name": "RHD INR Monitoring",
+  "description": "ACT RHD registry \u2014 RHD INR Monitoring",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD INR Monitoring",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD INR Monitoring",
+      "sections": [
+        {
+          "label": "INR Monitoring",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Indication",
+              "id": "indication_inr_monitoring",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6e8ed53f-15e6-5b00-9ed0-44b11bd2d638"
+              }
+            },
+            {
+              "label": "INR Info",
+              "id": "inrInfoEntry",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "0778ce12-ddba-5e22-b5fd-92424e8747b4",
+                "repeatOptions": {
+                  "limit": 20
+                }
+              },
+              "questions": [
+                {
+                  "label": "INR Target",
+                  "id": "inr_target",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "0778ce12-ddba-5e22-b5fd-92424e8747b4",
+                    "answers": [
+                      {
+                        "label": "1.5-2.5",
+                        "concept": "2822a113-1cd3-510e-b5bf-95b9279b1a4f",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "2.0-3.0",
+                        "concept": "d894d89a-04bd-5fc0-91a0-5dc3ddd8802b",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "2.5-3.5",
+                        "concept": "ea841a3a-f9cb-5761-aac6-939ffb158d94",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Date Updated",
+                  "id": "date_updated_inr",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "be9041b1-3948-5de0-a8b1-974e84b95715"
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "INR",
+                  "id": "inr",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "797b76a2-0096-5435-bc55-047d29370f75"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

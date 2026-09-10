@@ -19,6 +19,9 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
       timeout: 5s
+    volumes:
+      - ./frontend/config-core_demo.json:/usr/share/nginx/html/config-core_demo.json:ro
+      - ./frontend/act.png:/usr/share/nginx/html/act.png:ro
     depends_on:
       - backend
 
@@ -40,6 +43,31 @@ services:
       timeout: 5s
     volumes:
       - openmrs-data:/openmrs/data
+      # The addresshierarchy module only reads addressConfiguration.xml from the top level of
+      # configuration/addresshierarchy, but the demo content package unpacks it into a
+      # referenceapplication-demo subdirectory. Overlay the distro config so every startup
+      # copies the files to where the module expects them.
+      - ./distro/configuration/addresshierarchy:/openmrs/distribution/openmrs_config/addresshierarchy:ro
+      # RHD migration config (Phase 2). Mounted per-domain rather than mounting the whole
+      # configuration/ directory, so the demo content package's own domain folders are left intact.
+      - ./distro/configuration/conceptsources:/openmrs/distribution/openmrs_config/conceptsources:ro
+      - ./distro/configuration/ampathforms:/openmrs/distribution/openmrs_config/ampathforms/rhd:ro
+      - ./distro/configuration/programs:/openmrs/distribution/openmrs_config/programs/rhd:ro
+      - ./distro/configuration/programworkflows:/openmrs/distribution/openmrs_config/programworkflows/rhd:ro
+      - ./distro/configuration/programworkflowstates:/openmrs/distribution/openmrs_config/programworkflowstates/rhd:ro
+      - ./distro/configuration/personattributetypes:/openmrs/distribution/openmrs_config/personattributetypes/rhd:ro
+      - ./distro/configuration/drugs:/openmrs/distribution/openmrs_config/drugs/rhd:ro
+      - ./distro/configuration/concepts:/openmrs/distribution/openmrs_config/concepts/rhd:ro
+      - ./distro/configuration/visittypes:/openmrs/distribution/openmrs_config/visittypes:ro
+      - ./distro/configuration/patientidentifiertypes:/openmrs/distribution/openmrs_config/patientidentifiertypes:ro
+      - ./distro/configuration/locationtags:/openmrs/distribution/openmrs_config/locationtags:ro
+      - ./distro/configuration/locationtagmaps:/openmrs/distribution/openmrs_config/locationtagmaps/rhd:ro
+      - ./distro/configuration/encountertypes:/openmrs/distribution/openmrs_config/encountertypes:ro
+      - ./distro/configuration/attributetypes:/openmrs/distribution/openmrs_config/attributetypes:ro
+      - ./distro/configuration/locations:/openmrs/distribution/openmrs_config/locations:ro
+      - ./distro/configuration/idgen:/openmrs/distribution/openmrs_config/idgen:ro
+      - ./distro/configuration/autogenerationoptions:/openmrs/distribution/openmrs_config/autogenerationoptions:ro
+
 
   # MariaDB
   db:

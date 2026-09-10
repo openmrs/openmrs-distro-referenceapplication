@@ -1,0 +1,117 @@
+{
+  "name": "RHD Hospital Admission",
+  "description": "ACT RHD registry \u2014 RHD Hospital Admission",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Hospital Admission",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Hospital Admission",
+      "sections": [
+        {
+          "label": "Hospital admission",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date Admitted",
+              "id": "date_admitted",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "c437c2be-0520-5920-9bd7-26104bc229a4"
+              },
+              "required": true
+            },
+            {
+              "label": "Facility",
+              "id": "facility",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "01e6dd39-b8ba-5b0a-bcd7-6b8d5973c1bc"
+              }
+            },
+            {
+              "label": "Reason for Admission",
+              "id": "reason_for_admission",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e60fcf3b-1057-5d1f-a8be-679411b48ba9",
+                "answers": [
+                  {
+                    "label": "RHD - intervention",
+                    "concept": "218ff4c4-caa1-5666-b30e-4051e66c58c1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD - heart failure",
+                    "concept": "27f70da6-ee9e-5919-8b68-9977312f9ada",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD - stroke",
+                    "concept": "e50b612b-5460-5b0c-b919-90a3dbe1919f",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD - arrhythmia",
+                    "concept": "0198e8a2-c475-58d7-b19b-a6391db1bc27",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD - endocarditis",
+                    "concept": "490b4f2a-2421-56d3-b35e-c5c1c2e86ad2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Rheumatic fever",
+                    "concept": "127447AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Malaria",
+                    "concept": "116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Details (Hospital Admission)",
+              "id": "details_hospital_admission",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "29c468c3-9ee7-580f-8bfc-87123ef1d37e"
+              }
+            },
+            {
+              "label": "To Where?",
+              "id": "to_where",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "15951587-62e3-536f-a471-958b4f210b6c"
+              },
+              "_specBranching": "If Outcome = Transfer to another facility"
+            },
+            {
+              "label": "Date of Discharge",
+              "id": "date_of_discharge",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "f17fbfad-6208-53ee-a97a-17583d2f6259"
+              },
+              "_specBranching": "If Outcome = Discharge to home"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

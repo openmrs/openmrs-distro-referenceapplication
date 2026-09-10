@@ -1,0 +1,163 @@
+{
+  "name": "RHD Consent",
+  "description": "ACT RHD registry \u2014 RHD Consent",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Consultation Visit",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Consent",
+      "sections": [
+        {
+          "label": "Consent",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Study Name",
+              "id": "study_name",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1ba73207-ba91-5279-a078-f2be8d4b03fd",
+                "answers": [
+                  {
+                    "label": "National RHD registry (Mak SOMREC 2013-072)",
+                    "concept": "4b4061c7-c9c6-509f-a689-1dd2ad165ef1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "ADD-RHD ACT decentralization (Mak-SOMREC-2021-61)",
+                    "concept": "37a4fbc3-e41c-545d-8d97-aff8c11e705b",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "required": true
+            },
+            {
+              "label": "Assent",
+              "id": "assent",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "9c43bbda-3fe2-59b8-8566-1989f1350729"
+              }
+            },
+            {
+              "label": "Consent",
+              "id": "consent",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a9a5f14a-984c-5351-a98b-94e4ab4a57e4"
+              }
+            },
+            {
+              "label": "Name of person consenting",
+              "id": "name_of_person_consenting",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "26bfdcb1-ea0a-58ac-ace9-6e7abb00383b"
+              }
+            },
+            {
+              "label": "Relation of person consenting",
+              "id": "relation_of_person_consenting",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "df495209-b144-521b-b35a-8314872f538d",
+                "answers": [
+                  {
+                    "label": "Mother",
+                    "concept": "3b008b8a-38b8-5e6b-9428-40163e701644",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Father",
+                    "concept": "db956db2-d6c9-526a-a015-84465fc4d694",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Grandmother",
+                    "concept": "a7c69de7-178e-5d3b-95e9-d870b1f9ea74",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Grandfather",
+                    "concept": "1be7e468-7c72-575b-9256-74d714eb3b9d",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Aunt",
+                    "concept": "05ec48ad-2a5e-553f-b168-03e65ead7f48",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Uncle",
+                    "concept": "74a3bab3-9461-5bdb-a587-850d5fd11e8a",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other legal guardian",
+                    "concept": "0c06494e-22e8-55c7-b06f-aff1a08939a4",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Self",
+                    "concept": "edebe52c-de16-5ba7-ad1c-9f0d6a2bb323",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Study Completion",
+              "id": "study_completion",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "13ff5409-eda2-5fb9-9dde-95cc4afb75d3"
+              }
+            },
+            {
+              "label": "Reason for completiong",
+              "id": "reason_for_completiong",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f583bdb7-d010-5f68-a772-035e2a965684",
+                "answers": [
+                  {
+                    "label": "Final visit",
+                    "concept": "b013fec4-b274-5f70-8287-269c8547de52",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Withdrawn from study",
+                    "concept": "a655d3a4-5d60-5e79-9b9c-e6b38bf84d46",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Lost to follow-up",
+                    "concept": "7dc37c9e-1725-11ed-861d-0242ac120002",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Deceased",
+                    "concept": "159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

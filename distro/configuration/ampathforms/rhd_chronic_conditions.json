@@ -1,0 +1,276 @@
+{
+  "name": "RHD Chronic Health Conditions",
+  "description": "ACT RHD registry \u2014 RHD Chronic Health Conditions",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Consultation Visit",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Chronic Health Conditions",
+      "sections": [
+        {
+          "label": "Chronic health conditions",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Hematology/Oncology",
+              "id": "hematology_oncology_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "5743086e-867a-5e9b-aee6-ea3dd7245f30"
+              },
+              "questions": [
+                {
+                  "label": "Hematology/Oncology",
+                  "id": "hematology_oncology",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "5743086e-867a-5e9b-aee6-ea3dd7245f30",
+                    "answers": [
+                      {
+                        "label": "Sickle cell disease",
+                        "concept": "dfb474c5-1fa7-5c27-85eb-48642d0dcbaa",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Malignancy/Cancer",
+                        "concept": "145d8dca-1d80-53d1-aa2d-a399379d2f53",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "HIV",
+                        "concept": "16449d48-575e-5898-b015-8b52c60c048c",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Cardiovascular Disorders",
+              "id": "cardiovascular_disorders_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "0ba82838-d367-5609-b493-c5c205358e75"
+              },
+              "questions": [
+                {
+                  "label": "Cardiovascular Disorders",
+                  "id": "cardiovascular_disorders",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "0ba82838-d367-5609-b493-c5c205358e75",
+                    "answers": [
+                      {
+                        "label": "Ischemic heart disease",
+                        "concept": "c69cabba-fe10-5e12-83ce-6e679150563d",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Stroke",
+                        "concept": "41b1a801-9d9d-5687-9de5-39e89c73c8c7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Hypertension",
+                        "concept": "117399AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Peripheral vascular disease",
+                        "concept": "114212AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": true
+                }
+              ]
+            },
+            {
+              "label": "Chronic Respiratory Diseases",
+              "id": "chronic_respiratory_diseases_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "2f09c161-28b1-57a7-9c82-6209d54ff6bf"
+              },
+              "questions": [
+                {
+                  "label": "Chronic Respiratory Diseases",
+                  "id": "chronic_respiratory_diseases",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "2f09c161-28b1-57a7-9c82-6209d54ff6bf",
+                    "answers": [
+                      {
+                        "label": "Chronic obstructive pulmonary disease",
+                        "concept": "1295AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Asthma",
+                        "concept": "121375AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Digestive diseases",
+              "id": "digestive_diseases_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "fd250ab4-3a0b-50a9-90e0-f51bdd2e2221"
+              },
+              "questions": [
+                {
+                  "label": "Digestive diseases",
+                  "id": "digestive_diseases",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "fd250ab4-3a0b-50a9-90e0-f51bdd2e2221",
+                    "answers": [
+                      {
+                        "label": "Cirrhosis/liver disease",
+                        "concept": "9be8d87e-2ebc-59c4-a2cf-e35ce58f2b3c",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Gastroesophageal reflux",
+                        "concept": "29696a7f-8107-5dfb-a098-009044d4ef4c",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Neurological/Metal Health",
+              "id": "neurological_metal_health_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "ad0a85b5-52ac-51b4-8341-c496a7fb8b09"
+              },
+              "questions": [
+                {
+                  "label": "Neurological/Metal Health",
+                  "id": "neurological_metal_health",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "ad0a85b5-52ac-51b4-8341-c496a7fb8b09",
+                    "answers": [
+                      {
+                        "label": "Epilepsy",
+                        "concept": "155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Chronic headache",
+                        "concept": "c90e84e4-50d1-52e2-ac5c-0303b4aad667",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Depression",
+                        "concept": "119537AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Anxiety",
+                        "concept": "121543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Substance-use disorder",
+                        "concept": "ce31967e-bf40-5034-9a04-c6b9a9771bb6",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Diabetes and Kidney Diseases",
+              "id": "diabetes_and_kidney_diseases_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "cdf25a40-410c-50f1-9f1e-b7972ddb5328"
+              },
+              "questions": [
+                {
+                  "label": "Diabetes and Kidney Diseases",
+                  "id": "diabetes_and_kidney_diseases",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "cdf25a40-410c-50f1-9f1e-b7972ddb5328",
+                    "answers": [
+                      {
+                        "label": "Diabetes mellitus",
+                        "concept": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Chronic kidney disease",
+                        "concept": "145438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

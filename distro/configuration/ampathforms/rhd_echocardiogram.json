@@ -1,0 +1,482 @@
+{
+  "name": "RHD Echocardiogram",
+  "description": "ACT RHD registry \u2014 RHD Echocardiogram",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Echocardiogram",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Echocardiogram",
+      "sections": [
+        {
+          "label": "Echocardiogram",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Echocardiogram",
+              "id": "dateOfEchocardiogram",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "911be530-9457-54be-8515-4bbcdb832ccb"
+              }
+            },
+            {
+              "label": "Mitral Regurgitation",
+              "id": "mitral_regurgitation",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d6ab05e2-1ece-5f8f-893d-74739aa66ce5",
+                "answers": [
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Mild",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Severe",
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            },
+            {
+              "label": "Mitral stenosis severity",
+              "id": "mitral_stenosis_severity",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ed209fc3-0138-516c-a0bd-bcd3b2697a87",
+                "answers": [
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Mild",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Severe",
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            },
+            {
+              "label": "Is patient suitable for BAV?",
+              "id": "is_patient_suitable_for_bav",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3f82e07f-a760-54b1-94d1-84793cea53b3",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if Mitral stenosis Is \"Mild\" \"Moderate\" or \"Severe\""
+            },
+            {
+              "label": "Reasoning",
+              "id": "if_no_why",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "06898c35-63d1-5b2c-8f61-d3c972b252f5"
+              },
+              "_specBranching": "Show if Mitral stenosis Is \"Mild\" \"Moderate\" or \"Severe\""
+            },
+            {
+              "label": "Aortic Regurgitation",
+              "id": "aortic_regurgitation",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0bbc510f-1e95-5c74-bbe3-8896907fd6c1",
+                "answers": [
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Mild",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Severe",
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            },
+            {
+              "label": "Aortic Stenosis",
+              "id": "aortic_stenosis",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7586c9a6-73db-5ab2-8f23-71a3cc4bae62",
+                "answers": [
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Mild",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Severe",
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            },
+            {
+              "label": "Tricuspid Regurgitation",
+              "id": "tricuspid_regurgitation",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1a1f00f9-199c-5a40-832d-ca2df33681d2",
+                "answers": [
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Mild",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Severe",
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            },
+            {
+              "label": "Tricuspid Stenosis",
+              "id": "tricuspid_stenosis",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a24bc09b-f274-5fc2-b529-412da0e11923",
+                "answers": [
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Mild",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Severe",
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            },
+            {
+              "label": "Left Ventricular Ejection Fraction (%)",
+              "id": "left_ventricular_ejection_fraction",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ed630fda-8451-53c0-929e-40eafd9bca9b"
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            },
+            {
+              "label": "Left Ventricular Function",
+              "id": "left_ventricular_function",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1e8c4282-03cc-557b-ad63-002e29a10a83",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Mildly decreased",
+                    "concept": "7113c0d4-4fdd-5a2d-8aa2-31b4656950ee",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Moderately decreased",
+                    "concept": "f2f96d8b-47bb-56a0-9815-b0f6d1003589",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Severely decreased",
+                    "concept": "91d28548-97ec-53d7-a3fd-d2a6b94bb09b",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            },
+            {
+              "label": "Left Ventricular Size",
+              "id": "leftVentricularSize",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "89c3feab-8f0d-5f6c-a9c2-d511c6b0cce7",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Mildly Dilated",
+                    "concept": "0852128c-ab7d-5ac9-9930-34bf6c672b42",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Moderately Dilated",
+                    "concept": "2d9a827a-3604-54bd-8975-f00f5acdf9c7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Severely Dilated",
+                    "concept": "aeed7e23-586c-5b5a-a646-98becbea5476",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulmonary hypertension severity",
+              "id": "pulmonary_hypertension_severity",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8752bebf-302d-5367-8a72-e1d738412a67",
+                "answers": [
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Mild",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Severe",
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            },
+            {
+              "label": "Mitral Valve Annulus Diameter (cm)",
+              "id": "mitralValveAnnulusDiameter",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0c06609d-3fa8-580d-ba3d-fd724306af12"
+              }
+            },
+            {
+              "label": "Mitral Valve Anterior Leaflet Length (cm)",
+              "id": "mitralValveAnteriorLeafletLength",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a0a9fff2-1b5d-50fa-9d56-a507620c324d"
+              }
+            },
+            {
+              "label": "Wilkins Score",
+              "id": "wilkins_score",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e3576a93-7917-52ec-b2b7-46b7a27cc547",
+                "answers": [
+                  {
+                    "label": "1",
+                    "concept": "358b8fc2-744e-5ab9-9e7d-5c28f997fe66",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "2",
+                    "concept": "46247161-4c7b-519d-8006-774be9bc1cdc",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "3",
+                    "concept": "902f820a-b338-59e3-a782-d83a829475a6",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "4",
+                    "concept": "6092350d-98bf-57eb-8d05-fe909c12b1bf",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "5",
+                    "concept": "dcf1240f-e98f-5e59-b5fc-9cad7d3e3f23",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "6",
+                    "concept": "66a0177a-3ab0-5ff5-86fb-f3053d7a1e6a",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "7",
+                    "concept": "479983aa-e774-50f9-928c-d021e83482b2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "8",
+                    "concept": "57082d89-07be-5c19-b69d-4729cdf9a223",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "9",
+                    "concept": "4e485afe-28dc-5bdd-ae81-52a29bedcc94",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "10",
+                    "concept": "8d50b4b6-e937-587e-9b57-a6ac0e259b3f",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "11",
+                    "concept": "b4072bf9-f023-5afa-8a7e-20f6ce6602c5",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "12",
+                    "concept": "8add169a-473e-5f46-bed7-3ff6f4d1b155",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "13",
+                    "concept": "28c625e7-b03f-5518-9e6f-bb627abcc54d",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "14",
+                    "concept": "8aabf5a8-a353-5fef-9975-13725d9502c4",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "15",
+                    "concept": "e8ab3b7f-4856-565c-9619-f8c65c550e9c",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "16",
+                    "concept": "0e9cfdcb-69b5-51d6-8886-26d5bc54937c",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if Mitral stenosis Is \"Mild\" \"Moderate\" or \"Severe\""
+            },
+            {
+              "label": "Other Findings on Echocardiogram",
+              "id": "other_findings_on_echocardiogram",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ad533240-b503-5b82-a2fd-c7b69868d632",
+                "rows": "3"
+              },
+              "_specBranching": "Show if \"Echocardiogram\" = \"Yes\""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

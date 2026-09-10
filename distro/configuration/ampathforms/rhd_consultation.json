@@ -1,0 +1,1571 @@
+{
+  "name": "RHD Consultation Visit",
+  "description": "ACT RHD registry \u2014 RHD Consultation Visit",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Consultation Visit",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Consultation Visit",
+      "sections": [
+        {
+          "label": "Visit details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Consultation Visit",
+              "id": "date_of_review",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "c3edefd2-5777-5084-b01e-fd4ca0e40162"
+              },
+              "required": true
+            },
+            {
+              "label": "Consultation Visit Location",
+              "id": "consultationVisitLocation",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            },
+            {
+              "type": "encounterProvider",
+              "label": "Provider",
+              "id": "provider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            },
+            {
+              "label": "Interval History",
+              "id": "interval_history",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "90b7d412-1273-5814-bf02-2672e67c427e",
+                "rows": "3"
+              }
+            }
+          ]
+        },
+        {
+          "label": "History and comorbidities",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chronic Health Condition",
+              "id": "chronicHealthConditionEntry",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "d80478b2-4ed2-5d93-a604-6b5b50dab441",
+                "repeatOptions": {
+                  "limit": 20
+                }
+              },
+              "questions": [
+                {
+                  "label": "Chronic Health Condition",
+                  "id": "chronicHealthCondition",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "d80478b2-4ed2-5d93-a604-6b5b50dab441",
+                    "answers": [
+                      {
+                        "label": "Sickle cell disease",
+                        "concept": "dfb474c5-1fa7-5c27-85eb-48642d0dcbaa",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Malignancy/Cancer",
+                        "concept": "145d8dca-1d80-53d1-aa2d-a399379d2f53",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "HIV",
+                        "concept": "16449d48-575e-5898-b015-8b52c60c048c",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Ischemic heart disease",
+                        "concept": "c69cabba-fe10-5e12-83ce-6e679150563d",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Stroke",
+                        "concept": "41b1a801-9d9d-5687-9de5-39e89c73c8c7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Hypertension",
+                        "concept": "117399AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Peripheral vascular disease",
+                        "concept": "114212AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Chronic obstructive pulmonary disease",
+                        "concept": "1295AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Asthma",
+                        "concept": "121375AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Cirrhosis/liver disease",
+                        "concept": "9be8d87e-2ebc-59c4-a2cf-e35ce58f2b3c",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Gastroesophageal reflux",
+                        "concept": "29696a7f-8107-5dfb-a098-009044d4ef4c",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Epilepsy",
+                        "concept": "155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Chronic headache",
+                        "concept": "c90e84e4-50d1-52e2-ac5c-0303b4aad667",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Depression",
+                        "concept": "119537AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Anxiety",
+                        "concept": "121543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Substance-use disorder",
+                        "concept": "ce31967e-bf40-5034-9a04-c6b9a9771bb6",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Diabetes mellitus",
+                        "concept": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Chronic kidney disease",
+                        "concept": "145438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "Date Added",
+                  "id": "dateAdded_chronic",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "b8514967-2259-5a4d-9ac5-b9319144b8dc"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Allergy",
+              "id": "allergyEntry",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "cd73e118-64ee-5855-b276-f7cb44fdcf7e",
+                "repeatOptions": {
+                  "limit": 20
+                }
+              },
+              "questions": [
+                {
+                  "label": "Allergy",
+                  "id": "allergy",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "cd73e118-64ee-5855-b276-f7cb44fdcf7e",
+                    "answers": [
+                      {
+                        "label": "None",
+                        "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Penicillin (allergy)",
+                        "concept": "41bd79b2-db5a-5da1-89dd-827c30ccb25a",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Penicillin (anaphylaxis)",
+                        "concept": "b4e6c064-ab4f-5ee4-9837-094731ee23d4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "Reaction (Allergies)",
+                  "id": "reaction_allergies_group",
+                  "type": "obsGroup",
+                  "questionOptions": {
+                    "rendering": "group",
+                    "concept": "62cb455e-c9f9-5a7a-b521-ac6c68f0fe5d"
+                  },
+                  "questions": [
+                    {
+                      "label": "Reaction (Allergies)",
+                      "id": "reaction_allergies",
+                      "type": "obs",
+                      "questionOptions": {
+                        "rendering": "checkbox",
+                        "concept": "62cb455e-c9f9-5a7a-b521-ac6c68f0fe5d",
+                        "answers": [
+                          {
+                            "label": "Rash",
+                            "concept": "512AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Trouble breathing",
+                            "concept": "3b242d01-dada-5588-9f45-e87da22e7ec8",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Lip swelling",
+                            "concept": "9e6907fe-1c65-518f-9e1e-1e0189932e95",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Stomach upset",
+                            "concept": "a5d49b91-273a-5506-8575-674165374abc",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Diarrhea",
+                            "concept": "142412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "conceptMappings": []
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "label": "Other Allergies",
+                  "id": "other_allergies",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "3d8f718f-a8bb-5729-afe1-2f91f0a2155c"
+                  }
+                },
+                {
+                  "label": "Date Added",
+                  "id": "dateAdded_allergy",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "b8514967-2259-5a4d-9ac5-b9319144b8dc"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "RHD Complications",
+              "id": "rhdComplicationsEntry",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "a04d2268-a7de-589f-b4b6-92c47c13e342",
+                "repeatOptions": {
+                  "limit": 20
+                }
+              },
+              "questions": [
+                {
+                  "label": "RHD Complications",
+                  "id": "rhdComplications",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "a04d2268-a7de-589f-b4b6-92c47c13e342",
+                    "answers": [
+                      {
+                        "label": "Acute rheumatic fever",
+                        "concept": "006ab3b2-a0ea-45bf-b495-83e06f26f87a",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Acute heart failure",
+                        "concept": "65c796e5-bd32-51c6-93f7-991ff3add2ef",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Atrial arrhythmia",
+                        "concept": "1ce7a216-79dc-5f5b-83b2-9b3e695cc1b7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Stroke",
+                        "concept": "41b1a801-9d9d-5687-9de5-39e89c73c8c7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Infective endocarditis",
+                        "concept": "b3a93528-7fed-5050-bce3-85ca4d7a4ee4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Cyanosis",
+                        "concept": "143050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Cardiogenic shock",
+                        "concept": "146166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Pulmonary embolism",
+                        "concept": "113504AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Atrial fibrillation",
+                        "concept": "148203AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "Date Added",
+                  "id": "dateAdded_rhdComplications",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "b8514967-2259-5a4d-9ac5-b9319144b8dc"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Vital signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Height (cm)",
+              "id": "height",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6eabb220-cdd8-5104-b91c-eb9022d1a289"
+              },
+              "_specBranching": "Pull forward from previous visit"
+            },
+            {
+              "label": "Weight (kg)",
+              "id": "weight",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a25cf90c-2bdd-5874-8d31-519481f9b5db"
+              },
+              "_specBranching": "Pull forward from previous visit"
+            },
+            {
+              "label": "Heart Rate (BPM)",
+              "id": "heart_rate",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "99865498-12e2-546f-a6c1-53c9b0f51e6a"
+              }
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "id": "respiratoryRate",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Oxygen Saturation (%)",
+              "id": "oxygen_saturation",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3e3cdb78-9a9d-5e77-aa64-cd8abfecc441"
+              }
+            },
+            {
+              "label": "Systolic Blood Pressure (mmHg)",
+              "id": "systolicBloodPressure",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Diastolic Blood Pressure (mmHg)",
+              "id": "diastolicBloodPressure",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "NYHA Classification",
+              "id": "nyha_classification",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2f51b894-383c-53bb-9997-583e9761d132",
+                "answers": [
+                  {
+                    "label": "I",
+                    "concept": "9b905331-5cd5-5624-9f02-a88efaf771d6",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "II",
+                    "concept": "e4a2da4b-cca3-5bd6-bfc6-8e206dc339e9",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "III",
+                    "concept": "fea16333-1c36-5478-9ebf-ca9f6201f753",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "IV",
+                    "concept": "77e49ccb-efb0-5364-8dd2-d9e2a5e24924",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Physical Exam",
+              "id": "physicalExam",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1391AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "3"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Key Findings/Recommendations from this Visit",
+              "id": "key_findings_recommendations",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "58ec4c63-c67f-5d01-9b9f-a989793c19f8",
+                "rows": "3"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Secondary prophylaxis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Secondary Antibiotic Prophylaxis",
+              "id": "secondaryAntibioticProphylaxisEntry",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "668e0221-8b41-5669-9ad8-78e193d42494",
+                "repeatOptions": {
+                  "limit": 20
+                }
+              },
+              "questions": [
+                {
+                  "label": "Secondary Antibiotic Prophylaxis",
+                  "id": "secondary_antibiotic_prophylaxis",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "668e0221-8b41-5669-9ad8-78e193d42494",
+                    "answers": [
+                      {
+                        "label": "Q28 day BPG",
+                        "concept": "50be4b26-6c5b-5aaa-9254-3bfd313b4522",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Q21 day BPG",
+                        "concept": "2f3ee632-dd14-51b0-a4ec-de10e7958019",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Q14 day BPG",
+                        "concept": "91230c88-6a90-5d45-af50-fa6155fe5dd7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Oral penicillin V",
+                        "concept": "b9884219-358a-594b-94f5-f8a8863a25f3",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Oral sulfadiazine",
+                        "concept": "f2e06eb2-5c25-5e53-9e01-246112d05976",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Oral erythromycin",
+                        "concept": "fb8b6676-689b-5daa-83f7-1456210c587f",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Oral clarithromycin",
+                        "concept": "f6f25d63-bd1a-51cb-9596-e74a19759429",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Oral azithromycin",
+                        "concept": "1af922b8-acee-56c8-b184-eaef4e58e23a",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "None",
+                        "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "Date Started",
+                  "id": "sap_date_started",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "5bcc7d12-b279-5955-815c-090a1f392071"
+                  }
+                },
+                {
+                  "label": "Date Stopped",
+                  "id": "sap_date_stopped",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "d75edc42-3213-5a06-9228-4e5735b9594b"
+                  }
+                },
+                {
+                  "label": "Reason Stopped",
+                  "id": "reason_stopped",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "fa21e431-e64d-5493-b18c-9a1eaf7ee16a",
+                    "answers": [
+                      {
+                        "label": "Allergy",
+                        "concept": "121689AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Anaphylaxis",
+                        "concept": "148888AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Provider stopped",
+                        "concept": "eaf16fa9-03d7-5846-94c3-b02805889ed9",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Patient preference",
+                        "concept": "39af49bd-5dd0-5acd-8ffb-260bc83dbfd7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "label": "If not given SAP, why?",
+              "id": "if_not_given_sap_why",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "53d3cb00-b556-5842-b67f-32239176b746"
+              }
+            },
+            {
+              "label": "Secondary Antibiotic Prophylaxis Duration",
+              "id": "secondary_antibiotic_prophylaxis_duration",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "11117263-f71d-58e2-8363-d2e9b1dbddab",
+                "answers": [
+                  {
+                    "label": "1 year and reassess",
+                    "concept": "6f2c4ca8-a499-5851-975b-5bfb426143a9",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "2 years and reassess",
+                    "concept": "a3f9bcd3-787f-58b3-ae36-c494725a67eb",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "5 years or until age 21",
+                    "concept": "024cdfe6-c2eb-521c-8616-4729ac35439e",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Whichever is longer",
+                    "concept": "36ce4f25-03d4-5447-aba0-48545be2281c",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "10 years or until age 40",
+                    "concept": "ecc08a4c-6494-5737-b142-f59d18c07db1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Lifetime",
+                    "concept": "e13a5d80-2ba1-5927-b4e6-7369473222e1",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Hide if \"Category at Diagnosis\" is either \"Congenital heart disease\" or \"Other heart disease\"\n\nPull forward from previous visit.  Display all ever entered."
+            },
+            {
+              "label": "Secondary Antibiotic Prophylaxis Data Entry",
+              "id": "secondary_antibiotic_prophylaxis_data_entry",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d444bffc-c718-5295-a19e-8fb03dbdbfd7",
+                "answers": [
+                  {
+                    "label": "Continuous",
+                    "concept": "251999e5-c6e6-5843-bf2f-9cef78472e58",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Every 3 months",
+                    "concept": "4040ccf9-175d-5502-ada2-f562662c32f5",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Every 6 months",
+                    "concept": "dba07d74-cd84-519c-93e3-f43c8bf7c398",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Every 12 months",
+                    "concept": "2e145a91-1967-537c-b957-730f005002b2",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Hide if \"Category at Diagnosis\" is either \"Congenital heart disease\" or \"Other heart disease\"\n\nPull forward from previous visit.  Display all ever entered."
+            }
+          ]
+        },
+        {
+          "label": "Cardiac medications",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cardiac Medication",
+              "id": "cardiacMedicationEntry",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "0734567e-4f0a-5090-9d74-b953921a30e6",
+                "repeatOptions": {
+                  "limit": 20
+                }
+              },
+              "questions": [
+                {
+                  "label": "Cardiac Medication",
+                  "id": "cardiac_medication",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "0734567e-4f0a-5090-9d74-b953921a30e6",
+                    "answers": [
+                      {
+                        "label": "Acitrom",
+                        "concept": "3c7f8916-3ab5-5678-83c5-be7c7bb1f5e7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Amiodarone",
+                        "concept": "71118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Amlodipine",
+                        "concept": "71137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Aspirin",
+                        "concept": "71617AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Atenolol",
+                        "concept": "316441ec-c0fd-44bc-a040-c68f4da8d228",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Bisoprolol",
+                        "concept": "69628c7c-0e9f-5f7b-ad60-5b6f93b1cdce",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Candesartan",
+                        "concept": "d7d470bb-1574-5a02-8c69-e8928ae03169",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Captopril",
+                        "concept": "f5e348b5-ecd5-47cf-9a37-78e7ef08978d",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Carvedilol",
+                        "concept": "ba3cd2c4-d28f-4546-86d6-f6906fffc046",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Clonidine",
+                        "concept": "c6c2eabe-06e8-5eb9-93ac-f851fd77717f",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Clopidogrel",
+                        "concept": "cb8afacc-1b2c-493a-aad2-b67e69c73973",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Digoxin",
+                        "concept": "72005c75-6d84-468e-a28e-43ca17a7216a",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Diltiazem",
+                        "concept": "5b2e010c-b1d4-5875-b584-f6b7d028a211",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Doxazosin",
+                        "concept": "a9d138e6-48f4-547b-943a-211d1bc79200",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Enalapril",
+                        "concept": "d612ddcc-9d3b-4489-97e1-22893c9735df",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Enoxaparin",
+                        "concept": "14146168-c1af-414c-b211-679cf1952d3d",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Eplerenone",
+                        "concept": "ec647e02-65c5-55e5-95f2-f092e9fe20f3",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Felodipine",
+                        "concept": "54cb5a65-b55a-5059-b4dc-19aa6f709806",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Flecainide",
+                        "concept": "ce7939f0-3943-5f40-8cb4-2ee7438bc9df",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Furosemide",
+                        "concept": "9f6c3927-2a31-485c-8735-f10b9951aef9",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Hydralazine",
+                        "concept": "b87151c8-136b-4986-90bd-ca472176a08c",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Irbesatan",
+                        "concept": "cdc1dbd2-07a0-520b-a1b9-bb868bb9deca",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Isosorbide Dinitrate",
+                        "concept": "91e206fa-fc82-43e1-a72b-dd1653b41428",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Isosorbide Mononitrate",
+                        "concept": "c65d61af-b804-4a17-8f6b-b6d758fcf75a",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Lisinopril",
+                        "concept": "78945AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Losartan",
+                        "concept": "502a66e9-2eb3-4e13-926f-57fe9d393a94",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Methyldopa",
+                        "concept": "2abaf024-1a07-4828-ad80-cff39e62c1f4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Metolazone",
+                        "concept": "7c3c4351-4073-50a7-ad76-53a4e2446e86",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Metoprolol",
+                        "concept": "7dc18dde-ad3f-405a-be1e-8fc15a01cd91",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Minoxidil",
+                        "concept": "c2674a49-4994-5c95-9b66-26048629efab",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Nebivolol",
+                        "concept": "a8b02e6e-09bd-543b-84ec-bcb1be629159",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Nifedipine",
+                        "concept": "251a17f9-c229-4aee-9555-9bf7620b2a5a",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Nitrocontin",
+                        "concept": "7de8c3a9-b142-5ed5-b3da-6c277864eeb1",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Olmesartan",
+                        "concept": "f5992470-15e2-5a11-8990-af7958ed9226",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Perindopril",
+                        "concept": "6a2fa6c6-2cef-56d9-a942-418fd490fc9f",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Prasugrel",
+                        "concept": "11025785-bcdb-562b-9dcc-d9416137d081",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Prazosin",
+                        "concept": "245f9ab8-4e5f-5e4d-a6c2-d3ee7d5e60c6",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Propranolol",
+                        "concept": "40e6108c-3561-4478-9df7-e5385277edd4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Ramipril",
+                        "concept": "65e64309-a34b-593a-90ef-49306a9f833b",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Rivaroxaban",
+                        "concept": "a84e7a9b-31c6-5c6f-8257-45c140f661fc",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Sotalol",
+                        "concept": "f3559339-63ce-514b-ab49-5bb1e242326e",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Spironolactone",
+                        "concept": "d4c72168-24b0-4d22-ba60-848e7c146333",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Telmisartan",
+                        "concept": "9c7a0dc1-e056-5702-91d0-2c8d52ea9a45",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Torsemide",
+                        "concept": "9ba4f1ea-7b18-55ab-826a-2b28a34c8bc7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Valsartan",
+                        "concept": "2dc13b70-b6f7-5d68-9d28-43a585dfb5e6",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Verapamil",
+                        "concept": "040cf656-a2ac-4807-923f-a35eec824f0f",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Warfarin",
+                        "concept": "5e97fe35-58df-4925-bba7-7c49d75268a1",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Zofenopril",
+                        "concept": "b9bc1cff-6970-50ff-9584-3451a0c7a1f9",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "Dosing (Consultation Visit)",
+                  "id": "dosing_consultation_visit",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "8879385e-d35e-50a3-a3d0-4333d95d4878"
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "Dosing Interval",
+                  "id": "dosing_interval",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "04d77200-fa10-5c15-b58a-609bf8eadefb",
+                    "answers": [
+                      {
+                        "label": "Once a day",
+                        "concept": "84ab709b-370e-5922-810e-08a2d9a6fac1",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Twice a day",
+                        "concept": "aa611030-275a-51c0-99d9-d610e88b50a7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Thrice a day",
+                        "concept": "bae1cc50-a94f-5b56-86be-a21b2072d0a8",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Four times a day",
+                        "concept": "e09bca0b-d706-50f4-bee4-948df8ebbe20",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "Date Started",
+                  "id": "cardiac_med_date_started",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "5bcc7d12-b279-5955-815c-090a1f392071"
+                  }
+                },
+                {
+                  "label": "Date Stopped",
+                  "id": "cardiac_med_date_stopped",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "d75edc42-3213-5a06-9228-4e5735b9594b"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Plan and follow-up",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Is Endocarditis Prophylaxis Recommended",
+              "id": "sbe_prophylaxis_indicated",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "55bc18e3-9b27-5f37-b471-af999591ea2a",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "No",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Interventional Recommendation(s)",
+              "id": "interventionalRecommendationEntry",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "ce93d393-1df5-587f-bf11-c373eac2ccf4",
+                "repeatOptions": {
+                  "limit": 20
+                }
+              },
+              "questions": [
+                {
+                  "label": "Procedure Type",
+                  "id": "procedureType",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "3a576b80-744a-59ee-9515-d9fdca06f3d7",
+                    "answers": [
+                      {
+                        "label": "Catheterization",
+                        "concept": "91a4d13f-4bc8-54b0-a107-f4ab84cb7d60",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Surgery",
+                        "concept": "aa5fefb0-cf61-5f36-82e6-31dbbdf3f616",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "Interventional Recommendation(s)",
+                  "id": "interventional_recommendation_s",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "ce93d393-1df5-587f-bf11-c373eac2ccf4",
+                    "answers": [
+                      {
+                        "label": "Aortic valvuloplasty",
+                        "concept": "69678122-dc66-5b8a-93bc-3358d241ad1b",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Atrial septal defect closure",
+                        "concept": "d8d6a848-70c0-5f93-ba8d-0bd5a45b4868",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Atrial septal defect device closure",
+                        "concept": "823c07d2-aed4-54cc-9274-11f176927a59",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Atrial septostomy",
+                        "concept": "a0069775-61c7-544c-8be2-d1948d78add6",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Balloon atrial septostomy",
+                        "concept": "2574901c-bc82-57a5-84da-831e696abea6",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Coarctation balloon / stent angioplasty",
+                        "concept": "f72ea691-f09f-591b-b383-27160fe4a41f",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Coronary artery stent",
+                        "concept": "fcef8402-70b4-5789-a841-80cbdf1ea1c7",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Diagnostic cardiac catheterization",
+                        "concept": "409a8f23-38a2-5cb2-9cff-1f67a74b7092",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Mitral balloon valvuloplasty",
+                        "concept": "af9429ff-1b76-55f3-81ca-a9f775d93fb4",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Mitral valvuloplasty",
+                        "concept": "aca1be99-d090-5078-be63-81353ae89195",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Pacemaker placement",
+                        "concept": "13a0d832-9e52-5305-9631-58f2e21793f5",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Patent ductus arteriosus closure",
+                        "concept": "e027966c-0be2-5bb6-beda-27f3a9fbbdff",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Patent ductus arteriosus ligation",
+                        "concept": "2f22d53b-e5d4-5799-aa8c-0524871f66f2",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "isEmpty(procedureType)"
+                        }
+                      },
+                      {
+                        "label": "Patent ductus arteriosus stent",
+                        "concept": "f6be7d34-9bc7-55fd-b8a5-eaa306e2f175",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Pulmonary",
+                        "concept": "305a891f-052c-5d45-b816-9c7ffe103a1d",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Pulmonary artery balloon / stent angioplasty",
+                        "concept": "70fe1957-1b27-5a88-b029-49aa478a8567",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Pulmonary valvuloplasty",
+                        "concept": "36b3cc68-c53f-5a23-8380-24dbaf9c88fb",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Ventricular septal defect closure",
+                        "concept": "3fe8e0c8-a2dc-53db-88a0-9fd88cbe1291",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== '91a4d13f-4bc8-54b0-a107-f4ab84cb7d60'"
+                        }
+                      },
+                      {
+                        "label": "Anomalous pulmonary vein repair",
+                        "concept": "323cdabc-ba7b-5c38-9cb8-c2690f0f44db",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Aortic coarctation repair",
+                        "concept": "f114270e-e6c2-5ab8-b484-b62b105d441d",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Aortic valve repair/replacement",
+                        "concept": "cd9c582a-71f9-5441-97a8-6d50d7dc15c8",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Aortopulmonary shunt",
+                        "concept": "02ce0f4b-7793-52c3-9830-6f16bafac564",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Arterial switch",
+                        "concept": "912d50cd-d1b8-53de-9f74-df1446aa35fa",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Atrial septal defect repair",
+                        "concept": "a70a1179-acf1-56d4-9856-760a3aaf3add",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Atrioventricular septal defect repair",
+                        "concept": "1d506ef8-457f-5b9e-9bef-6fe58710c351",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Double outlet right ventricular repair",
+                        "concept": "64cce236-0e71-505c-a0ce-3f1dc4475787",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Fontan",
+                        "concept": "f9e45c35-1bff-544b-ab25-2cc0c2336d27",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Glenn",
+                        "concept": "642fe2f0-52b8-5ea9-8e8c-1ec6e33ca2b4",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Mitral valve repair/replacement",
+                        "concept": "7af8595d-407e-5705-bd8a-812735e2f188",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Pericardiectomy",
+                        "concept": "7fd8b076-60c7-5103-83c4-6b15f1dd5930",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Pulmonary artery band placement",
+                        "concept": "0b8091e6-70ae-54b1-b503-78a045dfb595",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Pulmonary arteryplasty",
+                        "concept": "de858611-1930-5faa-823e-7b67763e2a58",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Pulmonary valve repair/replacement",
+                        "concept": "7bf4ae57-d4ba-5572-b7ab-5b98ae0d677d",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Subaortic stenosis repair",
+                        "concept": "7349b961-5ead-58e0-ae1a-24ecfa1f495a",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Tetralogy of fallot repair",
+                        "concept": "8344f52c-309c-535f-86b3-0c15edef0d8b",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Tricuspid valve repair",
+                        "concept": "f05d740b-f6ee-572e-b194-f313688c28fb",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Truncus arteriosus repair",
+                        "concept": "11d830c4-8d68-5ba0-b2f6-5e6feeab9d96",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Vascular ring division",
+                        "concept": "9380f911-1a7f-5ea0-8b3e-8843fe1103eb",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Ventricular septal defect repair",
+                        "concept": "23681599-4b81-517c-b5a5-6b24833c57cb",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "procedureType !== 'aa5fefb0-cf61-5f36-82e6-31dbbdf3f616'"
+                        }
+                      },
+                      {
+                        "label": "Other (with field to complete)",
+                        "concept": "4ff41d80-a6f6-5e65-b20a-66b31ce1baa6",
+                        "conceptMappings": [],
+                        "hide": {
+                          "hideWhenExpression": "isEmpty(procedureType)"
+                        }
+                      }
+                    ]
+                  },
+                  "required": "true"
+                },
+                {
+                  "label": "Urgency",
+                  "id": "urgency",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "7b8eda07-34b6-55f2-ab6c-1b295f41918b",
+                    "answers": [
+                      {
+                        "label": "1 - within 1 week",
+                        "concept": "406285f2-be72-5594-8664-c8568ad9bc88",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "2 - within 1 month",
+                        "concept": "82c5209b-c183-5bc9-941c-890eba821a44",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "3 - within 3 months",
+                        "concept": "925610f9-1c3c-5396-880f-02a5fe309d53",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "4 - within 6 months",
+                        "concept": "57e3873e-018e-5ed6-b7d4-5f73ef464cbd",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "_specBranching": "If Type of Intervention is not None."
+                },
+                {
+                  "label": "Completed",
+                  "id": "interventional_recommendation_completed",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "1632f8dc-195d-5d67-a52e-6c7a057cb536",
+                    "answers": [
+                      {
+                        "label": "Yes",
+                        "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "No",
+                        "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Next Consultation Time Amount",
+              "id": "nextConsultationTimeAmount",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ba4b8a87-2ce8-559e-9a30-45504a9b6c1f"
+              }
+            },
+            {
+              "label": "Next Consultation Time Period",
+              "id": "nextConsultationTimePeriod",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1732AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Days",
+                    "concept": "1072AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Weeks",
+                    "concept": "1073AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Months",
+                    "concept": "1074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Years",
+                    "concept": "1734AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Follow-up Appointments = RHD Clinic"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "RHD Anticoagulation",
+  "description": "ACT RHD registry \u2014 RHD Anticoagulation",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Consultation Visit",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Anticoagulation",
+      "sections": [
+        {
+          "label": "Anticoagulation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date (Anticoagulation)",
+              "id": "date_anticoagulation",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "3edc315c-1914-5bc3-a587-ebb7271435a4"
+              },
+              "required": true
+            },
+            {
+              "label": "Type of Anticoagulation",
+              "id": "type_of_anticoagulation_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "d5421303-4a78-57ca-a274-a4d90ea99b28"
+              },
+              "questions": [
+                {
+                  "label": "Type of Anticoagulation",
+                  "id": "type_of_anticoagulation",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "d5421303-4a78-57ca-a274-a4d90ea99b28",
+                    "answers": [
+                      {
+                        "label": "Acetylsalicylate sodium",
+                        "concept": "71617AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Warfarin",
+                        "concept": "5e97fe35-58df-4925-bba7-7c49d75268a1",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Enoxaparin",
+                        "concept": "14146168-c1af-414c-b211-679cf1952d3d",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Rivaroxaban",
+                        "concept": "a84e7a9b-31c6-5c6f-8257-45c140f661fc",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

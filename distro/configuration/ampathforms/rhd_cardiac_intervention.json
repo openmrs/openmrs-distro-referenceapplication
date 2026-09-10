@@ -1,0 +1,99 @@
+{
+  "name": "RHD Cardiac Intervention",
+  "description": "ACT RHD registry \u2014 RHD Cardiac Intervention",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Interventions and Outcomes",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Cardiac Intervention",
+      "sections": [
+        {
+          "label": "Cardiac intervention",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Intervention",
+              "id": "date_of_intervention",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "605c542b-e3b8-5488-87e7-86f976ded9a5"
+              },
+              "required": true
+            },
+            {
+              "label": "Location",
+              "id": "location",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ffcc9d8f-e27c-53cc-a8dd-013fd51e01fe"
+              }
+            },
+            {
+              "label": "Procedure performed",
+              "id": "procedure_performed_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "2e290fa3-977b-5fb4-83c1-d8499bedb65e"
+              },
+              "questions": [
+                {
+                  "label": "Procedure performed",
+                  "id": "procedure_performed",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "2e290fa3-977b-5fb4-83c1-d8499bedb65e",
+                    "answers": [
+                      {
+                        "label": "Diagnostic cardiac catheterization",
+                        "concept": "409a8f23-38a2-5cb2-9cff-1f67a74b7092",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Mitral balloon valvuloplasty",
+                        "concept": "af9429ff-1b76-55f3-81ca-a9f775d93fb4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other catheter-based intervention",
+                        "concept": "50bd5eb9-aa34-52f3-bdb5-605d63df9832",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Mitral valve replacement",
+                        "concept": "a76e4d83-18c0-5ed8-b039-03d137ed70ea",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Mitral valve repair",
+                        "concept": "3b1bec9d-85f2-50aa-ad74-5b7bf920e8de",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Aortic valve replacement",
+                        "concept": "6ba15d4b-921d-52f4-9d56-aaed9df33239",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other non-coded",
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

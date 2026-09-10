@@ -1,0 +1,263 @@
+{
+  "name": "RHD Pregnancy",
+  "description": "ACT RHD registry \u2014 RHD Pregnancy",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Pregnancy",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Pregnancy",
+      "sections": [
+        {
+          "label": "Pregnancy details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Estimated Due Date",
+              "id": "estimated_due_date",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "3ad5133c-80d0-5007-ba1a-c5be27cbb10c"
+              },
+              "required": true
+            },
+            {
+              "label": "Pregnancy Number",
+              "id": "pregnancy_number",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8245f302-13c3-5754-a199-95040901fbc4"
+              }
+            },
+            {
+              "label": "Number of Fetuses",
+              "id": "number_of_fetuses",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0574bebd-028b-5f69-b92c-48d26d04afb1"
+              }
+            },
+            {
+              "label": "Maternal Complications During Pregnancy",
+              "id": "maternal_complications_during_pregnancy",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d476b4e0-5c24-5d99-9588-26aadc1e35c6"
+              }
+            },
+            {
+              "label": "Fetal Outcomes",
+              "id": "fetal_outcomes_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "7e596b69-bb4e-5080-90b3-0d191c0d340a"
+              },
+              "questions": [
+                {
+                  "label": "Fetal Outcomes",
+                  "id": "fetal_outcomes",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "7e596b69-bb4e-5080-90b3-0d191c0d340a",
+                    "answers": [
+                      {
+                        "label": "Fetal loss within 14 weeks",
+                        "concept": "13cfb3cc-8a17-5fb3-a7c4-7d99be7db1c8",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Fetal loss between 15-24 weeks",
+                        "concept": "61bc0253-cecb-5245-b028-1e3cfad547a7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Fetal loss after 25 weeks",
+                        "concept": "ded96719-cf9e-502b-b196-b074b8e90431",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Stillbirth",
+                        "concept": "125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Full-term live birth",
+                        "concept": "8656c519-49db-54f6-a32f-eb73a734a5ec",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Pre-term live birth",
+                        "concept": "d39a4a5f-f8ff-50d8-be27-f08f93066ab5",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Small for gestational age",
+                        "concept": "cfceaf51-ac5f-58b3-b986-d02831efe69e",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Delivery and outcomes",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Delivery mode",
+              "id": "delivery_mode",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2c13856b-5622-500f-b986-f1509c424056",
+                "answers": [
+                  {
+                    "label": "Vaginal birth",
+                    "concept": "302eda9b-16f5-5b84-81ab-623990616233",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Cesarean section",
+                    "concept": "4ba666f7-f45e-5be1-b17a-5de2ae6e2107",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "If Fetal Outcomes =  stillbirth or livebirth"
+            },
+            {
+              "label": "Location of Delivery",
+              "id": "location_of_delivery",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "37145a69-0515-5e34-b16f-4cbb898a748e",
+                "answers": [
+                  {
+                    "label": "Home with family",
+                    "concept": "f4b1bea6-69c3-5ee4-915c-e879e2110b5d",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Home with midwife",
+                    "concept": "b747672a-8881-53bb-8626-d5fac3918440",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Community clinic",
+                    "concept": "80fd3840-fc9a-5220-9096-de1275638c9f",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "District or regional referral hospital",
+                    "concept": "82b79c86-ec8a-5d9d-8cf2-077d85b80f64",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Tertiary referral hospital",
+                    "concept": "34e28d2b-1d3b-56a3-bde4-d615d41f72d3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other non-coded",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "If Fetal Outcomes = livebirth"
+            },
+            {
+              "label": "Estimated Gestational Age at Delivery (weeks)",
+              "id": "estimated_gestational_age_at_delivery_weeks",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e52a3150-1b3f-5ee5-89df-20439c08ef22"
+              },
+              "_specBranching": "If Fetal Outcomes =  livebirth"
+            },
+            {
+              "label": "Neonatal weight (kg)",
+              "id": "neonatal_weight_kg",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "864deea0-d006-559e-b5fb-5b26c4c56fa5"
+              },
+              "_specBranching": "If Fetal Outcomes = livebirth"
+            },
+            {
+              "label": "Maternal Complications Within 30 Days After Pregnancy",
+              "id": "maternal_complications_within_30_days_after_pregnancy",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7ec339f7-be0b-5199-a9e7-a8ab82860fb2"
+              }
+            },
+            {
+              "label": "Maternal Cause of Death",
+              "id": "maternal_cause_of_death",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "062a66ad-8efb-5d28-a6d9-511bb396d661"
+              },
+              "_specBranching": "If Maternal Prenatal outcome is not death + 30 day outcome is deceased"
+            },
+            {
+              "label": "Neonatal Outcomes 30 Days After Delivery",
+              "id": "neonatal_outcomes_30_days_after_delivery",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "53e59cbb-f2ef-5662-be9a-a4dc7e09ec51",
+                "answers": [
+                  {
+                    "label": "Alive out of hospital",
+                    "concept": "6a5cbfbf-24af-5387-ace9-f702162a5105",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Alive in hospital",
+                    "concept": "33a334e2-5caf-52c0-8ca7-e11e8cbfd7a3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Deceased",
+                    "concept": "159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "If Fetal Outcomes = livebirth"
+            },
+            {
+              "label": "Neontal Cause of Death",
+              "id": "neontal_cause_of_death",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a81827f3-5832-530f-91ef-b3a0c58079ca"
+              },
+              "_specBranching": "If Fetal Outcomes =  livebirth + 30 day outcome is deceased"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

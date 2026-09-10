@@ -1,0 +1,227 @@
+{
+  "name": "RHD Patient Information",
+  "description": "ACT RHD registry \u2014 RHD Patient Information",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Consultation Visit",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Patient Information",
+      "sections": [
+        {
+          "label": "Patient information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Category at Diagnosis",
+              "id": "category_at_diagnosis",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1a5aa050-661d-5e89-95d7-c1eba476df22",
+                "answers": [
+                  {
+                    "label": "Acute rheumatic fever",
+                    "concept": "cbfcf051-bee3-549d-b233-e5be0e7d691a",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD A",
+                    "concept": "7cfaaf46-1939-5437-8d40-31095cb29812",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD B",
+                    "concept": "2a648c80-594c-5442-bdfc-70e7472ef5b7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD C",
+                    "concept": "5458f2f7-9eba-5ba4-b2a8-6c736d574ca9",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD D",
+                    "concept": "19fb7b40-528e-5b1c-a610-f2e624c98038",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Screen + pending confirmatory echo",
+                    "concept": "27f33ebe-77fb-575f-b737-00aa47dae6d8",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Congenital heart disease",
+                    "concept": "365e75bb-35bc-503f-b8db-53bea2528d1b",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other heart disease",
+                    "concept": "7c42e9be-5828-5d4c-8a6e-f713efe8a945",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "required": true
+            },
+            {
+              "label": "Case Detected By",
+              "id": "case_detected_by",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "955632a1-82f7-5b84-a341-de85f95588d1",
+                "answers": [
+                  {
+                    "label": "Clinical presentation",
+                    "concept": "28452410-f2a2-5ad7-9590-43e47df1d254",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Pregnancy/labor",
+                    "concept": "06d80315-eaf9-5c71-a4c7-cb9759f93fe1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "School health screening",
+                    "concept": "5b7d5eb4-4c6a-52cb-95f3-ac5033708fc9",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Community-based screening",
+                    "concept": "24b5320c-bf9b-5c3b-a43c-d700cc1134e1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Healthcare center screening",
+                    "concept": "9e861499-cebe-5371-a893-5747f365da73",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Coincidental finding",
+                    "concept": "fdecbe0d-8c8d-545d-a3b8-b2fd31704db1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Post-mortem",
+                    "concept": "00e06a31-9d6f-5045-a6f8-62cf96fcd526",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other non-coded",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "required": true
+            },
+            {
+              "label": "Relocation Area",
+              "id": "relocation_area",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "32f3e45d-c2a8-5c19-b4d1-9306251426f6"
+              },
+              "_specBranching": "Show if Patient Status is \"inactive\" and \"Reason inactive is\"  \"Physical Relocation\""
+            },
+            {
+              "label": "Date of Death",
+              "id": "date_of_death",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "07534416-c1c2-5772-83d8-76a429986ec0"
+              },
+              "required": true,
+              "_specBranching": "Show if Patient Status is \"inactive\" and \"Reason Inactive\" is \"Death\""
+            },
+            {
+              "label": "Details of events leading up to death",
+              "id": "details_of_events_leading_up_to_death",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a4d27e8c-0c90-571f-be54-a6132c7a1d69"
+              }
+            },
+            {
+              "label": "Pregnant or Postpartum (60 Days After Delivery) at Time of Death",
+              "id": "pregnant_or_postpartum_60_days_after_delivery_at_time_of_death",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6ffe2fe5-f7c0-5993-b20e-13d1ccd384dc",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Show if patient Sex = Female"
+            },
+            {
+              "label": "WhatsApp",
+              "id": "whatsapp",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "02e65ad0-676d-5fb7-9a5d-044c1b67621b",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "No",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Home Address",
+              "id": "home_address",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1af5b942-8747-5dfb-aa40-805b5575f2e3"
+              }
+            },
+            {
+              "label": "Tertiary Phone Ownder",
+              "id": "tertiary_phone_ownder",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "17eeabd8-b3cd-5ae1-b600-9769174eadea"
+              }
+            },
+            {
+              "label": "Additional information to help locate patient",
+              "id": "additional_information_to_help_locate_patient",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2cebe220-2a9d-5c53-be68-f2257a4bfc9e"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

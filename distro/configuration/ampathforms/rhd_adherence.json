@@ -1,0 +1,154 @@
+{
+  "name": "RHD Oral Adherence",
+  "description": "ACT RHD registry \u2014 RHD Oral Adherence",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Oral Adherence",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Oral Adherence",
+      "sections": [
+        {
+          "label": "Oral adherence",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weeks in Reporting Period",
+              "id": "weeks_in_reporting_period",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "75cd7e15-5f05-58d1-acb1-4a046eb1b437"
+              },
+              "required": true
+            },
+            {
+              "label": "Adherence Estimage",
+              "id": "adherence_estimage",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8edff8dc-4af6-5d0f-bf1d-8e349c7a1b15"
+              },
+              "required": true
+            },
+            {
+              "label": "Adherence Estimate Based On",
+              "id": "adherence_estimate_based_on",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4313005d-d5b2-5d20-bf33-39aab1bf90c0",
+                "answers": [
+                  {
+                    "label": "Pill count",
+                    "concept": "204eaab6-8380-5d21-8b4a-a066eb17dcca",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Patient report",
+                    "concept": "1795c346-64df-54e3-aca1-a2855c8cc740",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Calendar",
+                    "concept": "5835eb9e-1e31-5866-9de7-1715dd4b7156",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other non-coded",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "required": true
+            },
+            {
+              "label": "Other Details (Oral Adherence)",
+              "id": "other_details_oral_adherence",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3fd2d82e-c664-5d77-b151-daf328e77bd9"
+              },
+              "_specBranching": "if Dosing = Other"
+            },
+            {
+              "label": "Dosing (Oral Adherence)",
+              "id": "dosing_oral_adherence",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "82976c2a-61b0-5777-9c53-0535b0892f9c",
+                "answers": [
+                  {
+                    "label": "Once a day",
+                    "concept": "84ab709b-370e-5922-810e-08a2d9a6fac1",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Twice a day",
+                    "concept": "aa611030-275a-51c0-99d9-d610e88b50a7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other non-coded",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "required": true
+            },
+            {
+              "label": "Prescription Duration",
+              "id": "prescription_duration",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "cd03af00-de81-5c08-9a02-92f95c00e1ce",
+                "answers": [
+                  {
+                    "label": "1 month",
+                    "concept": "87bdee8a-aaf8-56e7-9e34-2b668873787d",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "3 months",
+                    "concept": "30f01ae8-2fc0-5ac2-be59-a573b38d73d5",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "6 months",
+                    "concept": "35d3bb08-35fb-5377-8d8f-3edd73c1178b",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "12 months",
+                    "concept": "63726df8-d924-54fe-b88b-b8bc9749632b",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "required": true
+            },
+            {
+              "label": "Tablets Given/Prescribed",
+              "id": "tablets_given_prescribed",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f1343ee0-b1ed-5145-949e-dba989f81cf7"
+              },
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

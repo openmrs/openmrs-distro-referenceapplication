@@ -1,0 +1,125 @@
+{
+  "name": "RHD Allergies",
+  "description": "ACT RHD registry \u2014 RHD Allergies",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Consultation Visit",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Allergies",
+      "sections": [
+        {
+          "label": "Allergies",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Penicillin Allergy",
+              "id": "penicillin_allergy",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5cc3b707-b8ea-52ee-8e82-ea4de393a4a5",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "No",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "required": true
+            },
+            {
+              "label": "Evidence",
+              "id": "evidence",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "de49e440-3360-5350-b79d-c9cf45c5034c",
+                "answers": [
+                  {
+                    "label": "Patient reported reaction",
+                    "concept": "e67c5bd8-5a94-5c0d-b269-ba975671a46c",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Clinician reported reaction",
+                    "concept": "515378af-2fa3-5a44-83ad-e95d74a535a4",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "required": true,
+              "_specBranching": "If Penicillin Allergy = Yes"
+            },
+            {
+              "label": "Reaction (Allergies)",
+              "id": "reaction_allergies_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "62cb455e-c9f9-5a7a-b521-ac6c68f0fe5d"
+              },
+              "questions": [
+                {
+                  "label": "Reaction (Allergies)",
+                  "id": "reaction_allergies",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "62cb455e-c9f9-5a7a-b521-ac6c68f0fe5d",
+                    "answers": [
+                      {
+                        "label": "Rash",
+                        "concept": "512AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Trouble breathing",
+                        "concept": "3b242d01-dada-5588-9f45-e87da22e7ec8",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Lip swelling",
+                        "concept": "9e6907fe-1c65-518f-9e1e-1e0189932e95",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Stomach upset",
+                        "concept": "a5d49b91-273a-5506-8575-674165374abc",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Diarrhea",
+                        "concept": "142412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": true
+                }
+              ]
+            },
+            {
+              "label": "Other Allergies",
+              "id": "other_allergies",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3d8f718f-a8bb-5729-afe1-2f91f0a2155c"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

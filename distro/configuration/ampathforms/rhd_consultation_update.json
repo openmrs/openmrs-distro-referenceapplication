@@ -1,0 +1,87 @@
+{
+  "name": "RHD Consultation Update",
+  "description": "ACT RHD registry \u2014 RHD Consultation Update",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Consultation Visit",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Consultation Update",
+      "sections": [
+        {
+          "label": "RHD consultation update",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Follow-up Appointments",
+              "id": "follow_up_appointments_group",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "group",
+                "concept": "a53ea77c-8671-58b0-8011-6bd7fecc8b01"
+              },
+              "questions": [
+                {
+                  "label": "Follow-up Appointments",
+                  "id": "follow_up_appointments",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "a53ea77c-8671-58b0-8011-6bd7fecc8b01",
+                    "answers": [
+                      {
+                        "label": "RHD clinic",
+                        "concept": "aa0fc44c-3214-5916-86db-c13d4ea4654e",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Tertiary center",
+                        "concept": "93549872-2856-542e-becc-809e772d98ba",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Reason for RHD Clinic Appointment",
+              "id": "reason_for_rhd_clinic_appointment",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5ce0cc9b-69e6-5c52-ac07-c713b2f3c466",
+                "answers": [
+                  {
+                    "label": "General medical review",
+                    "concept": "0f8929d8-e3e6-5ccd-9b64-6bb64c6fbce9",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Echocardiogram",
+                    "concept": "18f7cc75-175f-5fde-ace2-c8988bdc37ec",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "ECG",
+                    "concept": "379e8e7e-5cf9-5425-a678-0c0257b64822",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other non-coded",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "_specBranching": "Follow-up Appointments = RHD Clinic"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
