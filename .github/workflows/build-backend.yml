@@ -49,6 +49,9 @@ on:
         required: true
       MAVEN_REPO_API_KEY:
         required: true
+  schedule:
+    # every day at 8:30 PM UTC on Saturday
+    - cron: '30 20 * * 6'
 
 env:
   IMAGE: openmrs/openmrs-reference-application-3-backend
