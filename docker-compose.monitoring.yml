@@ -33,7 +33,7 @@ services:
   alloy:
     image: grafana/alloy:v1.13.1
     environment:
-      ALLOY_OTLP_ENDPOINT: ${ALLOY_OTLP_ENDPOINT:}
+      ALLOY_OTLP_ENDPOINT: ${ALLOY_OTLP_ENDPOINT:-}
       ALLOY_OTLP_HEADERS: ${ALLOY_OTLP_HEADERS:-}
       ALLOY_OTLP_INSECURE: ${ALLOY_OTLP_INSECURE:-false}
     volumes:
