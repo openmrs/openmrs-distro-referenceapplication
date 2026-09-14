@@ -30,23 +30,6 @@ services:
             monitoring-init:
                 condition: service_completed_successfully
 
-    cadvisor:
-        image: gcr.io/cadvisor/cadvisor:v0.55.1
-        container_name: cadvisor
-        privileged: true
-        devices:
-          - /dev/kmsg
-        volumes:
-          - /:/rootfs:ro
-          - /sys:/sys:ro
-          - /var/lib/docker/:/var/lib/docker:ro
-          - /run/containerd/containerd.sock:/run/containerd/containerd.sock:ro
-          - /var/run/docker.sock:/var/run/docker.sock:ro
-        command:
-          - --docker_only=true
-          - --store_container_labels=true
-          - --docker=unix:///var/run/docker.sock
-
     alloy:
         image: grafana/alloy:v1.13.1
         volumes:
