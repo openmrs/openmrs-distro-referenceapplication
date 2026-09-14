@@ -20,8 +20,6 @@ rm -f /etc/alloy/*.alloy
 
 case "${MONITORING_MODE}" in
   bundled)
-    cp /monitoring/alloy/openmrs-bundled.alloy /etc/alloy/openmrs.alloy
-    cp /monitoring/alloy/cadvisor-bundled.alloy /etc/alloy/cadvisor.alloy
     cp /monitoring/alloy/logs.alloy /etc/alloy/logs.alloy
     ;;
 
