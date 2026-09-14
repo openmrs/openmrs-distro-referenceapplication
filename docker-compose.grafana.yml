@@ -12,6 +12,8 @@ services:
     monitoring-init:
         image: openmrs/openmrs-reference-application-3-monitoring-init:${TAG:-qa}
         build: ./monitoring
+        environment:
+          MONITORING_MODE: bundled
         volumes:
             - loki-data:/loki/data
             - loki-config:/etc/loki
