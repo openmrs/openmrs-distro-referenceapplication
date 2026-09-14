@@ -38,14 +38,14 @@ services:
       ALLOY_OTLP_INSECURE: ${ALLOY_OTLP_INSECURE:-false}
     volumes:
       - alloy-config:/etc/alloy
-    command: >
-      run
-      # Experimental stability is required for honor_metadata, which preserves
-      # Prometheus metric types when converting cAdvisor metrics to OpenTelemetry.
-      --stability.level=experimental
-      --server.http.listen-addr=0.0.0.0:12345
-      --storage.path=/var/lib/alloy/data
-      /etc/alloy
+    # Experimental stability is required for honor_metadata, which preserves
+    # Prometheus metric types when converting cAdvisor metrics to OpenTelemetry.
+    command:
+      - run
+      - --stability.level=experimental
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+      - /etc/alloy
     depends_on:
       monitoring-init:
         condition: service_completed_successfully

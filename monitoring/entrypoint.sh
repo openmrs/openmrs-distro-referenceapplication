@@ -21,6 +21,7 @@ rm -f /etc/alloy/*.alloy
 case "${MONITORING_MODE}" in
   bundled)
     cp /monitoring/alloy/logs.alloy /etc/alloy/logs.alloy
+    cp /monitoring/alloy/prometheus.alloy /etc/alloy/prometheus.alloy
     ;;
 
   otlp)
