@@ -106,6 +106,13 @@ jobs:
         env:
           DIGEST: ${{ steps.build.outputs.digest }}
         run: cosign sign --yes "${IMAGE}@${DIGEST}"
+        name: Verify image signature
+        env:
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          cosign verify "${IMAGE}@${DIGEST}" \
+            certificate-identity="https://github.com/openmrs/openmrs-distro-referenceapplication/.github/workflcertificate-identity="https://github.com/${{ github.repository }}/.github/workflows/build-frontend.yml@${{ github.ref }}"ows/build-frontend.yml@refs/heads/main" \
+            certificate-oidc-issuer="https://token.actions.githubusercontent.com"
 
       - name: Extract spa-assemble-config.json
         run: |
