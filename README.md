@@ -266,23 +266,6 @@ Because the agent auto-instruments the whole web application, it exports HTTP se
 JDBC client metrics in addition to the `jvm.*` family. The provisioned dashboard plots the
 JVM metrics only; anything else the agent sends is still queryable in Prometheus.
 
-#### Configuration options
-
-| Variable | Default | Set by this stack | Description |
-|----------|---------------|-------------------|-------------|
-| `OMRS_OTEL_ENABLED` | `false` | `true` | Attaches the Java agent. Nothing is exported without it |
-| `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://localhost:4318` | `http://alloy:4318` | Where to send OTLP data |
-| `OTEL_EXPORTER_OTLP_PROTOCOL` | `http/protobuf` | (not set) | Set to `grpc` and use port `4317` if your collector only exposes gRPC |
-| `OTEL_SERVICE_NAME` | `unknown_service:java` | `openmrs-backend` | Becomes the Prometheus `job` label |
-| `OTEL_METRICS_EXPORTER` | `otlp` | `otlp` | Metrics exporter to use |
-| `OTEL_TRACES_EXPORTER` | `otlp` | `none` | Tracing is off; Alloy's OTLP receiver only forwards metrics |
-| `OTEL_LOGS_EXPORTER` | `otlp` | `none` | Log export is off; Alloy collects container logs from Docker instead |
-| `OTEL_RESOURCE_ATTRIBUTES` | (empty) | (not set) | Extra resource attributes, e.g. `service.instance.id=backend-0,deployment.environment.name=prod` |
-| `OTEL_JMX_TARGET_SYSTEM` | (empty) | (not set) | Collects JMX metrics for a known system, e.g. `tomcat` |
-
-To enable tracing, set `OTEL_TRACES_EXPORTER=otlp` and add a `traces` output to the OTLP
-receiver in `monitoring/config.alloy`, which currently forwards metrics only.
-
 #### Prometheus labels
 
 Alloy converts OTLP resource attributes into Prometheus labels:
