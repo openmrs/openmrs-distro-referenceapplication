@@ -259,8 +259,6 @@ shown here rather than the compose file itself.
 JVM metrics come from the OpenTelemetry Java agent, which is bundled in the `openmrs-core`
 base image (downloaded and checksum-verified in that image's Dockerfile). Setting
 `OMRS_OTEL_ENABLED=true` makes the backend's startup script attach the agent to Tomcat.
-No OpenMRS code reads the `OTEL_*` variables -- the agent picks them up from the
-environment itself, so this compose file is the entire configuration surface.
 
 The path is: Java agent -> OTLP/HTTP -> Alloy -> Prometheus -> Grafana.
 
@@ -270,7 +268,7 @@ JVM metrics only; anything else the agent sends is still queryable in Prometheus
 
 #### Configuration options
 
-| Variable | Agent default | Set by this stack | Description |
+| Variable | Default | Set by this stack | Description |
 |----------|---------------|-------------------|-------------|
 | `OMRS_OTEL_ENABLED` | `false` | `true` | Attaches the Java agent. Nothing is exported without it |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://localhost:4318` | `http://alloy:4318` | Where to send OTLP data |
