@@ -12,6 +12,11 @@ prometheus.scrape "cadvisor" {
   // (e.g. counter/gauge types) when converting cAdvisor metrics to OpenTelemetry.
   honor_metadata  = true
 
+  // cAdvisor's machine_* metrics reuse a machine-info timestamp that only
+  // advances every few minutes, so honouring it makes them go stale between
+  // refreshes. Stamping at scrape time keeps every series fresh.
+  honor_timestamps = false
+
   forward_to = [
     prometheus.relabel.cadvisor.receiver,
   ]
