@@ -37,7 +37,10 @@ services:
         privileged: true
         volumes:
             - /:/rootfs:ro
-            - /var/run:/var/run:ro
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            # cAdvisor's docker factory needs containerd too, otherwise it falls back to
+            # raw cgroups and emits no container names or labels (so no service_name).
+            - /run/containerd/containerd.sock:/run/containerd/containerd.sock:ro
             - /sys:/sys:ro
             - /var/lib/docker:/var/lib/docker:ro
             - /dev/disk:/dev/disk:ro
