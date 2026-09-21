@@ -8,6 +8,13 @@ prometheus.scrape "cadvisor" {
   job_name        = "cadvisor"
   scrape_interval = "15s"
 
+  // cAdvisor exposes explicit timestamps. The machine_* metrics reuse a
+  // machine-info timestamp that only advances every few minutes, so honouring
+  // it makes those series go stale between refreshes and drop out of queries.
+  // Stamping at scrape time keeps every series fresh; container_* timestamps
+  // are only a second or two old, so nothing meaningful is lost.
+  honor_timestamps = false
+
   forward_to = [
     prometheus.relabel.cadvisor.receiver,
   ]
