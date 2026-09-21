@@ -43,6 +43,12 @@ services:
     prometheus:
         image: prom/prometheus:v3.9.0
         container_name: prometheus
+        command:
+          # normal Prometheus behaviour
+          - --config.file=/etc/prometheus/prometheus.yml
+          - --storage.tsdb.path=/prometheus
+          # Alloy forwards OTLP metrics to Prometheus using the remote-write API.
+          - --web.enable-remote-write-receiver
         volumes:
             - prometheus-config:/etc/prometheus
             - prometheus_data:/prometheus
@@ -76,6 +82,35 @@ services:
                 condition: service_started
             monitoring-init:
                 condition: service_completed_successfully
+
+    backend:
+      environment:
+        # Attaches the OpenTelemetry Java agent. Nothing is exported without it.
+        OMRS_OTEL_ENABLED: "true"
+
+        # Where the agent sends OTLP data. Point this elsewhere if you run your
+        # own collector instead of the bundled Alloy.
+        OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://alloy:4318}
+
+        # Becomes the Prometheus `job` label. Change it if you run more than one
+        # backend and need to tell them apart in dashboards.
+        OTEL_SERVICE_NAME: ${OTEL_SERVICE_NAME:-openmrs-backend}
+
+        OTEL_METRICS_EXPORTER: otlp
+        # Off: Alloy's OTLP receiver only forwards metrics.
+        OTEL_TRACES_EXPORTER: none
+        # Off: Alloy collects container logs from Docker instead.
+        OTEL_LOGS_EXPORTER: none
+
+        # Transport and encoding for OTLP
+        # Valid values: http/protobuf, grpc, http/json.
+        OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+
+        # Extra resource attributes attached to every metric.
+        # OTEL_RESOURCE_ATTRIBUTES: service.instance.id=backend-0,deployment.environment.name=prod
+
+        # Collect JMX metrics for a known system, e.g. tomcat.
+        # OTEL_JMX_TARGET_SYSTEM: tomcat
 
 volumes:
     grafana-data:
