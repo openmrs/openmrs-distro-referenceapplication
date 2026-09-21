@@ -36,6 +36,6 @@ prometheus.relabel "cadvisor" {
   // OpenTelemetry, so `honor_metadata` is unnecessary and Alloy does not need
   // the experimental stability level.
   forward_to = [
-    prometheus.remote_write.default.receiver,
+    prometheus.remote_write.local.receiver,
   ]
 }

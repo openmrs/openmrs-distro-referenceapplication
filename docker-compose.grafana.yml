@@ -51,7 +51,6 @@ services:
             - alloy-config:/etc/alloy
         command:
             - run
-            - --stability.level=experimental
             - --server.http.listen-addr=0.0.0.0:12345
             - --storage.path=/var/lib/alloy/data
             - /etc/alloy

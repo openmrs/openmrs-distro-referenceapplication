@@ -55,7 +55,7 @@ prometheus.relabel "cadvisor" {
 otelcol.receiver.prometheus "cadvisor" {
   output {
     metrics = [
-      otelcol.processor.batch.external.input,
+      otelcol.processor.batch.metrics.input,
     ]
   }
 }
