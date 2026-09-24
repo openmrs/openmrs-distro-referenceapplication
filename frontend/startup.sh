@@ -47,11 +47,12 @@ else
 fi
 
 SPA_DEFAULT_LOCALE=${SPA_DEFAULT_LOCALE:-en_GB}
+SPA_ENV=${SPA_ENV:-production}
 
 # Substitute environment variables in the html file
 # This allows us to override parts of the compiled file at runtime
 if [ -f "/usr/share/nginx/html/index.html" ]; then
-  envsubst '${IMPORTMAP_URL} ${SPA_PATH} ${API_URL} ${SPA_CONFIG_URLS} ${SPA_DEFAULT_LOCALE}' < "/usr/share/nginx/html/index.html" | sponge "/usr/share/nginx/html/index.html"
+  envsubst '${IMPORTMAP_URL} ${SPA_PATH} ${API_URL} ${SPA_CONFIG_URLS} ${SPA_DEFAULT_LOCALE} ${SPA_ENV}' < "/usr/share/nginx/html/index.html" | sponge "/usr/share/nginx/html/index.html"
 fi
 
 if [ -f "/usr/share/nginx/html/service-worker.js" ]; then
