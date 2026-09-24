@@ -1,0 +1,24 @@
+name: Claude PR Review
+
+on:
+  pull_request_target:
+    types: [opened, ready_for_review, reopened]
+
+jobs:
+  review:
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    uses: openmrs/openmrs-contrib-gha-workflows/.github/workflows/claude-pr-review.yml@main
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    with:
+      extra_instructions: |
+        This is the OpenMRS Reference Application distribution repository. Pay particular attention to:
+
+        - Module version bumps in distribution config: ensure version coherence across modules and that all referenced modules exist in the configured Maven/npm repos.
+        - Docker base-image pinning: pin to specific tags or digests, not :latest.
+        - Migration-path implications: if a module bump includes Liquibase changes, call out whether existing deployments will need data migration.
+        - Configuration files (content packages, frontend configs): flag inconsistencies between backend module versions and frontend ESM versions.
+        - Liquibase changesets, if any, must be append-only — never edit historical changeSet id/author.
