@@ -1,0 +1,120 @@
+# ==============================
+# Augmenter: Michael Eniolade
+# 📦 NGINX Reverse Proxy Config
+# For OpenMRS SPA and Backend
+# ==============================
+
+# 1. 🔒 Dynamic Content-Security-Policy Based on Request URI
+map $request_uri $csp_header {
+    default "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'self' ${FRAME_ANCESTORS}; base-uri 'self';";
+
+    "~^/openmrs/(?:admin|dictionary|module|patientDashboard.form)/" 
+        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-ancestors 'self'; base-uri 'self';";
+
+    "~^/openmrs/owa" 
+        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; frame-ancestors 'self'; base-uri 'self';";
+}
+
+# 2. 🌐 Support for Proxy-Aware Headers
+map $http_x_forwarded_proto $forwarded_proto {
+    "~.*" $http_x_forwarded_proto;
+    default $scheme;
+}
+
+map $http_x_real_ip $forwarded_ip {
+    "~.*" $http_x_real_ip;
+    default $remote_addr;
+}
+
+map $forwarded_proto $var_proxy_cookie_flags {
+    https   "JSESSIONID secure; samesite=strict; HttpOnly";
+    default "off";
+}
+
+# 3. ⚙️ Upstream Definitions
+upstream frontend {
+    server frontend max_fails=0;
+}
+
+upstream backend {
+    server backend:8080 max_fails=0;
+}
+
+# 4. 🌐 Server Block for HTTP
+server {
+    listen 80;
+    server_name _;
+
+    # 📛 Redirect to HTTPS if applicable
+    # return 301 https://$host$request_uri;
+
+    # 🛡️ Security Headers
+    add_header Content-Security-Policy $csp_header always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "geolocation=(), microphone=()" always;
+
+    # 📬 Proxy Headers
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-Proto $forwarded_proto;
+    proxy_set_header X-Real-IP $forwarded_ip;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_http_version 1.1;
+
+    # 🍪 Optional: Secure cookies (uncomment if HTTPS is enabled)
+    # proxy_cookie_flags $var_proxy_cookie_flags;
+
+    # 📦 GZIP Compression for performance
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_proxied any;
+    gzip_http_version 1.1;
+    gzip_types
+        application/javascript
+        application/json
+        application/ld+json
+        application/fhir+json
+        application/fhir+xml
+        application/xml
+        application/xhtml+xml
+        application/manifest+json
+        application/rss+xml
+        application/atom+xml
+        application/geo+json
+        application/importmap+json
+        application/rdf+xml
+        text/css
+        text/html
+        text/javascript
+        text/plain
+        text/xml
+        image/svg+xml
+        font/otf
+        font/ttf
+        font/woff
+        font/woff2;
+
+    # 🔁 Relative URL support
+    absolute_redirect off;
+
+    # 🔃 Routes
+    location = /openmrs/spa {
+        return 301 /openmrs/spa/;
+    }
+
+    location /openmrs/spa/ {
+        proxy_pass http://frontend/;
+        proxy_redirect http://$host/ /openmrs/spa/;
+    }
+
+    location /openmrs {
+        proxy_pass http://backend;
+    }
+
+    location = / {
+        return 301 /openmrs/spa/;
+    }
+}
