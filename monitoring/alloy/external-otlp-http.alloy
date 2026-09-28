@@ -9,6 +9,7 @@ otelcol.processor.batch "external" {
 otelcol.exporter.otlphttp "external" {
   client {
     endpoint = sys.env("ALLOY_OTLP_ENDPOINT")
+    headers = encoding.from_json(coalesce(sys.env("ALLOY_OTLP_HEADERS"), "{}"))
 
     tls {
       insecure = sys.env("ALLOY_OTLP_INSECURE") == "true"

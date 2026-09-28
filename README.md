@@ -285,26 +285,9 @@ Metric names follow OpenTelemetry semantic conventions and are translated to Pro
 naming by Alloy, so upgrading the agent version in `openmrs-core` can rename series and
 require dashboard updates.
 
-#### Prometheus labels
-
-Alloy converts OTLP resource attributes into Prometheus labels:
-
-- `service.name` becomes the `job` label
-- `service.namespace`, if set, prefixes it as `job="<namespace>/<name>"`
-- `service.instance.id`, if set, becomes the `instance` label
-- all other resource attributes land on the `target_info` metric, reachable with a
-  `group_left` join on `(job, instance)`
-
-This stack sets only `OTEL_SERVICE_NAME`, so the JVM dashboard filters on
-`job="openmrs-backend"` alone. **If you run more than one backend replica, give each a
-unique `service.instance.id`** via `OTEL_RESOURCE_ATTRIBUTES` -- otherwise every replica
-writes to the same series and Prometheus rejects the duplicate samples.
-
-Metric names follow OpenTelemetry semantic conventions and are translated to Prometheus
-naming by Alloy, so upgrading the agent version in `openmrs-core` can rename series and
-require dashboard updates.
-
 ### Environment variables reference
+
+#### SSL/certificates
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -315,6 +298,21 @@ require dashboard updates.
 | `CERT_CONTACT_EMAIL` | (empty) | Email for Let's Encrypt notifications (required in prod mode) |
 | `CERT_RSA_KEY_SIZE` | `4096` | RSA key size for certificates |
 | `CERT_PROFILE` | (empty) | Certificate profile: `classic` (90 days), `tlsserver` (45 days), or `shortlived` (6 days). Auto-set to `shortlived` for IP addresses |
+
+#### Monitoring
+
+
+| Variable | Default | Overlay | Description |
+|----------|---------|---------|-------------|
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://alloy:4318` | m, g | Where the backend's OpenTelemetry agent sends OTLP data. Point this elsewhere if you run your own collector instead of the bundled Alloy |
+| `OTEL_SERVICE_NAME` | `openmrs-backend` | m, g | Becomes the Prometheus `job` label. Change it if you run more than one backend and need to tell them apart in dashboards |
+| `OTEL_RESOURCE_ATTRIBUTES` | (unset) | m, g | Extra resource attributes attached to every metric, e.g. `service.instance.id=backend-0,deployment.environment.name=prod` |
+| `OTEL_JMX_TARGET_SYSTEM` | (unset) | m, g | Collect JMX metrics for a known system, e.g. `tomcat` |
+| `ALLOY_OTLP_ENDPOINT` | (empty) | m | Upstream OTLP endpoint Alloy forwards metrics to, e.g. a Grafana Cloud or other vendor endpoint. Required: `monitoring-init` fails if it is unset |
+| `ALLOY_OTLP_PROTOCOL` | `grpc` | m | Protocol used for that upstream export. Valid values: `grpc`, `http` |
+| `ALLOY_OTLP_HEADERS` | (empty) | m | Headers sent with the upstream export, typically authentication. A JSON object, e.g. `{"Authorization":"Basic <base64>"}` |
+| `ALLOY_OTLP_INSECURE` | `false` | m | Set to `true` to skip TLS when talking to the upstream endpoint |
+| `GRAFANA_ADMIN_PASSWORD` | `Admin123` | g | Password for Grafana's `admin` user. Change this before exposing Grafana |
 
 ## Contributing to the configuration
 
