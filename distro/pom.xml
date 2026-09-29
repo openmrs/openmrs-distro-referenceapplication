@@ -60,6 +60,7 @@
     <!-- Content Packages -->
     <reference-content.version>1.4.0</reference-content.version>
     <reference-demo-content.version>1.9.3-SNAPSHOT</reference-demo-content.version>
+    <reference-showcase-content.version>1.0.0-SNAPSHOT</reference-showcase-content.version>
   </properties>
 
   <dependencies>
@@ -250,6 +251,29 @@
       <groupId>org.openmrs.module</groupId>
       <artifactId>tasks-omod</artifactId>
       <version>${tasks.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Content packages -->
+    <dependency>
+      <groupId>org.openmrs.content</groupId>
+      <artifactId>referenceapplication</artifactId>
+      <version>${reference-content.version}</version>
+      <type>zip</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.content</groupId>
+      <artifactId>referenceapplication-demo</artifactId>
+      <version>${reference-demo-content.version}</version>
+      <type>zip</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openmrs.content</groupId>
+      <artifactId>referenceapplication-showcase</artifactId>
+      <version>${reference-showcase-content.version}</version>
+      <type>zip</type>
       <scope>provided</scope>
     </dependency>
   </dependencies>
