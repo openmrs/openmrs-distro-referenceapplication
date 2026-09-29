@@ -237,8 +237,9 @@ jobs:
 
       - name: Commit containers
         run: |
-          backend_container_id=$(docker ps --filter ancestor=openmrs/openmrs-reference-application-3-backend:nightly --format '{{.ID}}')
-          db_container_id=$(docker ps --filter ancestor=mariadb:10.8.2 --format '{{.ID}}')
+          backend_container_id=$(docker compose -f docker-compose-no-volumes.yml ps -q backend)
+          db_container_id=$(docker compose -f docker-compose-no-volumes.yml ps -q db)
+          [ -n "$backend_container_id" ] && [ -n "$db_container_id" ] || { docker ps -a; echo "missing container id"; exit 1; }
           docker commit $backend_container_id openmrs/openmrs-reference-application-3-backend:nightly-with-data
           docker commit $db_container_id openmrs/openmrs-reference-application-3-db:nightly-with-data
 
