@@ -3,8 +3,22 @@
     "restrictByVisitLocationTag": true,
     "showUpcomingAppointments": true,
     "extensionSlots": {
-      "action-menu-patient-chart-items-slot": {
-        "order": ["order-basket-action-menu"]
+      "patient-chart": {
+        "remove": ["patient-chart-order-basket"]
+      },
+      "patient-chart-dashboard-slot": {
+        "remove": [
+          "patient-orders-summary-dashboard",
+          "test-results-summary-dashboard",
+          "billing-summary-dashboard-link",
+          "patient-appointments-summary-dashboard",
+          "programs-summary-dashboard",
+          "attachments-results-summary-dashboard",
+          "immunization-summary-dashboard",
+          "procedures-summary-dashboard",
+          "conditions-summary-dashboard",
+          "medications-summary-dashboard"
+        ]
       }
     }
   },
@@ -15,6 +29,7 @@
       }
     }
   },
+  
   "@openmrs/esm-laboratory-app": {
     "labTableColumns": ["name", "patientId", "urgency", "age", "sex", "totalOrders", "action"]
   },
@@ -96,6 +111,22 @@
     "logo": {
       "src": "${openmrsSpaBase}/act.png",
       "alt": "ACT logo"
+    }
+  },
+  "@openmrs/esm-home-app": {
+    "extensionSlots": {
+      "homepage-dashboard-slot": {
+        "remove": [
+          "clinical-appointments-dashboard-link",
+          "service-queues-dashboard-link",
+          "ward-dashboard-link",
+          "billing-dashboard-link",
+          "laboratory-dashboard-link"
+        ]
+      },
+      "homepage-widgets-slot": {
+        "remove": ["home-appointments"]
+      }
     }
   }
 }
