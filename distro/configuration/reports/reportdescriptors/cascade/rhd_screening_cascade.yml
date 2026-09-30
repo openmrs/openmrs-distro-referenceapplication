@@ -1,0 +1,15 @@
+key: rhdScreeningCascade
+uuid: "8b257a0c-7e96-5a01-9672-975cae3b0419"
+name: "RHD Screening Cascade"
+description: "Active patients through screening, confirmatory echo and heart disease diagnosis"
+parameters:
+  - key: endDate
+    type: java.util.Date
+    label: "As of date"
+datasets:
+  - key: screeningCascadeData
+    type: sql
+    config: "sql/rhd_screening_cascade.sql"
+designs:
+  - type: csv
+    uuid: "3723a374-a8f8-50ca-987c-e427eaf350e4"

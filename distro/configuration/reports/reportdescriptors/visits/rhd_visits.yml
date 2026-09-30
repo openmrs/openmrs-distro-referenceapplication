@@ -1,0 +1,18 @@
+key: rhdVisits
+uuid: "b2c3d4e5-f6a7-8901-abcd-234567890abc"
+name: "RHD Visits Report"
+description: "All RHD clinic visits (encounters) per patient within a date range, grouped by visit type"
+parameters:
+  - key: startDate
+    type: java.util.Date
+    label: "Start Date"
+  - key: endDate
+    type: java.util.Date
+    label: "End Date"
+datasets:
+  - key: visitsData
+    type: sql
+    config: "sql/rhd_visits.sql"
+designs:
+  - type: csv
+    uuid: "c3d4e5f6-a7b8-9012-cdef-345678901bcd"

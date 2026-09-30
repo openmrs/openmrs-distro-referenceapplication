@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="act3-admin-provider-1" author="act3">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">SELECT COUNT(*) FROM users WHERE system_id = 'admin'</sqlCheck>
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM provider p JOIN users u ON u.person_id = p.person_id WHERE u.system_id = 'admin' AND p.retired = 0</sqlCheck>
+        </preConditions>
+        <comment>Give the built-in admin user a provider, so admin can save forms in O3</comment>
+        <sql>
+            INSERT INTO provider (person_id, identifier, creator, date_created, retired, uuid)
+            SELECT person_id, 'admin', user_id, NOW(), 0, 'ba1e27d3-2c89-49fc-9851-3b509abcce93' FROM users WHERE system_id = 'admin'
+        </sql>
+    </changeSet>
+</databaseChangeLog>

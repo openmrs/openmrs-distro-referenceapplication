@@ -1,0 +1,18 @@
+key: rhdInrMonitoring
+uuid: "d3a1f2b4-7c8e-4f90-b123-456789abcdef"
+name: "RHD INR Monitoring Export"
+description: "Anticoagulation INR monitoring data for patients on Warfarin — all INR readings with target range and date"
+parameters:
+  - key: startDate
+    type: java.util.Date
+    label: "Start Date"
+  - key: endDate
+    type: java.util.Date
+    label: "End Date"
+datasets:
+  - key: inrData
+    type: sql
+    config: "sql/inr_monitoring.sql"
+designs:
+  - type: csv
+    uuid: "e4b2c3d5-f7a8-4901-bcde-567890abcdef"

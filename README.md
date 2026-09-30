@@ -15,6 +15,82 @@ The OpenMRS 3.x UI is accessible at http://localhost/openmrs/spa
 
 OpenMRS Legacy UI is accessible at http://localhost/openmrs
 
+### ACT Core
+
+The backend image builds the [ACT Core](https://github.com/DIGI-UW/openmrs-module-actcore) module from
+source at `ACTCORE_REF` (default `main`), so build it locally:
+
+```bash
+docker compose up --build
+docker compose build --build-arg ACTCORE_REF=<commit or branch> backend
+```
+
+ACT Core re-evaluates the flags daily, keeps a list per flag, answers the flag gap look-up, computes
+prophylaxis adherence, and loads the report descriptors at startup, which the reporting module skips on a
+fresh database.
+
+ACT's reports are YAML and SQL files in `distro/configuration/reports/reportdescriptors/`. How they are
+written and loaded, and what each returns, is in ACT Core's
+[docs/report-descriptors.md](https://github.com/DIGI-UW/openmrs-module-actcore/blob/main/docs/report-descriptors.md).
+
+The frontend image assembles the [ACT frontend module](https://github.com/DIGI-UW/openmrs-esm-act-app),
+`@mherman22/esm-act-app`, from npm at its `next` tag, alongside the RefApp's modules. It adds ACT home, the
+registry, and the workspace that lists the data missing behind a critical data flag. `docker compose up
+--build` builds the frontend image with it. Docker reuses the assembled modules until `CACHE_BUST` changes, so
+to pick up newer `next` versions, rebuild with `docker compose build --build-arg CACHE_BUST=$(date +%s) frontend`.
+
+ACT home is the landing page. The login app goes to `/home/act-home`, ACT home and Registry come first in
+the home page's left nav, and `defaultDashboardPerRole` in `frontend/config-core_demo.json` sends the
+RefApp's organizational roles and System Developer there too. ACT home needs View Patient Flags, which
+clinician roles get through `Privilege Level: High`.
+
+The RefApp apps ACT does not use are assembled but switched off in `frontend/config-core_demo.json`:
+Service Queues, Appointments, Billing, Laboratory, Wards, Bed Management, Stock Management, Dispensing and
+Patient lists,
+and the patient chart's Orders, Results, Programs, Attachments, Immunizations, Procedures, Conditions and
+Medications pages and order basket. Each is hidden by removing its links, widgets and buttons from the slots
+they appear in, with an `extensionSlots` `remove` list under the app that owns the slot. Another
+implementation that wants one back deletes its entries from those lists, with no rebuild:
+
+| App | Entries to delete |
+| --- | --- |
+| Service Queues | `service-queues-dashboard-link` (home), `queue-screen-link` (app menu), `visit-form-queue-fields` (start visit form), `queue-patient-info-queue-entry-status` (patient banner), `admin-service-queues-card-link` (system admin) |
+| Appointments | `clinical-appointments-dashboard-link`, `home-appointments` (home), `patient-appointments-summary-dashboard` (chart), `patient-upcoming-appointment-widget` (start visit form); set `showUpcomingAppointments` back to `true` |
+| Billing | `billing-dashboard-link` (home), `billing-summary-dashboard-link` (chart), `billing-checkin-form` (start visit form), `visit-bills-panel` (visit summary), `patient-banner-billing-tags`, `patient-banner-payment-status-tag` (patient banner), `billable-services-admin-card-link` (system admin) |
+| Laboratory | `laboratory-dashboard-link` (home) |
+| Wards | `ward-dashboard-link` (home) |
+| Bed Management | `bed-management-admin-card-link` (system admin) |
+| Stock Management | `stock-management-admin-card-link` (system admin) |
+| Dispensing | `dispensing-link` (app menu) |
+| Patient lists | `patient-lists-dashboard-link` (home), `add-patient-to-patient-list-button` (patient chart's Actions menu). ACT Core still keeps a list per flag; ACT home's worklist tiles count them and open the registry narrowed to the flag |
+| Chart pages | the entry for the page in `patient-chart-dashboard-slot`, and `patient-chart-order-basket` for the order basket |
+
+Hiding an app removes its entry points, not its pages: a user who types an app's address still reaches it.
+The backend modules stay in `distro/distro.properties`, because the RefApp's demo roles grant their
+privileges.
+
+To work on the module itself, run it from a checkout of it, with this repository beside it, and open
+http://localhost:8090/openmrs/spa:
+
+```bash
+npx openmrs develop --backend http://localhost --port 8090 \
+  --config-file ../openmrs-distro-referenceapplication/frontend/config-core_demo.json
+```
+
+Clinician roles get the View Patient Flags privilege from the second start of the backend after it is
+first created.
+
+Each critical data flag's criteria return a row per missing answer: the patient, the encounter, and
+the question. ACT Core lists those rows as the flag's gaps. When a patient has no encounter to point
+at yet, such as no RHD Consultation Visit, the flag still shows and the workspace offers a new form.
+
+Change a flag's criteria in `distro/configuration/flags/rhd_flags.csv` and restart the backend so
+Initializer loads it. Saving criteria through the patientflags REST API stores `<` as `&lt;`, which
+breaks every criterion that compares dates.
+
+ACT Core also computes each patient's prophylaxis adherence and next due date, daily, with ACT 2.0's
+calculation. The registry's BPG status and adherence columns and the care cascade's Adherent step read it.
+
 ### Production deployment with SSL
 
 For production deployments with HTTPS/SSL certificates, create a `.env` file in the project root:

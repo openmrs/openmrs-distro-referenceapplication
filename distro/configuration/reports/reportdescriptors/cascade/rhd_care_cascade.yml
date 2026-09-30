@@ -1,0 +1,15 @@
+key: rhdCareCascade
+uuid: "9c6751ae-65fc-5f25-9aa6-8c65cb1dff68"
+name: "RHD Care Cascade"
+description: "Active RHD patients through prophylaxis, regimen, BPG initiation and adherence"
+parameters:
+  - key: endDate
+    type: java.util.Date
+    label: "As of date"
+datasets:
+  - key: careCascadeData
+    type: sql
+    config: "sql/rhd_care_cascade.sql"
+designs:
+  - type: csv
+    uuid: "95dd9028-4d50-5263-a0b3-3bc99a7abb91"

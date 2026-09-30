@@ -1,10 +1,44 @@
 {
+  "@openmrs/esm-home-app": {
+    "defaultDashboardPerRole": {
+      "Organizational: Doctor": "act-home",
+      "Organizational: Nurse": "act-home",
+      "Organizational: Registration Clerk": "act-home",
+      "Organizational: System Administrator": "act-home",
+      "System Developer": "act-home"
+    },
+    "extensionSlots": {
+      "homepage-dashboard-slot": {
+        "order": [
+          "act-home-dashboard-link",
+          "act-registry-dashboard-link",
+          "act-waiting-list-dashboard-link",
+          "act-screen-positive-dashboard-link"
+        ],
+        "remove": [
+          "clinical-appointments-dashboard-link",
+          "service-queues-dashboard-link",
+          "ward-dashboard-link",
+          "billing-dashboard-link",
+          "laboratory-dashboard-link",
+          "patient-lists-dashboard-link"
+        ]
+      },
+      "homepage-widgets-slot": {
+        "remove": [
+          "home-appointments"
+        ]
+      }
+    }
+  },
   "@openmrs/esm-patient-chart-app": {
     "restrictByVisitLocationTag": true,
-    "showUpcomingAppointments": true,
+    "showUpcomingAppointments": false,
     "extensionSlots": {
       "patient-chart": {
-        "remove": ["patient-chart-order-basket"]
+        "remove": [
+          "patient-chart-order-basket"
+        ]
       },
       "patient-chart-dashboard-slot": {
         "remove": [
@@ -19,19 +53,60 @@
           "conditions-summary-dashboard",
           "medications-summary-dashboard"
         ]
+      },
+      "patient-banner-tags-slot": {
+        "remove": [
+          "queue-patient-info-queue-entry-status",
+          "patient-banner-billing-tags",
+          "patient-banner-payment-status-tag"
+        ]
+      },
+      "visit-form-top-slot": {
+        "remove": [
+          "patient-upcoming-appointment-widget"
+        ]
+      },
+      "visit-form-bottom-slot": {
+        "remove": [
+          "visit-form-queue-fields"
+        ]
+      },
+      "extra-visit-attribute-slot": {
+        "remove": [
+          "billing-checkin-form"
+        ]
+      },
+      "visit-summary-panels": {
+        "remove": [
+          "visit-bills-panel"
+        ]
+      },
+      "patient-actions-slot": {
+        "remove": [
+          "add-patient-to-patient-list-button"
+        ]
       }
     }
   },
   "@openmrs/esm-ward-app": {
     "extensionSlots": {
       "action-menu-ward-patient-items-slot": {
-        "add": ["order-basket-action-menu"]
+        "add": [
+          "order-basket-action-menu"
+        ]
       }
     }
   },
-  
   "@openmrs/esm-laboratory-app": {
-    "labTableColumns": ["name", "patientId", "urgency", "age", "sex", "totalOrders", "action"]
+    "labTableColumns": [
+      "name",
+      "patientId",
+      "urgency",
+      "age",
+      "sex",
+      "totalOrders",
+      "action"
+    ]
   },
   "@openmrs/esm-styleguide": {
     "Brand color #1": "#005d5d"
@@ -43,7 +118,10 @@
     },
     "extensionSlots": {
       "app-menu-slot": {
-        "remove": ["dispensing-link"]
+        "remove": [
+          "dispensing-link",
+          "queue-screen-link"
+        ]
       }
     }
   },
@@ -52,7 +130,12 @@
       "fdd6f720-743b-57fc-915a-87c0f571097b",
       "060a2595-da89-5509-8cf4-645a8e50ad8a"
     ],
-    "sections": ["demographics", "contact", "relationships", "rhd-registration"],
+    "sections": [
+      "demographics",
+      "contact",
+      "relationships",
+      "rhd-registration"
+    ],
     "sectionDefinitions": [
       {
         "id": "rhd-registration",
@@ -81,8 +164,14 @@
         "label": "Consent Obtained",
         "showHeading": true,
         "customConceptAnswers": [
-          { "uuid": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3", "label": "Yes" },
-          { "uuid": "488b58ff-64f5-4f8a-8979-fa79940b1594", "label": "No" }
+          {
+            "uuid": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+            "label": "Yes"
+          },
+          {
+            "uuid": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+            "label": "No"
+          }
         ]
       },
       {
@@ -106,31 +195,89 @@
         "label": "Text-It Settings",
         "showHeading": true,
         "customConceptAnswers": [
-          { "uuid": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3", "label": "Yes" },
-          { "uuid": "488b58ff-64f5-4f8a-8979-fa79940b1594", "label": "No" }
+          {
+            "uuid": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+            "label": "Yes"
+          },
+          {
+            "uuid": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+            "label": "No"
+          }
         ]
       }
     ]
   },
   "@openmrs/esm-login-app": {
+    "links": {
+      "loginSuccess": "${openmrsSpaBase}/home/act-home"
+    },
     "logo": {
       "src": "${openmrsSpaBase}/act.png",
       "alt": "ACT logo"
     }
   },
-  "@openmrs/esm-home-app": {
-    "extensionSlots": {
-      "homepage-dashboard-slot": {
-        "remove": [
-          "clinical-appointments-dashboard-link",
-          "service-queues-dashboard-link",
-          "ward-dashboard-link",
-          "billing-dashboard-link",
-          "laboratory-dashboard-link"
-        ]
+  "@openmrs/esm-app-shell": {
+    "Enabled feature flags": [
+      "patient-flags"
+    ]
+  },
+  "@openmrs/esm-patient-flags-app": {
+    "allowFlagDeletion": false,
+    "tagActions": [
+      {
+        "tagName": "RHD",
+        "workspace": "clinical-forms-workspace"
       },
-      "homepage-widgets-slot": {
-        "remove": ["home-appointments"]
+      {
+        "tagName": "Critical data",
+        "workspace": "rhd-flag-gaps-workspace"
+      }
+    ],
+    "priorities": [
+      {
+        "priority": "RHD High",
+        "color": "red",
+        "isRiskPriority": true
+      },
+      {
+        "priority": "RHD Data Quality"
+      }
+    ]
+  },
+  "@mherman22/esm-act-app": {
+    "registry": {
+      "showBpgColumns": true
+    }
+  },
+  "@openmrs/esm-fast-data-entry-app": {
+    "formCategories": [
+      {
+        "name": "Prophylaxis",
+        "forms": [
+          {
+            "formUUID": "0119d2e6-e2e1-391c-9b88-d59a10b0780d",
+            "name": "Enter BPG"
+          },
+          {
+            "formUUID": "ba29e982-ce18-302a-9fc4-d4b2c3983465",
+            "name": "Enter oral prophylaxis"
+          }
+        ]
+      }
+    ],
+    "formCategoriesToShow": [
+      "Prophylaxis"
+    ]
+  },
+  "@openmrs/esm-system-admin-app": {
+    "extensionSlots": {
+      "system-admin-page-card-link-slot": {
+        "remove": [
+          "admin-service-queues-card-link",
+          "billable-services-admin-card-link",
+          "bed-management-admin-card-link",
+          "stock-management-admin-card-link"
+        ]
       }
     }
   }

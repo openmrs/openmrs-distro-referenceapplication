@@ -67,6 +67,13 @@ services:
       - ./distro/configuration/locations:/openmrs/distribution/openmrs_config/locations:ro
       - ./distro/configuration/idgen:/openmrs/distribution/openmrs_config/idgen:ro
       - ./distro/configuration/autogenerationoptions:/openmrs/distribution/openmrs_config/autogenerationoptions:ro
+      - ./distro/configuration/flagpriorities:/openmrs/distribution/openmrs_config/flagpriorities:ro
+      - ./distro/configuration/flagtags:/openmrs/distribution/openmrs_config/flagtags:ro
+      - ./distro/configuration/flags:/openmrs/distribution/openmrs_config/flags:ro
+      - ./distro/configuration/privileges:/openmrs/distribution/openmrs_config/privileges/rhd:ro
+      - ./distro/configuration/globalproperties/rhd:/openmrs/distribution/openmrs_config/globalproperties/rhd:ro
+      - ./distro/configuration/liquibase:/openmrs/distribution/openmrs_config/liquibase:ro
+      - ./distro/configuration/reports:/openmrs/distribution/openmrs_config/reports:ro
 
 
   # MariaDB

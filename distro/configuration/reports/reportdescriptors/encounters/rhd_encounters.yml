@@ -1,0 +1,18 @@
+key: rhdEncounters
+uuid: "d4e5f6a7-b8c9-0123-def0-456789012cde"
+name: "RHD Encounters Export"
+description: "All RHD encounters within a date range — one row per encounter with patient, type, location and provider"
+parameters:
+  - key: startDate
+    type: java.util.Date
+    label: "Start Date"
+  - key: endDate
+    type: java.util.Date
+    label: "End Date"
+datasets:
+  - key: encountersData
+    type: sql
+    config: "sql/rhd_encounters.sql"
+designs:
+  - type: csv
+    uuid: "e5f6a7b8-c9d0-1234-ef01-567890123def"

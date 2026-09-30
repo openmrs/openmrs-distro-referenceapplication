@@ -1,0 +1,18 @@
+key: rhdPatients
+uuid: "f1a2b3c4-d5e6-7890-abcd-ef1234567890"
+name: "RHD Patient List"
+description: "All registered RHD patients with demographics, identifiers, program enrollment and diagnosis category"
+parameters:
+  - key: startDate
+    type: java.util.Date
+    label: "Enrolled from"
+  - key: endDate
+    type: java.util.Date
+    label: "Enrolled to"
+datasets:
+  - key: patientData
+    type: sql
+    config: "sql/rhd_patients.sql"
+designs:
+  - type: csv
+    uuid: "a2b3c4d5-e6f7-8901-bcde-f12345678901"
