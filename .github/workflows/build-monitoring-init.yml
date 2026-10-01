@@ -13,9 +13,8 @@ on:
         required: false
         default: 'nightly'
       docker_image_tag_version:
-        description: 'Docker image version tag (e.g., 3.7.x)'
+        description: 'Docker image version tag override (default: derived from pom.xml, e.g. 3.8.x for 3.8.0-SNAPSHOT, 3.8.0-rc.1 or 3.8.0)'
         required: false
-        default: '3.7.x'
       docker_image_tag_env:
         description: 'Docker image environment tag (e.g., dev3)'
         required: false
@@ -29,7 +28,7 @@ on:
       docker_image_tag_version:
         required: false
         type: string
-        default: '3.7.x'
+        default: ''
       docker_image_tag_env:
         required: false
         type: string
@@ -47,7 +46,6 @@ on:
 env:
   IMAGE: openmrs/openmrs-reference-application-3-monitoring-init
   DOCKER_IMAGE_TAG: ${{ inputs.docker_image_tag || 'nightly' }}
-  DOCKER_IMAGE_TAG_VERSION: ${{ inputs.docker_image_tag_version || '3.7.x' }}
   DOCKER_IMAGE_TAG_ENV: ${{ inputs.docker_image_tag_env || 'dev3' }}
   DOCKER_IMAGE_PLATFORMS: linux/amd64,linux/arm64
 
@@ -67,6 +65,11 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ inputs.ref || github.sha }}
+
+      - name: Resolve version tag
+        uses: ./.github/actions/resolve-version-tag
+        with:
+          override: ${{ inputs.docker_image_tag_version }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0

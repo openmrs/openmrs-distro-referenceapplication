@@ -11,10 +11,11 @@ on:
         required: false
         type: string
         default: 'nightly'
+      # Leave empty to have each build derive the version tag from pom.xml at `ref`.
       docker_image_tag_version:
         required: false
         type: string
-        default: '3.7.x'
+        default: ''
       docker_image_tag_env:
         required: false
         type: string
@@ -42,14 +43,13 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Require non-empty ref and image tags
+      - name: Require non-empty ref and image tag
         env:
           REF: ${{ inputs.ref }}
           TAG: ${{ inputs.docker_image_tag }}
-          VERSION: ${{ inputs.docker_image_tag_version }}
         run: |
           set -euo pipefail
-          for v in REF TAG VERSION; do
+          for v in REF TAG; do
             [ -n "${!v}" ] || { echo "::error::build-all was called with an empty $v — check the caller's inputs"; exit 1; }
           done
 

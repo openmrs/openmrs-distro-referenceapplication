@@ -317,7 +317,6 @@ jobs:
     with:
       ref: ${{ inputs.release_version }}
       docker_image_tag: ${{ inputs.release_version }}
-      docker_image_tag_version: ${{ inputs.release_version }}
       docker_image_tag_env: demo
     secrets:
       DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}

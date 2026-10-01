@@ -1,0 +1,34 @@
+name: Resolve version tag
+description: >-
+  Sets DOCKER_IMAGE_TAG_VERSION for the remaining steps of the job. Uses `override` when given;
+  otherwise derives the X.Y.x line tag from the version in the root pom.xml, so the repository
+  must already be checked out. Every build in a line (3.8.0-SNAPSHOT, 3.8.0-rc.1, 3.8.0, ...)
+  maps to the same tag (3.8.x), which therefore points at the most recently published image.
+inputs:
+  override:
+    description: Explicit version tag to use instead of deriving one from pom.xml
+    required: false
+    default: ''
+runs:
+  using: composite
+  steps:
+    - name: Resolve version tag
+      shell: bash
+      env:
+        OVERRIDE: ${{ inputs.override }}
+      run: |
+        set -euo pipefail
+        if [ -n "$OVERRIDE" ]; then
+          TAG="$OVERRIDE"
+        else
+          VERSION=$(python3 -c "import xml.etree.ElementTree as ET; print(ET.parse('pom.xml').getroot().find('{http://maven.apache.org/POM/4.0.0}version').text.strip())")
+          if [[ "$VERSION" =~ ^([0-9]+\.[0-9]+)\.[0-9]+(-.+)?$ ]]; then
+            TAG="${BASH_REMATCH[1]}.x"
+          else
+            echo "::error::cannot derive a version tag from pom.xml version '$VERSION' (expected X.Y.Z or X.Y.Z-qualifier)"; exit 1
+          fi
+        fi
+        [[ "$TAG" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}$ ]] \
+          || { echo "::error::'$TAG' is not a valid Docker tag"; exit 1; }
+        echo "Version tag: $TAG"
+        echo "DOCKER_IMAGE_TAG_VERSION=$TAG" >> "$GITHUB_ENV"
