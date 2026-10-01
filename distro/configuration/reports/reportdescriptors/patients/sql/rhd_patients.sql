@@ -108,12 +108,38 @@ SELECT
         ORDER BY e_amt.encounter_datetime DESC, amt.obs_id DESC LIMIT 1
     )                                                               AS next_consultation_date,
 
-    -- ACT 2.0's BPG status chip counted whole days to a due date at midnight, so 7 days out is approaching.
-    CASE WHEN MAX(adh.injection_interval_days) > 0 AND MAX(adh.next_due) IS NOT NULL THEN
-        CASE WHEN DATEDIFF(MAX(adh.next_due), CURDATE()) < 0 THEN 'Not covered'
-             WHEN DATEDIFF(MAX(adh.next_due), CURDATE()) <= 7 THEN 'Deadline approaching'
-             ELSE 'Covered' END
+    -- No prescription also needs the latest consultation to prescribe none in force, as the table is rebuilt nightly.
+    CASE
+        WHEN (MAX(adh.injection_interval_days) IS NULL
+              OR MAX(adh.regimen_concept_id) = (SELECT concept_id FROM concept WHERE uuid = '1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))
+         AND NOT EXISTS (
+                SELECT 1
+                FROM obs o_rx
+                WHERE o_rx.voided = 0
+                  AND o_rx.concept_id = (SELECT concept_id FROM concept WHERE uuid = '668e0221-8b41-5669-9ad8-78e193d42494')
+                  AND o_rx.value_coded <> (SELECT concept_id FROM concept WHERE uuid = '1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+                  AND o_rx.encounter_id = (
+                        SELECT o_last.encounter_id
+                        FROM obs o_last
+                        WHERE o_last.person_id = p.person_id AND o_last.voided = 0 AND o_last.value_coded IS NOT NULL
+                          AND o_last.concept_id = (SELECT concept_id FROM concept WHERE uuid = '668e0221-8b41-5669-9ad8-78e193d42494')
+                        ORDER BY o_last.obs_datetime DESC, o_last.obs_id DESC LIMIT 1
+                      )
+                  AND NOT EXISTS (
+                        SELECT 1 FROM obs o_stop
+                        WHERE o_stop.obs_group_id = o_rx.obs_group_id AND o_stop.voided = 0
+                          AND o_stop.concept_id = (SELECT concept_id FROM concept WHERE uuid = 'd75edc42-3213-5a06-9228-4e5735b9594b')
+                          AND DATE(o_stop.value_datetime) <= CURDATE()
+                      )
+             ) THEN 'No prescription'
+        -- ACT 2.0's BPG status chip counted whole days to a due date at midnight, so 7 days out is approaching.
+        WHEN MAX(adh.injection_interval_days) > 0 AND MAX(adh.next_due) IS NOT NULL THEN
+            CASE WHEN DATEDIFF(MAX(adh.next_due), CURDATE()) < 0 THEN 'Not covered'
+                 WHEN DATEDIFF(MAX(adh.next_due), CURDATE()) <= 7 THEN 'Deadline approaching'
+                 ELSE 'Covered' END
     END                                                             AS bpg_status,
+    DATE(MAX(adh.next_due))                                         AS next_due_date,
+    DATEDIFF(MAX(adh.next_due), CURDATE())                          AS days_until_due,
     ROUND(MAX(adh.adherence) * 100)                                 AS adherence,
 
     -- Clinics, from the Assigned Cardiac Clinic and Health Center location attributes
