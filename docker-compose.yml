@@ -21,7 +21,8 @@ services:
       timeout: 5s
     volumes:
       - ./frontend/config-core_demo.json:/usr/share/nginx/html/config-core_demo.json:ro
-      - ./frontend/act.png:/usr/share/nginx/html/act.png:ro
+      - ./frontend/act-registry-header.svg:/usr/share/nginx/html/act-registry-header.svg:ro
+      - ./frontend/act-registry-login.svg:/usr/share/nginx/html/act-registry-login.svg:ro
     depends_on:
       - backend
 
