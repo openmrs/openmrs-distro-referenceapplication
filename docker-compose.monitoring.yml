@@ -1,0 +1,75 @@
+#    This Source Code Form is subject to the terms of the Mozilla Public License,
+#    v. 2.0. If a copy of the MPL was not distributed with this file, You can
+#    obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+#    the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+#
+#    Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+#    graphic logo is a trademark of OpenMRS Inc.
+
+# To test this overlay, use the sample OTLP collector setup at
+# https://gist.github.com/jayasanka-sack/e8c91436df75768257c7e40bc6b4b433
+
+services:
+  monitoring-init:
+    image: openmrs/openmrs-reference-application-3-monitoring-init:${TAG:-qa}
+    build: ./monitoring
+    environment:
+      MONITORING_MODE: otlp
+      ALLOY_OTLP_ENDPOINT: ${ALLOY_OTLP_ENDPOINT:-}
+      ALLOY_OTLP_PROTOCOL: ${ALLOY_OTLP_PROTOCOL:-http}
+    volumes:
+      - alloy-config:/etc/alloy
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.55.1
+    privileged: true
+    command:
+      - --docker_only=true
+      - --store_container_labels=false
+      - --whitelisted_container_labels=com.docker.compose.service,com.docker.compose.project
+      - --enable_metrics=cpu,memory,network,disk,diskIO,oom_event
+      - --housekeeping_interval=15s
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /dev/disk:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+
+  alloy:
+    image: grafana/alloy:v1.13.1
+    environment:
+      ALLOY_OTLP_ENDPOINT: ${ALLOY_OTLP_ENDPOINT:-}
+      ALLOY_OTLP_HEADERS: ${ALLOY_OTLP_HEADERS:-}
+      ALLOY_OTLP_INSECURE: ${ALLOY_OTLP_INSECURE:-false}
+      ALLOY_COMPOSE_PROJECT: ${COMPOSE_PROJECT_NAME}
+    volumes:
+      - alloy-config:/etc/alloy
+    # Experimental stability is required for honor_metadata, which preserves
+    # Prometheus metric types when converting cAdvisor metrics to OpenTelemetry.
+    command:
+      - run
+      - --stability.level=experimental
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+      - /etc/alloy
+    depends_on:
+      monitoring-init:
+        condition: service_completed_successfully
+
+  backend:
+    environment:
+      OMRS_OTEL_ENABLED: "true"
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://alloy:4318}
+      OTEL_SERVICE_NAME: ${OTEL_SERVICE_NAME:-openmrs-backend}
+      OTEL_METRICS_EXPORTER: otlp
+      OTEL_TRACES_EXPORTER: none
+      OTEL_LOGS_EXPORTER: none
+      OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+      OTEL_RESOURCE_ATTRIBUTES:
+      OTEL_JMX_TARGET_SYSTEM:
+
+volumes:
+  alloy-config:
