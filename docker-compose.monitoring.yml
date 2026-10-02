@@ -36,6 +36,7 @@ services:
       ALLOY_OTLP_ENDPOINT: ${ALLOY_OTLP_ENDPOINT:-}
       ALLOY_OTLP_HEADERS: ${ALLOY_OTLP_HEADERS:-}
       ALLOY_OTLP_INSECURE: ${ALLOY_OTLP_INSECURE:-false}
+      ALLOY_COMPOSE_PROJECT: ${COMPOSE_PROJECT_NAME}
     volumes:
       - alloy-config:/etc/alloy
     # Experimental stability is required for honor_metadata, which preserves
