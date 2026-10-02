@@ -1,6 +1,6 @@
 -- =============================================================================
 -- RHD Care Cascade
--- Equivalent to RhdCareCascadeReportManager (migrated from Java to YAML descriptor)
+-- Step names are the ACT Registry prototype's; ACT home's widget matches them by name.
 -- Parameter: @endDate
 -- =============================================================================
 WITH rhd_active AS (
@@ -45,15 +45,21 @@ bpg AS (
     WHERE regimen_uuid IN ('50be4b26-6c5b-5aaa-9254-3bfd313b4522','2f3ee632-dd14-51b0-a4ec-de10e7958019',
                            '91230c88-6a90-5d45-af50-fa6155fe5dd7')
 ),
+initiated AS (
+    SELECT b.person_id FROM bpg b
+    WHERE EXISTS (SELECT 1 FROM obs d WHERE d.person_id = b.person_id AND d.voided = 0
+                    AND d.concept_id = (SELECT concept_id FROM concept WHERE uuid = '5bcc7d12-b279-5955-815c-090a1f392071')
+                    AND d.value_datetime IS NOT NULL AND d.obs_datetime <= @endDate)
+),
 -- ACT Core's adherence as of its last run, not the end date.
 adherence AS (
-    SELECT b.person_id, a.adherence
+    SELECT b.person_id, a.adherence, a.next_due
     FROM bpg b
     JOIN actcore_prophylaxis_adherence a ON a.patient_id = b.person_id
 )
 SELECT 1 AS step_order, 'Active' AS step, COUNT(*) AS patients FROM rhd_active
 UNION ALL
-SELECT 2, 'Prescribed Prophylaxis', COUNT(*) FROM prescribed
+SELECT 2, 'Prescribed', COUNT(*) FROM prescribed
 UNION ALL
 SELECT 3, 'Oral', COUNT(*) FROM prescribed
  WHERE regimen_uuid IN ('b9884219-358a-594b-94f5-f8a8863a25f3','f2e06eb2-5c25-5e53-9e01-246112d05976',
@@ -62,10 +68,11 @@ SELECT 3, 'Oral', COUNT(*) FROM prescribed
 UNION ALL
 SELECT 4, 'BPG', COUNT(*) FROM bpg
 UNION ALL
-SELECT 5, 'Initiated BPG', COUNT(*) FROM bpg b
- WHERE EXISTS (SELECT 1 FROM obs d WHERE d.person_id = b.person_id AND d.voided = 0
-                 AND d.concept_id = (SELECT concept_id FROM concept WHERE uuid = '5bcc7d12-b279-5955-815c-090a1f392071')
-                 AND d.value_datetime IS NOT NULL AND d.obs_datetime <= @endDate)
+SELECT 5, 'Initiated', COUNT(*) FROM initiated
 UNION ALL
-SELECT 6, 'Adherent', COUNT(*) FROM adherence WHERE adherence >= 0.8
+SELECT 6, 'Covered today', COUNT(*) FROM initiated i
+ JOIN adherence a ON a.person_id = i.person_id
+ WHERE DATE(a.next_due) >= DATE(@endDate)
+UNION ALL
+SELECT 7, 'Adherent (80%+)', COUNT(*) FROM adherence WHERE adherence >= 0.8
 ORDER BY step_order
