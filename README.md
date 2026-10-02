@@ -308,8 +308,8 @@ require dashboard updates.
 | `OTEL_SERVICE_NAME` | `openmrs-backend` | m, g | Becomes the Prometheus `job` label. Change it if you run more than one backend and need to tell them apart in dashboards |
 | `OTEL_RESOURCE_ATTRIBUTES` | (unset) | m, g | Extra resource attributes attached to every metric, e.g. `service.instance.id=backend-0,deployment.environment.name=prod` |
 | `OTEL_JMX_TARGET_SYSTEM` | (unset) | m, g | Collect JMX metrics for a known system, e.g. `tomcat` |
-| `ALLOY_OTLP_ENDPOINT` | (empty) | m | Upstream OTLP endpoint Alloy forwards metrics to, e.g. a Grafana Cloud or other vendor endpoint. Required: `monitoring-init` fails if it is unset |
-| `ALLOY_OTLP_PROTOCOL` | `grpc` | m | Protocol used for that upstream export. Valid values: `grpc`, `http` |
+| `ALLOY_OTLP_ENDPOINT` | (empty) | m | Upstream OTLP endpoint Alloy forwards metrics to, e.g. a Grafana Cloud or other vendor endpoint. Required: `monitoring-init` fails if it is unset. The format depends on `ALLOY_OTLP_PROTOCOL`: with `http`, the base URL including the scheme and without the `/v1/metrics` suffix the exporter appends itself, e.g. `https://otlp-gateway-prod-eu-west-2.grafana.net/otlp`; with `grpc`, `host:port` with no path, e.g. `collector.example.org:4317` |
+| `ALLOY_OTLP_PROTOCOL` | `http` | m | Protocol used for that upstream export. Valid values: `grpc`, `http` |
 | `ALLOY_OTLP_HEADERS` | (empty) | m | Headers sent with the upstream export, typically authentication. A JSON object, e.g. `{"Authorization":"Basic <base64>"}` |
 | `ALLOY_OTLP_INSECURE` | `false` | m | Set to `true` to skip TLS when talking to the upstream endpoint |
 | `GRAFANA_ADMIN_PASSWORD` | `Admin123` | g | Password for Grafana's `admin` user. Change this before exposing Grafana |

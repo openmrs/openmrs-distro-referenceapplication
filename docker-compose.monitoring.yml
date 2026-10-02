@@ -13,7 +13,7 @@ services:
     environment:
       MONITORING_MODE: otlp
       ALLOY_OTLP_ENDPOINT: ${ALLOY_OTLP_ENDPOINT:-}
-      ALLOY_OTLP_PROTOCOL: ${ALLOY_OTLP_PROTOCOL:-grpc}
+      ALLOY_OTLP_PROTOCOL: ${ALLOY_OTLP_PROTOCOL:-http}
     volumes:
       - alloy-config:/etc/alloy
 

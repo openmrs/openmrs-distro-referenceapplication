@@ -4,7 +4,7 @@ set -e
 echo "Initializing monitoring configuration..."
 
 MONITORING_MODE="${MONITORING_MODE:-bundled}"
-ALLOY_OTLP_PROTOCOL="${ALLOY_OTLP_PROTOCOL:-grpc}"
+ALLOY_OTLP_PROTOCOL="${ALLOY_OTLP_PROTOCOL:-http}"
 
 echo "Monitoring mode: ${MONITORING_MODE}"
 
@@ -48,6 +48,51 @@ case "${MONITORING_MODE}" in
         echo "ERROR: Unsupported ALLOY_OTLP_PROTOCOL: ${ALLOY_OTLP_PROTOCOL}"
         echo "Supported values: grpc, http"
         exit 1
+        ;;
+    esac
+
+    # The two exporters expect different endpoint formats, so validate the
+    # endpoint against the protocol that was selected above.
+    case "${ALLOY_OTLP_PROTOCOL}" in
+      http)
+        case "${ALLOY_OTLP_ENDPOINT}" in
+          http://*|https://*) ;;
+          *)
+            echo "ERROR: ALLOY_OTLP_ENDPOINT must start with http:// or https:// when ALLOY_OTLP_PROTOCOL=http"
+            echo "Got: ${ALLOY_OTLP_ENDPOINT}"
+            exit 1
+            ;;
+        esac
+
+        case "${ALLOY_OTLP_ENDPOINT}" in
+          */v1/metrics|*/v1/metrics/)
+            echo "WARNING: ALLOY_OTLP_ENDPOINT ends with /v1/metrics, which the exporter appends itself."
+            echo "Use the base URL instead, e.g. https://otlp-gateway-prod-eu-west-2.grafana.net/otlp"
+            ;;
+        esac
+        ;;
+
+      grpc)
+        # The gRPC exporter takes a bare host:port, so drop any scheme first.
+        otlp_host_port="${ALLOY_OTLP_ENDPOINT#*://}"
+
+        case "${otlp_host_port}" in
+          */*)
+            echo "ERROR: ALLOY_OTLP_ENDPOINT must not contain a path when ALLOY_OTLP_PROTOCOL=grpc"
+            echo "Got: ${ALLOY_OTLP_ENDPOINT}"
+            exit 1
+            ;;
+        esac
+
+        case "${otlp_host_port}" in
+          ?*:[0-9]*) ;;
+          *)
+            echo "ERROR: ALLOY_OTLP_ENDPOINT must be host:port when ALLOY_OTLP_PROTOCOL=grpc"
+            echo "Expected something like: collector.example.org:4317"
+            echo "Got: ${ALLOY_OTLP_ENDPOINT}"
+            exit 1
+            ;;
+        esac
         ;;
     esac
     ;;
