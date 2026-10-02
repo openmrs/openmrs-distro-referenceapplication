@@ -14,13 +14,18 @@ services:
       MONITORING_MODE: otlp
       ALLOY_OTLP_ENDPOINT: ${ALLOY_OTLP_ENDPOINT:-}
       ALLOY_OTLP_PROTOCOL: ${ALLOY_OTLP_PROTOCOL:-grpc}
-      ALLOY_OTLP_INSECURE: ${ALLOY_OTLP_INSECURE:-false}
     volumes:
       - alloy-config:/etc/alloy
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.55.1
     privileged: true
+    command:
+      - --docker_only=true
+      - --store_container_labels=false
+      - --whitelisted_container_labels=com.docker.compose.service,com.docker.compose.project
+      - --enable_metrics=cpu,memory,network,disk,diskIO,oom_event
+      - --housekeeping_interval=15s
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro

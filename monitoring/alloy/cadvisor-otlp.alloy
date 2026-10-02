@@ -42,6 +42,11 @@ prometheus.relabel "cadvisor" {
     regex  = "container_label_.*"
   }
 
+  rule {
+    action = "labeldrop"
+    regex  = "id|image"
+ }
+
   forward_to = [
     otelcol.receiver.prometheus.cadvisor.receiver,
   ]
