@@ -1,11 +1,19 @@
-otelcol.processor.batch "default" {
-  output { metrics = [otelcol.exporter.prometheus.default.input] }
+otelcol.processor.batch "metrics" {
+  output {
+    metrics = [
+      otelcol.exporter.prometheus.openmrs.input,
+    ]
+  }
 }
 
-otelcol.exporter.prometheus "default" {
-  forward_to = [prometheus.remote_write.default.receiver]
+otelcol.exporter.prometheus "openmrs" {
+  forward_to = [
+    prometheus.remote_write.local.receiver,
+  ]
 }
 
-prometheus.remote_write "default" {
-  endpoint { url = "http://prometheus:9090/api/v1/write" }
+prometheus.remote_write "local" {
+  endpoint {
+    url = "http://prometheus:9090/api/v1/write"
+  }
 }

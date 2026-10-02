@@ -236,9 +236,9 @@ The distro ships an optional monitoring stack -- Grafana, Prometheus, Loki, Allo
 blackbox-exporter -- which collects container logs, HTTP endpoint probes and JVM metrics
 from the OpenMRS backend. Run it with:
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.grafana.yml up
+docker compose -f docker-compose.yml -f docker-compose.monitoring-bundled.yml up
 ```
-Grafana will be available at http://localhost/grafana. Use admin as username and see docker-compose.grafana.yml for the initial password.
+Grafana will be available at http://localhost/grafana. Use admin as username and see docker-compose.monitoring-bundled.yml for the initial password.
 
 Three dashboards are provisioned automatically:
 
@@ -248,7 +248,7 @@ Three dashboards are provisioned automatically:
 | JVM Runtime | Prometheus | Backend heap, GC, threads, loaded classes and CPU |
 | Endpoint health check | Prometheus | Availability and latency of probed HTTP endpoints |
 
-If you would like to use grafana in your distro, you just need to copy over `docker-compose.grafana.yml`.
+If you would like to use grafana in your distro, you just need to copy over `docker-compose.monitoring-bundled.yml`.
 
 Note that this is a single-node example: Prometheus, Loki and Grafana each store data in a
 local volume. For production or multi-replica deployments, reuse the configuration pattern
