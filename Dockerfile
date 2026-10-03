@@ -1,25 +1,19 @@
 # syntax=docker/dockerfile:1
 
-### ACT Core Stage
-# The flags refresh, flag lists, gap look-up and adherence, and loading the report descriptors after
-# reporting and Initializer have started.
-FROM openmrs/openmrs-core:2.8.x-dev-amazoncorretto-21 AS actcore
-ARG ACTCORE_REPO=https://github.com/DIGI-UW/openmrs-module-actcore.git
-ARG ACTCORE_REF=main
-ADD ${ACTCORE_REPO}#${ACTCORE_REF} /actcore
-WORKDIR /actcore
-RUN --mount=type=cache,target=/root/.m2/repository mvn -B -q -DskipTests package
-
 ### Dev Stage
 FROM openmrs/openmrs-core:2.8.x-dev-amazoncorretto-21 AS dev
 WORKDIR /openmrs_distro
 
-ARG MVN_ARGS="-s /usr/share/maven/ref/settings-docker.xml -U -P distro"
+# Keep repo.local: a mounted ~/.m2/settings.xml drops the image's pre-filled repository otherwise
+ARG MVN_ARGS="-s /usr/share/maven/ref/settings-docker.xml -Dmaven.repo.local=/usr/share/maven/ref/repository -U -P distro"
 ARG MVN_COMMAND="install"
 
 # Copy build files
 COPY pom.xml ./
 COPY distro ./distro/
+
+# Keep: a push to ACT Core's main changes this ref, so the mvn step refetches the new SNAPSHOT
+ADD https://github.com/DIGI-UW/openmrs-module-actcore.git#main /tmp/actcore-main
 
 ARG CACHE_BUST
 # Build the distro, but only deploy from the amd64 build
@@ -46,6 +40,5 @@ COPY --from=dev /openmrs/distribution/openmrs_core/openmrs.war /openmrs/distribu
 
 COPY --from=dev /openmrs/distribution/openmrs-distro.properties /openmrs/distribution/
 COPY --from=dev /openmrs/distribution/openmrs_modules /openmrs/distribution/openmrs_modules
-COPY --from=actcore /actcore/omod/target/actcore-omod-*.omod /openmrs/distribution/openmrs_modules/
 COPY --from=dev /openmrs/distribution/openmrs_owas /openmrs/distribution/openmrs_owas
 COPY --from=dev  /openmrs/distribution/openmrs_config /openmrs/distribution/openmrs_config

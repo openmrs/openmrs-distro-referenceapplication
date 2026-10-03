@@ -169,6 +169,15 @@
         <updatePolicy>interval:10080</updatePolicy>
       </snapshots>
     </repository>
+    <!-- Last, since it answers only ACT Core and Maven asks the repositories in order -->
+    <repository>
+      <id>github-actcore</id>
+      <name>ACT Core on DIGI-UW's GitHub Packages</name>
+      <url>https://maven.pkg.github.com/digi-uw/openmrs-module-actcore</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
   </repositories>
 
   <pluginRepositories>

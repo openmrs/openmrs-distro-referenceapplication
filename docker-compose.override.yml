@@ -12,3 +12,9 @@ services:
   backend:
     build:
       context: .
+      secrets:
+        - m2settings
+
+secrets:
+  m2settings:
+    file: ~/.m2/settings.xml
