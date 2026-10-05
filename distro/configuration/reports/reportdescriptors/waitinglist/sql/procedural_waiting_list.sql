@@ -7,6 +7,7 @@
 SELECT
     MAX(rhd_id.identifier)                                          AS rhd_id,
     p.gender                                                        AS sex,
+    p.birthdate                                                     AS date_of_birth,
     TIMESTAMPDIFF(YEAR, p.birthdate, CURDATE())                     AS age_years,
     MAX(type_name.name)                                             AS procedure_type,
     MAX(proc_name.name)                                             AS procedure_name,

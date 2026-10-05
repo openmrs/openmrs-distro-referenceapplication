@@ -166,6 +166,20 @@
           "isExpanded": "true",
           "questions": [
             {
+              "id": "anaphylaxis_warning",
+              "label": "Anaphylaxis warning",
+              "type": "markdown",
+              "questionOptions": {
+                "rendering": "markdown"
+              },
+              "value": [
+                "**Anaphylaxis: refer to a clinician before the next dose.**"
+              ],
+              "hide": {
+                "hideWhenExpression": "!includes(injection_tolerance, '148888AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            },
+            {
               "label": "Time Since Injection (Symptom Onset)",
               "id": "time_since_injection_symptom_onset",
               "type": "obs",

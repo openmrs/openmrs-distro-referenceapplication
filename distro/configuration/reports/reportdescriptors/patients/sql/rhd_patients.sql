@@ -138,6 +138,7 @@ SELECT
                  WHEN DATEDIFF(MAX(adh.next_due), CURDATE()) <= 7 THEN 'Deadline approaching'
                  ELSE 'Covered' END
     END                                                             AS bpg_status,
+    DATE(MAX(adh.last_given))                                       AS last_injection_date,
     DATE(MAX(adh.next_due))                                         AS next_due_date,
     DATEDIFF(MAX(adh.next_due), CURDATE())                          AS days_until_due,
     ROUND(MAX(adh.adherence) * 100)                                 AS adherence,
@@ -154,6 +155,21 @@ SELECT
         JOIN patientflags_flag f ON f.uuid = c.uuid AND f.retired = 0
         WHERE cm.patient_id = p.person_id AND cm.voided = 0 AND cm.end_date IS NULL
     )                                                               AS rhd_flags,
+
+    -- Each of those flags with the day the patient joined its list, as name=YYYY-MM-DD
+    (
+        SELECT GROUP_CONCAT(CONCAT(f.name, '=', DATE(cm.start_date)) ORDER BY f.name SEPARATOR '|')
+        FROM cohort_member cm
+        JOIN cohort c ON c.cohort_id = cm.cohort_id AND c.voided = 0
+        JOIN patientflags_flag f ON f.uuid = c.uuid AND f.retired = 0
+        WHERE cm.patient_id = p.person_id AND cm.voided = 0 AND cm.end_date IS NULL
+    )                                                               AS rhd_flag_dates,
+
+    -- Registry consent, from the Consent Given person attribute; empty when it was never recorded
+    CASE MAX(consent_answer.uuid)
+        WHEN 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3' THEN 'Yes'
+        WHEN '488b58ff-64f5-4f8a-8979-fa79940b1594' THEN 'No'
+    END                                                             AS consent_given,
 
     p.uuid                                                          AS patient_uuid
 
@@ -199,6 +215,11 @@ LEFT JOIN person_attribute pa_cardiac
                                                 WHERE uuid = 'fe261119-2911-5b36-be40-8f9827826987')
 LEFT JOIN location cardiac_loc ON cardiac_loc.location_id = pa_cardiac.value
 LEFT JOIN location primary_loc ON primary_loc.location_id = pa_village.value
+LEFT JOIN person_attribute pa_consent
+    ON pa_consent.person_id = p.person_id AND pa_consent.voided = 0
+    AND pa_consent.person_attribute_type_id = (SELECT person_attribute_type_id FROM person_attribute_type
+                                                WHERE uuid = 'e15bf9b7-249e-5d75-907d-937b8d9b0c46')
+LEFT JOIN concept consent_answer ON consent_answer.concept_id = pa_consent.value
 LEFT JOIN actcore_prophylaxis_adherence adh ON adh.patient_id = p.person_id
 
 WHERE
