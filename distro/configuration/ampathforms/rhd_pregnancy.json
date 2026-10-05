@@ -115,7 +115,7 @@
               "id": "maternal_complications_during_pregnancy",
               "type": "obs",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "d476b4e0-5c24-5d99-9588-26aadc1e35c6",
                 "answers": [
                   {
@@ -171,7 +171,7 @@
               "id": "fetal_outcomes",
               "type": "obs",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "7e596b69-bb4e-5080-90b3-0d191c0d340a",
                 "answers": [
                   {
@@ -300,7 +300,7 @@
               "id": "maternal_complications_within_30_days_after_pregnancy",
               "type": "obs",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "7ec339f7-be0b-5199-a9e7-a8ab82860fb2",
                 "answers": [
                   {
@@ -353,6 +353,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "45971515-88d0-5707-83ed-4401f9247878"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(maternal_complications_within_30_days_after_pregnancy) || includes(maternal_complications_within_30_days_after_pregnancy, '1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -389,6 +392,9 @@
                     "conceptMappings": []
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "!includes(maternal_complications_within_30_days_after_pregnancy, '2567da9f-864e-5408-b5ae-6686f80d0a99')"
               }
             },
             {
@@ -398,6 +404,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "94b36bd1-8ab3-514a-bd7d-3bc1d1ad66cd"
+              },
+              "hide": {
+                "hideWhenExpression": "!includes(maternal_complications_within_30_days_after_pregnancy, '2567da9f-864e-5408-b5ae-6686f80d0a99')"
               }
             },
             {
@@ -433,6 +442,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "9e97bc2d-971b-550a-9c4f-7bd1901e2370"
+              },
+              "hide": {
+                "hideWhenExpression": "neonatal_outcomes_30_days_after_delivery !== '33a334e2-5caf-52c0-8ca7-e11e8cbfd7a3' && neonatal_outcomes_30_days_after_delivery !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -464,6 +476,9 @@
                     "conceptMappings": []
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "neonatal_outcomes_30_days_after_delivery !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -473,6 +488,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "2927034b-a5c6-5440-aaf0-fb139f6c9897"
+              },
+              "hide": {
+                "hideWhenExpression": "neonatal_outcomes_30_days_after_delivery !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]

@@ -30,8 +30,15 @@
               "id": "facility",
               "type": "obs",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "01e6dd39-b8ba-5b0a-bcd7-6b8d5973c1bc"
+                "rendering": "ui-select-extended",
+                "concept": "01e6dd39-b8ba-5b0a-bcd7-6b8d5973c1bc",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                },
+                "isSearchable": true
               }
             },
             {
@@ -81,6 +88,15 @@
               }
             },
             {
+              "label": "Details",
+              "id": "details_hospital_admission",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "29c468c3-9ee7-580f-8bfc-87123ef1d37e"
+              }
+            },
+            {
               "label": "Outcome",
               "id": "outcome",
               "type": "obs",
@@ -109,15 +125,6 @@
                     "conceptMappings": []
                   }
                 ]
-              }
-            },
-            {
-              "label": "Details",
-              "id": "details_hospital_admission",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "29c468c3-9ee7-580f-8bfc-87123ef1d37e"
               }
             },
             {

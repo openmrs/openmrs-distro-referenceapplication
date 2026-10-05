@@ -1,0 +1,153 @@
+{
+  "name": "RHD Research Participation",
+  "description": "ACT RHD registry: RHD Research Participation",
+  "version": "1",
+  "published": true,
+  "retired": false,
+  "encounter": "RHD Consultation Visit",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "RHD Research Participation",
+      "sections": [
+        {
+          "label": "Research Participation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Would you like to be considered?",
+              "id": "research_opt_in",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5f63f9aa-dfe2-5500-810e-0a045f3406bc",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "No",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Participation",
+              "id": "participationEntry",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "d2969a84-4d7c-55e6-b16c-1ccbe726cc20",
+                "repeatOptions": {
+                  "limit": "20"
+                }
+              },
+              "questions": [
+                {
+                  "label": "Participation Name",
+                  "id": "participation_name",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "31c5e78e-5883-5ead-b6d1-f489645a71c6",
+                    "answers": [
+                      {
+                        "label": "ACT Global 2025",
+                        "concept": "df878370-c679-5f3e-8d06-be46987ebc0a",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "ARC",
+                        "concept": "e75a0c04-ab83-507d-bc08-84b3701851ce",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Miller",
+                        "concept": "090ada9a-4ec3-58ad-aef4-9041a5efc700",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Stage Study 1",
+                        "concept": "97a8563d-c35b-5ce1-b43f-bbf5f0551e23",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": true
+                },
+                {
+                  "label": "Study ID",
+                  "id": "study_id",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "b3450682-7eb0-5733-907b-980103b9dfb4"
+                  }
+                },
+                {
+                  "label": "Enrollment Date",
+                  "id": "enrollment_date",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "78c77d15-990e-59ee-a52a-d6f9909c4dc4"
+                  }
+                },
+                {
+                  "label": "Completion Date",
+                  "id": "completion_date",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "018c1bb8-5e14-56a3-b34e-96e183028efa"
+                  }
+                },
+                {
+                  "label": "Study Status",
+                  "id": "study_status",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "fa886587-717c-5c79-86e3-0dba2623fbc8",
+                    "answers": [
+                      {
+                        "label": "Active",
+                        "concept": "829c6afc-6d8c-5ae1-a660-177c254b8f48",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Inactive - Death",
+                        "concept": "4358f696-7a3d-5da4-949f-c8919974cccc",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Inactive - Lost to follow-up",
+                        "concept": "7dc37c9e-1725-11ed-861d-0242ac120002",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Inactive - Study team withdrawal",
+                        "concept": "6ce60819-d461-5d67-ad3b-a24cf6730543",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Inactive - Voluntary withdrawal",
+                        "concept": "f97a1d1d-5fc2-5dd7-9b55-7c16132464ee",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

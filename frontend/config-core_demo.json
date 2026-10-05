@@ -147,10 +147,16 @@
         "name": "RHD Registration",
         "fields": [
           "assignedCardiacClinic",
+          "primaryCareClinic",
           "consentGiven",
           "consentPerson",
           "consentDate",
-          "textItSettings"
+          "textItSettings",
+          "primaryPhone",
+          "phoneOwnerName",
+          "phoneOwnerRelationship",
+          "whatsappAvailable",
+          "telegramAvailable"
         ]
       }
     ],
@@ -160,6 +166,13 @@
         "type": "person attribute",
         "uuid": "fe261119-2911-5b36-be40-8f9827826987",
         "label": "Assigned Cardiac Clinic",
+        "showHeading": true
+      },
+      {
+        "id": "primaryCareClinic",
+        "type": "person attribute",
+        "uuid": "695f2990-236f-5d7c-b8aa-ddbdb22400f4",
+        "label": "Primary Care Clinic",
         "showHeading": true
       },
       {
@@ -198,6 +211,61 @@
         "type": "person attribute",
         "uuid": "68b50c5e-250e-5dab-bd34-fb007756a7ed",
         "label": "Text-It Settings",
+        "showHeading": true,
+        "customConceptAnswers": [
+          {
+            "uuid": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+            "label": "Yes"
+          },
+          {
+            "uuid": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+            "label": "No"
+          }
+        ]
+      },
+      {
+        "id": "primaryPhone",
+        "type": "person attribute",
+        "uuid": "542c6fd2-05ca-53e3-a4f5-cd23bc1abd8f",
+        "label": "Primary Phone",
+        "showHeading": true
+      },
+      {
+        "id": "phoneOwnerName",
+        "type": "person attribute",
+        "uuid": "ea3cb7ae-ffbe-5aee-8343-44977898f675",
+        "label": "Phone Owner Name",
+        "showHeading": true
+      },
+      {
+        "id": "phoneOwnerRelationship",
+        "type": "person attribute",
+        "uuid": "b36b2e80-c1ad-5417-84fc-89075904a089",
+        "label": "Phone Owner Relationship",
+        "showHeading": true
+      },
+      {
+        "id": "whatsappAvailable",
+        "type": "person attribute",
+        "uuid": "9b054d06-b812-5d57-b057-2e1b0338a888",
+        "label": "WhatsApp Available",
+        "showHeading": true,
+        "customConceptAnswers": [
+          {
+            "uuid": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+            "label": "Yes"
+          },
+          {
+            "uuid": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+            "label": "No"
+          }
+        ]
+      },
+      {
+        "id": "telegramAvailable",
+        "type": "person attribute",
+        "uuid": "d6764a78-a775-501e-b2ce-8b8bd431fd74",
+        "label": "Telegram Available",
         "showHeading": true,
         "customConceptAnswers": [
           {
