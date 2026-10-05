@@ -1,5 +1,3 @@
-version: "3.7"
-
 #    This Source Code Form is subject to the terms of the Mozilla Public License,
 #    v. 2.0. If a copy of the MPL was not distributed with this file, You can
 #    obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
@@ -32,12 +30,37 @@ services:
             monitoring-init:
                 condition: service_completed_successfully
 
+    cadvisor:
+        image: gcr.io/cadvisor/cadvisor:v0.55.1
+        privileged: true
+        command:
+            - --docker_only=true
+            - --store_container_labels=false
+            - --whitelisted_container_labels=com.docker.compose.service,com.docker.compose.project
+            - --enable_metrics=cpu,memory,network,disk,diskIO,oom_event
+            - --housekeeping_interval=15s
+        volumes:
+            - /:/rootfs:ro
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            # cAdvisor's docker factory needs containerd too, otherwise it falls back to
+            # raw cgroups and emits no container names or labels (so no service_name).
+            - /run/containerd/containerd.sock:/run/containerd/containerd.sock:ro
+            - /sys:/sys:ro
+            - /var/lib/docker:/var/lib/docker:ro
+            - /dev/disk:/dev/disk:ro
+        devices:
+            - /dev/kmsg
+
     alloy:
         image: grafana/alloy:v1.13.1
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - alloy-config:/etc/alloy
-        command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+        command:
+            - run
+            - --server.http.listen-addr=0.0.0.0:12345
+            - --storage.path=/var/lib/alloy/data
+            - /etc/alloy
         depends_on:
             monitoring-init:
                 condition: service_completed_successfully

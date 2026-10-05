@@ -8,13 +8,11 @@ prometheus.scrape "cadvisor" {
   job_name        = "cadvisor"
   scrape_interval = "15s"
 
-  // Experimental in Alloy. Required to preserve Prometheus metric metadata
-  // (e.g. counter/gauge types) when converting cAdvisor metrics to OpenTelemetry.
-  honor_metadata  = true
-
-  // cAdvisor's machine_* metrics reuse a machine-info timestamp that only
-  // advances every few minutes, so honouring it makes them go stale between
-  // refreshes. Stamping at scrape time keeps every series fresh.
+  // cAdvisor exposes explicit timestamps. The machine_* metrics reuse a
+  // machine-info timestamp that only advances every few minutes, so honouring
+  // it makes those series go stale between refreshes and drop out of queries.
+  // Stamping at scrape time keeps every series fresh; container_* timestamps
+  // are only a second or two old, so nothing meaningful is lost.
   honor_timestamps = false
 
   forward_to = [
@@ -37,30 +35,14 @@ prometheus.relabel "cadvisor" {
   }
 
   rule {
-    action        = "keep"
-    source_labels = ["container_label_com_docker_compose_project", "__name__"]
-    regex         = sys.env("ALLOY_COMPOSE_PROJECT") + ";.*|;machine_.*"
-   }
-
-  rule {
     action = "labeldrop"
     regex  = "container_label_.*"
   }
 
-  rule {
-    action = "labeldrop"
-    regex  = "id|image"
- }
-
+  // Straight to Prometheus. Unlike the OTLP variant there is no conversion to
+  // OpenTelemetry, so `honor_metadata` is unnecessary and Alloy does not need
+  // the experimental stability level.
   forward_to = [
-    otelcol.receiver.prometheus.cadvisor.receiver,
+    prometheus.remote_write.local.receiver,
   ]
-}
-
-otelcol.receiver.prometheus "cadvisor" {
-  output {
-    metrics = [
-      otelcol.processor.batch.metrics.input,
-    ]
-  }
 }
