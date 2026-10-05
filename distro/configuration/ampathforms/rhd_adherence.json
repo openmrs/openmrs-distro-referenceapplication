@@ -16,16 +16,17 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Weeks in Reporting Period",
-              "id": "weeks_in_reporting_period",
+              "label": "Date of Adherence Estimate",
+              "id": "date_of_adherence_estimate",
               "type": "obs",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "75cd7e15-5f05-58d1-acb1-4a046eb1b437"
-              }
+                "rendering": "date",
+                "concept": "99512ab5-208e-5c37-8f7b-8f72abe2a0db"
+              },
+              "required": true
             },
             {
-              "label": "Adherence Estimage",
+              "label": "Adherence Estimate (%)",
               "id": "adherence_estimage",
               "type": "obs",
               "questionOptions": {
@@ -34,7 +35,7 @@
               }
             },
             {
-              "label": "Adherence Estimate Based On",
+              "label": "Adherence Based On",
               "id": "adherence_estimate_based_on",
               "type": "obs",
               "questionOptions": {
@@ -42,8 +43,8 @@
                 "concept": "4313005d-d5b2-5d20-bf33-39aab1bf90c0",
                 "answers": [
                   {
-                    "label": "Pill count",
-                    "concept": "204eaab6-8380-5d21-8b4a-a066eb17dcca",
+                    "label": "Calendar",
+                    "concept": "5835eb9e-1e31-5866-9de7-1715dd4b7156",
                     "conceptMappings": []
                   },
                   {
@@ -52,58 +53,55 @@
                     "conceptMappings": []
                   },
                   {
-                    "label": "Calendar",
-                    "concept": "5835eb9e-1e31-5866-9de7-1715dd4b7156",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Other non-coded",
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pill count",
+                    "concept": "204eaab6-8380-5d21-8b4a-a066eb17dcca",
                     "conceptMappings": []
                   }
                 ]
-              }
-            },
-            {
-              "label": "Other Details (Oral Adherence)",
-              "id": "other_details_oral_adherence",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "3fd2d82e-c664-5d77-b151-daf328e77bd9"
               },
-              "hide": {
-                "hideWhenExpression": "dosing_oral_adherence !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
+              "required": true
             },
             {
-              "label": "Dosing (Oral Adherence)",
-              "id": "dosing_oral_adherence",
+              "label": "Explanation if Adherence is Below 80%",
+              "id": "explanation_adherence_below_80",
               "type": "obs",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "82976c2a-61b0-5777-9c53-0535b0892f9c",
+                "concept": "a9fbf67b-65d7-57f6-8270-7bb65cd49469",
                 "answers": [
                   {
-                    "label": "Once a day",
-                    "concept": "84ab709b-370e-5922-810e-08a2d9a6fac1",
+                    "label": "Could not afford medication",
+                    "concept": "90925418-a853-54a0-8105-bd003b98132d",
                     "conceptMappings": []
                   },
                   {
-                    "label": "Twice a day",
-                    "concept": "aa611030-275a-51c0-99d9-d610e88b50a7",
+                    "label": "Forgot",
+                    "concept": "30639dfc-096c-5b52-bd28-6c3f38ced1cc",
                     "conceptMappings": []
                   },
                   {
-                    "label": "Other non-coded",
+                    "label": "Medication has side effects",
+                    "concept": "3bce222b-1305-5977-91f8-6adb559bcce8",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Medication ran out",
+                    "concept": "64c5a80b-c9c5-5dd2-a60f-85c423c4bafa",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other",
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "conceptMappings": []
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(adherence_estimage) || adherence_estimage >= 80"
               }
             },
             {
-              "label": "Prescription Duration",
+              "label": "New Prescription Duration",
               "id": "prescription_duration",
               "type": "obs",
               "questionOptions": {
@@ -131,27 +129,6 @@
                     "conceptMappings": []
                   }
                 ]
-              }
-            },
-            {
-              "label": "Tablets Given/Prescribed",
-              "id": "tablets_given_prescribed",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "f1343ee0-b1ed-5145-949e-dba989f81cf7"
-              }
-            },
-            {
-              "label": "Explanation if Adherence is Below 80%",
-              "id": "explanation_adherence_below_80",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "a9fbf67b-65d7-57f6-8270-7bb65cd49469"
-              },
-              "hide": {
-                "hideWhenExpression": "isEmpty(adherence_estimage) || adherence_estimage >= 80"
               }
             }
           ]

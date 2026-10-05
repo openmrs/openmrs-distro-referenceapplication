@@ -16,6 +16,15 @@
           "isExpanded": "true",
           "questions": [
             {
+              "label": "Date of Service",
+              "id": "date_of_service_pregnancy",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "f287af86-af54-5c49-b716-9737c4f022b1"
+              }
+            },
+            {
               "label": "Estimated Due Date",
               "id": "estimated_due_date",
               "type": "obs",
@@ -26,12 +35,12 @@
               "required": true
             },
             {
-              "label": "Parity",
-              "id": "parity",
+              "label": "Date of Last Menstrual Period",
+              "id": "date_of_last_menstrual_period",
               "type": "obs",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "7ae7a2b2-dc78-5519-998a-76640d778caa"
+                "rendering": "date",
+                "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
             {
@@ -44,21 +53,12 @@
               }
             },
             {
-              "label": "Date of Last Menstrual Period",
-              "id": "date_of_last_menstrual_period",
+              "label": "Parity",
+              "id": "parity",
               "type": "obs",
               "questionOptions": {
-                "rendering": "date",
-                "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "Pregnancy Number",
-              "id": "pregnancy_number",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8245f302-13c3-5754-a199-95040901fbc4"
+                "rendering": "number",
+                "concept": "7ae7a2b2-dc78-5519-998a-76640d778caa"
               }
             },
             {
@@ -66,8 +66,48 @@
               "id": "number_of_fetuses",
               "type": "obs",
               "questionOptions": {
+                "rendering": "select",
+                "concept": "0574bebd-028b-5f69-b92c-48d26d04afb1",
+                "answers": [
+                  {
+                    "label": "1",
+                    "concept": "0713de9a-966e-5317-b240-7944f3412106",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "2",
+                    "concept": "c42e289a-560f-53c9-98e9-70eb67995a34",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "3",
+                    "concept": "07b40e33-25f0-5b4b-b82b-23391c8b2e81",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date of Delivery",
+              "id": "date_of_delivery",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5951015b-a07a-5a41-8f22-7b9d09f7cb37"
+              }
+            },
+            {
+              "label": "Gestational Age (in weeks)",
+              "id": "estimated_gestational_age_at_delivery_weeks",
+              "type": "obs",
+              "questionOptions": {
                 "rendering": "text",
-                "concept": "0574bebd-028b-5f69-b92c-48d26d04afb1"
+                "concept": "e52a3150-1b3f-5ee5-89df-20439c08ef22"
               }
             },
             {
@@ -75,69 +115,126 @@
               "id": "maternal_complications_during_pregnancy",
               "type": "obs",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "d476b4e0-5c24-5d99-9588-26aadc1e35c6"
+                "rendering": "checkbox",
+                "concept": "d476b4e0-5c24-5d99-9588-26aadc1e35c6",
+                "answers": [
+                  {
+                    "label": "Death",
+                    "concept": "2567da9f-864e-5408-b5ae-6686f80d0a99",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Eclampsia",
+                    "concept": "118744AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Hospitalization",
+                    "concept": "65914cdd-8b53-5968-9652-644c891553d8",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "New onset heart failure",
+                    "concept": "10071e8e-4d3b-5db4-ab4f-82f49d93267d",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Placental Abruption",
+                    "concept": "130108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Pre-eclampsia",
+                    "concept": "129251AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Rhythm disturbance",
+                    "concept": "e3f08b8a-5904-5173-b39c-f3cfb41b1790",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Stroke",
+                    "concept": "41b1a801-9d9d-5687-9de5-39e89c73c8c7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
               }
             },
             {
-              "label": "Fetal Outcomes",
-              "id": "fetal_outcomes_group",
-              "type": "obsGroup",
+              "label": "Fetal Outcome",
+              "id": "fetal_outcomes",
+              "type": "obs",
               "questionOptions": {
-                "rendering": "group",
-                "concept": "7e596b69-bb4e-5080-90b3-0d191c0d340a"
-              },
-              "questions": [
-                {
-                  "label": "Fetal Outcomes",
-                  "id": "fetal_outcomes",
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "checkbox",
-                    "concept": "7e596b69-bb4e-5080-90b3-0d191c0d340a",
-                    "answers": [
-                      {
-                        "label": "Fetal loss within 14 weeks",
-                        "concept": "13cfb3cc-8a17-5fb3-a7c4-7d99be7db1c8",
-                        "conceptMappings": []
-                      },
-                      {
-                        "label": "Fetal loss between 15-24 weeks",
-                        "concept": "61bc0253-cecb-5245-b028-1e3cfad547a7",
-                        "conceptMappings": []
-                      },
-                      {
-                        "label": "Fetal loss after 25 weeks",
-                        "concept": "ded96719-cf9e-502b-b196-b074b8e90431",
-                        "conceptMappings": []
-                      },
-                      {
-                        "label": "Stillbirth",
-                        "concept": "125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "conceptMappings": []
-                      },
-                      {
-                        "label": "Full-term live birth",
-                        "concept": "8656c519-49db-54f6-a32f-eb73a734a5ec",
-                        "conceptMappings": []
-                      },
-                      {
-                        "label": "Pre-term live birth",
-                        "concept": "d39a4a5f-f8ff-50d8-be27-f08f93066ab5",
-                        "conceptMappings": []
-                      },
-                      {
-                        "label": "Small for gestational age",
-                        "concept": "cfceaf51-ac5f-58b3-b986-d02831efe69e",
-                        "conceptMappings": []
-                      }
-                    ]
+                "rendering": "checkbox",
+                "concept": "7e596b69-bb4e-5080-90b3-0d191c0d340a",
+                "answers": [
+                  {
+                    "label": "Fetal loss within 14 weeks",
+                    "concept": "13cfb3cc-8a17-5fb3-a7c4-7d99be7db1c8",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Fetal loss between 15-24 weeks",
+                    "concept": "61bc0253-cecb-5245-b028-1e3cfad547a7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Fetal loss after 25 weeks",
+                    "concept": "ded96719-cf9e-502b-b196-b074b8e90431",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Stillbirth",
+                    "concept": "125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Full-term live birth",
+                    "concept": "8656c519-49db-54f6-a32f-eb73a734a5ec",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Pre-term live birth",
+                    "concept": "d39a4a5f-f8ff-50d8-be27-f08f93066ab5",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Small for gestational age",
+                    "concept": "cfceaf51-ac5f-58b3-b986-d02831efe69e",
+                    "conceptMappings": []
                   }
-                }
-              ]
+                ]
+              }
             },
             {
-              "label": "Reason for Cesarean Section",
+              "label": "Delivery Mode",
+              "id": "delivery_mode",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2c13856b-5622-500f-b986-f1509c424056",
+                "answers": [
+                  {
+                    "label": "Cesarean section",
+                    "concept": "4ba666f7-f45e-5be1-b17a-5de2ae6e2107",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Vaginal birth",
+                    "concept": "302eda9b-16f5-5b84-81ab-623990616233",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reason for cesarean section",
               "id": "reason_for_cesarean_section",
               "type": "obs",
               "questionOptions": {
@@ -149,55 +246,7 @@
               }
             },
             {
-              "label": "Describe Postpartum Complications Further",
-              "id": "describe_postpartum_complications",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "45971515-88d0-5707-83ed-4401f9247878"
-              }
-            },
-            {
-              "label": "Describe Neonatal Outcomes Further",
-              "id": "describe_neonatal_outcomes",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "9e97bc2d-971b-550a-9c4f-7bd1901e2370"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Delivery and outcomes",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Delivery mode",
-              "id": "delivery_mode",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "2c13856b-5622-500f-b986-f1509c424056",
-                "answers": [
-                  {
-                    "label": "Vaginal birth",
-                    "concept": "302eda9b-16f5-5b84-81ab-623990616233",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Cesarean section",
-                    "concept": "4ba666f7-f45e-5be1-b17a-5de2ae6e2107",
-                    "conceptMappings": []
-                  }
-                ]
-              },
-              "hide": {
-                "hideWhenExpression": "!(includes(fetal_outcomes, '125872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || includes(fetal_outcomes, '8656c519-49db-54f6-a32f-eb73a734a5ec') || includes(fetal_outcomes, 'd39a4a5f-f8ff-50d8-be27-f08f93066ab5'))"
-              }
-            },
-            {
-              "label": "Location of Delivery",
+              "label": "Delivery Location",
               "id": "location_of_delivery",
               "type": "obs",
               "questionOptions": {
@@ -230,47 +279,83 @@
                     "conceptMappings": []
                   },
                   {
-                    "label": "Other non-coded",
+                    "label": "Other",
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "conceptMappings": []
                   }
                 ]
-              },
-              "hide": {
-                "hideWhenExpression": "!(includes(fetal_outcomes, '8656c519-49db-54f6-a32f-eb73a734a5ec') || includes(fetal_outcomes, 'd39a4a5f-f8ff-50d8-be27-f08f93066ab5'))"
               }
             },
             {
-              "label": "Estimated Gestational Age at Delivery (weeks)",
-              "id": "estimated_gestational_age_at_delivery_weeks",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "e52a3150-1b3f-5ee5-89df-20439c08ef22"
-              },
-              "hide": {
-                "hideWhenExpression": "!(includes(fetal_outcomes, '8656c519-49db-54f6-a32f-eb73a734a5ec') || includes(fetal_outcomes, 'd39a4a5f-f8ff-50d8-be27-f08f93066ab5'))"
-              }
-            },
-            {
-              "label": "Neonatal weight (kg)",
+              "label": "Birth Weight",
               "id": "neonatal_weight_kg",
               "type": "obs",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "864deea0-d006-559e-b5fb-5b26c4c56fa5"
-              },
-              "hide": {
-                "hideWhenExpression": "!(includes(fetal_outcomes, '8656c519-49db-54f6-a32f-eb73a734a5ec') || includes(fetal_outcomes, 'd39a4a5f-f8ff-50d8-be27-f08f93066ab5'))"
               }
             },
             {
-              "label": "Maternal Complications Within 30 Days After Pregnancy",
+              "label": "Maternal Complications Postpartum",
               "id": "maternal_complications_within_30_days_after_pregnancy",
               "type": "obs",
               "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "7ec339f7-be0b-5199-a9e7-a8ab82860fb2",
+                "answers": [
+                  {
+                    "label": "Death",
+                    "concept": "2567da9f-864e-5408-b5ae-6686f80d0a99",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Eclampsia",
+                    "concept": "118744AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Hospitalization",
+                    "concept": "65914cdd-8b53-5968-9652-644c891553d8",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "New onset heart failure",
+                    "concept": "10071e8e-4d3b-5db4-ab4f-82f49d93267d",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Placental Abruption",
+                    "concept": "130108AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Pre-eclampsia",
+                    "concept": "129251AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Rhythm disturbance",
+                    "concept": "e3f08b8a-5904-5173-b39c-f3cfb41b1790",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Describe Postpartum Complications Further",
+              "id": "describe_postpartum_complications",
+              "type": "obs",
+              "questionOptions": {
                 "rendering": "text",
-                "concept": "7ec339f7-be0b-5199-a9e7-a8ab82860fb2"
+                "concept": "45971515-88d0-5707-83ed-4401f9247878"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(maternal_complications_within_30_days_after_pregnancy) || includes(maternal_complications_within_30_days_after_pregnancy, '1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -278,12 +363,54 @@
               "id": "maternal_cause_of_death",
               "type": "obs",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "062a66ad-8efb-5d28-a6d9-511bb396d661"
+                "rendering": "select",
+                "concept": "062a66ad-8efb-5d28-a6d9-511bb396d661",
+                "answers": [
+                  {
+                    "label": "Heart Failure",
+                    "concept": "27f70da6-ee9e-5919-8b68-9977312f9ada",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Hemorrhage",
+                    "concept": "147241AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Sepsis",
+                    "concept": "126721AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Stroke",
+                    "concept": "41b1a801-9d9d-5687-9de5-39e89c73c8c7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Other Infectious Disease",
+                    "concept": "3464443b-5ff9-55b4-8792-49ac8aa58800",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!includes(maternal_complications_within_30_days_after_pregnancy, '2567da9f-864e-5408-b5ae-6686f80d0a99')"
               }
             },
             {
-              "label": "Neonatal Outcomes 30 Days After Delivery",
+              "label": "Describe Maternal Cause of Death Further",
+              "id": "describe_maternal_cause_of_death_further",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "94b36bd1-8ab3-514a-bd7d-3bc1d1ad66cd"
+              },
+              "hide": {
+                "hideWhenExpression": "!includes(maternal_complications_within_30_days_after_pregnancy, '2567da9f-864e-5408-b5ae-6686f80d0a99')"
+              }
+            },
+            {
+              "label": "Neonatal Outcomes",
               "id": "neonatal_outcomes_30_days_after_delivery",
               "type": "obs",
               "questionOptions": {
@@ -306,21 +433,64 @@
                     "conceptMappings": []
                   }
                 ]
-              },
-              "hide": {
-                "hideWhenExpression": "!(includes(fetal_outcomes, '8656c519-49db-54f6-a32f-eb73a734a5ec') || includes(fetal_outcomes, 'd39a4a5f-f8ff-50d8-be27-f08f93066ab5'))"
               }
             },
             {
-              "label": "Neontal Cause of Death",
-              "id": "neontal_cause_of_death",
+              "label": "Describe Neonatal Outcomes Further",
+              "id": "describe_neonatal_outcomes",
               "type": "obs",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "a81827f3-5832-530f-91ef-b3a0c58079ca"
+                "concept": "9e97bc2d-971b-550a-9c4f-7bd1901e2370"
               },
               "hide": {
-                "hideWhenExpression": "!((includes(fetal_outcomes, '8656c519-49db-54f6-a32f-eb73a734a5ec') || includes(fetal_outcomes, 'd39a4a5f-f8ff-50d8-be27-f08f93066ab5')) && neonatal_outcomes_30_days_after_delivery === '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                "hideWhenExpression": "neonatal_outcomes_30_days_after_delivery !== '33a334e2-5caf-52c0-8ca7-e11e8cbfd7a3' && neonatal_outcomes_30_days_after_delivery !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Neonatal Cause of Death",
+              "id": "neontal_cause_of_death",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a81827f3-5832-530f-91ef-b3a0c58079ca",
+                "answers": [
+                  {
+                    "label": "Congenital Malformation",
+                    "concept": "143849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Infection",
+                    "concept": "080911f7-6428-5502-91ed-e70e1a1cc2d7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Prematurity",
+                    "concept": "a985a179-a255-512a-89e6-339d47f33c40",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "neonatal_outcomes_30_days_after_delivery !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Describe Neonatal Cause of Death Further",
+              "id": "describe_neonatal_cause_of_death_further",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2927034b-a5c6-5440-aaf0-fb139f6c9897"
+              },
+              "hide": {
+                "hideWhenExpression": "neonatal_outcomes_30_days_after_delivery !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]

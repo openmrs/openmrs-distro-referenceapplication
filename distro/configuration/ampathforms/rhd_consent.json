@@ -1,6 +1,6 @@
 {
-  "name": "RHD Consent",
-  "description": "ACT RHD registry: RHD Consent",
+  "name": "RHD Research Participation",
+  "description": "ACT RHD registry: RHD Research Participation",
   "version": "1",
   "published": true,
   "retired": false,
@@ -9,14 +9,14 @@
   "referencedForms": [],
   "pages": [
     {
-      "label": "RHD Consent",
+      "label": "RHD Research Participation",
       "sections": [
         {
-          "label": "Consent",
+          "label": "Research Participation",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Would You Like to Be Considered for Research",
+              "label": "Would you like to be considered?",
               "id": "research_opt_in",
               "type": "obs",
               "questionOptions": {
@@ -37,143 +37,113 @@
               }
             },
             {
-              "label": "Study Name",
-              "id": "study_name",
-              "type": "obs",
+              "label": "Participation",
+              "id": "participationEntry",
+              "type": "obsGroup",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "1ba73207-ba91-5279-a078-f2be8d4b03fd",
-                "answers": [
-                  {
-                    "label": "National RHD registry (Mak SOMREC 2013-072)",
-                    "concept": "4b4061c7-c9c6-509f-a689-1dd2ad165ef1",
-                    "conceptMappings": []
+                "rendering": "repeating",
+                "concept": "d2969a84-4d7c-55e6-b16c-1ccbe726cc20",
+                "repeatOptions": {
+                  "limit": "20"
+                }
+              },
+              "questions": [
+                {
+                  "label": "Participation Name",
+                  "id": "participation_name",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "31c5e78e-5883-5ead-b6d1-f489645a71c6",
+                    "answers": [
+                      {
+                        "label": "ACT Global 2025",
+                        "concept": "df878370-c679-5f3e-8d06-be46987ebc0a",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "ARC",
+                        "concept": "e75a0c04-ab83-507d-bc08-84b3701851ce",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Miller",
+                        "concept": "090ada9a-4ec3-58ad-aef4-9041a5efc700",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Stage Study 1",
+                        "concept": "97a8563d-c35b-5ce1-b43f-bbf5f0551e23",
+                        "conceptMappings": []
+                      }
+                    ]
                   },
-                  {
-                    "label": "ADD-RHD ACT decentralization (Mak-SOMREC-2021-61)",
-                    "concept": "37a4fbc3-e41c-545d-8d97-aff8c11e705b",
-                    "conceptMappings": []
+                  "required": true
+                },
+                {
+                  "label": "Study ID",
+                  "id": "study_id",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "b3450682-7eb0-5733-907b-980103b9dfb4"
                   }
-                ]
-              }
-            },
-            {
-              "label": "Assent",
-              "id": "assent",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "date",
-                "concept": "9c43bbda-3fe2-59b8-8566-1989f1350729"
-              }
-            },
-            {
-              "label": "Consent",
-              "id": "consent",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "date",
-                "concept": "a9a5f14a-984c-5351-a98b-94e4ab4a57e4"
-              }
-            },
-            {
-              "label": "Name of person consenting",
-              "id": "name_of_person_consenting",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "26bfdcb1-ea0a-58ac-ace9-6e7abb00383b"
-              }
-            },
-            {
-              "label": "Relation of person consenting",
-              "id": "relation_of_person_consenting",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "df495209-b144-521b-b35a-8314872f538d",
-                "answers": [
-                  {
-                    "label": "Mother",
-                    "concept": "3b008b8a-38b8-5e6b-9428-40163e701644",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Father",
-                    "concept": "db956db2-d6c9-526a-a015-84465fc4d694",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Grandmother",
-                    "concept": "a7c69de7-178e-5d3b-95e9-d870b1f9ea74",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Grandfather",
-                    "concept": "1be7e468-7c72-575b-9256-74d714eb3b9d",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Aunt",
-                    "concept": "05ec48ad-2a5e-553f-b168-03e65ead7f48",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Uncle",
-                    "concept": "74a3bab3-9461-5bdb-a587-850d5fd11e8a",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Other legal guardian",
-                    "concept": "0c06494e-22e8-55c7-b06f-aff1a08939a4",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Self",
-                    "concept": "edebe52c-de16-5ba7-ad1c-9f0d6a2bb323",
-                    "conceptMappings": []
+                },
+                {
+                  "label": "Enrollment Date",
+                  "id": "enrollment_date",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "78c77d15-990e-59ee-a52a-d6f9909c4dc4"
                   }
-                ]
-              }
-            },
-            {
-              "label": "Study Completion",
-              "id": "study_completion",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "date",
-                "concept": "13ff5409-eda2-5fb9-9dde-95cc4afb75d3"
-              }
-            },
-            {
-              "label": "Reason for completiong",
-              "id": "reason_for_completiong",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "f583bdb7-d010-5f68-a772-035e2a965684",
-                "answers": [
-                  {
-                    "label": "Final visit",
-                    "concept": "b013fec4-b274-5f70-8287-269c8547de52",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Withdrawn from study",
-                    "concept": "a655d3a4-5d60-5e79-9b9c-e6b38bf84d46",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Lost to follow-up",
-                    "concept": "7dc37c9e-1725-11ed-861d-0242ac120002",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Deceased",
-                    "concept": "159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "conceptMappings": []
+                },
+                {
+                  "label": "Completion Date",
+                  "id": "completion_date",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "018c1bb8-5e14-56a3-b34e-96e183028efa"
                   }
-                ]
-              }
+                },
+                {
+                  "label": "Study Status",
+                  "id": "study_status",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "fa886587-717c-5c79-86e3-0dba2623fbc8",
+                    "answers": [
+                      {
+                        "label": "Active",
+                        "concept": "829c6afc-6d8c-5ae1-a660-177c254b8f48",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Inactive - Death",
+                        "concept": "4358f696-7a3d-5da4-949f-c8919974cccc",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Inactive - Lost to follow-up",
+                        "concept": "7dc37c9e-1725-11ed-861d-0242ac120002",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Inactive - Study team withdrawal",
+                        "concept": "6ce60819-d461-5d67-ad3b-a24cf6730543",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Inactive - Voluntary withdrawal",
+                        "concept": "f97a1d1d-5fc2-5dd7-9b55-7c16132464ee",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                }
+              ]
             }
           ]
         }

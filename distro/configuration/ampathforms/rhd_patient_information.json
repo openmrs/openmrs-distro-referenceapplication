@@ -16,72 +16,402 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Category at Diagnosis",
-              "id": "category_at_diagnosis",
+              "label": "Diagnosis",
+              "id": "diagnosis_entry",
+              "type": "obsGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "594b4495-36dc-52a6-9810-15a9e2e2dcb9",
+                "repeatOptions": {
+                  "limit": "20"
+                }
+              },
+              "questions": [
+                {
+                  "label": "Category",
+                  "id": "category_at_diagnosis",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "1a5aa050-661d-5e89-95d7-c1eba476df22",
+                    "answers": [
+                      {
+                        "label": "Rheumatic Heart Disease/Rheumatic Fever",
+                        "concept": "4e529463-2036-5327-ad69-7cbd39df86a1",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Congenital Heart Disease",
+                        "concept": "365e75bb-35bc-503f-b8db-53bea2528d1b",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Other Heart Disease",
+                        "concept": "7c42e9be-5828-5d4c-8a6e-f713efe8a945",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Normal",
+                        "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": true
+                },
+                {
+                  "label": "Diagnosis Details",
+                  "id": "diagnosis_details_rhd",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "cfe17bb5-4a76-5f3a-9e1c-7b1e9b84a8e3",
+                    "answers": [
+                      {
+                        "label": "Acute Rheumatic Fever",
+                        "concept": "cbfcf051-bee3-549d-b233-e5be0e7d691a",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "RHD A",
+                        "concept": "1c4a12e2-1f80-5176-bd8f-0e3a0154ce0b",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "RHD B",
+                        "concept": "5e019f88-6b33-5749-8804-d9686ae680d5",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "RHD C/RHD D",
+                        "concept": "8c2f337a-99b3-5f76-8312-1cee4336309c",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": true,
+                  "hide": {
+                    "hideWhenExpression": "category_at_diagnosis !== '4e529463-2036-5327-ad69-7cbd39df86a1'"
+                  }
+                },
+                {
+                  "label": "Diagnosis Details",
+                  "id": "diagnosis_details_congenital",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "d3f6e1a2-9c5b-5e84-8f2d-1a6c7b9e0d4f",
+                    "answers": [
+                      {
+                        "label": "Aortopulmonary Window / Aortic Septal Defect",
+                        "concept": "47b5f83b-1141-5ba2-b16f-f5f7bc1f3564",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Arteriovenous malformation of cerebral vessels",
+                        "concept": "718abe57-83b9-54e2-8a7a-b212a1548854",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Atrial Septal Defect",
+                        "concept": "148196AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Atrioventricular Septal Defect / Canal",
+                        "concept": "360334b9-03e5-5982-bd7d-add4928e198b",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Coarctation of the Aorta",
+                        "concept": "434b03dd-6ea6-5c67-a7dd-4fac48cbcda0",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Congenital Aortic and/or Mitral Valve Disorders",
+                        "concept": "f43e9a0e-38a2-58dc-8f6f-42bd5e1db86c",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Congenital Pulmonic Stenosis",
+                        "concept": "6f778415-8d94-57cd-81f4-4a0dfedcd90c",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Congenital Tricuspid Valve Disorders",
+                        "concept": "ceff3675-fc78-5a6d-8ce7-334c22c58397",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Dextrocardia",
+                        "concept": "bd53c272-b058-5bd7-8b36-b8fc8fa38682",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Double Outlet Right Ventricle",
+                        "concept": "141788AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Hypoplastic Left Heart Syndrome",
+                        "concept": "1e6e4659-7c85-5f9c-b04e-4ad4f0ebbd19",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Hypoplastic Right Heart Syndrome",
+                        "concept": "3d43a458-0acf-5c26-9c48-a31e266b94ea",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Malformation of Cardiac Chambers / Connections",
+                        "concept": "70467d26-46da-572d-9dca-e3a58da7a431",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Mitral Stenosis",
+                        "concept": "63c11284-c7a6-50f1-ab3a-49cd6cbd0432",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Mitral Valve Insufficiency / Regurgitation",
+                        "concept": "598db3f3-1f79-53ac-9aef-dce6871085e6",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Partial Anomalous Pulmonary Vein Return",
+                        "concept": "d0e0283d-8c93-5807-aa27-d29240ce6ff4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Patent Ductus Arteriosus",
+                        "concept": "130715AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Pulmonary Artery Atresia",
+                        "concept": "be1e4879-6ba4-5101-8993-a0b718959939",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Pulmonary Infundibular Stenosis",
+                        "concept": "c7600dee-6dfb-5c39-8e56-89bc92b14344",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Pulmonary Valve Atresia",
+                        "concept": "c73555dc-1b0a-50f3-af6f-b1802ff26bc4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Total Anomalous Pulmonary Vein Return",
+                        "concept": "033d2bde-3bb1-560e-b363-4fa3f4429ffa",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Transposition of the Great Arteries",
+                        "concept": "0ed5febb-c749-5592-9285-37d45d4435d7",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Tricuspid Atresia/Stenosis",
+                        "concept": "26efc011-a60d-528a-96f3-c96e75679073",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Ventricular Septal Defect",
+                        "concept": "123240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": true,
+                  "hide": {
+                    "hideWhenExpression": "category_at_diagnosis !== '365e75bb-35bc-503f-b8db-53bea2528d1b'"
+                  }
+                },
+                {
+                  "label": "Diagnosis Details",
+                  "id": "diagnosis_details_other",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "b7a2c4d8-5e91-5f3a-8c6d-2b9e4f7a1c0d",
+                    "answers": [
+                      {
+                        "label": "Aortic Aneurysm",
+                        "concept": "ed1565cd-48e8-553d-a331-e1b50fe8e226",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Dilated Cardiomyopathy",
+                        "concept": "b0d85202-3ebb-5f7f-bd07-4d1778e68784",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Endomyocardial Fibrosis",
+                        "concept": "b6946c83-6e27-5f91-85ad-2ae2d1ab5593",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Heart Failure - Diastolic",
+                        "concept": "4f5a9af4-f725-59ea-923c-9dc68ef24ead",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Heart Failure - Systolic",
+                        "concept": "e5a95ca8-dc55-5632-90cb-7c86156bfcc4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Hypertensive Heart Disease",
+                        "concept": "117386AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Hypertrophic Cardiomyopathy",
+                        "concept": "87e47b58-c00c-509c-aec3-d2c4a4dcbed4",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Native Valve Endocarditis",
+                        "concept": "a84cd2f3-69e0-5137-a482-8888221e0199",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Non-rheumatic Aortic Stenosis",
+                        "concept": "00711966-7409-5c66-ad39-8f974cfe01b9",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Pericardial Effusion",
+                        "concept": "130562AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Restrictive Cardiomyopathy",
+                        "concept": "63d83a53-19cd-55ac-8360-0e6dcc486f31",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": true,
+                  "hide": {
+                    "hideWhenExpression": "category_at_diagnosis !== '7c42e9be-5828-5d4c-8a6e-f713efe8a945'"
+                  }
+                },
+                {
+                  "label": "Diagnosis Details",
+                  "id": "diagnosis_details_normal",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "checkbox",
+                    "concept": "e9f3a5c7-6b82-5d4e-9f1a-3c7d8e2b5f4a",
+                    "answers": [
+                      {
+                        "label": "Normal",
+                        "concept": "f48b4ebc-17ef-5747-bc7f-545b8e61e851",
+                        "conceptMappings": []
+                      }
+                    ]
+                  },
+                  "required": true,
+                  "hide": {
+                    "hideWhenExpression": "category_at_diagnosis !== '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                },
+                {
+                  "label": "Diagnosis Priority",
+                  "id": "diagnosis_priority",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "97c025b2-f42c-5c53-8aaa-0506c8dd3774",
+                    "answers": [
+                      {
+                        "label": "Primary",
+                        "concept": "deba7fd3-1780-5b23-b702-76140a161169",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "Secondary",
+                        "concept": "af45fb2a-ed18-5beb-935e-8e4d92df2dac",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Active",
+                  "id": "diagnosis_active",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "b1b5d279-8013-5ae4-83a7-0f2bd9bc8457",
+                    "answers": [
+                      {
+                        "label": "Yes",
+                        "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                        "conceptMappings": []
+                      },
+                      {
+                        "label": "No",
+                        "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                        "conceptMappings": []
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Started",
+                  "id": "diagnosis_started",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "62321320-695e-5319-a306-40dfd6ad94b7"
+                  }
+                },
+                {
+                  "label": "Ended",
+                  "id": "diagnosis_ended",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "e9f2fceb-05be-577f-bf76-dde0647f01db"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Screen +",
+              "id": "screen_positive",
               "type": "obs",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "1a5aa050-661d-5e89-95d7-c1eba476df22",
+                "rendering": "radio",
+                "concept": "82a5fbb5-038d-57b8-82d1-3fd0ac95673d",
                 "answers": [
                   {
-                    "label": "Acute rheumatic fever",
-                    "concept": "cbfcf051-bee3-549d-b233-e5be0e7d691a",
+                    "label": "Yes",
+                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
                     "conceptMappings": []
                   },
                   {
-                    "label": "RHD A",
-                    "concept": "7cfaaf46-1939-5437-8d40-31095cb29812",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "RHD B",
-                    "concept": "2a648c80-594c-5442-bdfc-70e7472ef5b7",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "RHD C",
-                    "concept": "5458f2f7-9eba-5ba4-b2a8-6c736d574ca9",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "RHD D",
-                    "concept": "19fb7b40-528e-5b1c-a610-f2e624c98038",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Screen + pending confirmatory echo",
-                    "concept": "27f33ebe-77fb-575f-b737-00aa47dae6d8",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Congenital heart disease",
-                    "concept": "365e75bb-35bc-503f-b8db-53bea2528d1b",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Other heart disease",
-                    "concept": "7c42e9be-5828-5d4c-8a6e-f713efe8a945",
+                    "label": "No",
+                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
                     "conceptMappings": []
                   }
                 ]
               }
             },
             {
-              "label": "Date Diagnosed",
-              "id": "date_diagnosed",
+              "label": "Date",
+              "id": "screen_positive_date",
               "type": "obs",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "159948AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "Primary Diagnosis Details",
-              "id": "primary_diagnosis_details",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "48d8e6a8-9095-5d16-8d0e-739004566b03"
+                "concept": "96d6d328-87ba-5a2e-bb71-2d1cd73b3e90"
+              },
+              "hide": {
+                "hideWhenExpression": "screen_positive !== 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3'"
               }
             },
             {
@@ -98,7 +428,7 @@
                     "conceptMappings": []
                   },
                   {
-                    "label": "Pregnancy/labor",
+                    "label": "Pregnancy / labor",
                     "concept": "06d80315-eaf9-5c71-a4c7-cb9759f93fe1",
                     "conceptMappings": []
                   },
@@ -163,6 +493,15 @@
               }
             },
             {
+              "label": "Village/Area of Residence",
+              "id": "village_area_of_residence",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c5641213-1ec1-5378-b6de-9135ca25a56d"
+              }
+            },
+            {
               "label": "Additional information to help locate patient",
               "id": "additional_information_to_help_locate_patient",
               "type": "obs",
@@ -170,35 +509,85 @@
                 "rendering": "text",
                 "concept": "2cebe220-2a9d-5c53-be68-f2257a4bfc9e"
               }
-            },
+            }
+          ]
+        },
+        {
+          "label": "Status",
+          "isExpanded": "true",
+          "questions": [
             {
-              "label": "WhatsApp",
-              "id": "whatsapp",
+              "label": "Status",
+              "id": "status_patient_registry",
               "type": "obs",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "02e65ad0-676d-5fb7-9a5d-044c1b67621b",
+                "rendering": "select",
+                "concept": "634a259d-fce2-5c93-b480-54f522c09a33",
                 "answers": [
                   {
-                    "label": "Yes",
-                    "concept": "cf82933b-3f3f-45e7-a5ab-5d31aaee3da3",
+                    "label": "Active",
+                    "concept": "8916f600-8e09-5340-bfa4-bd318a593554",
                     "conceptMappings": []
                   },
                   {
-                    "label": "No",
-                    "concept": "488b58ff-64f5-4f8a-8979-fa79940b1594",
+                    "label": "Inactive",
+                    "concept": "e96cece9-3e5c-5ac3-8a44-19c343e397f4",
                     "conceptMappings": []
                   }
                 ]
               }
             },
             {
-              "label": "Tertiary Phone Owner",
-              "id": "tertiary_phone_ownder",
+              "label": "Date of Status Change",
+              "id": "date_of_status_change",
               "type": "obs",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "17eeabd8-b3cd-5ae1-b600-9769174eadea"
+                "rendering": "date",
+                "concept": "1fb9ec14-a08a-581b-a5fb-c9ad8bbdf9e2"
+              }
+            },
+            {
+              "label": "Reason Inactive",
+              "id": "reason_inactive",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ecc7c952-37fb-5aba-b492-ba090f544829",
+                "answers": [
+                  {
+                    "label": "CHD spontaneous resolution",
+                    "concept": "18ef66ff-1321-5627-880d-c4550da8d15e",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Confirmatory echo normal",
+                    "concept": "c3ec61d8-7117-5295-83a8-2dffb457f435",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Death",
+                    "concept": "159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Lost to follow-up",
+                    "concept": "7dc37c9e-1725-11ed-861d-0242ac120002",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Physical relocation",
+                    "concept": "7eea66ed-4405-5e56-8c4a-4585d59c5478",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Voluntary inactivity",
+                    "concept": "6a5113cc-1ecc-5f83-bddd-6a74a79daf5a",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "status_patient_registry !== 'e96cece9-3e5c-5ac3-8a44-19c343e397f4'"
               }
             },
             {
@@ -208,14 +597,80 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "32f3e45d-c2a8-5c19-b4d1-9306251426f6"
+              },
+              "hide": {
+                "hideWhenExpression": "reason_inactive !== '7eea66ed-4405-5e56-8c4a-4585d59c5478'"
               }
-            }
-          ]
-        },
-        {
-          "label": "Death",
-          "isExpanded": "true",
-          "questions": [
+            },
+            {
+              "label": "Cause of Death",
+              "id": "cause_of_death",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "409f09ab-9a03-5c81-8d04-0e970531765b",
+                "answers": [
+                  {
+                    "label": "Adverse drug reaction",
+                    "concept": "04477cd8-be14-5f8d-bf25-9acdc37f8f37",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Anticoagulation related hemorrhage",
+                    "concept": "f149b958-f9b1-5df7-bd36-c6a97c1954c6",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Arrhythmia",
+                    "concept": "0198e8a2-c475-58d7-b19b-a6391db1bc27",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Catheterization",
+                    "concept": "91a4d13f-4bc8-54b0-a107-f4ab84cb7d60",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Heart failure",
+                    "concept": "27f70da6-ee9e-5919-8b68-9977312f9ada",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Malaria",
+                    "concept": "116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD - endocarditis",
+                    "concept": "490b4f2a-2421-56d3-b35e-c5c1c2e86ad2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD - other",
+                    "concept": "58c4ddcb-4c29-5099-9b50-1ed234567c19",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Stroke",
+                    "concept": "41b1a801-9d9d-5687-9de5-39e89c73c8c7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Trauma",
+                    "concept": "69a18712-03ce-5ac0-af10-b08602085043",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Within 30-days of cardiac surgery",
+                    "concept": "bea38eeb-60e2-5409-b89e-3d9ac08c660b",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "reason_inactive !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
             {
               "label": "Date of Death",
               "id": "date_of_death",
@@ -225,11 +680,11 @@
                 "concept": "07534416-c1c2-5772-83d8-76a429986ec0"
               },
               "hide": {
-                "hideWhenExpression": "!patient.deceasedDateTime && !patient.deceasedBoolean"
+                "hideWhenExpression": "reason_inactive !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
-              "label": "Details of events leading up to death",
+              "label": "Details of Death",
               "id": "details_of_events_leading_up_to_death",
               "type": "obs",
               "questionOptions": {
@@ -237,31 +692,7 @@
                 "concept": "a4d27e8c-0c90-571f-be54-a6132c7a1d69"
               },
               "hide": {
-                "hideWhenExpression": "!patient.deceasedDateTime && !patient.deceasedBoolean"
-              }
-            },
-            {
-              "label": "Pregnant or Postpartum (60 Days After Delivery) at Time of Death",
-              "id": "pregnant_or_postpartum_60_days_after_delivery_at_time_of_death",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "6ffe2fe5-f7c0-5993-b20e-13d1ccd384dc",
-                "answers": [
-                  {
-                    "label": "Yes",
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "No",
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "conceptMappings": []
-                  }
-                ]
-              },
-              "hide": {
-                "hideWhenExpression": "(!patient.deceasedDateTime && !patient.deceasedBoolean) || (patient.gender !== 'female')"
+                "hideWhenExpression": "reason_inactive !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]
