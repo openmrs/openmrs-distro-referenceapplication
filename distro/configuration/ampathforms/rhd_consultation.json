@@ -91,7 +91,7 @@
               },
               "questions": [
                 {
-                  "label": "Chronic Health Condition",
+                  "label": "Chronic Health Condition Name",
                   "id": "chronicHealthCondition",
                   "type": "obs",
                   "questionOptions": {
@@ -99,12 +99,12 @@
                     "concept": "d80478b2-4ed2-5d93-a604-6b5b50dab441",
                     "answers": [
                       {
-                        "label": "Sickle cell disease",
+                        "label": "Sickle Cell Disease",
                         "concept": "dfb474c5-1fa7-5c27-85eb-48642d0dcbaa",
                         "conceptMappings": []
                       },
                       {
-                        "label": "Malignancy/Cancer",
+                        "label": "Malignancy / Cancer",
                         "concept": "145d8dca-1d80-53d1-aa2d-a399379d2f53",
                         "conceptMappings": []
                       },
@@ -144,7 +144,7 @@
                         "conceptMappings": []
                       },
                       {
-                        "label": "Cirrhosis/liver disease",
+                        "label": "Cirrhosis / liver disease",
                         "concept": "9be8d87e-2ebc-59c4-a2cf-e35ce58f2b3c",
                         "conceptMappings": []
                       },
@@ -220,18 +220,13 @@
               },
               "questions": [
                 {
-                  "label": "Allergy",
+                  "label": "Allergy Name",
                   "id": "allergy",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "select",
                     "concept": "cd73e118-64ee-5855-b276-f7cb44fdcf7e",
                     "answers": [
-                      {
-                        "label": "None",
-                        "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                        "conceptMappings": []
-                      },
                       {
                         "label": "Penicillin (allergy)",
                         "concept": "149071AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -243,7 +238,7 @@
                         "conceptMappings": []
                       },
                       {
-                        "label": "Other non-coded",
+                        "label": "Other",
                         "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                         "conceptMappings": []
                       }
@@ -256,55 +251,86 @@
                   "type": "obsGroup",
                   "questionOptions": {
                     "rendering": "group",
-                    "concept": "62cb455e-c9f9-5a7a-b521-ac6c68f0fe5d"
+                    "concept": "8200713e-8647-52f0-b93d-841e4e9687b7"
                   },
                   "questions": [
                     {
-                      "label": "Reaction (Allergies)",
+                      "label": "Reaction",
                       "id": "reaction_allergies",
                       "type": "obs",
                       "questionOptions": {
                         "rendering": "checkbox",
-                        "concept": "62cb455e-c9f9-5a7a-b521-ac6c68f0fe5d",
+                        "concept": "8200713e-8647-52f0-b93d-841e4e9687b7",
                         "answers": [
                           {
-                            "label": "Rash",
-                            "concept": "512AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "label": "Anaphylaxis",
+                            "concept": "148888AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             "conceptMappings": []
                           },
                           {
-                            "label": "Trouble breathing",
-                            "concept": "3b242d01-dada-5588-9f45-e87da22e7ec8",
-                            "conceptMappings": []
-                          },
-                          {
-                            "label": "Lip swelling",
-                            "concept": "9e6907fe-1c65-518f-9e1e-1e0189932e95",
-                            "conceptMappings": []
-                          },
-                          {
-                            "label": "Stomach upset",
-                            "concept": "a5d49b91-273a-5506-8575-674165374abc",
+                            "label": "Chest tightness",
+                            "concept": "9df17a73-d1cc-5183-953e-557d6a87630a",
                             "conceptMappings": []
                           },
                           {
                             "label": "Diarrhea",
                             "concept": "142412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             "conceptMappings": []
+                          },
+                          {
+                            "label": "Dizziness or lightheadedness",
+                            "concept": "628b4762-15e5-5e97-8705-3160ba5619b8",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Fever",
+                            "concept": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Hives (urticaria)",
+                            "concept": "7aad9074-12c7-569e-9ef2-7652a47997b9",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Mouth or throat swelling",
+                            "concept": "ed595b95-91cb-5a74-991b-18967bc628ab",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Nausea or vomiting",
+                            "concept": "354a5e2f-726f-5792-a780-55fdb440fbe1",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Rash (itchy or red)",
+                            "concept": "3f0a603a-5852-56a6-8a54-4d465e0df480",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Shortness of breath",
+                            "concept": "141600AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Swelling (angioedema)",
+                            "concept": "46ee4a83-a12d-5e44-ab05-23277c0914c7",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Wheezing",
+                            "concept": "122863AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "conceptMappings": []
+                          },
+                          {
+                            "label": "Other",
+                            "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "conceptMappings": []
                           }
                         ]
                       }
                     }
                   ]
-                },
-                {
-                  "label": "Other Allergies",
-                  "id": "other_allergies",
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "text",
-                    "concept": "3d8f718f-a8bb-5729-afe1-2f91f0a2155c"
-                  }
                 },
                 {
                   "label": "Date Added",
@@ -1396,12 +1422,12 @@
                         "conceptMappings": []
                       },
                       {
-                        "label": "2: Urgent (60 days)",
+                        "label": "2: Urgent (60 days/2 months)",
                         "concept": "33bf504a-15f2-5504-9bdc-ddded0b5eb00",
                         "conceptMappings": []
                       },
                       {
-                        "label": "3: Elective (180 days)",
+                        "label": "3: Elective (180 days / 6 months)",
                         "concept": "2666bf97-7400-57c7-b535-7903e22ced34",
                         "conceptMappings": []
                       },

@@ -24,43 +24,23 @@
                 "concept": "1a5aa050-661d-5e89-95d7-c1eba476df22",
                 "answers": [
                   {
-                    "label": "Acute rheumatic fever",
-                    "concept": "cbfcf051-bee3-549d-b233-e5be0e7d691a",
+                    "label": "Rheumatic Heart Disease/Rheumatic Fever",
+                    "concept": "4e529463-2036-5327-ad69-7cbd39df86a1",
                     "conceptMappings": []
                   },
                   {
-                    "label": "RHD A",
-                    "concept": "7cfaaf46-1939-5437-8d40-31095cb29812",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "RHD B",
-                    "concept": "2a648c80-594c-5442-bdfc-70e7472ef5b7",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "RHD C",
-                    "concept": "5458f2f7-9eba-5ba4-b2a8-6c736d574ca9",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "RHD D",
-                    "concept": "19fb7b40-528e-5b1c-a610-f2e624c98038",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Screen + pending confirmatory echo",
-                    "concept": "27f33ebe-77fb-575f-b737-00aa47dae6d8",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "Congenital heart disease",
+                    "label": "Congenital Heart Disease",
                     "concept": "365e75bb-35bc-503f-b8db-53bea2528d1b",
                     "conceptMappings": []
                   },
                   {
-                    "label": "Other heart disease",
+                    "label": "Other Heart Disease",
                     "concept": "7c42e9be-5828-5d4c-8a6e-f713efe8a945",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "conceptMappings": []
                   }
                 ]
@@ -98,7 +78,7 @@
                     "conceptMappings": []
                   },
                   {
-                    "label": "Pregnancy/labor",
+                    "label": "Pregnancy / labor",
                     "concept": "06d80315-eaf9-5c71-a4c7-cb9759f93fe1",
                     "conceptMappings": []
                   },
@@ -200,6 +180,86 @@
                 "rendering": "text",
                 "concept": "17eeabd8-b3cd-5ae1-b600-9769174eadea"
               }
+            }
+          ]
+        },
+        {
+          "label": "Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Status",
+              "id": "status_patient_registry",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "634a259d-fce2-5c93-b480-54f522c09a33",
+                "answers": [
+                  {
+                    "label": "Active",
+                    "concept": "8916f600-8e09-5340-bfa4-bd318a593554",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Inactive",
+                    "concept": "e96cece9-3e5c-5ac3-8a44-19c343e397f4",
+                    "conceptMappings": []
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date of Status Change",
+              "id": "date_of_status_change",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1fb9ec14-a08a-581b-a5fb-c9ad8bbdf9e2"
+              }
+            },
+            {
+              "label": "Reason Inactive",
+              "id": "reason_inactive",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ecc7c952-37fb-5aba-b492-ba090f544829",
+                "answers": [
+                  {
+                    "label": "CHD spontaneous resolution",
+                    "concept": "18ef66ff-1321-5627-880d-c4550da8d15e",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Confirmatory echo normal",
+                    "concept": "c3ec61d8-7117-5295-83a8-2dffb457f435",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Death",
+                    "concept": "159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Lost to follow-up",
+                    "concept": "7dc37c9e-1725-11ed-861d-0242ac120002",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Physical relocation",
+                    "concept": "7eea66ed-4405-5e56-8c4a-4585d59c5478",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Voluntary inactivity",
+                    "concept": "6a5113cc-1ecc-5f83-bddd-6a74a79daf5a",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "status_patient_registry !== 'e96cece9-3e5c-5ac3-8a44-19c343e397f4'"
+              }
             },
             {
               "label": "Relocation Area",
@@ -208,14 +268,80 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "32f3e45d-c2a8-5c19-b4d1-9306251426f6"
+              },
+              "hide": {
+                "hideWhenExpression": "reason_inactive !== '7eea66ed-4405-5e56-8c4a-4585d59c5478'"
               }
-            }
-          ]
-        },
-        {
-          "label": "Death",
-          "isExpanded": "true",
-          "questions": [
+            },
+            {
+              "label": "Cause of Death",
+              "id": "cause_of_death",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "409f09ab-9a03-5c81-8d04-0e970531765b",
+                "answers": [
+                  {
+                    "label": "Adverse drug reaction",
+                    "concept": "04477cd8-be14-5f8d-bf25-9acdc37f8f37",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Anticoagulation related hemorrhage",
+                    "concept": "f149b958-f9b1-5df7-bd36-c6a97c1954c6",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Arrhythmia",
+                    "concept": "0198e8a2-c475-58d7-b19b-a6391db1bc27",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Catheterization",
+                    "concept": "91a4d13f-4bc8-54b0-a107-f4ab84cb7d60",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Heart failure",
+                    "concept": "27f70da6-ee9e-5919-8b68-9977312f9ada",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Malaria",
+                    "concept": "116128AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD - endocarditis",
+                    "concept": "490b4f2a-2421-56d3-b35e-c5c1c2e86ad2",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "RHD - other",
+                    "concept": "58c4ddcb-4c29-5099-9b50-1ed234567c19",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Stroke",
+                    "concept": "41b1a801-9d9d-5687-9de5-39e89c73c8c7",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Trauma",
+                    "concept": "69a18712-03ce-5ac0-af10-b08602085043",
+                    "conceptMappings": []
+                  },
+                  {
+                    "label": "Within 30-days of cardiac surgery",
+                    "concept": "bea38eeb-60e2-5409-b89e-3d9ac08c660b",
+                    "conceptMappings": []
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "reason_inactive !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
             {
               "label": "Date of Death",
               "id": "date_of_death",
@@ -225,11 +351,11 @@
                 "concept": "07534416-c1c2-5772-83d8-76a429986ec0"
               },
               "hide": {
-                "hideWhenExpression": "!patient.deceasedDateTime && !patient.deceasedBoolean"
+                "hideWhenExpression": "reason_inactive !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
-              "label": "Details of events leading up to death",
+              "label": "Details of Death",
               "id": "details_of_events_leading_up_to_death",
               "type": "obs",
               "questionOptions": {
@@ -237,31 +363,7 @@
                 "concept": "a4d27e8c-0c90-571f-be54-a6132c7a1d69"
               },
               "hide": {
-                "hideWhenExpression": "!patient.deceasedDateTime && !patient.deceasedBoolean"
-              }
-            },
-            {
-              "label": "Pregnant or Postpartum (60 Days After Delivery) at Time of Death",
-              "id": "pregnant_or_postpartum_60_days_after_delivery_at_time_of_death",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "6ffe2fe5-f7c0-5993-b20e-13d1ccd384dc",
-                "answers": [
-                  {
-                    "label": "Yes",
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "conceptMappings": []
-                  },
-                  {
-                    "label": "No",
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "conceptMappings": []
-                  }
-                ]
-              },
-              "hide": {
-                "hideWhenExpression": "(!patient.deceasedDateTime && !patient.deceasedBoolean) || (patient.gender !== 'female')"
+                "hideWhenExpression": "reason_inactive !== '159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]
