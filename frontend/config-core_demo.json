@@ -6,8 +6,8 @@
       "Organizational: Registration Clerk": "act-home",
       "Organizational: System Administrator": "act-home",
       "System Developer": "act-home",
-      "Organizational: ACT Community Clinician": "act-home",
-      "Organizational: ACT Data Clerk": "act-home",
+      "Organizational: ACT Community Clinician": "act-community-home",
+      "Organizational: ACT Data Clerk": "act-community-home",
       "Organizational: ACT Clinician": "act-home",
       "Organizational: ACT Site Administrator": "act-home",
       "Organizational: ACT Instance Administrator": "act-home",
@@ -17,6 +17,8 @@
       "homepage-dashboard-slot": {
         "order": [
           "act-home-dashboard-link",
+          "act-community-home-dashboard-link",
+          "act-due-for-prophylaxis-dashboard-link",
           "act-registry-dashboard-link",
           "act-worklists-dashboard-link",
           "act-waiting-list-dashboard-link",
@@ -321,7 +323,7 @@
   },
   "@openmrs/esm-login-app": {
     "links": {
-      "loginSuccess": "${openmrsSpaBase}/home/act-home"
+      "loginSuccess": "${openmrsSpaBase}/home"
     },
     "logo": {
       "src": "${openmrsSpaBase}/act-registry-login.svg",
