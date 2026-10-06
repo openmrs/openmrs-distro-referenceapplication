@@ -88,6 +88,11 @@ TV="$MAJ.$((MIN-1)).99"    # main initial-cut + resume + promote scenarios
 TV2="$MAJ.$((MIN-1)).98"   # hand-finalized-refusal scenario
 TV3="$MAJ.$((MIN-1)).97"   # base_ref-not-found scenario
 RELEASED=$(git tag -l | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1)
+# A fork has none of upstream's release tags, so give the isolated origin one for VIII to refuse.
+if [ -z "$RELEASED" ]; then
+  RELEASED="$MAJ.$((MIN-1)).96"
+  git tag "$RELEASED" && git push -q origin "refs/tags/$RELEASED"
+fi
 for t in "$TV" "$TV2" "$TV3"; do
   git rev-parse -q --verify "refs/tags/$t" >/dev/null && { echo "PRECONDITION FAIL: tag $t exists"; exit 99; }
 done

@@ -239,6 +239,7 @@ jobs:
     if: ${{ !inputs.dry_run }}
     permissions:
       contents: read
+      packages: read
     uses: ./.github/workflows/e2e-on-release.yml
     with:
       ref: ${{ needs.cut-rc.outputs.rc_tag }}

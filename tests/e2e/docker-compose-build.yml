@@ -29,6 +29,8 @@ services:
   backend:
     build:
       context: ../../
+      secrets:
+        - m2settings
     container_name: backend
     depends_on:
       - db
@@ -55,3 +57,7 @@ services:
       MYSQL_PASSWORD: ${OPENMRS_DB_PASSWORD:-openmrs}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
 
+# ACT Core comes from DIGI-UW's GitHub Packages, which needs a token; the workflow writes this file
+secrets:
+  m2settings:
+    file: ~/.m2/settings.xml

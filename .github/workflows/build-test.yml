@@ -11,6 +11,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # ACT Core is pulled from DIGI-UW's GitHub Packages, which needs a token even to read
+      packages: read
     strategy:
         matrix:
           java: [ '8' ]
@@ -24,6 +28,11 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
           cache: 'maven'
+          server-id: github-actcore
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
 
       - name: Build and Test
         run: mvn --batch-mode --update-snapshots --activate-profiles distro,validator clean verify
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
