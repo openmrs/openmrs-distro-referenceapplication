@@ -5,7 +5,11 @@
       "Organizational: Nurse": "act-home",
       "Organizational: Registration Clerk": "act-home",
       "Organizational: System Administrator": "act-home",
-      "System Developer": "act-home"
+      "System Developer": "act-home",
+      "Organizational: ACT Community Clinician": "act-home",
+      "Organizational: ACT Data Clerk": "act-home",
+      "Organizational: ACT Clinician": "act-home",
+      "Organizational: ACT Site Administrator": "act-home"
     },
     "extensionSlots": {
       "homepage-dashboard-slot": {
@@ -125,7 +129,41 @@
         "remove": [
           "dispensing-link",
           "queue-screen-link"
-        ]
+        ],
+        "configure": {
+          "system-administration-app-menu-link": {
+            "Display conditions": {
+              "privileges": [
+                "Manage Roles"
+              ]
+            }
+          }
+        }
+      },
+      "top-nav-actions-slot": {
+        "configure": {
+          "patient-search-icon": {
+            "Display conditions": {
+              "privileges": [
+                "Get Patients"
+              ]
+            }
+          },
+          "add-patient-action": {
+            "Display conditions": {
+              "privileges": [
+                "Add Patients"
+              ]
+            }
+          },
+          "implementer-tools-button": {
+            "Display conditions": {
+              "privileges": [
+                "O3 Implementer Tools"
+              ]
+            }
+          }
+        }
       }
     }
   },
