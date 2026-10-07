@@ -33,18 +33,54 @@ SELECT
         LIMIT 1
     )                                                               AS current_state,
 
-    -- Diagnosis category (most recent)
+    -- Diagnosis category, of the latest Diagnosis not answered inactive or secondary, as ACT 2.0 took the active
+    -- primary diagnosis (unanswered counts, as those questions did not load before 2026-10-07)
     (
         SELECT cn2.name
-        FROM obs cat_obs
+        FROM obs dg
+        JOIN obs cat_obs ON cat_obs.obs_group_id = dg.obs_id AND cat_obs.voided = 0
+          AND cat_obs.concept_id = (SELECT concept_id FROM concept WHERE uuid = '1a5aa050-661d-5e89-95d7-c1eba476df22')
         JOIN concept_name cn2 ON cn2.concept_id = cat_obs.value_coded
             AND cn2.locale = 'en' AND cn2.locale_preferred = 1 AND cn2.voided = 0
-        WHERE cat_obs.person_id = p.person_id
-          AND cat_obs.voided = 0
-          AND cat_obs.concept_id = (SELECT concept_id FROM concept WHERE uuid = '1a5aa050-661d-5e89-95d7-c1eba476df22')
-        ORDER BY cat_obs.obs_datetime DESC, cat_obs.obs_id DESC
+        WHERE dg.person_id = p.person_id AND dg.voided = 0
+          AND dg.concept_id = (SELECT concept_id FROM concept WHERE uuid = '594b4495-36dc-52a6-9810-15a9e2e2dcb9')
+          AND NOT EXISTS (
+                SELECT 1 FROM obs x
+                WHERE x.obs_group_id = dg.obs_id AND x.voided = 0
+                  AND ((x.concept_id = (SELECT concept_id FROM concept WHERE uuid = 'b1b5d279-8013-5ae4-83a7-0f2bd9bc8457')
+                        AND x.value_coded = (SELECT concept_id FROM concept WHERE uuid = '488b58ff-64f5-4f8a-8979-fa79940b1594'))
+                    OR (x.concept_id = (SELECT concept_id FROM concept WHERE uuid = '97c025b2-f42c-5c53-8aaa-0506c8dd3774')
+                        AND x.value_coded = (SELECT concept_id FROM concept WHERE uuid = 'af45fb2a-ed18-5beb-935e-8e4d92df2dac'))))
+        ORDER BY dg.obs_datetime DESC, dg.obs_id DESC
         LIMIT 1
     )                                                               AS diagnosis_category,
+
+    -- That Diagnosis's details (RHD A, RHD B and so on), in name order
+    (
+        SELECT GROUP_CONCAT(cn4.name ORDER BY cn4.name SEPARATOR ', ')
+        FROM obs det
+        JOIN concept_name cn4 ON cn4.concept_id = det.value_coded
+            AND cn4.locale = 'en' AND cn4.locale_preferred = 1 AND cn4.voided = 0
+        WHERE det.voided = 0
+          AND det.concept_id IN ((SELECT concept_id FROM concept WHERE uuid = 'cfe17bb5-4a76-5f3a-9e1c-7b1e9b84a8e3'),
+                                 (SELECT concept_id FROM concept WHERE uuid = 'd3f6e1a2-9c5b-5e84-8f2d-1a6c7b9e0d4f'),
+                                 (SELECT concept_id FROM concept WHERE uuid = 'b7a2c4d8-5e91-5f3a-8c6d-2b9e4f7a1c0d'),
+                                 (SELECT concept_id FROM concept WHERE uuid = 'e9f3a5c7-6b82-5d4e-9f1a-3c7d8e2b5f4a'))
+          AND det.obs_group_id = (
+            SELECT dg2.obs_id FROM obs dg2
+            WHERE dg2.person_id = p.person_id AND dg2.voided = 0
+              AND dg2.concept_id = (SELECT concept_id FROM concept WHERE uuid = '594b4495-36dc-52a6-9810-15a9e2e2dcb9')
+              AND NOT EXISTS (
+                SELECT 1 FROM obs x
+                WHERE x.obs_group_id = dg2.obs_id AND x.voided = 0
+                  AND ((x.concept_id = (SELECT concept_id FROM concept WHERE uuid = 'b1b5d279-8013-5ae4-83a7-0f2bd9bc8457')
+                        AND x.value_coded = (SELECT concept_id FROM concept WHERE uuid = '488b58ff-64f5-4f8a-8979-fa79940b1594'))
+                    OR (x.concept_id = (SELECT concept_id FROM concept WHERE uuid = '97c025b2-f42c-5c53-8aaa-0506c8dd3774')
+                        AND x.value_coded = (SELECT concept_id FROM concept WHERE uuid = 'af45fb2a-ed18-5beb-935e-8e4d92df2dac'))))
+            ORDER BY dg2.obs_datetime DESC, dg2.obs_id DESC
+            LIMIT 1
+          )
+    )                                                               AS diagnosis_details,
 
     -- Case detection method
     (
@@ -58,15 +94,17 @@ SELECT
         ORDER BY det_obs.obs_datetime ASC LIMIT 1
     )                                                               AS case_detected_by,
 
-    -- Penicillin allergy
+    -- Penicillin allergy: the latest Penicillin (allergy) or Penicillin (anaphylaxis) recorded as a consultation's Allergy
     (
         SELECT cn_pen.name
         FROM obs o_pen
         JOIN concept_name cn_pen ON cn_pen.concept_id = o_pen.value_coded
             AND cn_pen.locale = 'en' AND cn_pen.locale_preferred = 1 AND cn_pen.voided = 0
-        WHERE o_pen.person_id = p.person_id AND o_pen.voided = 0
-          AND o_pen.concept_id = (SELECT concept_id FROM concept WHERE uuid = '5cc3b707-b8ea-52ee-8e82-ea4de393a4a5')
-        ORDER BY o_pen.obs_datetime DESC LIMIT 1
+        WHERE o_pen.person_id = p.person_id AND o_pen.voided = 0 AND o_pen.obs_group_id IS NOT NULL
+          AND o_pen.concept_id = (SELECT concept_id FROM concept WHERE uuid = 'cd73e118-64ee-5855-b276-f7cb44fdcf7e')
+          AND o_pen.value_coded IN ((SELECT concept_id FROM concept WHERE uuid = '149071AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'),
+                                    (SELECT concept_id FROM concept WHERE uuid = 'b4e6c064-ab4f-5ee4-9837-094731ee23d4'))
+        ORDER BY o_pen.obs_datetime DESC, o_pen.obs_id DESC LIMIT 1
     )                                                               AS penicillin_allergy,
 
     -- Date of last consultation encounter
