@@ -181,7 +181,7 @@ SELECT
     DATEDIFF(MAX(adh.next_due), CURDATE())                          AS days_until_due,
     ROUND(MAX(adh.adherence) * 100)                                 AS adherence,
 
-    -- Clinics, from the Assigned Cardiac Clinic and Health Center location attributes
+    -- Clinics, from the Assigned Cardiac Clinic and Primary Care Clinic location attributes
     MAX(cardiac_loc.name)                                           AS cardiac_clinic,
     MAX(primary_loc.name)                                           AS primary_care_clinic,
 
@@ -246,7 +246,7 @@ LEFT JOIN person_attribute pa_phone
 LEFT JOIN person_attribute pa_village
     ON pa_village.person_id = p.person_id AND pa_village.voided = 0
     AND pa_village.person_attribute_type_id = (SELECT person_attribute_type_id FROM person_attribute_type
-                                                WHERE name = 'Health Center' LIMIT 1)
+                                                WHERE uuid = '695f2990-236f-5d7c-b8aa-ddbdb22400f4')
 LEFT JOIN person_attribute pa_cardiac
     ON pa_cardiac.person_id = p.person_id AND pa_cardiac.voided = 0
     AND pa_cardiac.person_attribute_type_id = (SELECT person_attribute_type_id FROM person_attribute_type
