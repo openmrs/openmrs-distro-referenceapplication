@@ -1,0 +1,25 @@
+key: rhdProgramme
+uuid: "c4a9e2d1-7b3f-4e58-9a16-2f0d8b5c7e31"
+name: "RHD Programme Report"
+description: "Per primary care clinic: active RHD Registry patients, who is due this week or overdue, BPG injections on time in the period, mean adherence and a data tag (Complete, Review or Duplicates)"
+parameters:
+  - key: startDate
+    type: java.util.Date
+    label: "Period from"
+  - key: endDate
+    type: java.util.Date
+    label: "Period to"
+  - key: cardiacClinic
+    type: java.lang.String
+    label: "Cardiac clinic (location uuid)"
+    required: false
+  - key: primaryCareClinic
+    type: java.lang.String
+    label: "Primary care clinic (location uuid)"
+    required: false
+datasets:
+  - key: byFacility
+    type: sql
+    config: "sql/rhd_programme.sql"
+designs:
+  - type: csv
