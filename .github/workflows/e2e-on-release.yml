@@ -55,7 +55,7 @@ jobs:
           bash ./tests/e2e/extract_tag_numbers.sh
 
       - name: Commit and export Containers
-        run: sh ./tests/e2e/commit_and_export_images.sh
+        run: bash ./tests/e2e/commit_and_export_images.sh
 
       - name: Verify artifact was created
         run: |
