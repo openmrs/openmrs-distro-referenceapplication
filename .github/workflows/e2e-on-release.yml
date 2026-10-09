@@ -343,7 +343,7 @@ jobs:
       - name: Checkout to the Repo's Tag
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          repository: openmrs/openmrs-esm-cohortbuilder
+          repository: openmrs/openmrs-esm-cohortbuilder-app
           ref: ${{ needs.build.outputs.cohort_builder_ref }}
           path: e2e_repo
 
