@@ -41,6 +41,15 @@ jobs:
         with:
           ref: ${{ inputs.ref }}
 
+      # Older release tags carry an older extract_tag_numbers.sh, so the script
+      # comes from this workflow's revision while the distro is built at the ref.
+      - name: Checkout the extraction script from the workflow revision
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          path: workflow-revision
+          sparse-checkout: tests/e2e/extract_tag_numbers.sh
+          sparse-checkout-cone-mode: false
+
       - name: Build and Run Containers
         run: docker compose -f ./tests/e2e/docker-compose-build.yml up -d
 
@@ -55,7 +64,7 @@ jobs:
         id: refs
         run: |
           docker cp frontend:/usr/share/nginx/html/spa-assemble-config.json frontend/spa-assemble-config.json
-          bash ./tests/e2e/extract_tag_numbers.sh
+          bash ./workflow-revision/tests/e2e/extract_tag_numbers.sh
 
       - name: Commit and export Containers
         run: bash ./tests/e2e/commit_and_export_images.sh
