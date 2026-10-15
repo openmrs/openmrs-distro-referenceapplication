@@ -26,8 +26,12 @@ M2="$WORK_DIR/m2"
 # upstream branch, without a commit, once the PR merges.
 #
 # The list is in build order: every module comes after the modules it depends
-# on, so it builds against their freshly built SNAPSHOTs rather than published
-# ones (the forks' SNAPSHOTs are not published at all).
+# on, so a sibling SNAPSHOT it asks for is the one just built (the forks'
+# SNAPSHOTs are not published at all). A module still builds against the
+# versions its own POM declares, though: initializer's platform-3.0 branch
+# declares the pre-3.0 releases of queue, billing, emrapi, appointments,
+# addresshierarchy, openconceptlab, patientflags and tasks, so its build does
+# not check it against the omods collected here.
 MODULES=(
 	"legacyui              | openmrs/openmrs-module-legacyui              | master"
 	"addresshierarchy      | openmrs/openmrs-module-addresshierarchy      | core-3.x"
@@ -109,7 +113,6 @@ if [ "${RUN_TESTS:-0}" = 1 ]; then
 else
 	mvn_args+=(-DskipTests)
 fi
-rm -f "$SRC/pom.xml"
 mkdir -p "$WORK_DIR/logs"
 
 echo "== Building (mvn ${mvn_args[*]}); the logs are in $WORK_DIR/logs"

@@ -81,6 +81,7 @@ A first run uses about 2.8 GB. With `RUN_TESTS=1`, test output brings it to abou
 ### What It Builds
 
 - Each module is built from the latest commit of the branch listed in the `MODULES` array at the top of the script. That is usually `core-3.x`, and `master` or `6.x` for a few. The results can therefore change from one day to the next as those branches move.
+- The distro's `event` module is not built: it goes away on Platform 3 ([openmrs/openmrs-module-event#33](https://github.com/openmrs/openmrs-module-event/pull/33)), and none of these modules requires it.
 - Three modules come from forks, because their 3.0 upgrade is still an open pull request. Each is pinned to the commit that was tested:
 
   | Module | Pull request |
