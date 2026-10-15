@@ -32,7 +32,7 @@ Everything the script writes goes under one work directory: `./o3-core3-modules`
 
 The last lines of a run print the full path of the `omods/` folder. They also list the modules built from open pull requests (see below).
 
-`omods/` is emptied and refilled only once every module has built. If a run stops on a build failure, the previous run's omods stay there.
+`omods/` is replaced only once every module has built and its omod has been collected. If a run stops before that, the previous run's omods stay there.
 
 ## Before You Run It
 
@@ -63,7 +63,7 @@ A first run uses about 2.8 GB. With `RUN_TESTS=1`, test output brings it to abou
 
 ### Requirements
 
-- git, Maven 3.9+, and JDK 21 or later. JDK 21 is the only version this was tested with: in CI, metadatamapping's OWA step has failed on JDK 25.
+- git, Maven 3.9+, and JDK 21 or later. JDK 21 is the only version this was tested with: in CI, metadatamapping's OWA step has failed on JDK 25. The script checks the JDK Maven runs on, which is `JAVA_HOME` when that is set, not necessarily the `java` on your `PATH`.
 - Network access to:
   - GitHub
   - mavenrepo.openmrs.org

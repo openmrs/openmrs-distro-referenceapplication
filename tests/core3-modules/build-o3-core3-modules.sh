@@ -69,8 +69,10 @@ die() { echo "ERROR: $*" >&2; exit 1; }
 for tool in git mvn java; do
 	command -v "$tool" >/dev/null || die "$tool is not on the PATH"
 done
-java_major=$(java -XshowSettings:properties -version 2>&1 | sed -n 's/^ *java\.specification\.version = //p')
-[ "${java_major:-0}" -ge 21 ] || die "JDK 21 or later is required; java on the PATH is ${java_major:-unknown}"
+# Ask Maven which JDK it runs on: it uses JAVA_HOME when that is set, which
+# need not be the java on the PATH.
+java_major=$(mvn -v 2>&1 | sed -n 's/^Java version: \([0-9]*\).*/\1/p')
+[ "${java_major:-0}" -ge 21 ] || die "JDK 21 or later is required; Maven runs on ${java_major:-an unknown JDK} (check JAVA_HOME)"
 
 mkdir -p "$SRC" "$M2"
 
@@ -118,14 +120,14 @@ for name in "${names[@]}"; do
 	start=$(date +%s)
 	if ! mvn "${mvn_args[@]}" -f "$SRC/$name/pom.xml" >"$log" 2>&1; then
 		echo "FAILED"
-		grep -E '^\[ERROR\]' "$log" | head -40 >&2
+		grep -E '^\[ERROR\]' "$log" | head -40 >&2 || true
 		die "$name failed to build; see $log"
 	fi
 	tests=""
 	if [ "${RUN_TESTS:-0}" = 1 ]; then
 		# Sum surefire's and failsafe's per-module totals (the lines without
 		# "Time elapsed"; those are per test class).
-		tests=$(grep -E 'Tests run: [0-9]+, Failures: [0-9]+, Errors: [0-9]+, Skipped: [0-9]+ *$' "$log" |
+		tests=$({ grep -E 'Tests run: [0-9]+, Failures: [0-9]+, Errors: [0-9]+, Skipped: [0-9]+ *$' "$log" || true; } |
 			sed -E 's/.*Tests run: ([0-9]+), Failures: ([0-9]+), Errors: ([0-9]+), Skipped: ([0-9]+) *$/\1 \2 \3 \4/' |
 			awk '{r+=$1; f+=$2; e+=$3; s+=$4} END {printf "%d %d %d %d", r, f, e, s}')
 		read -r run failed errors skipped <<<"$tests"
@@ -136,15 +138,19 @@ for name in "${names[@]}"; do
 done
 
 echo "== Collecting the omods into $OUT"
-rm -rf "$OUT"
-mkdir -p "$OUT"
+# Collect into a fresh folder and swap it in only once every omod is there, so
+# a failure here leaves the previous complete set in place.
+rm -rf "$OUT.new"
+mkdir -p "$OUT.new"
 for name in "${names[@]}"; do
 	# Only omod/target: test resources elsewhere under target/ include other
 	# modules' .omod files (initializer's exti18n, rest's mockModule).
 	found=("$SRC/$name"/omod/target/*.omod)
 	[ -f "${found[0]}" ] && [ ${#found[@]} -eq 1 ] || die "expected one .omod in $SRC/$name/omod/target, found: ${found[*]}"
-	cp "${found[0]}" "$OUT/"
+	cp "${found[0]}" "$OUT.new/"
 done
+rm -rf "$OUT"
+mv "$OUT.new" "$OUT"
 ls -1 "$OUT"
 echo "== $(ls -1 "$OUT" | wc -l | tr -d ' ') omods in $OUT. Copy them into your OpenMRS application data directory's modules/ folder."
 [ ${#pinned[@]} -eq 0 ] || echo "== Built from open pull requests, not from a merged upstream branch: ${pinned[*]}"
