@@ -54,7 +54,7 @@ jobs:
         run: docker compose -f ./tests/e2e/docker-compose-build.yml up -d
 
       - name: Wait for the backend to start
-        timeout-minutes: 25
+        timeout-minutes: 40
         run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/openmrs/login.htm)" != "200" ]]; do sleep 10; done
 
       # The tree at a release ref pins modules to a floating dist-tag
