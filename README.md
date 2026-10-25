@@ -314,6 +314,14 @@ require dashboard updates.
 | `ALLOY_OTLP_INSECURE` | `false` | m | Set to `true` to skip TLS when talking to the upstream endpoint |
 | `GRAFANA_ADMIN_PASSWORD` | `Admin123` | g | Password for Grafana's `admin` user. Change this before exposing Grafana |
 
+## 🚀 Quick Start with GitHub Codespaces
+
+1. Click the **Code** button on GitHub and select **Create codespace on main**.
+2. Wait for the environment to build. The application will start automatically.
+3. When prompted, click **Open in Browser** for Port 80.
+4. **Logs:** To see the progress, run `docker compose logs -f backend`.
+5. **Login:** User: `admin` | Pass: `Admin123`
+
 ## Contributing to the configuration
 
 This project uses the [Initializer](https://github.com/mekomsolutions/openmrs-module-initializer) module

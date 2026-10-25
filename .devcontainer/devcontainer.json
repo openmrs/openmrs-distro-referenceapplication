@@ -1,0 +1,25 @@
+{
+    "name": "OpenMRS RefApp Codespace",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "gateway", 
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    },
+    "forwardPorts": [80, 8080, 3306],
+    "portsAttributes": {
+        "80": {
+            "label": "OpenMRS Gateway",
+            "onAutoForward": "openBrowser"
+        }
+    },
+    "postStartCommand": "docker compose up -d",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "vscjava.vscode-java-pack"
+            ]
+        }
+    }
+}
