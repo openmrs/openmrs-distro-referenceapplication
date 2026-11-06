@@ -27,16 +27,19 @@ is to ensure that the workflow checks out to the specific release commit associa
 
 ## End-to-End Test Jobs
 
-The workflow includes several end-to-end test jobs, each corresponding to a specific frontend module in O3. These jobs are structured similarly and are listed below:
+The end-to-end tests run in a single `run-e2e-tests` matrix job, with one entry per frontend module in O3:
 
-- `run-patient-management-e2e-tests`
-- `run-patient-chart-e2e-tests`
-- `run-form-builder-e2e-tests`
-- `run-esm-core-e2e-tests`
-- `run-cohort-builder-e2e-tests`
-- `run-dispensing-app-e2e-tests`
+- patient management (`openmrs-esm-patient-management`)
+- patient chart (`openmrs-esm-patient-chart`)
+- form builder (`openmrs-esm-form-builder`)
+- esm-core (`openmrs-esm-core`)
+- cohort builder (`openmrs-esm-cohortbuilder-app`)
+- dispensing (`openmrs-esm-dispensing-app`)
+- billing (`openmrs-esm-billing-app`)
 
-In each "End-to-End Test Job," the workflow first checks out the repository associated with a specific OpenMRS frontend module. It then downloads Docker images from a previous "build" job, loads these images, and starts an OpenMRS instance.
+Each matrix entry's `key` matches a `<key>_ref` output of the "build" job. To add a module, add it to `extract_tag_numbers.sh`, expose its ref as a build job output, and add an entry to the matrix.
+
+In each matrix job, the workflow first checks out the repository associated with a specific OpenMRS frontend module. It then downloads Docker images from a previous "build" job, loads these images, and starts an OpenMRS instance.
 
 ### Why Check Out to the Tags?
 
