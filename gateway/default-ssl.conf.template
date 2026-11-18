@@ -48,7 +48,10 @@ server {
   proxy_set_header      X-Forwarded-Proto $forwarded_proto;
   proxy_set_header      X-Real-IP $forwarded_ip;
   proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
+  # first matching directive wins: JSESSIONID keeps samesite=strict, every other
+  # upstream cookie (e.g. Grafana's grafana_session) gets at least the Secure flag
   proxy_cookie_flags    JSESSIONID secure samesite=strict;
+  proxy_cookie_flags    ~ secure;
   proxy_http_version    1.1;
 
   gzip on;
